@@ -21,7 +21,6 @@ using System.Windows;
 
 namespace SciChart.Wpf.TestSuite.ExampleSandbox.CustomModifiers
 {
-    [TestCase("Custom Modifier Sandbox")]
     public partial class CustomModifierSandbox : Window
     {
         public CustomModifierSandbox()

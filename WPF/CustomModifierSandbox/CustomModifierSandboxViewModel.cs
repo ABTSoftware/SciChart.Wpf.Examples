@@ -22,7 +22,7 @@ using System.Linq;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
-using SciChart.Examples.ExternalDependencies.Data;
+using Shared;
 
 namespace SciChart.Wpf.TestSuite.ExampleSandbox.CustomModifiers
 {
