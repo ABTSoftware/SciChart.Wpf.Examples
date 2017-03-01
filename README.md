@@ -22,9 +22,11 @@ The SciChart WPF Examples Suite demonstrates 2D & 3D WPF Chart types, as well as
 
 ![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
 
-This showcase is written in WPF with MVVM, Unity Container and Reactive Extensions and is designed to be a demonstration of what SciChart WPF can do. Examples include:
+This showcase is written in WPF with MVVM, Unity Container and Reactive Extensions and is designed to be a demonstration of what SciChart WPF can do. 
 
-SciChart WPF Includes the following chart types, as well as an wide set of features, excellent performance and a poweful, flexible API.
+#### WPF Chart Types 
+
+SciChart WPF Includes the following 2D & 3D chart types, as well as an wide set of features, excellent performance and a poweful, flexible API.
 
 * [WPF Line Chart](https://www.scichart.com/wpf-chart-example-line-chart)
 * [WPF Band Chart](https://www.scichart.com/wpf-chart-example-band-series-chart)
@@ -46,6 +48,13 @@ SciChart WPF Includes the following chart types, as well as an wide set of featu
 * [WPF Heatmap Chart](https://www.scichart.com/wpf-chart-example-heatmap-chart)
 * [WPF Spectrogram Chart](https://www.scichart.com/wpf-chart-example-spectrogram-demo-chart)
 * [WPF Polar Chart](https://www.scichart.com/wpf-chart-example-polar-chart)
+
+#### WPF 3D Chart Types
+
+SciChart WPF also has an array of DirectX-powered Realtime 3D Charts for WPF, including:
+
+![SciChart WPF3D Collage](https://www.scichart.com/wp-content/uploads/2017/03/3d-charts-dash.jpg)
+
 * [WPF 3D Bubble Chart](https://www.scichart.com/wpf-3d-chart-example-simple-bubble-3d-chart)
 * [WPF 3D Point Cloud Chart](https://www.scichart.com/wpf-3d-chart-example-simple-point-cloud-3d-chart)
 * [WPF 3D Scatter Chart](https://www.scichart.com/wpf-3d-chart-example-simple-scatter-chart-3d)
@@ -73,3 +82,8 @@ SciChart WPF Comes with a number of tutorials to help you get started quickly us
 ### Sandbox 
 
 A place to put ideas, examples for users to answer support requests and more. 
+
+### Note: NuGet feed setup
+
+To build, you will need to set the correct NuGet feeds for SciChart WPF v4.x and v5.x. 
+NuGet Feed setup instructions are found at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
