@@ -1,0 +1,38 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ZoomAndPanAChart/SynchronizeMouseAcrossCharts.xaml</View>
+  <ViewModel>Examples.ZoomAndPanAChart.SynchronizeMouseAcrossChartsViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSyncMouseEvents.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates synchronizing of mouse events across multiple charts by using the MouseManager.MouseEventGroup attached property    
+    Two SciChartSurface panes are created and arranged vertically, this example shows how to synchronize Zoom, Pan, Rollover and Cursor operations using MVVM to enable and disable modifiers
+  </ToolTipDescription>
+  <Description>
+    Showcases how to synchronize mouse events across multiple charts by using the MouseManager.MouseEventGroup attached property.
+
+    Two SciChartSurface panes are created and arranged vertically. This example shows how to synchronize Zoom, Pan, Rollover and Cursor operations using MVVM to enable and disable ChartModifiers.
+
+    [b][i]Tips![/i][/b]
+
+    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
+
+    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/synchronizing-chartmodifier-mouse-events-across-charts/']Synchronizing ChartModifier Mouse Events Across Charts[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/SynchronizeMouseAcrossCharts.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/SynchronizeMouseAcrossCharts.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/SynchronizeMouseAcrossChartsViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>VerticalChartGroup</Features>
+    <Features>Cursor</Features>
+    <Features>Rollover</Features>
+    <Features>Tooltips</Features>
+    <Features>Zoom</Features>
+    <Features>Pan</Features>
+    <Features>MVVM</Features>
+  </Features>
+</ExampleDefinition>

@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.StyleAChart.LineSeriesStyling"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.StyleAChart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <local:LineSeriesStylingViewModel x:Key="vm" />
+
+        <Style x:Key="DashedGridLinesStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#292929" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeDashArray" Value="3 3" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+        <!-- to the chart and is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" />
+
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
+            <s:SciChartSurface.RenderableSeries>
+
+                <!--  Demonstrates a thick dashed line  -->
+                <s:FastLineRenderableSeries Name="Series0"
+                                            AntiAliasing="True"
+                                            DataSeries="{Binding Series0}"
+                                            StrokeDashArray="10,5"
+                                            StrokeThickness="3" />
+
+                <!--  Demonstrates a 1pixel dashed line  -->
+                <s:FastLineRenderableSeries Name="Series1"
+                                            AntiAliasing="True"
+                                            DataSeries="{Binding Series1}"
+                                            StrokeDashArray="3,3"
+                                            StrokeThickness="1" />
+
+                <!--  Demonstrates a line with PointMarker (also see PointMarkers example)  -->
+                <s:FastLineRenderableSeries Name="Series2"
+                                            AntiAliasing="True"
+                                            DataSeries="{Binding Series2}"
+                                            StrokeThickness="1">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:TrianglePointMarker Width="11"
+                                               Height="11"
+                                               Fill="#66FFFFFF" />
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+
+                <!--  Define an XAxis with Major Bands and dashed minor gridlines  -->
+                <s:NumericAxis DrawMajorGridLines="True"
+                               DrawMinorGridLines="True"
+                               DrawMinorTicks="True"
+                               MinorGridLineStyle="{StaticResource DashedGridLinesStyle}"
+                               TextFormatting="0.########" />
+
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+
+                <!--  Define an YAxis with Major Bands and dashed minor gridlines  -->
+                <s:NumericAxis DrawMajorBands="True"
+                               DrawMajorGridLines="True"
+                               DrawMinorGridLines="True"
+                               DrawMinorTicks="True"
+                               GrowBy="0.0, 0.1"
+                               MinorGridLineStyle="{StaticResource DashedGridLinesStyle}" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

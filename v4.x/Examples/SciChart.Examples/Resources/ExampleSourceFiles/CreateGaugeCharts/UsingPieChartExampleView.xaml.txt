@@ -1,0 +1,326 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateGaugeCharts.UsingPieChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:gauge="clr-namespace:SciChart.Examples.Examples.CreateGaugeCharts"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="PieChartListBoxForegroundStyle" TargetType="ListBox">
+                <Setter Property="Foreground" Value="#FFDFE0E6" />
+            </Style>
+
+            <DataTemplate x:Key="OutsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="14"
+                               Foreground="#FFDFE0E6"
+                               Text="{Binding Name}" />
+                    <TextBlock Margin="5 0 0 0"
+                               FontSize="14"
+                               Foreground="#FFDFE0E6"
+                               Text="{Binding Percentage,
+                                              StringFormat={}{0:#.##}%}" />
+                </StackPanel>
+
+            </DataTemplate>
+
+            <DataTemplate x:Key="InsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
+                <TextBlock FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#FF1C1C1F"
+                           Text="{Binding Percentage,
+                                          StringFormat={}{0:#.##}%}" />
+            </DataTemplate>
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <s:SciChartPieSurface x:Name="pieSurface"
+                              Grid.Column="1"
+                              Background="#FF1C1C1F"
+                              ChartTitle="Recommended Diet"
+                              FontSize="20"
+                              Foreground="#FFDFE0E6"
+                              SegmentSpacing="4"
+                              InsideLabelTemplate="{StaticResource InsideLabelDataTemplate}"
+                              LegendListStyle="{StaticResource PieChartListBoxForegroundStyle}"
+                              OutsideLabelTemplate="{StaticResource OutsideLabelDataTemplate}"
+                              ItemsSource="{Binding SegmentsDataCollection}">
+            
+            <i:Interaction.Behaviors>
+                <gauge:EventToCommandBehavior Command="{Binding SegmentSelectionCommand}" Event="SelectionChanged" PassArguments="True" />
+            </i:Interaction.Behaviors>
+
+            <s:SciChartPieSurface.ItemTemplate>
+                <DataTemplate DataType="gauge:PieSegmentViewModel">
+                    <s:PieSegment Fill="{Binding Fill, Mode=TwoWay}" SegmentValue="{Binding Path=Value, Mode=TwoWay}" Text="{Binding Path=Name, Mode=TwoWay}" IsSelected="{Binding IsSelected, Mode=TwoWay}" />
+                </DataTemplate>
+            </s:SciChartPieSurface.ItemTemplate>
+            
+            <!-- Brushes are per segment. If you do not specify brushes, SciChart will choose random brushes -->
+            <!-- you can specify SolidColorBrush, or GradientBrushes to give your pie chart a slightly less flat appearance -->
+            <s:SciChartPieSurface.BrushesCollection>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF8E01" Offset="0"/>
+                    <GradientStop Color="#A85D01" Offset="1"/>
+                </LinearGradientBrush>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#339933" Offset="0"/>
+                    <GradientStop Color="#226622" Offset="1"/>
+                </LinearGradientBrush>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#00AAFF" Offset="0"/>
+                    <GradientStop Color="#006599" Offset="1"/>
+                </LinearGradientBrush>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#818183" Offset="0"/>
+                    <GradientStop Color="#4B4B4C" Offset="1"/>
+                </LinearGradientBrush>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="Firebrick" Offset="0"/>
+                    <GradientStop Color="#7C1818" Offset="1"/>
+                </LinearGradientBrush>
+
+                <LinearGradientBrush>
+                   <GradientStop Color="DarkSalmon" Offset="0"/>
+                    <GradientStop Color="#C97A60" Offset="1"/>
+                </LinearGradientBrush>
+
+            </s:SciChartPieSurface.BrushesCollection>
+
+            <s:SciChartPieSurface.InfoLinesStyle>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="#FFDFE0E6" />
+                </Style>
+            </s:SciChartPieSurface.InfoLinesStyle>
+
+            <s:SciChartPieSurface.SegmentTooltipTemplate>
+                <DataTemplate DataType="s:IPieSegmentViewModel">
+                    <Grid Margin="3" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
+                                   Margin="3"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Text="Name: " />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Margin="3"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Text="{Binding Name}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="3"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Text="Value: " />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Margin="3"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Text="{Binding Value}" />
+
+                    </Grid>
+                </DataTemplate>
+            </s:SciChartPieSurface.SegmentTooltipTemplate>
+
+        </s:SciChartPieSurface>
+
+        <Border Panel.ZIndex="9999"
+                Background="#FF232426"
+                BorderBrush="#323539"
+                BorderThickness="0,0,2,0">
+
+            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="Tooltip"
+                              ContentTemplate="{StaticResource TooltipIconContentTemplate}"
+                              IsChecked="{Binding ShowTooltip,
+                                                  Mode=TwoWay,
+                                                  ElementName=pieSurface}"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Tooltip" />
+
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="Leg"
+                              IsChecked="{Binding ShowLegend,
+                                                  Mode=TwoWay,
+                                                  ElementName=pieSurface}"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Legend" />
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="MSel"
+                              FontSize="9"
+                              IsChecked="{Binding AllowMultiSelect,
+                                                  Mode=TwoWay,
+                                                  ElementName=pieSurface}"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Allow multi select" />
+
+                <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                      Content="Add"
+                                      FontSize="11"
+                                      Padding="0"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}"
+                                      ToolTipService.ToolTip="Add new item">
+
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Text="Add new pie segment" />
+
+                            <ext:FlyoutSeparator />
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Margin="3" FontSize="14" Text="Text: " />
+                                <TextBox Margin="3" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Text="{Binding NewSegmentText, Mode=OneWayToSource}" />
+                                <TextBlock Margin="3" Grid.Row="1"  FontSize="14" Text="Value:" />
+                                <TextBox PreviewTextInput="UIElement_OnPreviewTextInput" Margin="3" Grid.Row="1" Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left" Text="{Binding NewSegmentValue, Mode=OneWayToSource}" />
+                                <TextBlock Margin="3" Grid.Row="2" FontSize="14" Text="Fill:" />
+
+                                <ComboBox Grid.Row="2"
+                                          Grid.Column="1"
+                                          Width="200"
+                                          Margin="3"
+                                          Background="#FF1C1C1F"
+                                          ItemsSource="{Binding AllBrushes}"
+                                          SelectedIndex="1"
+                                          SelectedItem="{Binding NewSegmentBrush, Mode=OneWayToSource}">
+
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="gauge:PieBrushesModel">
+
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <Rectangle Width="18"
+                                                           Height="{Binding RelativeSource={RelativeSource Mode=Self},
+                                                                            Path=Width}"
+                                                           Margin="3 0"
+                                                           Fill="{Binding Brush}"
+                                                           RadiusX="2"
+                                                           RadiusY="2" />
+
+                                                <TextBlock Margin="3 0"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="14"
+                                                           Foreground="White"
+                                                           Text="{Binding BrushName}" />
+
+                                            </StackPanel>
+
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+
+                            </Grid>
+
+                            <ext:FlyoutSeparator />
+
+                            <Button Width="80"
+                                    Margin="3"
+                                    HorizontalAlignment="Right"
+                                    Command="{Binding AddNewItem}"
+                                    Content="Add" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+                <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                      Content="Edit"
+                                      FontSize="11"
+                                      Padding="0"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}"
+                                      ToolTipService.ToolTip="Edit selected segment">
+
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Text="Edit last selected pie segment"/>
+
+                            <ext:FlyoutSeparator />
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Margin="3" FontSize="14" Text="Text: " />
+                                <TextBox Margin="3" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Text="{Binding SelectedSegment.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Margin="3" Grid.Row="1"  FontSize="14" Text="Value:" />
+                                <TextBox PreviewTextInput="UIElement_OnPreviewTextInput" Margin="3" Grid.Row="1" Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left" Text="{Binding SelectedSegment.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                
+                            </Grid>
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+            </WrapPanel>
+        </Border>
+
+
+    </Grid>
+
+</UserControl>

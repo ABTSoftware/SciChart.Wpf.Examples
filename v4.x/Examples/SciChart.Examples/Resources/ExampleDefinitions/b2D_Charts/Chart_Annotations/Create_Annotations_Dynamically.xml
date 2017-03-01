@@ -1,0 +1,34 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCreateAnnotationsDynamically.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates the Modifiers API to create Text, Line, Box, LineArrow and Custom Annotations dynamically.</ToolTipDescription>
+  <Description>
+    Using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.AnnotationCreationModifier.html']AnnotationCreationModifier[/url] you can give your users the ability to create annotations dynamically via mouse-clicks.
+
+    [b][i]Tips![/i][/b]
+
+    To create [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.TextAnnotation.html']TextAnnotations[/url], [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AxisMarkerAnnotation.html']AxisMarkerAnnotations[/url], [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.CustomAnnotation.html']CustomAnnotations[/url], - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.HorizontalLineAnnotation.html']HorizontalLineAnnotations[/url] and - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.VerticalLineAnnotation.html']VerticalLineAnnotations[/url], simply click once.
+
+    To create [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.BoxAnnotation.html']BoxAnnotations[/url], [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.LineAnnotation.html']LineAnnotations[/url] and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.LineArrowAnnotation.html']LineArrowAnnotations[/url] click and drag.
+
+    After creating and selecting an annotation, you can drag, resize and delete it.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.AnnotationCreationModifier.html']AnnotationCreationModifier Type[/url]
+    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Documentation[/url]
+    - [url='http://www.scichart.com/databinding-annotations-with-mvvm/']Databinding Annotations with MVVM[/url]
+    - [url='http://www.scichart.com/questions/question/editing-annotations-and-keeping-track-of-them-in-an-mvvm-application']Best practices with Annotations in MVVM apps[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml.cs.txt</string>    
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/MyCustomAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/MyCustomAnnotation.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

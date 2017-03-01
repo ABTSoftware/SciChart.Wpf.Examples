@@ -1,0 +1,62 @@
+﻿<ResourceDictionary x:Class="SciChart.Examples.Examples.StyleAChart.CustomTheme.CustomTheme"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  *************************  -->
+    <!--  Colors and Brushes  -->
+    <!--  *************************  -->
+
+    <!--  Chart Brushes  -->
+    <SolidColorBrush x:Key="TickTextBrush" Color="#FF6495ED" />
+    <SolidColorBrush x:Key="MajorGridLineBrush" Color="#102A47" />
+    <SolidColorBrush x:Key="MinorGridLineBrush" Color="#0D223D" />
+    <SolidColorBrush x:Key="SciChartBackground" Color="#0D213A"/>
+    <SolidColorBrush x:Key="GridBorderBrush" Color="#102A47" />
+    <SolidColorBrush x:Key="GridBackgroundBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="RolloverLineBrush" Color="#33FD9F25" />
+    <SolidColorBrush x:Key="CursorLineBrush" Color="#996495ED" />
+    <SolidColorBrush x:Key="RubberBandFillBrush" Color="#33999999" />
+    <SolidColorBrush x:Key="RubberBandStrokeBrush" Color="#77999999" />
+    <SolidColorBrush x:Key="LegendBackgroundBrush" Color="#1D2C35" />
+
+    <SolidColorBrush x:Key="LabelBackgroundBrush" Color="#AA6495ED" />
+    <SolidColorBrush x:Key="LabelBorderBrush" Color="#FF6495ED" />
+    <SolidColorBrush x:Key="LabelForegroundBrush" Color="#EEEEEE" />
+
+    <SolidColorBrush x:Key="TextAnnotationForeground" Color="#EEEEEE" />
+    <SolidColorBrush x:Key="TextAnnotationBackground" Color="#AA6495ED" />
+
+    <Color x:Key="AxisBandsFill">#0E233A</Color>
+
+    <!--  Default Series Colors  -->
+    <Color x:Key="UpWickColor">#FF6495ED</Color>
+    <Color x:Key="DownWickColor">#FF00008B</Color>
+    <SolidColorBrush x:Key="UpBodyBrush" Color="#A06495ED" />
+    <SolidColorBrush x:Key="DownBodyBrush" Color="#A000008B" />
+
+    <Color x:Key="UpBandSeriesLineColor">#FF6495ED</Color>
+    <Color x:Key="DownBandSeriesLineColor">#FF00008B</Color>
+    <Color x:Key="UpBandSeriesFillColor">#A06495ED</Color>
+    <Color x:Key="DownBandSeriesFillColor">#A000008B</Color>
+
+    <LinearGradientBrush x:Key="MountainAreaBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#094C9F" Offset="0"/>
+        <GradientStop Color="#000710" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Color x:Key="MountainLineColor">#76BBD2</Color>
+    <Color x:Key="LineSeriesColor">#FFC6E6FF</Color>
+    <Color x:Key="ColumnLineColor">#FFFFFFFF</Color>
+    <SolidColorBrush x:Key="ColumnFillBrush" Color="#FFFFFFFF"></SolidColorBrush>
+
+    <Brush x:Key="OverviewFillBrush">#A06495ED</Brush>
+
+    <Brush x:Key="ScrollbarViewportBackgroundBrush">#A06495ED</Brush>
+
+    <LinearGradientBrush x:Key="DefaultColorMapBrush">
+        <GradientStop Offset="0" Color="DarkBlue" />
+        <GradientStop Offset="0.5" Color="CornflowerBlue" />
+        <GradientStop Offset="1" Color="#FF22AA" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>

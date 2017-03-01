@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ZoomAndPanAChart/DragAxisToScale.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDragAxisToScale.png</ImagePath>
+  <IconPath>IconZoom</IconPath>
+  <ToolTipDescription>Demonstrates mouse-dragging of X and Y Axis to scale using the YAxisDragModifier and XAxisDragModifier. These are a built-in ChartModifierBase derived classes which add the behavior of scaling on mouse-drag of each axis.
+  </ToolTipDescription>
+  <Description>
+    Showcases how to add Axis-Drag scaling to a SciChartSurface using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.YAxisDragModifier.html']YAxisDragModifier[/url] and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.XAxisDragModifier.html']XAxisDragModifier[/url]. ChartModifiers can be added to the SciChartSurface via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~ChartModifier.html']SciChartSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ModifierGroup.html']ModifierGroup[/url]
+
+    By default, the X and YAxisDragModifier apply to all axes on the chart. You can restrict them to a single axis using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.AxisDragModifierBase~AxisId.html']AxisAxisDragModifierBase.AxisId[/url] property. Or, you can include or include individual axis via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.YAxisDragModifier~IncludeAxisProperty.html']YAxisDragModifier.IncludeAxis[/url] or [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.XAxisDragModifier~IncludeAxisProperty.html']XAxisDragModifier.IncludeAxis[/url] attached properties.
+
+    Finally, drag modifiers can be used in Absolute mode (when YAxis.AutoRange=false) as well as Relative mode (when YAxis.AutoRange=true).
+
+    [b]Documentation links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17229/0/chartmodifiers-provided-by-scichart']ChartModifiers provided by SciChart[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.XAxisDragModifier.html']XAxisDragModifier Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.YAxisDragModifier.html']YAxisDragModifier Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/DragAxisToScale.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/DragAxisToScale.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Zoom</Features>
+    <Features>Pan</Features>
+  </Features>
+</ExampleDefinition>

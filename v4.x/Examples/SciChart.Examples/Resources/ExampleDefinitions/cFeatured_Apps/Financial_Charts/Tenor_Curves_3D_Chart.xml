@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconColumn</IconPath>
+  <ToolTipDescription>TODO</ToolTipDescription>
+  <Description>
+    The Tenor Curves example demonstrates how to combine 3D Charts and 2D Charts in the same example, in this case to display sample tenor curve data.
+
+    3D Charts are provided by the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface Type[/url]. In this example we use a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.UniformGridDataSeries3D%603.html']UniformGridDataSeries3D[/url] and a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.SurfaceMeshRenderableSeries3D.html']SurfaceMeshRenderableSeries3D[/url] to visualize the 3D surface. Rotation of the 3D chart is provided by the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.OrbitModifier3D.html']OrbitModifier3D[/url].
+
+    2D Line Charts are provided by the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface.html']SciChartSurface[/url]. This uses a single [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries.html']FastLineRenderableSeries[/url] and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries[/url] type to display line data, with an optional [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BasePointMarker.html']PointMarker[/url].
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface.html']SciChartSurface Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.SurfaceMeshRenderableSeries3D.html']SurfaceMeshRenderableSeries3D[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.UniformGridDataSeries3D%603.html']UniformGridDataSeries3D[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

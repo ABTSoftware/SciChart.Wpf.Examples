@@ -1,0 +1,20 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateRealtime3DCharts/CreateRealTime3DPointCloudChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    The 3D Point Cloud chart demo shows how to create a real-time 3D point cloud
+  </ToolTipDescription>
+  <Description>
+    The Realtime 3D Point Cloud demo shows how to use the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ScatterRenderableSeries3D.html']ScatterRenderableSeries3D[/url] type to render a 3D Point-Cloud chart with two-dimensional textures.
+
+    The Point-Cloud chart provides a high performance solution suitable for many thousands or hundreds of thousands of 3D markers, useful for particle physics visualisation, Ion-optics or NBody simulations.
+
+    Scatter points can be colored individually, programmatically selected and scaled using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.PointMetadata3D.html']PointMetadata3D[/url] class. PointMetadata also allows you to tag individual scatter points with a business object of any type.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/CreateRealTime3DPointCloudChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/CreateRealTime3DPointCloudChart.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

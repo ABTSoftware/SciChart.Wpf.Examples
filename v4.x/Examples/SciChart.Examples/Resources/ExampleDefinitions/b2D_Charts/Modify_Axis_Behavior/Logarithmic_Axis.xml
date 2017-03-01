@@ -1,0 +1,37 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/LogarithmicAxisView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoLogarithmicAxis.png</ImagePath>
+  <IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates a chart with three line-series and a Logarithmic Y-Axis</ToolTipDescription>
+  <Description>
+    This example demonstrates X or Y logarithmic axis in SciChart. Click the controls to change state. None= linear axes, Y-Axis and X-Axis set the respective axes to logarithmic or linear.
+
+    [b][i]Example Usage[/i][/b]
+
+    - Drag to zoom
+    - Double click to zoom to extents
+    - Change the Logarithmic Base from Log10, to LogE to Log2
+
+    [b][i]Tips![/i][/b]
+
+    The axis labels may be formatted using Scientific notation with Superscript. See the NumericAxis.ScientificNotation property in the help file.
+
+    [b]Documentation links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17191/29/logarithmicnumericaxis-vs-numericaxis']LogarithmicNumericAxis vs NumericAxis[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17202/30/scientific-or-engineering-notation']Scientific or Engineering Notation[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.LogarithmicAxis.LogarithmicNumericAxis.html']LogarithmicNumericAxis Type[/url]
+    - [url='http://www.scichart.com/questions/question/axis-gridlines-with-both-a-numericaxis-and-a-logarithmicnumericaxis']FAQ: Swithing between LogarithmicNumericAxis and NumericAxis[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/LogarithmicAxisView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/LogarithmicAxisView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>
+    <Features>Logarithmic</Features>
+    <Features>LogE</Features>
+    <Features>Log10</Features>
+  </Features>
+</ExampleDefinition>
