@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ModifyAxisBehaviour.ModifyAxisProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.ModifyAxisBehaviour"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="ModifyAxisPropertiesLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToggleButtonNew.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ButtonNew.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid x:Name="grid">
+
+        <Grid.Resources>
+
+            <Style x:Key="TextBoxStyle" TargetType="TextBox">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+                <Setter Property="Foreground" Value="#FFF" />
+                <Setter Property="Background" Value="#FF323539" />
+                <Setter Property="BorderBrush" Value="#FF5B5B5B" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+
+            <ext:ToValidDateTimeConverter x:Key="ToValidDateTimeConverter" />
+
+            <ext:ValidateDateFormatStringConverter x:Key="validateTextFormattingConveter" />
+
+            <Style TargetType="{x:Type DatePickerTextBox}">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <TextBox x:Name="PART_TextBox"
+                                     MaxLength="30"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding Text, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  *******************************************************  -->
+        <!--  Ignore below here: Controls to modify the Axis Behavior  -->
+        <!--  *******************************************************  -->
+
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=sciChart}">
+
+            <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                  Content="XAxis Controls"
+                                  Padding="0"
+                                  Style="{StaticResource FlyoutMenuButtonStyle}"
+                                  ToolTipService.ToolTip="XAxis Controls">
+
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+
+                        <TextBlock Text="XAxis Controls" />
+
+                        <CheckBox Margin="3"
+                                  Content="Draw Axis Bands"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawMajorBands, Mode=TwoWay}" />
+
+                        <CheckBox Margin="3"
+                                  Content="Draw Major Gridlines"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawMajorGridLines, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Minor GridLines"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawMinorGridLines, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Major Ticks"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawMajorTicks, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Minor Ticks"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawMinorTicks, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Labels"
+                                  IsChecked="{Binding ElementName=xAxis, Path=DrawLabels, Mode=TwoWay}" />
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="Text Formatting: " />
+
+                        <TextBox Margin="3"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding ElementName=xAxis, Path=TextFormatting, Mode=TwoWay, Converter={StaticResource validateTextFormattingConveter}, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="Visible Range Min" />
+
+                        <local:CompatibleDatePicker x:Name="minDatePicker"
+                                                    BorderBrush="#FF5B5B5B"
+                                                    BorderThickness="0"
+                                                    SelectedDate="{Binding ElementName=xAxis, Path=VisibleRange.Min, Mode=TwoWay, Converter={StaticResource ToValidDateTimeConverter}, ConverterParameter=Min}" />
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="Visible Range Max" />
+
+                        <local:CompatibleDatePicker x:Name="maxDatePicker"
+                                                    BorderBrush="#FF5B5B5B"
+                                                    BorderThickness="0"
+                                                    SelectedDate="{Binding ElementName=xAxis, Path=VisibleRange.Max, Mode=TwoWay, Converter={StaticResource ToValidDateTimeConverter}, ConverterParameter=Max}" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                  Content="YAxis Controls"
+                                  Padding="0"
+                                  Style="{StaticResource FlyoutMenuButtonStyle}"
+                                  ToolTipService.ToolTip="XAxis Controls">
+
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+
+                        <TextBlock Text="YAxis Controls" />
+
+                        <CheckBox Margin="3"
+                                  Content="Draw Axis Bands"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawMajorBands, Mode=TwoWay}" />
+
+                        <CheckBox Margin="3"
+                                  Content="Draw Major Gridlines"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawMajorGridLines, Mode=TwoWay}" />
+
+                        <CheckBox Margin="3"
+                                  Content="Draw Minor GridLines"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawMinorGridLines, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Major Ticks"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawMajorTicks, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Minor Ticks"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawMinorTicks, Mode=TwoWay}" />
+                        <CheckBox Margin="3"
+                                  Content="Draw Labels"
+                                  IsChecked="{Binding ElementName=yAxis, Path=DrawLabels, Mode=TwoWay}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="Text Formatting: " />
+
+                        <TextBox Margin="3"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding ElementName=yAxis, Path=TextFormatting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="Axis Alignment: " />
+
+                        <ComboBox x:Name="cboAlignment"
+                                  Margin="3"
+                                  SelectedItem="{Binding ElementName=yAxis, Path=AxisAlignment, Mode=TwoWay}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="VisibleRange.Min" />
+
+                        <TextBox x:Name="minValueTb"
+                                 Margin="3"
+                                 LostFocus="OnMinYAxesChanged"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding ElementName=yAxis, Path=VisibleRange.Min, Mode=OneWay}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="VisibleRange.Max" />
+
+                        <TextBox x:Name="maxValueTb"
+                                 Margin="3"
+                                 LostFocus="OnMaxYAxesChanged"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding ElementName=yAxis, Path=VisibleRange.Max, Mode=OneWay}" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
+
+            <!--  Add a DateTime XAxis  -->
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis x:Name="xAxis" VisibleRangeChanged="OnXVisibleRangeChanged" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Add two YAxes, to display price and volume data  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="yAxis"
+                               AxisAlignment="Right"
+                               GrowBy="-0.7,0"
+                               TextFormatting="#.0" />
+            </s:SciChartSurface.YAxis>
+
+            <!--  Add some sample RenderableSeries. Each theme has a default style for these  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastColumnRenderableSeries x:Name="columnSeries" YAxisId="{Binding ElementName=yAxis, Path=Id, Mode=TwoWay}" />
+                <s:FastOhlcRenderableSeries x:Name="ohlcSeries" YAxisId="{Binding ElementName=yAxis, Path=Id, Mode=TwoWay}" />
+                <s:FastLineRenderableSeries x:Name="lineSeries" YAxisId="{Binding ElementName=yAxis, Path=Id, Mode=TwoWay}" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Add some modifiers to zoom, zoom extents  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier />
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

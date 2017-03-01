@@ -1,0 +1,379 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateRadarChart.RadarChartCustomizationExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateRadarChart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="RadarChartTooltipTemplate" DataType="s:IRadarSeriesInfo">
+                <StackPanel HorizontalAlignment="Stretch" Margin="1" Orientation="Vertical">
+                    
+                    <TextBlock MaxWidth="100"
+                               FontSize="12"
+                               Text="{Binding AxisTitle}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+
+                    <StackPanel Margin="3 0 3 3" Orientation="Horizontal">
+                        <TextBlock Margin="3" FontSize="14" Text="{Binding SeriesName}"/>
+                        <TextBlock FontSize="14" Margin="3 0" Text="{Binding FormattedDataValue}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </DataTemplate>
+            
+            <local:RadarChartBillionDollarCategoryLabelProvider x:Key="BillionLabelProvider" />
+            <local:RadarChartPercentCategoryLabelProvider x:Key="PercentProvider" />
+            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
+
+            <Style x:Key="RadarAxisStyle" TargetType="local:CustomRadarAxis">
+                <Setter Property="DrawMajorTicks" Value="True" />
+                <Setter Property="AutoTicks" Value="False" />
+                <Setter Property="DrawLabels" Value="True" />
+                <Setter Property="TitleStyle">
+                    <Setter.Value>
+                        <Style TargetType="s:RadarAxisTitle">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock MaxWidth="100"
+                                                   FontSize="12"
+                                                   Text="{Binding AxisTitle}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="s:RadarPolygonRenderableSeries">
+                <Setter Property="SelectedSeriesStyle">
+                    <Setter.Value>
+                        <Style TargetType="s:RadarPolygonRenderableSeries">
+                            <Setter Property="StrokeThickness" Value="4" />
+                        </Style>
+                    </Setter.Value>
+                </Setter> 
+            </Style>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <s:SciChartRadarSurface x:Name="radarChart"
+                                Grid.Column="1"
+                                AutoAxisAngle="False"
+                                AutoAxisLength="False"
+                                ChartTitle="Economic Policy and Debt 2014"
+                                AxisAngleOffset="{Binding StartAngle, Mode=TwoWay}">
+
+            <s:SciChartRadarSurface.RadarAxes>
+                <local:CustomRadarAxis AxisAngle="0"
+                                       AxisLength="230"
+                                       AxisTitle="Average grace period on new external debt"
+                                       Id="gracePeriodId"
+                                       MajorDelta="2"
+                                       MinorDelta="2"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,16" />
+
+                <local:CustomRadarAxis AxisAngle="65"
+                                       AxisLength="400"
+                                       AxisTitle="Average grant element on new external debt"
+                                       Id="grantElementId"
+                                       LabelProvider="{StaticResource PercentProvider}"
+                                       MajorDelta="20"
+                                       MinorDelta="20"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,80" />
+
+                <local:CustomRadarAxis AxisAngle="110"
+                                       AxisLength="350"
+                                       AxisTitle="Average interest on new external debt"
+                                       Id="interestId"
+                                       LabelProvider="{StaticResource PercentProvider}"
+                                       MajorDelta="1"
+                                       MinorDelta="1"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0, 6" />
+
+                <local:CustomRadarAxis AxisAngle="180"
+                                       AxisLength="230"
+                                       AxisTitle="Average maturity on new external debt"
+                                       Id="maturityId"
+                                       MajorDelta="5"
+                                       MinorDelta="5"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,25" />
+
+                <local:CustomRadarAxis AxisAngle="225"
+                                       AxisLength="300"
+                                       AxisTitle="Changes in net reserves (BoP, current US$)"
+                                       Id="netReservesId"
+                                       LabelProvider="{StaticResource BillionLabelProvider}"
+                                       MajorDelta="2"
+                                       MinorDelta="2"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,10" />
+
+                <local:CustomRadarAxis AxisAngle="270"
+                                       AxisLength="400"
+                                       AxisTitle="Concessional debt (% of total external debt)"
+                                       Id="concessionalDebtId"
+                                       LabelProvider="{StaticResource PercentProvider}"
+                                       MajorDelta="5"
+                                       MinorDelta="5"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,25" />
+
+                <local:CustomRadarAxis AxisAngle="315"
+                                       AxisLength="300"
+                                       AxisTitle="Aid flows at constant US$"
+                                       Id="aidId"
+                                       LabelProvider="{StaticResource BillionLabelProvider}"
+                                       MajorDelta="0.2"
+                                       MinorDelta="0.2"
+                                       Style="{StaticResource RadarAxisStyle}"
+                                       VisibleRange="0,1.6" />
+
+            </s:SciChartRadarSurface.RadarAxes>
+
+            <s:SciChartRadarSurface.ChartModifiers>
+                <s:RadarTooltipModifier ShowTooltip="{Binding ShowTooltip, Mode=TwoWay}" />
+                <s:RadarLegendModifier LegendPlacement="Inside"
+                                       Orientation="Vertical"
+                                       ShowLegend="{Binding ShowLegend, Mode=TwoWay}" />
+                <s:RadarSeriesSelectionModifier ExecuteWhen="{Binding SelectionExecuteWhen}" AllowMultiSelect="{Binding AllowMultiSelection}" IsEnabled="{Binding AllowSelection}" />
+            </s:SciChartRadarSurface.ChartModifiers>
+
+            <s:SciChartRadarSurface.RenderableSeries>
+
+                <s:RadarPolygonRenderableSeries DataSeries="{Binding UkraineDataSeries}"
+                                                IsFilled="{Binding IsFilled, Mode=TwoWay}"
+                                                SeriesName="Ukraine"
+                                                Stroke="Blue"
+                                                StrokeThickness="1">
+                    <s:RadarPolygonRenderableSeries.PointMarker>
+                        <s:TrianglePointMarker Width="10"
+                                               Height="10"
+                                               Fill="Blue"
+                                               Stroke="Black"
+                                               StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.PointMarker>
+
+                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                        <s:TrianglePointMarker Width="15"
+                                               Height="15"
+                                               Fill="Blue"
+                                               Stroke="Black"
+                                               StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+
+                    <s:RadarPolygonRenderableSeries.Fill>
+                        <SolidColorBrush Opacity="0.4" Color="Blue" />
+                    </s:RadarPolygonRenderableSeries.Fill>
+
+                </s:RadarPolygonRenderableSeries>
+
+                <s:RadarPolygonRenderableSeries DataSeries="{Binding RomaniaDataSeries}"
+                                                IsFilled="{Binding IsFilled, Mode=TwoWay}"
+                                                SeriesName="Romania"
+                                                Stroke="Coral"
+                                                StrokeThickness="1">
+
+                    <s:RadarPolygonRenderableSeries.Fill>
+                        <SolidColorBrush Opacity="0.4" Color="Coral" />
+                    </s:RadarPolygonRenderableSeries.Fill>
+
+                    <s:RadarPolygonRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Width="10"
+                                              Height="10"
+                                              Fill="Coral"
+                                              Stroke="Black"
+                                              StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.PointMarker>
+
+                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                        <s:EllipsePointMarker Width="15"
+                                              Height="15"
+                                              Fill="Coral"
+                                              Stroke="Black"
+                                              StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                </s:RadarPolygonRenderableSeries>
+
+                <s:RadarPolygonRenderableSeries DataSeries="{Binding GeorgiaDataSeries}"
+                                                IsFilled="{Binding IsFilled, Mode=TwoWay}"
+                                                SeriesName="Georgia"
+                                                Stroke="Green"
+                                                StrokeThickness="1">
+
+                    <s:RadarPolygonRenderableSeries.Fill>
+                        <SolidColorBrush Opacity="0.4" Color="Green" />
+                    </s:RadarPolygonRenderableSeries.Fill>
+
+                    <s:RadarPolygonRenderableSeries.PointMarker>
+                        <s:CrossPointMarker Width="10"
+                                            Height="10"
+                                            Stroke="Green"
+                                            StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.PointMarker>
+
+                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                        <s:CrossPointMarker Width="15"
+                                            Height="15"
+                                            Stroke="Green"
+                                            StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                </s:RadarPolygonRenderableSeries>
+
+
+                <s:RadarPolygonRenderableSeries DataSeries="{Binding BelarusDataSeries}"
+                                                IsFilled="{Binding IsFilled, Mode=TwoWay}"
+                                                SeriesName="Belarus"
+                                                Stroke="YellowGreen"
+                                                StrokeThickness="1">
+
+                    <s:RadarPolygonRenderableSeries.Fill>
+                        <SolidColorBrush Opacity="0.4" Color="YellowGreen" />
+                    </s:RadarPolygonRenderableSeries.Fill>
+
+                    <s:RadarPolygonRenderableSeries.PointMarker>
+                        <s:SquarePointMarker Width="10"
+                                             Height="10"
+                                             Fill="YellowGreen"
+                                             Stroke="Black"
+                                             StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.PointMarker>
+
+                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                        <s:SquarePointMarker Width="15"
+                                             Height="15"
+                                             Fill="YellowGreen"
+                                             Stroke="Black"
+                                             StrokeThickness="1" />
+                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                </s:RadarPolygonRenderableSeries>
+
+            </s:SciChartRadarSurface.RenderableSeries>
+
+        </s:SciChartRadarSurface>
+
+        <Border Panel.ZIndex="9999"
+                Background="#FF232426"
+                BorderBrush="#323539"
+                BorderThickness="0,0,2,0">
+
+            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+
+                <ext:FlyoutMenuButton Content="Ang"
+                                      FontSize="12"
+                                      Padding="0"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}">
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Slide to change Start Angle of Radar Chart" />
+                            <ext:FlyoutSeparator />
+                            <Slider Margin="4"
+                                    HorizontalAlignment="Stretch"
+                                    Maximum="360"
+                                    Minimum="0"
+                                    Orientation="Horizontal"
+                                    Value="{Binding StartAngle,
+                                                    Mode=TwoWay}" />
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="Tooltip"
+                              ContentTemplate="{StaticResource TooltipIconContentTemplate}"
+                              IsChecked="{Binding ShowTooltip, Mode=TwoWay}"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Tooltip Radar Modifier" />
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="Leg"
+                              IsChecked="{Binding ShowLegend, Mode=TwoWay}"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Legend Radar Modifier" />
+                
+                <ToggleButton HorizontalAlignment="Left"
+                              Content="Fill"
+                              FontSize="12"
+                              IsChecked="{Binding IsFilled, Mode=TwoWay}"
+                              Padding="0"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Is filled series" />
+                
+                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
+                                            Content="SLCT"
+                                            Padding="0"
+                                            FontSize="11"
+                                            IsChecked="{Binding AllowSelection, Mode=TwoWay}"
+                                            Style="{StaticResource FlyoutMenuToggleButtonStyle}"
+                                            ToolTipService.ToolTip="Selection Modifier">
+
+                    <ext:FlyoutMenuToggleButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            
+                            <TextBlock FontSize="12" Text="Execute when" />
+                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:MouseModifier}}}" SelectedItem="{Binding SelectionExecuteWhen, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            
+                            <ext:FlyoutSeparator />
+
+                            <CheckBox Margin="3"
+                                      VerticalAlignment="Center"
+                                      Content="Allow Multi Selection"
+                                      IsChecked="{Binding AllowMultiSelection, Mode=TwoWay}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuToggleButton.PopupContent>
+                </ext:FlyoutMenuToggleButton>
+                
+                <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                      HorizontalContentAlignment="Center"
+                                      Content="THM"
+                                      FontSize="10"
+                                      Padding="0"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}"
+                                      ToolTipService.ToolTip="Theme changing">
+
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <TextBlock FontSize="12" Text="Update Theme" />
+                            <ext:FlyoutSeparator />
+
+                            <ComboBox FontSize="12"
+                                      ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
+                                      SelectedItem="{Binding ElementName=radarChart, Path=(s:ThemeManager.Theme), Mode=TwoWay}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+            </WrapPanel>
+        </Border>
+        
+    </Grid>
+</UserControl>

@@ -1,0 +1,23 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Title>Spectrogram Chart</Title>
+  <View>Examples/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoScatter.png</ImagePath>
+  <IconPath>IconScatter</IconPath>
+  <ToolTipDescription>New</ToolTipDescription>
+  <Description>
+    The Spectrogram Demo showcases how to mix a 2D Line Chart showing a Fast Fourier Transform (FFT) of a waveform, and also show a Spectrogram (scrolling heatmap) of the same data.
+
+    The scrolling heatmap is achieved using a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface.html']SciChartSurface[/url] with a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries[/url] and by updating the data on a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries[/url].
+
+    The result is a smooth 30FPS scrolling heatmap allowing you to visually inspect your spectrum data!
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/FFT.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Line</Features>
+  </Features>
+</ExampleDefinition>

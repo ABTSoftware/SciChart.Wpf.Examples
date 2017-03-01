@@ -1,0 +1,23 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/TooltipsAndHitTest3DCharts/SeriesCustomTooltips3DChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAddRemoveDataSeries.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>TODO</ToolTipDescription>
+  <Description>
+    Demonstrates how to add, and customize Tooltips on a 3D Chart by using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D[/url] Type.
+
+    This ChartModifier3D can be added to the SciChart3DSurface via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface~ChartModifier.html']SciChart3DSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.ModifierGroup3D.html']ModifierGroup3D[/url]
+
+    You can change the default tooltip by setting the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D~TooltipTemplateProperty.html']TooltipModifier3D.TooltipTemplate[/url] attached property on a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.BaseRenderableSeries3D.html']BaseRenderableSeries3D[/url] derived type. The Tooltip DataTemplate binds to a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.ChartData.SeriesInfo3D.html']SeriesInfo3D[/url], which is the viewmodel for tooltips.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.ChartData_namespace.html']SeriesInfo3D Derived Types[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/TooltipsAndHitTest3DCharts/SeriesCustomTooltips3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/TooltipsAndHitTest3DCharts/SeriesCustomTooltips3DChart.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

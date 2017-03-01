@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.NonUniformHeatmap.NonUniformHeatmap"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}"/>
+
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastNonUniformHeatmapRenderableSeries x:Name="heatmapSeries" Maximum="100" Opacity="0.9" DrawTextInCell="True" CellTextForeground="Black"/>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis x:Name="xAxis" FlipCoordinates="False" GrowBy="0.1,0.1" ScientificNotation="None" DrawMajorBands="True"/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="yAxis" FlipCoordinates="False" GrowBy="0.1,0.1" ScientificNotation="None" DrawMajorBands="True"/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:TooltipModifier></s:TooltipModifier>
+                    <s:ZoomPanModifier ClipModeX="None"></s:ZoomPanModifier>
+                    <s:MouseWheelZoomModifier></s:MouseWheelZoomModifier>
+                    <s:RubberBandXyZoomModifier ExecuteOn="MouseRightButton"/>
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,30 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ZoomAndPanAChart/MouseDragToPan.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDragToPan.png</ImagePath>
+<IconPath>IconPan</IconPath>
+  <ToolTipDescription>Demonstrates mouse-dragging of SciChart: Overlays three series on a SciChartSurface and applies the ZoomPanModifier. This is a built-in ChartModifierBase derived class which adds the behavior of panning on mouse-drag. 
+  </ToolTipDescription>
+  <Description>
+    Demonstrates mouse-dragging of SciChart: Overlays three series on a SciChartSurface and applies the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifier.html']ZoomPanModifier[/url]. This is a built-in ChartModifierBase derived class which adds the behavior of panning on mouse-drag. ChartModifiers can be added to the SciChartSurface via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~ChartModifier.html']SciChartSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ModifierGroup.html']ModifierGroup[/url]
+
+    [b][i]Interactivity Options[/i][/b]
+
+    Change input button to start the pan operation, e.g. Left, Middle button (WPF Only) or Right Button
+
+    [b]Documentation links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17229/0/chartmodifiers-provided-by-scichart']ChartModifiers provided by SciChart[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifier.html']ZoomPanModifier[/url]
+  </Description>
+  <HelpText>
+    Left-Button Drag to Pan the Chart
+  </HelpText>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/MouseDragToPan.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/MouseDragToPan.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Pan</Features>
+  </Features>
+</ExampleDefinition>

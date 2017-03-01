@@ -1,0 +1,14 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ChartGroup>AnnotateAChart</ChartGroup>
+  <Title>Apply Line Annotations</Title>
+  <View>Examples/IWantTo/AnnotateAChart/ApplyLineAnnotations.xaml</View>
+  <ViewModel />
+  <ImagePath>/Abt.Controls.SciChart.Example;component/Resources/Images/ExampleImages/demoPointMarkers.png</ImagePath>
+  <IconPath>/Abt.Controls.SciChart.Example;component/Resources/Images/ExampleIcons/line_icon.png</IconPath>
+  <ChartTypes>Line</ChartTypes>
+  <Description>Demonstrates adding line annotations to a SciChartSurface by point and click. Annotations can be added, selected, dragged (moved) and deleted</Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/ApplyLineAnnotations.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/ApplyLineAnnotations.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

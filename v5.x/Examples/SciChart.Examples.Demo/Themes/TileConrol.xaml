@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+                    xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
+                    xmlns:t="clr-namespace:SciChart.Examples.Demo.Controls.TileControl">
+
+    <converters:ThicknessToNegativeThicknessConverter x:Key="ThicknessToNegativeThicknessConverter" />
+
+    <Style TargetType="t:Tile">
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="t:Tile">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Margin="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ThicknessToNegativeThicknessConverter}}" helpers:Clip.ToBounds="True">
+                            <Grid.Resources>
+                                <Storyboard x:Key="TooltipOut" x:Name="TooltipOut">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_TooltipContent" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                                <Storyboard x:Key="TooltipIn" x:Name="TooltipIn">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_TooltipContent" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut" Exponent="12" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </Grid.Resources>
+                            <ContentPresenter x:Name="PART_MainContent"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding Content}">
+                                <ContentPresenter.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="MainTranslateTransform" />
+                                    </TransformGroup>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+
+                            <ContentPresenter x:Name="PART_DetailsContent"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding DetailedContent}">
+                                <ContentPresenter.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="DetailsTranslateTransform" />
+                                    </TransformGroup>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+
+                            <ContentPresenter x:Name="PART_TooltipContent"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding TooltipContent}"
+                                              Opacity="0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

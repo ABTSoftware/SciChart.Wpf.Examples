@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateStockCharts/MultiPane/CreateMultiPaneStockCharts.xaml</View>
+  <ViewModel>Examples.CreateStockCharts.MultiPane.CreateMultiPaneStockChartsViewModel</ViewModel>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCreateMultiPaneStockCharts.png</ImagePath>
+  <IconPath>IconCandlestick</IconPath>
+  <ToolTipDescription>Using the SciChartGroup and SciStockChart control, create's a static multi-pane stock chart with Indicator and Volume panes</ToolTipDescription>
+  <Description>
+    An MVVM example which demonstrates creating a static multi-panel stock chart with Volume and Indicator panes using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup.html']SciChartGroup[/url] control.
+
+    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
+
+    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
+
+    [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17243/40/does-scichart-support-technical-indicators-like-macd-sma-ema-rsi']Technical Indicators[/url] are for demonstration purposes only. We recommend the open-source [url='http://ta-lib.org/']TA-Lib[/url] to integrate technical indicators to SciChart!
+
+    [b][i]Example Usage[/i][/b]
+
+    - Switch from OHLC to Candlestick chart.
+    - Select Pan or Zoom mode.
+    - Zoom to extents via button or double-clicking on the chart.
+    - Drag XAxis and YAxis to scale.
+    - Hover to see XY cursor values.
+    - Change theme of the chart via the drop-down menu.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/create-multipane-stock-charts-with-scichartgroup/']Create MultiPane Stock Charts with SciChartGroup[/url]
+    - [url='http://www.scichart.com/how-to-add-a-scichartoverview-or-scrollbar-with-an-itemscontrol-of-charts-or-scichartgroup/']How to add a SciChartOverview or Scrollbar with an ItemsControl of charts, or SciChartGroup[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17243/40/does-scichart-support-technical-indicators-like-macd-sma-ema-rsi']Does SciChart Support Technical Indicators like MACD, SMA, EMA, RSI?[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup.html']SciChartGroup Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup Property[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId Property[/url]
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/CreateMultiPaneStockCharts.xaml.txt</string>    
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/CreateMultiPaneStockCharts.xaml.cs.txt</string>    
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/CreateMultiPaneStockChartsViewModel.cs.txt</string>    
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/PricePaneViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/IndicatorPaneViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/VolumePaneViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/RsiPaneViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/BaseChartPaneViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/MultiPane/StockChartHelper.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stock</Features>
+    <Features>Candlestick</Features>
+    <Features>Band</Features>
+    <Features>Line</Features>
+    <Features>VerticalChartGroup</Features>
+    <Features>SciChartGroup</Features>
+    <Features>Trading</Features>
+  </Features>
+</ExampleDefinition>
+

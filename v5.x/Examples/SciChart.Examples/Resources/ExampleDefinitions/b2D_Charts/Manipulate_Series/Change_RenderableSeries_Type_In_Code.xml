@@ -1,0 +1,22 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ManipulateSeries/ChangeRenderableSeriesTypeExampleView.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoChangeRenderableSeriesType.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates how to change the type of a RenderableSeries (e.g. change Line to Column, to Mountain) using the SciChart API</ToolTipDescription>
+  <Description>
+    Demonstrates how to change how a series type is rendered in code. This is achieved by manipulating the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime. The same thing can be achieved in MVVM, using our new MVVM [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding[/url] Markup Extension.
+
+    Click on a series to select it. With the series selected, change the Series Type via the dropdown.
+
+    [i][b]Note:[/b][/i][i] this example uses the HitTest API with interpolation to allow selecting of a series via mouse-click anywhere on the line, column or area.[/i]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ManipulateSeries/ChangeRenderableSeriesTypeExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ManipulateSeries/ChangeRenderableSeriesTypeExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>DataSeries</Features>
+  </Features>
+</ExampleDefinition>
+ 
