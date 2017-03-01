@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.Load500By500.Load500By500PageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:load500By500="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.Load500By500"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" x:Name="UserToolbar" TargetSurface="{Binding ElementName=sciChart}">
+
+            <Button Command="{Binding RunExampleCommand}"
+                    Padding="0"
+                    FontSize="11"
+                    Content="Load"
+                    Style="{StaticResource DefaultButtonStyle}" />
+
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           Grid.RowSpan="2"
+                           ViewportManager="{Binding ViewportManager}"
+                           load500By500:LineSeriesSource.DataSeries="{Binding DataSeries}">
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsAnimated="True" />
+                    <s:CursorModifier />
+                    <s:ZoomPanModifier ExecuteOn="MouseLeftButton" ReceiveHandledEvents="True" />
+                    <s:ZoomExtentsModifier IsAnimated="True" />
+                    <s:XAxisDragModifier />
+                    <s:YAxisDragModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+            <!-- Some hints to the user -->
+            <s:SciChartSurface.Annotations>
+
+                <s:CustomAnnotation CoordinateMode="Relative" 
+                                    HorizontalAnchorPoint="Left"
+                                    Margin="5,150,0,0" 
+                                    VerticalAnchorPoint="Center" 
+                                    IsHidden="{Binding ElementName=sciChart, Path=SelectedRenderableSeries.Count}"
+                                    X1="0" 
+                                    Y1="0" >
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Text="Click " 
+                                   Foreground="#FFF" />
+                        
+                        <Image Width="32"
+                               Height="32"
+                               Source="/SciChart.Examples;component/Resources/Images/load_button.png"
+                               Stretch="None" />
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Text=" for loading 500 series each with 500 points!" 
+                                   Foreground="#FFF" />
+
+                    </StackPanel>
+
+                </s:CustomAnnotation>
+
+            </s:SciChartSurface.Annotations>
+
+        </s:SciChartSurface>
+
+        <s:SciChartPerformanceOverlay Grid.Column="1"
+                                      Grid.Row="0"
+                                      Margin="5,5,50,0"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top"
+                                      Background="#33FFFFFF"
+                                      FontSize="16"
+                                      FontWeight="Bold"
+                                      Foreground="#FFF"
+                                      Padding="10"
+                                      TargetSurface="{Binding ElementName=sciChart}" />
+    </Grid>
+</UserControl>

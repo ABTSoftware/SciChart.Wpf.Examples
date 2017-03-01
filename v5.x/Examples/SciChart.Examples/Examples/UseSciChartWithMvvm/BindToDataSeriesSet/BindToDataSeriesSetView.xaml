@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.UseSciChartWithMvvm.BindToDataSeriesSet.BindToDataSeriesSetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=SciChart}">
+
+            <Button Command="{Binding AppendDataCommand}"
+                    Content="+50"
+                    Padding="1"
+                    Style="{StaticResource DefaultButtonStyle}" />
+
+        </ext:SciChartInteractionToolbar>
+        <!--  Button is used to invoke a delegate in the ViewModel to append 50 points.  -->
+
+        <!--  Declare a SciChartSurface and bind to data  -->
+        <s:SciChartSurface x:Name="SciChart"
+                           Grid.Column="1"
+                           ViewportManager="{Binding ViewportManager}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries DataSeries="{Binding ChartData}" Stroke="#279B27" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

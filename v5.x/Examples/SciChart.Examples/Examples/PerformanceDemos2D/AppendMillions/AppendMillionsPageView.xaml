@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="Abt.Controls.SciChart.PerformanceDemo.TestPages.AppendMillions.AppendMillionsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:controls2="clr-namespace:Abt.Controls.SciChart.PerformanceDemo.Controls"
+             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+             mc:Ignorable="d"
+             Background="#333"
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="240" />
+        </Grid.ColumnDefinitions>
+
+        <s:SciChartSurface x:Name="sciChart" s:ThemeManager.Theme="ExpressionDark"
+                           ViewportManager="{Binding ViewportManager}">
+
+            <s:SciChartSurface.RenderSurface>
+                <s3D:Direct3D10RenderSurface/>
+            </s:SciChartSurface.RenderSurface>
+            
+            <!-- Define RenderableSeries -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries SeriesColor="#FF4083B7" DataSeries="{Binding MainSeries}" />
+                <s:FastLineRenderableSeries SeriesColor="#FFFFA500" DataSeries="{Binding MaLowSeries}" />
+                <s:FastLineRenderableSeries SeriesColor="#FFE13219" DataSeries="{Binding MaHighSeries}" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis DrawMinorGridLines="True" DrawMinorTicks="True" TextFormatting="0.00"
+                               AxisTitle="Number of Points (per Series)" VisibleRange="0,9"
+                               AutoRange="{Binding BoundRange}" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMinorGridLines="True" DrawMinorTicks="True" GrowBy="0.1, 0.1" AxisTitle="Value"
+                               VisibleRange="0,9" AutoRange="{Binding BoundRange}" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsAnimated="True" />
+                    <s:ZoomPanModifier ExecuteOn="MouseMiddleButton" ReceiveHandledEvents="True" />
+                    <s:ZoomExtentsModifier IsAnimated="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+        <s:SciChartPerformanceOverlay TargetSurface="{Binding ElementName=sciChart}" 
+                                      Margin="25,25,50,25" 
+                                      Padding="10"
+                                      FontSize="16"
+                                      FontWeight="Bold"
+                                      Foreground="#FFF"
+                                      Background="#33FFFFFF"
+                                      HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                    Command="{Binding RunExampleCommand}"
+                    Margin="10">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Begin" FontFamily="Segoe UI" FontSize="16" Margin="0" Foreground="White"
+                                   Opacity="1.0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <ListBox Margin="10" ItemsSource="{Binding Messages}" Grid.Row="1" Background="Transparent"
+                     BorderThickness="1"
+                     ItemContainerStyle="{DynamicResource MessagesListBoxItemStyle}">
+
+            </ListBox>
+
+            <Border Grid.Row="2"
+                    Opacity="0"
+                    Background="{StaticResource InstructionsBackground}"
+                    abt:Transitionz.Opacity="{Binding OpacityParamsForInstructions}">
+                <StackPanel Orientation="Vertical" Margin="10"
+                            TextElement.Foreground="White">
+                    <TextBlock Text="Now Click, Drag to Zoom!" FontSize="18" Margin="0,3,0,3" />
+                    <TextBlock Text=" &gt; Double Click to Reset Zoom" Margin="0,2,0,2" />
+                    <TextBlock Text=" &gt; Middle Mouse Drag to Pan" Margin="0,2,0,2" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

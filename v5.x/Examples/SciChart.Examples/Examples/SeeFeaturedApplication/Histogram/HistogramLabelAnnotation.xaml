@@ -1,0 +1,12 @@
+﻿<s:TextAnnotation x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.Histogram.HistogramLabelAnnotation"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                  Foreground="#ffdddddd"
+                  FontWeight="Bold"
+                  FontSize="12"
+                  HorizontalAnchorPoint="Center"
+                  Text="{Binding LabelText}"
+                  VerticalAnchorPoint="Bottom"
+                  X1="{Binding X1}"
+                  Y1="{Binding Y1}" />

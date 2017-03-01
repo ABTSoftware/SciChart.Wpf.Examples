@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts.RealtimeWaterfall3DChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             Loaded="OnExampleLoaded"
+             Unloaded="OnExampleUnloaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+  <Grid>
+    <Grid.Resources>
+      <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
+        <s3D:GradientColorPalette.GradientStops>
+          <GradientStop Offset="0" Color="Red"/>
+          <GradientStop Offset="0.5" Color="Orange"/>
+          <GradientStop Offset="1" Color="Green"/>
+        </s3D:GradientColorPalette.GradientStops>
+      </s3D:GradientColorPalette>
+
+      <Style x:Key="WaterfallSeriesStyle" TargetType="s3D:WaterfallRenderableSeries3D">
+        <Setter Property="Stroke" Value="#773333FF" />
+        <Setter Property="Opacity" Value="0.8" />
+        <Setter Property="ClipMode" Value="{Binding SelectedValue, ElementName=ckbClipMode}"/>
+        <Setter Property="ZColorMapping" Value="{x:Null}"/>
+        <Setter Property="YColorMapping" Value="{x:Null}"/>
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillY}" Value="True">
+            <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
+          </DataTrigger>
+          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillZ}" Value="True">
+            <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}"/>
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+
+       <Style x:Key="MeshSeriesStyle" TargetType="s3D:SurfaceMeshRenderableSeries3D">
+           <Setter Property="Stroke" Value="#773333FF" />
+           <Setter Property="Opacity" Value="0.8" />
+           <Setter Property="MeshColorPalette" Value="{StaticResource GradientColorPalette}" />
+       </Style>
+
+            <ObjectDataProvider x:Key="ClipModeEnum" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="s3D:ClipMode"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+
+        </Grid.Resources>
+    
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
+    <!--  to the chart and is included for example purposes.  -->
+    <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
+    <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart}" >
+      <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
+                      Content="CTRL"
+                      FontSize="10"
+                      Padding="0" 
+                      x:Name="CTRLButton">
+        <ext:FlyoutMenuButton.PopupContent>
+          <StackPanel Orientation="Vertical" MinWidth="150">
+
+            <!-- Checkboxes to decide how the chart should be filled -->
+            <TextBlock FontSize="12" Text="Gradient fill direction:" />
+            <CheckBox  FontSize="12" Margin="4" Content="Along Y Axis" x:Name="ckbFillY" IsChecked="True" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+            <CheckBox FontSize="12" Margin="4" Content="Along Z Axis" x:Name="ckbFillZ" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+
+            <ext:FlyoutSeparator/>
+
+            <!-- Checkbox to decide which data points appear -->
+            <TextBlock FontSize="12" Text="Clip values:" />
+            <ComboBox  FontSize="12" Margin="4" x:Name="ckbClipMode" ItemsSource="{Binding Source={StaticResource ClipModeEnum}}" SelectedItem="{x:Static s3D:ClipMode.BelowZero}"/>
+        </StackPanel>
+        </ext:FlyoutMenuButton.PopupContent>
+      </ext:FlyoutMenuButton>
+        
+      <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
+                            Content="MESH" FontSize="9"
+                            Padding="0">
+        <ext:FlyoutMenuButton.PopupContent>
+            <StackPanel>
+                <TextBlock FontSize="12" Text="Change series Type:"/>
+                <ComboBox SelectionChanged="SelectedTypeChanged" SelectedIndex="1">
+                    <ComboBox.Items>
+                        <system:String>Surface Mesh</system:String>
+                        <system:String>Waterfall</system:String>
+                    </ComboBox.Items>
+                </ComboBox>
+            </StackPanel>
+        </ext:FlyoutMenuButton.PopupContent>
+    </ext:FlyoutMenuButton>
+        
+    </ext:SciChart3DInteractionToolbar>
+
+    <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1"
+                           BorderThickness="0"
+                           WorldDimensions="200,100,200">
+      <s3D:SciChart3DSurface.Camera>
+        <s3D:Camera3D ZoomToFitOnAttach="True"/>
+      </s3D:SciChart3DSurface.Camera>
+
+      <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:WaterfallRenderableSeries3D x:Name="WaterfallSeries" Style="{StaticResource WaterfallSeriesStyle}" />
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="MeshSeries" Style="{StaticResource MeshSeriesStyle}" IsVisible="False"/>
+      </s3D:SciChart3DSurface.RenderableSeries>
+
+      <s3D:SciChart3DSurface.XAxis>
+        <s3D:NumericAxis3D />
+      </s3D:SciChart3DSurface.XAxis>
+
+      <s3D:SciChart3DSurface.YAxis>
+        <s3D:NumericAxis3D VisibleRange="0, 5"/>
+      </s3D:SciChart3DSurface.YAxis>
+
+      <s3D:SciChart3DSurface.ZAxis>
+        <s3D:NumericAxis3D/>
+      </s3D:SciChart3DSurface.ZAxis>
+    </s3D:SciChart3DSurface>
+  </Grid>
+</UserControl>

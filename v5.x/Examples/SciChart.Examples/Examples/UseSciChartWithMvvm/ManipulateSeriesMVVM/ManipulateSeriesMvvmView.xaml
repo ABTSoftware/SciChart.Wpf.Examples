@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM.ManipulateSeriesMvvmView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Viewbox x:Key="FlyoutButtonContent">
+            <ContentPresenter Content="{Binding SelectedSeriesType}" ext:ContentPresenterHelper.ContentTemplate="{Binding IconPath}" />
+        </Viewbox>
+
+        <DataTemplate x:Key="ComboBoxItemTemplate" DataType="local:SeriesType">
+            <StackPanel Orientation="Horizontal">
+                <Viewbox Width="35" Height="35">
+                    <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding IconPath}" />
+                </Viewbox>
+                <TextBlock VerticalAlignment="Center" Text="{Binding Type.Name}" />
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChart}">
+
+            <Button Command="{Binding AddCommand}"
+                    Content="+"
+                    FontSize="18"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Add Series of Selected Type" />
+            <Button Command="{Binding RemoveCommand}"
+                    Content="-"
+                    FontSize="18"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Remove Selected Series" />
+            <Button Command="{Binding ClearCommand}"
+                    Content="CLR"
+                    FontSize="11"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Clear all series" />
+
+            <ext:FlyoutMenuButton Content="{StaticResource FlyoutButtonContent}" Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Select Series Type" />
+                        <ext:FlyoutSeparator />
+                        <ComboBox Margin="4"
+                                  ItemTemplate="{StaticResource ComboBoxItemTemplate}"
+                                  ItemsSource="{Binding SeriesTypes}"
+                                  SelectedItem="{Binding SelectedSeriesType}" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Shows the SciChartSurface and binds ZoomHistoryManager to the instance in the viewmodel  -->
+        <!--  This is what we use to control zoom history as well as Undo Redo  -->
+        <s:SciChartSurface x:Name="SciChart"
+                           Grid.Column="1"
+                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}"
+                           ViewportManager="{Binding ViewportManager}">
+            <s:SciChartSurface.Resources>
+                <ResourceDictionary Source="Styles.xaml" />
+            </s:SciChartSurface.Resources>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:SeriesSelectionModifier SelectionChanged="SeriesSelectionModifier_OnSelectionChanged">
+                        <s:SeriesSelectionModifier.SelectedSeriesStyle>
+                            <Style TargetType="s:BaseRenderableSeries">
+                                <Setter Property="StrokeThickness" Value="3" />
+                                <Setter Property="Stroke" Value="White" />
+                            </Style>
+                        </s:SeriesSelectionModifier.SelectedSeriesStyle>
+
+                    </s:SeriesSelectionModifier>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

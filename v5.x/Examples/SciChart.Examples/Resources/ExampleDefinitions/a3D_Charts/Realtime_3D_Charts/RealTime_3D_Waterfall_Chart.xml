@@ -1,0 +1,19 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml</View>
+  <ViewModel/>
+  <ImagePath/>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    The 3D Realtime Waterfall Chart example shows how to update a Waterfall Chart in real-time.
+  </ToolTipDescription>
+  <Description>
+    The 3D Realtime Waterfall Chart example shows how to update a Waterfall Chart in real-time.
+
+    [b]Change some of the options on the left-hand side to see what this versatile chart type is capable of doing.[/b]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/FFT.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

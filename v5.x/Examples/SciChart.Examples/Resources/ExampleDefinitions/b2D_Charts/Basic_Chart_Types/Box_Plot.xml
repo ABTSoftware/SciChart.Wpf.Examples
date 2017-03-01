@@ -1,0 +1,24 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateSimpleChart/BoxPlotExampleView.xaml</View>http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoBoxPlot.png</ImagePath>
+  <IconPath>IconBoxPlot</IconPath>
+  <ToolTipDescription>Demonstrates how to use create a Box Plot using SciChart</ToolTipDescription>
+  <Description>
+    Demonstrates how to use the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.BoxPlotDataSeries%602.html']BoxPlotDataSeries[/url] and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBoxPlotRenderableSeries.html']FastBoxPlotRenderableSeries[/url] to display statistical data.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBoxPlotRenderableSeries.html']FastBoxPlotRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.BoxPlotDataSeries%602.html']BoxPlotDataSeries Type[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/BoxPlotExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/BoxPlotExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>BoxPlot</Features>
+  </Features>
+</ExampleDefinition>

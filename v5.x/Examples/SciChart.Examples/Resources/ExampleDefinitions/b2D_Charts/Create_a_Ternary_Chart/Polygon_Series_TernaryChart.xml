@@ -1,0 +1,23 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateTernaryChart/PolygonSeriesTernaryChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconTernary</IconPath>
+  <ToolTipDescription>Generates a simple Ternary Polygon Chart in code</ToolTipDescription>
+  <Description>
+    Generates a Ternary Polygon chart in code. The TernaryPolygonRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
+
+    Polygons are rendered using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~Stroke.html']Stroke[/url] (outline) and Fill (fill).
+
+    [b]Documentation Links[/b]
+
+    - TernaryScatterRenderableSeries
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/PolygonSeriesTernaryChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/PolygonSeriesTernaryChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+  </Features>
+</ExampleDefinition>

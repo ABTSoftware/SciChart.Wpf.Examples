@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold.DragAnnotationsMvvm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Placement of overlay text, displaying threshold  -->
+        <ControlTemplate x:Key="LegendTemplate">
+            <Border HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#88444444"
+                    BorderBrush="#88EEEEEE"
+                    BorderThickness="1"
+                    CornerRadius="3">
+                <TextBlock Margin="5"
+                           FontSize="16"
+                           Foreground="#eee"
+                           Text="{Binding DataContext.Threshold,
+                                          StringFormat='Threshold = {0:#0.00}',
+                                          RelativeSource={RelativeSource AncestorType=s:SciChartSurface}}" />
+            </Border>
+        </ControlTemplate>
+
+        <!--  this is only included so the designer will work. In the example we bind to ViewportManager property in a ViewModel  -->
+        <!--  so that we can control the chart from the ViewModel. Another way to solve this problem is to have a design time viewmodel  -->
+        <s:DefaultViewportManager x:Key="DefaultViewportManager" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+
+            <ext:FlyoutMenuButton Content="AXIS"
+                                  Padding="0"
+                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150"
+                                Margin="0,0,0,4"
+                                Orientation="Vertical">
+                        <TextBlock Text="YAxis.AxisAlignment" />
+                        <ext:FlyoutSeparator />
+                        <ComboBox x:Name="cboYAxisAlignment"
+                                  Margin="4"
+                                  SelectedIndex="0">
+                            <ComboBox.Items>
+                                <s:AxisAlignment>Right</s:AxisAlignment>
+                                <s:AxisAlignment>Left</s:AxisAlignment>
+                            </ComboBox.Items>
+                        </ComboBox>
+
+                        <TextBlock Text="Xaxis.AxisAlignment" />
+                        <ext:FlyoutSeparator />
+                        <ComboBox x:Name="cboXAxisAlignment"
+                                  Margin="4"
+                                  SelectedIndex="0">
+                            <ComboBox.Items>
+                                <s:AxisAlignment>Bottom</s:AxisAlignment>
+                                <s:AxisAlignment>Top</s:AxisAlignment>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
+        <!--  We declare a SciChartSurface  -->
+        <!--  The ViewModel is the DragThresholdMvvmViewModel, which is assigned by the examples suite to the View.DataContext  -->
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           BorderThickness="0"
+                           Padding="0"
+                           ViewportManager="{Binding ViewportManager,
+                                                     Mode=OneWay,
+                                                     FallbackValue={StaticResource DefaultViewportManager}}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastColumnRenderableSeries DataPointWidth="0.2"
+                                              DataSeries="{Binding ColumnDataSeries}"
+                                              PaletteProvider="{Binding ThresholdPaletteProvider}" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisAlignment="{Binding ElementName=cboXAxisAlignment,
+                                                       Path=SelectedItem}"
+                               DrawMajorBands="True"
+                               VisibleRange="0.0, 10.0" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AxisAlignment="{Binding ElementName=cboYAxisAlignment,
+                                                       Path=SelectedItem}"
+                               DrawMajorBands="True"
+                               VisibleRange="-1.0, 1.0" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.Annotations>
+                <s:HorizontalLineAnnotation HorizontalAlignment="Stretch"
+                                            FontSize="13"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            IsEditable="True"
+                                            LabelPlacement="Axis"
+                                            LabelTextFormatting="0.00"
+                                            ShowLabel="True"
+                                            Stroke="#FF42b649"
+                                            StrokeThickness="2"
+                                            Y1="{Binding Threshold,
+                                                         Mode=TwoWay,
+                                                         FallbackValue=0.5}" />
+            </s:SciChartSurface.Annotations>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:LegendModifier Margin="10"
+                                  LegendTemplate="{StaticResource LegendTemplate}"
+                                  ShowLegend="True" />
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

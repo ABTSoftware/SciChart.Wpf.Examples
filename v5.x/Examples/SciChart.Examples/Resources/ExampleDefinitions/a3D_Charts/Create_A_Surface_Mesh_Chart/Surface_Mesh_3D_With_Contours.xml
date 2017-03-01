@@ -1,0 +1,16 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateASurfaceMeshChart/SurfaceMeshContours.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconSurface3D</IconPath>
+  <ToolTipDescription>
+    TODO
+  </ToolTipDescription>
+  <Description>
+    Description TODO
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateASurfaceMeshChart/SurfaceMeshContours.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateASurfaceMeshChart/SurfaceMeshContours.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>
