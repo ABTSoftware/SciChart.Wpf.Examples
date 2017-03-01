@@ -3033,7 +3033,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>pushd "$(SolutionDir)\Examples"
+    <PreBuildEvent>pushd "$(ProjectDir)..\"
 UpdateWpfExamples.bat
 popd
 if exist "$(TargetPath).locked" del "$(TargetPath).locked"
