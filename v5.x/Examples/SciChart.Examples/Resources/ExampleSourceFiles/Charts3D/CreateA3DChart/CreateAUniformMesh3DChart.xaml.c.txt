@@ -46,18 +46,6 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
                 }
             }
             surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
-            CheckSolidWireFrame.IsChecked = true;
-        }
-
-        private void CheckMeshTypeChanged(object sender, RoutedEventArgs e)
-        {
-            if (surfaceMeshRenderableSeries != null)
-            {
-                surfaceMeshRenderableSeries.DrawMeshAs = 
-                    CheckSolidMesh.IsChecked == true ? DrawMeshAs.SolidMesh : 
-                    CheckSolidWireFrame.IsChecked == true  ? DrawMeshAs.SolidWireFrame :  
-                    DrawMeshAs.Wireframe;
-            }
         }
 
         private void CheckDrawSkirtChanged(object sender, RoutedEventArgs e)

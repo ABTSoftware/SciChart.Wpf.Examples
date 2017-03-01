@@ -36,7 +36,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             InitializeComponent();
 
             _stopWatch = Stopwatch.StartNew();
-            _fpsAverage = new MovingAverage(50);         
+            _fpsAverage = new MovingAverage(5);
    
             this.Loaded += OnLoaded;
             this.Unloaded += OnUnloaded;

@@ -11,6 +11,7 @@
              d:DesignWidth="600">
 
     <UserControl.Resources>
+        
         <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
                 <GradientStop Offset="1" Color="DarkRed"/>
@@ -22,6 +23,8 @@
                 <GradientStop Offset="0.0" Color="#1D2C6B"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
+        
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
 
     </UserControl.Resources>
     <Grid>
@@ -44,9 +47,7 @@
 
                         <!-- Checkboxes to decide how the mesh should be drawn -->
                         <TextBlock FontSize="12" Text="Draw Mesh As" />
-                        <CheckBox  FontSize="12" Margin="4" x:Name="CheckSolidWireFrame" Content="Solid Wireframe" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckSolidMesh" Content="Solid Mesh" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckWireframe" Content="Wireframe" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference surfaceMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         <ext:FlyoutSeparator/>
 
