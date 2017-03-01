@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples", "Examples\SciChart.Examples\SciChart.Examples.csproj", "{52AF4E20-50EA-4C0F-9E5C-057613BAB9A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples", "SciChart.Examples\SciChart.Examples.csproj", "{52AF4E20-50EA-4C0F-9E5C-057613BAB9A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples.Demo", "Examples\SciChart.Examples.Demo\SciChart.Examples.Demo.csproj", "{B4F1752F-A1E0-4D2C-A900-9A1BE6997828}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples.Demo", "SciChart.Examples.Demo\SciChart.Examples.Demo.csproj", "{B4F1752F-A1E0-4D2C-A900-9A1BE6997828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples.ExternalDependencies", "Examples\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj", "{113EBB05-8D70-4B05-BB73-121A552A5754}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChart.Examples.ExternalDependencies", "SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj", "{113EBB05-8D70-4B05-BB73-121A552A5754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
