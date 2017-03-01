@@ -22,6 +22,7 @@ This showcase is written in WPF with MVVM, Unity Container and Reactie Extension
 * WPF Line Chart 
 * WPF Band Chart 
 * WPF Candlestick Chart 
+* WPF OHLC Chart 
 * WPF Column Chart
 * WPF Mountain / Area Chart 
 * WPF Scatter Chart 
@@ -32,10 +33,12 @@ This showcase is written in WPF with MVVM, Unity Container and Reactie Extension
 * WPF Stacked Column Chart
 * WPF 100% Stacked Mountain Chart 
 * WPF 100% Stacked Column Chart
+* WPF Radar Chart (v5+ Only)
 * WPF Heatmap Chart 
 * WPF 3D Bubble Chart
 * WPF 3D Scatter Chart 
 * WPF 3D Surface Mesh Chart 
+* WPF 3D Waterfall Chart (v5+ Only)
 
 ## Tutorials 
 
