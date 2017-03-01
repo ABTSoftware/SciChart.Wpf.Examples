@@ -20,6 +20,7 @@ using System.Linq;
 using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Model.DataSeries.Filters;
 using SciChart.Charting.Numerics.Calendars;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
@@ -373,17 +374,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
             PriceData = new DiscontinuousSeries<double>(ohlcDataSeries, Calendar);
             PriceData.SeriesName = priceData.Symbol;
 
+            var xyDataSeries = new XyDataSeries<DateTime, double>();
+            xyDataSeries.Append(priceData.TimeData, priceData.CloseData);
+
             // Create a series for the 200 period SMA which will be plotted as a line chart
-            Sma200Series = new XyDataSeries<DateTime, double>();
+            Sma200Series = new MovingAverageFilter(xyDataSeries, 200);
             Sma200Series.SeriesName = "200 SMA";
-            var ma200 = DataManager.Instance.ComputeMovingAverage(priceData.CloseData, 200);
-            Sma200Series.Append(priceData.TimeData, ma200);
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = new XyDataSeries<DateTime, double>();
+            Sma50Series = new MovingAverageFilter(xyDataSeries, 50);
             Sma50Series.SeriesName = "50 SMA";
-            var ma50 = DataManager.Instance.ComputeMovingAverage(priceData.CloseData, 50);
-            Sma50Series.Append(priceData.TimeData, ma50);
 
             // Update the chart type and timeframe with current settings
             UpdateChartType(_chartType);
