@@ -3059,4 +3059,34 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
       <HintPath>..\..\ExamplesForGit\Libs\WPFToolkit\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Core">
+      <HintPath>..\packages\SciChart.4.2.3.9817\lib\net40\SciChart.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Data">
+      <HintPath>..\packages\SciChart.4.2.3.9817\lib\net40\SciChart.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Drawing">
+      <HintPath>..\packages\SciChart.4.2.3.9817\lib\net40\SciChart.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting">
+      <HintPath>..\packages\SciChart.4.2.3.9817\lib\net40\SciChart.Charting.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Drawing.DirectX">
+      <HintPath>..\packages\SciChart.DirectX.4.2.3.9817\lib\net40\SciChart.Drawing.DirectX.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting3D">
+      <HintPath>..\packages\SciChart3D.4.2.3.9817\lib\net40\SciChart.Charting3D.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
