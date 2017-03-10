@@ -30,7 +30,7 @@
                            BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.5">
+                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9">
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Maximum="200">
                             <s:HeatmapColorPalette.GradientStops>

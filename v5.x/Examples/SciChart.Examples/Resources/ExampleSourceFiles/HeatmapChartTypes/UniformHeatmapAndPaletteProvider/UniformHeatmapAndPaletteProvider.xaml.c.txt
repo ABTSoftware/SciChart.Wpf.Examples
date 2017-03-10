@@ -73,8 +73,8 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
                     var r = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
                     var exp = Math.Max(0, 1 - r * 0.008);
                     data[y, x] = (v * exp + _random.NextDouble() * 50);
-
                 }
+
             var xStart = new DateTime(2017, 1, 13, 0, 0, 0);
             var xStep = DateTime.MinValue.AddDays(1).AddHours(6).AddMinutes(30);
             return new UniformHeatmapDataSeries<DateTime, int, double>(data, xStart, xStep, 0, 2) { SeriesName = "UniformHeatmap seria" };
@@ -98,12 +98,13 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
                 Minimum = 0,
                 Maximum = 100,
             };
+            ThreshholdValue = 50;
+        }
 
-            UniformHeatmapRenderableSeries.PaletteProvider = _customPaletteProvider;
-            SciChartSurface.Rendered += (o, args) =>
-            {
-                ThreshholdValue = 50;
-            };
+        private void OnPalletProvider_Clicked(object sender, RoutedEventArgs e)
+        {
+            UniformHeatmapRenderableSeries.PaletteProvider = UniformHeatmapRenderableSeries.PaletteProvider == null ? _customPaletteProvider : null;
+            SciChartSurface.ZoomExtents();
         }
     }
 
@@ -123,8 +124,8 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
             get { return _threshholdValue; }
             set
             {
-                if (_rSeries == null) return;
                 _threshholdValue = value;
+                if (_rSeries == null) return;
                 _rSeries.OnInvalidateParentSurface();
             }
         }
@@ -136,10 +137,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
 
             var zValue = _zValues[y, x];
 
-            // Do some offset
-            zValue = zValue - ThreshholdValue/4;
-
-            return _rSeries.GetColorFromZValue(zValue);
+            return zValue >= ThreshholdValue ? Colors.Black : Colors.White;
         }
 
         void IPaletteProvider.OnBeginSeriesDraw(IRenderableSeries rSeries)
