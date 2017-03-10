@@ -761,6 +761,14 @@
     <Compile Include="Examples\UseSciChartWithMvvm\ManipulateSeriesMVVM\ManipulateSeriesMvvmViewModel.cs" />
     <Compile Include="Examples\UseSciChartWithMvvm\ManipulateSeriesMVVM\SeriesType.cs" />
     <Compile Include="Examples\UseSciChartWithMvvm\ManipulateSeriesMVVM\ViewModelsFactory.cs" />
+    <Compile Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotation.xaml.cs">
+      <DependentUpon>ArrowAnnotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotationViewModel.cs" />
+    <Compile Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsView.xaml.cs">
+      <DependentUpon>SciChartMvvmBindingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsViewModel.cs" />
     <Compile Include="Examples\UseSciChartWithMvvm\SeriesBinding\SeriesBindingView.xaml.cs">
       <DependentUpon>SeriesBindingView.xaml</DependentUpon>
     </Compile>
@@ -1456,6 +1464,14 @@
     <Page Include="Examples\UseSciChartWithMvvm\ManipulateSeriesMVVM\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\UseSciChartWithMvvm\SeriesBinding\SeriesBindingView.xaml">
       <SubType>Designer</SubType>
@@ -3210,6 +3226,17 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\HeatmapChartTypes\NonUniformHeatmap\NonUniformHeatmap.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\HeatmapChartTypes\NonUniformHeatmap\NonUniformHeatmap.xaml.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\SciChart_Bindings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotation.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotation.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\ArrowAnnotationViewModel.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsView.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\UseSciChartWithMvvm\SciChartMVVMBindings\SciChartMvvmBindingsViewModel.c.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3240,32 +3267,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.9863\lib\net40\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.9867\lib\net40\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.9863\lib\net40\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.9867\lib\net40\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.9863\lib\net40\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.9867\lib\net40\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.9863\lib\net40\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.9867\lib\net40\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.9863\lib\net40\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.9867\lib\net40\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.9863\lib\net40\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.9867\lib\net40\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

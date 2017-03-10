@@ -1,18 +1,20 @@
-﻿<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider.UniformHeatmapAndPaletteProvider"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d" Loaded="UniformHeatmapAndPaletteProvider_OnLoaded">
+﻿<UserControl
+    x:Class="SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider.UniformHeatmapAndPaletteProvider"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d" Loaded="UniformHeatmapAndPaletteProvider_OnLoaded">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
+                <ResourceDictionary
+                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -26,54 +28,51 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChartSurface}"/>
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChartSurface}">
+            <ext:FlyoutSeparator Background="#444" />
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" FontSize="9" Content="PP" Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="240">
+                        <ToggleButton Content="Palette Provider" Style="{StaticResource DefaultToggleButtonStyle}"
+                                      Width="100" Margin="10,0,0,0" Click="OnPalletProvider_Clicked" />
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+                        <ext:FlyoutSeparator />
+                        <TextBlock Text="Threshhold Value" FontSize="11" />
+                        <Slider x:Name="Slider"
+                                Minimum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Minimum}"
+                                Maximum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Maximum}"
+                                Value="{Binding ThreshholdValue, Mode=TwoWay}" />
+                        <TextBlock Text="{Binding ElementName=Slider, Path=Value, StringFormat=N2}" FontSize="11" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
-            <Grid Grid.Row="0" Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
-                </Grid.ColumnDefinitions>
+        <s:SciChartSurface x:Name="SciChartSurface" Grid.Column="1" Margin="0,10">
 
-                <TextBlock Grid.Column="0" Text="Threshold value" Foreground="Red"/>
-                <Slider x:Name="Slider" Grid.Column="1" Minimum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Minimum}" Maximum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Maximum}" 
-                    TickPlacement="Both" TickFrequency="10" Margin="20,0" Value="{Binding ThreshholdValue, Mode=TwoWay}"/>
-                <TextBlock Grid.Column="2" Text="{Binding ElementName=Slider, Path=Value, StringFormat=N2}" Foreground="Red"/>
-            </Grid>
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries" />
+            </s:SciChartSurface.RenderableSeries>
 
-            <s:SciChartSurface x:Name="SciChartSurface" Grid.Row="1" Margin="0,10">
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis x:Name="xAxis"
+                                FlipCoordinates="False" GrowBy="0.1,0.1"
+                                DrawMajorBands="True" />
+            </s:SciChartSurface.XAxis>
 
-                <s:SciChartSurface.RenderableSeries>
-                    <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries"/>
-                </s:SciChartSurface.RenderableSeries>
-
-                <s:SciChartSurface.XAxis>
-                    <s:DateTimeAxis x:Name="xAxis"
-                               FlipCoordinates="False" GrowBy="0.1,0.1" 
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="yAxis"
+                               FlipCoordinates="False" GrowBy="0.1,0.1"
+                               ScientificNotation="None"
                                DrawMajorBands="True" />
-                </s:SciChartSurface.XAxis>
+            </s:SciChartSurface.YAxis>
 
-                <s:SciChartSurface.YAxis>
-                    <s:NumericAxis x:Name="yAxis"
-                               FlipCoordinates="False" GrowBy="0.1,0.1" 
-                               ScientificNotation="None" 
-                               DrawMajorBands="True" />
-                </s:SciChartSurface.YAxis>
-
-                <s:SciChartSurface.ChartModifier>
-                    <s:ModifierGroup>
-                        <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
-                    </s:ModifierGroup>
-                </s:SciChartSurface.ChartModifier>
-            </s:SciChartSurface>
-        </Grid>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
     </Grid>
 
-        
 </UserControl>
