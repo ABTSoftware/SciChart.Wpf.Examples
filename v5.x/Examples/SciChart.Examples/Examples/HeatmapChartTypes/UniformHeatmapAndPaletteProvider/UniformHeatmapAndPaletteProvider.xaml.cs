@@ -144,7 +144,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
         {
             _rSeries = (FastUniformHeatmapRenderableSeries)rSeries;
             var dataSeries = (IUniformHeatmapDataSeries) _rSeries.DataSeries;
-            _zValues = dataSeries.GetArray2D();
+            _zValues = dataSeries.GetZValues();
 
             _textureHeight = _zValues.GetLength(0);
             _textureWidth = _zValues.GetLength(1);

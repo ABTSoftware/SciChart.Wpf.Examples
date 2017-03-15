@@ -13,19 +13,22 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <s:GradientStopsToColorBrushConverter x:Key="GradientStopsToColorBrushConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="180" />
         </Grid.ColumnDefinitions>
 
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}"/>
+        <ext:SciChartInteractionToolbar Grid.Column="0" TargetSurface="{Binding ElementName=sciChart}"/>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
             <s:SciChartSurface.RenderableSeries>
@@ -50,6 +53,22 @@
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
+
+        <s:HeatmapColorMap Margin="10,10,60,40" 
+                          Grid.Column="2"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Stretch"
+                          Background="{Binding ElementName=sciChart, Path=Background}"
+                          Foreground="{Binding ElementName=sciChart, Path=Foreground}"
+                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource GradientStopsToColorBrushConverter}}"
+                          Minimum="{Binding ElementName=heatmapSeries, Path=ColorMap.Minimum, Mode=TwoWay}"
+                          Maximum="{Binding ElementName=heatmapSeries, Path=ColorMap.Maximum, Mode=TwoWay}"
+                          TextFormatting="0.00"
+                          Opacity="0.8"
+                          BorderBrush="#777"
+                          BorderThickness="1"
+                          Orientation="Vertical" />
+
     </Grid>
 
 </UserControl>

@@ -41,7 +41,9 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             {
                 for (int z = 0; z < zSize; z++)
                 {
-                    double y = Math.Sin(x * 0.2) / ((z+1) * 2);
+                    double xVal = ( double )x / ( double )xSize * 25.0;
+                    double zVal = ( double )z / ( double )zSize * 25.0;
+                    double y = Math.Sin(xVal * 0.2) / ((zVal+1) * 2);
                     meshDataSeries[z, x] = y;
                 }
             }

@@ -15,6 +15,7 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -28,6 +29,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
+using SciChart.Charting.Visuals.RenderableSeries;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.NonUniformHeatmap
 {
@@ -40,17 +42,20 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.NonUniformHeatmap
         {
             InitializeComponent();
 
-            heatmapSeries.ColorMap = new LinearGradientBrush
+            heatmapSeries.ColorMap = new HeatmapColorPalette
             {
-                GradientStops = new GradientStopCollection
+                GradientStops = new ObservableCollection<GradientStop>
                 {
                     new GradientStop(Colors.Blue, 0), 
                     new GradientStop(Colors.White, 0.3), 
                     new GradientStop(Colors.Green, 0.5),
                     new GradientStop(Colors.Yellow, 0.7),
                     new GradientStop(Colors.Red, 1.0),
-                }
+                },
+                Minimum = 0,
+                Maximum = 100
             };
+
             heatmapSeries.DataSeries = CreateSeries();
         }
 

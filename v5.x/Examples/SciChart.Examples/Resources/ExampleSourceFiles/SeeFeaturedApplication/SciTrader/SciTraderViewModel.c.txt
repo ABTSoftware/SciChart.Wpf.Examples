@@ -359,7 +359,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             // Create a new series and append Open, High, Low, Close data                
             _ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             _ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = UseDiscontinuousDateTimeAxis ? (IOhlcDataSeries<DateTime, double>) new DiscontinuousSeries<double>(_ohlcDataSeries, Calendar) : _ohlcDataSeries;
+            PriceData = UseDiscontinuousDateTimeAxis ? (IOhlcDataSeries<DateTime, double>) new DiscontinuousDataSeries<double>(_ohlcDataSeries, Calendar) : _ohlcDataSeries;
             PriceData.SeriesName = priceData.Symbol;
 
             var xyDataSeries = new XyDataSeries<DateTime, double>();
