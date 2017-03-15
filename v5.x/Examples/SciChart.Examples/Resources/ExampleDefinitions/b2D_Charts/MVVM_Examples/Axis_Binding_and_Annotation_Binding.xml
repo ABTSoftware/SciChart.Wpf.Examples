@@ -1,5 +1,4 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Title>SciChart Bindings Example</Title>
   <View>Examples/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsView.xaml</View>
   <ViewModel>Examples.UseSciChartWithMvvm.SciChartMVVMBindings.SciChartMvvmBindingsViewModel</ViewModel>
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultipleChartsMvvm.png</ImagePath>

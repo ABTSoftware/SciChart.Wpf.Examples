@@ -371,7 +371,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
             // Create a new series and append Open, High, Low, Close data                
             var ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = new DiscontinuousSeries<double>(ohlcDataSeries, Calendar);
+            PriceData = new DiscontinuousDataSeries<double>(ohlcDataSeries, Calendar);
             PriceData.SeriesName = priceData.Symbol;
 
             var xyDataSeries = new XyDataSeries<DateTime, double>();
