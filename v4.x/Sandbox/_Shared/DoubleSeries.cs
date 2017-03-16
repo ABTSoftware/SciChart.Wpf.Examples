@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
-namespace Shared
+namespace SciChart.Sandbox.Shared
 {
     /// <summary>
     /// A data-structure to contain a list of X,Y double-precision points

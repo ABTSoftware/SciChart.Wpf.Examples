@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Shared
+namespace SciChart.Sandbox.Shared
 {
     public class RandomWalkGenerator
     {

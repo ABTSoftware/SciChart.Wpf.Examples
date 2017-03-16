@@ -1,4 +1,4 @@
-﻿namespace Shared
+﻿namespace SciChart.Sandbox.Shared
 {
     public class XYPoint
     {
