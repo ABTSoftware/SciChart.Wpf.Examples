@@ -5,7 +5,7 @@
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// CustomModifierSandbox.xaml.cs is part of SCICHART®, High Performance Scientific Charts
+// NullableBooleanConverter.cs is part of SCICHART®, High Performance Scientific Charts
 // For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
 // 
 // This source code is protected by international copyright law. Unauthorized
@@ -16,16 +16,22 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
+using System;
+using System.Globalization;
+using System.Windows.Data;
 
-using System.Windows;
-
-namespace SciChart.Wpf.TestSuite.ExampleSandbox.CustomModifiers
+namespace SciChart.Sandbox.Converters
 {
-    public partial class CustomModifierSandbox : Window
+    public class NullableBooleanConverter : IValueConverter
     {
-        public CustomModifierSandbox()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            InitializeComponent();
+            return value.Equals(true);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.Equals(true);
         }
     }
 }

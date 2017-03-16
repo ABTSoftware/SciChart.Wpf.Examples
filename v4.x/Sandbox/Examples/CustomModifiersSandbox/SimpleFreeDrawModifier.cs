@@ -9,7 +9,7 @@ using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Utility.Mouse;
 
-namespace SciChart.Wpf.TestSuite.ExampleSandbox.CustomModifiers
+namespace SciChart.Sandbox.ExampleSandbox.CustomModifiers
 {
     public class SimpleFreeDrawModifier : ChartModifierBase
     {

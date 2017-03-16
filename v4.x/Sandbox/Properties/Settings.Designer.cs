@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomModifierSandbox.Properties
+namespace SciChart.Sandbox.Properties
 {
 
 
