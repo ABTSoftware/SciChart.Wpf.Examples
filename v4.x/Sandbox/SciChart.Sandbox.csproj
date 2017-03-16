@@ -152,14 +152,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Examples\ThresholdedLineSeries\DragThresholdMvvm.xaml.cs">
+      <DependentUpon>DragThresholdMvvm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\ThresholdedLineSeries\DragThresholdMvvmViewModel.cs" />
     <Compile Include="SearchExamplesBehaviour.cs" />
     <Compile Include="TestCaseAttribute.cs" />
+    <Compile Include="_Shared\DataManager.cs" />
     <Compile Include="_Shared\DoubleSeries.cs" />
     <Compile Include="_Shared\RandomWalkGenerator.cs" />
     <Compile Include="_Shared\XYPoint.cs" />
     <Page Include="Examples\CustomModifiersSandbox\CustomModifierSandbox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\ThresholdedLineSeries\DragThresholdMvvm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
