@@ -12,6 +12,5 @@
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/FFT.cs.txt</string>
   </CodeFiles>
 </ExampleDefinition>

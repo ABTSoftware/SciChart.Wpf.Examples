@@ -18,7 +18,6 @@
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleView.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/FFT.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Realtime</Features>

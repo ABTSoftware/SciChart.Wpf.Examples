@@ -21,6 +21,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 {

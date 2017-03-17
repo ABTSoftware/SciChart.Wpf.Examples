@@ -6,7 +6,7 @@ using System.Windows.Threading;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
 using SciChart.Core.Helpers;
-using SciChart.Examples.CreateRealtime3DCharts.RealtimeWaterfall;
+using SciChart.Examples.ExternalDependencies.Data;
 
 
 namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts

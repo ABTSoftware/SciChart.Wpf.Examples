@@ -18,7 +18,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using SciChart.Charting3D;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.PointMarkers;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -64,8 +63,22 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
         {            
             if (ScatterSeries3D != null && OpacitySlider != null && SizeSlider != null)
             {
-                ScatterSeries3D.PointMarker = (BasePointMarker3D)Activator.CreateInstance((Type)((ComboBox)sender).SelectedItem);
-                ScatterSeries3D.PointMarker.Fill = Colors.LimeGreen;
+                var pmType = (Type) ((ComboBox) sender).SelectedItem;
+                
+                // Special case. CustomPointMarker is defined in the XAML as it contains a custom brush 
+                if (pmType == typeof(CustomPointMarker3D))
+                {
+                    var pointMarker = (CustomPointMarker3D)this.TryFindResource("CustomPointMarkerResource");
+                    ScatterSeries3D.PointMarker = pointMarker;
+                }
+                else
+                {
+                    // Create an instance of the pointmarker we want to draw 
+                    var pointMarker = (BasePointMarker3D)Activator.CreateInstance(pmType);
+                    ScatterSeries3D.PointMarker = pointMarker;
+                }
+
+                ScatterSeries3D.PointMarker.Fill = Color.FromArgb(0x77, 0xAD, 0xFF, 0x2F);
                 ScatterSeries3D.PointMarker.Size = (float)SizeSlider.Value;
                 ScatterSeries3D.PointMarker.Opacity = OpacitySlider.Value;
             }
@@ -82,53 +95,5 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             if (ScatterSeries3D != null && ScatterSeries3D.PointMarker != null)
                 ScatterSeries3D.PointMarker.Opacity = ((Slider)sender).Value;
         }
-    }
-
-    /// <summary>
-    /// Defines a Custom texture Point-marker for used with 3D RenderableSeries
-    /// </summary>
-    public class CustomPointMarker3D : BaseTexturePointMarker3D
-    {
-        private Texture2D _texture;
-
-        /// <summary>
-        /// Initializes the instance of <see cref="TrianglePointMarker3D"/>.
-        /// </summary>
-        public CustomPointMarker3D()
-        {
-            DefaultStyleKey = typeof(CustomPointMarker3D);
-            _texture = new Texture2D(128, 128, TextureFormat.TEXTUREFORMAT_A8B8G8R8);
-            uint[] pixelData = new uint[128 * 128];
-
-            for (uint i = 0; i < 128; i++)
-            {
-                for (uint j = 0; j < 128; j++)
-                {
-                    uint i8 = 0;
-                    if (i < 52 || i > 76)
-                    {
-                        if (j > 52 && j < 76)
-                        {
-                            i8 = 0xff;
-                        }
-                    }
-                    else
-                    {
-                        i8 = 0xff;
-                    }
-
-                    pixelData[i + j * 128] = i8 | i8 << 8 | i8 << 16 | i8 << 24;
-                }
-            }
-            _texture.WritePixels(pixelData);
-        }
-
-        /// <summary>
-        /// Gets the <see cref="Texture2D" /> instance which is repeated across data-points
-        /// </summary>
-        public override Texture2D PointTexture
-        {
-            get { return _texture; }
-        }       
-    }
+    }   
 }

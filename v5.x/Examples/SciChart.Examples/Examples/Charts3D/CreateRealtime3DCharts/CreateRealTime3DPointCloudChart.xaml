@@ -32,16 +32,11 @@
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>
-                <!--<s3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D">
+                <s3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
                         <s3D:EllipsePointMarker3D Fill="#77ADFF2F"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
-                </s3D:ScatterRenderableSeries3D>-->
-                <s3D:PointLineRenderableSeries3D x:Name="ScatterRenderableSeries3D">
-                    <s3D:PointLineRenderableSeries3D.PointMarker>
-                        <s3D:EllipsePointMarker3D Fill="#77ADFF2F"/>
-                    </s3D:PointLineRenderableSeries3D.PointMarker>
-                </s3D:PointLineRenderableSeries3D>
+                </s3D:ScatterRenderableSeries3D>                
             </s3D:SciChart3DSurface.RenderableSeries>
 
 

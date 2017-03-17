@@ -14,6 +14,5 @@
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/FFT.cs.txt</string>
   </CodeFiles>
 </ExampleDefinition>

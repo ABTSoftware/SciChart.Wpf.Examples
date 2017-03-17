@@ -22,6 +22,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Core.Framework;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.Spectrogram
 {

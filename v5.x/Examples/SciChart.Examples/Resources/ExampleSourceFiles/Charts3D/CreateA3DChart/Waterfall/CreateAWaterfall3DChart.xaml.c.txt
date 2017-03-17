@@ -3,7 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
 using SciChart.Core.Helpers;
-using SciChart.Examples.CreateAChart3D.Waterfall.WaterfallChart;
+using SciChart.Examples.ExternalDependencies.Data;
+
 
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {

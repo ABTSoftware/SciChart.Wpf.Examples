@@ -19,6 +19,7 @@ using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
 using SciChart.Core.Helpers;
 using SciChart.Data.Model;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
 {

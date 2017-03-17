@@ -5,11 +5,31 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:createA3DChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateA3DChart"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <!-- CustomPointMarker3D allows a VisualBrush, SolidColorBrush, ImageBrush etc... to be placed on a point-marker --> 
+        <s3D:CustomPointMarker3D x:Key="CustomPointMarkerResource">
+            <s3D:CustomPointMarker3D.Brush>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Canvas Width="512" Height="512" Background="Yellow" Grid.Row="1" HorizontalAlignment="Left">
+                            <Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="125" Canvas.Top="150"/>
+                            <Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="325" Canvas.Top="150"/>
+                            <Path Stroke="Black" Data="M 125,300 S 225,400 325, 300" StrokeThickness="20" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Canvas.Left="35" />
+                        </Canvas>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </s3D:CustomPointMarker3D.Brush>
+        </s3D:CustomPointMarker3D>
+
+    </UserControl.Resources>
+    
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -53,7 +73,7 @@
                                 Minimum="0.1"
                                 Orientation="Horizontal"
                                 ValueChanged="SizeSlider_OnValueChanged"
-                                Value="0.33" />
+                                Value="1.0" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -73,11 +93,11 @@
                                 Minimum="0.1"
                                 Orientation="Horizontal"
                                 ValueChanged="OpacitySlider_OnValueChanged"
-                                Value="1.0" />
+                                Value="0.7" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
+           
         </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="SciChart"
@@ -91,7 +111,7 @@
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ScatterRenderableSeries3D x:Name="ScatterSeries3D">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
-                        <s3D:EllipsePointMarker3D Fill="LimeGreen" Size="1.0" Opacity="1"/>
+                        <s3D:EllipsePointMarker3D Fill="#77ADFF2F" Size="1.0" Opacity="1"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
