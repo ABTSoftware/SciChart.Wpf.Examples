@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.SciChartWithMvvm.AxisBindingAndSeriesBinding"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:extensions="clr-namespace:SciChart.Charting3D.Common.Extensions;assembly=SciChart.Charting3D"
+             xmlns:axis="clr-namespace:SciChart.Charting3D.Visuals.Axis;assembly=SciChart.Charting3D"
+             xmlns:sciChartWithMvvm="clr-namespace:SciChart.Examples.Examples.Charts3D.SciChartWithMvvm"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <sciChartWithMvvm:AxisBindingAndSeriesBindingViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="CustomNumeric3DStyle" BasedOn="{StaticResource {x:Type axis:NumericAxis3DForMvvm}}" TargetType="axis:NumericAxis3DForMvvm">
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Chocolate"/>
+                        <Setter Property="StrokeThickness" Value="3" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomTimeSpan3DStyle" BasedOn="{StaticResource {x:Type axis:TimeSpanAxis3DForMvvm}}" TargetType="axis:TimeSpanAxis3DForMvvm">
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="GreenYellow"/>
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+          <Style x:Key="CustomDateTime3DStyle" BasedOn="{StaticResource {x:Type axis:DateTimeAxis3DForMvvm}}" TargetType="axis:DateTimeAxis3DForMvvm">
+          <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="OrangeRed"/>
+                        <Setter Property="StrokeThickness" Value="1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart}"/>
+
+        <s3D:SciChart3DSurface x:Name="SciChart"
+                               Grid.Column="1"
+                               BorderThickness="0"
+                               WorldDimensions="200,100,200" 
+                               XAxis="{extensions:AxisBinding XAxis}"
+                               YAxis="{extensions:AxisBinding YAxis}"
+                               ZAxis="{extensions:AxisBinding ZAxis}"
+                              >
+            <s3D:SciChart3DSurface.Resources>
+
+            </s3D:SciChart3DSurface.Resources>
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="True" />
+            </s3D:SciChart3DSurface.Camera>
+         
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ZoomExtentsModifier3D />
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+    </Grid>
+</UserControl>

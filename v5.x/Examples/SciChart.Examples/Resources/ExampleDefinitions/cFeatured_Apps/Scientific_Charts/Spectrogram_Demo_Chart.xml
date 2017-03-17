@@ -15,7 +15,6 @@
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Spectrogram/FFT.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Line</Features>

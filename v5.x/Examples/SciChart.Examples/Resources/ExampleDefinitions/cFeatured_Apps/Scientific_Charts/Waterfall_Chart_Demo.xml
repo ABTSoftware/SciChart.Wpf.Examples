@@ -16,7 +16,6 @@
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/WaterfallChart.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/CustomWaterfallNumericAxis.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/CustomWaterfallRubberBandXyZoomModifier.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/FFT.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/VerticalValuesPaletteProvider.cs.txt</string>
   </CodeFiles>
   <Features>
