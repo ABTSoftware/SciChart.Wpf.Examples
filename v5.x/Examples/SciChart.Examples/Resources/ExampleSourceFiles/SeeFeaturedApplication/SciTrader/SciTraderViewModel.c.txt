@@ -19,7 +19,7 @@ using System.Linq;
 using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Common.Helpers;
-using SciChart.Charting.Model.DataSeries.Filters;
+using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Numerics.Calendars;
 using SciChart.Data.Model;
 using SciChart.Examples.Examples.SeeFeaturedApplication.Common;
@@ -359,18 +359,20 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             // Create a new series and append Open, High, Low, Close data                
             _ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             _ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = UseDiscontinuousDateTimeAxis ? (IOhlcDataSeries<DateTime, double>) new DiscontinuousDataSeries<double>(_ohlcDataSeries, Calendar) : _ohlcDataSeries;
+            PriceData = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? new DiscontinuousFilter<double>(_ohlcDataSeries, new OhlcDataSeries<DateTime, double>(), Calendar).FilteredDataSeries : _ohlcDataSeries);
             PriceData.SeriesName = priceData.Symbol;
 
             var xyDataSeries = new XyDataSeries<DateTime, double>();
             xyDataSeries.Append(priceData.TimeData, priceData.CloseData);
 
             // Create a series for the 200 period SMA which will be plotted as a line chart
-            Sma200Series = UseDiscontinuousDateTimeAxis ? new MovingAverageFilter(xyDataSeries, 200, Calendar) : new MovingAverageFilter(xyDataSeries, 200);
+            Sma200Series = UseDiscontinuousDateTimeAxis ? (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, new XyDataSeries<DateTime, double>(), 200, Calendar).FilteredDataSeries :
+                                                          (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, new XyDataSeries<DateTime, double>(), 200).FilteredDataSeries;
             Sma200Series.SeriesName = "200 SMA";
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = UseDiscontinuousDateTimeAxis ? new MovingAverageFilter(xyDataSeries, 50, Calendar) : new MovingAverageFilter(xyDataSeries, 50);
+            Sma50Series = UseDiscontinuousDateTimeAxis ? (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, new XyDataSeries<DateTime, double>(), 50, Calendar).FilteredDataSeries :
+                                                         (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, new XyDataSeries<DateTime, double>(), 50).FilteredDataSeries;
             Sma50Series.SeriesName = "50 SMA";
 
             // Update the chart type and timeframe with current settings

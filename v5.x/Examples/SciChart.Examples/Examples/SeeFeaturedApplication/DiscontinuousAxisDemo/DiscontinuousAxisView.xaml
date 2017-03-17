@@ -650,8 +650,7 @@
                 <!--  Create Y Axis  -->
                 <s:SciChartSurface.YAxis>
                     <s:NumericAxis AutoRange="Always"
-                                   GrowBy="0.1, 0.1"
-                                   TextFormatting="{Binding PriceChartTextFormatting}" />
+                                   GrowBy="0.1, 0.1" />
                 </s:SciChartSurface.YAxis>
 
                 <!--  Create and enable ChartModifiers through bindings  -->
