@@ -148,7 +148,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBindings
                 {
                     Background = new SolidColorBrush(Colors.LawnGreen),
                     BorderBrush = new SolidColorBrush(Colors.DarkGreen),
-                    BorderThickness = 5,
+                    BorderThickness = new Thickness(5),
                     CornerRadius = new CornerRadius(3),
                     X1 = 5.5,
                     X2 = 7,
