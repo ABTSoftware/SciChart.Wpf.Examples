@@ -13,8 +13,10 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+                <ResourceDictionary
+                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+                <ResourceDictionary
+                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
@@ -33,58 +35,148 @@
                                 RenderableSeries="{s:SeriesBinding RenderableSeries}"
                                 CentralAxisOffset="{Binding ElementName=HoleValueSlider, Path=Value, Mode=TwoWay}"
                                 AxisAngleOffset="{Binding ElementName=AngleValueSlider, Path=Value, Mode=TwoWay}">
-           
+
             <s:SciChartRadarSurface.Resources>
                 <Style x:Key="RadarSeriesStyle" TargetType="s:RadarPolygonRenderableSeries">
-                    <Setter Property="SelectedSeriesStyle">
+                    <Setter Property="IsFilled"
+                            Value="{Binding ElementName=FillingEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                </Style>
+
+                <Style x:Key="BlueRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                 <Setter Property="SelectedSeriesStyle">
                         <Setter.Value>
                             <Style TargetType="s:RadarPolygonRenderableSeries">
-                                <Setter Property="StrokeThickness" Value="4" />
+                                <Setter Property="StrokeThickness" Value="3" />
+                                <Setter Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Blue" Opacity="0.8"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="PointMarker">
+                                    <Setter.Value>
+                                        <s:TrianglePointMarker Width="15" 
+                                                               Height="15" 
+                                                               Fill="Blue"
+                                                               StrokeThickness="0"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
                         </Setter.Value>
                     </Setter>
-                    <Setter Property="IsFilled" Value="{Binding ElementName=FillingEnablingButton, Path=IsChecked, Mode=TwoWay}" />
                 </Style>
+                <Style x:Key="CoralRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="SelectedSeriesStyle">
+                        <Setter.Value>
+                            <Style TargetType="s:RadarPolygonRenderableSeries">
+                                <Setter Property="StrokeThickness" Value="3" />
+                                <Setter Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Coral" 
+                                                         Opacity="0.8"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="PointMarker">
+                                    <Setter.Value>
+                                        <s:EllipsePointMarker Width="15"
+                                                              Height="15"
+                                                              Fill="Coral"
+                                                              StrokeThickness="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style x:Key="GreenRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="SelectedSeriesStyle">
+                        <Setter.Value>
+                            <Style TargetType="s:RadarPolygonRenderableSeries">
+                                <Setter Property="StrokeThickness" Value="3" />
+                                <Setter Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Green"  
+                                                         Opacity="0.8"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="PointMarker">
+                                    <Setter.Value>
+                                        <s:CrossPointMarker Width="15"
+                                                            Height="15" 
+                                                            Stroke="Green"
+                                                            StrokeThickness="3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style x:Key="YellowGreenRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="SelectedSeriesStyle">
+                        <Setter.Value>
+                            <Style TargetType="s:RadarPolygonRenderableSeries">
+                                <Setter Property="StrokeThickness" Value="3" />
+                                <Setter Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="YellowGreen" 
+                                                         Opacity="0.8"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="PointMarker">
+                                    <Setter.Value>
+                                        <s:SquarePointMarker Width="15" 
+                                                             Height="15" 
+                                                             Fill="YellowGreen"
+                                                             StrokeThickness="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
             </s:SciChartRadarSurface.Resources>
-            
+
             <s:SciChartRadarSurface.RadarAxes>
                 <s:RadarAxis AxisTitle="Sales"
-                              DrawLabels="True"
-                              DrawMajorGridLines="True"
-                              Id="salesId"
-                              IsLabelCullingEnabled="True"
-                              VisibleRange="0, 100"
-                               GridLinesType="{Binding ElementName=GridLinesTypeSourceCombo, Path=SelectedItem}"/>
+                             DrawLabels="True"
+                             DrawMajorGridLines="True"
+                             Id="salesId"
+                             IsLabelCullingEnabled="True"
+                             VisibleRange="0, 100"
+                             GridLinesType="{Binding ElementName=GridLinesTypeSourceCombo, Path=SelectedItem}" />
 
                 <s:RadarAxis AxisTitle="Marketing"
-                              Id="marketingId"
-                              VisibleRange="0, 100" />
+                             Id="marketingId"
+                             VisibleRange="0, 100" />
 
                 <s:RadarAxis AxisTitle="Development"
-                              Id="developmentId"
-                              VisibleRange="0, 100" />
+                             Id="developmentId"
+                             VisibleRange="0, 100" />
 
                 <s:RadarAxis AxisTitle="Customer Support"
-                              Id="customerSupportId"
-                              VisibleRange="0, 100" />
+                             Id="customerSupportId"
+                             VisibleRange="0, 100" />
 
                 <s:RadarAxis AxisTitle="Information Technology"
-                              Id="informationTechnologyId"
-                              VisibleRange="0, 100" />
+                             Id="informationTechnologyId"
+                             VisibleRange="0, 100" />
 
                 <s:RadarAxis AxisTitle="Administration"
-                              Id="administrationId"
-                              VisibleRange="0, 100" />
+                             Id="administrationId"
+                             VisibleRange="0, 100" />
 
             </s:SciChartRadarSurface.RadarAxes>
             <s:SciChartRadarSurface.ChartModifiers>
-                <s:RadarTooltipModifier ShowTooltip="{Binding ElementName=TooltipEnablingButton, Path=IsChecked, Mode=TwoWay}" />
-                <s:RadarLegendModifier Orientation="Vertical" 
+                <s:RadarTooltipModifier
+                    ShowTooltip="{Binding ElementName=TooltipEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                <s:RadarLegendModifier Orientation="Vertical"
                                        ShowLegend="{Binding ElementName=LegendEnablingButton, Path=IsChecked, Mode=TwoWay}" />
-                <s:RadarSeriesSelectionModifier ExecuteWhen="{Binding ElementName=SelectionModeCombo, Path=SelectedItem}" 
-                                                AllowMultiSelect="{Binding ElementName=MultiSelectionEnablingCheckbox, Path=IsChecked, Mode=TwoWay}" 
-                                                IsEnabled="{Binding ElementName=SelectionEnablingButton, Path=IsChecked, Mode=TwoWay}" />
-                <s:RadarDragDataPointModifier IsEnabled="{Binding ElementName=ragDataPointButton, Path=IsChecked, Mode=TwoWay}"/>
+                <s:RadarSeriesSelectionModifier
+                    ExecuteWhen="{Binding ElementName=SelectionModeCombo, Path=SelectedItem}"
+                    AllowMultiSelect="{Binding ElementName=MultiSelectionEnablingCheckbox, Path=IsChecked, Mode=TwoWay}"
+                    IsEnabled="{Binding ElementName=SelectionEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                <s:RadarDragDataPointModifier
+                    IsEnabled="{Binding ElementName=ragDataPointButton, Path=IsChecked, Mode=TwoWay}" />
             </s:SciChartRadarSurface.ChartModifiers>
 
         </s:SciChartRadarSurface>
@@ -129,7 +221,7 @@
                                     Maximum="360"
                                     Minimum="0"
                                     Orientation="Horizontal"
-                                    x:Name="AngleValueSlider"/>
+                                    x:Name="AngleValueSlider" />
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
                 </ext:FlyoutMenuButton>
@@ -155,15 +247,15 @@
                               Content="Tooltip"
                               ContentTemplate="{StaticResource TooltipIconContentTemplate}"
                               Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Tooltip Radar Modifier" 
-                              x:Name="TooltipEnablingButton"/>
+                              ToolTipService.ToolTip="Tooltip Radar Modifier"
+                              x:Name="TooltipEnablingButton" />
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="Leg"
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Legend Radar Modifier"
                               IsChecked="True"
-                              x:Name="LegendEnablingButton"/>
+                              x:Name="LegendEnablingButton" />
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="DrgPnt"
@@ -172,16 +264,16 @@
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Drag Data Point Modifier"
                               IsChecked="True"
-                              x:Name="DragDataPointButton"/>
+                              x:Name="DragDataPointButton" />
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="Fill"
                               FontSize="12"
                               Padding="0"
                               Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Is filled series" 
+                              ToolTipService.ToolTip="Is filled series"
                               IsChecked="True"
-                              x:Name="FillingEnablingButton"/>
+                              x:Name="FillingEnablingButton" />
 
                 <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
                                             Content="SLCT"
@@ -196,16 +288,16 @@
 
                             <TextBlock FontSize="12" Text="Execute when" />
                             <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:MouseModifier}}}" 
+                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:MouseModifier}}}"
                                       SelectedIndex="0"
-                                      x:Name="SelectionModeCombo"/>
+                                      x:Name="SelectionModeCombo" />
 
                             <ext:FlyoutSeparator />
 
                             <CheckBox Margin="3"
                                       VerticalAlignment="Center"
                                       Content="Allow Multi Selection"
-                                      x:Name="MultiSelectionEnablingCheckbox"/>
+                                      x:Name="MultiSelectionEnablingCheckbox" />
 
                         </StackPanel>
                     </ext:FlyoutMenuToggleButton.PopupContent>

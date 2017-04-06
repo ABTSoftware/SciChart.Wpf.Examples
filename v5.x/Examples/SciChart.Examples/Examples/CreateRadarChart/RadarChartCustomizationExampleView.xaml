@@ -60,16 +60,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <Style TargetType="s:RadarPolygonRenderableSeries">
-                <Setter Property="SelectedSeriesStyle">
-                    <Setter.Value>
-                        <Style TargetType="s:RadarPolygonRenderableSeries">
-                            <Setter Property="StrokeThickness" Value="4" />
-                        </Style>
-                    </Setter.Value>
-                </Setter> 
-            </Style>
             
         </ResourceDictionary>
     </UserControl.Resources>
@@ -172,26 +162,38 @@
                                                 IsFilled="{Binding IsFilled, Mode=TwoWay}"
                                                 SeriesName="Ukraine"
                                                 Stroke="Blue"
-                                                StrokeThickness="1">
+                                                StrokeThickness="2">
                     <s:RadarPolygonRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="10"
                                                Height="10"
                                                Fill="Blue"
-                                               Stroke="Black"
-                                               StrokeThickness="1" />
+                                               StrokeThickness="0" />
                     </s:RadarPolygonRenderableSeries.PointMarker>
 
-                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
-                        <s:TrianglePointMarker Width="15"
+                    <s:RadarPolygonRenderableSeries.Fill>
+                        <SolidColorBrush Opacity="0.4" 
+                                         Color="Blue" />
+                    </s:RadarPolygonRenderableSeries.Fill>
+                    
+                    <s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
+                        <Style TargetType="s:RadarPolygonRenderableSeries">
+                            <Setter Property="StrokeThickness" Value="3" />
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8" 
+                                                     Color="Blue" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="PointMarker">
+                                <Setter.Value>
+                                    <s:TrianglePointMarker Width="15"
                                                Height="15"
                                                Fill="Blue"
-                                               Stroke="Black"
-                                               StrokeThickness="1" />
-                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
-
-                    <s:RadarPolygonRenderableSeries.Fill>
-                        <SolidColorBrush Opacity="0.4" Color="Blue" />
-                    </s:RadarPolygonRenderableSeries.Fill>
+                                               StrokeThickness="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
 
                 </s:RadarPolygonRenderableSeries>
 
@@ -199,80 +201,117 @@
                                                 IsFilled="{Binding IsFilled, Mode=TwoWay}"
                                                 SeriesName="Romania"
                                                 Stroke="Coral"
-                                                StrokeThickness="1">
+                                                StrokeThickness="2">
 
                     <s:RadarPolygonRenderableSeries.Fill>
-                        <SolidColorBrush Opacity="0.4" Color="Coral" />
+                        <SolidColorBrush Opacity="0.4"
+                                         Color="Coral" />
                     </s:RadarPolygonRenderableSeries.Fill>
 
                     <s:RadarPolygonRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="10"
                                               Height="10"
                                               Fill="Coral"
-                                              Stroke="Black"
-                                              StrokeThickness="1" />
+                                              StrokeThickness="0"/>
                     </s:RadarPolygonRenderableSeries.PointMarker>
 
-                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
-                        <s:EllipsePointMarker Width="15"
-                                              Height="15"
-                                              Fill="Coral"
-                                              Stroke="Black"
-                                              StrokeThickness="1" />
-                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                    <s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
+                        <Style TargetType="s:RadarPolygonRenderableSeries">
+                            <Setter Property="StrokeThickness" Value="3" />
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8" 
+                                                     Color="Coral" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="PointMarker">
+                                <Setter.Value>
+                                    <s:EllipsePointMarker Width="15"
+                                                          Height="15"
+                                                          Fill="Coral"
+                                                          StrokeThickness="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
                 </s:RadarPolygonRenderableSeries>
 
                 <s:RadarPolygonRenderableSeries DataSeries="{Binding GeorgiaDataSeries}"
                                                 IsFilled="{Binding IsFilled, Mode=TwoWay}"
                                                 SeriesName="Georgia"
                                                 Stroke="Green"
-                                                StrokeThickness="1">
+                                                StrokeThickness="2">
 
                     <s:RadarPolygonRenderableSeries.Fill>
-                        <SolidColorBrush Opacity="0.4" Color="Green" />
+                        <SolidColorBrush Opacity="0.4"
+                                         Color="Green" />
                     </s:RadarPolygonRenderableSeries.Fill>
 
                     <s:RadarPolygonRenderableSeries.PointMarker>
                         <s:CrossPointMarker Width="10"
                                             Height="10"
                                             Stroke="Green"
-                                            StrokeThickness="1" />
+                                            StrokeThickness="2" />
                     </s:RadarPolygonRenderableSeries.PointMarker>
 
-                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
-                        <s:CrossPointMarker Width="15"
-                                            Height="15"
-                                            Stroke="Green"
-                                            StrokeThickness="1" />
-                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                    <s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
+                        <Style TargetType="s:RadarPolygonRenderableSeries">
+                            <Setter Property="StrokeThickness" Value="3" />
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8"
+                                                     Color="Green" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="PointMarker">
+                                <Setter.Value>
+                                    <s:CrossPointMarker Width="15"
+                                                    Height="15"
+                                                    Stroke="Green"
+                                                    StrokeThickness="3" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
                 </s:RadarPolygonRenderableSeries>
-
 
                 <s:RadarPolygonRenderableSeries DataSeries="{Binding BelarusDataSeries}"
                                                 IsFilled="{Binding IsFilled, Mode=TwoWay}"
                                                 SeriesName="Belarus"
                                                 Stroke="YellowGreen"
-                                                StrokeThickness="1">
+                                                StrokeThickness="2">
 
                     <s:RadarPolygonRenderableSeries.Fill>
-                        <SolidColorBrush Opacity="0.4" Color="YellowGreen" />
+                        <SolidColorBrush Opacity="0.4" 
+                                         Color="YellowGreen" />
                     </s:RadarPolygonRenderableSeries.Fill>
 
                     <s:RadarPolygonRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="10"
                                              Height="10"
                                              Fill="YellowGreen"
-                                             Stroke="Black"
-                                             StrokeThickness="1" />
+                                             StrokeThickness="0"/>
                     </s:RadarPolygonRenderableSeries.PointMarker>
 
-                    <s:RadarPolygonRenderableSeries.SelectedPointMarker>
-                        <s:SquarePointMarker Width="15"
-                                             Height="15"
-                                             Fill="YellowGreen"
-                                             Stroke="Black"
-                                             StrokeThickness="1" />
-                    </s:RadarPolygonRenderableSeries.SelectedPointMarker>
+                    <s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
+                        <Style TargetType="s:RadarPolygonRenderableSeries">
+                            <Setter Property="StrokeThickness" Value="3" />
+                            <Setter Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8"
+                                                     Color="YellowGreen" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="PointMarker">
+                                <Setter.Value>
+                                    <s:SquarePointMarker Width="15"
+                                                         Height="15"
+                                                         Fill="YellowGreen"
+                                                         StrokeThickness="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:RadarPolygonRenderableSeries.SelectedSeriesStyle>
                 </s:RadarPolygonRenderableSeries>
 
             </s:SciChartRadarSurface.RenderableSeries>
