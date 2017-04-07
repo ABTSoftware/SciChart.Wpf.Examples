@@ -23,6 +23,8 @@
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,15 +46,13 @@
 
                         <!-- Checkboxes to decide how the mesh should be drawn -->
                         <TextBlock FontSize="12" Text="Draw Mesh As" />
-                        <CheckBox  FontSize="12" Margin="4" x:Name="CheckSolidWireFrame" Content="Solid Wireframe" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckSolidMesh" Content="Solid Mesh" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckWireframe" Content="Wireframe" Checked="CheckMeshTypeChanged" Unchecked="CheckMeshTypeChanged" s:ToggleButtonExtensions.GroupName="WireframeModes"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference surfaceMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         <ext:FlyoutSeparator/>
 
                         <!-- Checkbox for Mesh Skirt on or off -->
                         <TextBlock FontSize="12" Text="Mesh Skirt" />
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Mesh Skirt?" IsChecked="True" Checked="CheckDrawSkirtChanged" Unchecked="CheckDrawSkirtChanged"/>
+                        <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Mesh Skirt?" IsChecked="False" Checked="CheckDrawSkirtChanged" Unchecked="CheckDrawSkirtChanged"/>
 
                         <ext:FlyoutSeparator/>
 
@@ -63,7 +63,6 @@
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
-        
 
         <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
             <s3D:SciChart3DSurface.Camera>

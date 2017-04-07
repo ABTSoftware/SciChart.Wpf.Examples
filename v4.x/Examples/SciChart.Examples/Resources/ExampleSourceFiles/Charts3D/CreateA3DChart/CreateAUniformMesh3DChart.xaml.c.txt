@@ -32,7 +32,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             int zSize = 25;
             var meshDataSeries = new UniformGridDataSeries3D<double>(xSize, zSize)
             {
-                StepX = 1, 
+                StepX = 1,
                 StepZ = 1,
                 SeriesName = "Uniform Surface Mesh",
             };
@@ -45,19 +45,8 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
                     meshDataSeries[z, x] = y;
                 }
             }
-            surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
-            CheckSolidWireFrame.IsChecked = true;
-        }
 
-        private void CheckMeshTypeChanged(object sender, RoutedEventArgs e)
-        {
-            if (surfaceMeshRenderableSeries != null)
-            {
-                surfaceMeshRenderableSeries.DrawMeshAs = 
-                    CheckSolidMesh.IsChecked == true ? DrawMeshAs.SolidMesh : 
-                    CheckSolidWireFrame.IsChecked == true  ? DrawMeshAs.SolidWireFrame :  
-                    DrawMeshAs.Wireframe;
-            }
+            surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
         }
 
         private void CheckDrawSkirtChanged(object sender, RoutedEventArgs e)
