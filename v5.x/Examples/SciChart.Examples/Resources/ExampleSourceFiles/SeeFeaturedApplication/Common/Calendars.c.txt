@@ -9,6 +9,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     /// Example of how to make a Discontinuous DateTime Calender for the New York Stock Exchange
     /// 
     /// If you wish to extend this, ensure that public holidays are set for the year(s) which you wish to show data
+    /// e.g. https://www.redcort.com/us-federal-bank-holidays/
     /// </summary>
     public class NYSECalendar : DiscontinuousDateTimeCalendarBase
     {
@@ -49,6 +50,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     /// Example of how to make a Discontinuous DateTime Calender for the London Stock Exchange
     /// 
     /// If you wish to extend this, ensure that public holidays are set for the year(s) which you wish to show data
+    /// e.g. http://www.lseg.com/areas-expertise/our-markets/london-stock-exchange/equities-markets/trading-services/business-days
     /// </summary>
     public class LSECalendar : DiscontinuousDateTimeCalendarBase
     {
