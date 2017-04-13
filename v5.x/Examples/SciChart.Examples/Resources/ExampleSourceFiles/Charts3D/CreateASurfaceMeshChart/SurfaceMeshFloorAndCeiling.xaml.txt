@@ -29,7 +29,7 @@
 
             <s3D:SciChart3DSurface.RenderableSeries>
 
-                <!-- Floor with Contours. Uses HeightScaleFactor to display mesh on the floor -->
+                <!-- Floor with Contours. Uses HeightScaleFactor and YOffset = YAxis.VisibleRange.Min to display mesh on the floor -->
                 <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWireFrame" 
                                                    HeightScaleFactor="0.0"
                                                    Stroke="#FF228B22"                                                    
@@ -48,14 +48,14 @@
                                                    Maximum="4"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
 
-                <!-- Ceiling with Contours. Uses HeightScaleFactor=0 and YOffset=4 to display mesh on the ceiling -->
+                <!-- Ceiling with Contours. Uses HeightScaleFactor=0 and YOffset = YAxis.VisibleRange.Max to display mesh on the ceiling -->
                 <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWireFrame" 
                                                    HeightScaleFactor="0.0"
                                                    Opacity="0.4"
                                                    Stroke="#FF228B22" 
                                                    StrokeThickness="2.0"
                                                    Maximum="4"
-                                                   YOffset="4"
+                                                   YOffset="{Binding ElementName=YAxis, Path=VisibleRange.Max, Mode=OneWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>
@@ -64,7 +64,7 @@
                 <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.XAxis>
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D x:Name="YAxis" VisibleRange="-4,4"/>
             </s3D:SciChart3DSurface.YAxis>
             <s3D:SciChart3DSurface.ZAxis>
                 <s3D:NumericAxis3D />
