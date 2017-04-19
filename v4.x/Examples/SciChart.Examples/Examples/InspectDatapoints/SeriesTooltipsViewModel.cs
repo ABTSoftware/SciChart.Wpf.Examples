@@ -108,7 +108,12 @@ namespace SciChart.Examples.Examples.InspectDatapoints
                         HighThreshold = this.HighThreshold,
                         LowThreshold = this.LowThreshold,                        
                         Title = seriesInfo.RenderableSeries.DataSeries.SeriesName,
-                        Stroke = seriesInfo.Stroke,
+                        Stroke = seriesInfo.Stroke,  
+     
+                        // Fill is not used, but we include it to prevent a Binding error from the
+                        // overridden TooltipViewModel to the default TooltipModifier.TooltipContainerStyle which 
+                        // expects a property of type Brush called Fill
+                        Fill = Brushes.Transparent,
 				    };
 
                     vm.OverThreshold = vm.YValue > HighThreshold;
@@ -134,5 +139,6 @@ namespace SciChart.Examples.Examples.InspectDatapoints
         public bool OverOrUnderThreshold  { get { return OverThreshold | UnderThreshold; }}
         public Color BackgroundColor { get; set; }
         public Color Stroke { get; set; }
+        public Brush Fill { get; set; }
     }
 }
