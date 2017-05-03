@@ -699,5 +699,23 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return values.ToArray();
         }
 
+        /// <summary>
+        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
+        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
+        /// </summary>
+        /// <param name="objResource">The resource to load</param>
+        /// <returns>A byte[] array representing the obj file</returns>
+        public byte[] LoadWavefrontObject(Obj3D objResource)
+        {
+            var asm = GetType().Assembly;
+            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains(objResource.Value));
+
+            using (var stream = asm.GetManifestResourceStream(resourceString))
+            using (var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
     }
 }
