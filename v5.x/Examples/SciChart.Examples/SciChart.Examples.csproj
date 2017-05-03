@@ -292,7 +292,11 @@
     <Compile Include="Examples\Charts3D\Customize3DChart\AddGeometryTo3DChart.xaml.cs">
       <DependentUpon>AddGeometryTo3DChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml.cs">
+      <DependentUpon>AddObjectsToA3DChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\Charts3D\Customize3DChart\CubeGeometry.cs" />
+    <Compile Include="Examples\Charts3D\Customize3DChart\ObjSceneEntity.cs" />
     <Compile Include="Examples\Charts3D\Customize3DChart\TextSceneEntity.cs" />
     <Compile Include="Examples\Charts3D\ManipulateSeries3DMVVM\ManipulateSeries3DMvvmView.xaml.cs">
       <DependentUpon>ManipulateSeries3DMvvmView.xaml</DependentUpon>
@@ -998,6 +1002,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\Charts3D\Customize3DChart\AddGeometryTo3DChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -3277,6 +3285,15 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\ManipulateSeries3DMVVM\ManipulateSeries3DMvvmView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\ManipulateSeries3DMVVM\ManipulateSeries3DMvvmViewModel.c.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Customize_3D_Charts\Add_Objects_To_a_3D_Chart.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3307,32 +3324,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10061\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10082\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10061\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10082\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10061\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10082\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10061\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10082\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10061\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10082\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10061\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10082\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
