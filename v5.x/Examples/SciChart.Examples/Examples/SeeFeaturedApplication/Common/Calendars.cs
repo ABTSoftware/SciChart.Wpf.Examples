@@ -15,8 +15,6 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     {
         public sealed override ObservableCollection<TimeSpanRange> SkipDayTimeRange { get; set; }
         public sealed override ObservableCollection<DayOfWeek> SkipDaysInWeek { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDaysInMonth { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDaysInYear { get; set; }
         public sealed override ObservableCollection<DateTime> SkipDates { get; set; }
 
         public NYSECalendar()
@@ -25,7 +23,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
             {
                 // NYSE is open at 9:30 am EST
                 new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(9, 30, 0)),
-                // NYSE is closed at 16:00 pm EST
+                 // NYSE is closed at 16:00 pm EST
                 new TimeSpanRange(new TimeSpan(16, 0, 0), new TimeSpan(24, 0, 0))
             };
 
@@ -37,7 +35,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
             };
 
             SkipDates = new ObservableCollection<DateTime>
-            {                
+            {
                 new DateTime(2015, 12, 25), // NYSE Closed on Christmas Day 2015
                 new DateTime(2016, 1, 1),   // NYSE Closed on New years day 2016
                 new DateTime(2016, 1, 15),  // NYSE Clsoed on Martin Luther King Day 2016
@@ -56,8 +54,6 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     {
         public sealed override ObservableCollection<TimeSpanRange> SkipDayTimeRange { get; set; }
         public sealed override ObservableCollection<DayOfWeek> SkipDaysInWeek { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDaysInMonth { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDaysInYear { get; set; }
         public sealed override ObservableCollection<DateTime> SkipDates { get; set; }
 
         public LSECalendar()

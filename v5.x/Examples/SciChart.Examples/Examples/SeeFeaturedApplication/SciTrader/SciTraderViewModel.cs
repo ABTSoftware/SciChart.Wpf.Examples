@@ -364,7 +364,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
 
             var xyDataSeries = new XyDataSeries<DateTime, double>();
             xyDataSeries.Append(priceData.TimeData, priceData.CloseData);
-            var discontinuousSeries = new DiscontinuousAxisFilter<double>(xyDataSeries, Calendar).FilteredDataSeries as IDataSeries<DateTime, double>;
+            var discontinuousSeries = UseDiscontinuousDateTimeAxis ? new DiscontinuousAxisFilter<double>(xyDataSeries, Calendar).FilteredDataSeries as IDataSeries<DateTime, double> : null;
 
             // Create a series for the 200 period SMA which will be plotted as a line chart
             Sma200Series = UseDiscontinuousDateTimeAxis ? (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(discontinuousSeries, 200).FilteredDataSeries :
