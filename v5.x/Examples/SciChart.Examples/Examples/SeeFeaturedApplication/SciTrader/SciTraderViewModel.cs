@@ -359,21 +359,15 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             // Create a new series and append Open, High, Low, Close data                
             _ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             _ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? new DiscontinuousAxisFilter<double>(_ohlcDataSeries, Calendar).FilteredDataSeries : _ohlcDataSeries);
+            PriceData = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? _ohlcDataSeries.ToDiscontinuousSeries(Calendar) : _ohlcDataSeries);
             PriceData.SeriesName = priceData.Symbol;
-
-            var xyDataSeries = new XyDataSeries<DateTime, double>();
-            xyDataSeries.Append(priceData.TimeData, priceData.CloseData);
-            var discontinuousSeries = UseDiscontinuousDateTimeAxis ? new DiscontinuousAxisFilter<double>(xyDataSeries, Calendar).FilteredDataSeries as IDataSeries<DateTime, double> : null;
-
+            
             // Create a series for the 200 period SMA which will be plotted as a line chart
-            Sma200Series = UseDiscontinuousDateTimeAxis ? (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(discontinuousSeries, 200).FilteredDataSeries :
-                                                          (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, 200).FilteredDataSeries;
+            Sma200Series = (IXyDataSeries<DateTime, double>) PriceData.ToMovingAverage(200);
             Sma200Series.SeriesName = "200 SMA";
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = UseDiscontinuousDateTimeAxis ? (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(discontinuousSeries, 50).FilteredDataSeries :
-                                                         (IXyDataSeries<DateTime, double>)new MovingAverageFilter<DateTime>(xyDataSeries, 50).FilteredDataSeries;
+            Sma50Series = (IXyDataSeries<DateTime, double>)PriceData.ToMovingAverage(50);
             Sma50Series.SeriesName = "50 SMA";
 
             // Update the chart type and timeframe with current settings
