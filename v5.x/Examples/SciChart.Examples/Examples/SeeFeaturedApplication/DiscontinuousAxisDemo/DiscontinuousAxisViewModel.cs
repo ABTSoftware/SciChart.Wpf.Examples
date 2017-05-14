@@ -360,19 +360,15 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
             // Create a new series and append Open, High, Low, Close data                
             var ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = (IOhlcDataSeries<DateTime, double>) new DiscontinuousAxisFilter<double>(ohlcDataSeries, Calendar).FilteredDataSeries;
+            PriceData = (IOhlcDataSeries<DateTime, double>)ohlcDataSeries.ToDiscontinuousSeries(Calendar);
             PriceData.SeriesName = priceData.Symbol;
-
-            var xyDataSeries = new XyDataSeries<DateTime, double>();
-            xyDataSeries.Append(priceData.TimeData, priceData.CloseData);
-            var discontinuousSeries = new DiscontinuousAxisFilter<double>(xyDataSeries, Calendar).FilteredDataSeries as IDataSeries<DateTime, double>;
-
+            
             // Create a series for the 200 period SMA which will be plotted as a line chart
-            Sma200Series = (IXyDataSeries<DateTime, double>) new MovingAverageFilter<DateTime>(discontinuousSeries, 200).FilteredDataSeries;
+            Sma200Series = (IXyDataSeries<DateTime, double>) PriceData.ToMovingAverage(200);
             Sma200Series.SeriesName = "200 SMA";
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = (IXyDataSeries<DateTime, double>) new MovingAverageFilter<DateTime>(discontinuousSeries, 50).FilteredDataSeries;
+            Sma50Series = (IXyDataSeries<DateTime, double>)PriceData.ToMovingAverage(50);
             Sma50Series.SeriesName = "50 SMA";
 
             // Update the chart type and timeframe with current settings
