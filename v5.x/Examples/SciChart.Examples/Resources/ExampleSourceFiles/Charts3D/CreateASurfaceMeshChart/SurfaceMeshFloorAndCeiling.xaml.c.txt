@@ -13,9 +13,9 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
             InitializeComponent();
 
             var ds = new UniformGridDataSeries3D<double>(11, 4);
-            ds.StartX = 10;
+            ds.StartX = 0;
             ds.StepX = 0.09;
-            ds.StartZ = 1;
+            ds.StartZ = 0;
             ds.StepZ = 0.75;
 
             // Initialize some nice looking data

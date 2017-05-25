@@ -143,7 +143,8 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
         void IPaletteProvider.OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
             _rSeries = (FastUniformHeatmapRenderableSeries)rSeries;
-            var dataSeries = (IUniformHeatmapDataSeries) _rSeries.DataSeries;
+            //var dataSeries = (IUniformHeatmapDataSeries) _rSeries.DataSeries;
+            var dataSeries = (IBaseHeatmapDataSeries)_rSeries.DataSeries;
             _zValues = dataSeries.GetZValuesAsDoubles();
 
             _textureHeight = _zValues.GetLength(0);
