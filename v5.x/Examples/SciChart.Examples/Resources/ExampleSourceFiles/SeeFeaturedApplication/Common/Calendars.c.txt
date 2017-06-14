@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using SciChart.Charting.Numerics.Calendars;
+using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
 using SciChart.Data.Model;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
@@ -13,34 +14,19 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     /// </summary>
     public class NYSECalendar : DiscontinuousDateTimeCalendarBase
     {
-        public sealed override ObservableCollection<TimeSpanRange> SkipDayTimeRange { get; set; }
-        public sealed override ObservableCollection<DayOfWeek> SkipDaysInWeek { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDates { get; set; }
-
         public NYSECalendar()
         {
-            SkipDayTimeRange = new ObservableCollection<TimeSpanRange>
-            {
-                // NYSE is open at 9:30 am EST
-                new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(9, 30, 0)),
-                 // NYSE is closed at 16:00 pm EST
-                new TimeSpanRange(new TimeSpan(16, 0, 0), new TimeSpan(24, 0, 0))
-            };
+            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(9, 30, 0))); // NYSE is open at 9:30 am EST
+            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 0, 0), new TimeSpan(24, 0, 0))); // NYSE is closed at 16:00 pm EST
 
-            SkipDaysInWeek = new ObservableCollection<DayOfWeek>
-            {
-                // NYSE is closed on weekends
-                DayOfWeek.Saturday,
-                DayOfWeek.Sunday
-            };
+            // NYSE is closed on weekends
+            SkipDaysInWeek.Add(DayOfWeek.Saturday);
+            SkipDaysInWeek.Add(DayOfWeek.Sunday);
 
-            SkipDates = new ObservableCollection<DateTime>
-            {
-                new DateTime(2015, 12, 25), // NYSE Closed on Christmas Day 2015
-                new DateTime(2016, 1, 1),   // NYSE Closed on New years day 2016
-                new DateTime(2016, 1, 15),  // NYSE Clsoed on Martin Luther King Day 2016
-                new DateTime(2016, 11, 24)  // NYSE Closed on Thanksgiving  2016
-            };
+            SkipDates.Add(new DateTime(2015, 12, 25)); // NYSE Closed on Christmas Day 2015
+            SkipDates.Add(new DateTime(2016, 1, 1)); // NYSE Closed on New years day 2016
+            SkipDates.Add(new DateTime(2016, 1, 15)); // NYSE Clsoed on Martin Luther King Day 2016
+            SkipDates.Add(new DateTime(2016, 11, 24)); // NYSE Closed on Thanksgiving  2016
         }
     }
 
@@ -52,32 +38,17 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     /// </summary>
     public class LSECalendar : DiscontinuousDateTimeCalendarBase
     {
-        public sealed override ObservableCollection<TimeSpanRange> SkipDayTimeRange { get; set; }
-        public sealed override ObservableCollection<DayOfWeek> SkipDaysInWeek { get; set; }
-        public sealed override ObservableCollection<DateTime> SkipDates { get; set; }
-
         public LSECalendar()
         {
-            SkipDayTimeRange = new ObservableCollection<TimeSpanRange>
-            {
-                // LSE is open at 08:00am GMT
-                new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(8, 0, 0)),
-                // LSE is closed at 16:30pm GMT
-                new TimeSpanRange(new TimeSpan(16, 30, 0), new TimeSpan(24, 0, 0))
-            };
+            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(8, 0, 0))); // LSE is open at 08:00am GMT
+            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 30, 0), new TimeSpan(24, 0, 0))); // LSE is closed at 16:30pm GMT
 
-            SkipDaysInWeek = new ObservableCollection<DayOfWeek>
-            {
-                // LSE is closed on weekends
-                DayOfWeek.Saturday,
-                DayOfWeek.Sunday
-            };
+            // LSE is closed on weekends
+            SkipDaysInWeek.Add(DayOfWeek.Saturday);
+            SkipDaysInWeek.Add(DayOfWeek.Sunday);
 
-            SkipDates = new ObservableCollection<DateTime>
-            {
-                new DateTime(2015, 12, 25), // LSE Closed on Christmas Day 2015
-                new DateTime(2016, 1, 1)  // LSE Closed on New Years day 2016
-            };
+            SkipDates.Add(new DateTime(2015, 12, 25)); // LSE Closed on Christmas Day 2015
+            SkipDates.Add(new DateTime(2016, 1, 1)); // LSE Closed on New Years day 2016
         }
     }
 }

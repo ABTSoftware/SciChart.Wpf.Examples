@@ -36,10 +36,12 @@ namespace SciChart.Examples.ExternalDependencies.Common
         FastCandlestick,        
     }
 
-    public enum BarStyle
+    public enum AggregationPriceChart
     {
-        TimeBar,
-        VolumeBar,
-        RangeBar
+        Count,
+        Time,
+        Volume,
+        Range,
+        Renko
     }
 }

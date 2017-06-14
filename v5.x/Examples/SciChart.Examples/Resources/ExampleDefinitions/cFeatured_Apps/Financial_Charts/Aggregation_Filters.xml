@@ -1,6 +1,6 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml</View>
-  <ViewModel>Examples.SeeFeaturedApplication.DiscontinuousAxisDemo.DiscontinuousAxisViewModel</ViewModel>
+  <View>Examples/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml</View>
+  <ViewModel>Examples.SeeFeaturedApplication.AggregationFilters.AggregationFiltersViewModel</ViewModel>
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>
@@ -31,10 +31,9 @@
     - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartScrollbar.html']SciChartScrollBar Type[/url]
   </Description>
   <CodeFiles>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Common/Calendars.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersViewModel.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Stock</Features>

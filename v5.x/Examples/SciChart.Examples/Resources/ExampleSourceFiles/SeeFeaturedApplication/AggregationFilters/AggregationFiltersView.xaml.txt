@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDemo.DiscontinuousAxisView"
+﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.AggregationFilters.AggregationFiltersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,7 +20,6 @@
             <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
             <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
             <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <sciTrader:IsChartTypeConverter x:Key="IsChartTypeConverter" />
             <ext:IsModifierTypeConverter x:Key="IsModifierTypeConverter" />
 
             <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -78,69 +77,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <!--  Style for the Price line chart  -->
-            <Style x:Key="PriceLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
-                <Setter Property="ResamplingMode" Value="MinMax" />
-                <Setter Property="Stroke" Value="#FF4083B7" />
-                <Setter Property="StrokeThickness" Value="2" />
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
-                                     Height="9"
-                                     Fill="#FF4083B7"
-                                     Stroke="White"
-                                     StrokeThickness="2" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastLine}" />
-            </Style>
-
-            <!--  Style for the Price mountain chart  -->
-            <Style x:Key="PriceMountainSeriesStyle" TargetType="s:FastMountainRenderableSeries">
-                <Setter Property="Stroke" Value="#FFC6E6FF" />
-                <Setter Property="Fill" Value="#774083B7" />
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
-                                     Height="9"
-                                     Fill="#774083B7"
-                                     Stroke="White"
-                                     StrokeThickness="2" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastMountain}" />
-            </Style>
-
-            <!--  Style for the Price Column chart  -->
-            <Style x:Key="PriceColumnSeriesStyle" TargetType="s:FastColumnRenderableSeries">
-                <Setter Property="Stroke" Value="#FFC6E6FF" />
-                <Setter Property="Fill">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#774083B7" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
-                                     Height="9"
-                                     Fill="#774083B7"
-                                     Stroke="White"
-                                     StrokeThickness="2" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastColumn}" />
-            </Style>
-
+            
             <!--  Style for Candlestick chart  -->
             <Style x:Key="PriceCandlestickSeriesStyle" TargetType="s:FastCandlestickRenderableSeries">
-                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastCandlestick}" />
                 <Setter Property="StrokeUp" Value="#FF52CC54" />
                 <Setter Property="StrokeDown" Value="#FFE26565" />
                 <Setter Property="FillUp">
@@ -153,25 +92,6 @@
                         <SolidColorBrush Color="#D0E26565" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="AntiAliasing" Value="False" />
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
-                                     Height="9"
-                                     Fill="#FF52CC54"
-                                     Stroke="White"
-                                     StrokeThickness="2" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!--  Style for Ohlc chart  -->
-            <Style x:Key="PriceOhlcSeriesStyle" TargetType="s:FastOhlcRenderableSeries">
-                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastOhlc}" />
-                <Setter Property="StrokeUp" Value="#FF52CC54" />
-                <Setter Property="StrokeDown" Value="#FFE26565" />
                 <Setter Property="AntiAliasing" Value="False" />
                 <Setter Property="RolloverMarkerTemplate">
                     <Setter.Value>
@@ -209,7 +129,7 @@
                                               StringFormat=\{0:0.000\}}" />
                 </Grid>
             </DataTemplate>
-            
+
             <sciTrader:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -411,36 +331,123 @@
 
                         <StackPanel MinWidth="150" Orientation="Vertical">
 
-                            <TextBlock FontSize="12" Text="Chart Type:" />
+                            <TextBlock FontSize="12" Text="Aggregation Price Chart:" />
 
-                            <ComboBox Margin="2"
+                            <ComboBox Margin="2" x:Name="AggregationPriceCharts"
                                       FontSize="12"
-                                      ItemsSource="{Binding AllChartTypes}"
-                                      SelectedItem="{Binding SelectedChartType,
+                                      ItemsSource="{Binding AllAggregationPriceCharts}"
+                                      SelectedItem="{Binding SelectedAggregationPriceChart,
                                                              Mode=TwoWay}" />
 
                             <ext:FlyoutSeparator />
 
-                            <TextBlock FontSize="12" Text="Calendar:" />
+                            <StackPanel>
+                                <TextBlock FontSize="12" Text="Count:" />
+                                <ComboBox Margin="2"
+                                          FontSize="12"
+                                          ItemsSource="{Binding AllCounts}"
+                                          SelectedItem="{Binding SelectedCount,
+                                                                 Mode=TwoWay}" />
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Count">
+                                                <Setter Property="FrameworkElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
 
-                            <ComboBox Margin="2"
-                                      FontSize="12"
-                                      ItemsSource="{Binding AllCalendars}"
-                                      SelectedItem="{Binding SelectedCalendar,
-                                                             Mode=TwoWay}" />
+                            <StackPanel>
+                                <TextBlock FontSize="12" Text="Time Frame (min):" />
+                                <ComboBox Margin="2"
+                                          FontSize="12"
+                                          ItemsSource="{Binding AllTimeFrames}"
+                                          SelectedItem="{Binding SelectedTimeFrame,
+                                                                 Mode=TwoWay}" />
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Time">
+                                                <Setter Property="FrameworkElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
+
+                            <StackPanel >
+                                <TextBlock FontSize="12" Text="Volume:" />
+                                <ComboBox Margin="2"
+                                          FontSize="12"
+                                          ItemsSource="{Binding AllVolumes}"
+                                          SelectedItem="{Binding SelectedVolume,
+                                                                 Mode=TwoWay}" />
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Volume">
+                                                <Setter Property="FrameworkElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
+
+                            <StackPanel >
+                                <TextBlock FontSize="12" Text="Range:" />
+                                <ComboBox Margin="2"
+                                          FontSize="12"
+                                          ItemsSource="{Binding AllRanges}"
+                                          SelectedItem="{Binding SelectedRange,
+                                                                 Mode=TwoWay}" />
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Range">
+                                                <Setter Property="FrameworkElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock FontSize="12" Text="Brick size:" />
+                                <ComboBox Margin="2"
+                                          FontSize="12"
+                                          ItemsSource="{Binding AllBrickSizes}"
+                                          SelectedItem="{Binding SelectedBrickSize,
+                                                                 Mode=TwoWay}" />
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Renko">
+                                                <Setter Property="FrameworkElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
 
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
 
                 </ext:FlyoutMenuButton>
-                
+
             </WrapPanel>
         </Border>
 
         <Grid Grid.Column="1" Background="#333">
 
             <s:SciChartSurface x:Name="PriceChart"
-                               Grid.Row="0"
+                               Grid.Row="0" Annotations="{Binding BuySellAnnotations}"
                                s:SciChartGroup.VerticalChartGroup="myCharts">
 
                 <!--  Create Renderable Series, which bind to DataSet series 1:1 and in order  -->
@@ -448,7 +455,7 @@
                     <!--  Series 0..3 are shown or hidden based on ChartType property in ViewModel bound to IsVisible on series  -->
                     <!--  Only one is shown at any one time and these series show the data for DataSet.Series[0]  -->
                     <s:FastCandlestickRenderableSeries x:Name="series1"
-                                                       DataSeries="{Binding PriceData}"
+                                                       DataSeries="{Binding PriceSeries}"
                                                        ResamplingMode="MinMax"
                                                        Style="{StaticResource PriceCandlestickSeriesStyle}">
                         <s:CursorModifier.SnapToSeries>
@@ -458,45 +465,6 @@
                             </MultiBinding>
                         </s:CursorModifier.SnapToSeries>
                     </s:FastCandlestickRenderableSeries>
-                    <s:FastOhlcRenderableSeries DataSeries="{Binding PriceData}"
-                                                ResamplingMode="MinMax"
-                                                Style="{StaticResource PriceOhlcSeriesStyle}">
-                        <s:CursorModifier.SnapToSeries>
-                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Self}" />
-                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
-                            </MultiBinding>
-                        </s:CursorModifier.SnapToSeries>
-                    </s:FastOhlcRenderableSeries>
-                    <s:FastMountainRenderableSeries DataSeries="{Binding PriceData}"
-                                                    ResamplingMode="MinMax"
-                                                    Style="{StaticResource PriceMountainSeriesStyle}">
-                        <s:CursorModifier.SnapToSeries>
-                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Self}" />
-                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
-                            </MultiBinding>
-                        </s:CursorModifier.SnapToSeries>
-                    </s:FastMountainRenderableSeries>
-                    <s:FastLineRenderableSeries DataSeries="{Binding PriceData}" Style="{StaticResource PriceLineSeriesStyle}">
-                        <s:CursorModifier.SnapToSeries>
-                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Self}" />
-                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
-                            </MultiBinding>
-                        </s:CursorModifier.SnapToSeries>
-                    </s:FastLineRenderableSeries>
-                    <s:FastColumnRenderableSeries DataSeries="{Binding PriceData}"
-                                                  ResamplingMode="MinMax"
-                                                  Style="{StaticResource PriceColumnSeriesStyle}">
-                        <s:CursorModifier.SnapToSeries>
-                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Self}" />
-                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
-                            </MultiBinding>
-                        </s:CursorModifier.SnapToSeries>
-
-                    </s:FastColumnRenderableSeries>
                     <!--  Series 4, 5, are always visible  -->
                     <s:FastLineRenderableSeries DataSeries="{Binding Sma50Series}" Style="{StaticResource Ma50SeriesStyle}">
                         <s:CursorModifier.SnapToSeries>
@@ -518,9 +486,7 @@
 
                 <!--  Create X Axis. Optional bands give a cool look and feel for minimal performance impact  -->
                 <s:SciChartSurface.XAxis>
-                    <s:DiscontinuousDateTimeAxis Calendar="{Binding Calendar, Mode=TwoWay}"
-                                                 DrawMajorBands="True"
-                                                 GrowBy="0.0, 0.1" />
+                    <s:CategoryDateTimeAxis DrawMajorBands="True" GrowBy="0.0, 0.1" />
                 </s:SciChartSurface.XAxis>
 
                 <!--  Create Y Axis  -->
