@@ -645,6 +645,10 @@
       <DependentUpon>ShiftedAxes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ModifyAxisBehaviour\ShiftedAxes\ShiftedAxesBehavior.cs" />
+    <Compile Include="Examples\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.cs">
+      <DependentUpon>AggregationFiltersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\SeeFeaturedApplication\AggregationFilters\AggregationFiltersViewModel.cs" />
     <Compile Include="Examples\SeeFeaturedApplication\Common\Calendars.cs" />
     <Compile Include="Examples\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.cs">
       <DependentUpon>DiscontinuousAxisView.xaml</DependentUpon>
@@ -652,7 +656,6 @@
     <Compile Include="Examples\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisViewModel.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Examples\SeeFeaturedApplication\DiscontinuousAxisDemo\TicksAggregator.cs" />
     <Compile Include="Examples\SeeFeaturedApplication\Oscilloscope\ShiftedAxesBehavior.cs" />
     <Compile Include="Examples\ModifyAxisBehaviour\SwitchAxisTypeAtRuntime.xaml.cs">
       <DependentUpon>SwitchAxisTypeAtRuntime.xaml</DependentUpon>
@@ -1394,6 +1397,10 @@
     <Page Include="Examples\PerformanceDemos2D\UpdateScatter\UpdateScatterPointsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml">
       <SubType>Designer</SubType>
@@ -3233,7 +3240,6 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisViewModel.c.txt" />
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\TicksAggregator.c.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Common\Calendars.c.txt" />
@@ -3294,6 +3300,14 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\Customize3DChart\AddObjectsToA3DChart.xaml.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\Aggregation_Filters.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersViewModel.c.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3324,32 +3338,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10183\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10205\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10183\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10205\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10183\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10205\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10183\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10205\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10183\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10205\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10183\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10205\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
