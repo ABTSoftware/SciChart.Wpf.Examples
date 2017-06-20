@@ -78,7 +78,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
             var averageLoss = new MovingAverage(period);
 
             var previous = inputStream.First();
-            foreach (var item in inputStream.Skip(1))
+            foreach (var item in inputStream)
             {
                 double gain = item.Close > previous.Close ? item.Close - previous.Close : 0.0;
                 double loss = previous.Close > item.Close ? previous.Close - item.Close : 0.0;
