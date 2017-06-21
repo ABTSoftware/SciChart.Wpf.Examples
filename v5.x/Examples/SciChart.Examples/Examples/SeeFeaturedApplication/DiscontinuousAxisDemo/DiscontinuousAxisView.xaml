@@ -441,7 +441,8 @@
 
             <s:SciChartSurface x:Name="PriceChart"
                                Grid.Row="0"
-                               s:SciChartGroup.VerticalChartGroup="myCharts">
+                               s:SciChartGroup.VerticalChartGroup="myCharts"
+                               Annotations="{Binding Annotations}">
 
                 <!--  Create Renderable Series, which bind to DataSet series 1:1 and in order  -->
                 <s:SciChartSurface.RenderableSeries>
