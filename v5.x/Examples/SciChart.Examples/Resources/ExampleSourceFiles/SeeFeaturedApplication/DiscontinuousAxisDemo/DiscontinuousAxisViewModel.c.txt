@@ -22,7 +22,9 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Numerics.Calendars;
+using SciChart.Charting.Visuals.Annotations;
 using SciChart.Data.Model;
+using SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers;
 using SciChart.Examples.Examples.SeeFeaturedApplication.Common;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -48,11 +50,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
         private bool _showAxisLabels;
         private IDiscontinuousDateTimeCalendar _calendar;
         private string _selectedCalendar;
+        private AnnotationCollection _annotations;
 
         public DiscontinuousAxisViewModel()
         {
             var priceSeries = DataManager.Instance.GetPriceData("EURUSD", TimeFrame.Minute5);
             _priceData.Append(priceSeries.TimeData, priceSeries.OpenData, priceSeries.HighData, priceSeries.LowData, priceSeries.CloseData);
+            Annotations = CreateAnnotations();
             SetDefaults();
             InitializeChartSurface();
         }
@@ -141,7 +145,17 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
                 OnPropertyChanged("IsShowing50Sma");
             }
         }
-        
+
+        public AnnotationCollection Annotations
+        {
+            get { return _annotations; }
+            set
+            {
+                _annotations = value;
+                OnPropertyChanged("Annotations");
+            }
+        }
+
         private void InitializeChartSurface()
         {
             UpdatePriceChart();
@@ -153,6 +167,17 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
             _chartType = ChartType.FastCandlestick;
             _calendar = new DefaultDiscontinuousDateTimeCalendar();
             _selectedCalendar = "Extended";
+        }
+
+        private static AnnotationCollection CreateAnnotations()
+        {
+            return new AnnotationCollection
+            {
+                new BuyMarkerAnnotation(),
+                new SellMarkerAnnotation(),
+                new LineAnnotation(),
+                new BoxAnnotation()
+            };
         }
 
         private void SetModifier(ModifierType modifierType)
@@ -248,10 +273,33 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDem
 
             // Update the chart type and timeframe with current settings
             UpdateChartType(_chartType);
+            UpdateAnnotations();
 
             _priceSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
         }
-        
+
+        private void UpdateAnnotations()
+        {
+            var minIndex = PriceData.CloseValues.IndexOf(PriceData.CloseValues.Min());
+            var maxIndex = PriceData.CloseValues.IndexOf(PriceData.CloseValues.Max());
+
+            Annotations[0].X1 = PriceData.XValues[minIndex];
+            Annotations[0].Y1 = PriceData.YValues[minIndex];
+
+            Annotations[1].X1 = PriceData.XValues[maxIndex];
+            Annotations[1].Y1 = PriceData.YValues[maxIndex];
+
+            Annotations[2].X1 = PriceData.XValues[minIndex];
+            Annotations[2].Y1 = PriceData.YValues[minIndex];
+            Annotations[2].X2 = PriceData.XValues[maxIndex];
+            Annotations[2].Y2 = PriceData.YValues[maxIndex];
+
+            Annotations[3].X1 = PriceData.XValues[minIndex];
+            Annotations[3].Y1 = PriceData.YValues[minIndex];
+            Annotations[3].X2 = PriceData.XValues[maxIndex];
+            Annotations[3].Y2 = PriceData.YValues[maxIndex];
+        }
+
         private void UpdateChartType(ChartType chartType)
         {
             if (PriceData.Count == 0)
