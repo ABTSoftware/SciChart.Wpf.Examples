@@ -77,7 +77,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
 
             var xStart = new DateTime(2017, 1, 13, 0, 0, 0);
             var xStep = DateTime.MinValue.AddDays(1).AddHours(6).AddMinutes(30);
-            return new UniformHeatmapDataSeries<DateTime, int, double>(data, xStart, xStep, 0, 2) { SeriesName = "UniformHeatmap seria" };
+            return new UniformHeatmapDataSeries<DateTime, int, double>(data, xStart, xStep, 0, 2) { SeriesName = "UniformHeatmap" };
         }
 
         private void UniformHeatmapAndPaletteProvider_OnLoaded(object sender, RoutedEventArgs e)
@@ -112,13 +112,8 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
     public class CustomPaletteProvider : IHeatmapPaletteProvider
     {
         private FastUniformHeatmapRenderableSeries _rSeries;
-        private double[,] _zValues;
-        private bool _isYFlipped;
-        private bool _isXFlipped;
-        private int _textureHeight;
-        private int _textureWidth;
-
         private double _threshholdValue;
+
         public double ThreshholdValue
         {
             get { return _threshholdValue; }
@@ -130,28 +125,14 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
             }
         }
 
-        Color? IHeatmapPaletteProvider.OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex)
+        Color? IHeatmapPaletteProvider.OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex, IComparable zValue, Color cellColor, IPointMetadata metadata)
         {
-            var y = !_isYFlipped ? (_textureHeight - 1) - yIndex : yIndex;
-            var x = _isXFlipped ? (_textureWidth - xIndex) - 1 : xIndex;
-
-            var zValue = _zValues[y, x];
-
-            return zValue >= ThreshholdValue ? Colors.Black : Colors.White;
+            return (double)zValue >= ThreshholdValue ? Colors.Black : Colors.White;
         }
 
         void IPaletteProvider.OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
             _rSeries = (FastUniformHeatmapRenderableSeries)rSeries;
-            //var dataSeries = (IUniformHeatmapDataSeries) _rSeries.DataSeries;
-            var dataSeries = (IBaseHeatmapDataSeries)_rSeries.DataSeries;
-            _zValues = dataSeries.GetZValuesAsDoubles();
-
-            _textureHeight = _zValues.GetLength(0);
-            _textureWidth = _zValues.GetLength(1);
-
-            _isXFlipped = _rSeries.XAxis.FlipCoordinates;
-            _isYFlipped = _rSeries.YAxis.FlipCoordinates;
         }
     }
 }
