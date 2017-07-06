@@ -37,7 +37,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             var startDate = new DateTime(1995, 1, 1);
 
             // Budget data
-            var yearsData = Enumerable.Range(0, 17).Select(startDate.AddYears).ToArray();
+            var yearsData = Enumerable.Range(0, 18).Select(startDate.AddYears).ToArray();
             var gainLossData = new [] {0, -20.5, -30.06, -70.1, -100.22, 10.34, 30.00, 60.12, 50.1, 70.4, 40.55, 30.76, -50.2, -60.00, -20.01, 50.01, 60.32, 60.44};
 
             // Metadata
