@@ -56,24 +56,24 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=4.2.3.9872, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.4.2.3.9872\lib\net40\SciChart.Charting.dll</HintPath>
+    <Reference Include="SciChart.Charting, Version=4.2.4.10343, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.4.2.4.10343\lib\net40\SciChart.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Core, Version=4.2.3.9872, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.4.2.3.9872\lib\net40\SciChart.Core.dll</HintPath>
+    <Reference Include="SciChart.Charting3D, Version=4.2.4.10343, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.4.2.4.10343\lib\net40\SciChart.Charting3D.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Data, Version=4.2.3.9872, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.4.2.3.9872\lib\net40\SciChart.Data.dll</HintPath>
+    <Reference Include="SciChart.Core, Version=4.2.4.10343, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.4.2.4.10343\lib\net40\SciChart.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=4.2.3.9872, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.4.2.3.9872\lib\net40\SciChart.Drawing.dll</HintPath>
+    <Reference Include="SciChart.Data, Version=4.2.4.10343, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.4.2.4.10343\lib\net40\SciChart.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Drawing.DirectX, Version=4.2.3.9872, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.DirectX.4.2.3.9872\lib\net40\SciChart.Drawing.DirectX.dll</HintPath>
+    <Reference Include="SciChart.Drawing, Version=4.2.4.10343, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.4.2.4.10343\lib\net40\SciChart.Drawing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SciChart.Wpf.UI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
@@ -152,6 +152,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml.cs">
+      <DependentUpon>CreateAUniformMesh3DChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ThresholdedLineSeries\DragThresholdMvvm.xaml.cs">
       <DependentUpon>DragThresholdMvvm.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
     <Compile Include="_Shared\DoubleSeries.cs" />
     <Compile Include="_Shared\RandomWalkGenerator.cs" />
     <Compile Include="_Shared\XYPoint.cs" />
+    <Page Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Examples\CustomModifiersSandbox\CustomModifierSandbox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using SciChart.Core.Utility;
@@ -23,16 +26,20 @@ namespace SciChart.Sandbox
             this.DataContext = new MainViewModel();
         }
 
-        private void EnableLoggerChecked(object sender, RoutedEventArgs e)
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var chk = (ToggleButton) sender;
-            if (chk.IsChecked == true)
+            var chk = (ComboBox)sender;
+            switch (chk.SelectedIndex)
             {
-                SciChartDebugLogger.Instance.SetLogger(new ConsoleLogger());
-            }
-            else
-            {
-                SciChartDebugLogger.Instance.SetLogger(null);
+                case 0:
+                    SciChartDebugLogger.Instance.SetLogger(null);
+                    break;
+                case 1:
+                    SciChartDebugLogger.Instance.SetLogger(new ConsoleLogger());
+                    break;
+                case 2:
+                    SciChartDebugLogger.Instance.SetLogger(new FileLogger());
+                    break;
             }
         }
 
@@ -41,6 +48,51 @@ namespace SciChart.Sandbox
             public void Log(string formatString, params object[] args)
             {
                 Console.WriteLine(formatString, args);
+            }
+        }
+
+        private class FileLogger : ISciChartLoggerFacade
+        {
+            private const string LogFileName = "SciChart.log";
+            private const int LogFileAppendMaxSize = 5<<20; // 5 Mb
+
+            private bool _failure;
+
+            public FileLogger()
+            {
+                try
+                {
+                    FileInfo fi = new FileInfo(LogFileName);
+                    if (fi.Exists && fi.Length > LogFileAppendMaxSize)
+                    {
+                        File.Delete(LogFileName);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ReportFailure(e);
+                }
+            }
+
+            private void ReportFailure(Exception e)
+            {
+                _failure = true;
+                Debug.Assert(false, "An error has been occurred in FileLogger: " + e.Message);
+            }
+
+            public void Log(string formatString, params object[] args)
+            {
+                if (!_failure)
+                {
+                    try
+                    {
+                        File.AppendAllText(LogFileName, string.Format(formatString, args) + "\n");
+                    }
+                    catch (Exception e)
+                    {
+                        ReportFailure(e);
+                    }
+                }
             }
         }
 
