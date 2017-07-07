@@ -16,9 +16,11 @@
         </Grid.RowDefinitions>
 
         <ToolBar>
-            <ToggleButton Checked="EnableLoggerChecked"
-                          Content="Enable Logger"
-                          Unchecked="EnableLoggerChecked" />
+            <ComboBox SelectionChanged="Selector_OnSelectionChanged" >
+                <ComboBoxItem IsSelected="True">Logger: OFF</ComboBoxItem>
+                <ComboBoxItem>Logger: Console</ComboBoxItem>
+                <ComboBoxItem>Logger: File</ComboBoxItem>
+            </ComboBox>
             <Button Content="GC.Collect" Click="GCCollect_Click"></Button>
         </ToolBar>
 
