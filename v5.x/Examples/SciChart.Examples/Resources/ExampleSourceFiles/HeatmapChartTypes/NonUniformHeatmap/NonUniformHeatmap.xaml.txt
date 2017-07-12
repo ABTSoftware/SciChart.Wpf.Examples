@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <s:GradientStopsToColorBrushConverter x:Key="GradientStopsToColorBrushConverter"/>
+            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -32,7 +32,17 @@
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
             <s:SciChartSurface.RenderableSeries>
-                <s:FastNonUniformHeatmapRenderableSeries x:Name="heatmapSeries" Maximum="100" Opacity="0.9" DrawTextInCell="True" CellTextForeground="Black"/>
+                <s:FastNonUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9" DrawTextInCell="True">
+                    <s:FastNonUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Minimum="0" Maximum="100">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="White" Offset="0.3"/>
+                            <GradientStop Color="Green" Offset="0.5"/>
+                            <GradientStop Color="Yellow" Offset="0.7"/>
+                            <GradientStop Color="Red" Offset="1"/>
+                        </s:HeatmapColorPalette>
+                    </s:FastNonUniformHeatmapRenderableSeries.ColorMap>
+                </s:FastNonUniformHeatmapRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -60,7 +70,7 @@
                           VerticalAlignment="Stretch"
                           Background="{Binding ElementName=sciChart, Path=Background}"
                           Foreground="{Binding ElementName=sciChart, Path=Foreground}"
-                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource GradientStopsToColorBrushConverter}}"
+                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
                           Minimum="{Binding ElementName=heatmapSeries, Path=ColorMap.Minimum, Mode=TwoWay}"
                           Maximum="{Binding ElementName=heatmapSeries, Path=ColorMap.Maximum, Mode=TwoWay}"
                           TextFormatting="0.00"

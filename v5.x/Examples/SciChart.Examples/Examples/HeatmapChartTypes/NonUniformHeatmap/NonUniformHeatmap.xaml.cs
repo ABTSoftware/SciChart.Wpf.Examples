@@ -33,28 +33,11 @@ using SciChart.Charting.Visuals.RenderableSeries;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.NonUniformHeatmap
 {
-    /// <summary>
-    /// Interaction logic for NonUniformHeatmap.xaml
-    /// </summary>
     public partial class NonUniformHeatmap : UserControl
     {
         public NonUniformHeatmap()
         {
             InitializeComponent();
-
-            heatmapSeries.ColorMap = new HeatmapColorPalette
-            {
-                GradientStops = new ObservableCollection<GradientStop>
-                {
-                    new GradientStop(Colors.Blue, 0), 
-                    new GradientStop(Colors.White, 0.3), 
-                    new GradientStop(Colors.Green, 0.5),
-                    new GradientStop(Colors.Yellow, 0.7),
-                    new GradientStop(Colors.Red, 1.0),
-                },
-                Minimum = 0,
-                Maximum = 100
-            };
 
             heatmapSeries.DataSeries = CreateSeries();
         }
@@ -69,10 +52,10 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.NonUniformHeatmap
                     data[y, x] = 3.5 * ((h - y) * (w - x));
                 }
 
-            var xSteps = new int[] { 10, 10, 6, 10, 24, 12, 10 };
-            var ySteps = new int[] { 100, 200, 100, 400 };
+            var xRangeMapping = new int[] { 0, 10, 20, 26, 36, 60, 72, 84 };
+            var yRangeMapping = new int[] { 100, 250, 390, 410, 600 };
 
-            return new NonUniformHeatmapDataSeries<int, int, double>(data, 0, xSteps, 0, ySteps);
+            return new NonUniformHeatmapDataSeries<int, int, double>(data, i => xRangeMapping[i], i => yRangeMapping[i]);
         }
     }
 }

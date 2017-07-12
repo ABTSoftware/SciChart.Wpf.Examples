@@ -40,24 +40,13 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
     /// </summary>
     public partial class UniformHeatmapAndPaletteProvider : UserControl
     {
-        private readonly CustomPaletteProvider _customPaletteProvider = new CustomPaletteProvider();
         private readonly Random _random = new Random();
-
-        private double _threshholdValue;
-
-        public double ThreshholdValue
-        {
-            get { return _threshholdValue; }
-            set
-            {
-                _threshholdValue = value;
-                _customPaletteProvider.ThreshholdValue = _threshholdValue;
-            }
-        }
 
         public UniformHeatmapAndPaletteProvider()
         {
             InitializeComponent();
+
+            UniformHeatmapRenderableSeries.DataSeries = CreateSeries();
         }
 
         private IDataSeries CreateSeries()
@@ -79,60 +68,42 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
             var xStep = DateTime.MinValue.AddDays(1).AddHours(6).AddMinutes(30);
             return new UniformHeatmapDataSeries<DateTime, int, double>(data, xStart, xStep, 0, 2) { SeriesName = "UniformHeatmap" };
         }
-
-        private void UniformHeatmapAndPaletteProvider_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Slider.DataContext = this;
-            UniformHeatmapRenderableSeries.DataSeries = CreateSeries();
-           
-            UniformHeatmapRenderableSeries.ColorMap = new HeatmapColorPalette
-            {
-                GradientStops = 
-                {
-                    new GradientStop(Colors.Blue, 0), 
-                    new GradientStop(Colors.White, 0.3), 
-                    new GradientStop(Colors.Green, 0.5),
-                    new GradientStop(Colors.Yellow, 0.7),
-                    new GradientStop(Colors.Red, 1.0),
-                },
-                Minimum = 0,
-                Maximum = 100,
-            };
-            ThreshholdValue = 50;
-        }
-
-        private void OnPalletProvider_Clicked(object sender, RoutedEventArgs e)
-        {
-            UniformHeatmapRenderableSeries.PaletteProvider = UniformHeatmapRenderableSeries.PaletteProvider == null ? _customPaletteProvider : null;
-            SciChartSurface.ZoomExtents();
-        }
     }
 
-    // Custom PaletteProvider
-    public class CustomPaletteProvider : IHeatmapPaletteProvider
+    public class HeatmapThresholdPaletteProvider : IHeatmapPaletteProvider
     {
-        private FastUniformHeatmapRenderableSeries _rSeries;
+        private FastUniformHeatmapRenderableSeries _heatmap;
+
+        private Color _overheatColor = Colors.Red;
         private double _threshholdValue;
 
-        public double ThreshholdValue
+        public double ThresholdValue
         {
             get { return _threshholdValue; }
             set
             {
                 _threshholdValue = value;
-                if (_rSeries == null) return;
-                _rSeries.OnInvalidateParentSurface();
+
+                if (_heatmap != null)
+                {
+                    _heatmap.OnInvalidateParentSurface();
+                }
             }
         }
 
-        Color? IHeatmapPaletteProvider.OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex, IComparable zValue, Color cellColor, IPointMetadata metadata)
+        public void OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
-            return (double)zValue >= ThreshholdValue ? Colors.Black : Colors.White;
+            _heatmap = (FastUniformHeatmapRenderableSeries)rSeries;
         }
 
-        void IPaletteProvider.OnBeginSeriesDraw(IRenderableSeries rSeries)
+        public Color? OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex, IComparable zValue, Color cellColor, IPointMetadata metadata)
         {
-            _rSeries = (FastUniformHeatmapRenderableSeries)rSeries;
+            if((double)zValue >= ThresholdValue)
+            {
+                cellColor = _overheatColor;
+            }
+
+            return cellColor;
         }
     }
 }

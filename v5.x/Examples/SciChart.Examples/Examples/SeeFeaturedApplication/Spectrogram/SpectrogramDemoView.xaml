@@ -19,7 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible" />
-            <s:GradientStopsToColorBrushConverter x:Key="GradientStopsToColorBrushConverter"/>
+            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
 
             <Style x:Key="AxisStyle" TargetType="s:AxisBase">
                 <Setter Property="DrawMajorBands" Value="False" />
@@ -91,7 +91,7 @@
                             Background="{Binding ElementName=sciChart, Path=Background}"
                             BorderBrush="#777"
                             BorderThickness="1"
-                            ColorMap="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.GradientStops, Converter={StaticResource GradientStopsToColorBrushConverter}}"
+                            ColorMap="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
                             Foreground="{Binding ElementName=sciChart, Path=Foreground}"
                             Maximum="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.Maximum}"
                             Minimum="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.Minimum}"

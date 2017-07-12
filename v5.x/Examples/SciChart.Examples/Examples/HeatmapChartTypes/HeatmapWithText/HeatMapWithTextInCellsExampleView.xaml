@@ -8,6 +8,9 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -23,11 +26,19 @@
                            Padding="0"
                            BorderThickness="0">
             <s:SciChartSurface.RenderableSeries>
-                <s:FastHeatMapRenderableSeries x:Name="heatmapSeries"
+                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries"
                                                DrawTextInCell="True"
-                                               Maximum="100"
                                                Opacity="0.9">
-                </s:FastHeatMapRenderableSeries>
+                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Minimum="0" Maximum="100">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="White" Offset="0.3"/>
+                            <GradientStop Color="Green" Offset="0.5"/>
+                            <GradientStop Color="Yellow" Offset="0.7"/>
+                            <GradientStop Color="Red" Offset="1"/>
+                        </s:HeatmapColorPalette>
+                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
+                </s:FastUniformHeatmapRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -61,9 +72,9 @@
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Bottom"
                           DataContext="{Binding ElementName=heatmapSeries, Mode=OneWay}"
-                          ColorMap="{Binding ColorMap}"
-                          Minimum="{Binding Minimum}"
-                          Maximum="{Binding Maximum}"
+                          ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                          Minimum="{Binding ColorMap.Minimum}"
+                          Maximum="{Binding ColorMap.Maximum}"
                           TextFormatting="n0"
                           Opacity="0.9" />
 

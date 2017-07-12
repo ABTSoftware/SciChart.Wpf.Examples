@@ -6,9 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
     xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+    xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider"
     d:DesignHeight="300"
     d:DesignWidth="300"
-    mc:Ignorable="d" Loaded="UniformHeatmapAndPaletteProvider_OnLoaded">
+    mc:Ignorable="d">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -16,6 +17,8 @@
                 <ResourceDictionary
                     Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <local:HeatmapThresholdPaletteProvider x:Key="ThresholdPaletteProvider" ThresholdValue="100" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -30,19 +33,15 @@
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChartSurface}">
             <ext:FlyoutSeparator Background="#444" />
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" FontSize="9" Content="PP" Padding="0">
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PP" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="240">
-                        <ToggleButton Content="Palette Provider" Style="{StaticResource DefaultToggleButtonStyle}"
-                                      Width="100" Margin="10,0,0,0" Click="OnPalletProvider_Clicked" />
-
-                        <ext:FlyoutSeparator />
-                        <TextBlock Text="Threshhold Value" FontSize="11" />
+                        <TextBlock Text="Threshhold Value" />
                         <Slider x:Name="Slider"
-                                Minimum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Minimum}"
-                                Maximum="{Binding ElementName=UniformHeatmapRenderableSeries, Path=ColorMap.Maximum}"
-                                Value="{Binding ThreshholdValue, Mode=TwoWay}" />
-                        <TextBlock Text="{Binding ElementName=Slider, Path=Value, StringFormat=N2}" FontSize="11" />
+                                Minimum="{Binding ColorMap.Minimum, Source={x:Reference Name=UniformHeatmapRenderableSeries}}"
+                                Maximum="{Binding ColorMap.Maximum, Source={x:Reference Name=UniformHeatmapRenderableSeries}}"
+                                Value="{Binding ThresholdValue, Source={StaticResource ThresholdPaletteProvider}, Mode=TwoWay}" />
+                        <TextBlock Text="{Binding Value, Source={x:Reference Name=Slider}, StringFormat=N2}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -51,7 +50,17 @@
         <s:SciChartSurface x:Name="SciChartSurface" Grid.Column="1" Margin="0,10">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries" />
+                <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries" PaletteProvider="{StaticResource ThresholdPaletteProvider}">
+                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Minimum="0" Maximum="100">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="White" Offset="0.3"/>
+                            <GradientStop Color="Green" Offset="0.5"/>
+                            <GradientStop Color="Yellow" Offset="0.7"/>
+                            <GradientStop Color="Red" Offset="1"/>
+                        </s:HeatmapColorPalette>
+                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
+                </s:FastUniformHeatmapRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

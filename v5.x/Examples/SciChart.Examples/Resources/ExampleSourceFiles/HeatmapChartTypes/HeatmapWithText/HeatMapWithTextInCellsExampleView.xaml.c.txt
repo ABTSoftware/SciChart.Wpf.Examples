@@ -20,6 +20,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Axes;
 using SciChart.Charting.Visuals.Axes.LabelProviders;
 using SciChart.Core.Helpers;
+using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
 {
@@ -77,7 +78,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
                 {
                     data[y, x] = Math.Pow(rnd.NextDouble(), 0.15) * x / (w-1) * y / (h-1) * 100;
                 }
-            return new Heatmap2DArrayDataSeries<int, int, double>(data, ix => ix, iy => iy);
+            return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1);
         }
 
         public HeatMapWithTextInCellsExampleView()
