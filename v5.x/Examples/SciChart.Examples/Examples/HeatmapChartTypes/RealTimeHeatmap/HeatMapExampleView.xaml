@@ -12,7 +12,7 @@
              mc:Ignorable="d">
     
     <UserControl.Resources>
-        <s:GradientStopsToColorBrushConverter x:Key="GradientStopsToColorBrushConverter"/>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
     </UserControl.Resources>
     
     <Grid>
@@ -70,7 +70,7 @@
                           VerticalAlignment="Stretch"
                           Background="{Binding ElementName=sciChart, Path=Background}"
                           Foreground="{Binding ElementName=sciChart, Path=Foreground}"
-                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource GradientStopsToColorBrushConverter}}"
+                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
                           Minimum="{Binding ElementName=heatmapSeries, Path=ColorMap.Minimum, Mode=TwoWay}"
                           Maximum="{Binding ElementName=heatmapSeries, Path=ColorMap.Maximum, Mode=TwoWay}"
                           TextFormatting="0.00"
