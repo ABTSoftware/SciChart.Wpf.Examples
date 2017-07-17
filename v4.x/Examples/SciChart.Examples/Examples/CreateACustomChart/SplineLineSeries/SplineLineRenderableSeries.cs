@@ -193,7 +193,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
             var x = inputPointSeries.XValues.ToArray();
             var y = inputPointSeries.YValues.ToArray();
             double[] xs = new double[n];
-            double stepSize = (x[x.Length - 1] - x[0]) / (n - 1);
+            double stepSize = (x[x.Length - 1] - x[0]) / (n - upsampleBy);
 
             for (int i = 0; i < n; i++)
             {
