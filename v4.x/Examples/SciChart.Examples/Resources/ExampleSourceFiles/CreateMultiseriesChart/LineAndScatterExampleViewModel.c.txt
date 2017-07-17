@@ -37,7 +37,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             double.NaN, 130, double.NaN, double.NaN, double.NaN, 194, 198, double.NaN, double.NaN, double.NaN,
             double.NaN, double.NaN, double.NaN, 208, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN,
             double.NaN, double.NaN, 231, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN,
-            double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, 231
+            double.NaN, double.NaN, 231
         };
 
         private double[] _lineY =
