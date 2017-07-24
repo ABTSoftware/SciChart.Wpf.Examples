@@ -48,7 +48,7 @@
 
                         <TextBlock Text="PointMarker Width" />
 
-                        <Slider x:Name="widthSlider"
+                        <Slider x:Name="WidthSlider"
                                 Margin="4"
                                 HorizontalAlignment="Stretch"
                                 Maximum="25"
@@ -60,7 +60,7 @@
 
                         <TextBlock Text="PointMarker Height" />
 
-                        <Slider x:Name="heightSlider"
+                        <Slider x:Name="HeightSlider"
                                 Margin="4"
                                 HorizontalAlignment="Stretch"
                                 Maximum="25"
@@ -72,7 +72,7 @@
 
                         <TextBlock Text="PointMarker StrokeThickness " />
 
-                        <Slider x:Name="strokeThicknessSlider"
+                        <Slider x:Name="StrokeThicknessSlider"
                                 Margin="4"
                                 HorizontalAlignment="Stretch"
                                 Maximum="5"
@@ -95,13 +95,12 @@
                                             Stroke="LightBlue"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="{Binding ElementName=widthSlider,
-                                                              Path=Value}"
-                                              Height="{Binding ElementName=heightSlider,
+                        <s:EllipsePointMarker Width="{Binding Source={x:Reference WidthSlider}, Path=Value}"
+                                              Height="{Binding Source={x:Reference HeightSlider},
                                                                Path=Value}"
                                               Fill="#990077FF"
                                               Stroke="LightBlue"
-                                              StrokeThickness="{Binding ElementName=strokeThicknessSlider,
+                                              StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
                                                                         Path=Value}" />
                         
                     </s:FastLineRenderableSeries.PointMarker>
@@ -110,13 +109,13 @@
                                             Stroke="Red"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:SquarePointMarker Width="{Binding ElementName=widthSlider,
+                        <s:SquarePointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                              Path=Value}"
-                                             Height="{Binding ElementName=heightSlider,
+                                             Height="{Binding Source={x:Reference HeightSlider},
                                                               Path=Value}"
                                              Fill="#99FF0000"
                                              Stroke="Red"
-                                             StrokeThickness="{Binding ElementName=strokeThicknessSlider,
+                                             StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
                                                                        Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
@@ -124,13 +123,13 @@
                                             Stroke="Yellow"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:TrianglePointMarker Width="{Binding ElementName=widthSlider,
+                        <s:TrianglePointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                                Path=Value}"
-                                               Height="{Binding ElementName=heightSlider,
+                                               Height="{Binding Source={x:Reference HeightSlider},
                                                                 Path=Value}"
                                                Fill="#FFDD00"
                                                Stroke="#FF6600"
-                                               StrokeThickness="{Binding ElementName=strokeThicknessSlider,
+                                               StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
                                                                          Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
@@ -138,12 +137,12 @@
                                             Stroke="Magenta"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:CrossPointMarker Width="{Binding ElementName=widthSlider,
+                        <s:CrossPointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                             Path=Value}"
-                                            Height="{Binding ElementName=heightSlider,
+                                            Height="{Binding Source={x:Reference HeightSlider},
                                                              Path=Value}"
                                             Stroke="Magenta"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider,
+                                            StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
                                                                       Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
