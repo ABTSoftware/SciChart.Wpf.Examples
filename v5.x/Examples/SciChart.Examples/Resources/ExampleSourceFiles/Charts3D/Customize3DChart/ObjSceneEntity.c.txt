@@ -16,6 +16,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         private readonly SCRTModelSceneEntity _innerObject;
 
         private Vector3 _position = new Vector3(0,0,0);
+        private Vector3 _scale = new Vector3(1, 1, 1);
         private readonly bool _isSemiTransparent;
         private bool _drawBoundingBox = true;
         private Color _boundingBoxStroke = Colors.LimeGreen;
@@ -51,6 +52,18 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 _position.SafeDispose();
                 _position = value;
                 _innerObject.SetPosition(_position);
+                base.InvalidateScene();
+            }
+        }
+
+        public Vector3 Scale
+        {
+            get { return _scale; }
+            set
+            {
+                _scale.SafeDispose();
+                _scale = value;
+                _innerObject.SetScale(_scale);
                 base.InvalidateScene();
             }
         }

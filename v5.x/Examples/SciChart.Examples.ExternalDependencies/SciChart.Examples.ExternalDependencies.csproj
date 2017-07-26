@@ -342,7 +342,18 @@
     <EmbeddedResource Include="Resources\Data\TickData.csv" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Objects\Bolt.obj" />
+    <EmbeddedResource Include="Resources\Objects\Bishop_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\Bishop_Low.obj" />
+    <EmbeddedResource Include="Resources\Objects\King_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\King_Low.obj" />
+    <EmbeddedResource Include="Resources\Objects\Knight_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\Knight_Low.obj" />
+    <EmbeddedResource Include="Resources\Objects\Pawn_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\Pawn_Low.obj" />
+    <EmbeddedResource Include="Resources\Objects\Queen_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\Queen_Low.obj" />
+    <EmbeddedResource Include="Resources\Objects\Rook_High.obj" />
+    <EmbeddedResource Include="Resources\Objects\Rook_Low.obj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -354,32 +365,32 @@
   -->
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10356\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10398\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10356\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10398\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10356\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10398\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10356\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10398\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10356\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10398\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10356\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10398\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
