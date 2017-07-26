@@ -13,7 +13,10 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Media;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Primitives;
@@ -26,6 +29,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     {
         Default,
         FacingCameraAlways,
+        SacreenSpace
     }
 
     /// <summary>
@@ -33,11 +37,16 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     /// </summary>
     public class TextSceneEntity : BaseSceneEntity
     {
-        private readonly string _text;
         private readonly Color _textColor;
-        private readonly Vector3 _location;
         private readonly TextDisplayMode _textDisplayMode;
         Font3D _font;
+
+        public string Text { get; set; }
+
+        [TypeConverter(typeof(StringToVector3TypeConverter))]
+        public Vector3 Location { get; set; }
+
+        public double RotationAngle { get; set; }
 
         static TextSceneEntity()
         {
@@ -46,9 +55,9 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
 
         public TextSceneEntity(string text, Color textColor, Vector3 location, TextDisplayMode textDisplayMode = TextDisplayMode.FacingCameraAlways, int fontSize = 8, string fontFamily = "Arial")
         {
-            _text = text;
+            Text = text;
             _textColor = textColor;
-            _location = location;
+            Location = location;
             _textDisplayMode = textDisplayMode;
             _font = new Font3D(fontFamily, (uint) fontSize);
 
@@ -75,32 +84,49 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             if (_font == null) return;
 
             var currentCamera = RootSceneEntity != null ? RootSceneEntity.Viewport3D.CameraController : null;
-            if (_textDisplayMode == TextDisplayMode.Default || currentCamera == null)
+            switch (_textDisplayMode)
             {
-                // Just display text
-                _font.Begin();
-                _font.AddText(_text, _textColor, _location.X, _location.Y, _location.Z);
-                _font.End();
-                return;
-            }
-            else if (_textDisplayMode == TextDisplayMode.FacingCameraAlways)
-            {
-                // Display billboarded text using camera vectors                
-                Vector3 cameraFwd = currentCamera.Forward;
-                Vector3 cameraUp = currentCamera.Up;                
+                case TextDisplayMode.Default:
+                    {
+                        // Just display text
+                        _font.Begin();
+                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.End();
+                        break;
+                    }
+                case TextDisplayMode.FacingCameraAlways:
+                    {
+                        if (currentCamera == null)
+                            goto case TextDisplayMode.Default;
 
-                // Compute a side vector
-                Vector3 cameraSide = cameraFwd ^ cameraUp;
-                cameraSide.Normalize();
+                        // Display billboarded text using camera vectors                
+                        Vector3 cameraFwd = currentCamera.Forward;
+                        Vector3 cameraUp = currentCamera.Up;
 
-                // Compute orthogonal up vector
-                cameraUp = cameraSide ^ cameraFwd;
-                cameraUp.Normalize();
+                        // Compute a side vector
+                        Vector3 cameraSide = cameraFwd ^ cameraUp;
+                        cameraSide.Normalize();
 
-                // Display text billboarded using camera side, up vectors (text will always face camera) 
-                _font.BeginBillboard(cameraSide, cameraUp);
-                _font.AddText(_text, _textColor, _location.X, _location.Y, _location.Z);
-                _font.End();
+                        // Compute orthogonal up vector
+                        cameraUp = cameraSide ^ cameraFwd;
+                        cameraUp.Normalize();
+
+                        // Display text billboarded using camera side, up vectors (text will always face camera) 
+                        _font.BeginBillboard(cameraSide, cameraUp);
+                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.End();
+                        break;
+                    }
+                case TextDisplayMode.SacreenSpace:
+                    {
+                        // Screen space text 2D
+                        _font.BeginScreenSpace((float) RotationAngle, Location.X, Location.Y);
+                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.EndScreenSpace();
+                        break;
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

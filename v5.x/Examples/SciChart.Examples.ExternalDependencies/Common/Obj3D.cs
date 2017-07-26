@@ -24,6 +24,20 @@ namespace SciChart.Examples.ExternalDependencies.Common
         {
         }
 
-        public static readonly Obj3D Bolt = new Obj3D("Bolt.obj");
+#if USE_HIGH_POLY_OBJ3D
+        public static readonly Obj3D King = new Obj3D("King_High.obj");
+        public static readonly Obj3D Queen = new Obj3D("Queen_High.obj");
+        public static readonly Obj3D Bishop = new Obj3D("Bishop_High.obj");
+        public static readonly Obj3D Knight = new Obj3D("Knight_High.obj");
+        public static readonly Obj3D Rook = new Obj3D("Rook_High.obj");
+        public static readonly Obj3D Pawn = new Obj3D("Pawn_High.obj");
+#else
+        public static readonly Obj3D King = new Obj3D("King_Low.obj");
+        public static readonly Obj3D Queen = new Obj3D("Queen_Low.obj");
+        public static readonly Obj3D Bishop = new Obj3D("Bishop_Low.obj");
+        public static readonly Obj3D Knight = new Obj3D("Knight_Low.obj");
+        public static readonly Obj3D Rook = new Obj3D("Rook_Low.obj");
+        public static readonly Obj3D Pawn = new Obj3D("Pawn_Low.obj");
+#endif
     }
 }
