@@ -154,14 +154,101 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         public string BrushName { get; set; }
     }
 
-    public class DonutSegmentViewModel : IPieSegmentViewModel
+    public class DonutSegmentViewModel : BaseViewModel, IPieSegmentViewModel
     {
-        public double StrokeThickness { get; set; }
-        public Brush Fill { get; set; }
-        public Brush Stroke { get; set; }
-        public double Value { get; set; }
-        public double Percentage { get; set; }
-        public bool IsSelected { get; set; }
-        public string Name { get; set; }
+        public double _Value;
+        public double _Percentage;
+        public bool _IsSelected;
+        public string _Name;
+        public Brush _Fill;
+        public Brush _Stroke;
+        public double _strokeThickness;
+
+        public double StrokeThickness
+        {
+            get
+            {
+                return _strokeThickness;
+            }
+            set
+            {
+                _strokeThickness = value;
+                OnPropertyChanged("StrokeThickness");
+            }
+        }
+
+        public double Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                _Value = value;
+                OnPropertyChanged("Value");
+            }
+        }
+
+        public double Percentage
+        {
+            get
+            {
+                return _Percentage;
+            }
+            set
+            {
+                _Percentage = value;
+                OnPropertyChanged("Percentage");
+            }
+        }
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                _IsSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        public Brush Fill
+        {
+            get
+            {
+                return _Fill;
+            }
+            set
+            {
+                _Fill = value;
+                OnPropertyChanged("Fill");
+            }
+        }
+        public Brush Stroke
+        {
+            get
+            {
+                return _Stroke;
+            }
+            set
+            {
+                _Stroke = value;
+                OnPropertyChanged("Stroke");
+            }
+        }
     }
 }
