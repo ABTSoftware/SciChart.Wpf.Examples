@@ -4,22 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:customize3DChart="clr-namespace:SciChart.Examples.Examples.Charts3D.Customize3DChart"
+             xmlns:object="clr-namespace:SciChart.Charting3D.Visuals.Object;assembly=SciChart.Charting3D"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+
+        <customize3DChart:Object3DSource x:Key="PawnLowObj3DSource" SourcePath="Pawn_Low.obj"/>
+        <customize3DChart:Object3DSource x:Key="BishopLowObj3DSource" SourcePath="Bishop_Low.obj"/>
+        <customize3DChart:Object3DSource x:Key="KingLowObj3DSource" SourcePath="King_Low.obj"/>
+        <customize3DChart:Object3DSource x:Key="KnightLowObj3DSource" SourcePath="Knight_Low.obj"/>
+        <customize3DChart:Object3DSource x:Key="QueenLowObj3DSource" SourcePath="Queen_Low.obj"/>
+        <customize3DChart:Object3DSource x:Key="RookLowObj3DSource" SourcePath="Rook_Low.obj"/>
+
+        <s3D:GradientColorPalette x:Key="HeightColorMap">
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="1" Color="Black"/>
+                <GradientStop Offset="0" Color="White"/>
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+        
+    </UserControl.Resources>
+    
     <Grid>
-        <s3D:SciChart3DSurface Name="sciChart3DSurface" WorldDimensions="200,0,200">
+        <s3D:SciChart3DSurface Name="sciChart3DSurface" WorldDimensions="200,1,200">
+            
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D Target="0,50,0" Position="-400,200,400"></s3D:Camera3D>
+                    <s3D:Camera3D Target="0,50,0" Position="-400,200,400"/>
             </s3D:SciChart3DSurface.Camera>
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries" 
+                                                   Maximum="4"
+                                                   MeshPaletteMode="HeightMapSolidCells"
+                                                   DrawMeshAs="SolidMesh"
+                                                   HeightScaleFactor="0.0" 
+                                                   MeshColorPalette="{StaticResource HeightColorMap}"/>
+            </s3D:SciChart3DSurface.RenderableSeries>
+            
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D AutoTicks="False" MajorDelta="1.125" MinorDelta="1.125" DrawMinorGridLines="False" DrawMajorTicks="False" DrawMinorTicks="False" DrawLabels="False"/>
             </s3D:SciChart3DSurface.XAxis>
+
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D DrawMinorGridLines="False" DrawMajorTicks="False" DrawMinorTicks="False" DrawLabels="False"/>
             </s3D:SciChart3DSurface.YAxis>
+
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D AutoTicks="False" MajorDelta="1.125" MinorDelta="1.125" DrawMinorGridLines="False" DrawMajorTicks="False" DrawMinorTicks="False" DrawLabels="False"/>
             </s3D:SciChart3DSurface.ZAxis>
+
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" ExecuteWhen="Shift"/>
@@ -28,6 +63,45 @@
                     <s3D:ZoomExtentsModifier3D ResetPosition="-400,200,400" ResetTarget="0,50,0"  AnimateDurationMs="500"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
+
+            <s3D:SciChart3DSurface.SceneObjects>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.9375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.8125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.6875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.5625" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.4375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.3125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.1875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.0625" Scale="0.2, 0.2, 0.2"/>
+
+
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.501, 0.9375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KnightLowObj3DSource}" Position="0.0625, 0.501, 0.8125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource BishopLowObj3DSource}" Position="0.0625, 0.501, 0.6875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KingLowObj3DSource}" Position="0.0625, 0.501, 0.5625" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource QueenLowObj3DSource}" Position="0.0625, 0.501, 0.4375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource BishopLowObj3DSource}" Position="0.0625, 0.501, 0.3125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KnightLowObj3DSource}" Position="0.0625, 0.501, 0.1875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.501, 0.0625" Scale="0.2, 0.2, 0.2"/>
+
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.9375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.8125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.6875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.5625" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.4375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.3125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.1875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.0625" Scale="0.2, 0.2, 0.2"/>
+
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource RookLowObj3DSource}" Position="0.9375, 0.501, 0.9375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KnightLowObj3DSource}" Position="0.9375, 0.501, 0.8125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource BishopLowObj3DSource}" Position="0.9375, 0.501, 0.6875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KingLowObj3DSource}" Position="0.9375, 0.501, 0.5625" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource QueenLowObj3DSource}" Position="0.9375, 0.501, 0.4375" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource BishopLowObj3DSource}" Position="0.9375, 0.501, 0.3125" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource KnightLowObj3DSource}" Position="0.9375, 0.501, 0.1875" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjEntity CoordinateMode="Relative" Source="{StaticResource RookLowObj3DSource}" Position="0.9375, 0.501, 0.0625" Scale="0.2, 0.2, 0.2"/>
+            </s3D:SciChart3DSurface.SceneObjects>
         </s3D:SciChart3DSurface>
     </Grid>
 </UserControl>

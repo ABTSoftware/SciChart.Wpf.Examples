@@ -1,6 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Controls;
 using SciChart.Charting3D;
+using SciChart.Charting3D.Interop;
+using SciChart.Charting3D.Model;
+using SciChart.Charting3D.Visuals.Object;
+using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
@@ -14,139 +21,83 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         public AddObjectsToA3DChart()
         {
             InitializeComponent();
+            var dataSeries = new UniformGridDataSeries3D<double>(9, 9) {StartX = 1, StepX = 1, StartZ = 100, StepZ = 1};
 
-            CreateObjects();
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 9; y++)
+                {
+                    if (y%2 == 0)
+                    {
+                        dataSeries[y, x] = (x%2 == 0 ? 1 : 4);
+                    }
+                    else
+                    {
+                        dataSeries[y, x] = (x%2 == 0 ? 4 : 1);
+                    }
+                }
+            }
+
+            surfaceMeshRenderableSeries.DataSeries = dataSeries;
+        }
+    }
+
+    public class Object3DSource : IObj3DSource
+    {
+        public string _sourcePath;
+
+        public string SourcePath
+        {
+            get { return _sourcePath; }
+            set
+            {
+                _sourcePath = value;
+                if (value != null)
+                {
+                    Obj3DBytesSource = LoadWavefrontObject(value);
+                }
+            }
         }
 
-        private void CreateObjects()
+        public byte[] Obj3DBytesSource { get; private set; }
+
+        /// <summary>
+        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
+        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
+        /// </summary>
+        /// <param name="objResource">The resource to load</param>
+        /// <returns>A byte[] array representing the obj file</returns>
+        public byte[] LoadWavefrontObject(string objResource)
         {
-            const int BoardOriginOffset = -100;
-            const int PieceSize = 20;
-            const int PieceHalpSize = PieceSize / 2;
-
-            byte[] objectData;
-            ObjSceneEntity obj;
-
-            // a2 - h2: White Pawns
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Pawn);
-            for (int i = 0; i < 8; i++)
+            byte[] result = null;
+            if (!objResource.IsNullOrEmpty())
             {
-                obj = new ObjSceneEntity(Obj3D.Pawn.Value, objectData);
-                sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-                obj.Position = new Vector3(BoardOriginOffset + PieceSize * i + PieceHalpSize, 0, BoardOriginOffset + PieceSize + PieceHalpSize);
-                obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-            }
-            
-            // a2 - h2: Black Pawns
-            for (int i = 0; i < 8; i++)
-            {
-                objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Pawn);
-                obj = new ObjSceneEntity(Obj3D.Pawn.Value, objectData);
-                sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-                obj.Position = new Vector3(BoardOriginOffset + PieceSize * i + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 6 + PieceHalpSize);
-                obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
+                result = DataManager.Instance.LoadWavefrontObject(new Obj3D(objResource));
             }
 
-            // a1: White Left Rook
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Rook);
-            obj = new ObjSceneEntity(Obj3D.Rook.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
+            return result;
+        }
 
-            // h1: White Right Rook
-            obj = new ObjSceneEntity(Obj3D.Rook.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 7 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
+        /// <summary>
+        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
+        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
+        /// </summary>
+        /// <param name="objResource">The resource to load</param>
+        /// <returns>A byte[] array representing the obj file</returns>
+        public byte[] LoadWavefrontObjectFromPath(string obj3DSource)
+        {
+            byte[] result = null;
+            if (File.Exists(obj3DSource))
+            {
+                using (var stream = new FileStream(obj3DSource, FileMode.Open))
+                using (var ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    result = ms.ToArray();
+                }
+            }
 
-            // a8: Black Left Rook
-            obj = new ObjSceneEntity(Obj3D.Rook.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // h8: Black Right Rook
-            obj = new ObjSceneEntity(Obj3D.Rook.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 7 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // b1: White Left Knight
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Knight);
-            obj = new ObjSceneEntity(Obj3D.Knight.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // g1: White Right Knight
-            obj = new ObjSceneEntity(Obj3D.Knight.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 6 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // b8: Black Left Knight
-            obj = new ObjSceneEntity(Obj3D.Knight.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // g8: Black Right Knight
-            obj = new ObjSceneEntity(Obj3D.Knight.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 6 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // c1: White Left Bishop
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Bishop);
-            obj = new ObjSceneEntity(Obj3D.Bishop.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 2 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // f1: White Right Bishop
-            obj = new ObjSceneEntity(Obj3D.Bishop.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 5 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // c8: Black Left Bishop
-            obj = new ObjSceneEntity(Obj3D.Bishop.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 2 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // f8: Black Right Bishop
-            obj = new ObjSceneEntity(Obj3D.Bishop.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 5 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // d1: White Queen
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.Queen);
-            obj = new ObjSceneEntity(Obj3D.Queen.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 3 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // d8: Black Queen
-            obj = new ObjSceneEntity(Obj3D.Queen.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 3 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // d1: White King
-            objectData = DataManager.Instance.LoadWavefrontObject(Obj3D.King);
-            obj = new ObjSceneEntity(Obj3D.King.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 4 + PieceHalpSize, 0, BoardOriginOffset + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            // d8: Black King
-            obj = new ObjSceneEntity(Obj3D.King.Value, objectData);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(obj);
-            obj.Position = new Vector3(BoardOriginOffset + PieceSize * 4 + PieceHalpSize, 0, BoardOriginOffset + PieceSize * 7 + PieceHalpSize);
-            obj.Scale = new Vector3(0.1f, 0.1f, 0.1f);
+            return result;
         }
     }
 }
