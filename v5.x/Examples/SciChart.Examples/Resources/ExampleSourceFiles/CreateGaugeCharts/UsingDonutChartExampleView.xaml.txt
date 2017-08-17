@@ -18,9 +18,18 @@
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            
+            <gauge:LegendPlacementToOrientationConverter x:Key="LegendPlacementToOrientationConverter"/>
+            
             <Style x:Key="PieChartListBoxForegroundStyle" TargetType="ListBox">
                 <Setter Property="Foreground" Value="#FFDFE0E6" />
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="{Binding LegendPlacement, Source={x:Reference donutSurface}, Converter={StaticResource LegendPlacementToOrientationConverter}}"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <DataTemplate x:Key="OutsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
@@ -132,14 +141,28 @@
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Tooltip" />
 
+                <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                      Content="Leg"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}"
+                                      ToolTipService.ToolTip="Legend placement">
 
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Leg"
-                              IsChecked="{Binding ShowLegend,
-                                                  Mode=TwoWay,
-                                                  ElementName=donutSurface}"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Legend" />
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock Text="Legend placement" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" SelectedItem="{Binding Source={x:Reference donutSurface}, Path=LegendPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <CheckBox Margin="3"
+                                      VerticalAlignment="Center"
+                                      Content="Show legend"
+                                      IsChecked="{Binding ShowLegend, Mode=TwoWay, Source={x:Reference donutSurface}}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="MSel"
