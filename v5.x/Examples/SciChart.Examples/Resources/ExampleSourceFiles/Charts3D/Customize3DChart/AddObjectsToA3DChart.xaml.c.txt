@@ -1,10 +1,22 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using SciChart.Charting3D;
-using SciChart.Charting3D.Interop;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.Visuals.Object;
 using SciChart.Core.Extensions;
@@ -21,83 +33,23 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         public AddObjectsToA3DChart()
         {
             InitializeComponent();
-            var dataSeries = new UniformGridDataSeries3D<double>(9, 9) {StartX = 1, StepX = 1, StartZ = 100, StepZ = 1};
-
+            var dataSeries = new UniformGridDataSeries3D<double>(9, 9) { StartX = 1, StepX = 1, StartZ = 100, StepZ = 1 };
             for (int x = 0; x < 9; x++)
             {
-                for (int y = 0; y < 9; y++)
+                for (int z = 0; z < 9; z++)
                 {
-                    if (y%2 == 0)
+                    if (z % 2 == 0)
                     {
-                        dataSeries[y, x] = (x%2 == 0 ? 1 : 4);
+                        dataSeries[z, x] = (x % 2 == 0 ? 1 : 4);
                     }
                     else
                     {
-                        dataSeries[y, x] = (x%2 == 0 ? 4 : 1);
+                        dataSeries[z, x] = (x % 2 == 0 ? 4 : 1);
                     }
                 }
             }
 
             surfaceMeshRenderableSeries.DataSeries = dataSeries;
-        }
-    }
-
-    public class Object3DSource : IObj3DSource
-    {
-        public string _sourcePath;
-
-        public string SourcePath
-        {
-            get { return _sourcePath; }
-            set
-            {
-                _sourcePath = value;
-                if (value != null)
-                {
-                    Obj3DBytesSource = LoadWavefrontObject(value);
-                }
-            }
-        }
-
-        public byte[] Obj3DBytesSource { get; private set; }
-
-        /// <summary>
-        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
-        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
-        /// </summary>
-        /// <param name="objResource">The resource to load</param>
-        /// <returns>A byte[] array representing the obj file</returns>
-        public byte[] LoadWavefrontObject(string objResource)
-        {
-            byte[] result = null;
-            if (!objResource.IsNullOrEmpty())
-            {
-                result = DataManager.Instance.LoadWavefrontObject(new Obj3D(objResource));
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
-        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
-        /// </summary>
-        /// <param name="objResource">The resource to load</param>
-        /// <returns>A byte[] array representing the obj file</returns>
-        public byte[] LoadWavefrontObjectFromPath(string obj3DSource)
-        {
-            byte[] result = null;
-            if (File.Exists(obj3DSource))
-            {
-                using (var stream = new FileStream(obj3DSource, FileMode.Open))
-                using (var ms = new MemoryStream())
-                {
-                    stream.CopyTo(ms);
-                    result = ms.ToArray();
-                }
-            }
-
-            return result;
         }
     }
 }

@@ -99,7 +99,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
                 yPos += yOffset;
 
                 var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
-                context.DrawText(textRect, Stroke, TextSize, gainLossValue);
+                context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
 
                 if (metadata.IsCheckPoint)
                 {
