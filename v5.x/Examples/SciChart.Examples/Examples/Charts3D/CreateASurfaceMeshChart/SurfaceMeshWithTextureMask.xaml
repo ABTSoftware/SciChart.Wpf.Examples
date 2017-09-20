@@ -4,22 +4,91 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:createASurfaceMeshChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-    <s3D:SciChart3DSurface>
-        <s3D:SciChart3DSurface.XAxis>
-            <s3D:NumericAxis3D/>
-        </s3D:SciChart3DSurface.XAxis>
-        <s3D:SciChart3DSurface.YAxis>
-            <s3D:NumericAxis3D/>
-        </s3D:SciChart3DSurface.YAxis>
-        <s3D:SciChart3DSurface.ZAxis>
-            <s3D:NumericAxis3D/>
-        </s3D:SciChart3DSurface.ZAxis>
-    </s3D:SciChart3DSurface>
 
-    <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" 
-               Text="TODO: Surface mesh with masked cells (transparent, or Overridden Color) using Texture Mask"></TextBlock>
+    <UserControl.Resources>
+
+        <Style x:Key="3DAxisStyle" TargetType="s3D:AxisBase3D">
+            <Setter Property="DrawMajorBands" Value="False" />
+            <Setter Property="DrawLabels" Value="False" />
+            <Setter Property="DrawMajorGridLines" Value="False" />
+            <Setter Property="DrawMajorTicks" Value="False" />
+            <Setter Property="DrawMinorGridLines" Value="False" />
+            <Setter Property="DrawMinorTicks" Value="False" />
+        </Style>
+
+        <s3D:GradientColorPalette x:Key="HeightColorMap"
+                                  ContourColor="Black"
+                                  ContourStrokeThickness="2.0">
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="1" Color="DarkRed" />
+                <GradientStop Offset="0.9" Color="Red" />
+                <GradientStop Offset="0.8" Color="IndianRed" />
+                <GradientStop Offset="0.7" Color="Tomato" />
+                <GradientStop Offset="0.6" Color="Yellow" />
+                <GradientStop Offset="0.5" Color="GreenYellow" />
+                <GradientStop Offset="0.4" Color="LimeGreen" />
+                <GradientStop Offset="0.3" Color="Cyan" />
+                <GradientStop Offset="0.2" Color="CadetBlue" />
+                <GradientStop Offset="0.1" Color="Blue" />
+                <GradientStop Offset="0.0" Color="DarkBlue" />
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+        
+        <createASurfaceMeshChart:SurfaceMeshPaletteProvider3D x:Key="MeshPaletteProvider3D"/>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChart3DInteractionToolbar Grid.Column="0" TargetSurface="{Binding ElementName=SciChart}" />
+
+        <s3D:SciChart3DSurface x:Name="SciChart"
+                               Grid.Column="1"
+                               BorderThickness="0">
+            <s3D:SciChart3DSurface.RenderableSeries>
+
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries"
+                                                   DrawMeshAs="SolidMesh"
+                                                   DrawSkirt="False"
+                                                   MeshColorPalette="{StaticResource HeightColorMap}"
+                                                   PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
+
+
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries2"
+                                                   DrawMeshAs="SolidMesh"
+                                                   DrawSkirt="False"
+                                                   MeshColorPalette="{StaticResource HeightColorMap}"
+                                                   PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
+
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D Style="{StaticResource 3DAxisStyle}" PlaneBorderThickness="0.0" />
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D Style="{StaticResource 3DAxisStyle}" PlaneBorderThickness="0.0" />
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D Style="{StaticResource 3DAxisStyle}" PlaneBorderThickness="0.0" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:TooltipModifier3D CrosshairMode="None" IsEnabled="False" />
+                    <s3D:MouseWheelZoomModifier3D />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
     </Grid>
 </UserControl>

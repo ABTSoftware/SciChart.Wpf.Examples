@@ -38,10 +38,10 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             cboLegendOrientation.SelectedItem = Enum.GetName(typeof (Orientation), Orientation.Vertical);
 
             cboHorizontalAlignment.ItemsSource = Enum.GetNames(typeof (HorizontalAlignment));
-            cboHorizontalAlignment.SelectedItem = Enum.GetName(typeof(HorizontalAlignment), System.Windows.HorizontalAlignment.Stretch);
+            cboHorizontalAlignment.SelectedItem = Enum.GetName(typeof(HorizontalAlignment), System.Windows.HorizontalAlignment.Left);
 
             cboVerticalAlignment.ItemsSource = Enum.GetNames(typeof(VerticalAlignment));
-            cboVerticalAlignment.SelectedItem = Enum.GetName(typeof(VerticalAlignment), System.Windows.VerticalAlignment.Stretch);
+            cboVerticalAlignment.SelectedItem = Enum.GetName(typeof(VerticalAlignment), System.Windows.VerticalAlignment.Top);
         }
 
         private void MultipleLinesView_OnLoaded(object sender, RoutedEventArgs e)
