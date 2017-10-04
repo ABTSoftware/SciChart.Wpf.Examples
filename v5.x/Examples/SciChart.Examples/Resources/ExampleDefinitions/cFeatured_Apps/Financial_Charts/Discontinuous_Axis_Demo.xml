@@ -35,6 +35,12 @@
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisViewModel.cs.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Common/Calendars.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SciTrader/IsChartTypeConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SciTrader/IsSameObjectsMultiConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/OverlayTradeMarkers/BuyMarkerAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/OverlayTradeMarkers/BuyMarkerAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/OverlayTradeMarkers/SellMarkerAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/OverlayTradeMarkers/SellMarkerAnnotation.xaml.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Stock</Features>

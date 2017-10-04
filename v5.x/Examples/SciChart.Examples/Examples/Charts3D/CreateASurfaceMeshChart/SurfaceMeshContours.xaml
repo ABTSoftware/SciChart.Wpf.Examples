@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:createASurfaceMeshChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="600">
 
@@ -65,18 +66,76 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
+                                  Content="Cont" 
+                                  FontSize="10" 
+                                  Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
+
+                        <!-- Create the contour thickness slider -->
+                        <TextBlock FontSize="12" Text="Contour thickness" />
+                        <Slider Minimum="1" Maximum="5" x:Name="contourThicknessSlider" Value="1" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <!-- Create the contour inteval slider -->
+                        <TextBlock FontSize="12" Text="Contour inteval" />
+                        <Slider Minimum="2" Maximum="30" x:Name="contourIntervalSlider" Value="20" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <!-- Create the contour offset slider -->
+                        <TextBlock FontSize="12" Text="Contour offset" />
+                        <Slider Minimum="0.1" Maximum="30" x:Name="contourOffsetSlider" Value="0.1" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <!-- The contour color -->
+                        <TextBlock FontSize="12" Text="Contour color" />
+                        <ComboBox x:Name="contourComboBox"
+                                  Width="200"
+                                  Margin="3"
+                                  Background="#FF1C1C1F"
+                                  SelectedIndex="1"
+                                  SelectionChanged="ContourColorSelectionChanged">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="createASurfaceMeshChart:ColorModel">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Rectangle Width="18"
+                                                   Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}"
+                                                   Margin="3 0"
+                                                   Fill="{Binding Brush}"
+                                                   RadiusX="2"
+                                                   RadiusY="2" />
+
+                                        <TextBlock Margin="3 0"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="14"
+                                                   Foreground="White"
+                                                   Text="{Binding ColorName}" />
+
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" BorderThickness="0" WorldDimensions="600,300,300">
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries" 
                                                    DrawMeshAs="SolidWithContours"
-                                                   ContourColor="Black"
+                                                   ContourThickness="{Binding Source={x:Reference contourThicknessSlider}, Path=Value, Mode=TwoWay}"
+                                                   ContourInterval="{Binding Source={x:Reference contourIntervalSlider}, Path=Value, Mode=TwoWay}"
+                                                   ContourOffset="{Binding Source={x:Reference contourOffsetSlider}, Path=Value, Mode=TwoWay}"
                                                    Stroke="#77228B22" 
                                                    Maximum="150" 
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="True" 
-                                                   Opacity="{Binding ElementName=opacitySlider, Path=Value, Mode=TwoWay}"
+                                                   Opacity="{Binding Source={x:Reference opacitySlider}, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 

@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.RenderableSeries;
+using SciChart.Examples.Examples.CreateGaugeCharts;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Windows.Media.Color;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
 {
@@ -14,12 +21,14 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
     /// </summary>
     public partial class SurfaceMeshContours : UserControl
     {
+
         public SurfaceMeshContours()
         {
             InitializeComponent();
 
             var meshDataSeries = FillSeries(0, 200, 200);
             surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
+            contourComboBox.ItemsSource = typeof(Colors).GetProperties().Select(x => new ColorModel { ColorName = x.Name, Color = (Color)x.GetValue(null, null) }).ToList();
         }
 
         private void CheckDrawSkirtChanged(object sender, RoutedEventArgs e)
@@ -59,5 +68,22 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
 
             return dataSeries;
         }
+
+        private void ContourColorSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            surfaceMeshRenderableSeries.ContourColor = ((ColorModel)contourComboBox.SelectedItem).Color;
+        }
+    }
+
+    public class ColorModel
+    {
+        public Color Color { get; set; }
+
+        public Brush Brush
+        {
+            get { return new SolidColorBrush(Color); }
+        }
+
+        public string ColorName { get; set; }
     }
 }

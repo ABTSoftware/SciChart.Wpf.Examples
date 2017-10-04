@@ -47,10 +47,12 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
             InitializeComponent();
 
             var colormap = heatmapSeries.ColorMap;
+            var cpMin = colormap.Minimum;
+            var cpMax = colormap.Maximum;
             // Create data for our heatmaps in parallel
             Parallel.For(0, seriesPerPeriod, (i) =>
             {
-                _dataSeries[i] = CreateSeries(i, 300, 200, colormap);
+                _dataSeries[i] = CreateSeries(i, 300, 200, cpMin, cpMax);
             });
 
             heatmapSeries.DataSeries = _dataSeries[0];
@@ -77,7 +79,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
             heatmapSeries.DataSeries = _dataSeries[_timerIndex % _dataSeries.Length];
         }
 
-        private IDataSeries CreateSeries(int index, int width, int height, HeatmapColorPalette colorMap)
+        private IDataSeries CreateSeries(int index, int width, int height, double cpMin, double cpMax)
         {
             var random = new Random(Environment.TickCount << index);
             double angle = Math.PI * 2 * index / seriesPerPeriod;
@@ -91,7 +93,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
                     var r = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
                     var exp = Math.Max(0, 1 - r * 0.008);
                     var zValue = (v * exp + random.NextDouble() * 50);
-                    data[y, x] = (zValue > colorMap.Maximum) ? colorMap.Maximum : zValue;
+                    data[y, x] = (zValue > cpMax) ? cpMin : zValue;
                 }
             return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1);
         }

@@ -8,7 +8,7 @@
   </ToolTipDescription>
   <Description>
     Demonstrates how to use the PaletteProvider API to color SurfaceMesh cells individually.
-    This is achieved by creating a class which implements ISurfaceMeshPaletteProvider3D.
+    This can be used to change the color of a cell but also to show holes in a surface mesh (or nulls) by returning the color transparent.
 
     [b][i]Tip![/i][/b]
 

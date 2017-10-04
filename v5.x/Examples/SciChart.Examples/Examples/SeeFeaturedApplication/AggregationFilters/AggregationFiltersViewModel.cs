@@ -295,7 +295,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AggregationFilters
             Sma200Series.SeriesName = "200 SMA";
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = (IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(50);
+            Sma50Series = (IXyDataSeries<DateTime, double>)((IXyDataSeries<DateTime, double>) PriceSeries.ToMovingAverage(50)).Scale(1.001);
             Sma50Series.SeriesName = "50 SMA";
 
             _priceSeries.InvalidateParentSurface(RangeMode.ZoomToFit);

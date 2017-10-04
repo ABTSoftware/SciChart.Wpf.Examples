@@ -39,7 +39,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
                 slicePositions[i] = Math.Pow(logBase, i);
             }
 
-            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, slicePositions);
+            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, slicePositions) { SeriesName = "Waterfall" };
             dataSeries.StartX = 10;
             dataSeries.StepX = 1;
 
