@@ -4,10 +4,10 @@
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
   <IconPath>IconSurface3D</IconPath>
   <ToolTipDescription>
-    TODO
+    Demonstrates how to use the Contour API for SurfaceMesh.
   </ToolTipDescription>
   <Description>
-    Description TODO
+    Demonstrates how to use the Contour API for SurfaceMesh.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateASurfaceMeshChart/SurfaceMeshContours.xaml.txt</string>

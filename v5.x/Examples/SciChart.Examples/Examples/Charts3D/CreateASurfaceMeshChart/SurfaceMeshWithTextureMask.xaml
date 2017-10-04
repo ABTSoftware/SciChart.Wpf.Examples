@@ -6,6 +6,7 @@
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:createASurfaceMeshChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -40,6 +41,40 @@
         
         <createASurfaceMeshChart:SurfaceMeshPaletteProvider3D x:Key="MeshPaletteProvider3D"/>
 
+        <Style x:Key="TooltipStyle2" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="Coral"
+                                BorderBrush="Coral"
+                                BorderThickness="3"
+                                Opacity="0.9"
+                                Padding="5">
+
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TooltipStyle" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="White"
+                                BorderBrush="#ff4d81dd"
+                                BorderThickness="2"
+                                Opacity="0.9"
+                                Padding="5">
+
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
     <Grid>
@@ -59,6 +94,7 @@
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
+                                                   s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle2}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
 
 
@@ -66,6 +102,7 @@
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
+                                                   s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>

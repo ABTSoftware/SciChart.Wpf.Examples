@@ -21,7 +21,7 @@
         <object:ObjectModelSource x:Key="QueenLowObj3DSource" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/Queen_Low.obj"/>
         <object:ObjectModelSource x:Key="RookLowObj3DSource" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/Rook_Low.obj"/>
 
-        <object:ObjectModelRotation x:Key="ObjRotationState" Axis="YAxis" Angle="180" />
+        <object:Rotation3D x:Key="ObjRotationState" Axis="YAxis" Angle="180" />
 
         <object:TextureSource x:Key="BlackTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/BlackWoodTexture.jpg" />
         <object:TextureSource x:Key="WhiteTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/WhiteWoodTexture.jpg" />
@@ -48,7 +48,7 @@
 
         <s3D:SciChart3DSurface Name="sciChart3DSurface"
                                Grid.Column="1"
-                               WorldDimensions="200,1,200">
+                               WorldDimensions="250,1,250">
 
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D Position="-400,200,400" Target="0,50,0" />
@@ -99,41 +99,41 @@
 
                 <!--  The 3D chess objects models which are used in this example were created by Fabio Valle, objects are used for  -->
                 <!--  demonstrating purposes only to show possibility how to load and manipulate the 3D objects on 3D scene. Fabio's email: fabiovalle3d@gmail.com  -->
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="2.5, 1, 107.5" CoordinateMode="Absolute" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.4375, 0.501, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.1875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.501, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="2.5, 2, 107.5" CoordinateMode="DataCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.4375, 0.6, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.1875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
 
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.501, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.0625, 0.501, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.4375, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KingLowObj3DSource}" Position="0.0625, 0.501, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource QueenLowObj3DSource}" Position="0.0625, 0.501, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.0625, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D DrawBoundingBox="True" BoundingBoxStroke="White" TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.3125, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.501, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.6, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.0625, 0.6, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.4375, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KingLowObj3DSource}" Position="0.0625, 0.6, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource QueenLowObj3DSource}" Position="0.0625, 0.6, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.0625, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
+                <object:ObjectModel3D DrawBoundingBox="True" BoundingBoxStroke="White" TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.3125, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.6, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
 
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.5625, 0.501, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.1875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.501, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.5625, 0.6, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.1875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
 
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.9375, 0.501, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.9375, 0.501, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.5625, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KingLowObj3DSource}" Position="0.9375, 0.501, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource QueenLowObj3DSource}" Position="0.6875, 0.501, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.9375, 0.501, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.9375, 0.501, 0.1875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.9375, 0.501, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource RookLowObj3DSource}" Position="109.375, 0.1, 109.375" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="109.375, 0.1, 78.125" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="109.375, 0.1, -46.875" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KingLowObj3DSource}" Position="109.375, 0.1, 15.625" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource QueenLowObj3DSource}" Position=" 46.875, 0.1, 46.875" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="109.375, 0.1, -49.875" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="109.375, 0.1, -78.125" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource RookLowObj3DSource}" Position="109.375, 0.1, -109.375" CoordinateMode="WorldCoordinates" Scale="0.2, 0.2, 0.2"/>
 
             </s3D:SciChart3DSurface.SceneObjects>
         </s3D:SciChart3DSurface>

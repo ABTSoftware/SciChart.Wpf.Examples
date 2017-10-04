@@ -87,7 +87,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
                 _timer.Tick += OnTimerTick;
             }
 
-            //_timer.Start();
+            _timer.Start();
             surfaceMeshRenderableSeries.Maximum = (double)_meshDataSeries1.YRange.Max;
             surfaceMeshRenderableSeries.Minimum = (double)_meshDataSeries0.YRange.Min;
             surfaceMeshRenderableSeries.DataSeries = _meshDataSeries0;
