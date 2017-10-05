@@ -172,6 +172,9 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             // Revert raster state
             SCRTImmediateDraw.PopRasterizerState();
 
+            // Set the Rasterizer State for wireframe 
+            SCRTImmediateDraw.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
+
             // Create a Line Context for a continuous line and draw the outline of the cube 
             var lineColor = Color.FromArgb(0xFF, cubeColor.R, cubeColor.G, cubeColor.B);
 
@@ -179,6 +182,9 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             CreateSquare(2.0f, true, lineColor, new[] { corners[4], corners[5], corners[6], corners[7] });
             CreateSquare(2.0f, true, lineColor, new[] { corners[0], corners[4], corners[7], corners[3] });
             CreateSquare(2.0f, true, lineColor, new[] { corners[5], corners[1], corners[2], corners[6] });
+
+            // Revert raster state
+            SCRTImmediateDraw.PopRasterizerState();
         }
 
         private void CreateSquare(float lineThickness, bool isAntiAlias, Color lineColor, Vector3[] vertices)
