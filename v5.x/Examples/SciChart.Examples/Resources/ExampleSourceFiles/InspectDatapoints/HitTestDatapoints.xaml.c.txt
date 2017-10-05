@@ -32,7 +32,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints
 
             // Append some data
             var series0 = new XyDataSeries<double, double> { SeriesName = "Line Series"};
-            series0.Append(new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new double[] { 0, 0.1, 0.3, 0.5, 0.4, 0.35, 0.3, 0.25, 0.2, 0.1, 0.05 });
+            series0.Append(new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new double[] { 0, 0.1, 0.3, 0.5, 0.4, 0.35, 0.3, 0.25, 0.2, 0.1 });
             renderableLineSeries.DataSeries = series0;
 
             var series1 = new XyDataSeries<double, double> { SeriesName = "Column Series"};

@@ -32,7 +32,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             int zSize = 25;
             var meshDataSeries = new UniformGridDataSeries3D<double>(xSize, zSize)
             {
-                StepX = 1, 
+                StepX = 1,
                 StepZ = 1,
                 SeriesName = "Uniform Surface Mesh",
             };
@@ -47,6 +47,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
                     meshDataSeries[z, x] = y;
                 }
             }
+
             surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
         }
 

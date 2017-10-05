@@ -130,12 +130,14 @@
                               s:ToggleButtonExtensions.GroupName="RealTimeEEG" />
 
                 <ToggleButton Command="{Binding StopCommand}"
+                              x:Name="StopButton"
                               Content="Pause"
                               Style="{StaticResource PauseButtonStyle}"
                               ToolTip="Pause"
                               s:ToggleButtonExtensions.GroupName="RealTimeEEG" />
 
                 <ToggleButton Command="{Binding ResetCommand}"
+                              x:Name="ResetButton"
                               Content="Stop"
                               Style="{StaticResource StopButtonStyle}"
                               ToolTip="Stop"

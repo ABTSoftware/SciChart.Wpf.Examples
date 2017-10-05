@@ -36,7 +36,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             InitializeComponent();
 
             _stopWatch = Stopwatch.StartNew();
-            _fpsAverage = new MovingAverage(5);
+            _fpsAverage = new MovingAverage(5);         
    
             this.Loaded += OnLoaded;
             this.Unloaded += OnUnloaded;
@@ -59,22 +59,25 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         /// </summary>
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            // Compute the render time
-            double frameTime = _stopWatch.ElapsedMilliseconds;
-            double delta = frameTime - _lastFrameTime;
-            double fps = 1000.0 / delta;
+            if (StopButton.IsChecked != true && ResetButton.IsChecked != true)
+            {
+                // Compute the render time
+                double frameTime = _stopWatch.ElapsedMilliseconds;
+                double delta = frameTime - _lastFrameTime;
+                double fps = 1000.0 / delta;
 
-            // Push the fps to the movingaverage, we want to average the FPS to get a more reliable reading
-            _fpsAverage.Push(fps);
+                // Push the fps to the movingaverage, we want to average the FPS to get a more reliable reading
+                _fpsAverage.Push(fps);
 
-            // Render the fps to the screen
-            fpsCounter.Text =  double.IsNaN(_fpsAverage.Current) ? "-" : string.Format("{0:0}", _fpsAverage.Current);
+                // Render the fps to the screen
+                fpsCounter.Text = double.IsNaN(_fpsAverage.Current) ? "-" : string.Format("{0:0}", _fpsAverage.Current);
 
-            // Render the total point count (all series) to the screen
-            var eegExampleViewModel = (DataContext as EEGExampleViewModel);
-            pointCount.Text = eegExampleViewModel != null ? eegExampleViewModel.PointCount.ToString() : "Na";
+                // Render the total point count (all series) to the screen
+                var eegExampleViewModel = (DataContext as EEGExampleViewModel);
+                pointCount.Text = eegExampleViewModel != null ? eegExampleViewModel.PointCount.ToString() : "Na";
 
-            _lastFrameTime = frameTime;
+                _lastFrameTime = frameTime;
+            }
         }
     }
 }
