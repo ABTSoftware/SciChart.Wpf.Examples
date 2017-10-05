@@ -66,41 +66,53 @@
                         <StackPanel MinWidth="150" Orientation="Vertical">
                             <TextBlock Text="Legend source" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding GetLegendDataFor, ElementName=ternaryLegendModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                      SelectedItem="{Binding Path=GetLegendDataFor,  
+                                                             Source={x:Reference ternaryLegendModifier},
+                                                             Mode=TwoWay, 
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <TextBlock Text="Legend placement" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" SelectedItem="{Binding LegendPlacement, ElementName=ternaryLegendModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" 
+                                      SelectedItem="{Binding Path=LegendPlacement, 
+                                                             Source={x:Reference ternaryLegendModifier}, 
+                                                             Mode=TwoWay, 
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <TextBlock Text="Legend orientation" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type Orientation}}}" SelectedItem="{Binding Orientation, ElementName=ternaryLegendModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type Orientation}}}"
+                                      SelectedItem="{Binding Path=Orientation, 
+                                                             Source={x:Reference ternaryLegendModifier}, 
+                                                             Mode=TwoWay, 
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <CheckBox Margin="3"
                                       VerticalAlignment="Center"
                                       Content="Show legend"
-                                      IsChecked="{Binding ShowLegend,
-                                                          ElementName=ternaryLegendModifier,
+                                      IsChecked="{Binding Path=ShowLegend,
+                                                          Source={x:Reference ternaryLegendModifier},
                                                           Mode=TwoWay}" />
 
                             <CheckBox Margin="3"
                                       VerticalAlignment="Center"
                                       Content="Show checkboxes"
-                                      IsChecked="{Binding ShowVisibilityCheckboxes,
-                                                          ElementName=ternaryLegendModifier,
+                                      IsChecked="{Binding Path=ShowVisibilityCheckboxes,
+                                                          Source={x:Reference ternaryLegendModifier},
                                                           Mode=TwoWay}" />
 
                             <CheckBox Margin="3"
                                       VerticalAlignment="Center"
                                       Content="Show series markers"
-                                      IsChecked="{Binding ShowSeriesMarkers,
-                                                          ElementName=ternaryLegendModifier,
+                                      IsChecked="{Binding Path=ShowSeriesMarkers,
+                                                          Source={x:Reference ternaryLegendModifier},
                                                           Mode=TwoWay}" />
 
                         </StackPanel>
@@ -122,8 +134,8 @@
 
                             <ComboBox FontSize="12"
                                       ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                                      SelectedItem="{Binding ElementName=sciTernaryChart,
-                                                             Path=(s:ThemeManager.Theme),
+                                      SelectedItem="{Binding Path=(s:ThemeManager.Theme), 
+                                                             Source={x:Reference sciTernaryChart},                                                             
                                                              Mode=TwoWay}" />
 
                         </StackPanel>

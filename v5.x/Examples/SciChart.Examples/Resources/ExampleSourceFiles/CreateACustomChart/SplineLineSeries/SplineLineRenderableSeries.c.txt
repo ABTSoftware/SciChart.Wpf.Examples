@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using SciChart.Charting.Numerics.CoordinateCalculators;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
 using SciChart.Drawing.Common;
@@ -89,24 +88,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
                 }
             }
 
-            // Get the optional PointMarker to draw at original points
-            var pointMarker = this.GetPointMarker();
-            if (pointMarker != null)
-            {
-                var originalPointSeries = renderPassData.PointSeries;
-
-                pointMarker.BeginBatch(renderContext, pointMarker.Stroke, pointMarker.Fill);
-
-                // Iterate over points and draw the point marker 
-                for (int i = 0; i < originalPointSeries.Count; i++)
-                {
-                    point = GetCoordinatesFor(originalPointSeries[i].X, originalPointSeries[i].Y);
-
-                    pointMarker.MoveTo(renderContext, point.X, point.Y, originalPointSeries.Indexes[i]);
-                }
-
-                pointMarker.EndBatch(renderContext);
-            }
+            DrawPointMarkers(renderContext, renderPassData.PointSeries);
         }
 
         private Point GetCoordinatesFor(double xValue, double yValue)
@@ -133,16 +115,17 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
 
         public override HitTestInfo HitTest(Point rawPoint, double hitTestRadius, bool interpolate = false)
         {
+            var nearestBaseHitResult = base.HitTest(rawPoint, hitTestRadius, interpolate);
+            
             // No spline? Fine - return base implementation
             if (!IsSplineEnabled || _splineSeries == null || CurrentRenderPassData == null)
-                return base.HitTest(rawPoint, hitTestRadius, interpolate);
+                return nearestBaseHitResult;
 
             var nearestHitResult = new HitTestInfo();
 
             // Get the coordinateCalculators. See 'Converting Pixel Coordinates to Data Coordinates' documentation for coordinate transforms
             var xCalc = CurrentRenderPassData.XCoordinateCalculator;
-            var yCalc = CurrentRenderPassData.YCoordinateCalculator;
-
+            
             // Compute the X,Y data value at the mouse location
             var xDataPointAtMouse = xCalc.GetDataValue(CurrentRenderPassData.IsVerticalChart ? rawPoint.Y : rawPoint.X);
 
@@ -162,14 +145,22 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
 
                 // Compute the X,Y coordinates (pixel coords) of the nearest data point to the mouse
                 nearestHitResult.HitTestPoint = nearestHitResult.HitTestPoint = GetCoordinatesFor(xDataPointNearest, yDataPointNearest);
-
+                
                 // Determine if mouse-location is within 7.07 pixels of the nearest data point
                 var distance = Math.Pow(rawPoint.X - nearestHitResult.HitTestPoint.X, 2) +
                                Math.Pow(rawPoint.Y - nearestHitResult.HitTestPoint.Y, 2);
                 distance = Math.Sqrt(distance);
+                
+                var baseDistance = Math.Pow(rawPoint.X - nearestBaseHitResult.HitTestPoint.X, 2) + 
+                                   Math.Pow(rawPoint.Y - nearestBaseHitResult.HitTestPoint.Y, 2);
+                baseDistance = Math.Sqrt(baseDistance);
 
-                nearestHitResult.IsHit = distance <= DefaultHitTestRadius;
+                nearestHitResult.IsHit = distance <= DefaultHitTestRadius || baseDistance <= DefaultHitTestRadius;
                 nearestHitResult.IsVerticalHit = true;
+                nearestHitResult.DataSeriesIndex = nearestBaseHitResult.DataSeriesIndex;
+
+                if (DataSeries.HasMetadata)
+                    nearestHitResult.Metadata = DataSeries.Metadata[nearestHitResult.DataSeriesIndex];
 
                 // Returning a HitTestResult with IsHit = true / IsVerticalHit signifies to the Rollovermodifier & TooltipModifier to show a tooltip at this location
                 return nearestHitResult;
@@ -180,7 +171,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
                 return HitTestInfo.Empty;
             }
         }
-
+        
         // Cubic Spline interpolation: http://www.codeproject.com/Articles/560163/Csharp-Cubic-Spline-Interpolation
         private IList<Point> ComputeSplineSeries(IPointSeries inputPointSeries, bool isSplineEnabled, int upsampleBy)
         {
@@ -202,7 +193,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
             var x = inputPointSeries.XValues.ToArray();
             var y = inputPointSeries.YValues.ToArray();
             double[] xs = new double[n];
-            double stepSize = (x[x.Length - 1] - x[0]) / (n - 1);
+            double stepSize = (x[x.Length - 1] - x[0]) / (n - upsampleBy);
 
             for (int i = 0; i < n; i++)
             {
