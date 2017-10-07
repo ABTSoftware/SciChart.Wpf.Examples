@@ -301,6 +301,7 @@
       <DependentUpon>ManipulateSeries3DMvvmView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\Charts3D\ManipulateSeries3DMVVM\ManipulateSeries3DMvvmViewModel.cs" />
+    <Compile Include="Examples\Charts3D\ManipulateSeries3DMVVM\ViewModel3DFactory.cs" />
     <Compile Include="Examples\Charts3D\SciChartWithMvvm\AxisBindingAndSeriesBindingView.xaml.cs">
       <DependentUpon>AxisBindingAndSeriesBindingView.xaml</DependentUpon>
     </Compile>
@@ -3341,32 +3342,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10639\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10651\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10639\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10651\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10639\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10651\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10639\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10651\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10639\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10651\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10639\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10651\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

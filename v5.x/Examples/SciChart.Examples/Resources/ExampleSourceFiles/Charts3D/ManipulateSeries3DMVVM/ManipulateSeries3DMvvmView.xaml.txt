@@ -65,7 +65,26 @@
 
             <ext:FlyoutSeparator Background="#444" />
 
-            <ext:FlyoutMenuButton Content="PM"
+            <Button Command="{Binding AddCommand}"
+                    Content="+"
+                    FontSize="18"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Add Series of Selected Type" />
+            <Button Command="{Binding RemoveCommand}"
+                    Content="-"
+                    FontSize="18"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Remove Selected Series" />
+            <Button Command="{Binding ClearCommand}"
+                    Content="CLR"
+                    FontSize="11"
+                    Padding="0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Clear all series" />
+
+            <ext:FlyoutMenuButton Content="ST"
                                   Padding="0"
                                   Style="{StaticResource FlyoutMenuButtonStyle}">
                 <ext:FlyoutMenuButton.PopupContent>
