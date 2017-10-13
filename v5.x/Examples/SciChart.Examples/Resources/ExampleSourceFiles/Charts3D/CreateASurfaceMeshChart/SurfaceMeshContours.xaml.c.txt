@@ -9,7 +9,6 @@ using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.RenderableSeries;
-using SciChart.Examples.Examples.CreateGaugeCharts;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
