@@ -21,34 +21,13 @@
                 <ResourceDictionary
                     Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
                 <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
+                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" /> 
+                <ResourceDictionary 
+                    Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <s3D:GradientColorPalette x:Key="HeightColorMap"
-                                      ContourColor="Black"
-                                      ContourStrokeThickness="2.0">
-                <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="1" Color="DarkRed" />
-                    <GradientStop Offset="0.9" Color="Red" />
-                    <GradientStop Offset="0.7" Color="Yellow" />
-                    <GradientStop Offset="0.5" Color="GreenYellow" />
-                    <GradientStop Offset="0.3" Color="Cyan" />
-                    <GradientStop Offset="0.1" Color="Blue" />
-                    <GradientStop Offset="0.0" Color="#1D2C6B" />
-                </s3D:GradientColorPalette.GradientStops>
-            </s3D:GradientColorPalette>
-
-            <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
-                <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0" Color="Red" />
-                    <GradientStop Offset="0.25" Color="Orange" />
-                    <GradientStop Offset="0.5" Color="Yellow" />
-                    <GradientStop Offset="0.75" Color="Green" />
-                    <GradientStop Offset="1" Color="DarkGreen" />
-                </s3D:GradientColorPalette.GradientStops>
-            </s3D:GradientColorPalette>
-
         </ResourceDictionary>
+        
+
 
     </UserControl.Resources>
 
