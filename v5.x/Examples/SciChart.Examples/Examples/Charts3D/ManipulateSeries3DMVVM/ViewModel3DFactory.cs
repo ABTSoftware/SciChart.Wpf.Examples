@@ -23,22 +23,22 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
             Type type = GetViewModelType(typeName);
             if (type == typeof(ColumnRenderableSeries3DViewModel))
             {
-                return new ColumnRenderableSeries3DViewModel { DataSeries = GetColumnDataSeries(), StyleKey = "ColumnStyle3D" };
+                return new ColumnRenderableSeries3DViewModel { DataSeries = GetDataSeries(), StyleKey = "ColumnStyle3D" };
             }
 
             if (type == typeof(ImpulseRenderableSeries3DViewModel))
             {
-                return new ImpulseRenderableSeries3DViewModel { DataSeries = GetImpulseDataSeries(), StyleKey = "Impulse3DStyle" };
+                return new ImpulseRenderableSeries3DViewModel { DataSeries = GetDataSeries(), StyleKey = "Impulse3DStyle" };
             }
 
             if (type == typeof(PointLineRenderableSeries3DViewModel))
             {
-                return new PointLineRenderableSeries3DViewModel { DataSeries = GetPointLineDataSeries(), StyleKey = "PointLine3DStyle" };
+                return new PointLineRenderableSeries3DViewModel { DataSeries = GetScaledDataSeries(), StyleKey = "PointLine3DStyle" };
             }
 
             if (type == typeof(MountainRenderableSeries3DViewModel))
             {
-                return new MountainRenderableSeries3DViewModel { DataSeries = GetScatterDataSeries(), StyleKey = "Mountain3DStyle" };
+                return new MountainRenderableSeries3DViewModel { DataSeries = GetScaledDataSeries(), StyleKey = "Mountain3DStyle" };
             }
 
             if (type == typeof(SurfaceMeshRenderableSeries3DViewModel))
@@ -48,7 +48,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 
             if (type == typeof(ScatterRenderableSeries3DViewModel))
             {
-                return new ScatterRenderableSeries3DViewModel { DataSeries = GetScatterDataSeries(), StyleKey = "Scatter3DStyle" };
+                return new ScatterRenderableSeries3DViewModel { DataSeries = GetScaledDataSeries(), StyleKey = "Scatter3DStyle" };
             }
 
             if (type == typeof(WaterfallRenderableSeries3DViewModel))
@@ -60,52 +60,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 
         }
 
-        private static XyzDataSeries3D<double> GetScatterDataSeries()
-        {
-            var xyzDataSeries3D = new XyzDataSeries3D<double>() { SeriesName = "Colorful Bubble!" };
-
-            const int count = 250;
-
-            var random = new Random(0);
-
-            for (var i = 0; i < count; i++)
-            {
-                var x = DataManager.Instance.GetGaussianRandomNumber(39, 15);
-                var y = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
-                var z = DataManager.Instance.GetGaussianRandomNumber(9, 7);
-
-                var scale = (float)((random.NextDouble() + 0.5) * 3.0);
-
-                Color? randomColor = Color.FromArgb(0xFF, (byte)random.Next(50, 255), (byte)random.Next(50, 255), (byte)random.Next(50, 255));
-
-                xyzDataSeries3D.Append(x, y, z, new PointMetadata3D(randomColor, scale));
-            }
-
-            return xyzDataSeries3D;
-        }
-
-        private static XyzDataSeries3D<double> GetPointLineDataSeries( double shift = 0)
-        {
-            var xyzDataSeries3D = new XyzDataSeries3D<double>();
-
-            var random = new Random((int)DateTime.Now.Ticks);
-            shift = random.Next(0, 1);
-            for (var i = 0; i < 100; i++)
-            {
-                var x = DataManager.Instance.GetGaussianRandomNumber(38, 19);
-                var y = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
-                var z = DataManager.Instance.GetGaussianRandomNumber(10, 6);
-
-                Color? randomColor = Color.FromArgb(0xFF, (byte)random.Next(50, 255), (byte)random.Next(50, 255), (byte)random.Next(50, 255));
-                var scale = (float)((random.NextDouble() + 0.5) * 3.0);
-
-                xyzDataSeries3D.Append(x, y, z, new PointMetadata3D(randomColor, scale));
-            }
-
-            return xyzDataSeries3D;
-        }
-
-        private static XyzDataSeries3D<double> GetColumnDataSeries()
+        private static XyzDataSeries3D<double> GetDataSeries()
         {
             var xyzDataSeries3D = new XyzDataSeries3D<double>();
 
@@ -129,23 +84,25 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
             return xyzDataSeries3D;
         }
 
-        private static XyzDataSeries3D<double> GetImpulseDataSeries()
+        private static XyzDataSeries3D<double> GetScaledDataSeries()
         {
-            var xyzDataSeries3D = new XyzDataSeries3D<double>();
+            var xyzDataSeries3D = new XyzDataSeries3D<double>() { SeriesName = "Colorful Bubble!" };
 
-            for (var i = 1; i < 15; i++)
+            const int count = 250;
+
+            var random = new Random(0);
+
+            for (var i = 0; i < count; i++)
             {
-                for (var j = 1; j <= 15; j++)
-                {
-                    if (i != j && i % 3 == 0 && j % 3 == 0)
-                    {
-                        var y = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
-                        var x = DataManager.Instance.GetGaussianRandomNumber(30, 20);
-                        var randomColor = Color.FromArgb(0xFF, (byte)_random.Next(0, 255), (byte)_random.Next(0, 255), (byte)_random.Next(0, 255));
+                var x = DataManager.Instance.GetGaussianRandomNumber(40, 19);
+                var y = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
+                var z = DataManager.Instance.GetGaussianRandomNumber(10, 5);
 
-                        xyzDataSeries3D.Append(x, y, j, new PointMetadata3D(randomColor));
-                    }
-                }
+                var scale = (float)((random.NextDouble() + 0.5) * 3.0);
+
+                Color? randomColor = Color.FromArgb(0xFF, (byte)random.Next(50, 255), (byte)random.Next(50, 255), (byte)random.Next(50, 255));
+
+                xyzDataSeries3D.Append(x, y, z, new PointMetadata3D(randomColor, scale));
             }
 
             return xyzDataSeries3D;
