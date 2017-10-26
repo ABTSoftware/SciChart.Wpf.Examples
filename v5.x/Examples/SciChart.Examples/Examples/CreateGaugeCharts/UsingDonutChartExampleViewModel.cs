@@ -37,7 +37,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         {            
             _donutModels = new ObservableCollection<IPieSegmentViewModel>
             {
-                new DonutSegmentViewModel {Value = 48, Name = "Rent", Stroke = ToShade(Colors.Orange, 0.8), Fill = ToGradient(Colors.Orange), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 75, Name = "Rent", Stroke = ToShade(Colors.Orange, 0.8), Fill = ToGradient(Colors.Orange), StrokeThickness = 2},
                 new DonutSegmentViewModel {Value = 19, Name = "Food", Stroke = ToShade(Colors.Green, 0.8), Fill = ToGradient(Colors.Green), StrokeThickness = 2},
                 new DonutSegmentViewModel {Value = 9, Name = "Utilities", Stroke = ToShade(Colors.DodgerBlue, 0.8), Fill = ToGradient(Colors.DodgerBlue), StrokeThickness = 2},
                 new DonutSegmentViewModel {Value = 9, Name = "Fun", Stroke = ToShade(Colors.Gray, 0.8), Fill = ToGradient(Colors.Gray), StrokeThickness = 2},
@@ -64,9 +64,10 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
         private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
         {
-            if (!e.NewItems.IsNullOrEmptyList())
+            if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
             {
-                SelectedSegment = (IPieSegmentViewModel)e.NewItems[0];
+                var selectedSegment = e.NewItems[0];
+                SelectedSegment = (IPieSegmentViewModel) selectedSegment;
             }
         }
 

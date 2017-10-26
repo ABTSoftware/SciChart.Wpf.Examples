@@ -33,13 +33,13 @@
                                 Grid.Column="1"
                                 ChartTitle="Sales 2016"
                                 RenderableSeries="{s:SeriesBinding RenderableSeries}"
-                                CentralAxisOffset="{Binding ElementName=HoleValueSlider, Path=Value, Mode=TwoWay}"
-                                AxisAngleOffset="{Binding ElementName=AngleValueSlider, Path=Value, Mode=TwoWay}">
+                                CentralAxisOffset="{Binding Source={x:Reference HoleValueSlider}, Path=Value, Mode=TwoWay}"
+                                AxisAngleOffset="{Binding Source={x:Reference AngleValueSlider}, Path=Value, Mode=TwoWay}">
 
             <s:SciChartRadarSurface.Resources>
                 <Style x:Key="RadarSeriesStyle" TargetType="s:RadarPolygonRenderableSeries">
                     <Setter Property="IsFilled"
-                            Value="{Binding ElementName=FillingEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                            Value="{Binding Source={x:Reference FillingEnablingButton}, Path=IsChecked, Mode=TwoWay}" />
                 </Style>
 
                 <Style x:Key="BlueRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
@@ -143,7 +143,7 @@
                              Id="salesId"
                              IsLabelCullingEnabled="True"
                              VisibleRange="0, 100"
-                             GridLinesType="{Binding ElementName=GridLinesTypeSourceCombo, Path=SelectedItem}" />
+                             GridLinesType="{Binding Source={x:Reference GridLinesTypeSourceCombo}, Path=SelectedItem}" />
 
                 <s:RadarAxis AxisTitle="Marketing"
                              Id="marketingId"
@@ -168,15 +168,15 @@
             </s:SciChartRadarSurface.RadarAxes>
             <s:SciChartRadarSurface.ChartModifiers>
                 <s:RadarTooltipModifier
-                    ShowTooltip="{Binding ElementName=TooltipEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                    ShowTooltip="{Binding Source={x:Reference TooltipEnablingButton}, Path=IsChecked, Mode=TwoWay}" />
                 <s:RadarLegendModifier Orientation="Vertical"
-                                       ShowLegend="{Binding ElementName=LegendEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                                       ShowLegend="{Binding Source={x:Reference LegendEnablingButton}, Path=IsChecked, Mode=TwoWay}" />
                 <s:RadarSeriesSelectionModifier
-                    ExecuteWhen="{Binding ElementName=SelectionModeCombo, Path=SelectedItem}"
-                    AllowMultiSelect="{Binding ElementName=MultiSelectionEnablingCheckbox, Path=IsChecked, Mode=TwoWay}"
-                    IsEnabled="{Binding ElementName=SelectionEnablingButton, Path=IsChecked, Mode=TwoWay}" />
+                    ExecuteWhen="{Binding Source={x:Reference SelectionModeCombo}, Path=SelectedItem}"
+                    AllowsMultiSelection="{Binding Source={x:Reference MultiSelectionEnablingCheckbox}, Path=IsChecked, Mode=TwoWay}"
+                    IsEnabled="{Binding Source={x:Reference SelectionEnablingButton}, Path=IsChecked, Mode=TwoWay}" />
                 <s:RadarDragDataPointModifier
-                    IsEnabled="{Binding ElementName=ragDataPointButton, Path=IsChecked, Mode=TwoWay}" />
+                    IsEnabled="{Binding Source={x:Reference DragDataPointButton}, Path=IsChecked, Mode=TwoWay}" />
             </s:SciChartRadarSurface.ChartModifiers>
 
         </s:SciChartRadarSurface>
@@ -318,7 +318,7 @@
 
                             <ComboBox FontSize="12"
                                       ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                                      SelectedItem="{Binding ElementName=radarChart,
+                                      SelectedItem="{Binding Source={x:Reference radarChart},
                                                              Path=(s:ThemeManager.Theme),
                                                              Mode=TwoWay}" />
 

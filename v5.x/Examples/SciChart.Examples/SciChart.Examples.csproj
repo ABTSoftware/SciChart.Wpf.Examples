@@ -440,7 +440,6 @@
     <Compile Include="Examples\Charts3D\CreateRealtime3DCharts\CreateRealTime3DUniformMeshChart.xaml.cs">
       <DependentUpon>CreateRealTime3DUniformMeshChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Examples\CreateRadarChart\CustomRadarAxis.cs" />
     <Compile Include="Examples\CreateRadarChart\RadarChartCustomizationExampleView.xaml.cs">
       <DependentUpon>RadarChartCustomizationExampleView.xaml</DependentUpon>
     </Compile>
@@ -3239,9 +3238,6 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateRadarChart\RadarChartCustomizationLabelProviders.c.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateRadarChart\CustomRadarAxis.c.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisViewModel.c.txt" />
@@ -3346,32 +3342,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10712\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10763\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10712\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10763\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10712\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10763\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10712\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10763\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10712\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10763\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10712\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10763\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

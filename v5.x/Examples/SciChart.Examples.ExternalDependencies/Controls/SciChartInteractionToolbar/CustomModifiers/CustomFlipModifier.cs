@@ -63,8 +63,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             using (ParentSurface.SuspendUpdates())
             {
                 foreach (var axis in axes)
-                    if (!axis.IsCategoryAxis)
-                        axis.FlipCoordinates = !axis.FlipCoordinates;
+                    axis.FlipCoordinates = !axis.FlipCoordinates;
             }
         }
     }

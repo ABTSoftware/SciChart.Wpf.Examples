@@ -38,7 +38,7 @@
             <local:RadarChartPercentCategoryLabelProvider x:Key="PercentProvider" />
             <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
 
-            <Style x:Key="RadarAxisStyle" TargetType="local:CustomRadarAxis">
+            <Style x:Key="RadarAxisStyle" TargetType="s:RadarAxis">
                 <Setter Property="DrawMajorTicks" Value="True" />
                 <Setter Property="AutoTicks" Value="False" />
                 <Setter Property="DrawLabels" Value="True" />
@@ -78,73 +78,80 @@
                                 AxisAngleOffset="{Binding StartAngle, Mode=TwoWay}">
 
             <s:SciChartRadarSurface.RadarAxes>
-                <local:CustomRadarAxis AxisAngle="0"
-                                       AxisLength="230"
-                                       AxisTitle="Average grace period on new external debt"
-                                       Id="gracePeriodId"
-                                       MajorDelta="2"
-                                       MinorDelta="2"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,16" />
+                <s:RadarAxis AxisAngle="0"
+                             AxisLength="230"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Average grace period on new external debt"
+                             Id="gracePeriodId"
+                             MajorDelta="2"
+                             MinorDelta="2"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,16"/>
 
-                <local:CustomRadarAxis AxisAngle="65"
-                                       AxisLength="400"
-                                       AxisTitle="Average grant element on new external debt"
-                                       Id="grantElementId"
-                                       LabelProvider="{StaticResource PercentProvider}"
-                                       MajorDelta="20"
-                                       MinorDelta="20"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,80" />
+                <s:RadarAxis AxisAngle="65"
+                             AxisLength="400"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Average grant element on new external debt"
+                             Id="grantElementId"
+                             LabelProvider="{StaticResource PercentProvider}"
+                             MajorDelta="20"
+                             MinorDelta="20"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,80" />
 
-                <local:CustomRadarAxis AxisAngle="110"
-                                       AxisLength="350"
-                                       AxisTitle="Average interest on new external debt"
-                                       Id="interestId"
-                                       LabelProvider="{StaticResource PercentProvider}"
-                                       MajorDelta="1"
-                                       MinorDelta="1"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0, 6" />
+                <s:RadarAxis AxisAngle="110"
+                             AxisLength="350"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Average interest on new external debt"
+                             Id="interestId"
+                             LabelProvider="{StaticResource PercentProvider}"
+                             MajorDelta="1"
+                             MinorDelta="1"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0, 6" />
 
-                <local:CustomRadarAxis AxisAngle="180"
-                                       AxisLength="230"
-                                       AxisTitle="Average maturity on new external debt"
-                                       Id="maturityId"
-                                       MajorDelta="5"
-                                       MinorDelta="5"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,25" />
+                <s:RadarAxis AxisAngle="180"
+                             AxisLength="230"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Average maturity on new external debt"
+                             Id="maturityId"
+                             MajorDelta="5"
+                             MinorDelta="5"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,25" />
 
-                <local:CustomRadarAxis AxisAngle="225"
-                                       AxisLength="300"
-                                       AxisTitle="Changes in net reserves (BoP, current US$)"
-                                       Id="netReservesId"
-                                       LabelProvider="{StaticResource BillionLabelProvider}"
-                                       MajorDelta="2"
-                                       MinorDelta="2"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,10" />
+                <s:RadarAxis AxisAngle="225"
+                             AxisLength="300"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Changes in net reserves (BoP, current US$)"
+                             Id="netReservesId"
+                             LabelProvider="{StaticResource BillionLabelProvider}"
+                             MajorDelta="2"
+                             MinorDelta="2"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,10" />
 
-                <local:CustomRadarAxis AxisAngle="270"
-                                       AxisLength="400"
-                                       AxisTitle="Concessional debt (% of total external debt)"
-                                       Id="concessionalDebtId"
-                                       LabelProvider="{StaticResource PercentProvider}"
-                                       MajorDelta="5"
-                                       MinorDelta="5"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,25" />
+                <s:RadarAxis AxisAngle="270"
+                             AxisLength="400"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Concessional debt (% of total external debt)"
+                             Id="concessionalDebtId"
+                             LabelProvider="{StaticResource PercentProvider}"
+                             MajorDelta="5"
+                             MinorDelta="5"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,25" />
 
-                <local:CustomRadarAxis AxisAngle="315"
-                                       AxisLength="300"
-                                       AxisTitle="Aid flows at constant US$"
-                                       Id="aidId"
-                                       LabelProvider="{StaticResource BillionLabelProvider}"
-                                       MajorDelta="0.2"
-                                       MinorDelta="0.2"
-                                       Style="{StaticResource RadarAxisStyle}"
-                                       VisibleRange="0,1.6" />
+                <s:RadarAxis AxisAngle="315"
+                             AxisLength="300"
+                             SkippedFirstTicks="1"
+                             AxisTitle="Aid flows at constant US$"
+                             Id="aidId"
+                             LabelProvider="{StaticResource BillionLabelProvider}"
+                             MajorDelta="0.2"
+                             MinorDelta="0.2"
+                             Style="{StaticResource RadarAxisStyle}"
+                             VisibleRange="0,1.6"/>
 
             </s:SciChartRadarSurface.RadarAxes>
 
@@ -153,7 +160,7 @@
                 <s:RadarLegendModifier LegendPlacement="Inside"
                                        Orientation="Vertical"
                                        ShowLegend="{Binding ShowLegend, Mode=TwoWay}" />
-                <s:RadarSeriesSelectionModifier ExecuteWhen="{Binding SelectionExecuteWhen}" AllowMultiSelect="{Binding AllowMultiSelection}" IsEnabled="{Binding AllowSelection}" />
+                <s:RadarSeriesSelectionModifier ExecuteWhen="{Binding SelectionExecuteWhen}" AllowsMultiSelection="{Binding AllowMultiSelection}" IsEnabled="{Binding AllowSelection}" />
             </s:SciChartRadarSurface.ChartModifiers>
 
             <s:SciChartRadarSurface.RenderableSeries>
