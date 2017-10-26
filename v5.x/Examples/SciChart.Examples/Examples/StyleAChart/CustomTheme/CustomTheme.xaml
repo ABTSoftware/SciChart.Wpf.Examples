@@ -59,4 +59,6 @@
         <GradientStop Offset="1" Color="#FF22AA" />
     </LinearGradientBrush>
 
+    <Color x:Key="ShadowEffectColor">MediumPurple</Color>
+
 </ResourceDictionary>

@@ -93,7 +93,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
                     var r = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
                     var exp = Math.Max(0, 1 - r * 0.008);
                     var zValue = (v * exp + random.NextDouble() * 50);
-                    data[y, x] = (zValue > cpMax) ? cpMin : zValue;
+                    data[y, x] = (zValue > cpMax) ? cpMax : zValue;
                 }
             return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1);
         }

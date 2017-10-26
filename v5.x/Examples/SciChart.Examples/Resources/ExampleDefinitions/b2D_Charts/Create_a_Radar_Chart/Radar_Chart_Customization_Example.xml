@@ -20,7 +20,6 @@
     <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleViewModel.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationLabelProviders.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/CreateRadarChart/CustomRadarAxis.cs.txt</string>
   </CodeFiles>
   <Features>
   </Features>

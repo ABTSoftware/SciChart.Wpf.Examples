@@ -152,7 +152,7 @@
                     <s:AnnotationLabel LabelPlacement="Top"
                                        LabelStyle="{StaticResource sideLabel}"
                                        Text="Top" />
-                    <s:AnnotationLabel LabelPlacement="Axis" Panel.ZIndex="99" LabelStyle="{StaticResource sideLabel}" Text="Right" >
+                    <s:AnnotationLabel LabelPlacement="Right"  LabelStyle="{StaticResource sideLabel}" Text="Right" >
                       
                       </s:AnnotationLabel>
                 </s:HorizontalLineAnnotation>

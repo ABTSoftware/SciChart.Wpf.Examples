@@ -50,11 +50,11 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         }
 
         /// <summary>
-        /// Determines whether this instance is transparent. If TRUE then the 3D Engine must make some internal adjustments to allow order independent transparency
+        /// Determines a kind of the entity. If SCRT_SCENE_ENTITY_KIND_TRANSPARENT then the 3D Engine must make some internal adjustments to allow order independent transparency
         /// </summary>
-        public override bool IsTransparent()
+        public override eSCRTSceneEntityKind GetKind()
         {
-            return cubeColor.A != 255;
+            return cubeColor.A == 255 ? eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_OPAQUE : eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_TRANSPARENT;
         }
 
         /// <summary>
