@@ -32,13 +32,15 @@
         <Setter Property="Stroke" Value="#77228B22" />
     </Style>
 
-    <Style x:Key="WaterfallStyle" TargetType="renderableSeries:WaterfallRenderableSeries3DForMvvm">
+    <Style x:Key="WaterfallStyle" TargetType="renderableSeries:WaterfallRenderableSeries3DForMvvm" BasedOn="{StaticResource {x:Type renderableSeries:WaterfallRenderableSeries3DForMvvm}}" >
         <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}" />
         <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}" />
+        <!--<Setter Property="Stroke" Value="Purple" />-->
     </Style>
 
     <Style x:Key="ColumnStyle3D" TargetType="renderableSeries:ColumnRenderableSeries3DForMvvm">
         <Setter Property="ColumnShape" Value="{x:Type s3D:CylinderPointMarker3D}"/>
+        <Setter Property="Stroke" Value="Aqua" />
     </Style>
 
     <Style x:Key="Impulse3DStyle" TargetType="renderableSeries:ImpulseRenderableSeries3DForMvvm">
@@ -65,6 +67,7 @@
 
     <Style x:Key="Mountain3DStyle" TargetType="renderableSeries:MountainRenderableSeries3DForMvvm">
         <Setter Property="Fill" Value="MediumPurple"/>
+        <Setter Property="Stroke" Value="MediumPurple" />
     </Style>
 
 
