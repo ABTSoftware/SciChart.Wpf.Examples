@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
-using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
-using SciChart.Charting3D.Model;
-using SciChart.Charting3D.Model.ChartSeries;
-using SciChart.Charting3D.Model.DataSeries.Waterfall;
-using SciChart.Charting3D.PointMarkers;
-using SciChart.Charting3D.RenderableSeries;
 using SciChart.Charting3D.Visuals.RenderableSeries;
-using SciChart.Core.Extensions;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
-using SciChart.Examples.ExternalDependencies.Data;
 
 
 namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM

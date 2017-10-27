@@ -90,19 +90,6 @@
                 <s3D:Camera3D ZoomToFitOnAttach="True" />
             </s3D:SciChart3DSurface.Camera>
 
-            <s3D:SciChart3DSurface.Resources>
-                <Style x:Key="SurfaceMeshStyle" TargetType="renderableSeries:SurfaceMeshRenderableSeries3DForMvvm">
-                    <Setter Property="MeshColorPalette" Value="{StaticResource HeightColorMap}" />
-                    <Setter Property="Stroke" Value="#77228B22" />
-                </Style>
-
-                <Style x:Key="WaterfallStyle" TargetType="renderableSeries:WaterfallRenderableSeries3DForMvvm">
-                    <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}" />
-                    <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}" />
-                </Style>
-            </s3D:SciChart3DSurface.Resources>
-
-
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.1,0.1" />
             </s3D:SciChart3DSurface.XAxis>

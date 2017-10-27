@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows.Media;
-using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.Model.ChartSeries;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
-using SciChart.Charting3D.PointMarkers;
 using SciChart.Charting3D.Visuals.RenderableSeries;
 using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -14,12 +12,10 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
     public static class ViewModelFactory3D
     {
         private static readonly FasterRandom _random = new FasterRandom(251916);
-        private const int Count = 50;
         private static FFT2 _transform = new FFT2();
 
         public static IRenderableSeries3DViewModel New(string  typeName)
         {
-
             Type type = GetViewModelType(typeName);
             if (type == typeof(ColumnRenderableSeries3DViewModel))
             {
@@ -86,7 +82,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 
         private static XyzDataSeries3D<double> GetScaledDataSeries()
         {
-            var xyzDataSeries3D = new XyzDataSeries3D<double>() { SeriesName = "Colorful Bubble!" };
+            var xyzDataSeries3D = new XyzDataSeries3D<double>();
 
             const int count = 250;
 
@@ -111,7 +107,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 
         private static UniformGridDataSeries3D<double> GetSurfaceMeshDataSeries()
         {
-            var meshDataSeries = new UniformGridDataSeries3D<double>(80, 25) { StepX = 1, StepZ = 1, SeriesName = "Uniform Surface Mesh" };
+            var meshDataSeries = new UniformGridDataSeries3D<double>(80, 25) { StepX = 1, StepZ = 1 };
 
             for (int x = 0; x < 80; x++)
             {

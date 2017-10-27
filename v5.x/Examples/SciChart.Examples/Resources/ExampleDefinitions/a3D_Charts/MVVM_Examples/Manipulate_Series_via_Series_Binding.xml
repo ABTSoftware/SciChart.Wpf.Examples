@@ -20,7 +20,8 @@
     <string>Resources/ExampleSourceFiles/Charts3D/ManipulateSeries3DMVVM/ManipulateSeries3DMvvmView.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/ManipulateSeries3DMVVM/ManipulateSeries3DMvvmView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/ManipulateSeries3DMVVM/ManipulateSeries3DMvvmViewModel.cs.txt</string>
-
+    <string>Resources/ExampleSourceFiles/Charts3D/ManipulateSeries3DMVVM/Styles.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/ManipulateSeries3DMVVM/ViewModel3DFactory.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>MVVM</Features>
