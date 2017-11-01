@@ -280,8 +280,8 @@
     <Compile Include="Examples\Charts3D\CreateA3DChart\Simple3DHeatmapChart.xaml.cs">
       <DependentUpon>Simple3DHeatmapChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithTextureMask.xaml.cs">
-      <DependentUpon>SurfaceMeshWithTextureMask.xaml</DependentUpon>
+    <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.cs">
+      <DependentUpon>SurfaceMeshWithPaletteProvider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshFloorAndCeiling.xaml.cs">
       <DependentUpon>SurfaceMeshFloorAndCeiling.xaml</DependentUpon>
@@ -367,9 +367,6 @@
     </Compile>
     <Compile Include="Examples\CreateACustomChart\SplineLineSeries\SplineLineRenderableSeries.cs" />
     <Compile Include="Examples\CreateACustomChart\SplineLineSeries\TriDiagonalMatrix.cs" />
-    <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshColorPalettes.xaml.cs">
-      <DependentUpon>SurfaceMeshColorPalettes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Examples\CreateGaugeCharts\EventToCommandBehavior.cs" />
     <Compile Include="Examples\CreateGaugeCharts\LegendPlacementToOrientationConverter.cs" />
     <Compile Include="Examples\CreateGaugeCharts\UsingDonutChartExampleView.xaml.cs">
@@ -992,7 +989,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithTextureMask.xaml">
+    <Page Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1063,10 +1060,6 @@
     <Page Include="Examples\CreateACustomChart\SplineLineSeries\SplineChartExampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshColorPalettes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\CreateGaugeCharts\UsingDonutChartExampleView.xaml">
       <SubType>Designer</SubType>
@@ -1570,10 +1563,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Create_A_Surface_Mesh_Chart\Surface_Mesh_Color_Palettes.xml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Create_Realtime_Charts\50-Channel_EEG.xml">
@@ -3188,19 +3177,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Create_A_Surface_Mesh_Chart\Surface_Mesh_3D_Texture_Mask.xml">
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Create_A_Surface_Mesh_Chart\Surface_Mesh_3D_PaletteProvider.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshColorPalettes.xaml.c.txt" />
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshColorPalettes.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshContours.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshContours.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshFloorAndCeiling.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshFloorAndCeiling.xaml.txt" />
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithTextureMask.xaml.c.txt" />
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithTextureMask.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\Waterfall\CreateAWaterfall3DChart.xaml.c.txt" />
@@ -3316,6 +3301,10 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\ManipulateSeries3DMVVM\Styles.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\ManipulateSeries3DMVVM\ViewModel3DFactory.c.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3346,32 +3335,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10772\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10772\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10772\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10772\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10772\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10775\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10772\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10775\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
