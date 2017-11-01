@@ -70,7 +70,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
 
         private void ContourColorSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            surfaceMeshRenderableSeries.ContourColor = ((ColorModel)contourComboBox.SelectedItem).Color;
+            surfaceMeshRenderableSeries.ContourStroke = ((ColorModel)contourComboBox.SelectedItem).Color;
         }
     }
 

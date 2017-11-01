@@ -128,7 +128,7 @@
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries" 
                                                    DrawMeshAs="SolidWithContours"
-                                                   ContourThickness="{Binding Source={x:Reference contourThicknessSlider}, Path=Value, Mode=TwoWay}"
+                                                   ContourStrokeThickness="{Binding Source={x:Reference contourThicknessSlider}, Path=Value, Mode=TwoWay}"
                                                    ContourInterval="{Binding Source={x:Reference contourIntervalSlider}, Path=Value, Mode=TwoWay}"
                                                    ContourOffset="{Binding Source={x:Reference contourOffsetSlider}, Path=Value, Mode=TwoWay}"
                                                    Stroke="#77228B22" 
