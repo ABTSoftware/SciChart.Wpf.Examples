@@ -74,6 +74,7 @@
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries" 
                                                    DrawMeshAs="SolidWireFrame" 
                                                    Stroke="#77228B22" 
+                                                   ContourStroke="#77228B22"
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="False" 
                                                    Opacity="{Binding ElementName=opacitySlider, Path=Value, Mode=TwoWay}"
