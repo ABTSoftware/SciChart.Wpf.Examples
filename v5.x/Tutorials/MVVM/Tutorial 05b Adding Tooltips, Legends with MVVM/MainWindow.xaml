@@ -10,31 +10,33 @@
     <Window.Resources>
         <local:MainViewModel x:Key="MainViewModel"/>
 
+        <!-- Tooltip Template for an XyDataSeries binds to XySeriesInfo -->
+        <!-- Check out the properties on XySeriesInfo to see what you can bind to -->
         <DataTemplate x:Key="TooltipTemplate" DataType="s:XySeriesInfo">
             <StackPanel Orientation="Vertical">
-
                 <TextBlock Foreground="White">
                     <Run Text="Series: "/>
                     <Run Text="{Binding SeriesName, StringFormat='{}{0}:'}"/>
                 </TextBlock>
-
                 <TextBlock Foreground="White">
                     <Run Text="X-Value: "/>
-                    <Run Text="{Binding FormattedXValue}"/>
+                    <Run Text="{Binding FormattedXValue, Mode=OneWay}"/>
                 </TextBlock>
 
                 <TextBlock Foreground="White">
                     <Run Text="Y-Value: "/>
-                    <Run Text="{Binding FormattedYValue}"/>
+                    <Run Text="{Binding FormattedYValue, Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>
         </DataTemplate>
 
-        <Style x:Key="LineSeriesStyle" TargetType="s:FastLineRenderableSeries" >
-            <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipTemplate}"/>
-            <Setter Property="s:TooltipModifier.IncludeSeries" Value="True"/>
+        <!-- Style applied via x:Key name in ViewModel. See StyleKey property of LineRenderableSeriesViewModel -->
+        <Style TargetType="s:BaseRenderableSeries"  x:Key="LineSeriesStyle">
+            <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource TooltipTemplate}"/>
+            <Setter Property="s:RolloverModifier.IncludeSeries" Value="True"/>
+            <Setter Property="StrokeThickness" Value="2"/>
         </Style>
-        
+
     </Window.Resources>
 
     <Grid DataContext="{StaticResource MainViewModel}">
@@ -55,6 +57,7 @@
         <s:SciChartSurface Grid.Row="1"
                            RenderableSeries="{s:SeriesBinding RenderableSeries}"  
                            ChartTitle="{Binding ChartTitle}">
+                        
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis AxisTitle="{Binding XAxisTitle}"/>
             </s:SciChartSurface.XAxis>
