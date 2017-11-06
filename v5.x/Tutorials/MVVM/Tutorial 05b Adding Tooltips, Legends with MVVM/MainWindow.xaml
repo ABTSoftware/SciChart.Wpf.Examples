@@ -10,6 +10,33 @@
     <Window.Resources>
         <local:MainViewModel x:Key="MainViewModel"/>
 
+        <!-- The TooltipControl template is defined below -->
+        <!-- Change this if you want to have a non-default tooltip container -->
+        <!-- The ContentPresenter is bound to the DataContext (a SeriesInfo type) -->
+        <!-- and the ContentTemplate is the DataTemplate for the SeriesInfo -->
+        <!-- Finally, the TooltipContainerStyle is set on the RenderableSeries via Style -->
+        <Style x:Key="TooltipContainer" TargetType="s:TooltipControl">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="#ff6495ed"
+                                BorderBrush="#ff87B1FA"
+                                BorderThickness="2"
+                                CornerRadius="5"
+                                Opacity="0.9"
+                                Padding="5">
+
+                            <ContentPresenter Content="{TemplateBinding DataContext}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
         <!-- Tooltip Template for an XyDataSeries binds to XySeriesInfo -->
         <!-- Check out the properties on XySeriesInfo to see what you can bind to -->
         <DataTemplate x:Key="TooltipTemplate" DataType="s:XySeriesInfo">
@@ -32,6 +59,7 @@
 
         <!-- Style applied via x:Key name in ViewModel. See StyleKey property of LineRenderableSeriesViewModel -->
         <Style TargetType="s:BaseRenderableSeries"  x:Key="LineSeriesStyle">
+            <Setter Property="s:RolloverModifier.TooltipContainerStyle" Value="{StaticResource TooltipContainer}"/>
             <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource TooltipTemplate}"/>
             <Setter Property="s:RolloverModifier.IncludeSeries" Value="True"/>
             <Setter Property="StrokeThickness" Value="2"/>
