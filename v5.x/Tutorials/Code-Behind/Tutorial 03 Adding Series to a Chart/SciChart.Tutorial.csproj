@@ -35,20 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SciChart.Charting, Version=4.2.3.9840, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.4.2.3.9840\lib\net45\SciChart.Charting.dll</HintPath>
+    <Reference Include="SciChart.Charting, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Core, Version=4.2.3.9840, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.4.2.3.9840\lib\net45\SciChart.Core.dll</HintPath>
+    <Reference Include="SciChart.Core, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Data, Version=4.2.3.9840, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.4.2.3.9840\lib\net45\SciChart.Data.dll</HintPath>
+    <Reference Include="SciChart.Data, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=4.2.3.9840, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.4.2.3.9840\lib\net45\SciChart.Drawing.dll</HintPath>
+    <Reference Include="SciChart.Drawing, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Drawing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
