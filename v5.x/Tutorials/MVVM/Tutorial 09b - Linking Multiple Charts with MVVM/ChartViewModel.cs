@@ -19,10 +19,11 @@ namespace SciChart.Mvvm.Tutorial
 
         private XyDataSeries<double, double> _lineData;        
 
-        public ChartViewModel(IDataProvider dataProvider, string chartTitle)
+        public ChartViewModel(IDataProvider dataProvider, string chartTitle, string mouseEventGroupId)
         {
             _dataProvider = dataProvider;
             _chartTitle = chartTitle;
+            MouseEventGroup = mouseEventGroupId;
 
             CreateChartData();
             CreateChartSeries();
@@ -46,7 +47,7 @@ namespace SciChart.Mvvm.Tutorial
             });
         }
 
-        public string MouseEventGroup {  get { return "MouseEventGroupID"; } }
+        public string MouseEventGroup { get; set; }
 
         public ObservableCollection<IAxisViewModel> YAxes { get { return _yAxes; } }
 

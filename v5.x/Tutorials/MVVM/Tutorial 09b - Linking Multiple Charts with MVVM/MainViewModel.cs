@@ -11,8 +11,8 @@ namespace SciChart.Mvvm.Tutorial
 
         public MainViewModel()
         {
-            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Primary Chart"));
-            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Secondary Chart"));
+            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Primary Chart", "MouseGroup1"));
+            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Secondary Chart", "MouseGroup1"));
         }   
         
         public ObservableCollection<ChartViewModel> ChartPanes {  get { return _chartViewModels; } }
