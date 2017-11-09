@@ -4,43 +4,20 @@ using System.Windows;
 using CodeHighlighter.Common;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Visuals;
 using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
-using SciChart.Examples.Demo.Helpers.UsageTracking;
 using SciChart.Charting3D;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Wpf.UI.Reactive;
 using SciChart.Wpf.UI.Reactive.Observability;
-using SciChart.Wpf.UI.Reactive.Traits;
 using ServiceLocator = SciChart.Wpf.UI.Bootstrap.ServiceLocator;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
-    public class AllowFeedbackSettingBehaviour : ViewModelTrait<SettingsViewModel>
-    {
-        private readonly ISyncUsageHelper _usageHelper;
-
-        public AllowFeedbackSettingBehaviour(SettingsViewModel target, ISyncUsageHelper usageHelper) : base(target)
-        {
-            _usageHelper = usageHelper;
-
-            target.WhenPropertyChanged(x => x.AllowFeedback)
-                .Skip(1)
-                .Subscribe(allowFeedback =>
-                {
-                    usageHelper.Enabled = allowFeedback;
-                }).DisposeWith(this);
-
-            _usageHelper.EnabledChanged += (s, e) =>
-            {
-                target.AllowFeedback = _usageHelper.Enabled;
-            };
-        }
-    }
-
     public class SettingsViewModel : ViewModelWithTraitsBase
     {
         private Type _selectedRenderer;
@@ -68,6 +45,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
             Use3DAA4x = false;
             Use3DAANone = true;
+            EnableResamplingCPlusPlus = false;
 
             Observable.CombineLatest(
                 this.WhenPropertyChanged(x => x.UseAlternativeFillSourceD3D),
@@ -131,6 +109,23 @@ namespace SciChart.Examples.Demo.ViewModels
             set { SetDynamicValue("AllowFeedback", value); }
         }
 
+        public bool EnableResamplingCPlusPlus
+        {
+            get { return GetDynamicValue<bool>("EnableResamplingCPlusPlus"); }
+            set
+            {
+                SetDynamicValue("EnableResamplingCPlusPlus", value);
+
+                // Creates a style with this markup and adds to application resource to affect all charts
+                // <Style TargetType="s:SciChartSurface">
+                //   <Setter Property="RenderSurfaceBase.RenderSurfaceType" Value="_selectedRenderer"/>
+                // </Style>
+
+                CreateGlobalStyle<SciChartSurface>();
+                CreateGlobalStyle<SciStockChart>();
+            }
+        }        
+
         public Type SelectedRenderer
         {
             get { return _selectedRenderer; }
@@ -189,6 +184,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 var overrideStyle = new Style(typeof(T));
 
                 overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
+                overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
                 if (Application.Current.Resources.Contains(typeof(T)))
                 {
                     Application.Current.Resources.Remove(typeof(T));
