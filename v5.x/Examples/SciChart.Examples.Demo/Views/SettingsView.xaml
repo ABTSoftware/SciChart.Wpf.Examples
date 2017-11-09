@@ -7,8 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"
-     mc:Ignorable="d">
+             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"             
+             mc:Ignorable="d" >
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:RendererTypeToDisplayNameConverter x:Key="RendererConverter" />
@@ -207,6 +207,14 @@
                       FontSize="14"
                       ToolTip="Disable effects on lower powered machines for better performance! "
                       IsChecked="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Mode=TwoWay}" />
+
+                    <CheckBox Grid.Row="6"
+                              Margin="3"
+                              Content="Enable C++ Resampling Algorithms"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Enable / disable C++ Resampling algorithms for faster, more accurate resampling"
+                              IsChecked="{Binding EnableResamplingCPlusPlus, Mode=TwoWay}" />
                 </StackPanel>
 
                 <TextBlock Grid.Row="7"
