@@ -31,17 +31,22 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 {
     public class UsingPieChartExampleViewModel : BaseViewModel
     {
+        private IPieSegmentViewModel _oneSelectedSegment;
         public UsingPieChartExampleViewModel()
         {
+            _oneSelectedSegment = new PieSegmentViewModel {Value = 60, Name = "Fruit", IsSelected = true};
+
             SegmentsDataCollection = new ObservableCollection<IPieSegmentViewModel>
             {
-                new PieSegmentViewModel {Value = 60, Name = "Fruit", IsSelected = true},
+                _oneSelectedSegment,
                 new PieSegmentViewModel {Value = 46, Name = "Protein"},
                 new PieSegmentViewModel {Value = 36, Name = "Vegetables"},
                 new PieSegmentViewModel {Value = 30, Name = "Diary" },
                 new PieSegmentViewModel {Value = 18, Name = "Grains" },
                 new PieSegmentViewModel {Value = 10, Name = "Other" },
-            };                                       
+            };
+
+            SelectedSegment = _oneSelectedSegment;
 
             AddNewItem = new ActionCommand(() =>
             {
@@ -64,7 +69,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
         private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
         {
-            if (!e.NewItems.IsNullOrEmptyList())
+            if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
             {
                 var selectedSegment = e.NewItems[0];
                 SelectedSegment = (IPieSegmentViewModel)selectedSegment;

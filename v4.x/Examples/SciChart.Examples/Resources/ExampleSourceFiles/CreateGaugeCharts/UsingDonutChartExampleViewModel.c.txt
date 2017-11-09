@@ -64,10 +64,10 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
         private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
         {
-            if (!e.NewItems.IsNullOrEmptyList())
+            if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
             {
                 var selectedSegment = e.NewItems[0];
-                SelectedSegment = (IPieSegmentViewModel)selectedSegment;
+                SelectedSegment = (IPieSegmentViewModel) selectedSegment;
             }
         }
 
