@@ -98,7 +98,9 @@
                                BorderThickness="0"
                                MaxFrameRate="36"
                                RenderPriority="Normal"
-                               WorldDimensions="200,100,200">
+                               WorldDimensions="200,100,200"
+                               IsXyzGizmoVisible="False" 
+                               IsFpsCounterVisible="False" >
 
             <!--  Modify Camera Settings  -->
             <s3D:SciChart3DSurface.Camera>
@@ -121,17 +123,17 @@
 
             <!--  Create an X Axis  -->
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D AutoRange="Always" DrawLabels="False" />
+                <s3D:NumericAxis3D VisibleRange="0,10.001" FontSize="8" />
             </s3D:SciChart3DSurface.XAxis>
 
             <!--  Create a Y Axis  -->
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D AutoRange="Always" DrawLabels="False" />
+                <s3D:NumericAxis3D DrawLabels="False" AutoRange="Always" PlaneBorderThickness="0"  />
             </s3D:SciChart3DSurface.YAxis>
 
             <!--  Create a Z Axis  -->
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D FlipCoordinates="True" VisibleRange="-10,11"  />
+                <s3D:NumericAxis3D DrawLabels="False" AutoRange="Always" FlipCoordinates="True" />
             </s3D:SciChart3DSurface.ZAxis>
 
         </s3D:SciChart3DSurface>
@@ -180,7 +182,9 @@
                                BorderThickness="0"
                                MaxFrameRate="36"
                                RenderPriority="Normal"
-                               WorldDimensions="200,100,200">
+                               WorldDimensions="200,100,200"
+                               IsXyzGizmoVisible="False" 
+                               IsFpsCounterVisible="False" >
 
             <!--  Modify Camera Settings  -->
             <s3D:SciChart3DSurface.Camera>
@@ -203,17 +207,17 @@
 
             <!--  Create an X Axis  -->
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D AutoRange="Always" DrawLabels="False" />
+                <s3D:NumericAxis3D VisibleRange="0,10.001" FontSize="8" />
             </s3D:SciChart3DSurface.XAxis>
 
             <!--  Create a Y Axis  -->
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D AutoRange="Always" DrawLabels="False" />
+                <s3D:NumericAxis3D DrawLabels="False" AutoRange="Always" PlaneBorderThickness="0"  />
             </s3D:SciChart3DSurface.YAxis>
 
             <!--  Create a Z Axis  -->
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D FlipCoordinates="True" VisibleRange="-10,11" />
+                <s3D:NumericAxis3D DrawLabels="False" AutoRange="Always" FlipCoordinates="True" />
             </s3D:SciChart3DSurface.ZAxis>
 
         </s3D:SciChart3DSurface>
@@ -234,7 +238,7 @@
                             Foreground="{Binding ElementName=SciChart3DSurface,
                                                  Path=Foreground}"
                             Maximum="11"
-                            Minimum="-10"
+                            Minimum="0"
                             Opacity="0.8"
                             Orientation="Vertical"
                             TextFormatting="0.00" />

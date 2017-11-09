@@ -84,8 +84,8 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
         private void CreateDataSetAndSeries()
         {
             _series0 = new XyDataSeries<double, double>();
-            _series1 = new UniformGridDataSeries3D<double>(100, 100) { StartX = 1, StartZ = 1 };
-            _series2 = new UniformGridDataSeries3D<double>(100, 100) { StartX = 1, StartZ = 1 };
+            _series1 = new UniformGridDataSeries3D<double>(100, 100) { StartX = 0, StepX = 0.1, StartZ = 0 };
+            _series2 = new UniformGridDataSeries3D<double>(100, 100) { StartX = 0, StepX = 0.1, StartZ = 0 };
 
             _series0.FifoCapacity = FifoSize;
 
