@@ -32,7 +32,9 @@ namespace SciChart.Examples.Demo
 
         private void App_DispatcherUnhandledException(object sender,
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {            
+        {        
+            Log.Error("An unhandled exception occurred. Showing view to user...", e.Exception);
+                
             var exceptionView = new ExceptionView(e.Exception)
             {
                 Owner = Application.Current != null ? Application.Current.MainWindow : null,
