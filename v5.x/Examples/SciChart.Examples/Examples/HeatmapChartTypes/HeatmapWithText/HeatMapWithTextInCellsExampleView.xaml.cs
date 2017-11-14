@@ -15,12 +15,17 @@
 // *************************************************************************************
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Axes;
 using SciChart.Charting.Visuals.Axes.LabelProviders;
 using SciChart.Core.Helpers;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
+using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Core.Extensions;
+using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
 {
@@ -68,6 +73,16 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             }
         }
 
+        private void EnableContours(object sender, RoutedEventArgs e)
+        {
+            contourSeries.IsVisible = true;
+        }
+
+        private void DisableContours(object sender, RoutedEventArgs e)
+        {
+            contourSeries.IsVisible = false;
+        }
+
         private IDataSeries CreateSeries()
         {
             var rnd = new FasterRandom();
@@ -87,6 +102,66 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             yAxis.LabelProvider = new YAxisLabelProvider();
             xAxis.LabelProvider = new XAxisLabelProvider();
             heatmapSeries.DataSeries = CreateSeries();
+
+            contourSeries.DataSeries = heatmapSeries.DataSeries;
+            
+        }
+
+        
+        private void OnZMinKeyUp(object sender, KeyEventArgs e)
+        {
+            OnTxtBoxValueChanged(sender, e, zMin => contourSeries.ZMin = zMin);
+        }
+
+        private void OnZMaxKeyUp(object sender, KeyEventArgs e)
+        {
+            OnTxtBoxValueChanged(sender, e, zMax => contourSeries.ZMax = zMax);
+        }
+
+        private void OnZStepKeyUp(object sender, KeyEventArgs e)
+        {
+            OnTxtBoxValueChanged(sender, e, zStep => contourSeries.ZStep = zStep);
+        }
+
+        private void OnTxtBoxValueChanged(object sender, KeyEventArgs e, Action<double> action)
+        {
+            var txBox = sender as TextBox;
+
+            if (txBox != null && (e.Key == Key.Enter || e.Key == Key.Return))
+            {
+                var str = txBox.Text.Trim();
+
+                double value;
+                var isValid = double.TryParse(str, out value);
+
+                if (isValid)
+                {
+                    action(value);
+                }
+            }
+        }
+
+        private void OnMinorsPerMajorChanged(object sender, KeyEventArgs e)
+        {
+            OnTxtBoxValueChanged(sender, e, mPm => contourSeries.MinorsPerMajor = (int)mPm);
+        }
+
+        private void OnApplyMajorStyle(object sender, RoutedEventArgs e)
+        {
+            contourSeries.MajorLineStyle = ApplyMajorStyleCkb.IsChecked.Value ? (Style)Resources["MajorContourLineStyle"] : null;
+            sciChart.ZoomExtents();
+        }
+
+        private void OnApplyMinorStyle(object sender, RoutedEventArgs e)
+        {
+            contourSeries.MinorLineStyle = ApplyMinorStyleCkb.IsChecked.Value ? (Style)Resources["MinorContourLineStyle"] : null;
+            sciChart.ZoomExtents();
+        }
+
+        private void OnApplyPalette(object sender, RoutedEventArgs e)
+        {
+            contourSeries.ColorMap = ApplyPaletteCkb.IsChecked.Value ? (HeatmapColorPalette)Resources["ColorPalette"] : null;
+            sciChart.ZoomExtents();
         }
     }
 }

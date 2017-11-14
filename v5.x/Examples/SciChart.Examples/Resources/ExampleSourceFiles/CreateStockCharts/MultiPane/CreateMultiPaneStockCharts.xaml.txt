@@ -202,7 +202,7 @@
                                          IsPanEnabled="{Binding ParentViewModel.IsPanEnabled}"
                                          IsRolloverEnabled="False"
                                          IsRubberBandZoomEnabled="{Binding ParentViewModel.IsZoomEnabled}"
-                                         IsXAxisVisible="{Binding IsFirstChartPane}"
+                                         IsXAxisVisible="{Binding IsLastChartPane}"
                                          LegendStyle="{StaticResource LegendStyle}"
                                          Padding="0"
                                          RenderableSeries="{s:SeriesBinding ChartSeriesViewModels}"
