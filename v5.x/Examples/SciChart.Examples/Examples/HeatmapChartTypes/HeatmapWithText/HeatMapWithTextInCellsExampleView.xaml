@@ -68,8 +68,8 @@
             <ext:FlyoutMenuButton x:Name="ContourOptions"
                                   HorizontalAlignment="Left"
                                   FontSize="10"
-                                  Content="CNT"
-                                  ToolTipService.ToolTip="Annotation">
+                                  Content="CN"
+                                  ToolTipService.ToolTip="Contour">
 
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" MinHeight="300" Orientation="Vertical">
@@ -161,15 +161,17 @@
         </s:SciChartSurface>
 
         <s:HeatmapColorMap Margin="30"
-                          Grid.Column="1"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Bottom"
-                          DataContext="{Binding ElementName=heatmapSeries, Mode=OneWay}"
-                          ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
-                          Minimum="{Binding ColorMap.Minimum}"
-                          Maximum="{Binding ColorMap.Maximum}"
-                          TextFormatting="n0"
-                          Opacity="0.9" />
+                           Grid.Column="1"
+                           Background="{Binding ElementName=sciChart, Path=Background}" 
+                           Foreground="{Binding ElementName=sciChart, Path=Foreground}" 
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Bottom"
+                           DataContext="{Binding ElementName=heatmapSeries, Mode=OneWay}"
+                           ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           Minimum="{Binding ColorMap.Minimum}"
+                           Maximum="{Binding ColorMap.Maximum}"
+                           TextFormatting="n0"
+                           Opacity="0.9" />
 
     </Grid>
 </UserControl>

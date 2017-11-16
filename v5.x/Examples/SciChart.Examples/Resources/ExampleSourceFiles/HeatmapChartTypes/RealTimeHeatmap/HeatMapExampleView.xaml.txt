@@ -72,8 +72,8 @@
             <ext:FlyoutMenuButton x:Name="ContourOptions"
                                   HorizontalAlignment="Left"
                                   FontSize="10"
-                                  Content="CNT"
-                                  ToolTipService.ToolTip="Annotation">
+                                  Content="CN"
+                                  ToolTipService.ToolTip="Contour">
 
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" MinHeight="300" Orientation="Vertical">

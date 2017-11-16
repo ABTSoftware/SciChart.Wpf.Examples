@@ -40,7 +40,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.RealTimeStaticAxis
         private int _dataPoint1, _dataPoint2;
 
         private const int FifoCapacity = 100;
-        private const int Interval = 16;
+        private const int Interval = 100;
 
         public RealTimeStaticAxis()
         {
@@ -119,7 +119,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.RealTimeStaticAxis
 
             if (_timer == null)
             {
-                _timer = new DispatcherTimer(DispatcherPriority.Render);
+                _timer = new DispatcherTimer(DispatcherPriority.Background);
                 _timer.Interval = TimeSpan.FromMilliseconds(Interval);
                 _timer.Tick += TimerOnElapsed;
                 _timer.Start();
