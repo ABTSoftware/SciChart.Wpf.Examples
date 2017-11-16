@@ -43,7 +43,7 @@
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
-                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" ExecuteWhen="Shift" />
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" />
                     <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" />
                     <t3D:TooltipModifier3D CrosshairMode="Lines" CrosshairPlanesFill="#33FF6600" />
                     <s3D:MouseWheelZoomModifier3D />

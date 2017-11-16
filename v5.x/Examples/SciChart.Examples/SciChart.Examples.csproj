@@ -280,6 +280,9 @@
     <Compile Include="Examples\Charts3D\CreateA3DChart\Simple3DHeatmapChart.xaml.cs">
       <DependentUpon>Simple3DHeatmapChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml.cs">
+      <DependentUpon>SurfaceMeshNonUniformGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.cs">
       <DependentUpon>SurfaceMeshWithPaletteProvider.xaml</DependentUpon>
     </Compile>
@@ -986,6 +989,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\Charts3D\CreateA3DChart\CreateAUniformMesh3DChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -3305,6 +3312,15 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshWithPaletteProvider.xaml.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Create_A_Surface_Mesh_Chart\Surface_Mesh_3D_Non-Uniform_Data.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3335,32 +3351,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10829\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10843\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10829\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10843\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10829\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10843\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10829\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10843\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10829\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10843\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10829\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10843\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
