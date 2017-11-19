@@ -52,7 +52,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.MultiPane
             _viewportManager = new DefaultViewportManager();
             var closePaneCommand = new ActionCommand<IChildPane>(pane => ChartPaneViewModels.Remove((BaseChartPaneViewModel)pane));
 
-            _chartPaneViewModels.Add(new PricePaneViewModel(this, instrumentPriceData) { Title = "Price", ViewportManager = _viewportManager });
+            _chartPaneViewModels.Add(new PricePaneViewModel(this, instrumentPriceData) { IsFirstChartPane = true, ViewportManager = _viewportManager });
             _chartPaneViewModels.Add(new MacdPaneViewModel(this, instrumentPriceData) { Title = "MACD", ClosePaneCommand = closePaneCommand });
             _chartPaneViewModels.Add(new RsiPaneViewModel(this, instrumentPriceData) { Title = "RSI", ClosePaneCommand = closePaneCommand });
             _chartPaneViewModels.Add(new VolumePaneViewModel(this, instrumentPriceData) { Title = "Volume", ClosePaneCommand = closePaneCommand, IsLastChartPane = true});
