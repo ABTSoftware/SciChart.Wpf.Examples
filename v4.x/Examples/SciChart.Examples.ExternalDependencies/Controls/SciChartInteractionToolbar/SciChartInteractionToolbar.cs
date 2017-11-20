@@ -477,12 +477,12 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
 
             foreach (var exampleMod in exampleModifiers.ChildModifiers.Where(x => GetAppearceInToolbar((ChartModifierBase)x)))
             {
-                if (!devMods.ChildModifiers.Any(x => x.ModifierName == exampleMod.ModifierName))
+                if (HasToAddUserModifierToModifierGroup(exampleMod, devMods))
                 {
                     devMods.ChildModifiers.Add(exampleMod);
                 }
 
-                if (!userMods.ChildModifiers.Any(x => x.ModifierName == exampleMod.ModifierName))
+                if (HasToAddUserModifierToModifierGroup(exampleMod, userMods))
                 {
                     userMods.ChildModifiers.Add(exampleMod);
                 }
@@ -508,6 +508,22 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             }
 
             ModifiersSource = listMod;
+        }
+
+        private bool HasToAddUserModifierToModifierGroup(IChartModifier userModifier, ModifierGroup modifierGroup)
+        {
+            AxisDragModifierBase axisModifier = userModifier as AxisDragModifierBase;
+            if (axisModifier == null)
+            {
+                return !modifierGroup.ChildModifiers.Any(x => x.ModifierName == userModifier.ModifierName);
+            }
+
+            foreach (var mod in modifierGroup.ChildModifiers.OfType<AxisDragModifierBase>())
+            {
+                if (mod.ModifierName == axisModifier.ModifierName && mod.AxisId == axisModifier.AxisId) return false;
+            }
+
+            return true;
         }
     }
 }
