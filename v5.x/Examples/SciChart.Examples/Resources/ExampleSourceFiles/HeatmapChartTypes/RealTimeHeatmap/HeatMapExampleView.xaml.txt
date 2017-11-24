@@ -69,54 +69,7 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
-            <ext:FlyoutMenuButton x:Name="ContourOptions"
-                                  HorizontalAlignment="Left"
-                                  FontSize="10"
-                                  Content="CN"
-                                  ToolTipService.ToolTip="Contour">
-
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" MinHeight="300" Orientation="Vertical">
-
-                        <ToggleButton x:Name="AddContour" Margin="3" HorizontalAlignment="Left" MinWidth="66" Content="Contour" Style="{StaticResource DefaultToggleButtonStyle}" 
-                                      ToolTipService.ToolTip="Add Heatmap Contour" Checked="EnableContours" Unchecked="DisableContours" />
-                        <CheckBox x:Name="ApplyPaletteCkb" Click="OnApplyPalette" Content="Apply Palette" Margin="0,2"/>
-                        <ComboBox x:Name="ContourPaletteMode" MinWidth="10" ItemsSource="{Binding Source={StaticResource PaletteModesProvider}}" SelectedIndex="1" Margin="0,2"/>
-                        <CheckBox x:Name="ApplyMajorStyleCkb" Click="OnApplyMajorStyle" Content="Apply Major Style" Margin="0,2"/>
-                        <CheckBox x:Name="ApplyMinorStyleCkb" Click="OnApplyMinorStyle" Content="Apply Minor Style" Margin="0,2"/>
-
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Content="ZMin" />
-                            <TextBox x:Name="ZMin_tb" Grid.Column="1" KeyUp="OnZMinKeyUp"/>
-
-                            <Label Grid.Row="2" Content="ZMax" Foreground="White"/>
-                            <TextBox x:Name="ZMax_tb" Grid.Row="2" Grid.Column="1" KeyUp="OnZMaxKeyUp" />
-
-                            <Label Grid.Row="4" Content="ZStep"/>
-                            <TextBox x:Name="ZStep_tb" Grid.Row="4" Grid.Column="1" KeyUp="OnZStepKeyUp" />
-
-                            <Label Grid.Row="6" Content="Minors Per Major"/>
-                            <TextBox x:Name="MinorsPerMajor_tb" Grid.Row="6" Grid.Column="1" KeyUp="OnMinorsPerMajorChanged" />
-                        </Grid>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
+            
             <ToggleButton x:Name="StartButton" Click="StartButton_Click" IsChecked="True" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
             <ToggleButton x:Name="StopButton" Click="StopButton_Click" Style="{StaticResource StopButtonStyle}" Padding="7"/>
 
@@ -140,7 +93,6 @@
                         </s:HeatmapColorPalette>
                     </s:FastUniformHeatmapRenderableSeries.ColorMap>
                 </s:FastUniformHeatmapRenderableSeries>
-                <s:FastUniformContourRenderableSeries x:Name="contourSeries" ColorMapMode="{Binding SelectedValue, ElementName=ContourPaletteMode}" IsVisible="false"/>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

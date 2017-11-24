@@ -30,7 +30,7 @@
             <s3D:SciChart3DSurface.RenderableSeries>
 
                 <!-- Floor with Contours. Uses HeightScaleFactor and YOffset = YAxis.VisibleRange.Min to display mesh on the floor -->
-                <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWireFrame" 
+                <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWithContours"
                                                    HeightScaleFactor="0.0"
                                                    Stroke="#FF228B22"                                                    
                                                    StrokeThickness="2.0"
@@ -49,7 +49,7 @@
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
 
                 <!-- Ceiling with Contours. Uses HeightScaleFactor=0 and YOffset = YAxis.VisibleRange.Max to display mesh on the ceiling -->
-                <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWireFrame" 
+                <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWithContours"
                                                    HeightScaleFactor="0.0"
                                                    Opacity="0.4"
                                                    Stroke="#FF228B22" 

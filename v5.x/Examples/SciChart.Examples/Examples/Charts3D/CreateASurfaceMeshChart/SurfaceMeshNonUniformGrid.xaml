@@ -59,7 +59,7 @@
 
                         <!-- Create the opacity slider -->
                         <TextBlock FontSize="12" Text="Opacity" />
-                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
