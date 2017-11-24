@@ -383,6 +383,9 @@
     <Compile Include="Examples\CreateMultiseriesChart\CandlestickWithLinesView.xaml.cs">
       <DependentUpon>CandlestickWithLinesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\CreateMultiseriesChart\Contours\ContoursExampleView.xaml.cs">
+      <DependentUpon>ContoursExampleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\CreateMultiseriesChart\DashboardStyleCharts\ChartTypeViewModel.cs" />
     <Compile Include="Examples\CreateMultiseriesChart\DashboardStyleCharts\ChartTypeViewModelFactory.cs" />
     <Compile Include="Examples\CreateMultiseriesChart\DashboardStyleCharts\DashboardStyleChartsView.xaml.cs">
@@ -1077,6 +1080,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\CreateMultiseriesChart\CandlestickWithLinesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\CreateMultiseriesChart\Contours\ContoursExampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -3321,6 +3328,15 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateASurfaceMeshChart\SurfaceMeshNonUniformGrid.xaml.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Create_a_Multiseries_Chart\Contours_With_Heatmap_Chart.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateMultiseriesChart\Contours\ContoursExampleView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateMultiseriesChart\Contours\ContoursExampleView.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3351,32 +3367,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.0.10893\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10900\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.0.10893\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10900\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.0.10893\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10900\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.0.10893\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.0.10900\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.0.10893\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.0.10900\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.0.10893\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.0.10900\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
