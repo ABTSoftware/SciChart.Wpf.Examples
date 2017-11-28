@@ -103,8 +103,7 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
             MaxHistoBarCandles = 40;
             TickSize = 0.5;
 
-            _ticksPerCandle = 300000;
-              LoadRandomData(100, 30000);
+              LoadRandomData(100, 1000);
             _viewportManager.ZoomExtents();
         }
 
