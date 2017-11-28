@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:local="clr-namespace:SciChart.Sandbox.Examples.MarketProfileTradingExample"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              d:DesignHeight="400"
              d:DesignWidth="600"
              Background="#FF232426"
@@ -226,7 +227,9 @@
             Grid.Column="1"
             Padding="0"
             BorderThickness="0"
-            ViewportManager="{Binding ViewportManager}">
+            ViewportManager="{Binding ViewportManager}"
+            s3D:DirectXHelper.TryApplyDirectXRenderer="True"
+            >
 
             <s:SciChartSurface.RenderableSeries>
 
@@ -293,7 +296,8 @@
         <s:SciChartSurface
             Grid.Column="2"
             Padding="0"
-            BorderThickness="0">
+            BorderThickness="0"
+            s3D:DirectXHelper.TryApplyDirectXRenderer="True">
 
             <s:SciChartSurface.RenderableSeries>
 
@@ -340,7 +344,8 @@
             Grid.Column="1"
 
             Padding="0"
-            BorderThickness="0">
+            BorderThickness="0"
+            s3D:DirectXHelper.TryApplyDirectXRenderer="True">
 
             <s:SciChartSurface.RenderableSeries>
 
