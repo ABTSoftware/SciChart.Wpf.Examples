@@ -59,25 +59,29 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=5.0.0.10893, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\SciChart.5.0.0.10893\lib\net45\SciChart.Charting.dll</HintPath>
+    <Reference Include="SciChart.Charting, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.0.0.10907\lib\net45\SciChart.Charting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting3D, Version=5.0.0.10893, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\SciChart3D.5.0.0.10893\lib\net45\SciChart.Charting3D.dll</HintPath>
+    <Reference Include="SciChart.Charting3D, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.5.0.0.10907\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Core, Version=5.0.0.10893, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\SciChart.5.0.0.10893\lib\net45\SciChart.Core.dll</HintPath>
+    <Reference Include="SciChart.Core, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.0.0.10907\lib\net45\SciChart.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Data, Version=5.0.0.10893, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\SciChart.5.0.0.10893\lib\net45\SciChart.Data.dll</HintPath>
+    <Reference Include="SciChart.Data, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.0.0.10907\lib\net45\SciChart.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.0.0.10893, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\SciChart.5.0.0.10893\lib\net45\SciChart.Drawing.dll</HintPath>
+    <Reference Include="SciChart.Drawing, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.0.0.10907\lib\net45\SciChart.Drawing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SciChart.Drawing.DirectX, Version=5.0.0.10907, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.DirectX.5.0.0.10907\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SciChart.Wpf.UI, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -271,13 +275,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sharpdx_direct3d11_1_effects_x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sharpdx_direct3d11_1_effects_x86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="_Shared\Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:\Projects\SciChart\branches\SciChart_v5.0_Release_\src\SciChart.Drawing.DirectX\SciChart.Drawing.DirectX.csproj">
-      <Project>{fa1b08d1-eb65-4f91-9d85-ff18288d71a8}</Project>
-      <Name>SciChart.Drawing.DirectX</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
