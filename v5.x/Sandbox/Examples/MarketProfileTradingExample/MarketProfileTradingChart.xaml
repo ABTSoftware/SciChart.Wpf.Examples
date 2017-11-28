@@ -36,7 +36,7 @@
         </Style>
 
         <Style x:Key="OverThresholdBarStyle" TargetType="s:HistogramBar">
-            <Setter Property="Stroke" Value="Black" />
+            <Setter Property="Stroke" Value="BlueViolet" />
             <Setter Property="StrokeThickness" Value="1" />
             <Setter Property="Fill" Value="BlueViolet" />
             <Setter Property="Foreground" Value="GreenYellow" />
@@ -46,7 +46,7 @@
         <local:HistoBarPaletteProvider
             x:Key="VolumeLadderThresholdPaletteProvider"
             OverriddenBarStyle="{StaticResource OverThresholdBarStyle}"
-            VolumeThreshold="100" />
+            VolumeThreshold="1000" />
 
     </UserControl.Resources>
 
@@ -84,6 +84,7 @@
                               Style="{StaticResource ZoomButtonStyle}"
                               IsChecked="{Binding IsEnabled, Mode=TwoWay, Source={x:Reference rubberBandXyZoomModifier}}"
                               ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                              
                               s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_Modifiers" />
 
                 <ToggleButton x:Name="IsPanEnabled"
@@ -240,12 +241,14 @@
                     MaxHistoBarCandles="{Binding MaxHistoBarCandles, Mode=TwoWay}"
                     PaletteProvider="{StaticResource VolumeLadderThresholdPaletteProvider}"
                     TickSize="{Binding TickSize, Mode=TwoWay}"
-                    VerticalBarSpacing="{Binding VerticalBarSpacing, Mode=TwoWay}">
-
-
+                    VerticalBarSpacing="{Binding VerticalBarSpacing, Mode=TwoWay}"
+                    StrokeUp="#7052CC54"
+                    StrokeDown="#D0E26565">
+                    
                     <s:FastHistoBarRenderableSeries.FillUp>
                         <SolidColorBrush Color="#7052CC54" />
                     </s:FastHistoBarRenderableSeries.FillUp>
+                    
                     <s:FastHistoBarRenderableSeries.FillDown>
                         <SolidColorBrush Color="#D0E26565" />
                     </s:FastHistoBarRenderableSeries.FillDown>
@@ -284,9 +287,12 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="SciChartGroup">
                     <s:MouseWheelZoomModifier x:Name="mouseWheelZoomModifier" />
-                    <s:ZoomPanModifier x:Name="zoomPanModifier" ClipModeX="None" />
+                    <s:ZoomPanModifier x:Name="zoomPanModifier" 
+                                       IsEnabled="False"
+                                       ClipModeX="None" />
                     <s:ZoomExtentsModifier x:Name="zoomExtentsModifier" />
-                    <s:RubberBandXyZoomModifier x:Name="rubberBandXyZoomModifier" IsEnabled="False" />
+                    <s:RubberBandXyZoomModifier x:Name="rubberBandXyZoomModifier" 
+                                                ZoomExtentsY="True"/>
                     <s:RolloverModifier />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
@@ -304,7 +310,9 @@
                 <s:FastMarketProfileRenderableSeries
                     DataSeries="{Binding DataSeries}"
                     MarketProfileWidth="110"
-                    TickSize="{Binding TickSize, Mode=TwoWay}">
+                    TickSize="{Binding TickSize, Mode=TwoWay}"
+                    StrokeAsk="#7052CC54"
+                    StrokeBid="#D0E26565">
                     <s:FastMarketProfileRenderableSeries.FillAsk>
                         <SolidColorBrush Color="#7052CC54" />
                     </s:FastMarketProfileRenderableSeries.FillAsk>
