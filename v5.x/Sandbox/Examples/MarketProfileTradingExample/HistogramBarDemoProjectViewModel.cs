@@ -103,7 +103,7 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
             MaxHistoBarCandles = 40;
             TickSize = 0.5;
 
-              LoadRandomData(100, 1000);
+              LoadRandomData(30, 250);
             _viewportManager.ZoomExtents();
         }
 
@@ -448,15 +448,18 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
         private void ChangeBarStyling(HistogramMode histogramBarMode)
         {
             var brushConverter = new BrushConverter();
+            var askBrush = ((SolidColorBrush)brushConverter.ConvertFrom("#7052CC54"));
+            var bidBrush = ((SolidColorBrush)brushConverter.ConvertFrom("#D0E26565"));
+
             switch (histogramBarMode)
             {
                 case HistogramMode.VolumeLadder:
 
                     AskStroke = new SolidColorBrush(Colors.White) { Opacity = 0.8 };
-                    AskFill = new SolidColorBrush(Colors.Gray) { Opacity = 0.6 };
+                    AskFill = askBrush;
 
                     BidStroke = new SolidColorBrush(Colors.White) { Opacity = 0.8 };
-                    BidFill = new SolidColorBrush(Colors.Gray) { Opacity = 0.6 };
+                    BidFill = bidBrush;
 
                     break;
 
@@ -471,12 +474,12 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
                     break;
 
                 case HistogramMode.MarketProfile:
-
-                    AskStroke = new SolidColorBrush(Colors.Black);
-                    AskFill = ((SolidColorBrush)brushConverter.ConvertFrom("#7052CC54"));
-
-                    BidStroke = new SolidColorBrush(Colors.Black);
-                    BidFill = ((SolidColorBrush)brushConverter.ConvertFrom("#D0E26565"));
+                  
+                    AskStroke = askBrush;
+                    AskFill = askBrush;
+                   
+                    BidStroke = bidBrush;
+                    BidFill = bidBrush;
 
                     break;
             }
