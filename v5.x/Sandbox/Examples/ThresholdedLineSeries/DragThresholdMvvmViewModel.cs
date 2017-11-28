@@ -60,7 +60,7 @@ namespace SciChart.Sandbox.ThresholdedLineSeries
                 {
                     _dataSeries.Y1Values[i] = _thresholdValue;
                 }
-                _dataSeries.HasDataChanges = true;
+
                 _dataSeries.InvalidateParentSurface(RangeMode.None);
 
                 OnPropertyChanged("Threshold");
