@@ -339,9 +339,6 @@
     <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\TickData.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Objects\Bishop_High.obj" />
     <Resource Include="Resources\Objects\Bishop_Low.obj" />
     <Resource Include="Resources\Objects\King_High.obj" />
