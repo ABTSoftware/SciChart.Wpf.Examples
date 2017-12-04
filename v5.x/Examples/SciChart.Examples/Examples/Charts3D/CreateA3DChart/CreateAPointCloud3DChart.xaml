@@ -121,7 +121,7 @@
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D GrowBy="0.1,0.1" />
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" NegativeSideClipping="VisibleRange" PositiveSideClipping="VisibleRange" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
