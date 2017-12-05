@@ -34,7 +34,7 @@
                                                    HeightScaleFactor="0.0"
                                                    Stroke="#FF228B22"                                                    
                                                    StrokeThickness="2.0"
-                                                   Opacity="0.4"
+                                                   Opacity="0.7"
                                                    Maximum="4"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
                 
@@ -51,7 +51,7 @@
                 <!-- Ceiling with Contours. Uses HeightScaleFactor=0 and YOffset = YAxis.VisibleRange.Max to display mesh on the ceiling -->
                 <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWithContours"
                                                    HeightScaleFactor="0.0"
-                                                   Opacity="0.4"
+                                                   Opacity="0.7"
                                                    Stroke="#FF228B22" 
                                                    StrokeThickness="2.0"
                                                    Maximum="4"

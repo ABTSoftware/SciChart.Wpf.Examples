@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
@@ -404,14 +405,15 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public IEnumerable<Tick> GetTicks()
         {
             // e.g. resource format: SciChart.Examples.ExternalDependencies.Resources.Data.EURUSD_Daily.csv 
-            var csvResource = string.Format("{0}.{1}", ResourceDirectory, Path.ChangeExtension("TickData", "csv"));
+            var csvResourceZipped = string.Format("{0}.{1}", ResourceDirectory, "TickData.csv.gz");
 
             var ticks = new List<Tick>();
 
             var assembly = typeof(DataManager).Assembly;
             // Debug.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
-            using (var stream = assembly.GetManifestResourceStream(csvResource))
-            using (var streamReader = new StreamReader(stream))
+            using (var stream = assembly.GetManifestResourceStream(csvResourceZipped))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
             {
                 string line = streamReader.ReadLine();
                 while (line != null)
@@ -421,7 +423,8 @@ namespace SciChart.Examples.ExternalDependencies.Data
                     // Date, Open, High, Low, Close, Volume 
                     // 2007.07.02 03:30, 1.35310, 1.35310, 1.35280, 1.35310, 12 
                     var tokens = line.Split(',');
-                    tick.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo) + TimeSpan.Parse(tokens[1], DateTimeFormatInfo.InvariantInfo);
+                    tick.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo) +
+                                    TimeSpan.Parse(tokens[1], DateTimeFormatInfo.InvariantInfo);
                     tick.Open = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo);
                     tick.High = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo);
                     tick.Low = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo);
