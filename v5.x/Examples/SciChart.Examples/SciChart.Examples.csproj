@@ -514,6 +514,9 @@
     <Compile Include="Examples\CreateSimpleChart\DigitalMountainChartExampleView.xaml.cs">
       <DependentUpon>DigitalMountainChartExampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\HeatmapChartTypes\HeatmapMetadata\HeatmapMetadata.xaml.cs">
+      <DependentUpon>HeatmapMetadata.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\HeatmapChartTypes\NonUniformHeatmap\NonUniformHeatmap.xaml.cs">
       <DependentUpon>NonUniformHeatmap.xaml</DependentUpon>
     </Compile>
@@ -1229,6 +1232,10 @@
     <Page Include="Examples\CreateSimpleChart\DigitalMountainChartExampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\HeatmapChartTypes\HeatmapMetadata\HeatmapMetadata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\HeatmapChartTypes\NonUniformHeatmap\NonUniformHeatmap.xaml">
       <SubType>Designer</SubType>
@@ -3338,6 +3345,13 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateMultiseriesChart\Contours\ContoursExampleView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateMultiseriesChart\Contours\ContoursExampleView.xaml.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\HeatmapChartTypes\HeatmapMetaData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\HeatmapChartTypes\HeatmapMetadata\HeatmapMetadata.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\HeatmapChartTypes\HeatmapMetadata\HeatmapMetadata.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3368,32 +3382,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.1.10966\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.10987\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.1.10966\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.10987\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.1.10966\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.10987\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.1.10966\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.10987\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.1.10966\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.1.10987\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.1.10966\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.1.10987\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
