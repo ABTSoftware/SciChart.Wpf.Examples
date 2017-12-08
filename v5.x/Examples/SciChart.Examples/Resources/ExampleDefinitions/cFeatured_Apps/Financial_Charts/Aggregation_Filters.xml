@@ -4,31 +4,14 @@
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>
-    The SciTrader demo shows a multi-chart pane, interactive MVVM demo rendering Candlestick, Mountain (Area), Line and Column charts with user-selectable chart type, Data source (e.g. INDU, EUR.USD), Timeframe (Daily, Hourly) and interactivity modifiers for medium to large datasets (up to 100,000 OHLC values).
-    SciTrader showcases the interactivity of SCICHART via user-selectable ChartModifiers. Select an option and you can zoom, pan, scale the X &amp; Y axis, draw a zoom region and interrogate data values on mouse over.
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5
   </ToolTipDescription>
   <Description>
-    The SciTrader demo shows a multi-chart pane, interactive MVVM demo rendering Candlestick, Mountain (Area), Line and Column charts with user-selectable chart type, Data source, Timeframe and interactivity modifiers for medium to large datasets (up to 100,000 OHLC values).
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5.
 
-    [b][i]SciTrader showcases the interactivity of SCICHART via user-selectable ChartModifiers. Select an option and you can:[/i][/b]
+    Given a data-source of trading ticks or quotes, we aggregate into bars (Time bars, Range bars, Volume bars, Tick Bars and Renko Bars).
 
-    - Zoom the chart by dragging
-    - Pan the chart by dragging
-    - Zoom using the Mousewheel
-    - Zoom using the mousewheel
-    - Scale the chart by dragging X or Y Axes
-    - Use the RolloverModifier to interrogate data-point values
-
-    [b]Documentation Links[/b]
-
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
-    - [url='http://www.scichart.com/synchronizing-chartmodifier-mouse-events-across-charts/']Synchronizing ChartModifier Mouse Events Across Charts[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier.html']RolloverModifier Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier.html']CursorModifier Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartOverview.html']SciChartOverview Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartScrollbar.html']SciChartScrollBar Type[/url]
+    Each bar type is created by a different filter type, and we use the extension methods [b]DataSeries.AggregateByTime[/b], [b]DataSeries.AggregateByCount[/b], [b]DataSeries.AggregateByVolume[/b], [b]DataSeries.AggregateByRange[/b] and [b]DataSeries.AggregateByRenko[/b]. This creates a filter around the original tick data. Any changes to the tick data are reflected in the resulting bars on the chart. 
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.txt</string>
