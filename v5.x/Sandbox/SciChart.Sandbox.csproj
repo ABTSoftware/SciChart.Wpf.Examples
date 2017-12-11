@@ -192,6 +192,10 @@
       <DependentUpon>DragThresholdMvvm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ThresholdedLineSeries\DragThresholdMvvmViewModel.cs" />
+    <Compile Include="Examples\TicklinesUniformGrid\MillimeterDivisionsTickProvider.cs" />
+    <Compile Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml.cs">
+      <DependentUpon>TicklinesUniformGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchExamplesBehaviour.cs" />
     <Compile Include="TestCaseAttribute.cs" />
     <Compile Include="_Shared\DataManager.cs" />
@@ -216,6 +220,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\ThresholdedLineSeries\DragThresholdMvvm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
