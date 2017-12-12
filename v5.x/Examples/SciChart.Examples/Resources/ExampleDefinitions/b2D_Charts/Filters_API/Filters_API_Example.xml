@@ -9,7 +9,7 @@
   <Description>
     Demonstrates the Filters API in SciChart WPF, which gives you the ability to add simple filters to DataSeries in SciChart. 
     
-    Several built-in filters are included, such as Moving Average, 
+    Several built-in filters are included, such as Moving Average, Linear Trendline, Polynomial Trendline, Offset and Scale. You can also create your own filters by inheriting from FilterBase. 
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/FiltersAPI/FiltersAPIExample.xaml.txt</string>

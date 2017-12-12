@@ -26,12 +26,12 @@
                         <TextBlock Text="Slide to change Randomness of Data" />
                         <ext:FlyoutSeparator/>
                         <!-- Create the Z slider -->
-                        <Slider Minimum="0.1" Maximum="5.0" x:Name="randomSlider" ValueChanged="Slider_OnValueChanged"  Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0.05" Maximum="5.0" x:Name="randomSlider" ValueChanged="Slider_OnValueChanged"  Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock Text="Slide to change Slope of Data" />
                         <ext:FlyoutSeparator/>
                         <!-- Create the Z slider -->
-                        <Slider Minimum="0.01" Maximum="0.1" x:Name="slopeSlider" ValueChanged="Slider_OnValueChanged"  Value="0.01" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0.01" Maximum="0.5" x:Name="slopeSlider" ValueChanged="Slider_OnValueChanged"  Value="0.01" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -48,7 +48,10 @@
             </s:SciChartSurface.YAxis>
             
             <s:SciChartSurface.ChartModifier>
-                <s:RolloverModifier ShowTooltipOn="MouseHover" />
+                <s:ModifierGroup>
+                    <s:RolloverModifier ShowTooltipOn="MouseHover" />
+                    <s:LegendModifier ShowLegend="True"/>
+                </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
     </Grid>

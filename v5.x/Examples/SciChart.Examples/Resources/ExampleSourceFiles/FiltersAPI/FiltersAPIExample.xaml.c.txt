@@ -44,22 +44,22 @@ namespace SciChart.Examples.Examples.FiltersAPI
             var filteredDataLinearTrendline = _originalData.ToLinearTrendline();
             var filteredDataPolynomialTrendline = _originalData.ToPolynomialTrend(3);
             var filteredDataScale = _originalData.Scale(0.5);
-            var filteredDataOffset = _originalData.Offset(-0.2);
-            //var filteredDataCustom = new CustomFilter(_originalData);
+            var filteredDataOffset = _originalData.Offset(-50.0);
+            var filteredDataCustom = new CustomFilter(_originalData);
 
             _originalData.SeriesName = "Original Data";
             filteredDataLinearTrendline.SeriesName = "Linear Trendline";
             filteredDataPolynomialTrendline.SeriesName = "Polynomial (3rd Order)";
-            filteredDataScale.SeriesName = "Scaled";
-            filteredDataOffset.SeriesName = "Offset";
-            //filteredDataCustom.FilteredDataSeries.SeriesName = "Custom Filter";
+            filteredDataScale.SeriesName = "Scaled * 0.5";
+            filteredDataOffset.SeriesName = "Offset -50";
+            filteredDataCustom.FilteredDataSeries.SeriesName = "Custom Filter";
 
             sciChart.RenderableSeries.Add(new XyScatterRenderableSeries() { DataSeries = _originalData, Stroke=Colors.Red, PointMarker = new EllipsePointMarker() { Fill = Colors.Red, Stroke=Colors.Red}});
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataLinearTrendline, StrokeThickness = 2, Stroke = Colors.GreenYellow });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataPolynomialTrendline, StrokeThickness = 2, Stroke = Colors.Yellow });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataScale, StrokeThickness = 2, Stroke = Colors.DeepSkyBlue });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataOffset, StrokeThickness = 2, Stroke = Color.FromArgb(0x77, 0xFF, 0x33, 0x33) });
-            //sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Color.FromArgb(0x33, 0xFF, 0x66, 0x00) });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Colors.MediumPurple });
         }
 
         private void OnUpdatedData(double randomness, double curviness)
@@ -72,7 +72,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
         private DoubleSeries CreateSomeScatterData(double randomness, double curviness)
         {
             var doubleSeries = new DoubleSeries();            
-            Random r = new Random();
+            Random r = new Random(0);
             const double c = 0;
             const double m = 0.02;
 
@@ -93,32 +93,6 @@ namespace SciChart.Examples.Examples.FiltersAPI
         {
             if (randomSlider == null || slopeSlider == null) return;
             OnUpdatedData(randomSlider.Value, slopeSlider.Value);
-        }
-    }
-
-    public class CustomFilter : FilterBase
-    {
-        private readonly XyDataSeries<double, double> _originalDataSeries;
-        private readonly XyDataSeries<double, double> _filteredDataSeries = new XyDataSeries<double, double>();
-
-        public CustomFilter(XyDataSeries<double,double> originalDataSeries) : base(originalDataSeries)
-        {
-            _originalDataSeries = originalDataSeries;
-
-            // Store a reference in the base class to the FilteredDataSeries
-            FilteredDataSeries = _filteredDataSeries;
-        }
-
-        public override void FilterAll()
-        {
-            // When FilterAll is called, recreate the FilteredDataSeries and apply the filtering. 
-
-            _filteredDataSeries.Append(_originalDataSeries.XValues[0], _originalDataSeries.YValues[0]);
-
-            for (int i = 1; i < _originalDataSeries.Count; i++)
-            {
-                _filteredDataSeries.Append(_originalDataSeries.XValues[i], _originalDataSeries.YValues[i] + 0.5*_originalDataSeries.YValues[i-1]);
-            }
         }
     }
 }
