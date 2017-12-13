@@ -15,7 +15,8 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.Annotations;
@@ -23,11 +24,11 @@ using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers
-{
+{    
     public class TradeOverlayExampleViewModel : BaseViewModel
     {
         private IDataSeries<DateTime, double> _chartDataSeries;
-        private AnnotationCollection _annotations;
+        private ObservableCollection<IAnnotationViewModel> _annotations;
         private DefaultViewportManager _viewportManager;
 
         public TradeOverlayExampleViewModel()
@@ -50,7 +51,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers
             _chartDataSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
         }
 
-        public AnnotationCollection TradeAnnotations
+        public ObservableCollection<IAnnotationViewModel> TradeAnnotations
         {
             get { return _annotations; }
             set 
@@ -70,15 +71,15 @@ namespace SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers
             }
         }        
 
-        private static AnnotationCollection CreateAnnotations(IEnumerable<Trade> trades, List<NewsEvent> newsEvents)
+        private static ObservableCollection<IAnnotationViewModel> CreateAnnotations(IEnumerable<Trade> trades, List<NewsEvent> newsEvents)
         {
-            var annotations = new AnnotationCollection();
+            var annotations = new ObservableCollection<IAnnotationViewModel>();
             foreach (var trade in trades)
             {
-                IAnnotation annotation = trade.BuySell == BuySell.Buy ? new BuyMarkerAnnotation() : (IAnnotation)new SellMarkerAnnotation();
+                var annotation = trade.BuySell == BuySell.Buy ? new BuyMarkerAnnotationViewModel() : (IBuySellAnnotationViewModel)new SellMarkerAnnotationViewModel();
 
                 // The datacontext allows the tooltip inside the buy or sell marker to bind to elements of the Trade
-                annotation.DataContext = trade;
+                annotation.TradeData = trade;
 
                 // X1,Y1 we set up manually
                 annotation.X1 = trade.TradeDate;
@@ -89,10 +90,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers
 
             foreach(var newsEvent in newsEvents)
             {
-                var annotation = new NewsBulletAnnotation();
+                var annotation = new NewsBulletAnnotationViewModel();
 
                 // The datacontext allows the tooltip to bind to news data
-                annotation.DataContext = newsEvent;
+                annotation.NewsData = newsEvent;
 
                 // X1 is equal to the news date
                 annotation.X1 = newsEvent.EventDate;

@@ -51,8 +51,8 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
                 {
                     var dataValue = zValues[y * _width + x];
 
-                    //MetaData 
-                    var metadata = new HeatmapMetaData
+                    //Metadata 
+                    var metadata = new UniformHeatmapMetaData
                     {
                         IsSelected = false,
                         IsBody = dataValue > 0,
@@ -471,18 +471,14 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
             return (y *_width) + x;
         }
 
-        private void EnableMetaDatas(object sender, RoutedEventArgs e)
+        private void EnableMetadatas(object sender, RoutedEventArgs e)
         {
             heatmapSeries.PaletteProvider = new HeatmapMetaDataPaletteProvider();
-
-            var template = Resources["TooltipItemTemplate"] as DataTemplate;
-            TooltipModifier.SetTooltipTemplate(heatmapSeries, template);
         }
 
-        private void DisableMetaDatas(object sender, RoutedEventArgs e)
+        private void DisableMetadatas(object sender, RoutedEventArgs e)
         {
             heatmapSeries.PaletteProvider = null;
-            TooltipModifier.SetTooltipTemplate(heatmapSeries, null);
         }
     }
 
@@ -493,20 +489,18 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
             IPointMetadata[,] metaDatas = ((IHeatmapDataSeries)DataSeries).Metadata;
             if (metaDatas != null)
             {
-                var metaData = (HeatmapMetaData)metaDatas[yIndex, xIndex];
+                var metaData = (UniformHeatmapMetaData)metaDatas[yIndex, xIndex];
                 return metaData.IsBody ? base.FormatDataValue(dataValue, xIndex, yIndex) : string.Empty;
             }
             return base.FormatDataValue(dataValue, xIndex, yIndex); ;
         }
     }
 
-    public class HeatmapMetaData : IPointMetadata
+    public class UniformHeatmapMetaData : IPointMetadata
     {
-        // Implementing IPointMetadata
         public event PropertyChangedEventHandler PropertyChanged;
         public bool IsSelected { get; set; }
 
-        // Specific properties
         public Color CellColor { get; set; }
         public bool IsBody { get; set; }
         public string Tooltip { get; set; }
@@ -522,7 +516,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
         {
            if (metadata != null)
             {
-                cellColor = ((HeatmapMetaData)metadata).CellColor;
+                cellColor = ((UniformHeatmapMetaData)metadata).CellColor;
             }
 
             return cellColor;

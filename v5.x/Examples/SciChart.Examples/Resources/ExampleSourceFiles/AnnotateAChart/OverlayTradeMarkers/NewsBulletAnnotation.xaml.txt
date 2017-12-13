@@ -3,7 +3,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
                     VerticalAnchorPoint="Bottom"
-                    HorizontalAnchorPoint="Center">
+                    HorizontalAnchorPoint="Center"
+                    X1="{Binding X1}"
+                    Y1="{Binding Y1}"
+                    CoordinateMode="{Binding CoordinateMode}">
 
   <s:CustomAnnotation.Resources>
     <LinearGradientBrush x:Key="newsBulletBackground" StartPoint="0,0" EndPoint="0,1">
@@ -26,7 +29,7 @@
        object as datacontext of this annotation -->
       <ToolTipService.ToolTip>
         <ToolTip Foreground="#222">
-          <Grid Margin="6" MaxHeight="100" MaxWidth="150">
+          <Grid Margin="6" MaxHeight="100" MaxWidth="150" DataContext="{Binding NewsData}">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto" />
               <RowDefinition Height="Auto" />

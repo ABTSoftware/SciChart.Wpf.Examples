@@ -25,6 +25,14 @@
                     <TextBlock Text="{Binding Tooltip}"></TextBlock>
                 </Grid>
             </DataTemplate>
+
+            <Style x:Key="HeatmapStyle" TargetType="local:CustomUniformHeatmapRenderableSeries" BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=metadataSwitch, Path=IsChecked}" Value="True">
+                        <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
             
         </ResourceDictionary>
         
@@ -49,10 +57,10 @@
                     <StackPanel MinWidth="150" Orientation="Vertical">
                         <TextBlock Text="Get data from Metada"/>
                         <ext:FlyoutSeparator/>
-                        <CheckBox Margin="4"
+                        <CheckBox x:Name="metadataSwitch" Margin="4"
                                   Content="Use MetaData"
-                                  Checked="EnableMetaDatas"
-                                  Unchecked="DisableMetaDatas"
+                                  Checked="EnableMetadatas"
+                                  Unchecked="DisableMetadatas"
                                   />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
@@ -65,19 +73,7 @@
                            BorderThickness="0">
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" DrawTextInCell="True" Opacity="0.9" >
-                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
-                        <s:HeatmapColorPalette Minimum="0" Maximum="100">
-                            <GradientStop Color="Blue" Offset="0"/>
-                            <GradientStop Color="White" Offset="0.3"/>
-                            <GradientStop Color="Green" Offset="0.5"/>
-                            <GradientStop Color="Yellow" Offset="0.7"/>
-                            <GradientStop Color="Red" Offset="1"/>
-                        </s:HeatmapColorPalette>
-                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
-                </s:FastUniformHeatmapRenderableSeries>
-                
-                <!--<local:CustomUniformHeatmapRenderableSeries x:Name="heatmapSeries" DrawTextInCell="True" Opacity="0.9" >
+                <local:CustomUniformHeatmapRenderableSeries x:Name="heatmapSeries" DrawTextInCell="True" Opacity="0.9" Style="{StaticResource HeatmapStyle}">
                     <local:CustomUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
                             <GradientStop Color="Blue" Offset="0"/>
@@ -87,7 +83,7 @@
                             <GradientStop Color="Red" Offset="1"/>
                         </s:HeatmapColorPalette>
                     </local:CustomUniformHeatmapRenderableSeries.ColorMap>
-                </local:CustomUniformHeatmapRenderableSeries>-->
+                </local:CustomUniformHeatmapRenderableSeries>
 
             </s:SciChartSurface.RenderableSeries>
 
