@@ -16,8 +16,10 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     {
         public NYSECalendar()
         {
-            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(9, 30, 0))); // NYSE is open at 9:30 am EST
-            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 0, 0), new TimeSpan(24, 0, 0))); // NYSE is closed at 16:00 pm EST
+            // For intraday data, you can add a skip range like this.
+            // For daily data, skip ranges will cause the Daily OHLC bars with timestamp at 0:00:00 to be skipped 
+            //SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(9, 30, 0))); // NYSE is open at 9:30 am EST
+            //SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 0, 0), new TimeSpan(24, 0, 0))); // NYSE is closed at 16:00 pm EST
 
             // NYSE is closed on weekends
             SkipDaysInWeek.Add(DayOfWeek.Saturday);
@@ -40,8 +42,10 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
     {
         public LSECalendar()
         {
-            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(8, 0, 0))); // LSE is open at 08:00am GMT
-            SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 30, 0), new TimeSpan(24, 0, 0))); // LSE is closed at 16:30pm GMT
+            // For intraday data, you can add a skip range like this.
+            // For daily data, skip ranges will cause the Daily OHLC bars with timestamp at 0:00:00 to be skipped 
+            //SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(0, 0, 0), new TimeSpan(8, 0, 0))); // LSE is open at 08:00am GMT
+            //SkipDayTimeRange.Add(new TimeSpanRange(new TimeSpan(16, 30, 0), new TimeSpan(24, 0, 0))); // LSE is closed at 16:30pm GMT
 
             // LSE is closed on weekends
             SkipDaysInWeek.Add(DayOfWeek.Saturday);
