@@ -1,4 +1,5 @@
-﻿using SciChart.Charting.Model.DataSeries;
+﻿using System;
+using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 
 namespace SciChart.Examples.Examples.FiltersAPI
@@ -8,10 +9,10 @@ namespace SciChart.Examples.Examples.FiltersAPI
     /// </summary>
     public class CustomFilter : FilterBase
     {
-        private readonly XyDataSeries<double, double> _originalDataSeries;
-        private readonly XyDataSeries<double, double> _filteredDataSeries = new XyDataSeries<double, double>();
+        private readonly XyDataSeries<TimeSpan, double> _originalDataSeries;
+        private readonly XyDataSeries<TimeSpan, double> _filteredDataSeries = new XyDataSeries<TimeSpan, double>();
 
-        public CustomFilter(XyDataSeries<double,double> originalDataSeries) : base(originalDataSeries)
+        public CustomFilter(XyDataSeries<TimeSpan,double> originalDataSeries) : base(originalDataSeries)
         {
             _originalDataSeries = originalDataSeries;
 
@@ -57,7 +58,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
             // Implementing a simple low pass filter https://kiritchatterjee.wordpress.com/2014/11/10/a-simple-digital-low-pass-filter-in-c/
             for (int i = 1; i < _originalDataSeries.Count; i++)
             {
-                double xValue = _originalDataSeries.XValues[i];
+                TimeSpan xValue = _originalDataSeries.XValues[i];
                 double yValue = beta * _originalDataSeries.YValues[i] + (1 - beta) * _filteredDataSeries.YValues[i - 1];
                 _filteredDataSeries.Append(xValue, yValue);
             }

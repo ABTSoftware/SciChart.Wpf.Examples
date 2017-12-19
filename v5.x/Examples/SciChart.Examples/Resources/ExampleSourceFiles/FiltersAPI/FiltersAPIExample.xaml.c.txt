@@ -33,7 +33,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
     /// </summary>
     public partial class FiltersAPIExample : UserControl
     {
-        private readonly XyDataSeries<double, double> _originalData = new XyDataSeries<double,double>();
+        private readonly XyDataSeries<TimeSpan, double> _originalData = new XyDataSeries<TimeSpan, double>();
 
         public FiltersAPIExample()
         {
@@ -66,7 +66,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
         {
             var someDummyData = CreateSomeScatterData(randomness, curviness);
             _originalData.Clear();
-            _originalData.Append(someDummyData.XData, someDummyData.YData);
+            _originalData.Append(someDummyData.XData.Select(x => TimeSpan.FromSeconds(x)), someDummyData.YData);
         }
 
         private DoubleSeries CreateSomeScatterData(double randomness, double curviness)

@@ -41,7 +41,7 @@
         <s:SciChartSurface Grid.Column="1" 
                            x:Name="sciChart">
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis/>
+                <s:TimeSpanAxis/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis/>
