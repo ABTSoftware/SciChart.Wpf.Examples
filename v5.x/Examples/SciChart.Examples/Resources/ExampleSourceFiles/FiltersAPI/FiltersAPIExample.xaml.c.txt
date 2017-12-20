@@ -45,6 +45,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
             var filteredDataPolynomialTrendline = _originalData.ToPolynomialTrend(3);
             var filteredDataScale = _originalData.Scale(0.5);
             var filteredDataOffset = _originalData.Offset(-50.0);
+            var filteredDataSpline = _originalData.ToSpline(5);
             var filteredDataCustom = new CustomFilter(_originalData);
 
             _originalData.SeriesName = "Original Data";
@@ -52,12 +53,14 @@ namespace SciChart.Examples.Examples.FiltersAPI
             filteredDataPolynomialTrendline.SeriesName = "Polynomial (3rd Order)";
             filteredDataScale.SeriesName = "Scaled * 0.5";
             filteredDataOffset.SeriesName = "Offset -50";
+            filteredDataSpline.SeriesName = "Spline, Tension=5";
             filteredDataCustom.FilteredDataSeries.SeriesName = "Custom Filter";
 
             sciChart.RenderableSeries.Add(new XyScatterRenderableSeries() { DataSeries = _originalData, Stroke=Colors.Red, PointMarker = new EllipsePointMarker() { Fill = Colors.Red, Stroke=Colors.Red}});
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataLinearTrendline, StrokeThickness = 2, Stroke = Colors.GreenYellow });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataPolynomialTrendline, StrokeThickness = 2, Stroke = Colors.Yellow });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataScale, StrokeThickness = 2, Stroke = Colors.DeepSkyBlue });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataSpline, StrokeThickness = 1, Stroke = Colors.DeepSkyBlue, Opacity=0.5 });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataOffset, StrokeThickness = 2, Stroke = Color.FromArgb(0x77, 0xFF, 0x33, 0x33) });
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Colors.MediumPurple });
         }

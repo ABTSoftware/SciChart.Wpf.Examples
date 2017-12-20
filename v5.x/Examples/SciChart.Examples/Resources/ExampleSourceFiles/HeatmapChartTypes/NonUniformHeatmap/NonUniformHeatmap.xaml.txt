@@ -6,7 +6,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -22,7 +22,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
@@ -64,8 +64,8 @@
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
 
-        <s:HeatmapColorMap Margin="10,10,60,40" 
-                          Grid.Column="2"
+        <s:HeatmapColorMap Margin="40,20" 
+                          Grid.Column="1"
                           HorizontalAlignment="Right"
                           VerticalAlignment="Stretch"
                           Background="{Binding ElementName=sciChart, Path=Background}"
@@ -77,7 +77,17 @@
                           Opacity="0.8"
                           BorderBrush="#777"
                           BorderThickness="1"
-                          Orientation="Vertical" />
+                          Orientation="Vertical" >
+            <s:HeatmapColorMap.AxisStyle>
+                <Style TargetType="{x:Type s:NumericAxis}">
+                    <Setter Property="Margin" Value="-15,0,-10,0"/>
+                    <Setter Property="DrawMajorTicks" Value="False"/>
+                    <Setter Property="DrawMinorTicks" Value="False"/>
+                    <Setter Property="DrawMajorGridLines" Value="False"/>
+                    <Setter Property="DrawMinorGridLines" Value="False"/>
+                </Style>
+            </s:HeatmapColorMap.AxisStyle>
+        </s:HeatmapColorMap>
 
     </Grid>
 
