@@ -193,7 +193,7 @@
                                                    Opacity="{Binding ElementName=OpacityCombo, Path=SelectedItem}" 
                                                    MeshColorPalette="{Binding ElementName=ColorMapCombo, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"
                                                    StrokeThickness="2"
-                                                   Stroke="#33FFFFFF" 
+                                                   Stroke="#7FFFFFFF" 
                                                    DrawSkirt="True"
                                                    Minimum="0" Maximum="0.5" 
                                                    MeshPaletteMode="{Binding ElementName=MeshPaletteModeCombo, Path=SelectedItem}"
