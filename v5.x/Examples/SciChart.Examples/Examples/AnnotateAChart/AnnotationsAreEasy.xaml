@@ -203,7 +203,7 @@
                                           StrokeThickness="2"
                                           X1="9.5"
                                           Y1="3">
-                    <s:AnnotationLabel LabelPlacement="TopRight" Text="Bottom-aligned" />
+                    <s:AnnotationLabel LabelPlacement="TopRight" Text="Top-aligned" />
                 </s:VerticalLineAnnotation>
 
                 <!--  Events and Interaction  -->
