@@ -199,7 +199,6 @@
     <Compile Include="Common\CollapsableGridSplitter.cs" />
     <Compile Include="Common\GetTypeNameConverter.cs" />
     <Compile Include="Common\IPowerManager.cs" />
-    <Compile Include="Common\Obj3D.cs" />
     <Compile Include="Common\PowerManager.cs" />
     <Compile Include="Common\PowerPlan.cs" />
     <Compile Include="Common\SnappingModeToVisibilityConverter.cs" />
@@ -317,18 +316,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\AcousticPlots.csv" />
-    <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv" />
-    <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv" />
-    <EmbeddedResource Include="Resources\Data\INDU_Daily.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\TradeTicks.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\Waveform.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\cursor.png" />
     <Resource Include="Resources\Images\selection_view.png" />
     <Resource Include="Resources\Images\target.png" />
@@ -337,20 +324,11 @@
     <Resource Include="Resources\Images\SciChartLogo_Dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Objects\Bishop_High.obj" />
     <Resource Include="Resources\Objects\Bishop_Low.obj" />
-    <Resource Include="Resources\Objects\King_High.obj" />
     <Resource Include="Resources\Objects\King_Low.obj" />
-    <Resource Include="Resources\Objects\Knight_High.obj" />
     <Resource Include="Resources\Objects\Knight_Low.obj" />
-    <Resource Include="Resources\Objects\Pawn_High.obj" />
     <Resource Include="Resources\Objects\Pawn_Low.obj" />
-    <Resource Include="Resources\Objects\Queen_High.obj" />
     <Resource Include="Resources\Objects\Queen_Low.obj" />
-    <Resource Include="Resources\Objects\Rook_High.obj" />
     <Resource Include="Resources\Objects\Rook_Low.obj" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +337,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Data\TickData.csv.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Data\AcousticPlots.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\INDU_Daily.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\Waveform.txt.gz" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -370,32 +357,32 @@
   -->
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.1.11082\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.1.11093\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.1.11082\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.1.11093\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

@@ -657,6 +657,9 @@
       <DependentUpon>ShiftedAxes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ModifyAxisBehaviour\ShiftedAxes\ShiftedAxesBehavior.cs" />
+    <Compile Include="Examples\PerformanceDemos2D\ScatterPerf\FastPalettedScatterCharts.xaml.cs">
+      <DependentUpon>FastPalettedScatterCharts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.cs">
       <DependentUpon>AggregationFiltersView.xaml</DependentUpon>
     </Compile>
@@ -1417,6 +1420,10 @@
     <Page Include="Examples\PerformanceDemos2D\LoadMillions\LoadMillionsPageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\PerformanceDemos2D\ScatterPerf\FastPalettedScatterCharts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\PerformanceDemos2D\ScatterPerf\ScatterChartPerformanceTest.xaml">
       <SubType>Designer</SubType>
@@ -3369,6 +3376,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\OverlayTradeMarkers\TradeAnnotationViewModels.c.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fast_Paletted_Scatter_Charts.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\ScatterPerf\FastPalettedScatterCharts.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\ScatterPerf\FastPalettedScatterCharts.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3399,32 +3415,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.0.1.11082\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.0.1.11093\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.0.1.11082\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.0.1.11093\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.0.1.11082\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.0.1.11093\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

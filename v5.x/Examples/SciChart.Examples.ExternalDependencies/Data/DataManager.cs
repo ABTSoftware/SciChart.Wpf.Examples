@@ -285,7 +285,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
                             if (resourceString.Contains("_"))
                             {
                                 var instrument = Instrument.Parse(GetSubstring(resourceString, ResourceDirectory + ".", "_"));
-                                var timeframe = TimeFrame.Parse(GetSubstring(resourceString, "_", ".csv"));
+                                var timeframe = TimeFrame.Parse(GetSubstring(resourceString, "_", ".csv.gz"));
 
                                 _availableTimeFrames[instrument].Add(timeframe);
                             }
@@ -308,7 +308,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             // e.g. resource format: SciChart.Examples.ExternalDependencies.Resources.Data.EURUSD_Daily.csv 
-            var csvResource = string.Format("{0}.{1}", ResourceDirectory, "AcousticPlots.csv");
+            var csvResource = string.Format("{0}.{1}", ResourceDirectory, "AcousticPlots.csv.gz");
 
             var ch0 = new DoubleSeries(100000);
             var ch1 = new DoubleSeries(100000);
@@ -321,7 +321,8 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
             var assembly = typeof(DataManager).Assembly;
             using (var stream = assembly.GetManifestResourceStream(csvResource))
-            using (var streamReader = new StreamReader(stream))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
             {
                 string line = streamReader.ReadLine();
                 line = streamReader.ReadLine();
@@ -367,7 +368,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             // e.g. resource format: SciChart.Examples.ExternalDependencies.Resources.Data.EURUSD_Daily.csv 
-            var csvResource = string.Format("{0}.{1}", ResourceDirectory, Path.ChangeExtension(dataset, "csv"));
+            var csvResource = string.Format("{0}.{1}", ResourceDirectory, Path.ChangeExtension(dataset, "csv.gz"));
 
             var priceSeries = new PriceSeries();
             priceSeries.Symbol = dataset;
@@ -375,7 +376,8 @@ namespace SciChart.Examples.ExternalDependencies.Data
             var assembly = typeof(DataManager).Assembly;
             // Debug.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
             using (var stream = assembly.GetManifestResourceStream(csvResource))
-            using (var streamReader = new StreamReader(stream))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
             {
                 string line = streamReader.ReadLine();
                 while (line != null)
@@ -658,9 +660,10 @@ namespace SciChart.Examples.ExternalDependencies.Data
             var dataSource = new List<TradeData>();
 
             var asm = Assembly.GetExecutingAssembly();
-            var csvResource = asm.GetManifestResourceNames().Single(x => x.ToUpper(CultureInfo.InvariantCulture).Contains("TRADETICKS.CSV"));
+            var csvResource = asm.GetManifestResourceNames().Single(x => x.ToUpper(CultureInfo.InvariantCulture).Contains("TRADETICKS.CSV.GZ"));
             using (var stream = asm.GetManifestResourceStream(csvResource))
-            using (var streamReader = new StreamReader(stream))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
             {
                 string line = streamReader.ReadLine();
                 while (line != null)
@@ -686,10 +689,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             var values = new List<double>();
             var asm = Assembly.GetExecutingAssembly();
-            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains("Waveform.txt"));
+            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains("Waveform.txt.gz"));
 
             using (var stream = asm.GetManifestResourceStream(resourceString))
-            using (var streamReader = new StreamReader(stream))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
             {
                 string line = streamReader.ReadLine();
                 while (line != null)
@@ -700,25 +704,6 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             return values.ToArray();
-        }
-
-        /// <summary>
-        /// This loads an *.obj file which has been embedded in the SciChart.Examples.ExternalDependencies as an 
-        /// embedded resource. Valid obj files include the values provided by <see cref="Obj3D"/> type
-        /// </summary>
-        /// <param name="objResource">The resource to load</param>
-        /// <returns>A byte[] array representing the obj file</returns>
-        public byte[] LoadWavefrontObject(Obj3D objResource)
-        {
-            var asm = GetType().Assembly;
-            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains(objResource.Value));
-
-            using (var stream = asm.GetManifestResourceStream(resourceString))
-            using (var ms = new MemoryStream())
-            {
-                stream.CopyTo(ms);
-                return ms.ToArray();
-            }
         }
     }
 }
