@@ -33,17 +33,17 @@
 
 
         <s:SciChartSurface x:Name="sciChart"
-                                  Grid.Column="1">
+                                Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries x:Name="mountainSeries" 
-                                                       Fill="#771964FF"
-                                                       Stroke="#FF0944CF"
-                                                       YAxisId="PrimaryAxis" />
+                                                    Fill="#771964FF"
+                                                    Stroke="#FF0944CF"
+                                                    YAxisId="PrimaryAxis" />
                 <s:FastLineRenderableSeries x:Name ="lineSeries" 
-                                                   Stroke="#FF279B27"
-                                                   StrokeThickness="2"
-                                                   YAxisId="SecondaryAxis" />
+                                                Stroke="#FF279B27"
+                                                StrokeThickness="2"
+                                                YAxisId="SecondaryAxis" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -53,13 +53,13 @@
             <!--  Create Y Axes on the Left and Right  -->
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis AxisAlignment="Right"
-                                      Id="PrimaryAxis"
-                                      TickTextBrush="#FF279B27"
-                                      GrowBy="0.1, 0.1"/>
+                                    Id="PrimaryAxis"
+                                    TickTextBrush="#FF279B27"
+                                    GrowBy="0.1, 0.1"/>
                 <s:NumericAxis AxisAlignment="Left"
-                                      Id="SecondaryAxis"
-                                      TickTextBrush="#FF4083B7" 
-                                      GrowBy="0.1, 0.1"/>
+                                    Id="SecondaryAxis"
+                                    TickTextBrush="#FF4083B7" 
+                                    GrowBy="0.1, 0.1"/>
             </s:SciChartSurface.YAxes>
 
             <s:SciChartSurface.ChartModifier>
@@ -69,11 +69,11 @@
                     <!-- Note IsEnabled, IsXAxisOnly, ZoomExtentsY and IsAnimated properties are ound to controls in the example -->
                     <!-- Note default styling is provided by the themes, but you can override RubberBandFill, RubberBandStroke, RubberBandStrokeDashArray -->
                     <s:RubberBandXyZoomModifier IsXAxisOnly="{Binding ElementName=zoomXAxisOnly, Path=IsChecked, Mode=TwoWay}" 
-                                                ZoomExtentsY="{Binding ElementName=zoomExtentsY, Path=IsChecked, Mode=TwoWay}"
-                                                IsAnimated="{Binding ElementName=useAnimation, Path=IsChecked, Mode=TwoWay}"
-                                                RubberBandFill="#55FFFFFF"
-                                                RubberBandStroke="#FFFFFFFF"
-                                                RubberBandStrokeDashArray="2 2">
+                                            ZoomExtentsY="{Binding ElementName=zoomExtentsY, Path=IsChecked, Mode=TwoWay}"
+                                            IsAnimated="{Binding ElementName=useAnimation, Path=IsChecked, Mode=TwoWay}"
+                                            RubberBandFill="#55FFFFFF"
+                                            RubberBandStroke="#FFFFFFFF"
+                                            RubberBandStrokeDashArray="2 2">
                     </s:RubberBandXyZoomModifier>
 
                     <s:ZoomExtentsModifier IsAnimated="{Binding ElementName=useAnimation, Path=IsChecked, Mode=TwoWay}"/>

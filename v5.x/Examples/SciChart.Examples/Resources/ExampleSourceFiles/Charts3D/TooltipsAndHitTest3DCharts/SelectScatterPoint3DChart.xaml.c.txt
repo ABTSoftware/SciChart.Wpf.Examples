@@ -52,7 +52,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
             ZAx.VisibleRange = new DoubleRange(1000, 10000);
 
             _xyzDataSeries3D = new XyzDataSeries3D<double>();
-            renderableSeries3D.PointMarker = new EllipsePointMarker3D();
+            
             _xyzDataSeries3D.DataSeriesChanged += OnScatterDataChanged;
 
             for (int i = 0; i < 300; i++)

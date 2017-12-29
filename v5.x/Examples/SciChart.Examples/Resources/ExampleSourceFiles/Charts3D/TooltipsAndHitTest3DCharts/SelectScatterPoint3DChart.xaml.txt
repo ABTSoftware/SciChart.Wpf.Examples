@@ -45,7 +45,11 @@
                                s:ThemeManager.Theme="SciChartv4Dark">
 
             <s3D:SciChart3DSurface.RenderableSeries>
-                <s3D:ScatterRenderableSeries3D x:Name="renderableSeries3D" PaletteProvider="{StaticResource CloudPaletteProvider}" />
+                <s3D:ScatterRenderableSeries3D x:Name="renderableSeries3D" PaletteProvider="{StaticResource CloudPaletteProvider}" >
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:EllipsePointMarker3D Size="0.2"/>
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
