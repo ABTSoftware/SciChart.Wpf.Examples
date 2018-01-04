@@ -14,9 +14,13 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
+using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using SciChart.Charting3D.Model;
+using SciChart.Charting3D.Model.ChartData;
+using SciChart.Charting3D.RenderableSeries;
 using SciChart.Core.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
@@ -26,7 +30,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
     /// </summary>
     public partial class SeriesCustomTooltips3DChart : UserControl
     {
-        private const int Count = 5000;
+        private const int Count = 500;
 
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
         private readonly FasterRandom _random = new FasterRandom();
@@ -45,24 +49,57 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
         {
             var xyzDataSeries3D = new XyzDataSeries3D<double>();
 
-            for (var i = 0; i < Count; i++)
+            for (int i = 0, pointIndex = 0; i < Count; i++)
             {
                 var m1 = _random.Next(2) == 0 ? -1 : 1;
                 var m2 = _random.Next(2) == 0 ? -1 : 1;
                 var x1 = _random.NextDouble() * m1;
                 var x2 = _random.NextDouble() * m2;
 
-                if (x1*x1 + x2*x2 < 1)
-                {
-                    var x = 2*x1*Math.Sqrt(1 - x1*x1 - x2*x2);
-                    var y = 2*x2*Math.Sqrt(1 - x1*x1 - x2*x2);
-                    var z = 1 - 2*(x1*x1 + x2*x2);
+                if (x1 * x1 + x2 * x2 > 1) continue;
 
-                    xyzDataSeries3D.Append(x, y, z);
-                }
+                var x = 2 * x1 * Math.Sqrt(1 - x1 * x1 - x2 * x2);
+                var y = 2 * x2 * Math.Sqrt(1 - x1 * x1 - x2 * x2);
+                var z = 1 - 2 * (x1 * x1 + x2 * x2);
+
+                // Append an XYZ Point with random color
+                // Set the PointMetadata.Tag which we bind to in the View 
+                xyzDataSeries3D.Append(x, y, z, new PointMetadata3D(GetRandomColor(), 3.0f, false, 
+                    string.Format("PointMetadata Index {0}", ++pointIndex)));
             }
 
             SciChart.RenderableSeries[0].DataSeries = xyzDataSeries3D;
+        }
+
+        private Color GetRandomColor()
+        {
+            return Color.FromArgb(255, (byte)_random.Next(0, 255), (byte)_random.Next(0, 255),
+                (byte)_random.Next(0, 255));
+        }
+    }
+
+    // Shows how to get PointMetadata3D from the SeriesInfo and bind to in the tooltip. See the XAML for the Tooltip template
+    public class PointMetadataFromXyzSeriesInfoConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // Binding to Path=. means BaseXyzSeriesInfo3D
+            var seriesInfo = value as BaseXyzSeriesInfo3D;
+            if (seriesInfo == null) return null;
+
+            // Get the DataSeries and cast 
+            var ds = seriesInfo.RenderableSeries.DataSeries as XyzDataSeries3D<double>;
+
+            // Using VertexID (starts at 1) which is the XYZ point ID we can find the metadata 
+            var pointMetadata = ds.WValues[(int) seriesInfo.VertexId-1] as PointMetadata3D;
+
+            // Return the tag (set in OnLoaded as a string with index) 
+            return pointMetadata?.Tag;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,7 +5,8 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:cd="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
-             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D">
+             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts">
 
     <UserControl.Resources>
 
@@ -16,6 +17,8 @@
                           Direction="-45"
                           ShadowDepth="10"
                           Color="Black" />
+
+        <local:PointMetadataFromXyzSeriesInfoConverter x:Key="PointMetadataConverter"/>
 
         <Style x:Key="TooltipStyle" TargetType="s:TooltipControl">
             <Setter Property="Template">
@@ -40,10 +43,14 @@
                 <TextBlock>
                     <Run FontWeight="Bold" Text="This is the Custom tooltip DataTemplate" />
                 </TextBlock>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
                     <TextBlock>
                         <Run FontWeight="Bold" Text="VertexId: " />
                         <Run Text="{Binding VertexId}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="PointMetadata: " />
+                        <Run Text="{Binding ., Converter={StaticResource PointMetadataConverter}}" />
                     </TextBlock>
                     <TextBlock>
                         <Run FontWeight="Bold" Text="X: " />
@@ -98,9 +105,9 @@
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
-                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" />
-                    <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" />
-                    <t3D:TooltipModifier3D HoverDelay="150" ShowTooltipOn="MouseHover"/>
+                    <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" IsEnabled="True" />
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" IsEnabled="False" />
+                    <t3D:TooltipModifier3D HoverDelay="150" ShowTooltipOn="MouseOver" ShowAxisLabels="True"/>
                     <s3D:MouseWheelZoomModifier3D />
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
                                                AutoFitRadius="True"

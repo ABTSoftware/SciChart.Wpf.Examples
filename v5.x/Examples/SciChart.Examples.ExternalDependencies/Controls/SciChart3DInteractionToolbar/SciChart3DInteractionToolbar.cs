@@ -174,7 +174,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             var mouseWheelZoomPanModifier = new MouseWheelZoomModifier3D();
 
             var vertexSelectionMod = new VertexSelectionModifier3D { IsEnabled = false, ExecuteOn = ExecuteOn.MouseLeftButton, ExecuteWhen = MouseModifier.Ctrl };
-            var tooltipMod = new TooltipModifier3D { IsEnabled = false };
+            var tooltipMod = new TooltipModifier3D { IsEnabled = false, ShowTooltipOn = ShowTooltipOptions.MouseOver, ShowAxisLabels = true };
             var legendMod = new LegendModifier3D { LegendPlacement = LegendPlacement.Inside, ShowLegend = false };
 
             _modifiersInAllMode.ChildModifiers.Add(orbitModifier);
