@@ -39,6 +39,8 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     {
         private readonly Color _textColor;
         private readonly TextDisplayMode _textDisplayMode;
+        private readonly int _fontSize;
+        private readonly string _fontFamily;
         Font3D _font;
 
         public string Text { get; set; }
@@ -59,7 +61,8 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             _textColor = textColor;
             Location = location;
             _textDisplayMode = textDisplayMode;
-            _font = new Font3D(fontFamily, (uint) fontSize);
+            _fontSize = fontSize;
+            _fontFamily = fontFamily;
 
             // Set requires SeletionId to false to exclude this item from selection, tooltips and also 
             // prevent issues with maximum number of selectable meshes 
@@ -81,8 +84,6 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void RenderScene(IRenderPassInfo3D e)
         {
-            if (_font == null) return;
-
             var currentCamera = RootSceneEntity != null ? RootSceneEntity.Viewport3D.CameraController : null;
             switch (_textDisplayMode)
             {
@@ -135,9 +136,15 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// </summary>
         public override void Dispose()
         {
+            DisposeFont();
+
+            base.Dispose();
+        }
+
+        private void DisposeFont()
+        {
             _font.SafeDispose();
             _font = null;
-            base.Dispose();
         }
 
         /// <summary>
@@ -146,6 +153,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void UpdateScene(IRenderPassInfo3D e)
         {
+            if (_font == null)
+            {
+                _font = new Font3D(_fontFamily, (uint)_fontSize);
+            }
         }
 
 
@@ -156,6 +167,16 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <param name="vertexIds">The vertex ids.</param>
         public override void PerformSelection(bool isSelected, List<VertexId> vertexIds)
         {
+        }
+
+        /// <summary>
+        /// Called when the D3DEngine Restarts. Meshes and DirectX related objects should be recreated
+        /// </summary>
+        public override void OnEngineRestart()
+        {
+            DisposeFont();
+
+            base.OnEngineRestart();
         }
     }
 }
