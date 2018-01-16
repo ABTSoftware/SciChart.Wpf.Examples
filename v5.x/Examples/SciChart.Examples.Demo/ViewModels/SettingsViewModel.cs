@@ -1,9 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
-using CodeHighlighter.Common;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Visuals;
@@ -11,10 +9,9 @@ using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
-using SciChart.Examples.Demo.Helpers;
+using SciChart.Examples.Demo.Helpers.Navigation;
 using SciChart.Wpf.UI.Reactive;
 using SciChart.Wpf.UI.Reactive.Observability;
-using ServiceLocator = SciChart.Wpf.UI.Bootstrap.ServiceLocator;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
@@ -72,11 +69,32 @@ namespace SciChart.Examples.Demo.ViewModels
                 .Throttle(TimeSpan.FromMilliseconds(1))
                 .ObserveOnDispatcher()
                 .Subscribe(t =>
-                {
+                {                    
+                    GoHomeInCaseOfProblemExample();
+
                     Viewport3D.Restart3DEngineWith(
-                        UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect, 
-                        Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None);         
+                        UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
+                        Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None);
                 });
+        }
+
+        /// <summary>
+        /// Work around for SC-4346:
+        ///   Go home is case current example is one of examples that can cause application crash
+        ///   during 3D engine renderer switch.
+        /// </summary>
+        private static void GoHomeInCaseOfProblemExample()
+        {
+            var curExampleUri = Navigator.Instance.CurrentExample?.Uri;
+            var problemEmaples = new []
+            {
+                        "SciChart.Examples;component/Examples/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml"
+            };
+            bool needGoHome = !String.IsNullOrWhiteSpace(curExampleUri) && problemEmaples.Any(ex => ex == curExampleUri);
+            if (needGoHome && Navigator.Instance.NavigateToHomeCommand.CanExecute(null))
+            {
+                Navigator.Instance.NavigateToHomeCommand.Execute(null);
+            }
         }
 
         public bool UseD3D11
