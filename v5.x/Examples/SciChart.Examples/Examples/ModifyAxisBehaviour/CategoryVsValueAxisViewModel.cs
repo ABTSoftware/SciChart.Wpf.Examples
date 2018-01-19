@@ -13,10 +13,7 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
-using System.Collections.Generic;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.ModifyAxisBehaviour
@@ -25,42 +22,16 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
     {
         private IDataSeries<double, double> _dataSeries;
         private bool _useCategoryNumericAxis;
+        private double[] _xData = new[] { 1, 1.8, 2.35, 3.4, 4, 12, 12.3, 13.2, 13.5, 14, 20, 20.1, 20.6, 21.5, 22, 23, 24.2, 24.8, 25.15, 25.65, 26 };
+        private double[] _yData = new[] { 1d, 4, 3.00, 5.2, 2, 2, 1.3, 7, 5.5, 6.3, 6.3, 5.8, 4.1, 5.5, 3, 3, 4.8, 4.1, 6, 5.1, 5.8 };
 
         public CategoryVsValueAxisViewModel()
         {
             DataSeries = new XyDataSeries<double, double>();
             DataSeries.AcceptsUnsortedData = true;
-            DataSeries.Append(GenerateXData(100), GenerateYData(100));
+            DataSeries.Append(_xData, _yData);
         }
-
-        public IList<double> GenerateXData(int pointCount)
-        {
-            var retval = new List<double>();
-            var random = new FasterRandom();
-
-            for (var index = 0; index < pointCount; index++)
-            {
-                retval.Add(random.Next(1000));
-            }
-
-            retval.Sort();
-
-            return retval;
-        }
-
-        public IList<double> GenerateYData(int pointCount)
-        {
-            var retval = new List<double>();
-            var random = new FasterRandom();
-
-            for (var index = 0; index < pointCount; index++)
-            {
-                retval.Add(random.Next(10));
-            }
-
-            return retval;
-        }
-
+        
         public IDataSeries<double, double> DataSeries
         {
             get { return _dataSeries; }
