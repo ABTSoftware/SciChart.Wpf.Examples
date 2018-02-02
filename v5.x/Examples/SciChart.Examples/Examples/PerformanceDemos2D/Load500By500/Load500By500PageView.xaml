@@ -59,7 +59,7 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RubberBandXyZoomModifier IsAnimated="True" />
-                    <s:CursorModifier />
+                    <s:CursorModifier ShowTooltip="True"/>
                     <s:ZoomPanModifier ExecuteOn="MouseLeftButton" ReceiveHandledEvents="True" />
                     <s:ZoomExtentsModifier IsAnimated="True" />
                     <s:XAxisDragModifier />
