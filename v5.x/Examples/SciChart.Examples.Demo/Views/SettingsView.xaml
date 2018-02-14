@@ -215,6 +215,14 @@
                               FontSize="14"
                               ToolTip="Enable / disable C++ Resampling algorithms for faster, more accurate resampling"
                               IsChecked="{Binding EnableResamplingCPlusPlus, Mode=TwoWay}" />
+
+                    <CheckBox Grid.Row="6"
+                              Margin="3"
+                              Content="Enable Extreme Drawing Manager"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Enable / disable extreme drawing manager for faster, more accurate lines drawing"
+                              IsChecked="{Binding EnableExtremeDrawingManager, Mode=TwoWay}" />
                 </StackPanel>
 
                 <TextBlock Grid.Row="7"

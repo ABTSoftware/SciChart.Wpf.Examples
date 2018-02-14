@@ -43,6 +43,7 @@ namespace SciChart.Examples.Demo.ViewModels
             Use3DAA4x = false;
             Use3DAANone = true;
             EnableResamplingCPlusPlus = false;
+            EnableExtremeDrawingManager = true;
 
             Observable.CombineLatest(
                 this.WhenPropertyChanged(x => x.UseAlternativeFillSourceD3D),
@@ -134,15 +135,31 @@ namespace SciChart.Examples.Demo.ViewModels
             {
                 SetDynamicValue("EnableResamplingCPlusPlus", value);
 
-                // Creates a style with this markup and adds to application resource to affect all charts
-                // <Style TargetType="s:SciChartSurface">
-                //   <Setter Property="RenderSurfaceBase.RenderSurfaceType" Value="_selectedRenderer"/>
-                // </Style>
-
-                CreateGlobalStyle<SciChartSurface>();
-                CreateGlobalStyle<SciStockChart>();
+                RecreateStyles();
             }
-        }        
+        }
+
+        public bool EnableExtremeDrawingManager
+        {
+            get { return GetDynamicValue<bool>("EnableExtremeDrawingManager"); }
+            set
+            {
+                SetDynamicValue("EnableExtremeDrawingManager", value);
+
+                RecreateStyles();
+            }
+        }
+
+        private void RecreateStyles()
+        {
+            // Creates a style with this markup and adds to application resource to affect all charts
+            // <Style TargetType="s:SciChartSurface">
+            //   <Setter Property="RenderSurfaceBase.RenderSurfaceType" Value="_selectedRenderer"/>
+            // </Style>
+
+            CreateGlobalStyle<SciChartSurface>();
+            CreateGlobalStyle<SciStockChart>();
+        }
 
         public Type SelectedRenderer
         {
@@ -203,6 +220,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
                 overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
                 overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
+                overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
                 if (Application.Current.Resources.Contains(typeof(T)))
                 {
                     Application.Current.Resources.Remove(typeof(T));
