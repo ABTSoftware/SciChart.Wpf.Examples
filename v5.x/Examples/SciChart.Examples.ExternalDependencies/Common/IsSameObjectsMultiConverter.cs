@@ -1,6 +1,6 @@
 ﻿using System.Windows.Data;
 
-namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
+namespace SciChart.Examples.ExternalDependencies.Common
 {
     public class IsSameObjectsMultiConverter : IMultiValueConverter
     {

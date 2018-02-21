@@ -1,6 +1,6 @@
 ﻿using SciChart.Charting.Visuals.Annotations;
 
-namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBindings
+namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 {
     /// <summary>
     /// Interaction logic for ArrowAnnotation.xaml

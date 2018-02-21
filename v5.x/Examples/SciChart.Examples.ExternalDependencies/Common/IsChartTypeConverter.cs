@@ -16,9 +16,8 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using SciChart.Examples.ExternalDependencies.Common;
 
-namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
+namespace SciChart.Examples.ExternalDependencies.Common
 {
     public class IsChartTypeConverter : IValueConverter
     {

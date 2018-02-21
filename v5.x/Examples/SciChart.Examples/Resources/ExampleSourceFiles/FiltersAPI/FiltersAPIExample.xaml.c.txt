@@ -24,7 +24,6 @@ using SciChart.Examples.ExternalDependencies.Data;
 using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Examples.Examples.ZoomAndPanAChart;
 
 namespace SciChart.Examples.Examples.FiltersAPI
 {

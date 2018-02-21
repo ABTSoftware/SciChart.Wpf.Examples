@@ -729,12 +729,8 @@
       <DependentUpon>RealTimePerformanceDemoView.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Examples\SeeFeaturedApplication\SciTrader\IsSameObjectsMultiConverter.cs" />
     <Compile Include="Examples\SeeFeaturedApplication\Spectrogram\SpectrogramDemoView.xaml.cs">
       <DependentUpon>SpectrogramDemoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Examples\SeeFeaturedApplication\SciTrader\IsChartTypeConverter.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Examples\SeeFeaturedApplication\SciTrader\SciTraderView.xaml.cs">
       <DependentUpon>SciTraderView.xaml</DependentUpon>
@@ -2651,7 +2647,6 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Oscilloscope\OscilloscopeView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Oscilloscope\OscilloscopeView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Oscilloscope\OscilloscopeViewModel.c.txt" />
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\SciTrader\IsChartTypeConverter.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\SciTrader\SciTraderView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\SciTrader\SciTraderView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\SciTrader\SciTraderViewModel.c.txt" />
@@ -3191,9 +3186,6 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateGaugeCharts\UsingDonutChartExampleViewModel.c.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\SciTrader\IsSameObjectsMultiConverter.c.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateTernaryChart\TernaryErrorValuesVisibilityConverter.c.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -3418,32 +3410,32 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.1.0.11291\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.1.0.11292\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.1.0.11291\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.1.0.11292\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.1.0.11291\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.1.0.11292\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.1.0.11291\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.1.0.11292\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.1.0.11291\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.1.0.11292\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.1.0.11291\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.1.0.11292\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

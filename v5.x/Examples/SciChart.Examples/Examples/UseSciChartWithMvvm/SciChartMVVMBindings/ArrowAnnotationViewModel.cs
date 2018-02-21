@@ -2,7 +2,7 @@
 using SciChart.Charting.Model.ChartSeries;
 
 
-namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBindings
+namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 {
     public class ArrowAnnotationViewModel : BaseAnnotationViewModel
     {

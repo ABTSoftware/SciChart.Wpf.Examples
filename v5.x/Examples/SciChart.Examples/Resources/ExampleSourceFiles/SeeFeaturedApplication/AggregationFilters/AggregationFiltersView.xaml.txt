@@ -5,7 +5,6 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:sciTrader="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -130,7 +129,7 @@
                 </Grid>
             </DataTemplate>
 
-            <sciTrader:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter" />
+            <ext:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 

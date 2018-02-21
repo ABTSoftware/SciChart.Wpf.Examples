@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using SciChart.Charting.Numerics.Calendars;
-using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
-using SciChart.Data.Model;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.Common
 {

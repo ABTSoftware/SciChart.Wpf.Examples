@@ -10,7 +10,7 @@ using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 
-namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBindings
+namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 {
     public class SciChartMvvmBindingsViewModel : BaseViewModel
     {
