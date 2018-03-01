@@ -2,7 +2,7 @@
 using ChartProviders.Common;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Data;
-//using SciChart.Drawing.DirectX.Context.D3D11;
+using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighQualityRasterizer;
 using SciChart.Drawing.HighSpeedRasterizer;
 
@@ -21,10 +21,9 @@ namespace ChartProviderSciChart_Trunk
 
         public ChartingProviderSciChart_Trunk(Renderer whichRenderer)
         {
-            //_selectedRenderSurface = whichRenderer == Renderer.DirectX ? typeof(Direct3D11RenderSurface) :
-            //   whichRenderer == Renderer.SoftwareHS ? typeof(HighSpeedRenderSurface) :
-            //   typeof(HighQualityRenderSurface);            
-            _selectedRenderSurface = typeof(HighSpeedRenderSurface);
+            _selectedRenderSurface = whichRenderer == Renderer.DirectX ? typeof(Direct3D11RenderSurface) :
+               whichRenderer == Renderer.SoftwareHS ? typeof(HighSpeedRenderSurface) :
+               typeof(HighQualityRenderSurface);                        
         }
 
         public ISpeedTest ScatterPointsSpeedTest()
