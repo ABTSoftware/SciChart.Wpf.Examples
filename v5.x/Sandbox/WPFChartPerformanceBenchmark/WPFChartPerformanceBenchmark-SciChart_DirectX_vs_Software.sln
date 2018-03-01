@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChartProviders", "ChartProviders", "{5EB8DD45-829C-4B12-B177-BA9B991EF408}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartProviders.Common", "ChartProviders.Common\ChartProviders.Common.csproj", "{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartProviderSciChart_Trunk", "ChartProviderSciChart_Trunk\ChartProviderSciChart_Trunk.csproj", "{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{351628DE-2E9B-4608-ADC5-66DD58360999}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFChartPerformanceBenchmark - DirectX vs Software", "WPFChartPerformanceBenchmark_SC_DirectX_vs_Software\WPFChartPerformanceBenchmark - DirectX vs Software.csproj", "{D5EB3231-1774-4239-93AB-6D113F289343}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5EB3231-1774-4239-93AB-6D113F289343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5EB3231-1774-4239-93AB-6D113F289343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5EB3231-1774-4239-93AB-6D113F289343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5EB3231-1774-4239-93AB-6D113F289343}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{837CD3A6-6D72-4CBD-B7FA-197AB1E839BF} = {5EB8DD45-829C-4B12-B177-BA9B991EF408}
+		{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71} = {5EB8DD45-829C-4B12-B177-BA9B991EF408}
+	EndGlobalSection
+EndGlobal
