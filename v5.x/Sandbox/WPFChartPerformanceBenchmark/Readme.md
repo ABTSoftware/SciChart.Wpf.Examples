@@ -33,7 +33,9 @@ This article shows several test cases of SciChart's drawing performance, includi
 
  1. Open the WPFChartPerformanceBenchmark-SciChart_DirectX_vs_Software.sln
 
- 2. Right click the solution node and Enable Nuget Package Restore. This is required to download the SciChart WPF DLLs
+ 2. Right click the solution node and Enable Nuget Package Restore. This is required to download the SciChart WPF DLLs. 
+ 
+ ..* **NOTE:** For NuGet Package restore, ensure you add the NUGet feed https://www.myget.org/F/abtsoftware/api/v3/index.json to your Visual Studio. Full instructions can be found at [SciChart | Getting Nightly Builds with NuGet](https://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
 
  3. Build in Release Mode 
 
