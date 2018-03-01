@@ -115,17 +115,16 @@ namespace WPFChartPerformanceBenchmark
             TestRunnerType runnerType = TestRunnerType.Composition;
             // (TestRunnerType runnerType = TestRunnerType.DispatcherTimer; runnerType <= TestRunnerType.Composition; runnerType++)
             {
-//                //Testing the 500x500 series case (many series of few points) 
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 5 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 5 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 5 }));
-//                
+                //Testing the 500x500 series case (many series of few points) 
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "100x100, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 100, sciChartResampling, true) { StrokeThickness = 5 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "500x500, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 500, sciChartResampling, true) { StrokeThickness = 5 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "1000x1000, AA On", chartingProvider.LoadNxNRefreshTest(), duration, new TestParameters(runnerType, 1000, sciChartResampling, true) { StrokeThickness = 5 }));                
                 
                 // Scatter Series updating. Each test appends N points to a scatter series and a new N points each render. Tests raw fill-rate of the renderer
                 listTestCases.Add(new TestCase(i++, chartingProvider.Name, "Scatter", chartingProvider.ScatterPointsSpeedTest(), duration, new TestParameters(runnerType, 1000) { DataDistribution = DataDistribution.Uniform }));
@@ -136,34 +135,34 @@ namespace WPFChartPerformanceBenchmark
                 listTestCases.Add(new TestCase(i++, chartingProvider.Name, "Scatter", chartingProvider.ScatterPointsSpeedTest(), duration, new TestParameters(runnerType, 250000) { DataDistribution = DataDistribution.Uniform }));
                 listTestCases.Add(new TestCase(i++, chartingProvider.Name, "Scatter", chartingProvider.ScatterPointsSpeedTest(), duration, new TestParameters(runnerType, 500000) { DataDistribution = DataDistribution.Uniform }));
                 listTestCases.Add(new TestCase(i++, chartingProvider.Name, "Scatter", chartingProvider.ScatterPointsSpeedTest(), duration, new TestParameters(runnerType, 1000000) { DataDistribution = DataDistribution.Uniform })); 
-//                
-//                // FIFO Series updating. Tests speed of renderer, resampling and dataseries
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 1 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 2 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 3 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 3 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 3 }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 3 })); 
-//                                
-//                //  Line Series Appending. Each test appends N lines to an existing series. Does not scroll
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 1.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 1.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 1.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 1.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 2.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 2.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 2.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 2.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 5.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 5.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 5.0f }));
-//                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 5.0f }));            
+                
+                // FIFO Series updating. Tests speed of renderer, resampling and dataseries
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 1 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 2 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000, sciChartResampling, true) { StrokeThickness = 3 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 100000, sciChartResampling, true) { StrokeThickness = 3 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 1000000, sciChartResampling, true) { StrokeThickness = 3 }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "FIFO", chartingProvider.FifoLineSpeedTest(), duration, new TestParameters(runnerType, 10000000, sciChartResampling, true) { StrokeThickness = 3 })); 
+                                
+                //  Line Series Appending. Each test appends N lines to an existing series. Does not scroll
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 1.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 1.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 1.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 1.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 2.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 2.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 2.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 2.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 10000, 1000, 0, true, sciChartResampling) { StrokeThickness = 5.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 1000, 1, true, sciChartResampling) { StrokeThickness = 5.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 100000, 10000, 10, true, sciChartResampling) { StrokeThickness = 5.0f }));
+                listTestCases.Add(new TestCase(i++, chartingProvider.Name, "APPEND", chartingProvider.LineAppendSpeedTest(), duration, new LineAppendTestParameters(runnerType, 1000000, 10000, 100, true, sciChartResampling) { StrokeThickness = 5.0f }));            
             }
 
             

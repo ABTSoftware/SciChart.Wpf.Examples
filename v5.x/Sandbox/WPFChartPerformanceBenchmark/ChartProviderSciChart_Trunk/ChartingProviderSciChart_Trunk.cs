@@ -19,6 +19,9 @@ namespace ChartProviderSciChart_Trunk
     {
         private readonly Type _selectedRenderSurface;
 
+        private bool _enableExtremeResamplers = true;        
+        private bool _enableExtremeDrawingManager = true;
+
         public ChartingProviderSciChart_Trunk(Renderer whichRenderer)
         {
             _selectedRenderSurface = whichRenderer == Renderer.DirectX ? typeof(Direct3D11RenderSurface) :
@@ -41,30 +44,48 @@ namespace ChartProviderSciChart_Trunk
 		        {
 		            Version = Name,
 		            RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
-		            EnableExtremeResamplers = false,
-                    EnableExtremeDrawingManager = false,
+		            EnableExtremeResamplers = _enableExtremeResamplers,
+                    EnableExtremeDrawingManager = _enableExtremeDrawingManager,
 		        }
 		    };
         }
 
         public ISpeedTest FifoLineSpeedTest()
         {
-            return new FifoLineSeriesSpeedTest() { DataContext = new { Version = Name, RenderSurface = _selectedRenderSurface.AssemblyQualifiedName, EnableExtremeResamplers = true, EnableExtremeDrawingManager = true,} };
+            return new FifoLineSeriesSpeedTest() { DataContext = new
+            {
+                Version = Name,
+                RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
+                EnableExtremeResamplers = _enableExtremeResamplers,
+                EnableExtremeDrawingManager = _enableExtremeDrawingManager,
+            } };
         }
 
         public ISpeedTest LineAppendSpeedTest()
 		{
-            return new LineSeriesAppendingSpeedTest() { DataContext = new { Version = Name, RenderSurface = _selectedRenderSurface.AssemblyQualifiedName, EnableExtremeResamplers = true, EnableExtremeDrawingManager = true, } };
+            return new LineSeriesAppendingSpeedTest() { DataContext = new
+            {
+                Version = Name,
+                RenderSurface = 
+                _selectedRenderSurface.AssemblyQualifiedName,
+                EnableExtremeResamplers = _enableExtremeDrawingManager,
+                EnableExtremeDrawingManager = _enableExtremeDrawingManager,
+            } };
         }
 
         public ISpeedTest LoadNxNRefreshTest()
         {
-            return new Load500x500SeriesRefreshTest() { DataContext = new {RenderSurface = _selectedRenderSurface.AssemblyQualifiedName, EnableExtremeResamplers = true, EnableExtremeDrawingManager = true, } };
+            return new Load500x500SeriesRefreshTest() { DataContext = new
+            {
+                RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
+                EnableExtremeResamplers = _enableExtremeDrawingManager,
+                EnableExtremeDrawingManager = _enableExtremeDrawingManager,
+            } };
         }
 
         public string Name
         {
-            get { return "SciChart v5 (" + _selectedRenderSurface.Name + ")"; }
+            get { return "SciChart v5.1 (" + _selectedRenderSurface.Name + ")"; }
         }
     }
 }
