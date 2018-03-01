@@ -1,4 +1,4 @@
-#SCICHART WPF CHARTING PERFORMANCE BENCHMARK
+# SCICHART WPF CHARTING PERFORMANCE BENCHMARK
 
 This is the software used in the article [How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison](https://www.scichart.com/how-fast-is-scichart-wpf-chart/). 
 
