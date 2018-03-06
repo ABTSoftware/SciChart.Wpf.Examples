@@ -206,9 +206,11 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxes>
-                <s:NumericAxis s:RolloverModifier.AxisLabelContainerStyle="{StaticResource AxisLabelStyle}" s:RolloverModifier.AxisLabelTemplate="{StaticResource AxisLabelTemplate}" />
+                <s:NumericAxis s:RolloverModifier.AxisLabelContainerStyle="{StaticResource AxisLabelStyle}" 
+                               s:RolloverModifier.AxisLabelTemplate="{StaticResource AxisLabelTemplate}" 
+                               s:CursorModifier.AxisLabelContainerStyle="{StaticResource CusorAxisLabelStyle}"/>
             </s:SciChartSurface.XAxes>
-
+            
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis GrowBy="0.05, 0.05" />
             </s:SciChartSurface.YAxes>
@@ -219,13 +221,12 @@
                                         IsEnabled="True"
                                         ShowTooltipOn="Always" />
                     <s:CursorModifier x:Name="CursorModifier"
-                                      AxisLabelContainerStyle="{StaticResource CusorAxisLabelStyle}"
+                                      TooltipContainerStyle="{StaticResource CursorTooltipStyle}"
                                       IsEnabled="False"
                                       LineOverlayStyle="{StaticResource CursorLineStyle}"
                                       ShowAxisLabels="False"
                                       ShowTooltip="True"
-                                      ShowTooltipOn="MouseOver"
-                                      TooltipContainerStyle="{StaticResource CursorTooltipStyle}" />
+                                      ShowTooltipOn="MouseOver"/>
                     <s:TooltipModifier x:Name="TooltipModifier" IsEnabled="False" />
                     <s:VerticalSliceModifier IsEnabled="True">
                         <s:VerticalSliceModifier.VerticalLines>
