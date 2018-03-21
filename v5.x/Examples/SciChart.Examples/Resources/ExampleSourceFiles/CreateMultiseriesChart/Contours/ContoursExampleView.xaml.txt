@@ -97,6 +97,9 @@
                         <CheckBox Content="Use AntiAlising"
                                   IsChecked="{Binding Source={x:Reference contourSeries}, Path=AntiAliasing}"
                                   Margin="0,2" />
+                        <CheckBox Content="Show Heatmap"
+                                  IsChecked="{Binding Source={x:Reference heatmapSeries}, Path=IsVisible}"
+                                  Margin="0,2"/>
 
                         <Grid>
                             <Grid.RowDefinitions>
@@ -115,7 +118,7 @@
 
                             <StackPanel>
                                 <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMin, Mode=OneWay, StringFormat='{}ZMin: {0:0}'}" />
-                                <Slider Minimum="1"
+                                <Slider Minimum="5"
                                     Maximum="200"
                                     Interval="1"
                                     Value="{Binding Source={x:Reference contourSeries}, Path=ZMin, FallbackValue=10}"/>
@@ -124,7 +127,7 @@
 
                             <StackPanel Grid.Row="2">
                                 <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMax, Mode=OneWay, StringFormat='{}ZMax: {0:0}'}" />
-                                <Slider Minimum="1"
+                                <Slider Minimum="5"
                                     Maximum="200"
                                     Interval="1"
                                     Value="{Binding Source={x:Reference contourSeries}, Path=ZMax, FallbackValue=200}"/>
@@ -171,7 +174,11 @@
                     </s:FastUniformHeatmapRenderableSeries.ColorMap>
                 </s:FastUniformHeatmapRenderableSeries>
                 
-                <s:FastUniformContourRenderableSeries x:Name="contourSeries" AntiAliasing="True"/>
+                <s:FastUniformContourRenderableSeries x:Name="contourSeries" 
+                                                      AntiAliasing="True"
+                                                      ZMax="200"
+                                                      ZMin="20"
+                                                      ZStep="20"/>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -184,7 +191,7 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RolloverModifier ShowTooltipOn="Always"  UseInterpolation="True" ReceiveHandledEvents="True"/>
+                    <s:TooltipModifier ShowTooltipOn="Always"  UseInterpolation="True" ReceiveHandledEvents="True"/>
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton" />
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
                 </s:ModifierGroup>
@@ -192,22 +199,5 @@
 
         </s:SciChartSurface>
 
-        <!--<s:HeatmapColorMap Margin="10,10,60,40" 
-                          Grid.Column="1"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Stretch"
-                          Background="{Binding ElementName=sciChart, Path=Background}"
-                          Foreground="{Binding ElementName=sciChart, Path=Foreground}"
-                          ColorMap="{Binding ElementName=heatmapSeries, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
-                          Minimum="{Binding ElementName=heatmapSeries, Path=ColorMap.Minimum, Mode=TwoWay}"
-                          Maximum="{Binding ElementName=heatmapSeries, Path=ColorMap.Maximum, Mode=TwoWay}"
-                          TextFormatting="0.00"
-                          Opacity="0.8"
-                          BorderBrush="#777"
-                          BorderThickness="1"
-                          Orientation="Vertical" />-->
     </Grid>
 </UserControl>
-
-
-
