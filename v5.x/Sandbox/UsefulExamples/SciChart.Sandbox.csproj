@@ -179,6 +179,10 @@
     <Compile Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml.cs">
       <DependentUpon>CreateAUniformMesh3DChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml.cs">
+      <DependentUpon>AnimatedDataSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\AnimatedDataSeries\AnimatedDataSeriesFilter.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\Converters.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\EnumValueExtensions.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\FlyoutMenuButton.cs" />
@@ -206,6 +210,10 @@
     <Page Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\CustomModifiersSandbox\CustomModifierSandbox.xaml">
       <Generator>MSBuild:Compile</Generator>
