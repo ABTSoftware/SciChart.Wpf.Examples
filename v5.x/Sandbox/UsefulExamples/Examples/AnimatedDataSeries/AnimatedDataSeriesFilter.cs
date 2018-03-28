@@ -24,7 +24,7 @@ namespace SciChart.Sandbox.Examples.AnimatedDataSeries
             _filteredDataSeries.Clear();
 
             int index = 0;
-            int animationStepMillisconds = 10;
+            double animationStepMillisconds = 1;
 
             Action appendPoint = null;
 
@@ -37,13 +37,18 @@ namespace SciChart.Sandbox.Examples.AnimatedDataSeries
                 // 3.) Schedule another until complete
                 if (++index < _originalDataSeries.Count)
                 {
-                    appendPoint();
+                    // Achieve some rudimentary easing 
+                    animationStepMillisconds *= 1.05;
+                    animationStepMillisconds = Math.Min(animationStepMillisconds, 10);
+
+                    // Next point 
+                    appendPoint();                    
                 }
             };
 
             appendPoint = () =>
             {                
-                TimedMethod.Invoke(onAppendCallback).After(animationStepMillisconds).Go();
+                TimedMethod.Invoke(onAppendCallback).After((int)animationStepMillisconds).Go();
             };
 
             // 1.) Schedule one point to be appended
