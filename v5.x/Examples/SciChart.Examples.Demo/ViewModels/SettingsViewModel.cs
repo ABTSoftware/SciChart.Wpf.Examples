@@ -40,6 +40,8 @@ namespace SciChart.Examples.Demo.ViewModels
                 UseD3D9 = true;
             }
 
+            UseD3D10AsFallback = true;
+
             Use3DAA4x = false;
             Use3DAANone = true;
             EnableResamplingCPlusPlus = false;
@@ -63,6 +65,7 @@ namespace SciChart.Examples.Demo.ViewModels
             Observable.CombineLatest(
                     this.WhenPropertyChanged(x => x.UseD3D9),
                     this.WhenPropertyChanged(x => x.UseD3D11),
+                    this.WhenPropertyChanged(x => x.UseD3D10AsFallback),
                     this.WhenPropertyChanged(x => x.Use3DAANone),
                     this.WhenPropertyChanged(x => x.Use3DAA4x),
                     Tuple.Create)
@@ -75,7 +78,8 @@ namespace SciChart.Examples.Demo.ViewModels
 
                     Viewport3D.Restart3DEngineWith(
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
-                        Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None);
+                        Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None,
+                        UseD3D10AsFallback);
                 });
         }
 
@@ -102,6 +106,12 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             get { return GetDynamicValue<bool>("UseD3D11"); }
             set {  SetDynamicValue("UseD3D11", value);}
+        }
+
+        public bool UseD3D10AsFallback
+        {
+            get { return GetDynamicValue<bool>("UseD3D10AsFallback"); }
+            set { SetDynamicValue("UseD3D10AsFallback", value); }
         }
 
         public bool UseD3D9

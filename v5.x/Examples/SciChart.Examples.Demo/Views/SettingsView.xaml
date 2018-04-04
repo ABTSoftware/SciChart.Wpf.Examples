@@ -158,6 +158,7 @@
                 <StackPanel Orientation="Vertical" Margin="130 0 0 0" Grid.Row="4">
 
                     <CheckBox Margin="3"
+                          x:Name="useDirectX11Checkbox"
                           Content="Use DirectX 11"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
@@ -165,6 +166,14 @@
                           IsEnabled="{Binding IsDirectXAvailable}"
                           IsChecked="{Binding UseD3D11, Mode=TwoWay}"
                           s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
+
+                    <CheckBox Margin="15,3"
+                              Content="Use DirectX 10 as fallback Graphics API"
+                              FontSize="14"
+                              ToolTip="Uses the DirectX 10 Graphics API on those PCs which hardware doesn't support DirectX 11."
+                              DataContext="{StaticResource SettingsViewModel}"
+                              IsEnabled="{Binding ElementName=useDirectX11Checkbox, Path=IsChecked}"
+                              IsChecked="{Binding Path=UseD3D10AsFallback, Mode=TwoWay}" />
 
                     <CheckBox Margin="3"
                           Content="Use DirectX 9c"
