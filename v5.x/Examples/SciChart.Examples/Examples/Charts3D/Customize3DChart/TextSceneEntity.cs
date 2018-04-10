@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 using SciChart.Charting3D;
+using SciChart.Charting3D.Interop;
 using SciChart.Charting3D.Primitives;
 using SciChart.Charting3D.Visuals.Primitives;
 using SciChart.Core.Extensions;
@@ -85,13 +86,24 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         public override void RenderScene(IRenderPassInfo3D e)
         {
             var currentCamera = RootSceneEntity != null ? RootSceneEntity.Viewport3D.CameraController : null;
+
+            var locX = Location.X;
+            var locY = Location.Y;
+            var locZ = Location.Z;
+
+            // Commented code belove is the example of treating the Location value
+            // as 3D point in Data Coordinates Space but not in World Coordinates Space
+            //locX = (float)e.XCalc.GetCoordinate(Location.X) - e.WorldDimensions.X / 2.0f;
+            //locY = (float)e.YCalc.GetCoordinate(Location.Y);
+            //locZ = (float)e.ZCalc.GetCoordinate(Location.Z) - e.WorldDimensions.Z / 2.0f;
+
             switch (_textDisplayMode)
             {
                 case TextDisplayMode.Default:
                     {
                         // Just display text
                         _font.Begin();
-                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.AddText(Text, _textColor, locX, locY, locZ);
                         _font.End();
                         break;
                     }
@@ -114,7 +126,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
 
                         // Display text billboarded using camera side, up vectors (text will always face camera) 
                         _font.BeginBillboard(cameraSide, cameraUp);
-                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.AddText(Text, _textColor, locX, locY, locZ);
                         _font.End();
                         break;
                     }
@@ -122,7 +134,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                     {
                         // Screen space text 2D
                         _font.BeginScreenSpace((float) RotationAngle, Location.X, Location.Y);
-                        _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+                        _font.AddText(Text, _textColor, locX, locY, locZ);
                         _font.EndScreenSpace();
                         break;
                     }
@@ -177,6 +189,11 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             DisposeFont();
 
             base.OnEngineRestart();
+        }
+
+        public override eSCRTSceneEntityKind GetKind()
+        {
+            return eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_HUD3D;
         }
     }
 }
