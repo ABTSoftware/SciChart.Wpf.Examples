@@ -101,9 +101,9 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
         {
             // Raise DataSeriesChanged event and trigger chart updates
             _meshDataSeries0.IsDirty = true;
-            _meshDataSeries0.OnDataSeriesChanged(DataSeriesUpdate.DataChanged);
+            _meshDataSeries0.OnDataSeriesChanged(DataSeriesUpdate.DataChanged, DataSeriesAction.Update);
             _meshDataSeries1.IsDirty = true;
-            _meshDataSeries1.OnDataSeriesChanged(DataSeriesUpdate.DataChanged);
+            _meshDataSeries1.OnDataSeriesChanged(DataSeriesUpdate.DataChanged, DataSeriesAction.Update);
         }
     }
 

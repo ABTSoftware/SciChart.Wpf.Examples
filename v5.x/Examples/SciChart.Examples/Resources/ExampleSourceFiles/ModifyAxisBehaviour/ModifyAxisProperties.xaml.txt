@@ -128,7 +128,7 @@
                                   Content="YAxis Controls"
                                   Padding="0"
                                   Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  ToolTipService.ToolTip="XAxis Controls">
+                                  ToolTipService.ToolTip="YAxis Controls">
 
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" Orientation="Vertical">

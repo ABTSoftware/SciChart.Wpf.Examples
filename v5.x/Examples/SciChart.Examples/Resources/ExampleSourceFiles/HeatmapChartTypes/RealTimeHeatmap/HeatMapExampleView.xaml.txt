@@ -11,30 +11,9 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    
+
     <UserControl.Resources>
-        
         <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
-        <ObjectDataProvider
-            x:Key="PaletteModesProvider"
-            MethodName="GetValues"
-            ObjectType="{x:Type system:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="s:ColorPaletteMode" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
-        <Style x:Key="MajorContourLineStyle" TargetType="s:ContourLine">
-            <Setter Property="StrokeDashArray" Value="2,4" />
-            <Setter Property="StrokeThickness" Value="3" />
-            <Setter Property="Stroke" Value="Red" />
-        </Style>
-
-        <Style x:Key="MinorContourLineStyle" TargetType="s:ContourLine">
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Stroke" Value="GreenYellow" />
-        </Style>
 
         <s:HeatmapColorPalette x:Key="ColorPalette" Maximum="200">
             <s:HeatmapColorPalette.GradientStops>
@@ -79,20 +58,7 @@
                            BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9">
-                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
-                        <s:HeatmapColorPalette Maximum="200">
-                            <s:HeatmapColorPalette.GradientStops>
-                                <GradientStop Offset="0" Color="DarkBlue" />
-                                <GradientStop Offset="0.2" Color="CornflowerBlue" />
-                                <GradientStop Offset="0.4" Color="DarkGreen" />
-                                <GradientStop Offset="0.6" Color="Chartreuse" />
-                                <GradientStop Offset="0.8" Color="Yellow" />
-                                <GradientStop Offset="1" Color="Red" />
-                            </s:HeatmapColorPalette.GradientStops>
-                        </s:HeatmapColorPalette>
-                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
-                </s:FastUniformHeatmapRenderableSeries>
+                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" ColorMap="{StaticResource ColorPalette}" Opacity="0.9" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

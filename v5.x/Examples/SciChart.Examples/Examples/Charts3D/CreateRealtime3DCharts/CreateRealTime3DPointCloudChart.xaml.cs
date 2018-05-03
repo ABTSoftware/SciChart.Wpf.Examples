@@ -105,7 +105,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
             // Raise DataSeriesChanged event and trigger chart updates
             _xyzData.IsDirty = true;
-            _xyzData.OnDataSeriesChanged(DataSeriesUpdate.DataChanged);            
+            _xyzData.OnDataSeriesChanged(DataSeriesUpdate.DataChanged, DataSeriesAction.Update);            
         }
 
         private void OnPause()
