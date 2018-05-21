@@ -13,7 +13,7 @@
         <Setter Property="Fill" Value="{Binding Path=(common:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}" />
         <Setter Property="StrokeThickness" Value="2" />
     </Style>
-    
+
     <DataTemplate x:Key="TooltipIconContentTemplate">
         <Viewbox>
             <Grid Width="26" Height="26">
@@ -70,6 +70,19 @@
 
     <Style BasedOn="{StaticResource FlyoutSeparatorStyle}" TargetType="common:FlyoutSeparator" />
 
+    <Style x:Key="FlyoutMenuCalloutStyle" TargetType="s:Callout">
+        <Style.Triggers>
+            <Trigger Property="PopupAlignment" Value="Left">
+                <Setter Property="Canvas.Left" Value="40"/>
+                <Setter Property="Canvas.Right" Value="NaN"/>
+            </Trigger>
+            <Trigger Property="PopupAlignment" Value="Right">
+                <Setter Property="Canvas.Left" Value="NaN"/>
+                <Setter Property="Canvas.Right" Value="40"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="FlyoutMenuButtonStyle" TargetType="common:FlyoutMenuButton">
         <Setter Property="Effect" Value="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}" />
         <Setter Property="Background" Value="#FF323539" />
@@ -109,30 +122,30 @@
                         <Canvas x:Name="PART_Popup"
                                 Background="Transparent"
                                 Visibility="Collapsed">
-                            <Grid Canvas.Left="40" Canvas.Top="0">
-                                <s:Callout x:Name="Callout"
+                            <s:Callout x:Name="Callout"
                                            MinWidth="100"
                                            MinHeight="60"
                                            Background="#1c1c1e"
+                                       PopupAlignment="{TemplateBinding PopupAlignment}"
                                            BorderBrush="#5a5a5a"
+                                       Style="{StaticResource FlyoutMenuCalloutStyle}"
                                            Content="{TemplateBinding PopupContent}"
                                            Padding="3"
                                            StrokeThickness="2"
                                            Effect="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource CalloutEffect}}">
-                                    <s:Callout.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Foreground" Value="#AAA" />
-                                            <Setter Property="Margin" Value="4" />
-                                            <Setter Property="TextWrapping" Value="Wrap" />
-                                        </Style>
+                                <s:Callout.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#AAA" />
+                                        <Setter Property="Margin" Value="4" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
 
-                                        <Style BasedOn="{StaticResource FlyoutSeparatorStyle}" TargetType="common:FlyoutSeparator">
-                                            <Setter Property="Background" Value="#777" />
-                                            <Setter Property="Margin" Value="4" />
-                                        </Style>
-                                    </s:Callout.Resources>
-                                </s:Callout>
-                            </Grid>
+                                    <Style BasedOn="{StaticResource FlyoutSeparatorStyle}" TargetType="common:FlyoutSeparator">
+                                        <Setter Property="Background" Value="#777" />
+                                        <Setter Property="Margin" Value="4" />
+                                    </Style>
+                                </s:Callout.Resources>
+                            </s:Callout>
                         </Canvas>
 
                         <Border x:Name="PART_Border"
@@ -484,30 +497,30 @@
                         <Canvas x:Name="PART_Popup"
                                 Background="Transparent"
                                 Visibility="Collapsed">
-                            <Grid Canvas.Left="40" Canvas.Top="0">
-                                <s:Callout x:Name="Callout"
+                            <s:Callout x:Name="Callout"
                                            MinWidth="100"
                                            MinHeight="60"
                                            Background="#1c1c1e"
                                            BorderBrush="#5a5a5a"
+                                       PopupAlignment="{TemplateBinding PopupAlignment}"
+                                       Style="{StaticResource FlyoutMenuCalloutStyle}"
                                            Content="{TemplateBinding PopupContent}"
                                            Padding="3"
                                            StrokeThickness="2"
                                            Effect="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource CalloutEffect}}">
-                                    <s:Callout.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Foreground" Value="#AAA" />
-                                            <Setter Property="Margin" Value="4" />
-                                            <Setter Property="TextWrapping" Value="Wrap" />
-                                        </Style>
+                                <s:Callout.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#AAA" />
+                                        <Setter Property="Margin" Value="4" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
 
-                                        <Style BasedOn="{StaticResource FlyoutSeparatorStyle}" TargetType="common:FlyoutSeparator">
-                                            <Setter Property="Background" Value="#777" />
-                                            <Setter Property="Margin" Value="4" />
-                                        </Style>
-                                    </s:Callout.Resources>
-                                </s:Callout>
-                            </Grid>
+                                    <Style BasedOn="{StaticResource FlyoutSeparatorStyle}" TargetType="common:FlyoutSeparator">
+                                        <Setter Property="Background" Value="#777" />
+                                        <Setter Property="Margin" Value="4" />
+                                    </Style>
+                                </s:Callout.Resources>
+                            </s:Callout>
                         </Canvas>
 
                         <Border x:Name="PART_Border"

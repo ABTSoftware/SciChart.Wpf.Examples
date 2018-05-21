@@ -33,6 +33,9 @@ namespace SciChart.Examples.ExternalDependencies.Common
         public static readonly DependencyProperty PopupContentProperty = DependencyProperty.Register(
             "PopupContent", typeof(object), typeof(FlyoutMenuToggleButton), new PropertyMetadata(default(object)));
 
+        public static readonly DependencyProperty PopupAlignmentProperty =
+            DependencyProperty.Register("PopupAlignment", typeof(PopupAlignment), typeof(FlyoutMenuToggleButton), new PropertyMetadata(PopupAlignment.Left));
+
         private Canvas _popup;
         private Border _border;
         private TimedMethod _popupCloseToken;
@@ -43,6 +46,12 @@ namespace SciChart.Examples.ExternalDependencies.Common
         public FlyoutMenuToggleButton()
         {
             DefaultStyleKey = typeof(FlyoutMenuToggleButton);
+        }
+
+        public PopupAlignment PopupAlignment
+        {
+            get { return (PopupAlignment)GetValue(PopupAlignmentProperty); }
+            set { SetValue(PopupAlignmentProperty, value); }
         }
 
         public object PopupContent
