@@ -9,6 +9,17 @@ using SciChart.Charting.Model.DataSeries;
 
 namespace SciChart.Sandbox.Examples.SweepingEcgSeries
 {
+    public static class DataSeriesExtensions
+    {
+        public static void OutputCsv(this XyzDataSeries<double, double, double> s)
+        {
+            for (int i = 0; i < s.Count; i++)
+            {
+                Console.WriteLine("{0},{1},{2}", s.XValues[i], s.YValues[i], s.ZValues[i]);
+            }
+        }
+    }
+
     /// <summary>
     /// Interaction logic for SweepingEcg.xaml
     /// </summary>
@@ -80,7 +91,9 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
             double actualTime = (_totalIndex / sampleRate);
             double time = actualTime%10;
 
-            if (_dataSeriesA.Count < 4000)
+            const int MaxDataSeriesCount = 4000;
+
+            if (_dataSeriesA.Count < MaxDataSeriesCount)
             {
                 // For the first N points we append time, voltage, actual time
                 // Time must be ascending in X for scichart to perform the best, so we clip this to 0-10s
@@ -88,18 +101,23 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
             }
             else
             {
-                _dataSeriesIndex = _dataSeriesIndex >= 4000 ? 0 : _dataSeriesIndex;
+                _dataSeriesIndex = _dataSeriesIndex >= MaxDataSeriesCount ? 0 : _dataSeriesIndex;
 
                 // For subsequent points (after reaching the edge of the trace) we wrap traces around
                 // We re-use the same data-series just update its Y,Z values then trigger a redraw
                 _dataSeriesA.YValues[_dataSeriesIndex] = voltage;
                 _dataSeriesA.ZValues[_dataSeriesIndex] = actualTime;
                 _dataSeriesA.InvalidateParentSurface(RangeMode.None, hasDataChanged:true);
+
+                //_dataSeriesA.OutputCsv();
             }
 
             // Update the position of the latest Trace annotation
             latestTrace.X1 = time;
             latestTrace.Y1 = voltage;
+
+            // Update the DataSeries.Tag, used by PaletteProvider to dim the trace as time passes
+            _dataSeriesA.Tag = time;
 
             _currentIndex++;
             _totalIndex++;

@@ -25,16 +25,12 @@ namespace Abt.Controls.SciChart.Wpf.TestSuite.ExampleSandbox.SweepingEcg
                 return defaultColor;
 
             var xyzSeries = ((XyzDataSeries<double, double, double>)rSeries.DataSeries);
-            double xValue = xyzSeries.XValues[index];
-
-            if (double.IsNaN(xValue))
-                return defaultColor;            
 
             double actualTime = xyzSeries.ZValues[index];
-            double latestTime = xyzSeries.ZValues[xyzSeries.Count - 1];
+            double latestTime = (double) xyzSeries.Tag;
 
             // how old is the sample? 1.0 = New, 0.0 = Oldest
-            double sampleAge = 1.0 - (latestTime - actualTime) / 10.0;
+            double sampleAge = (actualTime - latestTime) / 10.0;
 
             // Clamp in ten steps, e.g.  0.1, 0.2 .... 0.9, 1.0
             // Why? Creating a new Pen for each single sample will slow down SciChart significantly
