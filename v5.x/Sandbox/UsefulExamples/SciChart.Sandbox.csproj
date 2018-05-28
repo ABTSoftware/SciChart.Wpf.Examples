@@ -192,6 +192,11 @@
     <Compile Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml.cs">
       <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\SweepingEcgSeries\DimTracePaletteProvider.cs" />
+    <Compile Include="Examples\SweepingEcgSeries\ModuloLabelProvider.cs" />
+    <Compile Include="Examples\SweepingEcgSeries\SweepingEcg.xaml.cs">
+      <DependentUpon>SweepingEcg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ThresholdedLineSeries\DragThresholdMvvm.xaml.cs">
       <DependentUpon>DragThresholdMvvm.xaml</DependentUpon>
     </Compile>
@@ -224,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\SweepingEcgSeries\SweepingEcg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -281,6 +290,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Examples\SweepingEcgSeries\Waveform.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
