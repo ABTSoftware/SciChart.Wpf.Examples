@@ -21,7 +21,7 @@ namespace Abt.Controls.SciChart.Wpf.TestSuite.ExampleSandbox.SweepingEcg
         {
             var defaultColor = rSeries.Stroke;
 
-            if (rSeries.DataSeries == null || rSeries.DataSeries.FifoCapacity.HasValue == false)
+            if (rSeries.DataSeries == null)
                 return defaultColor;
 
             var xyzSeries = ((XyzDataSeries<double, double, double>)rSeries.DataSeries);

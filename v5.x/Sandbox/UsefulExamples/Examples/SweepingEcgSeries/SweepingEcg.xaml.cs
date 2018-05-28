@@ -23,6 +23,7 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
         private TraceAOrB _whichTrace = TraceAOrB.TraceA;
         private XyzDataSeries<double, double, double> _dataSeriesA;
         private XyzDataSeries<double, double, double> _dataSeriesB;
+        private int _dataSeriesIndex;
 
         private enum TraceAOrB
         {
@@ -39,9 +40,8 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
 
         void SweepingEcg_Loaded(object sender, RoutedEventArgs e)
         {
-            // Get 10 seconds of data in the dataseries, 4000 samples at 'sample rate' of 400Hz
+            // Create an XyzDataSeries to store the X,Y value and Z-value is used to compute an opacity 
             _dataSeriesA = new XyzDataSeries<double, double, double>();
-            _dataSeriesB = new XyzDataSeries<double, double, double>();
 
             // Simulate waveform
             _sourceData = LoadWaveformData("Waveform.csv");
@@ -80,27 +80,21 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
             double actualTime = (_totalIndex / sampleRate);
             double time = actualTime%10;
 
-            // Toggle which trace is active
-            if (time == 0)
+            if (_dataSeriesA.Count < 4000)
             {
-                _whichTrace = _whichTrace == TraceAOrB.TraceA ? TraceAOrB.TraceB : TraceAOrB.TraceA;
-            }
-
-            Console.WriteLine("Time: ", time);
-
-            if (_whichTrace == TraceAOrB.TraceA)
-            {
-                // Append to DataSeriesA
-                // DataSeries B gets cleared 
-                _dataSeriesA.Append(time, voltage, actualTime);
-                _dataSeriesB.Clear();   
+                // For the first N points we append time, voltage, actual time
+                // Time must be ascending in X for scichart to perform the best, so we clip this to 0-10s
+                _dataSeriesA.Append(time, voltage, actualTime);                
             }
             else
             {
-                // Append to DataSeriesB
-                // DataSeriesA gets cleared 
-                _dataSeriesA.Clear();
-                _dataSeriesB.Append(time, voltage, actualTime);
+                _dataSeriesIndex = _dataSeriesIndex >= 4000 ? 0 : _dataSeriesIndex;
+
+                // For subsequent points (after reaching the edge of the trace) we wrap traces around
+                // We re-use the same data-series just update its Y,Z values then trigger a redraw
+                _dataSeriesA.YValues[_dataSeriesIndex] = voltage;
+                _dataSeriesA.ZValues[_dataSeriesIndex] = actualTime;
+                _dataSeriesA.InvalidateParentSurface(RangeMode.None, hasDataChanged:true);
             }
 
             // Update the position of the latest Trace annotation
@@ -108,7 +102,8 @@ namespace SciChart.Sandbox.Examples.SweepingEcgSeries
             latestTrace.Y1 = voltage;
 
             _currentIndex++;
-            _totalIndex++;            
+            _totalIndex++;
+            _dataSeriesIndex++;
         }
 
         private double[] LoadWaveformData(string filename)
