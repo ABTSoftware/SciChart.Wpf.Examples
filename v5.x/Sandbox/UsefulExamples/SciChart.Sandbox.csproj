@@ -192,6 +192,10 @@
     <Compile Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml.cs">
       <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\StripChart\RelativeTimeLabelProvider.cs" />
+    <Compile Include="Examples\StripChart\ScrollingStripChart.xaml.cs">
+      <DependentUpon>ScrollingStripChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\SweepingEcgSeries\DimTracePaletteProvider.cs" />
     <Compile Include="Examples\SweepingEcgSeries\ModuloLabelProvider.cs" />
     <Compile Include="Examples\SweepingEcgSeries\SweepingEcg.xaml.cs">
@@ -231,6 +235,10 @@
     <Page Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\StripChart\ScrollingStripChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\SweepingEcgSeries\SweepingEcg.xaml">
       <Generator>MSBuild:Compile</Generator>
