@@ -82,8 +82,20 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <ext:SciChart3DInteractionToolbar Grid.Column="0" TargetSurface="{Binding ElementName=SciChart}">
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
+                                  Content="CTRL" 
+                                  FontSize="10" 
+                                  Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
 
-        <ext:SciChart3DInteractionToolbar Grid.Column="0" TargetSurface="{Binding ElementName=SciChart}" />
+                        <TextBlock FontSize="12" Text="Lighting Factor" />
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="SciChart"
                                Grid.Column="1"
@@ -93,6 +105,7 @@
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries"
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
+                                                   LightingFactor="{Binding ElementName=lightingFactorSlider, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle2}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
@@ -101,6 +114,7 @@
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries2"
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
+                                                   LightingFactor="{Binding ElementName=lightingFactorSlider, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
