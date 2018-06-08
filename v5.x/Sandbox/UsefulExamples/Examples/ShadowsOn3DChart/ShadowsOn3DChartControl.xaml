@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart.Bottom3D"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:createBottomChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <Style x:Key="AxisStyle" TargetType="s3D:AxisBase3D">
+            <Setter Property="DrawMajorBands" Value="False" />
+            <Setter Property="DrawMajorGridLines" Value="True" />
+            <Setter Property="DrawMinorGridLines" Value="False" />
+            <Setter Property="DrawMajorTicks" Value="False" />
+            <Setter Property="DrawMinorTicks" Value="False" />
+            <Setter Property="TickTextBrush" Value="Black" />
+            <Setter Property="AxisBandsFill" Value="White" />
+            <!--<Setter Property="TickLabelStyle" Value="{StaticResource AxisLabelStyle}" />-->
+            <!--<Setter Property="MajorTickLineStyle">
+            <Setter.Value>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="GreenYellow" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                    <Setter Property="X2" Value="8" />
+                    <Setter Property="Y2" Value="8" />
+                </Style>
+            </Setter.Value>
+        </Setter>-->
+            <!--<Setter Property="MinorTickLineStyle">
+            <Setter.Value>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="Violet" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                    <Setter Property="X2" Value="4" />
+                    <Setter Property="Y2" Value="4" />
+                </Style>
+            </Setter.Value>
+        </Setter>-->
+            <!--<Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="LightGray" />
+                        <Setter Property="StrokeThickness" Value="0.5" />
+                    </Style>
+                </Setter.Value>
+            </Setter>-->
+            <!--<Setter Property="MinorGridLineStyle">
+            <Setter.Value>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="Violet" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                    <Setter Property="StrokeDashArray" Value="2 2" />
+                </Style>
+            </Setter.Value>
+        </Setter>-->
+        </Style>
+
+        <s3D:GradientColorPalette x:Key="HeightColorMap" IsStepped="False" >
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="0.29" Color="LightGray"/>
+                <GradientStop Offset="0.178" Color="OrangeRed"/>
+                <GradientStop Offset="0.05" Color="Yellow"/>
+                <GradientStop Offset="0" Color="White"/>
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+        <createBottomChart:SurfaceMeshPaletteProvider3D x:Key="MeshPaletteProvider3D"/>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <s3D:SciChart3DSurface x:Name="scs" 
+                               WorldDimensions="1350, 400, 600" 
+                               ShowLicensingWarnings="False" 
+                               IsAxisCubeVisible="True" 
+                               IsXyzGizmoVisible="True" 
+                               Background="AntiqueWhite"
+                               Grid.Column="1"
+                               >
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="False"/>
+            </s3D:SciChart3DSurface.Camera>
+
+            <!--<s3D:SciChart3DSurface.RenderSurface>
+                <s3D:Direct3D11RenderSurface/>
+            </s3D:SciChart3DSurface.RenderSurface>-->
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries"  
+                                                   DrawMeshAs="SolidMesh" 
+                                                   HeightScaleFactor="{Binding ElementName=heightScaleFactorSlider, Path=Value, Mode=TwoWay}"
+                                                   Stroke="LightGray" 
+                                                   StrokeThickness="0.2"
+                                                   DrawSkirt="False" 
+                                                   Opacity="{Binding ElementName=opacitySlider, Path=Value, Mode=TwoWay}"
+                                                   MeshPaletteMode="HeightMapInterpolated"
+                                                   MeshColorPalette="{StaticResource HeightColorMap}"
+                                                   PaletteProvider="{StaticResource MeshPaletteProvider3D}"
+                                                   />
+
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AxisTitle="X Axis" Style="{StaticResource AxisStyle}" Foreground="Black" />
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D x:Name="YAxis" AxisTitle="Y Axis" Style="{StaticResource AxisStyle}" VisibleRange="0, 0.4" Foreground="Black" />
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AxisTitle="Z Axis" Style="{StaticResource AxisStyle}" Foreground="Black" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D/>
+                    <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:ZoomExtentsModifier3D/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+
+    </Grid>
+</UserControl>

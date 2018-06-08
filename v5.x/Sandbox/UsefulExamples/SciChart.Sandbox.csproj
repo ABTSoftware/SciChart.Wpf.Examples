@@ -216,6 +216,12 @@
     <Compile Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml.cs">
       <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml.cs">
+      <DependentUpon>ShadowsOn3DChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\ShadowsOn3DChart\ShadowsOn3DChartControl.xaml.cs">
+      <DependentUpon>ShadowsOn3DChartControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\StripChart\RelativeTimeLabelProvider.cs" />
     <Compile Include="Examples\StripChart\ScrollingStripChart.xaml.cs">
       <DependentUpon>ScrollingStripChart.xaml</DependentUpon>
@@ -261,6 +267,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\ShadowsOn3DChart\ShadowsOn3DChartControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -327,6 +341,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Examples\SweepingEcgSeries\Waveform.csv" />
+    <None Include="Examples\ShadowsOn3DChart\Bottom3D.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
