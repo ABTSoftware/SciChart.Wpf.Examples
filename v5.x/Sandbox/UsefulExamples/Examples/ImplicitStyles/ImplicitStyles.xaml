@@ -1,0 +1,58 @@
+﻿<Window x:Class="SciChart.Sandbox.Examples.ImplicitStyles.ImplicitStyles"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SciChart.Sandbox.Examples.ImplicitStyles"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="ImplicitStyles" Height="450" Width="800">
+    
+    <Window.Resources>
+        
+        <!-- Apply an implicit style to SciChartSurface --> 
+        <Style TargetType="{x:Type s:SciChartSurface}" BasedOn="{StaticResource {x:Type s:SciChartSurface}}">
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Background" Value="#FF990000"></Setter>
+        </Style>
+        
+        <!-- Implicit style to NumericAxis --> 
+        <Style TargetType="{x:Type s:NumericAxis}" BasedOn="{StaticResource {x:Type s:NumericAxis}}" >
+            <Setter Property="AxisPanelStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type s:AxisPanel}">
+                        <Setter Property="Background" Value="Pink"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="AxisBandsFill" Value="#33FF0000"/>
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Red"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="#55FF0000"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <s:SciChartSurface>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis> 
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

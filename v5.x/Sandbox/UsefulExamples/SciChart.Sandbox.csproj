@@ -59,29 +59,23 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11299\lib\net45\SciChart.Charting.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Charting, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Charting3D, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart3D.5.1.0.11299\lib\net45\SciChart.Charting3D.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Charting3D, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.5.1.0.11458\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Core, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11299\lib\net45\SciChart.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Core, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Data, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11299\lib\net45\SciChart.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Data, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11299\lib\net45\SciChart.Drawing.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Drawing, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing.DirectX, Version=5.1.0.11299, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.DirectX.5.1.0.11299\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Drawing.DirectX, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.DirectX.5.1.0.11458\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
     <Reference Include="SciChart.Wpf.UI, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -207,6 +201,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CustomPointMarker\SeriesExtensions.cs" />
+    <Compile Include="Examples\ImplicitStyles\ImplicitStyles.xaml.cs">
+      <DependentUpon>ImplicitStyles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\MarketProfileTradingExample\Converters.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\EnumValueExtensions.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\FlyoutMenuButton.cs" />
@@ -261,6 +258,10 @@
     <Page Include="Examples\CustomPointMarker\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\ImplicitStyles\ImplicitStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\MarketProfileTradingExample\ExampleResources.xaml">
       <SubType>Designer</SubType>
@@ -341,6 +342,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Examples\SweepingEcgSeries\Waveform.csv" />
+    <None Include="app.config" />
     <None Include="Examples\ShadowsOn3DChart\Bottom3D.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -362,13 +364,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\SciChart.DirectX.5.1.0.11458\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.1.0.11458\build\SciChart.DirectX.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\SciChart.DirectX.5.1.0.11299\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.1.0.11299\build\SciChart.DirectX.targets'))" />
+    <Error Condition="!Exists('packages\SciChart.DirectX.5.1.0.11458\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.1.0.11458\build\SciChart.DirectX.targets'))" />
   </Target>
-  <Import Project="packages\SciChart.DirectX.5.1.0.11299\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.1.0.11299\build\SciChart.DirectX.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
