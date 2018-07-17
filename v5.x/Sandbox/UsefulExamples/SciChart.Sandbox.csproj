@@ -213,6 +213,11 @@
     <Compile Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml.cs">
       <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\ScrollbarMvvmAxis\NumericAxisViewModelWithScrollbar.cs" />
+    <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml.cs">
+      <DependentUpon>ScrollbarMvvmAxis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxisViewModel.cs" />
     <Compile Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml.cs">
       <DependentUpon>ShadowsOn3DChart.xaml</DependentUpon>
     </Compile>
@@ -270,6 +275,10 @@
     <Page Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml">
       <Generator>MSBuild:Compile</Generator>
