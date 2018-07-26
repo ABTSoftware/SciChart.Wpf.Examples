@@ -195,6 +195,10 @@
       <DependentUpon>AnimatedDataSeries.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\AnimatedDataSeries\AnimatedDataSeriesFilter.cs" />
+    <Compile Include="Examples\AnnotationsBindingToTextBox\MainViewModel.cs" />
+    <Compile Include="Examples\AnnotationsBindingToTextBox\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\CustomPointMarker\CheckedChangeZoomExtentsBehaviour.cs" />
     <Compile Include="Examples\CustomPointMarker\CustomPointMarker.cs" />
     <Compile Include="Examples\CustomPointMarker\MainWindow.xaml.cs">
@@ -253,6 +257,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\AnnotationsBindingToTextBox\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
