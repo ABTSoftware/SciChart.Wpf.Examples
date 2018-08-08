@@ -217,6 +217,9 @@
     <Compile Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml.cs">
       <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml.cs">
+      <DependentUpon>MultiLineDateTimeAxisLabels.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ScrollbarMvvmAxis\NumericAxisViewModelWithScrollbar.cs" />
     <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml.cs">
       <DependentUpon>ScrollbarMvvmAxis.xaml</DependentUpon>
@@ -283,6 +286,10 @@
     <Page Include="Examples\MarketProfileTradingExample\MarketProfileTradingChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml">
       <SubType>Designer</SubType>
