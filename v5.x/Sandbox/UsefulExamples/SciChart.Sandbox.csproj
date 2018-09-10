@@ -199,6 +199,14 @@
     <Compile Include="Examples\AnnotationsBindingToTextBox\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\CompositeAnnotationsMvvm\CompositeAnnotationsMvvm.xaml.cs">
+      <DependentUpon>CompositeAnnotationsMvvm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CompositeAnnotationsMvvm\CompositeAnnotationsMvvmViewModel.cs" />
+    <Compile Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotation.xaml.cs">
+      <DependentUpon>RangeXAnnotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotationViewModel.cs" />
     <Compile Include="Examples\CustomPointMarker\CheckedChangeZoomExtentsBehaviour.cs" />
     <Compile Include="Examples\CustomPointMarker\CustomPointMarker.cs" />
     <Compile Include="Examples\CustomPointMarker\MainWindow.xaml.cs">
@@ -267,6 +275,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\AnnotationsBindingToTextBox\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\CompositeAnnotationsMvvm\CompositeAnnotationsMvvm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
