@@ -208,6 +208,9 @@
     <Compile Include="Examples\ImplicitStyles\ImplicitStyles.xaml.cs">
       <DependentUpon>ImplicitStyles.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\LabStyleCharts\LabStyleCharts.xaml.cs">
+      <DependentUpon>LabStyleCharts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\MarketProfileTradingExample\Converters.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\EnumValueExtensions.cs" />
     <Compile Include="Examples\MarketProfileTradingExample\FlyoutMenuButton.cs" />
@@ -276,6 +279,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\ImplicitStyles\ImplicitStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\LabStyleCharts\LabStyleCharts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
