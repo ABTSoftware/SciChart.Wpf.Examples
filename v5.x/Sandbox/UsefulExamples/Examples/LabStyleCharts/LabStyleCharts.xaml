@@ -36,8 +36,8 @@
             <Setter Property="PlaneBorderThickness" Value="0"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="TickTextBrush" Value="Black"/>
-            <!-- Requires v5.1.1.11498 or later -->
-<!--            <Setter Property="AxisPlaneBackgroundFill" Value="White"/>-->
+            <!-- AxisPlaneBackgroundFill Requires v5.1.1.11498 or later -->
+            <Setter Property="AxisPlaneBackgroundFill" Value="White"/>
             <Setter Property="TickLabelAlignment" Value="ScreenAutoRotated"/>
             <Setter Property="DrawMajorBands" Value="False"/>
             <Setter Property="MajorGridLineStyle">

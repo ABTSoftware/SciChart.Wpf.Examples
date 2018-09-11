@@ -59,20 +59,20 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Charting.dll</HintPath>
+    <Reference Include="SciChart.Charting, Version=5.1.1.11498, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.1.11498\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Charting3D, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart3D.5.1.0.11458\lib\net45\SciChart.Charting3D.dll</HintPath>
+    <Reference Include="SciChart.Charting3D, Version=5.1.1.11498, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.5.1.1.11498\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Core, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Core.dll</HintPath>
+    <Reference Include="SciChart.Core, Version=5.1.1.11498, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.1.11498\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Data, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Data.dll</HintPath>
+    <Reference Include="SciChart.Data, Version=5.1.1.11498, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.1.11498\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.1.0.11458\lib\net45\SciChart.Drawing.dll</HintPath>
+    <Reference Include="SciChart.Drawing, Version=5.1.1.11498, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.1.1.11498\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="SciChart.Drawing.DirectX, Version=5.1.0.11458, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
       <HintPath>packages\SciChart.DirectX.5.1.0.11458\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
