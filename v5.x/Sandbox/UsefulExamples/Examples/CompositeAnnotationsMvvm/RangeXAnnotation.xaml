@@ -5,9 +5,11 @@
     xmlns:s="http://schemas.abtsoftware.co.uk/scichart" Canvas.ZIndex="1">
 
     <s:CompositeAnnotationForMvvm.Annotations>
-        <s:BoxAnnotation Background="#FFBADAFF" CoordinateMode="Relative" Opacity="0.3" X1="0" X2="1" Y1="0" Y2="1"/>
-        <s:LineAnnotation CoordinateMode="Relative" Stroke="#FFBADAFF" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="1"/>
-        <s:LineAnnotation CoordinateMode="Relative" Stroke="#FFBADAFF" StrokeThickness="1" X1="1" X2="1" Y1="0" Y2="1"/>
+        <s:AnnotationCollection>
+            <s:BoxAnnotation Background="#FFBADAFF" CoordinateMode="Relative" Opacity="0.3" X1="0" X2="1" Y1="0" Y2="1"/>
+            <s:LineAnnotation CoordinateMode="Relative" Stroke="#FFBADAFF" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="1"/>
+            <s:LineAnnotation CoordinateMode="Relative" Stroke="#FFBADAFF" StrokeThickness="1" X1="1" X2="1" Y1="0" Y2="1"/>
+        </s:AnnotationCollection>
     </s:CompositeAnnotationForMvvm.Annotations>
 
 </s:CompositeAnnotationForMvvm>
