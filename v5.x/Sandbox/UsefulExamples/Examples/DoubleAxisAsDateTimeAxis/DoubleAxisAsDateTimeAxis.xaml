@@ -1,9 +1,10 @@
-<UserControl x:Class="SciChart.Sandbox.Examples.ResamplingOfGridDataSeries3D.ResamplingOfGridDataSeries3D"
+<UserControl x:Class="SciChart.Sandbox.Examples.DoubleAxisAsDateTimeAxis.DoubleAxisAsDateTimeAxis"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SciChart.Sandbox.Examples.DoubleAxisAsDateTimeAxis"
              mc:Ignorable="d"
              d:DesignHeight="400"
              d:DesignWidth="600" >
@@ -29,6 +30,8 @@
         <Setter Property="YColorMapping" Value="{x:Null}" />
         <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
       </Style>
+
+        <local:OADateLabelProvider x:Key="OADateProvider" />
     </Grid.Resources>
 
     <s3D:SciChart3DSurface x:Name="SciChart"
@@ -51,10 +54,7 @@
       </s3D:SciChart3DSurface.YAxis>
 
       <s3D:SciChart3DSurface.ZAxis>
-        <s3D:LogarithmicNumericAxis3D TextFormatting="#.#E+0"
-                                      LogarithmicBase="10"
-                                      AutoRange="Always"
-                                      ScientificNotation="LogarithmicBase"/>
+        <s3D:NumericAxis3D LabelProvider="{StaticResource OADateProvider}" />
       </s3D:SciChart3DSurface.ZAxis>
 
       <s3D:SciChart3DSurface.ChartModifier>

@@ -213,6 +213,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CustomPointMarker\SeriesExtensions.cs" />
+    <Compile Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml.cs">
+      <DependentUpon>DoubleAxisAsDateTimeAxis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\DoubleAxisAsDateTimeAxis\OADateLabelProvider.cs" />
     <Compile Include="Examples\ImplicitStyles\ImplicitStyles.xaml.cs">
       <DependentUpon>ImplicitStyles.xaml</DependentUpon>
     </Compile>
@@ -294,6 +298,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\CustomPointMarker\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
