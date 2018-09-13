@@ -231,8 +231,8 @@
     <Compile Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml.cs">
       <DependentUpon>MultiLineDateTimeAxisLabels.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Examples\ResamplingInGridDataSeries3D\ResamplingInGridDataSeries3D.xaml.cs">
-      <DependentUpon>ResamplingInGridDataSeries3D.xaml</DependentUpon>
+    <Compile Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml.cs">
+      <DependentUpon>ResamplingOfGridDataSeries3D.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ScrollbarMvvmAxis\NumericAxisViewModelWithScrollbar.cs" />
     <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml.cs">
@@ -317,7 +317,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Examples\ResamplingInGridDataSeries3D\ResamplingInGridDataSeries3D.xaml">
+    <Page Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

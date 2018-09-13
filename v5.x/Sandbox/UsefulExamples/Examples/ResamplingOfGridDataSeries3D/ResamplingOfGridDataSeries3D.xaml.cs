@@ -9,15 +9,15 @@ using SciChart.Data.Numerics;
 using SciChart.Data.Numerics.PointResamplers;
 
 
-namespace SciChart.Sandbox.Examples.ResamplingInGridDataSeries3D
+namespace SciChart.Sandbox.Examples.ResamplingOfGridDataSeries3D
 {
     /// <summary>
     /// Interaction logic for ResamplingInGridDataSeries3D.xaml
     /// </summary>
-    [TestCase("Resampling in Grid Data Series 3D")]
-    public partial class ResamplingInGridDataSeries3D : UserControl
+    [TestCase("Resampling of Grid Data Series 3D")]
+    public partial class ResamplingOfGridDataSeries3D : UserControl
     {
-        public ResamplingInGridDataSeries3D()
+        public ResamplingOfGridDataSeries3D()
         {
             InitializeComponent();
 
