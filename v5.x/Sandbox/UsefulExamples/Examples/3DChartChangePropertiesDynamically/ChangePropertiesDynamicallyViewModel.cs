@@ -14,15 +14,18 @@ namespace SciChart.Sandbox.Examples._3DChartChangePropertiesDynamically
 {
     public class ChangePropertiesDynamicallyViewModel : BindableObject
     {
-        private readonly NumericAxis3DViewModel _xAxis = new NumericAxis3DViewModel() { VisibleRange = new DoubleRange(0,10), StyleKey = "AxisStyle" };
-        private readonly NumericAxis3DViewModel _yAxis = new NumericAxis3DViewModel() { VisibleRange = new DoubleRange(0,10), StyleKey = "AxisStyle" };
-        private readonly NumericAxis3DViewModel _zAxis = new NumericAxis3DViewModel() { VisibleRange = new DoubleRange(0, 10), StyleKey = "AxisStyle" };
+        private readonly NumericAxis3DViewModel _xAxis = new NumericAxis3DViewModel() { AxisTitleOffset=75, VisibleRange = new DoubleRange(0,20), StyleKey = "AxisStyle" };
+        private readonly NumericAxis3DViewModel _yAxis = new NumericAxis3DViewModel() { AxisTitleOffset=75, VisibleRange = new DoubleRange(0,5), StyleKey = "AxisStyle" };
+        private readonly NumericAxis3DViewModel _zAxis = new NumericAxis3DViewModel() { AxisTitleOffset=75, VisibleRange = new DoubleRange(0, 7), StyleKey = "AxisStyle" };
         private readonly ObservableCollection<IRenderableSeries3DViewModel> _series = new ObservableCollection<IRenderableSeries3DViewModel>();
 
         private string _chartTitle;
         private int _fontSize;
         private Brush _foreGround;        
         private Brush _gridlineColor;
+        private DoubleRange _visibleRange;
+        private string _axisTitle
+            ;
 
         public ChangePropertiesDynamicallyViewModel()
         {
@@ -36,6 +39,7 @@ namespace SciChart.Sandbox.Examples._3DChartChangePropertiesDynamically
             });
 
             ChartTitle = "This is a test to see if binding works, yes it does";
+            AxisTitle = "An Axis";
         }
 
         public ObservableCollection<IRenderableSeries3DViewModel> SeriesCollection3D => _series;
@@ -82,6 +86,32 @@ namespace SciChart.Sandbox.Examples._3DChartChangePropertiesDynamically
             {
                 _gridlineColor = value;
                 OnPropertyChanged("GridlineColor");
+            }
+        }
+
+        public DoubleRange VisibleRange
+        {
+            get => _visibleRange;
+            set
+            {
+                _visibleRange = value;
+                OnPropertyChanged("VisibleRange");
+                XAxis3D.VisibleRange = value;
+                YAxis3D.VisibleRange = value;
+                ZAxis3D.VisibleRange = value;
+            }
+        }
+
+        public string AxisTitle
+        {
+            get => _axisTitle;
+            set
+            {
+                _axisTitle = value;
+                OnPropertyChanged("AxisTitle");
+                XAxis3D.AxisTitle = value;
+                YAxis3D.AxisTitle = value;
+                ZAxis3D.AxisTitle = value;
             }
         }
     }

@@ -10,13 +10,16 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:SciChart.Sandbox.Common"
         mc:Ignorable="d"
-        Title="ChangePropertiesDynamically" Height="450" Width="800">
+        Title="ChangePropertiesDynamically" Height="650" Width="1000">
     <Window.Resources>
         <local:ChangePropertiesDynamicallyViewModel x:Key="vm"/>
 
-        <Style x:Key="AxisStyle">
+        <Style x:Key="AxisStyle" TargetType="s3D:AxisBase3D">
             <Setter Property="common:AxisGridLineStyleBehavior.GridStroke" 
                     Value="{Binding DataContext.GridlineColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type s3D:SciChart3DSurface}}}"/>
+            
+            <Setter Property="VisibleRange" Value="{Binding VisibleRange, Mode=TwoWay}"/>
+            <Setter Property="AxisTitle" Value="{Binding AxisTitle, Mode=TwoWay}"/>
         </Style>
 
         <DataTemplate x:Key="BrushItemTemplate">
@@ -29,12 +32,13 @@
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Title" Margin="5"/>
-            <TextBox Text="{Binding ChartTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="5"/>
+            <TextBox Text="{Binding ChartTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="5"/>
             <TextBlock Text="Font Size" Margin="5"/>
             <ComboBox SelectedItem="{Binding FontSize, Mode=TwoWay}" SelectedIndex="4" Margin="5">
                 <ComboBox.Items>
@@ -63,7 +67,19 @@
             </ComboBox>
         </StackPanel>
 
-        <s3D:SciChart3DSurface x:Name="ScatterChart3D" Grid.Row="1"
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Axis Title" Margin="5"/>
+            <TextBox Text="{Binding AxisTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="5"/>
+            <TextBlock Text="Axis VisibleRange" Margin="5"/>
+            <ComboBox SelectedItem="{Binding VisibleRange, Mode=TwoWay}" SelectedIndex="1" Margin="5">
+                <ComboBox.Items>
+                    <s:DoubleRange Min="0" Max="10"/>
+                    <s:DoubleRange Min="-10" Max="10"/>
+                </ComboBox.Items>
+            </ComboBox>
+        </StackPanel>
+
+            <s3D:SciChart3DSurface x:Name="ScatterChart3D" Grid.Row="2"
                                RenderableSeries="{extensions:SeriesBinding SeriesCollection3D}"
                                XAxis="{extensions:AxisBinding XAxis3D}"
                                YAxis="{extensions:AxisBinding YAxis3D}"
