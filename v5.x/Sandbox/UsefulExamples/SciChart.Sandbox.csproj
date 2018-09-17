@@ -275,6 +275,9 @@
     <Compile Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml.cs">
       <DependentUpon>TicklinesUniformGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml.cs">
+      <DependentUpon>TouchInputSandbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchExamplesBehaviour.cs" />
     <Compile Include="TestCaseAttribute.cs" />
     <Compile Include="_Shared\DataManager.cs" />
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
