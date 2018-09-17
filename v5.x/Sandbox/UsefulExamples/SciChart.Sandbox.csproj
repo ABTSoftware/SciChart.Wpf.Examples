@@ -188,6 +188,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\AxisGridlineBehaviour.cs" />
+    <Compile Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamically.xaml.cs">
+      <DependentUpon>ChangePropertiesDynamically.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamicallyViewModel.cs" />
     <Compile Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml.cs">
       <DependentUpon>CreateAUniformMesh3DChart.xaml</DependentUpon>
     </Compile>
@@ -277,6 +282,10 @@
     <Compile Include="_Shared\MovingAverage.cs" />
     <Compile Include="_Shared\RandomWalkGenerator.cs" />
     <Compile Include="_Shared\XYPoint.cs" />
+    <Page Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamically.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
