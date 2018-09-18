@@ -38,6 +38,7 @@
             <Setter Property="TickTextBrush" Value="Black"/>
             <!-- AxisPlaneBackgroundFill Requires v5.1.1.11498 or later -->
             <Setter Property="AxisPlaneBackgroundFill" Value="White"/>
+            <!-- Switch to TickLabelAlignment.Camera for labels resizing dynamically with zoom --> 
             <Setter Property="TickLabelAlignment" Value="ScreenAutoRotated"/>
             <Setter Property="DrawMajorBands" Value="False"/>
             <Setter Property="MajorGridLineStyle">
@@ -114,7 +115,7 @@
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>
-                    <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:MouseWheelZoomModifier3D MouseWheelSensitivity="100"/>
                     <s3D:ZoomExtentsModifier3D/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
