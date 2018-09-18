@@ -3,40 +3,67 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-        Title="TouchInputSandbox" Height="400" Width="600">
-    <Grid>
-        <TabControl>
-            <TabItem Header="2D Charts">
-                <Grid>
-                    <s:SciChartSurface x:Name="scs2D" IsManipulationEnabled="True">
+        xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+        xmlns:touchScreenModifiers="clr-namespace:SciChart.Sandbox.Examples.TouchScreenModifiers"
+        Title="TouchInputSandbox" Height="650" Width="1000">
+    
+    <Window.Resources>
+        <touchScreenModifiers:TouchInputSandboxViewModel x:Key="TouchInputSandboxViewModel"/>
+    </Window.Resources>
 
-                        <s:SciChartSurface.RenderableSeries>
-                            <s:FastBandRenderableSeries Fill="#33279B27"
-                                            FillY1="#33FF1919"
-                                            Stroke="#FFFF1919"
-                                            StrokeY1="#FF279B27" />
-                        </s:SciChartSurface.RenderableSeries>
+    <Grid DataContext="{StaticResource TouchInputSandboxViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                        <s:SciChartSurface.XAxis>
-                            <s:NumericAxis/>
-                        </s:SciChartSurface.XAxis>
-                        <s:SciChartSurface.YAxis>
-                            <s:NumericAxis/>
-                        </s:SciChartSurface.YAxis>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Zoom &amp; Pan Modifiers:" Margin="5" MinWidth="150"/>
+                <CheckBox x:Name="PinchEnabledCheckbox" IsChecked="True" Content="Pinch Zoom Enabled?" Margin="5"/>
+                <CheckBox x:Name="ZoomEnabledCheckbox" IsChecked="True" Content="Zoom Pan Enabled?" Margin="5"/>
+                <CheckBox x:Name="AxisDragEnabled" IsChecked="True" Content="Axis Drag Enabled?" Margin="5"/>
+            </StackPanel>
 
-                        <s:SciChartSurface.ChartModifier>
-                            <s:ModifierGroup>
-                                <s:PinchZoomModifier/>
-                                <s:ZoomPanModifier />
-                                <s:YAxisDragModifier/>
-                                <s:XAxisDragModifier/>
-                                <s:MouseWheelZoomModifier/>
-                                <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
-                            </s:ModifierGroup>
-                        </s:SciChartSurface.ChartModifier>
-                    </s:SciChartSurface>
-                </Grid>
-            </TabItem>
-        </TabControl>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Interaction Modifiers:" Margin="5" MinWidth="150"/>
+                <CheckBox x:Name="RolloverEnabledCheckbox" IsChecked="True" Content="Rollover Enabled?" Margin="5" abt:ToggleButtonExtensions.GroupName="TooltipGroup"/>
+                <CheckBox x:Name="TooltipEnabledCheckbox" IsChecked="False" Content="Tooltip Enabled?" Margin="5" abt:ToggleButtonExtensions.GroupName="TooltipGroup"/>
+                <CheckBox x:Name="LegendEnabledCheckbox" IsChecked="False" Content="Legend Enabled?" Margin="5"/>
+            </StackPanel>
+        </StackPanel>
+
+        <s:SciChartSurface x:Name="scs2D" Grid.Row="1" 
+                           RenderableSeries="{s:SeriesBinding Series}"
+                           Annotations="{s:AnnotationsBinding Annotations}">
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+
+                <s:ModifierGroup>
+                    <!-- Zoom and pan modifiers -->
+                    <s:PinchZoomModifier IsEnabled="{Binding ElementName=PinchEnabledCheckbox, Path=IsChecked}"/>
+                    <s:ZoomPanModifier  IsEnabled="{Binding ElementName=ZoomEnabledCheckbox, Path=IsChecked}"/>
+                    <s:YAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabledCheckbox, Path=IsChecked}"/>
+                    <s:XAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabledCheckbox, Path=IsChecked}"/>
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
+                    
+                    <!-- Interaction modifiers -->
+                    <s:LegendModifier IsEnabled="{Binding ElementName=LegendEnabledCheckbox, Path=IsChecked}" ShowLegend="True"/>
+                    <s:RolloverModifier IsEnabled="{Binding ElementName=RolloverEnabledCheckbox, Path=IsChecked}" ReceiveHandledEvents="True" ShowTooltipOn="Always"/>
+                    <s:TooltipModifier IsEnabled="{Binding ElementName=TooltipEnabledCheckbox, Path=IsChecked}" ReceiveHandledEvents="True" ShowTooltipOn="Always"/>
+                </s:ModifierGroup>
+                
+            </s:SciChartSurface.ChartModifier>
+            
+        </s:SciChartSurface>
     </Grid>
 </Window>
+
