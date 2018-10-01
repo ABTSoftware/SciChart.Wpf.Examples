@@ -62,5 +62,6 @@
     <Color x:Key="ShadowEffectColor">MediumPurple</Color>
 
     <Color x:Key="PlaneBorderColor">Black</Color>
+    <Color x:Key="AxisPlaneBackgroundFill">#00000000</Color>
 
 </ResourceDictionary>

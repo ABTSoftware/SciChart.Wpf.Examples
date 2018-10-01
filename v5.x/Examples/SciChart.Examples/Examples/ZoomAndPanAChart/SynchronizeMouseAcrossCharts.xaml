@@ -71,12 +71,15 @@
         <!-- Step 2: you must bind XAxis.VisibleRange together on the two charts                                -->
         <!--         you can bind three or more charts by binding to a common ViewModel property                -->
         <!--                                                                                                    -->
+        <!-- Step 3: You must set attached property SciChartGroup.VerticalChartGroup to synchronize axis sizes  -->
+        <!--                                                                                                    -->
         <!-- Be sure to set the ReceiveHandledEvents=True on modifiers which cease to work after sharing mouse events! -->
 
         <!--  Define Chart 0  -->
         <s:SciChartSurface x:Name="chart0"
                            Grid.Row="0"
-                           Grid.Column="1">
+                           Grid.Column="1"
+                           s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding ChartData0}" Stroke="#279B27" />
             </s:SciChartSurface.RenderableSeries>
@@ -117,7 +120,8 @@
 
         <!--  Define Chart 1  -->
         <s:SciChartSurface x:Name="chart1"
-                           Grid.Row="1" Grid.Column="1">
+                           Grid.Row="1" Grid.Column="1"
+                           s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding ChartData1}" Stroke="#279B27" />
             </s:SciChartSurface.RenderableSeries>
