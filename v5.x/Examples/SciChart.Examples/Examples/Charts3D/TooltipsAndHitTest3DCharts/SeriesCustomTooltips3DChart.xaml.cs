@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2017. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -76,30 +76,5 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
             return Color.FromArgb(255, (byte)_random.Next(0, 255), (byte)_random.Next(0, 255),
                 (byte)_random.Next(0, 255));
         }
-    }
-
-    // Shows how to get PointMetadata3D from the SeriesInfo and bind to in the tooltip. See the XAML for the Tooltip template
-    public class PointMetadataFromXyzSeriesInfoConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            // Binding to Path=. means BaseXyzSeriesInfo3D
-            var seriesInfo = value as BaseXyzSeriesInfo3D;
-            if (seriesInfo == null) return null;
-
-            // Get the DataSeries and cast 
-            var ds = seriesInfo.RenderableSeries.DataSeries as XyzDataSeries3D<double>;
-
-            // Using VertexID (starts at 1) which is the XYZ point ID we can find the metadata 
-            var pointMetadata = ds.WValues[(int) seriesInfo.VertexId-1] as PointMetadata3D;
-
-            // Return the tag (set in OnLoaded as a string with index) 
-            return pointMetadata?.Tag;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    }    
 }

@@ -270,11 +270,28 @@
       <DependentUpon>CompositeAnnotationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\AnnotateAChart\CompositeAnnotations\CompositeAnnotationsViewModel.cs" />
+    <Compile Include="Examples\AnnotateAChart\TradeAnnotations\Converters.cs" />
+    <Compile Include="Examples\AnnotateAChart\TradeAnnotations\TradeAnnotations.xaml.cs">
+      <DependentUpon>TradeAnnotations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\AnnotateAChart\TradeAnnotations\TradeAnnotationsViewModel.cs" />
     <Compile Include="Examples\Charts3D\Axis3D\LogarithmicAxis3DView.xaml.cs">
       <DependentUpon>LogarithmicAxis3DView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\Charts3D\CreateA3DChart\Waterfall\CreateAWaterfall3DChart.xaml.cs">
       <DependentUpon>CreateAWaterfall3DChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Charts3D\CreateA3DChart\CreateACylindroidMesh3DChart.xaml.cs">
+      <DependentUpon>CreateACylindroidMesh3DChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Charts3D\CreateA3DChart\CreateAPolarMesh3DChart.xaml.cs">
+      <DependentUpon>CreateAPolarMesh3DChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Charts3D\CreateA3DChart\CreateACustomFreeSurface3DChart.xaml.cs">
+      <DependentUpon>CreateACustomFreeSurface3DChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Charts3D\CreateA3DChart\CreateAnEllipsoidMesh3DChart.xaml.cs">
+      <DependentUpon>CreateAnEllipsoidMesh3DChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshContours.xaml.cs">
       <DependentUpon>SurfaceMeshContours.xaml</DependentUpon>
@@ -290,6 +307,9 @@
     </Compile>
     <Compile Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshFloorAndCeiling.xaml.cs">
       <DependentUpon>SurfaceMeshFloorAndCeiling.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Charts3D\CreateRealtime3DCharts\CreateRealTime3DGeoidChart.xaml.cs">
+      <DependentUpon>CreateRealTime3DGeoidChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\Charts3D\CreateRealtime3DCharts\RealtimeWaterfall\RealtimeWaterfall3DChart.xaml.cs">
       <DependentUpon>RealtimeWaterfall3DChart.xaml</DependentUpon>
@@ -372,7 +392,6 @@
     </Compile>
     <Compile Include="Examples\CreateACustomChart\SplineLineSeries\SplineLineRenderableSeries.cs" />
     <Compile Include="Examples\CreateACustomChart\SplineLineSeries\TriDiagonalMatrix.cs" />
-    <Compile Include="Examples\CreateGaugeCharts\EventToCommandBehavior.cs" />
     <Compile Include="Examples\CreateGaugeCharts\LegendPlacementToOrientationConverter.cs" />
     <Compile Include="Examples\CreateGaugeCharts\UsingDonutChartExampleView.xaml.cs">
       <DependentUpon>UsingDonutChartExampleView.xaml</DependentUpon>
@@ -951,11 +970,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Examples\AnnotateAChart\TradeAnnotations\TradeAnnotations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\AnnotateAChart\TradeAnnotations\DrawingToolsEditPanelResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Examples\Charts3D\Axis3D\LogarithmicAxis3DView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\Charts3D\CreateA3DChart\Waterfall\CreateAWaterfall3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateA3DChart\CreateACylindroidMesh3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateA3DChart\CreateAPolarMesh3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateA3DChart\CreateACustomFreeSurface3DChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateA3DChart\CreateAnEllipsoidMesh3DChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1014,6 +1057,10 @@
     <Page Include="Examples\Charts3D\CreateASurfaceMeshChart\SurfaceMeshFloorAndCeiling.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Charts3D\CreateRealtime3DCharts\CreateRealTime3DGeoidChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\Charts3D\CreateRealtime3DCharts\RealtimeWaterfall\RealtimeWaterfall3DChart.xaml">
       <SubType>Designer</SubType>
@@ -3189,9 +3236,6 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateTernaryChart\TernaryErrorValuesVisibilityConverter.c.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExampleSourceFiles\CreateGaugeCharts\EventToCommandBehavior.c.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Create_A_Surface_Mesh_Chart\Surface_Mesh_3D_With_Contours.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3380,6 +3424,54 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExampleSourceFiles\FiltersAPI\CustomFilter.c.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Basic_Chart_Types\Simple_Ellipsoid_3D_Chart.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Basic_Chart_Types\Simple_Cylindroid_3D_Chart.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Basic_Chart_Types\Closed_Mesh_3D_Chart.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Basic_Chart_Types\Simple_Polar_3D_Chart.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Chart_Annotations\Trade_Annotations.xml" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\TradeAnnotations\TradeAnnotations.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\TradeAnnotations\TradeAnnotations.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\TradeAnnotations\TradeAnnotationsViewModel.c.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateACustomFreeSurface3DChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateACustomFreeSurface3DChart.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateAnEllipsoidMesh3DChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateAnEllipsoidMesh3DChart.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateAPolarMesh3DChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateAPolarMesh3DChart.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\a3D_Charts\Realtime_3D_Charts\RealTime_3D_Geoid.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateRealtime3DCharts\CreateRealTime3DGeoidChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateRealtime3DCharts\CreateRealTime3DGeoidChart.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateACylindroidMesh3DChart.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\Charts3D\CreateA3DChart\CreateACylindroidMesh3DChart.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\TradeAnnotations\DrawingToolsEditPanelResourceDictionary.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\AnnotateAChart\TradeAnnotations\Converters.c.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>pushd "$(ProjectDir)..\"
@@ -3410,32 +3502,37 @@ if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Core">
-      <HintPath>..\packages\SciChart.5.1.2.11514\lib\net45\SciChart.Core.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.2.0.11618\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Data">
-      <HintPath>..\packages\SciChart.5.1.2.11514\lib\net45\SciChart.Data.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.2.0.11618\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing">
-      <HintPath>..\packages\SciChart.5.1.2.11514\lib\net45\SciChart.Drawing.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.2.0.11618\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting">
-      <HintPath>..\packages\SciChart.5.1.2.11514\lib\net45\SciChart.Charting.dll</HintPath>
+      <HintPath>..\packages\SciChart.5.2.0.11618\lib\net45\SciChart.Charting.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting.DrawingTools">
+      <HintPath>..\packages\SciChart.DrawingTools.5.2.0.11618\lib\net45\SciChart.Charting.DrawingTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Drawing.DirectX">
-      <HintPath>..\packages\SciChart.DirectX.5.1.2.11514\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+      <HintPath>..\packages\SciChart.DirectX.5.2.0.11618\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SciChart.Charting3D">
-      <HintPath>..\packages\SciChart3D.5.1.2.11514\lib\net45\SciChart.Charting3D.dll</HintPath>
+      <HintPath>..\packages\SciChart3D.5.2.0.11618\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

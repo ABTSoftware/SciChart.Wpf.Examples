@@ -23,7 +23,6 @@
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleView.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/EventToCommandBehavior.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/LegendPlacementToOrientationConverter.cs.txt</string>
   </CodeFiles>
 </ExampleDefinition>

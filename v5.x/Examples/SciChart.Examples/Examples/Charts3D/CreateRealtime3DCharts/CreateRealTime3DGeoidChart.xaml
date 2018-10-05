@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts.CreateRealTime3DGeoidChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="400"
+             d:DesignWidth="600">
+
+    <UserControl.Resources>
+        
+      <!-- Simulates a Linear Interpolated color map -->
+        <s3D:GradientColorPalette  x:Key="MeshColorPalette" IsStepped="False">
+            <s3D:GradientColorPalette.GradientStops>
+              <GradientStop Offset="1" Color="DarkRed"/>
+              <GradientStop Offset="0.7" Color="Red"/>
+              <GradientStop Offset="0.5" Color="Yellow"/>
+              <GradientStop Offset="0.01" Color="GreenYellow"/>
+              <GradientStop Offset="0.0075" Color="Cyan"/>
+              <GradientStop Offset="0.005" Color="Blue"/>
+              <GradientStop Offset="0.0" Color="#1D2C6B"/>
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart3DSurface}">
+            
+            <ext:FlyoutSeparator Background="#444"/>
+
+            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
+            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
+
+            <ext:FlyoutSeparator Background="#444"/>
+
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="MESH" FontSize="9" Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
+                        <TextBlock Text="Opacity" FontSize="11"/>
+                        <ext:FlyoutSeparator/>
+                        <ComboBox x:Name="OpacityCombo" SelectedIndex="0" Margin="3,5" FontSize="11">
+                            <ComboBox.Items>
+                                <system:Double>1.0</system:Double>
+                                <system:Double>0.8</system:Double>
+                                <system:Double>0.5</system:Double>
+                                <system:Double>0.3</system:Double>
+                                <system:Double>0.0</system:Double>
+                            </ComboBox.Items>
+                        </ComboBox>
+
+                        <TextBlock Text="Draw Mesh As" FontSize="11"/>
+                        <ext:FlyoutSeparator/>
+                        <ComboBox x:Name="DrawMeshAsCombo" SelectedIndex="0" Margin="3,5" FontSize="11">
+                            <ComboBox.Items>
+                                <s3D:DrawMeshAs>SolidMesh</s3D:DrawMeshAs>
+                                <s3D:DrawMeshAs>SolidWireFrame</s3D:DrawMeshAs>
+                                <s3D:DrawMeshAs>Wireframe</s3D:DrawMeshAs>
+                            </ComboBox.Items>
+                        </ComboBox>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="DATA" FontSize="9"  Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    
+                  <StackPanel Orientation="Vertical" MinWidth="150" >
+                        <TextBlock Text="Choose what data to Render" FontSize="11"/>
+                        <ext:FlyoutSeparator/>
+                        <ComboBox x:Name="DataCombo" SelectedIndex="2" Margin="3,5" SelectionChanged="DataCombo_OnSelectionChanged" FontSize="11">
+                            <ComboBox.Items>
+                                <system:String>3D Geoid 10 x 10</system:String>
+                                <system:String>3D Geoid 50 x 50</system:String>
+                                <system:String>3D Geoid 100 x 100</system:String>
+                                <system:String>3D Geoid 500 x 500</system:String>
+                                <system:String>3D Geoid 1k x 1k</system:String>
+                            </ComboBox.Items>
+                        </ComboBox>
+
+                      <TextBlock Text="Change scale of the Displacement Map" FontSize="11"/>
+                      <ext:FlyoutSeparator/>
+                      <Slider x:Name="sliderHeightOffsetsScale"
+                              Width="200"
+                              Margin="3"
+                              HorizontalAlignment="Left"
+                              Minimum="0" Maximum="1"
+                              Orientation="Horizontal"
+                              Value="0.5" />
+                    </StackPanel>
+                  
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+          
+        </ext:SciChart3DInteractionToolbar>
+
+      <s3D:SciChart3DSurface x:Name="SciChart3DSurface" Grid.Column="1" WorldDimensions="200,200,200" BorderThickness="0">
+          <s3D:SciChart3DSurface.Camera>
+              <s3D:Camera3D ZoomToFitOnAttach="True"/>
+          </s3D:SciChart3DSurface.Camera>
+
+          <s3D:SciChart3DSurface.RenderableSeries>
+              <s3D:FreeSurfaceRenderableSeries3D x:Name="SurfaceMesh"
+                                                 DrawMeshAs="{Binding Source={x:Reference DrawMeshAsCombo}, Path=SelectedItem}"
+                                                 Stroke="#77228B22"
+                                                 ContourStroke="#77228B22"
+                                                 StrokeThickness="2.0"
+                                                 Opacity="{Binding Source={x:Reference OpacityCombo}, Path=SelectedItem}"
+                                                 MeshColorPalette="{StaticResource MeshColorPalette}"
+                                                 PaletteMinimum="0.0, 6.0, 0.0" PaletteMaximum="0.0, 7.0, 0.0" />
+          </s3D:SciChart3DSurface.RenderableSeries>
+
+          <s3D:SciChart3DSurface.XAxis>
+              <s3D:NumericAxis3D VisibleRange="-8,8" AutoRange="Never" />
+          </s3D:SciChart3DSurface.XAxis>
+
+          <s3D:SciChart3DSurface.YAxis>
+              <s3D:NumericAxis3D VisibleRange="-8,8" AutoRange="Never" />
+          </s3D:SciChart3DSurface.YAxis>
+
+          <s3D:SciChart3DSurface.ZAxis>
+              <s3D:NumericAxis3D VisibleRange="-8,8" AutoRange="Never" />
+          </s3D:SciChart3DSurface.ZAxis>
+
+      </s3D:SciChart3DSurface>
+    </Grid>
+</UserControl>

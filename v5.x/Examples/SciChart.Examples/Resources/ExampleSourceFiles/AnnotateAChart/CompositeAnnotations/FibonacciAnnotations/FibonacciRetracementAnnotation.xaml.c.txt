@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2017. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,6 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System.Windows;
 using System.Windows.Media;
 using SciChart.Charting.Visuals.Annotations;
 
@@ -34,6 +36,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Fibonac
         public FibonacciRetracementAnnotation()
         {
             InitializeComponent();
+        }
+
+        private void FibonacciRetracementAnnotation_OnLoaded(object sender, RoutedEventArgs e)
+        {
             DataContext = new FibonacciRetracementViewModel(_ratios);
         }
     }

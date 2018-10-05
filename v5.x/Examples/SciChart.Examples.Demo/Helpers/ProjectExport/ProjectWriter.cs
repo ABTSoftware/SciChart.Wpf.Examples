@@ -18,7 +18,8 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             @"SciChart.Charting.dll",
             @"SciChart.Charting3D.dll",
             @"SciChart.Drawing.dll",
-            @"SciChart.Drawing.DirectX.dll"
+            @"SciChart.Drawing.DirectX.dll",
+            @"SciChart.Charting.DrawingTools.dll",
         };
 
         public static readonly string Interactivity = @"System.Windows.Interactivity.dll";

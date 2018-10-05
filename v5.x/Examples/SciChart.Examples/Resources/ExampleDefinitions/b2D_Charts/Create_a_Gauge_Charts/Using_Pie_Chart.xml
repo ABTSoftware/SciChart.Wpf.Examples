@@ -23,7 +23,6 @@
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingPieChartExampleView.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingPieChartExampleView.xaml.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingPieChartExampleViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/EventToCommandBehavior.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/LegendPlacementToOrientationConverter.cs.txt</string>
   </CodeFiles>
 </ExampleDefinition>

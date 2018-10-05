@@ -35,7 +35,6 @@
                                 </ScrollViewer.Tag>
                                 <ScrollViewer.Width>
                                     <MultiBinding Converter="{StaticResource multiplyConverter}">
-                                        <Binding ElementName="ExpanderContent" Path="ActualWidth" />
                                         <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </ScrollViewer.Width>
@@ -257,21 +256,6 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-
-            <!--  Example Frame itself  -->
-            <helpers:TransitioningFrame x:Name="ExamplesFrame"
-                                        HorizontalAlignment="Stretch"
-                                        IsHitTestVisible="True"
-                                        Style="{StaticResource transitioningFrameStyle}"
-                                        tz:Transitionz.Opacity="{tz:OpacityParams From=0,
-                                                                                    To=1,
-                                                                                    Duration=100,
-                                                                                    TransitionOn=Visibility}"
-                                        tz:Transitionz.Visibility="{Binding Path=ShowExample,
-                                                                             Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        navigation:Navigator.ExampleStartPage="{Binding SelectedExample.PageId,
-                                                                                        Mode=OneTime}" />
-
             <!--  Source Code View  -->
             <views:SourceCodeView HorizontalAlignment="Stretch"
                                   tz:Transitionz.Opacity="{tz:OpacityParams From=0,
@@ -352,7 +336,20 @@
                 </Border>
             </Expander>
 
-
+            <!--  Example Frame itself  -->
+            <helpers:TransitioningFrame x:Name="ExamplesFrame"
+                                        HorizontalAlignment="Stretch"
+                                        IsHitTestVisible="True"
+                                        Style="{StaticResource transitioningFrameStyle}"
+                                        tz:Transitionz.Opacity="{tz:OpacityParams From=0,
+                                                                                    To=1,
+                                                                                    Duration=100,
+                                                                                    TransitionOn=Visibility}"
+                                        tz:Transitionz.Visibility="{Binding Path=ShowExample,
+                                                                             Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        navigation:Navigator.ExampleStartPage="{Binding SelectedExample.PageId,
+                                                                                        Mode=OneTime}" />
+            
         </Grid>
 
         <Border Grid.Row="1"

@@ -63,7 +63,8 @@
                                 LegendListStyle="{StaticResource PieChartListBoxForegroundStyle}">
 
             <i:Interaction.Behaviors>
-                <gauge:EventToCommandBehavior Command="{Binding SegmentSelectionCommand}" Event="SelectionChanged" PassArguments="True" />
+                <!-- Note: To use this in your own application, grab from github at https://github.com/ABTSoftware/SciChart.WPF.Examples/tree/master/v5.x/Examples/SciChart.Examples.ExternalDependencies/Behaviors -->
+                <ext:EventToCommandBehavior Command="{Binding SegmentSelectionCommand}" Event="SelectionChanged" PassArguments="True" />
             </i:Interaction.Behaviors>
             
             <s:SciChartDonutSurface.ItemTemplate>

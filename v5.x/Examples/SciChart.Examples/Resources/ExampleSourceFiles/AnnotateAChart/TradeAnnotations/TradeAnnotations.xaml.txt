@@ -1,0 +1,351 @@
+﻿<UserControl
+    x:Class="SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations.TradeAnnotations"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:tradeAnnotations="clr-namespace:SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations"
+    xmlns:viewModels1="clr-namespace:SciChart.Charting.DrawingTools.TradingAnnotations.ViewModels;assembly=SciChart.Charting.DrawingTools"
+    d:DesignHeight="400"
+    d:DesignWidth="600"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
+                <ResourceDictionary Source="DrawingToolsEditPanelResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <tradeAnnotations:AnnotationViewModelToVisibilityConverter x:Key="AnnotationViewModelToVisibility" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <tradeAnnotations:DrawingToolViewModelToEditPanelOptionsConverter x:Key="DrawingToolViewModelToEditPanelOptionsConverter" />
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <i:Interaction.Behaviors>
+            <!-- Note: To use this in your own application, grab from github at https://github.com/ABTSoftware/SciChart.WPF.Examples/tree/master/v5.x/Examples/SciChart.Examples.ExternalDependencies/Behaviors -->
+            <ext:EventToCommandBehavior
+                Command="{Binding WorkSpaceKeyUpCommand}"
+                Event="KeyUp"
+                PassArguments="True" />
+        </i:Interaction.Behaviors>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference sciChart}}">
+
+            <ext:FlyoutMenuButton
+                Padding="0"
+                HorizontalAlignment="Left"
+                Content="Tools"
+                FontSize="10">
+
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:BrushAnnotationViewModel}"
+                            Content="Pointer"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:ElliotWaveAnnotationViewModel}"
+                            Content="Elliot Wave"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:PitchforkAnnotationViewModel}"
+                            Content="Pitchfork"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:XabcdAnnotationViewModel}"
+                            Content="XABCD Pattern"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:HeadAndShouldersAnnotationViewModel}"
+                            Content="Head and Shoulders"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:FibonacciExtensionAnnotationViewModel}"
+                            Content="Fibonacci Extension"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                        <ToggleButton
+                            Width="auto"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
+                            Command="{Binding SetAnnotationCreationTypeCommand}"
+                            CommandParameter="{x:Type viewModels1:FibonacciRetracementAnnotationViewModel}"
+                            Content="Fibonacci Retracement"
+                            IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
+                            Style="{StaticResource DefaultToggleButtonStyle}" />
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding DeleteSelectedAnnotationCommand}"
+                Content="Del"
+                Style="{StaticResource DefaultButtonStyle}" />
+
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface
+            x:Name="sciChart"
+            Grid.Column="1"
+            Annotations="{s:AnnotationsBinding Annotations}"
+            RenderableSeries="{s:SeriesBinding Series}">
+
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsEnabled="{Binding IsRubberBandEnabled}" />
+                    <s:ZoomPanModifier IsEnabled="{Binding IsZoomPanEnabled, Mode=TwoWay}" />
+                    <s:MouseWheelZoomModifier />
+                    <s:TradingAnnotationCreationModifierMvvm
+                        AnnotationViewModelType="{Binding AnnotationType}"
+                        AnnotationViewModelsCollection="{Binding Annotations}"
+                        IsEnabled="{Binding IsAnnotationCreationEnable, Mode=TwoWay}"
+                        ReceiveHandledEvents="True">
+                        <i:Interaction.Behaviors>
+                            <ext:EventToCommandBehavior
+                                Command="{Binding AnnotationCreatedCommand}"
+                                Event="AnnotationCreated"
+                                PassArguments="True" />
+                        </i:Interaction.Behaviors>
+                    </s:TradingAnnotationCreationModifierMvvm>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+        <Canvas Grid.ColumnSpan="2" Panel.ZIndex="99999">
+            <Thumb
+                Canvas.Left="45"
+                Canvas.Top="10"
+                Background="#FF1C1C1F"
+                Canvas.ZIndex="99999"
+                DragDelta="Thumb_OnDragDelta"
+                Visibility="{Binding IsEditPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Thumb.Template>
+                    <ControlTemplate>
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Border
+                                Grid.RowSpan="2"
+                                Background="#FF5B5B5B"
+                                BorderBrush="#FF5B5B5B"
+                                Cursor="SizeAll">
+                                <StackPanel Width="10">
+                                    <Line
+                                        Width="10"
+                                        Margin="2,2,0,2"
+                                        Stroke="#FF1C1C1F"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="2"
+                                        X1="0"
+                                        X2="10" />
+                                    <Line
+                                        Width="10"
+                                        Margin="2,2,0,2"
+                                        Stroke="#FF1C1C1F"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="2"
+                                        X1="0"
+                                        X2="10" />
+                                    <Line
+                                        Width="10"
+                                        Margin="2,2,0,2"
+                                        Stroke="#FF1C1C1F"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="2"
+                                        X1="0"
+                                        X2="10" />
+                                    <Line
+                                        Width="10"
+                                        Margin="2,2,0,2"
+                                        Stroke="#FF1C1C1F"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="2"
+                                        X1="0"
+                                        X2="10" />
+                                    <Line
+                                        Width="10"
+                                        Margin="2,2,0,2"
+                                        Stroke="#FF1C1C1F"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="2"
+                                        X1="0"
+                                        X2="10" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                Grid.Column="1"
+                                Grid.ColumnSpan="6"
+                                Background="#FF5B5B5B"
+                                BorderBrush="#FF5B5B5B"
+                                BorderThickness="0,1"
+                                IsHitTestVisible="False" />
+
+                            <ComboBox
+                                Grid.Column="1"
+                                MinWidth="46"
+                                Margin="2,0,0,0"
+                                SelectedItem="{Binding SelectedAnnotation.StrokeThickness, Mode=TwoWay}"
+                                Style="{StaticResource StrokethicknessBoxComboBoxStyle}">
+                                <system:Double>1</system:Double>
+                                <system:Double>3</system:Double>
+                                <system:Double>5</system:Double>
+                                <system:Double>7</system:Double>
+                            </ComboBox>
+
+                            <ComboBox
+                                Grid.Column="2"
+                                Margin="2,0,0,0"
+                                ItemsSource="{Binding AllBrushes}"
+                                SelectedItem="{Binding SelectedAnnotation.Stroke, Mode=TwoWay}"
+                                Style="{StaticResource ColorPicker}"
+                                Template="{StaticResource ComboBoxStrokeTemplate}" />
+
+                            <ComboBox
+                                Grid.Column="3"
+                                MinWidth="46"
+                                Margin="2,0,0,0"
+                                SelectedItem="{Binding SelectedAnnotation, Mode=TwoWay, Converter={StaticResource DrawingToolViewModelToEditPanelOptionsConverter}, ConverterParameter=FontSize}"
+                                Template="{StaticResource ComboBoxEditPanelTemplate}"
+                                Visibility="{Binding SelectedAnnotation, Converter={StaticResource AnnotationViewModelToVisibility}, ConverterParameter=FontSize}">
+                                <system:Double>6</system:Double>
+                                <system:Double>7</system:Double>
+                                <system:Double>8</system:Double>
+                                <system:Double>9</system:Double>
+                                <system:Double>10</system:Double>
+                                <system:Double>11</system:Double>
+                                <system:Double>12</system:Double>
+                                <system:Double>14</system:Double>
+                                <system:Double>18</system:Double>
+                                <system:Double>24</system:Double>
+                                <system:Double>36</system:Double>
+
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Margin" Value="1" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+
+                            </ComboBox>
+
+                            <ComboBox
+                                Grid.Column="4"
+                                Margin="2,0,0,0"
+                                ItemsSource="{Binding AllBrushes}"
+                                SelectedItem="{Binding SelectedAnnotation, Mode=TwoWay, Converter={StaticResource DrawingToolViewModelToEditPanelOptionsConverter}, ConverterParameter=Fill}"
+                                Style="{StaticResource ColorPicker}"
+                                Visibility="{Binding SelectedAnnotation, Converter={StaticResource AnnotationViewModelToVisibility}, ConverterParameter=Fill}" />
+
+                            <ComboBox
+                                Grid.Column="5"
+                                Margin="2,0,0,0"
+                                ItemsSource="{Binding AllBrushes}"
+                                SelectedItem="{Binding SelectedAnnotation, Mode=TwoWay, Converter={StaticResource DrawingToolViewModelToEditPanelOptionsConverter}, ConverterParameter=MiddleFill}"
+                                Style="{StaticResource ColorPicker}"
+                                Visibility="{Binding SelectedAnnotation, Converter={StaticResource AnnotationViewModelToVisibility}, ConverterParameter=Pitchfork}" />
+
+                            <ComboBox
+                                Grid.Column="6"
+                                Margin="2,0,0,0"
+                                ItemsSource="{Binding AllBrushes}"
+                                SelectedItem="{Binding SelectedAnnotation, Mode=TwoWay, Converter={StaticResource DrawingToolViewModelToEditPanelOptionsConverter}, ConverterParameter=SidesFill}"
+                                Style="{StaticResource ColorPicker}"
+                                Visibility="{Binding SelectedAnnotation, Converter={StaticResource AnnotationViewModelToVisibility}, ConverterParameter=Pitchfork}" />
+
+                        </Grid>
+                    </ControlTemplate>
+                </Thumb.Template>
+            </Thumb>
+        </Canvas>
+    </Grid>
+
+
+</UserControl>

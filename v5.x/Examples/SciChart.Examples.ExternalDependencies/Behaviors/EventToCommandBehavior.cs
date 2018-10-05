@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace SciChart.Examples.Examples.CreateGaugeCharts
+namespace SciChart.Examples.ExternalDependencies.Behaviors
 {
     /// <summary>
     /// Behavior that will connect an UI event to a viewmodel Command,
