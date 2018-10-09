@@ -110,7 +110,7 @@
                 BorderBrush="#323539"
                 BorderThickness="2"
                 Padding="5"
-                Effect="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource LegendDropShadow}}">            
+                Effect="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource LegendDropShadow}}">            
             <ItemsControl ItemsSource="{Binding ElementName=RolloverModifier, Path=SeriesData.SeriesInfo}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

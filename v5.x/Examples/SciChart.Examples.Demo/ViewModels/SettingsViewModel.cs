@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
+using SciChart.Charting.Common.MarkupExtensions;
 using SciChart.Charting.Visuals;
 using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighSpeedRasterizer;
@@ -46,6 +47,7 @@ namespace SciChart.Examples.Demo.ViewModels
             Use3DAANone = true;
             EnableResamplingCPlusPlus = false;
             EnableExtremeDrawingManager = true;
+            EnableDropShadows = true;
 
             Observable.CombineLatest(
                 this.WhenPropertyChanged(x => x.UseAlternativeFillSourceD3D),
@@ -81,6 +83,9 @@ namespace SciChart.Examples.Demo.ViewModels
                         Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None,
                         UseD3D10AsFallback);
                 });
+
+            this.WhenPropertyChanged(x => x.EnableDropShadows).Subscribe(b => EffectManager.EnableDropShadows = b)
+                .DisposeWith(this);
         }
 
         /// <summary>
@@ -136,6 +141,12 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             get { return GetDynamicValue<bool>("AllowFeedback"); }
             set { SetDynamicValue("AllowFeedback", value); }
+        }
+
+        public bool EnableDropShadows
+        {
+            get { return GetDynamicValue<bool>("EnableDropShadows"); }
+            set { SetDynamicValue("EnableDropShadows", value); }
         }
 
         public bool EnableResamplingCPlusPlus

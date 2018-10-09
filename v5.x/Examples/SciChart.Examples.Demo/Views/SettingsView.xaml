@@ -215,7 +215,7 @@
                       DataContext="{StaticResource SettingsViewModel}"
                       FontSize="14"
                       ToolTip="Disable effects on lower powered machines for better performance! "
-                      IsChecked="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Mode=TwoWay}" />
+                      IsChecked="{Binding EnableDropShadows, Mode=TwoWay}" />
 
                     <CheckBox Grid.Row="6"
                               Margin="3"

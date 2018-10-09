@@ -16,7 +16,7 @@
                 <Setter Property="Foreground" Value="#FF42b649"/>
             </Trigger>
         </Style.Triggers>
-        <Setter Property="Effect" Value="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}"/>
+        <Setter Property="Effect" Value="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}"/>
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Background" Value="#FF323539" />
         <Setter Property="Foreground" Value="#FFF" />
