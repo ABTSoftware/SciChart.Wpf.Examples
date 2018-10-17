@@ -46,7 +46,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _isEditPanelVisible = value;
-                OnPropertyChanged(nameof(IsEditPanelVisible));
+                OnPropertyChanged("IsEditPanelVisible");
             }
         }
 
@@ -68,7 +68,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _isRubberBandEnabled = value;
-                OnPropertyChanged(nameof(IsRubberBandEnabled));
+                OnPropertyChanged("IsRubberBandEnabled");
             }
         }
 
@@ -80,7 +80,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _series = value;
-                OnPropertyChanged(nameof(Series));
+                OnPropertyChanged("Series");
             }
         }
 
@@ -90,7 +90,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _annotations = value;
-                OnPropertyChanged(nameof(Annotations));
+                OnPropertyChanged("Annotations");
             }
         }
 
@@ -100,7 +100,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _annotationType = value;
-                OnPropertyChanged(nameof(AnnotationType));
+                OnPropertyChanged("AnnotationType");
             }
         }
 
@@ -110,7 +110,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _isAnnotationCreationEnable = value;
-                OnPropertyChanged(nameof(IsAnnotationCreationEnable));
+                OnPropertyChanged("IsAnnotationCreationEnable");
             }
         }
 
@@ -120,7 +120,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             set
             {
                 _isZoomPanEnabled = value;
-                OnPropertyChanged(nameof(IsZoomPanEnabled));
+                OnPropertyChanged("IsZoomPanEnabled");
             }
         }
 
@@ -156,7 +156,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
                     if (!(annotation is BrushAnnotationViewModel))
                     {
                         IsAnnotationDrawn = false;
-                        OnPropertyChanged(nameof(IsAnnotationDrawn));
+                        OnPropertyChanged("IsAnnotationDrawn");
                     }
                 });
             }
@@ -207,13 +207,13 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         private void OnAnnotationUnselected(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged(nameof(SelectedAnnotation));
+            OnPropertyChanged("SelectedAnnotation");
             IsEditPanelVisible = SelectedAnnotation != null;
         }
 
         private void OnAnnotationSelected(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged(nameof(SelectedAnnotation));
+            OnPropertyChanged("SelectedAnnotation");
             IsEditPanelVisible = SelectedAnnotation != null;
         }
 

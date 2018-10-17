@@ -7,9 +7,9 @@
     The Closed Mesh 3D chart demo shows how to create closed mesh using the SciChart 3D Component.
   </ToolTipDescription>
   <Description>
-    The Closed Mesh 3D chart demo shows how to use [url='http://www.scichart.com/TODO']CustomFreeSurfaceDataSeries3D[/url] and the [url='http://www.scichart.com/TODO']FreeSurfaceRenderableSeries3D[/url] to render closed 3d mesh.
+    The Closed Mesh 3D chart demo shows how to use [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.Model.CustomFreeSurfaceDataSeries3D%603.html']CustomFreeSurfaceDataSeries3D[/url] and the [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] to render closed 3d mesh.
 
-    [url='http://www.scichart.com/TODO']FreeSurfaceRenderableSeries3D[/url] allows you to create all kinds of shapes, including Sphere, Cylinder, Disc and free-form mesh shapes, and overlay heightmap, colormap (palette) and contours. Find examples of other shapes in the same section here or visit [url='http://www.scichart.com/TODO']the web site[/url] for more information.
+    [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] allows you to create all kinds of shapes, including Sphere, Cylinder, Disc and free-form mesh shapes, and overlay heightmap, colormap (palette) and contours. Find examples of other shapes in the same section here or visit [url='http://www.scichart.com']the web site[/url] for more information.
 
     Palette Mode drop-down menu demonstrates different modes of the data representation.
   </Description>
