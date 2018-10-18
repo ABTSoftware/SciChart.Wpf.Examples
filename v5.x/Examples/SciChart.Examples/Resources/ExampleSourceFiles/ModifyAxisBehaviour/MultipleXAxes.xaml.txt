@@ -102,8 +102,8 @@
             <!--  Create chart modifiers to zoom, drag X,Y Axes and double click to zoom extents  -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RubberBandXyZoomModifier IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked}" IsXAxisOnly="{Binding ElementName=zoomXAxisOnly, Path=IsChecked, Mode=TwoWay}" />
-                    <s:ZoomPanModifier ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked}" />
+                    <s:RubberBandXyZoomModifier  IsXAxisOnly="{Binding ElementName=zoomXAxisOnly, Path=IsChecked, Mode=TwoWay}" />
+                    <s:ZoomPanModifier ClipModeX="None"  />
                     <s:XAxisDragModifier AxisId="TopAxisId" />
                     <s:XAxisDragModifier AxisId="BottomAxisId" />
                     <s:YAxisDragModifier AxisId="LeftAxisId" />

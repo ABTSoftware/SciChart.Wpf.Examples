@@ -244,6 +244,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
         private void DeleteSelectedAnnotationOnSelectedPane()
         {
             Annotations.RemoveWhere(x => x.IsSelected);
+            IsEditPanelVisible = SelectedAnnotation != null;
         }
     }
 }
