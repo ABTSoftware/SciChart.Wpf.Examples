@@ -39,7 +39,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart
 
             this.LoadData();
 
-            EffectManager.Instance.EnableDropShadows = false;
+            EffectManager.EnableDropShadows = false;
 
             ds.StartX = 0;
             ds.StepX = 1;

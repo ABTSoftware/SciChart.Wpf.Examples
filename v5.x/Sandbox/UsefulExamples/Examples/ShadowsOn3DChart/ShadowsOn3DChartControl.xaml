@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:createBottomChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
+             xmlns:createASurfaceMeshChart="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateASurfaceMeshChart"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -66,7 +65,7 @@
                 <GradientStop Offset="0" Color="White"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
-        <createBottomChart:SurfaceMeshPaletteProvider3D x:Key="MeshPaletteProvider3D"/>
+        <createASurfaceMeshChart:SurfaceMeshPaletteProvider3D x:Key="MeshPaletteProvider3D"/>
 
     </UserControl.Resources>
 

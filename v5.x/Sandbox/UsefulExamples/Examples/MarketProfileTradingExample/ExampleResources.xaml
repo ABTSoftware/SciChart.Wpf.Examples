@@ -19,7 +19,7 @@
                 <Setter Property="Foreground" Value="#FF42b649"/>
             </Trigger>
         </Style.Triggers>
-        <Setter Property="Effect" Value="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}"/>
+        <Setter Property="Effect" Value="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}"/>
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Background" Value="#FF323539" />
         <Setter Property="Foreground" Value="#FFF" />
@@ -112,7 +112,7 @@
 
 
     <Style x:Key="FlyoutMenuButtonStyle" TargetType="local:FlyoutMenuButton">
-        <Setter Property="Effect" Value="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}" />
+        <Setter Property="Effect" Value="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}" />
         <Setter Property="Background" Value="#FF323539" />
         <Setter Property="Foreground" Value="#FFF" />
         <Setter Property="Margin" Value="3" />
@@ -159,7 +159,7 @@
                            Content="{TemplateBinding PopupContent}"
                            Padding="3"
                            StrokeThickness="2"
-                           Effect="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource CalloutEffect}}">
+                           Effect="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource CalloutEffect}}">
                                     <s:Callout.Resources>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Foreground" Value="#AAA" />
@@ -265,7 +265,7 @@
     </Style>
 
     <Style x:Key="DefaultButtonStyle" TargetType="Button">
-        <Setter Property="Effect" Value="{Binding Source={x:Static s:EffectManager.Instance}, Path=EnableDropShadows, Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}" />
+        <Setter Property="Effect" Value="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource ButtonEffect}}" />
         <Setter Property="Margin" Value="3" />
         <Setter Property="Background" Value="#FF323539" />
         <Setter Property="Foreground" Value="#FFF" />
