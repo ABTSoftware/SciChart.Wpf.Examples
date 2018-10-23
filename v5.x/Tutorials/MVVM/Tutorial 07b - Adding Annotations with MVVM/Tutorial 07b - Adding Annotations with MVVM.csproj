@@ -35,22 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SciChart.Charting, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Charting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SciChart.Core, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SciChart.Data, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.0.0.10775, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciChart.5.0.0.10775\lib\net45\SciChart.Drawing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -121,6 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart">
+      <Version>5.2.0.11680</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
