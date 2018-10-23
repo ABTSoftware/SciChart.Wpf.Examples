@@ -31,16 +31,16 @@
         <Setter Property="ZColorMapping" Value="{x:Null}" />
         <Setter Property="YColorMapping" Value="{x:Null}" />
         <Style.Triggers>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillY}" Value="True">
+          <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillY}}" Value="True">
             <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
           </DataTrigger>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillZ}" Value="True">
+          <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillZ}}" Value="True">
             <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}"/>
           </DataTrigger>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbShowPointMarkers}" Value="True">
+            <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbShowPointMarkers}}" Value="True">
             <Setter Property="PointMarker" Value="{StaticResource PointMarker}"/>
           </DataTrigger>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbIsVolumetric}" Value="True">
+          <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
             <!-- SliceThickness is used to define the thickness of waterfall slices -->
             <Setter Property="SliceThickness" Value="6"/>
             <!-- PointMarker isn't allowed with volumetric waterfall -->
