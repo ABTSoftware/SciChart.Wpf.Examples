@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
-            TODO SET YOUR LICENSE KEY HERE 
+            // TODO SET YOUR LICENSE KEY HERE 
             SciChartSurface.SetRuntimeLicenseKey(@"TODO SET KEY HERE");
 
             Application.EnableVisualStyles();
