@@ -159,6 +159,13 @@
                            BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
+
+                <s:FastUniformContourRenderableSeries x:Name="contourSeries" 
+                                                      AntiAliasing="True"
+                                                      ZMax="200"
+                                                      ZMin="20"
+                                                      ZStep="20"/>
+
                 <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9">
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Maximum="200">
@@ -174,11 +181,6 @@
                     </s:FastUniformHeatmapRenderableSeries.ColorMap>
                 </s:FastUniformHeatmapRenderableSeries>
                 
-                <s:FastUniformContourRenderableSeries x:Name="contourSeries" 
-                                                      AntiAliasing="True"
-                                                      ZMax="200"
-                                                      ZMin="20"
-                                                      ZStep="20"/>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

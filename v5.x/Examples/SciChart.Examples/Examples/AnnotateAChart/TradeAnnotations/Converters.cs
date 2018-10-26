@@ -15,7 +15,11 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value is BrushAnnotationViewModel || value is FibonacciExtensionAnnotationViewModel || value is FibonacciRetracementAnnotationViewModel) && (((string)parameter) == "FontSize" || ((string)parameter) == "Fill" || ((string)parameter) == "Pitchfork"))
+            if (value is BrushAnnotationViewModel && (((string)parameter) == "FontSize" || ((string)parameter) == "Fill" || ((string)parameter) == "Pitchfork"))
+            {
+                return Visibility.Collapsed;
+            }
+            else if ((value is FibonacciExtensionAnnotationViewModel || value is FibonacciRetracementAnnotationViewModel) && (((string) parameter) == "Fill" || ((string) parameter) == "Pitchfork"))
             {
                 return Visibility.Collapsed;
             }
