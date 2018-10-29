@@ -239,6 +239,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CustomPointMarker\SeriesExtensions.cs" />
+    <Compile Include="Examples\CustomSeriesMvvm\CustomSeriesMvvm.xaml.cs">
+      <DependentUpon>CustomSeriesMvvm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CustomSeriesMvvm\CustomSeriesMvvmViewModel.cs" />
+    <Compile Include="Examples\CustomSeriesMvvm\FastLineRenderableSeriesEx.cs" />
+    <Compile Include="Examples\CustomSeriesMvvm\LineRenderableSeriesViewModelEx.cs" />
     <Compile Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml.cs">
       <DependentUpon>DoubleAxisAsDateTimeAxis.xaml</DependentUpon>
     </Compile>
@@ -342,6 +348,10 @@
     <Page Include="Examples\CustomPointMarker\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\CustomSeriesMvvm\CustomSeriesMvvm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml">
       <SubType>Designer</SubType>
