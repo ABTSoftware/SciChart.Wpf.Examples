@@ -152,11 +152,16 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
                     }
 
                     IsAnnotationCreationEnable = annotation is BrushAnnotationViewModel;
-
                     if (!(annotation is BrushAnnotationViewModel))
                     {
                         IsAnnotationDrawn = false;
                         OnPropertyChanged("IsAnnotationDrawn");
+                    }
+                    else
+                    {
+                        annotation.IsEditable = false;
+                        Annotations.Where(x => x is BrushAnnotationViewModel && !ReferenceEquals(x, annotation))
+                            .ForEachDo(x => x.IsSelected = false);
                     }
                 });
             }
