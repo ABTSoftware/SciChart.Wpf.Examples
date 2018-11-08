@@ -302,6 +302,9 @@
       <DependentUpon>TouchInputSandbox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\TouchScreenModifiers\TouchInputSandboxViewModel.cs" />
+    <Compile Include="Examples\YAxisSameZeroLine\YAxisSameZeroLine.xaml.cs">
+      <DependentUpon>YAxisSameZeroLine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchExamplesBehaviour.cs" />
     <Compile Include="TestCaseAttribute.cs" />
     <Compile Include="_Shared\DataManager.cs" />
@@ -412,6 +415,10 @@
     <Page Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\YAxisSameZeroLine\YAxisSameZeroLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
