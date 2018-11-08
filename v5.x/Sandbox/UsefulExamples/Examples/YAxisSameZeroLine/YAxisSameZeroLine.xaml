@@ -14,14 +14,11 @@
         </Grid.ColumnDefinitions>
 
         <s:SciChartSurface x:Name="scs0" Grid.Column="0">
-            <s:SciChartSurface.ViewportManager>
-                <local:CustomViewportManager/>
-            </s:SciChartSurface.ViewportManager>
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis/>
+                <s:NumericAxis Tag="FirstYAxis" local:YAxisHelper.SyncZeroLineGroup="MyChartGroup"/>
             </s:SciChartSurface.YAxis>
             <s:SciChartSurface.ChartModifier>
                 <s:ZoomPanModifier/>
@@ -29,14 +26,11 @@
         </s:SciChartSurface>
 
         <s:SciChartSurface x:Name="scs1" Grid.Column="1">
-            <s:SciChartSurface.ViewportManager>
-                <local:CustomViewportManager/>
-            </s:SciChartSurface.ViewportManager>
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis/>
+                <s:NumericAxis Tag="SecondYAxis"  local:YAxisHelper.SyncZeroLineGroup="MyChartGroup"/>
             </s:SciChartSurface.YAxis>
             <s:SciChartSurface.ChartModifier>
                 <s:ZoomPanModifier/>
