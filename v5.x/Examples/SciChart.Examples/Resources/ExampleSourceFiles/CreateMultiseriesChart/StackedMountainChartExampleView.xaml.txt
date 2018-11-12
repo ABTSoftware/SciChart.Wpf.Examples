@@ -27,7 +27,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ex:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" />
+        <ex:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">

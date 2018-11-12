@@ -55,7 +55,7 @@
                                                    Stroke="#FF228B22" 
                                                    StrokeThickness="2.0"
                                                    Maximum="4"
-                                                   YOffset="{Binding ElementName=YAxis, Path=VisibleRange.Max, Mode=OneWay}"
+                                                   YOffset="{Binding Source={x:Reference Name=YAxis}, Path=VisibleRange.Max, Mode=OneWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>

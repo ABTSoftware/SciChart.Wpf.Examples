@@ -40,7 +40,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ToggleButton x:Name="useAA"
                           Content="Alias"
@@ -85,7 +85,7 @@
             <s:SciChartSurface x:Name="sciChart">
 
                 <s:SciChartSurface.RenderableSeries>
-                    <s:FastCandlestickRenderableSeries AntiAliasing="{Binding ElementName=useAA, Path=IsChecked, Mode=TwoWay}">
+                    <s:FastCandlestickRenderableSeries AntiAliasing="{Binding Source={x:Reference Name=useAA}, Path=IsChecked, Mode=TwoWay}">
                         <s:FastCandlestickRenderableSeries.FillUp>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <GradientStop Offset="0" Color="#55002200" />
@@ -99,9 +99,9 @@
                             </LinearGradientBrush>
                         </s:FastCandlestickRenderableSeries.FillDown>
                     </s:FastCandlestickRenderableSeries>
-                    <s:FastLineRenderableSeries AntiAliasing="{Binding ElementName=useAA, Path=IsChecked, Mode=TwoWay}" Stroke="#FF1919" />
-                    <s:FastLineRenderableSeries AntiAliasing="{Binding ElementName=useAA, Path=IsChecked, Mode=TwoWay}" Stroke="#1964FF" />
-                    <s:FastLineRenderableSeries AntiAliasing="{Binding ElementName=useAA, Path=IsChecked, Mode=TwoWay}" Stroke="#FF9B27" />
+                    <s:FastLineRenderableSeries AntiAliasing="{Binding Source={x:Reference Name=useAA}, Path=IsChecked, Mode=TwoWay}" Stroke="#FF1919" />
+                    <s:FastLineRenderableSeries AntiAliasing="{Binding Source={x:Reference Name=useAA}, Path=IsChecked, Mode=TwoWay}" Stroke="#1964FF" />
+                    <s:FastLineRenderableSeries AntiAliasing="{Binding Source={x:Reference Name=useAA}, Path=IsChecked, Mode=TwoWay}" Stroke="#FF9B27" />
                 </s:SciChartSurface.RenderableSeries>
 
                 <s:SciChartSurface.XAxis>

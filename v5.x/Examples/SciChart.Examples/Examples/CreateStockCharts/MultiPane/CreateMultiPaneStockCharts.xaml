@@ -174,7 +174,7 @@
         <s:SciChartGroup Grid.Column="1"
                          ItemContainerStyle="{StaticResource ChartPaneStyle}"
                          ItemsSource="{Binding ChartPaneViewModels}"
-                         s:ThemeManager.Theme="{Binding ElementName=ThemeCombo, Path=SelectedItem}">
+                         s:ThemeManager.Theme="{Binding Source={x:Reference Name=ThemeCombo}, Path=SelectedItem}">
             <s:SciChartGroup.ItemTemplate>
                 <DataTemplate>
 
@@ -257,8 +257,8 @@
                             </s:SciStockChart>
 
                             <!--  This is the scrollbar, its bound to the PART_ChartPaneView.XAxis above  -->
-                            <s:SciChartScrollbar Margin="{Binding ElementName=PART_ChartPaneView, Path=Padding, Mode=OneWay}"
-                                                 Axis="{Binding ElementName=PART_ChartPaneView, Path=XAxis}"
+                            <s:SciChartScrollbar Margin="{Binding Source={x:Reference Name=PART_ChartPaneView}, Path=Padding, Mode=OneWay}"
+                                                 Axis="{Binding Source={x:Reference Name=PART_ChartPaneView}, Path=XAxis}"
                                                  Style="{StaticResource ScrollBarStyle}" />
                         </Grid>
 

@@ -412,7 +412,7 @@
 
                             <ComboBox FontSize="12"
                                       ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                                      SelectedItem="{Binding ElementName=radarChart, Path=(s:ThemeManager.Theme), Mode=TwoWay}" />
+                                      SelectedItem="{Binding Source={x:Reference Name=radarChart}, Path=(s:ThemeManager.Theme), Mode=TwoWay}" />
 
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="CTRL" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
@@ -68,9 +68,9 @@
                     <!-- Adding the RubberBandXyZoomModifier gives SciChart the ability to zoom on mouse-drag  -->
                     <!-- Note IsEnabled, IsXAxisOnly, ZoomExtentsY and IsAnimated properties are ound to controls in the example -->
                     <!-- Note default styling is provided by the themes, but you can override RubberBandFill, RubberBandStroke, RubberBandStrokeDashArray -->
-                    <s:RubberBandXyZoomModifier IsXAxisOnly="{Binding ElementName=zoomXAxisOnly, Path=IsChecked, Mode=TwoWay}" 
-                                            ZoomExtentsY="{Binding ElementName=zoomExtentsY, Path=IsChecked, Mode=TwoWay}"
-                                            IsAnimated="{Binding ElementName=useAnimation, Path=IsChecked, Mode=TwoWay}"
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="{Binding Source={x:Reference Name=zoomXAxisOnly}, Path=IsChecked, Mode=TwoWay}" 
+                                            ZoomExtentsY="{Binding Source={x:Reference Name=zoomExtentsY}, Path=IsChecked, Mode=TwoWay}"
+                                            IsAnimated="{Binding Source={x:Reference Name=useAnimation}, Path=IsChecked, Mode=TwoWay}"
                                             RubberBandFill="#55FFFFFF"
                                             RubberBandStroke="#FFFFFFFF"
                                             RubberBandStrokeDashArray="2 2">

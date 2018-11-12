@@ -24,7 +24,7 @@
 
                 <!-- However when an image is applied, we want a nice square texture. -->
                 <!-- to set the ColorMapTextureSize to 512, 512 -->
-                <DataTrigger Binding="{Binding ElementName=ColorMapCombo, Path=SelectedIndex}" Value="2">
+                <DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
                     <Setter Property="ColorMapTextureSize" Value="512,512"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -50,7 +50,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart3DSurface}">
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart3DSurface}}">
             
             <ext:FlyoutSeparator Background="#444"/>
 
@@ -190,14 +190,16 @@
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="SurfaceMesh" 
-                                                   Opacity="{Binding ElementName=OpacityCombo, Path=SelectedItem}" 
-                                                   MeshColorPalette="{Binding ElementName=ColorMapCombo, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"
+                                                   Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
+                                                   CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                                   MeshColorPalette="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"
                                                    StrokeThickness="2"
                                                    Stroke="#7FFFFFFF" 
                                                    DrawSkirt="True"
                                                    Minimum="0" Maximum="0.5" 
-                                                   MeshPaletteMode="{Binding ElementName=MeshPaletteModeCombo, Path=SelectedItem}"
-                                                   DrawMeshAs="{Binding ElementName=DrawMeshAsCombo, Path=SelectedItem}"
+                                                   MeshPaletteMode="{Binding Source={x:Reference Name=MeshPaletteModeCombo}, Path=SelectedItem}"
+                                                   DrawMeshAs="{Binding Source={x:Reference Name=DrawMeshAsCombo}, Path=SelectedItem}"
                                                    Style="{StaticResource SurfaceMeshStyle}">
                 </s3D:SurfaceMeshRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
@@ -220,11 +222,11 @@
         <s:HeatmapColorMap Margin="15" Grid.Column="1"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Stretch"
-                            Background="{Binding ElementName=SciChart3DSurface, Path=Background}"
-                            Foreground="{Binding ElementName=SciChart3DSurface, Path=Foreground}"
-                            ColorMap="{Binding ElementName=ColorMapCombo, Path=SelectedItem.Brush}"
-                            Minimum="{Binding ElementName=SurfaceMesh, Path=Minimum}"
-                            Maximum="{Binding ElementName=SurfaceMesh, Path=Maximum}"
+                            Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
+                            Foreground="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Foreground}"
+                            ColorMap="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedItem.Brush}"
+                            Minimum="{Binding Source={x:Reference Name=SurfaceMesh}, Path=Minimum}"
+                            Maximum="{Binding Source={x:Reference Name=SurfaceMesh}, Path=Maximum}"
                             TextFormatting="0.00"
                             Opacity="0.8"
                             BorderBrush="#777"
@@ -233,7 +235,7 @@
             <s:HeatmapColorMap.Style>
                 <Style TargetType="s:HeatmapColorMap">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=ColorMapCombo, Path=SelectedIndex}" Value="2">
+                        <DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </Style.Triggers>

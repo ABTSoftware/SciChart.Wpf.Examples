@@ -19,7 +19,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ex:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChart}" />
+        <ex:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
 
         <!--  Shows the SciChartSurface and binds ZoomHistoryManager to the instance in the viewmodel  -->
         <!--  This is what we use to control zoom history as well as Undo Redo  -->

@@ -100,23 +100,19 @@
         <!--  Define the StockChart control, binding to PriceData  -->
         <s:SciStockChart x:Name="PriceChart"
                          Grid.Column="1"
-                         IsPanEnabled="{Binding IsChecked,
-                                                ElementName=IsPanEnabled,
-                                                Mode=TwoWay}"
-                         IsRubberBandZoomEnabled="{Binding IsChecked,
-                                                           ElementName=IsZoomEnabled,
-                                                           Mode=TwoWay}"
+                         IsPanEnabled="{Binding Source={x:Reference Name=IsPanEnabled}, Path=IsChecked, Mode=TwoWay}"
+                         IsRubberBandZoomEnabled="{Binding Source={x:Reference Name=IsZoomEnabled}, Path=IsChecked, Mode=TwoWay}"
                          LegendStyle="{StaticResource LegendStyle}"
                          RenderableSeries="{s:SeriesBinding SeriesViewModels}">
             <s:SciStockChart.Resources>
                 <Style x:Key="BaseRenderableSeriesStyle" TargetType="s:BaseRenderableSeries">
-                    <Setter Property="AntiAliasing" Value="{Binding ElementName=UseAntiAliasing, Path=IsChecked}" />
-                    <Setter Property="StrokeThickness" Value="{Binding ElementName=StrokeThicknesses, Path=SelectedItem}" />
+                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked}" />
+                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=StrokeThicknesses}, Path=SelectedItem}" />
                 </Style>
                 <Style x:Key="LineStyle" TargetType="s:FastLineRenderableSeries">
                     <Setter Property="Stroke" Value="#ffffa500" />
-                    <Setter Property="AntiAliasing" Value="{Binding ElementName=UseAntiAliasing, Path=IsChecked}" />
-                    <Setter Property="StrokeThickness" Value="{Binding ElementName=StrokeThicknesses, Path=SelectedItem}" />
+                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked}" />
+                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=StrokeThicknesses}, Path=SelectedItem}" />
                 </Style>
             </s:SciStockChart.Resources>
 
@@ -150,17 +146,17 @@
                 <!--  Matches parent surface padding left  -->
                 <ColumnDefinition Width="*" />
                 <!--  Hosts overview control  -->
-                <ColumnDefinition Width="{Binding ActualWidthValue, ElementName=Proxy, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                <ColumnDefinition Width="{Binding Source={x:Reference Name=Proxy}, Path=ActualWidthValue, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
                 <!--  Used to bind to parent surface YAxis  -->
                 <ColumnDefinition Width="15" />
                 <!--  Matches parent surface padding right  -->
             </Grid.ColumnDefinitions>
 
-            <ext:ActualSizePropertyProxy x:Name="Proxy" Element="{Binding ElementName=PriceChart, Path=YAxis}" />
+            <ext:ActualSizePropertyProxy x:Name="Proxy" Element="{Binding Source={x:Reference Name=PriceChart}, Path=YAxis}" />
 
             <!--  Define the Overview control, binding to XVisibleRange, which is shared between this and the SciStockChart control  -->
             <s:SciChartOverview Grid.Column="1"
-                                ParentSurface="{Binding ElementName=PriceChart,
+                                ParentSurface="{Binding Source={x:Reference Name=PriceChart},
                                                         Mode=OneWay}"
                                 SelectedRange="{Binding XVisibleRange,
                                                         Mode=TwoWay}"

@@ -230,13 +230,11 @@
                             Height="400"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Background="{Binding ElementName=SciChart3DSurface,
-                                                 Path=Background}"
+                            Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
                             BorderBrush="#777"
                             BorderThickness="1"
                             ColorMap="{StaticResource ColorMapGradient}"
-                            Foreground="{Binding ElementName=SciChart3DSurface,
-                                                 Path=Foreground}"
+                            Foreground="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Foreground}"
                             Maximum="11"
                             Minimum="0"
                             Opacity="0.8"

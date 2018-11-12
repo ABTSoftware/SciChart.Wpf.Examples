@@ -55,7 +55,7 @@
 
                 <Button Margin="3" ToolTipService.ToolTip="Zoom to Extents"
                                 Style="{StaticResource ZoomExtentsButtonStyle}"
-                                Command="{Binding ElementName=sciChart, Path=AnimateZoomExtentsCommand}"/>
+                                Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"/>
 
                 <ext:FlyoutSeparator Background="#444"/>
                 
@@ -122,12 +122,12 @@
             <!--  Specify interactivity modifiers  -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RubberBandXyZoomModifier IsXAxisOnly="True"  IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked, Mode=TwoWay}"/>
-                    <s:ZoomPanModifier ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked, Mode=TwoWay}"/>
-                    <s:XAxisDragModifier IsEnabled="{Binding ElementName=enableZoom, Path=IsEnabled}"/>
-                    <s:YAxisDragModifier IsEnabled="{Binding ElementName=enableZoom, Path=IsEnabled}"/>
-                    <s:MouseWheelZoomModifier IsEnabled="{Binding ElementName=enableZoom, Path=IsEnabled}"/>
-                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" IsEnabled="{Binding ElementName=enableZoom, Path=IsEnabled}"/>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True"  IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked, Mode=TwoWay}"/>
+                    <s:ZoomPanModifier ClipModeX="None" IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked, Mode=TwoWay}"/>
+                    <s:XAxisDragModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled}"/>
+                    <s:YAxisDragModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled}"/>
+                    <s:MouseWheelZoomModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled}"/>
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled}"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
 
@@ -135,11 +135,11 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation CoordinateMode="Relative" X1="0" Y1="0"  Margin="5,28,0,0" FontSize="20" Opacity="0.5" Foreground="#FFF" HorizontalAnchorPoint="Left" VerticalAnchorPoint="Center" 
                                   Text="&lt; Pause to enable Zoom/Pan" 
-                                  IsHidden="{Binding ElementName=enableZoom, Path=IsEnabled}"/>
+                                  IsHidden="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled}"/>
 
                 <s:TextAnnotation CoordinateMode="Relative" X1="0" Y1="0" Margin="5,95,0,0" FontSize="20" Opacity="0.5" Foreground="#FFF" HorizontalAnchorPoint="Left" VerticalAnchorPoint="Center" 
                                   Text="&lt; Now Zoom and Pan!" 
-                                  IsHidden="{Binding ElementName=enableZoom, Path=IsEnabled, Converter={StaticResource InvertBooleanConverter}}"/>
+                                  IsHidden="{Binding Source={x:Reference Name=enableZoom}, Path=IsEnabled, Converter={StaticResource InvertBooleanConverter}}"/>
             </s:SciChartSurface.Annotations>
 
         </s:SciChartSurface>

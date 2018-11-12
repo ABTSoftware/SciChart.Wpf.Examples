@@ -83,7 +83,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChartSurface}" />
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}" />
 
         <s:SciChartSurface x:Name="sciChartSurface" Grid.Column="1">
 

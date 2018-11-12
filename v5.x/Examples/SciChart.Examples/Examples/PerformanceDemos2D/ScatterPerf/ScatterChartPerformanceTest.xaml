@@ -19,7 +19,7 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" >
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
 
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PM" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
@@ -43,43 +43,43 @@
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
-                <s:XyScatterRenderableSeries x:Name="ellipseScatterSeries" Stroke="CornflowerBlue" IsVisible="{Binding ElementName=ChkEllipse, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="ellipseScatterSeries" Stroke="CornflowerBlue" IsVisible="{Binding Source={x:Reference Name=ChkEllipse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="crossScatterSeries" Stroke="BlueViolet" IsVisible="{Binding ElementName=ChkCross, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="crossScatterSeries" Stroke="BlueViolet" IsVisible="{Binding Source={x:Reference Name=ChkCross}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:CrossPointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="xScatterSeries" Stroke="DarkGray" IsVisible="{Binding ElementName=ChkX, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="xScatterSeries" Stroke="DarkGray" IsVisible="{Binding Source={x:Reference Name=ChkX}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:XPointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="squareScatterSeries" Stroke="DarkOrange" IsVisible="{Binding ElementName=ChkSquare, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="squareScatterSeries" Stroke="DarkOrange" IsVisible="{Binding Source={x:Reference Name=ChkSquare}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="triangleScatterSeries" Stroke="Crimson" IsVisible="{Binding ElementName=ChkTriangle, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="triangleScatterSeries" Stroke="Crimson" IsVisible="{Binding Source={x:Reference Name=ChkTriangle}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="triangleInvScatterSeries" Stroke="Coral" IsVisible="{Binding ElementName=ChkTriangleInverse, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="triangleInvScatterSeries" Stroke="Coral" IsVisible="{Binding Source={x:Reference Name=ChkTriangleInverse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:InvertedTrianglePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="spriteScatterSeries" IsVisible="{Binding ElementName=ChkSprite, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="spriteScatterSeries" IsVisible="{Binding Source={x:Reference Name=ChkSprite}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:SpritePointMarker>
                             <s:SpritePointMarker.PointMarkerTemplate>
@@ -144,6 +144,6 @@
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
-        <s:SciChartPerformanceOverlay TargetSurface="{Binding ElementName=sciChart}" Margin="5" VerticalAlignment="Top" IsHitTestVisible="False" Grid.Column="1"/>
+        <s:SciChartPerformanceOverlay TargetSurface="{Binding Source={x:Reference Name=sciChart}}" Margin="5" VerticalAlignment="Top" IsHitTestVisible="False" Grid.Column="1"/>
     </Grid>
 </UserControl>

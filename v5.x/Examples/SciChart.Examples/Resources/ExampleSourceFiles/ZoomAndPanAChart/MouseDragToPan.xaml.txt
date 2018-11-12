@@ -53,7 +53,7 @@
                 </ex:FlyoutMenuButton>
 
                 <Button HorizontalAlignment="Left"
-                        Command="{Binding ElementName=sciChart, Path=AnimateZoomExtentsCommand}"
+                        Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
                         Content="Zoom Extents"
                         Style="{StaticResource ZoomExtentsButtonStyle}"
                         ToolTipService.ToolTip="Zoom to Extents" />

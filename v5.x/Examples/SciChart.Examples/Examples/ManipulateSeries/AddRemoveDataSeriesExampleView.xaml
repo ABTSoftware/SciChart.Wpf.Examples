@@ -21,7 +21,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton Click="AddSeriesClick"
                                   Content="ADD"

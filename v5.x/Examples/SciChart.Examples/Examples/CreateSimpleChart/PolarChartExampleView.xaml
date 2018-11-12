@@ -19,7 +19,7 @@
         <!--  The SciChartPolarInteractionToolbar adds zoom, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" >
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
 
             <ext:FlyoutMenuButton Content="AXIS"
                                       Padding="0"
@@ -51,17 +51,13 @@
                         <CheckBox Margin="4"
                                       Content="XAxis.FlipCoordinates?"
                                       Foreground="#999"
-                                      IsChecked="{Binding FlipCoordinates,
-                                                          ElementName=xAxis,
-                                                          Mode=TwoWay}" />
+                                      IsChecked="{Binding Source={x:Reference Name=xAxis}, Path=FlipCoordinates, Mode=TwoWay}" />
 
                         <!--  Flip YAxis Coordinates  -->
                         <CheckBox Margin="4"
                                       Content="YAxis.FlipCoordinates?"
                                       Foreground="#999"
-                                      IsChecked="{Binding FlipCoordinates,
-                                                          ElementName=yAxis,
-                                                          Mode=TwoWay}" />
+                                      IsChecked="{Binding Source={x:Reference Name=yAxis}, Path=FlipCoordinates, Mode=TwoWay}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -78,11 +74,7 @@
                         <!--  Change YAxis Angle  -->
                         <Slider Maximum="360"
                                     Minimum="0"
-                                    Value="{Binding Angle,
-                                                    ElementName=yAxis,
-                                                    Mode=TwoWay,
-                                                    UpdateSourceTrigger=PropertyChanged}" />
-
+                                    Value="{Binding Source={x:Reference Name=yAxis}, Path=Angle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>

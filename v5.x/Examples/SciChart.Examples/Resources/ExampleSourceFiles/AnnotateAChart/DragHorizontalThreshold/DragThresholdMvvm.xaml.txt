@@ -41,7 +41,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton Content="AXIS"
                                   Padding="0"
@@ -93,15 +93,13 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis AxisAlignment="{Binding ElementName=cboXAxisAlignment,
-                                                       Path=SelectedItem}"
+                <s:NumericAxis AxisAlignment="{Binding Source={x:Reference Name=cboXAxisAlignment}, Path=SelectedItem}"
                                DrawMajorBands="True"
                                VisibleRange="0.0, 10.0" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis AxisAlignment="{Binding ElementName=cboYAxisAlignment,
-                                                       Path=SelectedItem}"
+                <s:NumericAxis AxisAlignment="{Binding Source={x:Reference Name=cboYAxisAlignment}, Path=SelectedItem}"
                                DrawMajorBands="True"
                                VisibleRange="-1.0, 1.0" />
             </s:SciChartSurface.YAxis>

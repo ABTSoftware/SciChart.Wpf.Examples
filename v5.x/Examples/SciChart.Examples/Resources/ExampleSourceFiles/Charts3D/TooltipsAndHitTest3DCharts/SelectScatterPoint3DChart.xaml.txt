@@ -34,8 +34,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChartSurface}"/>
+
+        <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}"/>
 
         <s3D:SciChart3DSurface x:Name="sciChartSurface"
                                Grid.RowSpan="2"

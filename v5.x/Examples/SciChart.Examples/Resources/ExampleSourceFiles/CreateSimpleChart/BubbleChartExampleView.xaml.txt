@@ -17,7 +17,7 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" >
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
 
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="BBL">
                 <ext:FlyoutMenuButton.PopupContent>
@@ -39,7 +39,7 @@
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries" ResamplingMode="MinMax" Stroke="#FFFF3333" />
-                <s:FastBubbleRenderableSeries x:Name="bubbleSeries" ZScaleFactor="{Binding ElementName=zScaleSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ResamplingMode="None" BubbleColor="#77333333" AutoZRange="False" />
+                <s:FastBubbleRenderableSeries x:Name="bubbleSeries" ZScaleFactor="{Binding Source={x:Reference Name=zScaleSlider}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ResamplingMode="None" BubbleColor="#77333333" AutoZRange="False" />
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis with Growby  -->

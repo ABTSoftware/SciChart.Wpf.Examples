@@ -38,7 +38,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=sciChartSurface}" />
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}" />
 
         <s:SciChartSurface x:Name="sciChartSurface" Grid.Column="1">
 
@@ -110,8 +110,8 @@
                 BorderBrush="#323539"
                 BorderThickness="2"
                 Padding="5"
-                Effect="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource LegendDropShadow}}">            
-            <ItemsControl ItemsSource="{Binding ElementName=RolloverModifier, Path=SeriesData.SeriesInfo}">
+                Effect="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource LegendDropShadow}}">
+            <ItemsControl ItemsSource="{Binding Source={x:Reference Name=RolloverModifier}, Path=SeriesData.SeriesInfo}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>

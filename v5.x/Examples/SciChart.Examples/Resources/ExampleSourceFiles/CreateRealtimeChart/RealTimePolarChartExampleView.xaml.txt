@@ -42,7 +42,7 @@
               <StackPanel MinWidth="150" Orientation="Vertical">
                 <TextBlock Text="Action Type"/>
 
-                <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding ElementName=mouseWheelZoomModifier, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding ElementName=mouseWheelZoomModifier, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
                 <ext:FlyoutSeparator/>
 
@@ -76,7 +76,7 @@
                         Value="50" />
 
                 <TextBlock Margin="5" Foreground="White">
-                  <Run Text="{Binding ElementName=Slider, Path=Value, StringFormat=\{0:0.0\}}" />
+                  <Run Text="{Binding Source={x:Reference Name=Slider}, Path=Value, StringFormat=\{0:0.0\}}" />
                   <Run Text="ms" />
                 </TextBlock>
 

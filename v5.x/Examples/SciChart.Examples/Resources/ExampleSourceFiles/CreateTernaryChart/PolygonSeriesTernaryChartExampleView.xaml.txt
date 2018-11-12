@@ -41,9 +41,7 @@
                 <ToggleButton x:Name="cursorModButton"
                               HorizontalAlignment="Left"
                               Content="Cursor"
-                              IsChecked="{Binding IsEnabled,
-                                                  Mode=TwoWay,
-                                                  ElementName=cursorTernaryModifier}"
+                              IsChecked="{Binding Source={x:Reference Name=cursorTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
                               Style="{StaticResource CursorTernaryButtonStyle}"
                               ToolTipService.ToolTip="Cursor Ternary Modifier" />
 
@@ -51,9 +49,7 @@
                               HorizontalAlignment="Left"
                               Content="Tooltip"
                               ContentTemplate="{StaticResource TooltipIconContentTemplate}"
-                              IsChecked="{Binding IsEnabled,
-                                                  Mode=TwoWay,
-                                                  ElementName=tooltipTernaryModifier}"
+                              IsChecked="{Binding Source={x:Reference Name=tooltipTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="tooltip Ternary Modifier" />
 

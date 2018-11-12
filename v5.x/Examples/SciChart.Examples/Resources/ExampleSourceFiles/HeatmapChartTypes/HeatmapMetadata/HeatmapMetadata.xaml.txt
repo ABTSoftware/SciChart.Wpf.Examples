@@ -28,7 +28,7 @@
 
             <Style x:Key="HeatmapStyle" TargetType="local:CustomUniformHeatmapRenderableSeries" BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding ElementName=metadataSwitch, Path=IsChecked}" Value="True">
+                    <DataTrigger Binding="{Binding Source={x:Reference Name=metadataSwitch}, Path=IsChecked}" Value="True">
                         <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"></Setter>
                     </DataTrigger>
                 </Style.Triggers>
@@ -50,7 +50,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChartSurface}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
             <ext:FlyoutSeparator Background="#444" />
             <ext:FlyoutMenuButton Content="MD" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
                 <ext:FlyoutMenuButton.PopupContent>
@@ -114,11 +114,11 @@
 
         <s:HeatmapColorMap Grid.Row="1"
                            Grid.Column="1"
-                           Background="{Binding ElementName=sciChart, Path=Background}" 
-                           Foreground="{Binding ElementName=sciChart, Path=Foreground}" 
+                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}" 
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}" 
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
-                           DataContext="{Binding ElementName=heatmapSeries, Mode=OneWay}"
+                           DataContext="{Binding Source={x:Reference Name=heatmapSeries}, Mode=OneWay}"
                            ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
                            Minimum="{Binding ColorMap.Minimum}"
                            Maximum="{Binding ColorMap.Maximum}"

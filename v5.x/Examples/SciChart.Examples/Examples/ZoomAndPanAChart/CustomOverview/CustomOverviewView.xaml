@@ -35,7 +35,7 @@
         <ext:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
     </UserControl.Resources>
 
-    <Grid Background="{Binding ElementName=MainChartSurface, Path=Background}">
+    <Grid Background="{Binding Source={x:Reference Name=MainChartSurface}, Path=Background}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -50,7 +50,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=MainChartSurface}" Grid.RowSpan="2" />
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=MainChartSurface}}" Grid.RowSpan="2" />
 
         <s:SciChartSurface x:Name="MainChartSurface"
                            Grid.Column="1"
@@ -75,12 +75,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <!--  Hosts overview control  -->
-                <ColumnDefinition Width="{Binding ActualWidthValue, ElementName=proxy, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                <ColumnDefinition Width="{Binding Source={x:Reference Name=proxy}, Path=ActualWidthValue, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
                 <!--  Used to bind to parent surface YAxis  -->
             </Grid.ColumnDefinitions>
 
             <!--  This class is in the Examples Source Code, under your install directory  -->
-            <ext:ActualSizePropertyProxy x:Name="proxy" Element="{Binding ElementName=MainChartSurface, Path=YAxis}" />
+            <ext:ActualSizePropertyProxy x:Name="proxy" Element="{Binding Source={x:Reference Name=MainChartSurface}, Path=YAxis}" />
 
             <!--  Define the SciChartSurface behind the scrollbar  -->
             <s:SciChartSurface x:Name="OverviewSurface"
@@ -106,8 +106,8 @@
             <!--  Define the scrollbar and bind to MainChartSurface XAxis  -->
             <s:SciChartScrollbar Grid.Column="0"
                                  Height="100"
-                                 Margin="{Binding ElementName=MainChartSurface, Path=Padding, Mode=OneWay}"
-                                 Axis="{Binding ElementName=XAxis}" />
+                                 Margin="{Binding Source={x:Reference Name=MainChartSurface}, Path=Padding, Mode=OneWay}"
+                                 Axis="{Binding Source={x:Reference Name=XAxis}}" />
 
         </Grid>
     </Grid>

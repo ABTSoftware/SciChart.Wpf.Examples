@@ -31,7 +31,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton x:Name="addVerticalSliceTooltip"
                                   HorizontalAlignment="Left"

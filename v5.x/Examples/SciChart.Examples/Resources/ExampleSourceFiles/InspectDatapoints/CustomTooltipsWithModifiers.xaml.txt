@@ -180,7 +180,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChart}" />
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
 
         <s:SciChartSurface Name="SciChart" Grid.Column="1">
 

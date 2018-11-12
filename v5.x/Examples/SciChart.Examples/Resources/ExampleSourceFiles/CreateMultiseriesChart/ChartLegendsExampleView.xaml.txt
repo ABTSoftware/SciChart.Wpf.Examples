@@ -63,9 +63,9 @@
                         <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
                             <TextBlock Text="Legend Controls" />
                             <ext:FlyoutSeparator/>
-                            <CheckBox Margin="4" Content="Show legend" IsChecked="{Binding ShowLegend, ElementName=legendModifier, Mode=TwoWay}" />
-                            <CheckBox Margin="4" Content="Show checkboxes" IsChecked="{Binding ShowVisibilityCheckboxes, ElementName=legendModifier, Mode=TwoWay}" />
-                            <CheckBox Margin="4" Content="Show series markers" IsChecked="{Binding ShowSeriesMarkers, ElementName=legendModifier, Mode=TwoWay}" />
+                            <CheckBox Margin="4" Content="Show legend" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowLegend, Mode=TwoWay}" />
+                            <CheckBox Margin="4" Content="Show checkboxes" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowVisibilityCheckboxes, Mode=TwoWay}" />
+                            <CheckBox Margin="4" Content="Show series markers" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowSeriesMarkers, Mode=TwoWay}" />
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
                 </ext:FlyoutMenuButton>
@@ -116,7 +116,7 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>                    
                     <s:LegendModifier x:Name="legendModifier" ShowLegend="True" Orientation="Horizontal" Margin="10" />
-                    <s:SeriesSelectionModifier IsEnabled="{Binding ElementName=SelectionEnabledToggle, Path=IsChecked, Mode=TwoWay}">
+                    <s:SeriesSelectionModifier IsEnabled="{Binding Source={x:Reference Name=SelectionEnabledToggle}, Path=IsChecked, Mode=TwoWay}">
                         <s:SeriesSelectionModifier.SelectedSeriesStyle>
                             <Style TargetType="s:BaseRenderableSeries">
                                 <Setter Property="StrokeThickness" Value="3" />

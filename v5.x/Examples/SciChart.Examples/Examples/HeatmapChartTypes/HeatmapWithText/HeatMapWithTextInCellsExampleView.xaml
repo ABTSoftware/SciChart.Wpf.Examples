@@ -22,7 +22,7 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}"/>
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
         
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1"
                            Padding="0"
@@ -71,11 +71,11 @@
 
         <s:HeatmapColorMap Margin="30"
                            Grid.Column="1"
-                           Background="{Binding ElementName=sciChart, Path=Background}" 
-                           Foreground="{Binding ElementName=sciChart, Path=Foreground}" 
+                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}" 
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}" 
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
-                           DataContext="{Binding ElementName=heatmapSeries, Mode=OneWay}"
+                           DataContext="{Binding Source={x:Reference Name=heatmapSeries}, Mode=OneWay}"
                            ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
                            Minimum="{Binding ColorMap.Minimum}"
                            Maximum="{Binding ColorMap.Maximum}"

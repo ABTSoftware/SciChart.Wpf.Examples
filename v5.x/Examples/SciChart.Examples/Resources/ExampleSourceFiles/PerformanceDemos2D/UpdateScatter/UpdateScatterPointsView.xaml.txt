@@ -57,6 +57,6 @@
                                       FontWeight="Bold"
                                       Foreground="#FFF"
                                       Padding="10"
-                                      TargetSurface="{Binding ElementName=sciChart}" />
+                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
     </Grid>
 </UserControl>

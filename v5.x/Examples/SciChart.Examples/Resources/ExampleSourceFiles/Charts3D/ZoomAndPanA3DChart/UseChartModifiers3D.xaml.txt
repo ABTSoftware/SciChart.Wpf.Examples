@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart}">
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
 
             <Button HorizontalAlignment="Left"
                     Click="OnClickHorizontalRotate"

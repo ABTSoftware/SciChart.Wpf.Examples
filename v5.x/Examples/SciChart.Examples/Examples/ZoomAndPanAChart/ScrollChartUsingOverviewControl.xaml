@@ -23,7 +23,7 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" Grid.RowSpan="2"/>
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" Grid.RowSpan="2"/>
 
         <!-- Declare the SciChartSurface -->
         <s:SciChartSurface x:Name="sciChart"
@@ -50,9 +50,9 @@
 
         <!-- Declare the SciChartOverview and bind to the main chart -->
         <s:SciChartOverview Grid.Row="1" Grid.Column="1"
-                                   DataSeries="{Binding ElementName=sciChart, Path=RenderableSeries[1].DataSeries}"
-                                   ParentSurface="{Binding ElementName=sciChart}"
-                                   SelectedRange="{Binding ElementName=sciChart, Path=XAxis.VisibleRange, Mode=TwoWay}"/>
+                                   DataSeries="{Binding Source={x:Reference Name=sciChart}, Path=RenderableSeries[1].DataSeries}"
+                                   ParentSurface="{Binding Source={x:Reference Name=sciChart}}"
+                                   SelectedRange="{Binding Source={x:Reference Name=sciChart}, Path=XAxis.VisibleRange, Mode=TwoWay}"/>
 
     </Grid>
 </UserControl>

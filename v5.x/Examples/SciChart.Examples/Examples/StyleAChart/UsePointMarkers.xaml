@@ -35,13 +35,12 @@
         </Grid.ColumnDefinitions>
 
         <!--  Define the Toolbar  -->
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton Content="PS"
                                   Padding="0"
                                   Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  Visibility="{Binding Path=IsDeveloperMode,
-                                                       ElementName=UserToolbar,
+                                  Visibility="{Binding ElementName=UserToolbar, Path=IsDeveloperMode,
                                                        Converter={StaticResource BoolToVisibilityConverter}}">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" Orientation="Vertical">
@@ -100,7 +99,7 @@
                                                                Path=Value}"
                                               Fill="#990077FF"
                                               Stroke="LightBlue"
-                                              StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
+                                              StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                         Path=Value}" />
                         
                     </s:FastLineRenderableSeries.PointMarker>
@@ -115,7 +114,7 @@
                                                               Path=Value}"
                                              Fill="#99FF0000"
                                              Stroke="Red"
-                                             StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
+                                             StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                        Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
@@ -129,7 +128,7 @@
                                                                 Path=Value}"
                                                Fill="#FFDD00"
                                                Stroke="#FF6600"
-                                               StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
+                                               StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                          Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
@@ -142,7 +141,7 @@
                                             Height="{Binding Source={x:Reference HeightSlider},
                                                              Path=Value}"
                                             Stroke="Magenta"
-                                            StrokeThickness="{Binding ElementName=StrokeThicknessSlider,
+                                            StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                       Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>

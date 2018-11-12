@@ -503,7 +503,7 @@
             </s:SciChartSurface>
 
             <s:SciChartOverview Grid.Row="3"
-                                ParentSurface="{Binding ElementName=PriceChart,
+                                ParentSurface="{Binding Source={x:Reference Name=PriceChart},
                                                         Mode=OneWay}"
                                 SelectedRange="{Binding OverviewVisibleRange, Mode=TwoWay}" />
 
@@ -521,7 +521,7 @@
             <!--  This ItemsControl is bound to the first (price) chart RolloverModifier, feeding back values of data under the mouse to the user  -->
             <ItemsControl Grid.Row="1"
                           MinHeight="24"
-                          DataContext="{Binding ElementName=PriceChart,
+                          DataContext="{Binding Source={x:Reference Name=PriceChart},
                                                 Path=ChartModifier}"
                           ItemTemplate="{StaticResource ChartDataTemplate}"
                           ItemsSource="{Binding Path=[RolloverModifier].SeriesData.SeriesInfo}"
@@ -537,7 +537,7 @@
             <!--  This ItemsControl is bound to the second (volume) chart RolloverModifier, feeding back values of data under the mouse to the user  -->
             <ItemsControl Grid.Row="2"
                           MinHeight="24"
-                          DataContext="{Binding ElementName=VolumeChart,
+                          DataContext="{Binding Source={x:Reference Name=VolumeChart},
                                                 Path=ChartModifier}"
                           ItemTemplate="{StaticResource ChartDataTemplate}"
                           ItemsSource="{Binding Path=[RolloverModifier].SeriesData.SeriesInfo}"
@@ -582,7 +582,7 @@
                             <TextBlock Text="Direction" />
 
                             <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
-                                      SelectedItem="{Binding XyDirection, ElementName=ZoomPanMod, Mode=TwoWay, 
+                                      SelectedItem="{Binding Source={x:Reference Name=ZoomPanMod}, Path=XyDirection, Mode=TwoWay, 
                                 Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         </StackPanel>
@@ -592,7 +592,7 @@
                 <ext:FlyoutSeparator />
 
                 <Button HorizontalAlignment="Left"
-                        Command="{Binding ElementName=PriceChart, Path=AnimateZoomExtentsCommand}"
+                        Command="{Binding Source={x:Reference Name=PriceChart}, Path=AnimateZoomExtentsCommand}"
                         Content="Zoom Extents"
                         Style="{StaticResource ZoomExtentsButtonStyle}"
                         ToolTipService.ToolTip="Zoom to Extents" />
@@ -606,13 +606,13 @@
                         <StackPanel MinWidth="150" Orientation="Vertical">
                             <TextBlock Text="Action Type" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding ActionType, ElementName=MouseWheelZoomMod, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding Source={x:Reference Name=MouseWheelZoomMod}, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <TextBlock Text="Direction" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding XyDirection, ElementName=MouseWheelZoomMod, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Source={x:Reference Name=MouseWheelZoomMod}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
@@ -690,15 +690,15 @@
 
                             <ComboBox x:Name="snappingModeCmbx"
                                       ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
-                                      SelectedItem="{Binding SnappingMode, ElementName=CursorMod, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                                      SelectedItem="{Binding Source={x:Reference Name=CursorMod}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
-                            <StackPanel Orientation="Vertical" Visibility="{Binding SelectedItem, ElementName=snappingModeCmbx, Mode=OneWay, Converter={StaticResource SnappingModeToVisibilityConverter}}">
+                            <StackPanel Orientation="Vertical" Visibility="{Binding Source={x:Reference Name=snappingModeCmbx}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource SnappingModeToVisibilityConverter}}">
                                 <TextBlock Text="Snap to" />
 
                                 <ComboBox x:Name="seriesToSnapCmbx"
-                                    ItemsSource="{Binding ElementName=PriceChart, Path=RenderableSeries}"
+                                    ItemsSource="{Binding Source={x:Reference Name=PriceChart}, Path=RenderableSeries}"
                                           DisplayMemberPath="DataSeries.SeriesName"
                                           SelectedValuePath="DataSeries.SeriesName"
                                           SelectedItem="{Binding SelectedSeriesToSnap}"

@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
             <ext:FlyoutMenuButton Content="ZM"
                                   Padding="0"
                                   Style="{StaticResource FlyoutMenuButtonStyle}">
@@ -102,7 +102,7 @@
             <!--  Create chart modifiers to zoom, drag X,Y Axes and double click to zoom extents  -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RubberBandXyZoomModifier  IsXAxisOnly="{Binding ElementName=zoomXAxisOnly, Path=IsChecked, Mode=TwoWay}" />
+                    <s:RubberBandXyZoomModifier  IsXAxisOnly="{Binding Source={x:Reference Name=zoomXAxisOnly}, Path=IsChecked, Mode=TwoWay}" />
                     <s:ZoomPanModifier ClipModeX="None"  />
                     <s:XAxisDragModifier AxisId="TopAxisId" />
                     <s:XAxisDragModifier AxisId="BottomAxisId" />

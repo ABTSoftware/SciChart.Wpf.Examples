@@ -42,7 +42,7 @@
         <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChart}" />
+        <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <s3D:SciChart3DSurface x:Name="sciChart"
                                Grid.RowSpan="2"
@@ -92,15 +92,15 @@
                             Margin="15"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Background="{Binding ElementName=sciChart,
+                            Background="{Binding Source={x:Reference Name=sciChart},
                                                  Path=Background}"
                             BorderBrush="#777"
                             BorderThickness="1"
-                            Foreground="{Binding ElementName=sciChart,
+                            Foreground="{Binding Source={x:Reference Name=sciChart},
                                                  Path=Foreground}"
-                            Maximum="{Binding ElementName=surfaceMeshRenderableSeries,
+                            Maximum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries},
                                               Path=Maximum}"
-                            Minimum="{Binding ElementName=surfaceMeshRenderableSeries,
+                            Minimum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries},
                                               Path=Minimum}"
                             Opacity="0.8"
                             Orientation="Vertical"

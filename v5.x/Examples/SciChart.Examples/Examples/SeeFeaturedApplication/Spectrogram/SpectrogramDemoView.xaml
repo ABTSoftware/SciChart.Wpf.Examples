@@ -63,7 +63,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChart}"/>
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Column="1"
@@ -88,13 +88,13 @@
                             Margin="10"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Stretch"
-                            Background="{Binding ElementName=sciChart, Path=Background}"
+                            Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
                             BorderBrush="#777"
                             BorderThickness="1"
-                            ColorMap="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
-                            Foreground="{Binding ElementName=sciChart, Path=Foreground}"
-                            Maximum="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.Maximum}"
-                            Minimum="{Binding ElementName=HeatmapRenderableSeries, Path=ColorMap.Minimum}"
+                            ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
+                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                            Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
+                            Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
                             Opacity="0.8"
                             Orientation="Vertical"
                             TextFormatting="0.00"/>
@@ -123,7 +123,7 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis Style="{StaticResource AxisStyle}" VisibleRange="{Binding ElementName=sciChart, Path=XAxis.VisibleRange, Mode=TwoWay}" />
+                <s:NumericAxis Style="{StaticResource AxisStyle}" VisibleRange="{Binding Source={x:Reference Name=sciChart}, Path=XAxis.VisibleRange, Mode=TwoWay}" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>

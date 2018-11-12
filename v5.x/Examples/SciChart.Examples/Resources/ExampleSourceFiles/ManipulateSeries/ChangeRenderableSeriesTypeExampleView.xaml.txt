@@ -48,8 +48,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton  Style="{StaticResource FlyoutMenuButtonStyle}" Content="TYPE" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>

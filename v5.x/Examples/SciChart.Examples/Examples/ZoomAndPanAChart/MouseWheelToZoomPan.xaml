@@ -49,20 +49,20 @@
                         <StackPanel MinWidth="150" Orientation="Vertical">
                             <TextBlock Text="Action Type" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding ElementName=mouseWheelZoomModifier, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <TextBlock Text="Direction" />
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding ElementName=mouseWheelZoomModifier, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
                 </ext:FlyoutMenuButton>
 
                 <Button HorizontalAlignment="Left"
-                        Command="{Binding ElementName=sciChart, Path=AnimateZoomExtentsCommand}"
+                        Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
                         Content="Zoom Extents"
                         Style="{StaticResource ZoomExtentsButtonStyle}"
                         ToolTipService.ToolTip="Zoom to Extents" />

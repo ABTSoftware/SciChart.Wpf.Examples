@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding ElementName=SciChart}">
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
 
             <Button Command="{Binding AppendDataCommand}"
                     Content="+50"

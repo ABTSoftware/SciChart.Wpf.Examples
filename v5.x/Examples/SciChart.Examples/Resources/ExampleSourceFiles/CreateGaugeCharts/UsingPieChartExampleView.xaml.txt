@@ -187,9 +187,7 @@
                 <ToggleButton HorizontalAlignment="Left"
                               Content="Tooltip"
                               ContentTemplate="{StaticResource TooltipIconContentTemplate}"
-                              IsChecked="{Binding ShowTooltip,
-                                                  Mode=TwoWay,
-                                                  ElementName=pieSurface}"
+                              IsChecked="{Binding Source={x:Reference Name=pieSurface}, Path=ShowTooltip, Mode=TwoWay}"
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Tooltip" />
                 
@@ -219,9 +217,7 @@
                 <ToggleButton HorizontalAlignment="Left"
                               Content="MSel"
                               FontSize="9"
-                              IsChecked="{Binding AllowMultiSelect,
-                                                  Mode=TwoWay,
-                                                  ElementName=pieSurface}"
+                              IsChecked="{Binding Source={x:Reference Name=pieSurface}, Path=AllowMultiSelect, Mode=TwoWay}"
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Allow multi select" />
 

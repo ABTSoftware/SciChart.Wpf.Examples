@@ -11,14 +11,6 @@
              mc:Ignorable="d">
 
     <Grid>
-        <Grid.Resources>
-            <Style x:Key="PointMarkerStyle" TargetType="s3D:BasePointMarker3D">
-                <Setter Property="Fill" Value="LimeGreen" />
-                <Setter Property="Opacity" Value="{Binding ElementName=opacitySlider, Path=Value, Mode=TwoWay}" />
-                <Setter Property="Size" Value="{Binding ElementName=sizeSlider, Path=Value}" />
-            </Style>
-        </Grid.Resources>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -27,7 +19,7 @@
         <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutSeparator Background="#444" />
 
@@ -79,7 +71,7 @@
                 <s3D:PointLineRenderableSeries3D x:Name="pointLineSeries3D"
                                                  StrokeThickness="2">
                     <s3D:PointLineRenderableSeries3D.PointMarker>
-                        <s3D:SpherePointMarker3D Size="{Binding ElementName=sizeSlider, Path=Value}"/>
+                        <s3D:SpherePointMarker3D Size="{Binding Source={x:Reference Name=sizeSlider}, Path=Value}"/>
                     </s3D:PointLineRenderableSeries3D.PointMarker>
                 </s3D:PointLineRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>

@@ -42,7 +42,7 @@
                         HorizontalAlignment="Left"
                         ToolTipService.ToolTip="Zoom to Extents"
                         Style="{StaticResource ZoomExtentsButtonStyle}"
-                        Command="{Binding ZoomExtentsCommand, ElementName=positiveScaleChart}"
+                        Command="{Binding Source={x:Reference Name=positiveScaleChart}, Path=ZoomExtentsCommand}"
                         Content="Zoom Extents" />
 
         <ext:FlyoutSeparator Background="#444"/>
@@ -88,9 +88,9 @@
         </Style>
 
         <s:ModifierGroup x:Key="ModifierGroup" x:Shared="False" MouseEventGroup="SharedMouseEvents">
-          <s:RubberBandXyZoomModifier IsEnabled="{Binding IsChecked, ElementName=enableZoom}" IsXAxisOnly="True" ZoomExtentsY="True" />
-          <s:ZoomPanModifier IsEnabled="{Binding IsChecked, ElementName=enablePan}" ClipModeX="None" />
-          <s:MouseWheelZoomModifier />
+            <s:RubberBandXyZoomModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}" IsXAxisOnly="True" ZoomExtentsY="True" />
+            <s:ZoomPanModifier IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}" ClipModeX="None" />
+            <s:MouseWheelZoomModifier />
           <s:ZoomExtentsModifier />
         </s:ModifierGroup>
       </Grid.Resources>

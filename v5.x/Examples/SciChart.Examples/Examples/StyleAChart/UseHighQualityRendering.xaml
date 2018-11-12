@@ -81,16 +81,16 @@
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}"
-                                            IsVisible="{Binding ElementName=UseLineSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
-                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding ElementName=UseMountainSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
+                                            IsVisible="{Binding Source={x:Reference Name=UseLineSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
+                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding Source={x:Reference Name=UseMountainSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="uhqrGroup">
-                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked}"/>
-                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked}"/>
+                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}"/>
+                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}"/>
                     <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
@@ -128,16 +128,16 @@
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}"
-                                            IsVisible="{Binding ElementName=UseLineSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
-                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding ElementName=UseMountainSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
+                                            IsVisible="{Binding Source={x:Reference Name=UseLineSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
+                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding Source={x:Reference Name=UseMountainSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="uhqrGroup">
-                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked}"/>
-                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked}"/>
+                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}"/>
+                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}"/>
                     <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
@@ -177,16 +177,16 @@
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}"
-                                            IsVisible="{Binding ElementName=UseLineSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
-                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding ElementName=UseMountainSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
+                                            IsVisible="{Binding Source={x:Reference Name=UseLineSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
+                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding Source={x:Reference Name=UseMountainSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="uhqrGroup">
-                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked}"/>
-                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked}"/>
+                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}"/>
+                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}"/>
                     <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
@@ -224,16 +224,16 @@
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}"
-                                            IsVisible="{Binding ElementName=UseLineSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
-                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding ElementName=UseMountainSeries, Path=IsChecked, Mode=TwoWay}"
-                                            StrokeThickness="{Binding ElementName=strokeThicknessSlider, Path=Value}" />
+                                            IsVisible="{Binding Source={x:Reference Name=UseLineSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
+                <s:FastMountainRenderableSeries DataSeries="{Binding DataSeries0}" IsVisible="{Binding Source={x:Reference Name=UseMountainSeries}, Path=IsChecked, Mode=TwoWay}"
+                                            StrokeThickness="{Binding Source={x:Reference Name=strokeThicknessSlider}, Path=Value}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="uhqrGroup">
-                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding ElementName=enableZoom, Path=IsChecked}"/>
-                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding ElementName=enablePan, Path=IsChecked}"/>
+                    <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}"/>
+                    <s:ZoomPanModifier ReceiveHandledEvents="True" ClipModeX="None" IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}"/>
                     <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>

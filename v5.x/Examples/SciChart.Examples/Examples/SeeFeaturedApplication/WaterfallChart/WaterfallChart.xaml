@@ -47,15 +47,13 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ToggleButton x:Name="customRubberBandButton"
                           HorizontalAlignment="Left"
                           Content="Zoom"
                           ContentTemplate="{StaticResource CustomZoomButtonStyle}"
-                          IsChecked="{Binding IsEnabled,
-                                              ElementName=customRubberBandModifier,
-                                              Mode=TwoWay}"
+                          IsChecked="{Binding Source={x:Reference Name=customRubberBandModifier}, Path=IsEnabled, Mode=TwoWay}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
                           ToolTipService.ToolTip="Custom Toggle Rubber-Band Zoom"
                           s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
@@ -126,15 +124,13 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:ZoomExtentsModifier IsAnimated="True"/>
-                    <s:ZoomPanModifier IsEnabled="{Binding Path=IsEnabled,
-                                                           ElementName=PanModifier,
+                    <s:ZoomPanModifier IsEnabled="{Binding Source={x:Reference Name=PanModifier}, Path=IsEnabled,
                                                            Mode=OneWay,
                                                            UpdateSourceTrigger=PropertyChanged}"
                                        XyDirection="XDirection"
                                        ZoomExtentsY="False"/>
                     <s:RubberBandXyZoomModifier IsAnimated="True"
-                                                IsEnabled="{Binding Path=IsEnabled,
-                                                                    ElementName=customRubberBandModifier,
+                                                IsEnabled="{Binding Source={x:Reference Name=customRubberBandModifier}, Path=IsEnabled,
                                                                     Mode=OneWay,
                                                                     UpdateSourceTrigger=PropertyChanged}"
                                                 IsXAxisOnly="True"/>

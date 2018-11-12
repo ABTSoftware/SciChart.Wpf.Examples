@@ -31,7 +31,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" />
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart"
@@ -113,7 +113,7 @@
             <TextBlock Margin="10"
                        Text="Selected PointMarkers:"
                        Foreground="#C6C6C6" />
-            <ListBox ItemsSource="{Binding ElementName=PointMarkersSelectionModifier, Path=SelectedPointMarkers}"
+            <ListBox ItemsSource="{Binding Source={x:Reference Name=PointMarkersSelectionModifier}, Path=SelectedPointMarkers}"
                      Foreground="#57A54A"
                      BorderBrush="Transparent"
                      Margin="5"

@@ -28,13 +28,13 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" >
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
 
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="TMR" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
                         <TextBlock Margin="5" >
-                            <Run Text="Timer Speed ("/><Run Text="{Binding ElementName=Slider, Path=Value, StringFormat=\{0:0.0\}}" /><Run Text="ms" /><Run Text=")"/>
+                            <Run Text="Timer Speed ("/><Run Text="{Binding Source={x:Reference Name=Slider}, Path=Value, StringFormat=\{0:0.0\}}" /><Run Text="ms" /><Run Text=")"/>
                         </TextBlock>
                         <ext:FlyoutSeparator/>
 

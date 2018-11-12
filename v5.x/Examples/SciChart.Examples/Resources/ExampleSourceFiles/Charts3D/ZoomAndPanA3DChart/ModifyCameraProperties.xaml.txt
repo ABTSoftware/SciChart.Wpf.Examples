@@ -32,7 +32,7 @@
         <!-- The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutSeparator Background="#444"/>
 
@@ -145,28 +145,28 @@
                 <TextBlock Text="Orthographic:" Grid.Row="9" FontWeight="Bold"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1">
-                    <Run Text="'"/><Run Text="{Binding ElementName=sciChart, Path=Camera.CameraId, FallbackValue='NA'}"/><Run Text="'"/>
+                    <Run Text="'"/><Run Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.CameraId, FallbackValue='NA'}"/><Run Text="'"/>
                 </TextBlock>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.Position, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Position, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="2" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.Target, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Target, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="3" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.OrbitalPitch, FallbackValue='NA'}" Grid.Row="4" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalPitch, FallbackValue='NA'}" Grid.Row="4" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.OrbitalYaw, FallbackValue='NA'}" Grid.Row="5" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalYaw, FallbackValue='NA'}" Grid.Row="5" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.Radius, FallbackValue='NA'}" Grid.Row="6" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Radius, FallbackValue='NA'}" Grid.Row="6" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.ProjectionMode, FallbackValue='NA'}" Grid.Row="7" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.ProjectionMode, FallbackValue='NA'}" Grid.Row="7" Grid.Column="1"/>
 
-                <TextBlock Text="{Binding ElementName=sciChart, Path=Camera.FieldOfView, FallbackValue='NA'}" Grid.Row="8" Grid.Column="1"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.FieldOfView, FallbackValue='NA'}" Grid.Row="8" Grid.Column="1"/>
 
                 <TextBlock Grid.Row="9" Grid.Column="1">
                     <Run Text="Width="/>
-                    <Run Text="{Binding ElementName=sciChart, Path=Camera.OrthoWidth, FallbackValue='NA'}"/>
+                    <Run Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrthoWidth, FallbackValue='NA'}"/>
                     <Run Text=", Height="/>
-                    <Run Text="{Binding ElementName=sciChart, Path=Camera.OrthoHeight, FallbackValue='NA'}"/>
+                    <Run Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrthoHeight, FallbackValue='NA'}"/>
                 </TextBlock>
             </Grid>
         </Border>

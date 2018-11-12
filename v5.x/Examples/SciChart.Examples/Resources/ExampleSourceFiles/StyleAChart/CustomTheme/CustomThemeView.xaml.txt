@@ -98,7 +98,7 @@
 
         <s:SciChartOverview x:Name="overview"
                             Grid.Row="1"
-                            SelectedRange="{Binding ElementName=sciChart,
+                            SelectedRange="{Binding Source={x:Reference Name=sciChart},
                                                     Path=XAxis.VisibleRange,
                                                     Mode=TwoWay}" />
     </Grid>

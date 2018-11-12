@@ -22,7 +22,7 @@
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar"
                                         Grid.RowSpan="2"
-                                        TargetSurface="{Binding ElementName=sciChart}">
+                                        TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
             <ext:FlyoutMenuButton HorizontalAlignment="Left"
                                   Content="THM"
@@ -132,7 +132,7 @@
         <s:SciChartOverview x:Name="overview"
                             Grid.Row="1"
                             Grid.Column="1"
-                            SelectedRange="{Binding ElementName=sciChart,
+                            SelectedRange="{Binding Source={x:Reference Name=sciChart},
                                                     Path=XAxis.VisibleRange,
                                                     Mode=TwoWay}" />
     </Grid>

@@ -41,7 +41,7 @@
                                        HorizontalAlignment="Left"
                                        Content="ROLL"
                                        HorizontalContentAlignment="Center"
-                                       IsChecked="{Binding ElementName=rolloverModifier, Path=IsEnabled,  Mode=TwoWay}"
+                                       IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=IsEnabled,  Mode=TwoWay}"
                                        Style="{StaticResource FlyoutMenuToggleButtonStyle}"
                                        FontSize="10"
                                        Padding="0"
@@ -53,14 +53,14 @@
                         <TextBlock FontSize="12" Text="Rollover mode" />
 
                         <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
-                                  SelectedItem="{Binding ElementName=rolloverModifier, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                         <ext:FlyoutSeparator />
 
                         <TextBlock FontSize="12" Text="Show tooltip mode" />
 
                         <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
-                                  SelectedItem="{Binding ElementName=rolloverModifier, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}" />
+                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}" />
 
                         <ext:FlyoutSeparator />
 
@@ -68,7 +68,7 @@
                               FontSize="12"
                               VerticalAlignment="Center"
                               Content="Show axis label"
-                              IsChecked="{Binding ElementName=rolloverModifier, Path=ShowAxisLabels, Mode=TwoWay}" />
+                              IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
 
                     </StackPanel>
                 </ext:FlyoutMenuToggleButton.PopupContent>
@@ -88,9 +88,7 @@
                                   Margin="3"
                                   VerticalAlignment="Center"
                                   Content="Use RolloverModifier interpolation?"
-                                  IsChecked="{Binding UseInterpolation,
-                                                      ElementName=rolloverModifier,
-                                                      Mode=TwoWay}" />
+                                  IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=UseInterpolation, Mode=TwoWay}" />
 
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
@@ -163,8 +161,7 @@
 
             <!--  A nice technique is to put the rollover legend inside an annotation with relative coordinates, then it is always inside the chart surface  -->
             <s:SciChartSurface.Annotations>
-                    <s:CustomAnnotation Content="{Binding SeriesData,
-                                                      ElementName=rolloverModifier}"
+                <s:CustomAnnotation Content="{Binding Source={x:Reference Name=rolloverModifier}, Path=SeriesData}"
                                     CoordinateMode="Relative"
                                     HorizontalAnchorPoint="Left"
                                     Opacity="1"

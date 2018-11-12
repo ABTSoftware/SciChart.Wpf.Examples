@@ -103,9 +103,9 @@
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
         <Grid Grid.Row="1" Background="#FF1C1C1E">
-            <s:SciChartScrollbar Width="{Binding ElementName=BottomAxis, Path=ActualWidth}"
+            <s:SciChartScrollbar Width="{Binding Source={x:Reference Name=BottomAxis}, Path=ActualWidth}"
                                  Margin="0,0,0,3"
-                                 Axis="{Binding ElementName=BottomAxis}" />
+                                 Axis="{Binding Source={x:Reference Name=BottomAxis}}" />
 
         </Grid>
     </Grid>

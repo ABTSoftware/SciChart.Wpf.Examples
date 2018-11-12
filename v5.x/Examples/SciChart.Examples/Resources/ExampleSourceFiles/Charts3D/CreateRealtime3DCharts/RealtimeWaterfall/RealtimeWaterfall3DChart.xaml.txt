@@ -24,14 +24,14 @@
       <Style x:Key="WaterfallSeriesStyle" TargetType="s3D:WaterfallRenderableSeries3D">
         <Setter Property="Stroke" Value="#773333FF" />
         <Setter Property="Opacity" Value="0.8" />
-        <Setter Property="ClipMode" Value="{Binding SelectedValue, ElementName=ckbClipMode}"/>
+                <Setter Property="ClipMode" Value="{Binding Source={x:Reference Name=ckbClipMode}, Path=SelectedValue}"/>
         <Setter Property="ZColorMapping" Value="{x:Null}"/>
         <Setter Property="YColorMapping" Value="{x:Null}"/>
         <Style.Triggers>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillY}" Value="True">
+                    <DataTrigger Binding="{Binding Source={x:Reference Name=ckbFillY}, Path=IsChecked}" Value="True">
             <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
           </DataTrigger>
-          <DataTrigger Binding="{Binding IsChecked, ElementName=ckbFillZ}" Value="True">
+                    <DataTrigger Binding="{Binding Source={x:Reference Name=ckbFillZ}, Path=IsChecked}" Value="True">
             <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}"/>
           </DataTrigger>
         </Style.Triggers>
@@ -79,7 +79,7 @@
     <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
     <!--  to the chart and is included for example purposes.  -->
     <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
-    <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart}" >
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" >
       <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
                       Content="CTRL"
                       FontSize="10"

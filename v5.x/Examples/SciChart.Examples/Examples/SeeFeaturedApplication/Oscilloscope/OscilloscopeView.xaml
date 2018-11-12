@@ -264,9 +264,9 @@
         <!--  Define the overlay panel to show start and to dates, chart values  -->
         <Grid Grid.Column="1"
               Margin="35,35,15,0"
-              DataContext="{Binding ElementName=oscilloscopeChart,
+              DataContext="{Binding Source={x:Reference Name=oscilloscopeChart},
                                     Path=ChartModifier[RolloverModifier]}"
-              Visibility="{Binding ElementName=oscilloscopeChart,
+              Visibility="{Binding Source={x:Reference Name=oscilloscopeChart},
                                    Path=DataContext.ChartModifier,
                                    Converter={StaticResource VisibleIfTypeConverter},
                                    ConverterParameter=Rollover}">
@@ -294,7 +294,7 @@
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="Zoom"
-                              IsChecked="{Binding ElementName=RubberBandModifier,
+                              IsChecked="{Binding Source={x:Reference Name=RubberBandModifier},
                                                   Path=IsEnabled,
                                                   Mode=TwoWay}"
                               Style="{StaticResource ZoomButtonStyle}"
@@ -303,7 +303,7 @@
 
                 <ToggleButton HorizontalAlignment="Left"
                               Content="Pan"
-                              IsChecked="{Binding ElementName=ZoomPanModifier,
+                              IsChecked="{Binding Source={x:Reference Name=ZoomPanModifier},
                                                   Path=IsEnabled,
                                                   Mode=TwoWay}"
                               Style="{StaticResource PanButtonStyle}"
@@ -311,7 +311,7 @@
                               s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
 
                 <Button HorizontalAlignment="Left"
-                        Command="{Binding ElementName=oscilloscopeChart,
+                        Command="{Binding Source={x:Reference Name=oscilloscopeChart},
                                           Path=AnimateZoomExtentsCommand}"
                         Content="Zoom Extents"
                         Style="{StaticResource ZoomExtentsButtonStyle}"
@@ -364,7 +364,7 @@
 
                             <ComboBox FontSize="12" 
                                       ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" 
-                                      SelectedItem="{Binding SourceMode, ElementName=rolloverModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                                      SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
@@ -372,7 +372,7 @@
 
                             <ComboBox FontSize="12" 
                                       ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
-                                      SelectedItem="{Binding ShowTooltipOn, ElementName=rolloverModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                                      SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
@@ -380,7 +380,7 @@
                                       FontSize="12"
                                       VerticalAlignment="Center"
                                       Content="Show axis label"
-                                      IsChecked="{Binding ShowAxisLabels, ElementName=rolloverModifier, Mode=TwoWay}" />
+                                      IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
 
                         </StackPanel>
                     </ext:FlyoutMenuToggleButton.PopupContent>
@@ -404,13 +404,13 @@
 
                             <TextBlock FontSize="12" Text="Cursor mode" />
 
-                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding SourceMode, ElementName=cursorModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
                             <TextBlock FontSize="12" Text="Show tooltip mode" />
 
-                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding ShowTooltipOn, ElementName=cursorModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
@@ -418,7 +418,7 @@
 
                             <ComboBox FontSize="12"
                                       ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
-                                      SelectedItem="{Binding SnappingMode, ElementName=cursorModifier, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                                      SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                             <ext:FlyoutSeparator />
 
@@ -426,13 +426,13 @@
                                       FontSize="12"
                                       VerticalAlignment="Center"
                                       Content="Show axis label"
-                                      IsChecked="{Binding ShowAxisLabels, ElementName=cursorModifier, Mode=TwoWay}" />
+                                      IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
 
                             <CheckBox Margin="3"
                                       FontSize="12"
                                       VerticalAlignment="Center"
                                       Content="Show tooltip"
-                                      IsChecked="{Binding ShowTooltip, ElementName=cursorModifier, Mode=TwoWay}" />
+                                      IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltip, Mode=TwoWay}" />
 
                         </StackPanel>
                     </ext:FlyoutMenuToggleButton.PopupContent>

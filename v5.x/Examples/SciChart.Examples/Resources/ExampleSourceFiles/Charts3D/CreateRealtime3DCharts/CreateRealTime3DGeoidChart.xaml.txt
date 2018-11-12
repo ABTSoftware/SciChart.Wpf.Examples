@@ -32,7 +32,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding ElementName=SciChart3DSurface}">
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart3DSurface}}">
             
             <ext:FlyoutSeparator Background="#444"/>
 
