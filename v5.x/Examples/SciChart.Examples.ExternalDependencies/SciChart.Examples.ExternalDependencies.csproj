@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{113EBB05-8D70-4B05-BB73-121A552A5754}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SciChart.Examples.ExternalDependencies</RootNamespace>
+    <AssemblyName>SciChart.Examples.ExternalDependencies</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release45|AnyCPU'">
+    <OutputPath>bin\Release\net45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release45|x64'">
+    <OutputPath>bin\x64\Release\net45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release45|x86'">
+    <OutputPath>bin\x86\Release\net45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release46|AnyCPU'">
+    <OutputPath>bin\Release\net46\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release46|x64'">
+    <OutputPath>bin\x64\Release\net46</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release46|x86'">
+    <OutputPath>bin\x86\Release\net46</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug45|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\net45\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug45|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\net45</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug45|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\net45</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug46|AnyCPU'">
+    <OutputPath>bin\Debug\net46\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug46|x64'">
+    <OutputPath>bin\x64\Debug\net46</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug46|x86'">
+    <OutputPath>bin\x86\Debug\net46</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
+    <Compile Include="Behaviors\ContentPresenterHelper.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\HyperlinkButtonBehavior.cs" />
+    <Compile Include="Common\BaseViewModel.cs" />
+    <Compile Include="Common\BoolToValueConverter.cs" />
+    <Compile Include="Common\CollapsableGridSplitter.cs" />
+    <Compile Include="Common\GetTypeNameConverter.cs" />
+    <Compile Include="Common\IPowerManager.cs" />
+    <Compile Include="Common\IsChartTypeConverter.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Common\IsSameObjectsMultiConverter.cs" />
+    <Compile Include="Common\PowerManager.cs" />
+    <Compile Include="Common\PowerPlan.cs" />
+    <Compile Include="Common\SnappingModeToVisibilityConverter.cs" />
+    <Compile Include="Controls\ExceptionView\ExceptionView.xaml.cs">
+      <DependentUpon>ExceptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SciChart3DInteractionToolbar\SciChart3DInteractionToolbar.cs" />
+    <Compile Include="Controls\SciChart3DInteractionToolbar\SciChart3DModifierButtonTemplateSelector.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\ComboBoxItemTemplateSelector.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\Converters\StringToAnnotationTypeConverter.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\Converters\EnumValueToStringConverter.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\CustomModifiers\CustomAnnotationCreationModifier.cs" />
+    <Compile Include="Common\DeveloperModManager.cs" />
+    <Compile Include="Common\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\FeaturesHelper.cs" />
+    <Compile Include="Common\FlyoutMenuButton.cs" />
+    <Compile Include="Common\FlyoutMenuToggleButton.cs" />
+    <Compile Include="Common\FrameworkVisibilityManager.cs" />
+    <Compile Include="Common\Instrument.cs" />
+    <Compile Include="Common\IsModifierTypeConverter.cs" />
+    <Compile Include="Common\ExampleHelpers.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\CustomModifiers\CustomChangeThemeModifier.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\CustomModifiers\CustomRotateChartModifier.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\InvokeCommandActionEx.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\ModifierButtonTemplateSelector.cs" />
+    <Compile Include="Common\NewsEvent.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\CustomModifiers\CustomFlipModifier.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\Extension\EnumValuesExtension.cs" />
+    <Compile Include="Controls\SciChartInteractionToolbar\MyCustomAnnotation.xaml.cs">
+      <DependentUpon>MyCustomAnnotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SciChartInteractionToolbar\SciChartInteractionToolbar.cs" />
+    <Compile Include="Common\SciChartPolarInteractionToolbar.cs" />
+    <Compile Include="Common\ScrollViewerWidthMultiConverter.cs" />
+    <Compile Include="Common\StrongTyped.cs" />
+    <Compile Include="Common\TextElementEx.cs" />
+    <Compile Include="Common\TimeFrame.cs" />
+    <Compile Include="Common\ToValidDateTimeConverter.cs" />
+    <Compile Include="Common\Trade.cs" />
+    <Compile Include="Common\TypeToTypeNameConverter.cs" />
+    <Compile Include="Common\ValidateDateFormatStringConverter.cs" />
+    <Compile Include="Common\VisibleIfTypeConverter.cs" />
+    <Compile Include="Controls\CoverFlow\CoverFlowControl.cs" />
+    <Compile Include="Controls\CoverFlow\CoverFlowEventArgs.cs" />
+    <Compile Include="Controls\CoverFlow\CoverFlowItemControl.cs" />
+    <Compile Include="Controls\CoverFlow\PlaneProjector.cs" />
+    <Compile Include="Data\DataManager.cs" />
+    <Compile Include="Data\DispatcherObservableCollection.cs" />
+    <Compile Include="Data\DoubleSeries.cs" />
+    <Compile Include="Data\FFT.cs" />
+    <Compile Include="Data\IDataManager.cs" />
+    <Compile Include="Data\MarketDataService.cs" />
+    <Compile Include="Data\MovingAverage.cs" />
+    <Compile Include="Data\PriceBar.cs" />
+    <Compile Include="Data\PriceSeries.cs" />
+    <Compile Include="Data\RandomPricesDataSource.cs" />
+    <Compile Include="Data\RandomWalkGenerator.cs" />
+    <Compile Include="Data\Tick.cs" />
+    <Compile Include="Data\TradeData.cs" />
+    <Compile Include="Data\XYPoint.cs" />
+    <Compile Include="Helpers\ActualSizePropertyProxy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\ExceptionView\ExceptionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SciChartInteractionToolbar\MyCustomAnnotation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\AnnotationStylesResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\BrushesNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ButtonNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\MergedResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\SciChartExampleToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ToggleButtonNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ToolbarButtonsCommon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\CoverFlowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\cursor.png" />
+    <Resource Include="Resources\Images\selection_view.png" />
+    <Resource Include="Resources\Images\target.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SciChartLogo_Dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Objects\Bishop_Low.obj" />
+    <Resource Include="Resources\Objects\King_Low.obj" />
+    <Resource Include="Resources\Objects\Knight_Low.obj" />
+    <Resource Include="Resources\Objects\Pawn_Low.obj" />
+    <Resource Include="Resources\Objects\Queen_Low.obj" />
+    <Resource Include="Resources\Objects\Rook_Low.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Objects\BlackWoodTexture.jpg" />
+    <Resource Include="Resources\Objects\WhiteWoodTexture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Data\TickData.csv.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Data\AcousticPlots.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\INDU_Daily.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\Waveform.txt.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\globe_heightmap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Interactivity\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Core">
+      <HintPath>..\packages\SciChart.5.2.1.11736\lib\net45\SciChart.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Data">
+      <HintPath>..\packages\SciChart.5.2.1.11736\lib\net45\SciChart.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Drawing">
+      <HintPath>..\packages\SciChart.5.2.1.11736\lib\net45\SciChart.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting">
+      <HintPath>..\packages\SciChart.5.2.1.11736\lib\net45\SciChart.Charting.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting.DrawingTools">
+      <HintPath>..\packages\SciChart.DrawingTools.5.2.1.11736\lib\net45\SciChart.Charting.DrawingTools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Drawing.DirectX">
+      <HintPath>..\packages\SciChart.DirectX.5.2.1.11736\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SciChart.Charting3D">
+      <HintPath>..\packages\SciChart3D.5.2.1.11736\lib\net45\SciChart.Charting3D.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

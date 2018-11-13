@@ -1,0 +1,27 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/SeriesSelectionExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>Demonstrates series-selection. Click a series to select it. It's color changes and it is brought to the top of the Z-order</ToolTipDescription>
+  <Description>
+    Demonstrates the use of the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier.html']SeriesSelectionModifier[/url], which hooks into the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17234/32/custom-chartmodifier-api---overview']ChartModifier API[/url] to select series on mouse-clicks. This complex, but easy to implement example uses many concepts in the ChartModifier API to bind legends and series together.
+
+    The selected series is styled via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier~SelectedSeriesStyle.html']SeriesSelectionModifier.SelectedSeriesStyle[/url]. A blanket style applied to any series which is selected. Also you can use the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~SelectedSeriesStyle.html']BaseRenderableSeries.SelectedSeriesStyle[/url] to achieve the same effect on an individual series level.
+
+    Finally, a LegendModifier exposes the currently selected series, and we can use a SciChartLegend to show the name of which series is selected.
+
+    [b]Documentation Links[/b]
+    
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17185/28/series-selection-and-selected-series-styling']Series Selection and Selected Series Styling API Documentation[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API Articles[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier.html']SeriesSelectionModifier Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesSelectionExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesSelectionExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Selection</Features>    
+  </Features>
+</ExampleDefinition>

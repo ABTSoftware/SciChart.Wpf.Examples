@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateRadarChart/UsingRadarChartExampleView.xaml</View>
+  <ViewModel>Examples.CreateRadarChart.UsingRadarChartExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconPolar</IconPath>
+  <ToolTipDescription>Radar Chart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a Radar Chart. A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point. The relative position and angle of the axes is typically uninformative. This is a circular chart type consisting of sectors which are proportional to the quantity it represents.
+
+    [i][b]Tips![/i][/b]
+    [i]You can change the style of every category.[/i]
+
+    [i]Every series can be configurable. You can change fill brush, stroke color, opacity...[/i]
+
+    [i]Hole in center can be changed in real time.[/i]
+    
+    [i]Radar rotation can be changed in real time too.[/i]
+
+    [b]Documentation Links[/b]
+    Coming soon.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/UsingRadarChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/UsingRadarChartExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/UsingRadarChartExampleViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+  </Features>
+</ExampleDefinition>

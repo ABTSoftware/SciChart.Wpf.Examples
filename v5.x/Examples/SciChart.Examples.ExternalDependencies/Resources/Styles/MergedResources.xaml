@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="BrushesNew.xaml" />
+        <ResourceDictionary Source="ButtonNew.xaml" />
+        <ResourceDictionary Source="ToggleButtonNew.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource ExampleToolbarButtonStyle}" TargetType="Button" />
+    <Style BasedOn="{StaticResource ExampleToolbarToggleButtonStyle}" TargetType="ToggleButton" />
+
+</ResourceDictionary>

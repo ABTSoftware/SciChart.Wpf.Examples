@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.LoadMillions.LoadMillionsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+
+            <Button Command="{Binding RunExampleCommand}"
+                    Content="Load"
+                    Padding="0"
+                    FontSize="11"
+                    Style="{StaticResource DefaultButtonStyle}" />
+
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           ViewportManager="{Binding ViewportManager}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries}" Stroke="DarkOrange" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsAnimated="True" />
+                    <s:CursorModifier ShowTooltip="True"/>
+                    <s:ZoomPanModifier ClipModeX="None"
+                                       ExecuteOn="MouseLeftButton"
+                                       ReceiveHandledEvents="True" />
+                    <s:ZoomExtentsModifier IsAnimated="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+            <!-- Some hints to the user -->
+            <s:SciChartSurface.Annotations>
+
+                <s:CustomAnnotation CoordinateMode="Relative" 
+                                    HorizontalAnchorPoint="Left"
+                                    Margin="5,150,0,0" 
+                                    VerticalAnchorPoint="Center" 
+                                    IsHidden="{Binding Source={x:Reference Name=sciChart}, Path=SelectedRenderableSeries.Count}"
+                                    X1="0" 
+                                    Y1="0" >
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Text="Click " 
+                                   Foreground="#FFF" />
+                        
+                        <Image Width="32"
+                               Height="32"
+                               Source="/SciChart.Examples;component/Resources/Images/load_button.png"
+                               Stretch="None" />
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Text=" for loading one million points to the chart and rendering in under 100ms!" 
+                                   Foreground="#FFF" />
+
+                    </StackPanel>
+
+                </s:CustomAnnotation>
+
+            </s:SciChartSurface.Annotations>
+
+        </s:SciChartSurface>
+
+        <s:SciChartPerformanceOverlay Grid.Column="1"
+                                      Margin="5,5,50,5"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top"
+                                      Background="#33FFFFFF"
+                                      FontSize="16"
+                                      FontWeight="Bold"
+                                      Foreground="#FFF"
+                                      Padding="10"
+                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+
+    </Grid>
+</UserControl>

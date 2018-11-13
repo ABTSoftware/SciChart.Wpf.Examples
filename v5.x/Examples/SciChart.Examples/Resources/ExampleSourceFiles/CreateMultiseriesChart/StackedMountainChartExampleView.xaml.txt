@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.StackedMountainChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="chartFill1" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#DDDBE0E1" />
+            <GradientStop Offset="1.0" Color="#88B6C1C3" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="chartFill0" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#DDACBCCA" />
+            <GradientStop Offset="1.0" Color="#88439AAF" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ex:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:StackedMountainRenderableSeries x:Name="mountainSeries1"
+                                                          Fill="{StaticResource chartFill0}"
+                                                          Stroke="#EEE"
+                                                          StrokeThickness="2" />
+                <s:StackedMountainRenderableSeries x:Name="mountainSeries2"
+                                                          Fill="{StaticResource chartFill1}"
+                                                          Stroke="#EEE"
+                                                          StrokeThickness="2" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisTitle="Sample No" TextFormatting="0.########" DrawMajorBands="True"/>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with GrowBy  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AxisTitle="Value"
+                                      DrawMajorBands="True"
+                                      GrowBy="0,0.1" />
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:XAxisDragModifier ClipModeX="None" />
+                    <s:YAxisDragModifier />
+                    <s:ZoomExtentsModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

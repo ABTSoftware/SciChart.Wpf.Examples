@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.StackedColumnChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="StackedColumnChartExampleView_OnLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="s:StackedColumnRenderableSeries">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="ShowLabel" Value="True" />
+            <Setter Property="Stroke" Value="#333" />
+            <Setter Property="DataPointWidth" Value="0.9" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="SciChart"
+                           Grid.Column="1"
+                           BorderThickness="0"
+                           ChartTitle="Meat vs. Vegetables"
+                           Padding="0">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#FF226Fb7" StackedGroupId="Meat" />
+                <s:StackedColumnRenderableSeries Fill="#ffff9a2e" StackedGroupId="Meat" />
+                <s:StackedColumnRenderableSeries Fill="#ffdc443f" StackedGroupId="Vegetables" />
+                <s:StackedColumnRenderableSeries Fill="#ffaad34f" StackedGroupId="Vegetables" />
+                <s:StackedColumnRenderableSeries Fill="#ff8562b4" StackedGroupId="Vegetables" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoTicks="False"
+                               MajorDelta="1"
+                               MinorDelta="0.5"
+                               VisibleRangeLimit="1972,2023" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMajorBands="True" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsAnimated="False" IsXAxisOnly="True" />
+                    <s:ZoomExtentsModifier IsAnimated="False" />
+                    <s:RolloverModifier ShowTooltipOn="Always" />
+                    <s:LegendModifier Margin="10"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Bottom"
+                                      GetLegendDataFor="AllSeries"
+                                      LegendPlacement="Bottom"
+                                      Orientation="Horizontal"
+                                      ShowLegend="True"
+                                      ShowVisibilityCheckboxes="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.StackedBarChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill0">
+            <GradientStop Offset="0" Color="#567893" />
+            <GradientStop Offset="1.0" Color="#3D5568" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill1">
+            <GradientStop Offset="0" Color="#ACBCCA" />
+            <GradientStop Offset="1.0" Color="#439AAF" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill2">
+            <GradientStop Offset="0" Color="#DBE0E1" />
+            <GradientStop Offset="1.0" Color="#B6C1C3" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <Grid>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    
+    <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+    <!-- to the chart and is included for example purposes. -->
+    <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
+
+        <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="AXIS" Padding="0">
+            <ext:FlyoutMenuButton.PopupContent>
+                <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
+                    <TextBlock Text="YAxis.AxisAlignment" />
+                    <ext:FlyoutSeparator/>
+                    <ComboBox SelectionChanged="CboYAxisAlignment_OnSelectionChanged" Margin="4" x:Name="cboYAxisAlignment" SelectedIndex="0">
+                        <ComboBox.Items>
+                            <s:AxisAlignment>Bottom</s:AxisAlignment>
+                            <s:AxisAlignment>Top</s:AxisAlignment>
+                            <s:AxisAlignment>Right</s:AxisAlignment>
+                            <s:AxisAlignment>Left</s:AxisAlignment>
+                        </ComboBox.Items>
+                    </ComboBox>
+
+                    <TextBlock Text="Xaxis.AxisAlignment" />
+                    <ext:FlyoutSeparator/>
+                    <ComboBox SelectionChanged="CboXAxisAlignment_OnSelectionChanged" Margin="4" x:Name="cboXAxisAlignment" SelectedIndex="0">
+                        <ComboBox.Items>
+                            <s:AxisAlignment>Right</s:AxisAlignment>
+                            <s:AxisAlignment>Left</s:AxisAlignment>
+                            <s:AxisAlignment>Bottom</s:AxisAlignment>
+                            <s:AxisAlignment>Top</s:AxisAlignment>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+            </ext:FlyoutMenuButton.PopupContent>
+        </ext:FlyoutMenuButton>
+    </ext:SciChartInteractionToolbar>
+
+    
+    <!--  Create the chart surface  -->
+    
+    <s:SciChartSurface Name="sciChart"
+                       Grid.Column="1"
+                       Padding="0"
+                       BorderThickness="0">
+        
+    <!--  Declare RenderableSeries  -->
+    
+        <s:SciChartSurface.RenderableSeries>
+            <s:StackedColumnRenderableSeries x:Name="columnSeries1" DataPointWidth="0.8" Stroke="#333" Fill="{StaticResource chartFill0}"/>
+            <s:StackedColumnRenderableSeries x:Name="columnSeries2" Stroke="#333" Fill="{StaticResource chartFill1}"/>
+            <s:StackedColumnRenderableSeries x:Name="columnSeries3" Stroke="#333" Fill="{StaticResource chartFill2}"/>
+        </s:SciChartSurface.RenderableSeries>
+        
+    <!--  Create an X Axis  -->
+    
+        <s:SciChartSurface.XAxis>
+            <s:NumericAxis x:Name="numericXAxis" AxisAlignment="Right" AxisTitle="Sample No"/>
+        </s:SciChartSurface.XAxis>
+
+        
+    <!--  Create a Y Axis with GrowBy  -->
+    
+        <s:SciChartSurface.YAxis>
+            <s:NumericAxis x:Name="numericYAxis" AxisAlignment="Bottom" AxisTitle="Value" GrowBy="0,0.1" FlipCoordinates="True" />
+        </s:SciChartSurface.YAxis>
+
+    </s:SciChartSurface>
+
+</Grid>
+</UserControl>

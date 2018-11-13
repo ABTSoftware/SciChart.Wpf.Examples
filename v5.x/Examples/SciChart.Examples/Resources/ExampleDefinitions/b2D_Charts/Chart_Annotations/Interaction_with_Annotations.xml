@@ -1,0 +1,26 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/AnnotateAChart/InteractionWithAnnotations.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoInteractionWithAnnotations.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates annotations selection/interactivity capabilities.</ToolTipDescription>
+  <Description>
+    Demonstrates how you may interact with annotations that have been placed on a chart, using the UIElement Annotations API.
+
+    To make an annotation Read-only, set [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AnnotationBase~IsEditable.html']AnnotationBase.IsEditable[/url]=false. Some of the annotations have IsEditable=true on this example. You can click them, drag and resize via the adorner anchor-points.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Documentation[/url]
+    - [url='http://www.scichart.com/databinding-annotations-with-mvvm/']Databinding Annotations with MVVM[/url]
+    - [url='http://www.scichart.com/questions/question/editing-annotations-and-keeping-track-of-them-in-an-mvvm-application']Best practices with Annotations in MVVM apps[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17209/33/custom-annotations---adding-a-watermark-to-a-chart']Custom Annotations - Adding a WaterMark to a Chart[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/InteractionWithAnnotations.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/InteractionWithAnnotations.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

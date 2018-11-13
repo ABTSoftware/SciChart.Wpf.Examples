@@ -1,0 +1,45 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsView.xaml</View>
+  <ViewModel>Examples.CreateMultiseriesChart.DashboardStyleCharts.DashboardStyleChartsViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDashboardStyleCharts.png</ImagePath>
+  <IconPath>IconStackedColumn</IconPath>
+  <ToolTipDescription>Shows how to dynamically change type of chart</ToolTipDescription>
+  <Description>
+    Demonstrates the many kinds of Stacked chart (Stacked Mountain, Stacked Column, 100% Stacked Column) available in SciChart, and allows MS Excel style changing of data-presentation dynamically.
+
+    [b]Example Usage[/b]
+
+    [i]To change chart type - just select item in the list at the top.[/i]
+
+    - Animated/NonAnimated Zoom/Zoom Extents.
+    - Show/Hide Labels inside columns.
+    - Change SpacingMode : Absolute or Relative.
+    - Change Spacing between columns using Slider.
+    - Change DataPoinWidth using Slider.
+    - Show/Hide series using CheckBoxes inside legend.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17245/41/stackedcolumnrenderableseries---stack-columns-vertically-horizontally-and-100']Introduction to Stacked Series in SciChart[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedMountainRenderableSeries.html']StackedMountainRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedColumnRenderableSeries.html']StackedColumnRenderableSeries Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/ChartTypeViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/ChartTypeViewModelFactory.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/DashboardDataHelper.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/ExampleListBoxStyle.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/LabelForegroundConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/RenderebleSeriesStyles.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/SpacingModeToMaximumSpacingConverter.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stacked</Features>
+    <Features>Column</Features>
+    <Features>Mountain</Features>
+    <Features>Area</Features>    
+  </Features>
+</ExampleDefinition>

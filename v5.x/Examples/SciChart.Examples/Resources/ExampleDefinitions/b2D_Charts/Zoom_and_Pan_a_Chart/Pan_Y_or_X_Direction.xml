@@ -1,0 +1,39 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ZoomAndPanAChart/MouseDragToPanXOrY.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPanXorYDirection.png</ImagePath>
+  <IconPath>IconPan</IconPath>
+    <ToolTipDescription>Demonstrates mouse-dragging of SciChart constrained to the X or Y axis. 
+    
+    Overlays a mountain (area) and line chart series on a SciChartSurface and applies the ZoomPanModifier. This is a built-in ChartModifierBase derived class which adds the behavior of panning on mouse-drag.
+    
+    This example uses secondary Y-axis to showcase panning when there is a left or right Y-Axis.
+  </ToolTipDescription>
+  <Description>
+    Demonstrates using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifier.html']ZoomPanModifier[/url], part of the [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API[/url], which allows panning the chart while dragging the mouse.
+
+    Mouse-dragging of of the SciChartSurface causes the viewport to pan.
+
+    [b][i]Tips![/i][/b]
+
+    - With the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifierBase~XyDirection.html']ZoomPanModifier.XyDirection[/url] property, Panning may be limited to the X Direction, Y Direction or XY (both) directions.
+
+    - With the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifierBase~ZoomExtentsY.html']ZoomPanModifier.ZoomExtentsY[/url] property, the YAxis zooms to extents as you pan. This is useful for trading charts.
+
+    - When the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifierBase~ClipModeX.html']ZoomPanModifier.ClipModeX[/url] property, you can control how the series behaves as you pan to the edge of the data. The default mode is ClipMode.StretchAtExtents, which causes a zooming (stretch) action when you reach the edge of the data.
+
+    - The ZoomPanModifier may be disabled on one or more axis by setting the attached property ZoomPanModifier.IncludeSeries="False" on an Axis. The default value is true.
+    
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17229/32/chartmodifiers-provided-by-scichart']ChartModifiers Provided by SciChart[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomPanModifier.html']ZoomPanModifier Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/MouseDragToPanXOrY.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/MouseDragToPanXOrY.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Pan</Features>
+  </Features>
+</ExampleDefinition>

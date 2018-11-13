@@ -1,0 +1,22 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateASurfaceMeshChart/SurfaceMeshWithPaletteProvider.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconSurface3D</IconPath>
+  <ToolTipDescription>
+    Demonstrates how to use the PaletteProvider API to color SurfaceMesh cells individually.
+  </ToolTipDescription>
+  <Description>
+    Demonstrates how to use the PaletteProvider API to color SurfaceMesh cells individually.
+    This can be used to change the color of a cell but also to show holes in a surface mesh (or nulls) by returning the color transparent.
+
+    [b][i]Tip![/i][/b]
+
+    The PaletteProvider is useful for showing thresholds or areas of interest!
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateASurfaceMeshChart/SurfaceMeshWithPaletteProvider.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateASurfaceMeshChart/SurfaceMeshWithPaletteProvider.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

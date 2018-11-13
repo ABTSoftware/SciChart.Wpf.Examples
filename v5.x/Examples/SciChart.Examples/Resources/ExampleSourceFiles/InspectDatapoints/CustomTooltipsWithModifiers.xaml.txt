@@ -1,0 +1,243 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.InspectDatapoints.CustomTooltipsWithModifiers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          BlurRadius="5"
+                          Direction="-45"
+                          ShadowDepth="10"
+                          Color="Black" />
+
+        <Style x:Key="TooltipStyle1" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="#ff6495ed"
+                                BorderBrush="#ff4d81dd"
+                                BorderThickness="2"
+                                Effect="{StaticResource DropShadowEffect}"
+                                Opacity="0.9"
+                                Padding="5">
+
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TooltipStyle2" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="#ffe2460c"
+                                BorderBrush="#ffff4500"
+                                BorderThickness="2"
+                                Effect="{StaticResource DropShadowEffect}"
+                                Opacity="0.9"
+                                Padding="5">
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CursorTooltipStyle" TargetType="s:CursorLabelControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:CursorLabelControl">
+                        <Border Background="#ffe2460c"
+                                BorderBrush="#ffff4500"
+                                BorderThickness="2"
+                                Effect="{StaticResource DropShadowEffect}"
+                                Opacity="0.9"
+                                Padding="5">
+                            <ItemsControl Margin="6" ItemsSource="{Binding DataContext.SeriesData.SeriesInfo, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="s:SeriesInfo">
+                                        <ContentControl Content="{Binding}" ContentTemplate="{Binding Path=RenderableSeries.(s:CursorModifier.TooltipTemplate)}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CursorLineStyle" TargetType="Line">
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="#AAFFA500" />
+        </Style>
+
+        <Style x:Key="CusorAxisLabelStyle" TargetType="s:AxisLabelControl">
+            <Setter Property="Background" Value="#FFFFA500" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!--  Label used in cursors  -->
+        <Style x:Key="HintDataItemsStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Margin" Value="3,2,2,2" />
+        </Style>
+
+
+        <DataTemplate x:Key="RolloverTooltipTemplate1" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="RM" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0}:'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="RolloverTooltipTemplate2" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0}:'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="RM" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VerticalSliceTooltipTemplate1" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="VCM" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0}:'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VerticalSliceTooltipTemplate2" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0}:'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="VCM" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TooltipTemplate1" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue, StringFormat='{}Y : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedXValue, StringFormat='{}X : {0}'}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TooltipTemplate2" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedXValue, StringFormat='{}X : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue, StringFormat='{}Y : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CursorTooltipTemplate1" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0} - '}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue, StringFormat='{}Y : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedXValue, StringFormat='{}X : {0}'}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CursorTooltipTemplate2" DataType="s:SeriesInfo">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName, StringFormat='{}{0} - '}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedXValue, StringFormat='{}X : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding FormattedYValue, StringFormat='{}Y : {0}'}" />
+            </StackPanel>
+        </DataTemplate>
+
+
+        <Style x:Key="AxisLabelStyle" TargetType="s:AxisLabelControl">
+            <Setter Property="Background" Value="CornflowerBlue" />
+            <Setter Property="BorderBrush" Value="Blue" />
+        </Style>
+
+        <DataTemplate x:Key="AxisLabelTemplate" DataType="s:AxisInfo">
+            <StackPanel>
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding AxisId, StringFormat='{}AxisId : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding DataValue, StringFormat='{}Val : {0}'}" />
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
+
+        <s:SciChartSurface Name="SciChart" Grid.Column="1">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#ff6495ed"
+                                            StrokeThickness="2"
+                                            s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate1}"
+                                            s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipStyle1}"
+                                            s:RolloverModifier.TooltipTemplate="{StaticResource RolloverTooltipTemplate1}"
+                                            s:TooltipModifier.TooltipContainerStyle="{StaticResource TooltipStyle1}"
+                                            s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate1}"
+                                            s:VerticalSliceModifier.TooltipContainerStyle="{StaticResource TooltipStyle1}"
+                                            s:VerticalSliceModifier.TooltipTemplate="{StaticResource VerticalSliceTooltipTemplate1}" />
+                <s:FastLineRenderableSeries Stroke="#ffe2460c"
+                                            StrokeThickness="2"
+                                            s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate2}"
+                                            s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipStyle2}"
+                                            s:RolloverModifier.TooltipTemplate="{StaticResource RolloverTooltipTemplate2}"
+                                            s:TooltipModifier.TooltipContainerStyle="{StaticResource TooltipStyle2}"
+                                            s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate2}"
+                                            s:VerticalSliceModifier.TooltipContainerStyle="{StaticResource TooltipStyle2}"
+                                            s:VerticalSliceModifier.TooltipTemplate="{StaticResource VerticalSliceTooltipTemplate2}" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxes>
+                <s:NumericAxis s:RolloverModifier.AxisLabelContainerStyle="{StaticResource AxisLabelStyle}" 
+                               s:RolloverModifier.AxisLabelTemplate="{StaticResource AxisLabelTemplate}" 
+                               s:CursorModifier.AxisLabelContainerStyle="{StaticResource CusorAxisLabelStyle}"/>
+            </s:SciChartSurface.XAxes>
+            
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis GrowBy="0.05, 0.05" />
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RolloverModifier x:Name="RolloverModifier"
+                                        IsEnabled="True"
+                                        ShowTooltipOn="Always" />
+                    <s:CursorModifier x:Name="CursorModifier"
+                                      TooltipContainerStyle="{StaticResource CursorTooltipStyle}"
+                                      IsEnabled="False"
+                                      LineOverlayStyle="{StaticResource CursorLineStyle}"
+                                      ShowAxisLabels="False"
+                                      ShowTooltip="True"
+                                      ShowTooltipOn="MouseOver"/>
+                    <s:TooltipModifier x:Name="TooltipModifier" IsEnabled="False" />
+                    <s:VerticalSliceModifier IsEnabled="True">
+                        <s:VerticalSliceModifier.VerticalLines>
+                            <s:VerticalLineAnnotation IsEditable="True"
+                                                      LabelPlacement="Axis"
+                                                      ShowLabel="True"
+                                                      X1="1250" />
+                        </s:VerticalSliceModifier.VerticalLines>
+                    </s:VerticalSliceModifier>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

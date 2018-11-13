@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.StyleAChart.UsePointMarkers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="UsePointMarkers_OnLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  This external resource dictionary defines a ControlTemplate which we will transform into  -->
+                <!--  a sprite for use in our SpritePointMarker below. This can take any WPF control template and  -->
+                <!--  renders it to bitmap once, for repeated blitting on the screen. Note you cannot use triggers or  -->
+                <!--  bindings in a SpritePointMarkers' template  -->
+                <ResourceDictionary Source="UsePointMarkersResourceDictionary.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter"
+                                      FalseValue="Collapsed"
+                                      TrueValue="Visible" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Define the Toolbar  -->
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+
+            <ext:FlyoutMenuButton Content="PS"
+                                  Padding="0"
+                                  Style="{StaticResource FlyoutMenuButtonStyle}"
+                                  Visibility="{Binding ElementName=UserToolbar, Path=IsDeveloperMode,
+                                                       Converter={StaticResource BoolToVisibilityConverter}}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+
+                        <TextBlock Text="PointMarker Width" />
+
+                        <Slider x:Name="WidthSlider"
+                                Margin="4"
+                                HorizontalAlignment="Stretch"
+                                Maximum="25"
+                                Minimum="2"
+                                Orientation="Horizontal"
+                                Value="9"/>
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="PointMarker Height" />
+
+                        <Slider x:Name="HeightSlider"
+                                Margin="4"
+                                HorizontalAlignment="Stretch"
+                                Maximum="25"
+                                Minimum="2"
+                                Orientation="Horizontal"
+                                Value="9"/>
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="PointMarker StrokeThickness " />
+
+                        <Slider x:Name="StrokeThicknessSlider"
+                                Margin="4"
+                                HorizontalAlignment="Stretch"
+                                Maximum="5"
+                                Minimum="1"
+                                Orientation="Horizontal"
+                                Value="2" />
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart" Grid.Column="1">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries1"
+                                            Stroke="LightBlue"
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Width="{Binding Source={x:Reference WidthSlider}, Path=Value}"
+                                              Height="{Binding Source={x:Reference HeightSlider},
+                                                               Path=Value}"
+                                              Fill="#990077FF"
+                                              Stroke="LightBlue"
+                                              StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
+                                                                        Path=Value}" />
+                        
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries2"
+                                            Stroke="Red"
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:SquarePointMarker Width="{Binding Source={x:Reference WidthSlider},
+                                                             Path=Value}"
+                                             Height="{Binding Source={x:Reference HeightSlider},
+                                                              Path=Value}"
+                                             Fill="#99FF0000"
+                                             Stroke="Red"
+                                             StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
+                                                                       Path=Value}" />
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries3"
+                                            Stroke="Yellow"
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:TrianglePointMarker Width="{Binding Source={x:Reference WidthSlider},
+                                                               Path=Value}"
+                                               Height="{Binding Source={x:Reference HeightSlider},
+                                                                Path=Value}"
+                                               Fill="#FFDD00"
+                                               Stroke="#FF6600"
+                                               StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
+                                                                         Path=Value}" />
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries4"
+                                            Stroke="Magenta"
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:CrossPointMarker Width="{Binding Source={x:Reference WidthSlider},
+                                                            Path=Value}"
+                                            Height="{Binding Source={x:Reference HeightSlider},
+                                                             Path=Value}"
+                                            Stroke="Magenta"
+                                            StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
+                                                                      Path=Value}" />
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries5"
+                                            Stroke="Wheat"
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:SpritePointMarker PointMarkerTemplate="{StaticResource AnyWpfControlTemplateCanGoHere}"/>
+                    </s:FastLineRenderableSeries.PointMarker>
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis with Growby  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with Growby  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:MouseWheelZoomModifier />
+                    <s:LegendModifier Margin="10"
+                                      HorizontalAlignment="Center"
+                                      LegendPlacement="Bottom"
+                                      Orientation="Horizontal"
+                                      ShowLegend="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>
