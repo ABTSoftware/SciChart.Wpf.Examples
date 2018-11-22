@@ -136,8 +136,6 @@
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="True" 
                                                    Opacity="{Binding Source={x:Reference opacitySlider}, Path=Value, Mode=TwoWay}"
-                                                   CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
-                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 
