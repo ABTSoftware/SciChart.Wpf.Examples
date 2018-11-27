@@ -23,6 +23,7 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.RealTimeStaticAxis
 {

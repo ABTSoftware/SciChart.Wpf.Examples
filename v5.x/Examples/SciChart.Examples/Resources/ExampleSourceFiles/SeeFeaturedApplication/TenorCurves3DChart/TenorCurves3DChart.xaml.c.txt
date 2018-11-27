@@ -19,6 +19,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting3D.Model;
 using SciChart.Core.Extensions;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
 {

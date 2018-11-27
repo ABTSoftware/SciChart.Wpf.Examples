@@ -24,6 +24,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
 {

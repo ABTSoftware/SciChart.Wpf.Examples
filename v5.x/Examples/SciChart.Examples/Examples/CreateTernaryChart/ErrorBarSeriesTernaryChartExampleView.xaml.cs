@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateTernaryChart
 {

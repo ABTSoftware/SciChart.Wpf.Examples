@@ -22,6 +22,7 @@ using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting3D.Model;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 {

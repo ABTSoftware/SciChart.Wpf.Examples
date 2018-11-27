@@ -18,6 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 {

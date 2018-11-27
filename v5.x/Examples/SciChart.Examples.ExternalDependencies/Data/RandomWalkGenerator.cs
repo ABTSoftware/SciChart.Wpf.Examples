@@ -18,6 +18,7 @@
 // *************************************************************************************
 using System;
 using SciChart.Core.Helpers;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {

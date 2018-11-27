@@ -20,6 +20,7 @@ using SciChart.Core.Extensions;
 using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Data;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
 {

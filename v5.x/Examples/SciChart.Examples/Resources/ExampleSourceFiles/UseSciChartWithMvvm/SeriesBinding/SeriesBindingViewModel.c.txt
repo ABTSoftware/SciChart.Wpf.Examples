@@ -25,6 +25,7 @@ using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SeriesBinding
 {

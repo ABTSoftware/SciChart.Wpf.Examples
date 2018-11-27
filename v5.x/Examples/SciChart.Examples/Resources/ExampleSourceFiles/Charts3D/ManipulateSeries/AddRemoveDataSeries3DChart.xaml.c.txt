@@ -24,6 +24,7 @@ using SciChart.Charting3D.PointMarkers;
 using SciChart.Charting3D.RenderableSeries;
 using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries
 {

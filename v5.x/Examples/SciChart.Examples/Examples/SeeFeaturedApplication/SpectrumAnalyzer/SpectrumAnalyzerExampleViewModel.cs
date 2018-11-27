@@ -22,6 +22,7 @@ using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 {

@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Core.Helpers;
 using SciChart.Core.Utility;
+using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart
 {
