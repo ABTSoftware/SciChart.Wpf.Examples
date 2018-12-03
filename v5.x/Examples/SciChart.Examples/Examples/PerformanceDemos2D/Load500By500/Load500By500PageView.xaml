@@ -32,7 +32,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ext:SciChartInteractionToolbar Grid.RowSpan="2" x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" x:Name="UserToolbar" 
+                                        TargetSurface="{Binding Source={x:Reference Name=sciChart}}"
+                                        >
 
             <Button Command="{Binding RunExampleCommand}"
                     Padding="0"
@@ -74,7 +76,6 @@
                                     HorizontalAnchorPoint="Left"
                                     Margin="5,150,0,0" 
                                     VerticalAnchorPoint="Center" 
-                                    IsHidden="{Binding Source={x:Reference Name=sciChart}, Path=SelectedRenderableSeries.Count}"
                                     X1="0" 
                                     Y1="0" >
 
