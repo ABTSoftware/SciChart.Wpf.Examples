@@ -28,6 +28,7 @@ using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
 using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Helpers;
+using FasterRandom = SciChart.Examples.ExternalDependencies.Helpers.FasterRandom;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
