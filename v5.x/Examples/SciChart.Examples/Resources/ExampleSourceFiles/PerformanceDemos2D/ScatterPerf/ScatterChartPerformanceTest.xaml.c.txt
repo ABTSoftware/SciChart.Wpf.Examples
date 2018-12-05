@@ -43,7 +43,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
             TimedMethod.Invoke(() =>
             {
                 var dataSeries = new XyDataSeries<double, double>() {AcceptsUnsortedData = true};
-                var rand = new FasterRandom();
+                var rand = new Random();
 
                 // Allow 1M points in WPF/DirectX. In Silverlight or software rendering, 100k points is enough to stress the renderer
                 int count = FeaturesHelper.Instance.SupportsHardwareAcceleration ? (int) 1E6 : (int) 1E5;

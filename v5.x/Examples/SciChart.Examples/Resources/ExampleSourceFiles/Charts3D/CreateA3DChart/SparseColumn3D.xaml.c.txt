@@ -26,8 +26,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {
     public partial class SparseColumn3D : UserControl
     {
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
         private const int Count = 15;
 
         public SparseColumn3D()
@@ -44,11 +43,11 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             {
                 for (var j = 1; j <= Count; j++)
                 {
-                    if (i != j && i %3 == 0 && j%3 ==0)
+                    if (i != j && i % 3 == 0 && j % 3 == 0)
                     {
                         var y = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
 
-                        var randomColor = Color.FromArgb(0xFF, (byte) _random.Next(0, 255), (byte) _random.Next(0, 255), (byte) _random.Next(0, 255));
+                        var randomColor = Color.FromArgb(0xFF, (byte)_random.Next(0, 255), (byte)_random.Next(0, 255), (byte)_random.Next(0, 255));
 
                         xyzDataSeries3D.Append(i, y, j, new PointMetadata3D(randomColor));
                     }

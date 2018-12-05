@@ -30,7 +30,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
     public partial class RealTimePolarChart : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        readonly FasterRandom _random = new FasterRandom();
+        readonly Random _random = new Random();
         private double _lastAmplitude = 1.0;
         private DispatcherTimer _timer;
 

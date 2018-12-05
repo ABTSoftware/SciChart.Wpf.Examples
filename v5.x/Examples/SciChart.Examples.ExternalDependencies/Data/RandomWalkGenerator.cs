@@ -16,16 +16,14 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
+
 using System;
-using SciChart.Core.Helpers;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
     public class RandomWalkGenerator
     {
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random;
+        private readonly Random _random = new Random();
         private double _last;
         private int _i;        
         private readonly double _bias = 0.01;
@@ -33,12 +31,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public RandomWalkGenerator(double bias = 0.01)
         {
             _bias = bias;
-            _random = new FasterRandom();
         }
 
         public RandomWalkGenerator(int seed)
         {
-            _random = new FasterRandom(seed);
+            _random = new Random(seed);
         }
 
         public void Reset()

@@ -83,7 +83,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries
                 xyzDataSeries3D.Append(x, y, z, new PointMetadata3D(randomColor, scale));
             }
 
-            var randomPicker = new FasterRandom();
+            var randomPicker = new Random();
             int randValue = randomPicker.Next(0, 6);
 
             switch (randValue)

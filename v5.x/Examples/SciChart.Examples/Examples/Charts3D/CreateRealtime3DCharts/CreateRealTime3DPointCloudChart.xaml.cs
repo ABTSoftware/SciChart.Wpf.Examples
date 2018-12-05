@@ -36,8 +36,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
         private DispatcherTimer _timer;
         private int _pointCount = 100000;
 
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
 
         public CreateRealTime3DPointCloudChart()
         {

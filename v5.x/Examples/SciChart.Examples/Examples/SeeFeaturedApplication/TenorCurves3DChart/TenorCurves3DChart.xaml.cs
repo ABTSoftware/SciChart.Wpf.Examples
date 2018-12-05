@@ -29,13 +29,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
     public partial class TenorCurves3DChart : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private FasterRandom _random;
+        private Random _random;
 
         public TenorCurves3DChart()
         {
             InitializeComponent();
 
-            _random = new FasterRandom();
+            _random = new Random();
             int xSize = 25;
             int zSize = 25;
             var meshDataSeries = new UniformGridDataSeries3D<double,double,DateTime>(xSize, zSize);

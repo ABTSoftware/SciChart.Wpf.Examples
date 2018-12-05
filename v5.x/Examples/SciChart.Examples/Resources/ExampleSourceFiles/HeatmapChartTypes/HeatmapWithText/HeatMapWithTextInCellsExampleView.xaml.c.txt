@@ -75,7 +75,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
 
         private IDataSeries CreateSeries()
         {
-            var rnd = new FasterRandom();
+            var rnd = new Random();
             int w = 24, h = 7;
             var data = new double[h, w];
             for (int x = 0; x < w; x++)

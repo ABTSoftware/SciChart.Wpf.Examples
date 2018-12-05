@@ -9,7 +9,6 @@ using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
 using SciChart.Examples.ExternalDependencies.Helpers;
 
-
 namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 {
     /// <summary>
@@ -28,8 +27,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
         private WaterfallDataSeries3D<double> _waterfallDataSeries;
 
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random;
+        private readonly Random _random = new Random();
 
         private readonly FFT2 _transform;
         private int _transformSize;
@@ -50,7 +48,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
         {
             InitializeComponent();
 
-            _random = new FasterRandom();
+            _random = new Random();
             _transform = new FFT2();            
 
             Loaded += OnLoaded;

@@ -31,7 +31,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
     public partial class GapsInSeries : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
 
         public GapsInSeries()
         {

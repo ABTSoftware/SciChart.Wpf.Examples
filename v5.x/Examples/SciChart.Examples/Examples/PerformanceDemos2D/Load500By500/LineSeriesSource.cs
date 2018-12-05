@@ -65,7 +65,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
             {
                 sciChartSurface.RenderableSeries.Clear();
 
-                var random = new FasterRandom();
+                var random = new Random();
                 var itr = (IEnumerable<IDataSeries>)e.NewValue;
                 var renderSeries = new List<IRenderableSeries>();
                 foreach (var dataSeries in itr)

@@ -39,7 +39,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
                                                         Color.FromArgb(255, 255, 99, 71), Color.FromArgb(255, 205, 133, 63), Color.FromArgb(255, 64, 224, 208), Color.FromArgb(255, 244, 164, 96)
                                                     };
 
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
         private const int ChannelCount = 50; // Number of channels to render
         private const int Size = 1000;       // Size of each channel in points (FIFO Buffer)
         private volatile int _currentSize = 0;

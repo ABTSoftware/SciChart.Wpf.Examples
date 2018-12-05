@@ -30,7 +30,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
     public partial class WaterfallChart : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
         private readonly FFT2 _transform;
         private VerticalValuesPaletteProvider _paletteProvider;
         private XyDataSeries<double, double> _emptySeries;

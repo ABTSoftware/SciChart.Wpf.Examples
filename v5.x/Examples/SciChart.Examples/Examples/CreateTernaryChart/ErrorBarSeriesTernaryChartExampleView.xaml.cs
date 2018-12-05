@@ -23,13 +23,13 @@ namespace SciChart.Examples.Examples.CreateTernaryChart
     public partial class ErrorBarSeriesTernaryChartExampleView : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private FasterRandom _random;
+        private Random _random;
 
         public ErrorBarSeriesTernaryChartExampleView()
         {
             InitializeComponent();
 
-            _random =new FasterRandom();
+            _random =new Random();
 
             cursorModButton.IsChecked = false;
             tooltipModButton.IsChecked = false;

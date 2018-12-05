@@ -34,7 +34,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Spectrogram
     {
         private readonly DispatcherTimer _timer;
         private readonly XyDataSeries<double, double> _xyDataSeries = new XyDataSeries<double>();
-        private readonly FasterRandom _random = new FasterRandom();        
+        private readonly Random _random = new Random();        
         private readonly FFT2 _transform;
         private readonly double[] _re = new double[1024];
         private readonly double[] _im = new double[1024];

@@ -74,7 +74,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SeriesBinding
         {
             var dates = Enumerable.Range(0, PointsCount).Select(i => i).ToArray();
             var medianValues = new RandomWalkGenerator().GetRandomWalkSeries(PointsCount).YData;
-            var random = new FasterRandom();
+            var random = new Random();
 
             for (int i = 0; i < PointsCount; i++)
             {

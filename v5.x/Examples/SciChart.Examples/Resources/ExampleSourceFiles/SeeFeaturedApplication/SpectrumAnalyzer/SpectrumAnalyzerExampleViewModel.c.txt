@@ -41,7 +41,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
         private bool _isTimeDomain;
 
         private FFT2 _transform;
-        private FasterRandom _random = new FasterRandom();
+        private Random _random = new Random();
 
         private ICommand _startCommand;
         private ICommand _stopCommand;

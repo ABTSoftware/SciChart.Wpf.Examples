@@ -12,7 +12,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 {
     public static class ViewModelFactory3D
     {
-        private static readonly FasterRandom _random = new FasterRandom(251916);
+        private static readonly Random _random = new Random(251916);
         private static FFT2 _transform = new FFT2();
 
         public static IRenderableSeries3DViewModel New(string  typeName)

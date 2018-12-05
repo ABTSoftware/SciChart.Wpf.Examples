@@ -58,7 +58,7 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
             var dates = Enumerable.Range(0, count).Select(i => new DateTime(2011, 01, 01).AddMonths(i)).ToArray();
             var medianValues = new RandomWalkGenerator().GetRandomWalkSeries(count).YData;
 
-            var random = new FasterRandom();
+            var random = new Random();
             for (int i = 0; i < count; i++)
             {
                 double med = medianValues[i];

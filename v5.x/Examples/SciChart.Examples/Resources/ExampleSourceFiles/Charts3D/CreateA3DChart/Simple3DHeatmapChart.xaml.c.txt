@@ -29,7 +29,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
     public partial class Simple3DHeatmapChart : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
         private const int XSize = 200;
         private const int ZSize = 200;
         private const double Angle = Math.PI * 2 * 20 / 30;

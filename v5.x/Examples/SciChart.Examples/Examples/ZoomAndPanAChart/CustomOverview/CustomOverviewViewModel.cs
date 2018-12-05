@@ -38,7 +38,7 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview
         private void Initialize()
         {
             RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel>();
-            var random = new FasterRandom();
+            var random = new Random();
             var generator = new RandomWalkGenerator();
 
             for (int i = 0; i < SeriesCount; i++)

@@ -37,7 +37,7 @@ namespace SciChart.Examples.Examples.StyleAChart
             var dataSeries5 = new XyDataSeries<double, double>() { SeriesName = "Sprite Marker" };
 
             const int dataSize = 30;
-            var rnd = new FasterRandom();
+            var rnd = new Random();
             for (int i = 0; i < dataSize; i++) dataSeries1.Append(i, rnd.NextDouble());
             for (int i = 0; i < dataSize; i++) dataSeries2.Append(i, 1 + rnd.NextDouble());
             for (int i = 0; i < dataSize; i++) dataSeries3.Append(i, 1.8 + rnd.NextDouble());

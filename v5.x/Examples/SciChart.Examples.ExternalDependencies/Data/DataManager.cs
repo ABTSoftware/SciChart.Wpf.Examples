@@ -28,7 +28,6 @@ using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
 using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Helpers;
-using FasterRandom = SciChart.Examples.ExternalDependencies.Helpers.FasterRandom;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
@@ -40,8 +39,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         private IList<Instrument> _availableInstruments;
         private IDictionary<Instrument, IList<TimeFrame>> _availableTimeFrames;
 
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private FasterRandom _random = new FasterRandom();
+        private Random _random = new Random();
 
         public static DataManager Instance
         {

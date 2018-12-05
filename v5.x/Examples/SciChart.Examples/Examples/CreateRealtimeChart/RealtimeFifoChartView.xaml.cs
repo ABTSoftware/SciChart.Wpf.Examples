@@ -39,7 +39,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         // The current time
         private double t;
 
-        FasterRandom _random = new FasterRandom();
+        Random _random = new Random();
 
         // The dataseries to fill
         private IXyDataSeries<double, double> series0;

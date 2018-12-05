@@ -6,7 +6,6 @@ using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
 using SciChart.Examples.ExternalDependencies.Helpers;
 
-
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {
     /// <summary>
@@ -15,14 +14,11 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
     public partial class CreateAWaterfall3DChart : UserControl
     {
         private readonly FFT2 _transform;
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random;
+        private readonly Random _random = new Random();
 
         public CreateAWaterfall3DChart()
         {
             InitializeComponent();
-
-            _random = new FasterRandom();
             _transform = new FFT2();
 
             Loaded += OnLoaded;

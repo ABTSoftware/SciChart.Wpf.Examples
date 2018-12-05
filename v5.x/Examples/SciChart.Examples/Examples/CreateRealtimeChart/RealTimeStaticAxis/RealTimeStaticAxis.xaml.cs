@@ -35,7 +35,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.RealTimeStaticAxis
         private DispatcherTimer _timer;
 
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly FasterRandom _random = new FasterRandom();
+        private readonly Random _random = new Random();
 
         private int _annotationCoord;
         private int _dataPoint1, _dataPoint2;

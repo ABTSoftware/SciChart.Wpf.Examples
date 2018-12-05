@@ -40,7 +40,7 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
             var rightDataSeries0 = new XyDataSeries<DateTime, double>();
             var rightDataSeries1 = new XyDataSeries<DateTime, double>();
 
-            var random = new FasterRandom();
+            var random = new Random();
 
             for (int i = 0; i < 20; i++)
             {

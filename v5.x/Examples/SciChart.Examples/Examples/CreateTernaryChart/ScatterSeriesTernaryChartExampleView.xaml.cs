@@ -23,12 +23,12 @@ namespace SciChart.Examples.Examples.CreateTernaryChart
     public partial class ScatterSeriesTernaryChartExampleView : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private FasterRandom _random;
+        private Random _random;
         public ScatterSeriesTernaryChartExampleView()
         {
             InitializeComponent();
 
-            _random = new FasterRandom();
+            _random = new Random();
 
             // scatters series
             var scatterDataSeries1 = new XyzDataSeries<double> { AcceptsUnsortedData = true, SeriesName = "Substance A" };

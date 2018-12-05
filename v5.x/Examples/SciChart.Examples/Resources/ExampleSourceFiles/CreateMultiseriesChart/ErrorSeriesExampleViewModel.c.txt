@@ -48,7 +48,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 
             // Generate some random error data. Errors must be absolute values, 
             // e.g. if a series has a Y-value of 5.0, and YError of =/-10% then you must enter YErrorHigh=5.5, YErrorLow=4.5 into the HlcDataSeries
-            var random = new FasterRandom();
+            var random = new Random();
             var yErrorHigh = yData.Select(y => y + random.NextDouble()*0.2);
             var yErrorLow = yData.Select(y => y - random.NextDouble()*0.2);
 
