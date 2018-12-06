@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <s:SciChartSurface Grid.Row="0" x:Name="primaryChartSurface" s:ThemeManager.Theme="BrightSpark">
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis Visibility="Collapsed"/>
+                <s:NumericAxis DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis/>
@@ -32,9 +32,6 @@
         <s:SciChartSurface Grid.Row="2" x:Name="secondaryChartSurface" Width="{Binding ElementName=primaryChartSurface, Path=RenderSurface.ActualWidth}"
                            s:ThemeManager.Theme="BrightSpark" 
                            HorizontalAlignment="Left">
-            <s:SciChartSurface.RenderSurface>
-                <s:HighSpeedRenderSurface Height="0"/>
-            </s:SciChartSurface.RenderSurface>
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis VisibleRange="{Binding ElementName=primaryChartSurface, Path=XAxis.VisibleRange, Mode=TwoWay}"/>
             </s:SciChartSurface.XAxis>
