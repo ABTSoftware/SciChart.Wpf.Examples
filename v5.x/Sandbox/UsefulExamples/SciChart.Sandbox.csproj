@@ -270,6 +270,9 @@
     <Compile Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml.cs">
       <DependentUpon>ResamplingOfGridDataSeries3D.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\ScrollbarAboveAxis\ScrollbarAboveAxis.xaml.cs">
+      <DependentUpon>ScrollbarAboveAxis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ScrollbarMvvmAxis\NumericAxisViewModelWithScrollbar.cs" />
     <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml.cs">
       <DependentUpon>ScrollbarMvvmAxis.xaml</DependentUpon>
@@ -390,6 +393,10 @@
     <Page Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\ScrollbarAboveAxis\ScrollbarAboveAxis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml">
       <SubType>Designer</SubType>
