@@ -27,13 +27,20 @@
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
 
-        <s:SciChartScrollbar Axis="{Binding ElementName=primaryChartSurface, Path=XAxis}" Grid.Row="1" s:ThemeManager.Theme="BrightSpark"/>
+        <s:SciChartScrollbar Axis="{Binding ElementName=primaryChartSurface, Path=XAxis}" Grid.Row="1" s:ThemeManager.Theme="BrightSpark" Panel.ZIndex="99"/>
 
+        <!-- NOTE: In order for this sample to work you need to set a valid developer license. This will hide the POWERED BY SCICHART logo which makes
+                    the lower chart have a minimum size.  -->
         <s:SciChartSurface Grid.Row="2" x:Name="secondaryChartSurface" Width="{Binding ElementName=primaryChartSurface, Path=RenderSurface.ActualWidth}"
-                           s:ThemeManager.Theme="BrightSpark" 
+                           s:ThemeManager.Theme="BrightSpark"                            
+                           Margin="0,-10,0,0"
                            HorizontalAlignment="Left">
+            <s:SciChartSurface.RenderSurface>
+                <s:HighSpeedRenderSurface Visibility="Hidden"/>
+            </s:SciChartSurface.RenderSurface>
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis VisibleRange="{Binding ElementName=primaryChartSurface, Path=XAxis.VisibleRange, Mode=TwoWay}"/>
+                <s:NumericAxis VisibleRange="{Binding ElementName=primaryChartSurface, Path=XAxis.VisibleRange, Mode=TwoWay}"
+                               BorderThickness="0,1,0,0" BorderBrush="#AAA"/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis Visibility="Collapsed"/>
