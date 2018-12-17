@@ -23,6 +23,7 @@ using SciChart.Charting.Visuals.Axes.LabelProviders;
 using SciChart.Core.Helpers;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
@@ -60,7 +61,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
         {
             public override string FormatLabel(IComparable dataValue)
             {
-                var h = Convert.ToInt32(dataValue);
+                var h = (int)Math.Ceiling(dataValue.ToDouble());
                 var dt = new DateTime(2000, 1, 1, 1, 0, 0).AddHours(h);
                 return dt.ToString("hh:mm tt", new CultureInfo("en-US"));
             }
