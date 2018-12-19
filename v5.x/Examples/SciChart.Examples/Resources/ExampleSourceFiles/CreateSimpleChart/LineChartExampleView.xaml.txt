@@ -31,8 +31,7 @@
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
         <!--  Create the chart surface  -->
-        <s:SciChartSurface Name="sciChart" Tag="BobbyCharta"
-                           Grid.Column="1">
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
