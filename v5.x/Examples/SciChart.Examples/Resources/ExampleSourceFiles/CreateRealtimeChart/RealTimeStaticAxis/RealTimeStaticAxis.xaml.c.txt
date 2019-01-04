@@ -17,13 +17,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
-using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Annotations;
-using SciChart.Core.Helpers;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.RealTimeStaticAxis
 {

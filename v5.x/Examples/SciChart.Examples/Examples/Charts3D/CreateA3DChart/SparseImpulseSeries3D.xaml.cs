@@ -19,9 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.PointMarkers;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {

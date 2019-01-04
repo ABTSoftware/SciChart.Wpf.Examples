@@ -18,10 +18,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview
 {

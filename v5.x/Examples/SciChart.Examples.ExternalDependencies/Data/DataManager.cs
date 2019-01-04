@@ -24,10 +24,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
-using SciChart.Charting.Visuals.Axes.DiscontinuousAxis;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {

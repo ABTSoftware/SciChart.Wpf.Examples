@@ -1,26 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SciChart.Charting.ChartModifiers;
-using SciChart.Charting.Model.ChartData;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Core.Helpers;
-using SciChart.Drawing.Common;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 {

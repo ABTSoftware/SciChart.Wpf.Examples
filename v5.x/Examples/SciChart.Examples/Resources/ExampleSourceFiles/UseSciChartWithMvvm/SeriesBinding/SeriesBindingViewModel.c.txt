@@ -18,14 +18,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
-using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SeriesBinding
 {

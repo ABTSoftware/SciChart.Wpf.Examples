@@ -14,15 +14,9 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Globalization;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using SciChart.Charting3D.Model;
-using SciChart.Charting3D.Model.ChartData;
-using SciChart.Charting3D.RenderableSeries;
-using SciChart.Core.Helpers;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
 {

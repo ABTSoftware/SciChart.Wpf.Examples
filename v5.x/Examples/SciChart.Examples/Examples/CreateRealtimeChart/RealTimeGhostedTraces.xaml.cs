@@ -18,9 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart
 {

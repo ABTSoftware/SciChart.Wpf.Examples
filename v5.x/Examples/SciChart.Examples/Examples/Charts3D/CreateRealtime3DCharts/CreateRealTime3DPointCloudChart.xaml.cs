@@ -14,16 +14,13 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting3D.Model;
-using SciChart.Core.Helpers;
 using SciChart.Data.Extensions;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 {
