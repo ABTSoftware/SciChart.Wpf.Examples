@@ -72,6 +72,22 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void RenderScene(IRenderPassInfo3D e)
         {
+            float bottomRightCoordX = bottomRight.X;
+            float bottomRightCoordY = bottomRight.Y;
+            float bottomRightCoordZ = bottomRight.Z;
+            float topLeftCoordX = topLeft.X;
+            float topLeftCoordY = topLeft.Y;
+            float topLeftCoordZ = topLeft.Z;
+
+            // Commented code below is the example of treating the Location value
+            // as 3D point in Data Coordinates Space but not in World Coordinates Space
+            //bottomRightCoordX = (float)e.XCalc.GetCoordinate(bottomRight.X) - e.WorldDimensions.X / 2.0f;
+            //bottomRightCoordY = (float)e.YCalc.GetCoordinate(bottomRight.Y);
+            //bottomRightCoordZ = (float)e.ZCalc.GetCoordinate(bottomRight.Z) - e.WorldDimensions.Z / 2.0f;
+            //topLeftCoordX = (float)e.XCalc.GetCoordinate(topLeft.X) - e.WorldDimensions.X / 2.0f;
+            //topLeftCoordY = (float)e.YCalc.GetCoordinate(topLeft.Y);
+            //topLeftCoordZ = (float)e.ZCalc.GetCoordinate(topLeft.Z) - e.WorldDimensions.Z / 2.0f;
+
             // y          1--------0
             // |         /|       /|
             // |       5--------4  |
@@ -83,14 +99,14 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             // |/
             // ----------- X
             Vector3[] corners = {
-                new Vector3(topLeft.X, topLeft.Y, topLeft.Z), //0
-                new Vector3(bottomRight.X, topLeft.Y, topLeft.Z), //1
-                new Vector3(bottomRight.X, bottomRight.Y, topLeft.Z), //2
-                new Vector3(topLeft.X, bottomRight.Y, topLeft.Z), //3
-                new Vector3(topLeft.X, topLeft.Y, bottomRight.Z), //4
-                new Vector3(bottomRight.X, topLeft.Y, bottomRight.Z), //5
-                new Vector3(bottomRight.X, bottomRight.Y, bottomRight.Z), //6
-                new Vector3(topLeft.X, bottomRight.Y, bottomRight.Z), //7
+                new Vector3(topLeftCoordX, topLeftCoordY, topLeftCoordZ), //0
+                new Vector3(bottomRightCoordX, topLeftCoordY, topLeftCoordZ), //1
+                new Vector3(bottomRightCoordX, bottomRightCoordY, topLeftCoordZ), //2
+                new Vector3(topLeftCoordX, bottomRightCoordY, topLeftCoordZ), //3
+                new Vector3(topLeftCoordX, topLeftCoordY, bottomRightCoordZ), //4
+                new Vector3(bottomRightCoordX, topLeftCoordY, bottomRightCoordZ), //5
+                new Vector3(bottomRightCoordX, bottomRightCoordY, bottomRightCoordZ), //6
+                new Vector3(topLeftCoordX, bottomRightCoordY, bottomRightCoordZ), //7
             };
 
             Vector3[] normals = {
