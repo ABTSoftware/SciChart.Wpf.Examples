@@ -115,7 +115,7 @@
                 <s:PolarXAxis Name="xAxis"
                               AxisTitle="Polar Chart"
                               BorderBrush="#93A3C5"
-                              RotationAngle="90"
+                              RotationAngle="0"
                               BorderThickness="0,2,0,0"
                               TitleFontSize="20" />
             </s:SciChartSurface.XAxis>
