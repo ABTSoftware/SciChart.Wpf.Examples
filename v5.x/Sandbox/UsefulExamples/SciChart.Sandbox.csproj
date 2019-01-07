@@ -213,6 +213,9 @@
     <Compile Include="Examples\ChartPrinting\ChartPrintingMultiPaneChartsViewModel.cs" />
     <Compile Include="Examples\ChartPrinting\ExportToBitmapModifier.cs" />
     <Compile Include="Examples\ChartPrinting\LineChartViewModel.cs" />
+    <Compile Include="Examples\ColumnSeriesNoGaps\ColumnSeriesNoGaps.xaml.cs">
+      <DependentUpon>ColumnSeriesNoGaps.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\CompositeAnnotationsMvvm\CompositeAnnotationsMvvm.xaml.cs">
       <DependentUpon>CompositeAnnotationsMvvm.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
     <Page Include="Examples\ChartPrinting\ChartPrintingMultiPaneCharts.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\ColumnSeriesNoGaps\ColumnSeriesNoGaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\CompositeAnnotationsMvvm\CompositeAnnotationsMvvm.xaml">
       <SubType>Designer</SubType>

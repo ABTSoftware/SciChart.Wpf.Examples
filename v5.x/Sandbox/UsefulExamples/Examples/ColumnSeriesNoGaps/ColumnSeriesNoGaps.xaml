@@ -1,0 +1,23 @@
+﻿<Window x:Class="SciChart.Sandbox.Examples.ColumnSeriesNoGaps.ColumnSeriesNoGaps"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SciChart.Sandbox.Examples.ColumnSeriesNoGaps"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="ColumnSeriesNoGaps" Height="450" Width="800">
+    <Grid>
+        <s:SciChartSurface x:Name="scs">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastColumnRenderableSeries x:Name="columnSeries" DataPointWidth="1" UseUniformWidth="True"/>
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis VisibleRange="0,100"/>
+            </s:SciChartSurface.XAxis>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

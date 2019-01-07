@@ -39,7 +39,7 @@ namespace SciChart.Sandbox.Examples.ScrollbarAboveAxis
             data.Append(0,0);
             data.Append(1, 1);
             data.Append(2, 2);
-        return data;
+            return data;
         }
     }
 }
