@@ -301,6 +301,7 @@
     <Compile Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml.cs">
       <DependentUpon>TicklinesUniformGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\TouchScreenModifiers\CustomTouchModifier.cs" />
     <Compile Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml.cs">
       <DependentUpon>TouchInputSandbox.xaml</DependentUpon>
     </Compile>
