@@ -2,25 +2,16 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Management.Instrumentation;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
-using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Axes;
 using SciChart.Charting.Visuals.Events;
-using SciChart.Charting.Visuals.PaletteProviders;
-using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
-using SciChart.Core.Helpers;
-using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
 {

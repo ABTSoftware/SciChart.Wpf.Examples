@@ -14,14 +14,11 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Core.Helpers;
 using SciChart.Data.Model;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {

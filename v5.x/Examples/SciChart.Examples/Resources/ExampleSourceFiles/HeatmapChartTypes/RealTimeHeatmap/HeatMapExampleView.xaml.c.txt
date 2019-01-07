@@ -17,12 +17,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
-using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Core.Helpers;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
 {

@@ -20,10 +20,8 @@ using System.Timers;
 using System.Windows.Input;
 using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
-using SciChart.Core.Helpers;
 using SciChart.Core.Utility;
 using SciChart.Examples.ExternalDependencies.Common;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 {

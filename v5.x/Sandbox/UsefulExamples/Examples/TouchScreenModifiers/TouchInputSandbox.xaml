@@ -59,6 +59,9 @@
                     <s:LegendModifier IsEnabled="{Binding ElementName=LegendEnabledCheckbox, Path=IsChecked}" ShowLegend="True"/>
                     <s:RolloverModifier IsEnabled="{Binding ElementName=RolloverEnabledCheckbox, Path=IsChecked}" ReceiveHandledEvents="True" ShowTooltipOn="Always"/>
                     <s:TooltipModifier IsEnabled="{Binding ElementName=TooltipEnabledCheckbox, Path=IsChecked}" ReceiveHandledEvents="True" ShowTooltipOn="Always"/>
+
+                    <!-- A custom modifier -->
+                    <touchScreenModifiers:CustomTouchModifier ReceiveHandledEvents="True"/>
                 </s:ModifierGroup>
                 
             </s:SciChartSurface.ChartModifier>

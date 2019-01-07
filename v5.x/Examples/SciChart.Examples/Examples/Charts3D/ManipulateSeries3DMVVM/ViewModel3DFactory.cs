@@ -4,9 +4,7 @@ using SciChart.Charting3D.Model;
 using SciChart.Charting3D.Model.ChartSeries;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
 using SciChart.Charting3D.Visuals.RenderableSeries;
-using SciChart.Core.Helpers;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 {

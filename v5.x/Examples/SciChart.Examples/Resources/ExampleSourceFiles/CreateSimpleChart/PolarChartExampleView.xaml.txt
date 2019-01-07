@@ -67,17 +67,37 @@
                                       Style="{StaticResource FlyoutMenuButtonStyle}">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" Orientation="Vertical">
+                       
+                        <TextBlock Text="Axes Angle" />
 
-                        <TextBlock Text="YAxis Angle" />
                         <ext:FlyoutSeparator />
 
+                        <TextBlock Text="XAxis Angle" />
+
+                        <!--  Change XAxis Angle  -->
+                        <Slider Maximum="500"
+                                Minimum="-500"
+                                Value="{Binding Source={x:Reference Name=xAxis},
+                                                Path=RotationAngle,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
+
+                        <ext:FlyoutSeparator />
+
+                        <TextBlock Text="YAxis Angle" />
+                        
                         <!--  Change YAxis Angle  -->
                         <Slider Maximum="360"
-                                    Minimum="0"
-                                    Value="{Binding Source={x:Reference Name=yAxis}, Path=Angle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Minimum="0"
+                                Value="{Binding Source={x:Reference Name=yAxis}, 
+                                                Path=Angle,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
+            
+            
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface Name="sciChart"
@@ -95,6 +115,7 @@
                 <s:PolarXAxis Name="xAxis"
                               AxisTitle="Polar Chart"
                               BorderBrush="#93A3C5"
+                              RotationAngle="0"
                               BorderThickness="0,2,0,0"
                               TitleFontSize="20" />
             </s:SciChartSurface.XAxis>

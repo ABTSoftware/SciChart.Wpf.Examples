@@ -15,16 +15,11 @@
 // *************************************************************************************
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Axes.LabelProviders;
-using SciChart.Core.Helpers;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
-using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
 {

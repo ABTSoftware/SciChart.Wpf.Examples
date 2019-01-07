@@ -18,11 +18,9 @@ using System.Timers;
 using System.Windows.Input;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 {
