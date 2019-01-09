@@ -309,6 +309,7 @@
       <DependentUpon>TouchInputSandbox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\TouchScreenModifiers\TouchInputSandboxViewModel.cs" />
+    <Compile Include="Examples\TruePolar\TruePolarChart.xaml.cs" />
     <Compile Include="Examples\YAxisSameZeroLine\YAxisSameZeroLine.xaml.cs">
       <DependentUpon>YAxisSameZeroLine.xaml</DependentUpon>
     </Compile>
@@ -487,6 +488,10 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Examples\ShadowsOn3DChart\Bottom3D.csv" />
+    <Page Include="Examples\TruePolar\TruePolarChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
