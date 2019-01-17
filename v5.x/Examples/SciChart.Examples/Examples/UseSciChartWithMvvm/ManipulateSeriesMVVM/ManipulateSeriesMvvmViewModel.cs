@@ -154,7 +154,10 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
 
         private void ZoomExtents()
         {
-            ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
+            _viewportManager.BeginInvoke(() =>
+            {
+                ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
+            });
         }
 
         private void FillSeriesTypes()
