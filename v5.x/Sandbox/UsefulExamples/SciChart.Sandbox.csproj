@@ -267,6 +267,10 @@
     <Compile Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml.cs">
       <DependentUpon>MultiLineDateTimeAxisLabels.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\Plane3DAnnotation\Plane3DAnnotation.xaml.cs">
+      <DependentUpon>Plane3DAnnotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Plane3DAnnotation\VerticalPlaneGeometry.cs" />
     <Compile Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml.cs">
       <DependentUpon>ResamplingOfGridDataSeries3D.xaml</DependentUpon>
     </Compile>
@@ -384,6 +388,10 @@
     <Page Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\Plane3DAnnotation\Plane3DAnnotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml">
       <SubType>Designer</SubType>
