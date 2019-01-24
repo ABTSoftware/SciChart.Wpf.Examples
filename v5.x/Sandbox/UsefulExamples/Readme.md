@@ -62,6 +62,10 @@ Demonstrates a complex customized Legend via LegendItemTemplate in SciChart WPF 
 
 Demonstrates how to create a CustomRenderableSeries using the MVVM API in SciChart WPF Charts
 
+### Hit-Test to Add Annotations on a Chart
+
+Demonstrates how to use the Hit-Test API to add VerticalLineAnnotations to a chart 
+
 ### Implicit Styles
 
 Demonstrates 2D SciChart WPF Charts styled using Implicit Styles
