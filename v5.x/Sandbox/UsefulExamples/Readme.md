@@ -60,7 +60,11 @@ Demonstrates a complex customized Legend via LegendItemTemplate in SciChart WPF 
 
 ### Custom Series MVVM Example
 
-Demonstrates how to create a CustomRenderableSeries using the MVVM API in SciChart WPF Charts
+Demonstrates how to create a CustomRenderableSeries using the MVVM API in SciChart WPF 
+
+### Hit-Test and get Point 3D
+
+Demonstrates how to use the Hit-Test 3D API to retrieve a Point 3D by mouse click
 
 ### Hit-Test to Add Annotations on a Chart
 

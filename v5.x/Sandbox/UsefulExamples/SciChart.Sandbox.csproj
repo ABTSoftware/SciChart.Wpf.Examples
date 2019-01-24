@@ -251,6 +251,9 @@
       <DependentUpon>DoubleAxisAsDateTimeAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\DoubleAxisAsDateTimeAxis\OADateLabelProvider.cs" />
+    <Compile Include="Examples\HitTestSandbox\HitTestGetPoint3D.xaml.cs">
+      <DependentUpon>HitTestGetPoint3D.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\HitTestSandbox\HitTestToAddAnnotations.xaml.cs">
       <DependentUpon>HitTestToAddAnnotations.xaml</DependentUpon>
     </Compile>
@@ -377,6 +380,10 @@
     <Page Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\HitTestSandbox\HitTestGetPoint3D.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\HitTestSandbox\HitTestToAddAnnotations.xaml">
       <SubType>Designer</SubType>
