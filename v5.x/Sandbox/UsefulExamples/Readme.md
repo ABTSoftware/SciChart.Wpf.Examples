@@ -62,6 +62,10 @@ Demonstrates a complex customized Legend via LegendItemTemplate in SciChart WPF 
 
 Demonstrates how to create a CustomRenderableSeries using the MVVM API in SciChart WPF 
 
+### Custom CompositeAnnotation Example
+
+Demonstrates how to create a CustomCompositeAnnotation in SciChart WPF
+
 ### Hit-Test and get Point 3D
 
 Demonstrates how to use the Hit-Test 3D API to retrieve a Point 3D by mouse click
