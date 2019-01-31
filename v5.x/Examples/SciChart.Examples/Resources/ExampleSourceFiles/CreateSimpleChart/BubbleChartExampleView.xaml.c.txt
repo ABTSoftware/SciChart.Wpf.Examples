@@ -17,7 +17,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.CreateSimpleChart
@@ -48,7 +50,7 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
             // XyzDataSeries is shared across two RenderableSeries
             //  - FastLineRenderableSeries chooses X,Y value to draw
             //  - FastBubbleRenderableSeries chooses X,Y value for position, Z for size
-            lineSeries.DataSeries = dataSeries;
+            lineSeries.DataSeries = dataSeries as IXyzDataSeries;
             bubbleSeries.DataSeries = dataSeries;
 
             sciChart.ZoomExtents();

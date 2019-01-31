@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -41,6 +42,7 @@
 
                 <!-- Column Series -->
                 <s:FastColumnRenderableSeries x:Name="renderableColumnSeries" Stroke="OrangeRed">
+                    
                     <s:FastColumnRenderableSeries.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Offset="0" Color="#FFFF867B" />
@@ -49,26 +51,40 @@
                         </LinearGradientBrush>
 
                     </s:FastColumnRenderableSeries.Fill>
+                    <s:FastColumnRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastColumnRenderableSeries.SeriesAnimation>
+                    
                 </s:FastColumnRenderableSeries>
 
                 <!-- Mountain Series -->
                 <s:FastMountainRenderableSeries x:Name="renderableMountainSeries"
-                                                       Fill="#33FFFF00"
-                                                       Stroke="#FFFF00" />
+                                                Fill="#33FFFF00"
+                                                Stroke="#FFFF00">
+                    <s:FastMountainRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastMountainRenderableSeries.SeriesAnimation>
+                </s:FastMountainRenderableSeries>
 
                 <!-- Line Series -->
                 <s:FastLineRenderableSeries x:Name="renderableLineSeries"
-                                                   Stroke="OrangeRed"
-                                                   StrokeDashArray="2 2 9 2">
+                                            Stroke="OrangeRed"
+                                            StrokeDashArray="2 2 9 2">
 
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="11"
-                                                     Height="11"
-                                                     Fill="Red"
-                                                     Stroke="Lavender"
-                                                     StrokeThickness="2" />
+                                              Height="11"
+                                              Fill="Red"
+                                              Stroke="Lavender"
+                                              StrokeThickness="2" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                    
                 </s:FastLineRenderableSeries>
+                
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

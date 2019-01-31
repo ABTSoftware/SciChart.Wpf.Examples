@@ -16,7 +16,9 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 

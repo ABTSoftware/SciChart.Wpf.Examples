@@ -24,6 +24,7 @@ using SciChart.Examples.ExternalDependencies.Data;
 using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 
 namespace SciChart.Examples.Examples.FiltersAPI
 {
@@ -37,7 +38,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
         public FiltersAPIExample()
         {
             InitializeComponent();
-            
+
             OnUpdatedData(1.0d, 0.01d);
 
             var filteredDataLinearTrendline = _originalData.ToLinearTrendline();
@@ -47,6 +48,15 @@ namespace SciChart.Examples.Examples.FiltersAPI
             var filteredDataSpline = _originalData.ToSpline(5);
             var filteredDataCustom = new CustomFilter(_originalData);
 
+            var sweepAnimation1 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation2 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation3 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation4 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation5 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation6 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation7 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+
+
             _originalData.SeriesName = "Original Data";
             filteredDataLinearTrendline.SeriesName = "Linear Trendline";
             filteredDataPolynomialTrendline.SeriesName = "Polynomial (3rd Order)";
@@ -55,13 +65,26 @@ namespace SciChart.Examples.Examples.FiltersAPI
             filteredDataSpline.SeriesName = "Spline, Tension=5";
             filteredDataCustom.FilteredDataSeries.SeriesName = "Custom Filter";
 
-            sciChart.RenderableSeries.Add(new XyScatterRenderableSeries() { DataSeries = _originalData, Stroke=Colors.Red, PointMarker = new EllipsePointMarker() { Fill = Colors.Red, Stroke=Colors.Red}});
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataLinearTrendline, StrokeThickness = 2, Stroke = Colors.GreenYellow });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataPolynomialTrendline, StrokeThickness = 2, Stroke = Colors.Yellow });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataScale, StrokeThickness = 2, Stroke = Colors.DeepSkyBlue });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataSpline, StrokeThickness = 1, Stroke = Colors.DeepSkyBlue, Opacity=0.5 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataOffset, StrokeThickness = 2, Stroke = Color.FromArgb(0x77, 0xFF, 0x33, 0x33) });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()  { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Colors.MediumPurple });
+            sciChart.RenderableSeries.Add(new XyScatterRenderableSeries() { DataSeries = _originalData, Stroke = Colors.Red, PointMarker = new EllipsePointMarker() { Fill = Colors.Red, Stroke = Colors.Red }, SeriesAnimation = sweepAnimation1 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataLinearTrendline, StrokeThickness = 2, Stroke = Colors.GreenYellow, SeriesAnimation = sweepAnimation2 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataPolynomialTrendline, StrokeThickness = 2, Stroke = Colors.Yellow, SeriesAnimation = sweepAnimation3 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataScale, StrokeThickness = 2, Stroke = Colors.DeepSkyBlue, SeriesAnimation = sweepAnimation4 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataSpline, StrokeThickness = 1, Stroke = Colors.DeepSkyBlue, Opacity = 0.5, SeriesAnimation = sweepAnimation5 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataOffset, StrokeThickness = 2, Stroke = Color.FromArgb(0x77, 0xFF, 0x33, 0x33), SeriesAnimation = sweepAnimation6 });
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Colors.MediumPurple, SeriesAnimation = sweepAnimation7 });
+
+            sweepAnimation1.StartAnimation();
+            sweepAnimation2.StartAnimation();
+            sweepAnimation3.StartAnimation();
+            sweepAnimation4.StartAnimation();
+            sweepAnimation5.StartAnimation();
+            sweepAnimation6.StartAnimation();
+            sweepAnimation7.StartAnimation();
+        }
+
+        private void FiltersAPIExample_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void OnUpdatedData(double randomness, double curviness)
@@ -73,7 +96,7 @@ namespace SciChart.Examples.Examples.FiltersAPI
 
         private DoubleSeries CreateSomeScatterData(double randomness, double curviness)
         {
-            var doubleSeries = new DoubleSeries();            
+            var doubleSeries = new DoubleSeries();
             Random r = new Random(0);
             const double c = 0;
             const double m = 0.02;
@@ -84,8 +107,8 @@ namespace SciChart.Examples.Examples.FiltersAPI
             // this will be used to apply filters such as Trendline, Polynomial, Scale, Offset etc... 
             for (int x = 0; x < 200; x++)
             {
-                double y = (m * x + c + (r.NextDouble() * randomness)) * x*(1+ curviness);
-                doubleSeries.Add(new XYPoint{X = x, Y = y});
+                double y = (m * x + c + (r.NextDouble() * randomness)) * x * (1 + curviness);
+                doubleSeries.Add(new XYPoint { X = x, Y = y });
             }
 
             return doubleSeries;

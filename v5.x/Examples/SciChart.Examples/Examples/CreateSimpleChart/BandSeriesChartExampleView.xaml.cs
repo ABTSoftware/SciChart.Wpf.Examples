@@ -13,9 +13,14 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Data;
 

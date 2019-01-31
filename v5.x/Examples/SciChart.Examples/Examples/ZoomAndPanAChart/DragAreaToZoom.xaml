@@ -6,6 +6,7 @@
              Loaded="DragAreaToZoom_Loaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -39,11 +40,19 @@
                 <s:FastMountainRenderableSeries x:Name="mountainSeries" 
                                                     Fill="#771964FF"
                                                     Stroke="#FF0944CF"
-                                                    YAxisId="PrimaryAxis" />
+                                                    YAxisId="PrimaryAxis">
+                    <s:FastMountainRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastMountainRenderableSeries.SeriesAnimation>
+                </s:FastMountainRenderableSeries>
                 <s:FastLineRenderableSeries x:Name ="lineSeries" 
                                                 Stroke="#FF279B27"
                                                 StrokeThickness="2"
-                                                YAxisId="SecondaryAxis" />
+                                                YAxisId="SecondaryAxis">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

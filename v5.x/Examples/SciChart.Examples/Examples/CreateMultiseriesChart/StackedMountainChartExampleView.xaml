@@ -5,6 +5,7 @@
              xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -34,14 +35,25 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
+                
                 <s:StackedMountainRenderableSeries x:Name="mountainSeries1"
-                                                          Fill="{StaticResource chartFill0}"
-                                                          Stroke="#EEE"
-                                                          StrokeThickness="2" />
+                                                   Fill="{StaticResource chartFill0}"
+                                                   Stroke="#EEE"
+                                                   StrokeThickness="2">
+                    <s:StackedMountainRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:StackedMountainRenderableSeries.SeriesAnimation>
+                </s:StackedMountainRenderableSeries>
+                
                 <s:StackedMountainRenderableSeries x:Name="mountainSeries2"
-                                                          Fill="{StaticResource chartFill1}"
-                                                          Stroke="#EEE"
-                                                          StrokeThickness="2" />
+                                                   Fill="{StaticResource chartFill1}"
+                                                   Stroke="#EEE"
+                                                   StrokeThickness="2">
+                    <s:StackedMountainRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:StackedMountainRenderableSeries.SeriesAnimation>
+                </s:StackedMountainRenderableSeries>
+                
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->
@@ -52,8 +64,8 @@
             <!--  Create a Y Axis with GrowBy  -->
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis AxisTitle="Value"
-                                      DrawMajorBands="True"
-                                      GrowBy="0,0.1" />
+                               DrawMajorBands="True"
+                               GrowBy="0,0.1" />
             </s:SciChartSurface.YAxis>
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>

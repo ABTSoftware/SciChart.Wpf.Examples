@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -41,18 +42,37 @@
 
                 <!--  Line and Error series are bound to the same (first) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
-                <s:FastErrorBarsRenderableSeries DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}" DataSeries="{Binding DataSeries0}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}"/>
+                <s:FastErrorBarsRenderableSeries x:Name="errorSeries1"
+                                                 DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}"
+                                                 DataSeries="{Binding DataSeries0}"
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+                    <s:FastErrorBarsRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastErrorBarsRenderableSeries.SeriesAnimation>
+                </s:FastErrorBarsRenderableSeries>
+                
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5"
                                               Height="5"
                                               Fill="White" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
                 <!--  Scatter and Error series are bound to the same (second) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
-                <s:FastErrorBarsRenderableSeries DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}" DataSeries="{Binding DataSeries1}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}"/>
+                <s:FastErrorBarsRenderableSeries x:Name="errorSeries2"
+                                                 DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}"
+                                                 DataSeries="{Binding DataSeries1}"
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+                    <s:FastErrorBarsRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastErrorBarsRenderableSeries.SeriesAnimation>
+                </s:FastErrorBarsRenderableSeries>
+                
                 <s:XyScatterRenderableSeries DataSeries="{Binding DataSeries1}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
@@ -60,6 +80,9 @@
                                               Fill="Transparent"
                                               Stroke="White" />
                     </s:XyScatterRenderableSeries.PointMarker>
+                    <s:XyScatterRenderableSeries.SeriesAnimation>
+                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:XyScatterRenderableSeries.SeriesAnimation>
                 </s:XyScatterRenderableSeries>
 
             </s:SciChartSurface.RenderableSeries>

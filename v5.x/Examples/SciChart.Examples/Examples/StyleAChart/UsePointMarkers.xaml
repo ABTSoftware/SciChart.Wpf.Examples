@@ -5,6 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              Loaded="UsePointMarkers_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -103,6 +104,9 @@
                                                                         Path=Value}" />
                         
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries2"
                                             Stroke="Red"
@@ -117,6 +121,9 @@
                                              StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                        Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries3"
                                             Stroke="Yellow"
@@ -131,6 +138,9 @@
                                                StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                          Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries4"
                                             Stroke="Magenta"
@@ -144,6 +154,9 @@
                                             StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                       Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries5"
                                             Stroke="Wheat"
@@ -151,6 +164,9 @@
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:SpritePointMarker PointMarkerTemplate="{StaticResource AnyWpfControlTemplateCanGoHere}"/>
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 

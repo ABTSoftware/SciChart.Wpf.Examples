@@ -13,7 +13,11 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {

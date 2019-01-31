@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -54,47 +55,91 @@
                                                  DataPointWidth="0.9"
                                                  Fill="#3399ff"
                                                  Stroke="#3399ff"
-                                                 StackedGroupId="China" />
+                                                 StackedGroupId="China">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="IndiaSeries"
                                                  Fill="#014358"
                                                  Stroke="#014358"
-                                                 StackedGroupId="India" />
+                                                 StackedGroupId="India">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="USASeries"
                                                  Fill="#1f8a71"
                                                  Stroke="#1f8a71"
-                                                 StackedGroupId="USA" />
+                                                 StackedGroupId="USA">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="IndonesiaSeries"
                                                  Fill="#bdd63b"
                                                  Stroke="#bdd63b"
-                                                 StackedGroupId="Indonesia" />
+                                                 StackedGroupId="Indonesia">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="BrazilSeries"
                                                  Fill="#ffe00b"
                                                  Stroke="#ffe00b"
-                                                 StackedGroupId="Brazil" />
+                                                 StackedGroupId="Brazil">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="PakistanSeries"
                                                  Fill="#f27421"
                                                  Stroke="#f27421"
-                                                 StackedGroupId="Pakistan" />
+                                                 StackedGroupId="Pakistan">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="NigeriaSeries"
                                                  Fill="#bb0000"
                                                  Stroke="#bb0000"
-                                                 StackedGroupId="Nigeria" />
+                                                 StackedGroupId="Nigeria">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="BangladeshSeries"
                                                  Fill="#550033"
                                                  Stroke="#550033"
-                                                 StackedGroupId="BangladeshSeries" />
+                                                 StackedGroupId="BangladeshSeries">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="RussiaSeries"
                                                  Fill="#339933"
                                                  Stroke="#339933"
-                                                 StackedGroupId="Russia" />
+                                                 StackedGroupId="Russia">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="JapanSeries"
                                                  Fill="#00aba9"
                                                  Stroke="#00aba9"
-                                                 StackedGroupId="Japan" />
+                                                 StackedGroupId="Japan">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="RestOfTheWorldSeries"
                                                  Fill="#560068"
                                                  Stroke="#560068"
-                                                 StackedGroupId="RestOfTheWorld" />
+                                                 StackedGroupId="RestOfTheWorld">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->
