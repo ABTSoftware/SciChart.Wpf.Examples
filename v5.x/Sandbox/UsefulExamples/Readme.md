@@ -106,6 +106,10 @@ Demonstrates how to place a scrollbar above an axis in a SciChart WPF Chart
 
 Demonstrates a realtime scrolling strip chart in WPF using SciChart 
 
+### Strings on XAxis 
+
+Demonstrates how to put string labels on the XAxis of a WPF Chart using the LabelProvider feature in SciChart
+
 ### Sweeping ECG Trace
 
 Demonstrates a realtime SciChart WPF Chart with a sweeping ECG trace, which starts on the left and wraps around when reaching the right of the chart
