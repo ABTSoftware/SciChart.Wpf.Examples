@@ -37,9 +37,9 @@
                                                Fill="{StaticResource BoxFill}"
                                                Stroke="SteelBlue">
                     <s:FastBoxPlotRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:5" ZeroLine="0">
+                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="0">
                             <animations:ScaleAnimation.EasingFunction>
-                                <BounceEase Bounces="2" Bounciness="2" EasingMode="EaseInOut"/>
+                                <ElasticEase EasingMode="EaseOut"/>
                             </animations:ScaleAnimation.EasingFunction>
                         </animations:ScaleAnimation>
                     </s:FastBoxPlotRenderableSeries.SeriesAnimation>   

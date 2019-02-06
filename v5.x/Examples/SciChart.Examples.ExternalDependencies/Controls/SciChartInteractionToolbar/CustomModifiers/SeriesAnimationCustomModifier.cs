@@ -19,22 +19,22 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         }
 
         public static readonly DependencyProperty FadeAnimationCommandProperty = DependencyProperty
-            .Register(nameof(FadeAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register("FadeAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ScaleAnimationCommandProperty = DependencyProperty
-            .Register(nameof(ScaleAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register("ScaleAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty SweepAnimationCommandProperty = DependencyProperty
-            .Register(nameof(SweepAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register("SweepAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty WaveAnimationCommandProperty = DependencyProperty
-            .Register(nameof(WaveAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register("WaveAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty StartAnimationCommandProperty =
-            DependencyProperty.Register(nameof(StartAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            DependencyProperty.Register("StartAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty StopAnimationCommandProperty =
-            DependencyProperty.Register(nameof(StopAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            DependencyProperty.Register("StopAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public ICommand StartAnimationCommand
         {
@@ -79,7 +79,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             SweepAnimationCommand = new ActionCommand(() => { SweepAnimation(); });
             WaveAnimationCommand = new ActionCommand(() => { WaveAnimation(); });
 
-            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); });
+            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); }); //a?.StartAnimation()
             StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StopAnimation()); });
         }
 
