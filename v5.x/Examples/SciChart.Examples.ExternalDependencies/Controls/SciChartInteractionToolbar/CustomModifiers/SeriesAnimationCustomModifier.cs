@@ -79,7 +79,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             SweepAnimationCommand = new ActionCommand(() => { SweepAnimation(); });
             WaveAnimationCommand = new ActionCommand(() => { WaveAnimation(); });
 
-            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); }); //a?.StartAnimation()
+            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); });
             StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StopAnimation()); });
         }
 

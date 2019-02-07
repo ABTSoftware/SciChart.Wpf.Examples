@@ -54,58 +54,58 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             {
                 switch (mod.Modifier.ModifierName)
                 {
-                    case nameof(RolloverModifier):
+                    case "RolloverModifier":
                         return RolloverModifierTemplate;
 
-                    case nameof(MouseWheelZoomModifier):
+                    case "MouseWheelZoomModifier":
                         return MouseWheelZoomModifierTemplate;
 
-                    case nameof(TooltipModifier):
+                    case "TooltipModifier":
                         return TooltipModifierTemplate;
 
-                    case nameof(SeriesSelectionModifier):
+                    case "SeriesSelectionModifier":
                         return SeriesSelectionModifierTemplate;
 
-                    case nameof(LegendModifier):
+                    case "LegendModifier":
                         return LegendModifierTemplate;
 
-                    case nameof(CursorModifier):
+                    case "CursorModifier":
                         return CursorModifierTemplate;
 
-                    case nameof(CustomAnnotationCreationModifier):
+                    case "CustomAnnotationCreationModifier":
                         return AnnotationCreationModifierTemplate;
 
-                    case nameof(ZoomPanModifier):
+                    case "ZoomPanModifier":
                         return ZoomPanModifierTemplate;
 
-                    case nameof(YAxisDragModifier):
+                    case "YAxisDragModifier":
                         return EmptyTemplate;
 
-                    case nameof(XAxisDragModifier):
+                    case "XAxisDragModifier":
                         return EmptyTemplate;
 
-                    case nameof(ZoomExtentsModifier):
+                    case "ZoomExtentsModifier":
                         return ZoomExtentsModifierTemplate;
 
-                    case nameof(CustomFlipModifier):
+                    case "CustomFlipModifier":
                         return FlipModifierTemplate;
 
-                    case nameof(CustomThemeChangeModifier):
+                    case "CustomThemeChangeModifier":
                         return ThemeModifierTemplate;
 
-                    case nameof(CustomRotateChartModifier):
+                    case "CustomRotateChartModifier":
                         return RotateChartModifierTemplate;
 
-                    case nameof(RubberBandXyZoomModifier):
+                    case "RubberBandXyZoomModifier":
                         return RubberBandXyZoomModifierTemplate;
 
-                    case nameof(DataPointSelectionModifier):
+                    case "DataPointSelectionModifier":
                         return PointMarkersModifierTemplate;
 
-                    case nameof(CustomExportModifier):
+                    case "CustomExportModifier":
                         return ExportModifierTemplate;
 
-                    case nameof(SeriesAnimationCustomModifier):
+                    case "SeriesAnimationCustomModifier":
                         return AnimationsModifierTemplate;
 
                     default:
