@@ -79,8 +79,21 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             SweepAnimationCommand = new ActionCommand(() => { SweepAnimation(); });
             WaveAnimationCommand = new ActionCommand(() => { WaveAnimation(); });
 
-            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); });
-            StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StopAnimation()); });
+            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a =>
+            {
+                if (a != null)
+                {
+                    a.StartAnimation();
+                }});
+            });
+
+            StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a =>
+            {
+                if (a != null)
+                {
+                    a.StopAnimation();
+                }});
+            });
         }
 
         private void ProcessAnimation(Action<ISeriesAnimation> doAction)
@@ -111,8 +124,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries series)
+                if (s is BaseRenderableSeries)
                 {
+                    var series = s as BaseRenderableSeries;
                     var trans = new ScaleAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
@@ -132,8 +146,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries series)
+                if (s is BaseRenderableSeries)
                 {
+                    var series = s as BaseRenderableSeries;
                     var trans = new SweepAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
@@ -148,8 +163,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries series)
+                if (s is BaseRenderableSeries)
                 {
+                    var series = s as BaseRenderableSeries;
                     var trans = new WaveAnimation();
                     trans.Duration = TimeSpan.FromSeconds(2);
                     trans.AnimationDelay = TimeSpan.FromSeconds(2);
