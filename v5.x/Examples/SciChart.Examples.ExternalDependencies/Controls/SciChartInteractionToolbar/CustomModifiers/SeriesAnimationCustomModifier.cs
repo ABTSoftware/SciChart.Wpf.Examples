@@ -108,8 +108,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries series)
+                if (s is BaseRenderableSeries)
                 {
+                    var series = s as BaseRenderableSeries;
                     var trans = new FadeAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
