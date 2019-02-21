@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                     
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -200,7 +199,7 @@
                                             Stroke="SteelBlue"
                                             YAxisId="PrimaryAxisId">
                 <s:FastMountainRenderableSeries.SeriesAnimation>
-                    <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                 </s:FastMountainRenderableSeries.SeriesAnimation>
             </s:FastMountainRenderableSeries>
 
@@ -211,7 +210,7 @@
                                                StrokeUp="Green"
                                                YAxisId="PrimaryAxisId">
                 <s:FastCandlestickRenderableSeries.SeriesAnimation>
-                    <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                 </s:FastCandlestickRenderableSeries.SeriesAnimation>
             </s:FastCandlestickRenderableSeries>
 
@@ -220,7 +219,7 @@
                                         StrokeThickness="3"
                                         YAxisId="PrimaryAxisId">
                 <s:FastLineRenderableSeries.SeriesAnimation>
-                    <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                 </s:FastLineRenderableSeries.SeriesAnimation>
             </s:FastLineRenderableSeries>
 
@@ -229,7 +228,7 @@
                                           Stroke="DarkOrange"
                                           YAxisId="SecondaryAxisId">
                 <s:FastColumnRenderableSeries.SeriesAnimation>
-                    <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
                 </s:FastColumnRenderableSeries.SeriesAnimation>
             </s:FastColumnRenderableSeries>
             

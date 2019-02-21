@@ -30,21 +30,21 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D GrowBy="0.2,0.2" AxisTitle="X"/>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" AxisTitle="X" AxisTitleOffset="60"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D GrowBy="0.1,0.1" AxisTitle="Y"/>
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" AxisTitle="Y" AxisTitleOffset="60"/>
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-9,9" AxisTitle="Z" />
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-9,9" AxisTitle="Z" AxisTitleOffset="60"/>
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
-                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" />
                     <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" />
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" />
                     <t3D:TooltipModifier3D CrosshairMode="Lines" CrosshairPlanesFill="#33FF6600" />
                     <s3D:MouseWheelZoomModifier3D />
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"

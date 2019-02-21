@@ -4,8 +4,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -47,7 +46,7 @@
                                                  DataSeries="{Binding DataSeries0}"
                                                  StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                 </s:FastErrorBarsRenderableSeries>
                 
@@ -58,7 +57,7 @@
                                               Fill="White" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
@@ -69,7 +68,7 @@
                                                  DataSeries="{Binding DataSeries1}"
                                                  StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                 </s:FastErrorBarsRenderableSeries>
                 
@@ -81,7 +80,7 @@
                                               Stroke="White" />
                     </s:XyScatterRenderableSeries.PointMarker>
                     <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:XyScatterRenderableSeries.SeriesAnimation>
                 </s:XyScatterRenderableSeries>
 

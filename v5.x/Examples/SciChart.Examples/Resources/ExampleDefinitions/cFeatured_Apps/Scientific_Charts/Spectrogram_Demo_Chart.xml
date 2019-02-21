@@ -8,7 +8,7 @@
   <Description>
     The Spectrogram Demo showcases how to mix a 2D Line Chart showing a Fast Fourier Transform (FFT) of a waveform, and also show a Spectrogram (scrolling heatmap) of the same data.
 
-    The scrolling heatmap is achieved using a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface.html']SciChartSurface[/url] with a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries[/url] and by updating the data on a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries[/url].
+    The scrolling heatmap is achieved using a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface.html']SciChartSurface[/url] with a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries[/url] and by updating the data on a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries[/url].
 
     The result is a smooth 30FPS scrolling heatmap allowing you to visually inspect your spectrum data!
   </Description>

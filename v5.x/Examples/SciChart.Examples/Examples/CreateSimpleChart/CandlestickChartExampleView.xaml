@@ -5,8 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              Loaded="CandlestickChartExampleView_OnLoaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -45,7 +44,7 @@
                         </LinearGradientBrush>
                     </s:FastCandlestickRenderableSeries.FillDown>
                     <s:FastCandlestickRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:4"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:4"/>
                     </s:FastCandlestickRenderableSeries.SeriesAnimation>
                 </s:FastCandlestickRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

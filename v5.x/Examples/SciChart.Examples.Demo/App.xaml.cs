@@ -82,13 +82,13 @@ namespace SciChart.Examples.Demo
                 }).Catch(ex =>
                 {
                     Log.Error("Exception:\n\n{0}", ex);
-                    MessageBox.Show("Exception occurred in SciChart.Examples.Demo Startup");
+                    MessageBox.Show("Exception occurred in SciChart.Examples.Demo.\r\n. Please send log files located at %CurrentUser%\\AppData\\Local\\SciChart\\SciChart.Examples.Demo.log to support");
                 });
             }
             catch (Exception caught)
             {
                 Log.Error("Exception:\n\n{0}", caught);
-                MessageBox.Show("Exception occurred in SciChart.Examples.Demo Startup");
+                MessageBox.Show("Exception occurred in SciChart.Examples.Demo.\r\n. Please send log files located at %CurrentUser%\\AppData\\Local\\SciChart\\SciChart.Examples.Demo.log to support");
             }
         }
 

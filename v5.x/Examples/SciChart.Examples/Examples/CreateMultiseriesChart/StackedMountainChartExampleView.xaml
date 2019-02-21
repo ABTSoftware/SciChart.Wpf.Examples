@@ -4,8 +4,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -41,7 +40,7 @@
                                                    Stroke="#EEE"
                                                    StrokeThickness="2">
                     <s:StackedMountainRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:StackedMountainRenderableSeries.SeriesAnimation>
                 </s:StackedMountainRenderableSeries>
                 
@@ -50,7 +49,7 @@
                                                    Stroke="#EEE"
                                                    StrokeThickness="2">
                     <s:StackedMountainRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:StackedMountainRenderableSeries.SeriesAnimation>
                 </s:StackedMountainRenderableSeries>
                 

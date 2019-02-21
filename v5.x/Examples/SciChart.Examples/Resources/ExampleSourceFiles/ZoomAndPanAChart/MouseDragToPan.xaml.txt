@@ -4,8 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              Loaded="MouseDragToPan_Loaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -67,17 +66,17 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries Fill="#77279B27" Stroke="#FF177B17">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
                 <s:FastMountainRenderableSeries Fill="#77FF1919" Stroke="#FFDD0909">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
                 <s:FastMountainRenderableSeries Fill="#771964FF" Stroke="#FF0944CF">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

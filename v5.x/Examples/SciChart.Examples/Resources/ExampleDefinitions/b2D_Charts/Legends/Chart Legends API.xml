@@ -7,8 +7,8 @@
   <Description>
     Generates a simple line chart with a chart legend. The Legend is created as follows:
 
-    - Adding a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url] to the SciChartSurface.ChartModifier. This aggregates and exposes series data which you can bind to.
-    - Adding a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend[/url] to the chart, binding it to LegendModifier.LegendData.SeriesInfo.
+    - Adding a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url] to the SciChartSurface.ChartModifier. This aggregates and exposes series data which you can bind to.
+    - Adding a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend[/url] to the chart, binding it to LegendModifier.LegendData.SeriesInfo.
 
     [b][i]Tip![/i][/b]
 
@@ -20,8 +20,8 @@
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17219/39/scichartlegend-itemspanel-and-itemstemplate']SciChartLegend ItemsPanel and ItemsTemplate[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17244/39/tutorial---custom-legend-with-color-picker-and-custom-point-markers']Custom Legend with Color Picker and Custom Point Markers[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17249/42/seriesinfo---the-series-viewmodel-for-legends-tooltips-rollovers']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ChartLegendsExampleView.xaml.txt</string>

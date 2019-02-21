@@ -6,6 +6,7 @@
              xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -19,6 +20,20 @@
                 <Setter Property="DrawMinorGridLines" Value="False" />
                 <Setter Property="DrawMajorBands" Value="False" />
                 <Setter Property="AutoRange" Value="Never" />
+            </Style>
+
+            <system:String x:Key="XAxisId">XAxisId</system:String>
+            <system:String x:Key="YAxis0Id">Y0AxisId</system:String>
+            <system:String x:Key="YAxis1Id">Y1AxisId</system:String>
+            
+            <Style x:Key="FirstLineRenderableSeriesStyle" TargetType="s:FastLineRenderableSeriesForMvvm">
+                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"></Setter>
+                <Setter Property="YAxisId" Value="{StaticResource YAxis0Id}"></Setter>
+            </Style>
+
+            <Style x:Key="SecondLineRenderableSeriesStyle" TargetType="s:FastLineRenderableSeriesForMvvm">
+                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"></Setter>
+                <Setter Property="YAxisId" Value="{StaticResource YAxis1Id}"></Setter>
             </Style>
 
         </ResourceDictionary>
@@ -69,24 +84,20 @@
             <!--  Create an X Axis with Growby  -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis x:Name="XAxis"
-                               Id="{Binding XAxisKey.Id,
-                                            Mode=TwoWay}"
+                              Id="{StaticResource XAxisId}"
                                VisibleRange="250,1400" />
             </s:SciChartSurface.XAxis>
-
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis x:Name="YAxis0"
                                AxisAlignment="Left"
                                BorderBrush="#ff6495ed"
-                               Id="{Binding Y0AxisKey.Id,
-                                            Mode=TwoWay}"
+                               Id="{StaticResource YAxis0Id}"
                                TickTextBrush="#ff6495ed"
                                VisibleRange="-5,25" />
                 <s:NumericAxis x:Name="YAxis1"
                                AxisAlignment="Right"
                                BorderBrush="#ffff4500"
-                               Id="{Binding Y1AxisKey.Id,
-                                            Mode=TwoWay}"
+                               Id="{StaticResource YAxis1Id}"
                                TickTextBrush="#ffff4500"
                                VisibleRange="0,40" />
             </s:SciChartSurface.YAxes>
@@ -139,11 +150,11 @@
                                     <Style BasedOn="{StaticResource ConciseAxisStyle}" TargetType="s:NumericAxis" />
                                 </s:SciChartSurface.Resources>
                                 <s:SciChartSurface.XAxis>
-                                    <s:NumericAxis Id="{Binding XAxisKey.Id}" VisibleRange="{Binding XAxisRange}" />
+                                    <s:NumericAxis Id="{StaticResource XAxisId}" VisibleRange="{Binding XAxisRange}" />
                                 </s:SciChartSurface.XAxis>
                                 <s:SciChartSurface.YAxes>
-                                    <s:NumericAxis Id="{Binding Y0AxisKey.Id}" VisibleRange="{Binding Y0AxisRange}" />
-                                    <s:NumericAxis Id="{Binding Y1AxisKey.Id}" VisibleRange="{Binding Y1AxisRange}" />
+                                    <s:NumericAxis Id="{StaticResource YAxis0Id}" VisibleRange="{Binding Y0AxisRange}" />
+                                    <s:NumericAxis Id="{StaticResource YAxis1Id}" VisibleRange="{Binding Y1AxisRange}" />
                                 </s:SciChartSurface.YAxes>
                             </s:SciChartSurface>
                         </Border>

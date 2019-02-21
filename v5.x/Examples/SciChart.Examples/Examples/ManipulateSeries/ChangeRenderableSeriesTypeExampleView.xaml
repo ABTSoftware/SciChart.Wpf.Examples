@@ -131,7 +131,7 @@
 
                         <Image Width="32"
                                Height="32"
-                               Source="/SciChart.Examples;component/Resources/Images/select_button.png"
+                               Source="/SciChart.Examples;component/Resources/Images/pointbutton_icon.png"
                                Stretch="None" />
 
                     </StackPanel>

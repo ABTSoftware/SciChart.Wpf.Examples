@@ -172,7 +172,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
                     trans.AnimationDelay = TimeSpan.FromSeconds(2);
                     if (s.DataSeries != null)
                     {
-                        trans.ZeroLine = (double) series.DataSeries.YMin;
+                        trans.ZeroLine = series.DataSeries.YMin.ToDouble();
                     }
 
                     series.SeriesAnimation = trans;

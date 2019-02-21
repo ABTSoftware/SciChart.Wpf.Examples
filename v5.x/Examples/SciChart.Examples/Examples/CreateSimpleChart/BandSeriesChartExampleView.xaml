@@ -4,8 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              Loaded="BandSeriesChartExampleView_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -47,7 +46,7 @@
                                             Stroke="#FFFF1919"
                                             StrokeY1="#FF279B27">
                     <s:FastBandRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2"/>
                     </s:FastBandRenderableSeries.SeriesAnimation>
                 </s:FastBandRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

@@ -4,8 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              Loaded="MouseDragToPanXOrY_Loaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -79,14 +78,14 @@
                                                 Stroke="#FF0944CF"
                                                 YAxisId="SecondaryAxis">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
                 <s:FastLineRenderableSeries Stroke="#FF279B27"
                                             StrokeThickness="2"
                                             YAxisId="PrimaryAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

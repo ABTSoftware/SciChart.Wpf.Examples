@@ -4,8 +4,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -52,7 +51,7 @@
 
                     </s:FastColumnRenderableSeries.Fill>
                     <s:FastColumnRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastColumnRenderableSeries.SeriesAnimation>
                     
                 </s:FastColumnRenderableSeries>
@@ -62,7 +61,7 @@
                                                 Fill="#33FFFF00"
                                                 Stroke="#FFFF00">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
 
@@ -80,7 +79,7 @@
                     </s:FastLineRenderableSeries.PointMarker>
                     
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                     
                 </s:FastLineRenderableSeries>

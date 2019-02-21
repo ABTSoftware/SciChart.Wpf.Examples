@@ -16,7 +16,7 @@
     - FastColumnRenderableSeries
     - XyScatterRenderableSeries
 
-    This is achieved by creating a class which implements [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] (for line series / outlines), [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] (for fills) and/or [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] for point-markers. A single class can implement more than one interface in order to provide coloring / paletting to different series types. 
+    This is achieved by creating a class which implements [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] (for line series / outlines), [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] (for fills) and/or [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] for point-markers. A single class can implement more than one interface in order to provide coloring / paletting to different series types. 
 
     [b][i]Tip![/i][/b]
 
@@ -25,10 +25,10 @@
     [b]Documentation Links[/b]
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17187/28/change-series-colour-dynamically-paletteprovider']Change Series Colour Dynamically (PaletteProvider)[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] Interface
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] interface
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] interface
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~PaletteProvider.html']BaseRenderableSeries.PaletteProvider Property[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] Interface
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] interface
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] interface
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~PaletteProvider.html']BaseRenderableSeries.PaletteProvider Property[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/StyleAChart/UsePaletteProvider/UsePaletteProvider.xaml.txt</string>

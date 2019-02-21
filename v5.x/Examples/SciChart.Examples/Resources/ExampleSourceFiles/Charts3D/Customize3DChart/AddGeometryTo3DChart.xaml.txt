@@ -24,7 +24,6 @@
                 <s3D:ModifierGroup3D>
                     <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" ExecuteWhen="Shift"/>
                     <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton"/>
-                    <s3D:VertexSelectionModifier3D ExecuteOn="MouseLeftButton" ExecuteWhen="Ctrl"/>
                     <s3D:MouseWheelZoomModifier3D/>
                     <s3D:ZoomExtentsModifier3D ResetPosition="-400,200,400" ResetTarget="0,50,0"  AnimateDurationMs="500"/>
                 </s3D:ModifierGroup3D>

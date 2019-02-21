@@ -31,8 +31,8 @@
 
     - [url='http://www.scichart.com/questions/question/ohlcdataseries-append-or-update-latest-bar']FAQ: OhlcDataSeries Append or Update latest bar[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17223/37/how-to-have-a-fixed-scrolling-time-range-on-the-xaxis-that-works-with-modifiers']How to have a Fixed Scrolling Time-Range on the XAxis that works with Modifiers[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
   </Description>
   <CodeFiles>

@@ -5,14 +5,14 @@
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates StrokeThickness, StrokeDashArray and PointMarker properties of a LineSeries which can be used to style a dashed or solid line with triangle markers</ToolTipDescription>
   <Description>
-    Demonstrates the FastLineRenderableSeries [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray[/url], StrokeThickness and PointMarker properties which can be used to style a dashed or solid line with triangle markers.
+    Demonstrates the FastLineRenderableSeries [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray[/url], StrokeThickness and PointMarker properties which can be used to style a dashed or solid line with triangle markers.
 
-    The [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray property[/url] accepts a double array similar to the [url='https://msdn.microsoft.com/en-us/library/bb980148(v=vs.95).aspx']WPF StrokeDashArray property[/url], and defines the length and spacing of dash strokes.
+    The [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray property[/url] accepts a double array similar to the [url='https://msdn.microsoft.com/en-us/library/bb980148(v=vs.95).aspx']WPF StrokeDashArray property[/url], and defines the length and spacing of dash strokes.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries.html']FastLineRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray Property[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries.html']FastLineRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries~StrokeDashArray.html']StrokeDashArray Property[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17175/28/Stroke-and-strokethickness']Stroke and StrokeThickness[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
   </Description>

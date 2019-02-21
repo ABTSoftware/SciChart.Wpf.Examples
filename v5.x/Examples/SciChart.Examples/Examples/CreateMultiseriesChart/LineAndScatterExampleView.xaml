@@ -4,8 +4,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -32,14 +31,14 @@
                         <s:EllipsePointMarker Width="9" Height="9"  Fill="#AAFFFFFF" Stroke="SteelBlue" StrokeThickness="2" ></s:EllipsePointMarker>
                     </s:XyScatterRenderableSeries.PointMarker>
                     <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:XyScatterRenderableSeries.SeriesAnimation>
                 </s:XyScatterRenderableSeries>
 
                 <!-- Series1 is a Line Series -->
                 <s:FastLineRenderableSeries DataSeries="{Binding FittedData}" Stroke="#279B27" StrokeThickness="1" >
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 

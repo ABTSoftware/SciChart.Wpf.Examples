@@ -5,8 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              Loaded="ColumnChartExampleViewOnLoaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -41,7 +40,7 @@
                     </s:FastColumnRenderableSeries.Fill>
                     
                     <s:FastColumnRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.2" />
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.2" />
                     </s:FastColumnRenderableSeries.SeriesAnimation>
 
                 </s:FastColumnRenderableSeries>

@@ -2,13 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
                     xmlns:w="clr-namespace:SciChart.Examples.Demo.Controls.WatermarkedAutocomplete"
-                    xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors"
-                    xmlns:abt="http://schemas.abtsoftware.co.uk/presentation">
+                    xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Common.xaml"/>
         <ResourceDictionary Source="TextBox.xaml"/>
-        
     </ResourceDictionary.MergedDictionaries>
     
     <converters:ThicknessToNegativeThicknessConverter x:Key="ThicknessToNegativeThicknessConverter" />
@@ -32,8 +30,8 @@
         <Setter Property="FontSize" Value="30" />
         <Setter Property="Foreground" Value="#FFF" />
         <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource TextBoxOutlineBrush}"/>        
-        <Setter Property="BorderThickness" Value="1"/>        
+        <Setter Property="BorderBrush" Value="{StaticResource TextBoxOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ItemTemplate" Value="{StaticResource AutocompleteItemTemplate}"/>
         <Setter Property="behaviors:TextBoxHelpers.LoseFocusOnEscape" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -87,7 +85,7 @@
                                  behaviors:TextBoxHelpers.LoseFocusOnEscape="{Binding Path=(behaviors:TextBoxHelpers.LoseFocusOnEscape), RelativeSource={RelativeSource TemplatedParent}}"
                                  behaviors:TextBoxHelpers.WatermarkContentTemplate="{Binding Path=(behaviors:TextBoxHelpers.WatermarkContentTemplate), RelativeSource={RelativeSource TemplatedParent}}"
                                  MaxLength="50">
-                        </TextBox>                        
+                        </TextBox>
 
                         <Popup x:Name="Popup">
                             <Border x:Name="PopupBorder"
@@ -115,5 +113,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

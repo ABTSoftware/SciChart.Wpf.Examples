@@ -5,8 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:createSimpleChart="clr-namespace:SciChart.Examples.Examples.CreateSimpleChart"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
+             xmlns:createSimpleChart="clr-namespace:SciChart.Examples.Examples.CreateSimpleChart"             
              Loaded="LineChartExampleView_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -40,7 +39,7 @@
                                             Stroke="#FF99EE99"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:5"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:5"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

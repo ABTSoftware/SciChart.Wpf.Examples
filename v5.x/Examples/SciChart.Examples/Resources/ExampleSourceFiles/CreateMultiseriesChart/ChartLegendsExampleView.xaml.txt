@@ -6,7 +6,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -83,7 +82,7 @@
                         <s:EllipsePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
@@ -92,7 +91,7 @@
                         <s:TrianglePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
@@ -101,7 +100,7 @@
                         <s:SquarePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 

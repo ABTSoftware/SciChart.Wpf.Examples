@@ -7,7 +7,6 @@
              Loaded="SplineChartExampleView_Loaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:animations="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.Animations;assembly=SciChart.Charting"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -49,7 +48,7 @@
                 <!-- Draw the original line -->
                 <s:FastLineRenderableSeries x:Name="LineRenderSeries" Stroke="SteelBlue" StrokeThickness="1" RolloverMarkerTemplate="{x:Null}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
@@ -58,7 +57,7 @@
                                                   IsSplineEnabled="True" UpSampleFactor="10">
 
                     <local:SplineLineRenderableSeries.SeriesAnimation>
-                        <animations:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </local:SplineLineRenderableSeries.SeriesAnimation>
                     
                     <!-- LegendMarkerTemplate is required to show a marker in the legend next to SeriesName -->

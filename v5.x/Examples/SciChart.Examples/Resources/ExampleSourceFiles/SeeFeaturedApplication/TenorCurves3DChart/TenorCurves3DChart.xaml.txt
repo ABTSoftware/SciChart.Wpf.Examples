@@ -64,17 +64,18 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D x:Name="XAx3D" VisibleRange="0,10" AxisTitle="Tenor" />
+                <s3D:NumericAxis3D x:Name="XAx3D" VisibleRange="0,10" AxisTitle="Tenor" AxisTitleOffset="60"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
                 <s3D:NumericAxis3D x:Name="YAx3D"
                                    AxisTitle="Rate (%)"
+                                   AxisTitleOffset="60"
                                    VisibleRange="0,10" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:DateTimeAxis3D x:Name="ZAx3D" DrawMajorBands="True" AxisTitle="Date" />
+                <s3D:DateTimeAxis3D x:Name="ZAx3D" DrawMajorBands="True" AxisTitle="Date" AxisTitleOffset="100"/>
             </s3D:SciChart3DSurface.ZAxis>
 
 

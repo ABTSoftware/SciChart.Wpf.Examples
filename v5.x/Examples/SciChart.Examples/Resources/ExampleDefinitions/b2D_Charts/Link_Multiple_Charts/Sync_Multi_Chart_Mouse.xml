@@ -13,9 +13,9 @@
 
     [b][i]Tips![/i][/b]
 
-    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
+    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
 
-    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
+    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
 
     [b]Documentation Links[/b]
 

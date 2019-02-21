@@ -25,8 +25,9 @@
                                 BorderBrush="#ff4d81dd"
                                 BorderThickness="2"
                                 Effect="{StaticResource DropShadowEffect}"
-                                Opacity="0.9"
-                                Padding="5">
+                                Margin="0,0,10,10"         
+                                Padding="5"
+                                Opacity="0.9">
 
                             <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
                         </Border>
@@ -43,8 +44,9 @@
                                 BorderBrush="#ffff4500"
                                 BorderThickness="2"
                                 Effect="{StaticResource DropShadowEffect}"
-                                Opacity="0.9"
-                                Padding="5">
+                                Margin="0,0,10,10"         
+                                Padding="5"
+                                Opacity="0.9">
                             <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
                         </Border>
                     </ControlTemplate>
@@ -60,8 +62,9 @@
                                 BorderBrush="#ffff4500"
                                 BorderThickness="2"
                                 Effect="{StaticResource DropShadowEffect}"
-                                Opacity="0.9"
-                                Padding="5">
+                                Margin="0,0,10,10"         
+                                Padding="5"
+                                Opacity="0.9">
                             <ItemsControl Margin="6" ItemsSource="{Binding DataContext.SeriesData.SeriesInfo, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="s:SeriesInfo">
@@ -80,7 +83,7 @@
             <Setter Property="Stroke" Value="#AAFFA500" />
         </Style>
 
-        <Style x:Key="CusorAxisLabelStyle" TargetType="s:AxisLabelControl">
+        <Style x:Key="CursorAxisLabelStyle" TargetType="s:AxisLabelControl">
             <Setter Property="Background" Value="#FFFFA500" />
             <Setter Property="Foreground" Value="White" />
         </Style>
@@ -208,9 +211,9 @@
             <s:SciChartSurface.XAxes>
                 <s:NumericAxis s:RolloverModifier.AxisLabelContainerStyle="{StaticResource AxisLabelStyle}" 
                                s:RolloverModifier.AxisLabelTemplate="{StaticResource AxisLabelTemplate}" 
-                               s:CursorModifier.AxisLabelContainerStyle="{StaticResource CusorAxisLabelStyle}"/>
+                               s:CursorModifier.AxisLabelContainerStyle="{StaticResource CursorAxisLabelStyle}"/>
             </s:SciChartSurface.XAxes>
-            
+
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis GrowBy="0.05, 0.05" />
             </s:SciChartSurface.YAxes>
