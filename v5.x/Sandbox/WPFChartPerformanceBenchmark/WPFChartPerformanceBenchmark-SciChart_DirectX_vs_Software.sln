@@ -9,13 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartProviders.Common", "Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartProviderSciChart_Trunk", "ChartProviderSciChart_Trunk\ChartProviderSciChart_Trunk.csproj", "{5F997D03-DC79-4A5F-9AE9-9C780CBB8B71}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{351628DE-2E9B-4608-ADC5-66DD58360999}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFChartPerformanceBenchmark - DirectX vs Software", "WPFChartPerformanceBenchmark_SC_DirectX_vs_Software\WPFChartPerformanceBenchmark - DirectX vs Software.csproj", "{D5EB3231-1774-4239-93AB-6D113F289343}"
 EndProject
 Global
