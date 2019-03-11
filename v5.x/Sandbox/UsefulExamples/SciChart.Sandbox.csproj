@@ -59,23 +59,23 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.2.11833\lib\net45\SciChart.Charting.dll</HintPath>
+    <Reference Include="SciChart.Charting, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Charting3D, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart3D.5.2.2.11833\lib\net45\SciChart.Charting3D.dll</HintPath>
+    <Reference Include="SciChart.Charting3D, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.5.3.0.11954\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Core, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.2.11833\lib\net45\SciChart.Core.dll</HintPath>
+    <Reference Include="SciChart.Core, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Data, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.2.11833\lib\net45\SciChart.Data.dll</HintPath>
+    <Reference Include="SciChart.Data, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.2.11833\lib\net45\SciChart.Drawing.dll</HintPath>
+    <Reference Include="SciChart.Drawing, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing.DirectX, Version=5.2.2.11833, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.DirectX.5.2.2.11833\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+    <Reference Include="SciChart.Drawing.DirectX, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.DirectX.5.3.0.11954\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
     </Reference>
     <Reference Include="SciChart.Examples.ExternalDependencies, Version=5.2.2.11833, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SciChart.ExternalDependencies.5.2.2.11833\lib\net45\SciChart.Examples.ExternalDependencies.dll</HintPath>
@@ -535,12 +535,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\SciChart.DirectX.5.2.2.11833\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.2.2.11833\build\SciChart.DirectX.targets')" />
+  <Import Project="packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\SciChart.DirectX.5.2.2.11833\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.2.2.11833\build\SciChart.DirectX.targets'))" />
+    <Error Condition="!Exists('packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
