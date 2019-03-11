@@ -66,6 +66,10 @@ Demonstrates how to create a CustomRenderableSeries using the MVVM API in SciCha
 
 Demonstrates how to create a CustomCompositeAnnotation in SciChart WPF
 
+### Eliminating Flicker in DirectX Renderer
+
+Some users report flicker when the DirectX renderer is enabled. The [published workaround here](https://www.scichart.com/questions/question/flickering-chart) is implemented in this example to show you how to do it. 
+
 ### Hit-Test and get Point 3D
 
 Demonstrates how to use the Hit-Test 3D API to retrieve a Point 3D by mouse click
@@ -121,6 +125,10 @@ Demonstrates how to shade the background of a line series in a color depending o
 ### Ticklines with Uniform Grid 
 
 Demonstrates how to have Axis Ticklines in a SciChart WPF Chart with 5mm spacing on the screen always, regardless of zoom 
+
+### Timeline Control
+
+An example showing how to create a sort of a timeline control using SciChart WPF 
 
 ### Touch Input Sandbox
 
