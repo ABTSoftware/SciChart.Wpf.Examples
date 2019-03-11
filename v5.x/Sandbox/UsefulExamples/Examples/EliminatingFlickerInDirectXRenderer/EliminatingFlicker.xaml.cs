@@ -19,7 +19,14 @@ namespace SciChart.Sandbox.Examples.EliminatingFlickerInDirectXRenderer
 {
     /// <summary>
     /// Some users report flicker when the DirectX renderer is enabled.
-    /// The [published workaround here](https://www.scichart.com/questions/question/flickering-chart) is implemented in this example to show you how to do it. 
+    /// The [published workaround here](https://www.scichart.com/questions/question/flickering-chart) is implemented in this example to show you how to do it.
+    ///
+    /// Instructions for use
+    ///
+    ///  1.) Start the example. It will start by default in software mode
+    ///  2.) use the GridSplitter to resize. Do you see flicker?
+    ///  3.) Click 'Enable DirectX' now use the grid splitter again. Does it flicker?
+    ///  4.) Finally, check the UseAlternativeFillSource and EnableForceWaitForGPU flags. This should eliminate flicker in DirectX which occurs on some PCs
     /// </summary>
     [TestCase("Eliminating Flicker in DirectX Renderer")]
     public partial class EliminatingFlicker : Window
