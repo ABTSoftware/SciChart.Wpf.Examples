@@ -59,29 +59,26 @@
       <HintPath>packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SciChart.Charting, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.0.11680\lib\net45\SciChart.Charting.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Charting, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Charting3D, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart3D.5.2.0.11680\lib\net45\SciChart.Charting3D.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Charting3D, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart3D.5.3.0.11954\lib\net45\SciChart.Charting3D.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Core, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.0.11680\lib\net45\SciChart.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Core, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Data, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.0.11680\lib\net45\SciChart.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Data, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.5.2.0.11680\lib\net45\SciChart.Drawing.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Drawing, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.5.3.0.11954\lib\net45\SciChart.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="SciChart.Drawing.DirectX, Version=5.2.0.11680, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
-      <HintPath>packages\SciChart.DirectX.5.2.0.11680\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SciChart.Drawing.DirectX, Version=5.3.0.11954, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.DirectX.5.3.0.11954\lib\net45\SciChart.Drawing.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Examples.ExternalDependencies, Version=5.2.2.11833, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SciChart.ExternalDependencies.5.2.2.11833\lib\net45\SciChart.Examples.ExternalDependencies.dll</HintPath>
     </Reference>
     <Reference Include="SciChart.Wpf.UI, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -196,9 +193,6 @@
       <DependentUpon>ChangePropertiesDynamically.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamicallyViewModel.cs" />
-    <Compile Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml.cs">
-      <DependentUpon>CreateAUniformMesh3DChart.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml.cs">
       <DependentUpon>AnimatedDataSeries.xaml</DependentUpon>
     </Compile>
@@ -225,6 +219,11 @@
       <DependentUpon>RangeXAnnotation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotationViewModel.cs" />
+    <Compile Include="Examples\CustomCompositeAnnotationExample\CompositeLineSquareAnnotation.cs" />
+    <Compile Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationExample.xaml.cs">
+      <DependentUpon>CustomCompositeAnnotationExample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationViewModel.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\CustomModifierSandbox.xaml.cs">
       <DependentUpon>CustomModifierSandbox.xaml</DependentUpon>
     </Compile>
@@ -254,6 +253,15 @@
       <DependentUpon>DoubleAxisAsDateTimeAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\DoubleAxisAsDateTimeAxis\OADateLabelProvider.cs" />
+    <Compile Include="Examples\EliminatingFlickerInDirectXRenderer\EliminatingFlicker.xaml.cs">
+      <DependentUpon>EliminatingFlicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\HitTestSandbox\HitTestGetPoint3D.xaml.cs">
+      <DependentUpon>HitTestGetPoint3D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\HitTestSandbox\HitTestToAddAnnotations.xaml.cs">
+      <DependentUpon>HitTestToAddAnnotations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ImplicitStyles\ImplicitStyles.xaml.cs">
       <DependentUpon>ImplicitStyles.xaml</DependentUpon>
     </Compile>
@@ -272,6 +280,10 @@
     <Compile Include="Examples\MultiLineDateTimeAxisLabels\MultiLineDateTimeAxisLabels.xaml.cs">
       <DependentUpon>MultiLineDateTimeAxisLabels.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\Plane3DAnnotation\Plane3DAnnotation.xaml.cs">
+      <DependentUpon>Plane3DAnnotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Plane3DAnnotation\VerticalPlaneGeometry.cs" />
     <Compile Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml.cs">
       <DependentUpon>ResamplingOfGridDataSeries3D.xaml</DependentUpon>
     </Compile>
@@ -283,11 +295,8 @@
       <DependentUpon>ScrollbarMvvmAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxisViewModel.cs" />
-    <Compile Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml.cs">
-      <DependentUpon>ShadowsOn3DChart.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Examples\ShadowsOn3DChart\ShadowsOn3DChartControl.xaml.cs">
-      <DependentUpon>ShadowsOn3DChartControl.xaml</DependentUpon>
+    <Compile Include="Examples\StringsOnXAxis\StringsOnXAxis.xaml.cs">
+      <DependentUpon>StringsOnXAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\StripChart\RelativeTimeLabelProvider.cs" />
     <Compile Include="Examples\StripChart\ScrollingStripChart.xaml.cs">
@@ -305,6 +314,9 @@
     <Compile Include="Examples\TicklinesUniformGrid\MillimeterDivisionsTickProvider.cs" />
     <Compile Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml.cs">
       <DependentUpon>TicklinesUniformGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\TimelineControl\TimeLineControl.xaml.cs">
+      <DependentUpon>TimeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\TouchScreenModifiers\CustomTouchModifier.cs" />
     <Compile Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml.cs">
@@ -330,10 +342,6 @@
     <Compile Include="_Shared\RandomWalkGenerator.cs" />
     <Compile Include="_Shared\XYPoint.cs" />
     <Page Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamically.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="Examples\3DChartDllLoadingTest\CreateAUniformMesh3DChart.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -365,6 +373,10 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationExample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Examples\CustomModifiersSandbox\CustomModifierSandbox.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -380,6 +392,18 @@
     <Page Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\EliminatingFlickerInDirectXRenderer\EliminatingFlicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\HitTestSandbox\HitTestGetPoint3D.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\HitTestSandbox\HitTestToAddAnnotations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\ImplicitStyles\ImplicitStyles.xaml">
       <SubType>Designer</SubType>
@@ -401,6 +425,10 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="Examples\Plane3DAnnotation\Plane3DAnnotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Examples\ResamplingOfGridDataSeries3D\ResamplingOfGridDataSeries3D.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -413,13 +441,9 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Examples\ShadowsOn3DChart\ShadowsOn3DChart.xaml">
+    <Page Include="Examples\StringsOnXAxis\StringsOnXAxis.xaml">
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="Examples\ShadowsOn3DChart\ShadowsOn3DChartControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\StripChart\ScrollingStripChart.xaml">
       <SubType>Designer</SubType>
@@ -436,6 +460,10 @@
     <Page Include="Examples\TicklinesUniformGrid\TicklinesUniformGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\TimelineControl\TimeLineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml">
       <SubType>Designer</SubType>
@@ -489,7 +517,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Examples\ShadowsOn3DChart\Bottom3D.csv" />
     <Page Include="Examples\TruePolar\TruePolarChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -515,13 +542,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\SciChart.DirectX.5.2.0.11680\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.2.0.11680\build\SciChart.DirectX.targets'))" />
+    <Error Condition="!Exists('packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SciChart.DirectX.5.3.0.11954\build\SciChart.DirectX.targets'))" />
   </Target>
-  <Import Project="packages\SciChart.DirectX.5.2.0.11680\build\SciChart.DirectX.targets" Condition="Exists('packages\SciChart.DirectX.5.2.0.11680\build\SciChart.DirectX.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

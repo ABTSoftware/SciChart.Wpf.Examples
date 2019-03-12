@@ -16,8 +16,8 @@
     [b]Documentation Links[/b]
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17252/41/polar-chart-types']Polar Chart Types[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
 
     [b][i]Note:[/i][/b] [i]Polar chart does not support FastHeatMapRenderableSeries for now.[/i]
   </Description>

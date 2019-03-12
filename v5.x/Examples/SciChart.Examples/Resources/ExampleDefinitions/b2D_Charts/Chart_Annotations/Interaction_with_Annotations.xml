@@ -7,7 +7,7 @@
   <Description>
     Demonstrates how you may interact with annotations that have been placed on a chart, using the UIElement Annotations API.
 
-    To make an annotation Read-only, set [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AnnotationBase~IsEditable.html']AnnotationBase.IsEditable[/url]=false. Some of the annotations have IsEditable=true on this example. You can click them, drag and resize via the adorner anchor-points.
+    To make an annotation Read-only, set [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AnnotationBase~IsEditable.html']AnnotationBase.IsEditable[/url]=false. Some of the annotations have IsEditable=true on this example. You can click them, drag and resize via the adorner anchor-points.
 
     [b]Documentation Links[/b]
 

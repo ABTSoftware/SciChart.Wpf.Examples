@@ -388,6 +388,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             };
             _modifiersInDevMode.ChildModifiers.Add(toolTipMod);
 
+            // AnimationsModifier
+            var animationsModifier = new SeriesAnimationCustomModifier();
+
+            _modifiersInDevMode.ChildModifiers.Add(animationsModifier);
+
             if (!isPolar)
             {
                 // YAxisDragModifier

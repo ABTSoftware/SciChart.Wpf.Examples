@@ -5,11 +5,11 @@
   <IconPath>IconImpulse</IconPath>
   <ToolTipDescription></ToolTipDescription>
   <Description>
-    The Sparse Impulse Series 3D chart demo shows how to use [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ImpulseRenderableSeries3D.html']ImpulseRenderableSeries3D[/url] to render a 3D Stem Chart.
+    The Sparse Impulse Series 3D chart demo shows how to use [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ImpulseRenderableSeries3D.html']ImpulseRenderableSeries3D[/url] to render a 3D Stem Chart.
 
     The ImpulseRenderableSeries3D type supports data in Xyz format (individual sparse points), or Uniform grid format (every X,Z cell has a stem). The latter is more efficient but less flexible.
 
-    Impulse stems can be colored individually using the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.PointMetadata3D.html']PointMetadata3D[/url] class.
+    Impulse stems can be colored individually using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.PointMetadata3D.html']PointMetadata3D[/url] class.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/SparseImpulseSeries3D.xaml.txt</string>

@@ -4,7 +4,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -25,7 +25,7 @@
                         <TextBlock Text="Slide to change ZScaleFactor" />
                         <ext:FlyoutSeparator/>
                         <!-- Create the Z slider -->
-                        <Slider Minimum="0.5" Maximum="5.0" x:Name="zScaleSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0.5" Maximum="5.0" x:Name="zScaleSlider" Value="2.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -38,8 +38,26 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="lineSeries" ResamplingMode="MinMax" Stroke="#FFFF3333" />
-                <s:FastBubbleRenderableSeries x:Name="bubbleSeries" ZScaleFactor="{Binding Source={x:Reference Name=zScaleSlider}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ResamplingMode="None" BubbleColor="#77333333" AutoZRange="False" />
+                <s:FastLineRenderableSeries x:Name="lineSeries" ResamplingMode="MinMax" Stroke="#FFFF3333">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="10650">
+                            <s:ScaleAnimation.EasingFunction>
+                                <ElasticEase EasingMode="EaseOut"></ElasticEase>
+                            </s:ScaleAnimation.EasingFunction>
+                        </s:ScaleAnimation>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastBubbleRenderableSeries x:Name="bubbleSeries" ZScaleFactor="{Binding Source={x:Reference Name=zScaleSlider}, 
+                                                Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ResamplingMode="None" 
+                                              BubbleColor="#77333333" AutoZRange="False">
+                    <s:FastBubbleRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="10650">
+                            <s:ScaleAnimation.EasingFunction>
+                                <ElasticEase EasingMode="EaseOut"></ElasticEase>
+                            </s:ScaleAnimation.EasingFunction>
+                        </s:ScaleAnimation>
+                    </s:FastBubbleRenderableSeries.SeriesAnimation>
+                </s:FastBubbleRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis with Growby  -->

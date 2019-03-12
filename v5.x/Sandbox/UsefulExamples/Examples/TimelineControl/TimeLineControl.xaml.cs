@@ -11,14 +11,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SciChart.Sandbox;
 
-namespace SciChart.Wpf.TestSuite.TestCases.ShadowsOn3DChart
+namespace SciChart.Sandbox.Examples.TimelineControl
 {
-    [TestCase("Bottom3D Shadows issue")]
-    public partial class ShadowsOn3DChart : Window
+    [TestCase("Timeline Control")]
+    public partial class TimeLineControl : Window
     {
-        public ShadowsOn3DChart()
+        public TimeLineControl()
         {
             InitializeComponent();
         }

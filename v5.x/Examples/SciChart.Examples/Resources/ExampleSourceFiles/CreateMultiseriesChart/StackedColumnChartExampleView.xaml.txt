@@ -5,7 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             Loaded="StackedColumnChartExampleView_OnLoaded"
+             Loaded="StackedColumnChartExampleView_OnLoaded"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -39,11 +39,31 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:StackedColumnRenderableSeries Fill="#FF226Fb7" StackedGroupId="Meat" />
-                <s:StackedColumnRenderableSeries Fill="#ffff9a2e" StackedGroupId="Meat" />
-                <s:StackedColumnRenderableSeries Fill="#ffdc443f" StackedGroupId="Vegetables" />
-                <s:StackedColumnRenderableSeries Fill="#ffaad34f" StackedGroupId="Vegetables" />
-                <s:StackedColumnRenderableSeries Fill="#ff8562b4" StackedGroupId="Vegetables" />
+                <s:StackedColumnRenderableSeries Fill="#FF226Fb7" StackedGroupId="Meat">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#ffff9a2e" StackedGroupId="Meat">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#ffdc443f" StackedGroupId="Vegetables">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#ffaad34f" StackedGroupId="Vegetables">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#ff8562b4" StackedGroupId="Vegetables">
+                    <s:StackedColumnRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    </s:StackedColumnRenderableSeries.SeriesAnimation>
+                </s:StackedColumnRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->

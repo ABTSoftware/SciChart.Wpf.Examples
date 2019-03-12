@@ -7,6 +7,7 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
+             Loaded="FiltersAPIExample_Loaded"
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid>
 

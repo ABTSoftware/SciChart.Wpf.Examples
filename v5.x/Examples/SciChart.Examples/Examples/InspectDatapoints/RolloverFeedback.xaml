@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -58,24 +58,36 @@
                 <s:FastLineRenderableSeries SelectedSeriesStyle="{StaticResource Series1SelectedStyle}"
                                             Stroke="SteelBlue"
                                             StrokeThickness="2">
+                    
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
                                               Fill="Lavender"
                                               StrokeThickness="1" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                    
                 </s:FastLineRenderableSeries>
 
                 <!--  Declare second line series with a PointMarker and RolloverMarker control template  -->
                 <s:FastLineRenderableSeries SelectedSeriesStyle="{StaticResource Series2SelectedStyle}"
                                             Stroke="DarkGreen"
                                             StrokeThickness="2">
+                    
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
                                               Fill="Lavender"
                                               StrokeThickness="1" />
                     </s:FastLineRenderableSeries.PointMarker>
+
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries IsVisible="False" Stroke="DarkRed" />

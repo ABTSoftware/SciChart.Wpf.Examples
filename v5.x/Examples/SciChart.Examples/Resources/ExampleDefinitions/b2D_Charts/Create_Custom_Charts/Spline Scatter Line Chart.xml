@@ -5,7 +5,7 @@
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Generates a spline scatter-line chart in code</ToolTipDescription>
   <Description>
-    Generates a spline scatter-line chart in code. Uses the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries[/url] type to demonstrate how to create your own series types. Here we implement a Cubic Spline line series with optional scatter points.
+    Generates a spline scatter-line chart in code. Uses the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries[/url] type to demonstrate how to create your own series types. Here we implement a Cubic Spline line series with optional scatter points.
 
     [b][i]Tips![/i][/b]
 
@@ -17,7 +17,7 @@
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17253/41/customrenderableseries-api-overview']CustomRenderableSeries API Overview[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17254/41/creating-a-custom-spline-line-series']Creating a Custom Spline Line Series - Walkthrough[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml.txt</string>

@@ -5,14 +5,14 @@
   <IconPath>IconTernary</IconPath>
   <ToolTipDescription>Generates a simple Ternary Scatter chart in code</ToolTipDescription>
   <Description>
-    Generates a Ternary Scatter chart in code. The TernaryScatterRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
+    Generates a Ternary Scatter chart in code. The TernaryScatterRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
 
-    The scatter chart uses the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url] to define the marker shape and size. This can be customized in code or you can create your own Point-Markers using our [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.SpritePointMarker.html']SpritePointMarker[/url] or [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BasePointMarker.html']BasePointMarker[/url] type.
+    The scatter chart uses the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url] to define the marker shape and size. This can be customized in code or you can create your own Point-Markers using our [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.SpritePointMarker.html']SpritePointMarker[/url] or [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BasePointMarker.html']BasePointMarker[/url] type.
 
     [b]Documentation Links[/b]
 
     - TernaryScatterRenderableSeries
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url]
   </Description>
   <CodeFiles>

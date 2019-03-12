@@ -5,7 +5,7 @@
   <IconPath>IconAxis3D</IconPath>
    <ToolTipDescription>Demonstrates a chart with three line-series and a Logarithmic X-Axis and Y-Axis</ToolTipDescription>
   <Description>
-    This example demonstrates X,Y or Z [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D.html']Logarithmic Axis[/url] axis in SciChart 3D. Click the controls to change state.
+    This example demonstrates X,Y or Z [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D.html']Logarithmic Axis[/url] axis in SciChart 3D. Click the controls to change state.
 
     [b][i]Example Usage[/i][/b]
 
@@ -15,12 +15,12 @@
 
     [b][i]Tips![/i][/b]
 
-    The axis labels may be formatted using Scientific notation with Superscript. See the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D~ScientificNotation.html']LogarithmicNumericAxis3D.ScientificNotation[/url] property in the help file.
+    The axis labels may be formatted using Scientific notation with Superscript. See the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D~ScientificNotation.html']LogarithmicNumericAxis3D.ScientificNotation[/url] property in the help file.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D.html']LogarithmicNumericAxis3D Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Axis.LogarithmicNumericAxis3D.html']LogarithmicNumericAxis3D Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface Type[/url]
 
   </Description>
   <CodeFiles>

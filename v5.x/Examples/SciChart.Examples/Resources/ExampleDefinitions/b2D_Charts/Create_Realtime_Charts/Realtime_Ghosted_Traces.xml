@@ -11,7 +11,7 @@
 
     [b][i]Tip![/i][/b]
 
-    This example looks a lot better using the new [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Drawing~SciChart.Drawing.HighQualityRasterizer.HighQualityRenderSurface.html']HighQualityRenderSurface[/url] due to its superior handling of transparency. For maximum performance use the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Drawing~SciChart.Drawing.HighSpeedRasterizer.HighSpeedRenderSurface.html']HighSpeedRenderSurface[/url].
+    This example looks a lot better using the new [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.HighQualityRasterizer.HighQualityRenderSurface.html']HighQualityRenderSurface[/url] due to its superior handling of transparency. For maximum performance use the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.HighSpeedRasterizer.HighSpeedRenderSurface.html']HighSpeedRenderSurface[/url].
 
     [b]Documentation Links[/b]
 

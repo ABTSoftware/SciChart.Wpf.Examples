@@ -8,16 +8,16 @@
     Overlays a candlestick and line chart series on a SciChartSurface and applies the MouseWheelZoomModifier. This is a built-in ChartModifierBase derived class which adds the behavior of scrolling and zooming on mouse-wheel.
   </ToolTipDescription>
   <Description>
-    Demonstrates the many modes of operation of the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.MouseWheelZoomModifier.html']MouseWheelZoomModifier[/url]. The default mode is Zoom around a point in the X and Y directions. ChartModifiers can be added to the SciChartSurface via the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~ChartModifier.html']SciChartSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ModifierGroup.html']ModifierGroup[/url]
+    Demonstrates the many modes of operation of the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.MouseWheelZoomModifier.html']MouseWheelZoomModifier[/url]. The default mode is Zoom around a point in the X and Y directions. ChartModifiers can be added to the SciChartSurface via the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~ChartModifier.html']SciChartSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ModifierGroup.html']ModifierGroup[/url]
 
     Additional modes are the ability to zoom in one direction only, or pan via the mouse-wheel. Try pressing CTRL or SHIFT while mouse-wheel scrolling to see the effect.
 
-    Finally, double-click to reset zoom at any time. This functionality is provided by the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomExtentsModifier.html']ZoomExtentsModifier[/url]
+    Finally, double-click to reset zoom at any time. This functionality is provided by the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.ZoomExtentsModifier.html']ZoomExtentsModifier[/url]
 
     [b]Documentation links[/b]
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17229/0/chartmodifiers-provided-by-scichart']ChartModifiers provided by SciChart[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.MouseWheelZoomModifier.html']MouseWheelZoomModifier Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.MouseWheelZoomModifier.html']MouseWheelZoomModifier Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/MouseWheelToZoomPan.xaml.txt</string>

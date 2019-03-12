@@ -18,6 +18,7 @@
 // *************************************************************************************
 using System.Windows;
 using System.Windows.Controls;
+using SciChart.Charting.ChartModifiers;
 using SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar
@@ -43,6 +44,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         public DataTemplate FlyoutSeparatorTemplate { get; set; }
         public DataTemplate EmptyTemplate { get; set; }
         public DataTemplate PointMarkersModifierTemplate { get; set; }
+        public DataTemplate AnimationsModifierTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -102,6 +104,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
 
                     case "CustomExportModifier":
                         return ExportModifierTemplate;
+
+                    case "SeriesAnimationCustomModifier":
+                        return AnimationsModifierTemplate;
 
                     default:
                         return EmptyTemplate;

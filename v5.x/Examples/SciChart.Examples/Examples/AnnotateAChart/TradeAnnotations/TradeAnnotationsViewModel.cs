@@ -73,7 +73,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
         }
 
         public bool IsAnnotationDrawn { set; get; }
-        
+
         public ObservableCollection<IRenderableSeriesViewModel> Series
         {
             get { return _series; }
@@ -135,15 +135,15 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             {
                 return new SciChart.Charting.Common.Helpers.ActionCommand<AnnotationCreationMVVMArgs>((e) =>
                 {
-                    var annotation = (IAnnotationViewModel) e.NewAnnotationViewModel;
+                    var annotation = (IAnnotationViewModel)e.NewAnnotationViewModel;
 
                     if (annotation != null)
                     {
                         var tradingAnnotation = annotation as ITradingAnnotationViewModel;
                         if (tradingAnnotation != null)
                         {
-                            ((AnnotationBase) tradingAnnotation.Annotation).Selected += OnAnnotationSelected;
-                            ((AnnotationBase) tradingAnnotation.Annotation).Unselected += OnAnnotationUnselected;
+                            ((AnnotationBase)tradingAnnotation.Annotation).Selected += OnAnnotationSelected;
+                            ((AnnotationBase)tradingAnnotation.Annotation).Unselected += OnAnnotationUnselected;
                         }
 
                         annotation.IsEditable = true;
@@ -151,18 +151,9 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
                         annotation.IsSelected = true;
                     }
 
-                    IsAnnotationCreationEnable = annotation is BrushAnnotationViewModel;
-                    if (!(annotation is BrushAnnotationViewModel))
-                    {
-                        IsAnnotationDrawn = false;
-                        OnPropertyChanged("IsAnnotationDrawn");
-                    }
-                    else
-                    {
-                        annotation.IsEditable = false;
-                        Annotations.Where(x => x is BrushAnnotationViewModel && !ReferenceEquals(x, annotation))
-                            .ForEachDo(x => x.IsSelected = false);
-                    }
+                    IsAnnotationCreationEnable = false;
+                    IsAnnotationDrawn = false;
+                    OnPropertyChanged("IsAnnotationDrawn");
                 });
             }
         }
@@ -170,7 +161,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
         {
             get
             {
-                return typeof(Brushes).GetProperties().Select(x => (Brush) x.GetValue(null, null)).ToList();
+                return typeof(Brushes).GetProperties().Select(x => (Brush)x.GetValue(null, null)).ToList();
             }
         }
 

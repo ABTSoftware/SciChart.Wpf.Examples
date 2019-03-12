@@ -6,21 +6,21 @@
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Shows how to use chart printing option and export to XPS and PNG</ToolTipDescription>
   <Description>
-    SciChart supports [url='http://www.scichart.com/documentation/v4.x/webframe.html#Screenshots,_Printing_and_Export_to_XPS.html']exporting the chart[/url], including legends, series and annotations to various image formats, including export to [b]BitmapSource[/b] (in-memory bitmap), to Png, Jpg or Bmp file, to [b]XPS[/b] (scalable vector format) or printing to local printer.
+    SciChart supports [url='http://www.scichart.com/documentation/v5.x/webframe.html#Screenshots,_Printing_and_Export_to_XPS.html']exporting the chart[/url], including legends, series and annotations to various image formats, including export to [b]BitmapSource[/b] (in-memory bitmap), to Png, Jpg or Bmp file, to [b]XPS[/b] (scalable vector format) or printing to local printer.
 
     [b]Export Scalable Vectors[/b]
 
-    To export a scalable vector such as XPS, you will need to enable the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Drawing~SciChart.Drawing.XamlRasterizer.XamlRenderSurface.html']XamlRenderSurface[/url].
+    To export a scalable vector such as XPS, you will need to enable the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.XamlRasterizer.XamlRenderSurface.html']XamlRenderSurface[/url].
 
-    There is a code sample [url='http://www.scichart.com/documentation/v4.x/webframe.html#Renderer_Plugins.html']how to enable the XamlRenderSurface here[/url].
+    There is a code sample [url='http://www.scichart.com/documentation/v5.x/webframe.html#Renderer_Plugins.html']how to enable the XamlRenderSurface here[/url].
 
     Be sure to re-enable the old RenderSurface after export as the XamlRenderSurface is slower and is not suitable for real-time drawing.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#Screenshots,_Printing_and_Export_to_XPS.html']Screenshots, Exporting and Printing Documentation[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Drawing~SciChart.Drawing.XamlRasterizer.XamlRenderSurface.html']XamlRenderSurface[/url] type
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#Renderer_Plugins.html']Renderer Plugins in SciChart[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#Screenshots,_Printing_and_Export_to_XPS.html']Screenshots, Exporting and Printing Documentation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.XamlRasterizer.XamlRenderSurface.html']XamlRenderSurface[/url] type
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#Renderer_Plugins.html']Renderer Plugins in SciChart[/url]
 
   </Description>
   <CodeFiles>

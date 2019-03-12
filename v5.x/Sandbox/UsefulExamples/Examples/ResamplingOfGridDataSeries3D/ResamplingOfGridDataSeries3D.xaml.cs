@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
-using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Data.Numerics;
 using SciChart.Data.Numerics.PointResamplers;

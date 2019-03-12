@@ -25,7 +25,6 @@ using SciChart.Charting.Model;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Core.Helpers;
 using SciChart.Data.Model;
 using SciChart.Sandbox.Shared;
 using SciChart.Sandbox._Shared;
@@ -44,7 +43,7 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
     public class HistogramBarDemoProjectViewModel : INotifyPropertyChanged
     {
         private readonly Timer _timerNewDataUpdate;
-        private FasterRandom _random;
+        private Random _random;
         public MovingAverage _movingAverage;
 
         private OhlcDataSeries<DateTime, double> _dataSeries0;
@@ -81,7 +80,7 @@ namespace SciChart.Sandbox.Examples.MarketProfileTradingExample
         //time\tprice\tvolume\tbidorask
         public HistogramBarDemoProjectViewModel()
         {
-            _random = new FasterRandom();
+            _random = new Random();
 
             _timerNewDataUpdate = new Timer(1);
             _timerNewDataUpdate.AutoReset = true;

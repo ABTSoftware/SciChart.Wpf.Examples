@@ -18,7 +18,7 @@
     [b]Documentation Links[/b]
 
     - [url='http://www.scichart.com/questions/question/hiding-data-when-using-a-line-series']FAQ: Hiding Data when using a Line Series[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~DrawNaNAs.html']BaseRenderableSeries.DrawNaNAs Property[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~DrawNaNAs.html']BaseRenderableSeries.DrawNaNAs Property[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GapsInSeries.xaml.txt</string>

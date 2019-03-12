@@ -74,7 +74,7 @@
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>
                     <s3D:MouseWheelZoomModifier3D/>
-                    <s3D:ZoomExtentsModifier3D/>
+                    <s3D:ZoomExtentsModifier3D AutoFitRadius="True" AnimateDurationMs = "500"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
         </s3D:SciChart3DSurface>

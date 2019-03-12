@@ -6,7 +6,7 @@
              Loaded="OnLogarithmicAxisViewLoaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -100,29 +100,53 @@
         <RowDefinition />
       </Grid.RowDefinitions>
 
-      <s:SciChartSurface x:Name="positiveScaleChart"
-                         Grid.Row="0"
-                         ChartModifier="{StaticResource ModifierGroup}">
-
-        <s:SciChartSurface.RenderableSeries>
-          <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}"/>
-          <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}"/>
-          <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}"/>
-        </s:SciChartSurface.RenderableSeries>
-
-      </s:SciChartSurface>
-
-      <s:SciChartSurface x:Name="negativeScaleChart"
-                         Grid.Row="1"
-                         ChartModifier="{StaticResource ModifierGroup}">
-
-        <s:SciChartSurface.RenderableSeries>
-          <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}"/>
-          <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}"/>
-          <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}"/>
-        </s:SciChartSurface.RenderableSeries>
-
-      </s:SciChartSurface>
+        <s:SciChartSurface x:Name="positiveScaleChart"
+                           Grid.Row="0"
+                           ChartModifier="{StaticResource ModifierGroup}">
+        
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+        
+        </s:SciChartSurface>
+        
+        <s:SciChartSurface x:Name="negativeScaleChart" 
+                           Grid.Row="1"
+                           ChartModifier="{StaticResource ModifierGroup}">
+        
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+        
+        </s:SciChartSurface>
     </Grid>
   </Grid>
 </UserControl>

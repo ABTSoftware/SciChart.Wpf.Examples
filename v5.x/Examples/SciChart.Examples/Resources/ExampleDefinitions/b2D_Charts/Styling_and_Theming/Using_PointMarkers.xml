@@ -14,7 +14,7 @@
     [b]Documentation Links[/b]
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']Data-Point Markers API[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers_namespace.html']BasePointMarker Types[/url]     
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers_namespace.html']BasePointMarker Types[/url]     
   </Description>    
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/StyleAChart/UsePointMarkers.xaml.txt</string>

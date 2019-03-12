@@ -24,7 +24,7 @@
                                       HorizontalAlignment="Left"
                                       ToolTipService.ToolTip="Toggle Series Selection"
                                       Style="{StaticResource PointerButtonStyle}"      
-                                      IsChecked="True"/>                
+                                      IsChecked="True"/>
 
                 <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="SRC" Padding="0">
                     <ext:FlyoutMenuButton.PopupContent>
@@ -71,8 +71,8 @@
                 </ext:FlyoutMenuButton>
 
             </StackPanel>
-        </Border>        
-        
+        </Border>
+
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
 
             <!--  Declare RenderableSeries  -->
@@ -81,26 +81,35 @@
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
-                
+
                 <s:FastLineRenderableSeries Stroke="#279B27">
-                <s:FastLineRenderableSeries.PointMarker>
-                    <s:TrianglePointMarker/>
-                </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:TrianglePointMarker/>
+                    </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries Stroke="#FF1919">
-                <s:FastLineRenderableSeries.PointMarker>
-                    <s:SquarePointMarker/>
-                </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:SquarePointMarker/>
+                    </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
-        
+
                 <s:FastLineRenderableSeries Stroke="#1964FF" IsVisible="False">
-                <s:FastLineRenderableSeries.PointMarker>
-                    <s:CrossPointMarker/>
-                </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <s:CrossPointMarker/>
+                    </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
-    
+
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Declare Axes  -->
@@ -114,7 +123,7 @@
 
             <!--  Declare ChartModifiers  -->
             <s:SciChartSurface.ChartModifier>
-                <s:ModifierGroup>                    
+                <s:ModifierGroup>
                     <s:LegendModifier x:Name="legendModifier" ShowLegend="True" Orientation="Horizontal" Margin="10" />
                     <s:SeriesSelectionModifier IsEnabled="{Binding Source={x:Reference Name=SelectionEnabledToggle}, Path=IsChecked, Mode=TwoWay}">
                         <s:SeriesSelectionModifier.SelectedSeriesStyle>

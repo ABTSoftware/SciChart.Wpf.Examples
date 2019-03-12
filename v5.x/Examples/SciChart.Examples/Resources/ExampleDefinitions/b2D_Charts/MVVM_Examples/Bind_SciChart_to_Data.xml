@@ -9,7 +9,7 @@
 
     This example uses a single line chart, with View and ViewModel and shows how to bind SciChart to a data-source and append new data using the MVVM pattern.
 
-    [i][b]Note:[/b][/i] Also see the documentation and examples featuring the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url], as this shows how to declare RenderableSeries and DataSeries from your ViewModel, for a true MVVM application.
+    [i][b]Note:[/b][/i] Also see the documentation and examples featuring the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url], as this shows how to declare RenderableSeries and DataSeries from your ViewModel, for a true MVVM application.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/BindToDataSeriesSet/BindToDataSeriesSetView.xaml.txt</string>

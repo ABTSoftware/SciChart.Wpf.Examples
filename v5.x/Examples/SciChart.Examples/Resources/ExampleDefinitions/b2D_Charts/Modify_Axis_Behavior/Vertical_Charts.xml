@@ -7,7 +7,7 @@
   <Description>
     Demonstrates a vertical chart with XAxis on the Left, Right, and YAxes at the Top. SciChart supports unlimited X and Y axis and allows placement of any axis on the Left, Right, Top, Bottom of the chart.
 
-    The Vertical Chart is created by setting [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']XAxis.AxisAlignment[/url] = Left, and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']YAxis.AxisAlignment[/url] = Top.        
+    The Vertical Chart is created by setting [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']XAxis.AxisAlignment[/url] = Left, and [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']YAxis.AxisAlignment[/url] = Top.        
 
     [b][i]Interactivity Options[/i][/b]
 

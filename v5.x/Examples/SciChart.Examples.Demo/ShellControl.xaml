@@ -267,7 +267,7 @@
         <Border Grid.Row="1"
                 Background="{StaticResource DialogBackground}"
                 Opacity="0"
-                tz:Transitionz.Blur="{Binding Path=BackgroundBlurParams}"
+                tz:Transitionz.Blur="{Binding Path=BlurBackgroundParams}"
                 tz:Transitionz.Opacity="{tz:OpacityParams From=0,
                                                             To=1,
                                                             Duration=200,

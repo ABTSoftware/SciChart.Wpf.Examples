@@ -28,22 +28,29 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
     /// </summary>
     public partial class HeatMapWithTextInCellsExampleView : UserControl
     {
-        class YAxisLabelProvider: LabelProviderBase
+        private class YAxisLabelProvider: LabelProviderBase
         {
             public override string FormatLabel(IComparable dataValue)
             {
-                var day = Convert.ToInt32(dataValue);
-                switch (day)
+                try
                 {
-                    case 0: return "Mon";
-                    case 1: return "Tue";
-                    case 2: return "Wed";
-                    case 3: return "Thu";
-                    case 4: return "Fri";
-                    case 5: return "Sat";
-                    case 6: return "Sun";
+                    switch (Convert.ToInt32(dataValue))
+                    {
+                        case 0: return "Mon";
+                        case 1: return "Tue";
+                        case 2: return "Wed";
+                        case 3: return "Thu";
+                        case 4: return "Fri";
+                        case 5: return "Sat";
+                        case 6: return "Sun";
+
+                        default: return string.Empty;
+                    }
                 }
-                return "";
+                catch
+                {
+                    return string.Empty;
+                }
             }
 
             public override string FormatCursorLabel(IComparable dataValue)
@@ -52,12 +59,20 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             }
         }
 
-        class XAxisLabelProvider : LabelProviderBase
+        private class XAxisLabelProvider : LabelProviderBase
         {
             public override string FormatLabel(IComparable dataValue)
             {
-                var h = (int)Math.Ceiling(dataValue.ToDouble());
-                var dt = new DateTime(2000, 1, 1, 1, 0, 0).AddHours(h);
+                var h = (int) Math.Ceiling(dataValue.ToDouble());
+                var dt = new DateTime(2000, 1, 1, 1, 0, 0);
+                try
+                {
+                    dt = dt.AddHours(h);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    dt = h < 0 ? DateTime.MinValue : DateTime.MaxValue;
+                }
                 return dt.ToString("hh:mm tt", new CultureInfo("en-US"));
             }
 
@@ -67,18 +82,22 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             }
         }
 
-
-
         private IDataSeries CreateSeries()
         {
+            const int w = 24;
+            const int h = 7;
+
             var rnd = new Random();
-            int w = 24, h = 7;
             var data = new double[h, w];
+
             for (int x = 0; x < w; x++)
+            {
                 for (int y = 0; y < h; y++)
                 {
-                    data[y, x] = Math.Pow(rnd.NextDouble(), 0.15) * x / (w-1) * y / (h-1) * 100;
+                    data[y, x] = Math.Pow(rnd.NextDouble(), 0.15) * x / (w - 1) * y / (h - 1) * 100;
                 }
+            }
+
             return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1);
         }
 
@@ -87,8 +106,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             InitializeComponent();
             yAxis.LabelProvider = new YAxisLabelProvider();
             xAxis.LabelProvider = new XAxisLabelProvider();
-            heatmapSeries.DataSeries = CreateSeries();
-          
+            heatmapSeries.DataSeries = CreateSeries();      
         }
     }
 }

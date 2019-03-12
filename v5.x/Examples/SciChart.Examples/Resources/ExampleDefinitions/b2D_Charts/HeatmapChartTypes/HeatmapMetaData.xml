@@ -11,8 +11,8 @@
     [b]Documentation Links[/b]
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17188/41/heatmap-series-overview']Heatmap API Documentation[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries Type[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
   </Description>
   <CodeFiles>

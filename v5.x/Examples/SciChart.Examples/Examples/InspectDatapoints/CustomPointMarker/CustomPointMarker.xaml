@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -45,6 +45,9 @@
                                                         Stroke="Red"
                                                         StrokeThickness="2" />
                     </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
             </s:SciChartSurface.RenderableSeries>

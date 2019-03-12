@@ -5,7 +5,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:shiftedAxes="clr-namespace:SciChart.Examples.Examples.ModifyAxisBehaviour.ShiftedAxes"
+             xmlns:shiftedAxes="clr-namespace:SciChart.Examples.Examples.ModifyAxisBehaviour.ShiftedAxes"             
              Loaded="ShiftedAxes_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -55,7 +55,11 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="lineRenderSeries" StrokeThickness="1" />
+                <s:FastLineRenderableSeries x:Name="lineRenderSeries" StrokeThickness="1">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis with Growby  -->

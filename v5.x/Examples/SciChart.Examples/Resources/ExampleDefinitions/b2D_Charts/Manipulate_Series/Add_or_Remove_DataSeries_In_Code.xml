@@ -5,11 +5,11 @@
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates how to add and remove data-series and their associated RenderableSeries using SciChart.</ToolTipDescription>
   <Description>
-    Demonstrates how to programmatically add and remove series in code. This is achieved by changing the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime.
+    Demonstrates how to programmatically add and remove series in code. This is achieved by changing the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime.
 
     Click 'Add Series' several times. Now click to select a series. With a series selected, click 'Delete Series'.
 
-    The same thing can be achieved in MVVM, using our new MVVM [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding[/url] Markup Extension.
+    The same thing can be achieved in MVVM, using our new MVVM [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding[/url] Markup Extension.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ManipulateSeries/AddRemoveDataSeriesExampleView.xaml.txt</string>

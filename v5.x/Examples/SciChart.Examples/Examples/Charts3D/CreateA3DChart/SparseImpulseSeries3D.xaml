@@ -118,7 +118,7 @@
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
-                <s3D:ZoomExtentsModifier3D />
+                <s3D:ZoomExtentsModifier3D AutoFitRadius="True" AnimateDurationMs = "500"/>
             </s3D:SciChart3DSurface.ChartModifier>
 
         </s3D:SciChart3DSurface>

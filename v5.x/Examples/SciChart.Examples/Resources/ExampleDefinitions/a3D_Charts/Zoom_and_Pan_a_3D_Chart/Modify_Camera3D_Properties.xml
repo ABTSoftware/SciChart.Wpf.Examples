@@ -4,12 +4,12 @@
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>
-    Demonstrates the properties of the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Camera3D.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
+    Demonstrates the properties of the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Camera3D.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
   </ToolTipDescription>
   <Description>
-    Demonstrates the properties of the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Camera3D.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
+    Demonstrates the properties of the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Camera3D.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
 
-    The Camera3D is attached to the [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface~Camera.htmll']SciChart3DSurface.Camera[/url] property and may be changed from perspective to orthogonal and zoomed to fit the 3D Chart. The Camera3D can also be animated from position to position, and multiple cameras can be enabled on a scene.
+    The Camera3D is attached to the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface~Camera.htmll']SciChart3DSurface.Camera[/url] property and may be changed from perspective to orthogonal and zoomed to fit the 3D Chart. The Camera3D can also be animated from position to position, and multiple cameras can be enabled on a scene.
     
     [b][i]Tip![/i][/b]
     

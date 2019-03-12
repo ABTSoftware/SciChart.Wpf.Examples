@@ -34,24 +34,32 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
-        
+
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart" Padding="0" BorderThickness="0" Grid.Column="1">
 
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation Text="Custom Spline Chart" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Top" X1="0.5" Y1="0.01" CoordinateMode="Relative"/>
             </s:SciChartSurface.Annotations>
-            
+
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
 
                 <!-- Draw the original line -->
-                <s:FastLineRenderableSeries x:Name="LineRenderSeries" Stroke="SteelBlue" StrokeThickness="1" RolloverMarkerTemplate="{x:Null}" />
+                <s:FastLineRenderableSeries x:Name="LineRenderSeries" Stroke="SteelBlue" StrokeThickness="1" RolloverMarkerTemplate="{x:Null}">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
 
                 <!-- Draw the spline series - custom renderable series -->
                 <local:SplineLineRenderableSeries x:Name="SplineRenderSeries" Stroke="DarkGreen" StrokeThickness="2"  
                                                   IsSplineEnabled="True" UpSampleFactor="10">
 
+                    <local:SplineLineRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </local:SplineLineRenderableSeries.SeriesAnimation>
+                    
                     <!-- LegendMarkerTemplate is required to show a marker in the legend next to SeriesName -->
                     <local:SplineLineRenderableSeries.LegendMarkerTemplate>
                         <DataTemplate>

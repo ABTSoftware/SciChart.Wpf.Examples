@@ -105,7 +105,7 @@
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" IsEnabled="True" />
                     <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" IsEnabled="False" />
-                    <t3D:TooltipModifier3D HoverDelay="150" ShowTooltipOn="MouseOver" ShowAxisLabels="True"/>
+                    <t3D:TooltipModifier3D HoverDelay="150" ShowTooltipOn="MouseOver" />
                     <s3D:MouseWheelZoomModifier3D />
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
                                                AutoFitRadius="True"

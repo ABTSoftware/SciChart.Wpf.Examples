@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"            
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                     
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -193,24 +193,45 @@
                        Style="{StaticResource SciChartSurfaceStyle}">
 
         <s:SciChartSurface.RenderableSeries>
+            
             <s:FastMountainRenderableSeries x:Name="mountainSeries"
                                             Fill="#774682B4"
                                             Stroke="SteelBlue"
-                                            YAxisId="PrimaryAxisId" />
+                                            YAxisId="PrimaryAxisId">
+                <s:FastMountainRenderableSeries.SeriesAnimation>
+                    <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                </s:FastMountainRenderableSeries.SeriesAnimation>
+            </s:FastMountainRenderableSeries>
+
             <s:FastCandlestickRenderableSeries x:Name="candlestickSeries"
                                                FillDown="#88FF3333"
                                                StrokeDown="Red"
                                                FillUp="#88008800"
                                                StrokeUp="Green"
-                                               YAxisId="PrimaryAxisId" />
+                                               YAxisId="PrimaryAxisId">
+                <s:FastCandlestickRenderableSeries.SeriesAnimation>
+                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                </s:FastCandlestickRenderableSeries.SeriesAnimation>
+            </s:FastCandlestickRenderableSeries>
+
             <s:FastLineRenderableSeries x:Name="lineSeries"
                                         Stroke="Plum"
                                         StrokeThickness="3"
-                                        YAxisId="PrimaryAxisId" />
+                                        YAxisId="PrimaryAxisId">
+                <s:FastLineRenderableSeries.SeriesAnimation>
+                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                </s:FastLineRenderableSeries.SeriesAnimation>
+            </s:FastLineRenderableSeries>
+
             <s:FastColumnRenderableSeries x:Name="columnSeries"
                                           Fill="#AA4400"
                                           Stroke="DarkOrange"
-                                          YAxisId="SecondaryAxisId" />
+                                          YAxisId="SecondaryAxisId">
+                <s:FastColumnRenderableSeries.SeriesAnimation>
+                    <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                </s:FastColumnRenderableSeries.SeriesAnimation>
+            </s:FastColumnRenderableSeries>
+            
         </s:SciChartSurface.RenderableSeries>
 
         <s:SciChartSurface.XAxis>

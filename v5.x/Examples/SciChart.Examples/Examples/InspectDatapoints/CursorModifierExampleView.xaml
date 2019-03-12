@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -90,14 +90,30 @@
             <!--  Declare line RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastLineRenderableSeries Stroke="#FF177B17" StrokeThickness="2" />
+                <s:FastLineRenderableSeries Stroke="#FF177B17" StrokeThickness="2">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries Stroke="#FFDD0909"
                                             StrokeThickness="3"
-                                            s:CursorModifier.SnapToSeries="True" />
-                <s:FastLineRenderableSeries Stroke="Gray" StrokeThickness="5" />
+                                            s:CursorModifier.SnapToSeries="True">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries Stroke="Gray" StrokeThickness="5">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries IsVisible="False"
                                             Stroke="Gold"
-                                            StrokeThickness="2" />
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
 
             </s:SciChartSurface.RenderableSeries>
 

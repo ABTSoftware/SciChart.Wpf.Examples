@@ -66,21 +66,6 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             public IRange Y1AxisRange { get; set; }
             public string ItemId { get; set; }
 
-            public AxisKey XAxisKey
-            {
-                get { return _xAxisKey; }
-            }
-
-            public AxisKey Y0AxisKey
-            {
-                get { return _y0AxisKey; }
-            }
-
-            public AxisKey Y1AxisKey
-            {
-                get { return _y1AxisKey; }
-            }
-
             public override bool Equals(object obj)
             {
                 var other = obj as ChartRangeHistory;
@@ -125,7 +110,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
         private readonly ActionCommand _redoCommand;
         private ObservableCollection<ChartRangeHistory> _rangesHistory = new ObservableCollection<ChartRangeHistory>();
         private ChartRangeHistory _selectedRange;
-        private List<IRenderableSeriesViewModel> _renderableSeriesViewModels;
+        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeriesViewModels;
 
         public ZoomHistoryMvvmViewModel()
         {
@@ -134,8 +119,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             var vm1 = new LineRenderableSeriesViewModel
             {
                 DataSeries = FillData(new XyDataSeries<double, double>(), "firstDataSeries"),
-                XAxisId = _xAxisKey.Id,
-                YAxisId = _y0AxisKey.Id,
+                StyleKey = "FirstLineRenderableSeriesStyle",
                 StrokeThickness = 2,
                 Stroke = Color.FromArgb(0xff, 0x64, 0x95, 0xed),
             };
@@ -143,13 +127,12 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             var vm2 = new LineRenderableSeriesViewModel
             {
                 DataSeries = FillData(new XyDataSeries<double, double>(), "secondDataSeries"),
-                XAxisId = _xAxisKey.Id,
-                YAxisId = _y1AxisKey.Id,
+                StyleKey = "SecondLineRenderableSeriesStyle",
                 StrokeThickness = 2,
                 Stroke = Color.FromArgb(0xff, 0xff, 0x45, 0x00),
             };
 
-            RenderableSeriesViewModels = new List<IRenderableSeriesViewModel> { vm1, vm2 };
+            RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel> { vm1, vm2 };
 
             _zoomHistoryManager = new ZoomHistoryManager();
             _zoomHistoryManager.RangeHistoryChanged += OnRangeHistoryChanged;
@@ -184,12 +167,6 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
                 }
             }, () => _zoomHistoryManager.CanRedo());
         }
-
-        public AxisKey XAxisKey { get { return _xAxisKey; } }
-
-        public AxisKey Y0AxisKey { get { return _y0AxisKey; } }
-
-        public AxisKey Y1AxisKey { get { return _y1AxisKey; } }
 
         public IZoomHistoryManager ZoomHistoryManager
         {
@@ -242,7 +219,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             }
         }
 
-        public List<IRenderableSeriesViewModel> RenderableSeriesViewModels
+        public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels
         {
             get { return _renderableSeriesViewModels; }
             set

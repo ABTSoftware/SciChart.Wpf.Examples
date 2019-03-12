@@ -5,7 +5,7 @@
   <IconPath>IconTernary</IconPath>
   <ToolTipDescription>Generates a simple Ternary Error Bar chart in code</ToolTipDescription>
   <Description>
-    The TernaryErrorBarRenderableSeries requires an [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] as data source, wich contains X-point, Y-point and Z-point. This includes HighError and LowError for each series entry. In this example the same XyzDataSeries is re-used to render a Scatter chart, as these only take the X,Y and Z values.
+    The TernaryErrorBarRenderableSeries requires an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] as data source, wich contains X-point, Y-point and Z-point. This includes HighError and LowError for each series entry. In this example the same XyzDataSeries is re-used to render a Scatter chart, as these only take the X,Y and Z values.
 
     [b][i]Tips![/i][/b]
 
@@ -14,7 +14,7 @@
     [b]Documentation Links[/b]
 
     - TernaryErrorBarRenderableSeries Type
-    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] Type
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] Type
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateTernaryChart/ErrorBarSeriesTernaryChartExampleView.xaml.txt</string>

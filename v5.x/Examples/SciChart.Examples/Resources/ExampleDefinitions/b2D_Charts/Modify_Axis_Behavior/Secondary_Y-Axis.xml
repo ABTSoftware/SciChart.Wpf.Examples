@@ -12,7 +12,7 @@
 
     [b][i]Tip![/i][/b]
 
-    The properties [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']NumericAxis.AxisAlignment[/url], [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~Id.html']NumericAxis.Id[/url] and [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~YAxisId.html']FastLineRenderableSeries.YAxisId[/url] / [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~XAxisId.html']FastLineRenderableSeries.XAxisId[/url] show how to align axes and assign series to them.
+    The properties [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']NumericAxis.AxisAlignment[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~Id.html']NumericAxis.Id[/url] and [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~YAxisId.html']FastLineRenderableSeries.YAxisId[/url] / [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~XAxisId.html']FastLineRenderableSeries.XAxisId[/url] show how to align axes and assign series to them.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/LeftRightYAxes.xaml.txt</string>

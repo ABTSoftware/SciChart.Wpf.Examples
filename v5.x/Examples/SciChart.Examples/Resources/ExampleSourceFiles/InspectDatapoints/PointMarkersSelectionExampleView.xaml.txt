@@ -89,10 +89,10 @@
                                GrowBy="0.1, 0.1" />
             </s:SciChartSurface.XAxis>
 
-            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <!--  Create a Y Axis with GrowBy. Optional bands give a cool look and feel for minimal performance impact  -->
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis DrawMajorBands="True" GrowBy="0.2, 0.2" Id="Right" BorderBrush="#4AB748" BorderThickness="1,0,0,0"/>
-                <s:NumericAxis DrawMajorBands="True" GrowBy="0.2, 0.2" Id="Left" AxisAlignment="Left" BorderBrush="Blue" BorderThickness="0,0,1,0"/>
+                <s:NumericAxis DrawMajorBands="False" GrowBy="0.2, 0.2" Id="Left" AxisAlignment="Left" BorderBrush="Blue" BorderThickness="0,0,1,0"/>
             </s:SciChartSurface.YAxes>
 
             <!-- Setting IsEnabled enables or disables a modifier in the Toolbar -->

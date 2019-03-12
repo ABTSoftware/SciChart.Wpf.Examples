@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
              Loaded="PolarChartExampleView_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -108,7 +108,11 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries"
                                             Stroke="#C4E5FC"
-                                            StrokeThickness="2" />
+                                            StrokeThickness="2">
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:1"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

@@ -5,7 +5,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              Loaded="CandlestickChartExampleView_OnLoaded"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -30,7 +30,7 @@
             <s:SciChartSurface.RenderableSeries>
 
                 <!--  Candlestick bodies now support gradients as well as solid colours  -->
-                <s:FastCandlestickRenderableSeries>
+                <s:FastCandlestickRenderableSeries x:Name="candlestickSeries">
                     <s:FastCandlestickRenderableSeries.FillUp>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Offset="0" Color="#55002200" />
@@ -43,6 +43,9 @@
                             <GradientStop Offset="1" Color="#FFFF0000" />
                         </LinearGradientBrush>
                     </s:FastCandlestickRenderableSeries.FillDown>
+                    <s:FastCandlestickRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:4"/>
+                    </s:FastCandlestickRenderableSeries.SeriesAnimation>
                 </s:FastCandlestickRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
