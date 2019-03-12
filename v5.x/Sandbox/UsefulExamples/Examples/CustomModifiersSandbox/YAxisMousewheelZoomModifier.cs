@@ -12,7 +12,7 @@ using SciChart.Core.Utility;
 using SciChart.Core.Utility.Mouse;
 using SciChart.Wpf.UI.Bootstrap.Utility;
 
-namespace SciChart.Sandbox.Examples.CustomModifiersSandbox
+namespace SciChart.Sandbox.Examples.CustomModifiers
 {
     public class YAxisMousewheelZoomModifier : YAxisDragModifier
     {
