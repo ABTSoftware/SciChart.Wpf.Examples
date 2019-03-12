@@ -191,6 +191,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\AxisGridlineBehaviour.cs" />
+    <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamically.xaml.cs">
       <DependentUpon>ChangePropertiesDynamically.xaml</DependentUpon>
     </Compile>
@@ -236,6 +237,7 @@
     <Compile Include="Examples\CustomModifiersSandbox\SimpleSeriesDragModifier.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\SimpleZoomInOutModifier.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\SimpleZoomPanModifier.cs" />
+    <Compile Include="Examples\CustomModifiersSandbox\YAxisMousewheelZoomModifier.cs" />
     <Compile Include="Examples\CustomPointMarker\CheckedChangeZoomExtentsBehaviour.cs" />
     <Compile Include="Examples\CustomPointMarker\CustomPointMarker.cs" />
     <Compile Include="Examples\CustomPointMarker\MainWindow.xaml.cs">
