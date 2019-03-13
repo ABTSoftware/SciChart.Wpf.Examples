@@ -318,6 +318,7 @@
     <Compile Include="Examples\TimelineControl\TimeLineControl.xaml.cs">
       <DependentUpon>TimeLineControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\TimelineControl\TimelineRenderableSeries.cs" />
     <Compile Include="Examples\TouchScreenModifiers\CustomTouchModifier.cs" />
     <Compile Include="Examples\TouchScreenModifiers\TouchInputSandbox.xaml.cs">
       <DependentUpon>TouchInputSandbox.xaml</DependentUpon>

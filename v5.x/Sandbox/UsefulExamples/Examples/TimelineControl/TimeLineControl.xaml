@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SciChart.Sandbox.Examples.TimelineControl"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
         Title="TimeLineControl" Height="450" Width="800">
     <Grid>
-        
+        <s:SciChartSurface>
+            <s:SciChartSurface.RenderableSeries>
+                <local:TimelineRenderableSeries x:Name="TimelineSeries" YOffset="0.5" Height="0.8"/>
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis VisibleRange="0,1" AutoRange="Never"/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
     </Grid>
 </Window>
