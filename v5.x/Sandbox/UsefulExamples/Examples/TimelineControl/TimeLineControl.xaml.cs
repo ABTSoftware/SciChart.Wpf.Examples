@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting3D.Extensions;
 
 namespace SciChart.Sandbox.Examples.TimelineControl
 {
@@ -22,10 +23,12 @@ namespace SciChart.Sandbox.Examples.TimelineControl
         {
             InitializeComponent();
 
-            var xyData = new XyDataSeries<double>();
-            xyData.Append(0, 0, new TimelinePointMetadata() { Fill = Colors.Red });
-            xyData.Append(5, 0, new TimelinePointMetadata() { Fill = Colors.Green});
-            xyData.Append(15, 0, new TimelinePointMetadata() { Fill = Colors.Blue});
+            var xyData = new XyzDataSeries<double, double, int>();
+
+            // Parameters. We use X= startX, Y= length, Z= Color of fill 
+            xyData.Append(0, 5, (int)Colors.Red.ToArgb());
+            xyData.Append(5, 10, (int)Colors.Green.ToArgb());
+            xyData.Append(15, 2, (int)Colors.Blue.ToArgb());
 
             TimelineSeries.DataSeries = xyData;
         }
