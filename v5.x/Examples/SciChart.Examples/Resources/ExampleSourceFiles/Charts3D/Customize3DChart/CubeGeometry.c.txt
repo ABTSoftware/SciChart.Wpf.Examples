@@ -118,10 +118,6 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 new Vector3(+0.0f, -1.0f, +0.0f), //bottom
             };
 
-            // Pass Entity ID
-            ulong selectionColor = SCRTImmediateDraw.EncodeSelectionId(EntityId, 0);
-            SCRTImmediateDraw.SelectionColor(selectionColor);
-
             // We create a mesh context. There are various mesh render modes. The simplest is Triangles
             // For this mode we have to draw a single triangle (three vertices) for each corner of the cube
             // You can see 
@@ -132,7 +128,11 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(cubeColor);
-            
+
+                // Pass Entity ID value for a hit test purpose
+                ulong selectionColor = SCRTImmediateDraw.EncodeSelectionId(EntityId, 0);
+                meshContext.SetSelectionId(selectionColor);
+
                 // Now draw the triangles. Each face of the cube is made up of two triangles
                 // Front face
                 SetNormal(meshContext, normals[0]);
@@ -212,6 +212,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             using (var lineContext = base.BeginLineStrips(lineThickness, isAntiAlias))
             {
                 lineContext.SetVertexColor(lineColor);
+
+                // Pass Entity ID value for a hit test purpose
+                ulong selectionColor = SCRTImmediateDraw.EncodeSelectionId(EntityId, 0);
+                lineContext.SetSelectionId(selectionColor);
 
                 foreach (var v in vertices)
                 {
