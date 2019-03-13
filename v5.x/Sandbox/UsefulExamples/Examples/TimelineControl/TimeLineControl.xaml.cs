@@ -19,18 +19,32 @@ namespace SciChart.Sandbox.Examples.TimelineControl
     [TestCase("Timeline Control example using Custom Series")]
     public partial class TimeLineControl : Window
     {
+        Random _random = new Random();
+
         public TimeLineControl()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
-            var xyData = new XyzDataSeries<double, double, int>();
+            var xyData0 = new XyzDataSeries<double, double, int>();
+            var xyData1 = new XyzDataSeries<double, double, int>();
 
-            // Parameters. We use X= startX, Y= length, Z= Color of fill 
-            xyData.Append(0, 5, (int)Colors.Red.ToArgb());
-            xyData.Append(5, 10, (int)Colors.Green.ToArgb());
-            xyData.Append(15, 2, (int)Colors.Blue.ToArgb());
+            double iLast = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                // Parameters. We use X= startX, Y= length, Z= Color of fill    
+                double length = _random.Next(1, 10);
+                xyData0.Append(iLast, length, GetRandomColor());                
+                xyData1.Append(iLast, length, GetRandomColor());
+                iLast += length;
+            }            
+            
+            TimelineSeries0.DataSeries = xyData0;
+            TimelineSeries1.DataSeries = xyData0;
+        }
 
-            TimelineSeries.DataSeries = xyData;
+        private int GetRandomColor()
+        {
+            return (int)Color.FromArgb(0xFF, (byte)_random.Next(50, 255), (byte)_random.Next(50, 255), (byte)_random.Next(50, 255)).ToArgb();
         }
     }
 }

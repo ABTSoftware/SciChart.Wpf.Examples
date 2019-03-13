@@ -10,13 +10,14 @@
     <Grid>
         <s:SciChartSurface>
             <s:SciChartSurface.RenderableSeries>
-                <local:TimelineRenderableSeries x:Name="TimelineSeries" YOffset="0.5" Height="0.8"/>
+                <local:TimelineRenderableSeries x:Name="TimelineSeries0" YOffset="0.5" Height="0.8"/>
+                <local:TimelineRenderableSeries x:Name="TimelineSeries1" YOffset="1.5" Height="0.8"/>
             </s:SciChartSurface.RenderableSeries>
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis VisibleRange="0,1" AutoRange="Never"/>
+                <s:NumericAxis VisibleRange="0,2" AutoRange="Never"/>
             </s:SciChartSurface.YAxis>
         </s:SciChartSurface>
     </Grid>
