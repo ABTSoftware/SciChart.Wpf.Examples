@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
@@ -30,7 +31,7 @@ namespace SciChart.Sandbox.Examples.ZoomExtentsAfterMvvmSeriesChanges
                 Stroke= Colors.DarkOrange, DataSeries = GetData(++_amplitude, random.NextDouble()*0.1)
             });
 
-            _viewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() => _viewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500))), DispatcherPriority.Input, null);
         }
 
         public DefaultViewportManager ViewportManager => _viewportManager;
