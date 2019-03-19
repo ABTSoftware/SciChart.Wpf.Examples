@@ -28,5 +28,7 @@ In both the NuGet Packages.config and PackageReference version, sharpdx_direct3d
 
 Just build and run it. Notice the Annotation in the middle of the chart which shows you which renderer plugin is applied.
 
+![Designer View](https://github.com/ABTSoftware/SciChart.WPF.Examples/raw/master/v5.x/Sandbox/DirectXDeploymentTestApp/Runtime%20View%20showing%20DirectX%20Renderer.png "Designer View")
 
+![Runtime View](https://github.com/ABTSoftware/SciChart.WPF.Examples/raw/master/v5.x/Sandbox/DirectXDeploymentTestApp/Runtime%20View%20showing%20DirectX%20Renderer.png "Runtime View")
 
