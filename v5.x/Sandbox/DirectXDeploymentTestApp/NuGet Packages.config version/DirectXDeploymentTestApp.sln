@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectXDeploymentTestApp", "DirectXDeploymentTestApp\DirectXDeploymentTestApp.csproj", "{EEF619C6-C245-430F-BD0F-A36ADCADA234}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEF619C6-C245-430F-BD0F-A36ADCADA234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF619C6-C245-430F-BD0F-A36ADCADA234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF619C6-C245-430F-BD0F-A36ADCADA234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF619C6-C245-430F-BD0F-A36ADCADA234}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC02B33C-F3CB-49FF-9AA5-17EC9F2279E9}
+	EndGlobalSection
+EndGlobal
