@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting3D;
 using SciChart.Charting3D.Model;
 using SciChart.Data.Extensions;
 using SciChart.Data.Model;
@@ -24,6 +25,8 @@ namespace SciChart.Sandbox.Examples._3DChartScatterSeriesOnWalls
         private DoubleRange _xRange;
         private DoubleRange _zRange;
         private XyzDataSeries3D<double> _wallXyData;
+        private bool _isOverCenterLineX;
+        private bool _isOverCenterLineZ;
 
         public Scatter3DOnChartWalls()
         {
@@ -116,8 +119,17 @@ namespace SciChart.Sandbox.Examples._3DChartScatterSeriesOnWalls
             double[] wallXyY = _wallXyData.YValues.ToUncheckedList();
             double[] wallXyZ = _wallXyData.ZValues.ToUncheckedList();
 
-            double maxX = _xRange != null ? _xRange.Max : 10;
-            double maxZ = _zRange != null ? _zRange.Max : 10;
+            // This part chooses which wall to place the wall scatter series on depending on camera position
+            // and where that wall is based on Axis.VisibleRange 
+            double maxX = 10, maxZ = 10;
+            if (_xRange != null)
+            {                
+                maxX = _isOverCenterLineX ? _xRange.Min : _xRange.Max;
+            }
+            if (_zRange != null)
+            {
+                maxZ = _isOverCenterLineZ ? _zRange.Min : _zRange.Max;
+            }
 
             // Update the data positions simulating 3D random walk / brownian motion 
             for (int i = 0, count = _xyzData.Count; i < count; i++)
@@ -167,7 +179,12 @@ namespace SciChart.Sandbox.Examples._3DChartScatterSeriesOnWalls
         }
 
         private void Camera3D_OnCameraUpdated(object sender, EventArgs e)
-        {            
+        {
+            var camera = ((ICameraController) sender);
+
+            // Store flags about camera position
+            _isOverCenterLineX = camera.Position.X > 0;
+            _isOverCenterLineZ = camera.Position.Z > 0;
         }
     }
 }

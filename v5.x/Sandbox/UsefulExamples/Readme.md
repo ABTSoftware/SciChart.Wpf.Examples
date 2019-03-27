@@ -22,6 +22,10 @@ With the app running, search or double click the exmaple you want to run. This w
 
 A sandbox application showing how to dynamically change the color of Gridlines, text and axis labels in a 3D SciChart WPF Chart
 
+### 3D Chart Scatter Series on walls
+
+An example showing how to mimic the effect of a 2D chart on the wall of the Axis Cube in 3D, using scatter series
+
 ### Animated DataSeries
 
 A simple example demonstrating how to animate a dataseries 
