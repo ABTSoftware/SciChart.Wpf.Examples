@@ -193,6 +193,9 @@
       <DependentUpon>ChangePropertiesDynamically.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamicallyViewModel.cs" />
+    <Compile Include="Examples\3DChartScatterSeriesOnWalls\Scatter3DOnChartWalls.xaml.cs">
+      <DependentUpon>Scatter3DOnChartWalls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml.cs">
       <DependentUpon>AnimatedDataSeries.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
     <Page Include="Examples\3DChartChangePropertiesDynamically\ChangePropertiesDynamically.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\3DChartScatterSeriesOnWalls\Scatter3DOnChartWalls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\AnimatedDataSeries\AnimatedDataSeries.xaml">
       <SubType>Designer</SubType>
