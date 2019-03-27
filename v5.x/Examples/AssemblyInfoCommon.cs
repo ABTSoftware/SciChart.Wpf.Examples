@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("SciChart Ltd")]
 [assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2018, www.scichart.com")]
 [assembly: AssemblyTrademark("SCICHART™")]
-
+ 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("PublicPrivateKeyFile.snk")]
 
@@ -40,4 +40,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.3.0.11983")]
+[assembly: AssemblyVersion("5.3.1.12037")]
