@@ -39,7 +39,6 @@ namespace SciChart.Sandbox.Examples.MouseDragModifier3D
             SciChart.ZAxis.VisibleRange = new DoubleRange(0, 100);
 
 
-            //addAnnotation();
             AddAnnotation();
         }
 
@@ -57,6 +56,10 @@ namespace SciChart.Sandbox.Examples.MouseDragModifier3D
             boxAnnotation.StrokeWidth = 2;
             
             SciChart.Viewport3D.RootEntity.Children.Add(boxAnnotation);
+
+            var binding = new System.Windows.Data.Binding("RangeX");
+            binding.Source = boxAnnotation;
+            textBlock.SetBinding(System.Windows.Controls.TextBlock.TextProperty, binding);
         }
     }
 }

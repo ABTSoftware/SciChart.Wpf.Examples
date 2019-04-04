@@ -46,7 +46,7 @@
 
         </s3D:SciChart3DSurface>
 
-        <Ellipse Name="ellipse" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" Fill="Red" />
+        <TextBlock x:Name="textBlock" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsHitTestVisible="False" />
         
     </Grid>
 </UserControl>
