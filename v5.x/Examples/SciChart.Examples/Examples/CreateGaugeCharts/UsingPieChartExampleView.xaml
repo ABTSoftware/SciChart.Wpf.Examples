@@ -22,6 +22,10 @@
             <gauge:LegendPlacementToOrientationConverter x:Key="LegendPlacementToOrientationConverter"/>
 
             <Style x:Key="PieChartListBoxForegroundStyle" TargetType="ListBox">
+                <Setter Property="MinWidth" Value="160"/>
+                <Setter Property="Margin" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Foreground" Value="#FFDFE0E6" />
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
