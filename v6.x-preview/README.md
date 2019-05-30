@@ -4,6 +4,11 @@ Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.sci
 
 # Note: v6.x Preview
 
+This branch is for the .NET Core 3 version of SciChart, v6.0.0-preview 
+
+* Requires .NET Core 3 Preview 5 SDK or later
+* Requires Visual Studio 2019 
+
 This branch is in active development and breaking changes may be pushed. Not for production use! 
 
 ### Note: NuGet feed setup
