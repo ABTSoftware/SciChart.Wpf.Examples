@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.Spectrogram.SpectrogramDemoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="OnExampleLoaded"
+             Unloaded="OnExampleUnloaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible" />
+            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
+
+            <Style x:Key="AxisStyle" TargetType="s:AxisBase">
+                <Setter Property="DrawMajorBands" Value="False" />
+                <Setter Property="IsPrimaryAxis" Value="False" />
+                <Setter Property="AxisBandsFill" Value="Transparent" />
+                <Setter Property="DrawMajorGridLines" Value="false" />
+                <Setter Property="DrawMinorGridLines" Value="false" />
+
+                <Setter Property="MajorTickLineStyle">
+                    <Setter.Value>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Transparent" />
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="MinorTickLineStyle">
+                    <Setter.Value>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Transparent" />
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="#FF1C1C1E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           Margin="5">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="#279B27" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+
+        <s:HeatmapColorMap Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Margin="10"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Stretch"
+                            Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
+                            BorderBrush="#777"
+                            BorderThickness="1"
+                            ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
+                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                            Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
+                            Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
+                            Opacity="0.8"
+                            Orientation="Vertical"
+                            TextFormatting="0.00"/>
+
+        <s:SciChartSurface x:Name="sciChart2"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Margin="5 5 20 5">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries">
+                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Minimum="-70" Maximum="0">
+                            <s:HeatmapColorPalette.GradientStops>
+                                <GradientStop Offset="0" Color="Transparent" />
+                                <GradientStop Offset="0.0001" Color="DarkBlue" />
+                                <GradientStop Offset="0.2" Color="CornflowerBlue" />
+                                <GradientStop Offset="0.4" Color="DarkGreen" />
+                                <GradientStop Offset="0.6" Color="Chartreuse" />
+                                <GradientStop Offset="0.8" Color="Yellow" />
+                                <GradientStop Offset="1" Color="Red" />
+                            </s:HeatmapColorPalette.GradientStops>
+                        </s:HeatmapColorPalette>
+                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
+                </s:FastUniformHeatmapRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis Style="{StaticResource AxisStyle}" VisibleRange="{Binding Source={x:Reference Name=sciChart}, Path=XAxis.VisibleRange, Mode=TwoWay}" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis Style="{StaticResource AxisStyle}" Visibility="Hidden" FlipCoordinates="True" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

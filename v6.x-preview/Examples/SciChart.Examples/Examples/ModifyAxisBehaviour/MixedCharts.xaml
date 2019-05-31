@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ModifyAxisBehaviour.MixedCharts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="MixedCharts_OnLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <Grid>
+        <s:SciChartSurface Name="sciChart">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="Red"
+                                            XAxisId="XAxisLeft"
+                                            YAxisId="YAxisTop1" />
+                <s:FastLineRenderableSeries Stroke="Black"
+                                            XAxisId="XAxisLeft"
+                                            YAxisId="YAxisTop2" />
+                <s:FastLineRenderableSeries Stroke="Green"
+                                            XAxisId="XAxisBottom"
+                                            YAxisId="YAxisRight1" />
+                <s:FastLineRenderableSeries Stroke="Blue"
+                                            XAxisId="XAxisBottom"
+                                            YAxisId="YAxisRight2" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxes>
+                <s:NumericAxis AxisAlignment="Left"
+                               AxisTitle="X-Axis"
+                               Id="XAxisLeft" />
+                <s:DateTimeAxis AxisAlignment="Bottom"
+                                AxisTitle="X-Axis"
+                                Id="XAxisBottom" />
+            </s:SciChartSurface.XAxes>
+
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis AxisAlignment="Top"
+                               AxisTitle="Red Line"
+                               BorderBrush="Red"
+                               BorderThickness="0,0,0,1"
+                               Id="YAxisTop1"
+                               TickTextBrush="Red" />
+                <s:NumericAxis AxisAlignment="Top"
+                               AxisTitle="Black Line"
+                               BorderBrush="Black"
+                               BorderThickness="0,0,0,1"
+                               Id="YAxisTop2"
+                               TickTextBrush="Black" />
+
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Green Line"
+                               BorderBrush="Green"
+                               BorderThickness="0,0,0,1"
+                               Id="YAxisRight1"
+                               TickTextBrush="Green" />
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Blue Line"
+                               BorderBrush="Blue"
+                               BorderThickness="0,0,0,1"
+                               Id="YAxisRight2"
+                               TickTextBrush="Blue" />
+
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" />
+                    <s:ZoomExtentsModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

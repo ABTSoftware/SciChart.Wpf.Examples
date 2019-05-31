@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateStockCharts.CreateSimpleStockChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="CreateSciTradeChartLoaded"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
+            <StackPanel Orientation="Vertical">
+                <ToggleButton IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsRubberBandZoomEnabled, Mode=TwoWay}"
+                              Style="{StaticResource ZoomButtonStyle}"
+                              s:ToggleButtonExtensions.GroupName="CreateSciStockChart_ZoomGroup"/>
+
+                <ToggleButton IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsPanEnabled, Mode=TwoWay}"
+                              Style="{StaticResource PanButtonStyle}"
+                              s:ToggleButtonExtensions.GroupName="CreateSciStockChart_ZoomGroup"/>
+
+                <Button Command="{Binding Source={x:Reference Name=StockChart}, Path=AnimateZoomExtentsCommand}" Style="{StaticResource ZoomExtentsButtonStyle}"/>
+
+                <ext:FlyoutSeparator Background="#444"/>
+
+                <ToggleButton Margin="3" Style="{StaticResource PointerButtonStyle}"
+                              ToolTipService.ToolTip="Enable CursorModifier"
+                              IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsCursorEnabled, Mode=TwoWay}" 
+                              s:ToggleButtonExtensions.GroupName="CreateSciStockChart_CursorGroup"/>
+
+                <ToggleButton Margin="3" Style="{StaticResource CalloutButtonStyle}" 
+                              ToolTipService.ToolTip="Enable RolloverModifier"
+                              IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsRolloverEnabled, Mode=TwoWay}" 
+                              s:ToggleButtonExtensions.GroupName="CreateSciStockChart_CursorGroup"/>
+
+                <ext:FlyoutSeparator Background="#444"/>
+
+                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="CTRL" Padding="0">
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
+                            <TextBlock Text="Additional Controls" />
+                            <ext:FlyoutSeparator/>
+                            <CheckBox Margin="4" Content="SciStockChart.ShowLegend" IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=ShowLegend, Mode=TwoWay}" />
+                            <CheckBox Margin="4" Content="SciStockChart.IsAxisMarkersEnabled" IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsAxisMarkersEnabled, Mode=TwoWay}" />
+                            <CheckBox Margin="4" Content="SciStockChart.IsXAxisVisible" IsChecked="{Binding Source={x:Reference Name=StockChart}, Path=IsXAxisVisible, Mode=TwoWay}" />
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+                
+
+            </StackPanel>
+        </Border>
+
+        <!--  Create the SciStockChart. In the code-behind we append data and add series  -->
+        <s:SciStockChart x:Name="StockChart"
+                         Grid.Column="1">
+
+            <!--  Override any property of the built-in CategoryDateTimeAxis here  -->
+            <s:SciStockChart.XAxisStyle>
+                <Style TargetType="s:CategoryDateTimeAxis">
+                    <Setter Property="DrawMinorGridLines" Value="True" />
+                    <Setter Property="DrawMajorGridLines" Value="True" />
+                    <Setter Property="DrawMajorBands" Value="True" />
+                    <Setter Property="MinorsPerMajor" Value="5" />
+                    <Setter Property="TextFormatting" Value="dd MMM yyyy" />
+                    <Setter Property="GrowBy" Value="0, 0.1" />
+                </Style>
+            </s:SciStockChart.XAxisStyle>
+
+            <!--  Override any property of the built-in NumericAxis here  -->
+            <s:SciStockChart.YAxisStyle>
+                <Style TargetType="s:NumericAxis">
+                    <Setter Property="DrawMinorGridLines" Value="True" />
+                    <Setter Property="DrawMajorGridLines" Value="True" />
+                    <Setter Property="DrawMajorBands" Value="False" />
+                    <Setter Property="MinorsPerMajor" Value="5" />
+                    <Setter Property="TextFormatting" Value="0.0000" />
+                </Style>
+            </s:SciStockChart.YAxisStyle>
+
+            <s:SciStockChart.RenderableSeries>
+                <s:FastCandlestickRenderableSeries AntiAliasing="False" />
+            </s:SciStockChart.RenderableSeries>
+        </s:SciStockChart>
+
+    </Grid>
+</UserControl>

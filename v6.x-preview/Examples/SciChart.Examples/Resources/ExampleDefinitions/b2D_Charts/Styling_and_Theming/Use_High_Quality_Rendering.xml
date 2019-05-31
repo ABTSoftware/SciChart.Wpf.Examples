@@ -1,0 +1,37 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/StyleAChart/UseHighQualityRendering.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHighQualityRasterizer.png</ImagePath>
+  <IconPath>IconThemes</IconPath>
+  <ToolTipDescription>Demonstrates how to apply the new High Quality Rendering mode to a SciChartSurface for smooth anti-aliased lines and fills!</ToolTipDescription>
+  <Description>
+    SciChart now ships with [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17261/44/high-quality-vs-high-speed-vs-directx-renderer-plugins']four rasterizer plugins[/url] which use different algorithms to render the RenderableSeries to the screen. These are:
+
+    [b]#1 The HighSpeedRenderSurface[/b]: An integer coordinate, fast, software renderer (CPU Based). Produces jagged lines but it's very quick.
+
+    [b]#2 The HighQualityRenderSurface[/b]: A floating point coordinate software renderer (CPU Based). Produces the best quality image, but uses more CPU resources than HighSpeed.
+
+    [b]#3 The Direct3D11RenderSurface[/b]: A floating point, DirectX10 hardware renderer (GPU Based). Utilizes pixel shaders to offload as much computation to the GPU as possible. Produces Antialiased quality like the HQ renderer, but faster in many cases than the HS renderer. Requires a DirectX10 Video Card and Windows Vista, 7, 8, 8.1 or later to operate.
+    
+    [b]#4 The XamlRenderSurface[/b]: A vector renderer which uses WPF Canvas and allows high-quality, scalable export to XPS, Vector Format or Printing. 
+    
+    [i]Note that some renderers are only available in the source-code editions of SciChart[/i].
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17261/44/high-quality-vs-high-speed-vs-directx-renderer-plugins']SciChart Renderer Plugins[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17262/44/creating-and-deploying-applications-with-the-direct3d10rendersurface']Deploying Applications with the Direct3D11RenderSurface[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17264/44/easy-fallback-from-directx-to-software-rendering-without-code-behind']Easy Fallback from DirectX to Software Rendering[/url]
+    - [url='http://www.scichart.com/how-fast-is-scichart-wpf-chart/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseHighQualityRendering.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseHighQualityRendering.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseHighQualityRenderingViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Style</Features>
+    <Features>HighQuality</Features>
+    <Features>RenderSurface</Features>
+  </Features>
+</ExampleDefinition>

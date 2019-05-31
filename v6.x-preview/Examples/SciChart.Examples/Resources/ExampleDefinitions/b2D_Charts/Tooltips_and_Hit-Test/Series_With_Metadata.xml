@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/SeriesWithMetadata/SeriesWithMetadata.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>Demonstrates how to use metadata with series.</ToolTipDescription>
+  <Description>
+    Demonstrates how to use [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.IPointMetadata_members.html']IPointMetadata[/url] with series.
+
+    The PointMetadata API allows you to tag each data-point with an optional business object. You can do this by creating any class that implements [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.IPointMetadata_members.html']IPointMetadata[/url] and passing to the Append/Update/Insert methods on DataSeries.
+    
+    The PointMetadata class can then be passed through to Tooltips, Drawing and Hit-Test stages. 
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602~Append.html']XyDataSeries.Append[/url] overloads with PointMetadata
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602~Append.html']OhlcDataSeries.Append[/url] overloads with PointMetadata
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesWithMetadata/SeriesWithMetadata.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesWithMetadata/SeriesWithMetadata.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesWithMetadata/AnnotatedPointMarker.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesWithMetadata/BudgetPointMetadata.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesWithMetadata/GainLossPaletteProvider.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Selection</Features>
+  </Features>
+</ExampleDefinition>

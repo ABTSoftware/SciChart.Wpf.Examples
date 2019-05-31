@@ -1,0 +1,34 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateSimpleChart/DigitalBandSeriesChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoBandSeries.png</ImagePath>
+  <IconPath>IconBand</IconPath>
+  <ChartTypes>Candlestick</ChartTypes>
+  <ToolTipDescription>Generates a Digital (Step) Band Series chart in code</ToolTipDescription>
+  <Description>
+    Generates a digital Band Series chart in code, by using a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBandRenderableSeries.html']FastBandRenderableSeries[/url] with the IsDigitalLine property set to true. The band series requires an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url], which contains one X-point and two Y-points. 
+    
+    Dual lines are drawn by Stroke, StrokeY1 and shaded bands are drawn using FillY1 and Fill, depending on whether Y1 is greater than Y2.
+
+    [b][i]Tip![/i][/b] 
+    
+    If you have data where Y1 is greater than Y2 always, you'll get an envelope effect. Great for rendering confidence intervals, error margins or Bollinger Bands!
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBandRenderableSeries.html']FastBandRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries Type[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/DigitalBandSeriesChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/DigitalBandSeriesChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Band</Features>
+    <Features>HiLow</Features>
+  </Features>
+</ExampleDefinition>
+
+<!--&lt;Hyperlink TargetName="Using ThemeManager"&gt;Using ThemeManager&lt;/Hyperlink&gt;-->

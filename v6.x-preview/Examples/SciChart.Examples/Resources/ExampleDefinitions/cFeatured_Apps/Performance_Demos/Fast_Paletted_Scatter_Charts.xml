@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/PerformanceDemos2D/ScatterPerf/FastPalettedScatterCharts.xaml</View>
+  <ViewModel></ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOscilloscope.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    Demonstrates the performance of SciChart's ExtremeScatterRenderableSeries when a paletteprovider is attached
+  </ToolTipDescription>
+  <Description>
+    The PaletteProvider feature allows you to change color of a scatter point, line segment, mountain segment, OHLC/Candlestick bar or column based on the data-value, or other data in your data-point.
+
+    This feature was notoriously slow when used in conjunction with XyScatterRenderableSeries and users demanded more performance.
+
+    As a result, we developed the ExtremeScatterRenderableSeries - a DirectX only scatter series type optimised for Big-Data and color changes via a PaletteProvider-like API. 
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/FastPalettedScatterCharts.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/FastPalettedScatterCharts.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+    <Features>Scatter</Features>
+  </Features>
+</ExampleDefinition>

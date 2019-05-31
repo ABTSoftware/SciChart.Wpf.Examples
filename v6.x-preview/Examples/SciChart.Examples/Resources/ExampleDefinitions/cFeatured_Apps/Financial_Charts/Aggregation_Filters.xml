@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml</View>
+  <ViewModel>Examples.SeeFeaturedApplication.AggregationFilters.AggregationFiltersViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+  <IconPath>IconCandlestick</IconPath>
+  <ToolTipDescription>
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5
+  </ToolTipDescription>
+  <Description>
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5.
+
+    Given a data-source of trading ticks or quotes, we aggregate into bars (Time bars, Range bars, Volume bars, Tick Bars and Renko Bars).
+
+    Each bar type is created by a different filter type, and we use the extension methods [b]DataSeries.AggregateByTime[/b], [b]DataSeries.AggregateByCount[/b], [b]DataSeries.AggregateByVolume[/b], [b]DataSeries.AggregateByRange[/b] and [b]DataSeries.AggregateByRenko[/b]. This creates a filter around the original tick data. Any changes to the tick data are reflected in the resulting bars on the chart. 
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stock</Features>
+    <Features>Candlestick</Features>
+    <Features>Ohlc</Features>
+    <Features>VerticalChartGroup</Features>
+    <Features>Trading</Features>
+  </Features>
+</ExampleDefinition>
