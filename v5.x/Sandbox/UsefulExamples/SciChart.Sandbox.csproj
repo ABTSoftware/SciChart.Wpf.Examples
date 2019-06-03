@@ -290,6 +290,11 @@
       <DependentUpon>ScrollbarMvvmAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxisViewModel.cs" />
+    <Compile Include="Examples\StockChartLogAxis\StockChartLogAxis.xaml.cs">
+      <DependentUpon>StockChartLogAxis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\StockChartLogAxis\StockChartLogAxisViewModel.cs" />
+    <Compile Include="Examples\StockChartLogAxis\SwitchAxisTypeBehavior.cs" />
     <Compile Include="Examples\StringsOnXAxis\StringsOnXAxis.xaml.cs">
       <DependentUpon>StringsOnXAxis.xaml</DependentUpon>
     </Compile>
@@ -444,6 +449,14 @@
     <Page Include="Examples\ScrollbarMvvmAxis\ScrollbarMvvmAxis.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\StockChartLogAxis\StockChartLogAxis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\StockChartLogAxis\StockChartLogAxisStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\StringsOnXAxis\StringsOnXAxis.xaml">
       <SubType>Designer</SubType>

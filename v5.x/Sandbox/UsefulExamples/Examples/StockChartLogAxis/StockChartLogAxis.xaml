@@ -1,0 +1,171 @@
+﻿<Window x:Class="SciChart.Sandbox.Examples.StockChartLogAxis.StockChartLogAxis"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:examples="clr-namespace:SciChart.Sandbox.Examples"
+        xmlns:stockChartLogAxis="clr-namespace:SciChart.Sandbox.Examples.StockChartLogAxis"
+        xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+        mc:Ignorable="d"
+        Title="StockChartLogAxis" Height="450" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StockChartLogAxisStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ext:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter"/>
+            <ext:IsModifierTypeConverter x:Key="IsModifierTypeConverter" />
+
+            <stockChartLogAxis:StockChartLogAxisViewModel x:Key="viewModel"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource viewModel}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="Use LogarithmicYAxis?" x:Name="useLogAxisCheckbox" IsChecked="False" ToolTip="Check to swap between Log and Linear Y-Axis"/>
+        </StackPanel>
+
+        <s:SciChartSurface x:Name="PriceChart" s:SciChartGroup.VerticalChartGroup="myCharts" Grid.Row="1" 
+                           stockChartLogAxis:SwitchAxisTypeBehavior.UseAlternateYAxis="{Binding ElementName=useLogAxisCheckbox, Path=IsChecked}">
+
+            <!--  Create Renderable Series, which bind to DataSet series 1:1 and in order  -->
+            <s:SciChartSurface.RenderableSeries>
+                <!--  Series 0..3 are shown or hidden based on ChartType property in ViewModel bound to IsVisible on series  -->
+                <!--  Only one is shown at any one time and these series show the data for DataSet.Series[0]  -->
+                <s:FastCandlestickRenderableSeries DataSeries="{Binding PriceData}"
+                                                       ResamplingMode="MinMax"
+                                                       Style="{StaticResource PriceCandlestickSeriesStyle}" 
+                                                       x:Name="series1">
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastCandlestickRenderableSeries>
+                <s:FastOhlcRenderableSeries DataSeries="{Binding PriceData}"
+                                                ResamplingMode="MinMax"
+                                                Style="{StaticResource PriceOhlcSeriesStyle}" >
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastOhlcRenderableSeries>
+                <s:FastMountainRenderableSeries DataSeries="{Binding PriceData}"
+                                                    ResamplingMode="MinMax"
+                                                    Style="{StaticResource PriceMountainSeriesStyle}">
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastMountainRenderableSeries>
+                <s:FastLineRenderableSeries DataSeries="{Binding PriceData}" Style="{StaticResource PriceLineSeriesStyle}">
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastLineRenderableSeries>
+                <s:FastColumnRenderableSeries DataSeries="{Binding PriceData}"
+                                                  ResamplingMode="MinMax"
+                                                  Style="{StaticResource PriceColumnSeriesStyle}" >
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+
+                </s:FastColumnRenderableSeries>
+                <!--  Series 4, 5, are always visible  -->
+                <s:FastLineRenderableSeries DataSeries="{Binding Sma50Series}" Style="{StaticResource Ma50SeriesStyle}" >
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastLineRenderableSeries>
+                <s:FastLineRenderableSeries DataSeries="{Binding Sma200Series}" Style="{StaticResource Ma200SeriesStyle}">
+                    <s:CursorModifier.SnapToSeries>
+                        <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem"/>
+                        </MultiBinding>
+                    </s:CursorModifier.SnapToSeries>
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create X Axis. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.XAxis>
+                <s:CategoryDateTimeAxis DrawMajorBands="True" GrowBy="0.0, 0.1" VisibleRange="{Binding CDTAVisibleRange, Mode=TwoWay}"/>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create Y Axis  -->
+            <stockChartLogAxis:SwitchAxisTypeBehavior.DefaultYAxis>
+                <s:NumericAxis AutoRange="Always"
+                               GrowBy="0.1, 0.1"
+                               TextFormatting="{Binding PriceChartTextFormatting}" />
+            </stockChartLogAxis:SwitchAxisTypeBehavior.DefaultYAxis>
+
+            <!-- Create alternative logarithmic YAxis and allow user to switch -->
+            <stockChartLogAxis:SwitchAxisTypeBehavior.AlternativeYAxis>
+                <s:LogarithmicNumericAxis AutoRange="Always"
+                               GrowBy="0.1, 0.1"
+                               TextFormatting="{Binding PriceChartTextFormatting}" 
+                               ScientificNotation="None" 
+                               LogarithmicBase="2"/>
+            </stockChartLogAxis:SwitchAxisTypeBehavior.AlternativeYAxis>
+
+            <!--  Create and enable ChartModifiers through bindings  -->
+            <s:SciChartSurface.ChartModifier>
+
+                <s:ModifierGroup x:Name="Modifier" s:MouseManager.MouseEventGroup="MySharedMouseGroup">
+                    <s:RolloverModifier x:Name="RolloverMod"
+                                            ReceiveHandledEvents="True" 
+                                            SourceMode="{Binding SourceMode}"
+                                            ShowAxisLabels="{Binding ShowAxisLabels}"
+                                            ShowTooltipOn="{Binding RolloverMode}"
+                                            IsEnabled="{Binding ChartModifier, Mode=OneWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=Rollover}" />
+                    <s:CursorModifier x:Name="CursorMod" IsEnabled="{Binding ChartModifier, Mode=OneWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=CrosshairsCursor}"
+                                          ShowAxisLabels="{Binding ShowAxisLabels}"
+                                          ReceiveHandledEvents="True"
+                                          ShowTooltipOn="{Binding RolloverMode}"
+                                          ShowTooltip="True" 
+                                          SourceMode="{Binding SourceMode}"
+                                          />
+                    <s:MouseWheelZoomModifier ActionType="Zoom" 
+                                                  ReceiveHandledEvents="True"
+                                                  XyDirection="XYDirection" 
+                                                  x:Name="MouseWheelZoomMod" />
+                    <s:RubberBandXyZoomModifier IsEnabled="{Binding ChartModifier, Mode=OneWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=RubberBandZoom}"
+                                                    ReceiveHandledEvents="True"
+                                                    IsXAxisOnly="True" >
+                    </s:RubberBandXyZoomModifier>
+                    <s:YAxisDragModifier/>
+                    <s:XAxisDragModifier/>
+                    <s:ZoomPanModifier x:Name="ZoomPanMod" 
+                                           ClipModeX="None"
+                                           ReceiveHandledEvents="True"
+                                           IsEnabled="{Binding ChartModifier, Mode=OneWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=ZoomPan}"/>
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</Window>
