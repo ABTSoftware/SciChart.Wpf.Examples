@@ -223,6 +223,7 @@
       <DependentUpon>CustomModifierSandbox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CustomModifiersSandbox\CustomModifierSandboxViewModel.cs" />
+    <Compile Include="Examples\CustomModifiersSandbox\DetectClicksOnChartPartsModifier.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\SimpleDataPointEditModifier.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\SimpleDataPointSelectionModifier.cs" />
     <Compile Include="Examples\CustomModifiersSandbox\SimpleFreeDrawModifier.cs" />

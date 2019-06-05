@@ -5,6 +5,7 @@
         xmlns:customModifiers="clr-namespace:SciChart.Sandbox.ExampleSandbox.CustomModifiers"
         xmlns:customModifiers1="clr-namespace:SciChart.Sandbox.Examples.CustomModifiers"
         xmlns:converters="clr-namespace:SciChart.Sandbox.Converters"
+        xmlns:customModifiersSandbox="clr-namespace:SciChart.Sandbox.Examples.CustomModifiersSandbox"
         Title="CustomModifierSandbox v1.1" Height="600" Width="1000">
     
     <Window.Resources>
@@ -81,6 +82,7 @@
                     <customModifiers1:YAxisMousewheelZoomModifier IsEnabled="{Binding ElementName=yAxisMousewheelEnabled, Path=IsChecked}"/>
                     <s:MouseWheelZoomModifier IsEnabled="{Binding ElementName=yAxisMousewheelEnabled, Path=IsChecked, Converter={StaticResource InverseBoolConverter}}"/>
                     <s:ZoomExtentsModifier/>
+                    <customModifiersSandbox:DetectClicksOnChartPartsModifier/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
