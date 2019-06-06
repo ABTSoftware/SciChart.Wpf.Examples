@@ -214,6 +214,13 @@
       <DependentUpon>RangeXAnnotation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotationViewModel.cs" />
+    <Compile Include="Examples\CustomAxisBandsProvider\AxisBandsTooltipModifier.cs" />
+    <Compile Include="Examples\CustomAxisBandsProvider\MainViewModel.cs" />
+    <Compile Include="Examples\CustomAxisBandsProvider\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CustomAxisBandsProvider\WeekDaysAxisCalendar.cs" />
+    <Compile Include="Examples\CustomAxisBandsProvider\XAxisBandsProvider.cs" />
     <Compile Include="Examples\CustomCompositeAnnotationExample\CompositeLineSquareAnnotation.cs" />
     <Compile Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationExample.xaml.cs">
       <DependentUpon>CustomCompositeAnnotationExample.xaml</DependentUpon>
@@ -249,6 +256,9 @@
       <DependentUpon>DoubleAxisAsDateTimeAxis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\DoubleAxisAsDateTimeAxis\OADateLabelProvider.cs" />
+    <Compile Include="Examples\DoubleScaleDiscontinuousDateTimeAxis\MainViewModel.cs" />
+    <Compile Include="Examples\DoubleScaleDiscontinuousDateTimeAxis\MainWindow.xaml.cs" />
+    <Compile Include="Examples\DoubleScaleDiscontinuousDateTimeAxis\WeekDaysAxisCalendar.cs" />
     <Compile Include="Examples\EliminatingFlickerInDirectXRenderer\EliminatingFlicker.xaml.cs">
       <DependentUpon>EliminatingFlicker.xaml</DependentUpon>
     </Compile>
@@ -383,6 +393,10 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="Examples\CustomAxisBandsProvider\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationExample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,6 +416,10 @@
     <Page Include="Examples\DoubleAxisAsDateTimeAxis\DoubleAxisAsDateTimeAxis.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\DoubleScaleDiscontinuousDateTimeAxis\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\EliminatingFlickerInDirectXRenderer\EliminatingFlicker.xaml">
       <SubType>Designer</SubType>
