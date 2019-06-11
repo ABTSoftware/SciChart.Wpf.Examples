@@ -7,49 +7,48 @@ namespace CustomAxisBandsProvider
 {
     public static class ColorProvider
     {
-        public static Color[] PaletteColors = {Colors.Green, Colors.Gray, Colors.Blue, Colors.AliceBlue, Colors.Aqua};
+        public static Color AxisBandColor = (Color)ColorConverter.ConvertFromString("#B4642123");
     }
 
     public class XAxisBandsProvider : DateTimeAxisBandsProvider
     {
+        Random _rand = new Random();
+
         public XAxisBandsProvider()
         {
-            var rand = new Random();
+            var count = _rand.Next(5, 10);
+            var incr = (VisibleRange.Max - VisibleRange.Min).Days / count;
 
-            var startDataDate = new DateTime(2017, 9, 1, 12, 0, 0);
-            var startBandsDate = startDataDate.AddYears(-1);
-            for (int i = 0; i < 100; ++i)
+            for (var start = VisibleRange.Min; start < VisibleRange.Max; start = start.AddDays(incr))
             {
-                var endDate = startBandsDate.AddDays(rand.Next(1, 100));
+                var bandRange = new DateRange(start, start.AddDays(_rand.Next(incr / 2)));
 
-                var bandInfo =
-                    new AxisBandInfo<DateRange>(new DateRange(startBandsDate, endDate),
-                        ColorProvider.PaletteColors[i % ColorProvider.PaletteColors.Length]);
+                var bandInfo = new AxisBandInfo<DateRange>(bandRange, ColorProvider.AxisBandColor);
                 AxisBands.Add(bandInfo);
-
-                startBandsDate = endDate.AddDays(rand.Next(1, 100));
             }
         }
+
+        public DateRange VisibleRange => new DateRange(new DateTime(2017, 9, 1), new DateTime(2018, 9, 1));
     }
 
     public class YAxisBandsProvider : NumericAxisBandsProvider
     {
+        Random _rand = new Random();
+
         public YAxisBandsProvider()
         {
-            var rand = new Random();
+            var count = _rand.Next(5, 10);
+            var incr = VisibleRange.Diff / count;
 
-            var startRange = new DoubleRange(-100, -90);
-            for (int i = 0; i < 100; ++i)
+            for (var start = VisibleRange.Min; start < VisibleRange.Max; start += incr)
             {
-                var bandInfo =
-                    new AxisBandInfo<DoubleRange>(startRange,
-                        ColorProvider.PaletteColors[i % ColorProvider.PaletteColors.Length]);
-                AxisBands.Add(bandInfo);
+                var bandRange = new DoubleRange(start, start + _rand.Next((int)incr / 2));
 
-                var min = startRange.Max + rand.Next(1, 100);
-                var max = min + rand.Next(1, 100);
-                startRange = new DoubleRange(min, max);
+                var bandInfo = new AxisBandInfo<DoubleRange>(bandRange, ColorProvider.AxisBandColor);
+                AxisBands.Add(bandInfo);
             }
         }
+
+        public DoubleRange VisibleRange => new DoubleRange(-100, 100);
     }
 }

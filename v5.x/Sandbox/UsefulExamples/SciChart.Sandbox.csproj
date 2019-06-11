@@ -214,12 +214,10 @@
       <DependentUpon>RangeXAnnotation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\CompositeAnnotationsMvvm\RangeXAnnotationViewModel.cs" />
-    <Compile Include="Examples\CustomAxisBandsProvider\AxisBandsTooltipModifier.cs" />
-    <Compile Include="Examples\CustomAxisBandsProvider\MainViewModel.cs" />
+    <Compile Include="Examples\CustomAxisBandsProvider\AxisBandsInfoModifier.cs" />
     <Compile Include="Examples\CustomAxisBandsProvider\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Examples\CustomAxisBandsProvider\WeekDaysAxisCalendar.cs" />
     <Compile Include="Examples\CustomAxisBandsProvider\XAxisBandsProvider.cs" />
     <Compile Include="Examples\CustomCompositeAnnotationExample\CompositeLineSquareAnnotation.cs" />
     <Compile Include="Examples\CustomCompositeAnnotationExample\CustomCompositeAnnotationExample.xaml.cs">

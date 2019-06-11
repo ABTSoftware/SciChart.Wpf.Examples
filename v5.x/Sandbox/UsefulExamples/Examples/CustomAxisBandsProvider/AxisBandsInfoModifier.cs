@@ -20,13 +20,13 @@ namespace CustomAxisBandsProvider
         public AxisBandsInfo YAxisBandInfo { get; set; }
     }
 
-    public class AxisBandsTooltipModifier : ChartModifierBase
+    public class AxisBandsInfoModifier : ChartModifierBase
     {
         // Defines the AxisBandsInfo DependencyProperty.
         public static readonly DependencyProperty ChartBandsInfoProperty =
-            DependencyProperty.Register("ChartBandsInfo", typeof(ChartBandsInfo), typeof(AxisBandsTooltipModifier), new PropertyMetadata(null));
+            DependencyProperty.Register("ChartBandsInfo", typeof(ChartBandsInfo), typeof(AxisBandsInfoModifier), new PropertyMetadata(null));
 
-        public AxisBandsTooltipModifier()
+        public AxisBandsInfoModifier()
         {
             SetCurrentValue(ChartBandsInfoProperty, new ChartBandsInfo
             {

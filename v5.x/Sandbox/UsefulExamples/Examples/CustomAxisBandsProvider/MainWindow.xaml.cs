@@ -28,30 +28,5 @@ namespace CustomAxisBandsProvider
         {
             InitializeComponent();
         }
-
-        private void Window_OnLoaded(object o, RoutedEventArgs e)
-        {
-            DataContext = new MainViewModel();
-        }
-
-        private void OnLoadDataClick(object sender, RoutedEventArgs e)
-        {
-            var dataSeries = new XyDataSeries<DateTime, double>();
-
-            var startDate = new DateTime(2017, 9, 1, 12, 0, 0);
-
-            for (int i = 0; i < 30; ++i)
-            {
-                var date = startDate.AddDays(i);
-
-
-                dataSeries.Append(date, i * 10);
-            }
-
-            LineRenderableSeries.DataSeries = dataSeries.ToDiscontinuousSeries(new WeekDaysAxisCalendar());
-            LineRenderableSeries2.DataSeries = LineRenderableSeries.DataSeries;
-
-            LineRenderableSeries.DataSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
-        }
     }
 }
