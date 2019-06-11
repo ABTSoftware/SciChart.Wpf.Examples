@@ -108,7 +108,7 @@
                     <!-- These are changed by user controls declared above in the example -->
                     <s3D:WaterfallRenderableSeries3D.Style>
                         <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <Setter Property="Stroke" Value="Blue" />
+                            <Setter Property="Stroke" Value="Transparent" />
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="StrokeThickness" Value="2" />
                             <Setter Property="SliceThickness" Value="0" />
@@ -128,12 +128,12 @@
                                 <!-- When ckbStrkTransparent is checked, we set both strokes to transparent to give a clearer view of the fill -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkTransparent}}" Value="True">
                                     <Setter Property="ZStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
-                                    <Setter Property="ZStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
+                                    <Setter Property="YStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
                                 </DataTrigger>
                                 <!-- When ckbStrkSolid is checked, we set both strokes to a solid color brush -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkSolidColor}}" Value="True">
                                     <Setter Property="ZStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
-                                    <Setter Property="ZStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
+                                    <Setter Property="YStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
                                 </DataTrigger>
                                 <!-- The YColorMapping applies a BrushColorPalette to the fill in the Y direction -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillY}}" Value="True">
