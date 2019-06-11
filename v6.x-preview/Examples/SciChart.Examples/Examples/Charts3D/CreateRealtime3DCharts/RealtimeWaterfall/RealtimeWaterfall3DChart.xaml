@@ -10,140 +10,153 @@
              mc:Ignorable="d"
              Loaded="OnExampleLoaded"
              Unloaded="OnExampleUnloaded"
-             d:DesignHeight="300" d:DesignWidth="300">
-  <Grid>
-    <Grid.Resources>
-      <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
-        <s3D:GradientColorPalette.GradientStops>
-          <GradientStop Offset="0" Color="Red"/>
-          <GradientStop Offset="0.5" Color="Orange"/>
-          <GradientStop Offset="1" Color="Green"/>
-        </s3D:GradientColorPalette.GradientStops>
-      </s3D:GradientColorPalette>
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
+                <s3D:GradientColorPalette.GradientStops>
+                    <GradientStop Offset="0" Color="Red"/>
+                    <GradientStop Offset="0.25" Color="Orange"/>
+                    <GradientStop Offset="0.5" Color="Yellow"/>
+                    <GradientStop Offset="0.75" Color="Green"/>
+                    <GradientStop Offset="1" Color="DarkGreen"/>
+                </s3D:GradientColorPalette.GradientStops>
+            </s3D:GradientColorPalette>
 
-      <Style x:Key="WaterfallSeriesStyle" TargetType="s3D:WaterfallRenderableSeries3D">
-        <Setter Property="Stroke" Value="#773333FF" />
-        <Setter Property="Opacity" Value="0.8" />
+            <s3D:GradientColorPalette x:Key="StrokeColorPalette" IsStepped="False">
+                <s3D:GradientColorPalette.GradientStops>
+                    <GradientStop Offset="0" Color="Crimson"/>
+                    <GradientStop Offset="0.33" Color="DarkOrange"/>
+                    <GradientStop Offset="0.67" Color="LimeGreen"/>
+                    <GradientStop Offset="1" Color="LimeGreen"/>
+                </s3D:GradientColorPalette.GradientStops>
+            </s3D:GradientColorPalette>
+
+            <Style x:Key="WaterfallSeriesStyle" TargetType="s3D:WaterfallRenderableSeries3D">
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="SliceThickness" Value="2"/>
                 <Setter Property="ClipMode" Value="{Binding Source={x:Reference Name=ckbClipMode}, Path=SelectedValue}"/>
-        <Setter Property="ZColorMapping" Value="{x:Null}"/>
-        <Setter Property="YColorMapping" Value="{x:Null}"/>
-        <Style.Triggers>
+                <Setter Property="ZColorMapping" Value="{x:Null}"/>
+                <Setter Property="YColorMapping" Value="{x:Null}"/>
+                <Setter Property="YStrokeColorMapping" Value="{StaticResource StrokeColorPalette}"/>
+                <Style.Triggers>
                     <DataTrigger Binding="{Binding Source={x:Reference Name=ckbFillY}, Path=IsChecked}" Value="True">
-            <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
-          </DataTrigger>
+                        <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}"/>
+                    </DataTrigger>
                     <DataTrigger Binding="{Binding Source={x:Reference Name=ckbFillZ}, Path=IsChecked}" Value="True">
-            <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}"/>
-          </DataTrigger>
-        </Style.Triggers>
-      </Style>
+                        <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
 
-       <Style x:Key="MeshSeriesStyle" TargetType="s3D:SurfaceMeshRenderableSeries3D">
-           <Setter Property="Stroke" Value="#773333FF" />
-           <Setter Property="Opacity" Value="0.8" />
-           <Setter Property="MeshColorPalette" Value="{StaticResource GradientColorPalette}" />
-       </Style>
+            <Style x:Key="MeshSeriesStyle" TargetType="s3D:SurfaceMeshRenderableSeries3D">
+                <Setter Property="Stroke" Value="#773333FF" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="MeshColorPalette" Value="{StaticResource GradientColorPalette}" />
+            </Style>
 
-       <ObjectDataProvider x:Key="ClipModeEnum" MethodName="GetValues"
+            <ObjectDataProvider x:Key="ClipModeEnum" MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="s3D:ClipMode"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
 
-       <Style x:Key="MyRadioButton" TargetType="{x:Type RadioButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid>
-                            <CheckBox
+            <Style x:Key="MyRadioButton" TargetType="{x:Type RadioButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RadioButton}">
+                            <Grid>
+                                <CheckBox
                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, 
                                 Path=IsChecked, Mode=TwoWay}"
                                 IsHitTestVisible="False" Content="{TemplateBinding Content}" />
-                            <CheckBox
+                                <CheckBox
                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, 
                             Path=IsChecked, Mode=TwoWay}"   
                                 Content="{TemplateBinding Content}" Opacity="0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-    </Grid.Resources>
-    
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+        </Grid.Resources>
 
-    <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
-    <!--  to the chart and is included for example purposes.  -->
-    <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}" >
-      <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
                       Content="CTRL"
                       FontSize="10"
                       Padding="0" 
                       x:Name="CTRLButton">
-        <ext:FlyoutMenuButton.PopupContent>
-          <StackPanel Orientation="Vertical" MinWidth="150">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
 
-            <!-- Checkboxes to decide how the chart should be filled -->
-            <TextBlock FontSize="12" Text="Gradient fill direction:" />
-          
-           <RadioButton x:Name="ckbFillY" FontSize="12" Margin="4" Content="Along Y Axis" IsChecked="True" GroupName="GradientFillDirection" Style="{StaticResource MyRadioButton}"/>
-           <RadioButton x:Name="ckbFillZ" FontSize="12" Margin="4" Content="Along Z Axis" GroupName="GradientFillDirection" Style="{StaticResource MyRadioButton}"/>
+                        <!-- Checkboxes to decide how the chart should be filled -->
+                        <TextBlock FontSize="12" Text="Gradient fill direction:" />
 
-           <ext:FlyoutSeparator/>
+                        <RadioButton x:Name="ckbFillY" FontSize="12" Margin="4" Content="Along Y Axis" IsChecked="True" GroupName="GradientFillDirection" Style="{StaticResource MyRadioButton}"/>
+                        <RadioButton x:Name="ckbFillZ" FontSize="12" Margin="4" Content="Along Z Axis" GroupName="GradientFillDirection" Style="{StaticResource MyRadioButton}"/>
 
-            <!-- Checkbox to decide which data points appear -->
-            <TextBlock FontSize="12" Text="Clip values:" />
-            <ComboBox  FontSize="12" Margin="4" x:Name="ckbClipMode" ItemsSource="{Binding Source={StaticResource ClipModeEnum}}" SelectedItem="{x:Static s3D:ClipMode.BelowZero}"/>
-        </StackPanel>
-        </ext:FlyoutMenuButton.PopupContent>
-      </ext:FlyoutMenuButton>
-        
-      <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
+                        <ext:FlyoutSeparator/>
+
+                        <!-- Checkbox to decide which data points appear -->
+                        <TextBlock FontSize="12" Text="Clip values:" />
+                        <ComboBox  FontSize="12" Margin="4" x:Name="ckbClipMode" ItemsSource="{Binding Source={StaticResource ClipModeEnum}}" SelectedItem="{x:Static s3D:ClipMode.BelowZero}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
                             Content="MESH" FontSize="9"
                             Padding="0">
-        <ext:FlyoutMenuButton.PopupContent>
-            <StackPanel>
-                <TextBlock FontSize="12" Text="Change series Type:"/>
-                <ComboBox SelectionChanged="SelectedTypeChanged" SelectedIndex="1">
-                    <ComboBox.Items>
-                        <system:String>Surface Mesh</system:String>
-                        <system:String>Waterfall</system:String>
-                    </ComboBox.Items>
-                </ComboBox>
-            </StackPanel>
-        </ext:FlyoutMenuButton.PopupContent>
-    </ext:FlyoutMenuButton>
-        
-    </ext:SciChart3DInteractionToolbar>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel>
+                        <TextBlock FontSize="12" Text="Change series Type:"/>
+                        <ComboBox SelectionChanged="SelectedTypeChanged" SelectedIndex="1">
+                            <ComboBox.Items>
+                                <system:String>Surface Mesh</system:String>
+                                <system:String>Waterfall</system:String>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-    <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1"
+        </ext:SciChart3DInteractionToolbar>
+
+        <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1"
                            BorderThickness="0"
                            WorldDimensions="200,100,200">
-      <s3D:SciChart3DSurface.Camera>
-        <s3D:Camera3D ZoomToFitOnAttach="True"/>
-      </s3D:SciChart3DSurface.Camera>
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+            </s3D:SciChart3DSurface.Camera>
 
-      <s3D:SciChart3DSurface.RenderableSeries>
+            <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:WaterfallRenderableSeries3D x:Name="WaterfallSeries" Style="{StaticResource WaterfallSeriesStyle}" />
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="MeshSeries" Style="{StaticResource MeshSeriesStyle}" IsVisible="False"/>
-      </s3D:SciChart3DSurface.RenderableSeries>
+            </s3D:SciChart3DSurface.RenderableSeries>
 
-      <s3D:SciChart3DSurface.XAxis>
-        <s3D:NumericAxis3D />
-      </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D />
+            </s3D:SciChart3DSurface.XAxis>
 
-      <s3D:SciChart3DSurface.YAxis>
-        <s3D:NumericAxis3D VisibleRange="0, 5"/>
-      </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D VisibleRange="0, 5"/>
+            </s3D:SciChart3DSurface.YAxis>
 
-      <s3D:SciChart3DSurface.ZAxis>
-        <s3D:NumericAxis3D/>
-      </s3D:SciChart3DSurface.ZAxis>
-    </s3D:SciChart3DSurface>
-  </Grid>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.ZAxis>
+        </s3D:SciChart3DSurface>
+    </Grid>
 </UserControl>

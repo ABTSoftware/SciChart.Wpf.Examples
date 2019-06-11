@@ -54,12 +54,12 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 sciChart.XAxis.VisibleRange = new DoubleRange(3, 6);
                 sciChart.ZoomExtentsY();
             }
-            panXYDirection.ItemsSource = Enum.GetNames(typeof(XyDirection));
 
+            panXYDirection.ItemsSource = Enum.GetNames(typeof(XyDirection));
         }
 
         // Optional: demonstrates changing which direction the ZoomPanModifier operates in
-        private void ZoomExtentsY_Checked(object sender, RoutedEventArgs e)
+        private void ZoomExtentsY_OnStateChanged(object sender, RoutedEventArgs e)
         {
             if (zoomPanModifier != null)
             {
@@ -71,37 +71,13 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
         {
             if (zoomPanModifier != null)
             {
-                zoomPanModifier.XyDirection = (XyDirection)Enum.Parse(typeof(XyDirection), (string)panXYDirection.SelectedValue);
-                
-                switch (zoomPanModifier.XyDirection)
+                zoomPanModifier.XyDirection = (XyDirection) Enum.Parse(typeof(XyDirection), (string) panXYDirection.SelectedValue);
+
+                if (zoomExtentsPanel != null)
                 {
-                    case XyDirection.XYDirection:
-
-                        if (chkZoomExtentsY != null)
-                        {
-                            chkZoomExtentsY.Visibility = Visibility.Collapsed;
-                            whenPanXTextBlock.Visibility = Visibility.Collapsed;
-                        }
-                        break;
-
-
-                    case XyDirection.XDirection:
-
-                        if (chkZoomExtentsY != null)
-                        {
-                            chkZoomExtentsY.Visibility = Visibility.Visible;
-                            whenPanXTextBlock.Visibility = Visibility.Visible;
-                        }
-                        break;
-
-                    case XyDirection.YDirection:
-
-                        if (chkZoomExtentsY != null)
-                        {
-                            chkZoomExtentsY.Visibility = Visibility.Collapsed;
-                            whenPanXTextBlock.Visibility = Visibility.Collapsed; 
-                        }
-                        break;
+                    zoomExtentsPanel.Visibility = zoomPanModifier.XyDirection == XyDirection.XDirection
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
                 }
             }
         }

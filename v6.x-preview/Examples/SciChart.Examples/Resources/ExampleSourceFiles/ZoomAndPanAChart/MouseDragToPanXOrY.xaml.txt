@@ -43,21 +43,19 @@
                         <StackPanel MinWidth="150" Orientation="Vertical">
 
                             <TextBlock Text="Pan SciChart in" />
-
                             <ComboBox x:Name="panXYDirection"
                                       SelectedIndex="2"
                                       SelectionChanged="PanXYDirection_OnSelectionChanged" />
 
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock x:Name="whenPanXTextBlock" Text=" When panning in X: " />
-
-                            <CheckBox x:Name="chkZoomExtentsY"
-                                      Margin="3"
-                                      Checked="ZoomExtentsY_Checked"
-                                      Content="Zoom Extents on Y"
-                                      Unchecked="ZoomExtentsY_Checked" />
-
+                            <StackPanel x:Name="zoomExtentsPanel">
+                                <ext:FlyoutSeparator />
+                                <TextBlock Text=" When panning in X: " />
+                                <CheckBox x:Name="chkZoomExtentsY"
+                                          Margin="3"
+                                          Checked="ZoomExtentsY_OnStateChanged"
+                                          Content="Zoom Extents on Y"
+                                          Unchecked="ZoomExtentsY_OnStateChanged" />
+                            </StackPanel>
                         </StackPanel>
                     </ext:FlyoutMenuButton.PopupContent>
                 </ext:FlyoutMenuButton>
