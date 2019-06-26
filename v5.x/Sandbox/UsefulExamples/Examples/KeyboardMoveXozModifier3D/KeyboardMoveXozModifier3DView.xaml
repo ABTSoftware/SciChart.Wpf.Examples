@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SciChart.Sandbox.Examples.KeyboardMoveXozModifier3D.KeyboardMoveXozModifier3DView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        xmlns:keyboardMoveXozModifier3D="clr-namespace:SciChart.Sandbox.Examples.KeyboardMoveXozModifier3D"
+        mc:Ignorable="d">
+    <Grid>
+
+        <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1" BorderThickness="0" WorldDimensions="200,100,200">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+            </s3D:SciChart3DSurface.Camera>
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:ScatterRenderableSeries3D x:Name="ScatterSeries3D">
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:EllipsePointMarker3D Fill="#2ecc71" Size="3" Opacity="1"/>
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" TextFormatting="0 ms"/>
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" NegativeSideClipping="VisibleRange" PositiveSideClipping="VisibleRange" TextFormatting="0 deg"/>
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" TextFormatting="0 hz"/>
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                  <keyboardMoveXozModifier3D:KeyboardMoveXozModifier3D />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+
+        <TextBlock x:Name="textBlock" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsHitTestVisible="False" />
+        
+    </Grid>
+</UserControl>

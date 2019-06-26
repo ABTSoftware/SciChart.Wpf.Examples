@@ -269,6 +269,10 @@
     <Compile Include="Examples\ImplicitStyles\ImplicitStyles.xaml.cs">
       <DependentUpon>ImplicitStyles.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\KeyboardMoveXozModifier3D\KeyboardMoveXozModifier3D.cs" />
+    <Compile Include="Examples\KeyboardMoveXozModifier3D\KeyboardMoveXozModifier3DView.xaml.cs">
+      <DependentUpon>KeyboardMoveXozModifier3DView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\LabStyleCharts\LabStyleCharts.xaml.cs">
       <DependentUpon>LabStyleCharts.xaml</DependentUpon>
     </Compile>
@@ -434,6 +438,10 @@
     <Page Include="Examples\ImplicitStyles\ImplicitStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Examples\KeyboardMoveXozModifier3D\KeyboardMoveXozModifier3DView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\LabStyleCharts\LabStyleCharts.xaml">
       <SubType>Designer</SubType>
