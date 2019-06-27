@@ -24,10 +24,6 @@
     </Window.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
         <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
             <s3D:SciChart3DSurface.Camera>
@@ -74,5 +70,9 @@
             </s3D:SciChart3DSurface.ChartModifier>
 
         </s3D:SciChart3DSurface>
+
+        <TextBlock Foreground="#FF6600" IsHitTestVisible="False" Margin="5" VerticalAlignment="Top">
+            <Run Text="CTRL + Drag to select, CTRL + Click to deselect all" />
+        </TextBlock>
     </Grid>
 </Window>
