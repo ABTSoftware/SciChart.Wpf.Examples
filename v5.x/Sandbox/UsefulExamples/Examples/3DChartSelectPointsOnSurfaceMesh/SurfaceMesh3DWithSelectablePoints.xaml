@@ -43,14 +43,14 @@
                                                    DrawSkirt="False" 
                                                    Opacity="0.8"
                                                    Shininess="100"
-                                                   CellHardnessFactor="0.5"
+                                                   CellHardnessFactor="0.24"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
 
-                <s3D:ImpulseRenderableSeries3D SelectedDataPointStroke="Aquamarine" x:Name="ImpulseRenderableSeries3D" StrokeThickness="0">
-                    <s3D:ImpulseRenderableSeries3D.PointMarker>
-                        <s3D:SpherePointMarker3D Fill="Transparent" Width="2" Height="2"/>
-                    </s3D:ImpulseRenderableSeries3D.PointMarker>
-                </s3D:ImpulseRenderableSeries3D>
+                <s3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D">
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Fill="Aquamarine" Size="3" SelectedFill="Red"/>
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
