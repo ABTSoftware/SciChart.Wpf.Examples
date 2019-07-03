@@ -14,6 +14,7 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,8 +47,6 @@ namespace SciChart.Examples.Examples.InspectDatapoints
 
         private void SciChartSurfaceMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            const string formatString = "{6}:\tMouse Coord: {0:0}, {1:0}\t\tNearest Datapoint Coord: {2:0.0}, {3:0.0}\tData Value: {4:0.0}, {5:0.0}";
-
             // Perform the hit test relative to the GridLinesPanel
             var hitTestPoint = e.GetPosition(sciChartSurface.GridLinesPanel as UIElement);
 
@@ -63,7 +62,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints
                     var seriesInfo = renderableSeries.GetSeriesInfo(hitTestInfo);
 
                     // Output result
-                    var formattedString = SeriesInfoToFormattedString(seriesInfo, hitTestPoint, formatString);
+                    var formattedString = SeriesInfoToFormattedString(seriesInfo, hitTestPoint);
 
                     // Show result
                     Console.WriteLine(formattedString);
@@ -72,27 +71,21 @@ namespace SciChart.Examples.Examples.InspectDatapoints
             }
         }
 
-        private string SeriesInfoToFormattedString(SeriesInfo seriesInfo, Point hitTestPoint, string formatString)
+        private string SeriesInfoToFormattedString(SeriesInfo seriesInfo, Point hitTestPoint)
         {
-            string formattedString =
-                string.Format(
-                    "{6}:\nMouse Coord: {0:0}, {1:0}\nNearest Point Coord: {2:0.0}, {3:0.0} \nData Value: {4:0.0}, {5:0.0}",
+            return string.Format(CultureInfo.InvariantCulture,
+                "{0}\nMouse Coord: {1:N2}, {2:N2}\nNearest Point Coord: {3:N2}, {4:N2} \nData Value: {5:N2}, {6:N2}", 
+                    seriesInfo.SeriesName,
                     seriesInfo.XyCoordinate.X, seriesInfo.XyCoordinate.Y,
                     hitTestPoint.X, hitTestPoint.Y,
-                    seriesInfo.XValue, seriesInfo.YValue,
-                    seriesInfo.SeriesName);
-
-            return formattedString;
+                    seriesInfo.XValue, seriesInfo.YValue);
         }
 
         private void AddOnView(string formattedString)
         {
             var newItem = new ListBoxItem {Content = formattedString};
-
-            hitTestListbox.Items.Add(newItem);
-
-            hitTestListbox.ScrollIntoView(newItem);
+            hitTestListBox.Items.Add(newItem);
+            hitTestListBox.ScrollIntoView(newItem);
         }
-
     }
 }

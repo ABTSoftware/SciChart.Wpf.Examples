@@ -11,15 +11,14 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:SciChart.Examples.Demo.Helpers.Navigation"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
              xmlns:w="clr-namespace:SciChart.Examples.Demo.Controls.WatermarkedAutocomplete"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              d:DesignHeight="600"
              d:DesignWidth="1000"
              mc:Ignorable="d">
-    <UserControl.Resources>
 
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Common.xaml" />
@@ -371,46 +370,61 @@
                                                     Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
                 </StackPanel>
 
-                <StackPanel Margin="3"
+                <StackPanel Margin="5,3"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Orientation="Horizontal"
                             Background="Transparent"
                             ToolTipService.ToolTip="We recommend viewing our demos with Windows Power-Saving = High Performance. You can change this setting in the control panel."
                             DataContext="{Binding Source={x:Static ext:FeaturesHelper.Instance}}">
+                    
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Hyperlink}" BasedOn="{StaticResource {x:Type Hyperlink}}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+
                     <TextBlock VerticalAlignment="Center" Foreground="#777">
                         <Run Text="Power Saving Settings: " />
                     </TextBlock>
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="{StaticResource SciChartGreenBrush}"
-                               Text="High Performance"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingHighPerformance,
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="DarkOrange"
-                               Text="Balanced"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingBalanced,
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="DarkOrange"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Text="{Binding CurrentPowerPlanName}"
-                               Visibility="{Binding Path=PowerSavingUnknown,
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="Crimson"
-                               Text="Power Saver"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingPowerSaver,
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                    <Button Content="..." ToolTipService.ToolTip="Open Control Panel" Command="{Binding Path=OpenControlPanelCommand}" 
-                            Margin="3,5"/>
+                    <TextBlock VerticalAlignment="Center"
+                               ToolTip="For the best performance, we recommend High Performance power saving options"
+                               Visibility="{Binding Path=PowerSavingHighPerformance,Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Hyperlink Foreground="{StaticResource SciChartGreenBrush}" Command="{Binding Path=OpenControlPanelCommand}">
+                            <Run Text="High Performance"/>
+                        </Hyperlink>
+                    </TextBlock>
+                    
+                    <TextBlock VerticalAlignment="Center"
+                               ToolTip="For the best performance, we recommend High Performance power saving options"
+                               Visibility="{Binding Path=PowerSavingBalanced, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Hyperlink Foreground="DarkOrange" Command="{Binding Path=OpenControlPanelCommand}">
+                            <Run Text="Balanced"/>
+                        </Hyperlink>
+                    </TextBlock>
+                    
+                    <TextBlock VerticalAlignment="Center"
+                               ToolTip="For the best performance, we recommend High Performance power saving options"
+                               Visibility="{Binding Path=PowerSavingUnknown, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Hyperlink Foreground="DarkOrange" Command="{Binding Path=OpenControlPanelCommand}">
+                            <Run Text="{Binding CurrentPowerPlanName, Mode=OneWay}"/>
+                        </Hyperlink>
+                    </TextBlock>
+                    
+                    <TextBlock VerticalAlignment="Center"
+                               ToolTip="For the best performance, we recommend High Performance power saving options"
+                               Visibility="{Binding Path=PowerSavingPowerSaver, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Hyperlink Foreground="Crimson" Command="{Binding Path=OpenControlPanelCommand}">
+                            <Run Text="Power Saver"/>
+                        </Hyperlink>
+                    </TextBlock>
                 </StackPanel>
             </Grid>
         </Border>
