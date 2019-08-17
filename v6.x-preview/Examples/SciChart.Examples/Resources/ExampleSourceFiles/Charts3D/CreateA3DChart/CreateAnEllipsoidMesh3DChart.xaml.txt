@@ -13,10 +13,10 @@
 
     <s3D:GradientColorPalette x:Key="LinearHeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
       <s3D:GradientColorPalette.GradientStops>
-        <GradientStop Offset="1" Color="DarkRed"/>
-        <GradientStop Offset="0.9" Color="Red"/>
-        <GradientStop Offset="0.7" Color="Yellow"/>
-        <GradientStop Offset="0.5" Color="GreenYellow"/>
+          <GradientStop Offset="1" Color="DarkRed"/>
+          <GradientStop Offset="0.9" Color="Red"/>
+          <GradientStop Offset="0.7" Color="Yellow"/>
+          <GradientStop Offset="0.5" Color="GreenYellow"/>
         <GradientStop Offset="0.3" Color="Cyan"/>
         <GradientStop Offset="0.1" Color="Blue"/>
         <GradientStop Offset="0.0" Color="#1D2C6B"/>
@@ -29,9 +29,9 @@
         <GradientStop Offset="0.9" Color="Red"/>
         <GradientStop Offset="0.7" Color="Yellow"/>
         <GradientStop Offset="0.5" Color="GreenYellow"/>
-        <GradientStop Offset="0.0041" Color="Cyan"/>
-        <GradientStop Offset="0.004" Color="Blue"/>
-        <GradientStop Offset="0.0" Color="#1D2C6B"/>
+          <GradientStop Offset="0.0041" Color="Cyan"/>
+          <GradientStop Offset="0.004" Color="Blue"/>
+          <GradientStop Offset="0.0" Color="#1D2C6B"/>
       </s3D:GradientColorPalette.GradientStops>
     </s3D:GradientColorPalette>
 
@@ -70,6 +70,16 @@
             <TextBlock FontSize="12" Text="Opacity" />
             <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
+			<TextBlock FontSize="12" Text="Lighting Factor" />
+            <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+            <TextBlock FontSize="12" Text="Shininess" />
+            <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+            
+            <TextBlock FontSize="12" Text="Specular Strength" />
+            <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+
           </StackPanel>
         </ext:FlyoutMenuButton.PopupContent>
       </ext:FlyoutMenuButton>
@@ -107,8 +117,11 @@
                                              ContourInterval="0.1"
                                              ContourStroke="#77228B22"
                                              StrokeThickness="2.0"
+                                             LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
                                              Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
                                              MeshColorPalette="{StaticResource LinearHeightColorMap}"
+                                             Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                             SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
                                              PaletteMinimum="0.0, 6.0, 0.0" PaletteMaximum="7.0, 0.0, 0.0" />
       </s3D:SciChart3DSurface.RenderableSeries>
 

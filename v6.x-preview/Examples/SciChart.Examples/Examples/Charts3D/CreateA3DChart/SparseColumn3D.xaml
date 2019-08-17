@@ -81,6 +81,22 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
+                                  Content="MTRL" 
+                                  FontSize="10" 
+                                  Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
+
+                        <TextBlock FontSize="12" Text="Shininess" />
+                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Specular Strength" />
+                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="SciChart"
@@ -96,6 +112,8 @@
                 <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
                 <s3D:ColumnRenderableSeries3D ColumnShape="{Binding Source={x:Reference PointMarkerCombo}, Path=SelectedValue}"
                                               DataPointWidthX="{Binding Source={x:Reference SizeSlider}, Path=Value}"
+                                              SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
+                                              Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
                                               Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}" />
 
             </s3D:SciChart3DSurface.RenderableSeries>

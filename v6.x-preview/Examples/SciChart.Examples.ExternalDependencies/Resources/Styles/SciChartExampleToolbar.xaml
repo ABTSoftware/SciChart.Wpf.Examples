@@ -575,14 +575,6 @@
                     <CheckBox Margin="3"
                               FontSize="12"
                               VerticalAlignment="Center"
-                              Content="IsInterpolated"
-                              IsChecked="{Binding Modifier.UseInterpolation, Mode=TwoWay}" />
-
-                    <common:FlyoutSeparator />
-
-                    <CheckBox Margin="3"
-                              FontSize="12"
-                              VerticalAlignment="Center"
                               Content="Show axis label"
                               IsChecked="{Binding Modifier.ShowAxisLabels, Mode=TwoWay}" />
 

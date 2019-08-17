@@ -11,8 +11,10 @@ using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
+using SciChart.Drawing.DirectXRasterizer;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers.Navigation;
+using FullScreenAntiAliasingMode = SciChart.Charting3D.FullScreenAntiAliasingMode;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Observability;
 
@@ -26,7 +28,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public SettingsViewModel()
         {
             SelectedRenderer = Direct3D11CompatibilityHelper.SupportsDirectX10
-                ? typeof (Direct3D11RenderSurface)
+                ? typeof (TsrRenderSurface)
                 : typeof (HighSpeedRenderSurface);          
 
             this.WithTrait<AllowFeedbackSettingBehaviour>();
@@ -47,7 +49,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
             Use3DAA4x = false;
             Use3DAANone = true;
-            EnableResamplingCPlusPlus = false;
+            EnableResamplingCPlusPlus = true;
             EnableExtremeDrawingManager = true;
             EnableDropShadows = true;
 
@@ -61,6 +63,8 @@ namespace SciChart.Examples.Demo.ViewModels
                     Viewport3D.UseAlternativeFillSource = t.Item1;
                     Direct3D11RenderSurface.EnableForceWaitForGPU = t.Item2;
                     Viewport3D.ForceStallUntilGPUIsIdle = t.Item2;
+                    TsrRenderSurface.UseAlternativeFillSource = t.Item1;
+                    TsrRenderSurface.ForceStallUntilGPUIsIdle = t.Item2;
                     CreateGlobalStyle<SciChartSurface>();
                     CreateGlobalStyle<SciStockChart>();
                 })
@@ -80,10 +84,15 @@ namespace SciChart.Examples.Demo.ViewModels
                 {                    
                     GoHomeInCaseOfProblemExample();
 
+                    // Restart 3D Engine with D3D9/D3D10/Auto, AntiAliasing mode 
                     Viewport3D.Restart3DEngineWith(
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
                         Use3DAA4x ? FullScreenAntiAliasingMode.MSAA4x : FullScreenAntiAliasingMode.None,
                         UseD3D10AsFallback);
+
+                    // Restart 2D engine with D3D9
+                    TsrRenderSurface.RestartEngineWith(
+                        UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect);
                 });
 
             this.WhenPropertyChanged(x => x.EnableDropShadows).Subscribe(b => EffectManager.EnableDropShadows = b)
@@ -194,7 +203,8 @@ namespace SciChart.Examples.Demo.ViewModels
                 _selectedRenderer = value;
                 OnPropertyChanged(value);
 
-                if (value == typeof(Direct3D11RenderSurface))
+                IsDirectXEnabled2D = value == typeof(Direct3D11RenderSurface) || value == typeof(TsrRenderSurface);
+                if (IsDirectXEnabled2D)
                 {
                     try
                     {
@@ -223,6 +233,12 @@ namespace SciChart.Examples.Demo.ViewModels
             set => this.SetDynamicValue(value);
         }
 
+        public bool IsDirectXEnabled2D
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
         public bool UseAlternativeFillSourceD3D
         {
             get => this.GetDynamicValue<bool>(); 
@@ -244,6 +260,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
                 overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
                 overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
+
                 if (Application.Current.Resources.Contains(typeof(T)))
                 {
                     Application.Current.Resources.Remove(typeof(T));

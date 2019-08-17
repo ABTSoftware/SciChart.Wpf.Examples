@@ -48,8 +48,8 @@
             <TextBlock FontSize="12" Text="Draw Mesh As" />
             <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
-            <!-- Checkbox for Draw Back Side on or off -->
-            <TextBlock FontSize="12" Text="Back Side" />
+			      <!-- Checkbox for Draw Back Side on or off -->
+			      <TextBlock FontSize="12" Text="Back Side" />
             <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Back Side?" IsChecked="{Binding DrawBackSide, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay}"/>
 
             <ext:FlyoutSeparator/>
@@ -58,6 +58,15 @@
             <TextBlock FontSize="12" Text="Opacity" />
             <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
+			<TextBlock FontSize="12" Text="Lighting Factor" />
+            <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+            <TextBlock FontSize="12" Text="Shininess" />
+            <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+            
+            <TextBlock FontSize="12" Text="Specular Strength" />
+            <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+			
           </StackPanel>
         </ext:FlyoutMenuButton.PopupContent>
       </ext:FlyoutMenuButton>
@@ -95,8 +104,11 @@
                                              ContourInterval="0.1"
                                              ContourStroke="#77228B22"
                                              StrokeThickness="2.0"
+                                             LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
                                              Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
                                              MeshColorPalette="{StaticResource HeightColorMap}"
+                                             Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                             SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
                                              PaletteMinimum="3.0, 0.0, 0.0" PaletteMaximum="4.0, 0.0, 0.0" />
       </s3D:SciChart3DSurface.RenderableSeries>
 

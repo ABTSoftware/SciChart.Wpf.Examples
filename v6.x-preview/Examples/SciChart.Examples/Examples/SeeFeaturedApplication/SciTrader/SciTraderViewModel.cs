@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com

@@ -10,6 +10,9 @@
     d:DesignWidth="600"
     Loaded="ScatterChartExampleView_Loaded"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <s:ColorToBrushConverter x:Key="BrushConverter" />
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,11 +33,12 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:XyScatterRenderableSeries x:Name="scatterRenderSeries">
                     <s:XyScatterRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="9"
-                                              Height="9"
-                                              Fill="SteelBlue"
-                                              Stroke="LightSteelBlue"
-                                              StrokeThickness="2" />
+                        <s:EllipsePointMarker
+                            Width="9"
+                            Height="9"
+                            Fill="{Binding Stroke, Converter={StaticResource BrushConverter}}"
+                            Stroke="{Binding Stroke}"
+                            StrokeThickness="2" />
                     </s:XyScatterRenderableSeries.PointMarker>
 
                     <s:XyScatterRenderableSeries.SeriesAnimation>
@@ -44,7 +48,7 @@
                 </s:XyScatterRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
-           <!--  Create an X Axis with Growby  -->
+            <!--  Create an X Axis with Growby  -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis DrawMajorBands="True" GrowBy="0.1, 0.1" />
             </s:SciChartSurface.XAxis>

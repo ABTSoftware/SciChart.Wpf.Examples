@@ -92,6 +92,10 @@
 
                         <TextBlock FontSize="12" Text="Lighting Factor" />
                         <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Shininess" />
+                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -106,6 +110,7 @@
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
                                                    LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding ElementName=shininessSlider, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle2}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>
@@ -115,6 +120,7 @@
                                                    DrawMeshAs="SolidMesh"
                                                    DrawSkirt="False"
                                                    LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding ElementName=shininessSlider, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    s3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle}"
                                                    PaletteProvider="{StaticResource MeshPaletteProvider3D}"/>

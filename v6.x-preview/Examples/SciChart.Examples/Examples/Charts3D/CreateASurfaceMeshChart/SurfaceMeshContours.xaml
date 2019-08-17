@@ -63,6 +63,13 @@
                         <!-- Create the opacity slider -->
                         <TextBlock FontSize="12" Text="Opacity" />
                         <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Normal hardness" />
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Shininess" />
+                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -136,6 +143,8 @@
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="True" 
                                                    Opacity="{Binding Source={x:Reference opacitySlider}, Path=Value, Mode=TwoWay}"
+                                                   CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 

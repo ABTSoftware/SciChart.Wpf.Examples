@@ -470,7 +470,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 
     public class CustomUniformHeatmapRenderableSeries : FastUniformHeatmapRenderableSeries
     {
-        protected override string FormatDataValue(double dataValue, int xIndex, int yIndex)
+        public override string FormatDataValue(double dataValue, int xIndex, int yIndex)
         {
             IPointMetadata[,] metaDatas = ((IHeatmapDataSeries)DataSeries).Metadata;
             if (metaDatas != null)

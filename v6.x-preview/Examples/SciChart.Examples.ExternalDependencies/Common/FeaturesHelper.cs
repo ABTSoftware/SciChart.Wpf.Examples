@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -29,78 +29,54 @@ namespace SciChart.Examples.ExternalDependencies.Common
     public class FeaturesHelper : INotifyPropertyChanged
     {
         private readonly PowerManager _powerManager = new PowerManager();
-        private static readonly FeaturesHelper _instance = new FeaturesHelper();
-        private DispatcherTimer _timer;
+
         private PowerPlan _lastPlan;
 
         private FeaturesHelper()
         {
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += (s, e) =>
+            var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
+
+            timer.Tick += (s, e) =>
             {
                 var currentPlan = _powerManager.GetCurrentPlan();
-                if (_lastPlan != currentPlan)
+
+                if (_lastPlan == null || !_lastPlan.Equals(currentPlan))
                 {
-                    OnPropertyChanged("PowerSavingHighPerformance");
-                    OnPropertyChanged("PowerSavingBalanced");
-                    OnPropertyChanged("PowerSavingUnknown");
-                    OnPropertyChanged("PowerSavingPowerSaver");
+                    OnPropertyChanged(nameof(PowerSavingHighPerformance));
+                    OnPropertyChanged(nameof(PowerSavingBalanced));
+                    OnPropertyChanged(nameof(PowerSavingUnknown));
+                    OnPropertyChanged(nameof(PowerSavingPowerSaver));
 
                     _lastPlan = currentPlan;
                 }                
             };
-            _timer.Start();
+
+            timer.Start();
         }
 
-        public static FeaturesHelper Instance { get { return _instance; } }
+        public static FeaturesHelper Instance { get; } = new FeaturesHelper();
 
-        public bool SupportsHardwareAcceleration
-        {
-            get
-            {
-#if SILVERLIGHT
-                return false;
-#else
-                return Direct3D11CompatibilityHelper.SupportsDirectX10;
-#endif
+        public string CurrentPowerPlanName => _powerManager.GetCurrentPlan().Name;
 
-            }
-        }
+        public bool SupportsHardwareAcceleration => Direct3D11CompatibilityHelper.SupportsDirectX10;
 
-        public string CurrentPowerPlanName
-        {
-            get { return _powerManager.GetCurrentPlan().Name; }
-        }
+        public bool PowerSavingHighPerformance => _powerManager.GetCurrentPlan().Guid == _powerManager.MaximumPerformance.Guid;
 
-        public bool PowerSavingHighPerformance
-        {
-            get { return _powerManager.GetCurrentPlan().Guid == _powerManager.MaximumPerformance.Guid; }
-        }
+        public bool PowerSavingBalanced => _powerManager.GetCurrentPlan().Guid == _powerManager.Balanced.Guid;
 
-        public bool PowerSavingBalanced
-        {
-            get { return _powerManager.GetCurrentPlan().Guid == _powerManager.Balanced.Guid; }
-        }
+        public bool PowerSavingUnknown => !PowerSavingHighPerformance && !PowerSavingBalanced && !PowerSavingPowerSaver;
 
-        public bool PowerSavingUnknown
-        {
-            get { return !PowerSavingHighPerformance && !PowerSavingBalanced && !PowerSavingPowerSaver; }
-        }
+        public bool PowerSavingPowerSaver => _powerManager.GetCurrentPlan().Guid == _powerManager.PowerSourceOptimized.Guid;
 
-        public bool PowerSavingPowerSaver
-        {
-            get { return _powerManager.GetCurrentPlan().Guid == _powerManager.PowerSourceOptimized.Guid; }
-        }
-
-        public ICommand OpenControlPanelCommand { get {  return new ActionCommand(() => _powerManager.OpenControlPanel());} }
+        public ICommand OpenControlPanelCommand { get { return new ActionCommand(() => _powerManager.OpenControlPanel()); }}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

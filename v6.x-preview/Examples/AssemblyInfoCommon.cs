@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 //[assembly: Obfuscation(Feature = "msil encryption, string encryption, value encryption", Exclude = true, StripAfterObfuscation = true)]
 
 [assembly: AssemblyCompany("SciChart Ltd")]
-[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2018, www.scichart.com")]
+[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2019, www.scichart.com")]
 [assembly: AssemblyTrademark("SCICHART™")]
  
 //[assembly: AssemblyDelaySign(false)]
@@ -39,4 +39,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.0.0.12140")]
+[assembly: AssemblyVersion("6.0.0.12184")]

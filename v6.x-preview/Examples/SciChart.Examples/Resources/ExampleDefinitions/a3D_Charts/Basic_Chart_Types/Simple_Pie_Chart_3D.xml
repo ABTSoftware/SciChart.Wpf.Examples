@@ -1,0 +1,14 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateA3DChart/CreateAPieChart3D.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconPie3D</IconPath>
+  <ToolTipDescription></ToolTipDescription>
+  <Description>
+    The 3D Pie chart demo shows how to use create 3D pie chart that contain a number of sections, while using the PieSection struct describe each section and adding them to the Scene Entity
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/CreateAPieChart3D.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/CreateAPieChart3D.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

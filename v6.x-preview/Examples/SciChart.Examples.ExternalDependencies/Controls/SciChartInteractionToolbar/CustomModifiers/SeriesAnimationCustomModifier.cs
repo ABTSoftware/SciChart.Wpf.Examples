@@ -19,22 +19,22 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         }
 
         public static readonly DependencyProperty FadeAnimationCommandProperty = DependencyProperty
-            .Register("FadeAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register(nameof(FadeAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ScaleAnimationCommandProperty = DependencyProperty
-            .Register("ScaleAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register(nameof(ScaleAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty SweepAnimationCommandProperty = DependencyProperty
-            .Register("SweepAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register(nameof(SweepAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty WaveAnimationCommandProperty = DependencyProperty
-            .Register("WaveAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            .Register(nameof(WaveAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty StartAnimationCommandProperty =
-            DependencyProperty.Register("StartAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(StartAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public static readonly DependencyProperty StopAnimationCommandProperty =
-            DependencyProperty.Register("StopAnimationCommand", typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(StopAnimationCommand), typeof(ICommand), typeof(SeriesAnimationCustomModifier), new PropertyMetadata(null));
 
         public ICommand StartAnimationCommand
         {
@@ -79,21 +79,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             SweepAnimationCommand = new ActionCommand(() => { SweepAnimation(); });
             WaveAnimationCommand = new ActionCommand(() => { WaveAnimation(); });
 
-            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a =>
-            {
-                if (a != null)
-                {
-                    a.StartAnimation();
-                }});
-            });
-
-            StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a =>
-            {
-                if (a != null)
-                {
-                    a.StopAnimation();
-                }});
-            });
+            StartAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StartAnimation()); });
+            StopAnimationCommand = new ActionCommand(() => { ProcessAnimation(a => a?.StopAnimation()); });
         }
 
         private void ProcessAnimation(Action<ISeriesAnimation> doAction)
@@ -108,9 +95,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries)
+                if (s is BaseRenderableSeries series)
                 {
-                    var series = s as BaseRenderableSeries;
                     var trans = new FadeAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
@@ -125,9 +111,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries)
+                if (s is BaseRenderableSeries series)
                 {
-                    var series = s as BaseRenderableSeries;
                     var trans = new ScaleAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
@@ -147,9 +132,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries)
+                if (s is BaseRenderableSeries series)
                 {
-                    var series = s as BaseRenderableSeries;
                     var trans = new SweepAnimation();
                     trans.Duration = TimeSpan.FromSeconds(5);
                     trans.AnimationDelay = TimeSpan.FromSeconds(1);
@@ -164,15 +148,14 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
         {
             foreach (var s in ParentSurface.RenderableSeries)
             {
-                if (s is BaseRenderableSeries)
+                if (s is BaseRenderableSeries series)
                 {
-                    var series = s as BaseRenderableSeries;
                     var trans = new WaveAnimation();
                     trans.Duration = TimeSpan.FromSeconds(2);
                     trans.AnimationDelay = TimeSpan.FromSeconds(2);
                     if (s.DataSeries != null)
                     {
-                        trans.ZeroLine = series.DataSeries.YMin.ToDouble();
+                        trans.ZeroLine = (double) series.DataSeries.YMin;
                     }
 
                     series.SeriesAnimation = trans;

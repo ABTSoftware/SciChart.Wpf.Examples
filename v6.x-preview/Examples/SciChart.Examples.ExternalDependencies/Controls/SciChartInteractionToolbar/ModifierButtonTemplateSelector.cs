@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -54,58 +54,58 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToo
             {
                 switch (mod.Modifier.ModifierName)
                 {
-                    case "RolloverModifier":
+                    case nameof(RolloverModifier):
                         return RolloverModifierTemplate;
 
-                    case "MouseWheelZoomModifier":
+                    case nameof(MouseWheelZoomModifier):
                         return MouseWheelZoomModifierTemplate;
 
-                    case "TooltipModifier":
+                    case nameof(TooltipModifier):
                         return TooltipModifierTemplate;
 
-                    case "SeriesSelectionModifier":
+                    case nameof(SeriesSelectionModifier):
                         return SeriesSelectionModifierTemplate;
 
-                    case "LegendModifier":
+                    case nameof(LegendModifier):
                         return LegendModifierTemplate;
 
-                    case "CursorModifier":
+                    case nameof(CursorModifier):
                         return CursorModifierTemplate;
 
-                    case "CustomAnnotationCreationModifier":
+                    case nameof(CustomAnnotationCreationModifier):
                         return AnnotationCreationModifierTemplate;
 
-                    case "ZoomPanModifier":
+                    case nameof(ZoomPanModifier):
                         return ZoomPanModifierTemplate;
 
-                    case "YAxisDragModifier":
+                    case nameof(YAxisDragModifier):
                         return EmptyTemplate;
 
-                    case "XAxisDragModifier":
+                    case nameof(XAxisDragModifier):
                         return EmptyTemplate;
 
-                    case "ZoomExtentsModifier":
+                    case nameof(ZoomExtentsModifier):
                         return ZoomExtentsModifierTemplate;
 
-                    case "CustomFlipModifier":
+                    case nameof(CustomFlipModifier):
                         return FlipModifierTemplate;
 
-                    case "CustomThemeChangeModifier":
+                    case nameof(CustomThemeChangeModifier):
                         return ThemeModifierTemplate;
 
-                    case "CustomRotateChartModifier":
+                    case nameof(CustomRotateChartModifier):
                         return RotateChartModifierTemplate;
 
-                    case "RubberBandXyZoomModifier":
+                    case nameof(RubberBandXyZoomModifier):
                         return RubberBandXyZoomModifierTemplate;
 
-                    case "DataPointSelectionModifier":
+                    case nameof(DataPointSelectionModifier):
                         return PointMarkersModifierTemplate;
 
-                    case "CustomExportModifier":
+                    case nameof(CustomExportModifier):
                         return ExportModifierTemplate;
 
-                    case "SeriesAnimationCustomModifier":
+                    case nameof(SeriesAnimationCustomModifier):
                         return AnimationsModifierTemplate;
 
                     default:

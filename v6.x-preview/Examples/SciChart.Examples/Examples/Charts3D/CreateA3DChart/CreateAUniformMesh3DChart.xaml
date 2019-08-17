@@ -59,6 +59,19 @@
                         <!-- Create the opacity slider -->
                         <TextBlock FontSize="12" Text="Opacity" />
                         <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Normal hardness" />
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Shininess" />
+                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Specular Strength" />
+                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock FontSize="12" Text="Lighting Factor" />
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -77,6 +90,10 @@
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="False" 
                                                    Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
+                                                   LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                                   CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
+                                                   SpecularStrength="{Binding ElementName=specularStrengthSlider, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 

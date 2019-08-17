@@ -7,8 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"             
-             mc:Ignorable="d" >
+             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"    
+             mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:RendererTypeToDisplayNameConverter x:Key="RendererConverter" />
@@ -54,6 +54,7 @@
                       Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -120,19 +121,33 @@
                                               ConverterParameter={x:Type s3D:Direct3D11RenderSurface}}"
                           s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
 
+                    <CheckBox Margin="3"
+                              x:Name="tsrRendererCheckbox"
+                              Content="TsrEngine (NEW!)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all examples using the Tsr Rendering Engine (NEW!). Requires DirectX9 GPU or Later"
+                              IsEnabled="{Binding IsDirectXAvailable}"
+                              IsChecked="{Binding SelectedRenderer,
+                                              Mode=TwoWay,
+                                              Converter={StaticResource RendererConverter},
+                                              ConverterParameter={x:Type s:TsrRenderSurface}}"
+                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
+
                     <CheckBox Margin="15,3"
                           Content="Use Alternative Fill Source (DirectX Only)"
                           FontSize="14"
                           ToolTip="Uses an alternative method (not WPF's D3DImage) to render DirectX Content. Can help compatibility issues on some machines"
                           DataContext="{StaticResource SettingsViewModel}"
-                          IsEnabled="{Binding ElementName=directXRendererCheckbox, Path=IsChecked}"
+                          IsEnabled="{Binding Path=IsDirectXEnabled2D}"
                           IsChecked="{Binding Path=UseAlternativeFillSourceD3D, Mode=TwoWay}"/>
+
                     <CheckBox Margin="15,3"
                           Content="Enable Force Wait for GPU (DirectX Only)"
                           FontSize="14"
                           ToolTip="Enables waitinf for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
                           DataContext="{StaticResource SettingsViewModel}"
-                          IsEnabled="{Binding ElementName=directXRendererCheckbox, Path=IsChecked}"
+                          IsEnabled="{Binding XPath=IsDirectXEnabled2D}"
                           IsChecked="{Binding Path=EnableForceWaitForGPU, Mode=TwoWay}"/>
 
                     <CheckBox Margin="3"
@@ -153,7 +168,7 @@
                        FontFamily="Segoe UI"
                        FontSize="18"
                        Foreground="#FFF"
-                       Text="3D Charts" />
+                       Text="DirectX Settings" />
 
                 <StackPanel Orientation="Vertical" Margin="130 0 0 0" Grid.Row="4">
 
@@ -162,7 +177,7 @@
                           Content="Use DirectX 11"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
-                          ToolTip="Render all 3D Charts using DirectX11 (where available)"
+                          ToolTip="Render all 2D &amp; 3D Charts using DirectX11 (where available)"
                           IsEnabled="{Binding IsDirectXAvailable}"
                           IsChecked="{Binding UseD3D11, Mode=TwoWay}"
                           s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
@@ -179,7 +194,7 @@
                           Content="Use DirectX 9c"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
-                          ToolTip="Render all 3D Charts using DirectX9 (where available)"
+                          ToolTip="Render all 3D Charts (and 2D Charts when TSR Engine) using DirectX9 (where available)"
                           IsChecked="{Binding UseD3D9, Mode=TwoWay}"
                           s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
 

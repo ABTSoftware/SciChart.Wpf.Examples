@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -15,7 +15,6 @@
 // *************************************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 using SciChart.Charting3D;
@@ -36,7 +35,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     /// <summary>
     /// A class to demonstrate a 3D Text Elements added to the SciChart3D Scene. Created using our BaseSceneEntity and Font3D APIs
     /// </summary>
-    public class TextSceneEntity : BaseSceneEntity
+    public class TextSceneEntity : BaseSceneEntity<SCRTSceneEntity>
     {
         private readonly Color _textColor;
         private readonly TextDisplayMode _textDisplayMode;
@@ -56,7 +55,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             SCRTDllLoader.InitNativeLibs();
         }
 
-        public TextSceneEntity(string text, Color textColor, Vector3 location, TextDisplayMode textDisplayMode = TextDisplayMode.FacingCameraAlways, int fontSize = 8, string fontFamily = "Arial")
+        public TextSceneEntity(string text, Color textColor, Vector3 location,
+            TextDisplayMode textDisplayMode = TextDisplayMode.FacingCameraAlways,
+            int fontSize = 8, string fontFamily = "Arial")
+            : base(new SCRTSceneEntity())
         {
             Text = text;
             _textColor = textColor;
@@ -71,19 +73,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         }
 
         /// <summary>
-        /// Determines whether this instance is transparent. When True SciChart internally
-        /// </summary>
-        /// <returns></returns>
-        public override bool IsTransparent()
-        {
-            return _textColor.A < 255;
-        }
-
-        /// <summary>
         /// Called when the 3D Engine wishes to render this element. This is where geometry must be drawn to the 3D scene
         /// </summary>
-        /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
-        public override void RenderScene(IRenderPassInfo3D e)
+        /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
+        public override void RenderScene(IRenderPassInfo3D rpi)
         {
             var currentCamera = RootSceneEntity != null ? RootSceneEntity.Viewport3D.CameraController : null;
 
@@ -146,11 +139,14 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            DisposeFont();
+            if (disposing)
+            {
+                DisposeFont();
+            }
 
-            base.Dispose();
+            base.Dispose(disposing);
         }
 
         private void DisposeFont()
@@ -162,23 +158,13 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <summary>
         /// Called when the 3D Engine wishes to update the geometry in this element. This is where we need to cache geometry before draw.
         /// </summary>
-        /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
-        public override void UpdateScene(IRenderPassInfo3D e)
+        /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
+        public override void UpdateScene(IRenderPassInfo3D rpi)
         {
             if (_font == null)
             {
                 _font = new Font3D(_fontFamily, (uint)_fontSize);
             }
-        }
-
-
-        /// <summary>
-        /// Performs selection on this entity, setting the IsSelected flag to True or False on the specified <see cref="VertexId">Vertex Ids</see>
-        /// </summary>
-        /// <param name="isSelected">if set to <c>true</c> the vertices become .</param>
-        /// <param name="vertexIds">The vertex ids.</param>
-        public override void PerformSelection(bool isSelected, List<VertexId> vertexIds)
-        {
         }
 
         /// <summary>

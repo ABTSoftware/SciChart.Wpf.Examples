@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2018. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,7 +13,7 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System.Collections.Generic;
+
 using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting3D;
@@ -25,7 +25,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     /// <summary>
     /// A class to demonstrate a 3D Geometry added to the SciChart3D Scene. Created using our BaseSceneEntity and Mesh APIs
     /// </summary>
-    public class CubeGeometry : BaseSceneEntity
+    public class CubeGeometry : BaseSceneEntity<SCRTSceneEntity>
     {
         private readonly Vector3 bottomRight;
         private readonly Vector3 topLeft;
@@ -33,7 +33,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         private readonly Color cubeColor;
 
 
-        public CubeGeometry(Vector3 topLeft, Vector3 bottomRight, Color cubeColor)
+        public CubeGeometry(Vector3 topLeft, Vector3 bottomRight, Color cubeColor) : base(new SCRTSceneEntity())
         {
             // Shady : Setting the position of scene entities will be used back when sorting them from camera perspective back to front
             using (TSRVector3 centerPosition = new TSRVector3(
@@ -58,19 +58,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         }
 
         /// <summary>
-        ///     Called when the 3D Engine wishes to update the geometry in this element. This is where we need to cache geometry
-        ///     before draw.
-        /// </summary>
-        /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
-        public override void UpdateScene(IRenderPassInfo3D e)
-        {
-        }
-
-        /// <summary>
         ///     Called when the 3D Engine wishes to render this element. This is where geometry must be drawn to the 3D scene
         /// </summary>
-        /// <param name="e">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
-        public override void RenderScene(IRenderPassInfo3D e)
+        /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
+        public override void RenderScene(IRenderPassInfo3D rpi)
         {
             float bottomRightCoordX = bottomRight.X;
             float bottomRightCoordY = bottomRight.Y;
@@ -124,13 +115,13 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             using (var meshContext = base.BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
-                SCRTImmediateDraw.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
+                SciChart3DNative.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
             
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(cubeColor);
-
+            
                 // Pass Entity ID value for a hit test purpose
-                ulong selectionColor = SCRTImmediateDraw.EncodeSelectionId(EntityId, 0);
+                ulong selectionColor = SciChart3DNative.EncodeSelectionId(EntityId, 0);
                 meshContext.SetSelectionId(selectionColor);
 
                 // Now draw the triangles. Each face of the cube is made up of two triangles
@@ -190,10 +181,10 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             }
             
             // Revert raster state
-            SCRTImmediateDraw.PopRasterizerState();
+            SciChart3DNative.PopRasterizerState();
 
             // Set the Rasterizer State for wireframe 
-            SCRTImmediateDraw.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
+            SciChart3DNative.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 
             // Create a Line Context for a continuous line and draw the outline of the cube 
             var lineColor = Color.FromArgb(0xFF, cubeColor.R, cubeColor.G, cubeColor.B);
@@ -204,7 +195,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             CreateSquare(2.0f, true, lineColor, new[] { corners[5], corners[1], corners[2], corners[6] });
 
             // Revert raster state
-            SCRTImmediateDraw.PopRasterizerState();
+            SciChart3DNative.PopRasterizerState();
         }
 
         private void CreateSquare(float lineThickness, bool isAntiAlias, Color lineColor, Vector3[] vertices)
@@ -214,7 +205,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 lineContext.SetVertexColor(lineColor);
 
                 // Pass Entity ID value for a hit test purpose
-                ulong selectionColor = SCRTImmediateDraw.EncodeSelectionId(EntityId, 0);
+                ulong selectionColor = SciChart3DNative.EncodeSelectionId(EntityId, 0);
                 lineContext.SetSelectionId(selectionColor);
 
                 foreach (var v in vertices)
@@ -240,17 +231,6 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         private void SetNormal(IImmediateLitMeshContext meshContext, Vector3 vector3)
         {
             meshContext.Normal3(vector3.X, vector3.Y, vector3.Z);
-        }
-
-        /// <summary>
-        ///     Performs selection on this entity, setting the IsSelected flag to True or False on the specified
-        ///     <see cref="VertexId">Vertex Ids</see>
-        /// </summary>
-        /// <param name="isSelected">if set to <c>true</c> the vertices become .</param>
-        /// <param name="vertexIds">The vertex ids.</param>
-        public override void PerformSelection(bool isSelected, List<VertexId> vertexIds)
-        {
-            // Do nothing
         }
     }
 }

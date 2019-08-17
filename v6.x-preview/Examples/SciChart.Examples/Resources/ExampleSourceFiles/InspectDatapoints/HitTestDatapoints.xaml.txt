@@ -27,7 +27,7 @@
         <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}" />
 
         <s:SciChartSurface x:Name="sciChartSurface"
-                           Grid.Column="1"
+                           Grid.Row="0" Grid.Column="1"
                            MouseLeftButtonUp="SciChartSurfaceMouseLeftButtonUp">
 
             <!--  Declare line RenderableSeries with a circular point marker  -->
@@ -60,21 +60,19 @@
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis AxisAlignment="Left" GrowBy="0, 0.1" />
+                <s:NumericAxis AxisAlignment="Left" GrowBy="0.0, 0.1" />
             </s:SciChartSurface.YAxis>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-
                     <s:CursorModifier ShowAxisLabels="True"
                                       ShowTooltip="False"
                                       UseInterpolation="True" />
-
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
 
             <s:SciChartSurface.Annotations>
-                <s:TextAnnotation Margin="5,18,0,0"
+                <s:TextAnnotation Margin="5,10,0,0"
                                   Background="#232323"
                                   CoordinateMode="Relative"
                                   FontSize="20"
@@ -85,44 +83,30 @@
                                   VerticalAnchorPoint="Center"
                                   X1="0"
                                   Y1="0" />
-
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
         <!--  Listbox to demonstrate hit-test results  -->
-        <ListBox x:Name="hitTestListbox"
+        <ListBox x:Name="hitTestListBox"
                  Grid.Row="1"
                  Grid.Column="1"
                  HorizontalAlignment="Left"
                  Background="#FF1C1C1E"
                  BorderThickness="0"
-                 Foreground="Aquamarine"
+                 Foreground="White"
                  Opacity="0.6">
-            
-            <ListBox.Style>
-                <Style TargetType="ListBox">
-                    <Setter Property="ItemsPanel">
-                        <Setter.Value>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </Setter.Value>
-                    </Setter>
-
-                    <Setter Property="ItemContainerStyle">
-                        <Setter.Value>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="BorderThickness" Value="0 0 1 1" />
-                                <Setter Property="BorderBrush" Value="#FFF" />
-                                <Setter Property="Margin" Value="0 0 5 0" />
-                                <Setter Property="Padding" Value="2" />
-                            </Style>
-                        </Setter.Value>
-                    </Setter>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="BorderThickness" Value="0,0,1,0" />
+                    <Setter Property="BorderBrush" Value="White" />
+                    <Setter Property="Padding" Value="10,5" />
                 </Style>
-            </ListBox.Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
-
     </Grid>
 </UserControl>
-

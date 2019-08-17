@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.6.9" />
-    <PackageReference Include="SciChart.Wpf.UI" Version="3.0.49" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="3.0.249" />
     <PackageReference Include="SharpDX" Version="4.2.0" />
     <PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
     <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
@@ -120,15 +120,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12140-alpha" />
+    <PackageReference Include="SciChart" Version="6.0.0.12184-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12140-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12184-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12140-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12184-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12140-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12184-alpha" />
   </ItemGroup>
 </Project>
