@@ -120,15 +120,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12184-alpha" />
+    <PackageReference Include="SciChart" Version="6.0.0.12332-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12184-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12332-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12184-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12332-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12184-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12332-alpha" />
   </ItemGroup>
 </Project>
