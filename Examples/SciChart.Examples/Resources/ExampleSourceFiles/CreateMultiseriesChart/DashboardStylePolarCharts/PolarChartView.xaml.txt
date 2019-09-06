@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarCharts.PolarChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+    
+    <Grid>
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Padding="0" RenderableSeries="{s:SeriesBinding RenderableSeriesViewModel}">
+
+            <s:SciChartSurface.XAxis>
+                <s:PolarXAxis AutoRange="Always"
+                              DrawLabels="False"
+                              DrawMajorTicks="False"
+                              DrawMinorTicks="False" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:PolarYAxis AutoRange="Always"
+                              DrawLabels="False"
+                              DrawMajorTicks="False"
+                              DrawMinorTicks="False"
+                              GrowBy="0,0.2" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

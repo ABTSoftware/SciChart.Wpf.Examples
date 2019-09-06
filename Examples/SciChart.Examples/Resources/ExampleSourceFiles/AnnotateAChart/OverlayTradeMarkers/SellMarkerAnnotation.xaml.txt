@@ -1,0 +1,52 @@
+﻿<!-- PathAnnotation, exposes properties of a Path, such as Data, to the annotations API -->
+<!-- The SellMarkerAnnotation displays a red arrow pointing down, with tooltip to bind to Trade data object -->
+<s:CustomAnnotation x:Class="SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers.SellMarkerAnnotation"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart" 
+                    VerticalAnchorPoint="Bottom"
+                    HorizontalAnchorPoint="Center"
+                    Margin="0,-15,0,0"
+                    X1="{Binding X1}"
+                    Y1="{Binding Y1}">
+
+    <Path Data="m 3.5 0.5 4 0 0 8 3 0 -5 5 -5 -5 3 0 z"
+            Fill="#57B22020"
+            Stroke="#FF990000"
+            StrokeThickness="1"/>
+
+    <!-- Creating the tooltip. In the TradeOverlayExampleViewModel we set a Trade object as datacontext of this annotation -->
+    <ToolTipService.ToolTip>
+        <ToolTip Foreground="#222">
+            <Grid Margin="6" DataContext="{Binding TradeData}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Side: " />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Quantity: " />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Instrument: " />
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="DealPrice: " />
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="TradeDate: " />
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Total: " />
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding BuySell}" Foreground="#FF990000"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Quantity}" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Instrument}" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding DealPrice, StringFormat=$\{0:0.000\}}" Foreground="#FF990000"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TradeDate}" />
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TotalPrice, StringFormat=$\{0:0.000\}}" Foreground="#FF990000"/>
+            </Grid>
+        </ToolTip>
+    </ToolTipService.ToolTip>
+
+</s:CustomAnnotation>

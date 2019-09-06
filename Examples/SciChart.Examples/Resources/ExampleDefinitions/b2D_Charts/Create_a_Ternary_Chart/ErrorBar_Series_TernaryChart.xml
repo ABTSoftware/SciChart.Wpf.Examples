@@ -1,0 +1,27 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateTernaryChart/ErrorBarSeriesTernaryChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconTernary</IconPath>
+  <ToolTipDescription>Generates a simple Ternary Error Bar chart in code</ToolTipDescription>
+  <Description>
+    The TernaryErrorBarRenderableSeries requires an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] as data source, wich contains X-point, Y-point and Z-point. This includes HighError and LowError for each series entry. In this example the same XyzDataSeries is re-used to render a Scatter chart, as these only take the X,Y and Z values.
+
+    [b][i]Tips![/i][/b]
+
+    Do you need to change the length of the Error Bar Cup? Try setting ErrorBarCupLength. This alters how much space the bar takes up.
+
+    [b]Documentation Links[/b]
+
+    - TernaryErrorBarRenderableSeries Type
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url] Type
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/ErrorBarSeriesTernaryChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/ErrorBarSeriesTernaryChartExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/CompositeTernarySeriesInfoToErrorValuesConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/TernaryErrorValuesVisibilityConverter.cs.txt</string>
+  </CodeFiles>
+  <Features>
+  </Features>
+</ExampleDefinition>

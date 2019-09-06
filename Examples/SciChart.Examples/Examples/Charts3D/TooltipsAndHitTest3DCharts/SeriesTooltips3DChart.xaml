@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts.SeriesTooltips3DChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChart3DInteractionToolbar Grid.Column="0" TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
+
+        <s3D:SciChart3DSurface x:Name="SciChart"
+                               Grid.Column="1"
+                               BorderThickness="0"
+                               WorldDimensions="600,300,180">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D Position="-160, 190, -520" Target="-45,150,0" />
+            </s3D:SciChart3DSurface.Camera>
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
+                <s3D:PointLineRenderableSeries3D IsLineStrips="False" StrokeThickness="4">
+                    <s3D:PointLineRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Size="8.0" />
+                    </s3D:PointLineRenderableSeries3D.PointMarker>
+                </s3D:PointLineRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" AxisTitle="X" AxisTitleOffset="60"/>
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D GrowBy="0.1,0.1" AxisTitle="Y" AxisTitleOffset="60"/>
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-9,9" AxisTitle="Z" AxisTitleOffset="60"/>
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" />
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" />
+                    <t3D:TooltipModifier3D CrosshairMode="Lines" CrosshairPlanesFill="#33FF6600" />
+                    <s3D:MouseWheelZoomModifier3D />
+                    <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
+                                               ResetPosition="-160, 190, -520"
+                                               ResetTarget="-45,150,0" />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+    </Grid>
+</UserControl>

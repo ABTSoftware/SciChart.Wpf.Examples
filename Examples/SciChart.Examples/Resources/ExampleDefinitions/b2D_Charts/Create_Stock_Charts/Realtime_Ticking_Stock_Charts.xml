@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml</View>
+  <ViewModel>Examples.CreateStockCharts.RealtimeMvvm.CreateRealTimeTickingStockChartViewModel</ViewModel>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealTimeStockChart.png</ImagePath>
+  <IconPath>IconCandlestick</IconPath>
+  <ToolTipDescription>Using the SciStockChart control, create's a real-time example with two series and a SciChartOverview</ToolTipDescription>
+  <Description>
+    An MVVM example which showcases real-time ticking stock charts.
+
+    In the source-code you will see that we use the OhlcDataSeries.Append and OhlcDataSeries.Update methods to
+
+    [b][i]Example Usage[/i][/b]
+
+    Click the START button to start the example. Now you can zoom and pan the chart, it continues to tick and update in real-time.
+
+    - Switch from OHLC to Candlestick chart.
+    - Select Pan or Zoom mode.
+    - Zoom to extents via button or double-clicking on the chart.
+    - Drag XAxis and YAxis to scale.
+    - Drag the Overview control to scroll and scale.
+    - Hover to see XY cursor values.
+    - Change theme of the chart via the drop-down menu.
+
+    [b][i]Tips[/i][/b]
+
+    An in-depth explanation of how this example works can be seen at the article [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17223/37/how-to-have-a-fixed-scrolling-time-range-on-the-xaxis-that-works-with-modifiers']How to have a Fixed Scrolling Time-Range on the XAxis that works with Modifiers[/url]
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/questions/question/ohlcdataseries-append-or-update-latest-bar']FAQ: OhlcDataSeries Append or Update latest bar[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17223/37/how-to-have-a-fixed-scrolling-time-range-on-the-xaxis-that-works-with-modifiers']How to have a Fixed Scrolling Time-Range on the XAxis that works with Modifiers[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChartViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stock</Features>
+    <Features>Candlestick</Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+    <Features>Trading</Features>
+  </Features>
+</ExampleDefinition>
+

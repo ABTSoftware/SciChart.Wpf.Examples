@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/HeatmapChartTypes/HeatmapMetadata/HeatmapMetadata.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHeatmapWithText.png</ImagePath>
+  <IconPath>IconHeat</IconPath>
+  <ToolTipDescription>Demonstrates how to create a Heatmap with Metadata and shows how it can be used with PaletteProviders, Tooltips and Labels</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a Heatmap with Text in the cells SciChart. Accepts a 2D Array of data and has a user-defined colour map which can be displayed as a legend over the chart.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17188/41/heatmap-series-overview']Heatmap API Documentation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries Type[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/HeatmapMetadata/HeatmapMetadata.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/HeatmapMetadata/HeatmapMetadata.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Heatmap</Features>
+  </Features>
+</ExampleDefinition>
