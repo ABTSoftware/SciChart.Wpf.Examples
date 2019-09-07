@@ -37,12 +37,14 @@
 
         <!-- Chart Surface -->
         <abt:BusyPanel Grid.Row="1" BusyMessage="{Binding LoadingMessage}">
-            <s:SciChartSurface RenderableSeries="{s:SeriesBinding Series}">
+            <s:SciChartSurface RenderableSeries="{s:SeriesBinding Series}" 
+                               s:VisualXcceleratorEngine.IsEnabled="True"
+                               s:VisualXcceleratorEngine.DowngradeWithoutException="False">
                 <s:SciChartSurface.XAxis>
                     <s:NumericAxis/>
                 </s:SciChartSurface.XAxis>
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis/>
+                    <s:NumericAxis GrowBy="0.1, 0.1"/>
                 </s:SciChartSurface.YAxis>
             </s:SciChartSurface>
         </abt:BusyPanel>
