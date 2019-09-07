@@ -56,12 +56,12 @@ namespace Fifo100MillionPointsDemo
 
         private async void OnRun()
         {
-            LoadingMessage = "Loading 100 Million Points...";
+            LoadingMessage = "Loading 50 Million Points...";
             IsStopped = false;
 
             // Load the points
             const int seriesCount = 5;
-            const int pointCount = 10;
+            const int pointCount = 10_000_000;
             var series = await CreateSeries(seriesCount, pointCount);
             Series.AddRange(series);
 
@@ -72,11 +72,26 @@ namespace Fifo100MillionPointsDemo
         {
             return await Task.Run(() =>
             {
+                // Create N series of M points async. Return to calling code to set on the chart 
                 List<IRenderableSeriesViewModel> series = new List<IRenderableSeriesViewModel>();
                 for (int i = 0; i < seriesCount; i++)
                 {
-                    var xyDataSeries = new XyDataSeries<float, float>() {FifoCapacity = pointCount};
-                    int yOffset = i + 2;
+                    var xyDataSeries = new XyDataSeries<float, float>()
+                    {
+                        // Required for scrolling / streaming 'first in first out' charts
+                        FifoCapacity = pointCount,
+
+                        // Optional to improve performance when you know in advance whether 
+                        // data is sorted ascending and contains float.NaN or not 
+                        DataDistributionCalculator = new UserDefinedDistributionCalculator<float, float>()
+                        {
+                            ContainsNaN = false, 
+                            IsEvenlySpaced = true, 
+                            IsSortedAscending = true,
+                        }
+                    };
+
+                    int yOffset = i + i;
                     for (int j = 0; j < pointCount; j++)
                     {
                         xyDataSeries.Append(j, Rand.Next() + yOffset);

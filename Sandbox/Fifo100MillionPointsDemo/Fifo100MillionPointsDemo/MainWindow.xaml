@@ -44,7 +44,7 @@
                     <s:NumericAxis/>
                 </s:SciChartSurface.XAxis>
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis GrowBy="0.1, 0.1"/>
+                    <s:NumericAxis GrowBy="0.1, 0.1" />
                 </s:SciChartSurface.YAxis>
             </s:SciChartSurface>
         </abt:BusyPanel>
