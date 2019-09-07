@@ -8,7 +8,7 @@ To run the demo, ensure that you have setup the NuGet package feed below. Compil
 
 ## NuGet Package Feed setup
 
-In order to build the applicaiton, you will need to add our private NuGet feed for BETA packages. 
+In order to build the application, you will need to add our private NuGet feed for BETA packages. 
 
 * In Visual Studio, go to Tools -> Options -> NuGet 
 *  Under Package Sources, add a feed called SciChart Bleeding-Edge
