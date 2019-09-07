@@ -3,11 +3,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
 using SciChart.UI.Reactive;
@@ -18,10 +21,13 @@ namespace Fifo100MillionPointsDemo
     {
         private bool _isStopped;
         private string _loadingMessage;
+        private Timer _timer;
 
         public MainViewModel()
         {
             _isStopped = true;
+            _timer = new Timer(10);
+            _timer.Elapsed += OnTimerTick;
             RunCommand = new ActionCommand(OnRun, () => this.IsStopped);
             StopCommand = new ActionCommand(OnStop, () => this.IsStopped == false);
         }
@@ -31,6 +37,8 @@ namespace Fifo100MillionPointsDemo
 
         public ActionCommand RunCommand { get; }
         public ActionCommand StopCommand { get; }
+
+        public DefaultViewportManager ViewportManager { get; } = new DefaultViewportManager();
 
         public bool IsStopped
         {
@@ -61,9 +69,11 @@ namespace Fifo100MillionPointsDemo
 
             // Load the points
             const int seriesCount = 5;
-            const int pointCount = 10_000_000;
+            const int pointCount = 10000;//_000_000;
             var series = await CreateSeries(seriesCount, pointCount);
             Series.AddRange(series);
+
+            _timer.Start();
 
             LoadingMessage = null;
         }
@@ -80,6 +90,8 @@ namespace Fifo100MillionPointsDemo
                     {
                         // Required for scrolling / streaming 'first in first out' charts
                         FifoCapacity = pointCount,
+
+                        Capacity = pointCount,
 
                         // Optional to improve performance when you know in advance whether 
                         // data is sorted ascending and contains float.NaN or not 
@@ -110,9 +122,35 @@ namespace Fifo100MillionPointsDemo
 
         private void OnStop()
         {
-            IsStopped = true;
-            Series.Clear();
+            lock (Series)
+            {
+                _timer.Stop();
+                IsStopped = true;
+                Series.Clear();
+            }
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+        }
+
+        private void OnTimerTick(object sender, ElapsedEventArgs e)
+        {
+            lock (Series)
+            {
+                using (ViewportManager.SuspendUpdates())
+                {
+                    int seriesIndex = 0;
+                    foreach (var series in Series)
+                    {
+                        var dataSeries = (XyDataSeries<float, float>) series.DataSeries;
+                        int startIndex = (int) dataSeries.XValues.Last() + 1;
+                        const int appendCount = 100;//_000;
+                        int yOffset = seriesIndex + seriesIndex;
+                        for (int i = startIndex; i < startIndex + appendCount; i++)
+                            dataSeries.Append(i, Rand.Next() + yOffset);
+
+                        seriesIndex++;
+                    }
+                }
+            }
         }
     }
 }
