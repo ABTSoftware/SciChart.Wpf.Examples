@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart">
-      <Version>6.0.0.12351-alpha</Version>
+      <Version>6.0.0.12352-alpha</Version>
     </PackageReference>
     <PackageReference Include="SciChart.Wpf.UI">
       <Version>3.0.249</Version>
