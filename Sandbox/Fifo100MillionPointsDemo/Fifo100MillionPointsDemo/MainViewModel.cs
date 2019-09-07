@@ -38,14 +38,23 @@ namespace Fifo100MillionPointsDemo
             _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
             RunCommand = new ActionCommand(OnRun, () => this.IsStopped);
             StopCommand = new ActionCommand(OnStop, () => this.IsStopped == false);
+
+            // Add the point count options 
             AllPointCounts.AddRange(new []
             {
                 new PointCountViewModel("1 Million", 5, 200_000),
                 new PointCountViewModel("5 Million", 5, 1_000_000),
                 new PointCountViewModel("10 Million", 5, 2_000_000),
                 new PointCountViewModel("50 Million", 5, 10_000_000),
-                new PointCountViewModel("100 Million", 5, 20_000_000),
             });
+
+            // Add further test cases depending on system RAM and 64/32bit status
+            if (SysInfo.GetRamGb() >= 8)
+                AllPointCounts.Add(new PointCountViewModel("100 Million", 5, 20_000_000));
+
+            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
+                AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
+
             SelectedPointCount = AllPointCounts.Last();
         }
 
@@ -100,7 +109,10 @@ namespace Fifo100MillionPointsDemo
 
             // Load the points
             var series = await CreateSeries(seriesCount, pointCount);
-            Series.AddRange(series);
+            using (ViewportManager.SuspendUpdates())
+            {
+                Series.AddRange(series);
+            }
 
             _timer.Start();
 
@@ -145,7 +157,10 @@ namespace Fifo100MillionPointsDemo
                         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
                         xyDataSeries.Append(_xBuffer, _yBuffer);
                     }
-                    
+
+                    // Force a GC Collect before we begin
+                    GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+
                     series.Add(new LineRenderableSeriesViewModel()
                     {
                         DataSeries = xyDataSeries,

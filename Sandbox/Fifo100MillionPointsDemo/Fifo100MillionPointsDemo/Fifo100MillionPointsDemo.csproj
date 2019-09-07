@@ -33,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,6 +61,7 @@
     <Compile Include="ObservableCollectionExtensions.cs" />
     <Compile Include="PointCountViewModel.cs" />
     <Compile Include="Rand.cs" />
+    <Compile Include="SysInfo.cs" />
     <Page Include="Common.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
