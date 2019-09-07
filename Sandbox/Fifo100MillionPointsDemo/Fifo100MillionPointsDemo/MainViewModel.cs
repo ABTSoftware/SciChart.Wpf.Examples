@@ -131,7 +131,7 @@ namespace Fifo100MillionPointsDemo
                 for (int i = 0; i < seriesCount; i++)
                 {
                     var randomWalkGenerator = new Rand();
-                    var xyDataSeries = new StreamingSeries<float, float>()
+                    var xyDataSeries = new XyDataSeries<float, float>()
                     {
                         // Required for scrolling / streaming 'first in first out' charts
                         FifoCapacity = pointCount,
@@ -201,7 +201,7 @@ namespace Fifo100MillionPointsDemo
                     int seriesIndex = 0;
                     foreach (var series in Series)
                     {
-                        var dataSeries = (StreamingSeries<float, float>) series.DataSeries;
+                        var dataSeries = (XyDataSeries<float, float>) series.DataSeries;
                         var randomWalkGenerator = (Rand)dataSeries.Tag;
                         int startIndex = (int) dataSeries.XValues.Last() + 1;
 
