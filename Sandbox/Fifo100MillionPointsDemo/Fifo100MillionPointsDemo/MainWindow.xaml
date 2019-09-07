@@ -54,11 +54,11 @@
                         <s:NumericAxis AutoRange="Always"/>
                     </s:SciChartSurface.XAxis>
                     <s:SciChartSurface.YAxis>
-                        <s:NumericAxis GrowBy="0.1, 0.1" />
+                        <s:NumericAxis AutoRange="Never" VisibleRange="0,9" />
                     </s:SciChartSurface.YAxis>
                 </s:SciChartSurface>
 
-                <s:SciChartPerformanceOverlay Background="#33333333" TargetSurface="{Binding ElementName=scs}" Margin="40" VerticalAlignment="Top" IsHitTestVisible="False"/>
+                <s:SciChartPerformanceOverlay Background="#33FFFFFF" TargetSurface="{Binding ElementName=scs}" Margin="20" Padding="20"  VerticalAlignment="Top" IsHitTestVisible="False"/>
             </Grid>
         </abt:BusyPanel>
 
