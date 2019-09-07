@@ -2,16 +2,18 @@
 
 Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.scichart.com): High Performance Realtime [WPF Chart Library](https://www.scichart.com/wpf-chart-features). 
 
-WPF Chart Examples are provided in C# / WPF. If you are looking for other platforms then please see here:
+# Note: v6.x Preview
 
-* [iOS Charts](https://github.com/ABTSoftware/SciChart.iOS.Examples) (Swift / Objective C)
-* [Android Charts](https://github.com/ABTSoftware/SciChart.Android.Examples) (Java / Kotlin)
-* [Xamarin Charts](https://github.com/ABTSoftware/SciChart.Xamarin.Examples) (C#) BETA!
-* [NativeScript Charts](https://github.com/ABTSoftware/SciChart.NativeScript.Examples) (TypeScript / Javascript) BETA!
+This branch is for the .NET Core 3 version of SciChart, v6.0.0-preview 
+
+* Requires .NET Core 3 Preview 5 SDK or later
+* Requires Visual Studio 2019 
+
+This branch is in active development and breaking changes may be pushed. Not for production use! 
 
 ### Note: NuGet feed setup
 
-To build, you will need to set the correct NuGet feeds for SciChart WPF v4.x and v5.x. 
+To build, you will need to set the correct NuGet feeds for SciChart WPF v6.x
 NuGet Feed setup instructions are found at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
 
 # Repository Contents
