@@ -17,15 +17,17 @@
 
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
         <!-- Toolbar -->
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Point Count: " Margin="5" VerticalAlignment="Center" FontSize="24"/>
-            <ComboBox Margin="5" SelectedItem="{Binding SelectedPointCount}" DisplayMemberPath="DisplayName" ItemsSource="{Binding AllPointCounts}" MinWidth="100">
+            <TextBlock Text="Point Count: " Margin="5" VerticalAlignment="Center" FontSize="16"/>
+            <ComboBox Margin="5" SelectedItem="{Binding SelectedPointCount}" DisplayMemberPath="DisplayName" 
+                      IsEnabled="{Binding IsStopped}"
+                      ItemsSource="{Binding AllPointCounts}" MinWidth="100">
             </ComboBox>
 
             <Button Margin="5" MinWidth="100" Command="{Binding RunCommand}">
