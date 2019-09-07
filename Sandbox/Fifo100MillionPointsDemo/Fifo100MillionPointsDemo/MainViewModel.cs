@@ -12,6 +12,7 @@ using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Charting2D.Interop;
 using SciChart.Data.Model;
 using SciChart.UI.Reactive;
 
@@ -26,7 +27,7 @@ namespace Fifo100MillionPointsDemo
         const int TimerIntervalMs = 10;
 
         // Temporary buffers for improving the performance of loading and appending data
-        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html
+        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
         readonly float[] _xBuffer = new float[AppendCount];
         readonly float[] _yBuffer = new float[AppendCount];
 
@@ -70,18 +71,29 @@ namespace Fifo100MillionPointsDemo
 
         private async void OnRun()
         {
-            LoadingMessage = "Loading 50 Million Points...";
+            const int seriesCount = 5;
+            const int pointCount = 20_000_000;
+            LoadingMessage = $"Loading {FormatPointCountString(seriesCount, pointCount)} Points...";
             IsStopped = false;
 
             // Load the points
-            const int seriesCount = 5;
-            const int pointCount = 10_000_000;
             var series = await CreateSeries(seriesCount, pointCount);
             Series.AddRange(series);
 
             _timer.Start();
 
             LoadingMessage = null;
+        }
+
+        private string FormatPointCountString(int seriesCount, int pointCount)
+        {
+            int totalCount = seriesCount * pointCount;
+            if (totalCount > 1_000_000)
+            {
+                return (totalCount / 1_000_000) + " Million";
+            }
+
+            return totalCount.ToString();
         }
 
         private async Task<List<IRenderableSeriesViewModel>> CreateSeries(int seriesCount, int pointCount)
@@ -101,6 +113,7 @@ namespace Fifo100MillionPointsDemo
 
                         // Optional to improve performance when you know in advance whether 
                         // data is sorted ascending and contains float.NaN or not 
+                        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
                         DataDistributionCalculator = new UserDefinedDistributionCalculator<float, float>()
                         {
                             ContainsNaN = false, 
@@ -110,12 +123,18 @@ namespace Fifo100MillionPointsDemo
                     };
 
                     int yOffset = i + i;
-                    for (int j = 0; j < pointCount; j++)
+                    for (int j = 0; j < pointCount; j += AppendCount)
                     {
-                        // Todo: Append blocks of 10k points for performance
-                        xyDataSeries.Append(j, Rand.Next() + yOffset);
+                        for (int k = 0; k < AppendCount; k++)
+                        {
+                            _xBuffer[k] = j+k;
+                            _yBuffer[k] = Rand.Next() + yOffset;
+                        }
+                        // Append blocks of 10k points for performance
+                        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
+                        xyDataSeries.Append(_xBuffer, _yBuffer);
                     }
-
+                    
                     series.Add(new LineRenderableSeriesViewModel()
                     {
                         DataSeries = xyDataSeries,
@@ -148,10 +167,11 @@ namespace Fifo100MillionPointsDemo
                     int seriesIndex = 0;
                     foreach (var series in Series)
                     {
-                        // Append new points
                         var dataSeries = (XyDataSeries<float, float>) series.DataSeries;
                         int startIndex = (int) dataSeries.XValues.Last() + 1;
-                        
+
+                        // Append new points in blocks of AppendCount 
+                        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
                         int yOffset = seriesIndex + seriesIndex;
                         for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
                         {
