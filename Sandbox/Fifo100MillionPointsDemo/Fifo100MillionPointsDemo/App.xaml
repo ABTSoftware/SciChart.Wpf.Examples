@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:Fifo100MillionPointsDemo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <ResourceDictionary Source="ApplicationStyles.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Common.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Brushes.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="ComboBox.Common.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="ComboBox.Wpf.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

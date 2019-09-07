@@ -58,8 +58,21 @@
     <Compile Include="Colors.cs" />
     <Compile Include="NoLockTimer.cs" />
     <Compile Include="ObservableCollectionExtensions.cs" />
+    <Compile Include="PointCountViewModel.cs" />
     <Compile Include="Rand.cs" />
-    <Page Include="ApplicationStyles.xaml">
+    <Page Include="Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBox.Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBox.Wpf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

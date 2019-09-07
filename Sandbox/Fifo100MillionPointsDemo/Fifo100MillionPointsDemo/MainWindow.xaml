@@ -7,6 +7,7 @@
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
         xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Background="{StaticResource AppBackgroundBrush}">
@@ -23,6 +24,10 @@
 
         <!-- Toolbar -->
         <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Point Count: " Margin="5" VerticalAlignment="Center" FontSize="24"/>
+            <ComboBox Margin="5" SelectedItem="{Binding SelectedPointCount}" DisplayMemberPath="DisplayName" ItemsSource="{Binding AllPointCounts}" MinWidth="100">
+            </ComboBox>
+
             <Button Margin="5" MinWidth="100" Command="{Binding RunCommand}">
                 <Button.Content>
                     <TextBlock Text="RUN ►" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>

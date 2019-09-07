@@ -30,6 +30,7 @@ namespace Fifo100MillionPointsDemo
         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
         readonly float[] _xBuffer = new float[AppendCount];
         readonly float[] _yBuffer = new float[AppendCount];
+        private PointCountViewModel _selectedPointCount;
 
         public MainViewModel()
         {
@@ -37,11 +38,32 @@ namespace Fifo100MillionPointsDemo
             _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
             RunCommand = new ActionCommand(OnRun, () => this.IsStopped);
             StopCommand = new ActionCommand(OnStop, () => this.IsStopped == false);
+            AllPointCounts.AddRange(new []
+            {
+                new PointCountViewModel("1 Million", 5, 200_000),
+                new PointCountViewModel("5 Million", 5, 1_000_000),
+                new PointCountViewModel("10 Million", 5, 2_000_000),
+                new PointCountViewModel("50 Million", 5, 10_000_000),
+                new PointCountViewModel("100 Million", 5, 20_000_000),
+            });
+            SelectedPointCount = AllPointCounts.Last();
         }
 
 
         public ObservableCollection<IRenderableSeriesViewModel> Series { get; } = new ObservableCollection<IRenderableSeriesViewModel>();
 
+        public ObservableCollection<PointCountViewModel> AllPointCounts { get; } = new ObservableCollection<PointCountViewModel>();
+
+        public PointCountViewModel SelectedPointCount
+        {
+            get => _selectedPointCount;
+            set
+            {
+                _selectedPointCount = value;
+                OnPropertyChanged("SelectedPointCount");
+            }
+        }
+        
         public ActionCommand RunCommand { get; }
         public ActionCommand StopCommand { get; }
 
@@ -71,9 +93,9 @@ namespace Fifo100MillionPointsDemo
 
         private async void OnRun()
         {
-            const int seriesCount = 5;
-            const int pointCount = 20_000_000;
-            LoadingMessage = $"Loading {FormatPointCountString(seriesCount, pointCount)} Points...";
+            int seriesCount = SelectedPointCount.SeriesCount;
+            int pointCount = SelectedPointCount.PointCount;
+            LoadingMessage = $"Loading {SelectedPointCount.DisplayName} Points...";
             IsStopped = false;
 
             // Load the points
@@ -83,17 +105,6 @@ namespace Fifo100MillionPointsDemo
             _timer.Start();
 
             LoadingMessage = null;
-        }
-
-        private string FormatPointCountString(int seriesCount, int pointCount)
-        {
-            int totalCount = seriesCount * pointCount;
-            if (totalCount > 1_000_000)
-            {
-                return (totalCount / 1_000_000) + " Million";
-            }
-
-            return totalCount.ToString();
         }
 
         private async Task<List<IRenderableSeriesViewModel>> CreateSeries(int seriesCount, int pointCount)
