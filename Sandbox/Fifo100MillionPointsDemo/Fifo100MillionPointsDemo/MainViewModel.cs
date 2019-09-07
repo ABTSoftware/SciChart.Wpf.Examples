@@ -21,13 +21,19 @@ namespace Fifo100MillionPointsDemo
     {
         private bool _isStopped;
         private string _loadingMessage;
-        private Timer _timer;
+        private readonly NoLockTimer _timer;
+        const int AppendCount = 10_000;
+        const int TimerIntervalMs = 10;
+
+        // Temporary buffers for improving the performance of loading and appending data
+        // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html
+        readonly float[] _xBuffer = new float[AppendCount];
+        readonly float[] _yBuffer = new float[AppendCount];
 
         public MainViewModel()
         {
             _isStopped = true;
-            _timer = new Timer(10);
-            _timer.Elapsed += OnTimerTick;
+            _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
             RunCommand = new ActionCommand(OnRun, () => this.IsStopped);
             StopCommand = new ActionCommand(OnStop, () => this.IsStopped == false);
         }
@@ -69,7 +75,7 @@ namespace Fifo100MillionPointsDemo
 
             // Load the points
             const int seriesCount = 5;
-            const int pointCount = 10000;//_000_000;
+            const int pointCount = 10_000_000;
             var series = await CreateSeries(seriesCount, pointCount);
             Series.AddRange(series);
 
@@ -106,6 +112,7 @@ namespace Fifo100MillionPointsDemo
                     int yOffset = i + i;
                     for (int j = 0; j < pointCount; j++)
                     {
+                        // Todo: Append blocks of 10k points for performance
                         xyDataSeries.Append(j, Rand.Next() + yOffset);
                     }
 
@@ -131,21 +138,27 @@ namespace Fifo100MillionPointsDemo
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
-        private void OnTimerTick(object sender, ElapsedEventArgs e)
+        private void OnTimerTick()
         {
             lock (Series)
             {
+                // Freeze updates on scichart UI 
                 using (ViewportManager.SuspendUpdates())
                 {
                     int seriesIndex = 0;
                     foreach (var series in Series)
                     {
+                        // Append new points
                         var dataSeries = (XyDataSeries<float, float>) series.DataSeries;
                         int startIndex = (int) dataSeries.XValues.Last() + 1;
-                        const int appendCount = 100;//_000;
+                        
                         int yOffset = seriesIndex + seriesIndex;
-                        for (int i = startIndex; i < startIndex + appendCount; i++)
-                            dataSeries.Append(i, Rand.Next() + yOffset);
+                        for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
+                        {
+                            _xBuffer[i] = j;
+                            _yBuffer[i] = Rand.Next() + yOffset;
+                        }
+                        dataSeries.Append(_xBuffer, _yBuffer);
 
                         seriesIndex++;
                     }
