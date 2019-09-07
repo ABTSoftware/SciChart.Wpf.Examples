@@ -55,8 +55,8 @@ namespace Fifo100MillionPointsDemo
             if (SysInfo.GetRamGb() >= 8)
                 AllPointCounts.Add(new PointCountViewModel("100 Million", 5, 20_000_000));
 
-            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
-                AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
+//            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
+//                AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
 
             SelectedPointCount = AllPointCounts.Last();
         }

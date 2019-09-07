@@ -9,7 +9,7 @@
         xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="650" Width="1024"
         Background="{StaticResource AppBackgroundBrush}">
     <Window.Resources>
         <local:MainViewModel x:Key="vm"/>
@@ -58,20 +58,22 @@
                     </s:SciChartSurface.YAxis>
                 </s:SciChartSurface>
 
-                <s:SciChartPerformanceOverlay Background="#33FFFFFF" TargetSurface="{Binding ElementName=scs}" Margin="20" Padding="20"  VerticalAlignment="Top" IsHitTestVisible="False"/>
+                <s:SciChartPerformanceOverlay Background="#33FFFFFF" TargetSurface="{Binding ElementName=scs}" Margin="20,10" Padding="20"  VerticalAlignment="Top" IsHitTestVisible="False"/>
             </Grid>
         </abt:BusyPanel>
 
         <Border Grid.Row="1" Background="{StaticResource AppBackgroundBrush}"
                 tz:Transitionz.Visibility="{Binding IsStopped, Converter={StaticResource b2vc}}"
                 tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=300, TransitionOn=Visibility}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       FontSize="24"
-                       TextAlignment="Center">
-                <Run Text="Select a series size and click"/>
-                <Run Text="RUN ►" FontWeight="Bold"/>
-                <Run Text="to start the test"/>
-            </TextBlock>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <TextBlock FontSize="24"
+                           TextAlignment="Center">
+                    <Run Text="Select a series size and click"/>
+                    <Run Text="RUN ►" FontWeight="Bold"/>
+                    <Run Text="to start the test"/>
+                </TextBlock>
+            </StackPanel>
+
         </Border>
 
         <!-- Status bar -->
