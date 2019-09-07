@@ -1,0 +1,25 @@
+# Fifo 100 Million Points Demo
+
+This demo showcases SciChart WPF v6's incredible performance when rendering streaming (scrolling) line charts. 
+
+To run the demo, ensure that you have setup the NuGet package feed below. Compilation requires Visual Studio 2019 or later. 
+
+## NuGet Package Feed setup
+
+In order to build the applicaiton, uyou will need to add our private NuGet feed for BETA packages. 
+
+* In Visual Studio, go to Tools -> Options -> NuGet 
+*  Under Package Sources, add a feed called SciChart Bleeding-Edge
+* Add this URL to the nuget feed https://www.myget.org/F/abtsoftware-bleeding-edge/api/v3/index.json 
+
+When you build, Visual Studio will now automatically restore NuGet packages. For more information see our page [Getting Nightly Builds with NuGet](https://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget).
+
+## Running the Application 
+
+For best performance, run the application in Release Mode without debugger attached. Debug mode will result in a 50% slowdown, and the debugger adds (requires) extra memory and CPU to run the application. 
+
+## Hardware Requirements
+
+We recommend 16 GB RAM and a DirectX11 capable GPU. However, the sample will automatically limit point-counts based on your system RAM. 
+
+Our tests were performed on a system with nVidia 1070 GTX and we get a stable 30 FPS at 100,000,000 points.  
