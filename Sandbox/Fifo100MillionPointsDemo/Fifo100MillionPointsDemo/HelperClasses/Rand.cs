@@ -16,7 +16,7 @@ namespace Fifo100MillionPointsDemo.HelperClasses
         public float NextWalk()
         {
             // Random walk
-            _current += (float)((Random.NextDouble() - 0.5) * 0.005);
+            _current += (float)((Random.NextDouble() - 0.5) * 0.002);
 
             // Clamp to 0..1
             _current = Math.Max(Math.Min(_current, 1.0f), 0.0f);
