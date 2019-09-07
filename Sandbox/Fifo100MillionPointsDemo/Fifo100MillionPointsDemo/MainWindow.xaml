@@ -58,7 +58,7 @@
                     </s:SciChartSurface.YAxis>
                 </s:SciChartSurface>
 
-                <s:SciChartPerformanceOverlay TargetSurface="{Binding ElementName=scs}" Margin="40" VerticalAlignment="Top" IsHitTestVisible="False"/>
+                <s:SciChartPerformanceOverlay Background="#33333333" TargetSurface="{Binding ElementName=scs}" Margin="40" VerticalAlignment="Top" IsHitTestVisible="False"/>
             </Grid>
         </abt:BusyPanel>
 
