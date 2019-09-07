@@ -14,6 +14,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Charting2D.Interop;
+using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 using SciChart.UI.Reactive;
 using Colors = Fifo100MillionPointsDemo.HelperClasses.Colors;
@@ -129,7 +130,8 @@ namespace Fifo100MillionPointsDemo
                 List<IRenderableSeriesViewModel> series = new List<IRenderableSeriesViewModel>();
                 for (int i = 0; i < seriesCount; i++)
                 {
-                    var xyDataSeries = new XyDataSeries<float, float>()
+                    var randomWalkGenerator = new Rand();
+                    var xyDataSeries = new StreamingSeries<float, float>()
                     {
                         // Required for scrolling / streaming 'first in first out' charts
                         FifoCapacity = pointCount,
@@ -144,7 +146,10 @@ namespace Fifo100MillionPointsDemo
                             ContainsNaN = false, 
                             IsEvenlySpaced = true, 
                             IsSortedAscending = true,
-                        }
+                        }, 
+                         
+                        // Just associate a random walk generator with the series for more consistent random generation
+                        Tag = randomWalkGenerator,
                     };
 
                     int yOffset = i + i;
@@ -153,7 +158,7 @@ namespace Fifo100MillionPointsDemo
                         for (int k = 0; k < AppendCount; k++)
                         {
                             _xBuffer[k] = j+k;
-                            _yBuffer[k] = Rand.Next() + yOffset;
+                            _yBuffer[k] = randomWalkGenerator.NextWalk() + yOffset;
                         }
                         // Append blocks of 10k points for performance
                         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
@@ -180,6 +185,7 @@ namespace Fifo100MillionPointsDemo
             {
                 _timer.Stop();
                 IsStopped = true;
+                Series.ForEachDo(x => x.DataSeries.FifoCapacity = 1);
                 Series.Clear();
             }
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
@@ -195,7 +201,8 @@ namespace Fifo100MillionPointsDemo
                     int seriesIndex = 0;
                     foreach (var series in Series)
                     {
-                        var dataSeries = (XyDataSeries<float, float>) series.DataSeries;
+                        var dataSeries = (StreamingSeries<float, float>) series.DataSeries;
+                        var randomWalkGenerator = (Rand)dataSeries.Tag;
                         int startIndex = (int) dataSeries.XValues.Last() + 1;
 
                         // Append new points in blocks of AppendCount 
@@ -204,7 +211,7 @@ namespace Fifo100MillionPointsDemo
                         for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
                         {
                             _xBuffer[i] = j;
-                            _yBuffer[i] = Rand.Next() + yOffset;
+                            _yBuffer[i] = randomWalkGenerator.NextWalk() + yOffset;
                         }
                         dataSeries.Append(_xBuffer, _yBuffer);
 

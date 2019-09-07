@@ -59,6 +59,7 @@
     <Compile Include="HelperClasses\Colors.cs" />
     <Compile Include="HelperClasses\NoLockTimer.cs" />
     <Compile Include="HelperClasses\ObservableCollectionExtensions.cs" />
+    <Compile Include="HelperClasses\StreamingSeries.cs" />
     <Compile Include="PointCountViewModel.cs" />
     <Compile Include="HelperClasses\Rand.cs" />
     <Compile Include="HelperClasses\SysInfo.cs" />
