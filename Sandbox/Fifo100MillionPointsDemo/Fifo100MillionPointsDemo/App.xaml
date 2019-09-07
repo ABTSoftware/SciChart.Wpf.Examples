@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Fifo100MillionPointsDemo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <ResourceDictionary Source="ApplicationStyles.xaml"></ResourceDictionary>
     </Application.Resources>
 </Application>

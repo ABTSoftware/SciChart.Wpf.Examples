@@ -4,9 +4,64 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fifo100MillionPointsDemo"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+        xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="800"
+        Background="{StaticResource AppBackgroundBrush}">
+    <Window.Resources>
+        <local:MainViewModel x:Key="vm"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="5" MinWidth="100" Command="{Binding RunCommand}">
+                <Button.Content>
+                    <TextBlock Text="RUN ►" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button.Content>
+            </Button>
+            <Button Margin="5" MinWidth="100" Command="{Binding StopCommand}">
+                <Button.Content>
+                    <TextBlock Text="Stop ■" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+        <!-- Chart Surface -->
+        <abt:BusyPanel Grid.Row="1" BusyMessage="{Binding LoadingMessage}">
+            <s:SciChartSurface RenderableSeries="{s:SeriesBinding Series}">
+                <s:SciChartSurface.XAxis>
+                    <s:NumericAxis/>
+                </s:SciChartSurface.XAxis>
+                <s:SciChartSurface.YAxis>
+                    <s:NumericAxis/>
+                </s:SciChartSurface.YAxis>
+            </s:SciChartSurface>
+        </abt:BusyPanel>
+
+        <Border Grid.Row="1" Background="{StaticResource AppBackgroundBrush}"
+                tz:Transitionz.Visibility="{Binding IsStopped, Converter={StaticResource b2vc}}"
+                tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=300, TransitionOn=Visibility}">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       FontSize="24"
+                       TextAlignment="Center">
+                <Run Text="Select a series size and click"/>
+                <Run Text="RUN ►" FontWeight="Bold"/>
+                <Run Text="to start the test"/>
+            </TextBlock>
+        </Border>
+
+        <!-- Status bar -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+
+        </StackPanel>
     </Grid>
 </Window>
