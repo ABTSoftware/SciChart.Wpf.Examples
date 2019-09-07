@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Timers;
 
-namespace Fifo100MillionPointsDemo
+namespace Fifo100MillionPointsDemo.HelperClasses
 {
     public class NoLockTimer : IDisposable
     {

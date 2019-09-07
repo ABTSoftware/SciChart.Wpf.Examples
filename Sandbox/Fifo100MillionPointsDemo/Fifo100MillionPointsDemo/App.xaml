@@ -6,10 +6,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Common.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Brushes.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="ComboBox.Common.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="ComboBox.Wpf.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/Common.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/Brushes.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/ComboBox.Common.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/ComboBox.Wpf.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

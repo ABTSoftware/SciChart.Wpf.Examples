@@ -8,6 +8,7 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Fifo100MillionPointsDemo.HelperClasses;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
@@ -15,6 +16,7 @@ using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Charting2D.Interop;
 using SciChart.Data.Model;
 using SciChart.UI.Reactive;
+using Colors = Fifo100MillionPointsDemo.HelperClasses.Colors;
 
 namespace Fifo100MillionPointsDemo
 {

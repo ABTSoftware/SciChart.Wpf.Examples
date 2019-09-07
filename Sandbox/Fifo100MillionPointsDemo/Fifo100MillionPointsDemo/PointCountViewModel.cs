@@ -1,4 +1,5 @@
-﻿using SciChart.Data.Model;
+﻿using SciChart.Charting.Model.DataSeries;
+using SciChart.Data.Model;
 
 namespace Fifo100MillionPointsDemo
 {

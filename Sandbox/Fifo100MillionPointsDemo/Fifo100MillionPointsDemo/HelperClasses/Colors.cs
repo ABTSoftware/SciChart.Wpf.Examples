@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Fifo100MillionPointsDemo
+namespace Fifo100MillionPointsDemo.HelperClasses
 {
     public class Colors
     {
