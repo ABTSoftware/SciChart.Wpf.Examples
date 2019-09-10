@@ -1,0 +1,34 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/CustomPointMarker/CustomPointMarker.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>TODO</ToolTipDescription>
+  <Description>
+    Demonstrates two different methods of creating Custom PointMarkers in SciChart:
+
+    [b]#1 By inheriting[/b] [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BasePointMarker.html']BasePointMarker[/url]
+
+    Using this method, you can inherit BasePointMarker and override Draw. The Draw method is called for every single point which is on-screen in your DataSeries. Use the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.Common.IRenderContext2D.html']RenderContext API[/url] to do the drawing.
+
+    [b]#2 By inheriting[/b] [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BitmapSpriteBase.html']BitmapSpriteBase[/url]
+
+    Using this method, you can inherit BitmapSpriteBase and override RenderToCache. The RenderToCache method is called once and allows you to cache a single marker using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Drawing~SciChart.Drawing.Common.IRenderContext2D.html']RenderContext API[/url]. This method is far faster but all markers must look the same.
+
+    [i][b]Note:[/b][/i] [i]There is also another method, by using[/i] [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.SpritePointMarker.html']SpritePointMarker[/url]. [i]This method allows you to cache a WPF UIElement to bitmap and repeatedly draw.[/i]
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']Adding DataPoint Markers[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PointMarkers_namespace.html']BasePointMarker Types[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomPointMarker/CustomPointMarker.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomPointMarker/CustomPointMarker.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomPointMarker/DiamondPointMarker.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomPointMarker/StarPointMarker.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Selection</Features>    
+  </Features>
+</ExampleDefinition>

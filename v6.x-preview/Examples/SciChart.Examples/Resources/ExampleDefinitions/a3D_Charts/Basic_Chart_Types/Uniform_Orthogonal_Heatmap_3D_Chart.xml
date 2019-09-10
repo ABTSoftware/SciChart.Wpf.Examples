@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateA3DChart/Simple3DHeatmapChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconHeat</IconPath>
+  <ToolTipDescription>TODO
+  </ToolTipDescription>
+  <Description>
+    As well as creating a Heatmap chart with SciChart 2D, you can also create one using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface[/url].
+
+    This is achieved by using a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.SurfaceMeshRenderableSeries3D.html']SurfaceMeshRenderableSeries3D[/url] with [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.UniformGridDataSeries3D%603.html']UniformGridDataSeries3D[/url] and by using a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.CameraController.html']CameraController[/url] with [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.CameraController~ProjectionMode.html']ProjectionMode[/url] = Orthogonal. The result is the camera looks top-down and can view the surface-mesh as a flat Heatmap.
+
+    [b][i]Tip![/i][/b]
+
+    The Heatmap can also be scrolled by pushing data to the the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.UniformGridDataSeries3D%603~PushRow.html']UniformGridDataSeries3D.PushRow[/url] method.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface.html']SciChart3DSurface[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.SurfaceMeshRenderableSeries3D.html']SurfaceMeshRenderableSeries3D[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.UniformGridDataSeries3D%603.html']UniformGridDataSeries3D[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.ICameraController.html']ICameraController interface[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Simple3DHeatmapChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Simple3DHeatmapChart.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

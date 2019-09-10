@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.AnnotateAChart.CreateAnnotationsDynamically.CreateAnnotationsDynamically"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="CreateAnnotationsDynamicallyLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <!--  Defines Default Colors for annotations via implicit styles  -->
+        <Style x:Key="TextAnnotationStyle" TargetType="s:TextAnnotation">
+            <Setter Property="Background" Value="#22B22020" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="#666666" />
+        </Style>
+
+        <Style x:Key="BoxAnnotationStyle" TargetType="s:BoxAnnotation">
+            <Setter Property="BorderBrush" Value="#279B27" />
+            <Setter Property="Background" Value="#551964FF" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style x:Key="AxisMarkerAnnotationStyle" TargetType="s:AxisMarkerAnnotation">
+            <Setter Property="Background" Value="#FF6600" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#EEE" />
+        </Style>
+
+        <Style x:Key="HorizontalLineAnnotationStyle" TargetType="s:HorizontalLineAnnotation">
+            <Setter Property="Stroke" Value="#FFFF6600" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="ShowLabel" Value="True" />
+            <Setter Property="LabelPlacement" Value="Axis" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style x:Key="VerticalLineAnnotationStyle" TargetType="s:VerticalLineAnnotation">
+            <Setter Property="Stroke" Value="#FFFF6600" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="ShowLabel" Value="True" />
+            <Setter Property="LabelPlacement" Value="Axis" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}">
+
+            <ToggleButton x:Name="pointerButton"
+                          Margin="2"
+                          Checked="OnEditingEnabled"
+                          Content="Pointer"
+                          Style="{StaticResource PointerButtonStyle}"
+                          Tag="LineAnnotation"
+                          ToolTip="Pointer"
+                          Unchecked="OnEditDisabled"
+                          s:ToggleButtonExtensions.GroupName="Modifiers" />
+
+            <Button Click="OnDeleteSelectedAnnotationsClick"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Padding="0"
+                    Content="DEL"
+                    ToolTip="Delete Selected"/>
+
+            <ext:FlyoutSeparator />
+
+            <ext:FlyoutMenuButton x:Name="AnnotationCreation"
+                                  HorizontalAlignment="Left"
+                                  Content="Annotation"
+                                  Style="{StaticResource AnnotationButtonStyle}"
+                                  ToolTipService.ToolTip="Annotation">
+
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+
+                        <TextBlock Text="Annotation Type" />
+
+                        <ComboBox x:Name="AnnotationTypes"
+                                  SelectedIndex="0"
+                                  SelectionChanged="AnnotationTypes_OnSelectionChanged" />
+                        <ext:FlyoutSeparator />
+
+                        <Button Width="auto"
+                                HorizontalAlignment="Stretch"
+                                Click="AddAnnotation_OnClick"
+                                Content="Add Annotation"
+                                Style="{StaticResource DefaultButtonStyle}" />
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Defines the SciChartSurface, with CreateAnnotationModifier  -->
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           BorderThickness="0"
+                           ClipModifierSurface="True"
+                           Padding="0">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastCandlestickRenderableSeries />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:CategoryDateTimeAxis DrawMajorBands="True" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMajorBands="True" TextFormatting="0.0#" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:AnnotationCreationModifier x:Name="annotationCreation" AnnotationCreated="OnAnnotationCreated" />
+                    <s:YAxisDragModifier />
+                    <s:XAxisDragModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+            <s:SciChartSurface.Annotations>
+
+                <s:CustomAnnotation CoordinateMode="Relative" 
+                                    HorizontalAnchorPoint="Left"
+                                    VerticalAnchorPoint="Center" 
+                                    Margin="5,60,0,0" 
+                                    X1="0" 
+                                    Y1="0" >
+
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel Orientation="Horizontal">
+                            
+                            <TextBlock FontSize="20" 
+                                       Opacity="0.7"
+                                       Background="#232323"
+                                       Margin="5 0"
+                                       Text="To select the desired annotation type, click" 
+                                       Foreground="#FFF" />
+                            
+                        <Image Width="32"
+                               Height="32"
+                               Source="/SciChart.Examples;component/Resources/Images/annotation_icon.png"
+                               Stretch="None" />
+                            
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Horizontal">
+                            
+                            <TextBlock FontSize="20" 
+                                       Opacity="0.7"
+                                       Background="#232323"
+                                       Margin="5 0"
+                                       Text="Now you can add an annotation of the chosen type on the chart. Just click on the surface!" 
+                                       Foreground="#FFF" />
+
+                        <Image Width="32"
+                               Height="32"
+                               Source="/SciChart.Examples;component/Resources/Images/pointbutton_icon.png"
+                               Stretch="None" />
+
+                        </StackPanel>
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Margin="5 0"
+                                   Text="For some annotation types, like BoxAnnotation, it may require more than 1 click to finish it." 
+                                   Foreground="#FFF" />
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock FontSize="20" 
+                                       Opacity="0.7"
+                                       Background="#232323"
+                                       Margin="5 0"
+                                       Text="A single click on an annotation makes it selected. You can delete the selected annotation, clicking"
+                                       Foreground="#FFF" />
+
+                            <Image Width="32"
+                                   Height="32"
+                                   Source="/SciChart.Examples;component/Resources/Images/del_button.png"
+                                   Stretch="None" />
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </s:CustomAnnotation>
+
+            </s:SciChartSurface.Annotations>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateRealtimeChart.RealTimeGhostedTraces"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="OnExampleLoaded"
+             Unloaded="OnExampleUnloaded"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Used by the hint annotation, hides if if the user selects high quality renderer  -->
+        <ext:TrueIfValueConverter x:Key="TrueIfValueConverter" Value="SciChart.Rendering.HighQualityRasterizer.HighQualityRenderSurface" />
+
+        <Color x:Key="Stroke">#FF279B27</Color>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+        <!-- to the chart and is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}" >
+
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="TMR" Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
+                        <TextBlock Margin="5" >
+                            <Run Text="Timer Speed ("/><Run Text="{Binding ElementName=Slider, Path=Value, StringFormat=\{0:0.0\}}" /><Run Text="ms" /><Run Text=")"/>
+                        </TextBlock>
+                        <ext:FlyoutSeparator/>
+
+                        <Slider x:Name="Slider"                                
+                                Margin="4"
+                                Maximum="500"
+                                Minimum="20"
+                                ValueChanged="Slider_OnValueChanged"
+                                Value="20" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           RenderPriority="Low">
+
+            <!--  10 RenderableSeries with decreasing opacity, which will be bound to our shifting window of DataSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}"/>
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.9" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.8" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.7" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.62" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.55" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.45" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.35" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.25" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource Stroke}" Opacity="0.15" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoRange="Always" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Never"
+                               DrawMajorBands="True"
+                               TextFormatting="0.00"
+                               VisibleRange="-2.0, 2.0" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

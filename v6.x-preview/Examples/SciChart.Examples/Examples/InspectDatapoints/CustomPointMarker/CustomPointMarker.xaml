@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.InspectDatapoints.CustomPointMarker.CustomPointMarker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:pointMarker="clr-namespace:SciChart.Examples.Examples.InspectDatapoints.CustomPointMarker"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"             
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <pointMarker:StarPointMarker x:Key="StarPointMarker"
+                                     Width="20"
+                                     Height="20"
+                                     Fill="Blue"
+                                     Stroke="Yellow"
+                                     StrokeThickness="1" />
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+        
+        <s:SciChartSurface Grid.Column="1" Name="sciChart">
+
+            <!--  Declare line RenderableSeries with PointMarker  -->
+            <s:SciChartSurface.RenderableSeries>
+
+                <s:FastLineRenderableSeries x:Name="fastLineSeries"
+                                            SelectedPointMarker="{StaticResource StarPointMarker}"
+                                            Stroke="#FFFF1919">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <pointMarker:DiamondPointMarker Width="11"
+                                                        Height="11"
+                                                        Fill="Yellow"
+                                                        Stroke="Red"
+                                                        StrokeThickness="2" />
+                    </s:FastLineRenderableSeries.PointMarker>
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                </s:FastLineRenderableSeries>
+
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis with Growby  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis DrawMajorBands="False" GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMajorBands="False" GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+            <!--  Create Modifiers  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier />
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomExtentsModifier />
+                    <s:XAxisDragModifier />
+                    <s:YAxisDragModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

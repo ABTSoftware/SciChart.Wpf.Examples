@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/WaterfallChart/WaterfallChart.xaml</View>
+  <ViewModel></ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSpectrumAnalyzer.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+    <ToolTipDescription>Waterfall chart simulation using SciChart 2D</ToolTipDescription>
+  <Description>
+    Waterfall chart simulation using SciChart 2D.
+    
+    Custom WaterfallRubberBandZoomModifier is implemented using SciChart custom modifiers API. See the following articles for more details:
+    [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17234/32/custom-chartmodifier-api---overview']Custom ChartModifier[/url] 
+    [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32/chartmodifiers-zooming-panning']Zooming, Panning[/url] 
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/WaterfallChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/WaterfallChart.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/CustomWaterfallNumericAxis.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/CustomWaterfallRubberBandXyZoomModifier.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/VerticalValuesPaletteProvider.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+  </Features>
+</ExampleDefinition>

@@ -1,0 +1,40 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/UseSciChartWithMvvm/ManipulateSeriesMVVM/ManipulateSeriesMvvmView.xaml</View>
+  <ViewModel>Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM.ManipulateSeriesMvvmViewModel</ViewModel>
+  <ImagePath></ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription></ToolTipDescription>
+  <Description>
+    Demonstrates how to Add, Change or Remove RenderableSeries with the new [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url], which forms part of the MVVM API in SciChart. 
+    
+    This example also shows how use styles for RenderableSeries and change series type at runtime from your ViewModel. 
+
+    [b][i]Tip![/i][/b]
+
+    - Select series type in ComboBox and add new series by pressing "+" button.
+
+    - You can also use ShiftValue slider to customize DataSeries generation.
+
+    - Select RenderableSeries via SeriesSelectionModifier and remove series by pressing "-" button
+
+    - Select RenderableSeries via SeriesSelectionModifier and change it type by changing type in ComboBox
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url]
+    - List of [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartSeries_namespace.html']BaseRenderableSeriesViewModel derived Types[/url]
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/ManipulateSeriesMvvmView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/ManipulateSeriesMvvmView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/ManipulateSeriesMvvmViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/SeriesType.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/Styles.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/ManipulateSeriesMVVM/ViewModelsFactory.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>MVVM</Features>
+  </Features>
+</ExampleDefinition>
+

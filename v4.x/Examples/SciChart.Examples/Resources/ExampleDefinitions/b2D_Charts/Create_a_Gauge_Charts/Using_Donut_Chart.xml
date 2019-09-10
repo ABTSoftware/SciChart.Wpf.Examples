@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateGaugeCharts/UsingDonutChartExampleView.xaml</View>
+  <ViewModel>Examples.CreateGaugeCharts.UsingDonutChartExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPolarChartExample.png</ImagePath>
+  <IconPath>IconPolar</IconPath>
+  <ToolTipDescription>Donut Chart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a Donut Chart. This is a circular chart type with a hole in the center consisting of sectors which are proportional to the quantity it represents.
+
+    [i][b]Tips![/i][/b]
+    [i]You can change the fill color of every segment and style of its label.[/i] 
+    
+    [i]The labels can be placed outside or inside a segment.[/i]
+    
+    [i]Every segment can be highlighted by clicking on it or when selected in the Legend.[/i]
+
+    [i]Hover a segment with the cursor to see a tooltip with additional info about it![/i]
+
+    [b]Documentation Links[/b]
+    Coming soon.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingDonutChartExampleViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateGaugeCharts/EventToCommandBehavior.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateA3DChart.Simple3DHeatmapChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <s3D:GradientColorPalette x:Key="ColorPalette" IsStepped="False">
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="0" Color="DarkBlue" />
+                <GradientStop Offset="0.2" Color="CornflowerBlue" />
+                <GradientStop Offset="0.4" Color="DarkGreen" />
+                <GradientStop Offset="0.6" Color="Chartreuse" />
+                <GradientStop Offset="0.8" Color="Yellow" />
+                <GradientStop Offset="1" Color="Red" />
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <s3D:SciChart3DSurface x:Name="SciChart3DSurface"
+                               Grid.Column="1"
+                               BorderThickness="0"
+                               MaxFrameRate="36"
+                               RenderPriority="Normal"
+                               WorldDimensions="200,100,200">
+
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D OrbitalPitch="90"
+                              OrbitalYaw="90"
+                              OrthoHeight="235"
+                              OrthoWidth="355"
+                              ProjectionMode="Orthogonal"
+                              ZoomToFitOnAttach="True" />
+            </s3D:SciChart3DSurface.Camera>
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh"
+                                                   HeightScaleFactor="0"
+                                                   Maximum="200"
+                                                   MeshColorPalette="{StaticResource ColorPalette}"
+                                                   StrokeThickness="0" />
+
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AutoRange="Always" VisibleRange="20,200" TextFormatting="0" PlaneBorderThickness="0" />
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D AutoRange="Always" DrawLabels="False" TextFormatting="0" PlaneBorderThickness="0" />
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AutoRange="Always" TextFormatting="0" PlaneBorderThickness="0" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:MouseWheelZoomModifier3D />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+
+    </Grid>
+</UserControl>

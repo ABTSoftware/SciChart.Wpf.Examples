@@ -1,0 +1,36 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+  <View>Examples/AnnotateAChart/AnnotationsAreEasy.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAnnotationsAreEasy.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates the Annotations API to create Text, Line, Box, LineArrow and Custom Annotations in Xaml.</ToolTipDescription>
+  <Description>
+    An introduction to the UIElement Annotations API, which allows WPF UIElements to be placed over the chart at specific X and Y data-values.
+
+    [b]Annotation Types Include:[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AxisMarkerAnnotation.html']AxisMarkerAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.BoxAnnotation.html']BoxAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.CompositeAnnotation.html']CompositeAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.CustomAnnotation.html']CustomAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.HorizontalLineAnnotation.html']HorizontalLineAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.LineAnnotation.html']LineAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.LineArrowAnnotation.html']LineArrowAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.TextAnnotation.html']TextAnnotation[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.VerticalLineAnnotation.html']VerticalLineAnnotation[/url]
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Documentation[/url]
+    - [url='http://www.scichart.com/databinding-annotations-with-mvvm/']Databinding Annotations with MVVM[/url]
+    - [url='http://www.scichart.com/questions/question/editing-annotations-and-keeping-track-of-them-in-an-mvvm-application']Best practices with Annotations in MVVM apps[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17209/33/custom-annotations---adding-a-watermark-to-a-chart']Custom Annotations - Adding a WaterMark to a Chart[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/AnnotationsAreEasy.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/AnnotationsAreEasy.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

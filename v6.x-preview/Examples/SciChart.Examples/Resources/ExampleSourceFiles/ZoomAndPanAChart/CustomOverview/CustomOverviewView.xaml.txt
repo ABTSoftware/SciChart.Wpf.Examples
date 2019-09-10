@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview.CustomOverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="s:SciChartScrollbar">
+            <Setter Property="GripsThickness" Value="9" />
+            <Setter Property="GripsLength" Value="30" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ViewportStyle">
+                <Setter.Value>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="#33000000" />
+                        <Setter Property="BorderBrush" Value="#99000000" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="GripsStyle">
+                <Setter.Value>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="#535353" />
+                        <Setter Property="BorderThickness" Value="2" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ext:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="{Binding Source={x:Reference Name=MainChartSurface}, Path=Background}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=MainChartSurface}}" Grid.RowSpan="2" />
+
+        <s:SciChartSurface x:Name="MainChartSurface"
+                           Grid.Column="1"
+                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis x:Name="XAxis"
+                               DrawMinorGridLines="True"
+                               DrawMinorTicks="True"
+                               VisibleRange="50,300" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMinorGridLines="True" DrawMinorTicks="True" />
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+
+        <!--  This grid is used to space Overview Control so its width matches parent chart XAxis  -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <!--  The grid is used to set paddings around the Overview, so that the size of the Overview matches the size of the XAxis on the parent chart  -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!--  Hosts overview control  -->
+                <ColumnDefinition Width="{Binding Source={x:Reference Name=proxy}, Path=ActualWidthValue, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                <!--  Used to bind to parent surface YAxis  -->
+            </Grid.ColumnDefinitions>
+
+            <!--  This class is in the Examples Source Code, under your install directory  -->
+            <ext:ActualSizePropertyProxy x:Name="proxy" Element="{Binding Source={x:Reference Name=MainChartSurface}, Path=YAxis}" />
+
+            <!--  Define the SciChartSurface behind the scrollbar  -->
+            <s:SciChartSurface x:Name="OverviewSurface"
+                               Grid.Column="0"
+                               Loaded="OnOverviewSurfaceLoaded"
+                               RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+
+                <s:SciChartSurface.XAxis>
+                    <s:NumericAxis DrawMajorGridLines="False"
+                                   DrawMinorGridLines="False"
+                                   Visibility="Collapsed" />
+                </s:SciChartSurface.XAxis>
+
+                <s:SciChartSurface.YAxis>
+
+                    <s:NumericAxis DrawMajorGridLines="False"
+                                   DrawMinorGridLines="False"
+                                   Visibility="Collapsed" />
+                </s:SciChartSurface.YAxis>
+
+            </s:SciChartSurface>
+
+            <!--  Define the scrollbar and bind to MainChartSurface XAxis  -->
+            <s:SciChartScrollbar Grid.Column="0"
+                                 Height="100"
+                                 Margin="{Binding Source={x:Reference Name=MainChartSurface}, Path=Padding, Mode=OneWay}"
+                                 Axis="{Binding Source={x:Reference Name=XAxis}}" />
+
+        </Grid>
+    </Grid>
+</UserControl>

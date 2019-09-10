@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateRealtimeChart.UsingSeriesValueModifier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="OnExampleLoaded"
+             Unloaded="OnExampleUnloaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <!--  Converter used by feedback panel below SciChartSurface  -->
+        <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+
+        <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <!--  DataContext is SeriesInfo for each legend row  -->
+        <!--  This is not part of the example, but just to toggle features on and off such as  -->
+        <!--  RenderableSeries.IsVisible and setting the SeriesValueModifier.IsSeriesValueModifierEnabled attached property  -->
+        <DataTemplate x:Key="CustomLegendTemplate" DataType="s:SciChartLegend">
+            <Grid Margin="2,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Series icon, binds to SeriesInfo.Stroke  -->
+                <Ellipse Grid.Column="0"
+                         Width="10"
+                         Height="10"
+                         Margin="5,0,20,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Fill="{Binding Stroke,
+                                        Converter={StaticResource ColorToBrushConverter}}" />
+
+                <!--  Series name (SeriesInfo.SeriesName)  -->
+                <TextBlock Grid.Column="1"
+                           Width="90"
+                           HorizontalAlignment="Center"
+                           Text="{Binding SeriesName}" />
+
+                <!--  Show or hide the 'Visibility Checkboxes'  -->
+                <Grid Grid.Column="2" Visibility="{Binding DataContext.ShowVisibilityCheckboxes, ElementName=PART_LegendItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                    <!--  Binds to SeriesInfo.IsVisible to show and hide the series  -->
+                    <CheckBox HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Content="R-Series Visible?"
+                              Foreground="{Binding Stroke,
+                                                   Converter={StaticResource ColorToBrushConverter}}"
+                              IsChecked="{Binding IsVisible,
+                                                  Mode=TwoWay}" />
+                </Grid>
+
+                <!--  Binds to SeriesInfo.RenderableSeries, attached property SeriesValueModifier.IsSeriesValueModifierEnabled  -->
+                <!--  This demonstrates how to enable or disable the axis markers per series. If you want to do this you can  -->
+                <!--  just bind to or set SeriesValueModifier.IsSeriesValueModifierEnabled, no need to create the legend, we just do that for demo purposes  -->
+                <CheckBox Grid.Column="3"
+                          Margin="10,0,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Content="IsSeriesValueModifierEnabled?"
+                          DataContext="{Binding RenderableSeries}"
+                          Foreground="{Binding Stroke,
+                                               Converter={StaticResource ColorToBrushConverter}}"
+                          IsChecked="{Binding Path=(s:SeriesValueModifier.IncludeSeries),
+                                              Mode=TwoWay}" />
+
+            </Grid>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <!--  This is where the example starts  -->
+    <Grid>
+        <s:SciChartSurface x:Name="sciChartSurface">
+
+            <s:SciChartSurface.RenderableSeries>
+                <!--  The three RenderableSeries are controlled from the legend  -->
+                <!--  If you set RenderableSeries.IsVisible = false, it will hide the renderableseries but not the Axis Marker  -->
+                <!--  If you set SeriesValueModifier.IsSeriesValueModifierEnabled=False on the RenderableSeries, it will hide the axis marker but not the series  -->
+                <s:FastLineRenderableSeries x:Name="renderableSeries0"
+                                            Stroke="DarkOrange"
+                                            StrokeThickness="2" />
+                <s:FastLineRenderableSeries x:Name="renderableSeries1"
+                                            Stroke="SteelBlue"
+                                            StrokeThickness="2" />
+                <s:FastLineRenderableSeries x:Name="renderableSeries2"
+                                            Stroke="DarkOliveGreen"
+                                            StrokeThickness="2" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoRange="Always"
+                               AxisTitle="Time (Seconds)"
+                               TextFormatting="0.0" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Always"
+                               AxisTitle="Amplitude (Volts)"
+                               DrawMajorBands="True"
+                               GrowBy="0.1, 0.1"
+                               TextFormatting="0.00" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:CursorModifier />
+                    <!--  SeriesValueModifier: This Provides axis markers per series, for each RenderableSeries that  -->
+                    <!--  has SeriesValueModifier.IsSeriesValueModifierEnabled=True  -->
+                    <s:SeriesValueModifier />
+                    <s:LegendModifier x:Name="legendModifier"
+                                      Margin="10"
+                                      GetLegendDataFor="AllSeries"
+                                      LegendItemTemplate="{StaticResource CustomLegendTemplate}"
+                                      ShowLegend="True"
+                                      ShowVisibilityCheckboxes="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

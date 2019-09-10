@@ -1,0 +1,34 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateMultiseriesChart/ChartLegendsExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultipleLines.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates how to create legends simple multi-series charts in code</ToolTipDescription>
+  <Description>
+    Generates a simple line chart with a chart legend. The Legend is created as follows:
+
+    - Adding a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url] to the SciChartSurface.ChartModifier. This aggregates and exposes series data which you can bind to.
+    - Adding a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend[/url] to the chart, binding it to LegendModifier.LegendData.SeriesInfo.
+
+    [b][i]Tip![/i][/b]
+
+    There are many different configurations for the legend, including auto-creation of legend, or fine grained control over the legend rows. Please review the API documentation below carefully for further informatino.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17218/39/scichart-legend-api-overview']SciChart Legend API Overview[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17219/39/scichartlegend-itemspanel-and-itemstemplate']SciChartLegend ItemsPanel and ItemsTemplate[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17244/39/tutorial---custom-legend-with-color-picker-and-custom-point-markers']Custom Legend with Color Picker and Custom Point Markers[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17249/42/seriesinfo---the-series-viewmodel-for-legends-tooltips-rollovers']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartLegend.html']SciChartLegend Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.LegendModifier.html']LegendModifier Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ChartLegendsExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ChartLegendsExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Legend</Features>
+    <Features>PointMarker</Features>
+  </Features>
+</ExampleDefinition>

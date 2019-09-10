@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.InspectDatapoints.SeriesSelectionExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="SeriesSelectionExampleView_OnLoaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <Grid>
+
+        <s:SciChartSurface x:Name="sciChartSurface">
+
+            <!--  Declare Axes  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoRange="Always" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis AxisAlignment="Right" Id="Right" />
+                <s:NumericAxis AxisAlignment="Left" Id="Left" />
+            </s:SciChartSurface.YAxes>
+
+
+            <!--  Declare ChartModifiers  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+
+                    <!--  Provides Interactivity  -->
+                    <s:RubberBandXyZoomModifier />
+                    <s:XAxisDragModifier />
+                    <s:YAxisDragModifier AxisId="Left" />
+                    <s:YAxisDragModifier AxisId="Right" />
+                    <s:ZoomExtentsModifier />
+
+                    <!--  Provides selection of series and custom styling to the selected series  -->
+                    <s:SeriesSelectionModifier>
+                        <s:SeriesSelectionModifier.SelectedSeriesStyle>
+
+                            <!--  When a series is selected (on click), apply this style  -->
+                            <!--  Changes Stroke to white on click  -->
+                            <!--  Applies a PointMarker on click  -->
+                            <Style TargetType="s:BaseRenderableSeries">
+                                <Setter Property="Stroke" Value="White" />
+                                <Setter Property="PointMarkerTemplate">
+                                    <Setter.Value>
+                                        <!--  This is how we do PointMarkerTemplates in Scichart v2.0. You can either declare an EllipsePointMarker inline,  -->
+                                        <!--  or, if temmplating (because you are sharing a style across many series), then use a ControlTemplate with a BasePointMarker,  -->
+                                        <!--  or UIElement to replicate across each data-point  -->
+                                        <ControlTemplate>
+                                            <s:EllipsePointMarker Width="7"
+                                                                  Height="7"
+                                                                  Fill="#FF00DC"
+                                                                  Stroke="White" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+
+                        </s:SeriesSelectionModifier.SelectedSeriesStyle>
+                    </s:SeriesSelectionModifier>
+
+                    <!--  Provides a data source for the legend control  -->
+                    <s:LegendModifier Margin="10"
+                                      GetLegendDataFor="SelectedSeries"
+                                      ShowLegend="True" />
+
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

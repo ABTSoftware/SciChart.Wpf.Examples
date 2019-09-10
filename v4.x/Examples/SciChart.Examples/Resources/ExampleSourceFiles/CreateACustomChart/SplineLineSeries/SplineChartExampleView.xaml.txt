@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries.SplineChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries"
+             Loaded="SplineChartExampleView_Loaded"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <!-- The style for the rollover line -->
+        <Style x:Key="RolloverLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="DarkGreen"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeDashArray" Value="2 2"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=sciChart}"/>
+        
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart" Padding="0" BorderThickness="0" Grid.Column="1">
+
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation Text="Custom Spline Chart" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Top" X1="0.5" Y1="0.01" CoordinateMode="Relative"/>
+            </s:SciChartSurface.Annotations>
+            
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+
+                <!-- Draw the original line -->
+                <s:FastLineRenderableSeries x:Name="LineRenderSeries" Stroke="SteelBlue" StrokeThickness="1" RolloverMarkerTemplate="{x:Null}" />
+
+                <!-- Draw the spline series - custom renderable series -->
+                <local:SplineLineRenderableSeries x:Name="SplineRenderSeries" Stroke="DarkGreen" StrokeThickness="2"  
+                                                  IsSplineEnabled="True" UpSampleFactor="10">
+
+                    <!-- LegendMarkerTemplate is required to show a marker in the legend next to SeriesName -->
+                    <local:SplineLineRenderableSeries.LegendMarkerTemplate>
+                        <DataTemplate>
+                            <Line VerticalAlignment="Center" Stretch="Fill" Stroke="DarkGreen"
+                                    StrokeThickness="2" X1="0" X2="1" Y1="0.5" Y2="0.5" />
+                        </DataTemplate>
+                    </local:SplineLineRenderableSeries.LegendMarkerTemplate>
+
+                    <!-- PointMarker is optional, to display a marker on each data point -->
+                    <local:SplineLineRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Fill="White" Stroke="DarkGreen"/>
+                    </local:SplineLineRenderableSeries.PointMarker>
+
+                    <!-- RolloverMarker is optional, to display a marker on Rollover -->
+                    <local:SplineLineRenderableSeries.RolloverMarkerTemplate>
+                        <ControlTemplate>
+                            <Ellipse Width="9" Height="9" Fill="White" Stroke="DarkGreen" StrokeThickness="1"></Ellipse>
+                        </ControlTemplate>
+                    </local:SplineLineRenderableSeries.RolloverMarkerTemplate>
+
+                </local:SplineLineRenderableSeries>
+
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis with Growby  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisTitle="X" TextFormatting="#.############" ScientificNotation="None" DrawMajorBands="True"/>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AxisTitle="Y" GrowBy="0.7, 0.7" DrawMajorBands="True"/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier x:Name="RubberBandXyZoomModifier" IsEnabled="True"/>
+                    <s:ZoomPanModifier x:Name="ZoomPanModifier" IsEnabled="False" ClipModeX="None"/>
+                    <s:LegendModifier ShowLegend="True" LegendPlacement="Inside" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <s:RolloverModifier x:Name="RolloverModifier" ShowAxisLabels="False" 
+                                        UseInterpolation="True"
+                                        LineOverlayStyle="{StaticResource RolloverLineStyle}"
+                                        ShowTooltipOn="Always"/>
+                    <s:XAxisDragModifier/>
+                    <s:YAxisDragModifier/>
+                    <s:ZoomExtentsModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

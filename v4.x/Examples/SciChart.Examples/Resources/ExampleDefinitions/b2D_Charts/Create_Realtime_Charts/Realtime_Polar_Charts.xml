@@ -1,0 +1,32 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateRealtimeChart/RealTimePolarChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealtimePolarChatt.png</ImagePath>
+  <IconPath>IconPolar</IconPath>
+  <ToolTipDescription>
+    This example shows how to create realtime polar chart with noisy sinewave
+  </ToolTipDescription>
+  <Description>
+    This example shows how to create realtime polar chart with noisy sinewave. Recreates data series when timer ticks and then replaces old data points on new ones.
+
+    [b][i]Tips![/i][/b]
+
+    To increase performance of chart you can append data points to data series before attaching to appropriate renderable series.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17227/36/performance-tips-and-tricks']Performance Tips and Tricks[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17252/41/polar-chart-types']Polar Chart Types[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/v4.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealTimePolarChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealTimePolarChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+    <Features>Polar</Features>
+  </Features>
+</ExampleDefinition>

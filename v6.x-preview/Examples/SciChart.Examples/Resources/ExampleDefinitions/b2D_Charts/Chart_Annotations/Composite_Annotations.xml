@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/AnnotateAChart/CompositeAnnotations/CompositeAnnotationsView.xaml</View>
+  <ViewModel>Examples.AnnotateAChart.CompositeAnnotations.CompositeAnnotationsViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoThreshold.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates how to use CompositeAnnotations</ToolTipDescription>
+  <Description>
+    Demonstrates the CompositeAnnotations API, which allows combining multiple Annotations or UIElements into a single draggable, selectable element.
+
+    This example demonstrates how to make a Fibonnacci Retracement, Fibonacci Extension and Measure (Peak to Peak, or Cycle Duration) annotation using the new Composite Annotations API.
+
+    For full details, [b]see the example source code[/b]
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.CompositeAnnotation.html']CompositeAnnotation Type[/url]
+    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Overview[/url]
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/CompositeAnnotationsView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/CompositeAnnotationsView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/CompositeAnnotationsViewModel.cs.txt</string>
+
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciExtensionAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciExtensionAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioBox.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioBox.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioBoxViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioLine.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioLine.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRatioViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRetracementAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRetracementAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/FibonacciRetracementViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/TrendLine.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/TrendLine.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/FibonacciAnnotations/TrendLineViewModel.cs.txt</string>
+
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureX/MeasureXAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureX/MeasureXAnnotation.xaml.txt</string>
+
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureXy/MeasureXyAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureXy/MeasureXyAnnotation.xaml.txt</string>
+
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureY/MeasureYAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CompositeAnnotations/MeasureY/MeasureYAnnotation.xaml.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+    <Features>MVVM</Features>
+  </Features>
+</ExampleDefinition>
