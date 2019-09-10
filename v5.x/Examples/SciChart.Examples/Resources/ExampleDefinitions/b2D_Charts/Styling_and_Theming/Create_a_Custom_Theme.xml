@@ -1,0 +1,35 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/StyleAChart/CustomTheme/CustomThemeView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCustomTheme.png</ImagePath>
+  <IconPath>IconThemes</IconPath>
+  <ToolTipDescription>Demonstrates easy Xaml Styling via the ThemeManager. SciChart includes six pre-defined Themes, which provide chart pane, grid-line brushes and default colors for Renderable Series</ToolTipDescription>
+  <Description>
+    SciChart Ships with 8 stunning themes, which you can apply to your charts with a single line of code.
+
+    This example shows how to style SciChart with your own custom theme, and how it affects default cursor, zoom, axis, grid and series colors.
+
+    [b][i]Tips![/i][/b]
+
+    To define your custom theme you need to create a ResourceDictionary with the brushes and colors which are all keyed off the properties in the IThemeProvider interface.
+
+    You can also take one of our themes and just [url='http://www.scichart.com/questions/question/example-for-implementing-ithemeprovider']override certain brushes or colors[/url].
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17246/38/how-to-create-a-custom-theme-for-scichart']How to Create a Custom Theme for SciChart[/url]
+    - [url='http://www.scichart.com/questions/question/example-for-implementing-ithemeprovider']FAQ: Example for implementing IThemeProvider[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Themes.IThemeProvider.html']IThemeProvider Members[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/StyleAChart/CustomTheme/CustomThemeView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/CustomTheme/CustomThemeView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/CustomTheme/CustomTheme.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/CustomTheme/CustomTheme.xaml.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Style</Features>
+    <Features>Theme</Features>
+    <Features>XAML</Features>
+  </Features>
+</ExampleDefinition>

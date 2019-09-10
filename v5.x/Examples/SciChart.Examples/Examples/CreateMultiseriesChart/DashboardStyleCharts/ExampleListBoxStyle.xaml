@@ -1,0 +1,148 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <Style x:Key="ExampleListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="3" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0"
+                                                                     Storyboard.TargetName="fillColor"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     To=".35" />
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0"
+                                                                     Storyboard.TargetName="contentPresenter"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     To=".55" />
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="Unselected" />
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0"
+                                                                     Storyboard.TargetName="fillColor2"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     To=".75" />
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="FocusStates">
+                                            <VisualState x:Name="Focused">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                                   Storyboard.TargetName="FocusVisualElement"
+                                                                                   Storyboard.TargetProperty="Visibility">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unfocused" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Rectangle x:Name="fillColor"
+                                               Fill="#FF0FA32D"
+                                               IsHitTestVisible="False"
+                                               Opacity="0"
+                                               RadiusX="1"
+                                               RadiusY="1" />
+                                    <Rectangle x:Name="fillColor2"
+                                               Fill="#FF0FA32D"
+                                               IsHitTestVisible="False"
+                                               Opacity="0"
+                                               RadiusX="1"
+                                               RadiusY="1" />
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                    <Rectangle x:Name="FocusVisualElement"
+                                               RadiusX="1"
+                                               RadiusY="1"
+                                               Stroke="#FF0FA32D"
+                                               StrokeThickness="1"
+                                               Visibility="Collapsed" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <s:SciChartSurface Width="200"
+                                           Height="110"
+                                           ChartTitle="{Binding TypeName}"
+                                           FontSize="13"
+                                           Padding="0"
+                                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+                            <s:SciChartSurface.Resources>
+                                <ResourceDictionary Source="RenderebleSeriesStyles.xaml" />
+                            </s:SciChartSurface.Resources>
+                            <!--  Create an X Axis  -->
+                            <s:SciChartSurface.XAxis>
+                                <s:NumericAxis DrawMajorGridLines="False"
+                                               DrawMinorGridLines="False"
+                                               Visibility="Collapsed" />
+                            </s:SciChartSurface.XAxis>
+
+                            <!--  Create a Y Axis with GrowBy  -->
+                            <s:SciChartSurface.YAxis>
+                                <s:NumericAxis DrawMajorBands="True"
+                                               DrawMajorGridLines="False"
+                                               DrawMinorGridLines="False"
+                                               Visibility="Collapsed" />
+                            </s:SciChartSurface.YAxis>
+                        </s:SciChartSurface>
+
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,0">
+                                    <GradientStop Offset="0.0" Color="#00FEFEFE" />
+                                    <GradientStop Offset="1.0" Color="#00000000" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ZoomAndPanAChart.MouseDragToPan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
+             Loaded="MouseDragToPan_Loaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#FF232426"
+                BorderBrush="#323539"
+                Panel.ZIndex="9999"
+                BorderThickness="0,0,2,0">
+
+            <WrapPanel HorizontalAlignment="Left"
+                       Orientation="Vertical">
+
+                <ex:FlyoutMenuButton x:Name="dragToPanModExample"
+                                     HorizontalAlignment="Left"
+                                     Padding="0"
+                                     Content="Pan"
+                                     Style="{StaticResource FlyoutMenuButtonStyle}"
+                                     ToolTipService.ToolTip="Pan">
+
+                    <ex:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock Text="Pan SciChart on" />
+
+                            <ComboBox x:Name="panSciChartOn"
+                                      SelectedIndex="0"
+                                      SelectionChanged="PanSciChartOn_OnSelectionChanged" />
+
+                        </StackPanel>
+                    </ex:FlyoutMenuButton.PopupContent>
+                </ex:FlyoutMenuButton>
+
+                <Button HorizontalAlignment="Left"
+                        Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
+                        Content="Zoom Extents"
+                        Style="{StaticResource ZoomExtentsButtonStyle}"
+                        ToolTipService.ToolTip="Zoom to Extents" />
+
+            </WrapPanel>
+        </Border>
+
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastMountainRenderableSeries Fill="#77279B27" Stroke="#FF177B17">
+                    <s:FastMountainRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastMountainRenderableSeries.SeriesAnimation>
+                </s:FastMountainRenderableSeries>
+                <s:FastMountainRenderableSeries Fill="#77FF1919" Stroke="#FFDD0909">
+                    <s:FastMountainRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastMountainRenderableSeries.SeriesAnimation>
+                </s:FastMountainRenderableSeries>
+                <s:FastMountainRenderableSeries Fill="#771964FF" Stroke="#FF0944CF">
+                    <s:FastMountainRenderableSeries.SeriesAnimation>
+                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    </s:FastMountainRenderableSeries.SeriesAnimation>
+                </s:FastMountainRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.YAxis>
+
+            <!--  Adding the ZoomPanModifier gives SciChart the ability to pan on mouse-drag  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier x:Name="zoomPanModifier"
+                                       ExecuteOn="MouseLeftButton"
+                                       IsEnabled="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+    </Grid>
+
+</UserControl>

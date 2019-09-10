@@ -1,0 +1,61 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:SciChart.Examples.Demo.Common"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors" xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+    x:Class="SciChart.Examples.Demo.Views.EverythingView"
+             >
+    
+    <UserControl.Resources>
+
+        <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+        
+        <DataTemplate x:Key="ComboBoxItemTemplate">
+            <TextBlock Text="{Binding Path=GroupingMode, Converter={StaticResource EnumDescriptionConverter}}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource GroupHeaderTextStyle}">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5,10,10,10"/>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Border Background="{StaticResource HeaderBackgroundBrush}" Grid.Row="0">
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Margin="10"
+					Style="{StaticResource ExampleHeaderTextStyle}"
+					Text="SORT BY" />
+                <ComboBox 
+                    MinWidth="160"
+					ItemsSource="{Binding SortingGroups}"
+					SelectedItem="{Binding SelectedGroupingMode, Mode=TwoWay}"
+                    ItemTemplate="{StaticResource ComboBoxItemTemplate}"/>
+            </StackPanel>
+        </Border>
+
+        <ItemsControl Margin="0,10" Grid.Row="1"
+			ItemTemplate="{StaticResource EverythingDataTemplate}"
+			ItemsSource="{Binding EverythingSource}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <common:WrapPanelCompatible Orientation="Horizontal" >
+                        <!--                        <i:Interaction.Behaviors>-->
+                        <!--                            <behaviors:TilesHarmonistBehavior/>-->
+                        <!--                        </i:Interaction.Behaviors>-->
+                    </common:WrapPanelCompatible>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

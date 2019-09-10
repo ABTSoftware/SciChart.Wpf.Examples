@@ -1,0 +1,27 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/VerticallyStackedAxes.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoVerticallyStackedAxes.png</ImagePath>
+<IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates overriding the LeftAxesPanel Template to create a true EEG style chart, where many traces are included on the same chart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a Vertically Stacked chart where multiple YAxis are occupying different locations on the chart. This allows series to overlap each other as they are on the same SciChartSurface.
+
+    This is achieved by overriding the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~LeftAxesPanelTemplate.html']SciChartSurface.LeftAxesPanelTemplate[/url]. This API may also be used to override how Axis are arranged on the Left, Top, Right or Bottom of a SciChartSurface.
+
+    [i][b]Note: [/b][/i] [i]it is also possible to arrange multiple SciChartSurfaces in a Grid or ItemsControl to get the same effect, where series do not need to overlap.[/i]
+
+    [b][i]Interactivity Options[/i][/b]
+
+    - Drag the Chart to zoom.
+    - Double click to reset zoom.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/VerticallyStackedAxes.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/VerticallyStackedAxes.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stacked</Features>    
+    <Features>Axis</Features>
+  </Features>
+</ExampleDefinition>

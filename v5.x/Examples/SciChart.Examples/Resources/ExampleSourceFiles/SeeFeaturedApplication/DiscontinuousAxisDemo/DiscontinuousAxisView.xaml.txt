@@ -1,0 +1,609 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.DiscontinuousAxisDemo.DiscontinuousAxisView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
+            <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+            <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <ext:IsChartTypeConverter x:Key="IsChartTypeConverter" />
+            <ext:IsModifierTypeConverter x:Key="IsModifierTypeConverter" />
+            <ext:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter" />
+
+            <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontFamily" Value="Arial" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="Margin" Value="3,2,2,2" />
+            </Style>
+
+            <Style x:Key="HintDataItemsStyle"
+                   BasedOn="{StaticResource TextBlockStyle}"
+                   TargetType="TextBlock">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+
+            <Style x:Key="ChartDataItemsStyle"
+                   BasedOn="{StaticResource TextBlockStyle}"
+                   TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}" />
+            </Style>
+
+            <!--  Style for the 50-period Moving Average  -->
+            <Style x:Key="Ma50SeriesStyle" TargetType="s:FastLineRenderableSeries">
+                <Setter Property="ResamplingMode" Value="MinMax" />
+                <Setter Property="Stroke" Value="#FFE13219" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#AAE13219"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  Style for 200 period Moving Average  -->
+            <Style x:Key="Ma200SeriesStyle" TargetType="s:FastLineRenderableSeries">
+                <Setter Property="ResamplingMode" Value="MinMax" />
+                <Setter Property="Stroke" Value="#FFFFA500" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#AAFFA500"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  Style for the Price line chart  -->
+            <Style x:Key="PriceLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
+                <Setter Property="ResamplingMode" Value="MinMax" />
+                <Setter Property="Stroke" Value="#FF4083B7" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#FF4083B7"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastLine}" />
+            </Style>
+
+            <!--  Style for the Price mountain chart  -->
+            <Style x:Key="PriceMountainSeriesStyle" TargetType="s:FastMountainRenderableSeries">
+                <Setter Property="Stroke" Value="#FFC6E6FF" />
+                <Setter Property="Fill" Value="#774083B7" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#774083B7"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastMountain}" />
+            </Style>
+
+            <!--  Style for the Price Column chart  -->
+            <Style x:Key="PriceColumnSeriesStyle" TargetType="s:FastColumnRenderableSeries">
+                <Setter Property="Stroke" Value="#FFC6E6FF" />
+                <Setter Property="Fill">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#774083B7" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#774083B7"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastColumn}" />
+            </Style>
+
+            <!--  Style for Candlestick chart  -->
+            <Style x:Key="PriceCandlestickSeriesStyle" TargetType="s:FastCandlestickRenderableSeries">
+                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastCandlestick}" />
+                <Setter Property="StrokeUp" Value="#FF52CC54" />
+                <Setter Property="StrokeDown" Value="#FFE26565" />
+                <Setter Property="FillUp">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#7052CC54" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FillDown">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#D0E26565" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="AntiAliasing" Value="False" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#FF52CC54"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  Style for Ohlc chart  -->
+            <Style x:Key="PriceOhlcSeriesStyle" TargetType="s:FastOhlcRenderableSeries">
+                <Setter Property="IsVisible" Value="{Binding SelectedChartType, Mode=TwoWay, Converter={StaticResource IsChartTypeConverter}, ConverterParameter=FastOhlc}" />
+                <Setter Property="StrokeUp" Value="#FF52CC54" />
+                <Setter Property="StrokeDown" Value="#FFE26565" />
+                <Setter Property="AntiAliasing" Value="False" />
+                <Setter Property="RolloverMarkerTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Width="9"
+                                     Height="9"
+                                     Fill="#FF52CC54"
+                                     Stroke="White"
+                                     StrokeThickness="2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  DataTemplate for the SeriesInfo which are exposed on the RolloverModifier  -->
+            <DataTemplate x:Key="ChartDataTemplate" DataType="s:SeriesInfo">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource ChartDataItemsStyle}"
+                               Text="{Binding SeriesName}" />
+                    <TextBlock Grid.Column="1"
+                               Margin="0,2,2,2"
+                               Style="{StaticResource ChartDataItemsStyle}"
+                               Text=":" />
+                    <TextBlock Grid.Column="2"
+                               Margin="3,2,20,2"
+                               Style="{StaticResource ChartDataItemsStyle}"
+                               Text="{Binding Value,
+                                              StringFormat=\{0:0.000\}}" />
+                </Grid>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Define the Toolbar  -->
+        <Border Panel.ZIndex="9999"
+                Background="#FF232426"
+                BorderBrush="#323539"
+                BorderThickness="0,0,2,0">
+
+            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+
+                <ToggleButton HorizontalAlignment="Left"
+                              Command="{Binding SetRubberBandZoomModifierCommand}"
+                              Content="Zoom"
+                              IsChecked="{Binding IsRubberBandZoomSelected,
+                                                  Mode=OneWay}"
+                              Style="{StaticResource ZoomButtonStyle}"
+                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
+
+                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
+                                            Command="{Binding SetZoomPanModifierCommand}"
+                                            Content="Pan"
+                                            IsChecked="{Binding IsZoomPanSelected,
+                                                                Mode=OneWay}"
+                                            Style="{StaticResource PanToggleButtonStyle}"
+                                            ToolTipService.ToolTip="Toggle Zoom-Pan"
+                                            s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                    <ext:FlyoutMenuToggleButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock Text="Direction" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Source={x:Reference Name=ZoomPanMod}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuToggleButton.PopupContent>
+                </ext:FlyoutMenuToggleButton>
+
+                <ext:FlyoutSeparator />
+
+                <Button HorizontalAlignment="Left"
+                        Command="{Binding Source={x:Reference Name=PriceChart},
+                                          Path=AnimateZoomExtentsCommand}"
+                        Content="Zoom Extents"
+                        Style="{StaticResource ZoomExtentsButtonStyle}"
+                        ToolTipService.ToolTip="Zoom to Extents" />
+
+                <ext:FlyoutMenuButton HorizontalAlignment="Left"
+                                      Content="Wheel"
+                                      Style="{StaticResource MouseWheelButtonStyle}"
+                                      ToolTipService.ToolTip="MouseWheel">
+
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <TextBlock Text="Action Type" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding Source={x:Reference Name=MouseWheelZoomMod}, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <TextBlock Text="Direction" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Source={x:Reference Name=MouseWheelZoomMod}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+                <ext:FlyoutMenuToggleButton x:Name="RollFlyoutMenuButton"
+                                            HorizontalAlignment="Left"
+                                            HorizontalContentAlignment="Center"
+                                            Command="{Binding SetRolloverModifierCommand}"
+                                            Content="ROLL"
+                                            FontSize="10"
+                                            IsChecked="{Binding IsRolloverSelected,
+                                                                Mode=OneWay}"
+                                            Padding="0"
+                                            Style="{StaticResource FlyoutMenuToggleButtonStyle}"
+                                            ToolTipService.ToolTip="Rollover"
+                                            s:ToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+
+                    <ext:FlyoutMenuToggleButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <TextBlock FontSize="12" Text="Rollover mode" />
+
+                            <ComboBox FontSize="12"
+                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                      SelectedItem="{Binding SourceMode,
+                                                             Mode=TwoWay,
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <TextBlock FontSize="12" Text="Show tooltip mode" />
+
+                            <ComboBox FontSize="12"
+                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}"
+                                      SelectedItem="{Binding RolloverMode,
+                                                             Mode=TwoWay,
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <CheckBox Margin="3"
+                                      VerticalAlignment="Center"
+                                      Content="Show axis label"
+                                      FontSize="12"
+                                      IsChecked="{Binding ShowAxisLabels,
+                                                          Mode=TwoWay}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuToggleButton.PopupContent>
+                </ext:FlyoutMenuToggleButton>
+
+                <!--  Cursor modifier  -->
+                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
+                                            HorizontalContentAlignment="Center"
+                                            Command="{Binding SetCursorModifierCommand}"
+                                            Content="CUR"
+                                            IsChecked="{Binding IsCursorSelected,
+                                                                Mode=OneWay}"
+                                            Padding="0"
+                                            Style="{StaticResource CursorButtonStyle}"
+                                            s:ToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+
+                    <ext:FlyoutMenuToggleButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <ext:SnappingModeToVisibilityConverter x:Key="SnappingModeToVisibilityConverter" />
+                            </StackPanel.Resources>
+
+                            <TextBlock Text="Cursor mode" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <TextBlock Text="Show tooltip mode" />
+
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding RolloverMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <TextBlock Text="Snapping mode" />
+
+                            <ComboBox x:Name="snappingModeCmbx"
+                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
+                                      SelectedItem="{Binding SnappingMode,
+                                                             Source={x:Reference Name=CursorMod},
+                                                             Mode=TwoWay,
+                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <StackPanel Orientation="Vertical" Visibility="{Binding Source={x:Reference Name=snappingModeCmbx}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource SnappingModeToVisibilityConverter}}">
+                                <TextBlock Text="Snap to" />
+
+                                <ComboBox x:Name="seriesToSnapCmbx"
+                                          DisplayMemberPath="DataSeries.SeriesName"
+                                          FontSize="12"
+                                          ItemsSource="{Binding Source={x:Reference Name=PriceChart},
+                                                                Path=RenderableSeries}"
+                                          SelectedIndex="0"
+                                          SelectedItem="{Binding SelectedSeriesToSnap}"
+                                          SelectedValuePath="DataSeries.SeriesName" />
+                                <ext:FlyoutSeparator />
+                            </StackPanel>
+
+                            <CheckBox Margin="3"
+                                      VerticalAlignment="Center"
+                                      Content="Show axis label"
+                                      IsChecked="{Binding ShowAxisLabels,
+                                                          Mode=TwoWay}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuToggleButton.PopupContent>
+                </ext:FlyoutMenuToggleButton>
+
+                <ext:FlyoutSeparator />
+
+                <ext:FlyoutMenuButton x:Name="traderDataExample"
+                                      HorizontalAlignment="Left"
+                                      Content="Data"
+                                      FontSize="11"
+                                      Padding="0"
+                                      Style="{StaticResource FlyoutMenuButtonStyle}"
+                                      ToolTipService.ToolTip="Data">
+
+                    <ext:FlyoutMenuButton.PopupContent>
+
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+
+                            <TextBlock FontSize="12" Text="Chart Type:" />
+
+                            <ComboBox Margin="2"
+                                      FontSize="12"
+                                      ItemsSource="{Binding AllChartTypes}"
+                                      SelectedItem="{Binding SelectedChartType,
+                                                             Mode=TwoWay}" />
+
+                            <ext:FlyoutSeparator />
+
+                            <TextBlock FontSize="12" Text="Calendar:" />
+
+                            <ComboBox Margin="2"
+                                      FontSize="12"
+                                      ItemsSource="{Binding AllCalendars}"
+                                      SelectedItem="{Binding SelectedCalendar,
+                                                             Mode=TwoWay}" />
+
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+
+                </ext:FlyoutMenuButton>
+                
+            </WrapPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Background="#333">
+
+            <s:SciChartSurface x:Name="PriceChart"
+                               Grid.Row="0"
+                               s:SciChartGroup.VerticalChartGroup="myCharts"
+                               Annotations="{Binding Annotations}">
+
+                <!--  Create Renderable Series, which bind to DataSet series 1:1 and in order  -->
+                <s:SciChartSurface.RenderableSeries>
+                    <!--  Series 0..3 are shown or hidden based on ChartType property in ViewModel bound to IsVisible on series  -->
+                    <!--  Only one is shown at any one time and these series show the data for DataSet.Series[0]  -->
+                    <s:FastCandlestickRenderableSeries x:Name="series1"
+                                                       DataSeries="{Binding PriceData}"
+                                                       ResamplingMode="MinMax"
+                                                       Style="{StaticResource PriceCandlestickSeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastCandlestickRenderableSeries>
+                    <s:FastOhlcRenderableSeries DataSeries="{Binding PriceData}"
+                                                ResamplingMode="MinMax"
+                                                Style="{StaticResource PriceOhlcSeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastOhlcRenderableSeries>
+                    <s:FastMountainRenderableSeries DataSeries="{Binding PriceData}"
+                                                    ResamplingMode="MinMax"
+                                                    Style="{StaticResource PriceMountainSeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastMountainRenderableSeries>
+                    <s:FastLineRenderableSeries DataSeries="{Binding PriceData}" Style="{StaticResource PriceLineSeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastLineRenderableSeries>
+                    <s:FastColumnRenderableSeries DataSeries="{Binding PriceData}"
+                                                  ResamplingMode="MinMax"
+                                                  Style="{StaticResource PriceColumnSeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+
+                    </s:FastColumnRenderableSeries>
+                    <!--  Series 4, 5, are always visible  -->
+                    <s:FastLineRenderableSeries DataSeries="{Binding Sma50Series}" Style="{StaticResource Ma50SeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastLineRenderableSeries>
+                    <s:FastLineRenderableSeries DataSeries="{Binding Sma200Series}" Style="{StaticResource Ma200SeriesStyle}">
+                        <s:CursorModifier.SnapToSeries>
+                            <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding ElementName="seriesToSnapCmbx" Path="SelectedItem" />
+                            </MultiBinding>
+                        </s:CursorModifier.SnapToSeries>
+                    </s:FastLineRenderableSeries>
+                </s:SciChartSurface.RenderableSeries>
+
+                <!--  Create X Axis. Optional bands give a cool look and feel for minimal performance impact  -->
+                <s:SciChartSurface.XAxis>
+                    <s:DiscontinuousDateTimeAxis Calendar="{Binding Calendar, Mode=TwoWay}"
+                                                 DrawMajorBands="True"
+                                                 GrowBy="0.0, 0.1" />
+                </s:SciChartSurface.XAxis>
+
+                <!--  Create Y Axis  -->
+                <s:SciChartSurface.YAxis>
+                    <s:NumericAxis AutoRange="Always"
+                                   GrowBy="0.1, 0.1" />
+                </s:SciChartSurface.YAxis>
+
+                <!--  Create and enable ChartModifiers through bindings  -->
+                <s:SciChartSurface.ChartModifier>
+
+                    <s:ModifierGroup x:Name="Modifier" s:MouseManager.MouseEventGroup="MySharedMouseGroup">
+                        <s:RolloverModifier x:Name="RolloverMod"
+                                            IsEnabled="{Binding ChartModifier,
+                                                                Mode=OneWay,
+                                                                Converter={StaticResource IsModifierTypeConverter},
+                                                                ConverterParameter=Rollover}"
+                                            ReceiveHandledEvents="True"
+                                            ShowAxisLabels="{Binding ShowAxisLabels}"
+                                            ShowTooltipOn="{Binding RolloverMode}"
+                                            SourceMode="{Binding SourceMode}" />
+                        <s:CursorModifier x:Name="CursorMod"
+                                          IsEnabled="{Binding ChartModifier,
+                                                              Mode=OneWay,
+                                                              Converter={StaticResource IsModifierTypeConverter},
+                                                              ConverterParameter=CrosshairsCursor}"
+                                          ReceiveHandledEvents="True"
+                                          ShowAxisLabels="{Binding ShowAxisLabels}"
+                                          ShowTooltip="True"
+                                          ShowTooltipOn="{Binding RolloverMode}"
+                                          SourceMode="{Binding SourceMode}" />
+                        <s:MouseWheelZoomModifier x:Name="MouseWheelZoomMod"
+                                                  ActionType="Zoom"
+                                                  ReceiveHandledEvents="True"
+                                                  XyDirection="XYDirection" />
+                        <s:RubberBandXyZoomModifier IsEnabled="{Binding ChartModifier,
+                                                                        Mode=OneWay,
+                                                                        Converter={StaticResource IsModifierTypeConverter},
+                                                                        ConverterParameter=RubberBandZoom}"
+                                                    IsXAxisOnly="True"
+                                                    ReceiveHandledEvents="True">
+                            <s:RubberBandXyZoomModifier />
+                        </s:RubberBandXyZoomModifier>
+                        <s:ZoomPanModifier x:Name="ZoomPanMod"
+                                           ClipModeX="None"
+                                           IsEnabled="{Binding ChartModifier,
+                                                               Mode=OneWay,
+                                                               Converter={StaticResource IsModifierTypeConverter},
+                                                               ConverterParameter=ZoomPan}"
+                                           ReceiveHandledEvents="True" />
+                        <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                    </s:ModifierGroup>
+                </s:SciChartSurface.ChartModifier>
+
+            </s:SciChartSurface>
+
+        </Grid>
+
+        <!--  Define the overlay panel to show start and to dates, chart values  -->
+        <Grid Grid.Column="1" Margin="35,40,15,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  This ItemsControl is bound to the first (price) chart RolloverModifier, feeding back values of data under the mouse to the user  -->
+            <ItemsControl Grid.Row="1"
+                          MinHeight="24"
+                          DataContext="{Binding Source={x:Reference Name=PriceChart},
+                                                Path=ChartModifier}"
+                          ItemTemplate="{StaticResource ChartDataTemplate}"
+                          ItemsSource="{Binding Path=[RolloverModifier].SeriesData.SeriesInfo}"
+                          Visibility="{Binding Path=[RolloverModifier].IsEnabled,
+                                               Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+        </Grid>
+    </Grid>
+</UserControl>

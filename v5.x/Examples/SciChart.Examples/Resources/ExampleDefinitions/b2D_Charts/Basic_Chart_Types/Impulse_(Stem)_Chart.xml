@@ -1,0 +1,30 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Title>Impulse (Stem) chart</Title>
+  <View>Examples/CreateSimpleChart/ImpulseChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoImpulse.png</ImagePath>
+  <IconPath>IconImpulse</IconPath>
+  <ToolTipDescription>Generates an Impulse-reseponse style chart with optional point-marker in code</ToolTipDescription>
+  <Description>
+    [b]Impulse Series chart[/b]
+
+    Generates an Impulse-response style chart with optional point-marker in code. The [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastImpulseRenderableSeries.html']FastImpulseRenderableSeries[/url] can be used to render an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url]   (uses Y1 only) or [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries[/url] (renders close).
+
+    [b][i]Tip! [/i][/b] [i]You can add optional data-point markers to a impulse series using the [/i][url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url][i]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.[/i]
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastImpulseRenderableSeries.html']FastImpulseRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries Type[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/ImpulseChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/ImpulseChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Stem</Features>
+    <Features>Impulse</Features>
+  </Features>
+</ExampleDefinition>

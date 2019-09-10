@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls">
+
+    <Style TargetType="controls:IndeterminateProgressBar">
+        <Setter Property="Foreground" Value="#FF168328" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Padding" Value="2,5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IndeterminateProgressBar">
+                    <Border x:Name="Root" Margin="{TemplateBinding Padding}">
+                        <Grid HorizontalAlignment="Left">
+                            <Rectangle x:Name="R1"
+                                       Width="4"
+                                       Height="4"
+                                       Fill="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Opacity="0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="R1TT" />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle x:Name="R2"
+                                       Width="4"
+                                       Height="4"
+                                       Fill="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Opacity="0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="R2TT" />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle x:Name="R3"
+                                       Width="4"
+                                       Height="4"
+                                       Fill="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Opacity="0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="R3TT" />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle x:Name="R4"
+                                       Width="4"
+                                       Height="4"
+                                       Fill="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Opacity="0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="R4TT" />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle x:Name="R5"
+                                       Width="4"
+                                       Height="4"
+                                       Fill="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Opacity="0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="R5TT" />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
