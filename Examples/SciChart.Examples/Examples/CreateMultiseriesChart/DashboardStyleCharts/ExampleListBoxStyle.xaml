@@ -108,13 +108,15 @@
                     <Grid>
                         <s:SciChartSurface Width="200"
                                            Height="110"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
                                            ChartTitle="{Binding TypeName}"
-                                           FontSize="13"
-                                           Padding="0"
                                            RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+
                             <s:SciChartSurface.Resources>
                                 <ResourceDictionary Source="RenderebleSeriesStyles.xaml" />
                             </s:SciChartSurface.Resources>
+
                             <!--  Create an X Axis  -->
                             <s:SciChartSurface.XAxis>
                                 <s:NumericAxis DrawMajorGridLines="False"
@@ -144,5 +146,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
