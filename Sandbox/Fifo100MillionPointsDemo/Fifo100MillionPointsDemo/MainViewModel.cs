@@ -51,14 +51,18 @@ namespace Fifo100MillionPointsDemo
                 new PointCountViewModel("50 Million", 5, 10_000_000),
             });
 
-            // Add further test cases depending on system RAM and 64/32bit status
             if (SysInfo.GetRamGb() >= 8)
                 AllPointCounts.Add(new PointCountViewModel("100 Million", 5, 20_000_000));
 
-//            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
-//                AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
-
             SelectedPointCount = AllPointCounts.Last();
+
+            // Add further test cases depending on system RAM and 64/32bit status
+            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
+            {
+                // Note, these won't render nicely at 30 FPS, we need to improve our resampling algorithm - it is possible (we have the technology, we can rebuild him)
+                AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
+                AllPointCounts.Add(new PointCountViewModel("1 Billion", 5, 200_000_000));
+            }
         }
 
 
