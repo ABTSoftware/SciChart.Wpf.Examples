@@ -191,7 +191,7 @@
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="SurfaceMesh" 
-                                                   Opacity="{Binding Source={x:Reference OpacityCombo}, Path=SelectedItem}"
+                                                   Opacity="{Binding Source={x:Reference opacitySlider}, Path=SelectedItem}"
                                                    CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
                                                    Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"

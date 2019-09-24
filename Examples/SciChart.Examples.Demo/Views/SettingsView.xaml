@@ -80,14 +80,14 @@
                        Margin="15 25 0 15"
                        FontSize="18"
                        Foreground="#FFF"
-                       Text="Default Render Plugin for 2D Charts" />
+                       Text="Which Renderer Plugin for 2D Charts" />
 
                 <StackPanel Grid.Row="2"
                         Margin="135 0 0 0"
                         Orientation="Vertical"
                         TextElement.Foreground="#FFF">
                     <CheckBox Margin="3"
-                          Content="Software (High Speed)"
+                          Content="Software (High Speed / low quality)"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
                           ToolTip="Render all examples using the High Speed renderer plugin"
@@ -110,7 +110,7 @@
 
                     <CheckBox Margin="3"
                           x:Name="directXRendererCheckbox"
-                          Content="DirectX (Fastest)"
+                          Content="DirectX (SharpDX, Legacy)"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
                           ToolTip="Render all examples using the DirectX renderer plugin. Requires DirectX10 GPU or Later"
@@ -123,10 +123,10 @@
 
                     <CheckBox Margin="3"
                               x:Name="tsrRendererCheckbox"
-                              Content="TsrEngine (NEW!)"
+                              Content="Visual Xccelerator Engine (NEW!)"
                               DataContext="{StaticResource SettingsViewModel}"
                               FontSize="14"
-                              ToolTip="Render all examples using the Tsr Rendering Engine (NEW!). Requires DirectX9 GPU or Later"
+                              ToolTip="Render all examples using the new incredibly fast Visual Xccelerator engine (our fastest ever WPF charts). Requires DirectX9 GPU or Later"
                               IsEnabled="{Binding IsDirectXAvailable}"
                               IsChecked="{Binding SelectedRenderer,
                                               Mode=TwoWay,
@@ -151,7 +151,7 @@
                           IsChecked="{Binding Path=EnableForceWaitForGPU, Mode=TwoWay}"/>
 
                     <CheckBox Margin="3"
-                          Content="Vector (Highest Quality)"
+                          Content="Vector (XAML based for printing)"
                           DataContext="{StaticResource SettingsViewModel}"
                           FontSize="14"
                           ToolTip="Render all examples using the Vector renderer plugin"
@@ -239,6 +239,14 @@
                               FontSize="14"
                               ToolTip="Enable / disable C++ Resampling algorithms for faster, more accurate resampling"
                               IsChecked="{Binding EnableResamplingCPlusPlus, Mode=TwoWay}" />
+
+                    <CheckBox Margin="3"
+                              Content="Enable Impossible mode (Experimental!)"
+                              FontSize="14"
+                              ToolTip="Enables an experimental mode which gives impossible performance in real-time big-data charts (Billions of points)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              IsEnabled="{Binding Path=IsDirectXEnabled2D}"
+                              IsChecked="{Binding Path=EnableImpossibleMode, Mode=TwoWay}"/>
 
                     <CheckBox Grid.Row="6"
                               Margin="3"

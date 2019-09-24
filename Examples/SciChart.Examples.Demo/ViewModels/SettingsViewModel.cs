@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using SciChart.Charting;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.MarkupExtensions;
@@ -171,6 +172,17 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
+        public bool EnableImpossibleMode
+        {
+            get => this.GetDynamicValue<bool>();
+            set
+            {
+                this.SetDynamicValue(value);
+
+                RecreateStyles();
+            }
+        }
+
         public bool EnableExtremeDrawingManager
         {
             get => this.GetDynamicValue<bool>(); 
@@ -260,6 +272,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
                 overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
                 overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
+                overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
 
                 if (Application.Current.Resources.Contains(typeof(T)))
                 {

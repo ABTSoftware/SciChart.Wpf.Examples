@@ -1293,7 +1293,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj" />
   </ItemGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Controls.Input.Toolkit, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -1302,15 +1302,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12382-alpha" />
+    <PackageReference Include="SciChart" Version="6.0.0.12462-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12382-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12462-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12382-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12462-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12382-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12462-alpha" />
   </ItemGroup>
 </Project>

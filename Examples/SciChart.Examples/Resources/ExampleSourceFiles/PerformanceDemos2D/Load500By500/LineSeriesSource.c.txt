@@ -72,9 +72,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
                     random.NextBytes(rgb);
                     var renderableSeries = new FastLineRenderableSeries()
                     {
-                        AntiAliasing = false,
+                        AntiAliasing = true,
                         Stroke = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]),
                         DataSeries = dataSeries,
+                        StrokeThickness = 1,
                     };
 
                     renderSeries.Add(renderableSeries);
