@@ -51,17 +51,19 @@ namespace Fifo100MillionPointsDemo
                 new PointCountViewModel("50 Million", 5, 10_000_000),
             });
 
+            // If you have 8GB of RAM or more you can render 100M (will require just 1GB but to be safe...)
             if (SysInfo.GetRamGb() >= 8)
                 AllPointCounts.Add(new PointCountViewModel("100 Million", 5, 20_000_000));
 
             SelectedPointCount = AllPointCounts.Last();
 
-            // Add further test cases depending on system RAM and 64/32bit status
+            // Add further test cases depending on system RAM and 64/32bit status and how much RAM
+            // 1 Billion points requires 8GB of free RAM or it will hit swap drive 
             if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
             {
-                // Note, these won't render nicely at 30 FPS, we need to improve our resampling algorithm - it is possible (we have the technology, we can rebuild him)
+                // Note: these point counts require the experimental VisualXccelerator.EnableImpossibleMode flag set to true on the chart 
                 AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
-                AllPointCounts.Add(new PointCountViewModel("1 Billion", 5, 200_000_000));
+                AllPointCounts.Add(new PointCountViewModel("1 Bazillion", 5, 200_000_000));
             }
         }
 
@@ -111,7 +113,7 @@ namespace Fifo100MillionPointsDemo
         {
             int seriesCount = SelectedPointCount.SeriesCount;
             int pointCount = SelectedPointCount.PointCount;
-            LoadingMessage = $"Loading {SelectedPointCount.DisplayName} Points...";
+            LoadingMessage = $"Generating {SelectedPointCount.DisplayName} Points...";
             IsStopped = false;
 
             // Load the points

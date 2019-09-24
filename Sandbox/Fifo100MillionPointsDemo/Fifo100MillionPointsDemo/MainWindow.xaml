@@ -45,11 +45,18 @@
         <!-- Chart Surface -->
         <abt:BusyPanel Grid.Row="1" BusyMessage="{Binding LoadingMessage}">
             <Grid>
+
+                <!-- s:VisualXcceleratorEngine.IsEnabled enables our new super fast DirectX 9,10,11 engine -->
+                <!--  .FallbackType="{x:Type s:HighQualityRenderSurface}" means fall back to this renderer if DirectX not supported -->
+                <!--  .DowngradeWithoutException="False" means it will throw exception if you don't support DirectX, otherwise, silent downgrade -->
+                <!--  .EnableImpossibleMode="True" enables experimental data-processing algorithms which are up to 100x faster -->
                 <s:SciChartSurface x:Name="scs" 
                                    RenderableSeries="{s:SeriesBinding Series}" 
                                    ViewportManager="{Binding ViewportManager}"
                                    s:VisualXcceleratorEngine.IsEnabled="True"
-                                   s:VisualXcceleratorEngine.DowngradeWithoutException="False">
+                                   s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}"
+                                   s:VisualXcceleratorEngine.DowngradeWithoutException="False"
+                                   s:VisualXcceleratorEngine.EnableImpossibleMode="True">
                     <s:SciChartSurface.XAxis>
                         <s:NumericAxis AutoRange="Always"/>
                     </s:SciChartSurface.XAxis>

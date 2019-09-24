@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -120,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart">
-      <Version>6.0.0.12382-alpha</Version>
+      <Version>6.0.0.12462-beta</Version>
     </PackageReference>
     <PackageReference Include="SciChart.Wpf.UI">
       <Version>3.0.249</Version>
