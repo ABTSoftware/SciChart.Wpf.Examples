@@ -26,8 +26,8 @@ namespace Fifo100MillionPointsDemo
         private bool _isStopped;
         private string _loadingMessage;
         private readonly NoLockTimer _timer;
-        const int AppendCount = 100;
-        const int TimerIntervalMs = 1000;
+        const int AppendCount = 10_000;
+        const int TimerIntervalMs = 10;
 
         // Temporary buffers for improving the performance of loading and appending data
         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
@@ -137,8 +137,8 @@ namespace Fifo100MillionPointsDemo
                 IRenderableSeriesViewModel[] series = new IRenderableSeriesViewModel[seriesCount];
 
                 // We generate data in parallel as just generating 1,000,000,000 points takes a long time no matter how fast your chart is! 
-                Parallel.For(0, seriesCount, i =>
-                //for(int i = 0; i < seriesCount; i++)
+                //Parallel.For(0, seriesCount, i =>
+                for(int i = 0; i < seriesCount; i++)
                 {
                     // Temporary buffer for fast filling of DataSeries
                     var xBuffer = new float[AppendCount];
@@ -186,7 +186,7 @@ namespace Fifo100MillionPointsDemo
                         DataSeries = xyDataSeries,
                         Stroke = Colors.RandomColor()
                     };
-                });
+                }//);
 
                 // Force a GC Collect before we begin
                 //GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
