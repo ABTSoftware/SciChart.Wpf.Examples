@@ -48,7 +48,7 @@ namespace Fifo100MillionPointsDemo
             {
                 new PointCountViewModel("1 Million", 5, 200_000),
                 new PointCountViewModel("5 Million", 5, 1_000_000),
-                new PointCountViewModel("10 Million", 1, 2_000_000),
+                new PointCountViewModel("10 Million", 5, 2_000_000),
                 new PointCountViewModel("50 Million", 5, 10_000_000),
             });
 
@@ -141,15 +141,14 @@ namespace Fifo100MillionPointsDemo
                 IRenderableSeriesViewModel[] series = new IRenderableSeriesViewModel[seriesCount];
 
                 // We generate data in parallel as just generating 1,000,000,000 points takes a long time no matter how fast your chart is! 
-               //Parallel.For(0, seriesCount, i =>
-                for(int i = 0; i < seriesCount; i++)
+                Parallel.For(0, seriesCount, i =>
                 {
-                    int thisI = i;
                     // Temporary buffer for fast filling of DataSeries
                     var xBuffer = new float[AppendCount];
                     var yBuffer = new float[AppendCount];
 
-                    var randomWalkGenerator = new Rand();
+                    int randomSeed = i * short.MaxValue;
+                    var randomWalkGenerator = new Rand(randomSeed);
                     var xyDataSeries = new XyDataSeries<float, float>()
                     {
                         // Required for scrolling / streaming 'first in first out' charts
@@ -171,7 +170,7 @@ namespace Fifo100MillionPointsDemo
                         Tag = randomWalkGenerator,
                     };
 
-                    int yOffset = thisI + thisI;
+                    int yOffset = i + i;
                     for (int j = 0; j < pointCount; j += AppendCount)
                     {
                         for (int k = 0; k < AppendCount; k++)
@@ -191,7 +190,7 @@ namespace Fifo100MillionPointsDemo
                         DataSeries = xyDataSeries,
                         Stroke = Colors.RandomColor()
                     };
-                }//);
+                });
 
                 // Force a GC Collect before we begin
                 GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
@@ -210,13 +209,13 @@ namespace Fifo100MillionPointsDemo
             if (Debugger.IsAttached)
             {
                 // Its considerably slower to run the code when debugger is attached. Warn the user
-                warnings.Add("Debugger is attached");
+                warnings.Add("Debugger is attached, try without");
             }
 
             if (SysInfo.GetRamGb() <= 8)
             {
-                // Hmm, time to upgrade? https://www.amazon.co.uk/s?k=16GB+DDR4+RAM&i=computers&ref=nb_sb_noss_2 :) 
-                warnings.Add("Low system RAM, try on 16GB machine");
+                // Hmm, time to upgrade? https://www.amazon.co.uk/s?k=16GB+DDR4+RAM :) 
+                warnings.Add("Low system RAM, try on 16GB machine?");
             }
 
             return warnings.Any() ? "Perf warnings! " + string.Join(". ", warnings) : null;
