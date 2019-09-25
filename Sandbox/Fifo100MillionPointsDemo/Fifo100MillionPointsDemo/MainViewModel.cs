@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Threading.Tasks;
@@ -45,10 +46,9 @@ namespace Fifo100MillionPointsDemo
             // Add the point count options 
             AllPointCounts.AddRange(new []
             {
-                new PointCountViewModel("100", 5, 10000),
                 new PointCountViewModel("1 Million", 5, 200_000),
                 new PointCountViewModel("5 Million", 5, 1_000_000),
-                new PointCountViewModel("10 Million", 5, 2_000_000),
+                new PointCountViewModel("10 Million", 1, 2_000_000),
                 new PointCountViewModel("50 Million", 5, 10_000_000),
             });
 
@@ -66,8 +66,12 @@ namespace Fifo100MillionPointsDemo
                 AllPointCounts.Add(new PointCountViewModel("500 Million", 5, 100_000_000));
                 AllPointCounts.Add(new PointCountViewModel("1 Bazillion", 5, 200_000_000));
             }
+
+            // Setup some warnings
+            PerformanceWarnings = GetPerformanceWarnings();
         }
 
+        public string PerformanceWarnings { get; }
 
         public ObservableCollection<IRenderableSeriesViewModel> Series { get; } = new ObservableCollection<IRenderableSeriesViewModel>();
 
@@ -137,9 +141,10 @@ namespace Fifo100MillionPointsDemo
                 IRenderableSeriesViewModel[] series = new IRenderableSeriesViewModel[seriesCount];
 
                 // We generate data in parallel as just generating 1,000,000,000 points takes a long time no matter how fast your chart is! 
-                //Parallel.For(0, seriesCount, i =>
+               //Parallel.For(0, seriesCount, i =>
                 for(int i = 0; i < seriesCount; i++)
                 {
+                    int thisI = i;
                     // Temporary buffer for fast filling of DataSeries
                     var xBuffer = new float[AppendCount];
                     var yBuffer = new float[AppendCount];
@@ -166,7 +171,7 @@ namespace Fifo100MillionPointsDemo
                         Tag = randomWalkGenerator,
                     };
 
-                    int yOffset = i + i;
+                    int yOffset = thisI + thisI;
                     for (int j = 0; j < pointCount; j += AppendCount)
                     {
                         for (int k = 0; k < AppendCount; k++)
@@ -189,10 +194,29 @@ namespace Fifo100MillionPointsDemo
                 }//);
 
                 // Force a GC Collect before we begin
-                //GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
 
                 return series.ToList();
             });
+        }
+
+        private string GetPerformanceWarnings()
+        {
+            List<string> warnings = new List<string>();
+#if DEBUG
+            warnings.Add("Debug mode is slow, try Release");
+#endif
+            if (Debugger.IsAttached)
+            {
+                warnings.Add("Debugger is attached");
+            }
+
+            if (SysInfo.GetRamGb() <= 8)
+            {
+                warnings.Add("Low system RAM, try on 16GB machine");
+            }
+
+            return warnings.Any() ? "Perf warnings! " + string.Join(". ", warnings) : null;
         }
 
         private void OnStop()
