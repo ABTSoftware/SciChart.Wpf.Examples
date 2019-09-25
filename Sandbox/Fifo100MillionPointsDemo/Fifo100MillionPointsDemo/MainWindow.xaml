@@ -7,13 +7,13 @@
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
         xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="SciChart | 1 Billion Points Tech Demo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1024"
+        Height="650" Width="1024"
         Background="{StaticResource AppBackgroundBrush}">
+
     <Window.Resources>
         <local:MainViewModel x:Key="vm"/>
-
         <abt:VisibleIfNotNullConverter x:Key="visNotNull"/>
     </Window.Resources>
 
