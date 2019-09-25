@@ -26,8 +26,8 @@ namespace Fifo100MillionPointsDemo
         private bool _isStopped;
         private string _loadingMessage;
         private readonly NoLockTimer _timer;
-        const int AppendCount = 10_000;
-        const int TimerIntervalMs = 10;
+        const int AppendCount = 100;
+        const int TimerIntervalMs = 1000;
 
         // Temporary buffers for improving the performance of loading and appending data
         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
@@ -45,6 +45,7 @@ namespace Fifo100MillionPointsDemo
             // Add the point count options 
             AllPointCounts.AddRange(new []
             {
+                new PointCountViewModel("100", 5, 10000),
                 new PointCountViewModel("1 Million", 5, 200_000),
                 new PointCountViewModel("5 Million", 5, 1_000_000),
                 new PointCountViewModel("10 Million", 5, 2_000_000),
@@ -128,14 +129,21 @@ namespace Fifo100MillionPointsDemo
             LoadingMessage = null;
         }
 
-        private async Task<List<IRenderableSeriesViewModel>> CreateSeries(int seriesCount, int pointCount)
+        private static async Task<List<IRenderableSeriesViewModel>> CreateSeries(int seriesCount, int pointCount)
         {
             return await Task.Run(() =>
             {
                 // Create N series of M points async. Return to calling code to set on the chart 
-                List<IRenderableSeriesViewModel> series = new List<IRenderableSeriesViewModel>();
-                for (int i = 0; i < seriesCount; i++)
+                IRenderableSeriesViewModel[] series = new IRenderableSeriesViewModel[seriesCount];
+
+                // We generate data in parallel as just generating 1,000,000,000 points takes a long time no matter how fast your chart is! 
+                Parallel.For(0, seriesCount, i =>
+                //for(int i = 0; i < seriesCount; i++)
                 {
+                    // Temporary buffer for fast filling of DataSeries
+                    var xBuffer = new float[AppendCount];
+                    var yBuffer = new float[AppendCount];
+
                     var randomWalkGenerator = new Rand();
                     var xyDataSeries = new XyDataSeries<float, float>()
                     {
@@ -149,11 +157,11 @@ namespace Fifo100MillionPointsDemo
                         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
                         DataDistributionCalculator = new UserDefinedDistributionCalculator<float, float>()
                         {
-                            ContainsNaN = false, 
-                            IsEvenlySpaced = true, 
+                            ContainsNaN = false,
+                            IsEvenlySpaced = true,
                             IsSortedAscending = true,
-                        }, 
-                         
+                        },
+
                         // Just associate a random walk generator with the series for more consistent random generation
                         Tag = randomWalkGenerator,
                     };
@@ -163,25 +171,27 @@ namespace Fifo100MillionPointsDemo
                     {
                         for (int k = 0; k < AppendCount; k++)
                         {
-                            _xBuffer[k] = j+k;
-                            _yBuffer[k] = randomWalkGenerator.NextWalk() + yOffset;
+                            xBuffer[k] = j + k;
+                            yBuffer[k] = randomWalkGenerator.NextWalk() + yOffset;
                         }
+
                         // Append blocks of 10k points for performance
                         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
-                        xyDataSeries.Append(_xBuffer, _yBuffer);
+                        xyDataSeries.Append(xBuffer, yBuffer);
                     }
 
-                    // Force a GC Collect before we begin
-                    GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
-
-                    series.Add(new LineRenderableSeriesViewModel()
+                    // Store the series 
+                    series[i] = new LineRenderableSeriesViewModel()
                     {
                         DataSeries = xyDataSeries,
                         Stroke = Colors.RandomColor()
-                    });
-                }
+                    };
+                });
 
-                return series;
+                // Force a GC Collect before we begin
+                //GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+
+                return series.ToList();
             });
         }
 
@@ -201,6 +211,7 @@ namespace Fifo100MillionPointsDemo
         {
             lock (Series)
             {
+                return;
                 // Freeze updates on scichart UI 
                 using (ViewportManager.SuspendUpdates())
                 {
