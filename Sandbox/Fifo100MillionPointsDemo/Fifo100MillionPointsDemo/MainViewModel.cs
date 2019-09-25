@@ -211,7 +211,6 @@ namespace Fifo100MillionPointsDemo
         {
             lock (Series)
             {
-                return;
                 // Freeze updates on scichart UI 
                 using (ViewportManager.SuspendUpdates())
                 {
