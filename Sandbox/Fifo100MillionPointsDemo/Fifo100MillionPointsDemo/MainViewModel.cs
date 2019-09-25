@@ -204,15 +204,18 @@ namespace Fifo100MillionPointsDemo
         {
             List<string> warnings = new List<string>();
 #if DEBUG
+            // Debug mode is the cause of all performance woes. Try release mode?
             warnings.Add("Debug mode is slow, try Release");
 #endif
             if (Debugger.IsAttached)
             {
+                // Its considerably slower to run the code when debugger is attached. Warn the user
                 warnings.Add("Debugger is attached");
             }
 
             if (SysInfo.GetRamGb() <= 8)
             {
+                // Hmm, time to upgrade? https://www.amazon.co.uk/s?k=16GB+DDR4+RAM&i=computers&ref=nb_sb_noss_2 :) 
                 warnings.Add("Low system RAM, try on 16GB machine");
             }
 
