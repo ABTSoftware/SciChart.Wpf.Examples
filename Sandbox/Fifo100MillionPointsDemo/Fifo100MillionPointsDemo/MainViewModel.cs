@@ -27,8 +27,8 @@ namespace Fifo100MillionPointsDemo
         private bool _isStopped;
         private string _loadingMessage;
         private readonly NoLockTimer _timer;
-        const int AppendCount = 10_000;
-        const int TimerIntervalMs = 10;
+        const int AppendCount = 10_000; // The number of points to append per timer tick
+        const int TimerIntervalMs = 10; // Interval of timer tick 
 
         // Temporary buffers for improving the performance of loading and appending data
         // see https://www.scichart.com/documentation/v5.x/webframe.html#Performance_Tips_&_Tricks.html for why
@@ -56,8 +56,6 @@ namespace Fifo100MillionPointsDemo
             if (SysInfo.GetRamGb() >= 8)
                 AllPointCounts.Add(new PointCountViewModel("100 Million", 5, 20_000_000));
 
-            SelectedPointCount = AllPointCounts.Last();
-
             // Add further test cases depending on system RAM and 64/32bit status and how much RAM
             // 1 Billion points requires 8GB of free RAM or it will hit swap drive 
             if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
@@ -69,6 +67,9 @@ namespace Fifo100MillionPointsDemo
 
             // Setup some warnings
             PerformanceWarnings = GetPerformanceWarnings();
+
+            // Get ready to rock & roll 
+            SelectedPointCount = AllPointCounts.Last();
         }
 
         public string PerformanceWarnings { get; }
