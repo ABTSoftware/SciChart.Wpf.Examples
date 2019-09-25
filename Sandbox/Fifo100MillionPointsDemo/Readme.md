@@ -2,7 +2,7 @@
 
 This demo showcases SciChart WPF v6's incredible performance when rendering streaming (scrolling) line charts.
  
-![enter image description here](https://raw.githubusercontent.com/ABTSoftware/SciChart.Wpf.Examples/SciChart_v6_Release/Sandbox/Fifo100MillionPointsDemo/fifo-100million-points-demo.PNG) 
+![enter image description here](https://raw.githubusercontent.com/ABTSoftware/SciChart.Wpf.Examples/SciChart_v6_Release/Sandbox/Fifo100MillionPointsDemo/fifo-1-billion-points-demo.PNG)
 
 To run the demo, ensure that you have setup the NuGet package feed below. Compilation requires Visual Studio 2019 or later. 
 
