@@ -117,7 +117,7 @@
                 <s:CustomAnnotation CoordinateMode="Relative" 
                                     HorizontalAnchorPoint="Left"
                                     VerticalAnchorPoint="Center" 
-                                    Margin="5,120,0,0" 
+                                    Margin="10,150,0,0" 
                                     X1="0" 
                                     Y1="0" >
 
@@ -138,12 +138,19 @@
                     </StackPanel>
 
                 </s:CustomAnnotation>
-<!--                <s:TextAnnotation CoordinateMode="Relative" Foreground="White"  Margin="5,70,0,0" FontSize="20" Text="To change Point-Marker Type click" HorizontalAnchorPoint="Left" VerticalAnchorPoint="Center" Opacity="0.9" />-->
 
                 <s:TextAnnotation CoordinateMode="Relative" X1="0.5" Y1="0.85"  Foreground="White" FontSize="16" Text="Zoom In and Out to feel the speeeed!" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Center" Opacity="0.9"></s:TextAnnotation>
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
-        <s:SciChartPerformanceOverlay TargetSurface="{Binding Source={x:Reference Name=sciChart}}" Margin="5" VerticalAlignment="Top" IsHitTestVisible="False" Grid.Column="1"/>
+        <s:SciChartPerformanceOverlay Grid.Column="1"
+                                      Margin="0,0,50,0"
+                                      VerticalAlignment="Top"
+                                      Background="#33FFFFFF"
+                                      FontWeight="Bold"
+                                      Foreground="#FFF"
+                                      Padding="10"
+                                      IsHitTestVisible="False"
+                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
     </Grid>
 </UserControl>

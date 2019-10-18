@@ -15,6 +15,7 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -40,7 +41,6 @@ namespace SciChart.Examples
                 return hashCode;
             }
         }
-
         public string ExampleCategory { get; set; }
         public string ChartGroup { get; set; }
         public string ExampleTitle { get; set; }
@@ -79,6 +79,18 @@ namespace SciChart.Examples
                 res.ExampleCategory = xmlExample.Key.ExampleCategory;
                 res.ChartGroup = xmlExample.Key.ChartGroup;
                 res.Title = xmlExample.Key.ExampleTitle;
+
+                string codeFile = res.CodeFiles.FirstOrDefault();
+                if (codeFile == null)
+                {
+                    res.GithubUrl = Urls.GithubRootUrl;
+                }
+                else
+                {
+                    string exampleFolder = codeFile.Replace("Resources/ExampleSourceFiles/", "");
+                    exampleFolder = exampleFolder.Substring(0, exampleFolder.LastIndexOf("/", StringComparison.InvariantCulture));
+                    res.GithubUrl = Urls.GithubExampleRootUrl + exampleFolder;
+                }
 
                 return res;
             }

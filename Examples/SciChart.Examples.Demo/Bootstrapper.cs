@@ -2,7 +2,6 @@
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
-using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.UI.Bootstrap;
@@ -24,7 +23,7 @@ namespace SciChart.Examples.Demo
         {
         }
 
-        public Task InitializeAsync()
+        public  Task InitializeAsync()
         {            
             try
             {
@@ -44,7 +43,7 @@ namespace SciChart.Examples.Demo
                 throw;
             }
 
-            return Task.Factory.StartNew(() =>
+            return Task.Factory.StartNew(async () =>
             {
                 try
                 {
@@ -62,10 +61,11 @@ namespace SciChart.Examples.Demo
                     // Bootstrap D3D to save time on startup     
                     _logger.InfoFormat("... 4of4 D3D11.Initialize()");
 
-                    Direct3D11RenderSurface.InitEngineAsync().Then(r =>
-                    {
-                        vm.InitReady = true;
-                    });
+                    //Direct3D11RenderSurface.InitEngineAsync().Then(r =>
+                    //{
+                    await Task.Delay(3000);
+                    vm.InitReady = true;
+                    //});
                 }
                 catch (Exception e)
                 {

@@ -43,6 +43,7 @@ namespace SciChart.Examples.Demo.Helpers
             TopLevelCategory = exDefinition.ExampleCategory;
             IconPath = exDefinition.IconPath;
             Features = exDefinition.Features;
+            GithubExampleUrl = exDefinition.GithubUrl;
             _sourceFilePaths = exDefinition.CodeFiles;
         }
 
@@ -159,6 +160,8 @@ namespace SciChart.Examples.Demo.Helpers
         public List<Features> Features { get; set; }
 
         public string TopLevelCategory { get; set; }
+
+        public string GithubExampleUrl { get; set; }
 
         public string Group { get; set; }
 

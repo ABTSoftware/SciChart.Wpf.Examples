@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SciChart.Charting;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
-using SciChart.Drawing.DirectX.Context.D3D11;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
 {
@@ -29,7 +19,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
         {
             InitializeComponent();
 
-            if (Direct3D11CompatibilityHelper.SupportsDirectX10)
+            if (VisualXcceleratorEngine.SupportsHardwareAcceleration)
             {
                 warningText.IsHidden = true;
                 SetupScatterSeries();

@@ -115,13 +115,13 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             using (var meshContext = base.BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
-                SciChart3DNative.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
+                VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
             
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(cubeColor);
             
                 // Pass Entity ID value for a hit test purpose
-                ulong selectionColor = SciChart3DNative.EncodeSelectionId(EntityId, 0);
+                ulong selectionColor = VXccelEngine3D.EncodeSelectionId(EntityId, 0);
                 meshContext.SetSelectionId(selectionColor);
 
                 // Now draw the triangles. Each face of the cube is made up of two triangles
@@ -179,12 +179,12 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 SetVertex(meshContext, corners[5]);
                 SetVertex(meshContext, corners[4]);
             }
-            
+
             // Revert raster state
-            SciChart3DNative.PopRasterizerState();
+            VXccelEngine3D.PopRasterizerState();
 
             // Set the Rasterizer State for wireframe 
-            SciChart3DNative.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
+            VXccelEngine3D.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 
             // Create a Line Context for a continuous line and draw the outline of the cube 
             var lineColor = Color.FromArgb(0xFF, cubeColor.R, cubeColor.G, cubeColor.B);
@@ -195,7 +195,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             CreateSquare(2.0f, true, lineColor, new[] { corners[5], corners[1], corners[2], corners[6] });
 
             // Revert raster state
-            SciChart3DNative.PopRasterizerState();
+            VXccelEngine3D.PopRasterizerState();
         }
 
         private void CreateSquare(float lineThickness, bool isAntiAlias, Color lineColor, Vector3[] vertices)
@@ -205,7 +205,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 lineContext.SetVertexColor(lineColor);
 
                 // Pass Entity ID value for a hit test purpose
-                ulong selectionColor = SciChart3DNative.EncodeSelectionId(EntityId, 0);
+                ulong selectionColor = VXccelEngine3D.EncodeSelectionId(EntityId, 0);
                 lineContext.SetSelectionId(selectionColor);
 
                 foreach (var v in vertices)

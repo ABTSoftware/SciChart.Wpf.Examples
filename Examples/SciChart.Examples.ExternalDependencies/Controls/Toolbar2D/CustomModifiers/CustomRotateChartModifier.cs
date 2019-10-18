@@ -26,7 +26,7 @@ using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Visuals.Axes;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class CustomRotateChartModifier : ChartModifierBase
     {

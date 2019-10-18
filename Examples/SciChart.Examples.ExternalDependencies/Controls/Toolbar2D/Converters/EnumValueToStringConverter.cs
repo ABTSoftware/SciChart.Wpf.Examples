@@ -5,7 +5,7 @@
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// ComboBoxItemTemplateSelector.cs is part of SCICHART®, High Performance Scientific Charts
+// EnumValueToStringConverter.cs is part of SCICHART®, High Performance Scientific Charts
 // For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
 // 
 // This source code is protected by international copyright law. Unauthorized
@@ -18,36 +18,23 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Converters
 {
-    public class ComboBoxItemTemplateSelector : DataTemplateSelector
+    public class EnumValueToStringConverter : IValueConverter
     {
-        public DataTemplate SelectedItemTemplate { get; set; }
-
-        public DataTemplate ItemTemplate { get; set; }
-
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var isSelected = false;
+            return Enum.GetName(value.GetType(), value);
+        }
 
-            var fe = container as FrameworkElement;
-            if (fe != null)
-            {
-                var parent = fe.TemplatedParent;
-                if (parent != null)
-                {
-                    var cbo = parent as ComboBox;
-
-                    isSelected = cbo != null;
-                }
-            }
-
-            return isSelected ? SelectedItemTemplate : ItemTemplate;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
         }
     }
 }

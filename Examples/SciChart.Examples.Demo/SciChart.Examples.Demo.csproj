@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon />
+    <ApplicationIcon>SciChartDemoIcon32.ico</ApplicationIcon>
     <StartupObject />
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
@@ -60,8 +60,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
@@ -78,15 +76,9 @@
     <EmbeddedResource Include="Resources\stopwords.dat" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.6.9" />
-    <PackageReference Include="SciChart.Wpf.UI" Version="3.0.249" />
-    <PackageReference Include="SharpDX" Version="4.2.0" />
-    <PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
-    <PackageReference Include="SharpDX.Direct3D11.Effects" Version="4.2.0" />
-    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
-    <PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
-    <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.73" />
+    <PackageReference Include="RestSharp" Version="106.6.10" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="3.1.251" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj">
@@ -114,21 +106,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\WPFToolkit\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
+    <PackageReference Include="SciChart" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12475-alpha" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12567-beta" />
   </ItemGroup>
 </Project>

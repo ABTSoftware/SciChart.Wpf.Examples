@@ -24,14 +24,16 @@
 
     <ScrollViewer BorderThickness="0"
                   HorizontalScrollBarVisibility="Disabled"
-                  VerticalScrollBarVisibility="Auto">
+                  VerticalScrollBarVisibility="Auto"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=1000, BeginTime=500, TransitionOn=Once}">
         <Grid d:DataContext="{StaticResource DesignTimeDataContext}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <coverFlow:CoverFlowControl x:Name="CoverFlowControl"
+            <coverFlow:CoverFlowControl x:Name="CoverFlowControl" 
+                                        Background="{StaticResource ApplicationBackgroundBrush}"
                                         Grid.Row="0"
                                         Height="400"
                                         Margin="10"

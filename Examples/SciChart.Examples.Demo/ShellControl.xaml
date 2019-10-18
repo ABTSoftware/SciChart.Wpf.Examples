@@ -132,6 +132,9 @@
                             Height="32"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center">
+                        <Canvas.RenderTransform>
+                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" CenterY="10"/>
+                        </Canvas.RenderTransform>
                         <Path Data="m 28 27 -7.5 -7.5 c 1.1 -1.7 1.8 -3.8 1.8 -6 0 -6.1 -5 -11.1 -11.1 -11.1 -6.1 0 -11.1 5 -11.1 11.1 0 6.1 4.9 11.2 11 11.2 3 0 5.6 -1.2 7.6 -3.1 l 7.3 7.3 c 0.3 0.3 0.6 0.4 1 0.4 0.3 0 0.7 -0.1 1 -0.4 0.5 -0.5 0.5 -1.3 0 -1.9 z m -16.9 -5 c -4.6 0 -8.4 -3.8 -8.4 -8.4 0 -4.6 3.8 -8.4 8.4 -8.4 4.6 0 8.4 3.8 8.4 8.4 0 4.6 -3.8 8.4 -8.4 8.4 z" Fill="{StaticResource IconFillDefault}" />
                     </Canvas>
                     <TextBlock x:Name="PART_Watermark"
@@ -188,9 +191,9 @@
                 BorderThickness="0,0,0,2">
             <Grid Margin="20,20,20,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="255" />
+                    <ColumnDefinition Width="Auto" MinWidth="300" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="255" />
+                    <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel HorizontalAlignment="Left"
@@ -213,10 +216,10 @@
                                            Grid.Column="1"
                                            Height="40"
                                            MaxWidth="400"
-                                           Margin="40,0,40,0"
+                                           Margin="20,0,20,0"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Top"
-                                           FontSize="20"
+                                           FontSize="18"
                                            IsEnabled="{Binding SearchBoxEnabled,
                                                                Mode=TwoWay}"
                                            ItemsSource="{Binding AutoCompleteDataSource}"
@@ -234,7 +237,14 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"
                        Source="Resources/Images/scichartlogo.png"
-                       Stretch="None" />
+                       Stretch="Fill" 
+                       MouseDown="UIElement_OnMouseDown"
+                       ToolTip="SciChart | Making Impossible Projects Possible since 2012"
+                       Cursor="Hand">
+                    <Image.Effect>
+                        <DropShadowEffect Color="#33000000"/>
+                    </Image.Effect>
+                </Image>
             </Grid>
         </Border>
 
@@ -249,8 +259,7 @@
                                     Grid.Row="1"
                                     Style="{StaticResource transitioningFrameStyle}"
                                     tz:Transitionz.Blur="{Binding BlurOnSearchParams}"
-                                    navigation:Navigator.StartPage="{Binding HomePage,
-                                                                             Mode=OneTime}" />
+                                    navigation:Navigator.StartPage="{Binding HomePage, Mode=OneTime}" />
 
         <views:SearchView Grid.Row="1"
                           HorizontalAlignment="Stretch"
@@ -261,7 +270,7 @@
                                                                       Duration=200,
                                                                       TransitionOn=Visibility}"
                           tz:Transitionz.Visibility="{Binding SearchText,
-                                                               Converter={StaticResource IsEmptyStringConverter}}" />
+                                                               Converter={StaticResource IsEmptyStringConverter}, FallbackValue='Collapsed'}" />
 
         <Border Grid.Row="1"
                 Background="{StaticResource DialogBackground}"

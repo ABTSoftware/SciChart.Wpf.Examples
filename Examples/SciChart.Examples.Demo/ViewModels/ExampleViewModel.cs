@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers;
@@ -36,6 +38,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private bool _isInfoVisible;
         private bool _isShowingHelp;
+        private bool _isShowingSourceCodeHelp;
 
         /// <summary>
         /// Designer Constructor
@@ -71,12 +74,31 @@ namespace SciChart.Examples.Demo.ViewModels
                 IsShowingHelp = false;
             });
 
+            CloseSourceCodeHelpCommand = new ActionCommand(() =>
+            {
+                IsShowingSourceCodeHelp = false;
+            });
+
+            ShowGithubCommand = new ActionCommand(() =>
+            {
+                string githubUrl = SelectedExample == null  ? Urls.GithubRootUrl
+                    : SelectedExample.GithubExampleUrl;
+
+                    Process.Start("explorer.exe", githubUrl);
+            });
+
+            GoToDocumentationCommand = new ActionCommand(() =>
+            {
+                Process.Start("explorer.exe", Urls.DocumentationRootUrl);
+            });
+
             SmileFrownViewModel = new SmileFrownViewModel(this);
             ExportExampleViewModel = new ExportExampleViewModel(module, this);
             BreadCrumbViewModel = new BreadCrumbViewModel(module, this);
 
             ShowExample = true;
             IsShowingHelp = true;
+            IsShowingSourceCodeHelp = true;
             IsInfoVisible = true;
         }
 
@@ -134,7 +156,26 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
+        public bool IsShowingSourceCodeHelp
+        {
+            get => _isShowingSourceCodeHelp;
+            set
+            {
+                if (_isShowingSourceCodeHelp != value)
+                {
+                    _isShowingSourceCodeHelp = value;
+                    OnPropertyChanged("IsShowingSourceCodeHelp");
+                }
+            }
+        }
+
         public ActionCommand CloseHelpCommand { get; }
+
+        public ActionCommand CloseSourceCodeHelpCommand { get; }
+
+        public ActionCommand ShowGithubCommand { get; }
+
+        public ActionCommand GoToDocumentationCommand { get; }
 
         public ActionCommand HideDescriptionCommand
         {

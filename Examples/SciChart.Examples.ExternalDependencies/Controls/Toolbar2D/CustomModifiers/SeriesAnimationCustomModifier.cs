@@ -9,7 +9,7 @@ using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Core.Extensions;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class SeriesAnimationCustomModifier : ChartModifierBase
     {

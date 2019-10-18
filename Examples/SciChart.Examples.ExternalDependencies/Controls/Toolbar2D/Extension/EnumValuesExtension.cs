@@ -5,7 +5,7 @@
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// EnumValueToStringConverter.cs is part of SCICHART®, High Performance Scientific Charts
+// EnumValuesExtension.cs is part of SCICHART®, High Performance Scientific Charts
 // For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
 // 
 // This source code is protected by international copyright law. Unauthorized
@@ -18,23 +18,24 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows.Data;
+using System.Windows.Markup;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.Converters
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Extension
 {
-    public class EnumValueToStringConverter : IValueConverter
+    public class EnumValuesExtension : MarkupExtension
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private readonly Type _enumType;
+
+        public EnumValuesExtension(Type enumType)
         {
-            return Enum.GetName(value.GetType(), value);
+            _enumType = enumType;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return value;
+            return Enum.GetNames(_enumType);
         }
     }
 }

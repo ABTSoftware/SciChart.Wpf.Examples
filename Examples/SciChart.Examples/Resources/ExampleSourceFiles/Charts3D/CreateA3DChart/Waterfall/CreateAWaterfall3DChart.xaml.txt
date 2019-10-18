@@ -10,7 +10,7 @@
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid>
         <Grid.Resources>
-            <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" />
+            <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" Fill="Blue" />
 
             <s3D:GradientColorPalette x:Key="ExampleGradientColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
@@ -108,7 +108,7 @@
                     <!-- These are changed by user controls declared above in the example -->
                     <s3D:WaterfallRenderableSeries3D.Style>
                         <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <Setter Property="Stroke" Value="Transparent" />
+                            <Setter Property="Stroke" Value="White" />
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="StrokeThickness" Value="2" />
                             <Setter Property="SliceThickness" Value="0" />

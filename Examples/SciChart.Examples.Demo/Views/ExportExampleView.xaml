@@ -37,10 +37,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="255" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="32" />
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.ColumnSpan="2"
@@ -62,9 +63,7 @@
                 Command="{Binding CancelCommand}"
                 Style="{StaticResource CloseButtonStyle}" />
 
-        <TextBlock Grid.Row="2"
-                   Grid.Column="0"
-                   Text="Please select folder to which export the example. . ." />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Please select folder to which export the example. . ." />
 
         <TextBox Grid.Row="3"
                  Grid.Column="0"
@@ -111,6 +110,14 @@
             <Button Width="80"
                     Command="{Binding OkCommand}"
                     Content="GO" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock TextWrapping="Wrap" MouseDown="UIElement_OnMouseDown" FontSize="12" FontWeight="Bold">
+                <Run Text="Note:" FontWeight="Bold" FontStyle="Italic"/>
+                <Run Text="All our examples are also published on Github. If you'd like to browse the entire SciChart Examples source-code," FontStyle="Italic" />
+                <Run Text="please click here." Foreground="{StaticResource SciChartGreenBrush}" TextDecorations="Underline" Cursor="Hand" />
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

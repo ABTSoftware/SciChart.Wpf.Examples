@@ -20,17 +20,18 @@
             </s:ModifierGroup>
 
             <s:SquarePointMarker x:Key="SquarePointMarker"
-                                 Width="7"
-                                 Height="7"
+                                 Width="8"
+                                 Height="8"
                                  Fill="Red"
                                  Stroke="Orange"
                                  StrokeThickness="1" />
+
             <s:EllipsePointMarker x:Key="EllipsePointMarker"
                                   Width="10"
                                   Height="10"
                                   Fill="Red"
                                   Stroke="Orange"
-                                  StrokeThickness="1" />
+                                  StrokeThickness="2" />
 
             <local:StrokeFillPaletteProvider x:Key="StrokeFillPaletteProvider"
                                              AreaSelection="{Binding [AreaSelectionModifier].AreaSelection,

@@ -1,42 +1,88 @@
-﻿using System.IO;
+﻿using SciChart.UI.Bootstrap;
+using System;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using Unity;
-using System;
-using SciChart.UI.Bootstrap;
 
 namespace SciChart.Examples.Demo.Helpers.UsageTracking
 {
     [ExportType(typeof(ISyncUsageHelper), CreateAs.Singleton)]
     public class SyncUsageHelper : ISyncUsageHelper
     {
+        private class DataEncryptionHelper
+        {
+            string _namespace = "Abt.Licensing.New";
+            string _class = "SodiumSymmetricEncryption";
+            string _decodingMethod = "Decrypt";
+            string _encodingMethod = "Encrypt";
+
+            public string Decrypt(string encrypted)
+            {
+                var decrypted = String.Empty;
+                var decodingMethod = GetEncoderType()?
+                    .GetMethod(_decodingMethod);
+                if (decodingMethod != null)
+                {
+                    decrypted = decodingMethod.Invoke(null, new object[] { encrypted }) as string;
+                }
+
+                return decrypted;
+            }
+
+            private Type GetEncoderType()
+            {
+                var type = AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .FirstOrDefault(assemblyType => assemblyType.Name == _class &&
+                                                    assemblyType.Namespace == _namespace);
+
+                return type;
+            }
+
+            public string Encrypt(string raw)
+            {
+                var encrypted = String.Empty;
+                var encodingMethod = GetEncoderType()?
+                    .GetMethod(_encodingMethod);
+                if (encodingMethod != null)
+                {
+                    encrypted = encodingMethod.Invoke(null, new object[] { raw }) as string;
+                }
+
+                return encrypted;
+            }
+        }
+
         private string userId;
         private DateTime lastSent = DateTime.MinValue;
         private readonly IUsageCalculator _usageCalculator;
         private readonly IUsageServiceClient _client;
+        private readonly DataEncryptionHelper _encryptionHelper;
         private bool _enabled = true;
 
         public event EventHandler<EventArgs> EnabledChanged;
 
-        private readonly string _password = "vankNBVDavigfuakbvja";
-
         public SyncUsageHelper(IUsageCalculator usageCalculator, IUsageServiceClient client)
         {
+            _encryptionHelper = new DataEncryptionHelper();
             _usageCalculator = usageCalculator;
             _client = client;
             userId = System.Guid.NewGuid().ToString();
         }
 
-        public bool Enabled { get { return _enabled; } set { _enabled = value; } }
+        public bool Enabled
+        {
+            get => _enabled;
+            set => _enabled = value;
+        }
 
         public void LoadFromIsolatedStorage()
         {
-#if !SILVERLIGHT
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
-#else
-            using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForSite())
-#endif
             {
                 if (isf.FileExists("Usage.xml"))
                 {
@@ -44,11 +90,18 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
                     {
                         using (var stream = new IsolatedStorageFileStream("Usage.xml", FileMode.Open, isf))
                         {
-                            string usageXml = "";
+                            var usageXml = "";
                             using (StreamReader reader = new StreamReader(stream))
                             {
                                 var encryptedUsage = reader.ReadToEnd();
-                                usageXml = Abt.Licensing.Core.EncryptionUtil.Decrypt(encryptedUsage, _password);
+                                try
+                                {
+                                    usageXml = _encryptionHelper.Encrypt(encryptedUsage);
+                                }
+                                catch
+                                {
+                                    // Old file contents will not decrypt due to encryption changes.  We don't care.
+                                }
                             }
 
                             using (var textReader = new StringReader(usageXml))
@@ -85,39 +138,40 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
                         // If something goes wrong, delete the local file
                         try { isf.DeleteFile("Usage.xml"); }
                         catch { }
-                        
                     }
                 }
-
             }
         }
 
         public void WriteToIsolatedStorage()
         {
-#if !SILVERLIGHT
-            using (IsolatedStorageFile isf = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
-#else
-            using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForSite())
-#endif
+            try
             {
-                using (var stream = new IsolatedStorageFileStream("Usage.xml", FileMode.Create, isf))
+                using (var isf = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly,
+                    null, null))
                 {
-                    XDocument xml = SerializationUtil.Serialize(_usageCalculator.Usages.Values.Where(e => e.VisitCount > 0));
-                    xml.Root.Add(new XAttribute("UserId", userId));
-                    xml.Root.Add(new XAttribute("Enabled", Enabled));
-                    xml.Root.Add(new XAttribute("LastSent", lastSent.ToString("o")));
-                    
-                    using (var stringWriter = new StringWriter())
+                    using (var stream = new IsolatedStorageFileStream("Usage.xml", FileMode.Create, isf))
                     {
-                        xml.Save(stringWriter);
-                        var encryptedUsage = Abt.Licensing.Core.EncryptionUtil.Encrypt(stringWriter.ToString(), _password);
-                        using (StreamWriter writer = new StreamWriter(stream))
+                        var xml = SerializationUtil.Serialize(
+                            _usageCalculator.Usages.Values.Where(e => e.VisitCount > 0));
+                        xml.Root.Add(new XAttribute("UserId", userId));
+                        xml.Root.Add(new XAttribute("Enabled", Enabled));
+                        xml.Root.Add(new XAttribute("LastSent", lastSent.ToString("o")));
+
+                        using (var stringWriter = new StringWriter())
                         {
-                            writer.Write(encryptedUsage);
+                            xml.Save(stringWriter);
+
+                            var encryptedUsage = _encryptionHelper.Encrypt(stringWriter.ToString());
+                            using (StreamWriter writer = new StreamWriter(stream))
+                            {
+                                writer.Write(encryptedUsage);
+                            }
                         }
                     }
                 }
             }
+            catch { }
         }
 
         public void SendUsagesToServer()
@@ -133,29 +187,18 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
         {
             if (!_enabled)
                 return;
-#if !SILVERLIGHT
+
             //var ratings = _client.GetGlobalUsage();
             //ratings.ContinueWith(r =>
             //{
             //if (r.Result != null)
             //    _usageCalculator.Ratings = r.Result.ToDictionary<ExampleRating, string>(x => x.ExampleID);
             //});
-#else
-            //_client.GetGlobalUsageAsync();
-
-            //_client.GetGlobalUsageCompleted += (sender, args) =>
-            //{
-            //    if (args.Result.Any())
-            //    {
-            //        _usageCalculator.Ratings = args.Result;
-            //    }
-            //};
-#endif
         }
 
         public void SetUsageOnExamples()
         {
-            IModule module = ServiceLocator.Container.Resolve<IModule>();
+            var module = ServiceLocator.Container.Resolve<IModule>();
             foreach (var example in module.Examples.Values)
             {
                 example.Usage = _usageCalculator.GetUsage(example);

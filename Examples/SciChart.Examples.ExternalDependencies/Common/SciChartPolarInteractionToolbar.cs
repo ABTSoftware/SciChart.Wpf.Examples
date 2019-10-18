@@ -19,7 +19,7 @@
 using System.Windows.Data;
 using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Visuals;
-using SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar;
+using SciChart.Examples.ExternalDependencies.Controls.Toolbar2D;
 
 namespace SciChart.Examples.ExternalDependencies.Common
 {

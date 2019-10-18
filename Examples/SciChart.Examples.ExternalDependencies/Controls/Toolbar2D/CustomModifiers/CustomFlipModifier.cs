@@ -25,7 +25,7 @@ using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class CustomFlipModifier : ChartModifierBase
     {

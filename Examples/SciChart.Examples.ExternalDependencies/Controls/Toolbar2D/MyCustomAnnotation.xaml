@@ -1,4 +1,4 @@
-﻿<s:CustomAnnotation x:Class="SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.MyCustomAnnotation"
+﻿<s:CustomAnnotation x:Class="SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.MyCustomAnnotation"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

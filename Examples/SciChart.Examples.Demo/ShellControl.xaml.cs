@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SciChart.Examples.Demo
 {
@@ -10,6 +13,11 @@ namespace SciChart.Examples.Demo
         public ShellControl()
         {
             InitializeComponent();           
+        }
+
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("explorer.exe", "http://www.scichart.com");
         }
     }
 }

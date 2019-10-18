@@ -21,8 +21,8 @@ using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Threading;
+using SciChart.Charting;
 using SciChart.Charting.Common.Helpers;
-using SciChart.Drawing.DirectX.Context.D3D11;
 
 namespace SciChart.Examples.ExternalDependencies.Common
 {
@@ -58,7 +58,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
         public string CurrentPowerPlanName => _powerManager.GetCurrentPlan().Name;
 
-        public bool SupportsHardwareAcceleration => Direct3D11CompatibilityHelper.SupportsDirectX10;
+        public bool SupportsHardwareAcceleration => VisualXcceleratorEngine.SupportsHardwareAcceleration;
 
         public bool PowerSavingHighPerformance => _powerManager.GetCurrentPlan().Guid == _powerManager.MaximumPerformance.Guid;
 

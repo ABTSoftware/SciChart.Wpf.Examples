@@ -68,7 +68,7 @@
 
                 <s:CustomAnnotation CoordinateMode="Relative" 
                                     HorizontalAnchorPoint="Left"
-                                    Margin="5,150,0,0" 
+                                    Margin="10,150,0,0" 
                                     VerticalAnchorPoint="Center" 
                                     X1="0" 
                                     Y1="0" >
@@ -101,14 +101,13 @@
         </s:SciChartSurface>
 
         <s:SciChartPerformanceOverlay Grid.Column="1"
-                                      Margin="5,5,50,5"
-                                      HorizontalAlignment="Stretch"
+                                      Margin="0,0,50,0"
                                       VerticalAlignment="Top"
                                       Background="#33FFFFFF"
-                                      FontSize="16"
                                       FontWeight="Bold"
                                       Foreground="#FFF"
                                       Padding="10"
+                                      IsHitTestVisible="False"
                                       TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
     </Grid>

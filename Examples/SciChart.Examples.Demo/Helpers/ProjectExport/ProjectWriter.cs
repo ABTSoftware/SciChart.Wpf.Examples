@@ -18,11 +18,9 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             @"SciChart.Charting.dll",
             @"SciChart.Charting3D.dll",
             @"SciChart.Drawing.dll",
-            @"SciChart.Drawing.DirectX.dll",
             @"SciChart.Charting.DrawingTools.dll",
         };
 
-        public static readonly string Interactivity = @"System.Windows.Interactivity.dll";
         public static readonly string ExternalDependencies = @"SciChart.Examples.ExternalDependencies.dll";
         
         public static readonly string ProjectFileName = "ProjectFile.csproj";
@@ -33,8 +31,6 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly XNamespace DefaultXmlns = "http://schemas.microsoft.com/developer/msbuild/2003";
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
-
-        private static readonly  string[] SharpDxLibs = { "sharpdx_direct3d11_1_effects_x64.dll", "sharpdx_direct3d11_1_effects_x86.dll" };
 
         public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool showMessageBox = true)
         {
@@ -68,13 +64,6 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             }
 
             WriteProjectFiles(files, selectedPath + projectName + @"\");
-
-            foreach (var sharpDxLib in SharpDxLibs)
-            {
-                var sourceFilePath = Path.Combine(assembliesPath, sharpDxLib);
-                var destFilePath = Path.Combine(selectedPath + projectName, sharpDxLib);
-                File.Copy(sourceFilePath, destFilePath);
-            }
 
             if (showMessageBox)
             {
@@ -112,9 +101,9 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 el.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
                 elements[0].Add(el);
 
-                var el2 = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", Interactivity.Replace(".dll", string.Empty)));
-                el2.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, Interactivity)));
-                elements[0].Add(el2);
+//                var el2 = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", Interactivity.Replace(".dll", string.Empty)));
+//                el2.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, Interactivity)));
+//                elements[0].Add(el2);
 
                 foreach (var asmName in AssembliesNames)
                 {
@@ -141,17 +130,6 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                     el.Add(new XElement(DefaultXmlns + "SubType", "Designer"));
                     elements[1].Add(el);
                 }
-
-                foreach (var sharpDxLib in SharpDxLibs)
-                {
-                    var sharpDll64element = new XElement(DefaultXmlns + "Content", new XAttribute("Include", sharpDxLib));
-                    var xElementChild = new XElement(DefaultXmlns + "CopyToOutputDirectory");
-                    xElementChild.Add("Always");
-                    sharpDll64element.Add(xElementChild);
-
-                    elements[1].Add(sharpDll64element);
-                }
-
             }
 
             return projXml.ToString();

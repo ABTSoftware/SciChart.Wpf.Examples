@@ -19,9 +19,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting.ChartModifiers;
-using SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers;
+using SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 {
     public class ModifierButtonTemplateSelector : DataTemplateSelector
     {

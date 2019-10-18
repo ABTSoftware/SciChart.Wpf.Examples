@@ -23,6 +23,7 @@ namespace SciChart.Examples
 #endif
     public class ExampleDefinition
     {
+        public string GithubUrl { get; set; }
         public string ExampleCategory { get; set; }
         public string ChartGroup { get; set; }
         public string Title { get; set; }

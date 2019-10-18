@@ -109,19 +109,6 @@
                           s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
 
                     <CheckBox Margin="3"
-                          x:Name="directXRendererCheckbox"
-                          Content="DirectX (SharpDX, Legacy)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all examples using the DirectX renderer plugin. Requires DirectX10 GPU or Later"
-                          IsEnabled="{Binding IsDirectXAvailable}"
-                          IsChecked="{Binding SelectedRenderer,
-                                              Mode=TwoWay,
-                                              Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type s3D:Direct3D11RenderSurface}}"
-                          s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
-
-                    <CheckBox Margin="3"
                               x:Name="tsrRendererCheckbox"
                               Content="Visual Xccelerator Engine (NEW!)"
                               DataContext="{StaticResource SettingsViewModel}"

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using SciChart.Core.Utility;
 using Unity;
 using SciChart.UI.Bootstrap;
 
@@ -13,6 +15,11 @@ namespace SciChart.Examples.Demo.Views
         {
             InitializeComponent();
             DataContext = ServiceLocator.Container.Resolve<IMainWindowViewModel>();
+
+//            this.Loaded += (s, e) =>
+//            {
+//                TimedMethod.Invoke(() => CoverFlowControl.Visibility = Visibility.Visible).After(2000).Go();
+//            };
         }
     }
 }

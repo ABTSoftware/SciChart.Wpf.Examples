@@ -24,7 +24,7 @@ using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Visuals.Annotations;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class CustomAnnotationCreationModifier : AnnotationCreationModifier
     {

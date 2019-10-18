@@ -50,6 +50,9 @@
     <None Remove="Resources\Objects\WhiteWoodTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs" Link="Properties\AssemblyInfoCommon.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Data\AcousticPlots.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
@@ -60,7 +63,7 @@
     <EmbeddedResource Include="Resources\Data\Waveform.txt.gz" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.30" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -85,15 +88,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12567-beta" />
   </ItemGroup>
 </Project>

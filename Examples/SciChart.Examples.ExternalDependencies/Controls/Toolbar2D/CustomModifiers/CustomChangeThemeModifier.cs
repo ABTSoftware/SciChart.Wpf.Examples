@@ -30,7 +30,7 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Visuals;
 using SciChart.Core;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class CustomExportModifier : ChartModifierBase
     {

@@ -35,9 +35,9 @@ using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
-using SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.CustomModifiers;
+using SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 {
     /// <summary>
     /// A toolbar used in examples to simplify zoom, pan, zoom extents, rollover, cursor etc... This also helps us with

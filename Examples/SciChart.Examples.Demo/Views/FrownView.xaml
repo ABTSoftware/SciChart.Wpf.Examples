@@ -45,12 +45,20 @@
                 Margin="0,10"
                 HorizontalAlignment="Stretch"
                 Background="{StaticResource IconForeground}" />
-        <TextBlock Grid.Row="2"
-                   Grid.ColumnSpan="2"
-                   HorizontalAlignment="Left"
-                   FontFamily="Segoe UI"
-                   Foreground="#FFF"
-                   Text="Oh noes! What don't you like about SciChart? Please use the form below to tell us" />
+
+        <StackPanel Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left">
+            <TextBlock 
+                FontFamily="Segoe UI"
+                Foreground="#EEE"
+                Text="What don't you like about SciChart? Please use the form below to tell us." />
+
+            <TextBlock Margin="0,10,0,0" Foreground="#EEE">
+                <Run Text="We take complaints very seriously."/>
+                <Run Text="If you leave your email, our staff can reply." FontWeight="Bold"/>
+            </TextBlock>
+        </StackPanel>
 
         <ContentPresenter Grid.Row="3"
                           Grid.Column="0"
@@ -71,22 +79,20 @@
 
             <TextBox MaxHeight="80"
                      Margin="0,10"
-                     Text="{Binding FeedbackEmail,
+                     Text="{Binding FeedbackEmail,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, 
                                     Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     behaviors:TextBoxHelpers.WatermarkContent="Your Email (Optional)" />
+                     behaviors:TextBoxHelpers.WatermarkContent="Your Email (So we can reply)" />
 
             <TextBox Grid.Row="1"
                      MaxHeight="80"
                      Margin="0,10"
-                     Text="{Binding FeedbackSubject,
-                                    Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged,
-                                    ValidatesOnDataErrors=True}"
+                     Text="{Binding FeedbackSubject,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, 
+                                    Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     behaviors:TextBoxHelpers.WatermarkContent="Subject, e.g. 'BandSeries example crashes'" />
+                     behaviors:TextBoxHelpers.WatermarkContent="Subject, e.g. 'this example crashes'" />
 
 
             <TextBox Grid.Row="2"
@@ -95,11 +101,11 @@
                      Margin="0,10"
                      VerticalContentAlignment="Top"
                      AcceptsReturn="True"
-                     Text="{Binding FeedbackContent,
+                     Text="{Binding FeedbackContent,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, 
                                     Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     behaviors:TextBoxHelpers.WatermarkContent="Feedback" />
+                     behaviors:TextBoxHelpers.WatermarkContent="Please tell us what's wrong..." />
 
             <Button Grid.Row="3"
                     Width="100"

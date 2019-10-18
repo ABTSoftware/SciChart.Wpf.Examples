@@ -2,13 +2,11 @@
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Threading;
 using SciChart.Charting;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.MarkupExtensions;
 using SciChart.Charting.Visuals;
-using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
@@ -28,14 +26,14 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public SettingsViewModel()
         {
-            SelectedRenderer = Direct3D11CompatibilityHelper.SupportsDirectX10
+            SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration
                 ? typeof (TsrRenderSurface)
                 : typeof (HighSpeedRenderSurface);          
 
             this.WithTrait<AllowFeedbackSettingBehaviour>();
-            IsDirectXAvailable = Direct3D11CompatibilityHelper.SupportsDirectX10;
+            IsDirectXAvailable = VisualXcceleratorEngine.SupportsHardwareAcceleration;
 
-            if (Direct3D11CompatibilityHelper.HasDirectX10CapableGpu)
+            if (VisualXcceleratorEngine.HasDirectX10OrBetterCapableGpu)
             {
                 UseD3D11 = true;
                 UseD3D9 = false;
@@ -60,9 +58,9 @@ namespace SciChart.Examples.Demo.ViewModels
                 Tuple.Create)
                 .Subscribe(t =>
                 {
-                    Direct3D11RenderSurface.UseAlternativeFillSource = t.Item1;
+                    VisualXcceleratorEngine.UseAlternativeFillSource = t.Item1;
                     Viewport3D.UseAlternativeFillSource = t.Item1;
-                    Direct3D11RenderSurface.EnableForceWaitForGPU = t.Item2;
+                    VisualXcceleratorEngine.EnableForceWaitForGPU = t.Item2;
                     Viewport3D.ForceStallUntilGPUIsIdle = t.Item2;
                     TsrRenderSurface.UseAlternativeFillSource = t.Item1;
                     TsrRenderSurface.ForceStallUntilGPUIsIdle = t.Item2;
@@ -215,12 +213,12 @@ namespace SciChart.Examples.Demo.ViewModels
                 _selectedRenderer = value;
                 OnPropertyChanged(value);
 
-                IsDirectXEnabled2D = value == typeof(Direct3D11RenderSurface) || value == typeof(TsrRenderSurface);
+                IsDirectXEnabled2D = value == typeof(TsrRenderSurface);
                 if (IsDirectXEnabled2D)
                 {
                     try
                     {
-                        Direct3D11RenderSurface.AssertSupportsDirectX();
+                        VisualXcceleratorEngine.AssertSupportsDirectX();
                     }
                     catch (Exception ex)
                     {

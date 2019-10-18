@@ -167,12 +167,8 @@
 
 
         <!--  Render SciChart using Direct X Render Surface  -->
-        <!--  The only line required to enable this feature is s:RenderSurfaceBase.RenderSurfaceType=  -->
-        <s:SciChartSurface Grid.Column="1" Grid.Row="1">
-
-            <s:SciChartSurface.RenderSurface>
-                <directXRender:Direct3D11RenderSurface />
-            </s:SciChartSurface.RenderSurface>
+        <!--  The only line required to enable this feature is s:VisualXcceleratorEngine.IsEnabled -->
+        <s:SciChartSurface Grid.Column="1" Grid.Row="1" s:VisualXcceleratorEngine.IsEnabled="True">
 
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->

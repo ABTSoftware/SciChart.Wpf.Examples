@@ -1,3 +1,6 @@
+using System;
+using System.ComponentModel;
+using System.Net.Mail;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Examples.Demo.Common;
 using SciChart.UI.Reactive;
@@ -7,7 +10,7 @@ using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
-    public class SmileFrownViewModel : BaseViewModel
+    public class SmileFrownViewModel : BaseViewModel, IDataErrorInfo
     {
         private readonly ExampleViewModel _parent;
         private bool _isSmile;
@@ -217,5 +220,45 @@ namespace SciChart.Examples.Demo.ViewModels
                 _parent.InvalidateDialogProperties();
             }
         }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(FeedbackEmail) && !this.IsValidEmail(this.FeedbackEmail))
+                {
+                    return "Please enter a valid email so we can reply";
+                }
+
+                if (columnName == nameof(FeedbackSubject) && string.IsNullOrWhiteSpace(this.FeedbackSubject))
+                {
+                    return "Please enter a subject line";
+                }
+
+                if (columnName == nameof(FeedbackContent) && string.IsNullOrWhiteSpace(this.FeedbackContent))
+                {
+                    return "Please tell us some feedback";
+                }
+
+                return null;
+            }
+        }
+
+        private bool IsValidEmail(string feedbackEmail)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(feedbackEmail)) return false;
+                MailAddress m = new MailAddress(feedbackEmail);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        public string Error { get; }
     }
 }

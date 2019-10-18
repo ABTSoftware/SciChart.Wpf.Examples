@@ -170,6 +170,7 @@
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\Tenor_Curves_3D_Chart.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\ECG_Monitor_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fast_Paletted_Scatter_Charts.xml" />
+    <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fifo_1Billion_Points_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_1Million_Points_Instantly.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_500_Series_x_500_points.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\NBody_2D_Scatter_Chart_Simulation.xml" />
@@ -519,6 +520,13 @@
     <None Remove="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticalCharts.xaml.txt" />
     <None Remove="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticallyStackedAxes.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticallyStackedAxes.xaml.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageView.xaml.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageView.xaml.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageViewModel.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\NoLockTimer.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\PointCount.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\Rand.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\SysInfo.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\LineSeriesSource.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\Load500By500PageView.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\Load500By500PageView.xaml.txt" />
@@ -806,6 +814,7 @@
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\Tenor_Curves_3D_Chart.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\ECG_Monitor_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fast_Paletted_Scatter_Charts.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fifo_1Billion_Points_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_1Million_Points_Instantly.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_500_Series_x_500_points.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\NBody_2D_Scatter_Chart_Simulation.xml" />
@@ -1155,6 +1164,13 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticalCharts.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticallyStackedAxes.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\ModifyAxisBehaviour\VerticallyStackedAxes.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageView.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\FifoBillionPointsPageViewModel.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\NoLockTimer.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\PointCount.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\Rand.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\FifoBillionPoints\SysInfo.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\LineSeriesSource.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\Load500By500PageView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\PerformanceDemos2D\Load500By500\Load500By500PageView.xaml.txt" />
@@ -1296,21 +1312,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\WPFToolkit\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
+    <PackageReference Include="SciChart" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12567-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12475-alpha" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12475-alpha" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12567-beta" />
   </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
 using SciChart.Charting.Visuals.RenderableSeries;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 {
     public class InvokeSnapToSeriesCommandAction : TriggerAction<Control>
     {

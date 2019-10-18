@@ -47,12 +47,16 @@
                 Margin="0,10"
                 HorizontalAlignment="Stretch"
                 Background="{StaticResource IconForeground}" />
-        <TextBlock Grid.Row="2"
-                   Grid.ColumnSpan="2"
-                   HorizontalAlignment="Left"
-                   FontFamily="Segoe UI"
-                   Foreground="#FFF"
-                   Text="We're glad you like SciChart! Please use the form below to send us feedback" />
+        <StackPanel Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left">
+            <TextBlock 
+                       FontFamily="Segoe UI"
+                       Foreground="#EEE"
+                       Text="We're glad you like SciChart! Please use the form below to send us feedback" />
+
+            <TextBlock Margin="0,10,0,0" Foreground="#EEE" Text="If you'd like one of our team to contact you back, just leave your email below."></TextBlock>
+        </StackPanel>
 
         <Canvas Grid.Row="3"
                 Grid.Column="0"
@@ -92,15 +96,14 @@
 
             <TextBox MaxHeight="80"
                      Margin="0,10"
-                     Text="{Binding FeedbackEmail,
-                                    Mode=TwoWay}"
+                     Text="{Binding FeedbackEmail, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     behaviors:TextBoxHelpers.WatermarkContent="Your Email (Optional)" />
+                     behaviors:TextBoxHelpers.WatermarkContent="Your Email (So we can reply)" />
             <TextBox Grid.Row="1"
                      MaxHeight="80"
                      Margin="0,10"
-                     Text="{Binding FeedbackSubject,
+                     Text="{Binding FeedbackSubject,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, 
                                     Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
@@ -111,11 +114,11 @@
                      Margin="0,10"
                      VerticalContentAlignment="Top"
                      AcceptsReturn="True"
-                     Text="{Binding FeedbackContent,
+                     Text="{Binding FeedbackContent,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, 
                                     Mode=TwoWay}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     behaviors:TextBoxHelpers.WatermarkContent="Feedback" />
+                     behaviors:TextBoxHelpers.WatermarkContent="Feedback. Please tell us what you think!" />
 
             <Button Grid.Row="3"
                     Width="100"

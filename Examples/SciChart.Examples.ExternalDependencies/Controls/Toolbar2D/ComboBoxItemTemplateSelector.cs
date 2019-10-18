@@ -5,7 +5,7 @@
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// EnumValuesExtension.cs is part of SCICHART®, High Performance Scientific Charts
+// ComboBoxItemTemplateSelector.cs is part of SCICHART®, High Performance Scientific Charts
 // For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
 // 
 // This source code is protected by international copyright law. Unauthorized
@@ -20,22 +20,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Markup;
+using System.Windows;
+using System.Windows.Controls;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.Extension
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 {
-    public class EnumValuesExtension : MarkupExtension
+    public class ComboBoxItemTemplateSelector : DataTemplateSelector
     {
-        private readonly Type _enumType;
+        public DataTemplate SelectedItemTemplate { get; set; }
 
-        public EnumValuesExtension(Type enumType)
-        {
-            _enumType = enumType;
-        }
+        public DataTemplate ItemTemplate { get; set; }
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            return Enum.GetNames(_enumType);
+            var isSelected = false;
+
+            var fe = container as FrameworkElement;
+            if (fe != null)
+            {
+                var parent = fe.TemplatedParent;
+                if (parent != null)
+                {
+                    var cbo = parent as ComboBox;
+
+                    isSelected = cbo != null;
+                }
+            }
+
+            return isSelected ? SelectedItemTemplate : ItemTemplate;
         }
     }
 }

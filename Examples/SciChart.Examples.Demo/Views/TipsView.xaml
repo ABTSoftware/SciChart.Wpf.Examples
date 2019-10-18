@@ -117,9 +117,8 @@
                 <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Example Source Code" TextAlignment="Center"/>
                 <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
                 <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
-                    <Run Text="Switch views from the example"></Run><LineBreak/>
-                    <Run Text="to source code. You can even"></Run><LineBreak/>
-                    <Run Text="export it to Visual Studio!"></Run>
+                    <Run Text="Switch views from the example to source-code."></Run><LineBreak/>
+                    <Run Text="You can also view the code on Github!"></Run>
                 </TextBlock>
             </StackPanel>
         </Grid>

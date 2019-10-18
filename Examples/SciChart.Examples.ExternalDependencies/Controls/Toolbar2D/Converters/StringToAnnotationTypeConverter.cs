@@ -25,7 +25,7 @@ using System.Windows.Data;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Examples.ExternalDependencies.Common;
 
-namespace SciChart.Examples.ExternalDependencies.Controls.SciChartInteractionToolbar.Converters
+namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Converters
 {
     public enum AnnotationType
     {

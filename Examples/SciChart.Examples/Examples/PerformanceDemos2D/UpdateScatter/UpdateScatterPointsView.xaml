@@ -49,14 +49,13 @@
         </s:SciChartSurface>
 
         <s:SciChartPerformanceOverlay Grid.Row="1"
-                                      Margin="25,25,50,25"
-                                      HorizontalAlignment="Stretch"
+                                      Margin="0,0,50,0"
                                       VerticalAlignment="Top"
                                       Background="#33FFFFFF"
-                                      FontSize="16"
                                       FontWeight="Bold"
                                       Foreground="#FFF"
                                       Padding="10"
+                                      IsHitTestVisible="False"
                                       TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
     </Grid>
 </UserControl>
