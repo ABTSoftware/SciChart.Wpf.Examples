@@ -42,6 +42,8 @@
                 <GradientStop Offset="0.0" Color="#1D2C6B"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
+
+        <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -72,7 +74,7 @@
                         <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
 
                         <TextBlock Text="Draw Mesh As" FontSize="11"/>
@@ -193,7 +195,7 @@
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="SurfaceMesh" 
                                                    Opacity="{Binding Source={x:Reference opacitySlider}, Path=SelectedItem}"
                                                    CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
-                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                                    MeshColorPalette="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"
                                                    StrokeThickness="2"
                                                    Stroke="#7FFFFFFF" 

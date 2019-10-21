@@ -9,96 +9,96 @@
              d:DesignHeight="400"
              d:DesignWidth="600">
 
-  <UserControl.Resources>
+    <UserControl.Resources>
 
-    <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
-      <s3D:GradientColorPalette.GradientStops>
-        <GradientStop Offset="1" Color="DarkRed"/>
-        <GradientStop Offset="0.9" Color="Red"/>
-        <GradientStop Offset="0.7" Color="Yellow"/>
-        <GradientStop Offset="0.5" Color="GreenYellow"/>
-        <GradientStop Offset="0.3" Color="Cyan"/>
-        <GradientStop Offset="0.1" Color="Blue"/>
-        <GradientStop Offset="0.0" Color="#1D2C6B"/>
-      </s3D:GradientColorPalette.GradientStops>
-    </s3D:GradientColorPalette>
+        <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="1" Color="DarkRed"/>
+                <GradientStop Offset="0.9" Color="Red"/>
+                <GradientStop Offset="0.7" Color="Yellow"/>
+                <GradientStop Offset="0.5" Color="GreenYellow"/>
+                <GradientStop Offset="0.3" Color="Cyan"/>
+                <GradientStop Offset="0.1" Color="Blue"/>
+                <GradientStop Offset="0.0" Color="#1D2C6B"/>
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
 
-    <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
+        <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-  </UserControl.Resources>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
+        <!-- The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality -->
+        <!-- to the chart and is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
 
-    <!-- The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality -->
-    <!-- to the chart and is included for example purposes. -->
-    <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
-    <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-      <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
                             Content="CTRL"
                             FontSize="10"
                             Padding="0">
-        <ext:FlyoutMenuButton.PopupContent>
-          <StackPanel Orientation="Vertical" MinWidth="150">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical" MinWidth="150">
 
-            <!-- Checkboxes to decide how the mesh should be drawn -->
-            <TextBlock FontSize="12" Text="Draw Mesh As" />
-            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        <!-- Checkboxes to decide how the mesh should be drawn -->
+                        <TextBlock FontSize="12" Text="Draw Mesh As" />
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
-			      <!-- Checkbox for Draw Back Side on or off -->
-			      <TextBlock FontSize="12" Text="Back Side" />
-            <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Back Side?" IsChecked="{Binding DrawBackSide, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay}"/>
+                        <!-- Checkbox for Draw Back Side on or off -->
+                        <TextBlock FontSize="12" Text="Back Side" />
+                        <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Back Side?" IsChecked="{Binding DrawBackSide, Source={x:Reference cylindroidMeshRenderableSeries}, Mode=TwoWay}"/>
 
-            <ext:FlyoutSeparator/>
+                        <ext:FlyoutSeparator/>
 
-            <!-- Create the opacity slider -->
-            <TextBlock FontSize="12" Text="Opacity" />
-            <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <!-- Create the opacity slider -->
+                        <TextBlock FontSize="12" Text="Opacity" />
+                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-			<TextBlock FontSize="12" Text="Lighting Factor" />
-            <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <TextBlock FontSize="12" Text="Lighting Factor" />
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-            <TextBlock FontSize="12" Text="Shininess" />
-            <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-            
-            <TextBlock FontSize="12" Text="Specular Strength" />
-            <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-			
-          </StackPanel>
-        </ext:FlyoutMenuButton.PopupContent>
-      </ext:FlyoutMenuButton>
+                        <TextBlock FontSize="12" Text="Shininess" />
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-      <ext:FlyoutSeparator Background="#444" />
+                        <TextBlock FontSize="12" Text="Specular Strength" />
+                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-      <ext:FlyoutMenuButton Content="PM"
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutSeparator Background="#444" />
+
+            <ext:FlyoutMenuButton Content="PM"
                             Padding="0"
                             Style="{StaticResource FlyoutMenuButtonStyle}">
-        <ext:FlyoutMenuButton.PopupContent>
-          <StackPanel MinWidth="150" Orientation="Vertical">
-            <!-- Create the palette mode -->
-            <TextBlock FontSize="12" Text="Palette Mode" />
-            <ComboBox SelectionChanged="PaletteModeComboBox_OnSelectionChanged">
-              <ComboBoxItem IsSelected="True">Radial</ComboBoxItem>
-              <ComboBoxItem>Axial</ComboBoxItem>
-              <ComboBoxItem>Azimuthal</ComboBoxItem>
-              <ComboBoxItem>Polar</ComboBoxItem>
-            </ComboBox>
-          </StackPanel>
-        </ext:FlyoutMenuButton.PopupContent>
-      </ext:FlyoutMenuButton>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <!-- Create the palette mode -->
+                        <TextBlock FontSize="12" Text="Palette Mode" />
+                        <ComboBox SelectionChanged="PaletteModeComboBox_OnSelectionChanged">
+                            <ComboBoxItem IsSelected="True">Radial</ComboBoxItem>
+                            <ComboBoxItem>Axial</ComboBoxItem>
+                            <ComboBoxItem>Azimuthal</ComboBoxItem>
+                            <ComboBoxItem>Polar</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-    </ext:SciChart3DInteractionToolbar>
+        </ext:SciChart3DInteractionToolbar>
 
-    <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,200,200" BorderThickness="0">
-      <s3D:SciChart3DSurface.Camera>
-        <s3D:Camera3D ZoomToFitOnAttach="True"/>
-      </s3D:SciChart3DSurface.Camera>
+        <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,200,200" BorderThickness="0">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+            </s3D:SciChart3DSurface.Camera>
 
-      <s3D:SciChart3DSurface.RenderableSeries>
-        <s3D:FreeSurfaceRenderableSeries3D x:Name="cylindroidMeshRenderableSeries"
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:FreeSurfaceRenderableSeries3D x:Name="cylindroidMeshRenderableSeries"
                                              DrawMeshAs="SolidWireFrame"
                                              Stroke="#77228B22"
                                              ContourInterval="0.1"
@@ -107,23 +107,23 @@
                                              LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
                                              Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
                                              MeshColorPalette="{StaticResource HeightColorMap}"
-                                             Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                             Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                              SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
                                              PaletteMinimum="3.0, 0.0, 0.0" PaletteMaximum="4.0, 0.0, 0.0" />
-      </s3D:SciChart3DSurface.RenderableSeries>
+            </s3D:SciChart3DSurface.RenderableSeries>
 
-      <s3D:SciChart3DSurface.XAxis>
-        <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
-      </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
+            </s3D:SciChart3DSurface.XAxis>
 
-      <s3D:SciChart3DSurface.YAxis>
-        <s3D:NumericAxis3D />
-      </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D />
+            </s3D:SciChart3DSurface.YAxis>
 
-      <s3D:SciChart3DSurface.ZAxis>
-        <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
-      </s3D:SciChart3DSurface.ZAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
+            </s3D:SciChart3DSurface.ZAxis>
 
-    </s3D:SciChart3DSurface>
-  </Grid>
+        </s3D:SciChart3DSurface>
+    </Grid>
 </UserControl>

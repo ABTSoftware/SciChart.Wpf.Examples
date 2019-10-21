@@ -24,7 +24,7 @@
         </s3D:GradientColorPalette>
 
         <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
-
+        <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -65,7 +65,7 @@
                         <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
@@ -85,7 +85,7 @@
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="False" 
                                                    Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
-                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                                   Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                                    CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
             </s3D:SciChart3DSurface.RenderableSeries>

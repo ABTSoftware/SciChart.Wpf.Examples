@@ -18,8 +18,10 @@
             <Setter Property="DrawMinorGridLines" Value="False" />
             <Setter Property="DrawMinorTicks" Value="False" />
         </Style>
-        </UserControl.Resources>
-        <Grid>
+
+        <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
+    </UserControl.Resources>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -40,8 +42,8 @@
                         <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-                    
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+
                         <TextBlock FontSize="12" Text="Specular Strength" />
                         <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
@@ -122,7 +124,7 @@
                 <s3D:PieMeshRenderableSeries3D x:Name="PieSeries3D"
                                                Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"
                                                SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
-                                               Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}">
+                                               Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}">
                 </s3D:PieMeshRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
 

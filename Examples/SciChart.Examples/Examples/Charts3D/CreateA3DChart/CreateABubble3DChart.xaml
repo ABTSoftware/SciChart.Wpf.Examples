@@ -10,6 +10,10 @@
              mc:Ignorable="d">
 
     <Grid>
+        <Grid.Resources>
+            <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -87,7 +91,7 @@
                     <StackPanel Orientation="Vertical" MinWidth="150">
 
                         <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock FontSize="12" Text="Specular Strength" />
                         <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
@@ -109,7 +113,7 @@
                 <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
                 <s3D:ScatterRenderableSeries3D x:Name="ScatterSeries3D"
                                     SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
-                                    Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}">
+                                    Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Converter={StaticResource LinearToLogarithmicValueConverter}}">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
                         <s3D:EllipsePointMarker3D Fill="LimeGreen" Size="2.0" Opacity="1"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>

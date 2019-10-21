@@ -11,6 +11,10 @@
              mc:Ignorable="d">
 
     <Grid>
+        <Grid.Resources>
+            <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -89,7 +93,7 @@
                     <StackPanel Orientation="Vertical" MinWidth="150">
 
                         <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="1.0" Maximum="2048.0" x:Name="shininessSlider" Value="64.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
                         <TextBlock FontSize="12" Text="Specular Strength" />
                         <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
@@ -113,7 +117,7 @@
                 <s3D:ColumnRenderableSeries3D ColumnShape="{Binding Source={x:Reference PointMarkerCombo}, Path=SelectedValue}"
                                               DataPointWidthX="{Binding Source={x:Reference SizeSlider}, Path=Value}"
                                               SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
-                                              Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay}"
+                                              Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                               Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}" />
 
             </s3D:SciChart3DSurface.RenderableSeries>
