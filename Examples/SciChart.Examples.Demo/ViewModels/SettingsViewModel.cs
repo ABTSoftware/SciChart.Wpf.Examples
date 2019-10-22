@@ -10,7 +10,7 @@ using SciChart.Charting.Visuals;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
-using SciChart.Drawing.DirectXRasterizer;
+using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers.Navigation;
 using FullScreenAntiAliasingMode = SciChart.Charting3D.FullScreenAntiAliasingMode;
@@ -27,7 +27,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public SettingsViewModel()
         {
             SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration
-                ? typeof (TsrRenderSurface)
+                ? typeof (VisualXcceleratorRenderSurface)
                 : typeof (HighSpeedRenderSurface);          
 
             this.WithTrait<AllowFeedbackSettingBehaviour>();
@@ -62,8 +62,8 @@ namespace SciChart.Examples.Demo.ViewModels
                     Viewport3D.UseAlternativeFillSource = t.Item1;
                     VisualXcceleratorEngine.EnableForceWaitForGPU = t.Item2;
                     Viewport3D.ForceStallUntilGPUIsIdle = t.Item2;
-                    TsrRenderSurface.UseAlternativeFillSource = t.Item1;
-                    TsrRenderSurface.ForceStallUntilGPUIsIdle = t.Item2;
+                    VisualXcceleratorRenderSurface.UseAlternativeFillSource = t.Item1;
+                    VisualXcceleratorRenderSurface.ForceStallUntilGPUIsIdle = t.Item2;
                     CreateGlobalStyle<SciChartSurface>();
                     CreateGlobalStyle<SciStockChart>();
                 })
@@ -90,7 +90,7 @@ namespace SciChart.Examples.Demo.ViewModels
                         UseD3D10AsFallback);
 
                     // Restart 2D engine with D3D9
-                    TsrRenderSurface.RestartEngineWith(
+                    VisualXcceleratorRenderSurface.RestartEngineWith(
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect);
                 });
 
@@ -213,7 +213,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 _selectedRenderer = value;
                 OnPropertyChanged(value);
 
-                IsDirectXEnabled2D = value == typeof(TsrRenderSurface);
+                IsDirectXEnabled2D = value == typeof(VisualXcceleratorRenderSurface);
                 if (IsDirectXEnabled2D)
                 {
                     try

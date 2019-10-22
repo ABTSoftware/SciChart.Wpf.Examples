@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:tooltipsAndHitTest3DCharts="clr-namespace:SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -17,9 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <tooltipsAndHitTest3DCharts:ExamplePointCloudPaletteProvider x:Key="CloudPaletteProvider" />
-
+            <local:ExamplePointCloudPaletteProvider x:Key="CloudPaletteProvider" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -27,20 +24,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}"/>
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}"/>
 
         <s3D:SciChart3DSurface x:Name="sciChartSurface"
-                               Grid.RowSpan="2"
                                Grid.Column="1"
-                               Grid.ColumnSpan="2"
                                WorldDimensions="200,100,200"
                                s:ThemeManager.Theme="SciChartv4Dark">
 
@@ -74,35 +63,34 @@
             </s3D:SciChart3DSurface.ChartModifier>
         </s3D:SciChart3DSurface>
         
-        <ListBox x:Name="slectedItem"
-                 Grid.Row="1"
-                 Grid.Column="2"
+        <ListBox x:Name="selectedList"
+                 Grid.Column="1"
                  Width="200"
-                 ScrollViewer.HorizontalScrollBarVisibility ="Hidden"
-                 Height="300"
-                 Margin="3"
+                 Height="Auto"
+                 MaxHeight="305"
+                 VerticalAlignment="Bottom"
+                 HorizontalAlignment="Right"
+                 ScrollViewer.HorizontalScrollBarVisibility ="Disabled"
+                 Margin="5"
                  Opacity="0.6">
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="0,0,5,0"
-                                  Content="{x:Null}"
-                                  IsChecked="{Binding PointMetadata3D.IsSelected,
-                                                      Mode=TwoWay}" />
-                        <TextBlock FontFamily="Bold" Text="X: " />
-                        <TextBlock Text="{Binding X, StringFormat='0.00'}" />
-                        <TextBlock FontFamily="Bold" Text=", Y: " />
-                        <TextBlock Text="{Binding Y, StringFormat='0.00'}" />
-                        <TextBlock FontFamily="Bold" Text=", Z: " />
-                        <TextBlock Text="{Binding Z, StringFormat='0.00'}" />
-                    </StackPanel>
+                    <CheckBox IsChecked="{Binding PointMetadata3D.IsSelected, Mode=TwoWay}">
+                        <TextBlock Foreground="#474747" VerticalAlignment="Center">
+                            <Run Text="X:" FontWeight="Bold"/>
+                            <Run Text="{Binding X, StringFormat='0.00'}"/>
+                            <Run Text="Y:" FontWeight="Bold"/>
+                            <Run Text="{Binding Y, StringFormat='0.00'}"/>
+                            <Run Text="Z:" FontWeight="Bold"/>
+                            <Run Text="{Binding Z, StringFormat='0.00'}"/>
+                        </TextBlock>
+                    </CheckBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <!--  Some help text for example  -->
         <StackPanel Grid.Column="1"
-                    Grid.ColumnSpan="2"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Orientation="Vertical">
@@ -114,6 +102,7 @@
                        HorizontalAlignment="Left"
                        Text="Press the left mouse button and drag the rectangle to select all point markers that fall inside!" 
                        Foreground="#FFF" />
+
             <TextBlock FontSize="20" 
                        Opacity="0.7"
                        Background="#232323"
@@ -141,10 +130,7 @@
                            Background="#232323"
                            Text="More selection options can be found in the button's popup menu." 
                            Foreground="#FFF" />
-
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </UserControl>
-

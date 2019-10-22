@@ -7,7 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"    
+             xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"
+             xmlns:visualXcceleratorRasterizer="clr-namespace:SciChart.Drawing.VisualXcceleratorRasterizer;assembly=SciChart.Drawing"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -118,7 +119,7 @@
                               IsChecked="{Binding SelectedRenderer,
                                               Mode=TwoWay,
                                               Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type s:TsrRenderSurface}}"
+                                              ConverterParameter={x:Type visualXcceleratorRasterizer:VisualXcceleratorRenderSurface}}"
                               s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
 
                     <CheckBox Margin="15,3"

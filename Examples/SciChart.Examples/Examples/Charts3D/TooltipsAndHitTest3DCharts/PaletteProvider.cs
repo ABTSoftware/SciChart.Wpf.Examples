@@ -13,7 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System.Windows;
 using System.Windows.Media;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.RenderableSeries;
@@ -24,14 +23,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
     {
         public Color? OverridePointMarker(IRenderableSeries3D series, int index, IPointMetadata3D metadata)
         {
-            var pmFillColor = Colors.Lime;
-
-            if (metadata != null && metadata.IsSelected)
-            {
-                pmFillColor = Colors.White;
-            }
-
-            return pmFillColor;
+            return metadata?.IsSelected == true ? Colors.White : Colors.Lime;
         }
 
         public void OnAttach(IRenderableSeries3D renderSeries)

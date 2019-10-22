@@ -81,7 +81,7 @@
                            ZoomHistoryManager="{Binding ZoomHistoryManager,
                                                         Mode=TwoWay}">
 
-            <!--  Create an X Axis with Growby  -->
+            <!--  Create an X Axis with GrowBy  -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis x:Name="XAxis"
                               Id="{StaticResource XAxisId}"
@@ -167,5 +167,4 @@
                     Style="{StaticResource NextButtonPathStyle}" />
         </Grid>
     </Grid>
-
 </UserControl>
