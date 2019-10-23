@@ -9,3 +9,4 @@ packages
 *.db
 /v6.x-preview/Build/
 /v6.x-preview/Examples/lastbuild.txt
+Build/
