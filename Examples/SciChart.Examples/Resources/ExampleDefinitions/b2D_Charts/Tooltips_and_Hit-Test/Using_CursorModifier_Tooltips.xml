@@ -5,16 +5,16 @@
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>TODO </ToolTipDescription>
   <Description>
-    This example demonstrates the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier.html']CursorModifier[/url]: a ChartModifier derived type which adds a cross-hairs (cursor) to the chart, as well as displaying an aggregated tooltip for all series.
+    This example demonstrates the [url='https://www.scichart.com/documentation/win/current/webframe.html#CursorModifier.html']CursorModifier[/url]: a ChartModifier derived type which adds a cross-hairs (cursor) to the chart, as well as displaying an aggregated tooltip for all series.
 
     The Tooltip may be templated to display custom data, or configured to show only on mouse-over of a series, or always. It is also possible to show/hide Axis Labels, Show/Hide the crosshairs and style the Crosshairs lines.
 
-    Alternative modifiers for displaying Tooltips include the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.TooltipModifier.html']TooltipModifier[/url], the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier.html']RolloverModifier[/url] and the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier.html']VerticalSliceModifier[/url].
+    Alternative modifiers for displaying Tooltips include the [url='https://www.scichart.com/documentation/win/current/webframe.html#TooltipModifier.html']TooltipModifier[/url], the [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier[/url] and the [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']VerticalSliceModifier[/url].
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17229/0/chartmodifiers-provided-by-scichart']ChartModifiers in SciChart[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier.html']CursorModifier Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifiers in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#CursorModifier.html']CursorModifier Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/InspectDatapoints/CursorModifierExampleView.xaml.txt</string>

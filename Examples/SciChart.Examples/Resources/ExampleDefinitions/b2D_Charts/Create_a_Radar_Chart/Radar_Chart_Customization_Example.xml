@@ -9,11 +9,11 @@
 
     [i][b]Tips![/i][/b]
     [i]You can configurate AxisLength and Angle properties in RadarYAxis. But before you should set to false AutoAxisLength or AutoAxisAngleCalculation properties in SciChartRadarSurface.[/i]
-    
+
     [i]For customizate axis label you should use label provider on axis [/i]
 
     [b]Documentation Links[/b]
-    Coming soon.
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleView.xaml.txt</string>

@@ -15,10 +15,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17227/36/performance-tips-and-tricks']Performance Tips and Tricks[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17252/41/polar-chart-types']Polar Chart Types[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Polar%20charts%20Type.html']Polar Chart Types[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealTimePolarChartExampleView.xaml.txt</string>

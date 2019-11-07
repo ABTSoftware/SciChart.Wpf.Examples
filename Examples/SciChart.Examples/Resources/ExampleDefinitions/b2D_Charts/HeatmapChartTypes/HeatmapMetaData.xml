@@ -10,10 +10,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17188/41/heatmap-series-overview']Heatmap API Documentation[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastHeatMapRenderableSeries.html']FastHeatMapRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries%603.html']Heatmap2DArrayDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries class[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.NonUniformHeatmapDataSeries%601.html']NonUniformHeatmapDataSeries class[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/HeatmapChartTypes/HeatmapMetadata/HeatmapMetadata.xaml.txt</string>

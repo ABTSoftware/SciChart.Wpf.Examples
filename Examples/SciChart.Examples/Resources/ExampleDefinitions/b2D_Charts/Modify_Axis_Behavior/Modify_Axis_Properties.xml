@@ -18,10 +18,10 @@
 
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17195/30/turning-gridlines-axis-labels-on-or-off']Turning Gridlines, Axis Labels On or Off[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17196/30/drawing-axis-bands']Drawing Axis Bands[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17204/31/setting-axis-visiblerange-in-code-or-mvvm']Setting Axis VisibleRange in Code or MVVM[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17189/29/axis-types-in-scichart']Axis Types in SciChart[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.NumericAxis.html']NumericAxis Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.DateTimeAxis.html']DateTimeAxis Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Ranging%20-%20AutoRange%20and%20VisibleRange.html']Setting Axis VisibleRange in Code or MVVM[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Types%20in%20SciChart.html']Axis Types in SciChart[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.NumericAxis.html']NumericAxis Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.DateTimeAxis.html']DateTimeAxis Type[/url]
 
   </Description>
   <CodeFiles>

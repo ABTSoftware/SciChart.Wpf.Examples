@@ -6,18 +6,18 @@
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates how to add a Horizontal line Annotation and drag via the mouse, recoloring the series when series-values pass a certain threshold</ToolTipDescription>
   <Description>
-    Demonstrates how a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.HorizontalLineAnnotation.html']HorizontalLineAnnotation[/url] and a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastColumnRenderableSeries.html']FastColumnRenderableSeries[/url] can interact in an MVVM example to dynamically color the column-series bars based on the threshold value.
+    Demonstrates how a [url='https://www.scichart.com/documentation/win/current/The%20HorizontalLineAnnotation%20Type.html']HorizontalLineAnnotation[/url] and a [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] can interact in an MVVM example to dynamically color the column-series bars based on the threshold value.
 
-    Drag the line to see the colors of the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastColumnRenderableSeries.html']FastColumnRenderableSeries[/url] change whenever the data-value is greater than the threshold.
+    Drag the line to see the colors of the [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] change whenever the data-value is greater than the threshold.
 
-    Re-coloring of bars is provided by the RedIfOverThresholdPaletteProvider, a custom class which implements [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] and [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] and is attached to the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~PaletteProvider.html']BaseRenderableSeries.PaletteProvider[/url] property. Using this method you can re-color data-points in Column, Line, OHLC and Candlestick Series depending on their data-value.
+    Re-coloring of bars is provided by the RedIfOverThresholdPaletteProvider, a custom class which implements [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] and [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] and is attached to the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~PaletteProvider.html']BaseRenderableSeries.PaletteProvider[/url] property. Using this method you can re-color data-points in Column, Line, OHLC and Candlestick Series depending on their data-value.
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17187/28/change-series-colour-dynamically-paletteprovider']Change Series Colour Dynamically (PaletteProvider)[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] Interface
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] interface
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] interface
+    - [url='https://www.scichart.com/documentation/win/current/Paletted%20Series.html']Change Series Colour Dynamically (PaletteProvider)[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IStrokePaletteProvider.html']IStrokePaletteProvider[/url] Interface
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IFillPaletteProvider.html']IFillPaletteProvider[/url] interface
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PaletteProviders.IPointMarkerPaletteProvider.html']IPointMarkerPaletteProvider[/url] interface
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/AnnotateAChart/DragHorizontalThreshold/DragThresholdMvvm.xaml.txt</string>

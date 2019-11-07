@@ -13,11 +13,11 @@
     [i]Every series can be configurable. You can change fill brush, stroke color, opacity...[/i]
 
     [i]Hole in center can be changed in real time.[/i]
-    
+
     [i]Radar rotation can be changed in real time too.[/i]
 
     [b]Documentation Links[/b]
-    Coming soon.
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateRadarChart/UsingRadarChartExampleView.xaml.txt</string>

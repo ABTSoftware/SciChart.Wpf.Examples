@@ -6,9 +6,15 @@
   <IconPath>IconHeat</IconPath>
   <ToolTipDescription>Shows how to use UniformHeatmap with a custom PaletteProvider</ToolTipDescription>
   <Description>
-    Demonstrates how to create a UniformHeatmap and how to use PaletteProvider to gain an extra control of filling with color SciChart UniformHeatmap. 
-    
+    Demonstrates how to create a UniformHeatmap and how to use PaletteProvider to gain an extra control of filling with color SciChart UniformHeatmap.
+
     [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Paletted%20Series.html']The PaletteProvider API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries class[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.NonUniformHeatmapDataSeries%601.html']NonUniformHeatmapDataSeries class[/url]
 
   </Description>
   <CodeFiles>

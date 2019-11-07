@@ -13,13 +13,13 @@
 
     [b][i]Tips![/i][/b]
 
-    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
+    All charts are synchronized by using the [url='http://www.scichart.com/documentation/win/current/SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
 
-    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
+    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/synchronizing-chartmodifier-mouse-events-across-charts/']Synchronizing ChartModifier Mouse Events Across Charts[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Synchronizing%20Multiple%20Charts.html']Synchronizing ChartModifier Mouse Events Across Charts[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/SynchronizeMouseAcrossCharts.xaml.txt</string>

@@ -4,12 +4,12 @@
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>
-    Demonstrates how [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.ZoomExtentsModifier3D.html']ZoomExtentsModifier[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.OrbitModifier3D.html']OrbitModifier[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.MouseWheelZoomModifier3D.html']MouseWheelModifier[/url] works and how to rotate camera.
+    Demonstrates how [url='https://www.scichart.com/documentation/win/current/ZoomExtentsModifier3.html']ZoomExtentsModifier3D[/url], [url='https://www.scichart.com/documentation/win/current/The%20Orbit%20Modifier.html']OrbitModifier[/url], [url='https://www.scichart.com/documentation/win/current/MouseWheelZoomModifier3D.html']MouseWheelModifier[/url] works and how to rotate camera.
   </ToolTipDescription>
   <Description>
-    Demonstrates how [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.ZoomExtentsModifier3D.html']ZoomExtentsModifier[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.OrbitModifier3D.html']OrbitModifier[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.MouseWheelZoomModifier3D.html']MouseWheelModifier[/url] works and how to rotate camera.
-   
-   [b][i]Tip![/i][/b]
+    Demonstrates how [url='https://www.scichart.com/documentation/win/current/ZoomExtentsModifier3.html']ZoomExtentsModifier3D[/url], [url='https://www.scichart.com/documentation/win/current/The%20Orbit%20Modifier.html']OrbitModifier[/url], [url='https://www.scichart.com/documentation/win/current/MouseWheelZoomModifier3D.html']MouseWheelModifier[/url] works and how to rotate camera.
+
+    [b][i]Tip![/i][/b]
 
     [b]Click RV to rotate camera verticaly or click RH and rotate camera horizontaly.[/b]
   </Description>

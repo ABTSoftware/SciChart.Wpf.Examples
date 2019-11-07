@@ -17,10 +17,7 @@
 // distributed or made available without express written permission.
 // *************************************************************************************
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -34,28 +31,19 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
 {
     public class CustomExportModifier : ChartModifierBase
     {
-        private bool _useXamlRs;
+        public ICommand SavePngCommand => new ActionCommand(SavePng);
 
-        public ICommand SavePngCommand { get { return new ActionCommand(this.SavePng); } }
+        public ICommand SavePngBigCommand => new ActionCommand(SavePngBig);
 
-        public ICommand SavePngBigCommand { get {  return new ActionCommand(this.SavePngBig);} }
+        public ICommand SaveXpsCommand => new ActionCommand(SaveXps);
 
-        public ICommand SaveXpsCommand { get {  return new ActionCommand(this.SaveXps);} }
+        public ICommand SaveXpsBigCommand => new ActionCommand(SaveXpsBig);
 
-        public ICommand SaveXpsBigCommand { get {  return new ActionCommand(this.SaveXpsBig);} }
-
-        public bool UseXamlRs
-        {
-            get { return _useXamlRs; }
-            set
-            {
-                _useXamlRs = value;
-            }
-        }
+        public bool UseXamlRs { get; set; }
 
         private void SavePng()
         {
-            Export("Png|*.png", UseXamlRs, null);
+            Export("Png|*.png", UseXamlRs);
         }
 
         private void SavePngBig()
@@ -65,7 +53,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
 
         private void SaveXps()
         {
-            Export("XPS|*.xps", UseXamlRs, null);
+            Export("XPS|*.xps", UseXamlRs);
         }
 
         private void SaveXpsBig()
@@ -73,7 +61,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
             Export("XPS|*.xps", UseXamlRs, new Size(2000, 1000));
         }
 
-        private void Export(string filter, bool useXaml, System.Windows.Size? size = null)
+        private void Export(string filter, bool useXaml, Size? size = null)
         {
             var saveFileDialog = new SaveFileDialog
             {
@@ -83,9 +71,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                var surface = ParentSurface as SciChartSurface;
-                if (surface == null)
-                    return;
+                if (!(ParentSurface is SciChartSurface surface)) return;
 
                 var exportType = filter.ToUpper().Contains("XPS") ? ExportType.Xps : ExportType.Png;
 
@@ -113,10 +99,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
 
                 return string.IsNullOrEmpty(theme) ? ThemeManager.DefaultTheme : theme;
             }
-            set
-            {
-                ThemeManager.SetTheme((SciChartSurface)ParentSurface, value);
-            }
+            set => ThemeManager.SetTheme((SciChartSurface)ParentSurface, value);
         }
     }
 }

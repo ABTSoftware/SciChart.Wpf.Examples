@@ -6,22 +6,22 @@
   <ToolTipDescription>This shows the SeriesValueModifier applied to a real-time chart, to display the latest value of a series on the YAxis with an AxisMarkerAnnotation.
   </ToolTipDescription>
   <Description>
-    This shows the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier.html']SeriesValueModifier[/url] applied to a real-time chart, to display the latest value of a series on the YAxis with an AxisMarkerAnnotation.
+    This shows the [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesValueModifier.html']SeriesValueModifier[/url] applied to a real-time chart, to display the latest value of a series on the YAxis with an AxisMarkerAnnotation.
 
     [b][i]Tips![/i][/b]
 
     1. By default AxisMarkerAnnotations bind to the Stroke, IsVisible and AxisId properties of the RenderableSeries. You can override the style via the [url='http://www.scichart.com/questions/question/upgrading-to-scicharts-v2']SeriesValueModifier.AxisMarkerStyle[/url] property.
 
-    2. The SeriesValueModifier works on a single axis. You can change which axis by setting the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~YAxisId.html']SeriesValueModifier.YAxisId Property[/url]
+    2. The SeriesValueModifier works on a single axis. You can change which axis by setting the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~YAxisId.html']SeriesValueModifier.YAxisId Property[/url]
 
-    3. You can include or exlude a series from the SeriesValueModifier by using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~SetIncludeSeries.html']SeriesValueModifier.IncludeSeries[/url] attached property on the target BaseRenderableSeries.
+    3. You can include or exlude a series from the SeriesValueModifier by using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~SetIncludeSeries.html']SeriesValueModifier.IncludeSeries[/url] attached property on the target BaseRenderableSeries.
 
     4. The SeriesValueModifier axis labels obey the output of AxisCore.CursorTextFormatting
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier.html']SeriesValueModifier Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~AxisMarkerStyle.html']SeriesValueModifier.AxisMarkerStyle Property[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesValueModifier.html']SeriesValueModifier Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesValueModifier~AxisMarkerStyle.html']SeriesValueModifier.AxisMarkerStyle Property[/url]
     - [url='http://www.scichart.com/questions/question/upgrading-to-scicharts-v2']SeriesValueModifier.AxisMarkerStyle Example[/url]
   </Description>
   <CodeFiles>

@@ -11,12 +11,11 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17252/41/polar-chart-types']Polar Chart Types[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
-    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Documentation[/url]
-    - [url='http://www.scichart.com/databinding-annotations-with-mvvm/']Databinding Annotations with MVVM[/url]
-    - [url='http://www.scichart.com/questions/question/editing-annotations-and-keeping-track-of-them-in-an-mvvm-application']Best practices with Annotations in MVVM apps[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Polar%20charts%20Type.html']Polar Chart Types[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Intro%20to%20the%20Annotations%20API.html']Annotations API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']Databinding Annotations with MVVM[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/AnnotateAChart/PolarChartAnnotations.xaml.txt</string>

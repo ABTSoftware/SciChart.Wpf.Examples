@@ -5,11 +5,11 @@
   <IconPath>IconColumn</IconPath>
   <ToolTipDescription></ToolTipDescription>
   <Description>
-    The Sparse Column 3D demo shows how to use [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ColumnRenderableSeries3D.html']ColumnRenderableSeries3D[/url] to render 3d columns.
+    The Sparse Column 3D demo shows how to use [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ColumnRenderableSeries3D.html']ColumnRenderableSeries3D[/url] to render 3d columns.
 
     The ColumnRenderableSeries3D type supports data in Xyz format (individual sparse points), or Uniform grid format (every X,Z cell has a column). The latter is more efficient but less flexible.
 
-    Columns can be colored individually using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.PointMetadata3D.html']PointMetadata3D[/url] class
+    Columns can be colored individually using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.PointMetadata3D.html']PointMetadata3D[/url] class
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/SparseColumn3D.xaml.txt</string>

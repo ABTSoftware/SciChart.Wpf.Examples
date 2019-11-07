@@ -68,6 +68,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
             var xStep = DateTime.MinValue.AddDays(1).AddHours(6).AddMinutes(30);
             return new UniformHeatmapDataSeries<DateTime, int, double>(data, xStart, xStep, 0, 2) { SeriesName = "UniformHeatmap" };
         }
+
     }
 
     public class HeatmapThresholdPaletteProvider : IHeatmapPaletteProvider
@@ -76,6 +77,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
 
         private Color _overheatColor = Colors.Red;
         private double _threshholdValue;
+        private double _opacity;
 
         public double ThresholdValue
         {
@@ -94,6 +96,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
         public void OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
             _heatmap = (FastUniformHeatmapRenderableSeries)rSeries;
+            _opacity = rSeries.Opacity;
         }
 
         public Color? OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex, IComparable zValue, Color cellColor, IPointMetadata metadata)
@@ -101,6 +104,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
             if((double)zValue >= ThresholdValue)
             {
                 cellColor = _overheatColor;
+                cellColor.A = (byte)(cellColor.A * _opacity);
             }
 
             return cellColor;

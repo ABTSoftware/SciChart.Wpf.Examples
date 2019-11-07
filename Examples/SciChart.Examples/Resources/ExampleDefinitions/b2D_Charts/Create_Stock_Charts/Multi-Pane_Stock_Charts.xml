@@ -7,11 +7,11 @@
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Using the SciChartGroup and SciStockChart control, create's a static multi-pane stock chart with Indicator and Volume panes</ToolTipDescription>
   <Description>
-    An MVVM example which demonstrates creating a static multi-panel stock chart with Volume and Indicator panes using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup.html']SciChartGroup[/url] control.
+    An MVVM example which demonstrates creating a static multi-panel stock chart with Volume and Indicator panes using the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChartGroup%20-%20Multi%20Pane%20Stock%20Charts%20API.html']SciChartGroup[/url] control.
 
-    All charts are synchronized by using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
+    All charts are synchronized by using the [url='http://www.scichart.com/documentation/win/current/SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup[/url] attached property and by TwoWay binding all [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~VisibleRange.html']XAxis.VisibleRange[/url] properties to a common ViewModel property.
 
-    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
+    Chart YAxis sizes are synchronized using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId[/url] attached property.
 
     [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17243/40/does-scichart-support-technical-indicators-like-macd-sma-ema-rsi']Technical Indicators[/url] are for demonstration purposes only. We recommend the open-source [url='http://ta-lib.org/']TA-Lib[/url] to integrate technical indicators to SciChart!
 
@@ -29,9 +29,9 @@
     - [url='http://www.scichart.com/create-multipane-stock-charts-with-scichartgroup/']Create MultiPane Stock Charts with SciChartGroup[/url]
     - [url='http://www.scichart.com/how-to-add-a-scichartoverview-or-scrollbar-with-an-itemscontrol-of-charts-or-scichartgroup/']How to add a SciChartOverview or Scrollbar with an ItemsControl of charts, or SciChartGroup[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17243/40/does-scichart-support-technical-indicators-like-macd-sma-ema-rsi']Does SciChart Support Technical Indicators like MACD, SMA, EMA, RSI?[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup.html']SciChartGroup Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup Property[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId Property[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChartGroup%20-%20Multi%20Pane%20Stock%20Charts%20API.html']SciChartGroup Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Core~SciChart.Core.Utility.Mouse.MouseManager_members.html']MouseManager.MouseEventGroup Property[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciChartGroup~VerticalChartGroupProperty.html']SciChartGroup.VerticalChartGroupId Property[/url]
 
   </Description>
   <CodeFiles>

@@ -34,26 +34,24 @@
                                             Stroke="#FF99EE99"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2"/>
+                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2" />
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
-            <!--  Create an X Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <!--  Create an X Axis with GrowBy. Optional bands give a cool look and feel for minimal performance impact  -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis DrawMajorBands="True"
                                GrowBy="0.1, 0.1"
                                VisibleRange="0, 10" />
             </s:SciChartSurface.XAxis>
 
-            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <!--  Create a Y Axis with GrowBy. Optional bands give a cool look and feel for minimal performance impact  -->
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis DrawMajorBands="True"
                                GrowBy="0.5, 0.5"
                                VisibleRange="-4, 4" />
             </s:SciChartSurface.YAxis>
-
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>

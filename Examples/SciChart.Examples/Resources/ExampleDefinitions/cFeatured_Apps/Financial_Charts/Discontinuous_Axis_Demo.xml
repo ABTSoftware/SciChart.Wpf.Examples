@@ -11,9 +11,14 @@
 
     For example, a DiscontinuousDateTimeAxis and a dataset of trading data (futures, forex or stocks), the DiscontinuousDateTimeAxis can be used to show or hide weekend or overnight gaps in data.
 
-    A calendar is applied to the DiscontinuousDateTimeAxis which contains the times to skip. Special days such as holidays or weekends can also be skipped. 
-    
-    Finally, the DiscontinuousDateTimeAxis may be used in process control systems, which require a DateTimeAxis but removing of certain times or date ranges from the axis. 
+    A calendar is applied to the DiscontinuousDateTimeAxis which contains the times to skip. Special days such as holidays or weekends can also be skipped.
+
+    Finally, the DiscontinuousDateTimeAxis may be used in process control systems, which require a DateTimeAxis but removing of certain times or date ranges from the axis.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20DiscontinuousDateTimeAxis.html']The DiscontinuousDateTimeAxis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml.txt</string>

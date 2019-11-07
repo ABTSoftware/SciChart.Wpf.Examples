@@ -6,7 +6,7 @@
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Shows how to create multi-pane stock charts using the SciStockChart control</ToolTipDescription>
   <Description>
-    Simple example which shows how to create a stock chart using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciStockChart.html']SciStockChart Type[/url] control. This control allows easy creation of stock charts and also has default interaction applied, including Zooming, Panning, Mousewheel zoom and Cursors.
+    Simple example which shows how to create a stock chart using the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciStockChart%20-%20Simplified%20Financial%20Charts.html']SciStockChart Type[/url] control. This control allows easy creation of stock charts and also has default interaction applied, including Zooming, Panning, Mousewheel zoom and Cursors.
 
     [b][i]Example Usage[/i][/b]
 
@@ -19,10 +19,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.TradeChart.SciStockChart.html']SciStockChart Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciStockChart%20-%20Simplified%20Financial%20Charts.html']SciStockChart Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis vs. NumericAxis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateStockCharts/CreateSimpleStockChart.xaml.txt</string>

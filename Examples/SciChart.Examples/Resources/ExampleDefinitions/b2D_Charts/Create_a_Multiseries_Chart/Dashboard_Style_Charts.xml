@@ -20,9 +20,9 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17245/41/stackedcolumnrenderableseries---stack-columns-vertically-horizontally-and-100']Introduction to Stacked Series in SciChart[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedMountainRenderableSeries.html']StackedMountainRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedColumnRenderableSeries.html']StackedColumnRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Grouped%20Column%20Series%20Type.html']Introduction to Stacked Series in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Mountains%20Type.html']StackedMountainRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Columns%20Type.html']StackedColumnRenderableSeries Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/ChartTypeViewModel.cs.txt</string>

@@ -25,8 +25,7 @@ namespace SciChart.Examples.Demo
         public App()
         {
             Startup += Application_Startup;
-            Exit += OnExit;
-            DispatcherUnhandledException += App_DispatcherUnhandledException;
+            Exit += OnExit; DispatcherUnhandledException += App_DispatcherUnhandledException;
 
             InitializeComponent();
         }

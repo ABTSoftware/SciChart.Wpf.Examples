@@ -28,7 +28,7 @@
                 <!-- Series0 is a Scatter Series -->
                 <s:XyScatterRenderableSeries DataSeries="{Binding ScatterData}">
                     <s:XyScatterRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="9" Height="9"  Fill="#AAFFFFFF" Stroke="SteelBlue" StrokeThickness="2" ></s:EllipsePointMarker>
+                        <s:EllipsePointMarker Width="9" Height="9" Fill="#AAFFFFFF" Stroke="SteelBlue" StrokeThickness="2" />
                     </s:XyScatterRenderableSeries.PointMarker>
                     <s:XyScatterRenderableSeries.SeriesAnimation>
                         <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>

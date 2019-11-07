@@ -12,7 +12,11 @@
 
     [b][i]Tip![/i][/b]
 
-    The properties [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']NumericAxis.AxisAlignment[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~Id.html']NumericAxis.Id[/url] and [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~YAxisId.html']FastLineRenderableSeries.YAxisId[/url] / [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~XAxisId.html']FastLineRenderableSeries.XAxisId[/url] show how to align axes and assign series to them.
+    The properties [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']NumericAxis.AxisAlignment[/url], [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~Id.html']NumericAxis.Id[/url] and [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~YAxisId.html']FastLineRenderableSeries.YAxisId[/url] / [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~XAxisId.html']FastLineRenderableSeries.XAxisId[/url] show how to align axes and assign series to them.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2008%20-%20Adding%20Multiple%20Axis.html']Tutorial: Creating a chart with multiple Axis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/LeftRightYAxes.xaml.txt</string>

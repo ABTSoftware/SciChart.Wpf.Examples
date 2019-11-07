@@ -11,7 +11,14 @@
 
     Given a data-source of trading ticks or quotes, we aggregate into bars (Time bars, Range bars, Volume bars, Tick Bars and Renko Bars).
 
-    Each bar type is created by a different filter type, and we use the extension methods [b]DataSeries.AggregateByTime[/b], [b]DataSeries.AggregateByCount[/b], [b]DataSeries.AggregateByVolume[/b], [b]DataSeries.AggregateByRange[/b] and [b]DataSeries.AggregateByRenko[/b]. This creates a filter around the original tick data. Any changes to the tick data are reflected in the resulting bars on the chart. 
+    Each bar type is created by a different filter type, and we use the extension methods [b]DataSeries.AggregateByTime[/b], [b]DataSeries.AggregateByCount[/b], [b]DataSeries.AggregateByVolume[/b], [b]DataSeries.AggregateByRange[/b] and [b]DataSeries.AggregateByRenko[/b]. This creates a filter around the original tick data. Any changes to the tick data are reflected in the resulting bars on the chart.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']What is the Filters API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20DiscontinuousDateTimeAxis.html']The DiscontinuousDateTimeAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Aggregation%20Filters%20(Renko,%20Volume,%20Tick%20and%20Range%20Bars).html']Renko, Volume, Tick and Range Bars[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml.txt</string>

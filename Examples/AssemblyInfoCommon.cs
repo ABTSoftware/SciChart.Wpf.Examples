@@ -39,4 +39,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.0.0.12596")]
+
+// NOTE: MASTER SHOULD KEEP THIS AS V7.x WHEN MERGING. 
+// This is to prevent conflicts in teamcity when tests are run on both master & v6 branch at the same time. 
+[assembly: AssemblyVersion("6.0.0.12693")]

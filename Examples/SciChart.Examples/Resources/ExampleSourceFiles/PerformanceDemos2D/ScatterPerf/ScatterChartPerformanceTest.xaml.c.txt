@@ -30,14 +30,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
         public ScatterChartPerformanceTest()
         {
             InitializeComponent();
-
-            this.Loaded += OnLoaded;
+            
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             // Create our data in another thread to stop the UI from being stalled. 
-            // It's not appending to SciChart Dataseries that is the problem, its Calling Rand.Next() two million times which is pretty slow :)
+            // It's not appending to SciChart data series that is the problem, its Calling Rand.Next() two million times which is pretty slow :)
             TimedMethod.Invoke(() =>
             {
                 var dataSeries = new XyDataSeries<double, double>() {AcceptsUnsortedData = true};
@@ -55,13 +55,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
                 // Bind to scichart 
                 Action bindData = () => { BindData(dataSeries); };
                 Dispatcher.BeginInvoke(bindData);
+
             }).After(200).OnThread(TimedMethodThread.Background).Go();
         }
 
         private void BindData(XyDataSeries<double, double> dataSeries)
         {
-            // must be called on UI thread, as DataSeries is a dependency property
-            // Note in MVVM you can bind RednerableSeries.DataSeries to a property in VM and update in any thread.
+            // Must be called on UI thread, as DataSeries is a dependency property
+            // Note in MVVM you can bind RenderableSeries.DataSeries to a property in VM and update in any thread.
             using (sciChart.SuspendUpdates())
             {
                 foreach (var rSeries in sciChart.RenderableSeries)

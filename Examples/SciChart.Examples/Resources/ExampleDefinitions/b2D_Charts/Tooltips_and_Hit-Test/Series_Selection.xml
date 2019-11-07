@@ -5,17 +5,16 @@
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates series-selection. Click a series to select it. It's color changes and it is brought to the top of the Z-order</ToolTipDescription>
   <Description>
-    Demonstrates the use of the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier.html']SeriesSelectionModifier[/url], which hooks into the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17234/32/custom-chartmodifier-api---overview']ChartModifier API[/url] to select series on mouse-clicks. This complex, but easy to implement example uses many concepts in the ChartModifier API to bind legends and series together.
+    Demonstrates the use of the [url='https://www.scichart.com/documentation/win/current/webframe.html#Series%20Selection.html']SeriesSelectionModifier[/url], which hooks into the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifier API[/url] to select series on mouse-clicks. This complex, but easy to implement example uses many concepts in the ChartModifier API to bind legends and series together.
 
-    The selected series is styled via the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier~SelectedSeriesStyle.html']SeriesSelectionModifier.SelectedSeriesStyle[/url]. A blanket style applied to any series which is selected. Also you can use the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~SelectedSeriesStyle.html']BaseRenderableSeries.SelectedSeriesStyle[/url] to achieve the same effect on an individual series level.
+    The selected series is styled via the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier~SelectedSeriesStyle.html']SeriesSelectionModifier.SelectedSeriesStyle[/url]. A blanket style applied to any series which is selected. Also you can use the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~SelectedSeriesStyle.html']BaseRenderableSeries.SelectedSeriesStyle[/url] to achieve the same effect on an individual series level.
 
     Finally, a LegendModifier exposes the currently selected series, and we can use a SciChartLegend to show the name of which series is selected.
 
     [b]Documentation Links[/b]
-    
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17185/28/series-selection-and-selected-series-styling']Series Selection and Selected Series Styling API Documentation[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API Articles[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.SeriesSelectionModifier.html']SeriesSelectionModifier Type[/url]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifier API Articles[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Series%20Selection.html']Series Selection and Selected Series Styling API Documentation[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesSelectionExampleView.xaml.txt</string>

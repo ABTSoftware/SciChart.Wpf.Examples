@@ -5,7 +5,7 @@
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates usage of VerticalSliceModifier for getting slices of series like when using RolloverModifier. You can add, remove and interact with slices</ToolTipDescription>
   <Description>
-    Demonstrates usage of [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier.html']VerticalSliceModifier[/url] for getting slices of series like when using RolloverModifier.
+    Demonstrates usage of [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']VerticalSliceModifier[/url] for getting slices of series like when using RolloverModifier.
 
     [b][i]Tip![/i][/b]
 
@@ -13,20 +13,19 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17268/42/adding-draggable-rollovermodifier-style-lines-with-the-verticalslicemodifier']Adding draggable RolloverModifier style lines with the VerticalSliceModifier[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API - All Articles[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier.html']VerticalSliceModifier Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']Adding draggable RolloverModifier style lines with the VerticalSliceModifier[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifier API - All Articles[/url]
 
     [b][i]Also of interest[/i][/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17249/42/seriesinfo---the-series-viewmodel-for-legends-tooltips-rollovers']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XySeriesInfo.html']XySeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XyzSeriesInfo.html']XyzSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XyStackedSeriesInfo.html']XyStackedSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.HlcSeriesInfo.html']HlcSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.OhlcSeriesInfo.html']OhlcSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.BandSeriesInfo.html']BandSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.BoxPlotSeriesInfo.html']BoxPlotSeriesInfo Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesInfo%20%E2%80%93%20the%20ViewModels%20for%20Tooltips%20and%20Legends.html']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XySeriesInfo.html']XySeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XyzSeriesInfo.html']XyzSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XyStackedSeriesInfo.html']XyStackedSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.HlcSeriesInfo.html']HlcSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.OhlcSeriesInfo.html']OhlcSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.BandSeriesInfo.html']BandSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.BoxPlotSeriesInfo.html']BoxPlotSeriesInfo Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/InspectDatapoints/SeriesVerticalSlicesExample.xaml.txt</string>

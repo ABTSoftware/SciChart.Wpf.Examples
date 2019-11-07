@@ -5,20 +5,20 @@
   <IconPath>IconStackedColumn</IconPath>
   <ToolTipDescription>Shows how to create stacked column chart</ToolTipDescription>
   <Description>
-    Generates a Stacked column chart in code-behind. The [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedColumnRenderableSeries.html']StackedColumnRenderableSeries API[/url] can be used to render columns stacked one above another, side by side, or a Left or Right aligned Bar Chart.
+    Generates a Stacked column chart in code-behind. The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Columns%20Type.html']StackedColumnRenderableSeries API[/url] can be used to render columns stacked one above another, side by side, or a Left or Right aligned Bar Chart.
 
-    Columns are rendered using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~Stroke.html']Stroke[/url] (outline) and [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~Fill.html']Fill[/url] (fill).
+    Columns are rendered using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~Stroke.html']Stroke[/url] (outline) and [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~Fill.html']Fill[/url] (fill).
 
-    [b][i]Tips![/i][/b] 
-    
-    Do you need to change the width of the column? Try setting [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~DataPointWidth.html']DataPointWidth[/url] from 0.0 to 1.0. This alters how much space the column takes up. Also the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~UseUniformWidth.html']UseUniformWidth[/url] property may be used to define whether column widths are uniform or not
+    [b][i]Tips![/i][/b]
 
-    Did you know we support 100% Stacked Column charts? See the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17245/41/stackedcolumnrenderableseries---stack-columns-vertically-horizontally-and-100']Introduction to Stacked Series in SciChart[/url] article for more information.
+    Do you need to change the width of the column? Try setting [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~DataPointWidth.html']DataPointWidth[/url] from 0.0 to 1.0. This alters how much space the column takes up. Also the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseColumnRenderableSeries~UseUniformWidth.html']UseUniformWidth[/url] property may be used to define whether column widths are uniform or not
+
+    Did you know we support 100% Stacked Column charts? See the [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Grouped%20Column%20Series%20Type.html']Introduction to Stacked Series in SciChart[/url] article for more information.
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17245/41/stackedcolumnrenderableseries---stack-columns-vertically-horizontally-and-100']Introduction to Stacked Series in SciChart[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.StackedColumnRenderableSeries.html']StackedColumnRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Grouped%20Column%20Series%20Type.html']Introduction to Stacked Series in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Columns%20Type.html']StackedColumnRenderableSeries Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/StackedColumnChartExampleView.xaml.txt</string>

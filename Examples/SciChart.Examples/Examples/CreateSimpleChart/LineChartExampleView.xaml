@@ -5,7 +5,6 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:createSimpleChart="clr-namespace:SciChart.Examples.Examples.CreateSimpleChart"             
              Loaded="LineChartExampleView_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -28,7 +27,7 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
@@ -39,21 +38,17 @@
                                             Stroke="#FF99EE99"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:5"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:5" />
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
-            <!--  Create an X Axis with Growby  -->
+            <!--  Create an X Axis with GrowBy  -->
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis DrawMajorBands="True"
-                               FlipCoordinates="True"
-                               GrowBy="0.1, 0.1"
-                               ScientificNotation="None"
-                               TextFormatting="#.############" />
+                <s:NumericAxis DrawMajorBands="True" FlipCoordinates="True" GrowBy="0.1, 0.1" />
             </s:SciChartSurface.XAxis>
 
-            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <!--  Create a Y Axis with GrowBy. Optional bands give a cool look and feel for minimal performance impact  -->
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis DrawMajorBands="True" GrowBy="0.5, 0.5" />
             </s:SciChartSurface.YAxis>

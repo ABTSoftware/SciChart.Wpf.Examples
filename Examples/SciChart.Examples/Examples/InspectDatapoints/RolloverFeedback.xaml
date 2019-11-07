@@ -112,7 +112,7 @@
         <!--  you can theoretically do anything!  -->
         <!--    -->
         <!--  NOTE: See the RolloverModifier documentation for alternatives, such as binidng to a SciChartLegend  -->
-        <!--  http://support.scichart.com/index.php?/Knowledgebase/Article/View/17248/42/adding-timeseries-tooltips-with-the-rollovermodifier  -->
+        <!--  https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html  -->
 
         <Border Grid.Column="1"
                 Margin="23,23"

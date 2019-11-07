@@ -5,9 +5,9 @@
   <IconPath>IconLine</IconPath>
   <ToolTipDescription></ToolTipDescription>
   <Description>
-    Demonstrates how to Add, Change or Remove RenderableSeries with the new [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url], which forms part of the MVVM API in SciChart. 
-    
-    This example also shows how use styles for RenderableSeries and change series type at runtime from your ViewModel. 
+    Demonstrates how to Add, Change or Remove RenderableSeries with the new [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url], which forms part of the MVVM API in SciChart.
+
+    This example also shows how use styles for RenderableSeries and change series type at runtime from your ViewModel.
 
     [b][i]Tip![/i][/b]
 
@@ -21,8 +21,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding Markup Extension[/url]
-    - List of [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartSeries_namespace.html']BaseRenderableSeriesViewModel derived Types[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Worked%20Example%20-%20Manipulate%20Series%20in%20MVVM.html']Manipulating Series in MVVM[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#MVVM%20DataSeries%20RenderableSeries%20API.html']SeriesBinding Markup Extension[/url]
+    - List of [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartSeries_namespace.html']BaseRenderableSeriesViewModel derived Types[/url]
+
 
   </Description>
   <CodeFiles>

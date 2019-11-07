@@ -5,14 +5,14 @@
   <IconPath>IconTernary</IconPath>
   <ToolTipDescription>Generates a simple Ternary Polygon Chart in code</ToolTipDescription>
   <Description>
-    Generates a Ternary Polygon chart in code. The TernaryPolygonRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
+    Generates a [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Ternary%20Polygon%20Type.html']Ternary Polygon chart[/url] in code. The TernaryPolygonRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
 
-    Polygons are rendered using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~Stroke.html']Stroke[/url] (outline) and Fill (fill).
+    Polygons are rendered using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries~Stroke.html']Stroke[/url] (outline) and Fill (fill).
 
     [b]Documentation Links[/b]
 
-    - TernaryScatterRenderableSeries
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20a%20Ternary%20Chart.html']What is a Ternary Chart?[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Ternary%20Polygon%20Type.html']The Ternary Polygon Chart type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateTernaryChart/PolygonSeriesTernaryChartExampleView.xaml.txt</string>

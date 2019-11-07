@@ -5,16 +5,16 @@
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>TODO</ToolTipDescription>
   <Description>
-    Demonstrates how to add Tooltips to a 3D Chart by using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D[/url] Type.
+    Demonstrates how to add Tooltips to a 3D Chart by using the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D[/url] Type.
 
-    This ChartModifier3D can be added to the SciChart3DSurface via the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface~ChartModifier.html']SciChart3DSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.ModifierGroup3D.html']ModifierGroup3D[/url]
+    This ChartModifier3D can be added to the SciChart3DSurface via the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.SciChart3DSurface~ChartModifier.html']SciChart3DSurface.ChartModifier[/url] property, or via a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Modifiers.ModifierGroup3D.html']ModifierGroup3D[/url]
 
     You can change the default tooltip, and also whether lines or planes are shown at the intersection point. Axis labels may also be turned on or off.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.PointLineRenderableSeries3D.html']PointLineRenderableSeries3D Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Modifiers.Tooltip3D.TooltipModifier3D.html']TooltipModifier3D Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.PointLineRenderableSeries3D.html']PointLineRenderableSeries3D Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/TooltipsAndHitTest3DCharts/SeriesTooltips3DChart.xaml.txt</string>

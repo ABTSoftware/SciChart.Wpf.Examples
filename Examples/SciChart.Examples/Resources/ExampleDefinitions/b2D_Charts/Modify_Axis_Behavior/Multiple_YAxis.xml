@@ -15,7 +15,7 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17194/29/creating-a-chart-with-multiple-x-and-y-axes']Creating a Chart with Multiple X and Y Axes[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2008%20-%20Adding%20Multiple%20Axis.html']Tutorial: Creating a Chart with Multiple X and Y Axes[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/QuadLeftRightAxes.xaml.txt</string>

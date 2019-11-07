@@ -10,6 +10,15 @@
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid>
         <Grid.Resources>
+
+            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                <Style.Triggers>
+                    <Trigger Property="IsChecked"  Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" Fill="Blue" />
 
             <s3D:GradientColorPalette x:Key="ExampleGradientColorPalette" IsStepped="False">
@@ -61,7 +70,7 @@
                         
                         <!-- Checkboxes to decide how the chart should be filled -->
                         <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
-                        <CheckBox  FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrkY" IsChecked="True"  s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                        <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrkY" IsChecked="True"  s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
                         <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrkZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
                         <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrkSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
                         <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrkTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>

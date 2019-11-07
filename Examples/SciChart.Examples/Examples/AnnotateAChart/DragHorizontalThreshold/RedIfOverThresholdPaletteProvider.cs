@@ -43,7 +43,11 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
         public Color? OverrideStrokeColor(IRenderableSeries series, int index, IPointMetadata metadata)
         {
             if (_yValues[index] > Threshold)
-                return _overriddenColor;
+            {
+                var color = _overriddenColor;
+                color.A = (byte) (_overriddenColor.A * series.Opacity);
+                return color;
+            }
 
             // Returning null means use the default color when rendering
             return null;
@@ -52,7 +56,11 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
         public Brush OverrideFillBrush(IRenderableSeries series, int index, IPointMetadata metadata)
         {
             if (_yValues[index] > Threshold)
-                return _overriddenFill;
+            {
+                var colorBrush = _overriddenFill;
+                colorBrush.Opacity *= series.Opacity;
+                return colorBrush;
+            }
 
             // Returning null means use the default color when rendering
             return null;

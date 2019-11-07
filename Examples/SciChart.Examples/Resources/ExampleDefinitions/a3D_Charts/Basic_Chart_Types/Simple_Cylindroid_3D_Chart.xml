@@ -7,9 +7,9 @@
     The Cylindroid 3D chart demo shows how to create high-performance 3D Cylindroid Mesh with two-dimensional offset array applied to its surface using the SciChart 3D Component.
   </ToolTipDescription>
   <Description>
-    The Cylindroid 3D chart demo shows how to use [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.Model.CylindroidDataSeries3D%602.html']CylindroidDataSeries3D[/url] and the [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] to render 3d ellipsoid.
+    The Cylindroid 3D chart demo shows how to use [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.CylindroidDataSeries3D%602.html']CylindroidDataSeries3D[/url] and the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] to render 3d ellipsoid.
 
-    [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] allows you to create all kinds of shapes, including Sphere, Cylinder, Disc and free-form mesh shapes, and overlay heightmap, colormap (palette) and contours. Find examples of other shapes in the same section here or visit [url='http://www.scichart.com']the web site[/url] for more information.
+    [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url] allows you to create all kinds of shapes, including Sphere, Cylinder, Disc and free-form mesh shapes, and overlay heightmap, colormap (palette) and contours. Find examples of other shapes in the same section here or visit [url='http://www.scichart.com']the web site[/url] for more information.
 
     Palette Mode drop-down menu demonstrates different modes of the data representation.
   </Description>

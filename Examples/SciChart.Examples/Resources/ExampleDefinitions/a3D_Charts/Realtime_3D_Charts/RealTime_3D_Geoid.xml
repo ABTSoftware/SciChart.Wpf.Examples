@@ -7,9 +7,9 @@
     The 3D Realtime Ellipsoid Mesh example shows how to update a Ellipsoid Mesh in real-time
   </ToolTipDescription>
   <Description>
-    The 3D Realtime Ellipsoid Mesh example shows how to update a [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.Model.EllipsoidDataSeries3D%601.html']EllipsoidDataSeries3D[/url] in real-time to render to a 3D [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url].
+    The 3D Realtime Ellipsoid Mesh example shows how to update a [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.EllipsoidDataSeries3D%601.html']EllipsoidDataSeries3D[/url] in real-time to render to a 3D [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D.html']FreeSurfaceRenderableSeries3D[/url].
 
-    The Free Surface Mesh colors and palette can be udpated by supplying a [url='https://www.scichart.com/documentation/v5.x/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D~MeshColorPalette.html']MeshColorPalette[/url], which wraps a LinearGradientBrush.
+    The Free Surface Mesh colors and palette can be udpated by supplying a [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.FreeSurfaceRenderableSeries3D~MeshColorPalette.html']MeshColorPalette[/url], which wraps a LinearGradientBrush.
 
     Many mesh options are available such as Wireframe, SolidMesh, Solid with Wireframe, and many paletting options such as Solid Cells, Interpolated Cells and Textured.
 

@@ -5,9 +5,9 @@
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Demonstrates how to simple multi-series financial charts, with a Candlestick chart rendering OHLC data and three line series rendering Moving Average indicators</ToolTipDescription>
   <Description>
-    Demonstrates a multi-series chart using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries[/url] with three [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries.html']FastLineRenderableSeries[/url] showing the moving average of the closing price.
+    Demonstrates a multi-series chart using the [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries[/url] with three [url='https://www.scichart.com/documentation/win/current/The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url] showing the moving average of the closing price.
 
-    The example uses the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis[/url] which collapses overnight and weekend gaps in data, but, uses the Index to the data to calculate X-position. This means that [b]all DataSeries must have the same number of data-points[/b] [i](you can pad DataSeries using double.NaN for null or empty points)[/i].
+    The example uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis[/url] which collapses overnight and weekend gaps in data, but, uses the Index to the data to calculate X-position. This means that [b]all DataSeries must have the same number of data-points[/b] [i](you can pad DataSeries using double.NaN for null or empty points)[/i].
 
     [b]Example Usage[/b]
 
@@ -19,10 +19,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis vs. NumericAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/CandlestickWithLinesView.xaml.txt</string>

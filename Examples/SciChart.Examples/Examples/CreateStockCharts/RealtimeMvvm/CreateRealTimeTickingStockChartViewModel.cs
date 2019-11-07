@@ -28,13 +28,16 @@ using SciChart.Examples.ExternalDependencies.Data;
 namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
 {
     public class CreateRealTimeTickingStockChartViewModel : BaseViewModel
-    {     
+    {
         private readonly IMarketDataService _marketDataService;        
         private readonly MovingAverage _sma50 = new MovingAverage(50);
-        private readonly double _barTimeFrame = TimeSpan.FromMinutes(5).TotalSeconds;
+
         private PriceBar _lastPrice;
         private IndexRange _xVisibleRange;
+
+        private int _selectedStrokeThickness;
         private string _selectedSeriesStyle;
+
         private ObservableCollection<IRenderableSeriesViewModel> _seriesViewModels;
 
         public CreateRealTimeTickingStockChartViewModel()
@@ -46,29 +49,33 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
             _marketDataService = new MarketDataService(new DateTime(2000, 08, 01, 12, 00, 00), 5, 20);
 
             // Add ChartSeriesViewModels for the candlestick and SMA series
-            var ds0 = new OhlcDataSeries<DateTime, double> { SeriesName = "Price Series"};
-            _seriesViewModels.Add(new OhlcRenderableSeriesViewModel { DataSeries = ds0, StyleKey = "BaseRenderableSeriesStyle" });
+            var ds0 = new OhlcDataSeries<DateTime, double> {SeriesName = "Price Series"};
+            _seriesViewModels.Add(new OhlcRenderableSeriesViewModel {DataSeries = ds0, StyleKey = "BaseRenderableSeriesStyle"});
 
             var ds1 = new XyDataSeries<DateTime, double> {SeriesName = "50-Period SMA"};
             _seriesViewModels.Add(new LineRenderableSeriesViewModel {DataSeries = ds1, StyleKey = "LineStyle"});
 
             // Append 150 historical bars to data series
-            var prices = _marketDataService.GetHistoricalData(100);           
-            ds0.Append(
-                prices.Select(x => x.DateTime),
+            var prices = _marketDataService.GetHistoricalData(100);
+
+            ds0.Append(prices.Select(x => x.DateTime),
                 prices.Select(x => x.Open),
                 prices.Select(x => x.High),
                 prices.Select(x => x.Low),
                 prices.Select(x => x.Close));
+
             ds1.Append(prices.Select(x => x.DateTime), prices.Select(y => _sma50.Push(y.Close).Current));
 
-            SelectedSeriesStyle = "Ohlc";
+            StrokeThicknesses = new[] {1, 2, 3, 4, 5};
+            SeriesStyles = new[] {"OHLC", "Candlestick", "Line", "Mountain"};
 
+            SelectedStrokeThickness = 2;
+            SelectedSeriesStyle = "OHLC";
         }
 
         public ObservableCollection<IRenderableSeriesViewModel> SeriesViewModels
         {
-            get { return _seriesViewModels; }
+            get => _seriesViewModels;
             set
             {
                 _seriesViewModels = value;
@@ -76,24 +83,31 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
             }
         }
 
-        public double BarTimeFrame { get { return _barTimeFrame; } }
+        public double BarTimeFrame { get; } = TimeSpan.FromMinutes(5).TotalSeconds;
 
-        public ICommand TickCommand
+        public ICommand TickCommand => new ActionCommand(() => OnNewPrice(_marketDataService.GetNextBar()));
+        
+        public ICommand StartUpdatesCommand => new ActionCommand(() => _marketDataService.SubscribePriceUpdate(OnNewPrice)); 
+
+        public ICommand StopUpdatesCommand => new ActionCommand(() => _marketDataService.ClearSubscriptions());
+
+        public IEnumerable<string> SeriesStyles { get; }
+
+        public IEnumerable<int> StrokeThicknesses { get; }
+
+        public int SelectedStrokeThickness
         {
-            get { return new ActionCommand(() => OnNewPrice(_marketDataService.GetNextBar())); }
+            get => _selectedStrokeThickness;
+            set
+            {
+                _selectedStrokeThickness = value;
+                OnPropertyChanged("SelectedStrokeThickness");
+            }
         }
-
-        public ICommand StartUpdatesCommand { get { return new ActionCommand(() => _marketDataService.SubscribePriceUpdate(OnNewPrice)); } }
-
-        public ICommand StopUpdatesCommand { get { return new ActionCommand(() => _marketDataService.ClearSubscriptions()); } }
-
-        public IEnumerable<string> SeriesStyles { get { return new[] {"OHLC", "Candle", "Line", "Mountain"}; } }
-
-        public IEnumerable<int> StrokeThicknesses { get { return new[] {1, 2, 3, 4, 5}; }}
 
         public string SelectedSeriesStyle
         {
-            get { return _selectedSeriesStyle; }    
+            get => _selectedSeriesStyle;
             set
             {
                 _selectedSeriesStyle = value;
@@ -107,7 +121,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
                         StyleKey = "BaseRenderableSeriesStyle"
                     };
                 }                   
-                else if (_selectedSeriesStyle == "Candle")
+                else if (_selectedSeriesStyle == "Candlestick")
                 {
                     SeriesViewModels[0] = new CandlestickRenderableSeriesViewModel
                     {
@@ -131,18 +145,21 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
                         StyleKey = "BaseRenderableSeriesStyle"
                     };
                 }
+
+                OnPropertyChanged("SeriesViewModels");
             }
         }      
 
         public IndexRange XVisibleRange
         {
-            get { return _xVisibleRange; }
+            get => _xVisibleRange;
             set
             {
-                if (Equals(_xVisibleRange, value)) 
-                    return;
-                _xVisibleRange = value;
-                OnPropertyChanged("XVisibleRange");
+                if (!Equals(_xVisibleRange, value))
+                {
+                    _xVisibleRange = value;
+                    OnPropertyChanged("XVisibleRange");
+                }
             }
         }
 

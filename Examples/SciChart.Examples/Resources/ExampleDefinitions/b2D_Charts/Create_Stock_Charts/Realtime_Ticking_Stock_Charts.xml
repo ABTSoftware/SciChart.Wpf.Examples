@@ -5,7 +5,7 @@
   <ViewModel />
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealTimeStockChart.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
-  <ToolTipDescription>Using the SciStockChart control, create's a real-time example with two series and a SciChartOverview</ToolTipDescription>
+  <ToolTipDescription>Using the SciStockChart control, creates a real-time example with two series and a SciChartOverview</ToolTipDescription>
   <Description>
     An MVVM example which showcases real-time ticking stock charts.
 
@@ -21,7 +21,6 @@
     - Drag XAxis and YAxis to scale.
     - Drag the Overview control to scroll and scale.
     - Hover to see XY cursor values.
-    - Change theme of the chart via the drop-down menu.
 
     [b][i]Tips[/i][/b]
 
@@ -31,9 +30,9 @@
 
     - [url='http://www.scichart.com/questions/question/ohlcdataseries-append-or-update-latest-bar']FAQ: OhlcDataSeries Append or Update latest bar[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17223/37/how-to-have-a-fixed-scrolling-time-range-on-the-xaxis-that-works-with-modifiers']How to have a Fixed Scrolling Time-Range on the XAxis that works with Modifiers[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis vs. NumericAxis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml.txt</string>

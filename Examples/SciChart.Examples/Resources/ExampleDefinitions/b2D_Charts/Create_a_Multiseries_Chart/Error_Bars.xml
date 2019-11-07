@@ -7,17 +7,17 @@
   <Description>
     Demonstrates how to add Error Bars to a Line or Scatter Chart.
 
-    The [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastErrorBarsRenderableSeries.html']FastErrorBarsRenderableSeries[/url] requires a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries[/url] as data source. This includes X,Y,YHigh,YLow for each series entry. In this example the same HlcDataSeries is re-used to render a Line or Scatter chart, as these only take the X,Y values.
+    The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] requires a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries[/url] as data source. This includes X,Y,YHigh,YLow for each series entry. In this example the same HlcDataSeries is re-used to render a Line or Scatter chart, as these only take the X,Y values.
 
     [b][i]Tip![/i][/b]
 
-    Do you need to change the width of the Error Bars? Try setting [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastErrorBarsRenderableSeries~DataPointWidth.html']DataPointWidth[/url] from 0.0 to 1.0. This alters how much space the bar takes up.
+    Do you need to change the width of the Error Bars? Try setting [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastErrorBarsRenderableSeries~DataPointWidth.html']DataPointWidth[/url] from 0.0 to 1.0. This alters how much space the bar takes up.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastErrorBarsRenderableSeries.html']FastErrorBarsRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ErrorSeriesExampleView.xaml.txt</string>

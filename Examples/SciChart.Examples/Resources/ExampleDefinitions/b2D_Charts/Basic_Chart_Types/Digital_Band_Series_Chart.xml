@@ -6,20 +6,21 @@
   <ChartTypes>Candlestick</ChartTypes>
   <ToolTipDescription>Generates a Digital (Step) Band Series chart in code</ToolTipDescription>
   <Description>
-    Generates a digital Band Series chart in code, by using a [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBandRenderableSeries.html']FastBandRenderableSeries[/url] with the IsDigitalLine property set to true. The band series requires an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url], which contains one X-point and two Y-points. 
-    
+    Generates a digital Band Series chart in code, by using a [url='https://www.scichart.com/documentation/win/current/The%20Band%20Series%20Type.html']FastBandRenderableSeries[/url] with the IsDigitalLine property set to true. The band series requires an [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url], which contains one X-point and two Y-points.
+
     Dual lines are drawn by Stroke, StrokeY1 and shaded bands are drawn using FillY1 and Fill, depending on whether Y1 is greater than Y2.
 
-    [b][i]Tip![/i][/b] 
-    
+    [b][i]Tip![/i][/b]
+
     If you have data where Y1 is greater than Y2 always, you'll get an envelope effect. Great for rendering confidence intervals, error margins or Bollinger Bands!
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastBandRenderableSeries.html']FastBandRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Band%20Series%20Type.html']FastBandRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/What%20is%20a%20RenderableSeries.html']What is a RenderableSeries?[/url]
+    - [url='https://www.scichart.com/documentation/win/current/DataSeries%20Types%20in%20SciChart.html']DataSeries Types in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']Common RenderableSeries Properties[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateSimpleChart/DigitalBandSeriesChartExampleView.xaml.txt</string>

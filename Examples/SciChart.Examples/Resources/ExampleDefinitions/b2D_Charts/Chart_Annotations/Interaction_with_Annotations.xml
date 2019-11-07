@@ -7,14 +7,13 @@
   <Description>
     Demonstrates how you may interact with annotations that have been placed on a chart, using the UIElement Annotations API.
 
-    To make an annotation Read-only, set [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Annotations.AnnotationBase~IsEditable.html']AnnotationBase.IsEditable[/url]=false. Some of the annotations have IsEditable=true on this example. You can click them, drag and resize via the adorner anchor-points.
+    To make an annotation Read-only, set [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Annotations.AnnotationBase~IsEditable.html']AnnotationBase.IsEditable[/url]=false. Some of the annotations have IsEditable=true on this example. You can click them, drag and resize via the adorner anchor-points.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/annotations-are-easy/']Annotations API Documentation[/url]
-    - [url='http://www.scichart.com/databinding-annotations-with-mvvm/']Databinding Annotations with MVVM[/url]
-    - [url='http://www.scichart.com/questions/question/editing-annotations-and-keeping-track-of-them-in-an-mvvm-application']Best practices with Annotations in MVVM apps[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17209/33/custom-annotations---adding-a-watermark-to-a-chart']Custom Annotations - Adding a WaterMark to a Chart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Intro%20to%20the%20Annotations%20API.html']Annotations API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']Databinding Annotations with MVVM[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20CustomAnnotation%20Type.html']Custom Annotations - Adding a WaterMark to a Chart[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/AnnotateAChart/InteractionWithAnnotations.xaml.txt</string>

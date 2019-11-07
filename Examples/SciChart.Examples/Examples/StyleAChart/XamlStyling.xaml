@@ -18,13 +18,13 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Arial Black" />
             <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="SteelBlue" />
         </Style>
 
         <!--  Define styles for the GridLinesPanel  -->
         <Style x:Key="GridLinesPanelStyle" TargetType="s:GridLinesPanel">
             <Setter Property="Background" Value="Pink" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="BorderBrush" Value="SteelBlue" />
         </Style>
 
         <Style x:Key="LeftAxisLabelStyle" TargetType="s:DefaultTickLabel">

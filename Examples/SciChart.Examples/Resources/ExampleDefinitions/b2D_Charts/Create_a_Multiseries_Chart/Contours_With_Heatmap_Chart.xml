@@ -5,14 +5,15 @@
   <IconPath>IconHeat</IconPath>
   <ToolTipDescription>Demonstrates how to simple multi-series financial charts, with a Candlestick chart rendering OHLC data and three line series rendering Moving Average indicators</ToolTipDescription>
   <Description>
-    Demonstrates how to add Contours to a Heatmap chart. Contours are provided by the [b]FastUniformContourRenderableSeries[/b]. This uses the same data-source the Heatmap: a 2D double[,] array. 
+    Demonstrates how to add [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Contours%20Series%20Type.html']Contours[/url] to a [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']WPF Heatmap chart[/url]. Contours are provided by the [b]FastUniformContourRenderableSeries[/b]. This uses the same data-source the Heatmap: a 2D double[,] array.
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastCandlestickRenderableSeries.html']FastCandlestickRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17190/29/categorydatetimeaxis-vs-datetimeaxis']CategoryDateTimeAxis vs. NumericAxis[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Contours%20Series%20Type.html']The Contour Series Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']The Heatmap Series Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries class[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.NonUniformHeatmapDataSeries%601.html']NonUniformHeatmapDataSeries class[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/Contours/ContoursExampleView.xaml.txt</string>

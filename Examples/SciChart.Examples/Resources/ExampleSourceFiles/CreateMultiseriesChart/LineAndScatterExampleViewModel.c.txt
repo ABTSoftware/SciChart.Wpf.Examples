@@ -20,7 +20,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {
     public class LineAndScatterExampleViewModel : BaseViewModel
     {
-        private double[] _xData =
+        private readonly double[] _xData =
         {
             57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76,
             77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102,
@@ -28,7 +28,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             125, 126, 127, 128, 129, 130, 131, 132
         };
 
-        private double[] _scatterY =
+        private readonly double[] _scatterY =
         {
             53, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, 70,
             double.NaN, 72, 81, 60, 67, double.NaN, double.NaN, 72, double.NaN, 72, double.NaN, double.NaN, double.NaN,
@@ -40,7 +40,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             double.NaN, double.NaN, 231
         };
 
-        private double[] _lineY =
+        private readonly double[] _lineY =
         {
             77.033282491478, 73.9085208618748, 71.1324976363107, 68.6967626265043,
             66.5928656441749, 64.8123565010411, 63.3467850088222, 62.187700979237, 61.3266542240045, 60.7551945548437,
@@ -67,7 +67,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 
         public IXyDataSeries<double, double> ScatterData
         {
-            get { return _scatterData; }
+            get => _scatterData;
             set
             {
                 if (_scatterData == value) return;
@@ -78,7 +78,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 
         public IXyDataSeries<double, double> FittedData
         {
-            get { return _fittedData; }
+            get => _fittedData;
             set
             {
                 if (_fittedData == value) return;

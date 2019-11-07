@@ -22,7 +22,6 @@
             <Setter Property="ShowSeriesMarkers" Value="True" />
             <Setter Property="ShowVisibilityCheckboxes" Value="True" />
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -36,8 +35,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Background="#FF232426"
-                BorderBrush="#323539"
+        <Border Grid.RowSpan="2"
+                Background="#FF232426"
+                BorderBrush="#FF323539"
                 BorderThickness="0,0,2,0"
                 Canvas.ZIndex="9999">
 
@@ -56,11 +56,10 @@
                 <ext:FlyoutSeparator />
 
                 <ToggleButton Command="{Binding StartUpdatesCommand}"
-                              Padding="4"
                               Style="{StaticResource PlayButtonStyle}"
                               s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
+
                 <ToggleButton Command="{Binding StopUpdatesCommand}"
-                              Padding="4"
                               Style="{StaticResource PauseButtonStyle}"
                               s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
 
@@ -75,17 +74,21 @@
                             <ext:FlyoutSeparator />
 
                             <TextBlock Text="Stroke Thickness:" />
-                            <ComboBox x:Name="StrokeThicknesses"
-                                      Margin="4"
+                            <ComboBox Margin="4"
                                       ItemsSource="{Binding StrokeThicknesses}"
-                                      SelectedIndex="1" />
+                                      SelectedItem="{Binding SelectedStrokeThickness, Mode=TwoWay}" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Foreground="#FFF"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
                             <TextBlock Text="Series Styles:" />
                             <ComboBox Margin="4"
                                       ItemsSource="{Binding SeriesStyles}"
-                                      SelectedItem="{Binding SelectedSeriesStyle,
-                                                             Mode=TwoWay}" />
-
+                                      SelectedItem="{Binding SelectedSeriesStyle, Mode=TwoWay}"/>
+                            
                             <CheckBox x:Name="UseAntiAliasing"
                                       Margin="4"
                                       Content="Use Antialiasing?"
@@ -99,31 +102,33 @@
 
         <!--  Define the StockChart control, binding to PriceData  -->
         <s:SciStockChart x:Name="PriceChart"
+                         Grid.Row="0"
                          Grid.Column="1"
                          IsPanEnabled="{Binding Source={x:Reference Name=IsPanEnabled}, Path=IsChecked, Mode=TwoWay}"
                          IsRubberBandZoomEnabled="{Binding Source={x:Reference Name=IsZoomEnabled}, Path=IsChecked, Mode=TwoWay}"
                          LegendStyle="{StaticResource LegendStyle}"
                          RenderableSeries="{s:SeriesBinding SeriesViewModels}">
+
             <s:SciStockChart.Resources>
                 <Style x:Key="BaseRenderableSeriesStyle" TargetType="s:BaseRenderableSeries">
-                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked}" />
-                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=StrokeThicknesses}, Path=SelectedItem}" />
+                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked, Mode=OneWay}" />
+                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=PriceChart}, Path=DataContext.SelectedStrokeThickness}" />
                 </Style>
                 <Style x:Key="LineStyle" TargetType="s:FastLineRenderableSeries">
-                    <Setter Property="Stroke" Value="#ffffa500" />
-                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked}" />
-                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=StrokeThicknesses}, Path=SelectedItem}" />
+                    <Setter Property="Stroke" Value="#FFFFA500" />
+                    <Setter Property="AntiAliasing" Value="{Binding Source={x:Reference Name=UseAntiAliasing}, Path=IsChecked, Mode=OneWay}" />
+                    <Setter Property="StrokeThickness" Value="{Binding Source={x:Reference Name=PriceChart}, Path=DataContext.SelectedStrokeThickness}" />
                 </Style>
             </s:SciStockChart.Resources>
 
             <!--  Override any properties of the built-in CategoryDateTimeAxis  -->
             <s:SciStockChart.XAxisStyle>
                 <Style TargetType="s:CategoryDateTimeAxis">
-                    <Setter Property="BarTimeFrame" Value="{Binding BarTimeFrame, Mode=OneWay}" />
+                    <Setter Property="GrowBy" Value="0, 0.1" />
                     <Setter Property="DrawMinorGridLines" Value="False" />
                     <Setter Property="DrawMajorBands" Value="True" />
+                    <Setter Property="BarTimeFrame" Value="{Binding BarTimeFrame, Mode=OneWay}" />
                     <Setter Property="VisibleRange" Value="{Binding XVisibleRange, Mode=TwoWay}" />
-                    <Setter Property="GrowBy" Value="0, 0.1" />
                 </Style>
             </s:SciStockChart.XAxisStyle>
 
@@ -140,34 +145,24 @@
               Grid.Column="1"
               Height="32">
 
-            <!--  The grid is used to set paddings around the Overview, so that the size of the Overview matches the size of the XAxis on the parent chart  -->
+            <!--  The grid is used to set the padding on the Overview, so that the size of the Overview matches the size of the XAxis on the parent chart  -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <!--  Matches parent surface padding left  -->
                 <ColumnDefinition Width="*" />
-                <!--  Hosts overview control  -->
                 <ColumnDefinition Width="{Binding Source={x:Reference Name=Proxy}, Path=ActualWidthValue, Mode=OneWay, Converter={StaticResource DoubleToGridLengthConverter}}" />
-                <!--  Used to bind to parent surface YAxis  -->
-                <ColumnDefinition Width="15" />
-                <!--  Matches parent surface padding right  -->
             </Grid.ColumnDefinitions>
 
             <ext:ActualSizePropertyProxy x:Name="Proxy" Element="{Binding Source={x:Reference Name=PriceChart}, Path=YAxis}" />
 
             <!--  Define the Overview control, binding to XVisibleRange, which is shared between this and the SciStockChart control  -->
-            <s:SciChartOverview Grid.Column="1"
-                                ParentSurface="{Binding Source={x:Reference Name=PriceChart},
-                                                        Mode=OneWay}"
-                                SelectedRange="{Binding XVisibleRange,
-                                                        Mode=TwoWay}"
-                                s:ThemeManager.Theme="{Binding ElementName=ThemeCombo,
-                                                               Path=SelectedItem}" />
-
+            <s:SciChartOverview Grid.Column="0"
+                                DataSeries="{Binding SeriesViewModels[0].DataSeries, Mode=OneWay}"
+                                ParentSurface="{Binding Source={x:Reference Name=PriceChart}, Mode=OneWay}"
+                                SelectedRange="{Binding XVisibleRange, Mode=TwoWay}"/>
         </Grid>
     </Grid>
 
     <!--  Used for the example only. On user switching example, stop the timer  -->
-    <!--  You shouldnt need this for your code  -->
+    <!--  You shouldn't need this for your code  -->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unloaded">
             <i:InvokeCommandAction Command="{Binding StopUpdatesCommand}" />

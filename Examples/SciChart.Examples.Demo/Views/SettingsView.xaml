@@ -221,27 +221,36 @@
                       IsChecked="{Binding EnableDropShadows, Mode=TwoWay}" />
 
                     <CheckBox Grid.Row="6"
+                              x:Name="EnableCppCheckbox"
                               Margin="3"
                               Content="Enable C++ Resampling Algorithms"
                               DataContext="{StaticResource SettingsViewModel}"
                               FontSize="14"
                               ToolTip="Enable / disable C++ Resampling algorithms for faster, more accurate resampling"
-                              IsChecked="{Binding EnableResamplingCPlusPlus, Mode=TwoWay}" />
+                              IsChecked="{Binding Path=EnableResamplingCPlusPlus, Mode=TwoWay}" />
 
-                    <CheckBox Margin="3"
+                    <CheckBox Margin="15,3"
+                              Content="Enable SIMD in C++ Algorithms"
+                              FontSize="14"
+                              ToolTip="Enables SIMD / Streaming SIMD Extensions for advanced parallelisation-on-chip"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              IsEnabled="{Binding ElementName=EnableCppCheckbox, Path=IsChecked}"
+                              IsChecked="{Binding Path=EnableSimd, Mode=TwoWay}" />
+
+                    <CheckBox Margin="15,3"
                               Content="Enable Impossible mode (Experimental!)"
                               FontSize="14"
                               ToolTip="Enables an experimental mode which gives impossible performance in real-time big-data charts (Billions of points)"
                               DataContext="{StaticResource SettingsViewModel}"
-                              IsEnabled="{Binding Path=IsDirectXEnabled2D}"
+                              IsEnabled="{Binding ElementName=EnableCppCheckbox, Path=IsChecked}"
                               IsChecked="{Binding Path=EnableImpossibleMode, Mode=TwoWay}"/>
 
                     <CheckBox Grid.Row="6"
                               Margin="3"
-                              Content="Enable Extreme Drawing Manager"
+                              Content="Enable Extreme Drawing Manager (Legacy)"
                               DataContext="{StaticResource SettingsViewModel}"
                               FontSize="14"
-                              ToolTip="Enable / disable extreme drawing manager for faster, more accurate lines drawing"
+                              ToolTip="LEGACY: Superceded by VisualXccelerator engine. Enable / disable extreme drawing manager for faster, more accurate lines drawing"
                               IsChecked="{Binding EnableExtremeDrawingManager, Mode=TwoWay}" />
                 </StackPanel>
 

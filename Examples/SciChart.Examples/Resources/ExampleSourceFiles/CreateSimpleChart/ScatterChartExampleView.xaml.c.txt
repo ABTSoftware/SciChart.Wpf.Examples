@@ -31,7 +31,7 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
 
         private void ScatterChartExampleView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Create a dataseries of type X=double, Y=double
+            // Create a data series of type X=double, Y=double
             var dataSeries = new XyDataSeries<double, double>();
 
             var data = DataManager.Instance.GetDampedSinewave(1.0, 0.02, 200);

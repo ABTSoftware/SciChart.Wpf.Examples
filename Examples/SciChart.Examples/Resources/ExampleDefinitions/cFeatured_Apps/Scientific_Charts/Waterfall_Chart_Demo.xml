@@ -8,8 +8,9 @@
     Waterfall chart simulation using SciChart 2D.
     
     Custom WaterfallRubberBandZoomModifier is implemented using SciChart custom modifiers API. See the following articles for more details:
-    [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17234/32/custom-chartmodifier-api---overview']Custom ChartModifier[/url] 
-    [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32/chartmodifiers-zooming-panning']Zooming, Panning[/url] 
+
+    [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']Custom ChartModifier[/url] 
+    [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html/chartmodifiers-zooming-panning']Zooming, Panning[/url] 
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/WaterfallChart/WaterfallChart.xaml.txt</string>

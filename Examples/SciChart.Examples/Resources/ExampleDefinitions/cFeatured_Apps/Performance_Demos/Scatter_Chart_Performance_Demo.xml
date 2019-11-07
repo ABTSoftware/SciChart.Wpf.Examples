@@ -11,11 +11,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17227/36/performance-tips-and-tricks']Performance Tips and Tricks[/url]
-    - [url='http://www.scichart.com/how-fast-is-scichart-wpf-chart/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
-    - [url='http://www.scichart.com/insane-wpf-scatter-chart-performance-with-parallel-rendering/']Insane WPF Scatter Chart performance with Parallel Rendering[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.XyScatterRenderableSeries.html']XyScatterRenderableSeries[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url]
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Scatter%20Series%20Type.html']XyScatterRenderableSeries[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/ScatterChartPerformanceTest.xaml.txt</string>

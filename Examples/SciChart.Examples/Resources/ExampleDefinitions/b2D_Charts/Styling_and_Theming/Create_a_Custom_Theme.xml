@@ -17,9 +17,9 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17246/38/how-to-create-a-custom-theme-for-scichart']How to Create a Custom Theme for SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']How to Create a Custom Theme for SciChart[/url]
     - [url='http://www.scichart.com/questions/question/example-for-implementing-ithemeprovider']FAQ: Example for implementing IThemeProvider[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Themes.IThemeProvider.html']IThemeProvider Members[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Themes.IThemeProvider.html']IThemeProvider Members[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/StyleAChart/CustomTheme/CustomThemeView.xaml.txt</string>

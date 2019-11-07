@@ -11,7 +11,7 @@
     Manipulate the thumbs on the Overview control to zoom the chart, drag the center region to scroll the chart. 
   </ToolTipDescription>
   <Description>
-    Demonstrates a supplimentary control, the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartOverview.html']SciChartOverview[/url]. This control can be bound to a parent SciChartSurface and renders the first series on that surface in entirely. A reticule is overlaid on the SciChartOverview to show the portion of the parent data in the viewport.
+    Demonstrates a supplimentary control, the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChartOverview.html']SciChartOverview[/url]. This control can be bound to a parent SciChartSurface and renders the first series on that surface in entirely. A reticule is overlaid on the SciChartOverview to show the portion of the parent data in the viewport.
 
     Interact with the SciChartOverview by dragging the middle area to scroll, or the edges of the middle area to scale. Similarly as you pan the chart by dragging, the SciChartOverview updates to show the current section of the data in the viewport.
 
@@ -19,11 +19,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17257/43/scrolling-a-chart-with-the-scichartoverview']Scrolling a Chart with the SciChartOverview[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChartOverview.html']Scrolling a Chart with the SciChartOverview[/url]
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17258/43/creating-a-custom-scichartoverview-with-many-series-using-the-scrollbar-api']Creating a Custom SciChartOverview with many series using the ScrollBar API[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17251/43/scichartscrollbar---per-axis-scrollbars-api']SciChartScrollbar - per axis ScrollBars API[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartOverview.html']SciChartOverview Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartScrollbar.html']SciChartScrollBar Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Scrollbars.html']SciChartScrollbar - per axis ScrollBars API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChartOverview.html']SciChartOverview Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ZoomAndPanAChart/ScrollChartUsingOverviewControl.xaml.txt</string>

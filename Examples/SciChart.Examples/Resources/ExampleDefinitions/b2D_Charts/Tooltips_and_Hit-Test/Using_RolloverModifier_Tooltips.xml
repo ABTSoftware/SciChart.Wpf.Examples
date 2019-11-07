@@ -5,34 +5,34 @@
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates using the BaseRenderableSeries.RolloverMarkerTemplate property and the RolloverModifier to add mouse-over feedback of data-points on multiple line series to the user</ToolTipDescription>
   <Description>
-    Demonstrates using the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier.html']RolloverModifier[/url], part of the [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API[/url], to add mouse-over feedback of data-points on time-series to the user.
+    Demonstrates using the [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier[/url], part of the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifier API[/url], to add mouse-over feedback of data-points on time-series to the user.
 
-    An ItemsControl data-binds to a collection of [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.InspectSeriesModifierBase~SeriesData.html']RolloverModifier.SeriesData.SeriesInfo[/url] collection.
+    An ItemsControl data-binds to a collection of [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.InspectSeriesModifierBase~SeriesData.html']RolloverModifier.SeriesData.SeriesInfo[/url] collection.
 
-    The [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17249/42/seriesinfo---the-series-viewmodel-for-legends-tooltips-rollovers']SeriesInfo is like a ViewModel[/url] for the data-point, and each SeriesInfo derived type contains:
+    The [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesInfo%20%E2%80%93%20the%20ViewModels%20for%20Tooltips%20and%20Legends.html']SeriesInfo is like a ViewModel[/url] for the data-point, and each SeriesInfo derived type contains:
 
     - The X,Y values of the series under the cursor.
     - The series color.
     - The series name
 
-    This can be used to create Active legends which update values as the user moves the mouse. For more information, please see the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17248/42/adding-timeseries-tooltips-with-the-rollovermodifier']Adding TimeSeries Tooltips with the RolloverModifier[/url] article.       
+    This can be used to create Active legends which update values as the user moves the mouse. For more information, please see the [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']Adding TimeSeries Tooltips with the RolloverModifier[/url] article.       
 
     [b]Documentation Links[/b]
     
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17248/42/adding-timeseries-tooltips-with-the-rollovermodifier']Adding TimeSeries Tooltips with the RolloverModifier[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/32']ChartModifier API - All Articles[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier.html']RolloverModifier Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']Adding TimeSeries Tooltips with the RolloverModifier[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifier API - All Articles[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier Type[/url]
 
     [b][i]Also of interest[/i][/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17249/42/seriesinfo---the-series-viewmodel-for-legends-tooltips-rollovers']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XySeriesInfo.html']XySeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XyzSeriesInfo.html']XyzSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.XyStackedSeriesInfo.html']XyStackedSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.HlcSeriesInfo.html']HlcSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.OhlcSeriesInfo.html']OhlcSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.BandSeriesInfo.html']BandSeriesInfo Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartData.BoxPlotSeriesInfo.html']BoxPlotSeriesInfo Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesInfo%20%E2%80%93%20the%20ViewModels%20for%20Tooltips%20and%20Legends.html']SeriesInfo - The Series ViewModel for Legends, Tooltips, Rollovers[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XySeriesInfo.html']XySeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XyzSeriesInfo.html']XyzSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.XyStackedSeriesInfo.html']XyStackedSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.HlcSeriesInfo.html']HlcSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.OhlcSeriesInfo.html']OhlcSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.BandSeriesInfo.html']BandSeriesInfo Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartData.BoxPlotSeriesInfo.html']BoxPlotSeriesInfo Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/InspectDatapoints/RolloverFeedback.xaml.txt</string>

@@ -5,19 +5,17 @@
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Generates a spline scatter-line chart in code</ToolTipDescription>
   <Description>
-    Generates a spline scatter-line chart in code. Uses the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries[/url] type to demonstrate how to create your own series types. Here we implement a Cubic Spline line series with optional scatter points.
+    Generates a spline scatter-line chart in code. Uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#Custom%20Series%20(CustomRenderableSeries).html']CustomRenderableSeries[/url] type to demonstrate how to create your own series types. Here we implement a Cubic Spline line series with optional scatter points.
 
     [b][i]Tips![/i][/b]
 
-    As well as Stroke, you can set [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17175/28/Stroke-and-strokethickness']StrokeThickness[/url], [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17178/28/antialiasing-or-no-antialiasing']AntiAliasing[/url], [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17179/28/showing-or-hiding-a-renderableseries']IsVisible[/url] properties to change how the series is rendered.[
+    As well as Stroke, you can set [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']StrokeThickness[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']AntiAliasing[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']IsVisible[/url] properties to change how the series is rendered.[
 
-    You can add data-point markers to a line series using the [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.
+    You can add data-point markers to a line series using the [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17253/41/customrenderableseries-api-overview']CustomRenderableSeries API Overview[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17254/41/creating-a-custom-spline-line-series']Creating a Custom Spline Line Series - Walkthrough[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.CustomRenderableSeries.html']CustomRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Custom%20Series%20(CustomRenderableSeries).html']CustomRenderableSeries API Overview[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml.txt</string>

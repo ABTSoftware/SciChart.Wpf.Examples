@@ -17,7 +17,10 @@
     [i]Hover a segment with the cursor to see a tooltip with additional info about it![/i]
 
     [b]Documentation Links[/b]
-    Coming soon.
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Donut%20Chart%20Type.html']The Pie Chart Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/What%20is%20a%20RenderableSeries.html']What is a RenderableSeries?[/url]
+    - [url='https://www.scichart.com/documentation/win/current/DataSeries%20Types%20in%20SciChart.html']DataSeries Types in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']Common RenderableSeries Properties[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateGaugeCharts/UsingPieChartExampleView.xaml.txt</string>

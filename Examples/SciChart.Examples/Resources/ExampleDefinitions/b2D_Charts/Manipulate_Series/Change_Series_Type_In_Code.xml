@@ -7,7 +7,7 @@
     Demonstrates how to change the type of a RenderableSeries (e.g. change Line to Column, to Mountain) using the SciChart API
   </ToolTipDescription>
   <Description>
-    Demonstrates how to change how a series type is rendered in code. This is achieved by manipulating the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime. The same thing can be achieved in MVVM, using our new MVVM [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding[/url] Markup Extension.
+    Demonstrates how to change how a series type is rendered in code. This is achieved by manipulating the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime. The same thing can be achieved in MVVM, using our new MVVM [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.SeriesBinding.html']SeriesBinding[/url] Markup Extension.
 
     Click on a series to select it. With the series selected, change the Series Type via the dropdown.
 

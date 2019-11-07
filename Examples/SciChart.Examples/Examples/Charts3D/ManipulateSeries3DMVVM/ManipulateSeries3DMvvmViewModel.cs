@@ -19,7 +19,6 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
             {
                 "Column Series",
                 "Impulse Series",
-                "Mountain Series",
                 "PointLine Series",
                 "SurfaceMesh Series",
                 "Waterfall Series",

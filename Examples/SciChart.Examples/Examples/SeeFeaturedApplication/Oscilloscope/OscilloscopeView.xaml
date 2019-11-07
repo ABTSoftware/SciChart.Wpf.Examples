@@ -16,7 +16,7 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding StartCommand}" />
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unoaded">
+        <i:EventTrigger EventName="Unloaded">
             <i:InvokeCommandAction Command="{Binding StopCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -79,18 +79,18 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0"
-                               Margin="3,2,2,2"
                                Style="{StaticResource ChartDataItemsStyle}"
                                Text="{Binding SeriesName}" />
+
                     <TextBlock Grid.Column="1"
                                Margin="0,2,2,2"
                                Style="{StaticResource ChartDataItemsStyle}"
                                Text=":" />
+
                     <TextBlock Grid.Column="2"
                                Margin="3,2,20,2"
                                Style="{StaticResource ChartDataItemsStyle}"
-                               Text="{Binding Value,
-                                              StringFormat=\{0:0.0000\}}" />
+                               Text="{Binding Value, StringFormat=\{0:0.0000\}}" />
                 </Grid>
             </DataTemplate>
 
@@ -162,12 +162,9 @@
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Border VerticalAlignment="Center" Background="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">
-
-                                    <Image Source="/SciChart.Examples;component/Resources/Images/step_line.png" Stretch="None" />
-                                </Border>
-                            </StackPanel>
+                            <Border Background="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">
+                                <Image Source="/SciChart.Examples;component/Resources/Images/step_line.png" Stretch="None" />
+                            </Border>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
@@ -203,8 +200,7 @@
             <!--  Declare RenderableSeries, which map 1:1 to DataSet series and in order  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding ChartData}"
-                                            IsDigitalLine="{Binding IsDigitalLine,
-                                                                    Mode=TwoWay}"
+                                            IsDigitalLine="{Binding IsDigitalLine, Mode=TwoWay}"
                                             ResamplingMode="{Binding SeriesResamplingMode}"
                                             Style="{StaticResource LineSeriesStyle}"
                                             s:CursorModifier.SnapToSeries="True"
@@ -231,8 +227,7 @@
             </s:SciChartSurface.XAxes>
 
             <s:SciChartSurface.YAxes>
-                <s:NumericAxis AnimatedVisibleRange="{Binding YVisibleRange,
-                                                              Mode=TwoWay}"
+                <s:NumericAxis AnimatedVisibleRange="{Binding YVisibleRange, Mode=TwoWay}"
                                BorderThickness="2,0,0,0"
                                GrowBy="0.1, 0.1"
                                IsCenterAxis="True"
@@ -285,7 +280,8 @@
         <!--  This toolbar adds zoom, pan, zoom extents and other functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <Border Panel.ZIndex="9999"
+        <Border Grid.Column="0"
+                Panel.ZIndex="9999"
                 Background="#FF232426"
                 BorderBrush="#323539"
                 BorderThickness="0,0,2,0">
@@ -319,7 +315,7 @@
 
                 <ext:FlyoutSeparator />
 
-                <ext:FlyoutMenuButton x:Name="OsciloscopeDataSourceExample"
+                <ext:FlyoutMenuButton x:Name="OscilloscopeDataSourceExample"
                                       HorizontalAlignment="Left"
                                       Content="DS"
                                       Style="{StaticResource FlyoutMenuButtonStyle}"
@@ -327,20 +323,14 @@
 
                     <ext:FlyoutMenuButton.PopupContent>
                         <StackPanel MinWidth="150" Orientation="Vertical">
-
                             <TextBlock Text="Data Source:" />
-
                             <ComboBox SelectedItem="{Binding SelectedDataSource, Mode=TwoWay}">
-
                                 <ComboBox.Items>
                                     <system:String>Fourier Series</system:String>
                                     <system:String>Lissajous</system:String>
                                 </ComboBox.Items>
-
                             </ComboBox>
-
                         </StackPanel>
-
                     </ext:FlyoutMenuButton.PopupContent>
                 </ext:FlyoutMenuButton>
 
@@ -442,13 +432,9 @@
 
                 <ToggleButton HorizontalAlignment="Left"
                               Command="{Binding SetDigitalLineCommand}"
-                              IsChecked="{Binding IsDigitalLine,
-                                                  Mode=OneWay}"
+                              IsChecked="{Binding IsDigitalLine, Mode=OneWay}"
                               Style="{StaticResource IsStepLineButtonStyle}" />
-
             </WrapPanel>
         </Border>
-
-
     </Grid>
 </UserControl>

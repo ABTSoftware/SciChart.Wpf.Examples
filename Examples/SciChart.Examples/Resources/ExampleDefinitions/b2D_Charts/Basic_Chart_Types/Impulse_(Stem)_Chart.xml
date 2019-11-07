@@ -8,16 +8,17 @@
   <Description>
     [b]Impulse Series chart[/b]
 
-    Generates an Impulse-response style chart with optional point-marker in code. The [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastImpulseRenderableSeries.html']FastImpulseRenderableSeries[/url] can be used to render an [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries[/url], [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url]   (uses Y1 only) or [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries[/url] (renders close).
+    Generates an Impulse-response style chart with optional point-marker in code. The [url='https://www.scichart.com/documentation/win/current/The%20Impulse%20Chart%20Type.html']FastImpulseRenderableSeries[/url] can be used to render an [url='https://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries[/url], [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyyDataSeries%602.html']XyyDataSeries[/url]   (uses Y1 only) or [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries[/url] (renders close).
 
-    [b][i]Tip! [/i][/b] [i]You can add optional data-point markers to a impulse series using the [/i][url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17182/28/adding-data-pointmarkers']PointMarker API[/url][i]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.[/i]
+    [b][i]Tip! [/i][/b] [i]You can add optional data-point markers to a impulse series using the [/i][url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url][i]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.[/i]
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastImpulseRenderableSeries.html']FastImpulseRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries Type[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17176/28/what-is-a-renderableseries-and-what-is-a-dataseries']What is a RenderableSeries and what is a DataSeries?[/url]
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/List/Index/28']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Impulse%20Chart%20Type.html']FastImpulseRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyDataSeries%602.html']XyDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/What%20is%20a%20RenderableSeries.html']What is a RenderableSeries?[/url]
+    - [url='https://www.scichart.com/documentation/win/current/DataSeries%20Types%20in%20SciChart.html']DataSeries Types in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']Common RenderableSeries Properties[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateSimpleChart/ImpulseChartExampleView.xaml.txt</string>

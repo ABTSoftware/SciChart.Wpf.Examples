@@ -10,6 +10,7 @@ using SciChart.Charting.Visuals;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
+using SciChart.Data.Numerics.PointResamplers;
 using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers.Navigation;
@@ -49,7 +50,9 @@ namespace SciChart.Examples.Demo.ViewModels
             Use3DAA4x = false;
             Use3DAANone = true;
             EnableResamplingCPlusPlus = true;
-            EnableExtremeDrawingManager = true;
+            EnableExtremeDrawingManager = false;
+            EnableSimd = true;
+            EnableImpossibleMode = false;
             EnableDropShadows = true;
 
             Observable.CombineLatest(
@@ -167,6 +170,17 @@ namespace SciChart.Examples.Demo.ViewModels
                 this.SetDynamicValue(value);
 
                 RecreateStyles();
+            }
+        }
+
+        public bool EnableSimd
+        {
+            get => this.GetDynamicValue<bool>();
+            set
+            {
+                this.SetDynamicValue(value);
+
+                ExtremeResamplersFactory.Instance.AccelerationMode = value ? ExtremeResamplerAccelerationMode.Auto : ExtremeResamplerAccelerationMode.None;
             }
         }
 

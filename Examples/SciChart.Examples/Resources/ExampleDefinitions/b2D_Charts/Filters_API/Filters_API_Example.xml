@@ -7,9 +7,17 @@
     Demonstrates how to the the Filters API in SciChart WPF v5
   </ToolTipDescription>
   <Description>
-    Demonstrates the Filters API in SciChart WPF, which gives you the ability to add simple filters to DataSeries in SciChart. 
-    
-    Several built-in filters are included, such as Moving Average, Linear Trendline, Polynomial Trendline, Offset and Scale. You can also create your own filters by inheriting from FilterBase. 
+    Demonstrates the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']Filters API in SciChart WPF[/url], which gives you the ability to add simple filters to DataSeries in SciChart.
+
+    Several built-in filters are included, such as [url='https://www.scichart.com/documentation/win/current/webframe.html#Moving%20Average%20Filter.html']Moving Average[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#Linear%20Trendline,%20Polynomial%20Trendline%20Filters.html']Linear Trendline, Polynomial Trendline[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#Scale,%20Offset%20Filters.html']Offset and Scale[/url]. You can also create your own filters by inheriting from FilterBase.
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']What is the Filters API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Moving%20Average%20Filter.html']Moving Average Filter[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Linear%20Trendline,%20Polynomial%20Trendline%20Filters.html']Linear Trendline, Polynomial Trendline Filter[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Scale,%20Offset%20Filters.html']Offset and Scale Filter[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Ratio%20Filter.html']Ratio Filter[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Filter.html']Creating a Custom Filter[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/FiltersAPI/FiltersAPIExample.xaml.txt</string>

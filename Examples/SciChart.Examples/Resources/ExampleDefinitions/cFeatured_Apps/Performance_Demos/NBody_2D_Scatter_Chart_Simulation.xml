@@ -11,8 +11,8 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17227/36/performance-tips-and-tricks']Performance Tips and Tricks[/url]
-    - [url='http://www.scichart.com/how-fast-is-scichart-wpf-chart/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/UpdateScatter/UpdateScatterPointsView.xaml.txt</string>

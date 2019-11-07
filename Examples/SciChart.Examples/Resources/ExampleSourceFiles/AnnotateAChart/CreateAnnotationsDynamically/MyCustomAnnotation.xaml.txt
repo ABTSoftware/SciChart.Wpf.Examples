@@ -11,6 +11,7 @@
 
     <Image Width="178"
            Height="74"
-           Source="/SciChart.Examples;component/Resources/Images/SciChartLogo_Dark.png"
-           Stretch="None" />
+           Source="/SciChart.Examples.ExternalDependencies;Component/Resources/Images/SciChartLogo_Dark.png"
+           Stretch="None"/>
+
 </s:CustomAnnotation>

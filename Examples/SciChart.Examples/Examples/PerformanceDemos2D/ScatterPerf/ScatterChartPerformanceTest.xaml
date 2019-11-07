@@ -8,9 +8,8 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
+    
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -19,26 +18,35 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PM" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
+                        <StackPanel.Resources>
+                            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                                <Setter Property="Margin" Value="4"/>
+                                <Setter Property="Foreground" Value="#999"/>
+                                <Setter Property="IsHitTestVisible" Value="True"/>
+                                <Setter Property="s:ToggleButtonExtensions.GroupName" Value="PointMarkersGroup"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter Property="IsHitTestVisible" Value="False"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock Text="Point Markers" />
                         <ext:FlyoutSeparator/>
-
-                        <CheckBox x:Name="ChkEllipse" Margin="4" Content="Ellipse" IsChecked="True" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkTriangle" Margin="4" Content="Triangle" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkTriangleInverse" Margin="4" Content="Inverted Triangle" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkSquare" Margin="4" Content="Square" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkCross" Margin="4" Content="Cross" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkX" Margin="4" Content="X" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-                        <CheckBox x:Name="ChkSprite"  Margin="4" Content="Sprite (Custom)" IsChecked="False" Foreground="#999" s:ToggleButtonExtensions.GroupName="SelectPointMarkersGroup"/>
-
+                        <CheckBox x:Name="ChkEllipse" Content="Ellipse" IsChecked="True"/>
+                        <CheckBox x:Name="ChkTriangle" Content="Triangle"/>
+                        <CheckBox x:Name="ChkTriangleInverse" Content="Inverted Triangle"/>
+                        <CheckBox x:Name="ChkSquare" Content="Square"/>
+                        <CheckBox x:Name="ChkCross" Content="Cross"/>
+                        <CheckBox x:Name="ChkX" Content="X"/>
+                        <CheckBox x:Name="ChkSprite" Content="Sprite (Custom)"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
@@ -84,7 +92,7 @@
                         <s:SpritePointMarker>
                             <s:SpritePointMarker.PointMarkerTemplate>
                                 <ControlTemplate>
-                                    <!-- Custom pointmarker rendering an asterisk style using Canvas + Line -->
+                                    <!-- Custom point marker rendering an asterisk style using Canvas + Line -->
                                     <Canvas Width="7" Height="7">
                                         <Line StrokeThickness="1" Stroke="LimeGreen" X1="0" X2="7" Y1="0" Y2="7"/>
                                         <Line StrokeThickness="1" Stroke="LimeGreen" X1="0" X2="7" Y1="7" Y2="0"/>
@@ -121,17 +129,17 @@
                                     X1="0" 
                                     Y1="0" >
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Background="#80232323">
 
                         <TextBlock FontSize="20" 
                                    Opacity="0.7"
-                                   Background="#232323"
-                                   Margin="0 0 5 0"
+                                   Margin="5,0"
                                    Text="To change Point-Marker Type click" 
                                    Foreground="#FFF" />
 
                         <Image Width="32"
                                Height="32"
+                               Margin="0,0,5,0"
                                Source="/SciChart.Examples;component/Resources/Images/point_marker_icon.png"
                                Stretch="None" />
 
@@ -139,7 +147,14 @@
 
                 </s:CustomAnnotation>
 
-                <s:TextAnnotation CoordinateMode="Relative" X1="0.5" Y1="0.85"  Foreground="White" FontSize="16" Text="Zoom In and Out to feel the speeeed!" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Center" Opacity="0.9"></s:TextAnnotation>
+                <s:TextAnnotation CoordinateMode="Relative"
+                                  X1="0.5" Y1="0.85" 
+                                  Foreground="White"
+                                  FontSize="16"
+                                  Text="Zoom In and Out to feel the speeeed!"
+                                  HorizontalAnchorPoint="Center"
+                                  VerticalAnchorPoint="Center"
+                                  Opacity="0.9"/>
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
