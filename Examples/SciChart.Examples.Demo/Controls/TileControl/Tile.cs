@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using SciChart.Examples.Demo.Helpers;
 
 namespace SciChart.Examples.Demo.Controls.TileControl
 {
     [TemplatePart(Name = "PART_PaintArea", Type = typeof(Shape)),
      TemplatePart(Name = "PART_MainContent", Type = typeof(ContentPresenter))]
-    public class Tile : ButtonBase
+    public class Tile : Button
     {
         public static readonly DependencyProperty DetailedContentProperty = DependencyProperty.Register("DetailedContent", typeof(object), typeof(Tile), new PropertyMetadata(default(object)));
 

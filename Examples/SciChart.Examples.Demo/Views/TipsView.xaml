@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="850">
+             d:DesignHeight="600" d:DesignWidth="850"
+             AutomationProperties.AutomationId="TipsView">
     <Grid>
 
         <!-- Breadcrumb section -->
@@ -159,7 +160,8 @@
 
             <Border Height="1" Background="#333" VerticalAlignment="Bottom" Margin="5,0"/>
         
-            <Button Style="{StaticResource IconButtonStyle}" Width="NaN" Height="NaN" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Command="{Binding CloseHelpCommand}">
+            <Button AutomationProperties.AutomationId="TipsView.GotItButton" 
+                    Style="{StaticResource IconButtonStyle}" Width="NaN" Height="NaN" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Command="{Binding CloseHelpCommand}">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Border BorderThickness="2" Background="#1e1e1e" CornerRadius="5" BorderBrush="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">

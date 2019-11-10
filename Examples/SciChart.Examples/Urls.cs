@@ -10,5 +10,8 @@
         public static string GithubExampleRootUrl => "https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Examples/SciChart.Examples/Examples/";
 
         public static string DocumentationRootUrl => "https://www.scichart.com/wpf-chart-documentation";
+
+        public static string ReleaseArticle =>
+            "https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/";
     }
 }

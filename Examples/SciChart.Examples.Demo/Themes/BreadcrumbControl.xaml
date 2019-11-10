@@ -34,7 +34,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="breadcrumb:BreadcrumbControl">
                     <StackPanel Orientation="Horizontal">
-                        <Button Style="{TemplateBinding HomeButtonStyle}" Command="{TemplateBinding HomeCommand}"/>
+                        <Button Style="{TemplateBinding HomeButtonStyle}" Command="{TemplateBinding HomeCommand}"
+                                AutomationProperties.AutomationId="Breadcrumb.Home"/>
 
                         <ItemsControl ItemsSource="{TemplateBinding BreadcrumbItems}" Grid.Column="1">
                             <ItemsControl.ItemsPanel>
@@ -52,23 +53,6 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
-
-<!--                    <StackPanel Orientation="Horizontal">-->
-<!---->
-<!--                        -->
-<!---->
-<!--  -->
-<!---->
-<!--                        <TextBlock Margin="5,0" VerticalAlignment="Center" Text="Breadcrumb" Foreground="{StaticResource IconForeground}"/>-->
-<!---->
-<!--                        <Path Margin="5,0" VerticalAlignment="Center" Stroke="{StaticResource IconForegroundLight}" Opacity="0.25" StrokeThickness="1" -->
-<!--  StrokeMiterLimit="10" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" -->
-<!--  Data="M 0.8398 2.2956059e-4 0 0.54322956 9.7226 15.56863 l -9.7187 14.6269 0.832 0.5528 10.0821 -15.1739 z"></Path>-->
-<!---->
-<!--                        <TextBlock Margin="5,0" VerticalAlignment="Center" Text="Example" Foreground="{StaticResource IconForeground}"/>-->
-<!--                        -->
-<!--                    </StackPanel>-->
-    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

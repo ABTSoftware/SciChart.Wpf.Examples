@@ -200,7 +200,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public DoubleSeries GetSquirlyWave()
         {
             var doubleSeries = new DoubleSeries();
-            var rand = new Random((int)DateTime.Now.Ticks);
+            var rand = new Random(0);
 
             const int COUNT = 1000;
             for (int i = 0; i < COUNT; i++)            

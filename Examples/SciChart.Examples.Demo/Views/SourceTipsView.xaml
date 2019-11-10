@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="850">
+             d:DesignHeight="600" d:DesignWidth="850"
+             AutomationProperties.AutomationId="SourceTipsView">
     <Grid>
 
         <!-- Breadcrumb section -->

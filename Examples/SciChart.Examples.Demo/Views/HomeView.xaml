@@ -11,7 +11,8 @@
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              d:DesignHeight="800"
              d:DesignWidth="1198"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             AutomationProperties.AutomationId="HomeView">
     <UserControl.Resources>
 
         <demo:MainWindowViewModel x:Key="DesignTimeDataContext" />

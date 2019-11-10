@@ -201,6 +201,7 @@
                             Orientation="Horizontal">
                     <Button Command="{Binding GoBackCommand}" Style="{StaticResource BackButtonStyle}" />
                     <Button Margin="10,0,0,0"
+                            AutomationProperties.AutomationId="ShellControl.Home"
                             Command="{Binding NavigateToHomeCommand}"
                             Style="{StaticResource HomeButtonStyle}" />
                     <Button Margin="10,0,0,0"
@@ -208,6 +209,7 @@
                             Style="{StaticResource NextButtonStyle}" />
                     <ToggleButton Name="SettingsButton"
                                   Margin="10,0,0,0"
+                                  AutomationProperties.AutomationId="ShellControl.ShowSettings"
                                   Command="{Binding ShowSettingsCommand}"
                                   Style="{StaticResource SettingsButtonStyle}" />
                 </StackPanel>

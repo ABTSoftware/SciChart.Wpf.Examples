@@ -45,6 +45,7 @@
         <t:Tile Width="260"
                 Height="60"
                 Margin="0,0,8,8"
+                AutomationProperties.AutomationId="{Binding TileDataContext.Title}"
                 Background="{StaticResource GroupsItemBrush}"
                 Command="{Binding TileDataContext.SelectCommand}"
                 CommandParameter="{Binding TileDataContext}"

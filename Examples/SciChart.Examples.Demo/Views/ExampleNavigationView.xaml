@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="400"
+             AutomationProperties.AutomationId="ExampleNavigationView">
     
     <UserControl.Resources>
         <Style x:Key="BreadcrumbItemContainerStyle" TargetType="ListBoxItem" BasedOn="{StaticResource SourceCodeFileItemStyle}">

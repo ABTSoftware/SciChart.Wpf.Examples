@@ -14,7 +14,8 @@
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              d:DesignHeight="600"
              d:DesignWidth="800"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             AutomationProperties.AutomationId="ExampleView">
 
     <UserControl.Resources>
 
@@ -406,6 +407,7 @@
                                         HorizontalAlignment="Stretch"
                                         IsHitTestVisible="True"
                                         Style="{StaticResource transitioningFrameStyle}"
+                                        AutomationProperties.AutomationId="ExampleView.TransitioningFrame"
                                         tz:Transitionz.Opacity="{tz:OpacityParams From=0,
                                                                                     To=1,
                                                                                     Duration=100,

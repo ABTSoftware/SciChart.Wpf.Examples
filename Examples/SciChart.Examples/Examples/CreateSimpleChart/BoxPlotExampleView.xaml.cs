@@ -54,9 +54,9 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private IEnumerable<BoxPoint> GetBoxPlotData(int count)
         {
             var dates = Enumerable.Range(0, count).Select(i => new DateTime(2011, 01, 01).AddMonths(i)).ToArray();
-            var medianValues = new RandomWalkGenerator().GetRandomWalkSeries(count).YData;
+            var medianValues = new RandomWalkGenerator(0).GetRandomWalkSeries(count).YData;
 
-            var random = new Random();
+            var random = new Random(0);
             for (int i = 0; i < count; i++)
             {
                 double med = medianValues[i];

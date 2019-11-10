@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="SciChart.Examples.Demo.Splash"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ext:BoolToValueConverter x:Key="ib2vConverter" TrueValue="Collapsed" FalseValue="Visible"/>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Visibility="{Binding InitReady, Converter={StaticResource ib2vConverter}, FallbackValue=Visible}">
+            <StackPanel.Resources>
+                <ExponentialEase x:Key="ExponentialEase" Exponent="5"/>
+            </StackPanel.Resources>
+            <Image HorizontalAlignment="Center" Margin="10" Width="880" Stretch="Fill"
+                    VerticalAlignment="Top" Source="Resources/Images/scichartlogo.png" 
+                    tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500}"
+                    tz:Transitionz.Translate="{tz:TranslateParams From='0,50', To='0,0', Duration=500, Ease={StaticResource ExponentialEase}}">
+                <Image.Effect>
+                    <DropShadowEffect Color="#33000000"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock HorizontalAlignment="Center" Foreground="#999" FontSize="22" 
+                   FontStyle="Italic"                   
+                   tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, BeginTime=0}"
+                   >
+                <Run Text="SciChart SDK v6."/>
+                <Run Text="The World's Fastest WPF Charts" FontWeight="Black"/>
+            </TextBlock>
+            <TextBlock Text="Powered by our proprietary DirectX11 Visual Xccelerator® Engine" HorizontalAlignment="Center" Foreground="#777" FontSize="22" 
+                       FontStyle="Italic"                   
+                       tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, BeginTime=250}"
+            />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Find out more at " Foreground="#aaa" FontSize="16"/>
+                <TextBlock Text="scichart.com/scichart-wpf-v6" Foreground="#42B649" FontSize="16" Cursor="Hand"  MouseDown="UIElement_OnMouseDown"/>
+            </StackPanel>
+        </StackPanel>
+</UserControl>

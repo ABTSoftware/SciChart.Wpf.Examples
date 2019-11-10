@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
-             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views">
+             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
+             AutomationProperties.AutomationId="SourceCodeView">
 
     <UserControl.Resources>
         

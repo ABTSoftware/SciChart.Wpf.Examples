@@ -23,7 +23,7 @@ namespace SciChart.Examples.Demo
         {
         }
 
-        public  Task InitializeAsync()
+        public Task InitializeAsync()
         {            
             try
             {
@@ -63,7 +63,11 @@ namespace SciChart.Examples.Demo
 
                     //Direct3D11RenderSurface.InitEngineAsync().Then(r =>
                     //{
-                    await Task.Delay(3000);
+                    if (!App.QuickStart)
+                    {
+                        // Force delay to show splash
+                        await Task.Delay(3000);
+                    }
                     vm.InitReady = true;
                     //});
                 }

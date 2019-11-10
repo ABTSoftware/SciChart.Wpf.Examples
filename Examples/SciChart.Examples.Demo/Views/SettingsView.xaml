@@ -9,7 +9,8 @@
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"
              xmlns:visualXcceleratorRasterizer="clr-namespace:SciChart.Drawing.VisualXcceleratorRasterizer;assembly=SciChart.Drawing"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             AutomationProperties.AutomationId="SettingsView">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:RendererTypeToDisplayNameConverter x:Key="RendererConverter" />

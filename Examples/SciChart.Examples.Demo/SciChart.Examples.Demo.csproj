@@ -22,6 +22,8 @@
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Helpers\HtmlExport\ExportedExampleIndex.html" />
+    <None Remove="Helpers\HtmlExport\ExportedExampleTemplate.html" />
     <None Remove="Helpers\ProjectExport\Templates\App.config.txt" />
     <None Remove="Helpers\ProjectExport\Templates\App.xaml.c.txt" />
     <None Remove="Helpers\ProjectExport\Templates\App.xaml.txt" />
@@ -65,6 +67,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Helpers\HtmlExport\ExportedExampleIndex.html" />
+    <EmbeddedResource Include="Helpers\HtmlExport\ExportedExampleTemplate.html" />
     <EmbeddedResource Include="Helpers\ProjectExport\Templates\App.config.txt" />
     <EmbeddedResource Include="Helpers\ProjectExport\Templates\App.xaml.c.txt" />
     <EmbeddedResource Include="Helpers\ProjectExport\Templates\App.xaml.txt" />
@@ -106,15 +110,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.0.12693-beta" />
+    <PackageReference Include="SciChart" Version="6.0.0.12724-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.0.12693-beta" />
+    <PackageReference Include="SciChart3D" Version="6.0.0.12724-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12693-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.0.0.12724-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12693-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.0.0.12724-beta" />
   </ItemGroup>
 </Project>

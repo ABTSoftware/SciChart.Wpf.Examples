@@ -4,9 +4,10 @@
              xmlns:common="clr-namespace:SciChart.Examples.Demo.Common"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors" xmlns:System="clr-namespace:System;assembly=mscorlib"
-    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
-    x:Class="SciChart.Examples.Demo.Views.EverythingView"
-             >
+             xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+             xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls"
+             x:Class="SciChart.Examples.Demo.Views.EverythingView"
+             AutomationProperties.AutomationId="EverythingView">
     
     <UserControl.Resources>
 
@@ -44,10 +45,11 @@
             </StackPanel>
         </Border>
 
-        <ItemsControl Margin="0,10" Grid.Row="1"
-			ItemTemplate="{StaticResource EverythingDataTemplate}"
-			ItemsSource="{Binding EverythingSource}">
-            <ItemsControl.ItemsPanel>
+        <controls:ItemsControlWithUIAutomation Margin="0,10" Grid.Row="1"
+                      AutomationProperties.AutomationId="ExamplesWrapPanel"
+			          ItemTemplate="{StaticResource EverythingDataTemplate}"
+			          ItemsSource="{Binding EverythingSource}">
+            <controls:ItemsControlWithUIAutomation.ItemsPanel>
                 <ItemsPanelTemplate>
                     <common:WrapPanelCompatible Orientation="Horizontal" >
                         <!--                        <i:Interaction.Behaviors>-->
@@ -55,7 +57,7 @@
                         <!--                        </i:Interaction.Behaviors>-->
                     </common:WrapPanelCompatible>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+            </controls:ItemsControlWithUIAutomation.ItemsPanel>
+        </controls:ItemsControlWithUIAutomation>
     </Grid>
 </UserControl>

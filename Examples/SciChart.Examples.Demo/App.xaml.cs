@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
 using Unity;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -18,9 +21,10 @@ namespace SciChart.Examples.Demo
     /// </summary>
     public partial class App : Application
     {
-        private static readonly ILogFacade Log = LogManagerFacade.GetLogger(typeof(App));
+        private static ILogFacade _log;
         private Bootstrapper _bootStrapper;
-        private const string _devMode = "/devmode";
+        private const string _devMode = "/DEVMODE";
+        private const string _quickStart = "/QUICKSTART";
 
         public App()
         {
@@ -29,6 +33,21 @@ namespace SciChart.Examples.Demo
 
             InitializeComponent();
         }
+        
+        public ILogFacade Log
+        {
+            get
+            {
+                if (QuickStart) return new ConsoleLogger();
+                _log = _log ?? LogManagerFacade.GetLogger(typeof(App));
+                return _log;
+            }
+        }
+
+        /// <summary>
+        /// Quickstart is enabled when /quickStart is passed as command argument, and enables as fast as possible startup without animations, delays or unnecessary services. Used by UIAutomationTests
+        /// </summary>
+        public static bool QuickStart { get; private set; }
 
         private void App_DispatcherUnhandledException(object sender,
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -47,9 +66,16 @@ namespace SciChart.Examples.Demo
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Contains(_devMode))
+            if (e.Args.Contains(_devMode, StringComparer.InvariantCultureIgnoreCase))
             {
                 DeveloperModManager.Manage.IsDeveloperMode = true;
+            }
+
+            if (e.Args.Contains(_quickStart, StringComparer.InvariantCultureIgnoreCase))
+            {
+                // Used in automation testing, disable animations and delays in transitions 
+                QuickStart = true;
+                SeriesAnimationBase.GlobalEnableAnimations = false;
             }
 
             try
@@ -96,14 +122,17 @@ namespace SciChart.Examples.Demo
 
         private void OnExit(object sender, ExitEventArgs exitEventArgs)
         {
-            var usageCalc = ServiceLocator.Container.Resolve<IUsageCalculator>();
-            usageCalc.UpdateUsage(null);
+            if (!QuickStart)
+            {
+                var usageCalc = ServiceLocator.Container.Resolve<IUsageCalculator>();
+                usageCalc.UpdateUsage(null);
 
-            var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
+                var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
 
-            // Consider doing this a bit more often.
-            syncHelper.SendUsagesToServer();
-            syncHelper.WriteToIsolatedStorage();
+                // Consider doing this a bit more often.
+                syncHelper.SendUsagesToServer();
+                syncHelper.WriteToIsolatedStorage();
+            }
         }
     }
 }
