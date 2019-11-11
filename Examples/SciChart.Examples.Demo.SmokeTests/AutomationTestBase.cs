@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Tools;
 using NUnit.Framework;
 
 namespace SciChart.Examples.Demo.SmokeTests
@@ -12,6 +14,8 @@ namespace SciChart.Examples.Demo.SmokeTests
     {
         public const double DefaultDpiX = 96.0;
         public const double DefaultDpiY = 96.0;
+        private const int BigWaitTimeout = 3000;
+        private const int SmallWaitTimeout = 1000;
 
         public static string ResourcesPath = @"SciChart\Examples\Demo\SmokeTests\Resources\Expectations\";
         public static string ExportActualPath = Path.Combine(
@@ -231,6 +235,29 @@ namespace SciChart.Examples.Demo.SmokeTests
             }
 
             return bmp;
+        }
+
+        public T WaitForElement<T>(Func<T> getter)
+        {
+            var retry = Retry.WhileNull<T>(
+                getter,
+                TimeSpan.FromMilliseconds(BigWaitTimeout));
+
+            if (!retry.Success)
+            {
+                Assert.Fail($"Failed to get an element within a {BigWaitTimeout}ms");
+            }
+
+            return retry.Result;
+        }
+
+        public void WaitUntilClosed(AutomationElement element)
+        {
+            var result = Retry.WhileFalse(() => element.IsOffscreen, TimeSpan.FromMilliseconds(BigWaitTimeout));
+            if (!result.Success)
+            {
+                Assert.Fail($"Element failed to go offscreen within {BigWaitTimeout}ms");
+            }
         }
 
         private WriteableBitmap DecodePngStream(Stream pngStream)

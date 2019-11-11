@@ -50,8 +50,11 @@ namespace SciChart.Examples.Demo.Helpers
                 //_previousContentPresentationSite.Content = oldContent;
                 //_previousContentPresentationSite.IsHitTestVisible = false;
 
-                VisualStateManager.GoToState(this, "Normal", false);
-                VisualStateManager.GoToState(this, "Transition", true);
+                if (!App.QuickStart)
+                {
+                    VisualStateManager.GoToState(this, "Normal", false);
+                    VisualStateManager.GoToState(this, "Transition", true);
+                }
             }
         }
     }

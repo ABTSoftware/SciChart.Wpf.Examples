@@ -27,6 +27,12 @@ namespace SciChart.Examples.Demo
             {
                 this.WindowState = WindowState.Maximized;                
             }
+
+            // Always topmost if /quickstart mode used by UIAutomationTests
+            if (App.QuickStart)
+            {
+                this.Topmost = true;
+            }
         }
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)

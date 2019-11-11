@@ -36,7 +36,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         private IList<Instrument> _availableInstruments;
         private IDictionary<Instrument, IList<TimeFrame>> _availableTimeFrames;
 
-        private Random _random = new Random();
+        private Random _random = new Random(0);
 
         public static DataManager Instance
         {
@@ -49,6 +49,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
             {
                 return "SciChart.Examples.ExternalDependencies.Resources.Data";
             }
+        }
+
+        public void SetRandomSeed(int seed)
+        {
+            _random = new Random(seed);
         }
 
         public double GetGaussianRandomNumber(double mean, double stdDev)

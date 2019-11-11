@@ -11,22 +11,30 @@ using NUnit.Framework;
 
 namespace SciChart.Examples.Demo.SmokeTests
 {
+    /// <summary>
+    /// Smoke tests which start/stop the application once per test. In this test fixture we create a new SciChart.Examples.Demo application
+    /// per test. Theese are slow (about 5 seconds per test) but each test is completely isolated from the previous test.
+    ///
+    /// We pass the argument /quickStart to the SciChart.Examples.Demo.exe. This sets the flag App.QuickStart = true, which
+    /// disables startup delays, series animations and usage service HTTP comms. This makes the application faster to get in and less
+    /// waiting for transitions to complete 
+    /// </summary>
     [TestFixture]
     [Category("UIAutomationTests")]
-    public class SmokeTests : AutomationTestBase
+    [Ignore("Superceded by SmokeTests_ExampleWalkUsingBreadcrumbView")]
+    public class SmokeTests_NewAppPerTest : AutomationTestBase
     {
         private Application _theApp;
         private UIA3Automation _automation;
         private Window _mainWindow;
         private Stopwatch _stopwatch;
-        private const int BigWaitTimeout = 3000;
-        private const int SmallWaitTimeout = 1000;
         const double DefaultTolerance = 0.5;
         private const bool ExportActualForTest = false;
 
         [SetUp]
         public void Setup()
         {
+            // Create the app
             _theApp = FlaUI.Core.Application.Launch(new ProcessStartInfo("SciChart.Examples.Demo.exe", "/quickStart"));
             _automation = new UIA3Automation();
             _mainWindow = _theApp.GetMainWindow(_automation);
@@ -35,11 +43,13 @@ namespace SciChart.Examples.Demo.SmokeTests
             // TODO: click AutomationProperties.AutomationId="ShellControl.Home"
             // ShellControl.ShowSettings
             // Breadcrumb.Home
+            // ExampleNavigationView.CloseButton
         }
 
         [TearDown]
         public void Teardown()
         {
+            // Shutdown the app 
             _automation?.Dispose();
             _theApp?.Close();
             _stopwatch.Stop();
@@ -48,16 +58,16 @@ namespace SciChart.Examples.Demo.SmokeTests
 
         [Test]
         [TestCase("Band Series Chart", "Charts2D/CreateSimpleChart/BandSeriesChart.png", DefaultTolerance)]
-        [TestCase("Box Plot", "Charts2D/CreateSimpleChart/BoxPlot.png", DefaultTolerance)]
-        [TestCase("Bubble Chart", "Charts2D/CreateSimpleChart/BubbleChart.png", DefaultTolerance)]
-        [TestCase("Candlestick Chart", "Charts2D/CreateSimpleChart/CandlestickChart.png", DefaultTolerance)]
-        [TestCase("Digital Band Series Chart", "Charts2D/CreateSimpleChart/DigitalBandSeriesChart.png", DefaultTolerance)]
-        [TestCase("Digital Line Chart", "Charts2D/CreateSimpleChart/DigitalLineChart.png", DefaultTolerance)]
-        [TestCase("Impulse (Stem) Chart", "Charts2D/CreateSimpleChart/ImpulseStemChart.png", DefaultTolerance)]
-        [TestCase("Line Chart", "Charts2D/CreateSimpleChart/LineChart.png", DefaultTolerance)]
-        [TestCase("Mountain Chart", "Charts2D/CreateSimpleChart/MountainChart.png", DefaultTolerance)]
-        [TestCase("Polar Chart", "Charts2D/CreateSimpleChart/PolarChart.png", DefaultTolerance)]
-        [TestCase("Scatter Chart", "Charts2D/CreateSimpleChart/ScatterChart.png", DefaultTolerance)]
+        //[TestCase("Box Plot", "Charts2D/CreateSimpleChart/BoxPlot.png", DefaultTolerance)]
+        //[TestCase("Bubble Chart", "Charts2D/CreateSimpleChart/BubbleChart.png", DefaultTolerance)]
+        //[TestCase("Candlestick Chart", "Charts2D/CreateSimpleChart/CandlestickChart.png", DefaultTolerance)]
+        //[TestCase("Digital Band Series Chart", "Charts2D/CreateSimpleChart/DigitalBandSeriesChart.png", DefaultTolerance)]
+        //[TestCase("Digital Line Chart", "Charts2D/CreateSimpleChart/DigitalLineChart.png", DefaultTolerance)]
+        //[TestCase("Impulse (Stem) Chart", "Charts2D/CreateSimpleChart/ImpulseStemChart.png", DefaultTolerance)]
+        //[TestCase("Line Chart", "Charts2D/CreateSimpleChart/LineChart.png", DefaultTolerance)]
+        //[TestCase("Mountain Chart", "Charts2D/CreateSimpleChart/MountainChart.png", DefaultTolerance)]
+        //[TestCase("Polar Chart", "Charts2D/CreateSimpleChart/PolarChart.png", DefaultTolerance)]
+        //[TestCase("Scatter Chart", "Charts2D/CreateSimpleChart/ScatterChart.png", DefaultTolerance)]
         public void AssertExampleStarts(string exampleName, string resourceName, double tolerance)
         {
             // Get the example button and click it 
@@ -111,29 +121,6 @@ namespace SciChart.Examples.Demo.SmokeTests
                 }
                 Assert.True(CompareBitmaps(resourceName, actualBitmap, expectedBitmap, tolerance));
             }
-        }
-
-        private void WaitUntilClosed(AutomationElement element)
-        {
-            var result = Retry.WhileFalse(() => element.IsOffscreen, TimeSpan.FromMilliseconds(BigWaitTimeout));
-            if (!result.Success)
-            {
-                Assert.Fail($"Element failed to go offscreen within {BigWaitTimeout}ms" );
-            }
-        }
-
-        private T WaitForElement<T>(Func<T> getter)
-        {
-            var retry = Retry.WhileNull<T>(
-                () => getter(),
-                TimeSpan.FromMilliseconds(BigWaitTimeout));
-
-            if (!retry.Success)
-            {
-                Assert.Fail($"Failed to get an element within a {BigWaitTimeout}ms");
-            }
-
-            return retry.Result;
         }
     }
 }

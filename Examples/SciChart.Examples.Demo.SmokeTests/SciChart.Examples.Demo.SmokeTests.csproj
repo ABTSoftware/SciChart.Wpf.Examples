@@ -47,7 +47,8 @@
     </Compile>
     <Compile Include="AutomationTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmokeTests.cs" />
+    <Compile Include="SmokeTests_ExampleWalkUsingBreadcrumbView.cs" />
+    <Compile Include="SmokeTests_NewAppPerTest.cs" />
     <Compile Include="WriteableBitmapExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,26 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BandSeriesChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\AnnotationsAreEasy.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\ClosedSurfaceMesh3D.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleBubble3DChart.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleCylindroid3DChart.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleEllipsoid3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\NonUniformSurfaceMesh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CompositeAnnotations.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CreateAnnotationsDynamically.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DatapointMarkers.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DragHorizontalThreshold.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\InteractionWithAnnotations.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\PolarChartAnnotations.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeAnnotations.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeMarkers.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

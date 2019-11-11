@@ -4,17 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls"
+             xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400"
              AutomationProperties.AutomationId="ExampleNavigationView">
     
     <UserControl.Resources>
+
         <Style x:Key="BreadcrumbItemContainerStyle" TargetType="ListBoxItem" BasedOn="{StaticResource SourceCodeFileItemStyle}">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Width" Value="NaN"/>
             <Setter Property="Height" Value="NaN"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=.}"/>
         </Style>
 
         <DataTemplate x:Key="BreadCrumbChartCategoryItemTemplate">
@@ -38,10 +42,10 @@
         
         <DataTemplate x:Key="BreadCrumbChartGroupItemTemplate">
             <TextBlock Margin="5,10"
-                   HorizontalAlignment="Left"
-                   Style="{StaticResource DefaultTextStyle}"
-                   Text="{Binding Path=.}"
-                   TextWrapping="Wrap" />
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource DefaultTextStyle}"
+                       Text="{Binding Path=.}"
+                       TextWrapping="Wrap" />
         </DataTemplate>
 
         <DataTemplate x:Key="BreadCrumbExampleItemTemplate">
@@ -80,17 +84,20 @@
 
         <TextBlock Foreground="#FFF" Text="SCICHART Examples | You are Here"  Grid.ColumnSpan="3" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="20"/>
         <Button Margin="0" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Command="{Binding HideNavigationCommand}" 
+                AutomationProperties.AutomationId="ExampleNavigationView.CloseButton"
                 Style="{StaticResource CloseButtonStyle}" />
         <Border Height="1" Background="{StaticResource IconForeground}" HorizontalAlignment="Stretch" Grid.Row="1" Margin="0,10" Grid.ColumnSpan="4"/>
 
         <ListBox ItemsSource="{Binding AllTopLevelCategories}" SelectedItem="{Binding SelectedTopLevelCategory, Mode=TwoWay}"  Grid.Column="0" Grid.Row="2"
+                 AutomationProperties.AutomationId="CategoryListBox"
                  ItemContainerStyle="{StaticResource BreadcrumbItemContainerStyle}"
                  ItemTemplate="{StaticResource BreadCrumbChartCategoryItemTemplate}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                  Background="Transparent" BorderThickness="0" Margin="10">
         </ListBox>
-        
+
         <ListBox ItemsSource="{Binding AllChartGroups}" SelectedItem="{Binding SelectedChartGroup, Mode=TwoWay}"  Grid.Column="1" Grid.Row="2"
+                                          AutomationProperties.AutomationId="GroupsListBox"
                  ItemContainerStyle="{StaticResource BreadcrumbItemContainerStyle}"
                  ItemTemplate="{StaticResource BreadCrumbChartGroupItemTemplate}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
@@ -98,6 +105,7 @@
         </ListBox>
 
         <ListBox ItemsSource="{Binding Examples}" SelectedItem="{Binding SelectedExample, Mode=TwoWay}" Grid.Column="2" Grid.Row="2"
+                                          AutomationProperties.AutomationId="ExamplesListBox"
                  ItemContainerStyle="{StaticResource BreadcrumbItemContainerStyle}"
                  Background="Transparent" BorderThickness="0" Margin="10"
                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"

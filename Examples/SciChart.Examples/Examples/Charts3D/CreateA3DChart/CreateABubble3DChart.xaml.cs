@@ -45,6 +45,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 
             var random = new Random(0);
 
+            DataManager.Instance.SetRandomSeed(0); // required only by some UIAutomationTests, to have consistent results between test runs 
             for (var i = 0; i < count; i++)
             {
                 var x = DataManager.Instance.GetGaussianRandomNumber(5, 1.5);
