@@ -60,6 +60,7 @@
                 Margin="0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
+                AutomationProperties.AutomationId="ExportExampleView.CloseButton"
                 Command="{Binding CancelCommand}"
                 Style="{StaticResource CloseButtonStyle}" />
 
@@ -70,6 +71,7 @@
                  VerticalScrollBarVisibility="Auto"
                  MaxHeight="80"
                  TextWrapping="Wrap"
+                 AutomationProperties.AutomationId="ExportExampleView.ExportPathTextBox"
                  Text="{Binding ExportPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  behaviors:TextBoxHelpers.WatermarkContent="Export Path" />
 
@@ -89,6 +91,7 @@
                  VerticalScrollBarVisibility="Auto"
                  MaxHeight="80"
                  TextWrapping="Wrap"
+                 AutomationProperties.AutomationId="ExportExampleView.SciChartLibPath"
                  IsEnabled="{Binding IsAssemblyOk, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}"
                  Text="{Binding LibrariesPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  behaviors:TextBoxHelpers.WatermarkContent="SciChart Lib Path" />
@@ -109,6 +112,7 @@
                     Orientation="Horizontal">
             <Button Width="80"
                     Command="{Binding OkCommand}"
+                    AutomationProperties.AutomationId="ExportExampleView.ExportButton"
                     Content="GO" />
         </StackPanel>
 

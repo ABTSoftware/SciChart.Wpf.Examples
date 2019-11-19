@@ -81,7 +81,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
         private IEnumerable<VarPoint> GetVarianceData()
         {
             var dates = Enumerable.Range(0, 10).Select(i => new DateTime(2011, 01, 01).AddMonths(i)).ToArray();
-            var yValues = new RandomWalkGenerator().GetRandomWalkSeries(10).YData;
+            var yValues = new RandomWalkGenerator(seed: 0).GetRandomWalkSeries(10).YData;
 
             for (int i = 0; i < 10; i++)
             {

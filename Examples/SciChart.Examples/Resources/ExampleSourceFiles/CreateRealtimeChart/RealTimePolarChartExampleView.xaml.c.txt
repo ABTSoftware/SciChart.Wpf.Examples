@@ -28,7 +28,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
     public partial class RealTimePolarChart : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        readonly Random _random = new Random();
+        private readonly Random _random = new Random();
         private double _lastAmplitude = 1.0;
         private DispatcherTimer _timer;
 
@@ -45,17 +45,17 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         {
             var newDataSeries = new XyDataSeries<double, double>();
 
-            // Create a noisy sinewave and cache
-            // All this code is about the generation of data to create a nice randomized sinewave with 
+            // Create a noisy sine wave and cache
+            // All this code is about the generation of data to create a nice randomized sine wave with 
             // varying phase and amplitude
-            var randomAmplitude = Constrain(_lastAmplitude + ((_random.NextDouble()) - 0.50)/2, -2.0, 2.0);
+            var randomAmplitude = Constrain(_lastAmplitude + (_random.NextDouble() - 0.50) / 2, -2.0, 2.0);
             const double phase = 0.0;
-            var noisySinewave = DataManager.Instance.GetNoisySinewave(randomAmplitude, phase, 1000, 0.25);
+
+            var noisySineWave = DataManager.Instance.GetNoisySinewave(randomAmplitude, phase, 1000, 0.25);
             _lastAmplitude = randomAmplitude;
 
             // Append to a new dataseries
-            newDataSeries.Append(noisySinewave.XData, noisySinewave.YData);
-
+            newDataSeries.Append(noisySineWave.XData, noisySineWave.YData);
 
             lineSeries.DataSeries = newDataSeries;
         }
@@ -77,9 +77,11 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         {
             if (_timer == null)
             {
-                _timer = new DispatcherTimer(DispatcherPriority.Render);
+                _timer = new DispatcherTimer(DispatcherPriority.Render)
+                {
+                    Interval = TimeSpan.FromMilliseconds(Slider.Value)
+                };
 
-                _timer.Interval = TimeSpan.FromMilliseconds(Slider.Value);
                 _timer.Tick += TimerOnElapsed;
 
                 _timer.Start();

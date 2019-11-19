@@ -63,7 +63,7 @@ namespace SciChart.Examples.Demo
 
                     //Direct3D11RenderSurface.InitEngineAsync().Then(r =>
                     //{
-                    if (!App.QuickStart)
+                    if (!App.UIAutomationTestMode)
                     {
                         // Force delay to show splash
                         await Task.Delay(3000);

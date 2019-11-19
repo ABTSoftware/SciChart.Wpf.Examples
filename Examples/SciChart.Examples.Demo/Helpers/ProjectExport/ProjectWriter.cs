@@ -24,6 +24,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly string ExternalDependencies = @"SciChart.Examples.ExternalDependencies.dll";
         
         public static readonly string ProjectFileName = "ProjectFile.csproj";
+        public static readonly string SolutionFileName = "SolutionFile.sln";
         public static readonly string MainWindowFileName = "MainWindow.xaml";
         public static readonly string AssemblyInfoFileName = "AssemblyInfo.cs";
         public static readonly string ClrNamespace = "clr-namespace:";
@@ -54,7 +55,9 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
             string projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
             files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, projectName, assembliesPath + @"\");
+            files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
             files.RenameKey(ProjectFileName, projectName + ".csproj");
+            files.RenameKey(SolutionFileName, projectName + ".sln");
 
             files[MainWindowFileName] = GenerateShellFile(files[MainWindowFileName], example).Replace("[ExampleTitle]", example.Title);
 
@@ -67,7 +70,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
             if (showMessageBox)
             {
-                MessageBox.Show(string.Format("The {0} example was succesfully exported to {1}", example.Title, selectedPath + projectName), 
+                MessageBox.Show(Application.Current.MainWindow, string.Format("The {0} example was successfully exported to {1}", example.Title, selectedPath + projectName), 
                     "Success!");
             }
 
@@ -80,6 +83,13 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 .Replace("SciChart.Examples.Demo.Helpers.ProjectExport.Templates.", string.Empty)
                 .Replace(".c.", ".cs.")
                 .Replace(@".txt", string.Empty);
+        }
+
+        private static string GenerateSolutionFile(string file, string projectName)
+        {
+            var fileContents = file.Replace("[PROJECTNAME]", projectName);
+
+            return fileContents;
         }
 
         private static string GenerateProjectFile(string projFileSource, Example example, string projectName, string assembliesPath)
@@ -96,7 +106,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
                 var elements = projXml.Root.Elements().Where(x => x.Name.LocalName == "ItemGroup").ToList();
 
-                //Add appropriate References
+                // Add appropriate References
                 var el = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
                 el.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
                 elements[0].Add(el);
@@ -105,6 +115,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 //                el2.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, Interactivity)));
 //                elements[0].Add(el2);
 
+                // Add assembly references
                 foreach (var asmName in AssembliesNames)
                 {
                     el = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));

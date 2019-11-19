@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.CreateTernaryChart
 {
@@ -10,12 +11,12 @@ namespace SciChart.Examples.Examples.CreateTernaryChart
     public partial class ScatterSeriesTernaryChartExampleView : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private Random _random;
+        private RandomWalkGenerator _random;
         public ScatterSeriesTernaryChartExampleView()
         {
             InitializeComponent();
 
-            _random = new Random();
+            _random = new RandomWalkGenerator(seed: 0);
 
             // scatters series
             var scatterDataSeries1 = new XyzDataSeries<double> { AcceptsUnsortedData = true, SeriesName = "Substance A" };

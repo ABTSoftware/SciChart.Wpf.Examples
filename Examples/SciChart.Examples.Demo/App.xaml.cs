@@ -24,7 +24,7 @@ namespace SciChart.Examples.Demo
         private static ILogFacade _log;
         private Bootstrapper _bootStrapper;
         private const string _devMode = "/DEVMODE";
-        private const string _quickStart = "/QUICKSTART";
+        private const string _quickStart = "/UIAUTOMATIONTESTMODE";
 
         public App()
         {
@@ -38,16 +38,16 @@ namespace SciChart.Examples.Demo
         {
             get
             {
-                if (QuickStart) return new ConsoleLogger();
+                if (UIAutomationTestMode) return new ConsoleLogger();
                 _log = _log ?? LogManagerFacade.GetLogger(typeof(App));
                 return _log;
             }
         }
 
         /// <summary>
-        /// Quickstart is enabled when /quickStart is passed as command argument, and enables as fast as possible startup without animations, delays or unnecessary services. Used by UIAutomationTests
+        /// UIAutomationTestMode is enabled when /uiautomationTestMode is passed as command argument, and enables as fast as possible startup without animations, delays or unnecessary services. Used by UIAutomationTests
         /// </summary>
-        public static bool QuickStart { get; private set; }
+        public static bool UIAutomationTestMode { get; private set; }
 
         private void App_DispatcherUnhandledException(object sender,
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -74,7 +74,7 @@ namespace SciChart.Examples.Demo
             if (e.Args.Contains(_quickStart, StringComparer.InvariantCultureIgnoreCase))
             {
                 // Used in automation testing, disable animations and delays in transitions 
-                QuickStart = true;
+                UIAutomationTestMode = true;
                 SeriesAnimationBase.GlobalEnableAnimations = false;
             }
 
@@ -122,7 +122,7 @@ namespace SciChart.Examples.Demo
 
         private void OnExit(object sender, ExitEventArgs exitEventArgs)
         {
-            if (!QuickStart)
+            if (!UIAutomationTestMode)
             {
                 var usageCalc = ServiceLocator.Container.Resolve<IUsageCalculator>();
                 usageCalc.UpdateUsage(null);

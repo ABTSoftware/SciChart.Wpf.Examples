@@ -18,6 +18,7 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Arial Black" />
             <Setter Property="FontWeight" Value="Bold" />
+            <!-- Displays a border on the inner SciChartSurface -->
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="BorderBrush" Value="SteelBlue" />
         </Style>
@@ -25,6 +26,7 @@
         <!--  Define styles for the GridLinesPanel  -->
         <Style x:Key="GridLinesPanelStyle" TargetType="s:GridLinesPanel">
             <Setter Property="Background" Value="Pink" />
+            <!-- NOTE: Do not set BorderThickness, BorderBrush here. Instead set it on SciChartSurface to get an inner chart border -->
         </Style>
 
         <Style x:Key="LeftAxisLabelStyle" TargetType="s:DefaultTickLabel">

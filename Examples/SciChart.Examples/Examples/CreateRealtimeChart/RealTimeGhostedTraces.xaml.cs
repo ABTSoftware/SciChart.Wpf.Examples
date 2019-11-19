@@ -28,8 +28,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         private double _lastAmplitude = 1.0;
 
         private DispatcherTimer _timer;
-
-        readonly Random _random = new Random();
+        private readonly Random _random = new Random();
 
         public RealTimeGhostedTraces()
         {
@@ -37,24 +36,25 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         }
 
         /// <summary>
-        ///     Every X milliseconds we create a new DataSeries and append new data to it. We also enqueue this into a circular buffer of 10 Data-Series. 
-        ///     Then, all the DataSeries are re-assigned to RenderableSeries with varying opacity. This gives the impression of a trace 'ghosting' - becoming
-        ///     more transparent as time elapses. 
+        /// Every X milliseconds we create a new DataSeries and append new data to it. We also enqueue this into a circular buffer of 10 Data-Series. 
+        /// Then, all the DataSeries are re-assigned to RenderableSeries with varying opacity. This gives the impression of a trace 'ghosting' - becoming
+        /// more transparent as time elapses. 
         /// </summary>
         private void TimerOnElapsed(object sender, EventArgs e)
         {
             var newDataSeries = new XyDataSeries<double, double>();
 
-            // Create a noisy sinewave and cache
-            //  All this code is about the generation of data to create a nice randomized sinewave with 
+            // Create a noisy sine wave and cache
+            //  All this code is about the generation of data to create a nice randomized sine wave with 
             //  varying phase and amplitude
-            double randomAmplitude = Constrain(_lastAmplitude + ((_random.NextDouble()) - 0.50), -2.0, 2.0);
+            double randomAmplitude = Constrain(_lastAmplitude + (_random.NextDouble() - 0.50), -2.0, 2.0);
             const double phase = 0.0;
-            var noisySinewave = DataManager.Instance.GetNoisySinewave(randomAmplitude, phase, 1000, 0.25);
+
+            var noisySineWave = DataManager.Instance.GetNoisySinewave(randomAmplitude, phase, 1000, 0.25);
             _lastAmplitude = randomAmplitude;
 
             // Append to a new dataseries
-            newDataSeries.Append(noisySinewave.XData, noisySinewave.YData);
+            newDataSeries.Append(noisySineWave.XData, noisySineWave.YData);
 
             // Enqueue to the circular buffer
             _dataSeries.Add(newDataSeries);
@@ -69,8 +69,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         }
 
         /// <summary>
-        ///     This method shifts all the data series, e.g. if you have RenderableSeries 0-9 and DataSeries 0-9, after 
-        ///     a shift Dataseries 1-10 will be applied to renderableseries 0-9
+        /// This method shifts all the data series, e.g. if you have RenderableSeries 0-9 and DataSeries 0-9, after 
+        /// a shift Dataseries 1-10 will be applied to renderableseries 0-9
         /// </summary>
         /// <param name="dataSeries"></param>
         private void ReassignRenderableSeries(CircularBuffer<XyDataSeries<double, double>> dataSeries)
@@ -106,9 +106,11 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         {
             if (_timer == null)
             {
-                _timer = new DispatcherTimer(DispatcherPriority.Render);
+                _timer = new DispatcherTimer(DispatcherPriority.Render)
+                {
+                    Interval = TimeSpan.FromMilliseconds(Slider.Value)
+                };
 
-                _timer.Interval = TimeSpan.FromMilliseconds(Slider.Value);
                 _timer.Tick += TimerOnElapsed;
 
                 _timer.Start();

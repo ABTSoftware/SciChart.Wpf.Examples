@@ -24,20 +24,20 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 {
     public partial class RealtimeFifoChartView : UserControl
     {
-        // Data Sample Rate (sec)  - 20 Hz
-        private double dt = 0.02;
+        // Data Sample Rate (sec) - 20 Hz
+        private readonly double dt = 0.02;
 
         // FIFO Size is 200 samples, meaning after 200 samples have been appended, each new sample appended
         // results in one sample being discarded
-        private int FifoSize = 200;
+        private readonly int FifoSize = 200;
 
         // Timer to process updates
-        private Timer _timerNewDataUpdate;
+        private readonly Timer _timerNewDataUpdate;
 
         // The current time
         private double t;
 
-        Random _random = new Random();
+        readonly Random _random = new Random();
 
         // The dataseries to fill
         private IXyDataSeries<double, double> series0;
@@ -50,8 +50,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         {
             InitializeComponent();
 
-            _timerNewDataUpdate = new Timer(dt * 1000);
-            _timerNewDataUpdate.AutoReset = true;
+            _timerNewDataUpdate = new Timer(dt * 1000) {AutoReset = true};
             _timerNewDataUpdate.Elapsed += OnNewData;
             
             CreateDataSetAndSeries();
@@ -85,23 +84,20 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 
         private void ClearDataSeries()
         {
-            if (series0 == null)
-                return;
-
             using (sciChart.SuspendUpdates())
             {
-                series0.Clear();
-                series1.Clear();
-                series2.Clear();
+                series0?.Clear();
+                series1?.Clear();
+                series2?.Clear();
             }
         }
 
         private void OnNewData(object sender, EventArgs e)
         {
             // Compute our three series values
-            double y1 = 3.0 * Math.Sin(((2 * Math.PI) * 1.4) * t) + _random.NextDouble()*0.5;
-            double y2 = 2.0 * Math.Cos(((2 * Math.PI) * 0.8) * t) + _random.NextDouble()*0.5;
-            double y3 = 1.0 * Math.Sin(((2 * Math.PI) * 2.2) * t) + _random.NextDouble()*0.5;
+            double y1 = 3.0 * Math.Sin(2 * Math.PI * 1.4 * t) + _random.NextDouble() * 0.5;
+            double y2 = 2.0 * Math.Cos(2 * Math.PI * 0.8 * t) + _random.NextDouble() * 0.5;
+            double y3 = 1.0 * Math.Sin(2 * Math.PI * 2.2 * t) + _random.NextDouble() * 0.5;
 
             // Suspending updates is optional, and ensures we only get one redraw
             // once all three dataseries have been appended to
@@ -131,10 +127,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_timerNewDataUpdate != null)
-            {
-                _timerNewDataUpdate.Stop();
-            }
+            _timerNewDataUpdate?.Stop();
 
             StartButton.IsChecked = false;
             PauseButton.IsChecked = true;
@@ -166,6 +159,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         private void OnExampleLoaded(object sender, RoutedEventArgs e)
         {
             ResetButton_Click(this, null);
+
             _startDelegate = TimedMethod.Invoke(() => StartButton_Click(this, null)).After(500).Go();
         }
 

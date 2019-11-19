@@ -40,6 +40,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.OverlayTradeMarkers
             // Get some price data, trades
             List<Trade> trades;
             List<NewsEvent> newsEvents;
+            DataManager.Instance.SetRandomSeed(0); // required for UIAutomationTesting
             var priceData = DataManager.Instance.GetRandomTrades(out trades, out newsEvents);
 
             // Buffer above and append all in one go to avoid multiple recalculations of series range

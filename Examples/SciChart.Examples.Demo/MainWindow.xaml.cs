@@ -29,7 +29,7 @@ namespace SciChart.Examples.Demo
             }
 
             // Always topmost if /quickstart mode used by UIAutomationTests
-            if (App.QuickStart)
+            if (App.UIAutomationTestMode)
             {
                 this.Topmost = true;
             }

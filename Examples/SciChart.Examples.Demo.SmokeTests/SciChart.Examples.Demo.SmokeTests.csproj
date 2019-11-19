@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,6 +94,60 @@
     <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\PolarChartAnnotations.png" />
     <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeAnnotations.png" />
     <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeMarkers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\Fifo1BillionPoints.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\FastPalettedScatterCharts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\ScatterChartPerformanceDemo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ColumnChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalMountainChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingDonutChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingPieChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\CandlestickAndLines.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ContoursWithHeatmap.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardPolarCharts.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardStyleCharts.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ErrorBars.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\FanChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GapsInSeries.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\LineAndScatterChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedBarChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnSideBySide.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedMountainChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChartCustomization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ErrorBarTernaryChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\PolygonTernaryChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ScatterTernaryChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\CustomCharts\SplineScatterChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\StockCharts\MultiPaneStockChart.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StockCharts\RealtimeTickingCharts.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StockCharts\UsingSciStockChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ExportCharts\ExportChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\Filters\FiltersApiExample.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

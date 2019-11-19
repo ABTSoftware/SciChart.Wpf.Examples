@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.CreateTernaryChart
 {
@@ -10,13 +11,13 @@ namespace SciChart.Examples.Examples.CreateTernaryChart
     public partial class ErrorBarSeriesTernaryChartExampleView : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private Random _random;
+        private RandomWalkGenerator _random;
 
         public ErrorBarSeriesTernaryChartExampleView()
         {
             InitializeComponent();
 
-            _random =new Random();
+            _random =new RandomWalkGenerator(seed: 0);
 
             cursorModButton.IsChecked = false;
             tooltipModButton.IsChecked = false;

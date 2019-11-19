@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {
@@ -28,7 +29,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
     public partial class GapsInSeries : UserControl
     {
         // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly Random _random = new Random();
+        //private readonly RandomWalkGenerator _random = new RandomWalkGenerator();
 
         public GapsInSeries()
         {
@@ -51,6 +52,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 
         private IXyDataSeries<double, double> CreateDataSeries()
         {
+            var _random = new RandomWalkGenerator(seed: 0);
+
             var dataSeries = new XyDataSeries<double, double>();
             dataSeries.SeriesName = "Random Series";
 
@@ -64,7 +67,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             // Samples 3,4,5,6 append values
             for (; i < 7; i++)
             {
-                dataSeries.Append(i, _random.NextDouble());
+                dataSeries.Append(i, _random.GetRandomDouble());
             }
 
             // Samples 7,8,9 append double.NaN
@@ -76,7 +79,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             // Samples 10,11,12,13 append values
             for (; i < 14; i++)
             {
-                dataSeries.Append(i, -_random.NextDouble());
+                dataSeries.Append(i, -_random.GetRandomDouble());
             }
 
             // Samples 14,15,16 append double.NaN

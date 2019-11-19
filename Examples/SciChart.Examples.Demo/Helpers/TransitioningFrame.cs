@@ -50,7 +50,7 @@ namespace SciChart.Examples.Demo.Helpers
                 //_previousContentPresentationSite.Content = oldContent;
                 //_previousContentPresentationSite.IsHitTestVisible = false;
 
-                if (!App.QuickStart)
+                if (!App.UIAutomationTestMode)
                 {
                     VisualStateManager.GoToState(this, "Normal", false);
                     VisualStateManager.GoToState(this, "Transition", true);

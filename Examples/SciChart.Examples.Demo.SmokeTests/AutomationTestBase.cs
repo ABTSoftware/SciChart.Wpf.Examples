@@ -260,6 +260,13 @@ namespace SciChart.Examples.Demo.SmokeTests
             }
         }
 
+        public string GetTemporaryDirectory()
+        {
+            string tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(tempDirectory);
+            return tempDirectory;
+        }
+
         private WriteableBitmap DecodePngStream(Stream pngStream)
         {
             var decoder = new PngBitmapDecoder(pngStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);

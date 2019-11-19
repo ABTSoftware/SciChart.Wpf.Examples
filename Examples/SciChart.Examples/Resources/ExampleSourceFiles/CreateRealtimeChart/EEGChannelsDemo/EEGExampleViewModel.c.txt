@@ -20,7 +20,6 @@ using System.Timers;
 using System.Windows.Input;
 using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
-using SciChart.Core.Utility;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
@@ -29,22 +28,25 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
     {
         private ObservableCollection<EEGChannelViewModel> _channelViewModels;
 
-        private readonly IList<Color> _colors = new[]
-                                                    {
-                                                        Colors.White, Colors.Yellow, Color.FromArgb(255, 0, 128, 128), Color.FromArgb(255, 176, 196, 222),
-                                                        Color.FromArgb(255, 255, 182, 193), Colors.Purple, Color.FromArgb(255, 245, 222, 179),Color.FromArgb(255, 173, 216, 230),
-                                                        Color.FromArgb(255, 250, 128, 114), Color.FromArgb(255, 144, 238, 144), Colors.Orange, Color.FromArgb(255, 192, 192, 192), 
-                                                        Color.FromArgb(255, 255, 99, 71), Color.FromArgb(255, 205, 133, 63), Color.FromArgb(255, 64, 224, 208), Color.FromArgb(255, 244, 164, 96)
-                                                    };
+        private readonly IList<Color> _colors = new[] 
+        {
+            Colors.White, Colors.Yellow, Color.FromArgb(255, 0, 128, 128), Color.FromArgb(255, 176, 196, 222), 
+            Color.FromArgb(255, 255, 182, 193), Colors.Purple, Color.FromArgb(255, 245, 222, 179),Color.FromArgb(255, 173, 216, 230), 
+            Color.FromArgb(255, 250, 128, 114), Color.FromArgb(255, 144, 238, 144), Colors.Orange, Color.FromArgb(255, 192, 192, 192), 
+            Color.FromArgb(255, 255, 99, 71), Color.FromArgb(255, 205, 133, 63), Color.FromArgb(255, 64, 224, 208), Color.FromArgb(255, 244, 164, 96)
+        };
 
         private readonly Random _random = new Random();
+        private volatile int _currentSize;
+
         private const int ChannelCount = 50; // Number of channels to render
         private const int Size = 1000;       // Size of each channel in points (FIFO Buffer)
-        private volatile int _currentSize = 0;
-        private uint _timerInterval = 20;// Interval of the timer to generate data in ms        
-        private int _bufferSize = 15; // Number of points to append to each channel each timer tick
+
+        private uint _timerInterval = 20; // Interval of the timer to generate data in ms        
+        private int _bufferSize = 15;     // Number of points to append to each channel each timer tick
+
         private Timer _timer;        
-        private object _syncRoot = new object();
+        private readonly object _syncRoot = new object();
 
         // X, Y buffers used to buffer data into the Scichart instances in blocks of BufferSize
         private double[] xBuffer;
@@ -55,7 +57,6 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         private readonly ActionCommand _startCommand;
         private readonly ActionCommand _stopCommand;
         private readonly ActionCommand _resetCommand;
-        private TimedMethod _startDelegate;
 
         public EEGExampleViewModel()
         {
@@ -66,7 +67,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         public ObservableCollection<EEGChannelViewModel> ChannelViewModels
         {
-            get { return _channelViewModels; }
+            get => _channelViewModels;
             set 
             { 
                 _channelViewModels = value;
@@ -74,15 +75,15 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             }
         }        
 
-        public ICommand StartCommand { get { return _startCommand; } }
-        public ICommand StopCommand { get { return _stopCommand; } }
-        public ICommand ResetCommand { get { return _resetCommand; } }
+        public ICommand StartCommand => _startCommand;
+        public ICommand StopCommand => _stopCommand;
+        public ICommand ResetCommand => _resetCommand;
 
-        public int PointCount { get { return _currentSize * ChannelCount; } }
+        public int PointCount => _currentSize * ChannelCount;
 
         public double TimerInterval
         {
-            get { return _timerInterval; }
+            get => _timerInterval;
             set
             {
                 _timerInterval = (uint)value;
@@ -93,7 +94,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         public double BufferSize
         {
-            get { return _bufferSize; }
+            get => _bufferSize;
             set
             {
                 _bufferSize = (int)value;
@@ -104,7 +105,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         public bool IsReset
         {
-            get { return _isReset; }
+            get => _isReset;
             set
             {
                 _isReset = value;
@@ -119,7 +120,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         public bool IsRunning
         {
-            get { return _running; }
+            get => _running;
             set 
             { 
                 _running = value;
@@ -168,24 +169,23 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             // Initialize N EEGChannelViewModels. Each of these will be represented as a single channel
             // of the EEG on the view. One channel = one SciChartSurface instance
             ChannelViewModels = new ObservableCollection<EEGChannelViewModel>();
+
             for (int i = 0; i < ChannelCount; i++)
             {
-                var channelViewModel = new EEGChannelViewModel(Size, _colors[i%16]) {ChannelName = "Channel " + i};
+                var channelViewModel = new EEGChannelViewModel(Size, _colors[i % 16]) {ChannelName = "Channel " + i};
                 ChannelViewModels.Add(channelViewModel);
             }
 
             IsReset = true;
-        }        
+        }
 
         private void OnTick(object sender, EventArgs e)
         {
             // Ensure only one timer Tick processed at a time
             lock (_syncRoot)
             {
-                for (int i = 0; i < _channelViewModels.Count; i++)
+                foreach (var channel in _channelViewModels)
                 {
-                    // Get the dataseries created for this channel
-                    var channel = _channelViewModels[i];
                     var dataseries = channel.ChannelDataSeries;
 
                     // Preload previous value with k-1 sample, or 0.0 if the count is zero
@@ -195,7 +195,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
                     for (int j = 0; j < BufferSize; j++)
                     {
                         // Generate a new X,Y value in the random walk
-                        xValue = xValue + 1;
+                        xValue += 1;
                         double yValue = _random.NextDouble();
 
                         xBuffer[j] = xValue;

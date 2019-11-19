@@ -23,7 +23,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 {
     public partial class UsingSeriesValueModifier : UserControl
     {
-        // Data Sample Rate (sec)  - 20 Hz
+        // Data Sample Rate (sec) - 20 Hz
         private const double dt = 0.05;
 
         // FIFO Size is 100 samples, meaning after 100 samples have been appended, each new sample appended
@@ -37,22 +37,21 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         private double t;
 
         // The dataseries to fill
-        private IXyDataSeries<double, double> _series0;
-        private IXyDataSeries<double, double> _series1;
-        private IXyDataSeries<double, double> _series2;
+        private readonly IXyDataSeries<double, double> _series0;
+        private readonly IXyDataSeries<double, double> _series1;
+        private readonly IXyDataSeries<double, double> _series2;
 
         public UsingSeriesValueModifier()
         {
             InitializeComponent();
 
-            _timerNewDataUpdate = new Timer(dt * 1000);
-            _timerNewDataUpdate.AutoReset = true;
+            _timerNewDataUpdate = new Timer(dt * 1000) {AutoReset = true};
             _timerNewDataUpdate.Elapsed += OnNewData;
 
-            // Create new Dataseries of type X=double, Y=double
-            _series0 = new XyDataSeries<double, double>() { FifoCapacity = FifoSize, SeriesName = "Orange Series" };
-            _series1 = new XyDataSeries<double, double>() { FifoCapacity = FifoSize, SeriesName = "Blue Series" };
-            _series2 = new XyDataSeries<double, double>() { FifoCapacity = FifoSize, SeriesName = "Green Series" };
+            // Create new dataseries of type X=double, Y=double
+            _series0 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Orange Series"};
+            _series1 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Blue Series"};
+            _series2 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Green Series"};
 
             // Set the dataseries on the chart's RenderableSeries
             renderableSeries0.DataSeries = _series0;
@@ -62,23 +61,20 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 
         private void ClearDataSeries()
         {
-            if (_series0 == null)
-                return;
-
             using (sciChartSurface.SuspendUpdates())
             {
-                _series0.Clear();
-                _series1.Clear();
-                _series2.Clear();
+                _series0?.Clear();
+                _series1?.Clear();
+                _series2?.Clear();
             }
         }
 
         private void OnNewData(object sender, EventArgs e)
         {
             // Compute our three series values
-            double y1 = 3.0 * Math.Sin(((2 * Math.PI) * 1.4) * t * 0.02);
-            double y2 = 2.0 * Math.Cos(((2 * Math.PI) * 0.8) * t * 0.02);
-            double y3 = 1.0 * Math.Sin(((2 * Math.PI) * 2.2) * t * 0.02);
+            double y1 = 3.0 * Math.Sin(2 * Math.PI * 1.4 * t * 0.02);
+            double y2 = 2.0 * Math.Cos(2 * Math.PI * 0.8 * t * 0.02);
+            double y3 = 1.0 * Math.Sin(2 * Math.PI * 2.2 * t * 0.02);
 
             // Suspending updates is optional, and ensures we only get one redraw
             // once all three dataseries have been appended to
@@ -103,10 +99,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 
         private void OnExampleUnloaded(object sender, RoutedEventArgs e)
         {
-            if (_timerNewDataUpdate != null)
-            {
-                _timerNewDataUpdate.Stop();
-            }
+            _timerNewDataUpdate?.Stop();
         }
     }
 }

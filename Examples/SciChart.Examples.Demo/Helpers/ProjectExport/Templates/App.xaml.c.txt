@@ -13,6 +13,9 @@ namespace SciChartExport
 		     DispatcherUnhandledException += App_DispatcherUnhandledException;
 
 			 InitializeComponent();
+
+			 // TODO: Put your SciChart License Key here if needed
+			 // SciChartSurface.SetRuntimeLicenseKey(@"{YOUR SCICHART WPF v6 LICENSE KEY}");
         }
 
 		private void App_DispatcherUnhandledException(object sender,

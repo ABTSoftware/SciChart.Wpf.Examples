@@ -34,7 +34,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
         {
             var dataSeries = new XyDataSeries<double, double>() { AcceptsUnsortedData = true };
 
-            var random = new Random();
+            var random = new Random(0);
             var dataPointColors = new List<Color>();
 
             for (int i = 0; i < 100000; i++)

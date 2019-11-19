@@ -18,6 +18,9 @@
 // *************************************************************************************
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using SciChart.Charting.Visuals.RenderableSeries.Animations;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
@@ -31,6 +34,10 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public RandomWalkGenerator(double bias = 0.01)
         {
             _bias = bias;
+            if (!SeriesAnimationBase.GlobalEnableAnimations)
+            {
+                _random = new Random(0);
+            }
         }
 
         public RandomWalkGenerator(int seed)
@@ -60,6 +67,16 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             return doubleSeries;
+        }
+
+        public double GetRandomDouble()
+        {
+            return _random.NextDouble();
+        }
+
+        public int Next(int minValue, int maxValue)
+        {
+            return _random.Next(minValue, maxValue);
         }
     }
 }
