@@ -1,15 +1,11 @@
-﻿using SciChart.Charting3D.Model;
-using SciChart.Data.Model;
-using System;
+﻿using System;
 using System.Windows.Controls;
 using System.Windows.Media;
+using SciChart.Charting3D.Model;
+using SciChart.Data.Model;
 
-namespace SciChart.Sandbox.Examples.MouseDragModifier3D
+namespace AnnotationDragModifier3DExample
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    [TestCase("Annotation Drag Modifier 3D")]
     public partial class AnnotationDragModifier3D : UserControl
     {
         Random rand = new Random();

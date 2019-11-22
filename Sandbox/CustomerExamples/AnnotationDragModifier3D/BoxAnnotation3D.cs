@@ -1,20 +1,17 @@
-﻿using SciChart.Charting3D;
-using SciChart.Charting3D.Interop;
-using SciChart.Charting3D.Primitives;
-using SciChart.Charting3D.RenderableSeries;
-using SciChart.Charting3D.Visuals.Primitives;
-using SciChart.Data.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using SciChart.Charting3D;
+using SciChart.Charting3D.Interop;
+using SciChart.Charting3D.Primitives;
+using SciChart.Charting3D.RenderableSeries;
+using SciChart.Data.Model;
 
-namespace SciChart.Sandbox.Examples.MouseDragModifier3D
+namespace AnnotationDragModifier3DExample
 {
 	class BoxAnnotation3D : BaseSceneEntity, INotifyPropertyChanged
 	{
