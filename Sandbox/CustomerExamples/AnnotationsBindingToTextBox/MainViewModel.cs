@@ -2,7 +2,7 @@
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Data.Model;
 
-namespace SciChart.Sandbox.Examples.AnnotationsBindingToTextBox
+namespace AnnotationsBindingToTextBoxExample
 {
     public class MainViewModel : BindableObject
     {
