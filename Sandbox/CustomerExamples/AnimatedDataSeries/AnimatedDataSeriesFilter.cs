@@ -3,7 +3,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 using SciChart.Core.Utility;
 
-namespace SciChart.Sandbox.Examples.AnimatedDataSeries
+namespace AnimatedDataSeriesFilterExample
 {
     public class AnimatedDataSeriesFilter : FilterBase
     {
