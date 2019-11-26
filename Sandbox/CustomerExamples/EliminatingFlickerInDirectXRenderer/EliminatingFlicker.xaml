@@ -1,0 +1,55 @@
+﻿<Window x:Class="EliminatingFlickerExamplee.EliminatingFlicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        mc:Ignorable="d"
+        Title="EliminatingFlicker" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <CheckBox x:Name="EnableDirectXCheckbox" Content="Enable DirectX" Margin="5" />
+            <CheckBox Content="Enable 'Use Alternative Fill Source'" Margin="5" Checked="UseAltFillSource_OnChecked" Unchecked="UseAltFillSource_OnChecked"/>
+            <CheckBox Content="Enable 'Enable Force Wait for GPU'" Margin="5" Checked="EnableForceWait_OnChecked" Unchecked="EnableForceWait_OnChecked"/>
+        </StackPanel>
+
+        <s:SciChartSurface Grid.Row="1" 
+                           s3D:DirectXHelper.TryApplyDirectXRenderer="{Binding ElementName=EnableDirectXCheckbox, Path=IsChecked}"
+                           s3D:DirectXHelper.FallbackType="{x:Type s:HighSpeedRenderSurface}">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastMountainRenderableSeries x:Name="mountainSeries0"/>
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis VisibleRange="0,1000" AutoRange="Never"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Always"/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
+
+        <GridSplitter Grid.Row="2" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <s:SciChartSurface Grid.Row="3"
+                           s3D:DirectXHelper.TryApplyDirectXRenderer="{Binding ElementName=EnableDirectXCheckbox, Path=IsChecked}"
+                           s3D:DirectXHelper.FallbackType="{x:Type s:HighSpeedRenderSurface}">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastMountainRenderableSeries x:Name="mountainSeries1"/>
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis VisibleRange="0,1000" AutoRange="Never"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Always"/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
+
+    </Grid>
+</Window>
