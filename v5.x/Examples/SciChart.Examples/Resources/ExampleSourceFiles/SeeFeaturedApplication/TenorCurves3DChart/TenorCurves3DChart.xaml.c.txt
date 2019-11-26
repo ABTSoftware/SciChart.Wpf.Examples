@@ -26,20 +26,20 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
     /// </summary>
     public partial class TenorCurves3DChart : UserControl
     {
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private Random _random;
-
         public TenorCurves3DChart()
         {
             InitializeComponent();
 
-            _random = new Random();
+            var random = new Random();
+
             int xSize = 25;
             int zSize = 25;
+
             var meshDataSeries = new UniformGridDataSeries3D<double,double,DateTime>(xSize, zSize);
             var lineDataSeries = new XyDataSeries<double>();
             var mountainDataSeries = new XyDataSeries<double, double>();
 
+            meshDataSeries.SeriesName = "Tenor";
             meshDataSeries.StartZ = new DateTime(2010,1,1);
             meshDataSeries.StepZ = new TimeSpan(1,0,0,0).ToDateTime();
 
@@ -80,31 +80,33 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
 
                 for (int z = 0; z < zSize; z++)
                 {
-                    var y = (z != 0) ? Math.Pow((double)z + _random.NextDouble(), step) : Math.Pow((double)z + 1, 0.3);
+                    var y = (z != 0) ? Math.Pow(z + random.NextDouble(), step) : Math.Pow((double)z + 1, 0.3);
 
                     meshDataSeries[z, x] = y;
                 }
-
             }
 
             double average;
+
             for (int x = 0; x < xSize; x++)
             {
                 average = 0;
+
                 for (int z = 0; z < zSize; z++)
                 {
                     average += meshDataSeries[x, z];
                 }
-                var y = average / 25;
-                lineDataSeries.Append(x, y);
+
+                lineDataSeries.Append(x, average / 25);
                 mountainDataSeries.Append(x, meshDataSeries[12, x]);
             }
 
+            surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
             mountainRenderSeries.DataSeries = mountainDataSeries;
             LineRenderableSeries.DataSeries = lineDataSeries;
+
             surfaceMeshRenderableSeries.Maximum = (double)meshDataSeries.YRange.Max;
             surfaceMeshRenderableSeries.Minimum = (double)meshDataSeries.YRange.Min;
-            surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
         }
     }
 }

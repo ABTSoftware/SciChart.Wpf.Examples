@@ -6,14 +6,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:cd="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
+    
     <UserControl.Resources>
-        <s3D:GradientColorPalette x:Key="HeightColorMap"
-                                  ContourColor="Black"
-                                  ContourStrokeThickness="2.0">
+        <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
                 <GradientStop Offset="1" Color="DarkRed" />
                 <GradientStop Offset="0.9" Color="Red" />
@@ -25,6 +25,26 @@
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
+        <local:CustomVector3DConverter x:Key="CustomVector3DConverter" />
+
+        <DataTemplate x:Key="CustomSeriesTooltipTemplate" DataType="cd:SurfaceMeshSeriesInfo3D">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontWeight="Bold" Text="{Binding SeriesName, StringFormat='{}{0} Data Point'}" />
+                <Line X1="0" X2="1" Stretch="Fill" Stroke="#777" StrokeThickness="1" Margin="0,3"/>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="X: " />
+                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='X'}" />
+                </TextBlock>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="Y: " />
+                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='Y'}" />
+                </TextBlock>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="Z: " />
+                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='Z'}" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     
     <Grid Background="#FF1C1C1E">
@@ -45,10 +65,12 @@
         <ext:SciChart3DInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <s3D:SciChart3DSurface x:Name="sciChart"
+                               Grid.Row="0"
                                Grid.RowSpan="2"
                                Grid.Column="1"
                                BorderThickness="0"
                                WorldDimensions="200,100,200">
+
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True" />
             </s3D:SciChart3DSurface.Camera>
@@ -59,7 +81,8 @@
                                                    DrawSkirt="False"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    Stroke="#77228B22"
-                                                   StrokeThickness="2.0" />
+                                                   StrokeThickness="2.0" 
+                                                   s3D:TooltipModifier3D.TooltipTemplate="{StaticResource CustomSeriesTooltipTemplate}"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>
 
@@ -78,34 +101,32 @@
                 <s3D:DateTimeAxis3D x:Name="ZAx3D" DrawMajorBands="True" AxisTitle="Date" AxisTitleOffset="100"/>
             </s3D:SciChart3DSurface.ZAxis>
 
-
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:TooltipModifier3D />
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
 
         </s3D:SciChart3DSurface>
 
-        <s:HeatmapColorMap Grid.RowSpan="2"
-                            Grid.Column="1"
-                            Height="200"
-                            Margin="15"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="{Binding Source={x:Reference Name=sciChart},
-                                                 Path=Background}"
-                            BorderBrush="#777"
-                            BorderThickness="1"
-                            Foreground="{Binding Source={x:Reference Name=sciChart},
-                                                 Path=Foreground}"
-                            Maximum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries},
-                                              Path=Maximum}"
-                            Minimum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries},
-                                              Path=Minimum}"
-                            Opacity="0.8"
-                            Orientation="Vertical"
-                            TextFormatting="0.00">
+        <s:HeatmapColorMap Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Grid.Column="1"
+                           Height="200"
+                           Margin="15"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                           Maximum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries}, Path=Maximum}"
+                           Minimum="{Binding Source={x:Reference Name=surfaceMeshRenderableSeries}, Path=Minimum}"
+                           Opacity="0.8"
+                           Orientation="Vertical"
+                           TextFormatting="0.00">
+
             <s:HeatmapColorMap.ColorMap>
                 <LinearGradientBrush>
                     <GradientStop Offset="1" Color="DarkRed" />
@@ -121,15 +142,14 @@
         </s:HeatmapColorMap>
 
         <s:SciChartSurface x:Name="sciChart2"
+                           Grid.Row="0"
                            Grid.Column="2"
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="Lavender">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="5"
-                                              Height="5"
-                                              Fill="White" />
+                        <s:EllipsePointMarker Width="5" Height="5" Fill="White" />
                     </s:FastLineRenderableSeries.PointMarker>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -144,17 +164,13 @@
 
         </s:SciChartSurface>
 
-
         <s:SciChartSurface x:Name="sciChart3"
                            Grid.Row="1"
                            Grid.Column="2"
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
-
-                <s:FastMountainRenderableSeries x:Name="mountainRenderSeries"
-                                                Stroke="#AAFFC9A8"
-                                                StrokeThickness="2" />
+                <s:FastMountainRenderableSeries x:Name="mountainRenderSeries" Stroke="#AAFFC9A8" StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -166,6 +182,5 @@
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>
