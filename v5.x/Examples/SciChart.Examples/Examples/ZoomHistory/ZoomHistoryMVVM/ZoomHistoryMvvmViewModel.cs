@@ -139,18 +139,15 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
             _undoCommand = new ActionCommand(() =>
             {
-                if (_zoomHistoryManager.CanUndo())
-                {
-                    _zoomHistoryManager.Undo();
+                _zoomHistoryManager.Undo();
 
-                    var index = RangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare);
+                var index = RangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare);
+                _selectedRange = RangesHistory[index - 1];
 
-                    _selectedRange = RangesHistory[index - 1];
-
-                    OnPropertyChanged("SelectedRange");
-                    RaiseUndoRedoCanExecute();
-                }
-            }, () => _zoomHistoryManager.CanUndo());
+                OnPropertyChanged("SelectedRange");
+                RaiseUndoRedoCanExecute();
+            }, () => _zoomHistoryManager.CanUndo() &&
+                     RangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare) > 0);
 
             _redoCommand = new ActionCommand(() =>
             {
@@ -159,13 +156,13 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
                     _zoomHistoryManager.Redo();
 
                     var index = RangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare);
-
                     _selectedRange = RangesHistory[index + 1];
 
                     OnPropertyChanged("SelectedRange");
                     RaiseUndoRedoCanExecute();
                 }
-            }, () => _zoomHistoryManager.CanRedo());
+            }, () => _zoomHistoryManager.CanRedo() &&
+                     RangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare) < RangesHistory.Count - 1);
         }
 
         public IZoomHistoryManager ZoomHistoryManager
