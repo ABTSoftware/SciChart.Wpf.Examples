@@ -25,5 +25,7 @@
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
+
+        <TextBlock Foreground="Orange" Margin="20" Text="Drag to zoom on chart, then double-click zoom extents."/>
     </Grid>
 </Window>
