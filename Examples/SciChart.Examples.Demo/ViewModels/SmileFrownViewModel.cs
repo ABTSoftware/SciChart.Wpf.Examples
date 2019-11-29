@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using SciChart.Charting.Common.Helpers;
+using SciChart.Core.Utility;
 using SciChart.Examples.Demo.Common;
 using SciChart.UI.Reactive;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -22,6 +24,7 @@ namespace SciChart.Examples.Demo.ViewModels
         private bool _isFrownVisible;
         private bool _isSmileVisible;
         private bool _isVisible;
+        private bool _onSubmitted;
 
         public SmileFrownViewModel(ExampleViewModel parent)
         {
@@ -82,14 +85,19 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             get
             {
-                return new ActionCommand(() =>
+                return new ActionCommand(async () =>
                 {
+                    OnSubmitted = true;
+
                     _parent.Usage.FeedbackType = (ExampleFeedbackType?)(_isSmile ? ExampleFeedbackType.Smile : (_isFrown ? ExampleFeedbackType.Frown : (ExampleFeedbackType?)null));
                     _parent.Usage.FeedbackText = _feedbackSubject + ((_feedbackSubject + _feedbackContent).Length > 0 ? ": " : "") + _feedbackContent;
                     _parent.Usage.Email = _feedbackEmail;
 
+                    await Task.Delay(TimeSpan.FromMilliseconds(1500));
                     SmileVisible = false;
                     FrownVisible = false;
+                    await Task.Delay(TimeSpan.FromMilliseconds(500));
+                    OnSubmitted = false;
                 });
             }
         }
@@ -124,6 +132,19 @@ namespace SciChart.Examples.Demo.ViewModels
                     {
                         IsSmile = false;
                     }
+                }
+            }
+        }
+
+        public bool OnSubmitted
+        {
+            get { return _onSubmitted; }
+            set
+            {
+                if (_onSubmitted != value)
+                {
+                    _onSubmitted = value;
+                    OnPropertyChanged("OnSubmitted");
                 }
             }
         }

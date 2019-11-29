@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,6 +8,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 {
@@ -54,12 +56,13 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 
         private double[] FillZValues()
         {
-            var rnd = new Random();
+            var rnd = new RandomWalkGenerator(0);
             var lenght = _height * _width;
             var zValues = new double[lenght];
 
             // block1
             zValues[GetValueableIndex(0, 13)] = rnd.Next(20, 100);
+
 
             zValues[GetValueableIndex(1, 13)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(1, 14)] = rnd.Next(20, 100);

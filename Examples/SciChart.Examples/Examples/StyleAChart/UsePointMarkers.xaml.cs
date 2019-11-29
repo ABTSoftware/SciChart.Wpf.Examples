@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -35,7 +35,7 @@ namespace SciChart.Examples.Examples.StyleAChart
             var dataSeries5 = new XyDataSeries<double, double>() { SeriesName = "Sprite Marker" };
 
             const int dataSize = 30;
-            var rnd = new Random();
+            var rnd = new Random(0);
             for (int i = 0; i < dataSize; i++) dataSeries1.Append(i, rnd.NextDouble());
             for (int i = 0; i < dataSize; i++) dataSeries2.Append(i, 1 + rnd.NextDouble());
             for (int i = 0; i < dataSize; i++) dataSeries3.Append(i, 1.8 + rnd.NextDouble());

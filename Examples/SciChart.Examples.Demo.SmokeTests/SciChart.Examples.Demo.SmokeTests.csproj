@@ -149,6 +149,79 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Charts2D\Filters\FiltersApiExample.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapAndPaletteProvider.png" />
+    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapMetaData.png" />
+    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapRealTime.png" />
+    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapWithText.png" />
+    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\NonUniformHeatmap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\Legends\LegendsAPI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\SyncCharts\SyncCharts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\AddRemoveSeries.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeRenderableSeriesType.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeSeriesType.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CategoryVsValueAxis.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CentralXYAxes.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\LogarithmicAxis.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\ModifyAxisProperties.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleXAxis.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleYAxis.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\PolarChartManyAxes.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SecondaryYAxis.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SwitchAxisTypeRuntime.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticalCharts.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticallyStackedYAxis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\AxisAnnotationBinding.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindMultipleCharts.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindSciChartToData.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\ManipulateSeriesMvvm.png" />
+    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\SeriesBinding.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\CustomTheme.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\DashedLineStyling.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UseHQRendering.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPaletteProvider.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPointMarkers.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingThemeManager.png" />
+    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\Xaml Styling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\CustomPointMarker.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\HitTestAPI.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\PointMarkersSelection.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesSelection.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesWithMetadata.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\TooltipsAndModifiers.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\Using TooltipModifier.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingCursorModifier.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingRolloverModifier.png" />
+    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingVerticalSlice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\CustomOverviewControl.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAreaToZoom.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAxisToScale.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\MousewheelZoomScroll.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\OverviewControl.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanOnMouseDrag.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanYXDirection.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PerAxisScrollbars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\UndoRedo.png" />
+    <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\ZoomHistoryMVVM.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

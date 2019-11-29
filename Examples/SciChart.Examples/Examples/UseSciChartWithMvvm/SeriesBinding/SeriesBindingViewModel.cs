@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -70,8 +70,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SeriesBinding
         private IEnumerable<BoxPoint> GetBoxPlotData()
         {
             var dates = Enumerable.Range(0, PointsCount).Select(i => i).ToArray();
-            var medianValues = new RandomWalkGenerator().GetRandomWalkSeries(PointsCount).YData;
-            var random = new Random();
+            var medianValues = new RandomWalkGenerator(0).GetRandomWalkSeries(PointsCount).YData;
+            var random = new Random(0);
 
             for (int i = 0; i < PointsCount; i++)
             {

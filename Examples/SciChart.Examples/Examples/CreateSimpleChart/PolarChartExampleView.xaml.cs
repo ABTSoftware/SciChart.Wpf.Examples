@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -27,7 +27,7 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
     /// </summary>
     public partial class PolarChartExampleView : UserControl
     {
-        private string[] axisAlignment = new[] {"Bottom", "Top", "Left", "Right"};
+        private readonly string[] axisAlignment = {"Bottom", "Top", "Left", "Right"};
 
         public PolarChartExampleView()
         {
@@ -43,27 +43,24 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private void PolarChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
             var dataSeries = new XyDataSeries<double, double>();
-
             lineRenderSeries.DataSeries = dataSeries;
 
             var data = DataManager.Instance.GetSquirlyWave();
-
-            // Append data to series. SciChart automatically redraws
             dataSeries.Append(data.XData, data.YData);
 
             sciChart.ZoomExtents();
         }
 
-        private void OnXAxisALignmentChanged(object sender, SelectionChangedEventArgs e)
+        private void OnXAxisAlignmentChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(xAxis!=null)
-                xAxis.AxisAlignment = (AxisAlignment)Enum.Parse(typeof(AxisAlignment), (string)e.AddedItems[0], true);
+            if (xAxis != null)
+                xAxis.AxisAlignment = (AxisAlignment) Enum.Parse(typeof(AxisAlignment), (string) e.AddedItems[0], true);
         }
 
-        private void OnYAxisALignmentChanged(object sender, SelectionChangedEventArgs e)
+        private void OnYAxisAlignmentChanged(object sender, SelectionChangedEventArgs e)
         {
             if (yAxis != null)
-                yAxis.AxisAlignment = (AxisAlignment)Enum.Parse(typeof(AxisAlignment), (string)e.AddedItems[0], true);
+                yAxis.AxisAlignment = (AxisAlignment) Enum.Parse(typeof(AxisAlignment), (string) e.AddedItems[0], true);
         }
     }
 }

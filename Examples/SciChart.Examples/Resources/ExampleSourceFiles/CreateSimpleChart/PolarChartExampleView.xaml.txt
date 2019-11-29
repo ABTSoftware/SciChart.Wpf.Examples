@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"             
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              Loaded="PolarChartExampleView_OnLoaded"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -29,12 +29,12 @@
                         <!--  The XAxis Alignment combo  -->
                         <TextBlock Text="XAxis Alignment" />
                         <ext:FlyoutSeparator />
-                        <ComboBox x:Name="xAxisAlignment" SelectionChanged="OnXAxisALignmentChanged" />
+                        <ComboBox x:Name="xAxisAlignment" SelectionChanged="OnXAxisAlignmentChanged" />
 
                         <!--  The YAxis Alignment combo  -->
                         <TextBlock Margin="4,10,4,4" Text="YAxis Alignment" />
                         <ext:FlyoutSeparator />
-                        <ComboBox x:Name="yAxisAlignment" SelectionChanged="OnYAxisALignmentChanged" />
+                        <ComboBox x:Name="yAxisAlignment" SelectionChanged="OnYAxisAlignmentChanged" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>

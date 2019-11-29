@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -40,7 +40,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
     /// </summary>
     public partial class UniformHeatmapAndPaletteProvider : UserControl
     {
-        private readonly Random _random = new Random();
+        private readonly Random _random = new Random(0);
 
         public UniformHeatmapAndPaletteProvider()
         {
@@ -51,13 +51,13 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteP
 
         private IDataSeries CreateSeries()
         {
-            double angle = Math.PI * 2 * 1 / 30;
+            double angle = Math.Round(Math.PI * 2 * 1 / 30, 3);
             int w = 300, h = 200;
             var data = new double[h, w];
             for (int x = 0; x < w; x++)
                 for (int y = 0; y < h; y++)
                 {
-                    var v = (1 + Math.Sin(x * 0.04 + angle)) * 50 + (1 + Math.Sin(y * 0.1 + angle)) * 50 * (1 + Math.Sin(angle * 2));
+                    var v = (1 + Math.Round(Math.Sin(x * 0.04 + angle), 3)) * 50 + (1 + Math.Round(Math.Sin(y * 0.1 + angle), 3)) * 50 * (1 + Math.Round(Math.Sin(angle * 2), 3));
                     var cx = 150; var cy = 100;
                     var r = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
                     var exp = Math.Max(0, 1 - r * 0.008);

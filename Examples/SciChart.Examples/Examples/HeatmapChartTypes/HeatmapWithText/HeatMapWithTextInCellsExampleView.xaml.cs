@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -87,7 +87,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
             const int w = 24;
             const int h = 7;
 
-            var rnd = new Random();
+            var rnd = new Random(0);
             var data = new double[h, w];
 
             for (int x = 0; x < w; x++)

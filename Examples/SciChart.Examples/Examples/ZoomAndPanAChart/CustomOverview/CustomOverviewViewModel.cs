@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -36,7 +36,7 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview
         private void Initialize()
         {
             RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel>();
-            var random = new Random();
+            var random = new Random(0);
             var generator = new RandomWalkGenerator();
 
             for (int i = 0; i < SeriesCount; i++)

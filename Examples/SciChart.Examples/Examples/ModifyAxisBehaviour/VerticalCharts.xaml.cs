@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -38,7 +38,7 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
             var rightDataSeries0 = new XyDataSeries<double, double>();
             var rightDataSeries1 = new XyDataSeries<double, double>();
 
-            var random = new Random();
+            var random = new Random(0);
 
             for (int i = 0; i < 20; i++)
             {

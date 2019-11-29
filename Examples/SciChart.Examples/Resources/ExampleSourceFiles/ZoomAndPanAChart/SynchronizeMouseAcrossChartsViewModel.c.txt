@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2019. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -136,7 +136,8 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
             const int count = 1000;
             for (int i = 0; i < count; i++)
             {
-                ds0.Append(i, count * Math.Sin(i * Math.PI * 0.1) / i);
+                var y = count * Math.Sin(Math.Round(i * Math.PI, 3) * 0.1) / i;
+                ds0.Append(i, y);
             }
 
             return ds0;

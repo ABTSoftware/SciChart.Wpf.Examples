@@ -59,6 +59,12 @@ namespace SciChart.Examples.Demo.SmokeTests
         private const string Group_2D_Legends = "Legends";
         private const string Group_2D_LinkMultipleCharts = "Link Multiple Charts";
         private const string Group_2D_ManipulateSeries = "Manipulate Series";
+        private const string Group_2D_ModifyAxisBehavior = "Modify Axis Behavior";
+        private const string Group_2D_MVVMExamples = "MVVM Examples";
+        private const string Group_2D_StylingTheming = "Styling and Theming";
+        private const string Group_2D_TooltipsAndHitTest = "Tooltips and Hit Test";
+        private const string Group_2D_ZoomPan = "Zoom and Pan a Chart";
+        private const string Group_2D_ZoomHistory = "Zoom History Manager";
 
         // 3D Chart Example Groups
         private const string Group_3D_BasicChartTypes = "Basic Chart Types";
@@ -206,6 +212,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Custom, "Spline Scatter Line Chart", "Charts2D/CustomCharts/SplineScatterChart.png"),
             // 2D Charts, Create Realtime Charts
             // TODO: add later, stop timer for some of them, use fixed data for other or leave them
+
             // 2D Charts, Create Stock Charts
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Multi-Pane Stock Charts", "Charts2D/StockCharts/MultiPaneStockChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Realtime Ticking Stock Charts", "Charts2D/StockCharts/RealtimeTickingCharts.png"),
@@ -214,6 +221,70 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ExportAChart, "Export and Screenshot Options in Chart", "Charts2D/ExportCharts/ExportChart.png"),
             // 2D Charts, Filters API
             new ExampleStartTestCase(Category_2DCharts, Group_2D_FiltersApi, "Filters API Example", "Charts2D/Filters/FiltersApiExample.png"),
+            // 2D Charts, HeatmapChartType
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "Heatmap Chart", "Charts2D/Heatmaps/HeatmapRealTime.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "Heatmap Chart with Text", "Charts2D/Heatmaps/HeatmapWithText.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "HeatmapMetaData", "Charts2D/Heatmaps/HeatmapMetaData.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "NonUniformHeatmap", "Charts2D/Heatmaps/NonUniformHeatmap.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "UniformHeatmap and CustomPaletteProvider", "Charts2D/Heatmaps/HeatmapAndPaletteProvider.png"),
+            // 2D Charts, Legends
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Legends, "Chart Legends API", "Charts2D/Legends/LegendsAPI.png"),
+            // 2D Charts, Link Multiple Charts
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_LinkMultipleCharts, "Sync Multi Chart Mouse", "Charts2D/SyncCharts/SyncCharts.png",
+                (mw) => Thread.Sleep(1500)),
+            // 2D Charts, Manipulate Series:
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Add or Remove DataSeries In Code", "Charts2D/ManipulateSeries/AddRemoveSeries.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Change RenderableSeries Type In Code", "Charts2D/ManipulateSeries/ChangeRenderableSeriesType.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Change Series Type In Code", "Charts2D/ManipulateSeries/ChangeSeriesType.png"),
+            // 2D Charts, Modify Axis Behavior
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Category vs Value Axis", "Charts2D/ModifyAxisBehavior/CategoryVsValueAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Central XAxis and YAxis", "Charts2D/ModifyAxisBehavior/CentralXYAxes.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Logarithmic Axis", "Charts2D/ModifyAxisBehavior/LogarithmicAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Modify Axis Properties", "Charts2D/ModifyAxisBehavior/ModifyAxisProperties.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Multiple YAxis", "Charts2D/ModifyAxisBehavior/MultipleYAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Multiple-XAxis", "Charts2D/ModifyAxisBehavior/MultipleXAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Polar Chart with Multiple Axis", "Charts2D/ModifyAxisBehavior/PolarChartManyAxes.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Secondary Y-Axis", "Charts2D/ModifyAxisBehavior/SecondaryYAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Switch Axis Type At Runtime", "Charts2D/ModifyAxisBehavior/SwitchAxisTypeRuntime.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Vertical Charts", "Charts2D/ModifyAxisBehavior/VerticalCharts.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Vertically Stacked YAxis", "Charts2D/ModifyAxisBehavior/VerticallyStackedYAxis.png"),
+            // 2D Charts, MVVM Examples
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Axis Binding and Annotation Binding", "Charts2D/MVVMExamples/AxisAnnotationBinding.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Bind Multiple Charts", "Charts2D/MVVMExamples/BindMultipleCharts.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Bind SciChart to Data", "Charts2D/MVVMExamples/BindSciChartToData.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Manipulate Series Mvvm", "Charts2D/MVVMExamples/ManipulateSeriesMvvm.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Series Binding", "Charts2D/MVVMExamples/SeriesBinding.png"),
+            // 2D Charts, Styling and Theming
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Create a Custom Theme", "Charts2D/StylingTheming/CustomTheme.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Dashed Line Styling", "Charts2D/StylingTheming/DashedLineStyling.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Use High Quality Rendering", "Charts2D/StylingTheming/UseHQRendering.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PaletteProvider", "Charts2D/StylingTheming/UsingPaletteProvider.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PointMarkers", "Charts2D/StylingTheming/UsingPointMarkers.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using ThemeManager", "Charts2D/StylingTheming/UsingThemeManager.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Xaml Styling", "Charts2D/StylingTheming/Xaml Styling.png"),
+            // 2D Charts, Tooltips and Hit Test
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Custom Point Marker", "Charts2D/TooltipsAndHitTests/CustomPointMarker.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Custom Tooltips With Modifiers", "Charts2D/TooltipsAndHitTests/TooltipsAndModifiers.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Hit-Test API", "Charts2D/TooltipsAndHitTests/HitTestAPI.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "PointMarkers Selection", "Charts2D/TooltipsAndHitTests/PointMarkersSelection.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Series Selection", "Charts2D/TooltipsAndHitTests/SeriesSelection.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Series With Metadata", "Charts2D/TooltipsAndHitTests/SeriesWithMetadata.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Using CursorModifier Tooltips", "Charts2D/TooltipsAndHitTests/UsingCursorModifier.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Using RolloverModifier Tooltips", "Charts2D/TooltipsAndHitTests/UsingRolloverModifier.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Using TooltipModifier Tooltips", "Charts2D/TooltipsAndHitTests/Using TooltipModifier.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Using Vertical Slice Tooltips", "Charts2D/TooltipsAndHitTests/UsingVerticalSlice.png"),
+            // 2D Charts, Zoom and Pan a Chart
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Custom Overview Control", "Charts2D/ZoomPan/CustomOverviewControl.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Drag Area to Zoom", "Charts2D/ZoomPan/DragAreaToZoom.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Drag Axis to Scale", "Charts2D/ZoomPan/DragAxisToScale.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Mousewheel Zoom and Scroll", "Charts2D/ZoomPan/MousewheelZoomScroll.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Pan on Mouse-Drag", "Charts2D/ZoomPan/PanOnMouseDrag.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Pan Y or X Direction", "Charts2D/ZoomPan/PanYXDirection.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Per-Axis Scrollbars", "Charts2D/ZoomPan/PerAxisScrollbars.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Scroll Chart using Overview Control", "Charts2D/ZoomPan/OverviewControl.png"),
+            // 2D Charts, Zoom History Manager
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Simple Undo Redo", "Charts2D/ZoomHistory/UndoRedo.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Zoom History MVVM", "Charts2D/ZoomHistory/ZoomHistoryMVVM.png"),
             // 3D Charts, Create Simple Charts
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Closed Mesh 3D Chart", "Charts3D/BasicChartTypes/ClosedSurfaceMesh3D.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Bubble 3D Chart", "Charts3D/BasicChartTypes/SimpleBubble3DChart.png"),
@@ -242,13 +313,11 @@ namespace SciChart.Examples.Demo.SmokeTests
             RunScreenshotTest(testCase);
 
             // 2. Run the export test
-            RunExportExampleTest(testCase);
+            //RunExportExampleTest(testCase);
         }
 
         private void SwitchToExampleViaBreadCrumb(string category, string group, string example)
         {
-            var joe = DefaultExportActualForTest;
-
             // Click breadcrumb home
             var breadcrumbHome = WaitForElement(() => _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("Breadcrumb.Home")))?.AsButton();
             if (breadcrumbHome == null)
