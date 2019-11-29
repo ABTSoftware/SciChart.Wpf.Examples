@@ -8,24 +8,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <s:SciChartSurface s:RenderSurfaceExtensions.RenderSurfaceType="HighQualityRenderSurface">
+        <s:SciChartSurface x:Name="SciSurface" s:RenderSurfaceExtensions.RenderSurfaceType="HighQualityRenderSurface">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries"/>
             </s:SciChartSurface.RenderableSeries>
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis/>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis/>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
             </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation CoordinateMode="Relative" X1="0" Y1="0" Text="Drag to zoom on chart, then double-click zoom extents." Foreground="Orange"/>
+            </s:SciChartSurface.Annotations>
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RubberBandXyZoomModifier/>
                     <local:ZoomExtentsModifierEx ZoomExtentsCompleted="OnZoomExtentsCompleted"/>
+                    <s:XAxisDragModifier/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
 
-        <TextBlock Foreground="Orange" Margin="20" Text="Drag to zoom on chart, then double-click zoom extents."/>
     </Grid>
 </Window>

@@ -22,8 +22,8 @@ namespace EventOnZoomExtentsCompleted
         {
             if (e.IsAnimating == false)
             {
-                ZoomExtentsCompleted?.Invoke(this, EventArgs.Empty);
                 this.XAxis.VisibleRangeChanged -= OnVisibleRangeChanged;
+                ZoomExtentsCompleted?.Invoke(this, EventArgs.Empty);
             }
         }
     }
