@@ -1,0 +1,50 @@
+﻿<Window x:Class="ScrollbarAboveAxisExample.ScrollbarAboveAxis"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="ScrollbarAboveAxis" Height="450" Width="800">
+    <Grid Background="#FAFAFA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <s:SciChartSurface Grid.Row="0" x:Name="primaryChartSurface" s:ThemeManager.Theme="BrightSpark">
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier/>
+                    <s:MouseWheelZoomModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <s:SciChartScrollbar Axis="{Binding ElementName=primaryChartSurface, Path=XAxis}" Grid.Row="1" s:ThemeManager.Theme="BrightSpark" Panel.ZIndex="99"/>
+
+        <!-- NOTE: In order for this sample to work you need to set a valid developer license. This will hide the POWERED BY SCICHART logo which makes
+                    the lower chart have a minimum size.  -->
+        <s:SciChartSurface Grid.Row="2" x:Name="secondaryChartSurface" Width="{Binding ElementName=primaryChartSurface, Path=RenderSurface.ActualWidth}"
+                           s:ThemeManager.Theme="BrightSpark"                            
+                           Margin="0,-10,0,0"
+                           HorizontalAlignment="Left">
+            <s:SciChartSurface.RenderSurface>
+                <s:HighSpeedRenderSurface Visibility="Hidden"/>
+            </s:SciChartSurface.RenderSurface>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis VisibleRange="{Binding ElementName=primaryChartSurface, Path=XAxis.VisibleRange, Mode=TwoWay}"
+                               BorderThickness="0,1,0,0" BorderBrush="#AAA"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis Visibility="Collapsed"/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

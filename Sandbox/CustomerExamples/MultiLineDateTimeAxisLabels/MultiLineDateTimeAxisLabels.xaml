@@ -1,0 +1,38 @@
+﻿<Window x:Class="MultiLineDateTimeAxisLabelsExample.MultiLineDateTimeAxisLabels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="MultiLineDateTimeAxisLabels" Height="450" Width="800">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="TickLabelStyle" TargetType="s:DefaultTickLabel">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" TextAlignment="Center"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        
+        <s:SciChartSurface x:Name="scs">
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis x:Name="xAxis" TickLabelStyle="{StaticResource TickLabelStyle}"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="yAxis"/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:XAxisDragModifier/>
+                    <s:ZoomPanModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>
