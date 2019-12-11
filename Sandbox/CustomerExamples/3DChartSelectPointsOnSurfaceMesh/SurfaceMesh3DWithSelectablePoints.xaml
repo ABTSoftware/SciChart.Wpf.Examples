@@ -23,8 +23,17 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
+        <StackPanel Orientation="Horizontal" Background="Black">
+            <CheckBox Content="Flip XAxis" x:Name="flipXAxis" Foreground="White" Margin="5"/>
+            <CheckBox Content="Flip YAxis" x:Name="flipYAxis" Foreground="White" Margin="5"/>
+            <CheckBox Content="Flip ZAxis" x:Name="flipZAxis" Foreground="White" Margin="5"/>
+        </StackPanel>
+        <s3D:SciChart3DSurface Grid.Row="1" x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True"/>
             </s3D:SciChart3DSurface.Camera>
@@ -49,15 +58,15 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D />
+                <s3D:NumericAxis3D FlipCoordinates="{Binding ElementName=flipXAxis, Path=IsChecked}" />
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0,0.3"/>
+                <s3D:NumericAxis3D VisibleRange="0,0.3" FlipCoordinates="{Binding ElementName=flipYAxis, Path=IsChecked}" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D />
+                <s3D:NumericAxis3D FlipCoordinates="{Binding ElementName=flipZAxis, Path=IsChecked}" />
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
@@ -70,7 +79,7 @@
 
         </s3D:SciChart3DSurface>
 
-        <TextBlock Foreground="#FF6600" IsHitTestVisible="False" Margin="5" VerticalAlignment="Top">
+        <TextBlock Foreground="#FF6600" IsHitTestVisible="False" Margin="5" Grid.Row="1" VerticalAlignment="Top">
             <Run Text="CTRL + Drag to select, CTRL + Click to deselect all" />
         </TextBlock>
     </Grid>

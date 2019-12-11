@@ -45,6 +45,7 @@ namespace _3DChartChangePropertiesDynamically
                 }
             }
 
+
             // Assign the DataSeries to the chart 
             surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
 
