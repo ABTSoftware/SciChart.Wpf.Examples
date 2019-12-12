@@ -313,7 +313,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             RunScreenshotTest(testCase);
 
             // 2. Run the export test
-            //RunExportExampleTest(testCase);
+            RunExportExampleTest(testCase);
         }
 
         private void SwitchToExampleViaBreadCrumb(string category, string group, string example)
