@@ -5,12 +5,9 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:cd="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
-             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D"
-             xmlns:local="clr-namespace:SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts">
+             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D">
 
     <UserControl.Resources>
-
-        <s3D:Vector3ComponentConverter x:Key="Vector3ComponentConverter" />
 
         <DropShadowEffect x:Key="DropShadowEffect"
                           BlurRadius="5"
@@ -52,15 +49,15 @@
                     </TextBlock>
                     <TextBlock>
                         <Run FontWeight="Bold" Text="X: " />
-                        <Run Text="{Binding HitVertex, Converter={StaticResource Vector3ComponentConverter}, ConverterParameter='X'}" />
+                        <Run Text="{Binding FormattedXValue, Mode=OneWay}" />
                     </TextBlock>
                     <TextBlock>
                         <Run FontWeight="Bold" Text="Y: " />
-                        <Run Text="{Binding HitVertex, Converter={StaticResource Vector3ComponentConverter}, ConverterParameter='Y'}" />
+                        <Run Text="{Binding FormattedYValue, Mode=OneWay}" />
                     </TextBlock>
                     <TextBlock>
                         <Run FontWeight="Bold" Text="Z: " />
-                        <Run Text="{Binding HitVertex, Converter={StaticResource Vector3ComponentConverter}, ConverterParameter='Z'}" />
+                        <Run Text="{Binding FormattedZValue, Mode=OneWay}" />
                     </TextBlock>
                 </StackPanel>
             </StackPanel>

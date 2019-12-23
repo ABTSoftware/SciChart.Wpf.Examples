@@ -6,8 +6,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:cd="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
-             xmlns:local="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -15,7 +13,7 @@
     <UserControl.Resources>
         <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1" Color="DarkRed" />
+                <GradientStop Offset="1.0" Color="DarkRed" />
                 <GradientStop Offset="0.9" Color="Red" />
                 <GradientStop Offset="0.7" Color="Yellow" />
                 <GradientStop Offset="0.5" Color="GreenYellow" />
@@ -24,27 +22,6 @@
                 <GradientStop Offset="0.0" Color="#1D2C6B" />
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
-
-        <local:CustomVector3DConverter x:Key="CustomVector3DConverter" />
-
-        <DataTemplate x:Key="CustomSeriesTooltipTemplate" DataType="cd:SurfaceMeshSeriesInfo3D">
-            <StackPanel Orientation="Vertical">
-                <TextBlock FontWeight="Bold" Text="{Binding SeriesName, StringFormat='{}{0} Data Point'}" />
-                <Line X1="0" X2="1" Stretch="Fill" Stroke="#777" StrokeThickness="1" Margin="0,3"/>
-                <TextBlock>
-                    <Run FontWeight="Bold" Text="X: " />
-                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='X'}" />
-                </TextBlock>
-                <TextBlock>
-                    <Run FontWeight="Bold" Text="Y: " />
-                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='Y'}" />
-                </TextBlock>
-                <TextBlock>
-                    <Run FontWeight="Bold" Text="Z: " />
-                    <Run Text="{Binding HitVertex, Converter={StaticResource CustomVector3DConverter}, ConverterParameter='Z'}" />
-                </TextBlock>
-            </StackPanel>
-        </DataTemplate>
     </UserControl.Resources>
     
     <Grid Background="#FF1C1C1E">
@@ -81,8 +58,7 @@
                                                    DrawSkirt="False"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
                                                    Stroke="#77228B22"
-                                                   StrokeThickness="2.0" 
-                                                   s3D:TooltipModifier3D.TooltipTemplate="{StaticResource CustomSeriesTooltipTemplate}"/>
+                                                   StrokeThickness="2.0"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>
 

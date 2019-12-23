@@ -39,7 +39,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
             var lineDataSeries = new XyDataSeries<double>();
             var mountainDataSeries = new XyDataSeries<double, double>();
 
-            meshDataSeries.SeriesName = "Tenor";
+            meshDataSeries.SeriesName = "Tenor Curves";
             meshDataSeries.StartZ = new DateTime(2010,1,1);
             meshDataSeries.StepZ = new TimeSpan(1,0,0,0).ToDateTime();
 

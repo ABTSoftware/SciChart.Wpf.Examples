@@ -21,6 +21,5 @@
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/TenorCurves3DChart/CustomVector3DConverter.cs.txt</string>
   </CodeFiles>
 </ExampleDefinition>

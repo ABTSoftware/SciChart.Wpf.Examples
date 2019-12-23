@@ -7,38 +7,35 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="600">
+             d:DesignHeight="400"
+             d:DesignWidth="600">
     <Grid>
         <Grid.Resources>
-            <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" />
+
+            <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" Fill="Blue" />
 
             <s3D:GradientColorPalette x:Key="ExampleGradientColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0" Color="Red"/>
+                    <GradientStop Offset="0.00" Color="Red"/>
                     <GradientStop Offset="0.25" Color="Orange"/>
-                    <GradientStop Offset="0.5" Color="Yellow"/>
+                    <GradientStop Offset="0.50" Color="Yellow"/>
                     <GradientStop Offset="0.75" Color="Green"/>
-                    <GradientStop Offset="1" Color="DarkGreen"/>
+                    <GradientStop Offset="1.00" Color="DarkGreen"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
 
-            <s3D:SolidColorBrushPalette x:Key="TransparentColorPalette" Fill="Transparent">
-            </s3D:SolidColorBrushPalette>
-            <s3D:SolidColorBrushPalette x:Key="SolidFillColorPalette" Fill="#AA00BFFF">
-            </s3D:SolidColorBrushPalette>
+            <s3D:SolidColorBrushPalette x:Key="TransparentColorPalette" Fill="Transparent"/>
+            <s3D:SolidColorBrushPalette x:Key="SolidFillColorPalette" Fill="#AA00BFFF"/>
+            <s3D:SolidColorBrushPalette x:Key="SolidStrokeColorPalette" Fill="LimeGreen"/>
 
             <s3D:GradientColorPalette x:Key="ExampleStrokeColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0" Color="Crimson"/>
+                    <GradientStop Offset="0.00" Color="Crimson"/>
                     <GradientStop Offset="0.33" Color="DarkOrange"/>
                     <GradientStop Offset="0.67" Color="LimeGreen"/>
-                    <GradientStop Offset="1" Color="LimeGreen"/>
+                    <GradientStop Offset="1.00" Color="LimeGreen"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
-
-            <s3D:SolidColorBrushPalette x:Key="SolidStrokeColorPalette" Fill="LimeGreen">
-            </s3D:SolidColorBrushPalette>
-            
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -51,64 +48,81 @@
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
             <ext:FlyoutSeparator/>
-            
+
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
                       Content="CTRL"
                       FontSize="10"
                       Padding="0">
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                        
-                        <!-- Checkboxes to decide how the chart should be filled -->
-                        <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
-                        <CheckBox  FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrkY" IsChecked="True"  s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrkZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrkSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrkTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                        
-                        <ext:FlyoutSeparator/>
 
-                        <!-- Checkboxes to decide how the chart should be filled -->
-                        <TextBlock FontSize="12" Text="Gradient fill direction:" />
-                        <CheckBox  FontSize="12" Margin="4" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="Solid Color Fill (Blue)" x:Name="cbkFillSolid" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                        <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="cbkFillTransparent" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                        
-                        <ext:FlyoutSeparator/>
-                        
-                        <!-- Checkbox to decide whether PointMarkers are shown -->
-                        <TextBlock FontSize="12" Text="PointMarkers:" />
-                        <CheckBox  FontSize="12" Margin="4" Content="Show PointMarkers?" x:Name="ckbShowPointMarkers" IsChecked="False" s:ToggleButtonExtensions.GroupName="VolumetricChartGroup"/>
-                        
-                        <ext:FlyoutSeparator/>
-                        
-                        <!-- Checkbox to decide whether slices are flat -->
-                        
-                        <CheckBox  FontSize="12" Margin="4" Content="Is volumetric?" x:Name="ckbIsVolumetric" IsChecked="False" s:ToggleButtonExtensions.GroupName="VolumetricChartGroup"/>
-                    </StackPanel>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <Grid MinWidth="150">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Vertical">
+
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsChecked"  Value="True">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <!-- Checkboxes to decide how the chart should be filled -->
+                            <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrkY" IsChecked="True" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrkZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrkSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrkTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+
+                            <ext:FlyoutSeparator/>
+
+                            <!-- Checkboxes to decide how the chart should be filled -->
+                            <TextBlock FontSize="12" Text="GradientFill Direction:" />
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Solid Color Fill (Blue)" x:Name="cbkFillSolid" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="cbkFillTransparent" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+
+                            <ext:FlyoutSeparator/>
+
+                            <CheckBox FontSize="12" Margin="4" Content="Show PointMarkers?" x:Name="ckbShowPointMarkers" s:ToggleButtonExtensions.GroupName="MarkerVolumetricChartGroup"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Is Volumetric?" x:Name="ckbIsVolumetric" s:ToggleButtonExtensions.GroupName="MarkerVolumetricChartGroup"/>
+
+                        </StackPanel>
+                    </Grid>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
-        
+
         <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1"
                            BorderThickness="0"
                            WorldDimensions="200,100,200">
+
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True" />
             </s3D:SciChart3DSurface.Camera>
-            
+
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:WaterfallRenderableSeries3D x:Name="WaterfallSeries">
 
-                    <!-- This style is used to demonstrate different properties and their effects in the waterfall chart --> 
-                    <!-- You dont need a style, you can just set the properties above as attributes -->
-                    <!--                                                                            -->
+                    <!-- This style is used to demonstrate different properties and their effects in the waterfall chart -->
+                    <!-- You don't need a style, you can just set the properties above as attributes -->
+
                     <!-- In our example, we set the default properties for PointMarker, Y/ZStrokeColorMapping, Y/ZColorMapping to null. -->
                     <!-- These are changed by user controls declared above in the example -->
                     <s3D:WaterfallRenderableSeries3D.Style>
                         <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <Setter Property="Stroke" Value="Transparent" />
+                            <Setter Property="Stroke" Value="#AA228B22" />
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="StrokeThickness" Value="2" />
                             <Setter Property="SliceThickness" Value="0" />
@@ -153,11 +167,11 @@
                                     <Setter Property="YColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
                                     <Setter Property="ZColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
                                 </DataTrigger>
-                                <!-- the PointMarker property applies a 3-dimentional pointmarker to points on each slice --> 
+                                <!-- the PointMarker property applies a 3-dimensional point marker to points on each slice -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbShowPointMarkers}}" Value="True">
                                     <Setter Property="PointMarker" Value="{StaticResource PointMarker}"/>
                                 </DataTrigger>
-                                <!-- When SliceThickness is set, the waterfall slices become volumetric --> 
+                                <!-- When SliceThickness is set, the waterfall slices become volumetric -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
                                     <!-- SliceThickness is used to define the thickness of waterfall slices -->
                                     <Setter Property="SliceThickness" Value="6"/>
@@ -169,22 +183,22 @@
                     </s3D:WaterfallRenderableSeries3D.Style>
                 </s3D:WaterfallRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
-            
+
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:NumericAxis3D/>
             </s3D:SciChart3DSurface.XAxis>
-            
+
             <s3D:SciChart3DSurface.YAxis>
                 <s3D:NumericAxis3D/>
             </s3D:SciChart3DSurface.YAxis>
-            
+
             <s3D:SciChart3DSurface.ZAxis>
                 <s3D:LogarithmicNumericAxis3D TextFormatting="#.#E+0"
-                                      LogarithmicBase="10"
-                                      AutoRange="Always"
-                                      ScientificNotation="LogarithmicBase"/>
+                                              LogarithmicBase="10"
+                                              AutoRange="Always"
+                                              ScientificNotation="LogarithmicBase"/>
             </s3D:SciChart3DSurface.ZAxis>
-            
+
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:VertexSelectionModifier3D />
             </s3D:SciChart3DSurface.ChartModifier>
