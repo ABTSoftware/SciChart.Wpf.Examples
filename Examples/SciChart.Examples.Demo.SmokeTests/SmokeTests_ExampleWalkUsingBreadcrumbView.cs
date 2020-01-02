@@ -253,7 +253,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Bind Multiple Charts", "Charts2D/MVVMExamples/BindMultipleCharts.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Bind SciChart to Data", "Charts2D/MVVMExamples/BindSciChartToData.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Manipulate Series Mvvm", "Charts2D/MVVMExamples/ManipulateSeriesMvvm.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Series Binding", "Charts2D/MVVMExamples/SeriesBinding.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Series Binding", "Charts2D/MVVMExamples/SeriesBinding.png", (window) => Thread.Sleep(1500)),
             // 2D Charts, Styling and Theming
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Create a Custom Theme", "Charts2D/StylingTheming/CustomTheme.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Dashed Line Styling", "Charts2D/StylingTheming/DashedLineStyling.png"),

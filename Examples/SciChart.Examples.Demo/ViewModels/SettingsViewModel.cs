@@ -55,6 +55,10 @@ namespace SciChart.Examples.Demo.ViewModels
             EnableImpossibleMode = false;
             EnableDropShadows = true;
 
+            // Always force wait for draw in UIAutomationTestMode 
+            UseAlternativeFillSourceD3D = App.UIAutomationTestMode;
+            EnableForceWaitForGPU = App.UIAutomationTestMode;
+
             Observable.CombineLatest(
                 this.WhenPropertyChanged(x => x.UseAlternativeFillSourceD3D),
                 this.WhenPropertyChanged(x => EnableForceWaitForGPU), 
