@@ -2,14 +2,15 @@
 
 Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.scichart.com): High Performance Realtime [WPF Chart Library](https://www.scichart.com/wpf-chart-features). 
 
-# Note: v6.x Preview
+# SciChart WPF v6 Released! 
 
-This branch is for the .NET Core 3 version of SciChart, v6.0.0-beta 
+This branch is for the .NET Core 3 and .NET Framework 4.5.2+ version of SciChart, v6.x
 
 * Requires [.NET Core 3.0.100 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) or later
+* Requires .NET Core 3
 * Requires Visual Studio 2019 
 
-This branch is in active development and breaking changes may be pushed. Not for production use! 
+To find out [what's new in SciChart WPF v6 please see this link](https://www.scichart.com/documentation/win/current/What's%20New%20in%20SciChart%20SDK%20v6.html).
 
 ### Note: NuGet feed setup
 
@@ -21,6 +22,8 @@ NuGet Feed setup instructions are found at the page [Getting Nightly Builds with
 ### Scichart Examples Suite
 
 The SciChart WPF Examples Suite demonstrates 2D & 3D WPF Chart types, as well as featured apps which show the speed, power and flexibility of the SciChart.WPF Chart library. 
+
+The examples suite source code is found under the [/Examples folder]((https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Examples)).
 
 ![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
 
@@ -69,23 +72,18 @@ SciChart WPF also has an array of DirectX-powered Realtime 3D Charts for WPF, in
 
 SciChart WPF Comes with a number of tutorials to help you get started quickly using our powerful & flexible chart library! Please see below:
 
-![SciChart WPF Tutorials](https://www.scichart.com/wp-content/uploads/2012/06/scichart-tutorials-thumb.png)
+![SciChart WPF Tutorials](https://www.scichart.com/wp-content/uploads/2020/01/scichart-wpf-tutorial-thumb.png)
 
-* [Tutorial 01 Referencing the SciChart Dlls](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
-* [Tutorial 02 Creating A SciChartSurface](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2002%20-%20Creating%20a%20SciChartSurface.html)
-* [Tutorial 03 Adding Series](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2003%20-%20Adding%20Series%20to%20a%20Chart.html)
-* [Tutorial 04 Adding Zooming Panning](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2004%20-%20Adding%20Zooming,%20Panning%20Behavior.html)
-* [Tutorial 05 Adding ToolTips And Legends](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2004%20-%20Adding%20Zooming,%20Panning%20Behavior.html)
-* [Tutorial 06 Adding RealTime Updates](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2006%20-%20Adding%20Realtime%20Updates.html)
-* [Tutorial 07 Annotations](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2007%20-%20Adding%20Annotations.html)
-* [Tutorial 08 Adding Multiple Axis](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2008%20-%20Adding%20Multiple%20Axis.html)
-* [Tutorial 09 Adding Multiple Charts](https://www.scichart.com/documentation/v4.x/webframe.html#Tutorial%2009%20-%20Linking%20Multiple%20Charts.html)
+* [WPF v6 Tutorials (Code behind)](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
+* [WPF v6 Tutorials (MVVM)](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2002b%20-%20Creating%20a%20SciChartSurface%20with%20MVVM.html)
+
+Source code for the tutorials is found under the [/Tutorials folder]((https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Tutorials)
 
 ### Sandbox 
 
-A place to put ideas, examples for users to answer support requests and more. 
+A place to put ideas, examples for users to answer support requests and more. See [Sandbox/CustomerExamples](https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Sandbox/CustomerExamples) for a list of useful examples of customisation of SciChart. 
 
 ### Note: NuGet feed setup
 
-To build, you will need to set the correct NuGet feeds for SciChart WPF v4.x and v5.x. 
+To build, you will need to set the correct NuGet feeds for SciChart WPF. 
 NuGet Feed setup instructions are found at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
