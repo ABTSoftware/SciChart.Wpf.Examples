@@ -77,7 +77,7 @@ SciChart WPF Comes with a number of tutorials to help you get started quickly us
 * [WPF v6 Tutorials (Code behind)](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
 * [WPF v6 Tutorials (MVVM)](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2002b%20-%20Creating%20a%20SciChartSurface%20with%20MVVM.html)
 
-Source code for the tutorials is found under the [/Tutorials folder]((https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Tutorials)
+Source code for the tutorials is found under the [/Tutorials folder](https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Tutorials)
 
 ### Sandbox 
 
