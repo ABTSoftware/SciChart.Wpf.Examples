@@ -7,8 +7,8 @@ Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.sci
 This branch is for the .NET Core 3 and .NET Framework 4.5.2+ version of SciChart, v6.x
 
 * Requires [.NET Core 3.0.100 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) or later
-* Requires .NET Core 3
-* Requires Visual Studio 2019 
+* Requires .NET Framework v4.5.2 or later
+* Requires Visual Studio 2019 or later
 
 To find out [what's new in SciChart WPF v6 please see this link](https://www.scichart.com/documentation/win/current/What's%20New%20in%20SciChart%20SDK%20v6.html).
 
@@ -23,7 +23,7 @@ NuGet Feed setup instructions are found at the page [Getting Nightly Builds with
 
 The SciChart WPF Examples Suite demonstrates 2D & 3D WPF Chart types, as well as featured apps which show the speed, power and flexibility of the SciChart.WPF Chart library. 
 
-The examples suite source code is found under the [/Examples folder]((https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Examples)).
+**The examples suite source code is found under the [/Examples folder](https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Examples)).**
 
 ![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
 
