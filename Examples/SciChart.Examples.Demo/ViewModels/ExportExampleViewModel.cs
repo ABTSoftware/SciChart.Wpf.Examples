@@ -45,7 +45,10 @@ namespace SciChart.Examples.Demo.ViewModels
                 () =>
                 {
                     ProjectWriter.WriteProject(module.CurrentExample, ExportPath + @"\", LibrariesPath);
-                    _parent.Usage.Exported = true;
+                    if (_parent.Usage != null)
+                    {
+                        _parent.Usage.Exported = true;
+                    }
                     CloseTrigger = true;
                 },
                 () => !string.IsNullOrEmpty(ExportPath) && ValidateExportPath() == null);

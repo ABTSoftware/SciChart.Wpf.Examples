@@ -33,8 +33,6 @@ namespace SciChart.Examples.Demo.SmokeTests
         private UIA3Automation _automation;
         private Window _mainWindow;
         private Stopwatch _stopwatch;
-        private const int BigWaitTimeout = 3000;
-        private const int SmallWaitTimeout = 1000;
         const double DefaultTolerance = 0.5;
         private const bool DefaultExportActualForTest = false;
 
@@ -347,7 +345,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             groupListBoxItem.Select();
 
             // 3. select item 
-            var exampleListBoxItem = WaitForElement(() => exampleListBox.FindFirstChild(example).AsListBoxItem());
+            var exampleListBoxItem = WaitForElement(() => exampleListBox.Items.FirstOrDefault(x => x.AutomationId == example).AsListBoxItem());
             if (exampleListBoxItem.IsSelected)
             {
                 // already selected? Close the example navigation view 
@@ -356,6 +354,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             else
             {
                 // else select it 
+                exampleListBoxItem.ScrollIntoView();
                 exampleListBoxItem.Select();
             }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
@@ -97,14 +98,21 @@ namespace SciChart.Examples.Demo
                 _bootStrapper = new Bootstrapper(ServiceLocator.Container, new AttributedTypeDiscoveryService(new ExplicitAssemblyDiscovery(assembliesToSearch)));
                 _bootStrapper.InitializeAsync().Then(() =>
                 {
-                    //Syncing usages 
-                    var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
-                    syncHelper.LoadFromIsolatedStorage();
+                    if (!UIAutomationTestMode)
+                    {
+                        // Do this on background thread
+                        Task.Run(() =>
+                        {
+                            //Syncing usages 
+                            var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
+                            syncHelper.LoadFromIsolatedStorage();
 
-                    //Try sync with service
-                    syncHelper.GetRatingsFromServer();
-                    syncHelper.SendUsagesToServer();
-                    syncHelper.SetUsageOnExamples();
+                            //Try sync with service
+                            syncHelper.GetRatingsFromServer();
+                            syncHelper.SendUsagesToServer();
+                            syncHelper.SetUsageOnExamples();
+                        });
+                    }
 
                     _bootStrapper.OnInitComplete();
                 }).Catch(ex =>
@@ -130,7 +138,8 @@ namespace SciChart.Examples.Demo
                 var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
 
                 // Consider doing this a bit more often.
-                syncHelper.SendUsagesToServer();
+                // And not on close as it generates server errors.
+                //syncHelper.SendUsagesToServer();
                 syncHelper.WriteToIsolatedStorage();
             }
         }

@@ -14,8 +14,8 @@ namespace SciChart.Examples.Demo.SmokeTests
     {
         public const double DefaultDpiX = 96.0;
         public const double DefaultDpiY = 96.0;
-        private const int BigWaitTimeout = 3000;
-        private const int SmallWaitTimeout = 1000;
+        public const int BigWaitTimeout = 5000;
+        public const int SmallWaitTimeout = 1000;
 
         public static string ResourcesPath = @"SciChart\Examples\Demo\SmokeTests\Resources\Expectations\";
         public static string ExportActualPath = Path.Combine(

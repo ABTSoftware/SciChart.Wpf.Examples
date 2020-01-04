@@ -49,6 +49,7 @@
                     Grid.Column="1"
                     Margin="50 0 0 0"
                     HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="Settings.Close"
                     Command="{Binding HideSettingsCommand}"
                     Style="{StaticResource CloseButtonStyle}" />
         
@@ -127,6 +128,7 @@
                           Content="Use Alternative Fill Source (DirectX Only)"
                           FontSize="14"
                           ToolTip="Uses an alternative method (not WPF's D3DImage) to render DirectX Content. Can help compatibility issues on some machines"
+                          AutomationProperties.AutomationId="Settings.UseAlternativeFillSource"
                           DataContext="{StaticResource SettingsViewModel}"
                           IsEnabled="{Binding Path=IsDirectXEnabled2D}"
                           IsChecked="{Binding Path=UseAlternativeFillSourceD3D, Mode=TwoWay}"/>
@@ -135,6 +137,7 @@
                           Content="Enable Force Wait for GPU (DirectX Only)"
                           FontSize="14"
                           ToolTip="Enables waitinf for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
+                          AutomationProperties.AutomationId="Settings.EnableForceWaitForGpu"
                           DataContext="{StaticResource SettingsViewModel}"
                           IsEnabled="{Binding XPath=IsDirectXEnabled2D}"
                           IsChecked="{Binding Path=EnableForceWaitForGPU, Mode=TwoWay}"/>

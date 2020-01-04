@@ -35,19 +35,24 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public void ExampleChanged()
         {
-            IsSmile = _parent.Usage.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Frown) == ExampleFeedbackType.Smile;
-            IsFrown = _parent.Usage.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Smile) == ExampleFeedbackType.Frown;
-            FeedbackEmail = _parent.Usage.Email;
-            if (!string.IsNullOrEmpty(_parent.Usage.FeedbackText))
+            var usageService = _parent.Usage;
+            if (usageService != null)
             {
-                FeedbackSubject = _parent.Usage.FeedbackText.Contains(":") ? _parent.Usage.FeedbackText.Substring(0, _parent.Usage.FeedbackText.IndexOf(":")) : "";
-                FeedbackContent = _parent.Usage.FeedbackText.Contains(":") ? _parent.Usage.FeedbackText.Substring(_parent.Usage.FeedbackText.IndexOf(":") + 1) : _parent.Usage.FeedbackText;
+                IsSmile = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Frown) == ExampleFeedbackType.Smile;
+                IsFrown = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Smile) == ExampleFeedbackType.Frown;
+                FeedbackEmail = usageService.Email;
+                if (!string.IsNullOrEmpty(usageService.FeedbackText))
+                {
+                    FeedbackSubject = usageService.FeedbackText.Contains(":") ? usageService.FeedbackText.Substring(0, usageService.FeedbackText.IndexOf(":")) : "";
+                    FeedbackContent = usageService.FeedbackText.Contains(":") ? usageService.FeedbackText.Substring(usageService.FeedbackText.IndexOf(":") + 1) : usageService.FeedbackText;
+                }
+                else
+                {
+                    FeedbackSubject = null;
+                    FeedbackContent = null;
+                }
             }
-            else
-            {
-                FeedbackSubject = null;
-                FeedbackContent = null;
-            }
+            
 
 
             FrownVisible = false;

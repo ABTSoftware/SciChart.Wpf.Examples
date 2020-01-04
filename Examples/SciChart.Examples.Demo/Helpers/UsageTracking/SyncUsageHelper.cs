@@ -96,7 +96,7 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
                                 var encryptedUsage = reader.ReadToEnd();
                                 try
                                 {
-                                    usageXml = _encryptionHelper.Encrypt(encryptedUsage);
+                                    usageXml = _encryptionHelper.Decrypt(encryptedUsage);
                                 }
                                 catch
                                 {
@@ -127,11 +127,7 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
                             }
                         }
 
-                        var handler = EnabledChanged;
-                        if (handler != null)
-                        {
-                            handler(this, EventArgs.Empty);
-                        }
+                        EnabledChanged?.Invoke(this, EventArgs.Empty);
                     }
                     catch
                     {
@@ -139,6 +135,12 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
                         try { isf.DeleteFile("Usage.xml"); }
                         catch { }
                     }
+                }
+                else
+                {
+                    // Default on.
+                    _enabled = true;
+                    EnabledChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }

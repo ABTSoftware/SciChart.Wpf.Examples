@@ -2,6 +2,7 @@
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
+using SciChart.Charting;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.UI.Bootstrap;
@@ -63,7 +64,12 @@ namespace SciChart.Examples.Demo
 
                     //Direct3D11RenderSurface.InitEngineAsync().Then(r =>
                     //{
-                    if (!App.UIAutomationTestMode)
+                    if (App.UIAutomationTestMode)
+                    {
+                        VisualXcceleratorEngine.UseAlternativeFillSource = true;
+                        VisualXcceleratorEngine.EnableForceWaitForGPU = true;
+                    }
+                    else
                     {
                         // Force delay to show splash
                         await Task.Delay(3000);
