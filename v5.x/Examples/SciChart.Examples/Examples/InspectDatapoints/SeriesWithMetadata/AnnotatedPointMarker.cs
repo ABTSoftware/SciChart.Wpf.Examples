@@ -13,16 +13,13 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
-using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
 using SciChart.Drawing.Common;
 
@@ -34,17 +31,26 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
         private const double TextIndent = 3f;
 
         private IList<IPointMetadata> _dataPointMetadata;
-        IList<int> _dataPointIndexes = new List<int>();
+        private IList<int> _dataPointIndexes;
 
         private IPen2D _strokePen;
 
         private IBrush2D _gainFillBrush;
         private IBrush2D _lossFillBrush;
 
-        TextBlock _textBlock = new TextBlock { FontSize = TextSize };
+        private readonly TextBlock _textBlock;
 
         public Color GainMarkerFill { get; set; }
         public Color LossMarkerFill { get; set; }
+
+        public AnnotatedPointMarker()
+        {
+            _dataPointIndexes = new List<int>();
+
+            _textBlock = new TextBlock { FontSize = TextSize };
+
+            SetCurrentValue(PointMarkerBatchStrategyProperty, new DefaultPointMarkerBatchStrategy());
+        }
 
         public override void BeginBatch(IRenderContext2D context, Color? strokeColor, Color? fillColor)
         {
@@ -67,22 +73,20 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
 
         public override void Draw(IRenderContext2D context, IEnumerable<Point> centers)
         {
-            TryCasheResources(context);
+            TryCacheResources(context);
 
             var markerLocations = centers.ToArray();
-
             var prevValue = 0d;
+
             for (int i = 0; i < markerLocations.Length; ++i)
             {
                 var metadata = _dataPointMetadata[_dataPointIndexes[i]] as BudgetPointMetadata;
-
                 var center = markerLocations[i];
                 var isGain = metadata.GainLossValue >= prevValue;
 
                 DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
 
                 prevValue = metadata.GainLossValue;
-
                 var gainLossValue = metadata.GainLossValue + "$";
 
                 _textBlock.Text = gainLossValue;
@@ -108,7 +112,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             }
         }
 
-        private void TryCasheResources(IRenderContext2D context)
+        private void TryCacheResources(IRenderContext2D context)
         {
             _strokePen = _strokePen ?? context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
 
@@ -124,20 +128,20 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             double right = center.X + width;
 
             var diamondPoints = new[]
-                {
-                    // Points drawn like this:
-                    // 
-                    //      x0      (x4 in same location as x0)
-                    // 
-                    // x3        x1
-                    //
-                    //      x2
-                    new Point(center.X, top),
-                    new Point(right, center.Y),
-                    new Point(center.X, bottom),
-                    new Point(left, center.Y),
-                    new Point(center.X, top),
-                };
+            {
+                // Points drawn like this:
+                // 
+                //      x0      (x4 in same location as x0)
+                // 
+                // x3        x1
+                //
+                //      x2
+                new Point(center.X, top),
+                new Point(right, center.Y),
+                new Point(center.X, bottom),
+                new Point(left, center.Y),
+                new Point(center.X, top),
+            };
 
             context.FillPolygon(fill, diamondPoints);
             context.DrawLines(stroke, diamondPoints);
