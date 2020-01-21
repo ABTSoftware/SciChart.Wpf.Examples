@@ -18,7 +18,7 @@ namespace SciChart.Examples.Demo.Helpers
         protected override List<AutomationPeer> GetChildrenCore()
         {
             var list = base.GetChildrenCore();
-            list.AddRange(GetChildPeers(Owner));
+            list?.AddRange(GetChildPeers(Owner));
             return list;
         }
 
