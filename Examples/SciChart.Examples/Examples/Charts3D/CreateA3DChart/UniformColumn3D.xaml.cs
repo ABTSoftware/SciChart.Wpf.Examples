@@ -24,7 +24,8 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {
     public partial class UniformColumn3D : UserControl
     {
-        private const int Count = 15;
+        private const int CountX = 15;
+        private const int CountZ = 15;
 
         public UniformColumn3D()
         {
@@ -34,16 +35,18 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var uniformDataSeries = new UniformGridDataSeries3D<double>(Count, Count)
+            var uniformDataSeries = new UniformGridDataSeries3D<double>(CountX, CountZ)
             {
-                StepX = 1, 
-                StepZ = 1, 
+                StepX = 7, 
+                StepZ = 130,
+                StartX = 9,
+                StartZ = 295,
                 SeriesName = "Column 3D Data",
             };
 
-            for (var x = 0; x < Count; x++)
+            for (var x = 0; x < CountX; x++)
             {
-                for (var z = 0; z < Count; z++)
+                for (var z = 0; z < CountZ; z++)
                 {
                     var y = Math.Sin(x * 0.25) / ((z + 1) * 2);
                     uniformDataSeries[z, x] = y;

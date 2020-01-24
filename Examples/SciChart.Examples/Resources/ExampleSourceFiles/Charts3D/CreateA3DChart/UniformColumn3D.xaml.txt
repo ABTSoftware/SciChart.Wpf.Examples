@@ -99,19 +99,22 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D />
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0,0.5" />
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D />
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
-                <s3D:ZoomExtentsModifier3D AutoFitRadius="True" AnimateDurationMs = "500"/>
+                <s3D:ModifierGroup3D>
+                    <s3D:TooltipModifier3D HoverDelay="150" CrosshairMode="Lines" ShowTooltipOn="MouseOver" />
+                    <s3D:ZoomExtentsModifier3D AutoFitRadius="True" AnimateDurationMs = "500"/>
+                </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
 
         </s3D:SciChart3DSurface>
