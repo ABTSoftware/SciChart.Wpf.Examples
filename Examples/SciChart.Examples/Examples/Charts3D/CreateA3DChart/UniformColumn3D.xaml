@@ -99,15 +99,15 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.2,0.2"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
+                <s3D:NumericAxis3D VisibleRange="0,0.5" GrowBy="0.2,0.2"/>
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.9,0.7"/>
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.2,0.2"/>
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>

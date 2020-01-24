@@ -13,18 +13,18 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using SciChart.Charting3D.Model;
+using SciChart.Charting3D.PointMarkers;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using SciChart.Charting3D.Model;
-using SciChart.Charting3D.PointMarkers;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {
     public partial class UniformImpulseSeries3D : UserControl
     {
-        private const int Count = 15;
-
+        private const int CountX = 17;
+        private const int CountZ = 30;
         public UniformImpulseSeries3D()
         {
             InitializeComponent();
@@ -38,19 +38,21 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var uniformDataSeries = new UniformGridDataSeries3D<double>(Count, Count)
+            var uniformDataSeries = new UniformGridDataSeries3D<double>(CountX, CountZ)
             {
-                StepX = 1, 
-                StepZ = 1,
+                StepX = 7,
+                StepZ = 130,
+                StartX = 9,
+                StartZ = 295,
                 SeriesName = "Impulse Series 3D",
             };
 
-            for (var x = 0; x < Count; x++)
+            for (var x = 0; x < CountX; x++)
             {
-                for (var z = 0; z < Count; z++)
+                for (var z = 0; z < CountZ; z++)
                 {
-                    var y = Math.Sin(x*0.25) / ((z + 1) * 2);
-                    uniformDataSeries[z,x] = y;
+                    var y = Math.Sin(x * 0.25) / ((z + 1) * 2);
+                    uniformDataSeries[z, x] = y;
                 }
             }
 

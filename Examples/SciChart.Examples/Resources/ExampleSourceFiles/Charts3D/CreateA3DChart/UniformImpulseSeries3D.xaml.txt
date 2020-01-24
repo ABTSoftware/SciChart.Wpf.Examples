@@ -89,8 +89,7 @@
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ImpulseRenderableSeries3D x:Name="ImpulseSeries3D"
-                                               Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}"
-                                               >
+                                               Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}">
                     <s3D:ImpulseRenderableSeries3D.PointMarker>
                         <s3D:EllipsePointMarker3D Fill="{Binding Stroke}" Size="4.0" Opacity="1"/>
                     </s3D:ImpulseRenderableSeries3D.PointMarker>
@@ -98,16 +97,17 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D GrowBy="0.3,0,3" />
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.2,0.2"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D GrowBy="0.3,0,3" />
+                <s3D:NumericAxis3D VisibleRange="0,0.5" GrowBy="0.2,0.2"/>
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D GrowBy="0.3,0,3" />
-            </s3D:SciChart3DSurface.ZAxis> 
+                <s3D:NumericAxis3D AutoRange="Always" GrowBy="0.2,0.2"/>
+            </s3D:SciChart3DSurface.ZAxis>
+
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>

@@ -13,19 +13,17 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using SciChart.Charting3D.Model;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using SciChart.Charting3D.Extensions;
-using SciChart.Charting3D.Model;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 {
     public partial class UniformColumn3D : UserControl
     {
-        private const int CountX = 15;
-        private const int CountZ = 15;
+        private const int CountX = 17;
+        private const int CountZ = 30;
 
         public UniformColumn3D()
         {
@@ -37,7 +35,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
         {
             var uniformDataSeries = new UniformGridDataSeries3D<double>(CountX, CountZ)
             {
-                StepX = 7, 
+                StepX = 7,
                 StepZ = 130,
                 StartX = 9,
                 StartZ = 295,
