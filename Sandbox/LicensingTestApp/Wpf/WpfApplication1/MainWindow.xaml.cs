@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SciChart.Charting.Visuals;
 
 namespace WpfApplication1
 {
@@ -23,6 +24,9 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
+
+            this.VersionTextBlock.Text =
+                $"SciChart WPF {SciChartSurface.VersionInfo}";
         }
     }
 }
