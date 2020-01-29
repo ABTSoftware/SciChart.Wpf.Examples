@@ -26,7 +26,7 @@ namespace WpfApplication1
             InitializeComponent();
 
             this.VersionTextBlock.Text =
-                $"SciChart WPF {SciChartSurface.VersionInfo}";
+                $"SciChart WPF {SciChartSurface.VersionAndLicenseInfo}";
         }
     }
 }
