@@ -19,6 +19,8 @@ namespace WpfApplication1
 
             // Async load libraries and apply license 
             // 
+            // This code should be called and awaited before any SciChartSurface or SciChart3DSurface is shown
+            // 
             // Use SciChart.Charting3D.SciChart2D3DInitializer if you use both 2D & 3D charts in your app. Note this also initializes 2D libraries 
             // Use SciChart.Charting.Visuals.SciChart2DInitializer if you use only 2D charts in your app
             // 
