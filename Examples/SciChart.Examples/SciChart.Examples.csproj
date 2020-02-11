@@ -1348,15 +1348,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.0.3.13040-beta" />
+    <PackageReference Include="SciChart" Version="6.1.0.13042-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.0.3.13040-beta" />
+    <PackageReference Include="SciChart3D" Version="6.1.0.13042-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.0.3.13040-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.1.0.13042-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.0.3.13040-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.1.0.13042-beta" />
   </ItemGroup>
 </Project>
