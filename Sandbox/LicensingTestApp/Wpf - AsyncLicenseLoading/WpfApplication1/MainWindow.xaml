@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
         xmlns:wpfApplication1="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        Background="#222">
     <Grid x:Name="root">
         <wpfApplication1:LoadingContent/>
     </Grid>
