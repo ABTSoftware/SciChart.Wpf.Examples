@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using SciChart.Charting.Model.ChartSeries;
+using SciChart.Charting.Visuals.Axes;
 using SciChart.Data.Model;
 
 namespace SciChart.Mvvm.Tutorial
@@ -11,12 +13,19 @@ namespace SciChart.Mvvm.Tutorial
 
         public MainViewModel()
         {
-            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Primary Chart", "MouseGroup1"));
-            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), "Secondary Chart", "MouseGroup1"));
-        }   
-        
-        public ObservableCollection<ChartViewModel> ChartPanes {  get { return _chartViewModels; } }
-        
+            var xAxisViewModel = new NumericAxisViewModel
+            {
+                AxisTitle = "XAxis",
+                AutoRange = AutoRange.Once,
+                AxisAlignment = AxisAlignment.Bottom
+            };
+
+            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), xAxisViewModel, "Primary Chart", "MouseGroup1"));
+            ChartPanes.Add(new ChartViewModel(new DummyDataProvider(), xAxisViewModel, "Secondary Chart", "MouseGroup1"));
+        }
+
+        public ObservableCollection<ChartViewModel> ChartPanes { get { return _chartViewModels; } }
+
         public bool EnableZoom
         {
             get { return _enableZoom; }
@@ -44,6 +53,5 @@ namespace SciChart.Mvvm.Tutorial
                 }
             }
         }
-
     }
 }

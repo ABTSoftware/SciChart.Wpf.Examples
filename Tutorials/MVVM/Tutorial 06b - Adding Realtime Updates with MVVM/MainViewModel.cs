@@ -11,17 +11,22 @@ namespace SciChart.Mvvm.Tutorial
         private string _chartTitle = "Hello SciChart World!";
         private string _xAxisTitle = "XAxis";
         private string _yAxisTitle = "YAxis";
-        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries;
+
         private bool _enablePan;
         private bool _enableZoom = true;
 
+        private AutoRangeViewportManager _viewportManager;
+        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries;
+        
         public MainViewModel()
         {
             var dummyDataProvider = new DummyDataProvider();
-            var lineData = new XyDataSeries<double, double>() { SeriesName = "TestingSeries" };
+            var lineData = new XyDataSeries<double, double> { SeriesName = "TestingSeries" };
 
+            _viewportManager = new AutoRangeViewportManager();
             _renderableSeries = new ObservableCollection<IRenderableSeriesViewModel>();
-            RenderableSeries.Add(new LineRenderableSeriesViewModel()
+
+            RenderableSeries.Add(new LineRenderableSeriesViewModel
             {
                 StrokeThickness = 2,
                 Stroke = Colors.SteelBlue,
@@ -34,14 +39,11 @@ namespace SciChart.Mvvm.Tutorial
             lineData.Append(initialDataValues.XValues, initialDataValues.YValues);
 
             // Subscribe to future updates
-            dummyDataProvider.SubscribeUpdates((newValues) =>
+            dummyDataProvider.SubscribeUpdates(newValues =>
             {
                 // Append when new values arrive
                 lineData.Append(newValues.XValues, newValues.YValues);
-                // Zoom the chart to fit
-                lineData.InvalidateParentSurface(RangeMode.ZoomToFit);
             });
-
         }
 
         public ObservableCollection<IRenderableSeriesViewModel> RenderableSeries
@@ -51,6 +53,16 @@ namespace SciChart.Mvvm.Tutorial
             {
                 _renderableSeries = value;
                 OnPropertyChanged("RenderableSeries");
+            }
+        }
+
+        public AutoRangeViewportManager ViewportManager
+        {
+            get { return _viewportManager; }
+            set
+            {
+                _viewportManager = value;
+                OnPropertyChanged("ViewportManager");
             }
         }
 

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 
 namespace SciChart.Mvvm.Tutorial
@@ -13,32 +12,37 @@ namespace SciChart.Mvvm.Tutorial
         private string _chartTitle = "Hello SciChart World!";
         private string _xAxisTitle = "XAxis";
         private string _yAxisTitle = "YAxis";
-        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries = new ObservableCollection<IRenderableSeriesViewModel>();
+
         private bool _enablePan;
         private bool _enableZoom = true;
+
         private XyDataSeries<double, double> _lineData;
-        private DummyDataProvider _dummyDataProvider = new DummyDataProvider();
+        private readonly DummyDataProvider _dummyDataProvider = new DummyDataProvider();
+        private AutoRangeViewportManager _viewportManager = new AutoRangeViewportManager();
+
         private ObservableCollection<IAnnotationViewModel> _annotations = new ObservableCollection<IAnnotationViewModel>();
+        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries = new ObservableCollection<IRenderableSeriesViewModel>();
 
         public MainViewModel()
         {
             CreateChartData();
-
             CreateChartSeries();
             
             // Subscribe to future updates
             int i = 0;
-            _dummyDataProvider.SubscribeUpdates((newValues) =>
+            _dummyDataProvider.SubscribeUpdates(newValues =>
             {
                 // Append when new values arrive
                 _lineData.Append(newValues.XValues, newValues.YValues);
-                // Zoom the chart to fit
-                _lineData.InvalidateParentSurface(RangeMode.ZoomToFit);
 
                 // Every 100th datapoint, add an annotation
                 if (i % 100 == 0)
                 {
-                    Annotations.Add(new InfoAnnotationViewModel() { X1 = _lineData.XValues.Last(), Y1 = 0.0 });                  
+                    Annotations.Add(new InfoAnnotationViewModel
+                    {
+                        X1 = _lineData.XValues.Last(),
+                        Y1 = 0.0
+                    });
                 }
                 i++;
             }); 
@@ -49,7 +53,7 @@ namespace SciChart.Mvvm.Tutorial
             var initialDataValues = _dummyDataProvider.GetHistoricalData();
 
             // Create a DataSeries. We later apply this to a RenderableSeries
-            _lineData = new XyDataSeries<double, double>() { SeriesName = "TestingSeries" };
+            _lineData = new XyDataSeries<double, double> { SeriesName = "TestingSeries" };
 
             // Append some data to the chart                                 
             _lineData.Append(initialDataValues.XValues, initialDataValues.YValues);         
@@ -60,7 +64,7 @@ namespace SciChart.Mvvm.Tutorial
         {
             // Create a RenderableSeries. Apply the DataSeries created before 
             _renderableSeries = new ObservableCollection<IRenderableSeriesViewModel>();
-            RenderableSeries.Add(new LineRenderableSeriesViewModel()
+            RenderableSeries.Add(new LineRenderableSeriesViewModel
             {
                 StrokeThickness = 2,
                 Stroke = Colors.SteelBlue,
@@ -86,6 +90,16 @@ namespace SciChart.Mvvm.Tutorial
             {
                 _renderableSeries = value;
                 OnPropertyChanged("RenderableSeries");
+            }
+        }
+
+        public AutoRangeViewportManager ViewportManager
+        {
+            get { return _viewportManager; }
+            set
+            {
+                _viewportManager = value;
+                OnPropertyChanged("ViewportManager");
             }
         }
 
@@ -146,6 +160,5 @@ namespace SciChart.Mvvm.Tutorial
                 }
             }
         }
-
     }
 }

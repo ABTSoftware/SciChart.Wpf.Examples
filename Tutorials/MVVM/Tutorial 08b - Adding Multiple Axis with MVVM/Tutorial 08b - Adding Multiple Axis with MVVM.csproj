@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AutoRangeViewportManager.cs" />
     <Compile Include="DummyDataProvider.cs" />
     <Compile Include="InfoAnnotation.xaml.cs">
       <DependentUpon>InfoAnnotation.xaml</DependentUpon>
