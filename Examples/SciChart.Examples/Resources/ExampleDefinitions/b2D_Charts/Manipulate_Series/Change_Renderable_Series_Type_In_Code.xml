@@ -9,7 +9,7 @@
 
     Click on a series to select it. With the series selected, change the Series Type via the dropdown.
 
-    [i][b]Note:[/b][/i][i] this example uses the HitTest API with interpolation to allow selecting of a series via mouse-click anywhere on the line, column or area.[/i]
+    [i][b]Note:[/b][/i] [i]this example uses the HitTest API with interpolation to allow selecting of a series via mouse-click anywhere on the line, column or area.[/i]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/ManipulateSeries/ChangeRenderableSeriesTypeExampleView.xaml.txt</string>
@@ -19,4 +19,3 @@
     <Features>DataSeries</Features>
   </Features>
 </ExampleDefinition>
- 

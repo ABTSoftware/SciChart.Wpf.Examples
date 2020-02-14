@@ -118,14 +118,13 @@
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\HeatmapChartTypes\UniformHeatmap_and_CustomPaletteProvider.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\Legends\Chart Legends API.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\Link_Multiple_Charts\Sync_Multi_Chart_Mouse.xml" />
+    <None Remove="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Add_or_Remove_Data_Series_In_Code.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Axis_Binding_and_Annotation_Binding.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Bind_Multiple_Charts.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Bind_SciChart_to_Data.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Manipulate_Series_Mvvm.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Series_Binding.xml" />
-    <None Remove="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Add_or_Remove_DataSeries_In_Code.xml" />
-    <None Remove="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_RenderableSeries_Type_In_Code.xml" />
-    <None Remove="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_Series_Type_In_Code.xml" />
+    <None Remove="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_Renderable_Series_Type_In_Code.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Category_vs_Value_Axis.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Central_XAxis_and_YAxis.xml" />
     <None Remove="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Logarithmic_Axis.xml" />
@@ -784,9 +783,8 @@
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Bind_SciChart_to_Data.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Manipulate_Series_Mvvm.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\MVVM_Examples\Series_Binding.xml" />
-    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Add_or_Remove_DataSeries_In_Code.xml" />
-    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_RenderableSeries_Type_In_Code.xml" />
-    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_Series_Type_In_Code.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Add_or_Remove_Data_Series_In_Code.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Manipulate_Series\Change_Renderable_Series_Type_In_Code.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Category_vs_Value_Axis.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Central_XAxis_and_YAxis.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\b2D_Charts\Modify_Axis_Behavior\Logarithmic_Axis.xml" />
@@ -1348,15 +1346,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.1.0.13045-beta" />
+    <PackageReference Include="SciChart" Version="6.1.0.13051-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.1.0.13045-beta" />
+    <PackageReference Include="SciChart3D" Version="6.1.0.13051-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.1.0.13045-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.1.0.13051-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.1.0.13045-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.1.0.13051-beta" />
   </ItemGroup>
 </Project>

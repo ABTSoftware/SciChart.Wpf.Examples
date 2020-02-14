@@ -231,9 +231,8 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_LinkMultipleCharts, "Sync Multi Chart Mouse", "Charts2D/SyncCharts/SyncCharts.png",
                 (mw) => Thread.Sleep(1500)),
             // 2D Charts, Manipulate Series:
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Add or Remove DataSeries In Code", "Charts2D/ManipulateSeries/AddRemoveSeries.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Change RenderableSeries Type In Code", "Charts2D/ManipulateSeries/ChangeRenderableSeriesType.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Change Series Type In Code", "Charts2D/ManipulateSeries/ChangeSeriesType.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Add or Remove Data Series In Code", "Charts2D/ManipulateSeries/AddRemoveSeries.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ManipulateSeries, "Change Renderable Series Type In Code", "Charts2D/ManipulateSeries/ChangeRenderableSeriesType.png"),
             // 2D Charts, Modify Axis Behavior
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Category vs Value Axis", "Charts2D/ModifyAxisBehavior/CategoryVsValueAxis.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Central XAxis and YAxis", "Charts2D/ModifyAxisBehavior/CentralXYAxes.png"),
