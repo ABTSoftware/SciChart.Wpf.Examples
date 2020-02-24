@@ -363,6 +363,8 @@ namespace SciChart.Examples.Demo.SmokeTests
 
         private void RunExportExampleTest(ExampleStartTestCase testCase)
         {
+            return;
+
             // Useful UIAutomation Ids
 
             // ExportExampleView
