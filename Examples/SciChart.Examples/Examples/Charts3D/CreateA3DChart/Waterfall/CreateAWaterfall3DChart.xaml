@@ -36,6 +36,12 @@
                     <GradientStop Offset="1.00" Color="LimeGreen"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
+
+            <Style x:Key="WaterfallTooltipStyle" TargetType="s:TooltipControl">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Background" Value="#AA228B22"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -122,7 +128,7 @@
                     <!-- These are changed by user controls declared above in the example -->
                     <s3D:WaterfallRenderableSeries3D.Style>
                         <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <Setter Property="Stroke" Value="#AA228B22" />
+                            <Setter Property="Stroke" Value="White" />
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="StrokeThickness" Value="2" />
                             <Setter Property="SliceThickness" Value="0" />
@@ -130,6 +136,7 @@
                             <Setter Property="ZStrokeColorMapping" Value="{x:Null}" />
                             <Setter Property="ZColorMapping" Value="{x:Null}" />
                             <Setter Property="YColorMapping" Value="{x:Null}" />
+                            <Setter Property="s3D:TooltipModifier3D.TooltipContainerStyle" Value="{StaticResource WaterfallTooltipStyle}" />
                             <Style.Triggers>
                                 <!-- The YStrokeColorMapping applies a BrushColorPalette (Solid or Gradient brush)to the stroke in the Y direction -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkY}}" Value="True">
