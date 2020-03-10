@@ -187,6 +187,10 @@
     <Compile Include="Examples\3DChartSelectPointsOnSurfaceMesh\SurfaceMesh3DWithSelectablePoints.xaml.cs">
       <DependentUpon>SurfaceMesh3DWithSelectablePoints.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\CustomSeriesAnimation\SeriesAnimation.xaml.cs">
+      <DependentUpon>SeriesAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\CustomSeriesAnimation\CustomSeriesAnimation.cs" />
     <Compile Include="Examples\AnnotationDragModifier3D\AnnotationDragModifier3D.xaml.cs">
       <DependentUpon>AnnotationDragModifier3D.xaml</DependentUpon>
     </Compile>
@@ -368,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Examples\3DChartSelectPointsOnSurfaceMesh\SurfaceMesh3DWithSelectablePoints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\CustomSeriesAnimation\SeriesAnimation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

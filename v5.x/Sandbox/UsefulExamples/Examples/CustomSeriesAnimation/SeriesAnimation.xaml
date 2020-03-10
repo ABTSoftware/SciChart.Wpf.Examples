@@ -1,0 +1,47 @@
+﻿<Window x:Class="SciChart.Sandbox.Examples.CustomSeriesAnimation.SeriesAnimation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SciChart.Sandbox.Examples.CustomSeriesAnimation"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="AnimatedPointSeries" Height="450" Width="800">
+    <Grid>
+        <s:SciChartSurface s:RenderSurfaceExtensions.RenderSurfaceType="HighQuality">
+            
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomExtentsModifier/>
+                    <s:MouseWheelZoomModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+            
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries" Stroke="LimeGreen">
+                    
+                    <s:FastLineRenderableSeries.SeriesAnimation>
+                        <local:CustomSeriesAnimation x:Name="customAnimation" Duration="0:0:0.25" AnimationEnded="CustomSeriesAnimation_AnimationEnded" />
+                    </s:FastLineRenderableSeries.SeriesAnimation>
+                    
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+            
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Always" GrowBy="0.2,0.2"/>
+            </s:SciChartSurface.YAxis>
+            
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoRange="Always" GrowBy="0.2,0.2"/>
+            </s:SciChartSurface.XAxis>
+            
+        </s:SciChartSurface>
+
+        <Button Content="Append points" 
+                Height="30"
+                Width="100"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Click="Button_Click"/>
+    </Grid>
+</Window>
