@@ -42,6 +42,6 @@
                 Width="100"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Click="Button_Click"/>
+                Click="OnAppendButtonClick"/>
     </Grid>
 </Window>

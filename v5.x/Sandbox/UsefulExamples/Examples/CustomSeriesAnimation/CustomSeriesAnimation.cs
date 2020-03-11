@@ -26,20 +26,24 @@ namespace SciChart.Sandbox.Examples.CustomSeriesAnimation
                 {
                     if (pointSeries.Count > 1)
                     {
-                        var nextPointIndex = pointSeries.Count - 1;
-                        var lastPointIndex = pointSeries.Count - 2;
+                        var addedPointSeriesIndex = pointSeries.Count - 1;
+                        var prevPointSeriesIndex = pointSeries.Count - 2;
 
-                        var nextIndex = pointSeries.Indexes[nextPointIndex];
-                        var lastIndex = pointSeries.Indexes[lastPointIndex];
+                        // Find corresponding indexes in DataSeries
+                        var addedDataSeriesIndex = pointSeries.Indexes[addedPointSeriesIndex];
+                        var prevDataSeriesIndex = pointSeries.Indexes[prevPointSeriesIndex];
 
-                        var nextXValue = Convert.ToDouble(RenderableSeries.DataSeries.XValues[nextIndex]);
-                        var lastXValue = Convert.ToDouble(RenderableSeries.DataSeries.XValues[lastIndex]);
+                        // Get X,Y data values from DataSeries by indexes
+                        var addedXValue = Convert.ToDouble(RenderableSeries.DataSeries.XValues[addedDataSeriesIndex]);
+                        var addedYValue = Convert.ToDouble(RenderableSeries.DataSeries.YValues[addedDataSeriesIndex]);
 
-                        var nextYValue = Convert.ToDouble(RenderableSeries.DataSeries.YValues[nextIndex]);
-                        var lastYValue = Convert.ToDouble(RenderableSeries.DataSeries.YValues[lastIndex]);
+                        var prevXValue = Convert.ToDouble(RenderableSeries.DataSeries.XValues[prevDataSeriesIndex]);
+                        var prevYValue = Convert.ToDouble(RenderableSeries.DataSeries.YValues[prevDataSeriesIndex]);
 
-                        pointSeries.XValues[nextPointIndex] = lastXValue + currentProgress * (nextXValue - lastXValue);
-                        pointSeries.YValues[nextPointIndex] = lastYValue + currentProgress * (nextYValue - lastYValue);
+                        // Update last point in PointSeries using linear interpolation
+                        // this PointSeries will be drawn in current frame
+                        pointSeries.XValues[addedPointSeriesIndex] = prevXValue + currentProgress * (addedXValue - prevXValue);
+                        pointSeries.YValues[addedPointSeriesIndex] = prevYValue + currentProgress * (addedYValue - prevYValue);
                     }
                 }
             }

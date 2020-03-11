@@ -15,6 +15,7 @@ namespace SciChart.Sandbox.Examples.CustomSeriesAnimation
         {
             InitializeComponent();
 
+            // Initialize a DataSeries with some data
             var data = new XyDataSeries<double, double>();
             for (int i = 0; i < count; i++)
             {
@@ -24,19 +25,15 @@ namespace SciChart.Sandbox.Examples.CustomSeriesAnimation
                     data.Append(i, 1.5 * (1.0 + Math.Cos(i * 0.1)));
                 else
                     data.Append(i, Math.Min(1.0, Math.Sqrt(i) - Math.Sqrt(95)));
-
             }
 
             lineSeries.DataSeries = data;
-            lineSeries.DataSeries.DataSeriesChanged += DataSeries_DataSeriesChanged;
+
+            // Subscribe to changes in the DataSeries
+            lineSeries.DataSeries.DataSeriesChanged += (sender, args) => customAnimation?.StartAnimation();
         }
 
-        private void DataSeries_DataSeriesChanged(object sender, DataSeriesChangedEventArgs e)
-        {
-            customAnimation?.StartAnimation();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void OnAppendButtonClick(object sender, RoutedEventArgs e)
         {
             if (lineSeries.DataSeries is XyDataSeries<double, double> xySeries)
             {
@@ -47,7 +44,7 @@ namespace SciChart.Sandbox.Examples.CustomSeriesAnimation
                     xySeries.Append(count, 2.0 + Math.Sin(count * 0.2));
 
                     var result = await tcs.Task;
-                    if (result == false) throw new Exception("Previous animation haven't been completed");
+                    if (!result) throw new Exception("Animation is still running.");
                 }
             }
         }
