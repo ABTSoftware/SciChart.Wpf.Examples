@@ -100,7 +100,7 @@ namespace SciChart.Examples.Demo.Helpers
 
         private static void LinkOnClick(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            Process.Start("explorer.exe", e.Uri.AbsoluteUri);
             e.Handled = true;
         }
 
