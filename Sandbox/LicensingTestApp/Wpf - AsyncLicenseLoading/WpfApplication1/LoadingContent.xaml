@@ -18,5 +18,8 @@
            <TextBlock FontStyle="Italic" Text="Check App.xaml.cs and MainWindow.xaml.cs for how we async load liensing before SciChart" Foreground="White" FontSize="12" TextAlignment="Center" Margin="20"
                       tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, BeginTime=200, Duration=500, TransitionOn=Loaded}"
                       tz:Transitionz.Translate="{tz:TranslateParams From='0,10', To='0,0', BeginTime=200, Duration=300, TransitionOn=Loaded, Ease={StaticResource ExpEase}}"/>
+        <TextBlock FontStyle="Normal" x:Name="timerTextBlock" Text="00:00:00" Foreground="White" FontSize="16" TextAlignment="Center" Margin="20"
+               tz:Transitionz.Opacity="{tz:OpacityParams BeginTime=200, Duration=500, From=0, TransitionOn=Loaded, To=1}"
+               tz:Transitionz.Translate="{tz:TranslateParams BeginTime=200, Duration=300, Ease={StaticResource ExpEase}, From=0\,10, TransitionOn=Loaded, To=0\,0}"/>
     </StackPanel>
 </UserControl>

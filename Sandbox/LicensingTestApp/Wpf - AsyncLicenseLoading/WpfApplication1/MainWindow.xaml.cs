@@ -20,7 +20,9 @@ namespace WpfApplication1
             // Wait for the license initialization we triggered in App.xaml.cs
             await SciChart2D3DInitializer.Awaiter;
 
-            // Now swap out content for SciChartSurfaces once lienses loaded 
+            ((LoadingContent) this.root.Children[0]).StopTimer();
+
+            // Now swap out content for SciChartSurfaces once licenses loaded 
             this.root.Children.Clear();
             this.root.Children.Add(new SciChartContent());
         }
