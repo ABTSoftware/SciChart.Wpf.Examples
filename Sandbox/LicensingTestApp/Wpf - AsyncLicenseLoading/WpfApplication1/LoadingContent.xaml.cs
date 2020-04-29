@@ -16,18 +16,17 @@ namespace WpfApplication1
         {
             InitializeComponent();
 
-            timerTextBlock.Loaded += (s, e) =>
-            {
-                initStopwatch = Stopwatch.StartNew();
-                timer.Interval = TimeSpan.FromMilliseconds(10);
-                timer.Tick += (sender, eventArgs) => { timerTextBlock.Text = initStopwatch.Elapsed.ToString("ss\\.fff"); };
-                timer.Start();
-            };
+            initStopwatch = Stopwatch.StartNew();
+            timer.Interval = TimeSpan.FromMilliseconds(20);
+            timer.Tick += (sender, eventArgs) => { timerTextBlock.Text = initStopwatch.Elapsed.ToString("ss\\.fff"); };
+            timer.Start();
         }
 
         public void StopTimer()
         {
+            initStopwatch.Stop();
             timer.Stop();
+            timerTextBlock.Text = initStopwatch.Elapsed.ToString("ss\\.fff");
         }
     }
 }

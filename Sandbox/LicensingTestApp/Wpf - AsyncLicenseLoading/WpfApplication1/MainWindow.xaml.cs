@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using SciChart.Charting3D;
 
 namespace WpfApplication1
@@ -22,9 +24,13 @@ namespace WpfApplication1
 
             ((LoadingContent) this.root.Children[0]).StopTimer();
 
+            // SciChart 6.2.0's license init is so fast that we put this awaiter in just so you can see the loading screen with time to initialize
+            // Remove it in your app, its not necessary 
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+
             // Now swap out content for SciChartSurfaces once licenses loaded 
-            this.root.Children.Clear();
             this.root.Children.Add(new SciChartContent());
+            this.root.Children.RemoveAt(0);
         }
     }
 }

@@ -113,13 +113,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart">
-      <Version>6.1.0.13075</Version>
+      <Version>6.2.0.13164</Version>
     </PackageReference>
     <PackageReference Include="SciChart.Wpf.UI.Transitionz">
       <Version>3.1.251</Version>
     </PackageReference>
     <PackageReference Include="SciChart3D">
-      <Version>6.1.0.13075</Version>
+      <Version>6.2.0.13164</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
