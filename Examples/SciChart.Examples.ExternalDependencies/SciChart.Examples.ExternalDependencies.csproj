@@ -34,6 +34,7 @@
     <None Remove="Resources\Data\INDU_Daily.csv.gz" />
     <None Remove="Resources\Data\TickData.csv.gz" />
     <None Remove="Resources\Data\TradeTicks.csv.gz" />
+    <None Remove="Resources\Data\VitalSignsTrace.csv.gz" />
     <None Remove="Resources\Data\Waveform.txt.gz" />
     <None Remove="Resources\Images\cursor.png" />
     <None Remove="Resources\Images\globe_heightmap.png" />
@@ -60,6 +61,7 @@
     <EmbeddedResource Include="Resources\Data\INDU_Daily.csv.gz" />
     <EmbeddedResource Include="Resources\Data\TickData.csv.gz" />
     <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
+    <EmbeddedResource Include="Resources\Data\VitalSignsTrace.csv.gz" />
     <EmbeddedResource Include="Resources\Data\Waveform.txt.gz" />
   </ItemGroup>
   <ItemGroup>
