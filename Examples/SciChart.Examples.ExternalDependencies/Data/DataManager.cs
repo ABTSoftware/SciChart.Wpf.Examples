@@ -464,8 +464,8 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
                     vitalSignsData.Add(new VitalSignsData
                     {
-                        XValue = double.Parse(tokens[0], NumberFormatInfo.InvariantInfo),
-                        ECGHeartRate = double.Parse(tokens[1], NumberFormatInfo.InvariantInfo),
+                        XValue = double.Parse(tokens[0], NumberFormatInfo.InvariantInfo), 
+                        ECGHeartRate = double.Parse(tokens[1], NumberFormatInfo.InvariantInfo), 
                         BloodPressure = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo),
                         BloodVolume = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo),
                         BloodOxygenation = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo)

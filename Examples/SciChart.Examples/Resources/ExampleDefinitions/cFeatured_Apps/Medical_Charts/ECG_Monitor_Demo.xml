@@ -12,8 +12,8 @@
     The example can run indefinitely as the FIFO chart series automatically discards points that are outside the viewport.
 
     A refresh rate of 50Hz is used and a shader effect is applied to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.
-
-    [b]Note:[/b] All data is a simulation.
+    
+    [b]Note:[/b] ECG data is a simulation.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ECGMonitor/ECGMonitorView.xaml.txt</string>
