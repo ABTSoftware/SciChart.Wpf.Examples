@@ -69,7 +69,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
         {
             if (ImpulseSeries3D != null && OpacitySlider != null && SizeSlider != null)
             {
-                ImpulseSeries3D.PointMarker = (BasePointMarker3D)Activator.CreateInstance((Type)((ComboBox)sender).SelectedItem);
+                ImpulseSeries3D.PointMarker = (BaseMeshPointMarker3D)Activator.CreateInstance((Type)((ComboBox)sender).SelectedItem);
                 ImpulseSeries3D.PointMarker.Fill = ImpulseSeries3D.Stroke;
                 ImpulseSeries3D.PointMarker.Size = (float)SizeSlider.Value;
                 ImpulseSeries3D.PointMarker.Opacity = OpacitySlider.Value;

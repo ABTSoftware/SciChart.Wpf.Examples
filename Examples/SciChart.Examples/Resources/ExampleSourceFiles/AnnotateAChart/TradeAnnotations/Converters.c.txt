@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -18,24 +14,29 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             if (value is BrushAnnotationViewModel && (((string)parameter) == "FontSize" || ((string)parameter) == "Fill" || ((string)parameter) == "Pitchfork"))
             {
                 return Visibility.Collapsed;
-            }
-            else if ((value is FibonacciExtensionAnnotationViewModel || value is FibonacciRetracementAnnotationViewModel) && (((string) parameter) == "Fill" || ((string) parameter) == "Pitchfork"))
+            } 
+            
+            if ((value is FibonacciExtensionAnnotationViewModel || value is FibonacciRetracementAnnotationViewModel) && (((string) parameter) == "Fill" || ((string) parameter) == "Pitchfork"))
             {
                 return Visibility.Collapsed;
-            }
-            else if (value is ElliotWaveAnnotationViewModel && (((string)parameter) == "Fill" || ((string)parameter) == "Pitchfork"))
+            } 
+            
+            if (value is ElliotWaveAnnotationViewModel && (((string)parameter) == "Fill" || ((string)parameter) == "Pitchfork"))
             {
                 return Visibility.Collapsed;
-            }
-            else if (value is PitchforkAnnotationViewModel && (((string)parameter) == "FontSize" || ((string)parameter) == "Fill"))
+            } 
+            
+            if (value is PitchforkAnnotationViewModel && (((string)parameter) == "FontSize" || ((string)parameter) == "Fill"))
             {
                 return Visibility.Collapsed;
-            }
-            else if (value is HeadAndShouldersAnnotationViewModel && ((string)parameter) == "Pitchfork")
+            } 
+            
+            if (value is HeadAndShouldersAnnotationViewModel && ((string)parameter) == "Pitchfork")
             {
                 return Visibility.Collapsed;
-            }
-            else if (value is XabcdAnnotationViewModel && ((string)parameter) == "Pitchfork")
+            } 
+            
+            if (value is XabcdAnnotationViewModel && ((string)parameter) == "Pitchfork")
             {
                 return Visibility.Collapsed;
             }
@@ -52,13 +53,8 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
     public class StrokeThicknessToEditPanelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            double result;
-            if (value != null && double.TryParse(value.ToString(), out result))
-            {
-                return value;
-            }
-            return 1d;
+        { 
+            return double.TryParse(value?.ToString(), out double result) ? result : 1d;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -73,55 +69,57 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dataContext = value as ITradingAnnotationViewModel;
+            if (value == null) return null;
+
             var transparent = Brushes.Transparent;
 
-            DataContext = dataContext;
+            DataContext = value;
 
-            if (dataContext is ElliotWaveAnnotationViewModel || dataContext is FibonacciExtensionAnnotationViewModel || dataContext is FibonacciRetracementAnnotationViewModel)
+            if (DataContext is ElliotWaveAnnotationViewModel || DataContext is FibonacciExtensionAnnotationViewModel || DataContext is FibonacciRetracementAnnotationViewModel)
             {
-                return SetBrush(transparent, transparent, transparent, ((TradingAnnotationViewModel)dataContext).FontSize, (string)parameter);
+                return SetValue(transparent, transparent, transparent, ((TradingAnnotationViewModel)DataContext).FontSize, (string)parameter);
+            } 
+            
+            if (DataContext is BrushAnnotationViewModel)
+            {
+                return SetValue(transparent, transparent, transparent, 0, (string)parameter);
+            } 
+            
+            if (DataContext is HeadAndShouldersAnnotationViewModel vm1)
+            {
+                return SetValue(vm1.Fill, transparent, transparent, vm1.FontSize, (string)parameter);
             }
-            else if (dataContext is BrushAnnotationViewModel)
+            
+            if (DataContext is XabcdAnnotationViewModel vm2)
             {
-                return SetBrush(transparent, transparent, transparent, 0, (string)parameter);
+                return SetValue(vm2.Fill, transparent, transparent, vm2.FontSize, (string)parameter);
             }
-            else if (dataContext is HeadAndShouldersAnnotationViewModel)
+            
+            if (DataContext is PitchforkAnnotationViewModel vm3)
             {
-                var vm = (HeadAndShouldersAnnotationViewModel)dataContext;
-                return SetBrush(vm.Fill, transparent, transparent, vm.FontSize, (string)parameter);
-            }
-            else if (dataContext is XabcdAnnotationViewModel)
-            {
-                var vm = (XabcdAnnotationViewModel)dataContext;
-                return SetBrush(vm.Fill, transparent, transparent, vm.FontSize, (string)parameter);
-            }
-            else if (dataContext is PitchforkAnnotationViewModel)
-            {
-                var vm = (PitchforkAnnotationViewModel)dataContext;
-                return SetBrush(transparent, vm.MiddleFill, vm.SidesFill, vm.FontSize, (string)parameter);
+                return SetValue(transparent, vm3.MiddleFill, vm3.SidesFill, vm3.FontSize, (string)parameter);
             }
 
             return null;
         }
 
-        private object SetBrush(Brush fill, Brush middleFill, Brush sidesFill, double fontSize, string parameter)
+        private object SetValue(Brush fill, Brush middleFill, Brush sidesFill, double fontSize, string parameter)
         {
             object value = Brushes.Transparent;
 
-            if ((string)parameter == "Fill")
+            if (parameter == "Fill")
             {
                 value = fill;
             }
-            else if ((string)parameter == "SidesFill")
+            else if (parameter == "SidesFill")
             {
                 value = sidesFill;
             }
-            else if ((string)parameter == "MiddleFill")
+            else if (parameter == "MiddleFill")
             {
                 value = middleFill;
             }
-            else if ((string)parameter == "FontSize")
+            else if (parameter == "FontSize")
             {
                 value = fontSize;
             }
@@ -131,34 +129,33 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dataContext = DataContext as ITradingAnnotationViewModel;
+            if (value == null) return DataContext;
 
-            if (dataContext is HeadAndShouldersAnnotationViewModel && ((string)parameter == "Fill"))
+            if (DataContext is HeadAndShouldersAnnotationViewModel vm1 && ((string)parameter == "Fill"))
             {
-                ((HeadAndShouldersAnnotationViewModel)dataContext).Fill = (Brush)value;
+                vm1.Fill = (Brush)value;
             }
-            else if (dataContext is XabcdAnnotationViewModel && ((string)parameter == "Fill"))
+            else if (DataContext is XabcdAnnotationViewModel vm2 && ((string)parameter == "Fill"))
             {
-                ((XabcdAnnotationViewModel)dataContext).Fill = (Brush)value;
+                vm2.Fill = (Brush)value;
             }
-            else if (dataContext is PitchforkAnnotationViewModel)
+            else if (DataContext is TradingAnnotationViewModel vm3 && (string)parameter == "FontSize")
+            {
+                vm3.FontSize = (double)value;
+            }
+            else if (DataContext is PitchforkAnnotationViewModel vm4)
             {
                 if ((string)parameter == "SidesFill")
                 {
-                    ((PitchforkAnnotationViewModel)dataContext).SidesFill = (System.Windows.Media.Brush)value;
+                    vm4.SidesFill = (Brush)value;
                 }
                 else if ((string)parameter == "MiddleFill")
                 {
-                    ((PitchforkAnnotationViewModel)dataContext).MiddleFill = (System.Windows.Media.Brush)value;
+                    vm4.MiddleFill = (Brush)value;
                 }
             }
 
-            if (!(dataContext is BrushAnnotationViewModel) && (string)parameter == "FontSize")
-            {
-                ((TradingAnnotationViewModel)dataContext).FontSize = (double)value;
-            }
-
-            return null;
+            return DataContext;
         }
     }
 }

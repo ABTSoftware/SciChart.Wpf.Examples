@@ -10,7 +10,6 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.DrawingTools.TradingAnnotations.ViewModels;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -20,14 +19,17 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 {
     public class TradeAnnotationsViewModel : BaseViewModel
     {
-        private DefaultViewportManager _viewportManager;
-        private bool _isRubberBandEnabled;
         private ObservableCollection<IRenderableSeriesViewModel> _series;
         private ObservableCollection<IAnnotationViewModel> _annotations;
+        
         private Type _annotationType;
-        private bool _isAnnotationCreationEnable;
-        private bool _isZoomPanEnabled;
+        private IAnnotationViewModel _selectedAnnotation;
+
         private bool _isEditPanelVisible;
+        private bool _isAnnotationCreationEnable;
+
+        private bool _isZoomPanEnabled;
+        private bool _isRubberBandEnabled;
 
         public TradeAnnotationsViewModel()
         {
@@ -42,7 +44,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public bool IsEditPanelVisible
         {
-            get { return _isEditPanelVisible; }
+            get => _isEditPanelVisible;
             set
             {
                 _isEditPanelVisible = value;
@@ -52,19 +54,17 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public IAnnotationViewModel SelectedAnnotation
         {
-            get
-            {
-                return Annotations.FirstOrDefault(x => x.IsSelected);
-            }
+            get => _selectedAnnotation;
             set
             {
-                var val = value;
+                _selectedAnnotation = value; 
+                OnPropertyChanged("SelectedAnnotation");
             }
         }
 
         public bool IsRubberBandEnabled
         {
-            get { return _isRubberBandEnabled; }
+            get => _isRubberBandEnabled;
             set
             {
                 _isRubberBandEnabled = value;
@@ -76,7 +76,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public ObservableCollection<IRenderableSeriesViewModel> Series
         {
-            get { return _series; }
+            get => _series;
             set
             {
                 _series = value;
@@ -86,7 +86,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public ObservableCollection<IAnnotationViewModel> Annotations
         {
-            get { return _annotations; }
+            get => _annotations;
             set
             {
                 _annotations = value;
@@ -96,7 +96,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public Type AnnotationType
         {
-            get { return _annotationType; }
+            get => _annotationType;
             set
             {
                 _annotationType = value;
@@ -106,7 +106,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public bool IsAnnotationCreationEnable
         {
-            get { return _isAnnotationCreationEnable; }
+            get => _isAnnotationCreationEnable;
             set
             {
                 _isAnnotationCreationEnable = value;
@@ -116,7 +116,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public bool IsZoomPanEnabled
         {
-            get { return _isZoomPanEnabled; }
+            get => _isZoomPanEnabled;
             set
             {
                 _isZoomPanEnabled = value;
@@ -124,66 +124,42 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             }
         }
 
-        public ICommand SetAnnotationCreationTypeCommand
-        {
-            get { return new ActionCommand<Type>(SetAnnotationTypeExecute); }
-        }
+        public ICommand SetAnnotationCreationTypeCommand => new ActionCommand<Type>(SetAnnotationTypeExecute);
 
-        public ICommand AnnotationCreatedCommand
+        public ICommand AnnotationCreatedCommand => new ActionCommand<AnnotationCreationMVVMArgs>(e =>
         {
-            get
+            var annotation = e.NewAnnotationViewModel;
+
+            if (annotation != null)
             {
-                return new SciChart.Charting.Common.Helpers.ActionCommand<AnnotationCreationMVVMArgs>((e) =>
+                if (annotation is ITradingAnnotationViewModel tradingAnnotation)
                 {
-                    var annotation = (IAnnotationViewModel)e.NewAnnotationViewModel;
+                    ((AnnotationBase) tradingAnnotation.Annotation).Selected += OnAnnotationSelectionChanged;
+                    ((AnnotationBase) tradingAnnotation.Annotation).Unselected += OnAnnotationSelectionChanged;
+                }
 
-                    if (annotation != null)
-                    {
-                        var tradingAnnotation = annotation as ITradingAnnotationViewModel;
-                        if (tradingAnnotation != null)
-                        {
-                            ((AnnotationBase)tradingAnnotation.Annotation).Selected += OnAnnotationSelected;
-                            ((AnnotationBase)tradingAnnotation.Annotation).Unselected += OnAnnotationUnselected;
-                        }
-
-                        annotation.IsEditable = true;
-                        annotation.CanEditText = true;
-                        annotation.IsSelected = true;
-                    }
-
-                    IsAnnotationCreationEnable = false;
-                    IsAnnotationDrawn = false;
-                    OnPropertyChanged("IsAnnotationDrawn");
-                });
+                annotation.IsEditable = true;
+                annotation.CanEditText = true;
+                annotation.IsSelected = true;
             }
-        }
-        public List<Brush> AllBrushes
+
+            IsAnnotationCreationEnable = false;
+            IsAnnotationDrawn = false;
+
+            OnPropertyChanged("IsAnnotationDrawn");
+        });
+        
+        public List<Brush> AllBrushes => typeof(Brushes).GetProperties().Select(x => (Brush)x.GetValue(null, null)).ToList();
+
+        public ICommand DeleteSelectedAnnotationCommand => new ActionCommand(DeleteSelectedAnnotationOnSelectedPane);
+
+        public ICommand WorkSpaceKeyUpCommand => new ActionCommand<KeyEventArgs>(e =>
         {
-            get
+            if (e.Key == Key.Delete)
             {
-                return typeof(Brushes).GetProperties().Select(x => (Brush)x.GetValue(null, null)).ToList();
+                DeleteSelectedAnnotationOnSelectedPane();
             }
-        }
-
-
-        public ICommand DeleteSelectedAnnotationCommand
-        {
-            get { return new SciChart.Charting.Common.Helpers.ActionCommand(DeleteSelectedAnnotationOnSelectedPane); }
-        }
-
-        public ICommand WorkSpaceKeyUpCommand
-        {
-            get
-            {
-                return new SciChart.Charting.Common.Helpers.ActionCommand<KeyEventArgs>((e) =>
-                {
-                    if (e.Key == Key.Delete)
-                    {
-                        DeleteSelectedAnnotationOnSelectedPane();
-                    }
-                });
-            }
-        }
+        });
 
         private void OnAnnotationsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
@@ -191,25 +167,18 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             {
                 foreach (IAnnotationViewModel annotation in args.OldItems)
                 {
-                    var tradingAnnotation = annotation as ITradingAnnotationViewModel;
-                    if (tradingAnnotation != null)
+                    if (annotation is ITradingAnnotationViewModel tradingAnnotation)
                     {
-                        ((AnnotationBase)tradingAnnotation.Annotation).Selected -= OnAnnotationSelected;
-                        ((AnnotationBase)tradingAnnotation.Annotation).Unselected -= OnAnnotationUnselected;
+                        ((AnnotationBase)tradingAnnotation.Annotation).Selected -= OnAnnotationSelectionChanged;
+                        ((AnnotationBase)tradingAnnotation.Annotation).Unselected -= OnAnnotationSelectionChanged;
                     }
                 }
             }
         }
 
-        private void OnAnnotationUnselected(object sender, EventArgs eventArgs)
+        private void OnAnnotationSelectionChanged(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged("SelectedAnnotation");
-            IsEditPanelVisible = SelectedAnnotation != null;
-        }
-
-        private void OnAnnotationSelected(object sender, EventArgs eventArgs)
-        {
-            OnPropertyChanged("SelectedAnnotation");
+            SelectedAnnotation = Annotations.FirstOrDefault(x => x.IsSelected);
             IsEditPanelVisible = SelectedAnnotation != null;
         }
 
@@ -230,17 +199,17 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
         private IOhlcDataSeries GetPriceDataSeries()
         {
             var stockPrices = new OhlcDataSeries<DateTime, double>();
-
             var prices = DataManager.Instance.GetPriceData(Instrument.Indu.Value, TimeFrame.Daily);
+            
             stockPrices.Append(prices.TimeData, prices.OpenData, prices.HighData, prices.LowData, prices.CloseData);
-
             return stockPrices;
         }
 
         private void DeleteSelectedAnnotationOnSelectedPane()
         {
             Annotations.RemoveWhere(x => x.IsSelected);
-            IsEditPanelVisible = SelectedAnnotation != null;
+            SelectedAnnotation = null;
+            IsEditPanelVisible = false;
         }
     }
 }
