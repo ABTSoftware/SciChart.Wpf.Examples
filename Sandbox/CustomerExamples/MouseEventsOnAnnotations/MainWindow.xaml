@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfApp31.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <s:SciChartSurface>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.Annotations>
+                <s:HorizontalLineAnnotation Y1="5" StrokeThickness="5" LabelValue="Double Click Me!" PreviewMouseDoubleClick="Control_OnPreviewMouseDoubleClick"/>
+            </s:SciChartSurface.Annotations>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier/>
+                    <s:ZoomExtentsModifier/>
+                    <s:VerticalSliceModifier>
+                        <s:VerticalSliceModifier.VerticalLines>
+                            <s:VerticalLineAnnotation IsEditable="True" StrokeThickness="5" X1="3" LabelValue="Double Click me!" PreviewMouseDoubleClick="Control_OnPreviewMouseDoubleClick"/>
+                        </s:VerticalSliceModifier.VerticalLines>
+                    </s:VerticalSliceModifier>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>
