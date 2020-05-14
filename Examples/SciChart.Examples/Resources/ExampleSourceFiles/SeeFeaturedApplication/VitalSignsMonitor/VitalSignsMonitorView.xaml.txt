@@ -1,0 +1,265 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.VitalSignsMonitor.VitalSignsMonitorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <SolidColorBrush x:Key="HeartRateBrush" Color="#FF42B649"/>
+        <SolidColorBrush x:Key="BloodPressureBrush" Color="#FFFFFF00"/>
+        <SolidColorBrush x:Key="BloodVolumeBrush" Color="#FFB0C4DE"/>
+        <SolidColorBrush x:Key="BloodOxygenationBrush" Color="#FF6495ED"/>
+
+        <ItemsPanelTemplate x:Key="YAxesPanel">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="MonitorBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="MinWidth" Value="220"/>
+            <Setter Property="MinHeight" Value="100"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="8,4,8,8"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+
+        <Style x:Key="MonitorLargeTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,0,0,-4"/>
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+        </Style>
+
+        <Style x:Key="MonitorMiddleTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="DockPanel.Dock" Value="Top"/>
+        </Style>
+
+        <Style x:Key="MonitorSmallTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+        </Style>
+
+        <Style x:Key="MonitorIconTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,-4,0,0"/>
+            <Setter Property="DockPanel.Dock" Value="Top"/>
+        </Style>
+
+        <Style x:Key="MonitorProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid Width="50"
+                              Height="20"
+                              HorizontalAlignment="Left"
+                              Background="{TemplateBinding Background}">
+                            <Border x:Name="PART_Indicator" 
+                                    HorizontalAlignment="Left"
+                                    Background="{TemplateBinding Foreground}"/>
+                            <Border x:Name="PART_Track">
+                                <Border.Background>
+                                    <DrawingBrush TileMode="Tile"
+                                                  Viewport="0,0,5,20"
+                                                  ViewportUnits="Absolute"
+                                                  Viewbox="0,0,5,20"
+                                                  ViewboxUnits="Absolute">
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <LineGeometry StartPoint="4,0" EndPoint="4,20"/>
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Pen>
+                                                    <Pen Thickness="2" Brush="#1C1C1C"/>
+                                                </GeometryDrawing.Pen>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Margin="-1"
+                                    BorderThickness="0,2,2,2"
+                                    BorderBrush="#1C1C1C"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <s:SciChartSurface Grid.RowSpan="4"
+                           x:Name="Surface"
+                           LeftAxesPanelTemplate="{StaticResource YAxesPanel}"
+                           RightAxesPanelTemplate="{StaticResource YAxesPanel}"
+                           s:VisualXcceleratorEngine.IsEnabled="True"
+                           s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}"
+                           s:VisualXcceleratorEngine.DowngradeWithoutException="False"
+                           s:VisualXcceleratorEngine.EnableImpossibleMode="False"/>
+
+        <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource MonitorBorderStyle}">
+            <Grid>
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="ECG"
+                               Foreground="{StaticResource HeartRateBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}"/>
+
+                    <TextBlock Foreground="{StaticResource HeartRateBrush}"
+                               Style="{StaticResource MonitorSmallTextBlockStyle}">
+                        <Run Text="V1-1.4MM"/>
+                        <LineBreak/>
+                        <Run Text="ST I +0.6 II +0.9"/>
+                    </TextBlock>
+                </DockPanel>
+
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="&#x2764;"
+                               x:Name="HeartBeatIcon"
+                               Foreground="{StaticResource HeartRateBrush}"
+                               Style="{StaticResource MonitorIconTextBlockStyle}"/>
+
+                    <TextBlock x:Name="HeartRateIndicator"
+                               Foreground="{StaticResource HeartRateBrush}"
+                               Style="{StaticResource MonitorLargeTextBlockStyle}"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource MonitorBorderStyle}">
+            <Grid>
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="NIBP"
+                               Foreground="{StaticResource BloodPressureBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}"/>
+
+                    <ProgressBar x:Name="BloodPressureBar"
+                                 Foreground="{StaticResource BloodPressureBrush}" 
+                                 Style="{StaticResource MonitorProgressBarStyle}"/>
+                </DockPanel>
+
+                <DockPanel LastChildFill="False">
+                    <TextBlock TextAlignment="Right"
+                               Foreground="{StaticResource BloodPressureBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}">
+                        <Run Text="AUTO"/>
+                        <LineBreak/>
+                        <Run Text="145/95"/>
+                    </TextBlock>
+
+                    <TextBlock x:Name="BloodPressureIndicator"
+                               Foreground="{StaticResource BloodPressureBrush}"
+                               Style="{StaticResource MonitorLargeTextBlockStyle}"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource MonitorBorderStyle}">
+            <Grid>
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="SV"
+                               Foreground="{StaticResource BloodVolumeBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}"/>
+
+                    <StackPanel DockPanel.Dock="Bottom" Margin="-4,0,0,0">
+                        <StackPanel.RenderTransform>
+                            <RotateTransform CenterX="25" CenterY="20" Angle="-90"/>
+                        </StackPanel.RenderTransform>
+
+                        <ProgressBar x:Name="BloodVolumeBar1"
+                                     Foreground="{StaticResource BloodVolumeBrush}"
+                                     Style="{StaticResource MonitorProgressBarStyle}"/>
+
+                        <ProgressBar x:Name="BloodVolumeBar2"
+                                     Foreground="{StaticResource BloodVolumeBrush}"
+                                     Style="{StaticResource MonitorProgressBarStyle}"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel LastChildFill="False">
+                    <TextBlock TextAlignment="Right"
+                               Foreground="{StaticResource BloodVolumeBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}">
+                        <Run Text="ML 100"/>
+                        <LineBreak/>
+                        <Run Text="%***** 55"/>
+                    </TextBlock>
+
+                    <TextBlock x:Name="BloodVolumeIndicator"
+                               Foreground="{StaticResource BloodVolumeBrush}"
+                               Style="{StaticResource MonitorLargeTextBlockStyle}"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource MonitorBorderStyle}">
+            <Grid>
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="SpO2 (%)"
+                               Foreground="{StaticResource BloodOxygenationBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}"/>
+
+                    <TextBlock Foreground="{StaticResource BloodOxygenationBrush}"
+                               Style="{StaticResource MonitorSmallTextBlockStyle}">
+                        <Run Text="71-"/>
+                        <LineBreak/>
+                        <Run Text="RESP"/>
+                    </TextBlock>
+                </DockPanel>
+
+                <DockPanel LastChildFill="False">
+                    <TextBlock x:Name="BloodOxygenClock"
+                               TextAlignment="Right"
+                               Foreground="{StaticResource BloodOxygenationBrush}"
+                               Style="{StaticResource MonitorMiddleTextBlockStyle}"/>
+
+                    <TextBlock x:Name="BloodOxygenIndicator"
+                               Foreground="{StaticResource BloodOxygenationBrush}"
+                               Style="{StaticResource MonitorLargeTextBlockStyle}"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using SciChart.Charting.Visuals;
 
@@ -13,46 +12,33 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
         public TradeAnnotations()
         {
             InitializeComponent();
-            ManipulationMargins.AnnotationLineWidth = 20;
+            ManipulationMargins.AnnotationLineWidth = 20d;
         }
 
-        // code for dragging the thumb on the toolbar. Not related to functionality of scichart 
+        // Code for dragging the thumb on the toolbar. Not related to functionality of SciChart 
         private void Thumb_OnDragDelta(object sender, DragDeltaEventArgs e)
         {
-            var thumb = e.Source as Thumb;
-            var mainWindow = Application.Current.MainWindow;
-            if (mainWindow != null)
+            if (e.Source is Thumb thumb && thumb.Parent is Canvas canvas)
             {
-                var horiz = Canvas.GetLeft(thumb) + e.HorizontalChange;
-                var vertic = Canvas.GetTop(thumb) + e.VerticalChange;
+                var left = Canvas.GetLeft(thumb) + e.HorizontalChange;
+                var top = Canvas.GetTop(thumb) + e.VerticalChange;
 
-                var translatePoint = this.TranslatePoint(new System.Windows.Point(horiz, vertic), mainWindow);
-                if (translatePoint.X > 0 && translatePoint.X + thumb.ActualWidth + 16 <= mainWindow.ActualWidth)
+                if (left <= 0d)
                 {
-                    Canvas.SetLeft(thumb, horiz);
+                    Canvas.SetLeft(thumb, 0d);
                 }
-                else if (translatePoint.X < 0)
+                else if (left + thumb.ActualWidth <= canvas.ActualWidth)
                 {
-                    Canvas.SetLeft(thumb, 0);
-                }
-                else if (translatePoint.X + thumb.ActualWidth + 16 > mainWindow.ActualWidth)
-                {
-                    Canvas.SetLeft(thumb, mainWindow.ActualWidth - 16 - thumb.ActualWidth);
+                    Canvas.SetLeft(thumb, left);
                 }
 
-                if (translatePoint.Y >= 0 && translatePoint.Y + thumb.ActualHeight + 69 <= mainWindow.ActualHeight)
+                if (top <= 0d)
                 {
-                    Canvas.SetTop(thumb, vertic);
+                    Canvas.SetTop(thumb, 0d);
                 }
-                else if (translatePoint.Y < 0)
+                else if (top + thumb.ActualHeight <= canvas.ActualHeight)
                 {
-                    Canvas.SetTop(thumb, mainWindow.TranslatePoint(new System.Windows.Point(0, 0), this).Y);
-                }
-                else if (translatePoint.Y > mainWindow.ActualHeight - 69)
-                {
-                    Canvas.SetTop(thumb,
-                        mainWindow.TranslatePoint(
-                            new System.Windows.Point(0, mainWindow.ActualHeight - 69 - thumb.ActualHeight), this).Y);
+                    Canvas.SetTop(thumb, top);
                 }
             }
         }

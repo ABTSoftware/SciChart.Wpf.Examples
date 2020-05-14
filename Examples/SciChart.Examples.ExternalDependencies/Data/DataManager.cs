@@ -443,6 +443,41 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return ticks;
         }
 
+        public IList<VitalSignsData> GetVitalSignsData()
+        {
+            var csvResourceZipped = string.Format("{0}.{1}", ResourceDirectory, "VitalSignsTrace.csv.gz");
+            var vitalSignsData = new List<VitalSignsData>();
+            var assembly = typeof(DataManager).Assembly;
+
+            using (var stream = assembly.GetManifestResourceStream(csvResourceZipped))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
+            {
+                string line = streamReader.ReadLine();
+
+                while (line != null)
+                {
+                    // Line Format: 
+                    // XValue, HeartRate, BloodPressure, BloodVolume, BloodOxygenation
+                    // 3.12833, 0.873118, 0.625403, 0.209285, 0.100243
+                    var tokens = line.Split(',');
+
+                    vitalSignsData.Add(new VitalSignsData
+                    {
+                        XValue = double.Parse(tokens[0], NumberFormatInfo.InvariantInfo), 
+                        ECGHeartRate = double.Parse(tokens[1], NumberFormatInfo.InvariantInfo), 
+                        BloodPressure = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo),
+                        BloodVolume = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo),
+                        BloodOxygenation = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo)
+                    });
+
+                    line = streamReader.ReadLine();
+                }
+            }
+
+            return vitalSignsData;
+        }
+
         public IList<double> ComputeMovingAverage(IList<double> prices, int length)
         {
             double[] result = new double[prices.Count];

@@ -27,7 +27,7 @@ namespace WpfApplication1
             // Options: runtimeLicenseKey should be set to your license key
             //          tempDirectory is an optional temp directory for loading native libraries. Leave null for the default 
 
-            string runtimeLicenseKey = "your license keycode here";
+            string runtimeLicenseKey = "your license key here!";
             string tempDirectory = null;
 
             var initTask = SciChart2D3DInitializer.LoadLibrariesAndLicenseAsync(runtimeLicenseKey, tempDirectory);

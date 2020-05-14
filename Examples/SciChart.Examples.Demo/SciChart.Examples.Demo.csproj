@@ -110,15 +110,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.0.13203-beta" />
   </ItemGroup>
 </Project>

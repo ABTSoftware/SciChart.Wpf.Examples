@@ -168,6 +168,7 @@
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\SciChart_Trader_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\Tenor_Curves_3D_Chart.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\ECG_Monitor_Demo.xml" />
+    <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\Vital_Signs_Monitor_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fast_Paletted_Scatter_Charts.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fifo_1Billion_Points_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_1Million_Points_Instantly.xml" />
@@ -555,6 +556,12 @@
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorViewModel.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsBatch.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsDataProvider.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsIndicatorsProvider.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsMonitorView.xaml.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsMonitorView.xaml.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsPaletteProvider.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\CustomAnnotationModifier.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\HistogramLabelAnnotation.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\HistogramLabelAnnotation.xaml.txt" />
@@ -828,6 +835,7 @@
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\SciChart_Trader_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Financial_Charts\Tenor_Curves_3D_Chart.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\ECG_Monitor_Demo.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Medical_Charts\Vital_Signs_Monitor_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fast_Paletted_Scatter_Charts.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Fifo_1Billion_Points_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Load_1Million_Points_Instantly.xml" />
@@ -1215,6 +1223,12 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorViewModel.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsBatch.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsDataProvider.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsIndicatorsProvider.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsMonitorView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsMonitorView.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsPaletteProvider.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\CustomAnnotationModifier.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\HistogramLabelAnnotation.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Histogram\HistogramLabelAnnotation.xaml.txt" />
@@ -1322,6 +1336,9 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\ZoomHistory\ZoomHistoryMVVM\ZoomHistoryMvvmViewModel.c.txt" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -1346,15 +1363,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.0.13203-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.1.0.13064-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.0.13203-beta" />
   </ItemGroup>
 </Project>

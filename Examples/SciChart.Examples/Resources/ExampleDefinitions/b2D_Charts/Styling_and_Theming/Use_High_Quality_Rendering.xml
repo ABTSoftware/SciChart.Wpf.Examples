@@ -1,6 +1,6 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/UseHighQualityRendering.xaml</View>
-  <ViewModel />
+  <ViewModel>Examples.StyleAChart.UseHighQualityRenderingViewModel</ViewModel>
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHighQualityRasterizer.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates how to apply the new High Quality Rendering mode to a SciChartSurface for smooth anti-aliased lines and fills!</ToolTipDescription>

@@ -9,7 +9,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
 {
     public class ManipulateSeries3DMvvmViewModel : BaseViewModel
     {
-        private string _SelectedType;
+        private string _selectedType;
 
         public ManipulateSeries3DMvvmViewModel()
         {
@@ -24,6 +24,7 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
                 "Waterfall Series",
                 "Scatter Series"
             };
+            _selectedType = SeriesTypes[5];
 
             AddCommand = new ActionCommand(() =>
             {
@@ -60,11 +61,11 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    _SelectedType = value;
+                    _selectedType = value;
                     OnPropertyChanged("SelectedType");
                 }
             }
-            get { return _SelectedType; }
+            get { return _selectedType; }
         }
 
         public ActionCommand AddCommand { get; private set; }
