@@ -20,6 +20,9 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis x:Name="yAxis" TickLabelStyle="{StaticResource ColorTickLabelAxisStyle}"/>
             </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.ChartModifier>
+                <s:ZoomPanModifier/>
+            </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
     </Grid>
 </Window>

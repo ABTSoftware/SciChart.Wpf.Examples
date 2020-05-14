@@ -23,8 +23,8 @@ namespace LabelIndividualStylingColoring
         {
             InitializeComponent();
 
-            xAxis.LabelProvider = new ColorLabelProvider(new ColorGenerator(Colors.GreenYellow, Colors.Aqua));
-            yAxis.LabelProvider = new ColorLabelProvider(new ColorGenerator(Colors.OrangeRed, Colors.BlueViolet));
+            xAxis.LabelProvider = new ColorLabelProvider(new ColorGenerator(Colors.Green, Colors.Red));
+            yAxis.LabelProvider = new ColorLabelProvider(new ColorGenerator(Colors.Red, Colors.Blue));
         }
     }
 }
