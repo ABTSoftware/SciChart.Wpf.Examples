@@ -81,16 +81,8 @@
             <Style x:Key="PriceCandlestickSeriesStyle" TargetType="s:FastCandlestickRenderableSeries">
                 <Setter Property="StrokeUp" Value="#FF52CC54" />
                 <Setter Property="StrokeDown" Value="#FFE26565" />
-                <Setter Property="FillUp">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#7052CC54" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="FillDown">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#D0E26565" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="FillUp" Value="#7052CC54" />
+                <Setter Property="FillDown" Value ="#70E26565" />
                 <Setter Property="AntiAliasing" Value="False" />
                 <Setter Property="RolloverMarkerTemplate">
                     <Setter.Value>
