@@ -135,7 +135,10 @@
 
             <!--  Create an X Axis  -->
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D FontSize="8" VisibleRange="0,10.001" />
+                <s3D:NumericAxis3D 
+                    FontSize="8" 
+                    VisibleRange="0,10.001" 
+                    PlaneBorderThickness="0"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <!--  Create a Y Axis  -->
@@ -151,7 +154,8 @@
                 <s3D:NumericAxis3D
                     AutoRange="Always"
                     DrawLabels="False"
-                    FlipCoordinates="True" />
+                    FlipCoordinates="True"
+                    PlaneBorderThickness="0"/>
             </s3D:SciChart3DSurface.ZAxis>
 
         </s3D:SciChart3DSurface>
@@ -234,7 +238,10 @@
 
             <!--  Create an X Axis  -->
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D FontSize="8" VisibleRange="0,10.001" />
+                <s3D:NumericAxis3D 
+                    FontSize="8" 
+                    VisibleRange="0,10.001"
+                    PlaneBorderThickness="0" />
             </s3D:SciChart3DSurface.XAxis>
 
             <!--  Create a Y Axis  -->
@@ -250,7 +257,8 @@
                 <s3D:NumericAxis3D
                     AutoRange="Always"
                     DrawLabels="False"
-                    FlipCoordinates="True" />
+                    FlipCoordinates="True"
+                    PlaneBorderThickness="0" />
             </s3D:SciChart3DSurface.ZAxis>
 
         </s3D:SciChart3DSurface>
