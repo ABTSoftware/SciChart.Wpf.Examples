@@ -27,7 +27,8 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public SettingsViewModel()
         {
-            SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration
+            SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration &&
+                               !VisualXcceleratorEngine.IsGpuBlacklisted
                 ? typeof (VisualXcceleratorRenderSurface)
                 : typeof (HighSpeedRenderSurface);          
 
