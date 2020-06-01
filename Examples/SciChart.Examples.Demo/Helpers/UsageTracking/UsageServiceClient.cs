@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using RestSharp;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using SciChart.Examples.Demo.Common;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Reactive;
-using SciChart.UI.Reactive.Services;
-
 
 namespace SciChart.Examples.Demo.Helpers.UsageTracking
 {
@@ -17,8 +15,6 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
         Task<bool> SendLocalUsage(string userId, List<ExampleUsage> usage);
 
         Task<List<ExampleRating>> GetGlobalUsage();
-
-
     }
 
     [ExportType(typeof(IUsageServiceClient), CreateAs.Singleton)]
@@ -31,19 +27,15 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
         {
             Validate.NotNull(config, "config");
             Validate.NotNull(config.Address, "config.Address");
-            _config = config;
 
+            _config = config;
         }
 
         public Task<bool> SendLocalUsage(string userId, List<ExampleUsage> usage)
         {
-            // Should be working now.
-            //return TaskEx.FromResult(true);
-
-            UsageData request = new UsageData() { UserId = userId, Usage = usage };
-            return Post<UsageData>(request, "Submit");
+            UsageData request = new UsageData { UserId = userId, Usage = usage };
+            return Post(request, "Submit");
         }
-
 
         public Task<List<ExampleRating>> GetGlobalUsage()
         {
@@ -63,27 +55,19 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
             return Task.Factory.StartNew(() =>
             {
                 var client = new RestClient(_config.Address);
-
                 var getRequest = new RestRequest("api/usage/" + action, Method.GET);
+                
                 getRequest.AddHeader("Authorization", GetAuthHeader(null));
+
                 client.Timeout = 30000;
                 client.Proxy = proxy ?? GetProxyService();
 
                 IRestResponse<TResponse> response = client.Execute<TResponse>(getRequest);
 
-                if (response.StatusCode == 0)
+                if (response.StatusCode == 0 || response.StatusCode != HttpStatusCode.OK)
                 {
                     return default(TResponse);
-                    //throw new Exception("We were unable to reach the Server at scichart.com. Please try again later");
                 }
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    return default(TResponse);
-
-                  //string responseBody = response.Content;
-                  //throw new Exception(string.IsNullOrEmpty(responseBody) ? "An unknown error occurred sending the request" : responseBody);
-                }
-
                 return response.Data;
             });
         }
@@ -93,31 +77,21 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
             return Task.Factory.StartNew(() =>
             {
                 var client = new RestClient(_config.Address);
+                var restRequest = new RestRequest("api/usage/" + action, Method.POST) {RequestFormat = DataFormat.Json};
 
-                var restRequest = new RestRequest("api/usage/" + action, Method.POST);
-                restRequest.RequestFormat = DataFormat.Json;
                 restRequest.AddHeader("Authorization", GetAuthHeader(null));
-                restRequest.AddBody(request);
+                restRequest.AddJsonBody(request);
+
                 client.Timeout = 30000;
                 client.Proxy = GetProxyService();
 
                 var response = client.Execute<BoolResponse>(restRequest);
                 
-                if (response.StatusCode == 0)
+                if (response.StatusCode == 0 || response.StatusCode != HttpStatusCode.OK)
                 {
-                    return default(bool);
-
-                    //throw new Exception("We were unable to reach the Server at scichart.com. Please try again later");
+                    return false;
                 }
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    return default(bool);
-
-                    //string responseBody = response.Content;
-                    //throw new Exception(string.IsNullOrEmpty(responseBody) ? "An unknown error occurred sending the request" : responseBody);
-                }
-
-                return response.Data.Result;
+                return response.Data?.Result ?? false;
             });
         }
 
@@ -190,15 +164,13 @@ namespace SciChart.Examples.Demo.Helpers.UsageTracking
             byte[] messageBytes = encoding.GetBytes(rawSig);
             string signature;
             // hash and base64 encode 
-            using (var hmacsha256 = new HMACSHA256(keyByte))
+            using (var sha256 = new HMACSHA256(keyByte))
             {
-                byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
-                signature = Convert.ToBase64String(hashmessage);
+                byte[] hashMessage = sha256.ComputeHash(messageBytes);
+                signature = Convert.ToBase64String(hashMessage);
             }
             // build auth header
             return timestamp + "," + salt + "," + signature;
         }
-
-
     }
 }

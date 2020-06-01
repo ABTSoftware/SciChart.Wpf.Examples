@@ -7,23 +7,22 @@ using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.MarkupExtensions;
 using SciChart.Charting.Visuals;
-using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
 using SciChart.Data.Numerics.PointResamplers;
+using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers.Navigation;
-using FullScreenAntiAliasingMode = SciChart.Charting3D.FullScreenAntiAliasingMode;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Observability;
+using FullScreenAntiAliasingMode = SciChart.Charting3D.FullScreenAntiAliasingMode;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
     public class SettingsViewModel : ViewModelWithTraitsBase
     {
         private Type _selectedRenderer;
-        private bool _enabled;
 
         public SettingsViewModel()
         {
@@ -32,7 +31,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 ? typeof (VisualXcceleratorRenderSurface)
                 : typeof (HighSpeedRenderSurface);          
 
-            this.WithTrait<AllowFeedbackSettingBehaviour>();
+            WithTrait<AllowFeedbackSettingBehaviour>();
             IsDirectXAvailable = VisualXcceleratorEngine.SupportsHardwareAcceleration;
 
             if (VisualXcceleratorEngine.HasDirectX10OrBetterCapableGpu)
@@ -47,11 +46,12 @@ namespace SciChart.Examples.Demo.ViewModels
             }
 
             UseD3D10AsFallback = true;
-
             Use3DAA4x = false;
             Use3DAANone = true;
+
             EnableResamplingCPlusPlus = true;
             EnableExtremeDrawingManager = false;
+
             EnableSimd = true;
             EnableImpossibleMode = false;
             EnableDropShadows = true;
@@ -102,7 +102,8 @@ namespace SciChart.Examples.Demo.ViewModels
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect);
                 });
 
-            this.WhenPropertyChanged(x => x.EnableDropShadows).Subscribe(b => EffectManager.EnableDropShadows = b)
+            this.WhenPropertyChanged(x => x.EnableDropShadows)
+                .Subscribe(b => EffectManager.EnableDropShadows = b)
                 .DisposeWith(this);
         }
 
@@ -114,11 +115,12 @@ namespace SciChart.Examples.Demo.ViewModels
         private static void GoHomeInCaseOfProblemExample()
         {
             var curExampleUri = Navigator.Instance.CurrentExample?.Uri;
-            var problemEmaples = new []
+            var problemExamples = new []
             {
-                        "SciChart.Examples;component/Examples/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml"
+                "SciChart.Examples;component/Examples/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml"
             };
-            bool needGoHome = !String.IsNullOrWhiteSpace(curExampleUri) && problemEmaples.Any(ex => ex == curExampleUri);
+
+            bool needGoHome = !string.IsNullOrWhiteSpace(curExampleUri) && problemExamples.Any(ex => ex == curExampleUri);
             if (needGoHome && Navigator.Instance.NavigateToHomeCommand.CanExecute(null))
             {
                 Navigator.Instance.NavigateToHomeCommand.Execute(null);
@@ -127,52 +129,52 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool UseD3D11
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool UseD3D10AsFallback
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool UseD3D9
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool Use3DAANone
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool Use3DAA4x
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool AllowFeedback
         {
-            get => this.GetDynamicValue<bool>(); 
-            set => this.SetDynamicValue(value);
+            get => GetDynamicValue<bool>(); 
+            set => SetDynamicValue(value);
         }
 
         public bool EnableDropShadows
         {
-            get => this.GetDynamicValue<bool>(); 
-            set => this.SetDynamicValue(value);
+            get => GetDynamicValue<bool>(); 
+            set => SetDynamicValue(value);
         }
 
         public bool EnableResamplingCPlusPlus
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set
             {
-                this.SetDynamicValue(value);
+                SetDynamicValue(value);
 
                 RecreateStyles();
             }
@@ -180,10 +182,10 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool EnableSimd
         {
-            get => this.GetDynamicValue<bool>();
+            get => GetDynamicValue<bool>();
             set
             {
-                this.SetDynamicValue(value);
+                SetDynamicValue(value);
 
                 ExtremeResamplersFactory.Instance.AccelerationMode = value ? ExtremeResamplerAccelerationMode.Auto : ExtremeResamplerAccelerationMode.None;
             }
@@ -191,10 +193,10 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool EnableImpossibleMode
         {
-            get => this.GetDynamicValue<bool>();
+            get => GetDynamicValue<bool>();
             set
             {
-                this.SetDynamicValue(value);
+                SetDynamicValue(value);
 
                 RecreateStyles();
             }
@@ -202,10 +204,10 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool EnableExtremeDrawingManager
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set
             {
-                this.SetDynamicValue(value);
+                SetDynamicValue(value);
 
                 RecreateStyles();
             }
@@ -224,7 +226,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public Type SelectedRenderer
         {
-            get { return _selectedRenderer; }
+            get => _selectedRenderer;
             set
             {
                 if (_selectedRenderer == value || value == null) return;
@@ -258,8 +260,8 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool EnableForceWaitForGPU
         {
-            get => this.GetDynamicValue<bool>(); 
-            set => this.SetDynamicValue(value);
+            get => GetDynamicValue<bool>(); 
+            set => SetDynamicValue(value);
         }
 
         public bool IsDirectXEnabled2D
@@ -270,38 +272,31 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool UseAlternativeFillSourceD3D
         {
-            get => this.GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>(); 
             set => SetDynamicValue(value);
         }
 
         public bool IsDirectXAvailable
         {
-            get => this.GetDynamicValue<bool>(); 
-            set {  this.SetDynamicValue(value); }
+            get => GetDynamicValue<bool>(); 
+            set => SetDynamicValue(value);
         }
 
         private void CreateGlobalStyle<T>() where T : SciChartSurface
         {
-            try
+            var overrideStyle = new Style(typeof(T));
+
+            overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
+            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
+            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
+            overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
+
+            if (Application.Current.Resources.Contains(typeof(T)))
             {
-                var overrideStyle = new Style(typeof(T));
-
-                overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
-                overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
-                overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
-                overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
-
-                if (Application.Current.Resources.Contains(typeof(T)))
-                {
-                    Application.Current.Resources.Remove(typeof(T));
-                }
-
-                Application.Current.Resources.Add(typeof(T), overrideStyle);
+                Application.Current.Resources.Remove(typeof(T));
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            Application.Current.Resources.Add(typeof(T), overrideStyle);
         }
     }
 }

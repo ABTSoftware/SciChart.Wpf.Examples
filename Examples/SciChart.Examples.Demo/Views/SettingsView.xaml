@@ -2,15 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:viewModels="clr-namespace:SciChart.Examples.Demo.ViewModels"
              xmlns:visualXcceleratorRasterizer="clr-namespace:SciChart.Drawing.VisualXcceleratorRasterizer;assembly=SciChart.Drawing"
-             mc:Ignorable="d"
              AutomationProperties.AutomationId="SettingsView">
+
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:RendererTypeToDisplayNameConverter x:Key="RendererConverter" />
@@ -36,25 +33,25 @@
         </Grid.ColumnDefinitions>
         
         <TextBlock FontFamily="Segoe UI"
-                       FontSize="24"
-                       Foreground="#FFF"
-                       Text="SciChart Examples Suite Settings" />
+                   FontSize="24"
+                   Foreground="#FFF"
+                   Text="SciChart Examples Suite Settings" />
 
-        <TextBlock FontFamily="Segoe UI" Grid.Row="1" Foreground="#FFF" Margin="5,10,5,0">
-                <Run Text="Hi there! Welcome to SciChart WPF! You are running SciChart"/>
-                <Run Text="{Binding Source={x:Static s:SciChartSurface.VersionInfo}, Path=.}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Segoe UI" Foreground="#FFF" Margin="5,10,5,0">
+            <Run Text="Hi there! Welcome to SciChart WPF! You are running SciChart"/>
+            <Run Text="{Binding Source={x:Static s:SciChartSurface.VersionInfo}, Path=.}"/>
         </TextBlock>
 
         <Button Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="50 0 0 0"
-                    HorizontalAlignment="Right"
-                    AutomationProperties.AutomationId="Settings.Close"
-                    Command="{Binding HideSettingsCommand}"
-                    Style="{StaticResource CloseButtonStyle}" />
-        
-        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
-                      Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2">
+                Grid.Column="1"
+                Margin="50,0,0,0"
+                HorizontalAlignment="Right"
+                AutomationProperties.AutomationId="Settings.Close"
+                Command="{Binding HideSettingsCommand}"
+                Style="{StaticResource CloseButtonStyle}" />
+
+        <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -78,38 +75,37 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
+                
                 <TextBlock Grid.Row="1"
-                       Margin="15 25 0 15"
-                       FontSize="18"
-                       Foreground="#FFF"
-                       Text="Which Renderer Plugin for 2D Charts" />
-
+                           Margin="15,25,0,15"
+                           FontSize="18"
+                           Foreground="#FFF"
+                           Text="Which Renderer Plugin for 2D Charts" />
+                
                 <StackPanel Grid.Row="2"
-                        Margin="135 0 0 0"
-                        Orientation="Vertical"
-                        TextElement.Foreground="#FFF">
+                            Margin="135,0,0,0"
+                            Orientation="Vertical"
+                            TextElement.Foreground="#FFF">
+                    
                     <CheckBox Margin="3"
-                          Content="Software (High Speed / low quality)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all examples using the High Speed renderer plugin"
-                          IsChecked="{Binding SelectedRenderer,
-                                              Mode=TwoWay,
-                                              Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type s:HighSpeedRenderSurface}}"
-                          s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
-
+                              Content="Software (High Speed / low quality)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all examples using the High Speed renderer plugin"
+                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" 
+                              IsChecked="{Binding SelectedRenderer, Mode=TwoWay,
+                                         Converter={StaticResource RendererConverter},
+                                         ConverterParameter={x:Type s:HighSpeedRenderSurface}}"/>
+                    
                     <CheckBox Margin="3"
-                          Content="Software (High Quality)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all examples using the High Quality Software renderer plugin"
-                          IsChecked="{Binding SelectedRenderer,
-                                              Mode=TwoWay,
-                                              Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type s:HighQualityRenderSurface}}"
-                          s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
+                              Content="Software (High Quality)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all examples using the High Quality Software renderer plugin"
+                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup"
+                              IsChecked="{Binding SelectedRenderer, Mode=TwoWay,
+                                         Converter={StaticResource RendererConverter},
+                                         ConverterParameter={x:Type s:HighQualityRenderSurface}}"/>
 
                     <CheckBox Margin="3"
                               x:Name="tsrRendererCheckbox"
@@ -117,62 +113,59 @@
                               DataContext="{StaticResource SettingsViewModel}"
                               FontSize="14"
                               ToolTip="Render all examples using the new incredibly fast Visual Xccelerator engine (our fastest ever WPF charts). Requires DirectX9 GPU or Later"
+                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup"
                               IsEnabled="{Binding IsDirectXAvailable}"
-                              IsChecked="{Binding SelectedRenderer,
-                                              Mode=TwoWay,
-                                              Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type visualXcceleratorRasterizer:VisualXcceleratorRenderSurface}}"
-                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
-
+                              IsChecked="{Binding SelectedRenderer, Mode=TwoWay,
+                                         Converter={StaticResource RendererConverter},
+                                         ConverterParameter={x:Type visualXcceleratorRasterizer:VisualXcceleratorRenderSurface}}"/>
+                    
                     <CheckBox Margin="15,3"
-                          Content="Use Alternative Fill Source (DirectX Only)"
-                          FontSize="14"
-                          ToolTip="Uses an alternative method (not WPF's D3DImage) to render DirectX Content. Can help compatibility issues on some machines"
-                          AutomationProperties.AutomationId="Settings.UseAlternativeFillSource"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          IsEnabled="{Binding Path=IsDirectXEnabled2D}"
-                          IsChecked="{Binding Path=UseAlternativeFillSourceD3D, Mode=TwoWay}"/>
-
+                              Content="Use Alternative Fill Source (DirectX Only)"
+                              FontSize="14"
+                              ToolTip="Uses an alternative method (not WPF's D3DImage) to render DirectX Content. Can help compatibility issues on some machines"
+                              AutomationProperties.AutomationId="Settings.UseAlternativeFillSource"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              IsEnabled="{Binding Path=IsDirectXEnabled2D}"
+                              IsChecked="{Binding Path=UseAlternativeFillSourceD3D, Mode=TwoWay}"/>
+                    
                     <CheckBox Margin="15,3"
-                          Content="Enable Force Wait for GPU (DirectX Only)"
-                          FontSize="14"
-                          ToolTip="Enables waitinf for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
-                          AutomationProperties.AutomationId="Settings.EnableForceWaitForGpu"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          IsEnabled="{Binding XPath=IsDirectXEnabled2D}"
-                          IsChecked="{Binding Path=EnableForceWaitForGPU, Mode=TwoWay}"/>
-
+                              Content="Enable Force Wait for GPU (DirectX Only)"
+                              FontSize="14"
+                              ToolTip="Enables waitinf for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
+                              AutomationProperties.AutomationId="Settings.EnableForceWaitForGpu"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              IsEnabled="{Binding Path=IsDirectXEnabled2D}"
+                              IsChecked="{Binding Path=EnableForceWaitForGPU, Mode=TwoWay}"/>
+                    
                     <CheckBox Margin="3"
-                          Content="Vector (XAML based for printing)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all examples using the Vector renderer plugin"
-                          IsChecked="{Binding SelectedRenderer,
-                                              Mode=TwoWay,
-                                              Converter={StaticResource RendererConverter},
-                                              ConverterParameter={x:Type s:XamlRenderSurface}}"
-                          s:ToggleButtonExtensions.GroupName="SettingsRenderGroup" />
-
+                              Content="Vector (XAML based for printing)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all examples using the Vector renderer plugin"
+                              s:ToggleButtonExtensions.GroupName="SettingsRenderGroup"
+                              IsChecked="{Binding SelectedRenderer, Mode=TwoWay,
+                                         Converter={StaticResource RendererConverter},
+                                         ConverterParameter={x:Type s:XamlRenderSurface}}"/>
                 </StackPanel>
-
+                
                 <TextBlock Grid.Row="3"
-                       Margin="15 15 0 15"
-                       FontFamily="Segoe UI"
-                       FontSize="18"
-                       Foreground="#FFF"
-                       Text="DirectX Settings" />
+                           Margin="15,15,0,15"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           Foreground="#FFF"
+                           Text="DirectX Settings" />
 
-                <StackPanel Orientation="Vertical" Margin="130 0 0 0" Grid.Row="4">
-
+                <StackPanel Grid.Row="4" Orientation="Vertical" Margin="130,0,0,0">
+                    
                     <CheckBox Margin="3"
-                          x:Name="useDirectX11Checkbox"
-                          Content="Use DirectX 11"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all 2D &amp; 3D Charts using DirectX11 (where available)"
-                          IsEnabled="{Binding IsDirectXAvailable}"
-                          IsChecked="{Binding UseD3D11, Mode=TwoWay}"
-                          s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
+                              x:Name="useDirectX11Checkbox"
+                              Content="Use DirectX 11"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all 2D &amp; 3D Charts using DirectX11 (where available)"
+                              IsEnabled="{Binding IsDirectXAvailable}"
+                              IsChecked="{Binding UseD3D11, Mode=TwoWay}"
+                              s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
 
                     <CheckBox Margin="15,3"
                               Content="Use DirectX 10 as fallback Graphics API"
@@ -181,51 +174,49 @@
                               DataContext="{StaticResource SettingsViewModel}"
                               IsEnabled="{Binding ElementName=useDirectX11Checkbox, Path=IsChecked}"
                               IsChecked="{Binding Path=UseD3D10AsFallback, Mode=TwoWay}" />
-
+                    
                     <CheckBox Margin="3"
-                          Content="Use DirectX 9c"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all 3D Charts (and 2D Charts when TSR Engine) using DirectX9 (where available)"
-                          IsChecked="{Binding UseD3D9, Mode=TwoWay}"
-                          s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
-
+                              Content="Use DirectX 9c"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all 3D Charts (and 2D Charts when TSR Engine) using DirectX9 (where available)"
+                              IsChecked="{Binding UseD3D9, Mode=TwoWay}"
+                              s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" />
+                    
                     <CheckBox Margin="3"
-                          Content="AntiAliasing (None)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all 3D Charts without AntiAliasing"
-                          IsChecked="{Binding Use3DAANone, Mode=TwoWay}"
-                          s:ToggleButtonExtensions.GroupName="3DAASettingsGroup" />
-
+                              Content="AntiAliasing (None)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all 3D Charts without AntiAliasing"
+                              IsChecked="{Binding Use3DAANone, Mode=TwoWay}"
+                              s:ToggleButtonExtensions.GroupName="3DAASettingsGroup" />
+                    
                     <CheckBox Margin="3"
-                          Content="AntiAliasing (4x MSAA)"
-                          DataContext="{StaticResource SettingsViewModel}"
-                          FontSize="14"
-                          ToolTip="Render all 3D Charts with 4x Multi Sample AntiAliasing"
-                          IsChecked="{Binding Use3DAA4x, Mode=TwoWay}"
-                          s:ToggleButtonExtensions.GroupName="3DAASettingsGroup" />
+                              Content="AntiAliasing (4x MSAA)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Render all 3D Charts with 4x Multi Sample AntiAliasing"
+                              IsChecked="{Binding Use3DAA4x, Mode=TwoWay}"
+                              s:ToggleButtonExtensions.GroupName="3DAASettingsGroup" />
                 </StackPanel>
+                
+                <TextBlock Grid.Row="5"
+                           Margin="15,15,0,15"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           Foreground="#FFF"
+                           Text="Performance" />
 
-                    <TextBlock Grid.Row="5"
-                       Margin="15 15 0 15"
-                       FontFamily="Segoe UI"
-                       FontSize="18"
-                       Foreground="#FFF"
-                       Text="Performance" />
+                <StackPanel Grid.Row="6" Orientation="Vertical" Margin="130,0,0,0">
+                    
+                    <CheckBox Margin="3"
+                              Content="Enable Drop Shadow Effects (used by Tooltips)"
+                              DataContext="{StaticResource SettingsViewModel}"
+                              FontSize="14"
+                              ToolTip="Disable effects on lower powered machines for better performance! "
+                              IsChecked="{Binding EnableDropShadows, Mode=TwoWay}" />
 
-                <StackPanel Orientation="Vertical" Margin="130 0 0 0" Grid.Row="6">
-
-                    <CheckBox Grid.Row="6"
-                      Margin="3"
-                      Content="Enable Drop Shadow Effects (used by Tooltips)"
-                      DataContext="{StaticResource SettingsViewModel}"
-                      FontSize="14"
-                      ToolTip="Disable effects on lower powered machines for better performance! "
-                      IsChecked="{Binding EnableDropShadows, Mode=TwoWay}" />
-
-                    <CheckBox Grid.Row="6"
-                              x:Name="EnableCppCheckbox"
+                    <CheckBox x:Name="EnableCppCheckbox"
                               Margin="3"
                               Content="Enable C++ Resampling Algorithms"
                               DataContext="{StaticResource SettingsViewModel}"
@@ -249,92 +240,79 @@
                               IsEnabled="{Binding ElementName=EnableCppCheckbox, Path=IsChecked}"
                               IsChecked="{Binding Path=EnableImpossibleMode, Mode=TwoWay}"/>
 
-                    <CheckBox Grid.Row="6"
-                              Margin="3"
+                    <CheckBox Margin="3"
                               Content="Enable Extreme Drawing Manager (Legacy)"
                               DataContext="{StaticResource SettingsViewModel}"
                               FontSize="14"
                               ToolTip="LEGACY: Superceded by VisualXccelerator engine. Enable / disable extreme drawing manager for faster, more accurate lines drawing"
                               IsChecked="{Binding EnableExtremeDrawingManager, Mode=TwoWay}" />
                 </StackPanel>
-
+                
                 <TextBlock Grid.Row="7"
-                       Margin="15 15 0 15"
-                       FontFamily="Segoe UI"
-                       FontSize="18"
-                       Foreground="#FFF"                      
-                       Text="Allow Feedback" />
-
+                           Margin="15,15,0,15"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           Foreground="#FFF"                      
+                           Text="Allow Feedback" />
+                
                 <CheckBox Grid.Row="8"
-                      Margin="135 0 0 0"
-                      Content="Allow Usage Stats feedback to our servers"
-                      DataContext="{StaticResource SettingsViewModel}"
-                      FontSize="14"
-                       ToolTip="Anonymous usage stats and Smile Frown feedback is enabled when this option is checked"
-                      IsChecked="{Binding Path=AllowFeedback,
-                                          Mode=TwoWay, 
-                                          UpdateSourceTrigger=PropertyChanged}"
-                      IsEnabled="True" />
-
-
+                          Margin="135,0,0,0"
+                          Content="Allow Usage Stats feedback to our servers"
+                          DataContext="{StaticResource SettingsViewModel}"
+                          FontSize="14"
+                          ToolTip="Anonymous usage stats and Smile Frown feedback is enabled when this option is checked"
+                          IsChecked="{Binding Path=AllowFeedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsEnabled="True" />
+                
                 <TextBlock Grid.Row="9"
-                       Margin="15 15 0 15"
-                       FontFamily="Segoe UI"
-                       FontSize="18"
-                       Foreground="#FFF"
-                       Text="Dev Mode"/>
-
+                           Margin="15,15,0,15"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           Foreground="#FFF"
+                           Text="Dev Mode"/>
+                
                 <CheckBox Grid.Row="10"
-                      Margin="135 0 0 0"
-                      Content="Enable Dev Mode"
-                      DataContext="{StaticResource SettingsViewModel}"
-                      FontSize="14"
-                      ToolTip="Hacks and Magic for our development and testing team. Leave this unchecked!"
-                      IsChecked="{Binding Source={x:Static ext:DeveloperModManager.Manage}, Path=IsDeveloperMode}" />
+                          Margin="135,0,0,15"
+                          Content="Enable Dev Mode"
+                          DataContext="{StaticResource SettingsViewModel}"
+                          FontSize="14"
+                          ToolTip="Hacks and Magic for our development and testing team. Leave this unchecked!"
+                          IsChecked="{Binding Source={x:Static ext:DeveloperModManager.Manage}, Path=IsDeveloperMode}" />
 
-
-                <StackPanel Orientation="Vertical" Grid.Row="11" Margin="135, 10, 0, 0" HorizontalAlignment="Left"
+                <StackPanel Grid.Row="11" Orientation="Vertical" Margin="135,0,0,15" HorizontalAlignment="Left"
                             Visibility="{Binding Source={x:Static ext:DeveloperModManager.Manage}, Path=IsDeveloperMode, Converter={StaticResource BoolToValueVisibilityConverter}}">
-                    <Button
-                        Width="150"
-                        Height="25"                 
-                        Margin="0,5"
-                        ToolTip="Force a GC Collect"
-                        Command="{Binding GCCollectCommand}"
-                        Content="Force GC.Collect"/>
-
-
-                    <Button
-                        Width="150"
-                        Height="25"
-                        Margin="0,5"
-                        ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
-                        Command="{Binding ExportAllHtmlCommand}"
-                        Content="Export all to HTML"/>
-
-                    <Button
-                        Width="150"
-                        Height="25"   
-                        Margin="0,5"
-                        ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
-                        Command="{Binding ExportToHtmlCommand}"
-                        Content="Export this to HTML"/>
-
-                    <Button
-                        Width="150"
-                        Height="25"      
-                        Margin="0,5"
-                        HorizontalAlignment="Left"
-                        ToolTip="Whoa there! This option exports all SciChart examples to stand alone projects and is for our devs to test export. If you want to export just one example, press the 'Export' button in the example toolbar"
-                        Command="{Binding ExportAllSolutionsCommand}"
-                        Content="Export all to Csproj"/>
                     
+                    <Button Width="150"
+                            Height="25"                 
+                            Margin="0,5"
+                            ToolTip="Force a GC Collect"
+                            Command="{Binding GCCollectCommand}"
+                            Content="Force GC.Collect"/>
+                    
+                    <Button Width="150"
+                            Height="25"
+                            Margin="0,5"
+                            ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
+                            Command="{Binding ExportAllHtmlCommand}"
+                            Content="Export all to HTML"/>
+                    
+                    <Button Width="150"
+                            Height="25"   
+                            Margin="0,5"
+                            ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
+                            Command="{Binding ExportToHtmlCommand}"
+                            Content="Export this to HTML"/>
+                    
+                    <Button Width="150"
+                            Height="25"      
+                            Margin="0,5"
+                            HorizontalAlignment="Left"
+                            ToolTip="Whoa there! This option exports all SciChart examples to stand alone projects and is for our devs to test export. If you want to export just one example, press the 'Export' button in the example toolbar"
+                            Command="{Binding ExportAllSolutionsCommand}"
+                            Content="Export all to Csproj"/>
+
                 </StackPanel>
-
-
             </Grid>
         </ScrollViewer>
     </Grid>
-
-
 </UserControl>
