@@ -1,0 +1,18 @@
+﻿<Application x:Class="MutipleUIThreadExample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+        <!-- Only software renderers support multiple UI threads -->
+        <Style x:Shared="False" TargetType="{x:Type s:SciChartSurface}">
+            <Setter Property="RenderSurface">
+                <Setter.Value>
+                    <s:HighQualityRenderSurface/>
+                    <!--<s:HighSpeedRenderSurface/>-->
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

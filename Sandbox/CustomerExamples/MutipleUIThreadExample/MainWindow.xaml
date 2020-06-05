@@ -1,0 +1,56 @@
+﻿<Window x:Class="MutipleUIThreadExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        WindowStartupLocation="CenterScreen"
+        Height="550"
+        Width="800">
+
+    <Window.Resources>
+        <Style TargetType="s:StackedColumnRenderableSeries">
+            <Setter Property="Spacing" Value="0"/>
+            <Setter Property="ShowLabel" Value="False"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="DataPointWidth" Value="0.9"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <s:SciChartSurface Name="sciChartSurface" ChartTitle="Meat vs. Vegetables (Grouped)">
+
+            <s:SciChartSurface.ChartTitleStyle>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+            </s:SciChartSurface.ChartTitleStyle>
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:StackedColumnRenderableSeries Fill="#FF226FB7" StackedGroupId="Meat"/>
+                <s:StackedColumnRenderableSeries Fill="#FFFF9A2E" StackedGroupId="Meat"/>
+                <s:StackedColumnRenderableSeries Fill="#FFDC443F" StackedGroupId="Vegetables"/>
+                <s:StackedColumnRenderableSeries Fill="#FFAAD34F" StackedGroupId="Vegetables"/>
+                <s:StackedColumnRenderableSeries Fill="#FF8562B4" StackedGroupId="Vegetables"/>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoTicks="False" MajorDelta="1" MinorDelta="0.5" VisibleRangeLimit="1972,2023"/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMajorBands="True"/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomExtentsModifier/>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True"/>
+                    <s:RolloverModifier ShowAxisLabels="False" ShowTooltipOn="Always"/>
+                    <s:LegendModifier Margin="10" LegendPlacement="Bottom" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>
