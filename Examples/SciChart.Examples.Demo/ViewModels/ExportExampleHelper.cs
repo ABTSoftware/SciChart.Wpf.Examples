@@ -143,7 +143,8 @@ namespace SciChart.Examples.Demo.ViewModels
             using (var fs = File.AppendText(ScriptPath))
             {
                 fs.WriteLine("@echo Building " + projectName);
-                fs.WriteLine(@"call ""C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe"" /ToolsVersion:12.0 /p:Configuration=""Debug"" ""{0}/{0}.csproj"" /p:WarningLevel=0", projectName);
+                fs.WriteLine(@"IF NOT EXIST ""C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin"" @echo VisualStudio folder not exists with the following path: ""C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin"" ");
+                fs.WriteLine(@"call ""C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe"" /p:Configuration=""Debug"" ""{0}/{0}.csproj"" /p:WarningLevel=0", projectName);
                 fs.WriteLine("if ERRORLEVEL 1 (");
                 fs.WriteLine("   @echo - Example {0} Failed to compile >> errorlog.txt", projectName);
                 fs.WriteLine(") else (");

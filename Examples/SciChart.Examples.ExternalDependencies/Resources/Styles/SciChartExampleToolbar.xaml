@@ -695,6 +695,12 @@
                               Content="Show axis label"
                               IsChecked="{Binding Modifier.ShowAxisLabels, Mode=TwoWay}" />
 
+                    <CheckBox Margin="3"
+                              FontSize="12"
+                              VerticalAlignment="Center"
+                              Content="Use Interpolation"
+                              IsChecked="{Binding Modifier.UseInterpolation, Mode=TwoWay}" />
+
                 </StackPanel>
             </common:FlyoutMenuToggleButton.PopupContent>
         </common:FlyoutMenuToggleButton>
