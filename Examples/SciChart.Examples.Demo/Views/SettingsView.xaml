@@ -281,35 +281,26 @@
 
                 <StackPanel Grid.Row="11" Orientation="Vertical" Margin="135,0,0,15" HorizontalAlignment="Left"
                             Visibility="{Binding Source={x:Static ext:DeveloperModManager.Manage}, Path=IsDeveloperMode, Converter={StaticResource BoolToValueVisibilityConverter}}">
-                    
-                    <Button Width="150"
-                            Height="25"                 
-                            Margin="0,5"
-                            ToolTip="Force a GC Collect"
+
+                    <Button ToolTip="Force a GC Collect"
                             Command="{Binding GCCollectCommand}"
-                            Content="Force GC.Collect"/>
+                            Content="Force GC.Collect"
+                            Style="{StaticResource DevModeButtonStyle}"/>
                     
-                    <Button Width="150"
-                            Height="25"
-                            Margin="0,5"
-                            ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
+                    <Button ToolTip="Whoa there! This option is for our devs to export all examples to HTML pages for the website"
                             Command="{Binding ExportAllHtmlCommand}"
-                            Content="Export all to HTML"/>
-                    
-                    <Button Width="150"
-                            Height="25"   
-                            Margin="0,5"
-                            ToolTip="Whoa there! This option is for our devs to export examples to HTML pages for the website. Did you mean to export to CSProj?"
+                            Content="Export all to HTML"
+                            Style="{StaticResource DevModeButtonStyle}"/>
+
+                    <Button ToolTip="Whoa there! This option is for our devs to export this example to HTML page for the website"
                             Command="{Binding ExportToHtmlCommand}"
-                            Content="Export this to HTML"/>
+                            Content="Export this to HTML"
+                            Style="{StaticResource DevModeButtonStyle}"/>
                     
-                    <Button Width="150"
-                            Height="25"      
-                            Margin="0,5"
-                            HorizontalAlignment="Left"
-                            ToolTip="Whoa there! This option exports all SciChart examples to stand alone projects and is for our devs to test export. If you want to export just one example, press the 'Export' button in the example toolbar"
+                    <Button ToolTip="Whoa there! This option exports all SciChart examples to stand alone projects and is for our devs to test export. If you want to export just one example, press the 'Export' button in the example toolbar"
                             Command="{Binding ExportAllSolutionsCommand}"
-                            Content="Export all to Csproj"/>
+                            Content="Export all to .csproj"
+                            Style="{StaticResource DevModeButtonStyle}"/>
 
                 </StackPanel>
             </Grid>

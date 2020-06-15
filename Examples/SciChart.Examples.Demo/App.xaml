@@ -1,8 +1,6 @@
 ﻿<Application x:Class="SciChart.Examples.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              StartupUri="MainWindow.xaml">
 
     <Application.Resources>
