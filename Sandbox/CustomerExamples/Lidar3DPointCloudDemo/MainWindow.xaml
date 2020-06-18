@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lidar3DPointCloudDemo"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
@@ -20,35 +19,56 @@
         </Grid.Resources>
 
         <s3D:SciChart3DSurface x:Name="SciChart3DSurface" WorldDimensions="1000,200,1000">
+
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D FarClip="10000" Position="800,1000,800"/>
             </s3D:SciChart3DSurface.Camera>
+
             <s3D:SciChart3DSurface.RenderableSeries>
+
+                <!-- Renders the point cloud -->
                 <s3D:ScatterRenderableSeries3D x:Name="pointCloud">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
                         <s3D:PixelPointMarker3D Fill="LimeGreen"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
+
+                <!-- Renders the contours and topography map -->
+                <!-- Try different DrawMeshAs modes such as Contours, SolidMesh, SolidMeshWireframe etc -->
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh" DrawMeshAs="SolidWithContours" 
+                                                   MeshPaletteMode="HeightMapInterpolated"
+                                                   ContourStroke="Azure" ContourStrokeThickness="2" Minimum="0" Maximum="50" 
+                                                   Opacity="0.5">
+                    <s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
+                        <s3D:BrushColorPalette Brush="{StaticResource ColorMap}"/>
+                    </s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
+                </s3D:SurfaceMeshRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
+
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="X Distance (metres)"/>
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="X Distance (metres)" />
             </s3D:SciChart3DSurface.XAxis>
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0, 50" TextFormatting="0m" AxisTitle="Height (metres)"/>
+                <s3D:NumericAxis3D VisibleRange="0, 50" TextFormatting="0m" AxisTitle="Height (metres)" />
             </s3D:SciChart3DSurface.YAxis>
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="Y Distance (metres)"/>
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="Y Distance (metres)" />
             </s3D:SciChart3DSurface.ZAxis>
+
+            <!-- Enables interaction such as orbit, or movement on W-A-X-D key down -->
+            <!-- Double click to reset zoom --> 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>
                     <s3D:FreeLookModifier3D ExecuteWhen="Ctrl" MovementSpeed="20"/>
                     <s3D:MouseWheelZoomModifier3D/>
-                    <s3D:ZoomExtentsModifier3D ResetPosition="800,1000,800" ResetTarget="0,25,0"/>
+                    <s3D:ZoomExtentsModifier3D ResetPosition="800,1000,800" ResetTarget="0,25,0" AnimateDurationMs="500"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
+
         </s3D:SciChart3DSurface>
 
+        <!-- Renders the Legend --> 
         <s:HeatmapColorMap Margin="25, 50"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Stretch"

@@ -17,11 +17,10 @@ namespace Lidar3DPointCloudDemo
         {
             InitializeComponent();
 
-            this.Loaded += async (s, e) => { await ReadLidarData(); };
-
+            ReadLidarData();
         }
 
-        private async Task ReadLidarData()
+        private async void ReadLidarData()
         {
             // The LinearColorMap type in SciChart allows you to generate a colour map based on a 
             // minimum and maximum value, e.g. min=0, max=50 means the gradient brush below is mapped into that range
@@ -44,9 +43,11 @@ namespace Lidar3DPointCloudDemo
 
             // Read the ASC Lidar data file with optional color map data
             const string filename = "LIDAR-DSM-2M-TQ38sw\\tq3080_DSM_2M.asc";
-            var xyzDataSeries3D = await AscReader.ReadFile(filename, heightValue => this.ColorMapFunction(heightValue, colorMap));
+            var lidarData = await AscReader.ReadFileToAscData(filename, heightValue => this.ColorMapFunction(heightValue, colorMap));
 
-            pointCloud.DataSeries = xyzDataSeries3D;
+            // Parse into SciChart format
+            pointCloud.DataSeries = await AscReader.ParseToXyzDataSeries(lidarData);
+            surfaceMesh.DataSeries = await AscReader.ParseToGridDataSeries(lidarData);
         }
 
         private Color ColorMapFunction(float heightValue, LinearColorMap colorMap)
