@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using SciChart.Charting3D.Extensions;
 using SciChart.Charting3D.Model;
+using SciChart.Charting3D.RenderableSeries;
 
 namespace Lidar3DPointCloudDemo
 {
@@ -17,66 +17,44 @@ namespace Lidar3DPointCloudDemo
         {
             InitializeComponent();
 
-            ReadLidarData();
+            this.Loaded += async (s, e) => { await ReadLidarData(); };
+
         }
 
-        private async void ReadLidarData()
+        private async Task ReadLidarData()
         {
-            const string filename = "LIDAR-DSM-2M-TQ38sw\\tq3080_DSM_2M.asc";
-            var xyzDataSeries3D = await AscReader.ReadFile(filename, (progress) =>
+            // The LinearColorMap type in SciChart allows you to generate a colour map based on a 
+            // minimum and maximum value, e.g. min=0, max=50 means the gradient brush below is mapped into that range
+            // 
+            // call .InitializeConstants() once and use ColorUtil.Lerp to interpolate the colormap for each data-value 
+            LinearColorMap colorMap = new LinearColorMap()
+            {
+                Minimum = 0,
+                Maximum = 50,
+                GradientStops = new []
                 {
-                    Console.WriteLine($"Progress {progress}%");
-                });
+                    new ColorMapPoint() { Color = Colors.DodgerBlue.ToArgb(), Offset = 0},
+                    new ColorMapPoint() { Color = Colors.LimeGreen.ToArgb(), Offset = 0.2},
+                    new ColorMapPoint() { Color = Colors.Orange.ToArgb(), Offset = 0.5},
+                    new ColorMapPoint() { Color = Colors.OrangeRed.ToArgb(), Offset = 0.7},
+                    new ColorMapPoint() { Color = Colors.Purple.ToArgb(), Offset = 1},
+                }
+            };
+            colorMap.InitializeConstants();
+
+            // Read the ASC Lidar data file with optional color map data
+            const string filename = "LIDAR-DSM-2M-TQ38sw\\tq3080_DSM_2M.asc";
+            var xyzDataSeries3D = await AscReader.ReadFile(filename, heightValue => this.ColorMapFunction(heightValue, colorMap));
 
             pointCloud.DataSeries = xyzDataSeries3D;
         }
-    }
 
-    public class AscReader
-    {
-        public static async Task<XyzDataSeries3D<float>> ReadFile(string filename, Action<int> reportProgress)
+        private Color ColorMapFunction(float heightValue, LinearColorMap colorMap)
         {
-            var xyzDataSeries3D = new XyzDataSeries3D<float>();
-
-            await Task.Run(() =>
-            {
-                using (var file = File.OpenText(filename))
-                {
-                    int ncols = ReadInt(file, "ncols");
-                    int nrows = ReadInt(file, "nrows");
-                    int xllcorner = ReadInt(file, "xllcorner");
-                    int yllcorner = ReadInt(file, "yllcorner");
-                    int cellsize = ReadInt(file, "cellsize");
-                    int NODATA_value = ReadInt(file, "NODATA_value");
-
-                    float[] xValues = Enumerable.Range(0, ncols).Select(x => (float)x).ToArray();
-
-                    for (int i = 0; i < nrows; i++)
-                    {
-                        float[] heightValues = ReadFloats(file, " ");
-                        float[] zValues = Enumerable.Repeat(0 + i * cellsize, nrows).Select(x => (float)x).ToArray();
-                        xyzDataSeries3D.Append(xValues, heightValues, zValues);
-                        reportProgress((int)(100.0f * i / nrows));
-                    }
-                }
-            });
-
-            return xyzDataSeries3D;
-        }
-
-        private static int ReadInt(StreamReader file, string prefix)
-        {
-            string line = file.ReadLine();
-            line = line.Replace(prefix, "").Trim();
-            return Int32.Parse(line, CultureInfo.InvariantCulture);
-        }
-
-        private static float[] ReadFloats(StreamReader file, string separator)
-        {
-            string line = file.ReadLine();
-            float[] values = line.Split(new[] {separator}, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => float.Parse(x)).ToArray();
-            return values;
+            // Linearly interpolate each heightValue into a colour and return to the ASCReader
+            // This will be injected into the SciChart XyzDataSeries3D to colour points in the point-cloud
+            uint argbColor = ColorUtil.Lerp(colorMap, heightValue);
+            return ColorUtil.FromUInt(argbColor);
         }
     }
 }

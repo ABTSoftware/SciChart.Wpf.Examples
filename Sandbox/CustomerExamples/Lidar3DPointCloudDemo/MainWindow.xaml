@@ -5,12 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lidar3DPointCloudDemo"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <s3D:SciChart3DSurface WorldDimensions="1000,200,1000">
+        <Grid.Resources>
+            <LinearGradientBrush x:Key="ColorMap" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="DodgerBlue"/>
+                <GradientStop Offset="0.2" Color="LimeGreen"/>
+                <GradientStop Offset="0.5" Color="Orange"/>
+                <GradientStop Offset="0.7" Color="OrangeRed"/>
+                <GradientStop Offset="1.0" Color="Purple"/>
+            </LinearGradientBrush>
+        </Grid.Resources>
+
+        <s3D:SciChart3DSurface x:Name="SciChart3DSurface" WorldDimensions="1000,200,1000">
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D FarClip="10000"/>
+                <s3D:Camera3D FarClip="10000" Position="800,1000,800"/>
             </s3D:SciChart3DSurface.Camera>
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ScatterRenderableSeries3D x:Name="pointCloud">
@@ -20,21 +31,37 @@
                 </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="X Distance (metres)"/>
             </s3D:SciChart3DSurface.XAxis>
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0, 30"/>
+                <s3D:NumericAxis3D VisibleRange="0, 50" TextFormatting="0m" AxisTitle="Height (metres)"/>
             </s3D:SciChart3DSurface.YAxis>
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D/>
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="Y Distance (metres)"/>
             </s3D:SciChart3DSurface.ZAxis>
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>
+                    <s3D:FreeLookModifier3D ExecuteWhen="Ctrl" MovementSpeed="20"/>
                     <s3D:MouseWheelZoomModifier3D/>
-                    <s3D:ZoomExtentsModifier3D/>
+                    <s3D:ZoomExtentsModifier3D ResetPosition="800,1000,800" ResetTarget="0,25,0"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
         </s3D:SciChart3DSurface>
+
+        <s:HeatmapColorMap Margin="25, 50"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Stretch"
+                           Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
+                           Foreground="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Foreground}"
+                           ColorMap="{StaticResource ColorMap}"
+                           Minimum="0"
+                           Maximum="50"
+                           TextFormatting="0m"
+                           Opacity="0.8"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           Orientation="Vertical">
+        </s:HeatmapColorMap>
     </Grid>
 </Window>
