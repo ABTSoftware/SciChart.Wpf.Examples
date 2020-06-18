@@ -1,0 +1,40 @@
+﻿<Window x:Class="Lidar3DPointCloudDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lidar3DPointCloudDemo"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <s3D:SciChart3DSurface WorldDimensions="1000,200,1000">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D FarClip="10000"/>
+            </s3D:SciChart3DSurface.Camera>
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:ScatterRenderableSeries3D x:Name="pointCloud">
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:PixelPointMarker3D Fill="LimeGreen"/>
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D VisibleRange="0, 30"/>
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.ZAxis>
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D/>
+                    <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:ZoomExtentsModifier3D/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+    </Grid>
+</Window>
