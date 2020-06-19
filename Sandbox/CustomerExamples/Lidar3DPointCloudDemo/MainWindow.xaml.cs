@@ -46,8 +46,8 @@ namespace Lidar3DPointCloudDemo
             var lidarData = await AscReader.ReadFileToAscData(filename, heightValue => this.ColorMapFunction(heightValue, colorMap));
 
             // Parse into SciChart format
-            pointCloud.DataSeries = await AscReader.ParseToXyzDataSeries(lidarData);
-            surfaceMesh.DataSeries = await AscReader.ParseToGridDataSeries(lidarData);
+            pointCloud.DataSeries = await AscReader.ParseToXyzDataSeries(lidarData, "tq3080_DSM_2M Point-Cloud");
+            surfaceMesh.DataSeries = await AscReader.ParseToGridDataSeries(lidarData, "tq3080_DSM_2M Topology Map");
         }
 
         private Color ColorMapFunction(float heightValue, LinearColorMap colorMap)

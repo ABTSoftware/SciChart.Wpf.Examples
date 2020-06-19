@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:chartData="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -16,6 +17,53 @@
                 <GradientStop Offset="0.7" Color="OrangeRed"/>
                 <GradientStop Offset="1.0" Color="Purple"/>
             </LinearGradientBrush>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+            <DataTemplate x:Key="LidarLegendItemTemplate" DataType="chartData:SeriesInfo3D">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem1"/>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem2"/>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem3"/>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem4"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox
+                        Grid.Column="0"
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Visible?"
+                        Foreground="White"
+                        IsChecked="{Binding RenderableSeries.IsVisible, Mode=TwoWay}"
+                        Visibility="{Binding LegendData.ShowVisibilityCheckboxes, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <s:PointMarker
+                        Grid.Column="1"
+                        Width="25"
+                        Height="10"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        DataContext="{Binding RenderableSeries}"
+                        DeferredContent="{Binding LegendMarkerTemplate}"
+                        Visibility="{Binding ShowSeriesMarkers, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <TextBlock
+                        Grid.Column="2"
+                        Margin="10,0,10,0"
+                        HorizontalAlignment="Left"
+                        Text="{Binding SeriesName}" />
+
+                    <!-- Opacity. Bound to SeriesInfo.RenderableSeries.Opacity -->
+                    <StackPanel Orientation="Horizontal" Grid.Column="3">
+                        <TextBlock Text="Opacity: " Foreground="White"/>
+                        <Slider  Minimum="0.0" Maximum="1.0" MinWidth="100" DataContext="{Binding RenderableSeries}" Value="{Binding Path=Opacity, Mode=TwoWay}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
         </Grid.Resources>
 
         <s3D:SciChart3DSurface x:Name="SciChart3DSurface" WorldDimensions="1000,200,1000">
@@ -27,17 +75,19 @@
             <s3D:SciChart3DSurface.RenderableSeries>
 
                 <!-- Renders the point cloud -->
-                <s3D:ScatterRenderableSeries3D x:Name="pointCloud">
+                <s3D:ScatterRenderableSeries3D x:Name="pointCloud" Opacity="1">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
-                        <s3D:PixelPointMarker3D Fill="LimeGreen"/>
+                        <!-- Apply a pixel pointmarker to render the point-cloud -->
+                        <!-- other types include the Ellipse, Quad or Sphere pointmarker -->
+                        <s3D:PixelPointMarker3D Fill="LimeGreen" Opacity="{Binding ElementName=pointCloud, Path=Opacity}"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
 
                 <!-- Renders the contours and topography map -->
                 <!-- Try different DrawMeshAs modes such as Contours, SolidMesh, SolidMeshWireframe etc -->
-                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh" DrawMeshAs="SolidWithContours" 
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh" DrawMeshAs="SolidWithContours"
                                                    MeshPaletteMode="HeightMapInterpolated"
-                                                   ContourStroke="Azure" ContourStrokeThickness="2" Minimum="0" Maximum="50" 
+                                                   ContourStroke="Azure" ContourStrokeThickness="2" Minimum="0" Maximum="50"
                                                    Opacity="0.5">
                     <s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
                         <s3D:BrushColorPalette Brush="{StaticResource ColorMap}"/>
@@ -63,12 +113,21 @@
                     <s3D:FreeLookModifier3D ExecuteWhen="Ctrl" MovementSpeed="20"/>
                     <s3D:MouseWheelZoomModifier3D/>
                     <s3D:ZoomExtentsModifier3D ResetPosition="800,1000,800" ResetTarget="0,25,0" AnimateDurationMs="500"/>
+                    <s3D:LegendModifier3D x:Name="LegendModifier3D" ShowLegend="False"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
 
         </s3D:SciChart3DSurface>
 
-        <!-- Renders the Legend --> 
+        <!-- Renders the series legend, bound to LegendModifier3D.LegendData -->
+        <s:SciChartLegend LegendData="{Binding ElementName=LegendModifier3D, Path=LegendData}" Margin="25,50"
+                          Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" ShowSeriesMarkers="True"
+                          ShowVisibilityCheckboxes="True"
+                          Grid.IsSharedSizeScope="True"
+                          ItemTemplate="{StaticResource LidarLegendItemTemplate}">
+        </s:SciChartLegend>
+
+        <!-- Renders the Heightmap Legend --> 
         <s:HeatmapColorMap Margin="25, 50"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Stretch"

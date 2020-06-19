@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using SciChart.Charting3D.Model;
-using SciChart.Charting3D.RenderableSeries;
 using SciChart.Core.Extensions;
 
 namespace Lidar3DPointCloudDemo
@@ -80,9 +79,9 @@ namespace Lidar3DPointCloudDemo
             return result;
         }
 
-        public static async Task<XyzDataSeries3D<float>> ParseToXyzDataSeries(AscData lidarData)
+        public static async Task<XyzDataSeries3D<float>> ParseToXyzDataSeries(AscData lidarData, string identifier)
         {
-            var xyzDataSeries3D = new XyzDataSeries3D<float>();
+            var xyzDataSeries3D = new XyzDataSeries3D<float>() { SeriesName = identifier };
 
             await Task.Run(() =>
             {
@@ -99,13 +98,14 @@ namespace Lidar3DPointCloudDemo
             return xyzDataSeries3D;
         }
 
-        public static async Task<UniformGridDataSeries3D<float>> ParseToGridDataSeries(AscData lidarData)
+        public static async Task<UniformGridDataSeries3D<float>> ParseToGridDataSeries(AscData lidarData, string identifier)
         {
             UniformGridDataSeries3D<float> uniformGridDataSeries = null;
 
             await Task.Run(() =>
             {
                 uniformGridDataSeries = new UniformGridDataSeries3D<float>(lidarData.NumberColumns, lidarData.NumberRows);
+                uniformGridDataSeries.SeriesName = identifier;
                 uniformGridDataSeries.StartX = 0;
                 uniformGridDataSeries.StepX = lidarData.CellSize;
                 uniformGridDataSeries.StartZ = 0;
