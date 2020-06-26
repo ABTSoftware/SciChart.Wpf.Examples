@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using SciChart.Charting.Visuals;
 using SciChart.Charting3D;
 
 namespace WpfApplication1
@@ -21,6 +22,9 @@ namespace WpfApplication1
         {
             // Wait for the license initialization we triggered in App.xaml.cs
             await SciChart2D3DInitializer.Awaiter;
+
+            // Dumps licensing info to console
+            Console.WriteLine(SciChartSurface.DumpInfo());
 
             ((LoadingContent) this.root.Children[0]).StopTimer();
 
