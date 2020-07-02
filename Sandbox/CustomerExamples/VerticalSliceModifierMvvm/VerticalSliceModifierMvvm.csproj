@@ -74,22 +74,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\scichart.dev.mobile\WPF\src\SciChart.Charting\SciChart.Charting.csproj">
-      <Project>{f170e190-3ef2-4782-b120-558265eb75ad}</Project>
-      <Name>SciChart.Charting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\scichart.dev.mobile\WPF\src\SciChart.Core\SciChart.Core.csproj">
-      <Project>{26e8a50a-1597-4126-99e3-d43e1ca47e49}</Project>
-      <Name>SciChart.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\scichart.dev.mobile\WPF\src\SciChart.Data\SciChart.Data.csproj">
-      <Project>{4df09ee7-5073-4048-9316-282d1805dcf6}</Project>
-      <Name>SciChart.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\scichart.dev.mobile\WPF\src\SciChart.Drawing\SciChart.Drawing.csproj">
-      <Project>{3f29aa32-9595-4081-b559-085916dd50b8}</Project>
-      <Name>SciChart.Drawing</Name>
-    </ProjectReference>
+    <PackageReference Include="SciChart">
+      <Version>6.2.1.13283</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

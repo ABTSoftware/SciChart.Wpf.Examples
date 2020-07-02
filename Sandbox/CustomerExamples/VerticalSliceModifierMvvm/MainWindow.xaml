@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Background="#333">
-            <Button Content="Add Vertical Line" Margin="5" Command="{Binding AddLineCommand}"/>
+            <Button Content="Add Vertical Line" Margin="5" Command="{Binding AddLinesCommand}"/>
             <Button Content="Clear Lines" Margin="5" Command="{Binding ClearLinesCommand}"/>
         </StackPanel>
 
