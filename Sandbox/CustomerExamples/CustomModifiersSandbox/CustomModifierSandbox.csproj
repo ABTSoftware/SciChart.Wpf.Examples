@@ -84,10 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart">
-      <Version>6.0.2.13028</Version>
+      <Version>6.2.1.13286</Version>
     </PackageReference>
     <PackageReference Include="SciChart.ExternalDependencies">
-      <Version>6.0.2.13028</Version>
+      <Version>6.2.1.13286</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,12 +6,14 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Utility.Mouse;
+using SciChart.Data.Numerics;
 
 namespace CustomModifierSandboxExample
 {
     public class SimpleFreeDrawModifier : ChartModifierBase
     {
         private XyDataSeries<DateTime, double> _dataSeries;
+        private int freeDrawIndex = 0;
 
         public override void OnModifierDoubleClick(ModifierMouseArgs e)
         {
@@ -20,12 +22,13 @@ namespace CustomModifierSandboxExample
             // First double-click, start drawing
             if (_dataSeries == null)
             {
-                _dataSeries = new XyDataSeries<DateTime, double>() { AcceptsUnsortedData = true };
+                _dataSeries = new XyDataSeries<DateTime, double>() { AcceptsUnsortedData = true, SeriesName = $"Free Draw {freeDrawIndex++}"};
                 var renderableSeries = new FastLineRenderableSeries()
                 {
                     StrokeThickness = 2,
                     Stroke = Colors.LimeGreen,
-                    PointMarker = new EllipsePointMarker() {Fill = Colors.White,}
+                    PointMarker = new EllipsePointMarker() {Fill = Colors.White,},
+                    ResamplingMode = ResamplingMode.None
                 };
                 renderableSeries.DataSeries = _dataSeries;
                 ParentSurface.RenderableSeries.Add(renderableSeries);
