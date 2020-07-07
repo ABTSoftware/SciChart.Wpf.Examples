@@ -55,7 +55,7 @@ namespace CustomModifierSandboxExample
             }
 
             // Perform a hit-test. Was the mouse over a data-point?
-            var pointHitTestInfo = selectedSeries.HitTest(e.MousePoint, 10.0, false);
+            var pointHitTestInfo = selectedSeries.HitTestProvider.HitTest(e.MousePoint, 10.0, false);
             if (pointHitTestInfo.IsHit)
             {
                 // Store info about point selected

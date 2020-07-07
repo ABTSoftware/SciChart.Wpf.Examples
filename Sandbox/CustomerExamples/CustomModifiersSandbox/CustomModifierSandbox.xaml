@@ -36,7 +36,7 @@
             <CheckBox x:Name="dragSeriesEnabled" Foreground="White" Margin="3,5" IsChecked="True"  Content="Enable Series Drag?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
             <CheckBox x:Name="dragPointEnabled" Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Data-Point Drag?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
             <CheckBox x:Name="selectPointsEnabled" Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Select Points Drag?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
-            <CheckBox x:Name="freeDrawEnabled" Tooltip="Double click to start and end a free-draw line"  Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Free Draw?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
+            <CheckBox x:Name="freeDrawEnabled" ToolTip="Double click to start and end a free-draw line"  Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Free Draw?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
             <CheckBox x:Name="zoomEnabled" Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Zoom?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
             <CheckBox x:Name="panEnabled" Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Pan?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>
             <CheckBox x:Name="yAxisMousewheelEnabled" Foreground="White" Margin="3,5" IsChecked="False" Content="Enable Mousewheel on YAxis?" s:ToggleButtonExtensions.GroupName="ControlsGroup"/>

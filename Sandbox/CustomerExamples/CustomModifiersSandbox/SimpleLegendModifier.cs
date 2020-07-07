@@ -58,7 +58,7 @@ namespace CustomModifierSandboxExample
                     }
 
                     var hitResult = renderableSeries.DataSeries.HasValues
-                                        ? renderableSeries.HitTest(new Point(ModifierSurface.ActualWidth, 0))
+                                        ? renderableSeries.HitTestProvider.HitTest(new Point(ModifierSurface.ActualWidth, 0))
                                         : default(HitTestInfo);
 
                     var s = renderableSeries.GetSeriesInfo(hitResult);

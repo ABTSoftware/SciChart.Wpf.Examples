@@ -72,7 +72,7 @@ namespace CustomModifierSandboxExample
             this.ModifierSurface.Children.Add(_line);
 
             // Add the rollover points to the surface
-            var hitTestResults = allSeries.Select(x => x.VerticalSliceHitTest(pt)).ToArray();
+            var hitTestResults = allSeries.Select(x => x.HitTestProvider.VerticalSliceHitTest(pt)).ToArray();
             foreach (var hitTestResult in hitTestResults)
             {
                 const int markerSize = 7;
