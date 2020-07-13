@@ -177,6 +177,7 @@
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Performance_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Scatter_Chart_Performance_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Histogram.xml" />
+    <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\LIDAR_PointCloud_3D_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Oscilloscope_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Spectrogram_Demo_Chart.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Spectrum_Analyzer_Demo.xml" />
@@ -556,6 +557,8 @@
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorViewModel.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Lidar3DPointCloudDemo\Lidar3DPointCloudDemoView.xaml.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Lidar3DPointCloudDemo\Lidar3DPointCloudDemoView.xaml.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsBatch.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsDataProvider.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsIndicatorsProvider.c.txt" />
@@ -844,6 +847,7 @@
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Performance_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Scatter_Chart_Performance_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Histogram.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\LIDAR_PointCloud_3D_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Oscilloscope_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Spectrogram_Demo_Chart.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Spectrum_Analyzer_Demo.xml" />
@@ -1223,6 +1227,8 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\ECGMonitor\ECGMonitorViewModel.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Lidar3DPointCloudDemo\Lidar3DPointCloudDemoView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Lidar3DPointCloudDemo\Lidar3DPointCloudDemoView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsBatch.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsDataProvider.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\VitalSignsMonitor\VitalSignsIndicatorsProvider.c.txt" />
@@ -1363,15 +1369,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.1.13303-beta" />
+    <PackageReference Include="SciChart" Version="6.2.1.13304-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.1.13303-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.1.13304-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.1.13303-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.1.13304-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.1.13303-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.1.13304-beta" />
   </ItemGroup>
 </Project>
