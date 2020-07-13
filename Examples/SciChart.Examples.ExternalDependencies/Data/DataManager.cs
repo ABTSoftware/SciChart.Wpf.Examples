@@ -23,7 +23,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Media;
+using Lidar3DPointCloudDemo;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.ExternalDependencies.Data
@@ -741,6 +743,13 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             return values.ToArray();
+        }
+
+        public async Task<AscData> GetAscDataAsync(Func<float, Color> colorMapFunction)
+        {
+            const string resourceName = "LIDAR_tq3080_DSM_2M.asc.gz";
+
+            return await AscReader.ReadResourceToAscData(resourceName, colorMapFunction);
         }
     }
 }
