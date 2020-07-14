@@ -10,6 +10,8 @@
     
     <Window.Resources>
         <local:MainWindowViewModel x:Key="vm"/>
+
+        <local:StatePaletteProvider x:Key="StatePaletteProvider" ErrorColor="Crimson" WarningColor="Orange" NormalColor="LimeGreen"/>
     </Window.Resources>
 
     <Grid DataContext="{StaticResource vm}">
@@ -41,7 +43,8 @@
                                 <s:SciChartSurface x:Name="StateSeriesChart" Background="#33FF0000" ShowLicensingWarnings="False">
 
                                     <s:SciChartSurface.RenderableSeries>
-                                        <s:XyScatterRenderableSeries DataSeries="{Binding ScatterSeriesData}">
+                                        <s:XyScatterRenderableSeries DataSeries="{Binding ScatterSeriesData}"
+                                                                     PaletteProvider="{StaticResource StatePaletteProvider}">
                                             <s:XyScatterRenderableSeries.PointMarker>
                                                 <s:EllipsePointMarker/>
                                             </s:XyScatterRenderableSeries.PointMarker>
