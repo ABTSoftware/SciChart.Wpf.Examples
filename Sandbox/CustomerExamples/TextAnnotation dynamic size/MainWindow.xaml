@@ -10,11 +10,11 @@
     <Grid>
         <s:SciChartSurface ShowLicensingWarnings="False">
             <s:SciChartSurface.Annotations>
-                <s:TextAnnotation Text="This is a long label" X1="3" Y1="7" Foreground="LimeGreen">
-                    <s:TextAnnotation.LayoutTransform>
+                <local:TextAnnotationEx Text="This is a long label" X1="3" Y1="7" Foreground="LimeGreen">
+                    <local:TextAnnotationEx.LayoutTransform>
                         <RotateTransform Angle="-90"/>
-                    </s:TextAnnotation.LayoutTransform>
-                </s:TextAnnotation>
+                    </local:TextAnnotationEx.LayoutTransform>
+                </local:TextAnnotationEx>
                 <s:TextAnnotation Text="Pan the chart until the green label goes off screen" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Center" CoordinateMode="Relative" X1="0.5" Y1="0.5" Foreground="OrangeRed"/>
             </s:SciChartSurface.Annotations>
             <s:SciChartSurface.XAxis>
