@@ -36,12 +36,6 @@
                     <GradientStop Offset="1.00" Color="LimeGreen"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
-
-            <Style x:Key="WaterfallTooltipStyle" TargetType="s:TooltipControl">
-                <Setter Property="BorderBrush" Value="Transparent"/>
-                <Setter Property="Background" Value="#AA228B22"/>
-                <Setter Property="Foreground" Value="White"/>
-            </Style>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -56,9 +50,9 @@
             <ext:FlyoutSeparator/>
 
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
-                      Content="CTRL"
-                      FontSize="10"
-                      Padding="0">
+                                  Content="CTRL"
+                                  FontSize="10"
+                                  Padding="0">
 
                 <ext:FlyoutMenuButton.PopupContent>
                     <Grid MinWidth="150">
@@ -79,21 +73,21 @@
                                 </Style>
                             </StackPanel.Resources>
 
-                            <!-- Checkboxes to decide how the chart should be filled -->
+                            <!-- Check boxes to decide how the chart should be filled -->
                             <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrkY" IsChecked="True" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrkZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrkSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrkTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrokeY" IsChecked="True" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrokeZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrokeSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrokeTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
 
                             <ext:FlyoutSeparator/>
 
-                            <!-- Checkboxes to decide how the chart should be filled -->
+                            <!-- Check boxes to decide how the chart should be filled -->
                             <TextBlock FontSize="12" Text="GradientFill Direction:" />
                             <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
                             <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Solid Color Fill (Blue)" x:Name="cbkFillSolid" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="cbkFillTransparent" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="Solid Color Fill (Blue)" x:Name="ckbFillSolid" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
+                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbFillTransparent" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
 
                         </StackPanel>
 
@@ -110,9 +104,9 @@
             </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
 
-        <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1"
-                           BorderThickness="0"
-                           WorldDimensions="200,100,200">
+        <s3D:SciChart3DSurface x:Name="SciChart"
+                               Grid.Column="1"
+                               WorldDimensions="200,100,200">
 
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True" />
@@ -128,7 +122,8 @@
                     <!-- These are changed by user controls declared above in the example -->
                     <s3D:WaterfallRenderableSeries3D.Style>
                         <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <Setter Property="Stroke" Value="White" />
+                            <!-- The Stroke is not applied to the WaterfallRenderableSeries3D. This color is used for Tooltip (Background) binding -->
+                            <Setter Property="Stroke" Value="#AA228B22" />
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="StrokeThickness" Value="2" />
                             <Setter Property="SliceThickness" Value="0" />
@@ -136,23 +131,22 @@
                             <Setter Property="ZStrokeColorMapping" Value="{x:Null}" />
                             <Setter Property="ZColorMapping" Value="{x:Null}" />
                             <Setter Property="YColorMapping" Value="{x:Null}" />
-                            <Setter Property="s3D:TooltipModifier3D.TooltipContainerStyle" Value="{StaticResource WaterfallTooltipStyle}" />
                             <Style.Triggers>
                                 <!-- The YStrokeColorMapping applies a BrushColorPalette (Solid or Gradient brush)to the stroke in the Y direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkY}}" Value="True">
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeY}}" Value="True">
                                     <Setter Property="YStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
                                 </DataTrigger>
                                 <!-- The ZStrokeColorMapping applies a BrushColorPalette to the stroke in the Z direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkZ}}" Value="True">
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeZ}}" Value="True">
                                     <Setter Property="ZStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
                                 </DataTrigger>
                                 <!-- When ckbStrkTransparent is checked, we set both strokes to transparent to give a clearer view of the fill -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkTransparent}}" Value="True">
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeTransparent}}" Value="True">
                                     <Setter Property="ZStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
                                     <Setter Property="YStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
                                 </DataTrigger>
                                 <!-- When ckbStrkSolid is checked, we set both strokes to a solid color brush -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrkSolidColor}}" Value="True">
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeSolidColor}}" Value="True">
                                     <Setter Property="ZStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
                                     <Setter Property="YStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
                                 </DataTrigger>
@@ -164,17 +158,17 @@
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillZ}}" Value="True">
                                     <Setter Property="ZColorMapping" Value="{StaticResource ExampleGradientColorPalette}"/>
                                 </DataTrigger>
-                                <!-- When cbkFillTransparent is checked, we set both fills to transparent to give a clearer view of the stroke -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference cbkFillTransparent}}" Value="True">
+                                <!-- When ckbFillTransparent is checked, we set both fills to transparent to give a clearer view of the stroke -->
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillTransparent}}" Value="True">
                                     <Setter Property="YColorMapping" Value="{StaticResource TransparentColorPalette}"/>
                                     <Setter Property="ZColorMapping" Value="{StaticResource TransparentColorPalette}"/>
                                 </DataTrigger>
-                                <!-- When cbkFillSolid is checked, we set both fills to transparent to give a clearer view of the stroke -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference cbkFillSolid}}" Value="True">
+                                <!-- When ckbFillSolid is checked, we set both fills to transparent to give a clearer view of the stroke -->
+                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillSolid}}" Value="True">
                                     <Setter Property="YColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
                                     <Setter Property="ZColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
                                 </DataTrigger>
-                                <!-- the PointMarker property applies a 3-dimensional point marker to points on each slice -->
+                                <!-- The PointMarker property applies a 3-dimensional point marker to points on each slice -->
                                 <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbShowPointMarkers}}" Value="True">
                                     <Setter Property="PointMarker" Value="{StaticResource PointMarker}"/>
                                 </DataTrigger>

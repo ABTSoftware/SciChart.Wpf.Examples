@@ -11,14 +11,12 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
     /// </summary>
     public partial class CreateAWaterfall3DChart : UserControl
     {
-        private readonly FFT2 _transform;
+        private readonly FFT2 _transform = new FFT2();
         private readonly Random _random = new Random();
 
         public CreateAWaterfall3DChart()
         {
             InitializeComponent();
-            _transform = new FFT2();
-
             Loaded += OnLoaded;
         }
 
@@ -29,18 +27,22 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
 
             var logBase = 10;
             var slicePositions = new double[sliceCount];
+
             for (int i = 0; i < sliceCount; ++i)
             {
                 slicePositions[i] = Math.Pow(logBase, i);
             }
 
-            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, slicePositions) { SeriesName = "Waterfall" };
-            dataSeries.StartX = 10;
-            dataSeries.StepX = 1;
+            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, slicePositions)
+            {
+                SeriesName = "Waterfall",
+                StartX = 10,
+                StepX = 1
+            };
 
             _transform.init((uint)Math.Log(pointsPerSlice, 2));
-            FillDataSeries(dataSeries, sliceCount, pointsPerSlice);
 
+            FillDataSeries(dataSeries, sliceCount, pointsPerSlice);
             WaterfallSeries.DataSeries = dataSeries;
         }
 
