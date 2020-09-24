@@ -100,7 +100,7 @@
                 <s3D:ImpulseRenderableSeries3D x:Name="ImpulseSeries3D"
                                                Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}">
                     <s3D:ImpulseRenderableSeries3D.PointMarker>
-                        <s3D:EllipsePointMarker3D Fill="{Binding Stroke}" Size="4.0" Opacity="1"/>
+                        <s3D:SpherePointMarker3D Fill="{Binding Stroke}" Size="4.0" Opacity="1"/>
                     </s3D:ImpulseRenderableSeries3D.PointMarker>
                 </s3D:ImpulseRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>

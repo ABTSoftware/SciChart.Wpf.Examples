@@ -747,7 +747,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
         public async Task<AscData> GetAscDataAsync(Func<float, Color> colorMapFunction)
         {
-            const string resourceName = "LIDAR_tq3080_DSM_2M.asc.gz";
+            const string resourceName = "LIDARtq3080DSM2M.asc.gz";
 
             return await AscReader.ReadResourceToAscData(resourceName, colorMapFunction);
         }

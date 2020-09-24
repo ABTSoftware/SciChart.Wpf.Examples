@@ -7,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using SciChart.Charting3D.Model;
-using SciChart.Core.Extensions;
 
 namespace Lidar3DPointCloudDemo
 {
@@ -112,8 +110,8 @@ namespace Lidar3DPointCloudDemo
         private static int ReadInt(StreamReader file, string prefix)
         {
             string line = file.ReadLine();
-            line = line.Replace(prefix, "").Trim();
-            return Int32.Parse(line, CultureInfo.InvariantCulture);
+            line = line.Replace(prefix, string.Empty).Trim();
+            return int.Parse(line, NumberFormatInfo.InvariantInfo);
         }
 
         private static float[] ReadFloats(StreamReader file, string separator, float noDataValue)
@@ -122,8 +120,8 @@ namespace Lidar3DPointCloudDemo
             float[] values = line.Split(new[] {separator}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x =>
                 {
-                    float rawValue = float.Parse(x);
-                    return rawValue == noDataValue ? float.NaN : rawValue;
+                    float rawValue = float.Parse(x, NumberFormatInfo.InvariantInfo);
+                    return rawValue.CompareTo(noDataValue) == 0 ? float.NaN : rawValue;
                 } ).ToArray();
             return values;
         }

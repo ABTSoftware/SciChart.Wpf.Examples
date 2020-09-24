@@ -32,7 +32,7 @@
     <None Remove="Resources\Data\EURUSD_Hourly.csv.gz" />
     <None Remove="Resources\Data\EURUSD_Minute5.csv.gz" />
     <None Remove="Resources\Data\INDU_Daily.csv.gz" />
-    <None Remove="Resources\Data\LIDAR_tq3080_DSM_2M.asc.gz" />
+    <None Remove="Resources\Data\LIDARtq3080DSM2M.asc.gz" />
     <None Remove="Resources\Data\TickData.csv.gz" />
     <None Remove="Resources\Data\TradeTicks.csv.gz" />
     <None Remove="Resources\Data\VitalSignsTrace.csv.gz" />
@@ -60,7 +60,7 @@
     <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv.gz" />
     <EmbeddedResource Include="Resources\Data\INDU_Daily.csv.gz" />
-    <EmbeddedResource Include="Resources\Data\LIDAR_tq3080_DSM_2M.asc.gz" />
+    <EmbeddedResource Include="Resources\Data\LIDARtq3080DSM2M.asc.gz" />
     <EmbeddedResource Include="Resources\Data\TickData.csv.gz" />
     <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
     <EmbeddedResource Include="Resources\Data\VitalSignsTrace.csv.gz" />
@@ -92,15 +92,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.2.13335-beta" />
+    <PackageReference Include="SciChart" Version="6.2.2.13345-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.2.13335-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.2.13345-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13335-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13345-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13335-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13345-beta" />
   </ItemGroup>
 </Project>
