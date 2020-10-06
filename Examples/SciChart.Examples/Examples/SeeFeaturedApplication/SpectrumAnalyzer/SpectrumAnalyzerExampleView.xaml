@@ -14,7 +14,7 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding StartCommand}" />
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unoaded">
+        <i:EventTrigger EventName="Unloaded">
             <i:InvokeCommandAction Command="{Binding StopCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>

@@ -176,6 +176,7 @@
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\NBody_2D_Scatter_Chart_Simulation.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Performance_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Scatter_Chart_Performance_Demo.xml" />
+    <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Audio_Analyzer_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Histogram.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\LIDAR_PointCloud_3D_Demo.xml" />
     <None Remove="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Oscilloscope_Demo.xml" />
@@ -549,6 +550,9 @@
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersViewModel.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerView.xaml.c.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerView.xaml.txt" />
+    <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerViewModel.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\Common\Calendars.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.c.txt" />
     <None Remove="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.txt" />
@@ -846,6 +850,7 @@
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\NBody_2D_Scatter_Chart_Simulation.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Performance_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Performance_Demos\Scatter_Chart_Performance_Demo.xml" />
+    <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Audio_Analyzer_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Histogram.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\LIDAR_PointCloud_3D_Demo.xml" />
     <EmbeddedResource Include="Resources\ExampleDefinitions\cFeatured_Apps\Scientific_Charts\Oscilloscope_Demo.xml" />
@@ -1219,6 +1224,9 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersView.xaml.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AggregationFilters\AggregationFiltersViewModel.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerView.xaml.c.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerView.xaml.txt" />
+    <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\AudioAnalyzer\AudioAnalyzerViewModel.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\Common\Calendars.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.c.txt" />
     <EmbeddedResource Include="Resources\ExampleSourceFiles\SeeFeaturedApplication\DiscontinuousAxisDemo\DiscontinuousAxisView.xaml.txt" />
@@ -1342,6 +1350,7 @@
     <EmbeddedResource Include="Resources\ExampleSourceFiles\ZoomHistory\ZoomHistoryMVVM\ZoomHistoryMvvmViewModel.c.txt" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
@@ -1369,15 +1378,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net452'">
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.2.13350-beta" />
+    <PackageReference Include="SciChart" Version="6.2.2.13355-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.2.13350-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.2.13355-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13350-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13355-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13350-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13355-beta" />
   </ItemGroup>
 </Project>
