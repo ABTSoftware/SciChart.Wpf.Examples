@@ -60,7 +60,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChartFreq}}">
+        <local:AudioAnalyzerInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChartFreq}}">
             <ext:FlyoutMenuButton Content="INP"
                                   Padding="0"
                                   Style="{StaticResource FlyoutMenuButtonStyle}">
@@ -79,7 +79,7 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-        </ext:SciChartInteractionToolbar>
+        </local:AudioAnalyzerInteractionToolbar>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -93,6 +93,9 @@
             </Grid.ColumnDefinitions>
             <!--  Create the chart surface  -->
             <s:SciChartSurface Grid.Row="0" Grid.ColumnSpan="3">
+                <s:SciChartSurface.ViewportManager>
+                    <local:YPeakViewportManager/>
+                </s:SciChartSurface.ViewportManager>
 
                 <!--  Declare RenderableSeries  -->
                 <s:SciChartSurface.RenderableSeries>
@@ -109,11 +112,14 @@
 
                 <!--  Create a Y Axis  -->
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis VisibleRange="-1.1, 1.1" AutoRange="Never" Visibility="Collapsed" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
+                    <s:NumericAxis AutoRange="Always" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
                 </s:SciChartSurface.YAxis>
 
             </s:SciChartSurface>
             <s:SciChartSurface Grid.Row="1" Grid.Column="0" x:Name="sciChartFreq">
+                <s:SciChartSurface.ViewportManager>
+                    <local:YPeakViewportManager/>
+                </s:SciChartSurface.ViewportManager>
 
                 <!--  Declare RenderableSeries  -->
                 <s:SciChartSurface.RenderableSeries>
@@ -125,12 +131,12 @@
 
                 <!--  Create an X Axis  -->
                 <s:SciChartSurface.XAxis>
-                    <s:NumericAxis AutoRange="Always" AxisTitle="Hz"/>
+                    <s:NumericAxis AutoRange="Always" AxisTitle="Frequency, Hz"/>
                 </s:SciChartSurface.XAxis>
 
                 <!--  Create a Y Axis  -->
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis VisibleRange="-200, 0" AutoRange="Never" AxisTitle="dB"/>
+                    <s:NumericAxis AutoRange="Always" AxisTitle="Relative Amplitude, dB"/>
                 </s:SciChartSurface.YAxis>
 
             </s:SciChartSurface>

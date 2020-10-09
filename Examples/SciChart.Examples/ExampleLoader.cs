@@ -106,10 +106,10 @@ namespace SciChart.Examples
 
             var names = assembly.GetManifestResourceNames();
 
-            var allExampleSourceFiles = names.Where(x => x.Contains("ExampleSourceFiles"));
+            var allExampleSourceFiles = names.Where(x => x.Contains("SciChart.Examples.Examples"));
 
-            var find = name.Replace('/', '.').Replace(".cs.", ".c.");
-            var file = allExampleSourceFiles.FirstOrDefault(x => x.Contains(find));
+            var find = name.Replace('/', '.').Replace(".txt", string.Empty).Replace("Resources.ExampleSourceFiles.", string.Empty);
+            var file = allExampleSourceFiles.FirstOrDefault(x => x.EndsWith(find));
 
             if (file == null)
                 throw new Exception(string.Format("Unable to find the source code resource {0}", find));
