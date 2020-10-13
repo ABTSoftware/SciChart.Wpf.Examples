@@ -123,10 +123,27 @@
 
                 <!--  Declare RenderableSeries  -->
                 <s:SciChartSurface.RenderableSeries>
-                    <s:FastLineRenderableSeries DataSeries="{Binding FrequencyDataSeries}"
-                                                Stroke="#FF99EE99"
-                                                StrokeThickness="2">
-                    </s:FastLineRenderableSeries>
+                    <s:FastMountainRenderableSeries DataSeries="{Binding FrequencyDataSeries}"
+                                                    AntiAliasing="True"
+                                                    Stroke="Transparent"
+                                                    ZeroLineY="-1000">
+                        <s:FastMountainRenderableSeries.PaletteProvider>
+                            <local:AudioAnalyzerPaletteProvider>
+                                <local:AudioAnalyzerPaletteProvider.Palette>
+                                    <s:HeatmapColorPalette Minimum="-250" Maximum="0">
+                                        <s:HeatmapColorPalette.GradientStops>
+                                            <GradientStop Offset="0" Color="DarkBlue" />
+                                            <GradientStop Offset="0.3" Color="CornflowerBlue" />
+                                            <GradientStop Offset="0.5" Color="DarkGreen" />
+                                            <GradientStop Offset="0.6" Color="Chartreuse" />
+                                            <GradientStop Offset="0.75" Color="Yellow" />
+                                            <GradientStop Offset="0.95" Color="Red" />
+                                        </s:HeatmapColorPalette.GradientStops>
+                                    </s:HeatmapColorPalette>
+                                </local:AudioAnalyzerPaletteProvider.Palette>
+                            </local:AudioAnalyzerPaletteProvider>
+                        </s:FastMountainRenderableSeries.PaletteProvider>
+                    </s:FastMountainRenderableSeries>
                 </s:SciChartSurface.RenderableSeries>
 
                 <!--  Create an X Axis  -->
@@ -170,10 +187,10 @@
                                     <GradientStop Offset="0" Color="Transparent" />
                                     <GradientStop Offset="0.0001" Color="DarkBlue" />
                                     <GradientStop Offset="0.2" Color="CornflowerBlue" />
-                                    <GradientStop Offset="0.4" Color="DarkGreen" />
-                                    <GradientStop Offset="0.6" Color="Chartreuse" />
-                                    <GradientStop Offset="0.8" Color="Yellow" />
-                                    <GradientStop Offset="1" Color="Red" />
+                                    <GradientStop Offset="0.45" Color="DarkGreen" />
+                                    <GradientStop Offset="0.5" Color="Chartreuse" />
+                                    <GradientStop Offset="0.7" Color="Yellow" />
+                                    <GradientStop Offset="0.9" Color="Red" />
                                 </s:HeatmapColorPalette.GradientStops>
                             </s:HeatmapColorPalette>
                         </s:FastUniformHeatmapRenderableSeries.ColorMap>

@@ -28,6 +28,7 @@
     <string>SeeFeaturedApplication/AudioAnalyzer/SampleReader.cs</string>
     <string>SeeFeaturedApplication/AudioAnalyzer/YPeakViewportManager.cs</string>
     <string>SeeFeaturedApplication/AudioAnalyzer/AudioAnalyzerInteractionToolbar.cs</string>
+    <string>SeeFeaturedApplication/AudioAnalyzer/AudioAnalyzerPaletteProvider.cs</string>
   </CodeFiles>
   <Features>
     <Features>Realtime</Features>
