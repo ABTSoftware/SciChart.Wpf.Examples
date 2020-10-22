@@ -286,7 +286,14 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             var overrideStyle = new Style(typeof(T));
 
-            overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
+            if (SelectedRenderer == typeof(VisualXcceleratorRenderSurface) && !App.UIAutomationTestMode)
+            {
+                overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.IsEnabledProperty, true));
+            }
+            else
+            {
+                overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
+            }
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
             overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
