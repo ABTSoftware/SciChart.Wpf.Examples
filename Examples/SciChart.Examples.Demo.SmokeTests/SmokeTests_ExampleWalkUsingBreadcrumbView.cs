@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using FlaUI.Core;
@@ -76,9 +77,11 @@ namespace SciChart.Examples.Demo.SmokeTests
 
         // Todo ... more groups...
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
+            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Directory.SetCurrentDirectory(dir);
             _theApp = FlaUI.Core.Application.Launch(new ProcessStartInfo("SciChart.Examples.Demo.exe", "/uiautomationTestMode"));
             _automation = new UIA3Automation();
             _mainWindow = _theApp.GetMainWindow(_automation);
@@ -98,7 +101,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             // Now application state should be in the example view
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             // Kill the app 
@@ -157,7 +160,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         }
 
 
-        public ExampleStartTestCase[] FastAssertExampleStartsTestCases = new[]
+        public static ExampleStartTestCase[] FastAssertExampleStartsTestCases = new[]
         {
             // 2D Charts, Create Simple Charts
             new ExampleStartTestCase(Category_2DCharts, Group_2D_CreateSimpleCharts, "Band Series Chart", "Charts2D/CreateSimpleChart/BandSeriesChart.png"),
@@ -244,7 +247,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Secondary Y-Axis", "Charts2D/ModifyAxisBehavior/SecondaryYAxis.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Switch Axis Type At Runtime", "Charts2D/ModifyAxisBehavior/SwitchAxisTypeRuntime.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Vertical Charts", "Charts2D/ModifyAxisBehavior/VerticalCharts.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Vertically Stacked YAxis", "Charts2D/ModifyAxisBehavior/VerticallyStackedYAxis.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Vertically Stacked YAxis", "Charts2D/ModifyAxisBehavior/VerticallyStackedYAxis.png", (window) => Thread.Sleep(1500)),
             // 2D Charts, MVVM Examples
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Axis Binding and Annotation Binding", "Charts2D/MVVMExamples/AxisAnnotationBinding.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Bind Multiple Charts", "Charts2D/MVVMExamples/BindMultipleCharts.png"),
@@ -297,7 +300,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         };
 
         [Test]
-        [TestCaseSource("FastAssertExampleStartsTestCases")]
+        [TestCaseSource(nameof(FastAssertExampleStartsTestCases))]
         public void WhenStartExample_ShouldHaveExpectedScreenshot_AndExportSource(ExampleStartTestCase testCase)
         {
             // Switch to example
