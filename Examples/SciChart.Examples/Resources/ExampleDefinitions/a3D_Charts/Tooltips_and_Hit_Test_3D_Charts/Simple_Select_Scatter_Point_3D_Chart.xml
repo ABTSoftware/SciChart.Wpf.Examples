@@ -13,7 +13,7 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Modifiers.VertexSelectionModifier3D.html']DataPointSelectionModifier[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Modifiers.VertexSelectionModifier3D.html']VertexSelectionModifier3D[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/TooltipsAndHitTest3DCharts/SelectScatterPoint3DChart.xaml.txt</string>
