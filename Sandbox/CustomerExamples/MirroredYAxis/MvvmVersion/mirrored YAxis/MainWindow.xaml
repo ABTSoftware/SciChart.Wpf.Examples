@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfApplication14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:wpfApplication14="clr-namespace:WpfApplication14"
+        xmlns:mirroredYAxis="clr-namespace:mirrored_YAxis"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <mirroredYAxis:MainViewModel x:Key="mvm"/>
+        <Style x:Key="YAxisStyle" TargetType="{x:Type s:AxisBase}">
+            <Setter Property="VisibleRange" Value="{Binding YAxisVisibleRange, Mode=TwoWay}"/>
+            <Setter Property="TextFormatting" Value="0.00"/>
+            <Setter Property="MaxAutoTicks" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource mvm}">
+        <s:SciChartSurface XAxes="{s:AxesBinding XAxis}" YAxes="{s:AxesBinding YAxis}">
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier ClipModeX="None"/>
+                    <s:ZoomExtentsModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>
