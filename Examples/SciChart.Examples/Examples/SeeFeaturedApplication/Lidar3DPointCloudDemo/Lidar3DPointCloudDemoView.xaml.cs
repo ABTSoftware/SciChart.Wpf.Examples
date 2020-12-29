@@ -13,10 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting3D.Extensions;
@@ -35,7 +33,6 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
         public Lidar3DPointCloudDemoView()
         {
             InitializeComponent();
-
             ReadLidarData();
         }
 
@@ -43,21 +40,21 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
         {
             // The LinearColorMap type in SciChart allows you to generate a colour map based on a 
             // minimum and maximum value, e.g. min=0, max=50 means the gradient brush below is mapped into that range
-            // 
-            // call .InitializeConstants() once and use ColorUtil.Lerp to interpolate the colormap for each data-value 
             var colorMap = new LinearColorMap
             {
                 Minimum = 0,
                 Maximum = 50,
-                GradientStops = new []
+                GradientStops = new[]
                 {
-                    new ColorMapPoint { Color = Colors.DodgerBlue.ToArgb(), Offset = 0},
+                    new ColorMapPoint { Color = Colors.DodgerBlue.ToArgb(), Offset = 0.0},
                     new ColorMapPoint { Color = Colors.LimeGreen.ToArgb(), Offset = 0.2},
                     new ColorMapPoint { Color = Colors.Orange.ToArgb(), Offset = 0.5},
                     new ColorMapPoint { Color = Colors.OrangeRed.ToArgb(), Offset = 0.7},
-                    new ColorMapPoint { Color = Colors.Purple.ToArgb(), Offset = 1},
+                    new ColorMapPoint { Color = Colors.Purple.ToArgb(), Offset = 1.0},
                 }
             };
+
+            // Call .InitializeConstants() once and use ColorUtil.Lerp to interpolate the colormap for each data-value 
             colorMap.InitializeConstants();
 
             // Read the ASC Lidar data file with optional color map data
@@ -101,18 +98,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
 
             await Task.Run(() =>
             {
-                uniformGridDataSeries =
-                    new UniformGridDataSeries3D<float>(lidarData.NumberColumns, lidarData.NumberRows)
-                    {
-                        SeriesName = identifier,
-                        StartX = 0,
-                        StepX = lidarData.CellSize,
-                        StartZ = 0,
-                        StepZ = lidarData.CellSize
-                    };
+                uniformGridDataSeries = new UniformGridDataSeries3D<float>(lidarData.NumberColumns, lidarData.NumberRows) 
+                {
+                    SeriesName = identifier, 
+                    StartX = 0, 
+                    StepX = lidarData.CellSize, 
+                    StartZ = 0, 
+                    StepZ = lidarData.CellSize
+                };
 
-                var index = 0;
-                for (var z = 0; z < lidarData.NumberRows; z++)
+                for (int index = 0, z = 0; z < lidarData.NumberRows; z++)
                 {
                     for (var x = 0; x < lidarData.NumberColumns; x++)
                     {

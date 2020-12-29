@@ -33,7 +33,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
     {
         public static readonly DependencyProperty IsSplineEnabledProperty =
             DependencyProperty.Register("IsSplineEnabled", typeof (bool), typeof (SplineLineRenderableSeries),
-                new PropertyMetadata(default(bool)));
+                new PropertyMetadata(default(bool), PropertyChangedCallback));
 
         public bool IsSplineEnabled
         {
@@ -42,7 +42,7 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
         }
 
         public static readonly DependencyProperty UpSampleFactorProperty = DependencyProperty.Register(
-            "UpSampleFactor", typeof (int), typeof (SplineLineRenderableSeries), new PropertyMetadata(10));
+            "UpSampleFactor", typeof (int), typeof (SplineLineRenderableSeries), new PropertyMetadata(10, PropertyChangedCallback));
 
         public int UpSampleFactor
         {
@@ -129,6 +129,11 @@ namespace SciChart.Examples.Examples.CreateACustomChart.SplineLineSeries
         public SplineLineRenderableSeries()
         {
             HitTestProvider = new SplineLineHitTestProvider(this);
+        }
+
+        private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            OnInvalidateParentSurface(d, e);
         }
 
         /// <summary>

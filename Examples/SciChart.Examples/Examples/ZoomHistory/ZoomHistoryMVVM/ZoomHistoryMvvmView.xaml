@@ -13,7 +13,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-
             <Style x:Key="ConciseAxisStyle" TargetType="s:AxisBase">
                 <Setter Property="Visibility" Value="Collapsed" />
                 <Setter Property="DrawMajorGridLines" Value="False" />
@@ -27,15 +26,14 @@
             <system:String x:Key="YAxis1Id">Y1AxisId</system:String>
             
             <Style x:Key="FirstLineRenderableSeriesStyle" TargetType="s:FastLineRenderableSeriesForMvvm">
-                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"></Setter>
-                <Setter Property="YAxisId" Value="{StaticResource YAxis0Id}"></Setter>
+                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"/>
+                <Setter Property="YAxisId" Value="{StaticResource YAxis0Id}"/>
             </Style>
 
             <Style x:Key="SecondLineRenderableSeriesStyle" TargetType="s:FastLineRenderableSeriesForMvvm">
-                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"></Setter>
-                <Setter Property="YAxisId" Value="{StaticResource YAxis1Id}"></Setter>
+                <Setter Property="XAxisId" Value="{StaticResource XAxisId}"/>
+                <Setter Property="YAxisId" Value="{StaticResource YAxis1Id}"/>
             </Style>
-
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -71,34 +69,33 @@
             
         </ex:SciChartInteractionToolbar>
 
-
         <!--  Shows the SciChartSurface and binds ZoomHistoryManager to the instance in the viewmodel  -->
         <!--  This is what we use to control zoom history as well as Undo Redo  -->
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Row="0"
                            Grid.Column="1"
                            RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}"
-                           ZoomHistoryManager="{Binding ZoomHistoryManager,
-                                                        Mode=TwoWay}">
+                           ZoomHistoryManager="{Binding ZoomHistoryManager, Mode=TwoWay}">
 
             <!--  Create an X Axis with GrowBy  -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis x:Name="XAxis"
-                              Id="{StaticResource XAxisId}"
+                               Id="{StaticResource XAxisId}"
                                VisibleRange="250,1400" />
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis x:Name="YAxis0"
                                AxisAlignment="Left"
-                               BorderBrush="#ff6495ed"
+                               BorderBrush="#FF6495ed"
                                Id="{StaticResource YAxis0Id}"
-                               TickTextBrush="#ff6495ed"
+                               TickTextBrush="#FF6495ed"
                                VisibleRange="-5,25" />
+
                 <s:NumericAxis x:Name="YAxis1"
                                AxisAlignment="Right"
-                               BorderBrush="#ffff4500"
+                               BorderBrush="#FFFF4500"
                                Id="{StaticResource YAxis1Id}"
-                               TickTextBrush="#ffff4500"
+                               TickTextBrush="#FFFF4500"
                                VisibleRange="0,40" />
             </s:SciChartSurface.YAxes>
 
@@ -109,7 +106,6 @@
                     <s:MouseWheelZoomModifier/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
         </s:SciChartSurface>
 
         <!--  Eye candy ;-)  -->
@@ -120,32 +116,39 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="620" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+
             <Button Grid.Column="0"
                     Command="{Binding UndoCommand}"
                     Style="{StaticResource BackButtonPathStyle}" />
+
             <coverFlow:CoverFlowControl Grid.Column="1"
+                                        Grid.ColumnSpan="3"
                                         Height="180"
                                         Margin="10"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Center"
-                                        ItemsSource="{Binding RangesHistory}"
+                                        ItemsSource="{Binding RangesHistory, Mode=OneWay}"
                                         Scale="0.65"
-                                        SelectedItem="{Binding SelectedRange,
-                                                               Mode=TwoWay}"
-                                        SpaceBetweenItems="210"
-                                        SpaceBetweenSelectedItemAndItems="40">
+                                        SelectionColor="#FF2C3135"
+                                        SelectedItem="{Binding SelectedRange, Mode=TwoWay}"
+                                        NextPrevSelectionOnly="True"
+                                        SpaceBetweenItems="180"
+                                        SpaceBetweenSelectedItemAndItems="50"
+                                        HideOverlappedSideItems="True">
                 <coverFlow:CoverFlowControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="#ff2C3135" BorderThickness="3">
+                        <Border Background="#FF1C1C1E"
+                                BorderBrush="#FF2C3135"
+                                BorderThickness="3">
                             <s:SciChartSurface Width="250"
                                                Height="170"
                                                Margin="-1"
-                                               FontSize="13"
-                                               Padding="0"
-                                               RenderableSeries="{s:SeriesBinding DataContext.RenderableSeriesViewModels,
-                                                                                  RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                               FontSize="12"
+                                               RenderableSeries="{s:SeriesBinding DataContext.RenderableSeriesViewModels, RelativeSource={RelativeSource AncestorType=ListBox}}">
                                 <s:SciChartSurface.Resources>
                                     <Style BasedOn="{StaticResource ConciseAxisStyle}" TargetType="s:NumericAxis" />
                                 </s:SciChartSurface.Resources>
@@ -162,7 +165,25 @@
                 </coverFlow:CoverFlowControl.ItemTemplate>
             </coverFlow:CoverFlowControl>
 
-            <Button Grid.Column="2"
+            <Border Grid.Column="1" Background="#FF1C1C1E">
+                <Border.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#FF1C1C1E"/>
+                        <GradientStop Offset="1" Color="Transparent"/>
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
+            </Border>
+
+            <Border Grid.Column="3" Background="#FF1C1C1E">
+                <Border.OpacityMask>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                        <GradientStop Offset="0" Color="#FF1C1C1E"/>
+                        <GradientStop Offset="1" Color="Transparent"/>
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
+            </Border>
+
+            <Button Grid.Column="4"
                     Command="{Binding RedoCommand}"
                     Style="{StaticResource NextButtonPathStyle}" />
         </Grid>

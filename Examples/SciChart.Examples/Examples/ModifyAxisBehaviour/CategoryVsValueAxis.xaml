@@ -28,8 +28,7 @@
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
             <ToggleButton HorizontalAlignment="Left"
                           Content="Cat"
-                          IsChecked="{Binding UseCategoryNumericAxis,
-                                              Mode=TwoWay}"
+                          IsChecked="{Binding UseCategoryNumericAxis, Mode=TwoWay}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
                           ToolTipService.ToolTip="X-Axis Category?" />
         </ext:SciChartInteractionToolbar>
@@ -47,11 +46,11 @@
             </s:SciChartSurface.RenderableSeries>
 
             <local:SwitchAxisTypeBehavior.DefaultXAxis>
-                <s:NumericAxis DrawMajorBands="True" />
+                <s:NumericAxis Id="XNumAxis" DrawMajorBands="True" />
             </local:SwitchAxisTypeBehavior.DefaultXAxis>
 
             <local:SwitchAxisTypeBehavior.AlternativeXAxis>
-                <s:CategoryNumericAxis DrawMajorBands="True" />
+                <s:CategoryNumericAxis Id="XCatAxis" DrawMajorBands="True" />
             </local:SwitchAxisTypeBehavior.AlternativeXAxis>
 
             <s:SciChartSurface.YAxis>

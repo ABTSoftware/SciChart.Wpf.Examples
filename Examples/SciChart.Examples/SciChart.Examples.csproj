@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationIcon />
     <StartupObject />
@@ -13,10 +13,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
@@ -44,15 +44,15 @@
     <Resource Include="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.2.13419-beta" />
+    <PackageReference Include="SciChart" Version="6.2.2.13445-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.2.13419-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.2.13445-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13419-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13445-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13419-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13445-beta" />
   </ItemGroup>
 </Project>

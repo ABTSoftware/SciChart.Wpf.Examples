@@ -31,26 +31,26 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
     [TemplateVisualState(GroupName = "SelectedStates", Name = "UnselectedState")]
     public class CoverFlowItemControl : ListBoxItem, IDisposable
     {
-#if SILVERLIGHT
-        private PlaneProjection _planeProjection;
-#else
-        private PlaneProjector _planeProjection;
-#endif
         private bool _isItemSelected;
-
+        private bool _isAnimating;
+        
         private double _x;
         private double _yRotation;
         private double _scale;
-        private bool _isAnimating;
 
         private Border _container;
-
         private Duration _duration;
+        
         private IEasingFunction _easingFunction;
         private DoubleAnimation _xAnimation;
 
+        private Color _selectionColor;
+        private ColorAnimation _selectionAnimation;
+
         private Storyboard _animation;
         private ScaleTransform _scaleTransform;
+        private PlaneProjector _planeProjection;
+
         private EasingDoubleKeyFrame _rotationKeyFrame;
         private EasingDoubleKeyFrame _scaleXKeyFrame;
         private EasingDoubleKeyFrame _scaleYKeyFrame;
@@ -59,7 +59,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         public bool IsItemSelected
         {
-            get { return _isItemSelected; }
+            get => _isItemSelected;
             set
             {
                 _isItemSelected = value;
@@ -70,9 +70,22 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             }
         }
 
+        public Color SelectionColor
+        {
+            get => _selectionColor;
+            set
+            {
+                _selectionColor = value;
+                if (_selectionAnimation != null)
+                {
+                    _selectionAnimation.To = _selectionColor;
+                }
+            }
+        }
+
         public double YRotation
         {
-            get { return _yRotation; }
+            get => _yRotation;
             set
             {
                 _yRotation = value;
@@ -85,7 +98,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         public double Scale
         {
-            get { return _scale; }
+            get => _scale;
             set
             {
                 _scale = value;
@@ -99,7 +112,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         public double X
         {
-            get { return _x; }
+            get => _x;
             set
             {
                 _x = value;
@@ -123,22 +136,20 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            
             _container = (Border)GetTemplateChild("container");
 
             _rotationKeyFrame = (EasingDoubleKeyFrame)GetTemplateChild("rotationKeyFrame");
             _scaleXKeyFrame = (EasingDoubleKeyFrame)GetTemplateChild("scaleXKeyFrame");
             _scaleYKeyFrame = (EasingDoubleKeyFrame)GetTemplateChild("scaleYKeyFrame");
             _scaleTransform = (ScaleTransform)GetTemplateChild("scaleTransform");
-
-#if SILVERLIGHT
-            _planeProjection = (PlaneProjection)GetTemplateChild("Rotator");
-#else
+            
             _planeProjection = (PlaneProjector)GetTemplateChild("Rotator");
-#endif
 
             if (_planeProjection != null)
             {
                 _planeProjection.RotationY = _yRotation;
+                
                 if (_container != null)
                 {
                     SubscribeContentPresenterEvents(_container);
@@ -146,6 +157,13 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             }
 
             _animation = (Storyboard)GetTemplateChild("Animation");
+            _selectionAnimation = (ColorAnimation)GetTemplateChild("SelectionColorAnimation");
+
+            if (_selectionAnimation != null)
+            {
+                _selectionAnimation.To = _selectionColor;
+            }
+
             if (_animation != null)
             {
                 SubscribeAnimationEvents(_animation);
@@ -202,24 +220,21 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             }
         }
 
-        void Animation_Completed(object sender, EventArgs e)
+        private void Animation_Completed(object sender, EventArgs e)
         {
             _isAnimating = false;
         }
 
-        void ContentPresenter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (ItemSelected != null)
-            {
-                ItemSelected(this, null);
-            }
+        private void ContentPresenter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        { 
+            ItemSelected?.Invoke(this, null);
         }
 
-        public void SetValues(double x, int zIndex, double r, double z, double s, Duration d, IEasingFunction ease, bool useAnimation)
+        public void SetValues(double x, int zIndex, double r, double s, Duration d, IEasingFunction ease, bool useAnimation)
         {
             if (useAnimation)
             {
-                if (!_isAnimating && Canvas.GetLeft(this) != x)
+                if (!_isAnimating && x.CompareTo(Canvas.GetLeft(this)) != 0)
                 {
                     Canvas.SetLeft(this, _x);
                 }
@@ -248,7 +263,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
                 _isAnimating = true;
                 _animation.Begin();
-                Canvas.SetZIndex(this, zIndex);
+                
+                Panel.SetZIndex(this, zIndex);
             }
 
             _x = x;

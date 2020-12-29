@@ -80,42 +80,44 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
 
             for (int i = 0; i < markerLocations.Length; ++i)
             {
-                var metadata = _dataPointMetadata[_dataPointIndexes[i]] as BudgetPointMetadata;
-                var center = markerLocations[i];
-                var isGain = metadata.GainLossValue >= prevValue;
-
-                DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
-
-                prevValue = metadata.GainLossValue;
-                var gainLossValue = metadata.GainLossValue + "$";
-
-                _textBlock.Text = gainLossValue;
-                _textBlock.MeasureArrange();
-
-                var xPos = center.X - _textBlock.DesiredSize.Width / 2;
-                xPos = xPos < 0 ? TextIndent : xPos;
-
-                var marginalRightPos = context.ViewportSize.Width - _textBlock.DesiredSize.Width - TextIndent;
-                xPos = xPos > marginalRightPos ? marginalRightPos : xPos;
-
-                var yPos = center.Y;
-                var yOffset = isGain ? -_textBlock.DesiredSize.Height - TextIndent : TextIndent;
-                yPos += yOffset;
-
-                var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
-                context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
-
-                if (metadata.IsCheckPoint)
+                if (_dataPointMetadata[_dataPointIndexes[i]] is BudgetPointMetadata metadata)
                 {
-                    context.DrawQuad(_strokePen, textRect.TopLeft, textRect.BottomRight);
+                    var center = markerLocations[i];
+                    var isGain = metadata.GainLossValue >= prevValue;
+
+                    DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
+
+                    prevValue = metadata.GainLossValue;
+                    var gainLossValue = metadata.GainLossValue + "$";
+
+                    _textBlock.Text = gainLossValue;
+                    _textBlock.MeasureArrange();
+
+                    var xPos = center.X - _textBlock.DesiredSize.Width / 2;
+                    xPos = xPos < 0 ? TextIndent : xPos;
+
+                    var marginalRightPos = context.ViewportSize.Width - _textBlock.DesiredSize.Width - TextIndent;
+                    xPos = xPos > marginalRightPos ? marginalRightPos : xPos;
+
+                    var yPos = center.Y;
+                    var yOffset = isGain ? -_textBlock.DesiredSize.Height - TextIndent : TextIndent;
+                    yPos += yOffset;
+
+                    var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
+                    context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
+
+                    if (metadata.IsCheckPoint) 
+                        context.DrawQuad(_strokePen, textRect.TopLeft, textRect.BottomRight);
                 }
             }
         }
 
         private void TryCacheResources(IRenderContext2D context)
         {
+            if (!context.IsCompatibleType(_strokePen)) 
+                Dispose();
+            
             _strokePen = _strokePen ?? context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
-
             _gainFillBrush = _gainFillBrush ?? context.CreateBrush(GainMarkerFill);
             _lossFillBrush = _lossFillBrush ?? context.CreateBrush(LossMarkerFill);
         }
@@ -152,8 +154,13 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             base.Dispose();
 
             _strokePen.SafeDispose();
+            _strokePen = null;
+
             _gainFillBrush.SafeDispose();
+            _gainFillBrush = null;
+
             _lossFillBrush.SafeDispose();
+            _lossFillBrush = null;
         }
     }
 }

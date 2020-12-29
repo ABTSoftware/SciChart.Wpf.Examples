@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:demo="clr-namespace:SciChart.Examples.Demo"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-        xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-        xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
         Title="SciChart &gt; Examples"
         Width="1380"
         Height="860"
+        MinWidth="1024"
+        MinHeight="768"
         WindowStartupLocation="CenterScreen"
         s:Device.SnapsToDevicePixels="True"
         Background="#222">
@@ -16,11 +16,8 @@
         <s:BooleanToVisibilityConverter x:Key="b2vConverter"/>
     </Window.Resources>
         
-    <Grid >
+    <Grid>
         <demo:Splash/>
-
-        <demo:ShellControl AutomationProperties.AutomationId="ShellControl" 
-                           Visibility="{Binding InitReady, Converter={StaticResource b2vConverter}, FallbackValue=Collapsed}"/>
+        <demo:ShellControl AutomationProperties.AutomationId="ShellControl" Visibility="{Binding InitReady, Converter={StaticResource b2vConverter}, FallbackValue=Collapsed}"/>
     </Grid>
-
 </Window>

@@ -13,10 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.ModifyAxisBehaviour
@@ -31,7 +27,7 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
         public bool UseLogarithmicAxis
         {
-            get { return _useLogarithmicAxis; }
+            get => _useLogarithmicAxis;
             set
             {
                 _useLogarithmicAxis = value;

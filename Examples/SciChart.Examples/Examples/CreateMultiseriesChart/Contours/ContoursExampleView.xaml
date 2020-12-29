@@ -14,10 +14,9 @@
         
         <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
 
-        <ObjectDataProvider
-            x:Key="PaletteModesProvider"
-            MethodName="GetValues"
-            ObjectType="{x:Type system:Enum}">
+        <ObjectDataProvider x:Key="PaletteModesProvider"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="s:ColorPaletteMode" />
             </ObjectDataProvider.MethodParameters>
@@ -36,12 +35,12 @@
 
         <s:HeatmapColorPalette x:Key="ColorPalette" Maximum="200">
             <s:HeatmapColorPalette.GradientStops>
-                <GradientStop Offset="0" Color="DarkBlue" />
+                <GradientStop Offset="0.0" Color="DarkBlue" />
                 <GradientStop Offset="0.2" Color="CornflowerBlue" />
                 <GradientStop Offset="0.4" Color="DarkGreen" />
                 <GradientStop Offset="0.6" Color="Chartreuse" />
                 <GradientStop Offset="0.8" Color="Yellow" />
-                <GradientStop Offset="1" Color="Red" />
+                <GradientStop Offset="1.0" Color="Red" />
             </s:HeatmapColorPalette.GradientStops>
         </s:HeatmapColorPalette>
         
@@ -75,91 +74,66 @@
 
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" MinHeight="300" Orientation="Vertical">
-
                         <CheckBox x:Name="ApplyPaletteCkb" 
                                   Content="Apply Palette"
                                   Click="OnApplyPalette"
                                   Margin="0,2"/>
+
                         <ComboBox x:Name="ContourPaletteMode"
                                   MinWidth="10"
                                   ItemsSource="{Binding Source={StaticResource PaletteModesProvider}}"
                                   SelectedItem="{Binding Source={x:Reference contourSeries}, Path=ColorMapMode}"
                                   SelectedIndex="1" 
                                   Margin="0,2"/>
+
                         <CheckBox x:Name="ApplyMajorStyleCkb"
                                   Content="Apply Major Style" 
                                   Click="OnApplyMajorStyle"
                                   Margin="0,2"/>
+
                         <CheckBox x:Name="ApplyMinorStyleCkb"
                                   Content="Apply Minor Style"
                                   Click="OnApplyMinorStyle"
                                   Margin="0,2"/>
-                        <CheckBox Content="Use AntiAlising"
+
+                        <CheckBox Content="Use AntiAliasing"
                                   IsChecked="{Binding Source={x:Reference contourSeries}, Path=AntiAliasing}"
                                   Margin="0,2" />
+
                         <CheckBox Content="Show Heatmap"
                                   IsChecked="{Binding Source={x:Reference heatmapSeries}, Path=IsVisible}"
                                   Margin="0,2"/>
-
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <!--0-->
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                                <!--2-->
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                                <!--4-->
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
-                                <!--6-->
-                            </Grid.RowDefinitions>
-
-                            <StackPanel>
-                                <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMin, Mode=OneWay, StringFormat='{}ZMin: {0:0}'}" />
-                                <Slider Minimum="5"
-                                    Maximum="200"
-                                    Interval="1"
-                                    Value="{Binding Source={x:Reference contourSeries}, Path=ZMin, FallbackValue=10}"/>
-
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2">
-                                <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMax, Mode=OneWay, StringFormat='{}ZMax: {0:0}'}" />
-                                <Slider Minimum="5"
-                                    Maximum="200"
-                                    Interval="1"
-                                    Value="{Binding Source={x:Reference contourSeries}, Path=ZMax, FallbackValue=200}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="4">
-                                <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZStep, Mode=OneWay, StringFormat='{}ZStep: {0:0}'}" />
-                                <Slider Minimum="5"
-                                        Maximum="50"
-                                        Interval="5"
-                                        Value="{Binding Source={x:Reference contourSeries}, Path=ZStep, FallbackValue=20}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="6">
-                                <TextBlock Text="{Binding Source={x:Reference contourSeries},  Path=MinorsPerMajor, Mode=OneWay, StringFormat='{}Minors Per Major: {0:0}'}" />
-                                <Slider Minimum="0"
-                                    Maximum="10"
-                                    Interval="1"
-                                    Value="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor}"/>
-                            </StackPanel>
-
-                        </Grid>
+                        
+                        <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMin, Mode=OneWay, StringFormat='{}ZMin: {0:0}'}" />
+                        <Slider Minimum="5"
+                                Maximum="200"
+                                Interval="1"
+                                Value="{Binding Source={x:Reference contourSeries}, Path=ZMin, FallbackValue=10}"/>
+                        
+                        <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZMax, Mode=OneWay, StringFormat='{}ZMax: {0:0}'}" />
+                        <Slider Minimum="5"
+                                Maximum="200"
+                                Interval="1"
+                                Value="{Binding Source={x:Reference contourSeries}, Path=ZMax, FallbackValue=200}"/>
+                        
+                        <TextBlock Text="{Binding Source={x:Reference contourSeries}, Path=ZStep, Mode=OneWay, StringFormat='{}ZStep: {0:0}'}" />
+                        <Slider Minimum="5"
+                                Maximum="50"
+                                Interval="5"
+                                Value="{Binding Source={x:Reference contourSeries}, Path=ZStep, FallbackValue=20}" />
+                        
+                        <TextBlock Text="{Binding Source={x:Reference contourSeries},  Path=MinorsPerMajor, Mode=OneWay, StringFormat='{}Minors Per Major: {0:0}'}" />
+                        <Slider Minimum="0"
+                                Maximum="10"
+                                Interval="1"
+                                Value="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor}"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
-        <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0"
-                           BorderThickness="0">
-
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
-
                 <s:FastUniformContourRenderableSeries x:Name="contourSeries" 
                                                       AntiAliasing="True"
                                                       ZMax="200"
@@ -170,17 +144,16 @@
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Maximum="200">
                             <s:HeatmapColorPalette.GradientStops>
-                                <GradientStop Offset="0" Color="DarkBlue" />
+                                <GradientStop Offset="0.0" Color="DarkBlue" />
                                 <GradientStop Offset="0.2" Color="CornflowerBlue" />
                                 <GradientStop Offset="0.4" Color="DarkGreen" />
                                 <GradientStop Offset="0.6" Color="Chartreuse" />
                                 <GradientStop Offset="0.8" Color="Yellow" />
-                                <GradientStop Offset="1" Color="Red" />
+                                <GradientStop Offset="1.0" Color="Red" />
                             </s:HeatmapColorPalette.GradientStops>
                         </s:HeatmapColorPalette>
                     </s:FastUniformHeatmapRenderableSeries.ColorMap>
                 </s:FastUniformHeatmapRenderableSeries>
-                
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -193,13 +166,11 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:TooltipModifier ShowTooltipOn="Always"  UseInterpolation="True" ReceiveHandledEvents="True"/>
+                    <s:TooltipModifier ShowTooltipOn="Always" UseInterpolation="True" ReceiveHandledEvents="True" />
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton" />
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>

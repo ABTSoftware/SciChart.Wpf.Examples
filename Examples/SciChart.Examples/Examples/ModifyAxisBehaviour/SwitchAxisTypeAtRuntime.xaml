@@ -11,13 +11,11 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </UserControl.Resources>
 
     <Grid>
@@ -27,16 +25,12 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
             <ToggleButton HorizontalAlignment="Left"
                           Content="Log"
-                          IsChecked="{Binding UseLogarithmicAxis,
-                                              Mode=TwoWay}"
+                          IsChecked="{Binding UseLogarithmicAxis, Mode=TwoWay}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
                           ToolTipService.ToolTip="Y-Axis Logarithmic?" />
-
         </ext:SciChartInteractionToolbar>
-
 
         <!--  Declare the SciChartSurface  -->
         <!--  Because in this example we are dynamically changing axis type from Linear to Logarithmic,  -->
@@ -48,14 +42,16 @@
                            m:SwitchAxisTypeBehavior.UseAlternateYAxis="{Binding UseLogarithmicAxis}">
 
             <m:SwitchAxisTypeBehavior.DefaultYAxis>
-                <s:NumericAxis AutoRange="Never"
+                <s:NumericAxis Id="YNumAxis"
+                               AutoRange="Never"
                                AxisTitle="Numeric Axis"
                                DrawMajorBands="True"
                                VisibleRange="0, 10" />
             </m:SwitchAxisTypeBehavior.DefaultYAxis>
 
             <m:SwitchAxisTypeBehavior.AlternativeYAxis>
-                <s:LogarithmicNumericAxis AxisTitle="Logarithmic Axis"
+                <s:LogarithmicNumericAxis Id="YLogAxis"
+                                          AxisTitle="Logarithmic Axis"
                                           CursorTextFormatting="0.0"
                                           DrawMajorBands="True"
                                           LogarithmicBase="10"
@@ -102,12 +98,8 @@
                                Stretch="None" />
 
                     </StackPanel>
-
                 </s:CustomAnnotation> 
-
             </s:SciChartSurface.Annotations>
-
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>

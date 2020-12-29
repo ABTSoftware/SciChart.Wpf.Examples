@@ -35,7 +35,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
     {
         #region DependencyProperties
 
-        public new static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(CoverFlowControl), new PropertyMetadata(default(object), SelectedItemPropertyChanged));
+        public new static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(CoverFlowControl), new PropertyMetadata(null, SelectedItemPropertyChanged));
+
+        public static readonly DependencyProperty SelectionColorProperty = DependencyProperty.Register("SelectionColor", typeof(Color), typeof(CoverFlowControl), new PropertyMetadata(Colors.Transparent, OnValuesChanged));
 
         public static readonly DependencyProperty SingleItemDurationProperty = DependencyProperty.Register("SingleItemDuration", typeof(Duration), typeof(CoverFlowControl), new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(600)), OnValuesChanged));
 
@@ -43,9 +45,13 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(CoverFlowControl), new PropertyMetadata(.7d, OnValuesChanged));
 
+        public static readonly DependencyProperty HideOverlappedSideItemsProperty = DependencyProperty.Register("HideOverlappedSideItems", typeof(bool), typeof(CoverFlowControl), new PropertyMetadata(false));
+
         public static readonly DependencyProperty SpaceBetweenItemsProperty = DependencyProperty.Register("SpaceBetweenItems", typeof(double), typeof(CoverFlowControl), new PropertyMetadata(60d, OnValuesChanged));
 
         public static readonly DependencyProperty SpaceBetweenSelectedItemAndItemsProperty = DependencyProperty.Register("SpaceBetweenSelectedItemAndItems", typeof(double), typeof(CoverFlowControl), new PropertyMetadata(140d, OnValuesChanged));
+
+        public static readonly DependencyProperty NextPrevSelectionOnlyProperty = DependencyProperty.Register("NextPrevSelectionOnly", typeof(bool), typeof(CoverFlowControl), new PropertyMetadata(false));
 
         public static readonly DependencyProperty ZDistanceProperty = DependencyProperty.Register("ZDistance", typeof(double), typeof(CoverFlowControl), new PropertyMetadata(0d, OnValuesChanged));
 
@@ -57,66 +63,87 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         #region CLR Properties
 
+        public Color SelectionColor
+        {
+            get => (Color)GetValue(SelectionColorProperty);
+            set => SetValue(SelectionColorProperty, value);
+        }
+
         public Duration SingleItemDuration
         {
-            get { return (Duration)GetValue(SingleItemDurationProperty); }
-            set { SetValue(SingleItemDurationProperty, value); }
+            get => (Duration)GetValue(SingleItemDurationProperty);
+            set => SetValue(SingleItemDurationProperty, value);
         }
 
         public Duration PageDuration
         {
-            get { return (Duration)GetValue(PageDurationProperty); }
-            set { SetValue(PageDurationProperty, value); }
+            get => (Duration)GetValue(PageDurationProperty);
+            set => SetValue(PageDurationProperty, value);
         }
 
         public double Scale
         {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
+            get => (double)GetValue(ScaleProperty);
+            set => SetValue(ScaleProperty, value);
+        }
+
+        public bool HideOverlappedSideItems
+        {
+            get => (bool)GetValue(HideOverlappedSideItemsProperty);
+            set => SetValue(HideOverlappedSideItemsProperty, value);
         }
 
         public double SpaceBetweenItems
         {
-            get { return (double)GetValue(SpaceBetweenItemsProperty); }
-            set { SetValue(SpaceBetweenItemsProperty, value); }
+            get => (double)GetValue(SpaceBetweenItemsProperty);
+            set => SetValue(SpaceBetweenItemsProperty, value);
         }
 
         public double SpaceBetweenSelectedItemAndItems
         {
-            get { return (double)GetValue(SpaceBetweenSelectedItemAndItemsProperty); }
-            set { SetValue(SpaceBetweenSelectedItemAndItemsProperty, value); }
+            get => (double)GetValue(SpaceBetweenSelectedItemAndItemsProperty);
+            set => SetValue(SpaceBetweenSelectedItemAndItemsProperty, value);
+        }
+
+        public bool NextPrevSelectionOnly
+        {
+            get => (bool)GetValue(NextPrevSelectionOnlyProperty);
+            set => SetValue(NextPrevSelectionOnlyProperty, value);
         }
 
         public double ZDistance
         {
-            get { return (double)GetValue(ZDistanceProperty); }
-            set { SetValue(ZDistanceProperty, value); }
+            get => (double)GetValue(ZDistanceProperty);
+            set => SetValue(ZDistanceProperty, value);
         }
 
         public double RotationAngle
         {
-            get { return (double)GetValue(RotationAngleProperty); }
-            set { SetValue(RotationAngleProperty, value); }
+            get => (double)GetValue(RotationAngleProperty);
+            set => SetValue(RotationAngleProperty, value);
         }
 
         public IEasingFunction EasingFunction
         {
-            get { return (IEasingFunction)GetValue(EasingFunctionProperty); }
-            set { SetValue(EasingFunctionProperty, value); }
+            get => (IEasingFunction)GetValue(EasingFunctionProperty);
+            set => SetValue(EasingFunctionProperty, value);
         }
 
         #endregion
 
-        private ItemsPresenter _itemsPresenter;
         private int _selectedIndex;
-        private readonly ObservableCollection<CoverFlowItemControl> _items;
-        private Dictionary<object, CoverFlowItemControl> _objectToItemContainer;
+        private int _prevSelectedIndex;
+
+        private bool _isZIndexAscending;
         private bool _wasSelected;
 
+        private ItemsPresenter _itemsPresenter;
+        private readonly ObservableCollection<CoverFlowItemControl> _items;
+        private Dictionary<object, CoverFlowItemControl> _objectToItemContainer;
 
         private Duration _animationDuration;
-        private ICommand _nextItemCommand;
-        private ICommand _previousItemCommand;
+        private readonly ICommand _nextItemCommand;
+        private readonly ICommand _previousItemCommand;
 
         public event SelectedItemChangedEvent SelectedItemChanged;
         public event EventHandler SelectedItemClick;
@@ -124,66 +151,70 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         public int SelectedIndex
         {
-            get { return _selectedIndex; }
-            set { IndexSelected(value, false); }
+            get => _selectedIndex;
+            set => IndexSelected(value, false);
         }
 
         public new object SelectedItem
         {
-            get { return GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
 
-        private void IndexSelected(int index, bool mouseclick)
+        private void IndexSelected(int index, bool mouseClick)
         {
             _items[SelectedIndex].IsItemSelected = false;
             _items[index].IsItemSelected = true;
 
-            IndexSelected(index, mouseclick, true);
+            IndexSelected(index, mouseClick, true);
         }
 
-        private void IndexSelected(int index, bool mouseclick, bool layoutChildren)
+        private void IndexSelected(int index, bool mouseClick, bool layoutChildren)
         {
             if (_items.Count > 0)
             {
                 _selectedIndex = index;
+                _isZIndexAscending = _prevSelectedIndex <= _selectedIndex;
+                _prevSelectedIndex = _selectedIndex;
+
                 var item = _items.Count > 0 ? _items[SelectedIndex].Content : null;
+
                 SetValue(SelectedItemProperty, item);
 
                 if (layoutChildren)
-                {
                     InvalidateArrange();
-                }
 
-                var args = new CoverFlowEventArgs { Index = index, Item = _items[index].Content, MouseClick = mouseclick };
-
-                if (SelectedItemChanged != null)
+                var args = new CoverFlowEventArgs
                 {
-                    SelectedItemChanged(args);
-                }
+                    Index = index,
+                    Item = _items[index].Content,
+                    MouseClick = mouseClick
+                };
+
+                SelectedItemChanged?.Invoke(args);
 
                 if (PropertyChanged != null)
-                {
                     OnPropertyChanged("SelectedIndex");
-                }
             }
         }
 
         public CoverFlowControl()
         {
             DefaultStyleKey = typeof(CoverFlowControl);
-            _items = new ObservableCollection<CoverFlowItemControl>();
-            _items.CollectionChanged += (sender, args) => InvalidateArrange();
-            _animationDuration = SingleItemDuration;
-            _wasSelected = true;
 
-            Loaded += (_, __) =>
+            _items = new ObservableCollection<CoverFlowItemControl>();
+            _items.CollectionChanged += (s, e) => InvalidateArrange();
+            _animationDuration = SingleItemDuration;
+
+            _wasSelected = true;
+            _prevSelectedIndex = int.MaxValue;
+
+            Loaded += (s, e) =>
             {
                 var item = GetItemContainerForObject(SelectedItem);
                 if (item != null)
                 {
                     var index = _items.IndexOf(item);
-
                     if (index >= 0 && _wasSelected)
                     {
                         int centralButtonIndex = _items.Count / 2;
@@ -192,7 +223,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
                     }
                 }
             };
-
+            
             _previousItemCommand = new ActionCommand(PreviousItem);
             _nextItemCommand = new ActionCommand(NextItem);
 
@@ -204,15 +235,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             _itemsPresenter = (ItemsPresenter)GetTemplateChild("ItemsPresenter");
         }
 
-        public ICommand PreviousItemCommand
-        {
-            get { return _previousItemCommand; }
-        }
+        public ICommand PreviousItemCommand => _previousItemCommand;
 
-        public ICommand NextItemCommand
-        {
-            get { return _nextItemCommand; }
-        }
+        public ICommand NextItemCommand => _nextItemCommand;
 
         protected CoverFlowItemControl GetItemContainerForObject(object key)
         {
@@ -224,14 +249,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             return item;
         }
 
-        protected Dictionary<object, CoverFlowItemControl> ObjectToItemContainer
-        {
-            get { return _objectToItemContainer ?? (_objectToItemContainer = new Dictionary<object, CoverFlowItemControl>()); }
-        }
+        protected Dictionary<object, CoverFlowItemControl> ObjectToItemContainer => _objectToItemContainer ?? (_objectToItemContainer = new Dictionary<object, CoverFlowItemControl>());
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new CoverFlowItemControl();
+            return new CoverFlowItemControl {SelectionColor = SelectionColor};
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
@@ -244,8 +266,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
             base.ClearContainerForItemOverride(element, item);
             ObjectToItemContainer.Remove(item);
 
-            var coverFlowItem = element as CoverFlowItemControl;
-            if (coverFlowItem != null)
+            if (element is CoverFlowItemControl coverFlowItem)
             {
                 _items.Remove(coverFlowItem);
                 UnsubscribeCoverFlowItemEvents(coverFlowItem);
@@ -255,9 +276,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
-            var coverFlowItem = element as CoverFlowItemControl;
 
-            if (coverFlowItem != null)
+            if (element is CoverFlowItemControl coverFlowItem)
             {
                 ObjectToItemContainer[item] = coverFlowItem;
 
@@ -291,12 +311,17 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         private void CoverFlowItemSelected(object sender, EventArgs e)
         {
-            var item = sender as CoverFlowItemControl;
-            if (item != null)
+            if (sender is CoverFlowItemControl item)
             {
                 var index = _items.IndexOf(item);
+
                 if (index >= 0)
                 {
+                    if (NextPrevSelectionOnly && Math.Abs(index - SelectedIndex) > 1)
+                    {
+                        return;
+                    }
+
                     if (index != SelectedIndex)
                     {
                         IndexSelected(index, true);
@@ -304,10 +329,12 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
                     else
                     {
                         var handler = SelectedItemClick;
-                        if (handler != null)
+                        handler?.Invoke(this, new CoverFlowEventArgs
                         {
-                            handler(this, new CoverFlowEventArgs { Index = index, Item = _items[index].Content, MouseClick = false });
-                        }
+                            Index = index,
+                            Item = _items[index].Content,
+                            MouseClick = false
+                        });
                     }
                 }
             }
@@ -315,8 +342,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         private void CoverFlowItemSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var item = sender as CoverFlowItemControl;
-            if (item != null)
+            if (sender is CoverFlowItemControl item)
             {
                 var index = _items.IndexOf(item);
                 LayoutChild(item, index);
@@ -326,28 +352,34 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         protected void LayoutChild(CoverFlowItemControl item, int index)
         {
             var halfWidth = _itemsPresenter.ActualWidth / 2;
-
             var relativeIndex = index - SelectedIndex;
             var position = GetRelativePosition(relativeIndex);
 
-            var x = (halfWidth + (relativeIndex * SpaceBetweenItems + (SpaceBetweenSelectedItemAndItems * position))) - (item.ActualWidth / 2);
-
+            var x = halfWidth + (relativeIndex * SpaceBetweenItems + SpaceBetweenSelectedItemAndItems * position) - item.ActualWidth / 2;
+            var zIndex = _items.Count + index * (_isZIndexAscending ? 1 : -1);
             var scale = position == 0 ? 1 : Scale;
-            var zIndex = _items.Count - Math.Abs(relativeIndex);
 
             bool useAnimation;
+
             if ((x + item.ActualWidth < 0 || x > _itemsPresenter.ActualWidth) &&
                 (item.X + item.ActualWidth < 0 || item.X > _itemsPresenter.ActualWidth) &&
                 !(x + item.ActualWidth < 0 && item.X > _itemsPresenter.ActualWidth) &&
                 !(item.X + item.ActualWidth < 0 && x > _itemsPresenter.ActualWidth))
             {
                 useAnimation = false;
+
+                if (HideOverlappedSideItems) 
+                    item.Visibility = Visibility.Hidden;
             }
             else
             {
                 useAnimation = true;
+
+                if (HideOverlappedSideItems)
+                    item.Visibility = Visibility.Visible;
             }
-            item.SetValues(x, zIndex, RotationAngle * position, ZDistance * Math.Abs(position), scale, _animationDuration, EasingFunction, useAnimation);
+            
+            item.SetValues(x, zIndex, RotationAngle * position, scale, _animationDuration, EasingFunction, useAnimation);
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -374,9 +406,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
                     var position = GetRelativePosition(relativeIndex);
 
                     var item = _items[index];
-                    var itemCenter = (halfWidth + (relativeIndex * SpaceBetweenItems + (SpaceBetweenSelectedItemAndItems * position)));
+                    var itemCenter = halfWidth + (relativeIndex * SpaceBetweenItems + SpaceBetweenSelectedItemAndItems * position);
 
-                    item.X = itemCenter - (item.ActualWidth / 2);
+                    item.X = itemCenter - item.ActualWidth / 2;
                     item.YRotation = RotationAngle * position;
                     item.Scale = position == 0 ? 1 : Scale;
 
@@ -493,8 +525,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
 
         private static void OnValuesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var coverFlowControl = d as CoverFlowControl;
-            if (coverFlowControl != null)
+            if (d is CoverFlowControl coverFlowControl)
             {
                 coverFlowControl.InvalidateArrange();
             }
@@ -503,14 +534,12 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         private static void SelectedItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             var coverFlow = (CoverFlowControl)d;
+            coverFlow.ObjectToItemContainer.TryGetValue(args.NewValue, out var item);
 
-            CoverFlowItemControl item;
-            coverFlow.ObjectToItemContainer.TryGetValue(args.NewValue, out item);
             if (item != null)
             {
                 var newIndex = coverFlow._items.IndexOf(item);
-                if (coverFlow.SelectedIndex == newIndex) { }
-                else
+                if (coverFlow.SelectedIndex != newIndex)
                 {
                     coverFlow.SelectedIndex = newIndex;
                 }

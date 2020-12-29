@@ -1,0 +1,38 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/StyleAChart/UseLabelProvider/UseLabelProvider.xaml</View>
+  <ViewModel/>
+  <ImagePath/>
+  <IconPath>IconThemes</IconPath>
+  <ToolTipDescription>Demonstrates how to use the ILabelProvider interface to customize axis labels individually</ToolTipDescription>
+  <Description>
+    Demonstrates how to use the [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Labels%20-%20LabelProvider%20API.html']LabelProvider API[/url] to customize axis labels individually. Using this API you can override individual labels for all types of axes. By default SciChart defines the following label providers:
+
+    - DateTimeLabelProvider
+    - NumericLabelProvider
+    - TimeSpanLabelProvider
+    - TradeChartAxisLabelProvider
+
+    If you create a LabelProvider, inherit from the correct class above or [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.LabelProviders.LabelProviderBase.html']LabelProviderBase[/url] to get even more customization options.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Labels%20-%20LabelProvider%20API.html']Full Control Over Axis Labels[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Labels%20-%20TextFormatting%20and%20CursorTextFormatting.html']Axis Labels Text Formatting[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisCore~LabelProvider.html']AxisCore.LabelProvider[/url] property
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.Axes.LabelProviders.LabelProviderBase.html']LabelProviderBase[/url] class
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/UseLabelProvider.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/UseLabelProvider.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/LabelColorGenerator.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/CustomLabelParams.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/CustomLabelProvider.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseLabelProvider/CustomLabelViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>
+    <Features>Custom</Features>
+    <Features>LabelProvider</Features>
+    <Features>Style</Features>
+  </Features>
+</ExampleDefinition>

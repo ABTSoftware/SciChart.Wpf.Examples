@@ -7,11 +7,12 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:chartData="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
             <LinearGradientBrush x:Key="ColorMap" StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Offset="0" Color="DodgerBlue"/>
+                <GradientStop Offset="0.0" Color="DodgerBlue"/>
                 <GradientStop Offset="0.2" Color="LimeGreen"/>
                 <GradientStop Offset="0.5" Color="Orange"/>
                 <GradientStop Offset="0.7" Color="OrangeRed"/>
@@ -28,39 +29,38 @@
                         <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem3"/>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem4"/>
                     </Grid.ColumnDefinitions>
-                    <CheckBox
-                        Grid.Column="0"
-                        Margin="5,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="Visible?"
-                        Foreground="White"
-                        IsChecked="{Binding RenderableSeries.IsVisible, Mode=TwoWay}"
-                        Visibility="{Binding LegendData.ShowVisibilityCheckboxes, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                    <s:PointMarker
-                        Grid.Column="1"
-                        Width="25"
-                        Height="10"
-                        Margin="10,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        HorizontalContentAlignment="Stretch"
-                        VerticalContentAlignment="Stretch"
-                        DataContext="{Binding RenderableSeries}"
-                        DeferredContent="{Binding LegendMarkerTemplate}"
-                        Visibility="{Binding ShowSeriesMarkers, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <CheckBox Grid.Column="0"
+                              Margin="5,0,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Content="Visible?"
+                              Foreground="White"
+                              IsChecked="{Binding RenderableSeries.IsVisible, Mode=TwoWay}"
+                              Visibility="{Binding LegendData.ShowVisibilityCheckboxes, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                    <TextBlock
-                        Grid.Column="2"
-                        Margin="10,0,10,0"
-                        HorizontalAlignment="Left"
-                        Text="{Binding SeriesName}" />
+                    <s:PointMarker Grid.Column="1"
+                                   Width="10"
+                                   Height="10"
+                                   Margin="10,0,0,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Stretch"
+                                   VerticalContentAlignment="Stretch"
+                                   DataContext="{Binding RenderableSeries}"
+                                   DeferredContent="{Binding LegendMarkerTemplate}"
+                                   Visibility="{Binding ShowSeriesMarkers, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <TextBlock Grid.Column="2"
+                               Margin="10,0,10,2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="{Binding SeriesName}" />
 
                     <!-- Opacity. Bound to SeriesInfo.RenderableSeries.Opacity -->
-                    <StackPanel Orientation="Horizontal" Grid.Column="3">
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="Opacity: " Foreground="White"/>
-                        <Slider  Minimum="0.0" Maximum="1.0" MinWidth="100" DataContext="{Binding RenderableSeries}" Value="{Binding Path=Opacity, Mode=TwoWay}"/>
+                        <Slider Minimum="0.0" Maximum="1.0" MinWidth="100" DataContext="{Binding RenderableSeries}" Value="{Binding Path=Opacity, Mode=TwoWay}"/>
                     </StackPanel>
                 </Grid>
             </DataTemplate>
@@ -85,9 +85,13 @@
 
                 <!-- Renders the contours and topography map -->
                 <!-- Try different DrawMeshAs modes such as Contours, SolidMesh, SolidMeshWireframe etc -->
-                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh" DrawMeshAs="SolidWithContours"
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMesh"
+                                                   DrawMeshAs="SolidWithContours"
                                                    MeshPaletteMode="HeightMapInterpolated"
-                                                   ContourStroke="Azure" ContourStrokeThickness="2" Minimum="0" Maximum="50"
+                                                   ContourStroke="Azure"
+                                                   ContourStrokeThickness="2"
+                                                   Minimum="0"
+                                                   Maximum="50"
                                                    Opacity="0.5">
                     <s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
                         <s3D:BrushColorPalette Brush="{StaticResource ColorMap}"/>
@@ -96,17 +100,19 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="X Distance (metres)" />
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="X Distance (meters)" />
             </s3D:SciChart3DSurface.XAxis>
+
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0, 50" TextFormatting="0m" AxisTitle="Height (metres)" />
+                <s3D:NumericAxis3D VisibleRange="0,50" TextFormatting="0m" AxisTitle="Height (meters)" />
             </s3D:SciChart3DSurface.YAxis>
+
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="Y Distance (metres)" />
+                <s3D:NumericAxis3D TextFormatting="0m" AxisTitle="Y Distance (meters)" />
             </s3D:SciChart3DSurface.ZAxis>
 
             <!-- Enables interaction such as orbit, or movement on W-A-X-D key down -->
-            <!-- Double click to reset zoom --> 
+            <!-- Double click to reset zoom -->
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>
@@ -116,19 +122,22 @@
                     <s3D:LegendModifier3D x:Name="LegendModifier3D" ShowLegend="False"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
-
         </s3D:SciChart3DSurface>
 
         <!-- Renders the series legend, bound to LegendModifier3D.LegendData -->
-        <s:SciChartLegend LegendData="{Binding ElementName=LegendModifier3D, Path=LegendData}" Margin="25,50"
-                          Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" ShowSeriesMarkers="True"
+        <s:SciChartLegend LegendData="{Binding ElementName=LegendModifier3D, Path=LegendData}"
+                          Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
+                          Margin="25"
+                          Orientation="Vertical"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          ShowSeriesMarkers="True"
                           ShowVisibilityCheckboxes="True"
                           Grid.IsSharedSizeScope="True"
-                          ItemTemplate="{StaticResource LidarLegendItemTemplate}">
-        </s:SciChartLegend>
+                          ItemTemplate="{StaticResource LidarLegendItemTemplate}"/>
 
-        <!-- Renders the Heightmap Legend --> 
-        <s:HeatmapColorMap Margin="25, 50"
+        <!-- Renders the Heightmap Legend -->
+        <s:HeatmapColorMap Margin="25"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Stretch"
                            Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
@@ -136,11 +145,22 @@
                            ColorMap="{StaticResource ColorMap}"
                            Minimum="0"
                            Maximum="50"
+                           EnableAxisDrag="False"
                            TextFormatting="0m"
                            Opacity="0.8"
                            BorderBrush="#777"
                            BorderThickness="1"
                            Orientation="Vertical">
+
+            <s:HeatmapColorMap.AxisStyle>
+                <Style TargetType="s:AxisBase">
+                    <Setter Property="Margin" Value="-10,0,0,0"/>
+                    <Setter Property="DrawMajorBands" Value="False"/>
+                    <Setter Property="DrawMinorTicks" Value="False"/>
+                    <Setter Property="DrawMajorGridLines" Value="False"/>
+                    <Setter Property="DrawMinorGridLines" Value="False"/>
+                </Style>
+            </s:HeatmapColorMap.AxisStyle>
         </s:HeatmapColorMap>
     </Grid>
 </UserControl>

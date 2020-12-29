@@ -15,10 +15,11 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using SciChart.Charting.ChartModifiers;
-using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Common.Helpers;
+using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Numerics.Calendars;
 using SciChart.Data.Model;
@@ -30,34 +31,37 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
 {
     public class SciTraderViewModel : BaseViewModel
     {
-        private readonly IEnumerable<ChartType> _allChartTypes = new[] { ChartType.FastLine, ChartType.FastColumn, ChartType.FastMountain, ChartType.FastCandlestick, ChartType.FastOhlc, };
+        private readonly IDataManager _dataManager = DataManager.Instance;
+
         private Instrument _instrument;
         private TimeFrame _timeFrame;
-        private ChartType _chartType;
-        private IRange _chartDateRange;
-        private IDataManager _dataManager = DataManager.Instance;
-        private bool _isShowing200Sma;
-        private bool _isShowing50Sma;
+        
         private IOhlcDataSeries<DateTime, double> _priceSeries;
         private IXyDataSeries<DateTime, double> _sma200Series;
         private IXyDataSeries<DateTime, double> _sma50Series;
         private IXyDataSeries<DateTime, long> _volumeSeries;
-        private ModifierType _chartModifier = ModifierType.Rollover;
-        private ShowTooltipOptions _showToolTipMode;
+
+        private ModifierType _chartZoomModifier;
+        private ModifierType _chartSeriesModifier;
+
+        private ChartType _chartType;
+        private ShowTooltipOptions _showTooltipMode;
         private SourceMode _sourceMode;
+
+        private string _selectedSeriesToSnap;
         private bool _showAxisLabels;
         private bool _useDiscontinuousDateTimeAxis;
+
         private IRange _cdtaVisibleRange;
         private IRange _ddtaVisibleRange;
         private IRange _overviewVisibleRange;
+        
         private IDiscontinuousDateTimeCalendar _calendar;
         private OhlcDataSeries<DateTime, double> _ohlcDataSeries;
-
 
         public SciTraderViewModel()
         {
             SetDefaults();
-
             InitializeChartSurface();
         }
 
@@ -70,76 +74,88 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             _dataManager = dataManager;
 
             SetDefaults();
-
             InitializeChartSurface();
         }
 
-        public ActionCommand SetCursorModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.CrosshairsCursor)); } }
-        public ActionCommand SetRolloverModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Rollover)); } }
-        public ActionCommand SetZoomPanModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.ZoomPan)); } }
-        public ActionCommand SetRubberBandZoomModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.RubberBandZoom)); } }
-        public ActionCommand SetNullModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Null)); } }
+        public ActionCommand SetZoomPanModifierCommand { get; private set; }
+        public ActionCommand SetRubberBandModifierCommand { get; private set; }
 
-        public bool IsZoomPanSelected { get { return ChartModifier == ModifierType.ZoomPan; } }
-        public bool IsRubberBandZoomSelected { get { return ChartModifier == ModifierType.RubberBandZoom; } }
-        public bool IsRolloverSelected { get { return ChartModifier == ModifierType.Rollover; } }
-        public bool IsCursorSelected { get { return ChartModifier == ModifierType.CrosshairsCursor; } }
+        public ActionCommand SetCursorModifierCommand { get; private set; }
+        public ActionCommand SetRolloverModifierCommand { get; private set; }
 
-        public IEnumerable<Instrument> AllInstruments { get { return _dataManager.AvailableInstruments; } }
+        public bool IsZoomPanSelected => ChartZoomModifier == ModifierType.ZoomPan;
+        public bool IsRubberBandZoomSelected => ChartZoomModifier == ModifierType.RubberBandZoom;
 
-        public IEnumerable<TimeFrame> AllTimeFrames { get { return _dataManager.GetAvailableTimeFrames(SelectedInstrument); } }
-        public IEnumerable<ChartType> AllChartTypes { get { return _allChartTypes; } }
+        public bool IsCursorSelected => ChartSeriesModifier == ModifierType.CrosshairsCursor;
+        public bool IsRolloverSelected => ChartSeriesModifier == ModifierType.Rollover;
 
-        public IOhlcDataSeries<DateTime, double> PriceData
+        public ObservableCollection<string> AllSeriesNames { get; } = new ObservableCollection<string> {"200 SMA", "50 SMA"};
+
+        public IEnumerable<Instrument> AllInstruments => _dataManager.AvailableInstruments;
+        public IEnumerable<TimeFrame> AllTimeFrames => _dataManager.GetAvailableTimeFrames(SelectedInstrument);
+
+        public IEnumerable<ChartType> AllChartTypes { get; } = new[]
         {
-            get { return _priceSeries; }
-            set 
+            ChartType.FastLine,
+            ChartType.FastColumn,
+            ChartType.FastMountain,
+            ChartType.FastCandlestick,
+            ChartType.FastOhlc
+        };
+
+        public IOhlcDataSeries<DateTime, double> PriceSeries
+        {
+            get => _priceSeries;
+            set
             {
                 _priceSeries = value;
-                OnPropertyChanged("PriceData");
+               // _priceSeries.SeriesName = "PriceData";
+                OnPropertyChanged(nameof(PriceSeries));
             }
         }
 
         public IXyDataSeries<DateTime, double> Sma200Series
         {
-            get { return _sma200Series; }
+            get => _sma200Series;
             set
             {
                 _sma200Series = value;
-                OnPropertyChanged("Sma200Series");
+                _sma200Series.SeriesName = "200 SMA";
+                OnPropertyChanged(nameof(Sma200Series));
             }
         }
 
         public IXyDataSeries<DateTime, double> Sma50Series
         {
-            get { return _sma50Series; }
+            get => _sma50Series;
             set
             {
                 _sma50Series = value;
-                OnPropertyChanged("Sma50Series");
+                _sma50Series.SeriesName = "50 SMA";
+                OnPropertyChanged(nameof(Sma50Series));
             }
         }
 
         public IXyDataSeries<DateTime, long> VolumeData
         {
-            get { return _volumeSeries; }
+            get => _volumeSeries;
             set
             {
                 _volumeSeries = value;
-                OnPropertyChanged("VolumeData");
+                OnPropertyChanged(nameof(VolumeData));
             }
         }
 
         public Instrument SelectedInstrument
         {
-            get { return _instrument; }
+            get => _instrument;
             set
             {
                 _instrument = value;
 
-                OnPropertyChanged("AllTimeFrames");
-                OnPropertyChanged("SelectedInstrument");
-                OnPropertyChanged("PriceChartTextFormatting");
+                OnPropertyChanged(nameof(AllTimeFrames));
+                OnPropertyChanged(nameof(SelectedInstrument));
+                OnPropertyChanged(nameof(PriceChartTextFormatting));
 
                 // Since timeframes depend on the instrument, get a new timeframe before updating the chart and below, raise PropertyChanged events
                 SelectedTimeFrame = _dataManager.GetAvailableTimeFrames(_instrument).First();
@@ -148,74 +164,54 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
 
         public ChartType SelectedChartType
         {
-            get { return _chartType; }
+            get => _chartType;
             set
             {
                 _chartType = value;
-                OnPropertyChanged("SelectedChartType");
+                OnPropertyChanged(nameof(SelectedChartType));
+            }
+        }
+
+        public string SelectedSeriesToSnap
+        {
+            get => _selectedSeriesToSnap;
+            set
+            {
+                _selectedSeriesToSnap = value;
+                OnPropertyChanged(nameof(SelectedSeriesToSnap));
             }
         }
 
         public TimeFrame SelectedTimeFrame
         {
-            get { return _timeFrame; }
+            get => _timeFrame;
             set
             {
                 if (value != null)
                 {
                     _timeFrame = value;
                     UpdateChartData(_instrument, _timeFrame);
-                    OnPropertyChanged("SelectedTimeFrame");
+                    OnPropertyChanged(nameof(SelectedTimeFrame));
                 }
             }
         }
-
-        public IRange ChartVisibleRange
-        {
-            get { return _chartDateRange; }
-            set
-            {
-                _chartDateRange = value;
-                OnPropertyChanged("ChartVisibleRange");
-            }
-        }
-
-        public bool Show200SMa
-        {
-            get { return _isShowing200Sma; }
-            set
-            {
-                _isShowing200Sma = value;
-                OnPropertyChanged("IsShowing200Sma");
-            }
-        }
-
-
-        public bool Show50Sma
-        {
-            get { return _isShowing50Sma; }
-            set
-            {
-                _isShowing50Sma = value;
-                OnPropertyChanged("IsShowing50Sma");
-            }
-        }
-
+        
         /// <summary>
         /// Generates a formatting string for the Y-Axis, if DecimalPlaces = 1, generates "#", if DecimalPlaces = 3, generates "#.000" etc... 
         /// </summary>
-        public string PriceChartTextFormatting
-        {
-            get
-            {
-                return _instrument.DecimalPlaces == 0 ? "#" : "0." + new string('0', _instrument.DecimalPlaces);
-            }
-        }
+        public string PriceChartTextFormatting => _instrument.DecimalPlaces == 0 ? "#" : "0." + new string('0', _instrument.DecimalPlaces);
 
         private void InitializeChartSurface()
         {
+            SetZoomPanModifierCommand = new ActionCommand(() => ChartZoomModifier = IsZoomPanSelected ? ModifierType.Null : ModifierType.ZoomPan);
+            SetRubberBandModifierCommand = new ActionCommand(() => ChartZoomModifier = IsRubberBandZoomSelected ? ModifierType.Null : ModifierType.RubberBandZoom);
+
+            SetCursorModifierCommand = new ActionCommand(() => ChartSeriesModifier = IsCursorSelected ? ModifierType.Null : ModifierType.CrosshairsCursor);
+            SetRolloverModifierCommand = new ActionCommand(() => ChartSeriesModifier = IsRolloverSelected ? ModifierType.Null : ModifierType.Rollover);
+
             UpdateChartData(_instrument, _timeFrame);
-            SetModifier(ModifierType.Rollover);
+            ChartZoomModifier = ModifierType.RubberBandZoom;
+            ChartSeriesModifier = ModifierType.Rollover;
         }
 
         private void SetDefaults()
@@ -226,70 +222,70 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             _sourceMode = SourceMode.AllVisibleSeries;
         }
 
-        private void SetModifier(ModifierType modifierType)
+        public ModifierType ChartSeriesModifier
         {
-            ChartModifier = modifierType;
-        }
-
-        public ModifierType ChartModifier
-        {
-            get
-            {
-                return _chartModifier;
-            }
+            get => _chartSeriesModifier;
             set
             {
-                _chartModifier = value;
-                OnPropertyChanged("ChartModifier");
-                OnPropertyChanged("IsRolloverSelected");
-                OnPropertyChanged("IsZoomPanSelected");
-                OnPropertyChanged("IsRubberBandZoomSelected");
-                OnPropertyChanged("IsCursorSelected");
+                _chartSeriesModifier = value;
+                OnPropertyChanged(nameof(ChartSeriesModifier));
+                OnPropertyChanged(nameof(IsRolloverSelected));
+                OnPropertyChanged(nameof(IsCursorSelected));
             }
         }
 
-        public ShowTooltipOptions RolloverMode
+        public ModifierType ChartZoomModifier
         {
-            get { return _showToolTipMode; }
+            get => _chartZoomModifier;
             set
             {
-                _showToolTipMode = value;
-                OnPropertyChanged("RolloverMode");
+                _chartZoomModifier = value;
+                OnPropertyChanged(nameof(ChartZoomModifier));
+                OnPropertyChanged(nameof(IsZoomPanSelected));
+                OnPropertyChanged(nameof(IsRubberBandZoomSelected));
             }
         }
 
+        public ShowTooltipOptions ShowTooltipMode
+        {
+            get => _showTooltipMode;
+            set
+            {
+                _showTooltipMode = value;
+                OnPropertyChanged(nameof(ShowTooltipMode));
+            }
+        }
 
         public SourceMode SourceMode
         {
-            get
-            {
-                return _sourceMode;
-            }
+            get => _sourceMode;
             set
             {
                 _sourceMode = value;
-                OnPropertyChanged("SourceMode");
+                OnPropertyChanged(nameof(SourceMode));
             }
         }
 
         public bool ShowAxisLabels
         {
-            get { return _showAxisLabels; }
+            get => _showAxisLabels;
             set
             {
                 _showAxisLabels = value;
-                OnPropertyChanged("ShowAxisLabels");
+                OnPropertyChanged(nameof(ShowAxisLabels));
             }
         }
 
         public bool UseDiscontinuousDateTimeAxis
         {
-            get { return _useDiscontinuousDateTimeAxis; }
+            get => _useDiscontinuousDateTimeAxis;
             set
             {
                 _useDiscontinuousDateTimeAxis = value;
-                OnPropertyChanged("UseDiscontinuousDateTimeAxis");
+                
+                OnPropertyChanged(nameof(UseDiscontinuousDateTimeAxis));
                 UpdateChartData(_instrument, _timeFrame);
+                
                 _priceSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
                 _volumeSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
             }
@@ -297,47 +293,46 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
 
         public IRange CDTAVisibleRange
         {
-            get { return _cdtaVisibleRange; }
+            get => _cdtaVisibleRange;
             set
             {
                 _cdtaVisibleRange = value;
-                OnPropertyChanged("CDTAVisibleRange");
-                OnPropertyChanged("OverviewVisibleRange");
+                OnPropertyChanged(nameof(CDTAVisibleRange));
+                OnPropertyChanged(nameof(OverviewVisibleRange));
             }
         }
 
         public IRange DDTAVisibleRange
         {
-            get { return _ddtaVisibleRange; }
+            get => _ddtaVisibleRange;
             set
             {
                 _ddtaVisibleRange = value;
-                OnPropertyChanged("DDTAVisibleRange");
-                OnPropertyChanged("OverviewVisibleRange");
+                OnPropertyChanged(nameof(DDTAVisibleRange));
+                OnPropertyChanged(nameof(OverviewVisibleRange));
             }
         }
 
         public IRange OverviewVisibleRange
         {
-            get { return _overviewVisibleRange; }
+            get => _overviewVisibleRange;
             set
             {
                 _overviewVisibleRange = value;
-                OnPropertyChanged("OverviewVisibleRange");
-                if(!_useDiscontinuousDateTimeAxis)
-                    OnPropertyChanged("CDTAVisibleRange");
-                else
-                    OnPropertyChanged("DDTAVisibleRange");
+                OnPropertyChanged(nameof(OverviewVisibleRange));
+                OnPropertyChanged(!_useDiscontinuousDateTimeAxis
+                    ? nameof(CDTAVisibleRange)
+                    : nameof(DDTAVisibleRange));
             }
         }
 
         public IDiscontinuousDateTimeCalendar Calendar
         {
-            get { return _calendar; }
+            get => _calendar;
             set
             {
                 _calendar = value;
-                OnPropertyChanged("Calendar");
+                OnPropertyChanged(nameof(Calendar));
             }
         }
 
@@ -359,26 +354,37 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             // Create a new series and append Open, High, Low, Close data                
             _ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
             _ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            PriceData = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? _ohlcDataSeries.ToDiscontinuousSeries(Calendar) : _ohlcDataSeries);
-            PriceData.SeriesName = priceData.Symbol;
+            
+            PriceSeries = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? _ohlcDataSeries.ToDiscontinuousSeries(Calendar) : _ohlcDataSeries);
+            PriceSeries.SeriesName = priceData.Symbol;
             
             // Create a series for the 200 period SMA which will be plotted as a line chart
-            Sma200Series = (IXyDataSeries<DateTime, double>) PriceData.ToMovingAverage(200);
-            Sma200Series.SeriesName = "200 SMA";
+            Sma200Series = (IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(200);
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = (IXyDataSeries<DateTime, double>)PriceData.ToMovingAverage(50);
-            Sma50Series.SeriesName = "50 SMA";
+            Sma50Series = (IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(50);
 
-            // Update the chart type and timeframe with current settings
+            // Update the chart type, series names and timeframe with current settings
             UpdateChartType(_chartType);
+            UpdateSeriesNames(priceData.Symbol);
+        }
+
+        private void UpdateSeriesNames(string priceName)
+        {
+            if (!AllSeriesNames.First().Contains("SMA"))
+                AllSeriesNames.RemoveAt(0);
+            
+            AllSeriesNames.Insert(0, priceName);
+            SelectedSeriesToSnap = priceName;
         }
 
         private void UpdateVolumeChart(PriceSeries prices)
         {
             // Create a new series and append Open, High, Low, Close data                
-            VolumeData = new XyDataSeries<DateTime, long>();
-            VolumeData.SeriesName = string.Format("{0} Volume", prices.Symbol);
+            VolumeData = new XyDataSeries<DateTime, long>
+            {
+                SeriesName = $"{prices.Symbol} Volume"
+            };
             VolumeData.Append(prices.TimeData, prices.VolumeData);
         }
 

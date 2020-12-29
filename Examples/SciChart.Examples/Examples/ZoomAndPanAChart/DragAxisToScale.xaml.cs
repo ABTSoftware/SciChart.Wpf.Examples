@@ -93,6 +93,11 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                     yAxisRightDragmodifier.IsEnabled = true;
                     xAxisDragModifier.IsEnabled = true;
                     break;
+                case XyDirection.None:
+                    yAxisLeftDragmodifier.IsEnabled = false;
+                    yAxisRightDragmodifier.IsEnabled = false;
+                    xAxisDragModifier.IsEnabled = false;
+                    break;
             }
         }
     }

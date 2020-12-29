@@ -29,7 +29,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             InitializeComponent();
 
             cboGetLegendFor.ItemsSource = Enum.GetNames(typeof (SourceMode));
-            cboGetLegendFor.SelectedIndex = 1;
+            cboGetLegendFor.SelectedIndex = 0;
 
             cboLegendPlacement.ItemsSource = Enum.GetNames(typeof (LegendPlacement));
             cboLegendPlacement.SelectedItem = Enum.GetName(typeof (LegendPlacement), LegendPlacement.Inside);

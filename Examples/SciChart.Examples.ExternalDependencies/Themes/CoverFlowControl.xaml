@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:coverFlow="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.CoverFlow">
 
-    <Color x:Key="SciChartGreen">#FF42b649</Color>
+    <Color x:Key="SciChartGreen">#FF42B649</Color>
 
     <Style TargetType="coverFlow:CoverFlowItemControl">
-        <Setter Property="Background" Value="#ff2C3135" />
+        <Setter Property="Background" Value="#FF2C3135" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
@@ -54,10 +54,10 @@
                             <VisualStateGroup Name="SelectedStates">
                                 <VisualState Name="SelectedState">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.5"
+                                        <ColorAnimation x:Name="SelectionColorAnimation"
+                                                        Duration="0:0:0.5"
                                                         Storyboard.TargetName="container"
-                                                        Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                        To="{StaticResource SciChartGreen}" />
+                                                        Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"/>
                                         <DoubleAnimation Duration="0:0:0.5"
                                                          Storyboard.TargetName="container"
                                                          Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
@@ -69,7 +69,7 @@
                                         <ColorAnimation Duration="0:0:0.5"
                                                         Storyboard.TargetName="container"
                                                         Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                        To="#ff2C3135" />
+                                                        To="#FF2C3135" />
                                         <DoubleAnimation Duration="0:0:0.5"
                                                          Storyboard.TargetName="container"
                                                          Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
@@ -114,6 +114,7 @@
     </Style>
 
     <Style TargetType="coverFlow:CoverFlowControl">
+        <Setter Property="SelectionColor" Value="{StaticResource SciChartGreen}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -131,5 +132,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

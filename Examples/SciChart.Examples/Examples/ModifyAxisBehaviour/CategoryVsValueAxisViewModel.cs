@@ -22,30 +22,32 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
     {
         private IDataSeries<double, double> _dataSeries;
         private bool _useCategoryNumericAxis;
-        private double[] _xData = new[] { 1, 1.8, 2.35, 3.4, 4, 12, 12.3, 13.2, 13.5, 14, 20, 20.1, 20.6, 21.5, 22, 23, 24.2, 24.8, 25.15, 25.65, 26 };
-        private double[] _yData = new[] { 1d, 4, 3.00, 5.2, 2, 2, 1.3, 7, 5.5, 6.3, 6.3, 5.8, 4.1, 5.5, 3, 3, 4.8, 4.1, 6, 5.1, 5.8 };
+        
+        private readonly double[] _xData = { 1, 1.8, 2.35, 3.4, 4, 12, 12.3, 13.2, 13.5, 14, 20, 20.1, 20.6, 21.5, 22, 23, 24.2, 24.8, 25.15, 25.65, 26 };
+        private readonly double[] _yData = { 1, 4, 3.0, 5.2, 2, 2, 1.3, 7, 5.5, 6.3, 6.3, 5.8, 4.1, 5.5, 3, 3, 4.8, 4.1, 6, 5.1, 5.8 };
 
         public CategoryVsValueAxisViewModel()
         {
-            DataSeries = new XyDataSeries<double, double>();
-            DataSeries.AcceptsUnsortedData = true;
+            DataSeries = new XyDataSeries<double> {AcceptsUnsortedData = true};
             DataSeries.Append(_xData, _yData);
         }
         
         public IDataSeries<double, double> DataSeries
         {
-            get { return _dataSeries; }
+            get => _dataSeries;
             set
             {
-                if (_dataSeries == value) return;
-                _dataSeries = value;
-                OnPropertyChanged("DataSeries");
+                if (_dataSeries != value)
+                {
+                    _dataSeries = value;
+                    OnPropertyChanged("DataSeries");
+                }
             }
         }
 
         public bool UseCategoryNumericAxis
         {
-            get { return _useCategoryNumericAxis; }
+            get => _useCategoryNumericAxis;
             set
             {
                 _useCategoryNumericAxis = value;

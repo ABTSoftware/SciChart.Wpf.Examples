@@ -17,6 +17,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Utility;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -72,6 +73,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
             }
 
             sciChart.ZoomExtents();
+        }
+
+        private void Chk_OnChecked(object sender, RoutedEventArgs e)
+        {
+            sciChart?.InvalidateElement();
         }
     }
 }

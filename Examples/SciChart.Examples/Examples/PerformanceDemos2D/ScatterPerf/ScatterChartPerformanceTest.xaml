@@ -37,13 +37,13 @@
                         </StackPanel.Resources>
                         <TextBlock Text="Point Markers" />
                         <ext:FlyoutSeparator/>
-                        <CheckBox x:Name="ChkEllipse" Content="Ellipse" IsChecked="True"/>
-                        <CheckBox x:Name="ChkTriangle" Content="Triangle"/>
-                        <CheckBox x:Name="ChkTriangleInverse" Content="Inverted Triangle"/>
-                        <CheckBox x:Name="ChkSquare" Content="Square"/>
-                        <CheckBox x:Name="ChkCross" Content="Cross"/>
-                        <CheckBox x:Name="ChkX" Content="X"/>
-                        <CheckBox x:Name="ChkSprite" Content="Sprite (Custom)"/>
+                        <CheckBox x:Name="ChkEllipse" Content="Ellipse" IsChecked="True" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkTriangle" Content="Triangle" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkTriangleInverse" Content="Inverted Triangle" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkSquare" Content="Square" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkCross" Content="Cross" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkX" Content="X" Checked="Chk_OnChecked"/>
+                        <CheckBox x:Name="ChkSprite" Content="Sprite (Custom)" Checked="Chk_OnChecked"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -51,43 +51,56 @@
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
-                <s:XyScatterRenderableSeries x:Name="ellipseScatterSeries" Stroke="CornflowerBlue" IsVisible="{Binding Source={x:Reference Name=ChkEllipse}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="ellipseScatterSeries" 
+                                             Stroke="CornflowerBlue" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkEllipse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="crossScatterSeries" Stroke="BlueViolet" IsVisible="{Binding Source={x:Reference Name=ChkCross}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="crossScatterSeries" 
+                                             Stroke="BlueViolet" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkCross}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:CrossPointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="xScatterSeries" Stroke="DarkGray" IsVisible="{Binding Source={x:Reference Name=ChkX}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="xScatterSeries" 
+                                             Stroke="DarkGray" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkX}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:XPointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="squareScatterSeries" Stroke="DarkOrange" IsVisible="{Binding Source={x:Reference Name=ChkSquare}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="squareScatterSeries" 
+                                             Stroke="DarkOrange" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkSquare}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="triangleScatterSeries" Stroke="Crimson" IsVisible="{Binding Source={x:Reference Name=ChkTriangle}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="triangleScatterSeries" 
+                                             Stroke="Crimson" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkTriangle}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="triangleInvScatterSeries" Stroke="Coral" IsVisible="{Binding Source={x:Reference Name=ChkTriangleInverse}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="triangleInvScatterSeries" 
+                                             Stroke="Coral" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkTriangleInverse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:InvertedTrianglePointMarker Width="5" Height="5"/>
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
-                <s:XyScatterRenderableSeries x:Name="spriteScatterSeries" IsVisible="{Binding Source={x:Reference Name=ChkSprite}, Path=IsChecked, Mode=TwoWay}">
+                <s:XyScatterRenderableSeries x:Name="spriteScatterSeries" 
+                                             IsVisible="{Binding Source={x:Reference Name=ChkSprite}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:SpritePointMarker>
                             <s:SpritePointMarker.PointMarkerTemplate>

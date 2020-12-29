@@ -112,8 +112,7 @@
                 <s3D:ModifierGroup3D>
                     <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton"/>
                     <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" />
-                    <s3D:VertexSelectionModifier3D ExecuteOn="MouseLeftButton"
-                                                   ExecuteWhen="Ctrl"/>
+                    <s3D:VertexSelectionModifier3D ExecuteOn="MouseLeftButton" />
                     <s3D:MouseWheelZoomModifier3D />
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
                                                ResetPosition="200,200,200"

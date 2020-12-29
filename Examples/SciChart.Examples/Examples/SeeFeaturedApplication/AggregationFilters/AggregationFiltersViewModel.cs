@@ -1,4 +1,20 @@
-﻿using System;
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2020. All rights reserved.
+//  
+// Web: http://www.scichart.com
+//   Support: support@scichart.com
+//   Sales:   sales@scichart.com
+// 
+// AggregationFiltersViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use. 
+// 
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied. 
+// *************************************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SciChart.Charting.ChartModifiers;
@@ -6,7 +22,6 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 using SciChart.Core.Extensions;
-using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
@@ -16,125 +31,124 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AggregationFilters
     {
         private readonly List<Tick> _ticks;
         private readonly IOhlcDataSeries<DateTime, double> _priceData = new OhlcDataSeries<DateTime, double>();
-        private readonly IEnumerable<AggregationPriceChart> _allAggregationPriceCharts = new[] { AggregationPriceChart.Count, AggregationPriceChart.Time, AggregationPriceChart.Volume, AggregationPriceChart.Range, AggregationPriceChart.Renko };
-        private readonly IEnumerable<int> _allCounts = new[] { 1000, 2000, 3000 };
-        private readonly IEnumerable<int> _allTimeFrames = new[] { 5, 15, 30 };
-        private readonly IEnumerable<int> _allVolumes = new[] { 1000, 2000, 3000 };
-        private readonly IEnumerable<double> _allRanges = new[] { 0.5, 1.0, 1.5 };
-        private readonly IEnumerable<double> _allBrickSizes = new[] { 0.5, 1.0, 1.5 };
-        
-        private IRange _chartDateRange;
-        private bool _isShowing200Sma;
-        private bool _isShowing50Sma;
+
         private IOhlcDataSeries<DateTime, double> _priceSeries;
         private IXyDataSeries<DateTime, double> _sma200Series;
         private IXyDataSeries<DateTime, double> _sma50Series;
-        private ModifierType _chartModifier = ModifierType.Rollover;
-        private ShowTooltipOptions _showToolTipMode;
-        private SourceMode _sourceMode;
-        private bool _showAxisLabels;
+
         private AggregationPriceChart _selectedAggregationPriceChart;
+        private ModifierType _chartZoomModifier;
+        private ModifierType _chartSeriesModifier;
+        
+        private ShowTooltipOptions _showTooltipMode;
+        private SourceMode _sourceMode;
+        
+        private bool _showAxisLabels;
+        private string _selectedSeriesToSnap;
+        
         private int _selectedCount;
         private int _selectedTimeFrame;
         private int _selectedVolume;
+        
         private double _selectedRange;
         private double _selectedBrickSize;
 
         public AggregationFiltersViewModel()
         {
             _ticks = DataManager.Instance.GetTicks().ToList();
-            _priceData.Append(_ticks.Select(x=>x.DateTime), _ticks.Select(x => x.Open), _ticks.Select(x => x.High), _ticks.Select(x => x.Low), _ticks.Select(x => x.Close));
+            _priceData.Append(_ticks.Select(x => x.DateTime), _ticks.Select(x => x.Open), _ticks.Select(x => x.High), _ticks.Select(x => x.Low), _ticks.Select(x => x.Close));
+            
+            SetZoomPanModifierCommand = new ActionCommand(() => ChartZoomModifier = IsZoomPanSelected ? ModifierType.Null : ModifierType.ZoomPan);
+            SetRubberBandModifierCommand = new ActionCommand(() => ChartZoomModifier = IsRubberBandZoomSelected ? ModifierType.Null : ModifierType.RubberBandZoom);
+
+            SetCursorModifierCommand = new ActionCommand(() => ChartSeriesModifier = IsCursorSelected ? ModifierType.Null : ModifierType.CrosshairsCursor);
+            SetRolloverModifierCommand = new ActionCommand(() => ChartSeriesModifier = IsRolloverSelected ? ModifierType.Null : ModifierType.Rollover);
+
             SetDefaults();
             InitializeChartSurface();
         }
 
-        public ActionCommand SetCursorModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.CrosshairsCursor)); } }
-        public ActionCommand SetRolloverModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Rollover)); } }
-        public ActionCommand SetZoomPanModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.ZoomPan)); } }
-        public ActionCommand SetRubberBandZoomModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.RubberBandZoom)); } }
-        public ActionCommand SetNullModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Null)); } }
+        public ActionCommand SetZoomPanModifierCommand { get; }
+        public ActionCommand SetRubberBandModifierCommand { get; }
+        
+        public ActionCommand SetCursorModifierCommand { get; }
+        public ActionCommand SetRolloverModifierCommand { get; }
 
-        public bool IsZoomPanSelected { get { return ChartModifier == ModifierType.ZoomPan; } }
-        public bool IsRubberBandZoomSelected { get { return ChartModifier == ModifierType.RubberBandZoom; } }
-        public bool IsRolloverSelected { get { return ChartModifier == ModifierType.Rollover; } }
-        public bool IsCursorSelected { get { return ChartModifier == ModifierType.CrosshairsCursor; } }
+        public bool IsZoomPanSelected => ChartZoomModifier == ModifierType.ZoomPan;
+        public bool IsRubberBandZoomSelected => ChartZoomModifier == ModifierType.RubberBandZoom;
+        
+        public bool IsCursorSelected => ChartSeriesModifier == ModifierType.CrosshairsCursor;
+        public bool IsRolloverSelected => ChartSeriesModifier == ModifierType.Rollover;
 
-        public IEnumerable<AggregationPriceChart> AllAggregationPriceCharts { get { return _allAggregationPriceCharts; } }
-        public IEnumerable<int> AllCounts { get { return _allCounts; } }
-        public IEnumerable<int> AllTimeFrames { get { return _allTimeFrames; } }
-        public IEnumerable<int> AllVolumes { get { return _allVolumes; } }
-        public IEnumerable<double> AllRanges { get { return _allRanges; } }
-        public IEnumerable<double> AllBrickSizes { get { return _allBrickSizes; } }
+        public IEnumerable<AggregationPriceChart> AllAggregationPriceCharts { get; } = new[]
+        {
+            AggregationPriceChart.Count,
+            AggregationPriceChart.Time,
+            AggregationPriceChart.Volume,
+            AggregationPriceChart.Range,
+            AggregationPriceChart.Renko
+        };
+        
+        public IEnumerable<int> AllCounts { get; } = new[] { 1000, 2000, 3000 };
+        public IEnumerable<int> AllTimeFrames { get; } = new[] { 5, 15, 30 };
+        public IEnumerable<int> AllVolumes { get; } = new[] { 1000, 2000, 3000 };
+        public IEnumerable<double> AllRanges { get; } = new[] { 0.5, 1.0, 1.5 };
+        public IEnumerable<double> AllBrickSizes { get; } = new[] { 0.5, 1.0, 1.5 };
+        public IEnumerable<string> AllSeriesNames { get; } = new[] { "PriceData", "200 SMA", "50 SMA" };
 
         public IOhlcDataSeries<DateTime, double> PriceSeries
         {
-            get { return _priceSeries; }
+            get => _priceSeries;
             set
             {
                 _priceSeries = value;
-                OnPropertyChanged("PriceSeries");
+                _priceSeries.SeriesName = "PriceData";
+                OnPropertyChanged(nameof(PriceSeries));
             }
         }
 
         public IXyDataSeries<DateTime, double> Sma200Series
         {
-            get { return _sma200Series; }
+            get => _sma200Series;
             set
             {
                 _sma200Series = value;
-                OnPropertyChanged("Sma200Series");
+                _sma200Series.SeriesName = "200 SMA";
+                OnPropertyChanged(nameof(Sma200Series));
             }
         }
 
         public IXyDataSeries<DateTime, double> Sma50Series
         {
-            get { return _sma50Series; }
+            get => _sma50Series;
             set
             {
                 _sma50Series = value;
-                OnPropertyChanged("Sma50Series");
-            }
-        }
-        
-        public IRange ChartVisibleRange
-        {
-            get { return _chartDateRange; }
-            set
-            {
-                _chartDateRange = value;
-                OnPropertyChanged("ChartVisibleRange");
+                _sma50Series.SeriesName = "50 SMA";
+                OnPropertyChanged(nameof(Sma50Series));
             }
         }
 
-        public bool Show200SMa
+        public string SelectedSeriesToSnap
         {
-            get { return _isShowing200Sma; }
+            get => _selectedSeriesToSnap;
             set
             {
-                _isShowing200Sma = value;
-                OnPropertyChanged("IsShowing200Sma");
+                _selectedSeriesToSnap = value;
+                OnPropertyChanged(nameof(SelectedSeriesToSnap));
             }
         }
 
-
-        public bool Show50Sma
-        {
-            get { return _isShowing50Sma; }
-            set
-            {
-                _isShowing50Sma = value;
-                OnPropertyChanged("IsShowing50Sma");
-            }
-        }
-        
         private void InitializeChartSurface()
         {
             UpdatePriceChart(_selectedAggregationPriceChart);
-            SetModifier(ModifierType.Rollover);
+            ChartZoomModifier = ModifierType.RubberBandZoom;
+            ChartSeriesModifier = ModifierType.Rollover;
         }
 
         private void SetDefaults()
         {
+            _selectedSeriesToSnap = "PriceData";
             _selectedAggregationPriceChart = AggregationPriceChart.Count;
             _selectedCount = 1000;
             _selectedTimeFrame = 5;
@@ -143,127 +157,125 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AggregationFilters
             _selectedBrickSize = 0.5;
         }
 
-        private void SetModifier(ModifierType modifierType)
+        public ModifierType ChartSeriesModifier
         {
-            ChartModifier = modifierType;
-        }
-
-        public ModifierType ChartModifier
-        {
-            get
-            {
-                return _chartModifier;
-            }
+            get => _chartSeriesModifier;
             set
             {
-                _chartModifier = value;
-                OnPropertyChanged("ChartModifier");
-                OnPropertyChanged("IsRolloverSelected");
-                OnPropertyChanged("IsZoomPanSelected");
-                OnPropertyChanged("IsRubberBandZoomSelected");
-                OnPropertyChanged("IsCursorSelected");
+                _chartSeriesModifier = value;
+                OnPropertyChanged(nameof(ChartSeriesModifier));
+                OnPropertyChanged(nameof(IsRolloverSelected));
+                OnPropertyChanged(nameof(IsCursorSelected));
             }
         }
 
-        public ShowTooltipOptions RolloverMode
+        public ModifierType ChartZoomModifier
         {
-            get { return _showToolTipMode; }
+            get => _chartZoomModifier;
             set
             {
-                _showToolTipMode = value;
-                OnPropertyChanged("RolloverMode");
+                _chartZoomModifier = value;
+                OnPropertyChanged(nameof(ChartZoomModifier));
+                OnPropertyChanged(nameof(IsZoomPanSelected));
+                OnPropertyChanged(nameof(IsRubberBandZoomSelected));
             }
         }
 
+        public ShowTooltipOptions ShowTooltipMode
+        {
+            get => _showTooltipMode;
+            set
+            {
+                _showTooltipMode = value;
+                OnPropertyChanged(nameof(ShowTooltipMode));
+            }
+        }
 
         public SourceMode SourceMode
         {
-            get
-            {
-                return _sourceMode;
-            }
+            get => _sourceMode;
             set
             {
                 _sourceMode = value;
-                OnPropertyChanged("SourceMode");
+                OnPropertyChanged(nameof(SourceMode));
             }
         }
 
         public bool ShowAxisLabels
         {
-            get { return _showAxisLabels; }
+            get => _showAxisLabels;
             set
             {
                 _showAxisLabels = value;
-                OnPropertyChanged("ShowAxisLabels");
+                OnPropertyChanged(nameof(ShowAxisLabels));
             }
         }
 
         public AggregationPriceChart SelectedAggregationPriceChart
         {
-            get { return _selectedAggregationPriceChart; }
+            get => _selectedAggregationPriceChart;
             set
             {
                 _selectedAggregationPriceChart = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedAggregationPriceChart");
+                OnPropertyChanged(nameof(SelectedAggregationPriceChart));
             }
         }
 
         public int SelectedCount
         {
-            get { return _selectedCount; }
+            get => _selectedCount;
             set
             {
                 _selectedCount = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedCount");
+                OnPropertyChanged(nameof(SelectedCount));
 
             }
         }
 
         public int SelectedTimeFrame
         {
-            get { return _selectedTimeFrame; }
+            get => _selectedTimeFrame;
             set
             {
                 _selectedTimeFrame = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedTimeFrame");
+                OnPropertyChanged(nameof(SelectedTimeFrame));
 
             }
         }
 
         public int SelectedVolume
         {
-            get { return _selectedVolume; }
+            get => _selectedVolume;
             set
             {
                 _selectedVolume = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedVolume");
+                OnPropertyChanged(nameof(SelectedVolume));
             }
         }
 
         public double SelectedRange
         {
-            get { return _selectedRange; }
+            get => _selectedRange;
             set
             {
                 _selectedRange = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedRange");
+                OnPropertyChanged(nameof(SelectedRange));
             }
         }
 
         public double SelectedBrickSize
         {
-            get { return _selectedBrickSize; }
+            get => _selectedBrickSize;
             set
             {
                 _selectedBrickSize = value;
                 UpdatePriceChart(_selectedAggregationPriceChart);
-                OnPropertyChanged("SelectedBrickSize");
+                OnPropertyChanged(nameof(SelectedBrickSize));
             }
         }
 
@@ -274,29 +286,29 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AggregationFilters
                 case AggregationPriceChart.Count:
                     PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByCount(_selectedCount);
                     break;
+                
                 case AggregationPriceChart.Time:
                     PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByTime(TimeSpan.FromMinutes(_selectedTimeFrame));
                     break;
+                
                 case AggregationPriceChart.Volume:
-                    PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByVolume(_ticks.Select(x => x.Volume.ToDouble()).ToList(), _selectedVolume);
+                    PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByVolume(i =>_ticks[i].Volume.ToDouble(), _selectedVolume);
                     break;
+                
                 case AggregationPriceChart.Range:
                     PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByRange(_selectedRange);
                     break;
+                
                 case AggregationPriceChart.Renko:
                     PriceSeries = (IOhlcDataSeries<DateTime, double>)_priceData.AggregateByRenko(_selectedBrickSize);
                     break;
             }
 
-            PriceSeries.SeriesName = "PriceData";
-
             // Create a series for the 200 period SMA which will be plotted as a line chart
             Sma200Series = (IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(200);
-            Sma200Series.SeriesName = "200 SMA";
 
             // Create a series for the 50 period SMA which will be plotted as a line chart
-            Sma50Series = (IXyDataSeries<DateTime, double>)((IXyDataSeries<DateTime, double>) PriceSeries.ToMovingAverage(50)).Scale(1.001);
-            Sma50Series.SeriesName = "50 SMA";
+            Sma50Series = (IXyDataSeries<DateTime, double>)((IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(50)).Scale(1.001);
 
             _priceSeries.InvalidateParentSurface(RangeMode.ZoomToFit);
         }

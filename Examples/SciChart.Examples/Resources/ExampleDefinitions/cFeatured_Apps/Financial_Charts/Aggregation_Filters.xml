@@ -4,10 +4,10 @@
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>
-    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v6
   </ToolTipDescription>
   <Description>
-    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v5.
+    Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF v6.
 
     Given a data-source of trading ticks or quotes, we aggregate into bars (Time bars, Range bars, Volume bars, Tick Bars and Renko Bars).
 

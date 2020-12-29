@@ -42,6 +42,7 @@ namespace SciChart.Examples
         HiLow,
         HitTest,
         Impulse,
+        LabelProvider,
         Legend,
         Line,
         Log10,
@@ -83,6 +84,6 @@ namespace SciChart.Examples
         Vertical,
         VerticalChartGroup,
         XAML,
-        Zoom,
+        Zoom
     }
 }

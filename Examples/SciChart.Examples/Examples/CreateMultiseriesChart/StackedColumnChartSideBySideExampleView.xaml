@@ -154,7 +154,7 @@
             <!--  Create a Y Axis with GrowBy  -->
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis AutoRange="Always"
-                               AxisTitle="billion of People"
+                               AxisTitle="Billion of People"
                                GrowBy="0,0.1"
                                DrawMajorBands="True"
                                VisibleRangeLimit="-5, 10" />
