@@ -44,15 +44,15 @@
     <Resource Include="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.2.13445-beta" />
+    <PackageReference Include="SciChart" Version="6.2.2.13447-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.2.13445-beta" />
+    <PackageReference Include="SciChart3D" Version="6.2.2.13447-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13445-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13447-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13445-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13447-beta" />
   </ItemGroup>
 </Project>
