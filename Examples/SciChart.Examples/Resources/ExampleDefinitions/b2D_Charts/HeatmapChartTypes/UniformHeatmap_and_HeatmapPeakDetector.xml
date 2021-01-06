@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/HeatmapChartTypes/UniformHeatmapPeakDetection/UniformHeatmapPeakDetection.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHeatmapWithText.png</ImagePath>
+  <IconPath>IconHeat</IconPath>
+  <ToolTipDescription>Shows how to use UniformHeatmap with VerticalPeakDetector</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a UniformHeatmap and use Automatic Peak Detection to highlight peaks on dense heatmaps.
+    This is useful when a heatmap is bigger than a screen resolution. In this situation peaks may be lost because of heatmap compression.
+    Setting the AutoPeakDetection property on a FastUniformHeatmapRenderableSeries turns on a peak detection algorithm to avoid this.
+
+    [b]Example Usage[/b]
+
+    Click 'PD' to enable or disable Automatic Peak Detection.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries class[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/UniformHeatmapPeakDetection/UniformHeatmapPeakDetection.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/UniformHeatmapPeakDetection/UniformHeatmapPeakDetection.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

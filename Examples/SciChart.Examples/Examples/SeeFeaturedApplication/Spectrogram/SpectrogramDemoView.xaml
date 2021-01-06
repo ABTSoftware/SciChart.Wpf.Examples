@@ -105,7 +105,7 @@
                            Margin="5 5 20 5">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries">
+                <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries" AutoPeakDetection="True">
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="-70" Maximum="0">
                             <s:HeatmapColorPalette.GradientStops>

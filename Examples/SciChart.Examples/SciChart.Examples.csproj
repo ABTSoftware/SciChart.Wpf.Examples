@@ -20,8 +20,17 @@
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <Compile Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <Compile Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <EmbeddedResource Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+    <None Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <None Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <None Remove="Resources\ExampleDefinitions\**\*.xml" />
     <None Remove="Resources\ExampleSourceFiles\**\*.txt" />
+    <None Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
     <None Remove="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
@@ -44,15 +53,23 @@
     <Resource Include="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.2.2.13447-beta" />
+    <Page Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <Page Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <Page Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.2.2.13447-beta" />
+    <Folder Include="Resources\ExampleSourceFiles\HeatmapChartTypes\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.2.2.13447-beta" />
+    <PackageReference Include="SciChart" Version="6.3.0.13458-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.2.2.13447-beta" />
+    <PackageReference Include="SciChart3D" Version="6.3.0.13458-beta" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DirectX" Version="6.3.0.13458-beta" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DrawingTools" Version="6.3.0.13458-beta" />
   </ItemGroup>
 </Project>
