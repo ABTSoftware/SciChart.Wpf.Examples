@@ -6,9 +6,9 @@
   <IconPath>IconHeat</IconPath>
   <ToolTipDescription>Shows how to use UniformHeatmap with VerticalPeakDetector</ToolTipDescription>
   <Description>
-    Demonstrates how to create a UniformHeatmap and use Automatic Peak Detection to highlight peaks on dense heatmaps.
-    This is useful when a heatmap is bigger than a screen resolution. In this situation peaks may be lost because of heatmap compression.
-    Setting the AutoPeakDetection property on a FastUniformHeatmapRenderableSeries turns on a peak detection algorithm to avoid this.
+    Demonstrates how to create a [b]UniformHeatmap[/b] and use [b]Automatic Peak Detection[/b] to highlight peaks on dense heatmaps.
+    This is useful when a heatmap dimensions exceed screen resolution. In this situation peaks may be lost because of heatmap compression.
+    Setting the [b]AutoPeakDetection[/b] property on a [b]FastUniformHeatmapRenderableSeries[/b] turns on a peak detection algorithm to avoid this.
 
     [b]Example Usage[/b]
 
