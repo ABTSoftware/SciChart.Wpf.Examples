@@ -1,5 +1,5 @@
 ﻿// **************************************************************************************
-// SCICHART © Copyright SciChart Ltd. 2011-2012. All rights reserved.
+// SCICHART © Copyright SciChart Ltd. 2011-2021. All rights reserved.
 // Examples Suite source code provided as-is to assist in creation of applications using SciChart. 
 // At no time may this source be be copied, transferred, sold, distributed or made available
 // **************************************************************************************

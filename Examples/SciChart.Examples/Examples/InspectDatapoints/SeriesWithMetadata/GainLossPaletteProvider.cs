@@ -35,7 +35,10 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
         /// Called at the start of an renderable series rendering, before the current draw operation.
         /// </summary>
         /// <param name="series"></param>
-        public void OnBeginSeriesDraw(IRenderableSeries series){}
+        public void OnBeginSeriesDraw(IRenderableSeries series)
+        {
+            _previousValue = 0d;
+        }
 
         /// <summary>
         /// Overrides the color of the outline on the attached <see cref="IRenderableSeries" />.
