@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <local:FifoBillionPointsPageViewModel x:Key="vm"/>
         <BooleanToVisibilityConverter x:Key="b2vc"/>
+        <local:BoolToAxisAutoRangeConverter x:Key="AutoRangeConverter" />
     </UserControl.Resources>
 
     <Grid DataContext="{StaticResource vm}">
@@ -25,7 +26,8 @@
         <!-- Toolbar -->
         <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
             <StackPanel Orientation="Vertical">
-                <RadioButton Command="{Binding RunCommand}" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
+                <RadioButton x:Name="RunBtn" Command="{Binding RunCommand}" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
+                <RadioButton x:Name="PauseBtn" Command="{Binding PauseCommand}" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
                 <RadioButton Command="{Binding StopCommand}" IsChecked="True" Style="{StaticResource StopButtonStyle}" Padding="7"/>
                 <ext:FlyoutSeparator Background="#444"/>
                 <ext:FlyoutMenuButton IsEnabled="{Binding IsStopped}" Style="{StaticResource FlyoutMenuButtonStyle}" Content="PC" Padding="0">
@@ -52,7 +54,7 @@
                                s:VisualXcceleratorEngine.DowngradeWithoutException="False"
                                s:VisualXcceleratorEngine.EnableImpossibleMode="True">
                 <s:SciChartSurface.XAxis>
-                    <s:NumericAxis AutoRange="Always"
+                    <s:NumericAxis AutoRange="{Binding IsChecked, Source={x:Reference RunBtn}, Converter={StaticResource AutoRangeConverter}}"
                                    DrawMinorGridLines="False"
                                    DrawMinorTicks="False"/>
                 </s:SciChartSurface.XAxis>
@@ -79,9 +81,16 @@
                                    Background="#88232323"
                                    HorizontalAlignment="Left"
                                    Visibility="{Binding HasWarnings, Mode=OneWay, Converter={StaticResource b2vc}}"/>
-    
+
                     </s:CustomAnnotation>
                 </s:SciChartSurface.Annotations>
+
+                <s:SciChartSurface.ChartModifier>
+                    <s:ModifierGroup IsEnabled="{Binding IsChecked, Source={x:Reference PauseBtn}}">
+                        <s:RubberBandXyZoomModifier IsAnimated="False" IsXAxisOnly="True" ZoomExtentsY="False" />
+                        <s:ZoomExtentsModifier IsAnimated="False" XyDirection="XDirection" />
+                    </s:ModifierGroup>
+                </s:SciChartSurface.ChartModifier>
             </s:SciChartSurface>
 
             <s:SciChartPerformanceOverlay Margin="0,0,50,0"

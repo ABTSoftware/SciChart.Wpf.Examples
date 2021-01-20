@@ -34,6 +34,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
 
             RunCommand = new ActionCommand(OnRun, () => !IsLoading);
+            PauseCommand = new ActionCommand(OnPause, ()=> !IsLoading && !IsStopped);
             StopCommand = new ActionCommand(OnStop, () => !IsLoading);
 
             // Add the point count options 
@@ -80,11 +81,12 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             set
             {
                 _selectedPointCount = value;
-                OnPropertyChanged("SelectedPointCount");
+                OnPropertyChanged(nameof(SelectedPointCount));
             }
         }
 
         public ActionCommand RunCommand { get; }
+        public ActionCommand PauseCommand { get; }
         public ActionCommand StopCommand { get; }
 
         public bool IsStopped
@@ -93,7 +95,8 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             set
             {
                 _isStopped = value;
-                OnPropertyChanged("IsStopped");
+                OnPropertyChanged(nameof(IsStopped));
+                PauseCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -106,17 +109,22 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             {
                 _loadingMessage = value;
 
-                OnPropertyChanged("LoadingMessage");
-                OnPropertyChanged("IsLoading");
+                OnPropertyChanged(nameof(LoadingMessage));
+                OnPropertyChanged(nameof(IsLoading));
 
                 RunCommand.RaiseCanExecuteChanged();
+                PauseCommand.RaiseCanExecuteChanged();
                 StopCommand.RaiseCanExecuteChanged();
             }
         }
 
         private async void OnRun()
         {
-            if (!IsStopped) return;
+            if (!IsStopped)
+            {
+                _timer.Start();
+                return;
+            }
 
             int seriesCount = SelectedPointCount.SeriesCount;
             int pointCount = SelectedPointCount.PointsCount;
@@ -225,6 +233,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             }
 
             return warnings.Any() ? "Performance warnings! " + string.Join(". ", warnings) : null;
+        }
+
+        private void OnPause()
+        {
+            lock (Series)
+            {
+                _timer.Stop();
+            }
         }
 
         private void OnStop()
