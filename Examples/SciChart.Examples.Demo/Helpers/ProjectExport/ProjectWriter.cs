@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Xml.Linq;
 using SciChart.Charting.Common.Extensions;
-using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Demo.Helpers.ProjectExport
 {
@@ -13,33 +12,39 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
     {
         public static readonly string[] AssembliesNames =
         {
-            @"SciChart.Core.dll",
-            @"SciChart.Data.dll",
-            @"SciChart.Charting.dll",
-            @"SciChart.Charting3D.dll",
-            @"SciChart.Drawing.dll",
-            @"SciChart.Charting.DrawingTools.dll",
+            "SciChart.Core.dll",
+            "SciChart.Data.dll",
+            "SciChart.Charting.dll",
+            "SciChart.Charting3D.dll",
+            "SciChart.Drawing.dll",
+            "SciChart.Charting.DrawingTools.dll"
         };
 
-        public static readonly string ExternalDependencies = @"SciChart.Examples.ExternalDependencies.dll";
-        
+        public static readonly string[] NuGetPackages =
+        {
+            //ExampleTitle;PackageName;PackageVersion
+            "AudioAnalyzerDemo;NAudio;1.10.0",
+            "VitalSignsMonitorDemo;System.Reactive;3.1.1"
+        };
+
+        public static readonly string ExternalDependencies = "SciChart.Examples.ExternalDependencies.dll";
+
         public static readonly string ProjectFileName = "ProjectFile.csproj";
         public static readonly string SolutionFileName = "SolutionFile.sln";
         public static readonly string MainWindowFileName = "MainWindow.xaml";
         public static readonly string AssemblyInfoFileName = "AssemblyInfo.cs";
         public static readonly string ClrNamespace = "clr-namespace:";
         public static readonly string ViewModelKey = "ViewModel";
-        public static readonly XNamespace DefaultXmlns = "http://schemas.microsoft.com/developer/msbuild/2003";
+
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
 
         public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool showMessageBox = true)
         {
             var files = new Dictionary<string, string>();
+            var assembly = typeof(ProjectWriter).Assembly;
 
-            var assembly = typeof (ProjectWriter).Assembly;
-
-            string[] names = assembly.GetManifestResourceNames();
+            var names = assembly.GetManifestResourceNames();
             var templateFiles = names.Where(x => x.Contains("Templates")).ToList();
 
             foreach (var templateFile in templateFiles)
@@ -47,15 +52,21 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 var fileName = GetFileNameFromNs(templateFile);
 
                 using (var s = assembly.GetManifestResourceStream(templateFile))
-                using (var sr = new StreamReader(s))
                 {
-                    files.Add(fileName, sr.ReadToEnd());
+                    if (s == null) break;
+
+                    using (var sr = new StreamReader(s))
+                    {
+                        files.Add(fileName, sr.ReadToEnd());
+                    }
                 }
             }
 
             string projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
-            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, projectName, assembliesPath + @"\");
+
+            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath);
             files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
+
             files.RenameKey(ProjectFileName, projectName + ".csproj");
             files.RenameKey(SolutionFileName, projectName + ".sln");
 
@@ -66,12 +77,12 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 files.Add(codeFile.Key, codeFile.Value);
             }
 
-            WriteProjectFiles(files, selectedPath + projectName + @"\");
+            WriteProjectFiles(files, Path.Combine(selectedPath, projectName));
 
-            if (showMessageBox)
+            if (showMessageBox && Application.Current.MainWindow != null)
             {
-                MessageBox.Show(Application.Current.MainWindow, string.Format("The {0} example was successfully exported to {1}", example.Title, selectedPath + projectName), 
-                    "Success!");
+                var message = $"The {example.Title} example was successfully exported to {selectedPath + projectName}"; 
+                MessageBox.Show(Application.Current.MainWindow, message, "Success!");
             }
 
             return projectName;
@@ -82,71 +93,67 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             return fullName
                 .Replace("SciChart.Examples.Demo.Helpers.ProjectExport.Templates.", string.Empty)
                 .Replace(".c.", ".cs.")
-                .Replace(@".txt", string.Empty);
+                .Replace(".txt", string.Empty);
         }
 
         private static string GenerateSolutionFile(string file, string projectName)
-        {
-            var fileContents = file.Replace("[PROJECTNAME]", projectName);
-
-            return fileContents;
+        { 
+            return file.Replace("[PROJECTNAME]", projectName);
         }
 
-        private static string GenerateProjectFile(string projFileSource, Example example, string projectName, string assembliesPath)
+        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath)
         {
             var projXml = XDocument.Parse(projFileSource);
-
             if (projXml.Root != null)
             {
-                //Change RootNamespace and AssemblyName for actual one, in our case - example title.
-                foreach (XElement element in projXml.Root.Descendants().Where(x => x.Name.LocalName == "RootNamespace" || x.Name.LocalName == "AssemblyName"))
-                {
-                    element.SetValue(projectName);
-                }
-
                 var elements = projXml.Root.Elements().Where(x => x.Name.LocalName == "ItemGroup").ToList();
-
-                // Add appropriate References
-                var el = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
-                el.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
-                elements[0].Add(el);
-
-//                var el2 = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", Interactivity.Replace(".dll", string.Empty)));
-//                el2.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, Interactivity)));
-//                elements[0].Add(el2);
-
-                // Add assembly references
-                foreach (var asmName in AssembliesNames)
+                if (elements.Count == 3)
                 {
-                    el = new XElement(DefaultXmlns + "Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
-                    el.Add(new XElement(DefaultXmlns + "HintPath", Path.Combine(assembliesPath, asmName)));
+                    // Add appropriate references
+                    var el = new XElement("Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
+                    el.Add(new XElement("HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
                     elements[0].Add(el);
-                }
 
-                //Add XElement <Compile> for all .cs files
-                var codeFiles = example.SourceFiles.Where(x => x.Key.EndsWith(".cs"));
-                foreach (var codeFile in codeFiles)
-                {
-                    el = new XElement(DefaultXmlns + "Compile", new XAttribute("Include", codeFile.Key));
-                    el.Add(new XElement(DefaultXmlns + "DependentUpon", codeFile.Key.Replace(".cs", string.Empty)));
-                    elements[1].Add(el);
-                }
+                    // Add assembly references
+                    foreach (var asmName in AssembliesNames)
+                    {
+                        el = new XElement("Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
+                        el.Add(new XElement("HintPath", Path.Combine(assembliesPath, asmName)));
+                        elements[0].Add(el);
+                    }
 
-                //Add XElement <Page> for all .xaml files
-                var uiCodeFiles = example.SourceFiles.Where(x => x.Key.EndsWith(".xaml"));
-                foreach (var uiFile in uiCodeFiles)
-                {
-                    el = new XElement(DefaultXmlns + "Page", new XAttribute("Include", uiFile.Key));
-                    el.Add(new XElement(DefaultXmlns + "Generator", "MSBuild:Compile"));
-                    el.Add(new XElement(DefaultXmlns + "SubType", "Designer"));
-                    elements[1].Add(el);
+                    // Add package references for specific example NuGet packages
+                    var exampleTitle = Regex.Replace(example.Title, @"\s", string.Empty);
+                    var examplePackages = NuGetPackages.Where(p => p.StartsWith(exampleTitle));
+                    if (examplePackages.Any())
+                    {
+                        foreach (var package in examplePackages)
+                        {
+                            // ExampleTitle;PackageName;PackageVersion
+                            var packageAttr = package.Split(';');
+                            if (packageAttr.Length == 3)
+                            {
+                                el = new XElement("PackageReference",
+                                    new XAttribute("Include", packageAttr[1]),
+                                    new XAttribute("Version", packageAttr[2]));
+
+                                elements[1].Add(el);
+                            }
+                        }
+                    }
+#if NET452
+                    return projXml.ToString().Replace("[PROJECTTARGET]", "net452");
+#else
+                    elements[2].Remove(); // Remove 'net452' references
+
+                    return projXml.ToString().Replace("[PROJECTTARGET]", "netcoreapp3.1");
+#endif
                 }
             }
 
-            return projXml.ToString();
+            return projFileSource;
         }
 
-        //InjectExampleIntoShell
         private static string GenerateShellFile(string shellFileSource, Example example)
         {
             var sourceFiles = example.SourceFiles;
@@ -154,10 +161,9 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             var view = DirectoryHelper.GetFileNameFromPath(example.Page.Uri);
             var xamlFile = sourceFiles.Where(pair => pair.Key.EndsWith(".xaml")).FirstOrDefault(x => x.Key == view);
 
-            string fileName;
-            var ns = GetExampleNamespace(xamlFile.Value, out fileName);
-
+            var ns = GetExampleNamespace(xamlFile.Value, out string fileName);
             var xml = XDocument.Parse(shellFileSource);
+
             if (xml.Root != null)
             {
                 //xmlns
@@ -212,19 +218,11 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
         private static void WriteProjectFiles(Dictionary<string, string> files, string selectedPath)
         {
-            Directory.CreateDirectory(selectedPath + @"\");
-            Directory.CreateDirectory(selectedPath + @"\Properties\");
-
-            var assemblyInfo = files[AssemblyInfoFileName];
-            using (var f = new StreamWriter(selectedPath + @"Properties\" + AssemblyInfoFileName))
-            {
-                f.Write(assemblyInfo);
-            }
-            files.Remove(AssemblyInfoFileName);
+            Directory.CreateDirectory(selectedPath);
 
             foreach (var file in files)
             {
-                using (var f = new StreamWriter(selectedPath + file.Key))
+                using (var f = new StreamWriter(Path.Combine(selectedPath, file.Key)))
                 {
                     f.Write(file.Value);
                 }

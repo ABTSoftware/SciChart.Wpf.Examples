@@ -82,10 +82,6 @@
                                   TrueValue="Visible" />
 
         <SolidColorBrush x:Key="DialogBackground"
-                         Opacity="0.5"
-                         Color="{StaticResource ApplicationBackgroundColor}" />
-
-        <SolidColorBrush x:Key="DialogBackgroundDarkest"
                          Opacity="0.8"
                          Color="{StaticResource ApplicationBackgroundColor}" />
 
@@ -476,7 +472,7 @@
 
         <Border Grid.Row="1"
                 Grid.ColumnSpan="2"
-                Background="{StaticResource DialogBackgroundDarkest}"
+                Background="{StaticResource DialogBackground}"
                 Canvas.ZIndex="3"
                 Opacity="1"
                 tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,

@@ -126,13 +126,10 @@
                      behaviors:TextBoxHelpers.WatermarkContent="Feedback. Please tell us what you think!" />
 
             <Button Grid.Row="3"
-                    Width="100"
-                    Height="32"
-                    Margin="0,5"
-                    HorizontalAlignment="Left"
+                    Content="Submit"
                     Command="{Binding SubmitCommand}"
                     Visibility="{Binding OnSubmitted, Converter={StaticResource ib2vConverter}}"
-                    Content="Submit" />
+                    Style="{StaticResource SubmitFeedbackButtonStyle}"/>
 
             <TextBlock Text="Thank you for your feedback!" 
                        Foreground="{StaticResource SciChartGreenBrush}"

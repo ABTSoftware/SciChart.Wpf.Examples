@@ -9,8 +9,8 @@
     </Style>
 
     <Style x:Key="DevModeButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Height" Value="36"/>
+        <Setter Property="Width" Value="140"/>
+        <Setter Property="Height" Value="26"/>
         <Setter Property="Margin" Value="0,5"/>
         <Setter Property="Background" Value="#FF323539"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -22,17 +22,26 @@
                     <Grid x:Name="RootElement" Background="Transparent">
                         <Border x:Name="Border"
                                 CornerRadius="2"
-                                Margin="{TemplateBinding Margin}"
+                                SnapsToDevicePixels="True"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"/>
+                                BorderThickness="{TemplateBinding BorderThickness}"/>
                         
                         <ContentPresenter x:Name="ContentHost"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           ext:TextElementEx.Foreground="{TemplateBinding Foreground}"/>
+
+                        <Border x:Name="DisabledVisualElement"
+                                CornerRadius="2"
+                                SnapsToDevicePixels="True"
+                                Background="#BB292929"
+                                BorderBrush="#5E292929"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                IsHitTestVisible="False"
+                                Opacity="0" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -44,12 +53,25 @@
                             <Setter TargetName="Border" Property="Background" Value="#FF5B5B5B"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="BorderThickness" Value="0"/>
-                            <Setter TargetName="ContentHost" Property="Opacity" Value="0.3"/>
+                            <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ExportExampleButtonStyle" BasedOn="{StaticResource DevModeButtonStyle}" TargetType="Button">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="SubmitFeedbackButtonStyle" BasedOn="{StaticResource DevModeButtonStyle}" TargetType="Button">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
 </ResourceDictionary>

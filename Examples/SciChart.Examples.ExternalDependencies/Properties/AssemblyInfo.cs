@@ -57,9 +57,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.abtsoftware.co.uk/scichart/exampleExternals", "SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers")]
 [assembly: XmlnsDefinition("http://schemas.abtsoftware.co.uk/scichart/exampleExternals", "SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Converters")]
 [assembly: XmlnsDefinition("http://schemas.abtsoftware.co.uk/scichart/exampleExternals", "SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionToolbar")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/expression/2010/interactivity", "Microsoft.Xaml.Behaviors")]
 
 [assembly: XmlnsPrefix("http://schemas.abtsoftware.co.uk/scichart/exampleExternals", "ext")]
-
-
 [assembly: XmlnsPrefix("http://schemas.microsoft.com/expression/2010/interactivity", "i")]
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/expression/2010/interactivity", "Microsoft.Xaml.Behaviors")]

@@ -1,34 +1,24 @@
 ﻿<UserControl x:Class="SciChart.Examples.Demo.Views.ExportExampleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:b="clr-namespace:SciChart.Examples.Demo.Behaviors">
+    
     <UserControl.Resources>
         <s:InvertBooleanConverter x:Key="InvertBooleanConverter" />
 
         <Style BasedOn="{StaticResource DefaultTextStyle}" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
+            <Setter Property="Margin" Value="0,5" />
         </Style>
 
         <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="TextBox">
             <Setter Property="Margin" Value="0,0,0,20" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <!--  <Setter Property="Validation.ErrorTemplate">  -->
-            <!--  <Setter.Value>  -->
-            <!--  <ControlTemplate>  -->
-            <!--  <TextBlock x:Name="errorBox"  -->
-            <!--  Margin="0,20,0,0"  -->
-            <!--  VerticalAlignment="Bottom"  -->
-            <!--  Foreground="White"  -->
-            <!--  Text="{Binding Path=[0].ErrorContent}" />  -->
-            <!--  </ControlTemplate>  -->
-            <!--  </Setter.Value>  -->
-            <!--  </Setter>  -->
-
+            <Setter Property="UseLayoutRounding" Value="True" />
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -40,86 +30,84 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="255" />
-            <ColumnDefinition Width="32" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2"
+        <TextBlock Grid.Column="0"
                    HorizontalAlignment="Left"
                    FontFamily="Segoe UI"
                    FontSize="20"
                    Foreground="#FFF"
                    Text="Export to Visual Studio" />
+
         <Border Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Height="1"
                 Margin="0,10"
-                HorizontalAlignment="Stretch"
                 Background="{StaticResource IconForeground}" />
+
         <Button Grid.Column="1"
                 Margin="0"
-                HorizontalAlignment="Right"
                 VerticalAlignment="Top"
+                HorizontalAlignment="Right"
                 AutomationProperties.AutomationId="ExportExampleView.CloseButton"
                 Command="{Binding CancelCommand}"
                 Style="{StaticResource CloseButtonStyle}" />
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Please select folder to which export the example. . ." />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Please select folder to which export the example" />
 
         <TextBox Grid.Row="3"
                  Grid.Column="0"
-                 VerticalScrollBarVisibility="Auto"
+                 MinHeight="50"
                  MaxHeight="80"
                  TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
                  AutomationProperties.AutomationId="ExportExampleView.ExportPathTextBox"
                  Text="{Binding ExportPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 behaviors:TextBoxHelpers.WatermarkContent="Export Path" />
+                 b:TextBoxHelpers.WatermarkContent="Export Path" />
 
         <Button Grid.Row="3"
                 Grid.Column="1"
-                Margin="4,0,0,0"
-                VerticalAlignment="Top"
+                Content=". . ."
+                FontWeight="SemiBold"
                 Command="{Binding SelectExportPathCommand}"
-                Content=" . . . " />
+                Style="{StaticResource ExportExampleButtonStyle}"/>
 
-        <TextBlock Grid.Row="4"
-                   Grid.Column="0"
-                   Text="Please select SciChart installation folder . . ." />
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Please select SciChart installation folder" />
 
         <TextBox Grid.Row="5"
                  Grid.Column="0"
-                 VerticalScrollBarVisibility="Auto"
+                 MinHeight="50"
                  MaxHeight="80"
                  TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
                  AutomationProperties.AutomationId="ExportExampleView.SciChartLibPath"
                  IsEnabled="{Binding IsAssemblyOk, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}"
                  Text="{Binding LibrariesPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 behaviors:TextBoxHelpers.WatermarkContent="SciChart Lib Path" />
+                 b:TextBoxHelpers.WatermarkContent="SciChart Lib Path" />
 
         <Button Grid.Row="5"
                 Grid.Column="1"
-                Margin="4,0,0,0"
-                VerticalAlignment="Top"
+                Content=". . ."
+                FontWeight="SemiBold"
                 Command="{Binding SelectLibraryCommand}"
-                Content=" . . . "
-                IsEnabled="{Binding IsAssemblyOk, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}" />
-
-        <StackPanel Grid.Row="6"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="10,0,0,0"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-            <Button Width="80"
-                    Command="{Binding OkCommand}"
-                    AutomationProperties.AutomationId="ExportExampleView.ExportButton"
-                    Content="GO" />
-        </StackPanel>
+                IsEnabled="{Binding IsAssemblyOk, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}" 
+                Style="{StaticResource ExportExampleButtonStyle}"/>
+        
+        <Button Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Width="80"
+                Content="GO"
+                HorizontalAlignment="Right"
+                Command="{Binding OkCommand}"
+                Style="{StaticResource ExportExampleButtonStyle}"
+                AutomationProperties.AutomationId="ExportExampleView.ExportButton"/>
 
         <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10">
             <TextBlock TextWrapping="Wrap" MouseDown="UIElement_OnMouseDown" FontSize="12" FontWeight="Bold">
-                <Run Text="Note:" FontWeight="Bold" FontStyle="Italic"/>
-                <Run Text="All our examples are also published on Github. If you'd like to browse the entire SciChart Examples source-code," FontStyle="Italic" />
+                <Run Text="Note: All our examples are also published on Github. If you'd like to browse the entire SciChart Examples source-code," />
                 <Run Text="please click here." Foreground="{StaticResource SciChartGreenBrush}" TextDecorations="Underline" Cursor="Hand" />
             </TextBlock>
         </StackPanel>
