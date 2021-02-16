@@ -1,0 +1,26 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/Customize3DChart/Customize3DSceneLighting.xaml</View>
+  <ViewModel/>
+  <ImagePath/>
+  <IconPath>Icon3D</IconPath>
+  <ToolTipDescription>
+    This 3D Chart demo shows how to control the light direction on the SciChart3DSurface using Viewport3D methods
+  </ToolTipDescription>
+  <Description>
+    This 3D Chart demo shows how to control the light direction on the SciChart3DSurface using [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Viewport3D.htmlViewport3D']Viewport3D[/url] methods.
+
+    The Viewport3D is attached to the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting3D~SciChart.Charting3D.ISciChart3DRenderSurface~Viewport3D.html']SciChart3DSurface.Viewport3D[/url] property and may be used to customize the presentation of the 3D Scene.
+
+    [b][i]Tip![/i][/b]
+
+    Click LD on the left to switch between main light modes. You can also change X,Y,Z light direction properties to see how the viewport of the 3D Chart changes.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/Customize3DSceneLighting.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/Customize3DSceneLighting.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Viewport3D</Features>
+    <Features>LightDirection3D</Features>
+  </Features>
+</ExampleDefinition>

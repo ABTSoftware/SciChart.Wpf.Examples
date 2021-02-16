@@ -44,6 +44,7 @@ namespace SciChart.Examples
         Impulse,
         LabelProvider,
         Legend,
+        LightDirection3D,
         Line,
         Log10,
         Logarithmic,
@@ -83,6 +84,7 @@ namespace SciChart.Examples
         Trading,
         Vertical,
         VerticalChartGroup,
+        Viewport3D,
         XAML,
         Zoom
     }

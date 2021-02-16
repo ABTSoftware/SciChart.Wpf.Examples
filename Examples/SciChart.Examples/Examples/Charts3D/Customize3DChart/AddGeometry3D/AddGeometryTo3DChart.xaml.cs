@@ -5,7 +5,7 @@
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// AddRemoveDataSeries3DChart.xaml.cs is part of the SCICHART® Examples. Permission is hereby granted
+// AddGeometryTo3DChart.xaml.cs is part of the SCICHART® Examples. Permission is hereby granted
 // to modify, create derivative works, distribute and publish any part of this source
 // code whether for commercial, private or personal use. 
 // 
@@ -13,13 +13,12 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
 using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Interop;
 
-namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
+namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
 {
     public partial class AddGeometryTo3DChart : UserControl
     {

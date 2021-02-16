@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/Charts3D/Customize3DChart/AddGeometryTo3DChart.xaml</View>
+  <View>Examples/Charts3D/Customize3DChart/AddGeometry3D/AddGeometryTo3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <ImagePath/>
   <IconPath>Icon3D</IconPath>
   <ToolTipDescription>
     This 3D Chart demo shows how to add a custom Cube Geometry to the SciChart3DSurface using our BaseSceneEntity type
@@ -14,10 +14,10 @@
     We also use the same example to demonstrate drawing 3D Text (Billboarded, facing camera always) at specific locations in the 3D scene. This uses the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Visuals.Primitives.Font3D.html']Font3D[/url] type and again [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Primitives.BaseSceneEntity.html']BaseSceneEntity[/url] to custom draw text of a specific font, color and string in the 3D scene.
   </Description>
   <CodeFiles>
-    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometryTo3DChart.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometryTo3DChart.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/CubeGeometry.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/TextSceneEntity.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometry3D/AddGeometryTo3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometry3D/AddGeometryTo3DChart.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometry3D/CubeGeometry.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddGeometry3D/TextSceneEntity.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Bubble3D</Features>

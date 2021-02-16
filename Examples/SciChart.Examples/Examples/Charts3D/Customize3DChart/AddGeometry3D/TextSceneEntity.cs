@@ -13,7 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
 using System;
 using System.ComponentModel;
 using System.Windows.Media;
@@ -23,13 +22,13 @@ using SciChart.Charting3D.Primitives;
 using SciChart.Charting3D.Visuals.Primitives;
 using SciChart.Core.Extensions;
 
-namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
+namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
 {
     public enum TextDisplayMode
     {
         Default,
         FacingCameraAlways,
-        SacreenSpace
+        ScreenSpace
     }
 
     /// <summary>
@@ -41,7 +40,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         private readonly TextDisplayMode _textDisplayMode;
         private readonly int _fontSize;
         private readonly string _fontFamily;
-        Font3D _font;
+        private Font3D _font;
 
         public string Text { get; set; }
 
@@ -69,7 +68,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
 
             // Set requires SeletionId to false to exclude this item from selection, tooltips and also 
             // prevent issues with maximum number of selectable meshes 
-            this.RequiresSelectionId = false;
+            RequiresSelectionId = false;
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void RenderScene(IRenderPassInfo3D rpi)
         {
-            var currentCamera = RootSceneEntity != null ? RootSceneEntity.Viewport3D.CameraController : null;
+            var currentCamera = RootSceneEntity?.Viewport3D.CameraController;
 
             var locX = Location.X;
             var locY = Location.Y;
@@ -123,7 +122,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                         _font.End();
                         break;
                     }
-                case TextDisplayMode.SacreenSpace:
+                case TextDisplayMode.ScreenSpace:
                     {
                         // Screen space text 2D
                         _font.BeginScreenSpace((float) RotationAngle, Location.X, Location.Y);

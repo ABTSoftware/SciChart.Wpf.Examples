@@ -13,14 +13,13 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
 using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Interop;
 using SciChart.Charting3D.Primitives;
 
-namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
+namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
 {
     /// <summary>
     /// A class to demonstrate a 3D Geometry added to the SciChart3D Scene. Created using our BaseSceneEntity and Mesh APIs
@@ -29,9 +28,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
     {
         private readonly Vector3 bottomRight;
         private readonly Vector3 topLeft;
-
         private readonly Color cubeColor;
-
 
         public CubeGeometry(Vector3 topLeft, Vector3 bottomRight, Color cubeColor) : base(new SCRTSceneEntity())
         {
@@ -112,7 +109,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             // We create a mesh context. There are various mesh render modes. The simplest is Triangles
             // For this mode we have to draw a single triangle (three vertices) for each corner of the cube
             // You can see 
-            using (var meshContext = base.BeginLitMesh(TSRRenderMode.TRIANGLES))
+            using (var meshContext = BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
                 VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
@@ -200,7 +197,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
 
         private void CreateSquare(float lineThickness, bool isAntiAlias, Color lineColor, Vector3[] vertices)
         {
-            using (var lineContext = base.BeginLineStrips(lineThickness, isAntiAlias))
+            using (var lineContext = BeginLineStrips(lineThickness, isAntiAlias))
             {
                 lineContext.SetVertexColor(lineColor);
 
