@@ -108,7 +108,6 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:ZoomExtentsModifier />
-                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" />
                     <s:MouseWheelZoomModifier XyDirection="YDirection" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
