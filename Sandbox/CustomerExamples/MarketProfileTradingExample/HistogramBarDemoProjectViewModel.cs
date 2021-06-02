@@ -49,6 +49,7 @@ namespace MarketProfileTradingChartExample
 
         private IViewportManager _viewportManager;
 
+        private bool _isForwardPass = true;
         private int _index;
         private int _candleCount;
         private double[] _data;
@@ -364,7 +365,9 @@ namespace MarketProfileTradingChartExample
             {
                 lock (elapsedEventArgs)
                 {
-                    if(_index >= _data.Length) _timerNewDataUpdate.Stop();
+                    if (_index >= _data.Length - 1 ||
+                        _index <= 0)
+                        _isForwardPass = !_isForwardPass;
 
                     var newTick = _data[_index];
                     var date = _dataSeries0.XValues[_dataSeries0.Count - 1].AddMinutes(30);
@@ -375,7 +378,7 @@ namespace MarketProfileTradingChartExample
                     if (_index % _ticksPerCandle == 0)
                     {
                         _filterDataSeries.Append(date, _movingAverage.Push(_cumulativeVolume).Current);
-                        _cumulativeVolume = default(double);
+                        _cumulativeVolume = default;
 
                         var metaNew = new CandlestickMetaData();
                         metaNew.AddTick(new CandleTick
@@ -436,7 +439,7 @@ namespace MarketProfileTradingChartExample
                         _dataSeries1.Update(_candleCount - 1, open, high, low, _cumulativeVolume);
                     }
 
-                    ++_index;
+                    _index = _isForwardPass ? _index + 1 : _index - 1;
                 }
             }
         }

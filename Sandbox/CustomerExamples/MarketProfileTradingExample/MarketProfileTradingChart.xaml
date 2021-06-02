@@ -290,7 +290,8 @@
                                        ClipModeX="None" />
                     <s:ZoomExtentsModifier x:Name="zoomExtentsModifier" />
                     <s:RubberBandXyZoomModifier x:Name="rubberBandXyZoomModifier" 
-                                                ZoomExtentsY="True"/>
+                                                ZoomExtentsY="True"
+                                                IsXAxisOnly="True"/>
                     <s:RolloverModifier />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
