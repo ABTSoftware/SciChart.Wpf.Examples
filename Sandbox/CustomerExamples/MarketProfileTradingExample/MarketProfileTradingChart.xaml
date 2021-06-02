@@ -59,8 +59,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="250" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -106,18 +106,26 @@
                               Style="{StaticResource PauseButtonStyle}"
                               s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
 
-
                 <marketProfileTradingChartExample:FlyoutSeparator />
+
+                <marketProfileTradingChartExample:FlyoutMenuButton Padding="0"
+                                                                   Content="MP"
+                                                                   ToolTipService.ToolTip="Market Profile Settings">
+                    <marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
+                        <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                            <TextBlock Text="Tick Profile:"/>
+                            <ComboBox Height="25"
+                                      ItemsSource="{Binding Source={marketProfileTradingChartExample:EnumValues {x:Type s:HistogramMode}}}"
+                                      SelectedItem="{Binding HistogramBarMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        </StackPanel>
+                    </marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
+                </marketProfileTradingChartExample:FlyoutMenuButton>
 
                 <marketProfileTradingChartExample:FlyoutMenuButton Padding="0"
                                       Style="{StaticResource MouseWheelButtonStyle}"
                                       ToolTipService.ToolTip="Renderable Series Settings">
                     <marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
                         <StackPanel MinWidth="150" Orientation="Vertical">
-                            <ComboBox Height="25"
-                                      ItemsSource="{Binding Source={marketProfileTradingChartExample:EnumValues {x:Type s:HistogramMode}}}"
-                                      SelectedItem="{Binding HistogramBarMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
                             <StackPanel
                                 Margin="5"
                                 VerticalAlignment="Center"

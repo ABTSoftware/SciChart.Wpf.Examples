@@ -84,7 +84,7 @@ namespace MarketProfileTradingChartExample
             _timerNewDataUpdate.AutoReset = true;
             _timerNewDataUpdate.Elapsed += OnNewData;
 
-            _viewportManager = new HistogramBarViewportManager();
+            _viewportManager = new DefaultViewportManager();
 
             _dataSeries0 = new OhlcDataSeries<DateTime, double>();
             _dataSeries1 = new OhlcDataSeries<DateTime, double>();
@@ -100,13 +100,18 @@ namespace MarketProfileTradingChartExample
             MaxHistoBarCandles = 40;
             TickSize = 0.5;
 
-              LoadRandomData(30, 250);
+            LoadRandomData(30, 250);
             _viewportManager.ZoomExtents();
         }
 
         public IViewportManager ViewportManager
         {
             get { return _viewportManager; }
+            set
+            {
+                _viewportManager = value;
+                OnPropertyChanged(nameof(ViewportManager));
+            }
         }
 
         public IDataSeries MovingAverageLine
@@ -168,8 +173,28 @@ namespace MarketProfileTradingChartExample
         }
 
 
-        public ICommand StopUpdatesCommand { get { return new ActionCommand(() => _timerNewDataUpdate.Stop()); } }
-        public ICommand StartUpdatesCommand { get { return new ActionCommand(() => _timerNewDataUpdate.Start()); } }
+        public ICommand StopUpdatesCommand
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                        {
+                            _timerNewDataUpdate.Stop();
+                            ViewportManager = new DefaultViewportManager();
+                        });
+            }
+        }
+        public ICommand StartUpdatesCommand
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                        {
+                            ViewportManager = new HistogramBarViewportManager();
+                            _timerNewDataUpdate.Start();
+                        });
+            }
+        }
 
         public double TickSize
         {
@@ -177,7 +202,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _tickSize = value;
-                OnPropertyChanged("TickSize");
+                OnPropertyChanged(nameof(TickSize));
             }
         }
 
@@ -187,7 +212,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _horizontalBarSpacing = value;
-                OnPropertyChanged("HorizontalBarSpacing");
+                OnPropertyChanged(nameof(HorizontalBarSpacing));
             }
         }
 
@@ -197,7 +222,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _verticalBarSpacing = value;
-                OnPropertyChanged("VerticalBarSpacing");
+                OnPropertyChanged(nameof(VerticalBarSpacing));
             }
         }
 
@@ -209,7 +234,7 @@ namespace MarketProfileTradingChartExample
                 if (Equals(_xVisibleRange, value))
                     return;
                 _xVisibleRange = value;
-                OnPropertyChanged("XVisibleRange");
+                OnPropertyChanged(nameof(XVisibleRange));
             }
         }
 
@@ -221,7 +246,7 @@ namespace MarketProfileTradingChartExample
                 if (Equals(_yVisibleRange, value))
                     return;
                 _yVisibleRange = value;
-                OnPropertyChanged("YVisibleRange");
+                OnPropertyChanged(nameof(YVisibleRange));
             }
         }
 
@@ -231,7 +256,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _dataSeries0 = value;
-                OnPropertyChanged("DataSeries");
+                OnPropertyChanged(nameof(DataSeries));
             }
         }
 
@@ -241,7 +266,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _dataSeries1 = value;
-                OnPropertyChanged("BottomChartDataSeries");
+                OnPropertyChanged(nameof(BottomChartDataSeries));
             }
         }
 
@@ -251,7 +276,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _yAutoRange = value;
-                OnPropertyChanged("YAutoRange");
+                OnPropertyChanged(nameof(YAutoRange));
             }
         }
 
@@ -263,7 +288,7 @@ namespace MarketProfileTradingChartExample
                 _histogramBarMode = value;
 
                 ChangeBarStyling(_histogramBarMode);
-                OnPropertyChanged("HistogramBarMode");
+                OnPropertyChanged(nameof(HistogramBarMode));
             }
         }
 
@@ -273,7 +298,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _alowToChangeVisibleRangeToMax = value;
-                OnPropertyChanged("AlowToChangeVisibleRangeToMax");
+                OnPropertyChanged(nameof(AlowToChangeVisibleRangeToMax));
             }
         }
 
@@ -289,10 +314,10 @@ namespace MarketProfileTradingChartExample
             _data = dataSource.GetRandomWalkSeries(ticksCount).YData.ToArray();
 
             _index = 0;
-           //var baseDate = DateTime.Now;
+            //var baseDate = DateTime.Now;
             for (int j = 0; j < candlesCount; j++)
             {
-                var date = _baseTime .AddMinutes(j*30);
+                var date = _baseTime.AddMinutes(j * 30);
                 var volume = _random.Next(100);
                 var bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
                 var cumulativeVolume = default(double);
@@ -473,10 +498,10 @@ namespace MarketProfileTradingChartExample
                     break;
 
                 case HistogramMode.MarketProfile:
-                  
+
                     AskStroke = askBrush;
                     AskFill = askBrush;
-                   
+
                     BidStroke = bidBrush;
                     BidFill = bidBrush;
 
@@ -488,7 +513,7 @@ namespace MarketProfileTradingChartExample
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
