@@ -358,8 +358,8 @@
 
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastVolumeCandlestickRenderableSeries DataSeries="{Binding BottomChartDataSeries, Mode=TwoWay}">
-
+                <s:FastVolumeCandlestickRenderableSeries DataSeries="{Binding BottomChartDataSeries, Mode=TwoWay}"
+                                                         FontSize="9">
 
                     <s:FastVolumeCandlestickRenderableSeries.FillUp>
                         <SolidColorBrush Color="#7052CC54" />
@@ -368,8 +368,6 @@
                         <SolidColorBrush Color="#D0E26565" />
                     </s:FastVolumeCandlestickRenderableSeries.FillDown>
                 </s:FastVolumeCandlestickRenderableSeries>
-
-                <!--<s:FastLineRenderableSeries DataSeries="{Binding MovingAverageLine}" Stroke="Green" />-->
 
             </s:SciChartSurface.RenderableSeries>
 
