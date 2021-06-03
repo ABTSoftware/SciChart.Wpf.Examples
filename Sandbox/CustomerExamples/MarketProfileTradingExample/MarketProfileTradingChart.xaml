@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:marketProfileTradingChartExample="clr-namespace:MarketProfileTradingChartExample"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -12,8 +11,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
-
         <marketProfileTradingChartExample:BoolToAxisAutoRangeConverter x:Key="AutoRangeConverter" />
         <marketProfileTradingChartExample:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
 
