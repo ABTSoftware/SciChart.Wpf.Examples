@@ -19,13 +19,7 @@
         
         <!-- Implicit style to NumericAxis --> 
         <Style TargetType="{x:Type s:NumericAxis}" BasedOn="{StaticResource {x:Type s:NumericAxis}}" >
-            <Setter Property="AxisPanelStyle">
-                <Setter.Value>
-                    <Style TargetType="{x:Type s:AxisPanel}">
-                        <Setter Property="Background" Value="Pink"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="Pink"/>
             <Setter Property="AxisBandsFill" Value="#33FF0000"/>
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
