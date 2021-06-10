@@ -42,7 +42,7 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 var dataSeries0 = new XyDataSeries<double, double>();
                 var dataSeries1 = new XyDataSeries<double, double>();
 
-                var data2 = DataManager.Instance.GetFourierSeries(1.0, 0.1);
+                var data2 = DataManager.Instance.GetFourierSeriesForMountainExample(1.0, 0.1);
                 var data1 = DataManager.Instance.GetDampedSinewave(1500, 3.0, 0.0, 0.005, data2.Count);
 
                 // Append data to series.
