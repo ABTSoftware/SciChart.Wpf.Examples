@@ -49,6 +49,7 @@ namespace MarketProfileTradingChartExample
 
         private IViewportManager _viewportManager;
 
+        private bool _isForwardPass = true;
         private int _index;
         private int _candleCount;
         private double[] _data;
@@ -83,7 +84,7 @@ namespace MarketProfileTradingChartExample
             _timerNewDataUpdate.AutoReset = true;
             _timerNewDataUpdate.Elapsed += OnNewData;
 
-            _viewportManager = new HistogramBarViewportManager();
+            _viewportManager = new DefaultViewportManager();
 
             _dataSeries0 = new OhlcDataSeries<DateTime, double>();
             _dataSeries1 = new OhlcDataSeries<DateTime, double>();
@@ -99,13 +100,18 @@ namespace MarketProfileTradingChartExample
             MaxHistoBarCandles = 40;
             TickSize = 0.5;
 
-              LoadRandomData(30, 250);
+            LoadRandomData(30, 250);
             _viewportManager.ZoomExtents();
         }
 
         public IViewportManager ViewportManager
         {
             get { return _viewportManager; }
+            set
+            {
+                _viewportManager = value;
+                OnPropertyChanged(nameof(ViewportManager));
+            }
         }
 
         public IDataSeries MovingAverageLine
@@ -167,8 +173,28 @@ namespace MarketProfileTradingChartExample
         }
 
 
-        public ICommand StopUpdatesCommand { get { return new ActionCommand(() => _timerNewDataUpdate.Stop()); } }
-        public ICommand StartUpdatesCommand { get { return new ActionCommand(() => _timerNewDataUpdate.Start()); } }
+        public ICommand StopUpdatesCommand
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                        {
+                            _timerNewDataUpdate.Stop();
+                            ViewportManager = new DefaultViewportManager();
+                        });
+            }
+        }
+        public ICommand StartUpdatesCommand
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                        {
+                            ViewportManager = new HistogramBarViewportManager();
+                            _timerNewDataUpdate.Start();
+                        });
+            }
+        }
 
         public double TickSize
         {
@@ -176,7 +202,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _tickSize = value;
-                OnPropertyChanged("TickSize");
+                OnPropertyChanged(nameof(TickSize));
             }
         }
 
@@ -186,7 +212,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _horizontalBarSpacing = value;
-                OnPropertyChanged("HorizontalBarSpacing");
+                OnPropertyChanged(nameof(HorizontalBarSpacing));
             }
         }
 
@@ -196,7 +222,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _verticalBarSpacing = value;
-                OnPropertyChanged("VerticalBarSpacing");
+                OnPropertyChanged(nameof(VerticalBarSpacing));
             }
         }
 
@@ -208,7 +234,7 @@ namespace MarketProfileTradingChartExample
                 if (Equals(_xVisibleRange, value))
                     return;
                 _xVisibleRange = value;
-                OnPropertyChanged("XVisibleRange");
+                OnPropertyChanged(nameof(XVisibleRange));
             }
         }
 
@@ -220,7 +246,7 @@ namespace MarketProfileTradingChartExample
                 if (Equals(_yVisibleRange, value))
                     return;
                 _yVisibleRange = value;
-                OnPropertyChanged("YVisibleRange");
+                OnPropertyChanged(nameof(YVisibleRange));
             }
         }
 
@@ -230,7 +256,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _dataSeries0 = value;
-                OnPropertyChanged("DataSeries");
+                OnPropertyChanged(nameof(DataSeries));
             }
         }
 
@@ -240,7 +266,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _dataSeries1 = value;
-                OnPropertyChanged("BottomChartDataSeries");
+                OnPropertyChanged(nameof(BottomChartDataSeries));
             }
         }
 
@@ -250,7 +276,7 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _yAutoRange = value;
-                OnPropertyChanged("YAutoRange");
+                OnPropertyChanged(nameof(YAutoRange));
             }
         }
 
@@ -262,7 +288,7 @@ namespace MarketProfileTradingChartExample
                 _histogramBarMode = value;
 
                 ChangeBarStyling(_histogramBarMode);
-                OnPropertyChanged("HistogramBarMode");
+                OnPropertyChanged(nameof(HistogramBarMode));
             }
         }
 
@@ -272,26 +298,23 @@ namespace MarketProfileTradingChartExample
             set
             {
                 _alowToChangeVisibleRangeToMax = value;
-                OnPropertyChanged("AlowToChangeVisibleRangeToMax");
+                OnPropertyChanged(nameof(AlowToChangeVisibleRangeToMax));
             }
         }
 
         public void LoadRandomData(int candlesCount, int ticksPerCandle)
         {
+            _data = null;
             _ticksPerCandle = ticksPerCandle;
 
-            _data = null;
-
             var dataSource = new RandomWalkGenerator();
-
             var ticksCount = (candlesCount + 1) * ticksPerCandle;
             _data = dataSource.GetRandomWalkSeries(ticksCount).YData.ToArray();
 
             _index = 0;
-           //var baseDate = DateTime.Now;
             for (int j = 0; j < candlesCount; j++)
             {
-                var date = _baseTime .AddMinutes(j*30);
+                var date = _baseTime.AddMinutes(j * 30);
                 var volume = _random.Next(100);
                 var bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
                 var cumulativeVolume = default(double);
@@ -314,130 +337,148 @@ namespace MarketProfileTradingChartExample
                 _dataSeries0.Append(date, _data[_index], _data[_index], _data[_index], _data[_index], metaData);
                 _candleCount = _dataSeries0.Count;
 
-                for (int i = 0; i < ticksPerCandle; i++)
-                {
-                    _index++;
-
-                    volume = _random.Next(100);
-                    bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
-
-                    //date = date;
-                    var newTick = _data[_index];
-                    var open = _dataSeries0.OpenValues[_candleCount - 1];
-                    high = _dataSeries0.HighValues[_candleCount - 1];
-                    high = high > newTick ? high : newTick;
-
-                    low = _dataSeries0.LowValues[_candleCount - 1];
-                    low = low < newTick ? low : newTick;
-
-                    var meta = (CandlestickMetaData)_dataSeries0.Metadata[_candleCount - 1];
-
-                    meta.AddTick(new CandleTick
-                    {
-                        BidOrAsk = bidOrAsk,
-                        Price = newTick,
-                        Volume = volume,
-                        TimeStamp = date
-                    });
-
-                    _dataSeries0.Update(_candleCount - 1, open, high, low, newTick);
-
-                    cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
-
-                    open = _dataSeries1.OpenValues[_candleCount - 1];
-                    high = _dataSeries1.HighValues[_candleCount - 1];
-                    high = high > cumulativeVolume ? high : cumulativeVolume;
-
-                    low = _dataSeries1.LowValues[_candleCount - 1];
-                    low = low < cumulativeVolume ? low : cumulativeVolume;
-
-                    _dataSeries1.Update(_candleCount - 1, open, high, low, cumulativeVolume);
-                }
+                cumulativeVolume = AddTicks(ticksPerCandle, date, cumulativeVolume);
 
                 _filterDataSeries.Append(date, _movingAverage.Push(cumulativeVolume).Current);
             }
         }
 
+        private double AddTicks(int ticksPerCandle, DateTime date, double cumulativeVolume)
+        {
+            for (int i = 0; i < ticksPerCandle; i++)
+            {
+                _index++;
+
+                var volume = _random.Next(100);
+                var bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
+
+                //date = date;
+                var newTick = _data[_index];
+                var open = _dataSeries0.OpenValues[_candleCount - 1];
+                var high = _dataSeries0.HighValues[_candleCount - 1];
+                high = high > newTick ? high : newTick;
+
+                var low = _dataSeries0.LowValues[_candleCount - 1];
+                low = low < newTick ? low : newTick;
+
+                var meta = (CandlestickMetaData) _dataSeries0.Metadata[_candleCount - 1];
+
+                meta.AddTick(new CandleTick
+                {
+                    BidOrAsk = bidOrAsk,
+                    Price = newTick,
+                    Volume = volume,
+                    TimeStamp = date
+                });
+
+                _dataSeries0.Update(_candleCount - 1, open, high, low, newTick);
+
+                cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
+
+                open = _dataSeries1.OpenValues[_candleCount - 1];
+                high = _dataSeries1.HighValues[_candleCount - 1];
+                high = high > cumulativeVolume ? high : cumulativeVolume;
+
+                low = _dataSeries1.LowValues[_candleCount - 1];
+                low = low < cumulativeVolume ? low : cumulativeVolume;
+
+                _dataSeries1.Update(_candleCount - 1, open, high, low, cumulativeVolume);
+            }
+
+            return cumulativeVolume;
+        }
+
         private void OnNewData(object sender, ElapsedEventArgs elapsedEventArgs)
         {
-            if (XVisibleRange != null)
+            if (XVisibleRange == null) return;
+
+            lock (elapsedEventArgs)
             {
-                lock (elapsedEventArgs)
+                if (_index >= _data.Length - 1 ||
+                    _index <= 0)
+                    _isForwardPass = !_isForwardPass;
+
+                var newTick = _data[_index];
+                var date = _dataSeries0.XValues[_dataSeries0.Count - 1].AddMinutes(30);
+
+                var volume = _random.Next(100);
+                var bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
+
+                if (_index % _ticksPerCandle == 0)
                 {
-                    if(_index >= _data.Length) _timerNewDataUpdate.Stop();
-
-                    var newTick = _data[_index];
-                    var date = _dataSeries0.XValues[_dataSeries0.Count - 1].AddMinutes(30);
-
-                    var volume = _random.Next(100);
-                    var bidOrAsk = _random.Next(2) == 0 ? BidOrAsk.Bid : BidOrAsk.Ask;
-
-                    if (_index % _ticksPerCandle == 0)
-                    {
-                        _filterDataSeries.Append(date, _movingAverage.Push(_cumulativeVolume).Current);
-                        _cumulativeVolume = default(double);
-
-                        var metaNew = new CandlestickMetaData();
-                        metaNew.AddTick(new CandleTick
-                        {
-                            BidOrAsk = bidOrAsk,
-                            Price = newTick,
-                            Volume = volume,
-                            TimeStamp = date
-                        });
-
-                        _cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
-
-                        var high = _cumulativeVolume > 0 ? _cumulativeVolume : 0;
-                        var low = _cumulativeVolume < 0 ? _cumulativeVolume : 0;
-
-                        _dataSeries1.Append(date, _cumulativeVolume, high, low, _cumulativeVolume);
-                        _dataSeries0.Append(date, newTick, newTick, newTick, newTick, metaNew);
-                        _candleCount = _dataSeries0.Count;
-
-                        var visibleRange = (IndexRange)XVisibleRange;
-                        if (visibleRange.Max + 2 >= _dataSeries0.Count)
-                        {
-                            var newRange = new IndexRange(visibleRange.Min + 1, visibleRange.Max + 1);
-                            XVisibleRange = newRange;
-                        }
-                    }
-                    else
-                    {
-                        var open = _dataSeries0.OpenValues[_candleCount - 1];
-                        var high = _dataSeries0.HighValues[_candleCount - 1];
-                        high = high > newTick ? high : newTick;
-
-                        var low = _dataSeries0.LowValues[_candleCount - 1];
-                        low = low < newTick ? low : newTick;
-
-                        var metaData = (CandlestickMetaData)_dataSeries0.Metadata[_candleCount - 1];
-
-                        metaData.AddTick(new CandleTick
-                        {
-                            BidOrAsk = bidOrAsk,
-                            Price = newTick,
-                            Volume = volume,
-                            TimeStamp = date
-                        });
-
-
-                        _dataSeries0.Update(_candleCount - 1, open, high, low, newTick);
-
-                        _cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
-
-                        open = _dataSeries1.OpenValues[_candleCount - 1];
-                        high = _dataSeries1.HighValues[_candleCount - 1];
-                        high = high > _cumulativeVolume ? high : _cumulativeVolume;
-
-                        low = _dataSeries1.LowValues[_candleCount - 1];
-                        low = low < _cumulativeVolume ? low : _cumulativeVolume;
-
-                        _dataSeries1.Update(_candleCount - 1, open, high, low, _cumulativeVolume);
-                    }
-
-                    ++_index;
+                    AddNewDataPoint(date, bidOrAsk, newTick, volume);
                 }
+                else
+                {
+                    UpdateLastDataPoint(newTick, bidOrAsk, volume, date);
+                }
+
+                _index = _isForwardPass ? _index + 1 : _index - 1;
+            }
+        }
+
+        private void UpdateLastDataPoint(double newTick, BidOrAsk bidOrAsk, int volume, DateTime date)
+        {
+            var open = _dataSeries0.OpenValues[_candleCount - 1];
+            var high = _dataSeries0.HighValues[_candleCount - 1];
+            high = high > newTick ? high : newTick;
+
+            var low = _dataSeries0.LowValues[_candleCount - 1];
+            low = low < newTick ? low : newTick;
+
+            var metaData = (CandlestickMetaData) _dataSeries0.Metadata[_candleCount - 1];
+
+            metaData.AddTick(new CandleTick
+            {
+                BidOrAsk = bidOrAsk,
+                Price = newTick,
+                Volume = volume,
+                TimeStamp = date
+            });
+
+
+            _dataSeries0.Update(_candleCount - 1, open, high, low, newTick);
+
+            _cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
+
+            open = _dataSeries1.OpenValues[_candleCount - 1];
+            high = _dataSeries1.HighValues[_candleCount - 1];
+            high = high > _cumulativeVolume ? high : _cumulativeVolume;
+
+            low = _dataSeries1.LowValues[_candleCount - 1];
+            low = low < _cumulativeVolume ? low : _cumulativeVolume;
+
+            _dataSeries1.Update(_candleCount - 1, open, high, low, _cumulativeVolume);
+        }
+
+        private void AddNewDataPoint(DateTime date, BidOrAsk bidOrAsk, double newTick, int volume)
+        {
+            _filterDataSeries.Append(date, _movingAverage.Push(_cumulativeVolume).Current);
+            _cumulativeVolume = default;
+
+            var metaNew = new CandlestickMetaData();
+            metaNew.AddTick(new CandleTick
+            {
+                BidOrAsk = bidOrAsk,
+                Price = newTick,
+                Volume = volume,
+                TimeStamp = date
+            });
+
+            _cumulativeVolume += bidOrAsk.Equals(BidOrAsk.Ask) ? volume : -volume;
+
+            var high = _cumulativeVolume > 0 ? _cumulativeVolume : 0;
+            var low = _cumulativeVolume < 0 ? _cumulativeVolume : 0;
+
+            _dataSeries1.Append(date, _cumulativeVolume, high, low, _cumulativeVolume);
+            _dataSeries0.Append(date, newTick, newTick, newTick, newTick, metaNew);
+            _candleCount = _dataSeries0.Count;
+
+            var visibleRange = (IndexRange) XVisibleRange;
+            if (visibleRange.Max + 2 >= _dataSeries0.Count)
+            {
+                var newRange = new IndexRange(visibleRange.Min + 1, visibleRange.Max + 1);
+                XVisibleRange = newRange;
             }
         }
 
@@ -470,10 +511,10 @@ namespace MarketProfileTradingChartExample
                     break;
 
                 case HistogramMode.MarketProfile:
-                  
+
                     AskStroke = askBrush;
                     AskFill = askBrush;
-                   
+
                     BidStroke = bidBrush;
                     BidFill = bidBrush;
 
@@ -485,7 +526,7 @@ namespace MarketProfileTradingChartExample
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

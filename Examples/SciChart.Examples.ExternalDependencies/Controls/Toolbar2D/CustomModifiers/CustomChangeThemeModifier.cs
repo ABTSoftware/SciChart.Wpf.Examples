@@ -17,6 +17,7 @@
 // distributed or made available without express written permission.
 // *************************************************************************************
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -84,7 +85,18 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
                     surface.ExportToFile(saveFileDialog.FileName, exportType, useXaml);
                 }
 
-                Process.Start(saveFileDialog.FileName);
+                try
+                {
+                    Process.Start(saveFileDialog.FileName);
+                }
+                catch (Win32Exception e)
+                {
+                    if (e.NativeErrorCode == 1155)
+                    {
+                        MessageBox.Show("Can't open because no application is associated with the specified file for this operation.", "Exported successfully!");
+                    }
+                }
+                
             }
         }
     }

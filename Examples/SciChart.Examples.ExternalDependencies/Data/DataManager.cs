@@ -181,6 +181,16 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return doubleSeries;
         }
 
+        public DoubleSeries GetFourierSeriesForMountainExample(double amplitude, double phaseShift, int count = 5000)
+        {
+            var series = this.GetFourierSeries(amplitude, phaseShift, count);
+
+            series.Insert(0, new XYPoint { X = -0.002, Y = 0.02 });
+            series.Insert(0, new XYPoint { X = -0.004, Y = 0 });
+            series.RemoveRange(series.Count-2, 2);
+            return series;
+        }
+
         public DoubleSeries GenerateEEG(int count, ref double startPhase, double phaseStep)
         {
             var doubleSeries = new DoubleSeries();

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4B059CDB-141D-4671-BBBC-15CFCC7610CC}</ProjectGuid>
+    <ProjectGuid>{2D49AF43-325C-440F-B08E-B4B8C2401BD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MarketProfileTradingChartExample</RootNamespace>
-    <AssemblyName>MarketProfileTradingChart</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>OffScreenExportExample</RootNamespace>
+    <AssemblyName>OffScreenExportExample</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,14 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DoubleSeries.cs" />
-    <Compile Include="MovingAverage.cs" />
-    <Compile Include="RandomWalkGenerator.cs" />
-    <Page Include="ExampleResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MarketProfileTradingChart.xaml">
+    <Compile Include="TextToBooleanConverter.cs" />
+    <Page Include="OffScreenExportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -70,23 +65,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters.cs" />
-    <Compile Include="EnumValueExtensions.cs" />
-    <Compile Include="FlyoutMenuButton.cs" />
-    <Compile Include="HistoBarPaletteProvider.cs" />
-    <Compile Include="HistogramBarDemoProjectViewModel.cs" />
-    <Compile Include="HistogramBarViewportManager.cs" />
-    <Compile Include="MarketProfileTradingChart.xaml.cs">
-      <DependentUpon>MarketProfileTradingChart.xaml</DependentUpon>
+    <Compile Include="OffScreenExportView.xaml.cs">
+      <DependentUpon>OffScreenExportView.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <PackageReference Include="SciChart">
+      <Version>6.0.2.13028</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>6.4.0.13569</Version>
-    </PackageReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

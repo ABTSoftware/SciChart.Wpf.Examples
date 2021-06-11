@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:marketProfileTradingChartExample="clr-namespace:MarketProfileTradingChartExample"
              d:DesignHeight="400"
              d:DesignWidth="600"
@@ -12,8 +11,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
-
         <marketProfileTradingChartExample:BoolToAxisAutoRangeConverter x:Key="AutoRangeConverter" />
         <marketProfileTradingChartExample:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
 
@@ -59,8 +56,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="250" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -106,18 +103,26 @@
                               Style="{StaticResource PauseButtonStyle}"
                               s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
 
-
                 <marketProfileTradingChartExample:FlyoutSeparator />
+
+                <marketProfileTradingChartExample:FlyoutMenuButton Padding="0"
+                                                                   Content="MP"
+                                                                   ToolTipService.ToolTip="Market Profile Settings">
+                    <marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
+                        <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                            <TextBlock Text="Tick Profile:"/>
+                            <ComboBox Height="25"
+                                      ItemsSource="{Binding Source={marketProfileTradingChartExample:EnumValues {x:Type s:HistogramMode}}}"
+                                      SelectedItem="{Binding HistogramBarMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        </StackPanel>
+                    </marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
+                </marketProfileTradingChartExample:FlyoutMenuButton>
 
                 <marketProfileTradingChartExample:FlyoutMenuButton Padding="0"
                                       Style="{StaticResource MouseWheelButtonStyle}"
                                       ToolTipService.ToolTip="Renderable Series Settings">
                     <marketProfileTradingChartExample:FlyoutMenuButton.PopupContent>
                         <StackPanel MinWidth="150" Orientation="Vertical">
-                            <ComboBox Height="25"
-                                      ItemsSource="{Binding Source={marketProfileTradingChartExample:EnumValues {x:Type s:HistogramMode}}}"
-                                      SelectedItem="{Binding HistogramBarMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
                             <StackPanel
                                 Margin="5"
                                 VerticalAlignment="Center"
@@ -290,7 +295,8 @@
                                        ClipModeX="None" />
                     <s:ZoomExtentsModifier x:Name="zoomExtentsModifier" />
                     <s:RubberBandXyZoomModifier x:Name="rubberBandXyZoomModifier" 
-                                                ZoomExtentsY="True"/>
+                                                ZoomExtentsY="True"
+                                                IsXAxisOnly="True"/>
                     <s:RolloverModifier />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
@@ -352,8 +358,8 @@
 
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastVolumeCandlestickRenderableSeries DataSeries="{Binding BottomChartDataSeries, Mode=TwoWay}">
-
+                <s:FastVolumeCandlestickRenderableSeries DataSeries="{Binding BottomChartDataSeries, Mode=TwoWay}"
+                                                         FontSize="9">
 
                     <s:FastVolumeCandlestickRenderableSeries.FillUp>
                         <SolidColorBrush Color="#7052CC54" />
@@ -362,8 +368,6 @@
                         <SolidColorBrush Color="#D0E26565" />
                     </s:FastVolumeCandlestickRenderableSeries.FillDown>
                 </s:FastVolumeCandlestickRenderableSeries>
-
-                <!--<s:FastLineRenderableSeries DataSeries="{Binding MovingAverageLine}" Stroke="Green" />-->
 
             </s:SciChartSurface.RenderableSeries>
 

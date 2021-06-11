@@ -23,7 +23,7 @@ using SciChart.Charting3D.Primitives;
 
 namespace Plane3DAnnotationExample
 {
-    public class VerticalPlaneGeometry : BaseSceneEntity
+    public class VerticalPlaneGeometry : BaseSceneEntity<SCRTSceneEntity>
     {
         private readonly double m_startX;
         private readonly double m_startY;
@@ -38,7 +38,7 @@ namespace Plane3DAnnotationExample
 
 
         public VerticalPlaneGeometry(double startX, double startY, double startZ,
-            double endX, double endY, double endZ, double height, Color color, bool drawWireframe)
+            double endX, double endY, double endZ, double height, Color color, bool drawWireframe) : base(new SCRTSceneEntity())
         {
             m_startX = startX;
             m_startY = startY;
@@ -106,7 +106,7 @@ namespace Plane3DAnnotationExample
             using (var meshContext = BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
-                SCRTImmediateDraw.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
+                VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
 
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(m_color);
@@ -132,14 +132,14 @@ namespace Plane3DAnnotationExample
             }
 
             // Revert raster state
-            SCRTImmediateDraw.PopRasterizerState();
+            VXccelEngine3D.PopRasterizerState();
 
             if (m_drawWireframe)
             {
 
 
                 // Set the Rasterizer State for wireframe 
-                SCRTImmediateDraw.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
+                VXccelEngine3D.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 
                 // Create a Line Context for a continuous line and draw the outline of the cube 
                 var lineColor = Color.FromArgb(0xFF, m_color.R, m_color.G, m_color.B);
@@ -147,7 +147,7 @@ namespace Plane3DAnnotationExample
                 CreateSquare(2.0f, true, lineColor, new[] { corners[0], corners[1], corners[3], corners[2] });
 
                 // Revert raster state
-                SCRTImmediateDraw.PopRasterizerState();
+                VXccelEngine3D.PopRasterizerState();
             }
         }
 
