@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Media;
-using SciChart.Charting.Model.ChartSeries;
-using SciChart.Charting.Model.DataSeries;
-using SciChart.Data.Model;
+﻿using SciChart.Data.Model;
 
 namespace SciChart.Mvvm.Tutorial
 {

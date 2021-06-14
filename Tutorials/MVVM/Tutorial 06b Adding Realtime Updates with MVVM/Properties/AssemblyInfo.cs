@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Tutorial 03 Adding Series to a Chart with MVVM")]
+[assembly: AssemblyTitle("Tutorial 06 Adding Realtime Updates with MVVM")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Tutorial 03 Adding Series to a Chart with MVVM")]
+[assembly: AssemblyProduct("Tutorial 06 Adding Realtime Updates with MVVM")]
 [assembly: AssemblyCopyright("Copyright © 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
