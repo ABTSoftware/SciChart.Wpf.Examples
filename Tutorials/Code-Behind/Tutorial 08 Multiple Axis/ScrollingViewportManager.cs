@@ -18,8 +18,8 @@ namespace SciChart.Tutorial
         }
         public override void AttachSciChartSurface(ISciChartSurface scs)
         {
-            base.AttachSciChartSurface(scs);
-            this.ParentSurface = scs;
+            base.AttachSciChartSurface(scs); 
+            ParentSurface = scs;
         }
         public ISciChartSurface ParentSurface { get; private set; }
         protected override IRange OnCalculateNewXRange(IAxis xAxis)

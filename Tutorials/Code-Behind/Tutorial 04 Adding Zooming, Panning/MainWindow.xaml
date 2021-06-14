@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+        Height="350"
+        Width="525">
+
     <Grid>
         <s:SciChartSurface x:Name="sciChartSurface">
 
@@ -31,8 +34,9 @@
                 <s:ModifierGroup>
                     <!-- Allow drag to zoom on Left mouse -->
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton"
-                                                RubberBandFill="#33FFFFFF" RubberBandStroke="#AAFFFFFF"
-                                                RubberBandStrokeDashArray="2 2"/>
+                                                RubberBandFill="#33FFFFFF"
+                                                RubberBandStroke="#AAFFFFFF"
+                                                RubberBandStrokeDashArray="2,2"/>
                     <!-- Allow pan on Right mouse drag -->
                     <s:ZoomPanModifier ExecuteOn="MouseRightButton" ClipModeX="None" />
                     <!-- Allow Dragging YAxis to Scale -->

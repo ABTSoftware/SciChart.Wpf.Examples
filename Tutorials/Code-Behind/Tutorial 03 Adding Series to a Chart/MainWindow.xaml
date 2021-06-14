@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+        Height="350"
+        Width="525">
+
     <Grid>
         <s:SciChartSurface x:Name="sciChartSurface">
 
-            <!--  Define RenderableSeries  -->
+            <!-- Define RenderableSeries -->
             <!-- where xmlns:s="http://schemas.abtsoftware.co.uk/scichart" -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="LineSeries" Stroke="#FF4083B7"/>

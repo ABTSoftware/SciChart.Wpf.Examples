@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+        Height="350"
+        Width="525">
+
     <Grid>
-        <!--  Create the chart surface  -->
+        <!-- Create the chart surface -->
         <!-- where xmlns:s="http://schemas.abtsoftware.co.uk/scichart" -->
         <s:SciChartSurface x:Name="sciChartSurface">
-            <!--  Create an X Axis  -->
+            <!-- Create an X Axis -->
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis AxisTitle="Number of Samples (per Series)"/>
             </s:SciChartSurface.XAxis>
-            <!--  Create a Y Axis  -->
+            <!-- Create a Y Axis -->
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis AxisTitle="Value"/>
             </s:SciChartSurface.YAxis>
-            <!--  Specify interactivity modifiers  -->
+            <!-- Specify interactivity modifiers -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RubberBandXyZoomModifier />

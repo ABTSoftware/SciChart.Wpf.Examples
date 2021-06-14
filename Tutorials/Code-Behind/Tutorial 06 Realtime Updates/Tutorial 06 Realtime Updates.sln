@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 09 Linking Multiple Charts", "Tutorial 09 Linking Multiple Charts\SciChart.Tutorial.csproj", "{1672F756-B065-40BC-BE97-B3E5E26A2C31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 06 Realtime Updates", "Tutorial 06 Realtime Updates.csproj", "{1672F756-B065-40BC-BE97-B3E5E26A2C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {995D017A-5595-4BA3-97A0-234AA0B197D5}
 	EndGlobalSection
 EndGlobal

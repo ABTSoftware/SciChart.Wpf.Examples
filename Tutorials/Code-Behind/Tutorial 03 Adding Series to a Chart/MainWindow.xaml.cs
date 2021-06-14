@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows;
 using SciChart.Charting.Model.DataSeries;
+
 namespace SciChart.Tutorial
 {
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.Loaded += OnLoaded;
+            InitializeComponent(); 
+            Loaded += OnLoaded;
         }
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {

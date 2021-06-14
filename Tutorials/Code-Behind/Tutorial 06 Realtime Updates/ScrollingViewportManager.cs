@@ -18,8 +18,8 @@ namespace SciChart.Tutorial
         }
         public override void AttachSciChartSurface(ISciChartSurface scs)
         {
-            base.AttachSciChartSurface(scs);
-            this.ParentSurface = scs;
+            base.AttachSciChartSurface(scs); 
+            ParentSurface = scs;
         }
         public ISciChartSurface ParentSurface { get; private set; }
         protected override IRange OnCalculateNewXRange(IAxis xAxis)
@@ -27,7 +27,7 @@ namespace SciChart.Tutorial
             // The Current XAxis VisibleRange
             var currentVisibleRange = xAxis.VisibleRange.AsDoubleRange();
             if (ParentSurface.ZoomState == ZoomStates.UserZooming)
-                return currentVisibleRange;     // Don't scroll if user is zooming
+                return currentVisibleRange; // Don't scroll if user is zooming
             // The MaxXRange is the VisibleRange on the XAxis if we were to zoom to fit all data
             var maxXRange = xAxis.GetMaximumRange().AsDoubleRange();
             double xMax = Math.Max(maxXRange.Max, currentVisibleRange.Max);
