@@ -26,7 +26,7 @@
                 <s:FastLineRenderableSeries x:Name="lineSeries"
                                             Stroke="#FF99EE99"
                                             StrokeThickness="1"
-                                            StrokeDashArray="48,2">
+                                            StrokeDashArray="48,12">
                 </s:FastLineRenderableSeries>
                 <s:FastBandRenderableSeries x:Name="bandSeries"
                                             Fill="#33279B27"
@@ -34,7 +34,7 @@
                                             Stroke="#FFFF1919"
                                             StrokeY1="#FF279B27"
                                             StrokeThickness="1"
-                                            StrokeDashArray="48,2">
+                                            StrokeDashArray="48,12">
                 </s:FastBandRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 

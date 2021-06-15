@@ -93,9 +93,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>6.1.1.13136</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

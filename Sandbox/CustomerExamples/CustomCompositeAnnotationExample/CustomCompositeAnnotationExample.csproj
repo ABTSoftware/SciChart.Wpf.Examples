@@ -69,12 +69,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>6.0.2.13028</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart.ExternalDependencies">
-      <Version>6.0.2.13028</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*" />
+    <PackageReference Include="SciChart.ExternalDependencies" Version="*" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="CustomCompositeAnnotationExample.xaml">

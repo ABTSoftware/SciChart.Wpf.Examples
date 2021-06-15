@@ -72,12 +72,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>5.4.0.12119</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart3D">
-      <Version>5.4.0.12119</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*" />
+    <PackageReference Include="SciChart3D" Version="*" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

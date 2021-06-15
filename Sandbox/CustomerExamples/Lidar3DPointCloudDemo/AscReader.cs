@@ -128,18 +128,21 @@ namespace Lidar3DPointCloudDemo
         {
             string line = file.ReadLine();
             line = line.Replace(prefix, "").Trim();
-            return Int32.Parse(line, CultureInfo.InvariantCulture);
+            return int.Parse(line, CultureInfo.InvariantCulture);
         }
 
         private static float[] ReadFloats(StreamReader file, string separator, float noDataValue)
         {
             string line = file.ReadLine();
+
             float[] values = line.Split(new[] {separator}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x =>
                 {
-                    float rawValue = float.Parse(x);
-                    return rawValue == noDataValue ? float.NaN : rawValue;
+                    float rawValue = float.Parse(x, CultureInfo.InvariantCulture);
+                    return rawValue.CompareTo(noDataValue) == 0 ? float.NaN : rawValue;
+
                 } ).ToArray();
+
             return values;
         }
     }

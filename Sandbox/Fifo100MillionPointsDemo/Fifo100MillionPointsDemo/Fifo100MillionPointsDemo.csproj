@@ -120,15 +120,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>6.0.0.12462-beta</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart.Wpf.UI">
-      <Version>3.0.249</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart.Wpf.UI.Transitionz">
-      <Version>3.0.249</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="*" />
+    <PackageReference Include="SciChart.Wpf.UI.Transitionz" Version="*" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
