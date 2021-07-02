@@ -221,6 +221,7 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RolloverModifier x:Name="RolloverModifier"
+                                        ReceiveHandledEvents="True"
                                         IsEnabled="True"
                                         ShowTooltipOn="Always" />
                     <s:CursorModifier x:Name="CursorModifier"
@@ -229,8 +230,9 @@
                                       LineOverlayStyle="{StaticResource CursorLineStyle}"
                                       ShowAxisLabels="False"
                                       ShowTooltip="True"
-                                      ShowTooltipOn="MouseOver"/>
-                    <s:TooltipModifier x:Name="TooltipModifier" IsEnabled="False" />
+                                      ShowTooltipOn="MouseOver"
+                                      ReceiveHandledEvents="True" />
+                    <s:TooltipModifier x:Name="TooltipModifier" IsEnabled="False" ReceiveHandledEvents="True" />
                     <s:VerticalSliceModifier IsEnabled="True">
                         <s:VerticalSliceModifier.VerticalLines>
                             <s:VerticalLineAnnotation IsEditable="True"

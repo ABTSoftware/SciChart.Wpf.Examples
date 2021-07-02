@@ -184,10 +184,14 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public DoubleSeries GetFourierSeriesForMountainExample(double amplitude, double phaseShift, int count = 5000)
         {
             var series = this.GetFourierSeries(amplitude, phaseShift, count);
+            series.RemoveRange(0, 2);
 
-            series.Insert(0, new XYPoint { X = -0.002, Y = 0.02 });
-            series.Insert(0, new XYPoint { X = -0.004, Y = 0 });
+            series.Insert(0, new XYPoint { X = 0.002, Y = 0.02 });
+            series.Insert(0, new XYPoint { X = 0, Y = 0 });
+
             series.RemoveRange(series.Count-2, 2);
+            series.Insert(series.Count, new XYPoint { X = 9.996, Y = -0.02 });
+            series.Insert(series.Count, new XYPoint { X = 9.998, Y = 0 });
             return series;
         }
 

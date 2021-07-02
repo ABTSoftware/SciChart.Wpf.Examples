@@ -138,7 +138,8 @@
                                       ShowTooltipOn="MouseOver"
                                       SourceMode="AllSeries"
                                       TooltipContainerStyle="{StaticResource CursorTooltipStyle}"
-                                      UseInterpolation="True" />
+                                      UseInterpolation="True" 
+                                      ReceiveHandledEvents="True" />
 
 
                     <!--  Provides selection of series and custom styling to the selected series  -->

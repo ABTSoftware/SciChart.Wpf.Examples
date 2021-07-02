@@ -23,30 +23,30 @@ using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarCharts
 {
-    public class DashboardStylePolarChartsViewModel:BaseViewModel
+    public class DashboardStylePolarChartsViewModel : BaseViewModel
     {
         private PolarChartViewModel _currentViewModel;
-        private readonly IViewportManager _viewportManager = new DefaultViewportManager();
+
         public ObservableCollection<PolarChartViewModel> PolarChartViewModels { get; set; }
 
-        public IViewportManager ViewportManager
-        {
-            get { return _viewportManager; }
-        }
+        public IViewportManager ViewportManager { get; } = new DefaultViewportManager();
 
         public PolarChartViewModel CurrentViewModel
         {
-            get { return _currentViewModel; }
+            get => _currentViewModel;
             set
             {
-                if (_currentViewModel == value) return;
-                _currentViewModel = value;
-                OnPropertyChanged("CurrentViewModel");
-                // Defer ZoomExtents execution setting DispatcherPriority lower then DispatcherPriority.Binding.
-                // This is required to perform ZoomExtents after DataSeries binding is applied.
-                Dispatcher.CurrentDispatcher.BeginInvoke(new Action(
-                    () => { _viewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500)); }),
-                    DispatcherPriority.Background);
+                if (_currentViewModel != value)
+                {
+                    _currentViewModel = value;
+                    OnPropertyChanged(nameof(CurrentViewModel));
+
+                    // Defer ZoomExtents execution setting DispatcherPriority lower then DispatcherPriority.Binding.
+                    // This is required to perform ZoomExtents after DataSeries binding is applied.
+                    Dispatcher.CurrentDispatcher.BeginInvoke(new Action(
+                            () => ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500))),
+                        DispatcherPriority.Background);
+                }
             }
         }
         
@@ -58,19 +58,17 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                 PolarChartViewModelFactory.New<MountainRenderableSeriesViewModel>(),
                 PolarChartViewModelFactory.New<ColumnRenderableSeriesViewModel>(),
                 PolarChartViewModelFactory.New<XyScatterRenderableSeriesViewModel>(),
-                PolarChartViewModelFactory.New<ImpulseRenderableSeriesViewModel>(),
-               
+                PolarChartViewModelFactory.New<ImpulseRenderableSeriesViewModel>(), 
+                
                 PolarChartViewModelFactory.New<CandlestickRenderableSeriesViewModel>(),
                 PolarChartViewModelFactory.New<OhlcRenderableSeriesViewModel>(),
-                
                 PolarChartViewModelFactory.New<ErrorBarsRenderableSeriesViewModel>(),
                 PolarChartViewModelFactory.New<BoxPlotRenderableSeriesViewModel>(),
                
                 PolarChartViewModelFactory.New<BandRenderableSeriesViewModel>(),
                 PolarChartViewModelFactory.New<BubbleRenderableSeriesViewModel>(),
-
                 PolarChartViewModelFactory.New<StackedMountainRenderableSeriesViewModel>(),
-                PolarChartViewModelFactory.New<StackedColumnRenderableSeriesViewModel>(),
+                PolarChartViewModelFactory.New<StackedColumnRenderableSeriesViewModel>()
             };
 
             _currentViewModel = PolarChartViewModels.FirstOrDefault();

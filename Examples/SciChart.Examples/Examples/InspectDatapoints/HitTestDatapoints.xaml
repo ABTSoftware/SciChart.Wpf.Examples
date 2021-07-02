@@ -67,7 +67,8 @@
                 <s:ModifierGroup>
                     <s:CursorModifier ShowAxisLabels="True"
                                       ShowTooltip="False"
-                                      UseInterpolation="True" />
+                                      UseInterpolation="True"
+                                      ReceiveHandledEvents="True" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
 

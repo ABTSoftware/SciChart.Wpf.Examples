@@ -17,9 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
+using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
-using SciChart.Charting.Model.ChartSeries;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarCharts
 {
@@ -29,14 +29,15 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
 
         public static PolarChartViewModel New<T>() where T : IRenderableSeriesViewModel
         {
-            var type = typeof (T);
-            var data = Enumerable.Range(0, PointAmount).Select(x => (double)x).ToList();
+            var type = typeof(T);
+            var data = Enumerable.Range(0, PointAmount).Select(x => (double) x).ToList();
 
-            if (type == typeof (LineRenderableSeriesViewModel))
+            if (type == typeof(LineRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(new LineRenderableSeriesViewModel {DataSeries = GetXyDataSeries(data)});
             }
-            if (type == typeof (XyScatterRenderableSeriesViewModel))
+
+            if (type == typeof(XyScatterRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(new XyScatterRenderableSeriesViewModel
                 {
@@ -50,35 +51,49 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                     }
                 });
             }
-            if (type == typeof (MountainRenderableSeriesViewModel))
+
+            if (type == typeof(MountainRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new MountainRenderableSeriesViewModel {DataSeries = GetXyDataSeries(data)});
+                return new PolarChartViewModel(new MountainRenderableSeriesViewModel
+                    {DataSeries = GetXyDataSeries(data)});
             }
-            if (type == typeof (ColumnRenderableSeriesViewModel))
+
+            if (type == typeof(ColumnRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new ColumnRenderableSeriesViewModel {DataSeries = GetXyDataSeries(data)});
+                return new PolarChartViewModel(new ColumnRenderableSeriesViewModel
+                    {DataSeries = GetXyDataSeries(data)});
             }
-            if (type == typeof (ImpulseRenderableSeriesViewModel))
+
+            if (type == typeof(ImpulseRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new ImpulseRenderableSeriesViewModel {DataSeries = GetHlcDataSeries(data)});
+                return new PolarChartViewModel(new ImpulseRenderableSeriesViewModel
+                    {DataSeries = GetHlcDataSeries(data)});
             }
-            if (type == typeof (CandlestickRenderableSeriesViewModel))
+
+            if (type == typeof(CandlestickRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new CandlestickRenderableSeriesViewModel {DataSeries = GetOhlcDataSeries(data)});
+                return new PolarChartViewModel(new CandlestickRenderableSeriesViewModel
+                    {DataSeries = GetOhlcDataSeries(data)});
             }
-            if (type == typeof (OhlcRenderableSeriesViewModel))
+
+            if (type == typeof(OhlcRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new OhlcRenderableSeriesViewModel {DataSeries = GetOhlcDataSeries(data)});
+                return new PolarChartViewModel(new OhlcRenderableSeriesViewModel
+                    {DataSeries = GetOhlcDataSeries(data)});
             }
-            if (type == typeof (BoxPlotRenderableSeriesViewModel))
+
+            if (type == typeof(BoxPlotRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(new BoxPlotRenderableSeriesViewModel {DataSeries = GetBoxSeries(data)});
             }
-            if (type == typeof (ErrorBarsRenderableSeriesViewModel))
+
+            if (type == typeof(ErrorBarsRenderableSeriesViewModel))
             {
-                return new PolarChartViewModel(new ErrorBarsRenderableSeriesViewModel {DataSeries = GetHlcDataSeries(data)});
+                return new PolarChartViewModel(new ErrorBarsRenderableSeriesViewModel
+                    {DataSeries = GetHlcDataSeries(data)});
             }
-            if (type == typeof (BubbleRenderableSeriesViewModel))
+
+            if (type == typeof(BubbleRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(new BubbleRenderableSeriesViewModel
                 {
@@ -87,11 +102,13 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                     AutoZRange = false,
                 });
             }
-            if (type == typeof (BandRenderableSeriesViewModel))
+
+            if (type == typeof(BandRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(new BandRenderableSeriesViewModel {DataSeries = GetXyyDataSeries(data)});
             }
-            if (type == typeof (StackedColumnRenderableSeriesViewModel))
+
+            if (type == typeof(StackedColumnRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(
                     new StackedColumnRenderableSeriesViewModel
@@ -113,7 +130,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                         StackedGroupId = "stackedColumns"
                     });
             }
-            if (type == typeof (StackedMountainRenderableSeriesViewModel))
+
+            if (type == typeof(StackedMountainRenderableSeriesViewModel))
             {
                 return new PolarChartViewModel(
                     new StackedMountainRenderableSeriesViewModel
@@ -187,8 +205,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
             var dataSeries = new XyyDataSeries<double, double>();
 
             dataSeries.Append(data, 
-                data.Select(x => x%2 == 0 ? 2*x : x), 
-                data.Select(x => x%2 == 1 ? 2*x : x));
+                data.Select(x => x % 2 == 0 ? 2 * x : x), 
+                data.Select(x => x % 2 == 1 ? 2 * x : x));
 
             return dataSeries;
         }

@@ -147,7 +147,7 @@
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:PolarYAxis GrowBy="0,0.2" />
+                <s:PolarYAxis GrowBy="0.0,0.2" />
             </s:SciChartSurface.YAxis>
 
             <s:SciChartSurface.ChartModifier>

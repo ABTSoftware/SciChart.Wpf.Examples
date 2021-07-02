@@ -13,12 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
-using System.Diagnostics;
 using System.Linq;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.Visuals.RenderableSeries.Animations;
-using SciChart.Data.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
@@ -26,7 +22,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {
     public class ErrorSeriesExampleViewModel : BaseViewModel
     {
-        private double _dataPointWidth = 0.7d;
+        private double _dataPointWidth = 0.7;
         private int _strokeThickness = 1;
 
         public ErrorSeriesExampleViewModel()
@@ -46,14 +42,14 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
         private void FillSeries(HlcDataSeries<double, double> hlcDataSeries, DoubleSeries sourceData, double scale)
         {
             var xData = sourceData.XData;
-            var yData = sourceData.YData.Select(x => x*scale).ToArray();
+            var yData = sourceData.YData.Select(x => x * scale).ToArray();
 
             // Generate some random error data. Errors must be absolute values, 
             // e.g. if a series has a Y-value of 5.0, and YError of =/-10% then you must enter YErrorHigh=5.5, YErrorLow=4.5 into the HlcDataSeries
             var random = new RandomWalkGenerator(seed: 0);
-            
-            var yErrorHigh = yData.Select(y => y + random.GetRandomDouble()*0.2);
-            var yErrorLow = yData.Select(y => y - random.GetRandomDouble()*0.2);
+
+            var yErrorHigh = yData.Select(y => y + (random.GetRandomDouble() * 0.2));
+            var yErrorLow = yData.Select(y => y - (random.GetRandomDouble() * 0.2));
 
             // HlcDataSeries requires X, Y, High, Low. 
             // For Error bars the High, Low becomes the High Low error, 
@@ -67,21 +63,21 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 
         public double DataPointWidth
         {
-            get { return _dataPointWidth; }
+            get => _dataPointWidth;
             set
             {
                 _dataPointWidth = value;
-                OnPropertyChanged("DataPointWidth");
+                OnPropertyChanged(nameof(DataPointWidth));
             }
         }
 
         public int StrokeThickness
         {
-            get { return _strokeThickness; }
+            get => _strokeThickness;
             set
             {
                 _strokeThickness = value;
-                OnPropertyChanged("StrokeThickness");
+                OnPropertyChanged(nameof(StrokeThickness));
             }
         }
     }
