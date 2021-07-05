@@ -76,8 +76,8 @@ namespace OffScreenExportExample
             // When rendering in memory without showing, we must specify a size
             // WPF has no idea what the size of the chart should be unless it
             // is hosted in a Window
-            surface.Width = 1000;
-            surface.Height = 1000;
+            surface.Width = 460;
+            surface.Height = 460;
 
             // Perform export
             var path = $"{FolderTxtblck.Text}/singleOffscreen_0.png";
@@ -95,8 +95,8 @@ namespace OffScreenExportExample
                 // When rendering in memory without showing, we must specify a size
                 // WPF has no idea what the size of the chart should be unless it
                 // is hosted in a Window
-                surface.Width = 1000;
-                surface.Height = 1000;
+                surface.Width = 460;
+                surface.Height = 460;
 
                 // Perform export
                 var path = $"{FolderTxtblck.Text}/multipleOffscreen_{counter}.png";
@@ -152,8 +152,8 @@ namespace OffScreenExportExample
             // When rendering in memory without showing, we must specify a size
             // WPF has no idea what the size of the chart should be unless it
             // is hosted in a Window
-            surface.Width = 1000;
-            surface.Height = 1000;
+            surface.Width = 460;
+            surface.Height = 460;
 
             // Prepare for export
             // Forcing load\render of a chart
@@ -161,7 +161,7 @@ namespace OffScreenExportExample
 
             // Perform export
             var path = $"{FolderTxtblck.Text}/cloningOffscreen.png";
-            surface.ExportToFile(path, ExportType.Png, true);
+            surface.ExportToFile(path, ExportType.Png, false, new Size(1200, 1200));
         }
 
         private void PrepareSurfaceForExport(SciChartSurface surface)
