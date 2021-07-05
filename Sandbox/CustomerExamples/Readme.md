@@ -134,6 +134,10 @@ Demonstrates how to have Axis Ticklines in a SciChart WPF Chart with 5mm spacing
 
 An example showing how to create a sort of a timeline control using SciChart WPF 
 
+### OffScreen Export 
+
+Demonstrates offscreen exporting of a chart or multiple charts to '.png' file. Also demonstrates an offscreen export using SciChart clonning functionality.
+
 ### Touch Input Sandbox
 
 A sandbox application with a SciChart WPF Chart allowing you to test out all the different zoom, pan and tooltip options on a touch screen. Also includes a custom Multi Touch ChartModifierBase example
