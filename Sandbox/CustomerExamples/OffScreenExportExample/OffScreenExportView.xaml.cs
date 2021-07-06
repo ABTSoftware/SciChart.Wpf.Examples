@@ -231,6 +231,27 @@ namespace OffScreenExportExample
                             StrokeThickness = random.Next(12),
                         }
                     },
+                    // Add Annotations
+                    Annotations = new AnnotationCollection()
+                    {
+                        new BoxAnnotation()
+                        {
+                            X1 = 2,
+                            X2 = 8,
+                            Y1 = 0.1,
+                            Y2 = 0.3,
+                            Background = new SolidColorBrush(Colors.Red),
+                        },
+
+                        new VerticalLineAnnotation()
+                        {
+                            X1 = 3,
+                            Stroke = new SolidColorBrush(Colors.Yellow),
+                            StrokeThickness = 3,
+                            ShowLabel = true,
+                            LabelPlacement = LabelPlacement.Axis
+                        }
+                    },
                 };
 
                 collectionToReturn.Add(surface);
