@@ -33,70 +33,95 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
         private DoubleRange _xLimit;
         private DoubleRange _yLimit;
 
-        private double _phase0 = 0.0;
-        private double _phase1 = 0.0;
+        private double _phase0;
+        private double _phase1;
         private double _phaseIncrement;
+
+        private bool _isRolloverSelected;
+        private bool _isCursorSelected;
 
         private ResamplingMode _resamplingMode;
         private IXyDataSeries<double, double> _series0;
         private string _selectedDataSource;
 
         private bool _isDigitalLine = true;
-
-        private ModifierType _chartModifier;
         private bool _canExecuteRollover;
 
         private Timer _timer;
         private const double TimerIntervalMs = 20;
 
-        private ICommand _startCommand;
-        private ICommand _stopCommand;
-
         public OscilloscopeViewModel()
         {
-            // For chart data setup, see  OnExampleEnter()
-            _startCommand = new ActionCommand(OnExampleEnter);
-            _stopCommand = new ActionCommand(OnExampleExit);
+            // For chart data setup, see OnExampleEnter()
+            StartCommand = new ActionCommand(OnExampleEnter);
+            StopCommand = new ActionCommand(OnExampleExit);
+
+            SetDigitalLineCommand = new ActionCommand(() => IsDigitalLine = !IsDigitalLine);
         }
 
-        public ICommand StartCommand { get { return _startCommand; } }
-        public ICommand StopCommand { get { return _stopCommand; } }
+        public ICommand StartCommand { get; }
+        public ICommand StopCommand { get; }
 
-        public ActionCommand SetRolloverModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Rollover)); } }
-        public ActionCommand SetCursorModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.CrosshairsCursor)); } }
-        public ActionCommand SetNullModifierCommand { get { return new ActionCommand(() => SetModifier(ModifierType.Null)); } }
-        public ActionCommand SetDigitalLineCommand { get { return new ActionCommand(() => IsDigitalLine = !IsDigitalLine); } }
+        public ICommand SetDigitalLineCommand { get; }
 
-        public bool IsRolloverSelected { get { return ChartModifier == ModifierType.Rollover; }}
-        public bool IsCursorSelected { get { return ChartModifier == ModifierType.CrosshairsCursor; } }
+        public bool IsRolloverSelected
+        {
+            get => _isRolloverSelected;
+            set
+            {
+                if (_isRolloverSelected != value)
+                {
+                    _isRolloverSelected = value;
+                    OnPropertyChanged(nameof(IsRolloverSelected));
+                }
+            }
+        }
+        public bool IsCursorSelected
+        {
+            get => _isCursorSelected;
+            set
+            {
+                if (_isCursorSelected != value)
+                {
+                    _isCursorSelected = value;
+                    OnPropertyChanged(nameof(IsCursorSelected));
+                }
+            }
+        }
 
         public bool CanExecuteRollover
         {
-            get { return _canExecuteRollover; }
+            get => _canExecuteRollover;
             set
             {
-                if (_canExecuteRollover == value) return;
-                _canExecuteRollover = value;
-                OnPropertyChanged("CanExecuteRollover");
+                if (_canExecuteRollover != value)
+                {
+                    _canExecuteRollover = value;
+                    OnPropertyChanged(nameof(CanExecuteRollover));
+                }
             }
         }
 
         public IXyDataSeries<double, double> ChartData
         {
-            get { return _series0; }
+            get => _series0;
             set
             {
                 _series0 = value;
-                OnPropertyChanged("ChartData");
+                OnPropertyChanged(nameof(ChartData));
             }
         }
 
         public string SelectedDataSource
         {
-            get { return _selectedDataSource; }
+            get => _selectedDataSource;
             set
             {
-                if (_selectedDataSource == value) return;
+                if (_selectedDataSource == value)
+                {
+                    return;
+                }
+
                 _selectedDataSource = value;
 
                 lock (this)
@@ -107,11 +132,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                         // and we cannot use the Rollover. Currently HitTest/Rollover is not implemented
                         // for UnsortedXyDataSeries. Also this series type does not currently support resampling
                         _phaseIncrement = Math.PI * 0.02;
-                        _series0 = new XyDataSeries<double, double> {AcceptsUnsortedData = true};
+                        _series0 = new XyDataSeries<double, double>
+                        {
+                            AcceptsUnsortedData = true
+                        };
+
                         IsDigitalLine = false;
-                        if (ChartModifier == ModifierType.Rollover)
-                            SetModifier(ModifierType.CrosshairsCursor);
-                        SeriesResamplingMode = ResamplingMode.None;                        
+                        SeriesResamplingMode = ResamplingMode.None;
+
+                        CanExecuteRollover = false;
+                        IsRolloverSelected = false;
                     }
                     else
                     {
@@ -119,9 +149,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                         // which supports the Rollover, HitTest and Resamplingd
                         _phaseIncrement = Math.PI * 0.1;
                         _series0 = new XyDataSeries<double, double>();
+
                         IsDigitalLine = true;
-                        CanExecuteRollover = true;
                         SeriesResamplingMode = ResamplingMode.MinMax;
+
+                        CanExecuteRollover = true;
                     }
 
                     // Setup the Zoom Limit (affects double click to zoom extents)
@@ -130,11 +162,14 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                     // Add the new dataseries and reset counters. See OnTick where data is appended
                     _series0.SeriesName = _selectedDataSource;
                     _series0.Clear();
+
                     ChartData = _series0;
+
                     _phase0 = 0;
                     _phase1 = 0.15;
                 }
-                OnPropertyChanged("SelectedDataSource");
+
+                OnPropertyChanged(nameof(SelectedDataSource));
             }
         }
 
@@ -143,7 +178,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
             if (_selectedDataSource == "Lissajous")
             {
                 XLimit = new DoubleRange(-1.2, 1.2);
-                YLimit = new DoubleRange(-1.2, 1.2);                
+                YLimit = new DoubleRange(-1.2, 1.2);
             }
             else
             {
@@ -151,76 +186,86 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                 YLimit = new DoubleRange(-12.5, 12.5);
             }
 
-            XVisibleRange = (DoubleRange) XLimit.Clone();
-            YVisibleRange = (DoubleRange) YLimit.Clone();
+            XVisibleRange = (DoubleRange)XLimit.Clone();
+            YVisibleRange = (DoubleRange)YLimit.Clone();
         }
 
         public bool IsDigitalLine
         {
-            get { return _isDigitalLine; }
+            get => _isDigitalLine;
             set
             {
-                if (_isDigitalLine == value) return;
-
-                _isDigitalLine = value;
-                OnPropertyChanged("IsDigitalLine");
+                if (_isDigitalLine != value)
+                {
+                    _isDigitalLine = value;
+                    OnPropertyChanged(nameof(IsDigitalLine));
+                }
             }
         }
 
         public DoubleRange XVisibleRange
         {
-            get { return _xVisibleRange; }
-            set 
-            { 
-                if (_xVisibleRange == value) return;
-
-                _xVisibleRange = value;
-                OnPropertyChanged("XVisibleRange");
+            get => _xVisibleRange;
+            set
+            {
+                if (_xVisibleRange != value)
+                {
+                    _xVisibleRange = value;
+                    OnPropertyChanged(nameof(XVisibleRange));
+                }
             }
         }
 
         public DoubleRange YVisibleRange
         {
-            get { return _yVisibleRange; }
+            get => _yVisibleRange;
             set
             {
-                if (_yVisibleRange == value) return;
-
-                _yVisibleRange = value;
-                OnPropertyChanged("YVisibleRange");
+                if (_yVisibleRange != value)
+                {
+                    _yVisibleRange = value;
+                    OnPropertyChanged(nameof(YVisibleRange));
+                }
             }
         }
 
-        public ModifierType ChartModifier
+        public DoubleRange XLimit
         {
-            get
-            {
-                return _chartModifier;
-            }
+            get => _xLimit;
             set
             {
-                _chartModifier = value;
-                OnPropertyChanged("ChartModifier");
-                OnPropertyChanged("IsRolloverSelected");
-                OnPropertyChanged("IsCursorSelected");
+                if (_xLimit != value)
+                {
+                    _xLimit = value;
+                    OnPropertyChanged(nameof(XLimit));
+                }
+            }
+        }
+
+        public DoubleRange YLimit
+        {
+            get => _yLimit;
+            set
+            {
+                if (_yLimit != value)
+                {
+                    _yLimit = value;
+                    OnPropertyChanged(nameof(YLimit));
+                }
             }
         }
 
         public ResamplingMode SeriesResamplingMode
         {
-            get { return _resamplingMode; }
+            get => _resamplingMode;
             set
             {
-                if (_resamplingMode == value) return;
-                _resamplingMode = value;
-                OnPropertyChanged("SeriesResamplingMode");
+                if (_resamplingMode != value)
+                {
+                    _resamplingMode = value;
+                    OnPropertyChanged(nameof(SeriesResamplingMode));
+                }
             }
-        }
-        
-
-        private void SetModifier(ModifierType modifierType)
-        {
-            ChartModifier = modifierType;
         }
 
         // Reset state when example exits
@@ -238,6 +283,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                 // Null to clear memory 
                 _xVisibleRange = null;
                 _yVisibleRange = null;
+
                 ChartData = null;
             }
         }
@@ -246,9 +292,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
         public void OnExampleEnter()
         {
             ChartData = new XyDataSeries<double, double>();
-
             SelectedDataSource = "Fourier Series";
-            SetModifier(ModifierType.CrosshairsCursor);
+            IsCursorSelected = true;
 
             _timer = new Timer(TimerIntervalMs) { AutoReset = true };
             _timer.Elapsed += OnTick;
@@ -260,41 +305,19 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
             lock (this)
             {
                 // Generate data at this phase depending on data source type
-                var dataSource = SelectedDataSource == "Lissajous"
-                                     ? DataManager.Instance.GetLissajousCurve(0.12, _phase1, _phase0, 2500)
-                                     : DataManager.Instance.GetFourierSeries(2.0, _phase0, 1000);
+                DoubleSeries dataSource = SelectedDataSource == "Lissajous"
+                    ? DataManager.Instance.GetLissajousCurve(0.12, _phase1, _phase0, 2500)
+                    : DataManager.Instance.GetFourierSeries(2.0, _phase0, 1000);
 
                 _phase0 += _phaseIncrement;
-                _phase1 += _phaseIncrement*0.005;
+                _phase1 += _phaseIncrement * 0.005;
 
                 // Lock the data-series and clear / re-add new data
-                using (this.ChartData.SuspendUpdates())
+                using (ChartData.SuspendUpdates())
                 {
                     _series0.Clear();
                     _series0.Append(dataSource.XData, dataSource.YData);
                 }
-            }
-        }
-
-        public DoubleRange XLimit
-        {
-            get { return _xLimit; }
-            set
-            {
-                if (_xLimit == value) return;
-                _xLimit = value;
-                OnPropertyChanged("XLimit");
-            }
-        }
-
-        public DoubleRange YLimit
-        {
-            get { return _yLimit; }
-            set
-            {
-                if (_yLimit == value) return;
-                _yLimit = value;
-                OnPropertyChanged("YLimit");
             }
         }
     }

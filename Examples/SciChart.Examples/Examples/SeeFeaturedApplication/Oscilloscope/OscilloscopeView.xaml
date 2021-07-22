@@ -29,8 +29,7 @@
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <ext:VisibleIfTypeConverter x:Key="VisibleIfTypeConverter" />
-            <ext:IsModifierTypeConverter x:Key="IsModifierTypeConverter" />
+            <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
             <Style x:Key="TextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="White" />
@@ -242,11 +241,11 @@
                                s:CursorModifier.AxisLabelContainerStyle="{StaticResource CursorAxisLabelStyle}" />
             </s:SciChartSurface.YAxes>
 
-            <!--  Create ChartModifiers, which are enabled or disabled from the ViewModel via the ChartModifier property and IsModifierTypeConverter  -->
+            <!--  Create ChartModifiers, which are enabled or disabled from the ViewModel -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RolloverModifier x:Name="rolloverModifier" IsEnabled="{Binding ChartModifier, Mode=TwoWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=Rollover}" ShowTooltipOn="Always" />
-                    <s:CursorModifier x:Name="cursorModifier" IsEnabled="{Binding ChartModifier, Mode=TwoWay, Converter={StaticResource IsModifierTypeConverter}, ConverterParameter=CrosshairsCursor}" ShowTooltip="True"/>
+                    <s:RolloverModifier x:Name="rolloverModifier" IsEnabled="{Binding IsRolloverSelected, Mode=OneWay}" ShowTooltipOn="Always" />
+                    <s:CursorModifier x:Name="cursorModifier" IsEnabled="{Binding IsCursorSelected, Mode=OneWay}" ShowTooltip="True"/>
                     <s:MouseWheelZoomModifier />
                     <s:ZoomExtentsModifier />
                     <s:ZoomPanModifier x:Name="ZoomPanModifier" IsEnabled="False" />
@@ -259,12 +258,9 @@
         <!--  Define the overlay panel to show start and to dates, chart values  -->
         <Grid Grid.Column="1"
               Margin="35,35,15,0"
-              DataContext="{Binding Source={x:Reference Name=oscilloscopeChart},
-                                    Path=ChartModifier[RolloverModifier]}"
-              Visibility="{Binding Source={x:Reference Name=oscilloscopeChart},
-                                   Path=DataContext.ChartModifier,
-                                   Converter={StaticResource VisibleIfTypeConverter},
-                                   ConverterParameter=Rollover}">
+              DataContext="{Binding Source={x:Reference Name=oscilloscopeChart}, Path=ChartModifier[RolloverModifier]}"
+              Visibility="{Binding Source={x:Reference Name=oscilloscopeChart}, Path=DataContext.IsRolloverSelected,
+                        Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl MinHeight="24"
                           VerticalAlignment="Top"
                           ItemTemplate="{StaticResource ChartDataTemplate}"
@@ -339,9 +335,8 @@
                 <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
                                             Content="ROLL"
                                             HorizontalContentAlignment="Center"
-                                            Command="{Binding SetRolloverModifierCommand}"
-                                            IsChecked="{Binding IsRolloverSelected, Mode=OneWay}"
-                                            IsEnabled="{Binding CanExecuteRollover}"
+                                            IsChecked="{Binding IsRolloverSelected, Mode=TwoWay}"
+                                            IsEnabled="{Binding CanExecuteRollover, Mode=OneWay}"
                                             Style="{StaticResource FlyoutMenuToggleButtonStyle}"
                                             FontSize="10"
                                             Padding="0"
@@ -378,8 +373,7 @@
 
                 <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
                                             Content="CUR"
-                                            Command="{Binding SetCursorModifierCommand}"
-                                            IsChecked="{Binding IsCursorSelected, Mode=OneWay}"
+                                            IsChecked="{Binding IsCursorSelected, Mode=TwoWay}"
                                             HorizontalContentAlignment="Center"
                                             Style="{StaticResource CursorButtonStyle}"
                                             FontSize="11"
