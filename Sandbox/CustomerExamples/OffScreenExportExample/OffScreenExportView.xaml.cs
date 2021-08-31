@@ -155,56 +155,9 @@ namespace OffScreenExportExample
             surface.Width = 460;
             surface.Height = 460;
 
-            // Prepare for export
-            // Forcing load\render of a chart
-            PrepareSurfaceForExport(surface);
-
             // Perform export
             var path = $"{FolderTxtblck.Text}/cloningOffscreen.png";
             surface.ExportToFile(path, ExportType.Png, false, new Size(1200, 1200));
-        }
-
-        private void PrepareSurfaceForExport(SciChartSurface surface)
-        {
-            // Prepare surface for rendering in memory
-            var desiredSize = new Size(1100, 1100);
-
-            surface.RenderPriority = RenderPriority.Immediate;
-
-            surface.ApplyTemplate();
-            surface.OnLoad();
-
-            if (surface.Annotations != null)
-            {
-                surface.Annotations
-                    .OfType<FrameworkElement>()
-                    .ForEachDo(annotation => annotation.RaiseEvent(new RoutedEventArgs(LoadedEvent)));
-            }
-
-            // Applying template and building control visual tree
-            surface.Measure(desiredSize);
-            surface.Arrange(new Rect(new Point(0, 0), desiredSize));
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
-
-            // Invalidate triggers creation of images inside surface axes and rendersurface
-            surface.InvalidateElement();
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
-
-            //Need invalidate one more time to consider sizes of created images during layout
-            surface.InvalidateElement();
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
         }
 
         private IEnumerable<SciChartSurface> GetMultippleCharts()
