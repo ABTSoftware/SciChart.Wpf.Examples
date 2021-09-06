@@ -43,7 +43,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
         public static readonly DependencyProperty PopupAlignmentProperty =
             DependencyProperty.Register("PopupAlignment", typeof(PopupAlignment), typeof(FlyoutMenuButton), new PropertyMetadata(PopupAlignment.Left));
 
-        private Canvas _popup;
+        private Popup _popup;
         private Border _border;
         private TimedMethod _popupCloseToken;
         private Storyboard _fadeStoryboard;
@@ -71,7 +71,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
         {
             base.OnApplyTemplate();
 
-            _popup = GetTemplateChild("PART_Popup") as Canvas;
+            _popup = GetTemplateChild("PART_Popup") as Popup;
             _border = GetTemplateChild("PART_Border") as Border;
             _root = GetTemplateChild("RootElement") as Grid;
             _callout = GetTemplateChild("Callout") as Callout;
@@ -93,9 +93,9 @@ namespace SciChart.Examples.ExternalDependencies.Common
                     _popupCloseToken.Dispose();
                     _popupCloseToken = null;
                 }
-                if (_popup.Visibility == Visibility.Collapsed)
+                if (!_popup.IsOpen)
                 {
-                    _popup.Visibility = Visibility.Visible;
+                    _popup.IsOpen = true;
                     _fadeStoryboard.Begin();
                 }
             };
@@ -104,7 +104,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
             {
                 _popupCloseToken = TimedMethod.Invoke(() =>
                 {
-                    _popup.Visibility = Visibility.Collapsed;
+                    _popup.IsOpen = false;
                     _fadeStoryboard.Stop();
                 }).After(200).Go();
             };
@@ -122,16 +122,11 @@ namespace SciChart.Examples.ExternalDependencies.Common
             {
                 _popupCloseToken = TimedMethod.Invoke(() =>
                 {
-                    _popup.Visibility = Visibility.Collapsed;
+                    _popup.IsOpen = false;
                     _fadeStoryboard.Stop();
                 }).After(200).Go();
             };
 
-//#if !SILVERLIGHT
-//            _popup.VerticalOffset = -32;
-//            _popup.AllowsTransparency = true;
-//            _popup.PopupAnimation = PopupAnimation.Fade;
-//#endif
         }
     }
 }

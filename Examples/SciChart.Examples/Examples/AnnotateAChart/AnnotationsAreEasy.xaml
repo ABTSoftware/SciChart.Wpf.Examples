@@ -30,7 +30,7 @@
                 <s:NumericAxis x:Name="XAxis"
                                AxisAlignment="Bottom"
                                AxisTitle="XAxis"
-                               DrawMajorBands="True"
+                               DrawMajorBands="False"
                                TextFormatting="0.0#"
                                VisibleRange="0, 10" />
             </s:SciChartSurface.XAxes>
@@ -38,7 +38,7 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis x:Name="YAxis"
                                AxisTitle="YAxis"
-                               DrawMajorBands="True"
+                               DrawMajorBands="False"
                                TextFormatting="0.0#" />
             </s:SciChartSurface.YAxis>
 
@@ -77,9 +77,9 @@
                 <!--  Watermark  -->
                 <s:TextAnnotation AnnotationCanvas="BelowChart"
                                   CoordinateMode="Relative"
-                                  FontSize="56"
+                                  FontSize="72"
                                   FontWeight="Bold"
-                                  Foreground="#22000000"
+                                  Foreground="#30008000"
                                   HorizontalAnchorPoint="Center"
                                   Text="Create Watermarks"
                                   VerticalAnchorPoint="Center"
