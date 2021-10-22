@@ -76,8 +76,8 @@ namespace OffScreenExportExample
             // When rendering in memory without showing, we must specify a size
             // WPF has no idea what the size of the chart should be unless it
             // is hosted in a Window
-            surface.Width = 1000;
-            surface.Height = 1000;
+            surface.Width = 460;
+            surface.Height = 460;
 
             // Perform export
             var path = $"{FolderTxtblck.Text}/singleOffscreen_0.png";
@@ -95,8 +95,8 @@ namespace OffScreenExportExample
                 // When rendering in memory without showing, we must specify a size
                 // WPF has no idea what the size of the chart should be unless it
                 // is hosted in a Window
-                surface.Width = 1000;
-                surface.Height = 1000;
+                surface.Width = 460;
+                surface.Height = 460;
 
                 // Perform export
                 var path = $"{FolderTxtblck.Text}/multipleOffscreen_{counter}.png";
@@ -152,59 +152,12 @@ namespace OffScreenExportExample
             // When rendering in memory without showing, we must specify a size
             // WPF has no idea what the size of the chart should be unless it
             // is hosted in a Window
-            surface.Width = 1000;
-            surface.Height = 1000;
-
-            // Prepare for export
-            // Forcing load\render of a chart
-            PrepareSurfaceForExport(surface);
+            surface.Width = 460;
+            surface.Height = 460;
 
             // Perform export
             var path = $"{FolderTxtblck.Text}/cloningOffscreen.png";
-            surface.ExportToFile(path, ExportType.Png, true);
-        }
-
-        private void PrepareSurfaceForExport(SciChartSurface surface)
-        {
-            // Prepare surface for rendering in memory
-            var desiredSize = new Size(1100, 1100);
-
-            surface.RenderPriority = RenderPriority.Immediate;
-
-            surface.ApplyTemplate();
-            surface.OnLoad();
-
-            if (surface.Annotations != null)
-            {
-                surface.Annotations
-                    .OfType<FrameworkElement>()
-                    .ForEachDo(annotation => annotation.RaiseEvent(new RoutedEventArgs(LoadedEvent)));
-            }
-
-            // Applying template and building control visual tree
-            surface.Measure(desiredSize);
-            surface.Arrange(new Rect(new Point(0, 0), desiredSize));
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
-
-            // Invalidate triggers creation of images inside surface axes and rendersurface
-            surface.InvalidateElement();
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
-
-            //Need invalidate one more time to consider sizes of created images during layout
-            surface.InvalidateElement();
-            using (var s = surface.SuspendUpdates())
-            {
-                s.ResumeTargetOnDispose = false;
-                surface.UpdateLayout();
-            }
+            surface.ExportToFile(path, ExportType.Png, false, new Size(1200, 1200));
         }
 
         private IEnumerable<SciChartSurface> GetMultippleCharts()
@@ -229,6 +182,27 @@ namespace OffScreenExportExample
                             DataSeries = GetLineDataseries(0.1, 0.1, 3000),
                             Stroke = Color.FromRgb(b[0], b[1], b[2]),
                             StrokeThickness = random.Next(12),
+                        }
+                    },
+                    // Add Annotations
+                    Annotations = new AnnotationCollection()
+                    {
+                        new BoxAnnotation()
+                        {
+                            X1 = 2,
+                            X2 = 8,
+                            Y1 = 0.1,
+                            Y2 = 0.3,
+                            Background = new SolidColorBrush(Colors.Red),
+                        },
+
+                        new VerticalLineAnnotation()
+                        {
+                            X1 = 3,
+                            Stroke = new SolidColorBrush(Colors.Yellow),
+                            StrokeThickness = 3,
+                            ShowLabel = true,
+                            LabelPlacement = LabelPlacement.Axis
                         }
                     },
                 };

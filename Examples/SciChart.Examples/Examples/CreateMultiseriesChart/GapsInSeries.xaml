@@ -25,8 +25,18 @@
                         <TextBlock Text="RenderableSeries.DrawNaNAs" />
                         <ext:FlyoutSeparator/>
 
-                        <CheckBox x:Name="gapsCheckbox" Content="Gaps" Margin="4" IsChecked="True"  Checked="GapsCheckbox_CheckedChanged" Unchecked="GapsCheckbox_CheckedChanged"/>
-                        <CheckBox x:Name="closedLinesCheckbox" Content="Closed Lines" Margin="4" Checked="ClosedCheckbox_CheckedChanged" Unchecked="ClosedCheckbox_CheckedChanged"/>
+                        <CheckBox x:Name="gapsCheckbox"
+                                  Content="Gaps"
+                                  Margin="4"
+                                  IsChecked="True"
+                                  Checked="GapsCheckbox_CheckedChanged"
+                                  Unchecked="GapsCheckbox_CheckedChanged"/>
+
+                        <CheckBox x:Name="closedLinesCheckbox"
+                                  Content="Closed Lines"
+                                  Margin="4"
+                                  Checked="ClosedCheckbox_CheckedChanged"
+                                  Unchecked="ClosedCheckbox_CheckedChanged"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -68,7 +78,7 @@
                 <!-- Line Series -->
                 <s:FastLineRenderableSeries x:Name="renderableLineSeries"
                                             Stroke="OrangeRed"
-                                            StrokeDashArray="2 2 9 2">
+                                            StrokeDashArray="2,2,9,2">
 
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="11"
@@ -83,17 +93,16 @@
                     </s:FastLineRenderableSeries.SeriesAnimation>
                     
                 </s:FastLineRenderableSeries>
-                
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis AxisTitle="Sample Index" DrawMajorBands="True"/>
             </s:SciChartSurface.XAxis>
+
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis AxisTitle="Value" DrawMajorBands="True"/>
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>

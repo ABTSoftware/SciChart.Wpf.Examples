@@ -16,6 +16,7 @@
 using System;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Model.Filters;
 using SciChart.Charting3D.Model;
 using SciChart.Core.Extensions;
 
@@ -80,9 +81,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
 
                 for (int z = 0; z < zSize; z++)
                 {
+                    // Compute a slope function with some noise
                     var y = (z != 0) ? Math.Pow(z + random.NextDouble(), step) : Math.Pow((double)z + 1, 0.3);
 
-                    meshDataSeries[z, x] = y;
+                    // Compute a 3d parabola function 
+                    var nX = x - xSize / 2;
+                    var nZ = z - zSize / 2;
+                    var parabola = (nX * nX) + (nZ * nZ);
+                    
+                    // Set the data
+                    meshDataSeries[z, x] = y * (parabola + 50) * 0.1;
                 }
             }
 
@@ -102,8 +110,10 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart
             }
 
             surfaceMeshRenderableSeries.DataSeries = meshDataSeries;
-            mountainRenderSeries.DataSeries = mountainDataSeries;
-            LineRenderableSeries.DataSeries = lineDataSeries;
+            MountainSeries0.DataSeries = lineDataSeries.ToSpline(10);
+            ScatterSeries0.DataSeries = lineDataSeries;
+            MountainSeries1.DataSeries = mountainDataSeries.ToSpline(10);
+            ScatterSeries1.DataSeries = mountainDataSeries;
 
             surfaceMeshRenderableSeries.Maximum = (double)meshDataSeries.YRange.Max;
             surfaceMeshRenderableSeries.Minimum = (double)meshDataSeries.YRange.Min;

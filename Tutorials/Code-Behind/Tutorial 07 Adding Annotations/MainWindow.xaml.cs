@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Core.Extensions;
-using SciChart.Data.Model;
 
 namespace SciChart.Tutorial
 {
@@ -11,8 +10,8 @@ namespace SciChart.Tutorial
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.Loaded += OnLoaded;
+            InitializeComponent(); 
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)

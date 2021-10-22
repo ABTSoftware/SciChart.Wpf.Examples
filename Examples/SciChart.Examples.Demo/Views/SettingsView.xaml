@@ -131,7 +131,7 @@
                     <CheckBox Margin="15,3"
                               Content="Enable Force Wait for GPU (DirectX Only)"
                               FontSize="14"
-                              ToolTip="Enables waitinf for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
+                              ToolTip="Enables waiting for GPU before presenting DirectX content to WPF. Can help compatibility issues on some machines"
                               AutomationProperties.AutomationId="Settings.EnableForceWaitForGpu"
                               DataContext="{StaticResource SettingsViewModel}"
                               IsEnabled="{Binding Path=IsDirectXEnabled2D}"

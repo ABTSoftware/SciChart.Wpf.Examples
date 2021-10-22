@@ -71,12 +71,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>6.0.2.13028</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart.DirectX">
-      <Version>6.0.2.13028</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*" />
+    <PackageReference Include="SciChart.DirectX" Version="*" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TestImage.jpg">

@@ -95,12 +95,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart">
-      <Version>5.3.0.11954</Version>
-    </PackageReference>
-    <PackageReference Include="SciChart.DirectX">
-      <Version>5.3.0.11954</Version>
-    </PackageReference>
+    <PackageReference Include="SciChart" Version="*"/>
+    <PackageReference Include="SciChart.DirectX" Version="*"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

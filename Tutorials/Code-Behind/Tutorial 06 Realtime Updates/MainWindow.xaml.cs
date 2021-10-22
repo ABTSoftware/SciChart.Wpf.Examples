@@ -10,8 +10,8 @@ namespace SciChart.Tutorial
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.Loaded += OnLoaded;
+            InitializeComponent(); 
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)

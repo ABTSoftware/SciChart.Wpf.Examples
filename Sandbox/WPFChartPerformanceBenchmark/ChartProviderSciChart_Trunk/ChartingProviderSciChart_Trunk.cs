@@ -3,6 +3,8 @@ using SciChart.Drawing.DirectX.Context.D3D11;
 using SciChart.Drawing.HighQualityRasterizer;
 using SciChart.Drawing.HighSpeedRasterizer;
 using System;
+using System.Reflection;
+using SciChart.Charting.Visuals;
 
 namespace ChartProviderSciChart_Trunk
 {
@@ -101,6 +103,6 @@ namespace ChartProviderSciChart_Trunk
             };
         }
 
-        public string Name => $"SciChart v5.3 ({_selectedRenderSurface.Name})";    
+        public string Name => $"SciChart {Assembly.GetAssembly(typeof(SciChartSurface)).GetName().Version} ({_selectedRenderSurface.Name})";    
     }
 }

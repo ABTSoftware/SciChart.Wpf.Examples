@@ -24,7 +24,7 @@
                               DrawLabels="False"
                               DrawMajorTicks="False"
                               DrawMinorTicks="False"
-                              GrowBy="0,0.2" />
+                              GrowBy="0.0,0.2" />
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>

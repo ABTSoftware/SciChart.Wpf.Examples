@@ -2,12 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using SciChart.Charting.Common.Helpers;
-using SciChart.Core.Utility;
 using SciChart.Examples.Demo.Common;
-using SciChart.UI.Reactive;
 using SciChart.Examples.ExternalDependencies.Common;
-using SciChart.UI.Reactive.Services;
 using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
 
 namespace SciChart.Examples.Demo.ViewModels
@@ -17,19 +13,16 @@ namespace SciChart.Examples.Demo.ViewModels
         private readonly ExampleViewModel _parent;
         private bool _isSmile;
         private bool _isFrown;
-        private bool _firstLoad;
         private string _feedbackEmail = "";
         private string _feedbackSubject = "";
         private string _feedbackContent = "";
         private bool _isFrownVisible;
         private bool _isSmileVisible;
-        private bool _isVisible;
         private bool _onSubmitted;
 
         public SmileFrownViewModel(ExampleViewModel parent)
         {
             _parent = parent;
-            _firstLoad = true;
             ExampleChanged();
         }
 
@@ -40,11 +33,18 @@ namespace SciChart.Examples.Demo.ViewModels
             {
                 IsSmile = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Frown) == ExampleFeedbackType.Smile;
                 IsFrown = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Smile) == ExampleFeedbackType.Frown;
+                
                 FeedbackEmail = usageService.Email;
+                
                 if (!string.IsNullOrEmpty(usageService.FeedbackText))
                 {
-                    FeedbackSubject = usageService.FeedbackText.Contains(":") ? usageService.FeedbackText.Substring(0, usageService.FeedbackText.IndexOf(":")) : "";
-                    FeedbackContent = usageService.FeedbackText.Contains(":") ? usageService.FeedbackText.Substring(usageService.FeedbackText.IndexOf(":") + 1) : usageService.FeedbackText;
+                    FeedbackSubject = usageService.FeedbackText.Contains(":")
+                        ? usageService.FeedbackText.Substring(0, usageService.FeedbackText.IndexOf(":", StringComparison.InvariantCulture))
+                        : string.Empty;
+
+                    FeedbackContent = usageService.FeedbackText.Contains(":")
+                        ? usageService.FeedbackText.Substring(usageService.FeedbackText.IndexOf(":", StringComparison.InvariantCulture) + 1)
+                        : usageService.FeedbackText;
                 }
                 else
                 {
@@ -52,64 +52,74 @@ namespace SciChart.Examples.Demo.ViewModels
                     FeedbackContent = null;
                 }
             }
-            
-
-
+   
             FrownVisible = false;
             SmileVisible = false;
         }
 
-        public ActionCommand CloseCommand
+        public ActionCommand CloseCommand => new ActionCommand(() =>
         {
-            get
+            SmileVisible = false;
+            FrownVisible = false;
+
+            var usageService = _parent.Usage;
+            if (usageService != null)
             {
-                return new ActionCommand(() =>
+                // Revert to original values
+                IsSmile = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Frown) == ExampleFeedbackType.Smile;
+                IsFrown = usageService.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Smile) == ExampleFeedbackType.Frown;
+
+                FeedbackEmail = usageService.Email;
+
+                if (!string.IsNullOrEmpty(usageService.FeedbackText))
                 {
-                    SmileVisible = false;
-                    FrownVisible = false;
-                    // Revert to original values
-                    IsSmile = _parent.Usage.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Frown) == ExampleFeedbackType.Smile;
-                    IsFrown = _parent.Usage.FeedbackType.GetValueOrDefault(ExampleFeedbackType.Smile) == ExampleFeedbackType.Frown;
-                    FeedbackEmail = _parent.Usage.Email;
-                    if (!string.IsNullOrEmpty(_parent.Usage.FeedbackText))
-                    {
-                        FeedbackSubject = _parent.Usage.FeedbackText.Contains(":") ? _parent.Usage.FeedbackText.Substring(0, _parent.Usage.FeedbackText.IndexOf(":")) : "";
-                        FeedbackContent = _parent.Usage.FeedbackText.Contains(":") ? _parent.Usage.FeedbackText.Substring(_parent.Usage.FeedbackText.IndexOf(":") + 1) : _parent.Usage.FeedbackText;
-                    }
-                    else
-                    {
-                        FeedbackSubject = null;
-                        FeedbackContent = null;
-                    }
+                    FeedbackSubject = usageService.FeedbackText.Contains(":")
+                        ? usageService.FeedbackText.Substring(0, usageService.FeedbackText.IndexOf(":", StringComparison.InvariantCulture))
+                        : string.Empty;
 
-                });
+                    FeedbackContent = usageService.FeedbackText.Contains(":")
+                        ? usageService.FeedbackText.Substring(usageService.FeedbackText.IndexOf(":", StringComparison.InvariantCulture) + 1)
+                        : usageService.FeedbackText;
+                }
+                else
+                {
+                    FeedbackSubject = null;
+                    FeedbackContent = null;
+                }
             }
-        }
+        });
 
-        public ActionCommand SubmitCommand
+        public ActionCommand SubmitCommand => new ActionCommand(async () =>
         {
-            get
+            OnSubmitted = true;
+
+            var usageService = _parent.Usage;
+            if (usageService != null)
             {
-                return new ActionCommand(async () =>
-                {
-                    OnSubmitted = true;
+                usageService.FeedbackType = _isSmile
+                    ? ExampleFeedbackType.Smile
+                    : (_isFrown ? ExampleFeedbackType.Frown : (ExampleFeedbackType?)null);
 
-                    _parent.Usage.FeedbackType = (ExampleFeedbackType?)(_isSmile ? ExampleFeedbackType.Smile : (_isFrown ? ExampleFeedbackType.Frown : (ExampleFeedbackType?)null));
-                    _parent.Usage.FeedbackText = _feedbackSubject + ((_feedbackSubject + _feedbackContent).Length > 0 ? ": " : "") + _feedbackContent;
-                    _parent.Usage.Email = _feedbackEmail;
+                usageService.FeedbackText = _feedbackSubject +
+                                            ((_feedbackSubject + _feedbackContent).Length > 0 ? ": " : "") +
+                                            _feedbackContent;
 
-                    await Task.Delay(TimeSpan.FromMilliseconds(1500));
-                    SmileVisible = false;
-                    FrownVisible = false;
-                    await Task.Delay(TimeSpan.FromMilliseconds(500));
-                    OnSubmitted = false;
-                });
+                usageService.Email = _feedbackEmail;
             }
-        }
+
+            await Task.Delay(TimeSpan.FromMilliseconds(1500));
+
+            SmileVisible = false;
+            FrownVisible = false;
+
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+
+            OnSubmitted = false;
+        });
 
         public bool IsSmile
         {
-            get { return _isSmile; }
+            get => _isSmile;
             set
             {
                 if (_isSmile != value)
@@ -126,7 +136,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool IsFrown
         {
-            get { return _isFrown; }
+            get => _isFrown;
             set
             {
                 if (_isFrown != value)
@@ -143,71 +153,72 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool OnSubmitted
         {
-            get { return _onSubmitted; }
+            get => _onSubmitted;
             set
             {
                 if (_onSubmitted != value)
                 {
                     _onSubmitted = value;
-                    OnPropertyChanged("OnSubmitted");
+                    OnPropertyChanged(nameof(OnSubmitted));
                 }
             }
         }
 
         public string FeedbackEmail
         {
-            get { return _feedbackEmail; }
+            get => _feedbackEmail;
             set
             {
                 if (_feedbackEmail != value)
                 {
                     _feedbackEmail = value;
-                    OnPropertyChanged("FeedbackEmail");
+                    OnPropertyChanged(nameof(FeedbackEmail));
                 }
             }
         }
 
         public string FeedbackSubject
         {
-            get { return _feedbackSubject; }
+            get => _feedbackSubject;
             set
             {
                 if (_feedbackSubject != value)
                 {
                     _feedbackSubject = value;
-                    OnPropertyChanged("FeedbackSubject");
+                    OnPropertyChanged(nameof(FeedbackSubject));
                 }
             }
         }
 
         public string FeedbackContent
         {
-            get { return _feedbackContent; }
+            get => _feedbackContent;
             set
             {
                 if (_feedbackContent != value)
                 {
                     _feedbackContent = value;
-                    OnPropertyChanged("FeedbackContent");
+                    OnPropertyChanged(nameof(FeedbackContent));
                 }
             }
         }
 
         public bool SmileVisible
         {
-            get { return _isSmileVisible; }
+            get => _isSmileVisible;
             set
             {
                 if (_isSmileVisible != value)
                 {
                     _isSmileVisible = value;
-                    OnPropertyChanged("SmileVisible");
+                    OnPropertyChanged(nameof(SmileVisible));
                 }
 
                 if (SmileVisible)
                 {
                     _parent.ExportExampleViewModel.IsExportVisible = false;
                     _parent.BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
+                    
                     FrownVisible = false;
                 }
                 else
@@ -222,19 +233,20 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool FrownVisible
         {
-            get { return _isFrownVisible; }
+            get => _isFrownVisible;
             set
             {
                 if (_isFrownVisible != value)
                 {
                     _isFrownVisible = value;
-                    OnPropertyChanged("FrownVisible");
+                    OnPropertyChanged(nameof(FrownVisible));
                 }
 
                 if (FrownVisible)
                 {
                     _parent.ExportExampleViewModel.IsExportVisible = false;
                     _parent.BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
+                    
                     SmileVisible = false;
                 }
                 else
@@ -251,17 +263,17 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             get
             {
-                if (columnName == nameof(FeedbackEmail) && !this.IsValidEmail(this.FeedbackEmail))
+                if (columnName == nameof(FeedbackEmail) && !IsValidEmail(FeedbackEmail))
                 {
                     return "Please enter a valid email so we can reply";
                 }
 
-                if (columnName == nameof(FeedbackSubject) && string.IsNullOrWhiteSpace(this.FeedbackSubject))
+                if (columnName == nameof(FeedbackSubject) && string.IsNullOrWhiteSpace(FeedbackSubject))
                 {
                     return "Please enter a subject line";
                 }
 
-                if (columnName == nameof(FeedbackContent) && string.IsNullOrWhiteSpace(this.FeedbackContent))
+                if (columnName == nameof(FeedbackContent) && string.IsNullOrWhiteSpace(FeedbackContent))
                 {
                     return "Please tell us some feedback";
                 }
@@ -274,10 +286,14 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(feedbackEmail)) return false;
-                MailAddress m = new MailAddress(feedbackEmail);
+                if (string.IsNullOrWhiteSpace(feedbackEmail))
+                {
+                    return false;
+                }
 
-                return true;
+                var mailAddress = new MailAddress(feedbackEmail);
+
+                return mailAddress != null;
             }
             catch (FormatException)
             {

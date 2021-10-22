@@ -107,8 +107,12 @@
             
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:LegendModifier ShowLegend="True" Margin="10" LegendItemTemplate="{StaticResource LegendTemplate}" />
-                    <s:CursorModifier ShowTooltip="True" ShowTooltipOn="MouseHover" TooltipContainerStyle="{StaticResource CursorTooltipContainerStyle}"/>
+                    <s:LegendModifier ShowLegend="True" Margin="10" 
+                                      LegendItemTemplate="{StaticResource LegendTemplate}" />
+                    <s:CursorModifier ShowTooltip="True" 
+                                      ShowTooltipOn="MouseHover" 
+                                      ReceiveHandledEvents="True" 
+                                      TooltipContainerStyle="{StaticResource CursorTooltipContainerStyle}"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
 

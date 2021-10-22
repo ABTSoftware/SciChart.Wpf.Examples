@@ -119,9 +119,8 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Canvas x:Name="PART_Popup"
-                                Background="Transparent"
-                                Visibility="Collapsed">
+                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Left">
+                            
                             <s:Callout x:Name="Callout"
                                            MinWidth="100"
                                            MinHeight="60"
@@ -146,7 +145,7 @@
                                     </Style>
                                 </s:Callout.Resources>
                             </s:Callout>
-                        </Canvas>
+                        </Popup>
 
                         <Border x:Name="PART_Border"
                                 Margin="{TemplateBinding Margin}"
@@ -494,9 +493,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Canvas x:Name="PART_Popup"
-                                Background="Transparent"
-                                Visibility="Collapsed">
+                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Left">
                             <s:Callout x:Name="Callout"
                                            MinWidth="100"
                                            MinHeight="60"
@@ -521,7 +518,7 @@
                                     </Style>
                                 </s:Callout.Resources>
                             </s:Callout>
-                        </Canvas>
+                        </Popup>
 
                         <Border x:Name="PART_Border"
                                 Margin="{TemplateBinding Margin}"

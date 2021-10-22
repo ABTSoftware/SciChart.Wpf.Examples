@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="SciChart.Examples.Demo.Views.ExampleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
              xmlns:breadcrumb="clr-namespace:SciChart.Examples.Demo.Controls.Breadcrumb"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
@@ -75,6 +74,15 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ToolbarSeparatorStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Fill" Value="{StaticResource IconForeground}" />
+            <Setter Property="UseLayoutRounding" Value="True" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+
         <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <ext:BoolToValueConverter x:Key="BoolToValueVisibilityConverter"
@@ -140,69 +148,56 @@
                     <!--  Smile Frown  -->
                     <ToggleButton x:Name="SmileButton"
                                   Command="{Binding SendSmileCommand}"
-                                  IsChecked="{Binding Path=SmileFrownViewModel.SmileVisible,
-                                                      Mode=OneWay}"
+                                  IsChecked="{Binding Path=SmileFrownViewModel.SmileVisible, Mode=OneWay}"
                                   Style="{StaticResource SmileButtonStyle}"
                                   ToolTipService.ToolTip="Send us some positive feedback! :) Your encouragement goes a long way!"/>
-                    <Border Width="1"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <ToggleButton Command="{Binding SendFrownCommand}"
-                                  IsChecked="{Binding Path=SmileFrownViewModel.FrownVisible,
-                                                      Mode=OneWay}"
+                                  IsChecked="{Binding Path=SmileFrownViewModel.FrownVisible, Mode=OneWay}"
                                   Style="{StaticResource FrownButtonStyle}"
                                   ToolTipService.ToolTip="Send us some negative feedback :( We take all feedback seriously, good or bad!"/>
-                    <Border Width="2"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <!--  Show Example  -->
                     <ToggleButton Width="NaN"
-                                  IsChecked="{Binding ShowExample,
-                                                      Mode=TwoWay}"
+                                  IsChecked="{Binding ShowExample, Mode=TwoWay}"
                                   Style="{StaticResource IconToggleButtonStyle}"
                                   ToolTipService.ToolTip="Switch back to example view">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center"
+                                <TextBlock Text="Example"
+                                           VerticalAlignment="Center"
                                            Foreground="{Binding Path=(ext:TextElementEx.Foreground),
-                                                                RelativeSource={RelativeSource FindAncestor,
-                                                                                               AncestorType=ContentPresenter}}"
-                                           Text="Example" />
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}"/>
                             </DataTemplate>
                         </ToggleButton.ContentTemplate>
                     </ToggleButton>
-                    <Border Width="1"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <!--  Show Source Code  -->
                     <ToggleButton Width="NaN"
-                                  IsChecked="{Binding ShowSourceCode,
-                                                      Mode=TwoWay}"
+                                  IsChecked="{Binding ShowSourceCode, Mode=TwoWay}"
                                   Style="{StaticResource IconToggleButtonStyle}"
                                   ToolTipService.ToolTip="View the Source Code for this example right here in the app">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center"
+                                <TextBlock Text="Source Code"
+                                           VerticalAlignment="Center"
                                            Foreground="{Binding Path=(ext:TextElementEx.Foreground),
-                                                                RelativeSource={RelativeSource FindAncestor,
-                                                                                               AncestorType=ContentPresenter}}"
-                                           Text="Source Code" />
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}" />
                             </DataTemplate>
                         </ToggleButton.ContentTemplate>
                     </ToggleButton>
 
-                     <Border Width="2" 
-                             Margin="5" 
-                             VerticalAlignment="Stretch" 
-                             Background="{StaticResource IconForeground}" /> 
-                     
-                     <!-- Export -->
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <!-- Export -->
                      <ToggleButton Width="NaN" 
                                    Margin="0,5,0,0" 
                                    VerticalAlignment="Top" 
@@ -211,20 +206,17 @@
                                    Style="{StaticResource IconToggleButtonStyle}" 
                                    ToolTipService.ToolTip="Export this example to a standalone Visual Studio solution"> 
                          <ToggleButton.ContentTemplate> 
-                             <DataTemplate> 
-                                 <TextBlock VerticalAlignment="Center" 
-                                            Foreground="{Binding Path=(ext:TextElementEx.Foreground), 
-                                                                 RelativeSource={RelativeSource FindAncestor, 
-                                                                                                AncestorType=ContentPresenter}}" 
-                                            Text="Export Solution" /> 
+                             <DataTemplate>
+                                <TextBlock Text="Export Solution"
+                                           VerticalAlignment="Center" 
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground),
+                                                RelativeSource={RelativeSource FindAncestor, 
+                                                AncestorType=ContentPresenter}}" /> 
                              </DataTemplate> 
                          </ToggleButton.ContentTemplate> 
-                     </ToggleButton> 
+                     </ToggleButton>
 
-                    <Border Width="2"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <Button Width="NaN" Command="{Binding ShowGithubCommand}"
                             Style="{StaticResource IconButtonStyle}"
@@ -251,10 +243,7 @@
                         </Button.ContentTemplate>
                     </Button>
 
-                    <Border Width="2"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <Button Width="NaN" Command="{Binding GoToDocumentationCommand}"
                             Style="{StaticResource IconButtonStyle}"
@@ -281,24 +270,20 @@
                         </Button.ContentTemplate>
                     </Button>
 
-                    <Border Width="2"
-                            Margin="5"
-                            VerticalAlignment="Stretch"
-                            Background="{StaticResource IconForeground}" />
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
 
                     <!--  Info Panel  -->
                     <ToggleButton x:Name="InfoPanelButton"
                                   Width="NaN"
-                                  IsChecked="{Binding IsInfoVisible,
-                                                      Mode=TwoWay}"
+                                  IsChecked="{Binding IsInfoVisible, Mode=TwoWay}"
                                   Style="{StaticResource IconToggleButtonStyle}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center"
+                                <TextBlock Text="Info"
+                                           VerticalAlignment="Center"
                                            Foreground="{Binding Path=(ext:TextElementEx.Foreground),
-                                                                RelativeSource={RelativeSource FindAncestor,
-                                                                                               AncestorType=ContentPresenter}}"
-                                           Text="Info" />
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}" />
                             </DataTemplate>
                         </ToggleButton.ContentTemplate>
                     </ToggleButton>
@@ -328,7 +313,7 @@
 
 
             <!--  Description / Info Box  -->
-            <Expander x:Name="DescriptiontBoxExpander"
+            <Expander x:Name="DescriptionBoxExpander"
                       Grid.Column="1"
                       ExpandDirection="Left"
                       IsExpanded="{Binding ElementName=InfoPanelButton,

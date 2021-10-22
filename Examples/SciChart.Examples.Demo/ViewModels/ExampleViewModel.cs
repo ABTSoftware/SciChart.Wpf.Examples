@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using SciChart.Examples.Demo.Common;
@@ -198,7 +197,7 @@ namespace SciChart.Examples.Demo.ViewModels
                     OnPropertyChanged("ShowSourceCode");
 
                     ShowExample = !ShowSourceCode;
-                    if (_showSourceCode)
+                    if (_showSourceCode && Usage != null)
                     {
                         Usage.ViewedSource = true;
                     }

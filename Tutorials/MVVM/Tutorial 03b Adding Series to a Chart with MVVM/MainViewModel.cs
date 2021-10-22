@@ -11,11 +11,13 @@ namespace SciChart.Mvvm.Tutorial
         private string _chartTitle = "Hello SciChart World!";
         private string _xAxisTitle = "XAxis";
         private string _yAxisTitle = "YAxis";
+
         private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries;
 
         public MainViewModel()
         {
             var lineData = new XyDataSeries<double, double>() { SeriesName = "TestingSeries" };
+
             lineData.Append(0, 0);
             lineData.Append(1, 1);
             lineData.Append(2, 2);

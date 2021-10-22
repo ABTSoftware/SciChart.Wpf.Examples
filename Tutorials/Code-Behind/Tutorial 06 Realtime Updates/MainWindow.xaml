@@ -5,7 +5,10 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
          mc:Ignorable="d"
-         Title="MainWindow" Height="550" Width="800">
+         Title="MainWindow"
+         Height="550"
+         Width="800">
+
     <Grid Background="#222">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -31,15 +34,16 @@
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton"
-                                                 RubberBandFill="#33FFFFFF" RubberBandStroke="#AAFFFFFF"
-                                                 RubberBandStrokeDashArray="2 2"/>
+                                                 RubberBandFill="#33FFFFFF"
+                                                 RubberBandStroke="#AAFFFFFF"
+                                                 RubberBandStrokeDashArray="2,2"/>
                     <s:ZoomPanModifier ExecuteOn="MouseRightButton" ClipModeX="None" />
                     <s:YAxisDragModifier DragMode="Scale"/>
                     <s:XAxisDragModifier DragMode="Pan"/>
                     <s:MouseWheelZoomModifier/>
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
-                    <!-- NEW CODE HERE -->
 
+                    <!-- NEW CODE HERE -->
                     <!-- Add a Legend to the chart -->
                     <!-- where xmlns:s="http://schemas.abtsoftware.co.uk/scichart" -->
                     <s:LegendModifier ShowLegend="True" Orientation="Horizontal"

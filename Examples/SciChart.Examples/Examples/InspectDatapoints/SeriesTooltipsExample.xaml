@@ -147,7 +147,7 @@
                     <s:TooltipModifier ReceiveHandledEvents="True"
                                        ShowTooltipOn="Always"
                                        TooltipLabelDataContextSelector="{Binding TooltipDataContext}"
-                                       UseInterpolation="True" />
+                                       UseInterpolation="True"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>

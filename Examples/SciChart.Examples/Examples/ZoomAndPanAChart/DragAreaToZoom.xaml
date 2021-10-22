@@ -39,7 +39,7 @@
                 <s:FastMountainRenderableSeries x:Name="mountainSeries" 
                                                     Fill="#771964FF"
                                                     Stroke="#FF0944CF"
-                                                    YAxisId="PrimaryAxis">
+                                                    YAxisId="SecondaryAxis">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
@@ -47,7 +47,7 @@
                 <s:FastLineRenderableSeries x:Name ="lineSeries" 
                                                 Stroke="#FF279B27"
                                                 StrokeThickness="2"
-                                                YAxisId="SecondaryAxis">
+                                                YAxisId="PrimaryAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>

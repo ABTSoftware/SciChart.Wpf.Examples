@@ -1,0 +1,22 @@
+﻿<Application x:Class="SciChartSurfaceMeshSelection.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SciChartSurfaceMeshSelection"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <Style x:Key="DefaultDragReticuleStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="{s:ThemeBinding RubberBandStrokeBrush}" />
+            <Setter Property="Fill" Value="{s:ThemeBinding RubberBandFillBrush}" />
+            <Setter Property="StrokeDashArray" Value="2 2" />
+        </Style>
+
+        <!--  SurfaceMeshSelectionModifier  -->
+        <Style TargetType="{x:Type local:SurfaceMeshSelectionModifier}">
+            <Setter Property="DragReticuleStyle" Value="{StaticResource DefaultDragReticuleStyle}" />
+        </Style>
+    </Application.Resources>
+</Application>

@@ -11,7 +11,8 @@
              mc:Ignorable="d">
     
     <UserControl.Resources>
-        <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
+        <s3D:GradientColorPalette x:Key="HeightColorMap" 
+                                  ContourStrokeThickness="1.0">
             <s3D:GradientColorPalette.GradientStops>
                 <GradientStop Offset="1.0" Color="DarkRed" />
                 <GradientStop Offset="0.9" Color="Red" />
@@ -22,6 +23,13 @@
                 <GradientStop Offset="0.0" Color="#1D2C6B" />
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
+
+        <LinearGradientBrush x:Key="MountainChartFill" StartPoint="0,0" EndPoint="0,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="0" Color="#4682B4"/>
+                <GradientStop Offset="1" Color="#374682B4"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
 
     </UserControl.Resources>
     
@@ -47,19 +55,20 @@
                                Grid.RowSpan="2"
                                Grid.Column="1"
                                BorderThickness="0"
-                               WorldDimensions="200,100,200">
+                               WorldDimensions="200,200,200"
+                               IsFpsCounterVisible="False">
 
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D ZoomToFitOnAttach="True" />
+                <s3D:Camera3D Position="-225,300,-225" Target="0,50,0" />
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries"
-                                                   DrawMeshAs="SolidWireFrame"
                                                    DrawSkirt="False"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
-                                                   Stroke="#77228B22"
-                                                   StrokeThickness="2.0"/>
+                                                   MeshPaletteMode="HeightMapInterpolated"
+                                                   Stroke="#4682B4"
+                                                   StrokeThickness="1.0"/>
 
             </s3D:SciChart3DSurface.RenderableSeries>
 
@@ -71,6 +80,7 @@
                 <s3D:NumericAxis3D x:Name="YAx3D"
                                    AxisTitle="Rate (%)"
                                    AxisTitleOffset="60"
+                                   TextFormatting="#"
                                    VisibleRange="0,10" />
             </s3D:SciChart3DSurface.YAxis>
 
@@ -90,10 +100,9 @@
         <s:HeatmapColorMap Grid.Row="0"
                            Grid.RowSpan="2"
                            Grid.Column="1"
-                           Height="200"
                            Margin="15"
                            HorizontalAlignment="Right"
-                           VerticalAlignment="Bottom"
+                           VerticalAlignment="Stretch"
                            Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
                            BorderBrush="#777"
                            BorderThickness="1"
@@ -124,19 +133,26 @@
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="Lavender">
-                    <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="5" Height="5" Fill="White" />
-                    </s:FastLineRenderableSeries.PointMarker>
-                </s:FastLineRenderableSeries>
+                <s:FastMountainRenderableSeries x:Name="MountainSeries0" Stroke="#4682b4" 
+                                                StrokeThickness="5"
+                                                Fill="{StaticResource MountainChartFill}">
+                </s:FastMountainRenderableSeries>
+                <s:XyScatterRenderableSeries x:Name="ScatterSeries0">
+                    <s:EllipsePointMarker Width="7" Height="7" Stroke="#366294"  Fill="White" />
+                </s:XyScatterRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis GrowBy="0.1,0.1" VisibleRange="-1, 26" />
+                <s:NumericAxis DrawMajorGridLines="False"
+                               DrawMinorGridLines="False"
+                               DrawMajorBands="True"/>
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis GrowBy="0.1,0.1" VisibleRange="0.9,2.7" />
+                <s:NumericAxis GrowBy="0,0.1" MaxAutoTicks="5"
+                               DrawMajorGridLines="True"
+                               DrawMinorGridLines="False"
+                               DrawMajorBands="False"/>
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>
@@ -147,15 +163,28 @@
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastMountainRenderableSeries x:Name="mountainRenderSeries" Stroke="#AAFFC9A8" StrokeThickness="2" />
+                <s:FastMountainRenderableSeries x:Name="MountainSeries1" Stroke="#4682b4" 
+                                                StrokeThickness="5"
+                                                Fill="{StaticResource MountainChartFill}"
+                                                />
+                <s:XyScatterRenderableSeries x:Name="ScatterSeries1">
+                    <s:EllipsePointMarker Width="7" Height="7" Stroke="#366294"  Fill="White" />
+                </s:XyScatterRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis GrowBy="0.1,0.1" VisibleRange="-1, 25" />
+                <s:NumericAxis DrawMajorGridLines="False"
+                               DrawMinorGridLines="False"
+                               DrawMajorBands="True"/>
+
+
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis />
+                <s:NumericAxis GrowBy="0,0.1" MaxAutoTicks="5" 
+                               DrawMajorGridLines="True"
+                               DrawMinorGridLines="False"
+                               DrawMajorBands="False"/>
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>

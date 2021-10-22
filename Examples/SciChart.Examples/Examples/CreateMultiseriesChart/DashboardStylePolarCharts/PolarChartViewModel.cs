@@ -22,19 +22,15 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
 {
     public class PolarChartViewModel : BaseViewModel
     {
-        private readonly string _title;
-
         public List<IRenderableSeriesViewModel> RenderableSeriesViewModel { get; private set; }
 
-        public string Title
-        {
-            get { return _title; }
-        }
+        public string Title { get; private set; }
 
         public PolarChartViewModel(params IRenderableSeriesViewModel[] series)
         {
             RenderableSeriesViewModel = new List<IRenderableSeriesViewModel>(series);
-            _title = series.First().GetType().Name;
+            
+            Title = series.First().GetType().Name;
         }
     }
 }

@@ -19,7 +19,6 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="BAR" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="150">
@@ -33,7 +32,6 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface Grid.Column="1" Padding="0" BorderThickness="0" x:Name="sciChart">
@@ -42,15 +40,16 @@
                 <!--  Line and Error series are bound to the same (first) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
                 <s:FastErrorBarsRenderableSeries x:Name="errorSeries1"
-                                                 DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}"
-                                                 DataSeries="{Binding DataSeries0}"
-                                                 StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+                                                 DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
+                                                 DataSeries="{Binding DataSeries0, Mode=OneWay}"
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                 </s:FastErrorBarsRenderableSeries>
-                
-                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+
+                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0, Mode=OneWay}"
+                                            StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5"
                                               Height="5"
@@ -64,15 +63,16 @@
                 <!--  Scatter and Error series are bound to the same (second) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
                 <s:FastErrorBarsRenderableSeries x:Name="errorSeries2"
-                                                 DataPointWidth="{Binding DataPointWidth, Mode=TwoWay}"
-                                                 DataSeries="{Binding DataSeries1}"
-                                                 StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+                                                 DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
+                                                 DataSeries="{Binding DataSeries1, Mode=OneWay}"
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                 </s:FastErrorBarsRenderableSeries>
-                
-                <s:XyScatterRenderableSeries DataSeries="{Binding DataSeries1}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}">
+
+                <s:XyScatterRenderableSeries DataSeries="{Binding DataSeries1, Mode=OneWay}"
+                                             StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
@@ -83,7 +83,6 @@
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:XyScatterRenderableSeries.SeriesAnimation>
                 </s:XyScatterRenderableSeries>
-
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
