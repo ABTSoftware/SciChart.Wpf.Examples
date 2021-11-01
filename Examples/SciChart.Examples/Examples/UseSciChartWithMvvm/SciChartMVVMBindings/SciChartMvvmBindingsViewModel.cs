@@ -24,6 +24,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 
             XAxes = new ObservableCollection<IAxisViewModel>();
             YAxes = new ObservableCollection<IAxisViewModel>();
+
             InitializeAxes();
         }
 
@@ -82,7 +83,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 
             AnnotationViewModels.Add(new LineAnnotationViewModel
             {
-                Stroke = (Colors.Chartreuse),
+                Stroke = Colors.Chartreuse,
                 StrokeThickness = 2,
                 Tooltip = "Hi, I am tooltip!",
                 X1 = 1,
@@ -99,7 +100,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 LabelPlacement = LabelPlacement.TopLeft,
                 LabelValue = "Right Aligned, with text on left",
                 ShowLabel = true,
-                Stroke = (Colors.Orange),
+                Stroke = Colors.Orange,
                 StrokeThickness = 2,
                 X1 = 5,
                 X2 = 6,
@@ -175,20 +176,20 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 
         private void InitializeRenderableSeries()
         {
-            var renderableSeries = new  LineRenderableSeriesViewModel
+            var renderableSeries = new LineRenderableSeriesViewModel
             {
-                Stroke = Colors.Blue, 
+                Stroke = Colors.Blue,
                 StrokeThickness = 2,
                 PointMarker = new EllipsePointMarker()
             };
 
-            var dataSeries = new XyDataSeries<double>();
+            var dataSeries = new UniformXyDataSeries<double>();
 
             renderableSeries.DataSeries = dataSeries;
 
             for (int i = 0; i < 11; ++i)
             {
-                dataSeries.Append(i, i - 3);
+                dataSeries.Append(i - 3);
             }
 
             RenderableSeries.Add(renderableSeries);
@@ -216,7 +217,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 VisibleRange = new DateRange(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)),
                 StyleKey = "DateTimeAxisStyle"
             };
-        
+
             XAxes.Add(xDateTimeAxis);
 
             var yNumAxis = new NumericAxisViewModel
@@ -225,7 +226,6 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 DrawMajorBands = false,
                 TextFormatting = "0.0#",
                 VisibleRange = new DoubleRange(-10, 10)
-   
             };
 
             YAxes.Add(yNumAxis);

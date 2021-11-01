@@ -13,6 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,7 +38,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints
         public void SeriesSelectionExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Create a number of DataSeries of type X=double, Y=double
-            var allDataSeries = new IDataSeries<double, double>[SeriesCount];
+            var allDataSeries = new IUniformXyDataSeries<double>[SeriesCount];
 
             var initialColor = Colors.Blue;
 
@@ -46,7 +48,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints
                 // Add N data and renderable series
                 for (int i = 0; i < SeriesCount; i++)
                 {
-                    AxisAlignment alignment = i%2 == 0 ? AxisAlignment.Left : AxisAlignment.Right;
+                    AxisAlignment alignment = i % 2 == 0 ? AxisAlignment.Left : AxisAlignment.Right;
 
                     allDataSeries[i] = GenerateDataSeries(alignment, i);
 
@@ -63,24 +65,28 @@ namespace SciChart.Examples.Examples.InspectDatapoints
                     // Colors are incremented for visual purposes only
                     int newR = initialColor.R == 255 ? 255 : initialColor.R + 5;
                     int newB = initialColor.B == 0 ? 0 : initialColor.B - 2;
+
                     initialColor = Color.FromArgb(255, (byte) newR, initialColor.G, (byte) newB);
                 }
             }
 
+            sciChartSurface.RenderableSeries[SeriesCount / 2].IsSelected = true;
+
             sciChartSurface.ZoomExtents();
         }
 
-        private IDataSeries<double, double> GenerateDataSeries(AxisAlignment axisAlignment, int index)
+        private IUniformXyDataSeries<double> GenerateDataSeries(AxisAlignment axisAlignment, int index)
         {
-            var dataSeries = new XyDataSeries<double, double>();
-            dataSeries.SeriesName = string.Format("Series {0}", index);
+            var dataSeries = new UniformXyDataSeries<double>
+            {
+                SeriesName = string.Format("Series {0}", index)
+            };
 
             double gradient = axisAlignment == AxisAlignment.Right ? index : -index;
             double start = axisAlignment == AxisAlignment.Right ? 0.0 : 14000;
 
-            DoubleSeries straightLineData = DataManager.Instance.GetStraightLine(gradient, start, SeriesPointCount);           
+            dataSeries.Append(DataManager.Instance.GetStraightLineYData(gradient, start, SeriesPointCount));
 
-            dataSeries.Append(straightLineData.XData, straightLineData.YData);
             return dataSeries;
         }
     }

@@ -26,9 +26,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.LoadMillions
 {
     public class LoadMillionsPageViewModel : BaseViewModel
     {
-        private IXyDataSeries<double, double> _dataSeries;
-        private readonly IViewportManager _viewportManager = new DefaultViewportManager();
-
+        private IUniformXyDataSeries<double> _dataSeries;
         private const int Count = 1000000;
 
         public LoadMillionsPageViewModel()
@@ -38,19 +36,18 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.LoadMillions
 
         public ActionCommand RunExampleCommand { get; private set; }
 
-        public IViewportManager ViewportManager
-        {
-            get { return _viewportManager; }
-        }
+        public IViewportManager ViewportManager { get; } = new DefaultViewportManager();
 
-        public IXyDataSeries<double, double> DataSeries
+        public IUniformXyDataSeries<double> DataSeries
         {
-            get { return _dataSeries; }
+            get => _dataSeries;
             set
             {
-                if (_dataSeries == value) return;
-                _dataSeries = value;
-                OnPropertyChanged("DataSeries");
+                if (_dataSeries != value)
+                {
+                    _dataSeries = value;
+                    OnPropertyChanged("DataSeries");
+                }
             }
         }
 
@@ -62,24 +59,24 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.LoadMillions
         private void OnRunExample()
         {
             Task.Factory.StartNew(() =>
-                {
-                    DataSeries = null;
+            {
+                DataSeries = null;
 
-                    // Generate Data and mark time 
-                    var dataSeries = new XyDataSeries<double, double>();
-                    var stopwatch = Stopwatch.StartNew();
-                    var xyData = new RandomWalkGenerator(0.0d).GetRandomWalkSeries(Count);
-                    stopwatch.Stop();
+                // Generate Data and mark time 
+                var dataSeries = new UniformXyDataSeries<double>();
+                var stopwatch = Stopwatch.StartNew();
+                var yData = new RandomWalkGenerator(0d).GetRandomWalkYData(Count);
+                stopwatch.Stop();
 
-                    // Append to SciChartSurface and mark time
-                    stopwatch = Stopwatch.StartNew();
-                    dataSeries.Append(xyData.XData, xyData.YData);
-                    DataSeries = dataSeries;
-                    stopwatch.Stop();
+                // Append to SciChartSurface and mark time
+                stopwatch = Stopwatch.StartNew();
+                dataSeries.Append(yData);
+                DataSeries = dataSeries;
+                stopwatch.Stop();
 
-                    // Zoom viewport to extents
-                    ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
-                });
+                // Zoom viewport to extents
+                ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
+            });
         }
     }
 }

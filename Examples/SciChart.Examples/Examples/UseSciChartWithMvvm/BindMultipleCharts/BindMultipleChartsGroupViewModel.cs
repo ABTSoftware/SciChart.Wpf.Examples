@@ -22,8 +22,10 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.BindMultipleCharts
 {
     public class BindMultipleChartsGroupViewModel : BaseViewModel
     {
-        private readonly ObservableCollection<ChartViewModel> _chartViewModels = new ObservableCollection<ChartViewModel>();
         private readonly RandomWalkGenerator _dataSource = new RandomWalkGenerator();
+
+        // Expose N ChartViewModels for each ChartView to bind to
+        public ObservableCollection<ChartViewModel> ChartViewModels { get; } = new ObservableCollection<ChartViewModel>();
 
         public BindMultipleChartsGroupViewModel()
         {
@@ -31,28 +33,22 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.BindMultipleCharts
             for (int i = 0; i < 9; i++)
             {
                 // Create a ChartViewModel          
-                var chartViewModel = new ChartViewModel();                
+                var chartViewModel = new ChartViewModel();             
 
                 // Create the data-series
-                var dataSeries = new XyDataSeries<double, double>();
+                var dataSeries = new UniformXyDataSeries<double>(i * 1000, 1d);
 
                 // Create data
-                var dummyXyData = _dataSource.GetRandomWalkSeries(1000);
+                var dummyYData = _dataSource.GetRandomWalkYData(1000);
 
                 // Append X,Y data
-                dataSeries.Append(dummyXyData.XData, dummyXyData.YData);
+                dataSeries.Append(dummyYData);
 
                 // Set the DataSeries on the ChartViewModel
                 chartViewModel.ChartData = dataSeries;
 
-                _chartViewModels.Add(chartViewModel);
+                ChartViewModels.Add(chartViewModel);
             }
-        }
-
-        // Expose N ChartViewModels for each ChartView to bind to
-        public ObservableCollection<ChartViewModel> ChartViewModels
-        {
-            get { return _chartViewModels; }
         }
     }
 }

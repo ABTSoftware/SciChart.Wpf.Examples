@@ -28,40 +28,40 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
         {
             InitializeComponent();
 
-            cboGetLegendFor.ItemsSource = Enum.GetNames(typeof (SourceMode));
+            cboGetLegendFor.ItemsSource = Enum.GetNames(typeof(SourceMode));
             cboGetLegendFor.SelectedIndex = 0;
 
-            cboLegendPlacement.ItemsSource = Enum.GetNames(typeof (LegendPlacement));
-            cboLegendPlacement.SelectedItem = Enum.GetName(typeof (LegendPlacement), LegendPlacement.Inside);
+            cboLegendPlacement.ItemsSource = Enum.GetNames(typeof(LegendPlacement));
+            cboLegendPlacement.SelectedItem = Enum.GetName(typeof(LegendPlacement), LegendPlacement.Inside);
 
-            cboLegendOrientation.ItemsSource = Enum.GetNames(typeof (Orientation));
-            cboLegendOrientation.SelectedItem = Enum.GetName(typeof (Orientation), Orientation.Vertical);
+            cboLegendOrientation.ItemsSource = Enum.GetNames(typeof(Orientation));
+            cboLegendOrientation.SelectedItem = Enum.GetName(typeof(Orientation), Orientation.Vertical);
 
-            cboHorizontalAlignment.ItemsSource = Enum.GetNames(typeof (HorizontalAlignment));
-            cboHorizontalAlignment.SelectedItem = Enum.GetName(typeof(HorizontalAlignment), System.Windows.HorizontalAlignment.Left);
+            cboHorizontalAlignment.ItemsSource = Enum.GetNames(typeof(HorizontalAlignment));
+            cboHorizontalAlignment.SelectedItem = Enum.GetName(typeof(HorizontalAlignment), HorizontalAlignment.Left);
 
             cboVerticalAlignment.ItemsSource = Enum.GetNames(typeof(VerticalAlignment));
-            cboVerticalAlignment.SelectedItem = Enum.GetName(typeof(VerticalAlignment), System.Windows.VerticalAlignment.Top);
+            cboVerticalAlignment.SelectedItem = Enum.GetName(typeof(VerticalAlignment), VerticalAlignment.Top);
         }
 
         private void MultipleLinesView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Add some data series of type X=double, Y=double
-            var dataSeries0 = new XyDataSeries<double, double> {SeriesName = "Curve A"};
-            var dataSeries1 = new XyDataSeries<double, double> {SeriesName = "Curve B"};
-            var dataSeries2 = new XyDataSeries<double, double> {SeriesName = "Curve C"};
-            var dataSeries3 = new XyDataSeries<double, double> { SeriesName = "Curve D" };
+            var dataSeries0 = new UniformXyDataSeries<double>(1d, 1d) { SeriesName = "Curve A" };
+            var dataSeries1 = new UniformXyDataSeries<double>(1d, 1d) { SeriesName = "Curve B" };
+            var dataSeries2 = new UniformXyDataSeries<double>(1d, 1d) { SeriesName = "Curve C" };
+            var dataSeries3 = new UniformXyDataSeries<double>(1d, 1d) { SeriesName = "Curve D" };
 
-            var data1 = DataManager.Instance.GetStraightLine(1000, 1.0, 10);
-            var data2 = DataManager.Instance.GetStraightLine(2000, 1.0, 10);
-            var data3 = DataManager.Instance.GetStraightLine(3000, 1.0, 10);
-            var data4 = DataManager.Instance.GetStraightLine(4000, 1.0, 10);
+            var data1 = DataManager.Instance.GetStraightLineYData(1000, 1.0, 10);
+            var data2 = DataManager.Instance.GetStraightLineYData(2000, 1.0, 10);
+            var data3 = DataManager.Instance.GetStraightLineYData(3000, 1.0, 10);
+            var data4 = DataManager.Instance.GetStraightLineYData(4000, 1.0, 10);
 
             // Append data to series.
-            dataSeries0.Append(data1.XData, data1.YData);
-            dataSeries1.Append(data2.XData, data2.YData);
-            dataSeries2.Append(data3.XData, data3.YData);
-            dataSeries3.Append(data4.XData, data4.YData);
+            dataSeries0.Append(data1);
+            dataSeries1.Append(data2);
+            dataSeries2.Append(data3);
+            dataSeries3.Append(data4);
 
             sciChart.RenderableSeries[0].DataSeries = dataSeries0;
             sciChart.RenderableSeries[1].DataSeries = dataSeries1;

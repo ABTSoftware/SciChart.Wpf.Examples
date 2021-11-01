@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:eegChannelsDemo="clr-namespace:SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -41,11 +42,11 @@
                              Foreground="White"
                              Text="{Binding ChannelName}" />
 
-                  <!-- Declare the SciChartSurface. We use RenderPriority=Low to put rendering below mouse input and keep the app responsive -->
-                  <s:SciChartSurface Grid.Column="1"
-                                     Height="20"
-                                     HorizontalAlignment="Stretch"
-                                     Padding="0">
+                    <!-- Declare the SciChartSurface. SciChartSurfaceEx enables hardware acceleration by default -->
+                    <eegChannelsDemo:SciChartSurfaceEx Grid.Column="1"
+                                         Height="20"
+                                         HorizontalAlignment="Stretch"
+                                         Padding="0">
 
                     <!--  Declare RenderableSeries, which are mapped to DataSet Series 1:1 and in order  -->
                     <s:SciChartSurface.RenderableSeries>
@@ -71,9 +72,6 @@
                                      DrawMinorGridLines="False"
                                      DrawMajorBands="False"
                                      Visibility="Collapsed">
-                        <s:NumericAxis.GrowBy>
-                          <s:DoubleRange Max="0" Min="0" />
-                        </s:NumericAxis.GrowBy>
                       </s:NumericAxis>
                     </s:SciChartSurface.XAxis>
                     <s:SciChartSurface.YAxis>
@@ -84,7 +82,7 @@
                                      Visibility="Collapsed" />
                     </s:SciChartSurface.YAxis>
 
-                  </s:SciChartSurface>
+                  </eegChannelsDemo:SciChartSurfaceEx>
                 </Grid>
             </DataTemplate>
 

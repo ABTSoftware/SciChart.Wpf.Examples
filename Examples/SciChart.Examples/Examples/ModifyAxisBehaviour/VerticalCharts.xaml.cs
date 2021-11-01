@@ -32,29 +32,28 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
         private void VerticalXAxis_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var leftDataSeries0 = new XyDataSeries<double, double>();
-            var leftDataSeries1 = new XyDataSeries<double, double>();
+            var leftDataSeries0 = new UniformXyDataSeries<double>();
+            var leftDataSeries1 = new UniformXyDataSeries<double>();
 
-            var rightDataSeries0 = new XyDataSeries<double, double>();
-            var rightDataSeries1 = new XyDataSeries<double, double>();
+            var rightDataSeries0 = new UniformXyDataSeries<double>();
+            var rightDataSeries1 = new UniformXyDataSeries<double>();
 
             var random = new Random(0);
 
             for (int i = 0; i < 20; i++)
             {
-                leftDataSeries0.Append(i, random.Next(10));
-                leftDataSeries1.Append(i, random.Next(10));
+                leftDataSeries0.Append(random.Next(10));
+                leftDataSeries1.Append(random.Next(10));
 
-                rightDataSeries0.Append(i, random.Next(10));
-                rightDataSeries1.Append(i, random.Next(10));
+                rightDataSeries0.Append(random.Next(10));
+                rightDataSeries1.Append(random.Next(10));
             }
-           
+
             sciChartLeft.RenderableSeries[0].DataSeries = leftDataSeries0;
             sciChartLeft.RenderableSeries[1].DataSeries = leftDataSeries1;
 
             sciChartRight.RenderableSeries[0].DataSeries = rightDataSeries0;
             sciChartRight.RenderableSeries[1].DataSeries = rightDataSeries1;
         }
-
     }
 }

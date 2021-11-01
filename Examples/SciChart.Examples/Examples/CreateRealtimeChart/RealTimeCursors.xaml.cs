@@ -37,21 +37,21 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         private double t;
 
         // The dataseries to fill
-        private readonly IXyDataSeries<double, double> _series0;
-        private readonly IXyDataSeries<double, double> _series1;
-        private readonly IXyDataSeries<double, double> _series2;
+        private readonly IUniformXyDataSeries<double> _series0;
+        private readonly IUniformXyDataSeries<double> _series1;
+        private readonly IUniformXyDataSeries<double> _series2;
 
         public RealTimeCursors()
         {
             InitializeComponent();
 
-            _timerNewDataUpdate = new Timer(dt * 1000) {AutoReset = true};
+            _timerNewDataUpdate = new Timer(dt * 1000) { AutoReset = true };
             _timerNewDataUpdate.Elapsed += OnNewData;
 
             // Create new Dataseries of type X=double, Y=double
-            _series0 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Orange Series"};
-            _series1 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Blue Series"};
-            _series2 = new XyDataSeries<double, double> {FifoCapacity = FifoSize, SeriesName = "Green Series"};
+            _series0 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Orange Series" };
+            _series1 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Blue Series" };
+            _series2 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Green Series" };
 
             // Set the dataseries on the chart's RenderableSeries
             renderableSeries0.DataSeries = _series0;
@@ -81,9 +81,9 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             using (sciChartSurface.SuspendUpdates())
             {
                 // Append x,y data to previously created series
-                _series0.Append(t, y1);
-                _series1.Append(t, y2);
-                _series2.Append(t, y3);
+                _series0.Append(y1);
+                _series1.Append(y2);
+                _series2.Append(y3);
             }
 
             // Increment current time

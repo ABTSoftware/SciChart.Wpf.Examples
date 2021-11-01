@@ -76,47 +76,53 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             TryCacheResources(context);
 
             var markerLocations = centers.ToArray();
+            var locationIndex = 0;
             var prevValue = 0d;
 
-            for (int i = 0; i < markerLocations.Length; ++i)
+            for (int i = 0; i < _dataPointMetadata.Count; ++i)
             {
-                if (_dataPointMetadata[_dataPointIndexes[i]] is BudgetPointMetadata metadata)
+                if (_dataPointMetadata[i] is BudgetPointMetadata metadata)
                 {
-                    var center = markerLocations[i];
                     var isGain = metadata.GainLossValue >= prevValue;
-
-                    DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
-
                     prevValue = metadata.GainLossValue;
-                    var gainLossValue = metadata.GainLossValue + "$";
 
-                    _textBlock.Text = gainLossValue;
-                    _textBlock.MeasureArrange();
+                    if (_dataPointIndexes.Contains(i))
+                    {
+                        var center = markerLocations[locationIndex];
+                        var gainLossValue = metadata.GainLossValue + "$";
 
-                    var xPos = center.X - _textBlock.DesiredSize.Width / 2;
-                    xPos = xPos < 0 ? TextIndent : xPos;
+                        DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
+       
+                        _textBlock.Text = gainLossValue;
+                        _textBlock.MeasureArrange();
 
-                    var marginalRightPos = context.ViewportSize.Width - _textBlock.DesiredSize.Width - TextIndent;
-                    xPos = xPos > marginalRightPos ? marginalRightPos : xPos;
+                        var xPos = center.X - _textBlock.DesiredSize.Width / 2;
+                        xPos = xPos < 0 ? TextIndent : xPos;
 
-                    var yPos = center.Y;
-                    var yOffset = isGain ? -_textBlock.DesiredSize.Height - TextIndent : TextIndent;
-                    yPos += yOffset;
+                        var marginalRightPos = context.ViewportSize.Width - _textBlock.DesiredSize.Width - TextIndent;
+                        xPos = xPos > marginalRightPos ? marginalRightPos : xPos;
 
-                    var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
-                    context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
+                        var yPos = center.Y;
+                        var yOffset = isGain ? -_textBlock.DesiredSize.Height - TextIndent : TextIndent;
+                        yPos += yOffset;
 
-                    if (metadata.IsCheckPoint) 
-                        context.DrawQuad(_strokePen, textRect.TopLeft, textRect.BottomRight);
+                        var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
+                        context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
+
+                        if (metadata.IsCheckPoint)
+                            context.DrawQuad(_strokePen, textRect.TopLeft, textRect.BottomRight);
+
+                        locationIndex++;
+                    }
                 }
             }
         }
 
         private void TryCacheResources(IRenderContext2D context)
         {
-            if (!context.IsCompatibleType(_strokePen)) 
+            if (!context.IsCompatibleType(_strokePen))
                 Dispose();
-            
+
             _strokePen = _strokePen ?? context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
             _gainFillBrush = _gainFillBrush ?? context.CreateBrush(GainMarkerFill);
             _lossFillBrush = _lossFillBrush ?? context.CreateBrush(LossMarkerFill);

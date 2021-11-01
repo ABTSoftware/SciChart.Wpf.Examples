@@ -30,16 +30,16 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
         private void LeftRightAxesView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Add two data series. These are bound 1:1 to renderableSeries
-            var leftDataSeries = new XyDataSeries<double, double>();
-            var rightDataSeries = new XyDataSeries<double, double>();
+            var leftDataSeries = new UniformXyDataSeries<double>(0d, 0.002);
+            var rightDataSeries = new UniformXyDataSeries<double>(0d, 0.002);
 
             // Get some data
-            var data1 = DataManager.Instance.GetFourierSeries(1.0, 0.1);
-            var data2 = DataManager.Instance.GetDampedSinewave(3.0, 0.005, data1.Count);
+            var data1 = DataManager.Instance.GetFourierYData(1.0, 0.1);
+            var data2 = DataManager.Instance.GetDampedSinewaveYData(3.0, 0.005, data1.Length);
 
             // Append data to series
-            leftDataSeries.Append(data1.XData, data1.YData);
-            rightDataSeries.Append(data2.XData, data2.YData);
+            leftDataSeries.Append(data1);
+            rightDataSeries.Append(data2);
 
             // Assign DataSeries to RenderableSeries
             // Note, you can also bind these as RenderableSeries.DataSeries is a DependencyProperty

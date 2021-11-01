@@ -33,14 +33,12 @@ namespace SciChart.Examples.Examples.ZoomHistory
             SciChart.ZoomHistoryManager = new ZoomHistoryManager();
 
             // Create a DataSeries of type X=double, Y=double
-            var dataSeries = new XyDataSeries<double, double>();
-
+            var dataSeries = new UniformXyDataSeries<double>(0d, 0.002);
             LineRenderSeries.DataSeries = dataSeries;
 
-            var data = DataManager.Instance.GetFourierSeries(1.0, 0.1);
-
             // Append data to series. SciChart automatically redraws
-            dataSeries.Append(data.XData, data.YData);
+            var data = DataManager.Instance.GetFourierYData(1.0, 0.1);
+            dataSeries.Append(data);
 
             SciChart.ZoomExtents();
         }

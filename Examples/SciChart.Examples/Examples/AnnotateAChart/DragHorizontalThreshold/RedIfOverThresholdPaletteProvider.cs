@@ -13,7 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
@@ -27,8 +26,8 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
     /// </summary>
     public class RedIfOverThresholdPaletteProvider : IStrokePaletteProvider, IFillPaletteProvider
     {
-        private Color _overriddenColor;
-        private Brush _overriddenFill;
+        private readonly Color _overriddenColor;
+        private readonly Brush _overriddenFill;
 
         private IList<double> _yValues;
 
@@ -68,9 +67,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
 
         public void OnBeginSeriesDraw(IRenderableSeries series)
         {
-            var dataSeries = series.DataSeries as XyDataSeries<double, double>;
-
-            _yValues = dataSeries.YValues;
+            _yValues = ((IUniformXyDataSeries<double>)series.DataSeries).YValues;
         }
     }
 }

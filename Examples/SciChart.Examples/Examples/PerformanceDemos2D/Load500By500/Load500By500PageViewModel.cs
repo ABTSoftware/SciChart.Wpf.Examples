@@ -33,15 +33,12 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
         private bool _isBusy;
         private IEnumerable<IDataSeries> _dataSeries;
 
-        private readonly IViewportManager _viewportManager = new DefaultViewportManager();
-
         public Load500By500PageViewModel()
         {
             SeriesCount = 500;
             PointCount = 500;
 
             Messages = new DispatcherObservableCollection<string>();
-
             RunExampleCommand = new ActionCommand(OnRunExample);
         }
 
@@ -52,65 +49,72 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
 
         public ActionCommand RunExampleCommand { get; private set; }
 
-        public IViewportManager ViewportManager
-        {
-            get { return _viewportManager; }
-        }
+        public IViewportManager ViewportManager { get; } = new DefaultViewportManager();
 
         public int SeriesCount
         {
-            get { return _seriesCount; }
+            get => _seriesCount;
             set
             {
-                if (_seriesCount == value) return;
-                _seriesCount = value;
-                UpdateExampleTitle();
-                OnPropertyChanged("SeriesCount");
+                if (_seriesCount != value)
+                {
+                    _seriesCount = value;
+                    UpdateExampleTitle();
+                    OnPropertyChanged("SeriesCount");
+                }
             }
         }
 
         public int PointCount
         {
-            get { return _pointCount; }
+            get => _pointCount;
             set
             {
-                if (_pointCount == value) return;
-                _pointCount = value;
-                UpdateExampleTitle();
-                OnPropertyChanged("PointCount");
+                if (_pointCount != value)
+                {
+                    _pointCount = value;
+                    UpdateExampleTitle();
+                    OnPropertyChanged("PointCount");
+                }
             }
         }
 
         public DispatcherObservableCollection<string> Messages
         {
-            get { return _messages; }
+            get => _messages;
             set
             {
-                if (_messages == value) return;
-                _messages = value;
-                OnPropertyChanged("Messages");
+                if (_messages != value)
+                {
+                    _messages = value;
+                    OnPropertyChanged("Messages");
+                }
             }
         }
 
         public IEnumerable<IDataSeries> DataSeries
         {
-            get { return _dataSeries; }
+            get => _dataSeries;
             set
             {
-                if (_dataSeries == value) return;
-                _dataSeries = value;
-                OnPropertyChanged("DataSeries");
+                if (_dataSeries != value)
+                {
+                    _dataSeries = value;
+                    OnPropertyChanged("DataSeries");
+                }
             }
         }
 
         public bool IsBusy
         {
-            get { return _isBusy; }
+            get => _isBusy;
             set
             {
-                if (_isBusy == value) return;
-                _isBusy = value;
-                OnPropertyChanged("IsBusy");
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    OnPropertyChanged("IsBusy");
+                }
             }
         }
 
@@ -122,38 +126,38 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
         private void OnRunExample()
         {
             Task.Factory.StartNew(() =>
+            {
+                DataSeries = null;
+                IsBusy = true;
+                var stopwatch = Stopwatch.StartNew();
+
+                // Generate Data and mark time                 
+                var yData = new double[SeriesCount][];
+                var generator = new RandomWalkGenerator(0d);
+                for (int i = 0; i < SeriesCount; i++)
                 {
-                    DataSeries = null;
-                    IsBusy = true;
-                    var stopwatch = Stopwatch.StartNew();
+                    yData[i] = generator.GetRandomWalkYData(PointCount);
+                    generator.Reset();
+                }
 
-                    // Generate Data and mark time                 
-                    DoubleSeries[] xyData = new DoubleSeries[SeriesCount];
-                    var generator = new RandomWalkGenerator(0d);
-                    for (int i = 0; i < SeriesCount; i++)
-                    {
-                        xyData[i] = generator.GetRandomWalkSeries(PointCount);
-                        generator.Reset();
-                    }
+                stopwatch.Stop();
+                IsBusy = false;
 
-                    stopwatch.Stop();
+                // Append to SciChartSurface and mark time
+                stopwatch = Stopwatch.StartNew();
+                var allDataSeries = new IDataSeries[SeriesCount];
+                for (int i = 0; i < SeriesCount; i++)
+                {
+                    var dataSeries = new UniformXyDataSeries<double>();
+                    dataSeries.Append(yData[i]);
+                    allDataSeries[i] = dataSeries;
+                }
 
-                    IsBusy = false;
+                DataSeries = allDataSeries;
+                stopwatch.Stop();
 
-                    // Append to SciChartSurface and mark time
-                    stopwatch = Stopwatch.StartNew();
-                    var allDataSeries = new IDataSeries[SeriesCount];
-                    for (int i = 0; i < SeriesCount; i++)
-                    {
-                        var dataSeries = new XyDataSeries<double, double>();
-                        dataSeries.Append(xyData[i].XData, xyData[i].YData);
-                        allDataSeries[i] = dataSeries;
-                    }
-                    DataSeries = allDataSeries;
-                    stopwatch.Stop();
-
-                    ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
-                });
+                ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
+            });
         }
     }
 }

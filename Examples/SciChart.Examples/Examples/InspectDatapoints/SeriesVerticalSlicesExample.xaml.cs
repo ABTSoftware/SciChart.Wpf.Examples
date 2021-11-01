@@ -40,19 +40,19 @@ namespace SciChart.Examples.Examples.InspectDatapoints
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var dataSeries0 = new XyDataSeries<double, double> { SeriesName = "Curve A" };
-            var dataSeries1 = new XyDataSeries<double, double> { SeriesName = "Curve B" };
-            var dataSeries2 = new XyDataSeries<double, double> { SeriesName = "Curve C" };
+            var dataSeries0 = new UniformXyDataSeries<double>(0d, 0.01) { SeriesName = "Curve A" };
+            var dataSeries1 = new UniformXyDataSeries<double>(0d, 0.01) { SeriesName = "Curve B" };
+            var dataSeries2 = new UniformXyDataSeries<double>(0d, 0.01) { SeriesName = "Curve C" };
 
-            var data1 = DataManager.Instance.GetSinewave(0.8, 0.0, 1000, 3);
-            var data2 = DataManager.Instance.GetSinewave(0.5, -1.0, 1000, 5);
-            var data3 = DataManager.Instance.GetSinewave(0.7, 0.75, 1000, 7);
+            var data1 = DataManager.Instance.GetSinewaveYData(0.8, 0.0, 1000, 3);
+            var data2 = DataManager.Instance.GetSinewaveYData(0.5, -1.0, 1000, 5);
+            var data3 = DataManager.Instance.GetSinewaveYData(0.7, 0.75, 1000, 7);
 
-            dataSeries0.Append(data1.XData, data1.YData);
-            dataSeries1.Append(data2.XData, data2.YData);
-            dataSeries2.Append(data3.XData, data3.YData);
+            dataSeries0.Append(data1);
+            dataSeries1.Append(data2);
+            dataSeries2.Append(data3);
 
-            using (this.sciChart.SuspendUpdates())
+            using (sciChart.SuspendUpdates())
             {
                 sciChart.RenderableSeries[0].DataSeries = dataSeries0;
                 sciChart.RenderableSeries[1].DataSeries = dataSeries1;
@@ -65,21 +65,23 @@ namespace SciChart.Examples.Examples.InspectDatapoints
         private void OnCreateSliceClick(object sender, RoutedEventArgs e)
         {
             MouseButtonEventHandler mouseClick = null;
+
             mouseClick = (s, arg) =>
-                 {
-                     this.MouseLeftButtonUp -= mouseClick;
-                     var mousePoint = arg.GetPosition((UIElement)this.sciChart.GridLinesPanel).X;
+            {
+                MouseLeftButtonUp -= mouseClick;
 
-                     var slice = new VerticalLineAnnotation()
-                     {
-                         X1 = this.sciChart.XAxis.GetDataValue(mousePoint),
-                         Style = (Style)Resources["sliceStyle"]
-                     };
+                var mousePoint = arg.GetPosition((UIElement)sciChart.GridLinesPanel).X;
 
-                     sliceModifier.VerticalLines.Add(slice);
-                 };
+                var slice = new VerticalLineAnnotation()
+                {
+                    X1 = sciChart.XAxis.GetDataValue(mousePoint),
+                    Style = (Style)Resources["sliceStyle"]
+                };
 
-            this.MouseLeftButtonUp += mouseClick;
+                sliceModifier.VerticalLines.Add(slice);
+            };
+
+            MouseLeftButtonUp += mouseClick;
         }
 
         private void OnDeleteSelectedSliceClick(object sender, RoutedEventArgs e)

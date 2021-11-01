@@ -446,7 +446,6 @@ namespace SciChart.Examples.Demo.SmokeTests
 
                     // Export the actual 
                     ProcessStartInfo startInfo = new ProcessStartInfo(pathString);
-                    startInfo.Verb = "edit";
                     Process.Start(startInfo);
                 }
                 //#endif

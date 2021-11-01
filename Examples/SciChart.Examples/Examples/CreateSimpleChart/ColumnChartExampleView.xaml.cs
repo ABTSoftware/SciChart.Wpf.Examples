@@ -28,22 +28,22 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
 
         private void ColumnChartExampleViewOnLoaded(object sender, RoutedEventArgs e)
         {
-            var dataSeries = new XyDataSeries<double, double> {SeriesName = "Histogram"};
+            var dataSeries = new UniformXyDataSeries<double> { SeriesName = "Histogram" };
 
-            var yValues = new double[] { 0.1, 0.2, 0.4, 0.8, 1.1, 1.5, 2.4, 4.6, 8.1, 11.7, 14.4, 16.0, 13.7, 10.1, 6.4, 3.5, 2.5, 1.4, 0.4, 0.1};
+            var yValues = new[] { 0.1, 0.2, 0.4, 0.8, 1.1, 1.5, 2.4, 4.6, 8.1, 11.7, 14.4, 16.0, 13.7, 10.1, 6.4, 3.5, 2.5, 1.4, 0.4, 0.1};
 
-            using (this.sciChart.SuspendUpdates())
+            using (sciChart.SuspendUpdates())
             {
                 for (int i = 0; i < yValues.Length; i++)
                 {
                     // DataSeries for appending data
-                    dataSeries.Append(i, yValues[i]);
+                    dataSeries.Append(yValues[i]);
                 }
 
-                this.columnSeries.DataSeries = dataSeries;
+                columnSeries.DataSeries = dataSeries;
             }
 
-            this.sciChart.ZoomExtents();
+            sciChart.ZoomExtents();
         }
     }
 }

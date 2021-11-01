@@ -23,9 +23,9 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private void PointMarkersSelectionExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Create a DataSeries of type X=double, Y=double
-            var dataSeries1 = new XyDataSeries<double, double> {SeriesName = "Green"};
-            var dataSeries2 = new XyDataSeries<double, double> {SeriesName = "Blue"};
-            var dataSeries3 = new XyDataSeries<double, double> {SeriesName = "Yellow"};
+            var dataSeries1 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Green" };
+            var dataSeries2 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Blue" };
+            var dataSeries3 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Yellow" };
 
             // Attach DataSeries to RenderableSeries
             lineRenderSeries1.DataSeries = dataSeries1;
@@ -34,20 +34,18 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
 
             // Generate data
             var count = 200;
-            var data1 = DataManager.Instance.GetSinewave(100, 55, count);
-            var data3 = DataManager.Instance.GetSinewave(50, 20, count);
+            var data1 = DataManager.Instance.GetSinewaveYData(100, 55, count);
+            var data3 = DataManager.Instance.GetSinewaveYData(50, 20, count);
             
             // Append data to series
             using (sciChart.SuspendUpdates())
             {
-                dataSeries1.Append(data1.XData, data1.YData,
-                    data1.XData.Select((d) => new MyMetadata {IsSelected = false}));
-                dataSeries3.Append(data3.XData, data3.YData,
-                    data3.XData.Select((d) => new MyMetadata {IsSelected = false}));
+                dataSeries1.Append(data1, Enumerable.Range(0, count).Select(i => new MyMetadata()));
+                dataSeries3.Append(data3, Enumerable.Range(0, count).Select(i => new MyMetadata()));
 
                 for (int i = 0; i < count; i += 4)
                 {
-                    dataSeries2.Append(data1.XData[i], i++, new MyMetadata {IsSelected = false});
+                    dataSeries2.Append(i++, new MyMetadata());
                 }
             }
 

@@ -33,13 +33,16 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
         private static readonly AxisKey _xAxisKey = new AxisKey("XAxisId", true);
         private static readonly AxisKey _y0AxisKey = new AxisKey("Y0AxisId", false);
         private static readonly AxisKey _y1AxisKey = new AxisKey("Y1AxisId", false);
-        private RangeHistorySameCompare _rangeHistoryCompare;
+
+        private readonly RangeHistorySameCompare _rangeHistoryCompare;
         private const int AxisAmount = 3;
 
         public class ChartRangeHistory : BaseViewModel
         {
-            public ChartRangeHistory(IDictionary<AxisKey, IRange> ranges)
+            public ChartRangeHistory(IDictionary<AxisKey, IRange> ranges, string itemId)
             {
+                ItemId = itemId;
+
                 foreach (var pair in ranges)
                 {
                     if (pair.Key.Id == _xAxisKey.Id && pair.Key.IsXAxis == _xAxisKey.IsXAxis)
@@ -57,21 +60,25 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
                 }
             }
 
+            public string ItemId { get; }
+
             public IRange XAxisRange { get; set; }
             public IRange Y0AxisRange { get; set; }
             public IRange Y1AxisRange { get; set; }
-            public string ItemId { get; set; }
+
+            public override int GetHashCode()
+            {
+                return ItemId.GetHashCode();
+            }
 
             public override bool Equals(object obj)
             {
-                var other = obj as ChartRangeHistory;
-
-                return other != null && Equals((ChartRangeHistory)obj);
+                return obj is ChartRangeHistory other && Equals(other);
             }
 
             public bool Equals(ChartRangeHistory other)
             {
-                if (ReferenceEquals(null, other)) return false;
+                if (other == null) return false;
                 if (ReferenceEquals(this, other)) return true;
 
                 return other.XAxisRange.Equals(XAxisRange) &&
@@ -82,19 +89,17 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
         public class RangeHistorySameCompare : EqualityComparer<ChartRangeHistory>
         {
-            public override bool Equals(ChartRangeHistory x, ChartRangeHistory y)
+            public override bool Equals(ChartRangeHistory crh1, ChartRangeHistory crh2)
             {
-                if (x.ItemId == y.ItemId)
-                {
-                    return true;
-                }
+                if (crh1 == null && crh2 == null) return true;
+                if (crh1 == null || crh2 == null) return false;
 
-                return false;
+                return crh1.ItemId == crh2.ItemId;
             }
 
-            public override int GetHashCode(ChartRangeHistory obj)
+            public override int GetHashCode(ChartRangeHistory crh)
             {
-                throw new NotImplementedException();
+                return crh.ItemId.GetHashCode();
             }
         }
 
@@ -114,7 +119,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
             var vm1 = new LineRenderableSeriesViewModel
             {
-                DataSeries = FillData(new XyDataSeries<double, double>(), "firstDataSeries"),
+                DataSeries = FillData(new UniformXyDataSeries<double>(), "firstDataSeries"),
                 StyleKey = "FirstLineRenderableSeriesStyle",
                 StrokeThickness = 2,
                 Stroke = Color.FromArgb(0xff, 0x64, 0x95, 0xed),
@@ -122,7 +127,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
             var vm2 = new LineRenderableSeriesViewModel
             {
-                DataSeries = FillData(new XyDataSeries<double, double>(), "secondDataSeries"),
+                DataSeries = FillData(new UniformXyDataSeries<double>(), "secondDataSeries"),
                 StyleKey = "SecondLineRenderableSeriesStyle",
                 StrokeThickness = 2,
                 Stroke = Color.FromArgb(0xff, 0xff, 0x45, 0x00),
@@ -163,7 +168,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
         public IZoomHistoryManager ZoomHistoryManager
         {
-            get { return _zoomHistoryManager; }
+            get => _zoomHistoryManager;
             set
             {
                 _zoomHistoryManager = value;
@@ -173,7 +178,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
         public ObservableCollection<ChartRangeHistory> RangesHistory
         {
-            get { return _rangesHistory; }
+            get => _rangesHistory;
             set
             {
                 _rangesHistory = value;
@@ -183,7 +188,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
         public ChartRangeHistory SelectedRange
         {
-            get { return _selectedRange; }
+            get => _selectedRange;
             set
             {
                 var currentIndex = _rangesHistory.IndexOf(_selectedRange, _rangeHistoryCompare);
@@ -214,7 +219,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
 
         public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels
         {
-            get { return _renderableSeriesViewModels; }
+            get => _renderableSeriesViewModels;
             set
             {
                 _renderableSeriesViewModels = value;
@@ -222,15 +227,9 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             }
         }
 
-        public ICommand UndoCommand
-        {
-            get { return _undoCommand; }
-        }
+        public ICommand UndoCommand => _undoCommand;
 
-        public ICommand RedoCommand
-        {
-            get { return _redoCommand; }
-        }
+        public ICommand RedoCommand => _redoCommand;
 
         private void OnRangeHistoryChanged(object sender, HistoryChangedEventArgs args)
         {
@@ -251,7 +250,7 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
                     newRanges = FillRanges(newRanges);
                 }
 
-                var item = new ChartRangeHistory(newRanges) { ItemId = Guid.NewGuid().ToString() };
+                var item = new ChartRangeHistory(newRanges, Guid.NewGuid().ToString());
                 RangesHistory.Add(item);
                 while (RangesHistory.Count > ZoomHistoryManager.HistoryDepth)
                 {
@@ -292,22 +291,19 @@ namespace SciChart.Examples.Examples.ZoomHistory.ZoomHistoryMVVM
             _redoCommand.RaiseCanExecuteChanged();
         }
 
-        private IDataSeries FillData(IXyDataSeries<double, double> dataSeries, string name)
+        private IDataSeries FillData(IUniformXyDataSeries<double> dataSeries, string name)
         {
             double randomWalk = 10.0;
+            double[] yBuffer = new double[Count];
 
-            // Generate the X,Y data with sequential dates on the X-Axis and slightly positively biased random walk on the Y-Axis
-            var xBuffer = new double[Count];
-            var yBuffer = new double[Count];
             for (int i = 0; i < Count; i++)
             {
-                randomWalk += (_random.NextDouble() - 0.498);
+                randomWalk += _random.NextDouble() - 0.498;
                 yBuffer[i] = randomWalk;
-                xBuffer[i] = i;
             }
 
             // Buffer above and append all in one go to avoid multiple recalculations of series range
-            dataSeries.Append(xBuffer, yBuffer);
+            dataSeries.Append(yBuffer);
             dataSeries.SeriesName = name;
 
             return dataSeries;

@@ -32,8 +32,8 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
         private void MixedCharts_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var leftDataSeries0 = new XyDataSeries<double, double>();
-            var leftDataSeries1 = new XyDataSeries<double, double>();
+            var leftDataSeries0 = new UniformXyDataSeries<double>();
+            var leftDataSeries1 = new UniformXyDataSeries<double>();
 
             var rightDataSeries0 = new XyDataSeries<DateTime, double>();
             var rightDataSeries1 = new XyDataSeries<DateTime, double>();
@@ -42,8 +42,8 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
             for (int i = 0; i < 20; i++)
             {
-                leftDataSeries0.Append(i, random.Next(10));
-                leftDataSeries1.Append(i, random.Next(10));
+                leftDataSeries0.Append(random.Next(10));
+                leftDataSeries1.Append(random.Next(10));
 
                 rightDataSeries0.Append(DateTime.Now.AddHours(i), random.Next(10));
                 rightDataSeries1.Append(DateTime.Now.AddHours(i), random.Next(10));

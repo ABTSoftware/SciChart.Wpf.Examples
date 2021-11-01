@@ -78,7 +78,7 @@
     <EmbeddedResource Include="Resources\stopwords.dat" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.85" />
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.90" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
     <PackageReference Include="SciChart.Wpf.UI" Version="3.1.251" />
   </ItemGroup>
@@ -108,15 +108,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart" Version="6.5.0.11857-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart3D" Version="6.5.0.11857-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.5.0.11857-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.5.0.11857-beta" />
   </ItemGroup>
 </Project>

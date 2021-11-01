@@ -27,45 +27,35 @@ using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
 {
-    public class ManipulateSeriesMvvmViewModel :BaseViewModel
+    public class ManipulateSeriesMvvmViewModel : BaseViewModel
     {
-        private readonly IViewportManager _viewportManager = new DefaultViewportManager();
-
         private SeriesType _selectedSeriesType;
-        private List<SeriesType> _seriesTypes;
-        private int _valueShift;
-
-        private readonly ObservableCollection<IRenderableSeriesViewModel> _renderableSeriesViewModels;
-
-        private readonly ActionCommand _addCommand;
-        private readonly ActionCommand _removeCommand;
-        private readonly ActionCommand _clearCommand;
-        private readonly ActionCommand _selectionChangedCommand;
 
         public ManipulateSeriesMvvmViewModel()
         {
-            _renderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel>();
+            ViewportManager = new DefaultViewportManager();
+            RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel>();
 
-            _addCommand = new ActionCommand(() =>
+            AddCommand = new ActionCommand(() =>
             {
                 RenderableSeriesViewModels.Add(ViewModelsFactory.New(SelectedSeriesType.Type, 0));
                 ZoomExtents();
                 ClearCommand.RaiseCanExecuteChanged();
             }, () => SelectedSeriesType != null);
 
-            _removeCommand = new ActionCommand(() =>
+            RemoveCommand = new ActionCommand(() =>
             {
                 RenderableSeriesViewModels.RemoveWhere(s => s.IsSelected);
                 ClearCommand.RaiseCanExecuteChanged();
             }, () => RenderableSeriesViewModels.Any(s => s.IsSelected));
 
-            _clearCommand = new ActionCommand(() =>
+            ClearCommand = new ActionCommand(() =>
             {
                 RenderableSeriesViewModels.Clear();
                 ClearCommand.RaiseCanExecuteChanged();
             }, () => RenderableSeriesViewModels.Count > 0);
 
-            _selectionChangedCommand = new ActionCommand(() =>
+            SelectionChangedCommand = new ActionCommand(() =>
             {
                 var rSeriesVm = RenderableSeriesViewModels.FirstOrDefault(s => s.IsSelected);
                 if (rSeriesVm != null)
@@ -76,32 +66,37 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
             });
 
             var data = DataManager.Instance.GetSinewave(1.0, 0.5, 100, 5);
-
             var lineDataSeries = new XyDataSeries<double, double>();
-            lineDataSeries.Append(data.XData.Select(d => d*5), data.YData);
+            lineDataSeries.Append(data.XData.Select(d => d * 5d), data.YData);
 
-            FillSeriesTypes();
+            SeriesTypes = new List<SeriesType>
+            {
+                new SeriesType(typeof(ColumnRenderableSeriesViewModel), "IconColumn"),
+                new SeriesType(typeof(ImpulseRenderableSeriesViewModel), "IconImpulse"),
+                new SeriesType(typeof(LineRenderableSeriesViewModel), "IconLine"),
+                new SeriesType(typeof(MountainRenderableSeriesViewModel), "IconMountain"),
+                new SeriesType(typeof(XyScatterRenderableSeriesViewModel), "IconScatter"),
+            };
+
             SelectedSeriesType = SeriesTypes[3];
 
-            _addCommand.Execute(null);
-            
+            AddCommand.Execute(null);
             AddCommand.RaiseCanExecuteChanged();
             RemoveCommand.RaiseCanExecuteChanged();
         }
 
-        public IViewportManager ViewportManager
-        {
-            get { return _viewportManager; }
-        }
+        public IViewportManager ViewportManager { get; }
+        public List<SeriesType> SeriesTypes { get; }
+        public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; }
 
-        public List<SeriesType> SeriesTypes
-        {
-            get { return _seriesTypes; }
-        }
+        public ActionCommand AddCommand { get; }
+        public ActionCommand RemoveCommand { get; }
+        public ActionCommand ClearCommand { get; }
+        public ActionCommand SelectionChangedCommand { get; }
 
         public SeriesType SelectedSeriesType
         {
-            get { return _selectedSeriesType; }
+            get => _selectedSeriesType;
             set
             {
                 if (_selectedSeriesType != value)
@@ -113,31 +108,6 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
             }
         }
 
-        public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels
-        {
-            get { return _renderableSeriesViewModels; }
-        }
-
-        public ActionCommand AddCommand
-        {
-            get { return _addCommand; }
-        }
-
-        public ActionCommand RemoveCommand
-        {
-            get { return _removeCommand; }
-        }
-
-        public ActionCommand ClearCommand
-        {
-            get { return _clearCommand; }
-        }
-
-        public ActionCommand SelectionChangedCommand
-        {
-            get { return _selectionChangedCommand; }
-        }
-        
         private void ChangeRenderableSeriesType()
         {
             var rSeriesVm = RenderableSeriesViewModels.FirstOrDefault(s => s.IsSelected);
@@ -154,22 +124,10 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
 
         private void ZoomExtents()
         {
-            _viewportManager.BeginInvoke(() =>
+            ViewportManager.BeginInvoke(() =>
             {
                 ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
             });
-        }
-
-        private void FillSeriesTypes()
-        {
-            _seriesTypes = new List<SeriesType>
-            {
-                new SeriesType(typeof (ColumnRenderableSeriesViewModel), "IconColumn"),
-                new SeriesType(typeof (ImpulseRenderableSeriesViewModel), "IconImpulse"),
-                new SeriesType(typeof (LineRenderableSeriesViewModel), "IconLine"),
-                new SeriesType(typeof (MountainRenderableSeriesViewModel), "IconMountain"),
-                new SeriesType(typeof (XyScatterRenderableSeriesViewModel), "IconScatter"),
-            };
         }
     }
 }

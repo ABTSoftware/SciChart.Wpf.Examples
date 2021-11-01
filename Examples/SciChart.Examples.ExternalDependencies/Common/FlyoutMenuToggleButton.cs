@@ -50,14 +50,14 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
         public PopupAlignment PopupAlignment
         {
-            get { return (PopupAlignment)GetValue(PopupAlignmentProperty); }
-            set { SetValue(PopupAlignmentProperty, value); }
+            get => (PopupAlignment)GetValue(PopupAlignmentProperty);
+            set => SetValue(PopupAlignmentProperty, value);
         }
 
         public object PopupContent
         {
-            get { return (object)GetValue(PopupContentProperty); }
-            set { SetValue(PopupContentProperty, value); }
+            get => (object)GetValue(PopupContentProperty);
+            set => SetValue(PopupContentProperty, value);
         }
 
         public override void OnApplyTemplate()
@@ -68,6 +68,9 @@ namespace SciChart.Examples.ExternalDependencies.Common
             _border = GetTemplateChild("PART_Border") as Border;
             _root = GetTemplateChild("RootElement") as Grid;
             _callout = GetTemplateChild("Callout") as Callout;
+
+            _popup.Placement = PlacementMode.Custom;
+            _popup.CustomPopupPlacementCallback = new CustomPopupPlacementCallback(placePopup);
 
             if (_root == null) return;
             _fadeStoryboard = ((Storyboard)_root.TryFindResource("FadeBorderAnimation"));
@@ -115,7 +118,14 @@ namespace SciChart.Examples.ExternalDependencies.Common
                     _popup.IsOpen = false;
                 }).After(200).Go();
             };
+        }
 
+        public CustomPopupPlacement[] placePopup(Size popupSize, Size targetSize, Point offset)
+        {
+            return new[]
+            {
+                new CustomPopupPlacement(new Point(40, 0), PopupPrimaryAxis.Horizontal)
+            };
         }
     }
 }

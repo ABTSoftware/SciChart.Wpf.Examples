@@ -31,7 +31,7 @@ namespace SciChart.Examples.Examples.ManipulateSeries
         public AddRemoveDataSeriesExampleView()
         {
             InitializeComponent();
-            this.Loaded += SciChartSurfaceLoaded;
+            Loaded += SciChartSurfaceLoaded;
         }
 
         private void SciChartSurfaceLoaded(object sender, RoutedEventArgs e)
@@ -42,11 +42,9 @@ namespace SciChart.Examples.Examples.ManipulateSeries
         private void DeleteSeriesClick(object sender, RoutedEventArgs e)
         {
             var rSeries = sciChart.SelectedRenderableSeries.FirstOrDefault();
-            if (rSeries == null || rSeries.DataSeries == null) 
-                return;
+            if (rSeries?.DataSeries == null) return;
 
             sciChart.RenderableSeries.Remove(rSeries);
-
             sciChart.ZoomExtents();
 
             OnSeriesSelectionChanged();
@@ -62,17 +60,16 @@ namespace SciChart.Examples.Examples.ManipulateSeries
         private void AddSeriesClick(object sender, RoutedEventArgs e)
         {
             // Create a DataSeries and append some data
-            var dataSeries = new XyDataSeries<double, double>();
-            var doubleData = DataManager.Instance.GetRandomDoubleSeries(250);
-            dataSeries.Append(doubleData.XData, doubleData.YData);
+            var dataSeries = new UniformXyDataSeries<double>();
+            dataSeries.Append(DataManager.Instance.GetRandomDoubleData(250));
 
             // Create a RenderableSeries and ensure DataSeries is set
             var renderSeries = new FastLineRenderableSeries
-                {
-                    Stroke = DataManager.Instance.GetRandomColor(), 
-                    DataSeries = dataSeries,
-                    StrokeThickness=2,
-                };
+            {
+                Stroke = DataManager.Instance.GetRandomColor(),
+                DataSeries = dataSeries,
+                StrokeThickness = 2
+            };
 
             // Add the new RenderableSeries
             sciChart.RenderableSeries.Add(renderSeries);

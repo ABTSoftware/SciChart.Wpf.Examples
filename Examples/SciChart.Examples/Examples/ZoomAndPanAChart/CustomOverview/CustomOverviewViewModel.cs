@@ -41,10 +41,11 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview
 
             for (int i = 0; i < SeriesCount; i++)
             {
-                var dataSeries = new XyDataSeries<double, double>();
-                var someData = generator.GetRandomWalkSeries(PointCount);
+                var dataSeries = new UniformXyDataSeries<double>();
+                var someData = generator.GetRandomWalkYData(PointCount);
+                
                 generator.Reset();
-                dataSeries.Append(someData.XData, someData.YData);
+                dataSeries.Append(someData);
 
                 var rgb = new byte[3];
                 random.NextBytes(rgb);
@@ -53,7 +54,7 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart.CustomOverview
                 {
                     DataSeries = dataSeries,
                     AntiAliasing = false,
-                    Stroke = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]),
+                    Stroke = Color.FromArgb(255, rgb[0], rgb[1], rgb[2])
                 });
             }
         }

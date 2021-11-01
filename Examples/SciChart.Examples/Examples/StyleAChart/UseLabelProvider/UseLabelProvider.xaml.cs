@@ -19,10 +19,10 @@ namespace SciChart.Examples.Examples.StyleAChart.UseLabelProvider
             {
                 ColorFrom = Colors.GreenYellow,
                 ColorTo = Colors.DodgerBlue,
-                
+
                 ValueFrom = 0,
                 ValueTo = 10,
-                
+
                 LabelAngle = 0,
                 LabelFormat = "X{0}"
             });
@@ -39,14 +39,14 @@ namespace SciChart.Examples.Examples.StyleAChart.UseLabelProvider
                 LabelFormat = "Y{0:N2}"
             });
 
-            var dataSeries = new XyDataSeries<double>();
+            var dataSeries = new UniformXyDataSeries<double>();
             var yValues = new[] {8, 6, 10, 7, 8, 10, 9, 8, 7, 8, 10};
 
             using (sciChartSurface.SuspendUpdates())
             {
                 for (int i = 0; i < yValues.Length; i++)
                 {
-                    dataSeries.Append(i, yValues[i]);
+                    dataSeries.Append(yValues[i]);
                 }
             }
 

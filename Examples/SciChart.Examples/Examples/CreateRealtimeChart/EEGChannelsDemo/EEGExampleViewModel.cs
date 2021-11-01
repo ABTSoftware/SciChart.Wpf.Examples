@@ -48,9 +48,6 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         private Timer _timer;        
         private readonly object _syncRoot = new object();
 
-        // X, Y buffers used to buffer data into the Scichart instances in blocks of BufferSize
-        private double[] xBuffer;
-        private double[] yBuffer;
         private bool _running;
         private bool _isReset;
 
@@ -144,8 +141,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             {
                 IsRunning = true;
                 IsReset = false;
-                xBuffer = new double[_bufferSize];
-                yBuffer = new double[_bufferSize];
+
                 _timer = new Timer(_timerInterval);
                 _timer.Elapsed += OnTick;
                 _timer.AutoReset = true;
@@ -186,27 +182,20 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             {
                 foreach (var channel in _channelViewModels)
                 {
-                    var dataseries = channel.ChannelDataSeries;
+                    var dataSeries = channel.ChannelDataSeries;
 
-                    // Preload previous value with k-1 sample, or 0.0 if the count is zero
-                    double xValue = dataseries.Count > 0 ? dataseries.XValues[dataseries.Count - 1] : 0.0;
-                    
-                    // Add points 10 at a time for efficiency   
-                    for (int j = 0; j < BufferSize; j++)
+                    using (dataSeries.SuspendUpdates())
                     {
-                        // Generate a new X,Y value in the random walk
-                        xValue += 1;
-                        double yValue = _random.NextDouble();
-
-                        xBuffer[j] = xValue;
-                        yBuffer[j] = yValue;
+                        // Add points 10 at a time for efficiency
+                        for (int j = 0; j < BufferSize; j++)
+                        {
+                            // Append a new Y value in the random walk
+                            dataSeries.Append(_random.NextDouble());
+                        }
                     }
 
-                    // Append block of values
-                    dataseries.Append(xBuffer, yBuffer);
-
                     // For reporting current size to GUI
-                    _currentSize = dataseries.Count;
+                    _currentSize = dataSeries.Count;
                 }
             }
         }
