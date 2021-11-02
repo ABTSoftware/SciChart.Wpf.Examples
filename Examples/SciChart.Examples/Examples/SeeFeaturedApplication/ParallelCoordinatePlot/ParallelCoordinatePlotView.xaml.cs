@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using SciChart.Charting.ChartModifiers;
+﻿using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Examples.ExternalDependencies.Data;
 using SciChart.Examples.ExternalDependencies.Helpers;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.ParallelCoordinatePlot
 {
@@ -23,8 +23,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ParallelCoordinatePl
         {
             sciChart.ShowLicensingWarnings = false;
 
-            var defaultAxisStyle = (Style) FindResource("DefaultParallelAxisStyle");
-            var alternativeAxisStyle = (Style) FindResource("AlternativeParallelAxisStyle");
+            var defaultAxisStyle = (Style)FindResource("DefaultParallelAxisStyle");
+            var alternativeAxisStyle = (Style)FindResource("AlternativeParallelAxisStyle");
 
             _pcSource = new ParallelCoordinateDataSource<WeatherData>(
 
@@ -85,7 +85,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ParallelCoordinatePl
         }
 
         private void OnAxisReordered(object sender, ParallelAxisReorderArgs args)
-        { 
+        {
             _pcSource?.ReorderItems(args.OldIndex, args.NewIndex);
         }
     }

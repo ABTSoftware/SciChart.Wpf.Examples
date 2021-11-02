@@ -100,15 +100,15 @@
     <Resource Include="Resources\Images\type_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.5.0.11857-beta" />
+    <PackageReference Include="SciChart" Version="6.5.0.11858-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.5.0.11857-beta" />
+    <PackageReference Include="SciChart3D" Version="6.5.0.11858-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.5.0.11857-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.5.0.11858-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.5.0.11857-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.5.0.11858-beta" />
   </ItemGroup>
 </Project>
