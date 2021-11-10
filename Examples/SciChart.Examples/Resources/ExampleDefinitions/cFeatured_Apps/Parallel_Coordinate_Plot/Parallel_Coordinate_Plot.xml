@@ -6,26 +6,26 @@
 	  Demonstrates how to create and use Parallel Coordinates Plot with SciChart
   </ToolTipDescription>
   <Description>
-	  Parallel Coordinates Plot is a chart type for visualizing and analyzing high-dimensional datasets. For example, it can be used to compare several sets of observations (represented by lines) of a combination of different factors (each represented by an axis).
+    The Parallel Coordinate Plot is a WPF chart type for visualizing and analyzing multi dimensional datasets. For example, it can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (each represented by an axis).
 
-	  This example demonstrates how to create, use and interact with Parallel Coordinates Plot with SciChart WPF v6.
+    This example demonstrates how to create, use and interact with Parallel Coordinates Plot with SciChart WPF v6.
 
-	  [b][i] The following interactions are possible:[/i][/b]
+    [b][i] The following interactions are possible:[/i][/b]
 
-	  - [b][MouseWheel][/b] to zoom in and out
-	  - Click and drag [b][Left Mouse Button][/b] to zoom in
-	  - Double-click [b][Left Mouse Button][/b] to zoom to data extents
+    - [b][MouseWheel][/b] to zoom in and out
+    - Click and drag [b][Left Mouse Button][/b] to zoom in
+    - Double-click [b][Left Mouse Button][/b] to zoom to data extents
 
-	  [b][i] Toolbar actions: [/i][/b]
+    [b][i] Toolbar actions: [/i][/b]
 
-	  - Toggle [b][Pan Button][/b] to enable panning with [b][Left Mouse Button][/b]
-	  - Toggle [b][Reorder Button][/b] to enable reordering of Y-Axes. This allows swapping positions of two axes by drag-and-drop
-	  - Toggle [b][Selection Button][/b] to enable Series selection. It allows clicking on a Series to select it, or multi-select by holding down [b][CTRL][/b]
-	  - Toggle [b][Splines Button][/b] to draw Series as splines
+    - Toggle [b][Pan Button][/b] to enable panning with [b][Left Mouse Button][/b]
+    - Toggle [b][Reorder Button][/b] to enable reordering of Y-Axes. This allows swapping positions of two axes by drag-and-drop
+    - Toggle [b][Selection Button][/b] to enable Series selection. It allows clicking on a Series to select it, or multi-select by holding down [b][CTRL][/b]
+    - Toggle [b][Splines Button][/b] to draw Series as splines
 
-	  [b]Documentation Links:[/b]
+    [b]Documentation Links:[/b]
 
-	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml.txt</string>

@@ -7,11 +7,13 @@
     The Digital Analyzer demo shows a multi-surface pane, interactive MVVM demo rendering FastLineRenderableSeries that uses UniformXyDataSeries as data source. 
   </ToolTipDescription>
   <Description>
-    A Digital Analyzer is an electronic instrument that captures and displays multiple signals from a digital system or digital circuit. 
+    A Digital Analyzer is an electronic instrument that captures and displays multiple signals from a piece of hardware, such as a Data Acquisition Card or Logic Analyzer. 
     
-    The Digital Analyzer demo shows multiple channels with randomly generated data with common XAxis. 
-    It is implemented using MVVM pattern to display multi-surface pane rendering FastLineRenderableSeries that use UniformXyDataSeries as data source. This DataSeries type requires Y-Values only, thuse reducing memory consumption.
-    In this way it is possible to display tens of billions of points on a single view. 
+    The Digital Analyzer demo shows multiple channels with randomly generated binary data with a common XAxis. 
+    It is implemented using the MVVM pattern to display multi-surface pane rendering FastLineRenderableSeries that use UniformXyDataSeries as data source. This DataSeries type requires Y-Values only, thus reducing memory consumption.
+    In this way it is possible to display tens of billions of points on a single view.
+
+    This demo loads up to 64 Billion Datapoints! (Requires 64GB RAM). 100 Billion Datapoints are also possible with 128GB of RAM.
     
     Interactivity is provided by ChartModifiers.
 

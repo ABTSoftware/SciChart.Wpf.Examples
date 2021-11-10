@@ -15,9 +15,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 {
     public class DigitalAnalyzerExampleViewModel : BaseViewModel
     {
-        private const int _maxDigitalCount = 1_000_000_000;
-        private const int _maxAnalogCount = 100_000_000;
-
         private bool _isLoading;
         private DoubleRange _xRange;
 
@@ -28,10 +25,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             SelectedChannelType = "Digital";
             SelectedChannelCount = 32;
             SelectedPointCount = 1000000;
-
-            var analogChannelCount = SelectedChannelCount / 8;
-            _ = AddChannels(SelectedChannelCount - analogChannelCount, analogChannelCount);
-			XRange = new DoubleRange(0, SelectedPointCount);
 
             ChangeChannelHeightCommand = new ActionCommand<object>((d) =>
             {
@@ -64,19 +57,20 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                 ChannelViewModels.Clear();
                 XRange = null;
 
-                // Create new channels
-                analogChannelCount = SelectedChannelCount / 8;
-                await AddChannels(SelectedChannelCount - analogChannelCount, analogChannelCount);
+                // Create a bunch of Digital channels
+                await AddChannels(SelectedChannelCount, 0);
 
                 XRange = new DoubleRange(0, SelectedPointCount);
                 IsLoading = false;
             });
+
+            LoadChannelsCommand.Execute(null);
         }
 
         private async Task AddChannels(int digitalChannelsCount, int analogChannelsCount)
         {
             List<byte[]> digitalChannels = new List<byte[]>();
-            List<double[]> analogChannels = new List<double[]>();
+            List<float[]> analogChannels = new List<float[]>();
 
             // Force GC to free memory
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
@@ -95,13 +89,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 
                     for (var i = 0; i < analogChannelsCount; i++)
                     {
-                        // Limit buffer size for doubles to avoid huge memory allocation
-                        var analogPoints = SelectedPointCount >= _maxDigitalCount ? _maxAnalogCount : SelectedPointCount;
-                        var newArray = new double[analogPoints];
+                        var newArray = new float[SelectedPointCount];
                         analogChannels.Add(newArray);
                     }
                 });
-                
+
                 // Generate random data and fill channels
                 await GenerateData(digitalChannels, analogChannels);
             }
@@ -122,7 +114,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             }
         }
 
-        private async Task GenerateData(List<byte[]> digitalChannels, List<double[]> analogChannels)
+        private async Task GenerateData(List<byte[]> digitalChannels, List<float[]> analogChannels)
         {
             var digitalChannelsCount = digitalChannels.Count;
             var analogChannelsCount = analogChannels.Count;
@@ -135,7 +127,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             {
                 var xStart = 0d;
                 var xStep = 1d;
-                var analogXStep = SelectedPointCount >= _maxDigitalCount ? _maxDigitalCount / _maxAnalogCount : xStep;
 
                 var digital = new List<Task<ChannelViewModel>>(digitalChannelsCount);
                 var analog = new List<Task<ChannelViewModel>>(analogChannelsCount);
@@ -145,10 +136,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                     var id = channelIndex++;
                     digital.Add(Task.Run(() => ChannelGenerationHelper.Instance.GenerateDigitalChannel(xStart, xStep, channel, id)));
                 }
-                foreach(var channel in analogChannels)
+                foreach (var channel in analogChannels)
                 {
                     var id = channelIndex++;
-                    analog.Add(Task.Run(() => ChannelGenerationHelper.Instance.GenerateAnalogChannel(xStart, analogXStep, channel, id)));
+                    analog.Add(Task.Run(() => ChannelGenerationHelper.Instance.GenerateAnalogChannel(xStart, xStep, channel, id)));
                 }
 
                 await Task.WhenAll(digital.Union(analog));
@@ -176,11 +167,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 
         public ActionCommand LoadChannelsCommand { get; }
 
-        public long TotalPoints => ChannelViewModels.Count * (long)SelectedPointCount;
+        public long TotalPoints => ChannelViewModels.Aggregate(0L, (acc, ch) => acc + ch.DataCount);
 
         public bool IsLoading
         {
-            get => _isLoading; 
+            get => _isLoading;
             set
             {
                 _isLoading = value;
