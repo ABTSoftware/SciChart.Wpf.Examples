@@ -66,6 +66,23 @@
             <sys:Int32>1000000000</sys:Int32>
         </x:Array>
 
+        <x:Array x:Key="StrokeThicknesses" Type="sys:Int32">
+            <sys:Int32>1</sys:Int32>
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+        </x:Array>
+
+        <x:Array x:Key="ResamplingEnabled" Type="sys:Boolean">
+            <sys:Boolean>True</sys:Boolean>
+            <sys:Boolean>False</sys:Boolean>
+        </x:Array>
+
+        <x:Array x:Key="ResamplingPrecision" Type="local:ResamplingPrecision">
+            <local:ResamplingPrecision>Default</local:ResamplingPrecision>
+            <local:ResamplingPrecision>Precision2x</local:ResamplingPrecision>
+            <local:ResamplingPrecision>Precision4x</local:ResamplingPrecision>
+        </x:Array>
+
     </UserControl.Resources>
 
     <Grid Grid.IsSharedSizeScope="True" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBooleanConverter}}">
@@ -138,6 +155,34 @@
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Converter={StaticResource PointCountToLabelConverter}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+
+                <ext:FlyoutMenuButton Content="RS" Padding="0">
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel Orientation="Vertical" MinWidth="150">
+                            <TextBlock Text="Line Stroke Thickness:"/>
+                            <ComboBox Margin="5"
+                                      SelectedItem="{Binding SelectedStrokeThickness}"
+                                      ItemsSource="{StaticResource StrokeThicknesses}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Text="Resampling Precision:"/>
+                            <ComboBox Margin="5"
+                                      SelectedItem="{Binding SelectedResamplingPrecision}"
+                                      ItemsSource="{StaticResource ResamplingPrecision}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>

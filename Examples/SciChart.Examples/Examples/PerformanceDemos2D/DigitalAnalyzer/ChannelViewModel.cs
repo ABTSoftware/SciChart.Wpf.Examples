@@ -5,6 +5,7 @@ using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
+using SciChart.Data.Numerics;
 using SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer.Common;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
@@ -19,6 +20,8 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
         private string _channelName;
         private readonly int _channelIndex;
         private double _channelHeight;
+        private uint _resamplingPrecision;
+        private int _strokeThickness;
 
         public ChannelViewModel(IDataSeries dataSeries, DoubleRange yRange, int channelIndex, string channelName)
         {
@@ -36,9 +39,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                     new FastLineRenderableSeries
                     {
                         DataSeries = _dataSeries,
-                        StrokeThickness = 1,
+                        StrokeThickness = _strokeThickness,
                         Stroke = ColorHelper.GetDimColor(_channelIndex, 0.8),
-                        IsDigitalLine = _isDigital
+                        IsDigitalLine = _isDigital,
+                        ResamplingPrecision = _resamplingPrecision,
                     }
                 };
 
@@ -58,6 +62,34 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                 if (_renderableSeries?.IsValueCreated == true && _renderableSeries?.Value.Any() == true)
                 {
                     _renderableSeries.Value[0].IsDigitalLine = _isDigital;
+                }
+            }
+        }
+
+        public int StrokeThickness
+        {
+            get => _strokeThickness;
+            set
+            {
+                _strokeThickness = value;
+
+                if (_renderableSeries?.IsValueCreated == true && _renderableSeries?.Value.Any() == true)
+                {
+                    _renderableSeries.Value[0].StrokeThickness = _strokeThickness;
+                }
+            }
+        }
+
+        public uint ResamplingPrecision
+        {
+            get => _resamplingPrecision;
+            set
+            {
+                _resamplingPrecision = value;
+
+                if (_renderableSeries?.IsValueCreated == true && _renderableSeries?.Value.Any() == true)
+                {
+                    _renderableSeries.Value[0].ResamplingPrecision = _resamplingPrecision;
                 }
             }
         }
@@ -107,6 +139,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                 OnPropertyChanged(nameof(ChannelName));
             }
         }
+
 
         public void SetChannelHeightDelta(double delta)
         {

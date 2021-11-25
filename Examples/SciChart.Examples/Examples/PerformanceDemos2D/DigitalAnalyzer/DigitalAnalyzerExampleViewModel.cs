@@ -13,6 +13,19 @@ using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 {
+    /// <summary>
+    /// Additional enum passed to ChannelViewModel: Resampling precisions
+    /// 
+    /// see https://www.scichart.com/documentation/win/current/webframe.html#The%20Extreme%20Resamplers%20API.html for info
+    /// on what the numeric values mean. Default is 0 
+    /// </summary>
+    public enum ResamplingPrecision
+    {
+        Default = 0,
+        Precision2x = 1,
+        Precision4x = 2,
+    }
+
     public class DigitalAnalyzerExampleViewModel : BaseViewModel
     {
         private bool _isLoading;
@@ -25,6 +38,8 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             SelectedChannelType = "Digital";
             SelectedChannelCount = 32;
             SelectedPointCount = 1000000;
+            SelectedResamplingPrecision =ResamplingPrecision.Default;
+            SelectedStrokeThickness = 1;
 
             ChangeChannelHeightCommand = new ActionCommand<object>((d) =>
             {
@@ -71,6 +86,9 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
         {
             List<byte[]> digitalChannels = new List<byte[]>();
             List<float[]> analogChannels = new List<float[]>();
+
+            // Make sure we allow UI to show progress bar
+            await Task.Delay(200);
 
             // Force GC to free memory
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
@@ -150,7 +168,12 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                 }
             });
 
-            channelList.ForEach(ch => ChannelViewModels.Add(ch));
+            channelList.ForEach(ch =>
+            {
+                ch.StrokeThickness = this.SelectedStrokeThickness;
+                ch.ResamplingPrecision = (uint)this.SelectedResamplingPrecision;
+                ChannelViewModels.Add(ch);
+            });
         }
 
         public ObservableCollection<ChannelViewModel> ChannelViewModels { get; private set; }
@@ -158,6 +181,17 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
         public string SelectedChannelType { get; set; }
 
         public int SelectedPointCount { get; set; }
+        /// <summary>
+        /// Additional property passed to ChannelViewModel: strokeThickness of the line (Default 1)
+        /// </summary>
+        public int SelectedStrokeThickness { get; set; }
+        /// <summary>
+        /// Additional property passed to ChannelViewModel: Resampling precisions
+        /// 
+        /// see https://www.scichart.com/documentation/win/current/webframe.html#The%20Extreme%20Resamplers%20API.html for info
+        /// on what the numeric values mean. Default is 0 
+        /// </summary>
+        public ResamplingPrecision SelectedResamplingPrecision { get; set; }
 
         public int SelectedChannelCount { get; set; }
 
@@ -167,7 +201,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 
         public ActionCommand LoadChannelsCommand { get; }
 
-        public long TotalPoints => ChannelViewModels.Aggregate(0L, (acc, ch) => acc + ch.DataCount);
+        public long TotalPoints => ChannelViewModels.Sum(c => (long)c.DataCount);
 
         public bool IsLoading
         {
