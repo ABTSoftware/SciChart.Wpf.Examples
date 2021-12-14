@@ -147,6 +147,10 @@ A sandbox application with a SciChart WPF Chart allowing you to test out all the
 WORK IN PROGRESS
 Demonstrates how to have two SciChart WPF charts, with YAxes with the same zero line, yet same scale
 
+### VS2022_Net60_Boilerplate
+
+A very simple example which you can open in VS2022 to show SciChart WPF working with .NET 6.0
+
 ### Zoom Extents after MVVM Series Changed
 
 Demonstrates how to Animate ZoomExtents on a SciChart WPF Chart after a series is added dynamically via MVVM 
