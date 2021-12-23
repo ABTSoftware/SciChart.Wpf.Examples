@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -58,6 +59,17 @@
                               IsChecked="True"
                               Style="{StaticResource DefaultToggleButtonStyle}"
                               ToolTipService.ToolTip="Toggle Auto Peak Detection"/>
+
+                <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <TextBlock Text="Texture Filtering"/>
+                            <CheckBox x:Name="textureSwitch"
+                                      Margin="4"
+                                      Content="UseLinearTextureFiltering"/>
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
             </StackPanel>
         </Border>
 
@@ -66,7 +78,8 @@
                 <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries">
                     <s:FastUniformHeatmapRenderableSeries.Style>
                         <Style TargetType="{x:Type s:FastUniformHeatmapRenderableSeries}">
-                            <Setter Property="AutoPeakDetection" Value="{Binding IsChecked, Source={x:Reference PeakDetectorToggle}}" />
+                            <Setter Property="AutoPeakDetection" Value="{Binding IsChecked, Mode=OneWay, Source={x:Reference PeakDetectorToggle}}"/>
+                            <Setter Property="UseLinearTextureFiltering" Value="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}"/>
                             <Setter Property="ColorMap">
                                 <Setter.Value>
                                     <s:HeatmapColorPalette Minimum="-70" Maximum="0">

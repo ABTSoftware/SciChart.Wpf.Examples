@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon />
     <StartupObject />
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
@@ -54,9 +54,6 @@
     <None Remove="Resources\Objects\WhiteWoodTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfoCommon.cs" Link="Properties\AssemblyInfoCommon.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Data\AcousticPlots.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
@@ -95,15 +92,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.5.0.11864-beta" />
+    <PackageReference Include="SciChart" Version="6.5.0.11865-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.5.0.11864-beta" />
+    <PackageReference Include="SciChart3D" Version="6.5.0.11865-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.5.0.11864-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.5.0.11865-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.5.0.11864-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.5.0.11865-beta" />
   </ItemGroup>
 </Project>

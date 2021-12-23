@@ -39,6 +39,8 @@ namespace SciChart.Examples.Examples.InspectDatapoints.CustomSeriesValueMarkers
         private readonly IMarketDataService _marketDataService;
         private readonly OhlcDataSeries<DateTime, double> _dataSeries;
 
+        private readonly object _tickLocker = new object();
+
         public CustomSeriesValueMarkersViewModel()
         {
             ViewportManager = new OnRenderedActionViewportManager(UpdateLineAnnotations);
@@ -123,7 +125,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.CustomSeriesValueMarkers
 
         private void AppendUpdatePrice(PriceBar price)
         {
-            lock (this)
+            lock (_tickLocker)
             {
                 if (_lastPrice != null && _lastPrice.DateTime == price.DateTime)
                 {

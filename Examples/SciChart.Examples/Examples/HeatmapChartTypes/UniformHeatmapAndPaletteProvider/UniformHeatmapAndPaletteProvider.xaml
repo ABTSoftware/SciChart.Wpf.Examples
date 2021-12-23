@@ -1,21 +1,19 @@
-﻿<UserControl
-    x:Class="SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider.UniformHeatmapAndPaletteProvider"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-    xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider.UniformHeatmapAndPaletteProvider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapAndPaletteProvider"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:HeatmapThresholdPaletteProvider x:Key="ThresholdPaletteProvider" ThresholdValue="100" />
@@ -32,8 +30,7 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChartSurface}}">
-            <ext:FlyoutSeparator Background="#444" />
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PP" Padding="0">
+            <ext:FlyoutMenuButton Content="PP" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="240">
                         <TextBlock Text="Threshhold Value" />
@@ -45,12 +42,25 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering"/>
+                        <CheckBox x:Name="textureSwitch"
+                                  Margin="4"
+                                  Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="SciChartSurface" Grid.Column="1" Margin="0,10">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries" PaletteProvider="{StaticResource ThresholdPaletteProvider}">
+                <s:FastUniformHeatmapRenderableSeries x:Name="UniformHeatmapRenderableSeries"
+                                                      PaletteProvider="{StaticResource ThresholdPaletteProvider}"
+                                                      UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}">
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
                             <GradientStop Color="Blue" Offset="0"/>
@@ -83,5 +93,4 @@
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
     </Grid>
-
 </UserControl>

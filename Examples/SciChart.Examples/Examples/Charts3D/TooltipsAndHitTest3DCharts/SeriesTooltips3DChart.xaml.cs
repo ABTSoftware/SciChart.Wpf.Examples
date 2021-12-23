@@ -38,7 +38,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
         {
             InitializeComponent();
 
-            _rotationAngle = 360 / 45;
+            _rotationAngle = 360d / 45;
             
             Loaded += (sender, args) => Initialize();
         }
@@ -51,7 +51,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
             for (var i = -SegmentsCount; i < SegmentsCount + 1; i++)
             {
                 AddSegment(xyzDataSeries3D, i, currentAngle);
-                currentAngle = (currentAngle + _rotationAngle)%360;
+                currentAngle = (currentAngle + _rotationAngle) % 360;
             }
 
             SciChart.RenderableSeries[0].DataSeries = xyzDataSeries3D;
@@ -70,8 +70,8 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
 
         private Point RotatePoint(Point point, double angle)
         {
-            var x = point.X*Math.Cos(angle) - point.Y*Math.Sin(angle);
-            var y = point.X*Math.Sin(angle) + point.Y*Math.Cos(angle);
+            var x = point.X * Math.Cos(angle) - point.Y * Math.Sin(angle);
+            var y = point.X * Math.Sin(angle) + point.Y * Math.Cos(angle);
 
             return new Point(x, y);
         }

@@ -34,7 +34,10 @@ namespace SciChart.Examples.ExternalDependencies.Data
     {
         private readonly IDictionary<string, PriceSeries> _dataSets = new Dictionary<string, PriceSeries>();
         private readonly List<DoubleSeries> _acousticPlotData = new List<DoubleSeries>();
+        
         private static readonly DataManager _instance = new DataManager();
+        private static readonly object _locker = new object();
+
         private IList<Instrument> _availableInstruments;
         private IDictionary<Instrument, IList<TimeFrame>> _availableTimeFrames;
 
@@ -306,11 +309,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
             {
                 if (_availableInstruments == null)
                 {
-                    lock (typeof(DataManager))
+                    lock (_locker)
                     {
                         if (_availableInstruments == null)
                         {
-                            var assembly = typeof (DataManager).Assembly;
+                            var assembly = typeof(DataManager).Assembly;
                             _availableInstruments = new List<Instrument>();
 
                             foreach (var resourceString in assembly.GetManifestResourceNames())
@@ -344,7 +347,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             if (_availableTimeFrames == null)
             {
-                lock (typeof (DataManager))
+                lock (_locker)
                 {
                     if (_availableTimeFrames == null)
                     {

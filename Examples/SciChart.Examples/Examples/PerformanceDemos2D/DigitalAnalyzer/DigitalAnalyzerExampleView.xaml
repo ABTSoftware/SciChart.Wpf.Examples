@@ -291,6 +291,8 @@
                                     <!--  Create an X Axis with GrowBy  -->
                                     <s:SciChartSurface.XAxis>
                                         <s:NumericAxis Style="{StaticResource HiddenAxisStyle}"
+                                                       VisibleRangeLimitMode="Min"
+                                                       VisibleRangeLimit="0,0"
                                                        VisibleRange="{Binding DataContext.XRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=ItemsControl, AncestorLevel=2}}"/>
                                     </s:SciChartSurface.XAxis>
 

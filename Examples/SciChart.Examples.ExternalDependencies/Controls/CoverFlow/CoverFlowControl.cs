@@ -152,7 +152,15 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         public int SelectedIndex
         {
             get => _selectedIndex;
-            set => IndexSelected(value, false);
+            set
+            {
+                IndexSelected(value, false);
+                
+                if (_items.Count > 0)
+                {
+                    _selectedIndex = value;
+                }
+            }
         }
 
         public new object SelectedItem

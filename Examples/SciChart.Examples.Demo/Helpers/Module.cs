@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Unity;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Examples.Demo.Helpers.Navigation;
 using SciChart.Examples.Demo.ViewModels;
 using SciChart.UI.Bootstrap;
+using Unity;
 
 namespace SciChart.Examples.Demo.Helpers
 {
@@ -25,22 +25,16 @@ namespace SciChart.Examples.Demo.Helpers
     [ExportType(typeof(IModule), CreateAs.Singleton)]
     public class Module : IModule
     {
-        public IDictionary<Guid, Example> _examples = new Dictionary<Guid, Example>();
-
-        public static readonly Dictionary<Guid, AppPage> ChartingPages = new Dictionary<Guid, AppPage>();
-
-        private readonly ActionCommand<Example> _navigateToExampleCommand;
-        private IDictionary<string, ReadOnlyCollection<string>> _groupsByCategory;
-        private ReadOnlyCollection<string> _allCategories;
         private Example _currentExample;
 
         public Module()
         {
-            _navigateToExampleCommand = new ActionCommand<Example>(example =>
+            NavigateToExampleCommand = new ActionCommand<Example>(example =>
             {
                 var lastExamplePage = CurrentExample != null ? CurrentExample.Page as ExampleAppPage : null;
                 
                 CurrentExample = example;
+
                 Navigator.Instance.Navigate(example);
                 Navigator.Instance.Push(example);
 
@@ -50,15 +44,15 @@ namespace SciChart.Examples.Demo.Helpers
                     lastExamplePage.ViewModel = null;                    
                 }
 
-                GC.Collect();
+                GC.Collect(); //NOSONAR
                 GC.WaitForPendingFinalizers();
-                GC.Collect();
+                GC.Collect(); //NOSONAR
             });
         }
 
         public Example CurrentExample
         {
-            get { return _currentExample; }
+            get => _currentExample;
             set
             {
                 _currentExample = value;
@@ -66,19 +60,20 @@ namespace SciChart.Examples.Demo.Helpers
             }
         }
 
-        public IDictionary<Guid, Example> Examples { get { return _examples; } }
+        public ICommand NavigateToExampleCommand { get; }
 
-        public ReadOnlyCollection<string> AllCategories { get { return _allCategories; } }
-        public IDictionary<string, ReadOnlyCollection<string>> GroupsByCategory { get { return _groupsByCategory; } }
+        public static Dictionary<Guid, AppPage> ChartingPages { get; } = new Dictionary<Guid, AppPage>();
 
-        private ICommand NavigateToExample
-        {
-            get { return _navigateToExampleCommand; }
-        }
+        public IDictionary<Guid, Example> Examples { get; } = new Dictionary<Guid, Example>();
+
+        public ReadOnlyCollection<string> AllCategories { get; private set; }
+
+        public IDictionary<string, ReadOnlyCollection<string>> GroupsByCategory { get; private set; }
 
         public void Initialize()
         {
             var exampleDefinitions = LoadExampleDefinitions();
+
             InitializeExamplesAndPages(exampleDefinitions);
           
             InitializeNewNavigator();
@@ -86,14 +81,14 @@ namespace SciChart.Examples.Demo.Helpers
 
         public IEnumerable<Example> ExamplesByCategoryAndGroup(string category, string @group)
         {
-            return _examples.Where(x => x.Value.Group == @group && x.Value.TopLevelCategory == category).Select(x => x.Value).ToList();
+            return Examples.Where(x => x.Value.Group == @group && x.Value.TopLevelCategory == category).Select(x => x.Value).ToList();
         }
 
         private static IEnumerable<ExampleDefinition> LoadExampleDefinitions()
         {
             var loader = new ExampleLoader();
-
             var xmlExamples = loader.DiscoverAllXmlFiles();
+           
             IEnumerable<ExampleDefinition> exampleDefinitions = xmlExamples.Select(e => loader.Parse(e));
 
             return exampleDefinitions;
@@ -108,18 +103,19 @@ namespace SciChart.Examples.Demo.Helpers
                 appPage = new ExampleAppPage(definition.Title ,definition.ViewModel, definition.View);
                 ChartingPages.Add(appPage.PageId, appPage);
 
-                var example = new Example(appPage, definition) {SelectCommand = NavigateToExample};
+                var example = new Example(appPage, definition) {SelectCommand = NavigateToExampleCommand};
 
-                _examples.Add(appPage.PageId, example);
+                Examples.Add(appPage.PageId, example);
                 categories.Add(example.TopLevelCategory);
             }
 
-            _allCategories = new ReadOnlyCollection<string>(categories.ToList());
-            _groupsByCategory = new Dictionary<string, ReadOnlyCollection<string>>();
-            foreach (var category in _allCategories)
+            AllCategories = new ReadOnlyCollection<string>(categories.ToList());
+            GroupsByCategory = new Dictionary<string, ReadOnlyCollection<string>>();
+            
+            foreach (var category in AllCategories)
             {
-                var groups = _examples.Where(ex => ex.Value.TopLevelCategory == category).Select(y => y.Value.Group).Distinct().ToList();
-                _groupsByCategory.Add(category, new ReadOnlyCollection<string>(groups));
+                var groups = Examples.Where(ex => ex.Value.TopLevelCategory == category).Select(y => y.Value.Group).Distinct().ToList();
+                GroupsByCategory.Add(category, new ReadOnlyCollection<string>(groups));
             }
 
             appPage = new HomeAppPage();
@@ -152,7 +148,8 @@ namespace SciChart.Examples.Demo.Helpers
             {
                 Navigator.Instance.NavigateToHomeCommand.Execute(null);
             }
-            _navigateToExampleCommand.Execute(currentExample);
+
+            NavigateToExampleCommand.Execute(currentExample);
         }
     }
 }

@@ -35,7 +35,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer.Common
         public ChannelViewModel GenerateAnalogChannel(double xStart, double xStep, float[] analogData, int index = 0)
         {
             UniformDataManager.GenerateAnalogData(analogData);
-            var dataSeries = new UniformXyDataSeries<float>(xStart, xStep, analogData);
+
+            // Provide additional info about expected data to avoid runtime checks
+            // There are frequent peaks at 0,1
+            var args = new UniformDataDistributionArgs<float>(false, -1f, 1f);
+            var dataSeries = new UniformXyDataSeries<float>(xStart, xStep, analogData, args);
 
             return new ChannelViewModel(dataSeries, new DoubleRange(-1.5, 1.5), index, $"Channel {index}") { IsDigital = false };
         }

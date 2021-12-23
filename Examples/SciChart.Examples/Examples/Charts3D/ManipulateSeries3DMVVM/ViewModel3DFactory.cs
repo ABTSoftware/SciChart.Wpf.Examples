@@ -31,11 +31,6 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
                 return new PointLineRenderableSeries3DViewModel { DataSeries = GetScaledDataSeries(), StyleKey = "PointLine3DStyle" };
             }
 
-            if (type == typeof(MountainRenderableSeries3DViewModel))
-            {
-                return new MountainRenderableSeries3DViewModel { DataSeries = GetScaledDataSeries(), StyleKey = "Mountain3DStyle" };
-            }
-
             if (type == typeof(SurfaceMeshRenderableSeries3DViewModel))
             {
                 return new SurfaceMeshRenderableSeries3DViewModel { DataSeries = GetSurfaceMeshDataSeries(), StyleKey = "SurfaceMeshStyle" };
@@ -183,11 +178,6 @@ namespace SciChart.Examples.Examples.Charts3D.ManipulateSeries3DMVVM
             if (seriesType.Equals("Impulse Series"))
             {
                 return typeof(ImpulseRenderableSeries3DViewModel);
-            }
-
-            if (seriesType.Equals("Mountain Series"))
-            {
-                return typeof(MountainRenderableSeries3DViewModel);
             }
 
             if (seriesType.Equals("PointLine Series"))

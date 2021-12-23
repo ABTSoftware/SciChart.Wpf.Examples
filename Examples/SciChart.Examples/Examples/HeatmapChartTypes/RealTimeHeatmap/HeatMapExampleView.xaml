@@ -7,7 +7,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -25,7 +24,7 @@
                 <GradientStop Offset="1" Color="Red" />
             </s:HeatmapColorPalette.GradientStops>
         </s:HeatmapColorPalette>
-        
+
         <Style TargetType="TextBox">
             <Setter Property="MinWidth" Value="50"/>
             <Setter Property="Height" Value="16"/>
@@ -37,7 +36,7 @@
         </Style>
 
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -48,17 +47,33 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            
+
+            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering"/>
+                        <CheckBox x:Name="textureSwitch"
+                                  Margin="4"
+                                  Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
             <ToggleButton x:Name="StartButton" Click="StartButton_Click" IsChecked="True" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
             <ToggleButton x:Name="StopButton" Click="StopButton_Click" Style="{StaticResource StopButtonStyle}" Padding="7"/>
 
         </ext:SciChartInteractionToolbar>
 
-        <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0"
+        <s:SciChartSurface Grid.Column="1"
+                           x:Name="sciChart"                  
+                           Padding="0"
                            BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" ColorMap="{StaticResource ColorPalette}" Opacity="0.9" />
+                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries"
+                                                      Opacity="0.9"
+                                                      ColorMap="{StaticResource ColorPalette}"
+                                                      UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}"/>
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -71,30 +86,27 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RolloverModifier ShowTooltipOn="Always"  UseInterpolation="True" ReceiveHandledEvents="True"/>
+                    <s:RolloverModifier ShowTooltipOn="Always" UseInterpolation="True" ReceiveHandledEvents="True"/>
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton" />
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
+            
         </s:SciChartSurface>
 
-        <s:HeatmapColorMap Margin="10,10,60,40" 
-                          Grid.Column="1"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Stretch"
-                          Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
-                          Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
-                          ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
-                          Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
-                          Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
-                          TextFormatting="0.00"
-                          Opacity="0.8"
-                          BorderBrush="#777"
-                          BorderThickness="1"
-                          Orientation="Vertical" />
+        <s:HeatmapColorMap Grid.Column="1"
+                           Margin="10,10,60,40" 
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Stretch"
+                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                           ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
+                           Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
+                           TextFormatting="0.00"
+                           Opacity="0.8"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           Orientation="Vertical" />
     </Grid>
 </UserControl>
-
-
-

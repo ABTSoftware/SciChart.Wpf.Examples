@@ -34,11 +34,14 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
         /// list of data series to be displayed in loop on timer
         /// </summary>
         private readonly IDataSeries[] _dataSeries = new IDataSeries[seriesPerPeriod];
+
         /// <summary>
         /// number of series to be displayed in a loop (period)
         /// </summary>
         private const int seriesPerPeriod = 30;
-        private DispatcherTimer _timer;
+
+        private readonly DispatcherTimer _timer;
+
         private int _timerIndex = 0;
 
         public HeatMapExampleView()
@@ -48,6 +51,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
             var colormap = heatmapSeries.ColorMap;
             var cpMin = colormap.Minimum;
             var cpMax = colormap.Maximum;
+
             // Create data for our heatmaps in parallel
             Parallel.For(0, seriesPerPeriod, (i) =>
             {
@@ -59,13 +63,10 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
             _timer = new DispatcherTimer(DispatcherPriority.Render)
             {
                 Interval = TimeSpan.FromMilliseconds(1),
-#if !SILVERLIGHT
+
                 IsEnabled = SeriesAnimationBase.GlobalEnableAnimations
-#endif
             };
-#if SILVERLIGHT
-            _timer.Start();
-#endif
+
             _timer.Tick += TimerOnTick;
         }
 
@@ -82,10 +83,14 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
         {
             var seed = SeriesAnimationBase.GlobalEnableAnimations ? (Environment.TickCount << index) : 0;
             var random = new Random(seed);
+            
             double angle = Math.Round(Math.PI * 2 * index, 3) / seriesPerPeriod;
+           
             int w = width, h = height;
             var data = new double[h, w];
+            
             for (int x = 0; x < w; x++)
+            { 
                 for (int y = 0; y < h; y++)
                 {
                     var v = (1 + Math.Round(Math.Sin(x * 0.04 + angle), 3)) * 50 + (1 + Math.Round(Math.Sin(y * 0.1 + angle), 3)) * 50 * (1 + Math.Round(Math.Sin(angle * 2), 3));
@@ -95,12 +100,16 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
                     var zValue = (v * exp + random.NextDouble() * 50);
                     data[y, x] = (zValue > cpMax) ? cpMax : zValue;
                 }
+            }
             return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1);
         }
 
         private void OnExampleLoaded(object sender, RoutedEventArgs e)
         {
-            if (SeriesAnimationBase.GlobalEnableAnimations) _timer.Start();
+            if (SeriesAnimationBase.GlobalEnableAnimations)
+            {
+                _timer.Start();
+            }
         }
 
         private void OnExampleUnloaded(object sender, RoutedEventArgs e)

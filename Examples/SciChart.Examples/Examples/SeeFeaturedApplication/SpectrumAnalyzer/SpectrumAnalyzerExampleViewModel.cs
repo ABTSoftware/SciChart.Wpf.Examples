@@ -27,14 +27,18 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
     public class SpectrumAnalyzerExampleViewModel : BaseViewModel
     {
         private const int Count = 1024;
+
         private readonly double[] _re = new double[1024];
         private readonly double[] _im = new double[1024];
+
         private IXyDataSeries<double, double> _dataSeries;
 
         private DoubleRange _xVisibleRange;
         private DoubleRange _yVisibleRange;
 
         private Timer _updateTimer = new Timer(10);
+        private readonly object _updateLocker = new object();
+
         private bool _isFrequencyDomain;
         private bool _isTimeDomain;
 
@@ -155,7 +159,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 
         private void UpdateData()
         {
-            lock (this)
+            lock (_updateLocker)
             {                
                 for (int i = 0; i < Count; i++)
                 {

@@ -7,73 +7,84 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300"
+             d:DesignWidth="300">
 
     <UserControl.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-            
+
             <!--Tooltip template-->
             <DataTemplate x:Key="TooltipItemTemplate">
                 <Grid DataContext="{Binding PointMetadata}">
-                    <TextBlock Text="{Binding Tooltip}"></TextBlock>
+                    <TextBlock Text="{Binding Tooltip}"/>
                 </Grid>
             </DataTemplate>
 
-            <Style x:Key="HeatmapStyle" TargetType="local:CustomUniformHeatmapRenderableSeries" BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
+            <Style x:Key="HeatmapStyle"
+                   TargetType="local:CustomUniformHeatmapRenderableSeries"
+                   BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Source={x:Reference Name=metadataSwitch}, Path=IsChecked}" Value="True">
-                        <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"></Setter>
+                        <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-            
         </ResourceDictionary>
-        
     </UserControl.Resources>
 
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ext:FlyoutSeparator Background="#444" />
             <ext:FlyoutMenuButton Content="MD" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Get data from Metada"/>
-                        <ext:FlyoutSeparator/>
-                        <CheckBox x:Name="metadataSwitch" Margin="4"
-                                  Content="Use MetaData"
+                        <TextBlock Text="Get data from Metadata"/>
+                        <CheckBox x:Name="metadataSwitch"
+                                  Margin="4"
+                                  Content="UseMetaData"
                                   Checked="EnableMetadatas"
-                                  Unchecked="DisableMetadatas"
-                                  />
+                                  Unchecked="DisableMetadatas"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-            
+
+            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering"/>
+                        <CheckBox x:Name="textureSwitch"
+                                  Margin="4"
+                                  Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
-        <s:SciChartSurface x:Name="sciChart" Grid.Column="1"
+        <s:SciChartSurface Grid.Column="1"
+                           x:Name="sciChart" 
                            Padding="0"
                            BorderThickness="0">
-            <s:SciChartSurface.RenderableSeries>
 
-                <local:CustomUniformHeatmapRenderableSeries x:Name="heatmapSeries" DrawTextInCell="True" Opacity="0.9" Style="{StaticResource HeatmapStyle}">
+            <s:SciChartSurface.RenderableSeries>
+                <local:CustomUniformHeatmapRenderableSeries x:Name="heatmapSeries"
+                                                            DrawTextInCell="True"
+                                                            Opacity="0.9"
+                                                            UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}"
+                                                            Style="{StaticResource HeatmapStyle}">
                     <local:CustomUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
                             <GradientStop Color="Blue" Offset="0"/>
@@ -84,7 +95,6 @@
                         </s:HeatmapColorPalette>
                     </local:CustomUniformHeatmapRenderableSeries.ColorMap>
                 </local:CustomUniformHeatmapRenderableSeries>
-
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -103,9 +113,9 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:TooltipModifier></s:TooltipModifier>
-                    <s:ZoomPanModifier ClipModeX="None"></s:ZoomPanModifier>
-                    <s:MouseWheelZoomModifier></s:MouseWheelZoomModifier>
+                    <s:TooltipModifier/>
+                    <s:ZoomPanModifier ClipModeX="None"/>
+                    <s:MouseWheelZoomModifier/>
                     <s:RubberBandXyZoomModifier ExecuteOn="MouseRightButton"/>
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
                 </s:ModifierGroup>
@@ -124,7 +134,5 @@
                            Maximum="{Binding ColorMap.Maximum}"
                            TextFormatting="n0"
                            Opacity="0.9" />
-
     </Grid>
-    
 </UserControl>
