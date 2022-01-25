@@ -135,9 +135,6 @@
                            x:Name="Surface"
                            LeftAxesPanelTemplate="{StaticResource YAxesPanel}"
                            RightAxesPanelTemplate="{StaticResource YAxesPanel}"
-                           s:VisualXcceleratorEngine.IsEnabled="True"
-                           s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}"
-                           s:VisualXcceleratorEngine.DowngradeWithoutException="False"
                            s:VisualXcceleratorEngine.EnableImpossibleMode="False"/>
 
         <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource MonitorBorderStyle}">

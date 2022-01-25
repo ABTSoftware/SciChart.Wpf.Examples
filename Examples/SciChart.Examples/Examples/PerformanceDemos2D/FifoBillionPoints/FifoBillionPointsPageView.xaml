@@ -49,15 +49,14 @@
             <s:SciChartSurface x:Name="scs" 
                                RenderableSeries="{s:SeriesBinding Series}" 
                                ViewportManager="{Binding ViewportManager}"
-                               s:VisualXcceleratorEngine.IsEnabled="True"
-                               s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}"
-                               s:VisualXcceleratorEngine.DowngradeWithoutException="False"
                                s:VisualXcceleratorEngine.EnableImpossibleMode="True">
+                
                 <s:SciChartSurface.XAxis>
                     <s:NumericAxis AutoRange="{Binding IsChecked, Source={x:Reference RunBtn}, Converter={StaticResource AutoRangeConverter}}"
                                    DrawMinorGridLines="False"
                                    DrawMinorTicks="False"/>
                 </s:SciChartSurface.XAxis>
+                
                 <s:SciChartSurface.YAxis>
                     <s:NumericAxis AutoRange="Never"
                                    DrawMinorGridLines="False"

@@ -1,10 +1,9 @@
-﻿using SciChart.Charting.ChartModifiers;
-using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Examples.ExternalDependencies.Data;
-using SciChart.Examples.ExternalDependencies.Helpers;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using SciChart.Charting.ChartModifiers;
+using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.SeeFeaturedApplication.ParallelCoordinatePlot
 {
@@ -15,8 +14,6 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ParallelCoordinatePl
         public ParallelCoordinatePlotView()
         {
             InitializeComponent();
-
-            VisualXcceleratorEngineHelper.ForceEnable(sciChart);
         }
 
         private void ParallelCoordinatePlotView_OnLoaded(object sender, RoutedEventArgs e)

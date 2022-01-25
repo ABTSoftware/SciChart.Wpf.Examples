@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
-using Unity;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Controls.ExceptionView;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Bootstrap.Utility;
 using SciChart.UI.Reactive.Async;
 using SciChart.UI.Reactive.Traits;
+using Unity;
 
 namespace SciChart.Examples.Demo
 {
@@ -24,15 +23,17 @@ namespace SciChart.Examples.Demo
     {
         private static ILogFacade _log;
         private Bootstrapper _bootStrapper;
+
         private const string _devMode = "/DEVMODE";
         private const string _quickStart = "/UIAUTOMATIONTESTMODE";
 
         public App()
-        {
-            Startup += Application_Startup;
-            Exit += OnExit; DispatcherUnhandledException += App_DispatcherUnhandledException;
-
-            InitializeComponent();
+        {  
+            Startup += OnStartup;
+            Exit += OnExit;
+            DispatcherUnhandledException += OnDispatcherUnhandledException;
+   
+            InitializeComponent();   
         }
         
         public ILogFacade Log
@@ -40,7 +41,7 @@ namespace SciChart.Examples.Demo
             get
             {
                 if (UIAutomationTestMode) return new ConsoleLogger();
-                _log = _log ?? LogManagerFacade.GetLogger(typeof(App));
+                _log ??= LogManagerFacade.GetLogger(typeof(App));
                 return _log;
             }
         }
@@ -50,22 +51,24 @@ namespace SciChart.Examples.Demo
         /// </summary>
         public static bool UIAutomationTestMode { get; private set; }
 
-        private void App_DispatcherUnhandledException(object sender,
-            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {        
             Log.Error("An unhandled exception occurred. Showing view to user...", e.Exception);
                 
             var exceptionView = new ExceptionView(e.Exception)
             {
-                Owner = Application.Current != null ? Application.Current.MainWindow : null,
-                WindowStartupLocation = Application.Current != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
+                Owner = Current?.MainWindow,
+                WindowStartupLocation = Current != null
+                    ? WindowStartupLocation.CenterOwner
+                    : WindowStartupLocation.CenterScreen
             };
+
             exceptionView.ShowDialog();
 
             e.Handled = true;
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private void OnStartup(object sender, StartupEventArgs e)
         {
             if (e.Args.Contains(_devMode, StringComparer.InvariantCultureIgnoreCase))
             {
@@ -90,9 +93,9 @@ namespace SciChart.Examples.Demo
 
                 var assembliesToSearch = new[]
                 {
-                    typeof (MainWindowViewModel).Assembly,
-                    typeof (AbtBootstrapper).Assembly, // SciChart.UI.Bootstrap
-                    typeof (IViewModelTrait).Assembly, // SciChart.UI.Reactive 
+                    typeof(MainWindowViewModel).Assembly,
+                    typeof(AbtBootstrapper).Assembly, // SciChart.UI.Bootstrap
+                    typeof(IViewModelTrait).Assembly, // SciChart.UI.Reactive 
                 };
 
                 _bootStrapper = new Bootstrapper(ServiceLocator.Container, new AttributedTypeDiscoveryService(new ExplicitAssemblyDiscovery(assembliesToSearch)));
@@ -115,6 +118,7 @@ namespace SciChart.Examples.Demo
                     }
 
                     _bootStrapper.OnInitComplete();
+
                 }).Catch(ex =>
                 {
                     Log.Error("Exception:\n\n{0}", ex);
@@ -133,6 +137,7 @@ namespace SciChart.Examples.Demo
             if (!UIAutomationTestMode)
             {
                 var usageCalc = ServiceLocator.Container.Resolve<IUsageCalculator>();
+
                 usageCalc.UpdateUsage(null);
 
                 var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
