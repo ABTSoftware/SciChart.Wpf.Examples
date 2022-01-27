@@ -99,4 +99,16 @@
     <Resource Include="Resources\Images\step_line.png" />
     <Resource Include="Resources\Images\type_button.png" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart" Version="6.5.1.26058" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart3D" Version="6.5.1.26058" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DirectX" Version="6.5.1.26058" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DrawingTools" Version="6.5.1.26058" />
+  </ItemGroup>
 </Project>
