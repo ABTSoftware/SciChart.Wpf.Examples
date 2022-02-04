@@ -28,9 +28,11 @@ The SciChart WPF Examples Suite demonstrates 2D & 3D WPF Chart types, as well as
 
 This showcase is written in WPF with MVVM, Unity Container and Reactive Extensions and is designed to be a demonstration of what SciChart WPF can do. 
 
-#### WPF Chart Types 
+#### WPF 2D Chart Types 
 
 SciChart WPF Includes the following 2D & 3D chart types, as well as an wide set of features, excellent performance and a poweful, flexible API.
+
+![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
 
 * [WPF Line Chart](https://www.scichart.com/wpf-chart-example-line-chart)
 * [WPF Band Chart](https://www.scichart.com/wpf-chart-example-band-series-chart)
