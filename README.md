@@ -2,26 +2,11 @@
 
 Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.scichart.com): High Performance Realtime [WPF Chart Library](https://www.scichart.com/wpf-chart-features). 
 
+![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
+
 # Build Instructions 
-### NuGet feed setup
 
-The SciChart.Wpf.Examples repository uses nightly builds and is updated automatically during our devops / deployment process. 
-To build, you will need to set the correct NuGet feeds for SciChart WPF nightly builds. 
-
-* In Visual Studio go to Tools -> Options -> NuGet Package Manager -> Package Sources
-* Add a Package Source called SciChart Nightly 
-* Set the feed URL to https://www.myget.org/F/abtsoftware-bleeding-edge/api/v3/index.json
-
-![Nuget Feed Setup](http://www.scichart.com/wp-content/uploads/2015/05/ToolsOptionsNuget.png)
-
-Further instructions for NuGet Feed setup at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
-
-### Licensing
-SciChart WPF is commercial software, and requires a trial or paid license of SciChart WPF to run. 
-Get a trial from https://www.scichart.com/licensing-scichart-wpf if needed
-
-### Visual Studio 
-After that, open Examples/SciChart2D3D.Examples.sln in Visual Studio 2019 or later, restore NuGet Packages, build and run! 
+See end of Readme.md for instructions on how to build the examples. 
 
 # SciChart WPF v6 Released! 
 
@@ -33,11 +18,6 @@ This branch is for the .NET Core 3 and .NET Framework 4.5.2+ version of SciChart
 
 To find out [what's new in SciChart WPF v6 please see this link](https://www.scichart.com/documentation/win/current/What's%20New%20in%20SciChart%20SDK%20v6.html).
 
-### Note: NuGet feed setup
-
-To build, you will need to set the correct NuGet feeds for SciChart WPF v6.x
-NuGet Feed setup instructions are found at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
-
 # Repository Contents
 
 ### Scichart Examples Suite
@@ -45,8 +25,6 @@ NuGet Feed setup instructions are found at the page [Getting Nightly Builds with
 The SciChart WPF Examples Suite demonstrates 2D & 3D WPF Chart types, as well as featured apps which show the speed, power and flexibility of the SciChart.WPF Chart library. 
 
 **The examples suite source code is found under the [/Examples folder](https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Examples)).**
-
-![SciChart WPF Collage](https://www.scichart.com/wp-content/uploads/2016/01/SciChart-WPF-Chart-Features-Collage-sml.png)
 
 This showcase is written in WPF with MVVM, Unity Container and Reactive Extensions and is designed to be a demonstration of what SciChart WPF can do. 
 
@@ -104,4 +82,26 @@ Source code for the tutorials is found under the [/Tutorials folder](https://git
 
 A place to put ideas, examples for users to answer support requests and more. See [Sandbox/CustomerExamples](https://github.com/ABTSoftware/SciChart.Wpf.Examples/tree/SciChart_v6_Release/Sandbox/CustomerExamples) for a list of useful examples of customisation of SciChart. 
 
+
+# Build Instructions 
+
+### NuGet feed setup
+
+The SciChart.Wpf.Examples repository uses nightly builds and is updated automatically during our devops / deployment process. 
+To build, you will need to set the correct NuGet feeds for SciChart WPF nightly builds. 
+
+* In Visual Studio go to Tools -> Options -> NuGet Package Manager -> Package Sources
+* Add a Package Source called SciChart Nightly 
+* Set the feed URL to https://www.myget.org/F/abtsoftware-bleeding-edge/api/v3/index.json
+
+![Nuget Feed Setup](http://www.scichart.com/wp-content/uploads/2015/05/ToolsOptionsNuget.png)
+
+Further instructions for NuGet Feed setup at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
+
+### Licensing
+SciChart WPF is commercial software, and requires a trial or paid license of SciChart WPF to run. 
+Get a trial from https://www.scichart.com/licensing-scichart-wpf if needed
+
+### Visual Studio 
+After that, open Examples/SciChart2D3D.Examples.sln in Visual Studio 2019 or later, restore NuGet Packages, build and run! 
 
