@@ -5,8 +5,16 @@ Examples, Showcase Applications and Tutorials for [SciChart.WPF](https://www.sci
 # Build Instructions 
 ### NuGet feed setup
 
+The SciChart.Wpf.Examples repository uses nightly builds and is updated automatically during our devops / deployment process. 
 To build, you will need to set the correct NuGet feeds for SciChart WPF nightly builds. 
-NuGet Feed setup instructions are found at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
+
+* In Visual Studio go to Tools -> Options -> NuGet Package Manager -> Package Sources
+* Add a Package Source called SciChart Nightly 
+* Set the feed URL to https://www.myget.org/F/abtsoftware-bleeding-edge/api/v3/index.json
+
+![Nuget Feed Setup](http://www.scichart.com/wp-content/uploads/2015/05/ToolsOptionsNuget.png)
+
+Further instructions for NuGet Feed setup at the page [Getting Nightly Builds with NuGet](http://support.scichart.com/index.php?/Knowledgebase/Article/View/17232/37/getting-nightly-builds-with-nuget)
 
 ### Licensing
 SciChart WPF is commercial software, and requires a trial or paid license of SciChart WPF to run. 
