@@ -7,6 +7,7 @@
     <Application.Resources>
         <!-- Only software renderers support multiple UI threads -->
         <Style x:Shared="False" TargetType="{x:Type s:SciChartSurface}">
+            <Setter Property="s:VisualXcceleratorEngine.IsEnabled" Value="False"/>
             <Setter Property="RenderSurface">
                 <Setter.Value>
                     <s:HighQualityRenderSurface/>
