@@ -1,0 +1,65 @@
+﻿<Window x:Class="LegendAxisVisibilityCheckboxExample.LegendAxisVisibilityCheckbox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:local="clr-namespace:LegendAxisVisibilityCheckboxExample"
+        mc:Ignorable="d"
+        Title="LegendAxisVisibilityCheckboxExample" Height="450" Width="800">
+    <Grid>
+
+        <Grid.Resources>
+
+            <local:TwoWayBooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+            <DataTemplate x:Key="SciChartLegendItemTemplate" DataType="s:SeriesInfo">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <s:PointMarker Grid.Column="0" Margin="5,0,0,0" Width="40" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   DataContext="{Binding RenderableSeries}"
+                                   DeferredContent="{Binding LegendMarkerTemplate}"
+                                   Visibility="{Binding ShowSeriesMarkers, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <TextBlock Margin="5,0,5,0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Left"
+                               Text="{Binding SeriesName}" />
+
+                    <CheckBox Margin="5,0,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Grid.Column="2"
+                              DataContext="{Binding Path=RenderableSeries.YAxis}"
+                              Content="{Binding Id}"
+                              Foreground="White"
+                              IsChecked="{Binding Visibility, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <s:SciChartSurface x:Name="scs">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="LineSeries0" YAxisId="PrimaryAxis" Stroke="GreenYellow"/>
+                <s:FastLineRenderableSeries x:Name="LineSeries1" YAxisId="SecondaryAxis" Stroke="OrangeRed"/>
+            </s:SciChartSurface.RenderableSeries>
+            <!--  Create XAxis  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis Id="PrimaryAxis" BorderBrush="GreenYellow" BorderThickness="1,0,0,0"/>
+                <s:NumericAxis Id="SecondaryAxis" BorderBrush="OrangeRed" BorderThickness="1,0,0,0"/>
+            </s:SciChartSurface.YAxes>
+            <s:SciChartSurface.ChartModifier>
+                <s:LegendModifier  LegendItemTemplate="{StaticResource SciChartLegendItemTemplate}"/>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>
