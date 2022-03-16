@@ -30,8 +30,9 @@ namespace OilAndGasExample.VerticalCharts
                 new VerticalChartViewModel(new ShaleChartInitializer()),
                 new VerticalChartViewModel(new DensityChartInitializer()),
                 new VerticalChartViewModel(new ResistivityChartInitializer()),
-                new VerticalChartViewModel(new ResistivityChartInitializer()),
-                new VerticalChartViewModel(new ResistivityChartInitializer())
+                new VerticalChartViewModel(new PermChartInitializer()),
+                new VerticalChartViewModel(new EmptyChartInitializer()),
+                new VerticalChartViewModel(new EmptyChartInitializer())
             };
         }
     }

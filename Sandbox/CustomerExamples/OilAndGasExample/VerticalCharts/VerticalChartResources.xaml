@@ -93,8 +93,33 @@
         <Setter Property="StrokeThickness" Value="2"/>
         <Setter Property="Stroke" Value="#1C1C1E"/>
         <Setter Property="StrokeY1" Value="Red"/>
-        <Setter Property="Fill" Value="Orange"/>
-        <Setter Property="FillY1" Value="ForestGreen"/>
+        <Setter Property="Fill" Value="ForestGreen"/>
+        <Setter Property="FillY1" Value="Orange"/>
+    </Style>
+
+    <!-- Resistivity Chart -->
+    <Style x:Key="ResistivityChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
+           BasedOn="{StaticResource ShaleChartXAxisStyle}"/>
+
+    <Style x:Key="ResistivityChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="VisibleRange" Value="0,1"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="ResistivitySeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Stroke" Value="DeepSkyBlue"/>
+    </Style>
+
+    <Style x:Key="ResistivityAverageSeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Stroke" Value="OrangeRed"/>
+        <Setter Property="StrokeDashArray" Value="5,5"/>
     </Style>
 
 </ResourceDictionary>
