@@ -13,7 +13,7 @@ namespace OilAndGasExample.VerticalCharts
 
         public string ChartTitle { get; }
 
-        public IVerticalChartInitializer ChartInitializer { get; }
+        public IChartInitializer ChartInitializer { get; }
 
         public ObservableCollection<IAxisViewModel> XAxes { get; } = new ObservableCollection<IAxisViewModel>();
 
@@ -38,7 +38,7 @@ namespace OilAndGasExample.VerticalCharts
             }
         }
 
-        public VerticalChartViewModel(IVerticalChartInitializer chartInitializer)
+        public VerticalChartViewModel(IChartInitializer chartInitializer)
         {
             ChartInitializer = chartInitializer;
             ChartTitle = chartInitializer.ChartTitle;

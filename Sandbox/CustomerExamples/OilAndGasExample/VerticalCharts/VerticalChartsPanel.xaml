@@ -50,6 +50,12 @@
                             <l:SurfaceToViewModelBehavior/>
                         </b:Interaction.Behaviors>
 
+                        <s:SciChartSurface.ChartModifier>
+                            <s:ModifierGroup>
+                                <s:MouseWheelZoomModifier XyDirection="XDirection"/>
+                                <s:ZoomExtentsModifier XyDirection="XDirection"/>
+                            </s:ModifierGroup>
+                        </s:SciChartSurface.ChartModifier>
                     </s:SciChartSurface>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

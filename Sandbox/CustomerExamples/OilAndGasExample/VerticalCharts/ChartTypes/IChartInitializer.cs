@@ -3,7 +3,7 @@ using SciChart.Charting.Model.ChartSeries;
 
 namespace OilAndGasExample.VerticalCharts.ChartTypes
 {
-    public interface IVerticalChartInitializer
+    public interface IChartInitializer
     {
         string ChartTitle { get; }
 

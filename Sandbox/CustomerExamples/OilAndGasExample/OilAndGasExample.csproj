@@ -55,11 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="VerticalCharts\ChartTypes\LineChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\IVerticalChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\StackedMountainChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\DensityChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\IChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\ResistivityChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\ShaleChartInitializer.cs" />
     <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
-    <Compile Include="VerticalCharts\VerticalChartPaletteProvider.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\ShaleChartPaletteProvider.cs" />
     <Compile Include="VerticalCharts\VerticalChartsPanel.xaml.cs">
       <DependentUpon>VerticalChartsPanel.xaml</DependentUpon>
     </Compile>
@@ -105,6 +106,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\Density.csv.gz" />
     <None Include="Data\Shale.csv.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

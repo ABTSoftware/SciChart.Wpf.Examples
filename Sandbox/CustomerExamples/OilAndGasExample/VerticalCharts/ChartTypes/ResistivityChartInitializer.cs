@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using SciChart.Charting.Model.ChartSeries;
-using SciChart.Charting.Visuals.Axes;
 
 namespace OilAndGasExample.VerticalCharts.ChartTypes
 {
-    public class LineChartInitializer : IVerticalChartInitializer
+    public class ResistivityChartInitializer : IChartInitializer
     {
-        public string ChartTitle => "TODO";
+        public string ChartTitle => "Resistivity";
+
         public IAxisViewModel GetXAxis()
         {
             return new NumericAxisViewModel
             {
-                AxisAlignment = AxisAlignment.Left,
-                StyleKey = "VerticalChartAxisStyle"
+                Visibility = Visibility.Collapsed
             };
         }
 
@@ -20,15 +21,13 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         {
             return new NumericAxisViewModel
             {
-                FlipCoordinates = true,
-                AxisAlignment = AxisAlignment.Bottom,
-                StyleKey = "VerticalChartAxisStyle"
+                Visibility = Visibility.Collapsed
             };
         }
 
         public IEnumerable<IRenderableSeriesViewModel> GetSeries()
         {
-            return new List<IRenderableSeriesViewModel>();
+            return Enumerable.Empty<IRenderableSeriesViewModel>();
         }
     }
 }

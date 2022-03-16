@@ -5,11 +5,10 @@ using System.IO.Compression;
 using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.Visuals.Axes;
 
 namespace OilAndGasExample.VerticalCharts.ChartTypes
 {
-    public class StackedMountainChartInitializer : IVerticalChartInitializer
+    public class ShaleChartInitializer : IChartInitializer
     {
         public string ChartTitle => "Shale";
 
@@ -17,8 +16,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         {
             return new NumericAxisViewModel
             {
-                AxisAlignment = AxisAlignment.Left,
-                StyleKey = "VerticalChartAxisStyle"
+                StyleKey = "ShaleChartXAxisStyle"
             };
         }
 
@@ -26,9 +24,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         {
             return new NumericAxisViewModel
             {
-                FlipCoordinates = true,
-                AxisAlignment = AxisAlignment.Bottom,
-                StyleKey = "VerticalChartAxisStyle"
+                StyleKey = "ShaleChartYAxisStyle"
             };
         }
 
@@ -40,14 +36,15 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var gz = new GZipStream(File.OpenRead("../../Data/Shale.csv.gz"), CompressionMode.Decompress))
-            using (var streamReader = new StreamReader(gz))
+            using (var fileStream = File.OpenRead("../../Data/Shale.csv.gz"))
+            using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gzStream))
             {
-                string line = streamReader.ReadLine();
+                var line = streamReader.ReadLine();
 
-                while (line != null)
+                while (!string.IsNullOrEmpty(line))
                 {
-                    var data = line.Split(';');
+                    var data = line.Replace(',','.').Split(';');
                     var x = double.Parse(data[0], CultureInfo.InvariantCulture);
 
                     dataSeries1.Append(x, double.Parse(data[1], CultureInfo.InvariantCulture));
@@ -58,39 +55,38 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
                 }
             }
 
+            var shalePaletteProvider = new ShaleChartPaletteProvider(new[]
+            {
+                new PaletteRange(000, 100, Brushes.Orange),
+                new PaletteRange(150, 200, Brushes.Orange),
+                new PaletteRange(220, 260, Brushes.Blue),
+                new PaletteRange(260, 280, Brushes.Red),
+                new PaletteRange(280, 350, Brushes.Orange),
+                new PaletteRange(400, 420, Brushes.LimeGreen),
+                new PaletteRange(480, 580, Brushes.Blue),
+                new PaletteRange(600, 620, Brushes.Aqua),
+                new PaletteRange(750, 800, Brushes.Orange),
+                new PaletteRange(820, 840, Brushes.LimeGreen),
+                new PaletteRange(900, 950, Brushes.Aqua)
+            });
+
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries1,
-                StyleKey = "GreenStackedMountainStyle",
-                IsOneHundredPercent = true
+                StyleKey = "GreenShaleSeriesStyle"
             });
 
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries2,
-                PaletteProvider = new VerticalChartPaletteProvider(new[]
-                {
-                    new PaletteRange(000, 100, Brushes.Orange),
-                    new PaletteRange(150, 200, Brushes.Orange),
-                    new PaletteRange(220, 260, Brushes.Blue),
-                    new PaletteRange(260, 280, Brushes.Red),
-                    new PaletteRange(280, 350, Brushes.Orange),
-                    new PaletteRange(400, 420, Brushes.LimeGreen),
-                    new PaletteRange(480, 580, Brushes.Blue),
-                    new PaletteRange(600, 620, Brushes.Aqua),
-                    new PaletteRange(750, 800, Brushes.Orange),
-                    new PaletteRange(820, 840, Brushes.LimeGreen),
-                    new PaletteRange(900, 950, Brushes.Aqua)
-                }),
-                StyleKey = "YellowStackedMountainStyle",
-                IsOneHundredPercent = true
+                PaletteProvider = shalePaletteProvider,
+                StyleKey = "YellowShaleSeriesStyle"
             });
 
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries3,
-                StyleKey = "RedStackedMountainStyle",
-                IsOneHundredPercent = true
+                StyleKey = "RedShaleSeriesStyle"
             });
 
             return renderSeries;

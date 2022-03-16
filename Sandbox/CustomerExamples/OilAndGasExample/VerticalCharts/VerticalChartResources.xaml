@@ -1,7 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                    xmlns:l="clr-namespace:OilAndGasExample.VerticalCharts">
 
+    <!-- Vertical Chart Panel -->
+    <Style x:Key="VerticalChartTitleStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,5"/>
+    </Style>
+
+    <!-- Shale Chart -->    
     <VisualBrush x:Key="CrossPatternedBrush"
                  TileMode="Tile"
                  Viewport="0,0,10,10" 
@@ -17,44 +28,73 @@
         </VisualBrush.Visual>
     </VisualBrush>
 
-    <Style x:Key="CrossStackedMountainStyle" TargetType="s:StackedMountainRenderableSeries">
+    <Style x:Key="CrossShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True"/>
+        <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="{StaticResource CrossPatternedBrush}"/>
     </Style>
 
-    <Style x:Key="GreenStackedMountainStyle" TargetType="s:StackedMountainRenderableSeries">
+    <Style x:Key="GreenShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True"/>
         <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="LightGreen"/>
     </Style>
 
-    <Style x:Key="YellowStackedMountainStyle" TargetType="s:StackedMountainRenderableSeries">
+    <Style x:Key="YellowShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True"/>
         <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="#E4E840"/>
     </Style>
 
-    <Style x:Key="RedStackedMountainStyle" TargetType="s:StackedMountainRenderableSeries">
+    <Style x:Key="RedShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True"/>
         <Setter Property="AntiAliasing" Value="True"/>
-        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="Firebrick"/>
     </Style>
 
-    <Style x:Key="VerticalChartAxisStyle" TargetType="{x:Type s:AxisBase}">
-        <Setter Property="AutoRange" Value="Always"/>
+    <Style x:Key="ShaleChartXAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Once"/>
+        <Setter Property="VisibleRangeLimit" Value="0,999"/>
+        <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalChartsPanel}}}"/>
+        <Setter Property="AxisAlignment" Value="Left"/>
         <Setter Property="Visibility" Value="Collapsed"/>
     </Style>
 
-    <Style x:Key="VerticalChartTitleStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,5"/>
+    <Style x:Key="ShaleChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Always"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+
+    <!-- Density Chart -->
+    <Style x:Key="DensityChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
+           BasedOn="{StaticResource ShaleChartXAxisStyle}"/>
+
+    <Style x:Key="DensityChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="VisibleRange" Value="-0.2,0.2"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="DensitySeriesStyle" TargetType="s:FastBandRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Stroke" Value="#1C1C1E"/>
+        <Setter Property="StrokeY1" Value="Red"/>
+        <Setter Property="Fill" Value="Orange"/>
+        <Setter Property="FillY1" Value="ForestGreen"/>
     </Style>
 
 </ResourceDictionary>

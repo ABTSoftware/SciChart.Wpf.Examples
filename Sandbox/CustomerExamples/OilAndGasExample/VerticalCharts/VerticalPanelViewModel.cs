@@ -6,17 +6,32 @@ namespace OilAndGasExample.VerticalCharts
 {
     public class VerticalPanelViewModel : BindableObject
     {
+        private DoubleRange _sharedXRange;
+
+        public DoubleRange SharedXRange
+        {
+            get => _sharedXRange;
+            set
+            {
+                if (_sharedXRange != value)
+                {
+                    _sharedXRange = value;
+                    OnPropertyChanged(nameof(SharedXRange));
+                }
+            }
+        }
+
         public ObservableCollection<VerticalChartViewModel> VerticalCharts { get; }
 
         public VerticalPanelViewModel()
         {
             VerticalCharts = new ObservableCollection<VerticalChartViewModel>
             {
-                new VerticalChartViewModel(new StackedMountainChartInitializer()),
-                new VerticalChartViewModel(new LineChartInitializer()),
-                new VerticalChartViewModel(new LineChartInitializer()),
-                new VerticalChartViewModel(new LineChartInitializer()),
-                new VerticalChartViewModel(new LineChartInitializer()),
+                new VerticalChartViewModel(new ShaleChartInitializer()),
+                new VerticalChartViewModel(new DensityChartInitializer()),
+                new VerticalChartViewModel(new ResistivityChartInitializer()),
+                new VerticalChartViewModel(new ResistivityChartInitializer()),
+                new VerticalChartViewModel(new ResistivityChartInitializer())
             };
         }
     }
