@@ -29,7 +29,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
 
         public IEnumerable<IRenderableSeriesViewModel> GetSeries()
         {
-            var renderSeries = new List<IRenderableSeriesViewModel>(1);           
+            var renderSeries = new List<IRenderableSeriesViewModel>(1);
             var dataSeries = new XyyDataSeries<double>();
 
             using (var fileStream = File.OpenRead("../../Data/Density.csv.gz"))
@@ -40,11 +40,14 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
 
                 while (!string.IsNullOrEmpty(line))
                 {
-                    var data = line.Replace(',','.').Split(';');
+                    if (!line.StartsWith("/"))
+                    {
+                        var data = line.Split(';');
 
-                    dataSeries.Append(double.Parse(data[0], CultureInfo.InvariantCulture),
-                        double.Parse(data[1], CultureInfo.InvariantCulture),
-                        double.Parse(data[2], CultureInfo.InvariantCulture));
+                        dataSeries.Append(double.Parse(data[0], CultureInfo.InvariantCulture),
+                            double.Parse(data[1], CultureInfo.InvariantCulture),
+                            double.Parse(data[2], CultureInfo.InvariantCulture));
+                    }
 
                     line = streamReader.ReadLine();
                 }

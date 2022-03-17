@@ -32,7 +32,7 @@
         <Setter Property="IsOneHundredPercent" Value="True"/>
         <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
-        <Setter Property="Stroke" Value="#474747"/>
+        <Setter Property="Stroke" Value="#1C1C1E"/>
         <Setter Property="Fill" Value="{StaticResource CrossPatternedBrush}"/>
     </Style>
 
@@ -70,11 +70,11 @@
 
     <Style x:Key="ShaleChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
         <Setter Property="AutoRange" Value="Always"/>
+        <Setter Property="GrowBy" Value="0.1,0.1"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Bottom"/>
         <Setter Property="Visibility" Value="Collapsed"/>
     </Style>
-
 
     <!-- Density Chart -->
     <Style x:Key="DensityChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
@@ -120,6 +120,40 @@
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="OrangeRed"/>
         <Setter Property="StrokeDashArray" Value="5,5"/>
+    </Style>
+
+    <!-- Pore Space Chart -->
+    <Style x:Key="PoreSpaceChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
+           BasedOn="{StaticResource ShaleChartXAxisStyle}"/>
+
+    <Style x:Key="PoreSpaceChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="VisibleRange" Value="-0.2,1.5"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="BluePoreSpaceSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Stroke" Value="#4682B4"/>
+        <Setter Property="Fill" Value="#904682B4"/>
+    </Style>
+
+    <Style x:Key="OlivePoreSpaceSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="Stroke" Value="#757000"/>
+        <Setter Property="Fill" Value="#90757000"/>
+    </Style>
+
+    <Style x:Key="ScatterPoreSpaceSeriesStyle" TargetType="s:XyScatterRenderableSeries">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s:EllipsePointMarker Height="8" Width="8" Fill="DodgerBlue"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

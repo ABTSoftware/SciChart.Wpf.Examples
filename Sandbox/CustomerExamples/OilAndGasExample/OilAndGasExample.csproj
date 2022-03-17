@@ -58,7 +58,7 @@
     <Compile Include="VerticalCharts\ChartTypes\DensityChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\EmptyChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\IChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\PermChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\PoreSpaceChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\ResistivityChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\ShaleChartInitializer.cs" />
     <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
@@ -109,6 +109,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\Density.csv.gz" />
+    <None Include="Data\PoreSpace.csv.gz" />
     <None Include="Data\Resistivity.csv.gz" />
     <None Include="Data\Shale.csv.gz" />
     <None Include="Properties\Settings.settings">

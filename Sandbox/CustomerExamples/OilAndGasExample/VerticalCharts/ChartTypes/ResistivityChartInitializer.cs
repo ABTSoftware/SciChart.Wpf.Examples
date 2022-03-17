@@ -41,10 +41,13 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
 
                 while (!string.IsNullOrEmpty(line))
                 {
-                    var data = line.Replace(',','.').Split(';');
+                    if (!line.StartsWith("/"))
+                    {
+                        var data = line.Split(';');
 
-                    dataSeries.Append(double.Parse(data[0], CultureInfo.InvariantCulture),
-                        double.Parse(data[1], CultureInfo.InvariantCulture));
+                        dataSeries.Append(double.Parse(data[0], CultureInfo.InvariantCulture),
+                            double.Parse(data[1], CultureInfo.InvariantCulture));
+                    }
 
                     line = streamReader.ReadLine();
                 }
@@ -55,14 +58,14 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
                 DataSeries = dataSeries,
                 StyleKey = "ResistivitySeriesStyle"
             });
-            
+
             renderSeries.Add(new LineRenderableSeriesViewModel
             {
                 DataSeries = dataSeries.ToMovingAverage(40),
                 StyleKey = "ResistivityAverageSeriesStyle"
 
             });
-            
+
             return renderSeries;
         }
     }

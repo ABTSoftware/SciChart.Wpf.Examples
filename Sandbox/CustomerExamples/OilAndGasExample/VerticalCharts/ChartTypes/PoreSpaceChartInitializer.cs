@@ -2,21 +2,20 @@
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
-using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 
 namespace OilAndGasExample.VerticalCharts.ChartTypes
 {
-    public class ShaleChartInitializer : IChartInitializer
+    public class PoreSpaceChartInitializer : IChartInitializer
     {
-        public string ChartTitle => "Shale";
+        public string ChartTitle => "Pore Space";
 
         public IAxisViewModel GetXAxis()
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "ShaleChartXAxisStyle"
+                StyleKey = "PoreSpaceChartXAxisStyle"
             };
         }
 
@@ -24,7 +23,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "ShaleChartYAxisStyle"
+                StyleKey = "PoreSpaceChartYAxisStyle"
             };
         }
 
@@ -36,7 +35,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../Data/Shale.csv.gz"))
+            using (var fileStream = File.OpenRead("../../Data/PoreSpace.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {
@@ -51,45 +50,33 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
 
                         dataSeries1.Append(x, double.Parse(data[1], CultureInfo.InvariantCulture));
                         dataSeries2.Append(x, double.Parse(data[2], CultureInfo.InvariantCulture));
-                        dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
+
+                        if (data[3] != "-") //scatter point marker
+                        { 
+                            dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
+                        }
                     }
 
                     line = streamReader.ReadLine();
                 }
             }
 
-            var shalePaletteProvider = new ShaleChartPaletteProvider(new[]
-            {
-                new PaletteRange(000, 100, Brushes.Orange),
-                new PaletteRange(150, 200, Brushes.Orange),
-                new PaletteRange(220, 260, Brushes.Blue),
-                new PaletteRange(260, 280, Brushes.Red),
-                new PaletteRange(280, 350, Brushes.Orange),
-                new PaletteRange(400, 420, Brushes.LimeGreen),
-                new PaletteRange(480, 580, Brushes.Blue),
-                new PaletteRange(600, 620, Brushes.Aqua),
-                new PaletteRange(750, 800, Brushes.Orange),
-                new PaletteRange(820, 840, Brushes.LimeGreen),
-                new PaletteRange(900, 950, Brushes.Aqua)
-            });
-
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries1,
-                StyleKey = "GreenShaleSeriesStyle"
+                StyleKey = "BluePoreSpaceSeriesStyle"
             });
 
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries2,
-                PaletteProvider = shalePaletteProvider,
-                StyleKey = "YellowShaleSeriesStyle"
+                StyleKey = "OlivePoreSpaceSeriesStyle"
             });
 
-            renderSeries.Add(new StackedMountainRenderableSeriesViewModel
+            renderSeries.Add(new XyScatterRenderableSeriesViewModel
             {
                 DataSeries = dataSeries3,
-                StyleKey = "RedShaleSeriesStyle"
+                StyleKey = "ScatterPoreSpaceSeriesStyle"
             });
 
             return renderSeries;
