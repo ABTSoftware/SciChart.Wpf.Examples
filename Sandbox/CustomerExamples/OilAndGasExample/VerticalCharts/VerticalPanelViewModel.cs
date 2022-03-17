@@ -31,7 +31,7 @@ namespace OilAndGasExample.VerticalCharts
                 new VerticalChartViewModel(new DensityChartInitializer()),
                 new VerticalChartViewModel(new ResistivityChartInitializer()),
                 new VerticalChartViewModel(new PoreSpaceChartInitializer()),
-                new VerticalChartViewModel(new EmptyChartInitializer()),
+                new VerticalChartViewModel(new SonicChartInitializer()),
                 new VerticalChartViewModel(new EmptyChartInitializer())
             };
         }

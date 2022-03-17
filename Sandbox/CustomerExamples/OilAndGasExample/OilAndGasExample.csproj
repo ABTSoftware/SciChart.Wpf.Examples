@@ -61,6 +61,7 @@
     <Compile Include="VerticalCharts\ChartTypes\PoreSpaceChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\ResistivityChartInitializer.cs" />
     <Compile Include="VerticalCharts\ChartTypes\ShaleChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartTypes\SonicChartInitializer.cs" />
     <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
     <Compile Include="VerticalCharts\ChartTypes\ShaleChartPaletteProvider.cs" />
     <Compile Include="VerticalCharts\VerticalChartsPanel.xaml.cs">
@@ -112,6 +113,7 @@
     <None Include="Data\PoreSpace.csv.gz" />
     <None Include="Data\Resistivity.csv.gz" />
     <None Include="Data\Shale.csv.gz" />
+    <None Include="Data\Sonic.csv.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

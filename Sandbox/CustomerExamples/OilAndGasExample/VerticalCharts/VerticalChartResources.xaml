@@ -70,7 +70,6 @@
 
     <Style x:Key="ShaleChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
         <Setter Property="AutoRange" Value="Always"/>
-        <Setter Property="GrowBy" Value="0.1,0.1"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Bottom"/>
         <Setter Property="Visibility" Value="Collapsed"/>
@@ -156,4 +155,33 @@
         </Setter>
     </Style>
 
+    <!-- Sonic Chart -->
+    <Style x:Key="SonicChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
+           BasedOn="{StaticResource ShaleChartXAxisStyle}"/>
+
+    <Style x:Key="SonicChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="VisibleRange" Value="0,100"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="SonicSeriesStyle" TargetType="{x:Type s:FastUniformHeatmapRenderableSeries}">
+        <Setter Property="UseLinearTextureFiltering" Value="True"/>
+        <Setter Property="ColorMap">
+            <Setter.Value>
+                <s:HeatmapColorPalette Minimum="0" Maximum="1">
+                    <s:HeatmapColorPalette.GradientStops>
+                        <GradientStop Offset="0.0" Color="DarkBlue"/>
+                        <GradientStop Offset="0.2" Color="Blue"/>
+                        <GradientStop Offset="0.4" Color="ForestGreen"/>
+                        <GradientStop Offset="0.6" Color="Chartreuse"/>
+                        <GradientStop Offset="0.8" Color="Yellow"/>
+                        <GradientStop Offset="1.0" Color="Red"/>
+                    </s:HeatmapColorPalette.GradientStops>
+                </s:HeatmapColorPalette>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
