@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using SciChart.Charting.Model.ChartSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts.ChartFactory
 {
-    public interface IChartInitializer
+    public interface IChartFactory
     {
-        string ChartTitle { get; }
+        string Title { get; }
 
         IAxisViewModel GetXAxis();
 

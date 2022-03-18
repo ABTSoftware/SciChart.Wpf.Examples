@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OilAndGasExample.VerticalCharts.VerticalChartsPanel"
+﻿<UserControl x:Class="OilAndGasExample.VerticalCharts.VerticalPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="clr-namespace:OilAndGasExample.VerticalCharts"
@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="VerticalChartResources.xaml"/>
+                <ResourceDictionary Source="VerticalPanelResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -38,8 +38,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <s:SciChartSurface Margin="5,0"
-                                       ShowLicensingWarnings="False"
+                    <s:SciChartSurface ShowLicensingWarnings="False"
                                        ChartTitle="{Binding ChartTitle}"
                                        ChartTitleStyle="{StaticResource VerticalChartTitleStyle}"
                                        XAxes="{s:AxesBinding XAxes}"
@@ -54,6 +53,7 @@
                             <s:ModifierGroup>
                                 <s:MouseWheelZoomModifier XyDirection="XDirection"/>
                                 <s:ZoomExtentsModifier XyDirection="XDirection"/>
+                                <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
                             </s:ModifierGroup>
                         </s:SciChartSurface.ChartModifier>
                     </s:SciChartSurface>

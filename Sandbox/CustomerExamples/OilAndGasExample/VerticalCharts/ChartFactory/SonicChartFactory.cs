@@ -3,19 +3,19 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using SciChart.Charting.Model.ChartSeries;
-using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts.ChartFactory
 {
-    public class DensityChartInitializer : IChartInitializer
+    public class SonicChartFactory : IChartFactory
     {
-        public string ChartTitle => "Density";
+        public string Title => "Sonic";
 
         public IAxisViewModel GetXAxis()
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "DensityChartXAxisStyle"
+                StyleKey = "SonicChartXAxisStyle"
             };
         }
 
@@ -23,19 +23,20 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "DensityChartYAxisStyle"
+                StyleKey = "SonicChartYAxisStyle"
             };
         }
 
         public IEnumerable<IRenderableSeriesViewModel> GetSeries()
         {
             var renderSeries = new List<IRenderableSeriesViewModel>(1);
-            var dataSeries = new XyyDataSeries<double>();
+            var heatmapData = new double[100, 1000];
 
-            using (var fileStream = File.OpenRead("../../Data/Density.csv.gz"))
+            using (var fileStream = File.OpenRead("../../Data/Sonic.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {
+                var i = 0;
                 var line = streamReader.ReadLine();
 
                 while (!string.IsNullOrEmpty(line))
@@ -43,20 +44,26 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
                     if (!line.StartsWith("/"))
                     {
                         var data = line.Split(';');
+                        var x = double.Parse(data[0], CultureInfo.InvariantCulture);
 
-                        dataSeries.Append(double.Parse(data[0], CultureInfo.InvariantCulture),
-                            double.Parse(data[1], CultureInfo.InvariantCulture),
-                            double.Parse(data[2], CultureInfo.InvariantCulture));
+                        for (int j = 0; j < 1000; j++)
+                        {
+                            heatmapData[i, j] = double.Parse(data[j], CultureInfo.InvariantCulture);
+                        }
+
+                        i++;
                     }
 
                     line = streamReader.ReadLine();
                 }
             }
 
-            renderSeries.Add(new BandRenderableSeriesViewModel
+            var dataSeries = new UniformHeatmapDataSeries<int, int, double>(heatmapData, 0, 1, 0, 1);
+
+            renderSeries.Add(new UniformHeatmapRenderableSeriesViewModel
             {
                 DataSeries = dataSeries,
-                StyleKey = "DensitySeriesStyle"
+                StyleKey = "SonicSeriesStyle"
             });
 
             return renderSeries;

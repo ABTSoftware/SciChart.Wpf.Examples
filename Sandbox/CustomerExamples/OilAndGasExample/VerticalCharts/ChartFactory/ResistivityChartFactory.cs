@@ -6,11 +6,11 @@ using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts.ChartFactory
 {
-    public class ResistivityChartInitializer : IChartInitializer
+    public class ResistivityChartFactory : IChartFactory
     {
-        public string ChartTitle => "Resistivity";
+        public string Title => "Resistivity";
 
         public IAxisViewModel GetXAxis()
         {

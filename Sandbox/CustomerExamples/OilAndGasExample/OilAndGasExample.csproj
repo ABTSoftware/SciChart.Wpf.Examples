@@ -55,17 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="VerticalCharts\ChartTypes\DensityChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\EmptyChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\IChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\PoreSpaceChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\ResistivityChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\ShaleChartInitializer.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\SonicChartInitializer.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\DensityChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\IChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\PoreSpaceChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\ResistivityChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\ShaleChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\SonicChartFactory.cs" />
+    <Compile Include="VerticalCharts\ChartFactory\TextureChartFactory.cs" />
     <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
-    <Compile Include="VerticalCharts\ChartTypes\ShaleChartPaletteProvider.cs" />
-    <Compile Include="VerticalCharts\VerticalChartsPanel.xaml.cs">
-      <DependentUpon>VerticalChartsPanel.xaml</DependentUpon>
+    <Compile Include="VerticalCharts\RangeFillPaletteProvider.cs" />
+    <Compile Include="VerticalCharts\VerticalPanel.xaml.cs">
+      <DependentUpon>VerticalPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="VerticalCharts\VerticalChartViewModel.cs" />
     <Compile Include="VerticalCharts\VerticalPanelViewModel.cs" />
@@ -82,11 +82,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="VerticalCharts\VerticalChartResources.xaml">
+    <Page Include="VerticalCharts\VerticalPanelResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VerticalCharts\VerticalChartsPanel.xaml">
+    <Page Include="VerticalCharts\VerticalPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,6 +114,7 @@
     <None Include="Data\Resistivity.csv.gz" />
     <None Include="Data\Shale.csv.gz" />
     <None Include="Data\Sonic.csv.gz" />
+    <None Include="Data\Texture.csv.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

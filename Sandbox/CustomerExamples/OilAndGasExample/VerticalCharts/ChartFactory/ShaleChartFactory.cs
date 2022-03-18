@@ -6,11 +6,11 @@ using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts.ChartFactory
 {
-    public class ShaleChartInitializer : IChartInitializer
+    public class ShaleChartFactory : IChartFactory
     {
-        public string ChartTitle => "Shale";
+        public string Title => "Shale";
 
         public IAxisViewModel GetXAxis()
         {
@@ -58,7 +58,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
                 }
             }
 
-            var shalePaletteProvider = new ShaleChartPaletteProvider(new[]
+            var rangePaletteProvider = new RangeFillPaletteProvider(new[]
             {
                 new PaletteRange(000, 100, Brushes.Orange),
                 new PaletteRange(150, 200, Brushes.Orange),
@@ -82,7 +82,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries2,
-                PaletteProvider = shalePaletteProvider,
+                PaletteProvider = rangePaletteProvider,
                 StyleKey = "YellowShaleSeriesStyle"
             });
 

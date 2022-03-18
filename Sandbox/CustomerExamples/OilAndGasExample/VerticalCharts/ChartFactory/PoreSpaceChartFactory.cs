@@ -5,11 +5,11 @@ using System.IO.Compression;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts.ChartFactory
 {
-    public class PoreSpaceChartInitializer : IChartInitializer
+    public class PoreSpaceChartFactory : IChartFactory
     {
-        public string ChartTitle => "Pore Space";
+        public string Title => "Pore Space";
 
         public IAxisViewModel GetXAxis()
         {

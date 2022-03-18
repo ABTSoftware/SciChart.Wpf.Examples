@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using OilAndGasExample.VerticalCharts.ChartTypes;
+using OilAndGasExample.VerticalCharts.ChartFactory;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Core.Extensions;
 using SciChart.Core.Framework;
@@ -13,7 +13,7 @@ namespace OilAndGasExample.VerticalCharts
 
         public string ChartTitle { get; }
 
-        public IChartInitializer ChartInitializer { get; }
+        public IChartFactory ChartFactory { get; }
 
         public ObservableCollection<IAxisViewModel> XAxes { get; } = new ObservableCollection<IAxisViewModel>();
 
@@ -32,19 +32,19 @@ namespace OilAndGasExample.VerticalCharts
 
                     using (_suspendable.SuspendUpdates())
                     {
-                        ChartInitializer?.GetSeries().ForEachDo(RenderableSeries.Add);
+                        ChartFactory?.GetSeries().ForEachDo(RenderableSeries.Add);
                     }
                 }
             }
         }
 
-        public VerticalChartViewModel(IChartInitializer chartInitializer)
+        public VerticalChartViewModel(IChartFactory chartFactory)
         {
-            ChartInitializer = chartInitializer;
-            ChartTitle = chartInitializer.ChartTitle;
+            ChartFactory = chartFactory;
+            ChartTitle = chartFactory.Title;
 
-            XAxes.Add(chartInitializer.GetXAxis());
-            YAxes.Add(chartInitializer.GetYAxis());
+            XAxes.Add(chartFactory.GetXAxis());
+            YAxes.Add(chartFactory.GetYAxis());
         }
     }
 }

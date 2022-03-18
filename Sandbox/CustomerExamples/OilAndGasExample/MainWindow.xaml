@@ -4,12 +4,14 @@
         xmlns:vc="clr-namespace:OilAndGasExample.VerticalCharts"
         Title="Oil &amp; Gas Example"
         Height="750"
-        Width="850">
+        Width="850"
+        MinHeight="450"
+        MinWidth="550">
 
     <Window.Resources>
         <vc:VerticalPanelViewModel x:Key="VerticalPanelViewModel"/>
     </Window.Resources>
 
-    <vc:VerticalChartsPanel DataContext="{StaticResource VerticalPanelViewModel}"/>
+    <vc:VerticalPanel DataContext="{StaticResource VerticalPanelViewModel}"/>
 
 </Window>

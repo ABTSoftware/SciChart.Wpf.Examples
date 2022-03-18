@@ -6,7 +6,7 @@ using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.RenderableSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartTypes
+namespace OilAndGasExample.VerticalCharts
 {
     public class PaletteRange
     {
@@ -29,7 +29,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
         }
     }
 
-    public class ShaleChartPaletteProvider : IFillPaletteProvider
+    public class RangeFillPaletteProvider : IFillPaletteProvider
     {
         private Brush _defaultBrush;
 
@@ -37,7 +37,7 @@ namespace OilAndGasExample.VerticalCharts.ChartTypes
 
         public IList<PaletteRange> PaletteRanges { get; }
 
-        public ShaleChartPaletteProvider(IEnumerable<PaletteRange> paletteRanges)
+        public RangeFillPaletteProvider(IEnumerable<PaletteRange> paletteRanges)
         {
             PaletteRanges = paletteRanges.OrderBy(x => x.StartIndex).ToList();
         }

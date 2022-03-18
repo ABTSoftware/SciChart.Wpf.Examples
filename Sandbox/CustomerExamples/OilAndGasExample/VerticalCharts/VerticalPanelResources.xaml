@@ -63,7 +63,7 @@
     <Style x:Key="ShaleChartXAxisStyle" TargetType="{x:Type s:AxisBase}">
         <Setter Property="AutoRange" Value="Once"/>
         <Setter Property="VisibleRangeLimit" Value="0,999"/>
-        <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalChartsPanel}}}"/>
+        <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalPanel}}}"/>
         <Setter Property="AxisAlignment" Value="Left"/>
         <Setter Property="Visibility" Value="Collapsed"/>
     </Style>
@@ -184,4 +184,30 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Texture Chart -->
+    <Style x:Key="TextureChartXAxisStyle" TargetType="{x:Type s:AxisBase}"
+           BasedOn="{StaticResource ShaleChartXAxisStyle}"/>
+
+    <Style x:Key="TextureChartYAxisStyle" TargetType="{x:Type s:AxisBase}">
+        <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="VisibleRange" Value="-5,30"/>
+        <Setter Property="FlipCoordinates" Value="True"/>
+        <Setter Property="AxisAlignment" Value="Bottom"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="TextureMountainSeriesStyle" TargetType="s:FastMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="IsDigitalLine" Value="True"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="Fill" Value="#90808080"/>
+    </Style>
+
+    <Style x:Key="TextureLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True"/>
+        <Setter Property="StrokeThickness" Value="4"/>
+        <Setter Property="Stroke" Value="#808080"/>
+    </Style>
+
 </ResourceDictionary>
