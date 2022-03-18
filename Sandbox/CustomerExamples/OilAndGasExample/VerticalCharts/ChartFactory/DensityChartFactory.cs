@@ -15,7 +15,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "DensityChartXAxisStyle"
+                StyleKey = "SharedXAxisStyle"
             };
         }
 

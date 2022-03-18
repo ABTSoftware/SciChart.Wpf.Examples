@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VerticalCharts\AxisLegend.cs" />
     <Compile Include="VerticalCharts\ChartFactory\DensityChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\IChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\PoreSpaceChartFactory.cs" />

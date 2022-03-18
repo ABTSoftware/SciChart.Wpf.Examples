@@ -13,20 +13,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <DockPanel Background="#1C1C1E">
-        <Border DockPanel.Dock="Top"
-                Height="100"
-                Background="#3C3C3E">
-            <TextBlock Text="TODO Interactive Axis Legend"
-                       FontSize="14"
-                       FontWeight="SemiBold"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-        </Border>
-
-        <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding VerticalCharts}">
+    <Grid Background="#1C1C1E">
+        <ItemsControl ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
@@ -38,9 +26,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <s:SciChartSurface ShowLicensingWarnings="False"
-                                       ChartTitle="{Binding ChartTitle}"
-                                       ChartTitleStyle="{StaticResource VerticalChartTitleStyle}"
+                    <s:SciChartSurface ShowLicensingWarnings="False"                     
                                        XAxes="{s:AxesBinding XAxes}"
                                        YAxes="{s:AxesBinding YAxes}"
                                        RenderableSeries="{s:SeriesBinding RenderableSeries}">
@@ -60,5 +46,5 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-    </DockPanel>
+    </Grid>
 </UserControl>

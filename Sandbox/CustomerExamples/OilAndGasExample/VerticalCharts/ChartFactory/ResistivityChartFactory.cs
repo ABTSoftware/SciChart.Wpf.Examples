@@ -16,7 +16,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "ResistivityChartXAxisStyle"
+                StyleKey = "SharedXAxisStyle"
             };
         }
 
