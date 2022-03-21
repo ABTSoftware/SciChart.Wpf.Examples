@@ -1,0 +1,306 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                    xmlns:l="clr-namespace:OilAndGasExample.VerticalCharts">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SciChart.Charting;component/Themes/TemplateParts/Default.Axes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="AxisLegendGridStyle" TargetType="Grid">
+        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="Margin" Value="-3,0"/>
+        <Setter Property="Background" Value="#3C3C3E"/>
+    </Style>
+
+    <Style x:Key="AxisLegendTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5,0"/>
+    </Style>
+
+    <ControlTemplate x:Key="LegendAxisTemplate" TargetType="s:AxisBase">
+        <Border s:Device.SnapsToDevicePixels="True"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+
+            <StackPanel x:Name="PART_AxisContainer"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        s:Device.SnapsToDevicePixels="True"
+                        s:AxisLayoutHelper.AxisAlignment="{Binding AxisAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                        Orientation="{Binding AxisAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource AxisAlignmentToAxisOrientationConverter}, ConverterParameter=Inverse}">
+
+                <ContentPresenter x:Name="PART_AxisLegend"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  Content="{Binding (l:AxisLegend.Content), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+
+                <Grid Canvas.ZIndex="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      s:Device.SnapsToDevicePixels="True"
+                      s:AxisLayoutHelper.IsInsideItem="True"           
+                      Visibility="{Binding (l:AxisLegend.AxisVisibility), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+
+                    <s:AxisPanel x:Name="PART_AxisCanvas"
+                                 s:Device.SnapsToDevicePixels="True"
+                                 AxisAlignment="{TemplateBinding AxisAlignment}"
+                                 Background="Transparent"
+                                 DrawLabels="{TemplateBinding DrawLabels}"
+                                 DrawMajorTicks="{TemplateBinding DrawMajorTicks}"
+                                 DrawMinorTicks="{TemplateBinding DrawMinorTicks}"
+                                 IsLabelCullingEnabled="{TemplateBinding IsLabelCullingEnabled}"
+                                 MajorTickLineStyle="{TemplateBinding MajorTickLineStyle}"
+                                 MinorTickLineStyle="{TemplateBinding MinorTickLineStyle}">
+
+                        <Image x:Name="PART_AxisBitmapImage"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               UseLayoutRounding = "True"
+                               SnapsToDevicePixels = "True"
+                               Stretch="Fill"/>
+
+                        <Grid x:Name="PART_LabelsCanvas" Margin="{Binding LabelToTickIndent, RelativeSource={RelativeSource FindAncestor, AncestorType=s:AxisPanel}, Mode=OneWay}">
+
+                            <s:TickLabelAxisCanvas s:Device.SnapsToDevicePixels="True"
+                                                   AutoFitMarginalLabels="{TemplateBinding AutoFitMarginalLabels}"
+                                                   Background="Transparent"
+                                                   ClipToBounds="False"
+                                                   IsLabelCullingEnabled="{TemplateBinding IsLabelCullingEnabled}" />
+
+                            <s:TickLabelAxisCanvas s:Device.SnapsToDevicePixels="True"
+                                                   AutoFitMarginalLabels="{TemplateBinding AutoFitMarginalLabels}"
+                                                   Background="Transparent"
+                                                   ClipToBounds="False"
+                                                   IsLabelCullingEnabled="{TemplateBinding IsLabelCullingEnabled}"
+                                                   Visibility="Collapsed" />
+                        </Grid>
+
+                        <s:AxisTitle Orientation="{TemplateBinding Orientation}"
+                                     Style="{TemplateBinding TitleStyle}"
+                                     Visibility="{Binding Content, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapseIfNullOrEmptyStringConverter}}" />
+                    </s:AxisPanel>
+
+                    <s:ModifierAxisCanvas x:Name="PART_ModifierAxisCanvas"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          s:Device.SnapsToDevicePixels="True" />
+                </Grid>
+
+                <ContentPresenter s:AxisLayoutHelper.IsOutsideItem="True"
+                                  Content="{TemplateBinding Scrollbar}" />
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+
+    <!-- Shale Chart -->
+
+    <VisualBrush x:Key="CrossPatternedBrush"
+                 TileMode="Tile"
+                 Viewport="0,0,10,10" 
+                 Viewbox="0,0,10,10" 
+                 ViewportUnits="Absolute"    
+                 ViewboxUnits="Absolute">
+        <VisualBrush.Visual>
+            <Canvas>
+                <Rectangle Fill="LightGreen" Width="10" Height="10"/>
+                <Path Stroke="#474747" Data="M 0 0 l 10 10"/>
+                <Path Stroke="#474747" Data="M 0 10 l 10 -10"/>
+            </Canvas>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <Grid x:Key="ShaleChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Background="Firebrick"/>
+        <Border Grid.Row="0" Grid.Column="1" Background="Blue"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="1" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="OIL" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="WATER" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="0" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource CrossPatternedBrush}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="0" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="SHALE" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="1" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+    <!-- Density Chart -->
+
+    <Grid x:Key="DensityChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="2" Grid.Column="0" Background="ForestGreen" BorderThickness="0,0,0,3" BorderBrush="Red"/>
+        <Border Grid.Row="2" Grid.Column="1" Background="Orange" BorderThickness="0,0,0,3" BorderBrush="Red"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="-0.2" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="DENSITY" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="0.2" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+    <!-- Resistivity Chart -->
+
+    <Grid x:Key="ResistivityChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Line Grid.Row="1" Grid.ColumnSpan="2" Stroke="OrangeRed" X1="0" X2="1" Stretch="Fill" StrokeThickness="1" StrokeDashArray="5,5"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="0" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="AVRG 40" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="1" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Line Grid.Row="3" Grid.ColumnSpan="2" Stroke="DeepSkyBlue" X1="0" X2="1" Stretch="Fill" StrokeThickness="2"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="0" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="RESISTIVITY" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="1" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+    <!-- Pore Space Chart -->
+
+    <Grid x:Key="PoreSpaceChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#904682B4" BorderThickness="0,0,0,3" BorderBrush="#4682B4"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="-0.2" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="PHIE" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="1.6" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="#90757000" BorderThickness="0,0,0,3" BorderBrush="#757000"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="-0.2" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="PHIT" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="1.6" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Border Grid.Row="4" Grid.ColumnSpan="2" Background="DodgerBlue" BorderThickness="0,0,0,1" BorderBrush="White"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="-0.2" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Text="CORE" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="1.6" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+    <!-- Sonic Chart -->
+
+    <Grid x:Key="SonicChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="6">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="0.0" Color="DarkBlue"/>
+                    <GradientStop Offset="0.2" Color="Blue"/>
+                    <GradientStop Offset="0.4" Color="ForestGreen"/>
+                    <GradientStop Offset="0.6" Color="Chartreuse"/>
+                    <GradientStop Offset="0.8" Color="Yellow"/>
+                    <GradientStop Offset="1.0" Color="Red"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="0" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="20" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="40" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" Text="60" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Text="80" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="5" Text="100" Margin="0" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Border Grid.Row="2" Grid.Column="0" Background="DarkBlue"/>
+        <Border Grid.Row="2" Grid.Column="1" Background="Blue"/>
+        <Border Grid.Row="2" Grid.Column="2" Background="ForestGreen"/>
+        <Border Grid.Row="2" Grid.Column="3" Background="Chartreuse"/>
+        <Border Grid.Row="2" Grid.Column="4" Background="Yellow"/>
+        <Border Grid.Row="2" Grid.Column="5" Background="Red"/>
+
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="6" Text="SONIC" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+    <!-- Texture Chart -->
+    
+    <Grid x:Key="TextureChartAxisLegend" Style="{StaticResource AxisLegendGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Background="#808080"/>
+        <Border Grid.Row="0" Grid.Column="1" Background="DarkCyan"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="MUD" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="GRAIN" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+
+        <Border Grid.Row="2" Grid.Column="0" Background="Goldenrod"/>
+        <Border Grid.Row="2" Grid.Column="1" Background="Green"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="SAND" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="GRAVEL" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+    </Grid>
+
+</ResourceDictionary>

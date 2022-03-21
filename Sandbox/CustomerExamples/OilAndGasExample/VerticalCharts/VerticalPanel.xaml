@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#1C1C1E">
+    <Grid Background="#3C3C3E">
         <ItemsControl ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -26,23 +26,39 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <s:SciChartSurface ShowLicensingWarnings="False"                     
-                                       XAxes="{s:AxesBinding XAxes}"
-                                       YAxes="{s:AxesBinding YAxes}"
-                                       RenderableSeries="{s:SeriesBinding RenderableSeries}">
+                    <Grid Margin="3,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
 
-                        <b:Interaction.Behaviors>
-                            <l:SurfaceToViewModelBehavior/>
-                        </b:Interaction.Behaviors>
+                        <s:SciChartSurface ShowLicensingWarnings="False"                     
+                                           XAxes="{s:AxesBinding XAxes}"
+                                           YAxes="{s:AxesBinding YAxes}"
+                                           RenderableSeries="{s:SeriesBinding RenderableSeries}">
 
-                        <s:SciChartSurface.ChartModifier>
-                            <s:ModifierGroup>
-                                <s:MouseWheelZoomModifier XyDirection="XDirection"/>
-                                <s:ZoomExtentsModifier XyDirection="XDirection"/>
-                                <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
-                            </s:ModifierGroup>
-                        </s:SciChartSurface.ChartModifier>
-                    </s:SciChartSurface>
+                            <b:Interaction.Behaviors>
+                                <l:SurfaceToViewModelBehavior/>
+                            </b:Interaction.Behaviors>
+
+                            <s:SciChartSurface.ChartModifier>
+                                <s:ModifierGroup>
+                                    <s:MouseWheelZoomModifier XyDirection="XDirection"/>
+                                    <s:ZoomExtentsModifier XyDirection="XDirection"/>
+                                    <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
+                                </s:ModifierGroup>
+                            </s:SciChartSurface.ChartModifier>
+                        </s:SciChartSurface>
+
+                        <Border Grid.Row="1" Background="#801C1C1E">
+                            <TextBlock Text="{Binding ChartTitle}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="LightGray"/>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
