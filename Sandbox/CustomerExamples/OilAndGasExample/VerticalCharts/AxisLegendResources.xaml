@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/SciChart.Charting;component/Themes/TemplateParts/Default.Axes.xaml"/>
+        <ResourceDictionary Source="/SciChart.Charting;component/Themes/TemplateParts/Default.Common.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="AxisLegendGridStyle" TargetType="Grid">
@@ -130,7 +131,7 @@
         <Border Grid.Row="0" Grid.Column="0" Background="Firebrick"/>
         <Border Grid.Row="0" Grid.Column="1" Background="Blue"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="1" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="100" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="OIL" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="WATER" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="0" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
@@ -139,7 +140,7 @@
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="0" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
         <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="SHALE" HorizontalAlignment="Center" Style="{StaticResource AxisLegendTextBlockStyle}"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="1" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="100" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
     </Grid>
 
     <!-- Density Chart -->

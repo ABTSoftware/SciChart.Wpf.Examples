@@ -46,11 +46,10 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
                     if (!line.StartsWith("/"))
                     {
                         var data = line.Split(';');
-                        var x = double.Parse(data[0], CultureInfo.InvariantCulture);
 
                         for (int j = 0; j < 1000; j++)
                         {
-                            heatmapData[i, j] = double.Parse(data[j], CultureInfo.InvariantCulture);
+                            heatmapData[i, j] = double.Parse(data[j], CultureInfo.InvariantCulture) * 100.0;
                         }
 
                         i++;

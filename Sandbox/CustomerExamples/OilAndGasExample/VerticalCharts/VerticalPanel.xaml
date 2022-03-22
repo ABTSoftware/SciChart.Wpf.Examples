@@ -43,10 +43,14 @@
                             </b:Interaction.Behaviors>
 
                             <s:SciChartSurface.ChartModifier>
-                                <s:ModifierGroup>
+                                <s:ModifierGroup s:MouseManager.MouseEventGroup="MouseGroup">
                                     <s:MouseWheelZoomModifier XyDirection="XDirection"/>
                                     <s:ZoomExtentsModifier XyDirection="XDirection"/>
                                     <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
+                                    <s:RolloverModifier ShowAxisLabels="False"
+                                                        ShowTooltipOn="Always"
+                                                        ReceiveHandledEvents="True"
+                                                        LineOverlayStyle="{StaticResource RolloverLineStyle}"/>
                                 </s:ModifierGroup>
                             </s:SciChartSurface.ChartModifier>
                         </s:SciChartSurface>

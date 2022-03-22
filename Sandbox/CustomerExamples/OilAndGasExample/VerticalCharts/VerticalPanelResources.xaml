@@ -14,9 +14,33 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRangeLimit" Value="0,999"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalPanel}}}"/>
         <Setter Property="AxisAlignment" Value="Left"/>
         <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+
+    <Style x:Key="RolloverLineStyle" TargetType="Line">
+        <Setter Property="Panel.ZIndex" Value="-1000"/>
+        <Setter Property="Stroke" Value="LimeGreen"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+    </Style>
+
+    <Style x:Key="RolloverTooltipBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Opacity" Value="0.9"/>
+        <Setter Property="Margin" Value="0,0,5,5"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-45"
+                                  ShadowDepth="5"
+                                  Color="DimGray"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Shale Chart -->
@@ -30,6 +54,7 @@
 
     <Style x:Key="ShaleChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Always"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMajorGridLines" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
@@ -49,6 +74,33 @@
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"                 
+                             Fill="LimeGreen"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="LightGreen" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="YellowShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
@@ -56,6 +108,33 @@
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="#E4E840"/>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"                 
+                             Fill="LimeGreen"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#E4E840" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="RedShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
@@ -63,6 +142,7 @@
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="Firebrick"/>
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False"/>
     </Style>
 
     <!-- Density Chart -->
@@ -72,6 +152,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-0.2,0.2"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
         <Setter Property="Template" Value="{StaticResource LegendAxisTemplate}"/>
@@ -86,6 +167,42 @@
         <Setter Property="StrokeY1" Value="Red"/>
         <Setter Property="Fill" Value="ForestGreen"/>
         <Setter Property="FillY1" Value="Orange"/>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"
+                             Fill="Red"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border>
+                                    <Border.Style>
+                                        <Style TargetType="Border" BasedOn="{StaticResource RolloverTooltipBorderStyle}">
+                                            <Setter Property="Background" Value="Orange"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsFirstSeries}" Value="True">
+                                                    <Setter Property="Background" Value="ForestGreen"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Resistivity Chart -->
@@ -95,6 +212,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="0,1"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
         <Setter Property="Template" Value="{StaticResource LegendAxisTemplate}"/>
@@ -106,6 +224,23 @@
         <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="2"/>
         <Setter Property="Stroke" Value="DeepSkyBlue"/>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="DeepSkyBlue" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ResistivityAverageSeriesStyle" TargetType="s:FastLineRenderableSeries">
@@ -113,6 +248,23 @@
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="OrangeRed"/>
         <Setter Property="StrokeDashArray" Value="5,5"/>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="OrangeRed" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Pore Space Chart -->
@@ -122,6 +274,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-0.2,1.6"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
         <Setter Property="Template" Value="{StaticResource LegendAxisTemplate}"/>
@@ -134,6 +287,33 @@
         <Setter Property="StrokeThickness" Value="2"/>
         <Setter Property="Stroke" Value="#4682B4"/>
         <Setter Property="Fill" Value="#904682B4"/>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"
+                             Fill="#4682B4"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#4682B4" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="OlivePoreSpaceSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
@@ -141,12 +321,56 @@
         <Setter Property="StrokeThickness" Value="2"/>
         <Setter Property="Stroke" Value="#757000"/>
         <Setter Property="Fill" Value="#90757000"/>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"
+                             Fill="#757000"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#757000" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ScatterPoreSpaceSeriesStyle" TargetType="s:XyScatterRenderableSeries">
         <Setter Property="PointMarker">
             <Setter.Value>
                 <s:EllipsePointMarker Height="8" Width="8" Fill="DodgerBlue" Stroke="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#FFC6E6FF" 
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
             </Setter.Value>
         </Setter>
     </Style>
@@ -158,6 +382,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="0,100"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
         <Setter Property="Template" Value="{StaticResource LegendAxisTemplate}"/>
@@ -169,7 +394,7 @@
         <Setter Property="UseLinearTextureFiltering" Value="True"/>
         <Setter Property="ColorMap">
             <Setter.Value>
-                <s:HeatmapColorPalette Minimum="0" Maximum="1">
+                <s:HeatmapColorPalette Minimum="0" Maximum="100">
                     <s:HeatmapColorPalette.GradientStops>
                         <GradientStop Offset="0.0" Color="DarkBlue"/>
                         <GradientStop Offset="0.2" Color="Blue"/>
@@ -181,6 +406,42 @@
                 </s:HeatmapColorPalette>
             </Setter.Value>
         </Setter>
+        <Setter Property="RolloverMarkerTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Width="9"
+                             Height="9"
+                             Fill="LimeGreen"
+                             Effect="{StaticResource EllipseShadowEffect}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="LimeGreen"
+                                        Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipTemplate">
+            <Setter.Value>
+                <DataTemplate DataType="s:HeatmapSeriesInfo">
+                    <StackPanel Orientation="Vertical" Margin="0,2">
+                        <TextBlock Foreground="Black" Text="{Binding FormattedZValue}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Texture Chart -->
@@ -190,6 +451,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-5,30"/>
+        <Setter Property="CursorTextFormatting" Value="N2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
         <Setter Property="Template" Value="{StaticResource LegendAxisTemplate}"/>
@@ -202,12 +464,14 @@
         <Setter Property="IsDigitalLine" Value="True"/>
         <Setter Property="StrokeThickness" Value="0"/>
         <Setter Property="Fill" Value="#90808080"/>
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False"/>
     </Style>
 
     <Style x:Key="TextureLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
         <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="4"/>
         <Setter Property="Stroke" Value="#808080"/>
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False"/>
     </Style>
 
 </ResourceDictionary>
