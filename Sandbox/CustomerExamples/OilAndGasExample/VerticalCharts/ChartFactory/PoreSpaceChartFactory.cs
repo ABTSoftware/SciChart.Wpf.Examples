@@ -10,6 +10,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     public class PoreSpaceChartFactory : IChartFactory
     {
         public string Title => "Pore Space";
+        
+        public string StyleKey => null;
 
         public IAxisViewModel GetXAxis()
         {

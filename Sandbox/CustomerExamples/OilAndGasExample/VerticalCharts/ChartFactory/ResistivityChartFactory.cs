@@ -11,6 +11,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     public class ResistivityChartFactory : IChartFactory
     {
         public string Title => "Resistivity";
+        
+        public string StyleKey => null;
 
         public IAxisViewModel GetXAxis()
         {

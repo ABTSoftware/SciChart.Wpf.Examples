@@ -7,6 +7,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     {
         string Title { get; }
 
+        string StyleKey { get; }
+
         IAxisViewModel GetXAxis();
 
         IAxisViewModel GetYAxis();

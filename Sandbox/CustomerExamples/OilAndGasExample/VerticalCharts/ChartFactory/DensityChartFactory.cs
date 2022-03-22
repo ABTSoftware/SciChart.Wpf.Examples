@@ -11,6 +11,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     {
         public string Title => "Density";
 
+        public string StyleKey => null;
+
         public IAxisViewModel GetXAxis()
         {
             return new NumericAxisViewModel

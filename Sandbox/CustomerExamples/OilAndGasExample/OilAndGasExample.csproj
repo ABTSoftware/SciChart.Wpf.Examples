@@ -63,6 +63,7 @@
     <Compile Include="VerticalCharts\ChartFactory\ShaleChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\SonicChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\TextureChartFactory.cs" />
+    <Compile Include="VerticalCharts\SurfaceStyleBehaviour.cs" />
     <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
     <Compile Include="VerticalCharts\RangeFillPaletteProvider.cs" />
     <Compile Include="VerticalCharts\VerticalPanel.xaml.cs">

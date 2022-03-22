@@ -11,12 +11,14 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     public class ShaleChartFactory : IChartFactory
     {
         public string Title => "Shale";
+        
+        public string StyleKey => "ShaleSurfaceStyle";
 
         public IAxisViewModel GetXAxis()
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "SharedXAxisStyle"
+                StyleKey = "ShaleChartXAxisStyle"
             };
         }
 

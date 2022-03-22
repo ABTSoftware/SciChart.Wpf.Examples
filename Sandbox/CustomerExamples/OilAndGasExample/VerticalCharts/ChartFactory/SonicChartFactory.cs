@@ -10,6 +10,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     public class SonicChartFactory : IChartFactory
     {
         public string Title => "Sonic";
+        
+        public string StyleKey => null;
 
         public IAxisViewModel GetXAxis()
         {

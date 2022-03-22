@@ -11,6 +11,8 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
     public class TextureChartFactory : IChartFactory
     {
         public string Title => "Texture";
+        
+        public string StyleKey => null;
 
         public IAxisViewModel GetXAxis()
         {

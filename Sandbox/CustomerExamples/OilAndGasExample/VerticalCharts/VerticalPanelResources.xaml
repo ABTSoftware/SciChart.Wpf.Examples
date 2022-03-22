@@ -11,6 +11,7 @@
 
     <Style x:Key="SharedXAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Once"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRangeLimit" Value="0,999"/>
         <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalPanel}}}"/>
@@ -20,8 +21,17 @@
 
     <!-- Shale Chart -->
 
+    <Style x:Key="ShaleChartXAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}"
+           BasedOn="{StaticResource SharedXAxisStyle}">
+        <Setter Property="DrawMajorBands" Value="False"/>
+        <Setter Property="DrawMajorGridLines" Value="False"/>
+        <Setter Property="DrawMinorGridLines" Value="False"/>
+    </Style>
+
     <Style x:Key="ShaleChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Always"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
+        <Setter Property="DrawMajorGridLines" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="FlipCoordinates" Value="True"/>
         <Setter Property="AxisAlignment" Value="Top"/>
@@ -30,25 +40,19 @@
         <Setter Property="l:AxisLegend.Content" Value="{StaticResource ShaleChartAxisLegend}"/>
     </Style>
 
-    <Style x:Key="CrossShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="IsOneHundredPercent" Value="True"/>
-        <Setter Property="AntiAliasing" Value="True"/>
-        <Setter Property="StrokeThickness" Value="1"/>
-        <Setter Property="Stroke" Value="#474747"/>
-        <Setter Property="Fill" Value="{StaticResource CrossPatternedBrush}"/>
+    <Style x:Key="ShaleSurfaceStyle" TargetType="s:SciChartSurface">
+        <Setter Property="Background" Value="{StaticResource CrossPatternedBrush}"/>
     </Style>
 
     <Style x:Key="GreenShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
         <Setter Property="IsOneHundredPercent" Value="True"/>
-        <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
-        <Setter Property="Fill" Value="LightGreen"/>
+        <Setter Property="Fill" Value="Transparent"/>
     </Style>
 
     <Style x:Key="YellowShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
         <Setter Property="IsOneHundredPercent" Value="True"/>
-        <Setter Property="AntiAliasing" Value="True"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="#E4E840"/>
@@ -56,8 +60,7 @@
 
     <Style x:Key="RedShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
         <Setter Property="IsOneHundredPercent" Value="True"/>
-        <Setter Property="AntiAliasing" Value="True"/>
-        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="Stroke" Value="#474747"/>
         <Setter Property="Fill" Value="Firebrick"/>
     </Style>
@@ -66,6 +69,7 @@
 
     <Style x:Key="DensityChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-0.2,0.2"/>
         <Setter Property="FlipCoordinates" Value="True"/>
@@ -88,6 +92,7 @@
 
     <Style x:Key="ResistivityChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="0,1"/>
         <Setter Property="FlipCoordinates" Value="True"/>
@@ -114,6 +119,7 @@
 
     <Style x:Key="PoreSpaceChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-0.2,1.6"/>
         <Setter Property="FlipCoordinates" Value="True"/>
@@ -149,6 +155,7 @@
 
     <Style x:Key="SonicChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="0,100"/>
         <Setter Property="FlipCoordinates" Value="True"/>
@@ -180,6 +187,7 @@
 
     <Style x:Key="TextureChartYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
         <Setter Property="AutoRange" Value="Never"/>
+        <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="VisibleRange" Value="-5,30"/>
         <Setter Property="FlipCoordinates" Value="True"/>

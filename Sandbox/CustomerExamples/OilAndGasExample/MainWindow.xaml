@@ -5,7 +5,7 @@
         Title="Oil &amp; Gas Example"
         Height="750"
         Width="850"
-        MinHeight="450"
+        MinHeight="750"
         MinWidth="550">
 
     <Window.Resources>
