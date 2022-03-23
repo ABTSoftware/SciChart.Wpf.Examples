@@ -55,22 +55,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GridCharts\GridLegend.xaml.cs">
+      <DependentUpon>GridLegend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GridCharts\GridPanel.xaml.cs">
+      <DependentUpon>GridPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GridCharts\GridPanelViewModel.cs" />
     <Compile Include="VerticalCharts\AxisLegend.cs" />
     <Compile Include="VerticalCharts\ChartFactory\DensityChartFactory.cs" />
-    <Compile Include="VerticalCharts\ChartFactory\IChartFactory.cs" />
+    <Compile Include="Common\IChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\PoreSpaceChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\ResistivityChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\ShaleChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\SonicChartFactory.cs" />
     <Compile Include="VerticalCharts\ChartFactory\TextureChartFactory.cs" />
-    <Compile Include="VerticalCharts\SurfaceStyleBehaviour.cs" />
-    <Compile Include="VerticalCharts\SurfaceToViewModelBehavior.cs" />
+    <Compile Include="Behaviors\SurfaceStyleBehaviour.cs" />
+    <Compile Include="Behaviors\SurfaceToViewModelBehavior.cs" />
     <Compile Include="VerticalCharts\RangeFillPaletteProvider.cs" />
     <Compile Include="VerticalCharts\VerticalPanel.xaml.cs">
       <DependentUpon>VerticalPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VerticalCharts\VerticalChartViewModel.cs" />
+    <Compile Include="Common\ChartViewModel.cs" />
     <Compile Include="VerticalCharts\VerticalPanelViewModel.cs" />
+    <Page Include="GridCharts\GridLegend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GridCharts\GridPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,7 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="VerticalCharts\GridItemsPanelBehavior.cs" />
+    <Compile Include="Behaviors\GridItemsPanelBehavior.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

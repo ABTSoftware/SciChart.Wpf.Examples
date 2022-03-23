@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="OilAndGasExample.VerticalCharts.VerticalPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l="clr-namespace:OilAndGasExample.VerticalCharts"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:br="clr-namespace:OilAndGasExample.Behaviors">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,12 +14,12 @@
     </UserControl.Resources>
 
     <Grid Background="#3C3C3E">
-        <ItemsControl Margin="-4,0" ItemsSource="{Binding VerticalCharts}">
+        <ItemsControl Margin="4,0" ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
                         <b:Interaction.Behaviors>
-                            <l:GridItemsPanelBehavior/>
+                            <br:GridItemsPanelBehavior ItemPlacement="Column"/>
                         </b:Interaction.Behaviors>
                     </Grid>
                 </ItemsPanelTemplate>
@@ -38,8 +38,8 @@
                                            RenderableSeries="{s:SeriesBinding RenderableSeries}">
 
                             <b:Interaction.Behaviors>
-                                <l:SurfaceStyleBehaviour/>
-                                <l:SurfaceToViewModelBehavior/>
+                                <br:SurfaceStyleBehaviour/>
+                                <br:SurfaceToViewModelBehavior/>
                             </b:Interaction.Behaviors>
 
                             <s:SciChartSurface.ChartModifier>

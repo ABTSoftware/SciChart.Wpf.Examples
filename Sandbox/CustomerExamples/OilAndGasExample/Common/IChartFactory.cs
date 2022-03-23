@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SciChart.Charting.Model.ChartSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartFactory
+namespace OilAndGasExample.Common
 {
     public interface IChartFactory
     {

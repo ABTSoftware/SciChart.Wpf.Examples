@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using Microsoft.Xaml.Behaviors;
+using OilAndGasExample.Common;
 using SciChart.Charting.Visuals;
 
-namespace OilAndGasExample.VerticalCharts
+namespace OilAndGasExample.Behaviors
 {
     public class SurfaceToViewModelBehavior : Behavior<SciChartSurface>
     {
@@ -22,7 +23,7 @@ namespace OilAndGasExample.VerticalCharts
         
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (AssociatedObject.DataContext is VerticalChartViewModel chartViewModel)
+            if (AssociatedObject.DataContext is ChartViewModel chartViewModel)
             {
                 chartViewModel.Suspendable = AssociatedObject;
             }

@@ -2,7 +2,7 @@
 
 namespace OilAndGasExample.VerticalCharts
 {
-    public class AxisLegend
+    public class AxisLegend : DependencyObject
     {
         public static readonly DependencyProperty ContentProperty = DependencyProperty.RegisterAttached
             ("Content", typeof(object), typeof(AxisLegend), new PropertyMetadata(null));

@@ -39,14 +39,14 @@
                 <ContentPresenter x:Name="PART_AxisLegend"
                                   VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
-                                  Content="{Binding (l:AxisLegend.Content), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+                                  Content="{Binding Path=(l:AxisLegend.Content), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
 
                 <Grid Canvas.ZIndex="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       s:Device.SnapsToDevicePixels="True"
                       s:AxisLayoutHelper.IsInsideItem="True"           
-                      Visibility="{Binding (l:AxisLegend.AxisVisibility), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+                      Visibility="{Binding Path=(l:AxisLegend.AxisVisibility), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
 
                     <s:AxisPanel x:Name="PART_AxisCanvas"
                                  s:Device.SnapsToDevicePixels="True"
@@ -130,12 +130,10 @@
 
         <Border Grid.Row="0" Grid.Column="0" Background="Firebrick"/>
         <Border Grid.Row="0" Grid.Column="1" Background="Blue"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="100" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="OIL" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="WATER" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="0" HorizontalAlignment="Right" Style="{StaticResource AxisLegendTextBlockStyle}"/>
-
+    
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="OIL" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="WATER" Style="{StaticResource AxisLegendTextBlockStyle}"/>
+        
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource CrossPatternedBrush}"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="0" HorizontalAlignment="Left" Style="{StaticResource AxisLegendTextBlockStyle}"/>

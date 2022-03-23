@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using OilAndGasExample.Common;
 using OilAndGasExample.VerticalCharts.ChartFactory;
 using SciChart.Data.Model;
 
@@ -21,18 +22,18 @@ namespace OilAndGasExample.VerticalCharts
             }
         }
 
-        public ObservableCollection<VerticalChartViewModel> VerticalCharts { get; }
+        public ObservableCollection<ChartViewModel> VerticalCharts { get; }
 
         public VerticalPanelViewModel()
         {
-            VerticalCharts = new ObservableCollection<VerticalChartViewModel>
+            VerticalCharts = new ObservableCollection<ChartViewModel>
             {
-                new VerticalChartViewModel(new ShaleChartFactory()),
-                new VerticalChartViewModel(new DensityChartFactory()),
-                new VerticalChartViewModel(new ResistivityChartFactory()),
-                new VerticalChartViewModel(new PoreSpaceChartFactory()),
-                new VerticalChartViewModel(new SonicChartFactory()),
-                new VerticalChartViewModel(new TextureChartFactory())
+                new ChartViewModel(new ShaleChartFactory()),
+                new ChartViewModel(new DensityChartFactory()),
+                new ChartViewModel(new ResistivityChartFactory()),
+                new ChartViewModel(new PoreSpaceChartFactory()),
+                new ChartViewModel(new SonicChartFactory()),
+                new ChartViewModel(new TextureChartFactory())
             };
         }
     }

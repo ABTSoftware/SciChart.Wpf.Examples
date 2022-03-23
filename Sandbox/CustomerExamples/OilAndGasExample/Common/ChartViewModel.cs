@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
-using OilAndGasExample.VerticalCharts.ChartFactory;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Core.Extensions;
 using SciChart.Core.Framework;
 using SciChart.Data.Model;
 
-namespace OilAndGasExample.VerticalCharts
+namespace OilAndGasExample.Common
 {
-    public class VerticalChartViewModel : BindableObject
+    public class ChartViewModel : BindableObject
     {
         private ISuspendable _suspendable;
 
@@ -38,7 +37,7 @@ namespace OilAndGasExample.VerticalCharts
             }
         }
 
-        public VerticalChartViewModel(IChartFactory chartFactory)
+        public ChartViewModel(IChartFactory chartFactory)
         {
             ChartFactory = chartFactory;
             ChartTitle = chartFactory.Title;
