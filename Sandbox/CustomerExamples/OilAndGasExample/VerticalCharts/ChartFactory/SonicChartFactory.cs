@@ -49,7 +49,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
 
                         for (int j = 0; j < 1000; j++)
                         {
-                            heatmapData[i, j] = double.Parse(data[j], CultureInfo.InvariantCulture) * 100.0;
+                            heatmapData[i, j] = double.Parse(data[j], CultureInfo.InvariantCulture);
                         }
 
                         i++;
