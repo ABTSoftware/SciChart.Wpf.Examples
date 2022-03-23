@@ -6,13 +6,22 @@ using OilAndGasExample.Common;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 
-namespace OilAndGasExample.VerticalCharts.ChartFactory
+namespace OilAndGasExample.GridCharts.ChartFactory
 {
-    public class PoreSpaceChartFactory : IChartFactory
+    public class MountainChartFactory : IChartFactory
     {
-        public string Title => "Pore Space";
-        
+        private readonly string _dataFileName;
+
+        public string Title { get; }
+
         public string StyleKey => null;
+
+        public MountainChartFactory(string dataFileName)
+        {
+            _dataFileName = dataFileName;
+
+            Title = dataFileName.Substring(0, dataFileName.IndexOf('.'));
+        }
 
         public IAxisViewModel GetXAxis()
         {
@@ -26,7 +35,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
         {
             return new NumericAxisViewModel
             {
-                StyleKey = "PoreSpaceChartYAxisStyle"
+                StyleKey = "SharedYAxisStyle"
             };
         }
 
@@ -38,7 +47,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/PoreSpace.csv.gz"))
+            using (var fileStream = File.OpenRead(Path.Combine("../../GridCharts/Data", _dataFileName)))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {
@@ -53,11 +62,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
 
                         dataSeries1.Append(x, double.Parse(data[1], CultureInfo.InvariantCulture));
                         dataSeries2.Append(x, double.Parse(data[2], CultureInfo.InvariantCulture));
-
-                        if (data[3] != "-")
-                        { 
-                            dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
-                        }
+                        dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
                     }
 
                     line = streamReader.ReadLine();
@@ -67,19 +72,19 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries1,
-                StyleKey = "BluePoreSpaceSeriesStyle"
+                StyleKey = "RedStackedMountainSeriesStyle"
             });
 
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries2,
-                StyleKey = "OlivePoreSpaceSeriesStyle"
+                StyleKey = "GreenStackedMountainSeriesStyle"
             });
 
-            renderSeries.Add(new XyScatterRenderableSeriesViewModel
+            renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries3,
-                StyleKey = "ScatterPoreSpaceSeriesStyle"
+                StyleKey = "BlueStackedMountainSeriesStyle"
             });
 
             return renderSeries;

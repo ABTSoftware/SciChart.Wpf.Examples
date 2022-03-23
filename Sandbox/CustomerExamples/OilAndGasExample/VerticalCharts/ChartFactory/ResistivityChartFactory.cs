@@ -36,7 +36,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var renderSeries = new List<IRenderableSeriesViewModel>(2);
             var dataSeries = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../Data/Resistivity.csv.gz"))
+            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Resistivity.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

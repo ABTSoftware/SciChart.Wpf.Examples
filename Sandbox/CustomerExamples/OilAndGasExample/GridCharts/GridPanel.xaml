@@ -6,6 +6,14 @@
              xmlns:br="clr-namespace:OilAndGasExample.Behaviors"
              xmlns:l="clr-namespace:OilAndGasExample.GridCharts">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="GridPanelResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid Background="#3C3C3E">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

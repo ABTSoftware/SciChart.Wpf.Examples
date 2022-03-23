@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GridCharts\ChartFactory\MountainChartFactory.cs" />
+    <Compile Include="GridCharts\ChartFactory\ScatterChartFactory.cs" />
     <Compile Include="GridCharts\GridLegend.xaml.cs">
       <DependentUpon>GridLegend.xaml</DependentUpon>
     </Compile>
@@ -83,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GridCharts\GridPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GridCharts\GridPanelResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,12 +136,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\Density.csv.gz" />
-    <None Include="Data\PoreSpace.csv.gz" />
-    <None Include="Data\Resistivity.csv.gz" />
-    <None Include="Data\Shale.csv.gz" />
-    <None Include="Data\Sonic.csv.gz" />
-    <None Include="Data\Texture.csv.gz" />
+    <None Include="GridCharts\Data\Grid-1.csv.gz" />
+    <None Include="GridCharts\Data\Grid-2.csv.gz" />
+    <None Include="GridCharts\Data\Grid-3.csv.gz" />
+    <None Include="GridCharts\Data\Grid-4.csv.gz" />
+    <None Include="GridCharts\Data\Grid-5.csv.gz" />
+    <None Include="GridCharts\Data\Grid-6.csv.gz" />
+    <None Include="GridCharts\Data\Grid-7.csv.gz" />
+    <None Include="GridCharts\Data\Grid-8.csv.gz" />
+    <None Include="GridCharts\Data\Grid-9.csv.gz" />
+    <None Include="VerticalCharts\Data\Density.csv.gz" />
+    <None Include="VerticalCharts\Data\PoreSpace.csv.gz" />
+    <None Include="VerticalCharts\Data\Resistivity.csv.gz" />
+    <None Include="VerticalCharts\Data\Shale.csv.gz" />
+    <None Include="VerticalCharts\Data\Sonic.csv.gz" />
+    <None Include="VerticalCharts\Data\Texture.csv.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -35,7 +35,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var renderSeries = new List<IRenderableSeriesViewModel>(1);
             var heatmapData = new double[100, 1000];
 
-            using (var fileStream = File.OpenRead("../../Data/Sonic.csv.gz"))
+            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Sonic.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

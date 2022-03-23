@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using OilAndGasExample.Common;
-using SciChart.Charting.Model.ChartSeries;
+using OilAndGasExample.GridCharts.ChartFactory;
 using SciChart.Data.Model;
 
 namespace OilAndGasExample.GridCharts
@@ -15,46 +13,18 @@ namespace OilAndGasExample.GridCharts
         {
             GridCharts = new ObservableCollection<ChartViewModel>
             {
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory()),
+                new ChartViewModel(new MountainChartFactory("Grid-1.csv.gz")),
+                new ChartViewModel(new ScatterChartFactory("Grid-2.csv.gz")),
+                new ChartViewModel(new ScatterChartFactory("Grid-3.csv.gz")),
 
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory()),
+                new ChartViewModel(new ScatterChartFactory("Grid-4.csv.gz")),
+                new ChartViewModel(new MountainChartFactory("Grid-5.csv.gz")),
+                new ChartViewModel(new ScatterChartFactory("Grid-6.csv.gz")),
                 
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory()),
-                new ChartViewModel(new EmptyChartFactory())
+                new ChartViewModel(new ScatterChartFactory("Grid-7.csv.gz")),
+                new ChartViewModel(new ScatterChartFactory("Grid-8.csv.gz")),
+                new ChartViewModel(new MountainChartFactory("Grid-9.csv.gz"))
             };
         }
-    }
-
-    public class EmptyChartFactory : IChartFactory
-    {
-        public string Title => "Empty";
-
-        public string StyleKey => null;
-
-        public IAxisViewModel GetXAxis()
-        {
-            return new NumericAxisViewModel
-            {
-                Visibility = System.Windows.Visibility.Collapsed
-            };
-        }
-
-        public IAxisViewModel GetYAxis()
-        {
-            return new NumericAxisViewModel
-            {
-                Visibility = System.Windows.Visibility.Collapsed
-            };
-        }
-
-        public IEnumerable<IRenderableSeriesViewModel> GetSeries()
-        {           
-            return Enumerable.Empty<IRenderableSeriesViewModel>();
-        }
-    }
+    }    
 }
