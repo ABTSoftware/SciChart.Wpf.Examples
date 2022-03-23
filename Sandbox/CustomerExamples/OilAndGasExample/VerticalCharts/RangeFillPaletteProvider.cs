@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
@@ -29,6 +30,37 @@ namespace OilAndGasExample.VerticalCharts
         }
     }
 
+    public class FillMetadata : IPointMetadata
+    {
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+        public Brush FillBrush { get; set; }
+
+        public FillMetadata(Brush fillBrush)
+        {
+            FillBrush = fillBrush;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            var handler = PropertyChanged;
+
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
     public class RangeFillPaletteProvider : IFillPaletteProvider
     {
         private Brush _defaultBrush;
@@ -44,16 +76,16 @@ namespace OilAndGasExample.VerticalCharts
 
         public void OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
-            _rangeIndex = 0;
-
             if (rSeries is StackedMountainRenderableSeries stackedMountainSeries)
             {
                 _defaultBrush = stackedMountainSeries.Fill;
             }
         }
 
-        public Brush OverrideFillBrush(IRenderableSeries rSeries, int index, IPointMetadata metadata)
+        public IPointMetadata GetMetadataByIndex(int index)
         {
+            if (index == 0) _rangeIndex = 0;
+            
             var range = PaletteRanges[_rangeIndex];
 
             if (index > range.StartIndex && index > range.EndIndex)
@@ -65,7 +97,16 @@ namespace OilAndGasExample.VerticalCharts
 
             if (index >= range.StartIndex && index <= range.EndIndex)
             {
-                return range.FillBrush;
+                return new FillMetadata(range.FillBrush);
+            }
+            return null;
+        }
+
+        public Brush OverrideFillBrush(IRenderableSeries rSeries, int index, IPointMetadata metadata)
+        {
+            if (metadata is FillMetadata fillMetadata)
+            {
+                return fillMetadata.FillBrush;
             }
             return _defaultBrush;
         }

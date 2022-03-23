@@ -39,29 +39,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Shale.csv.gz"))
-            using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
-            using (var streamReader = new StreamReader(gzStream))
-            {
-                var line = streamReader.ReadLine();
-
-                while (!string.IsNullOrEmpty(line))
-                {
-                    if (!line.StartsWith("/"))
-                    {
-                        var data = line.Split(';');
-                        var x = double.Parse(data[0], CultureInfo.InvariantCulture);
-
-                        dataSeries1.Append(x, double.Parse(data[1], CultureInfo.InvariantCulture));
-                        dataSeries2.Append(x, double.Parse(data[2], CultureInfo.InvariantCulture));
-                        dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
-                    }
-
-                    line = streamReader.ReadLine();
-                }
-            }
-
-            var rangePaletteProvider = new RangeFillPaletteProvider(new[]
+            var paletteProvider = new RangeFillPaletteProvider(new[]
             {
                 new PaletteRange(000, 100, Brushes.Orange),
                 new PaletteRange(150, 200, Brushes.Orange),
@@ -76,6 +54,32 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
                 new PaletteRange(900, 950, Brushes.Aqua)
             });
 
+            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Shale.csv.gz"))
+            using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gzStream))
+            {
+                var index = 0;
+                var line = streamReader.ReadLine();
+
+                while (!string.IsNullOrEmpty(line))
+                {
+                    if (!line.StartsWith("/"))
+                    {
+                        var data = line.Split(';');
+                        var x = double.Parse(data[0], CultureInfo.InvariantCulture);
+                        var metadata = paletteProvider.GetMetadataByIndex(index);
+
+                        dataSeries1.Append(x, double.Parse(data[1], CultureInfo.InvariantCulture));
+                        dataSeries2.Append(x, double.Parse(data[2], CultureInfo.InvariantCulture), metadata);
+                        dataSeries3.Append(x, double.Parse(data[3], CultureInfo.InvariantCulture));
+
+                        index++;
+                    }
+
+                    line = streamReader.ReadLine();
+                }
+            }
+
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries1,
@@ -85,7 +89,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             renderSeries.Add(new StackedMountainRenderableSeriesViewModel
             {
                 DataSeries = dataSeries2,
-                PaletteProvider = rangePaletteProvider,
+                PaletteProvider = paletteProvider,
                 StyleKey = "YellowShaleSeriesStyle"
             });
 
