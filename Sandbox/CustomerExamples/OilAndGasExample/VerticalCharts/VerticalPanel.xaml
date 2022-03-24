@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <Grid Background="#3C3C3E">
-        <ItemsControl Margin="4,0" ItemsSource="{Binding VerticalCharts}">
+        <ItemsControl Margin="4,0,-4,0" ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>

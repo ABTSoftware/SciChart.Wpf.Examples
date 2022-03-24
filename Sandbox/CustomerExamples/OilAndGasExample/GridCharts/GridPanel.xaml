@@ -14,7 +14,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#3C3C3E">
+    <Grid Background="#2C2C2E">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
@@ -48,7 +48,7 @@
 
         <l:GridLegend Grid.Row="1"/>
 
-        <ItemsControl Grid.Row="2" Margin="0,-4" ItemsSource="{Binding GridCharts}">
+        <ItemsControl Grid.Row="2" Margin="-4" ItemsSource="{Binding GridCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
@@ -70,13 +70,7 @@
                             <br:SurfaceStyleBehaviour/>
                             <br:SurfaceToViewModelBehavior/>
                         </b:Interaction.Behaviors>
-
-                        <s:SciChartSurface.ChartModifier>
-                            <s:ModifierGroup >
-                                <s:MouseWheelZoomModifier XyDirection="XYDirection"/>
-                                <s:ZoomExtentsModifier XyDirection="XYDirection"/>
-                            </s:ModifierGroup>
-                        </s:SciChartSurface.ChartModifier>
+                        
                     </s:SciChartSurface>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

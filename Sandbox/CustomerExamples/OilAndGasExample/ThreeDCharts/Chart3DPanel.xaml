@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="OilAndGasExample.ThreeDCharts.Chart3DPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:br="clr-namespace:OilAndGasExample.Behaviors">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Chart3DPanelResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <s3D:SciChart3DSurface BorderThickness="0"
+                           IsFpsCounterVisible="False"
+                           IsXyzGizmoVisible="False"
+                           ShowLicensingWarnings="False"
+                           WorldDimensions="200,100,200"
+                           DataContext="{Binding Chart, Mode=OneWay}"
+                           RenderableSeries="{s3D:SeriesBinding RenderableSeries}">
+
+        <b:Interaction.Behaviors>
+            <br:SurfaceToViewModelBehavior/>
+        </b:Interaction.Behaviors>
+
+        <s3D:SciChart3DSurface.Camera>
+            <s3D:Camera3D Position="250,300,300"
+                          Target="0,10,0"
+                          Radius="320"
+                          OrbitalPitch="30"/>
+        </s3D:SciChart3DSurface.Camera>
+
+        <s3D:SciChart3DSurface.XAxis>
+            <s3D:NumericAxis3D Style="{StaticResource Scatter3DAxisStyle}"/>
+        </s3D:SciChart3DSurface.XAxis>
+
+        <s3D:SciChart3DSurface.YAxis>
+            <s3D:NumericAxis3D Style="{StaticResource Scatter3DAxisStyle}"/>
+        </s3D:SciChart3DSurface.YAxis>
+
+        <s3D:SciChart3DSurface.ZAxis>
+            <s3D:NumericAxis3D Style="{StaticResource Scatter3DAxisStyle}"/>
+        </s3D:SciChart3DSurface.ZAxis>
+
+        <s3D:SciChart3DSurface.ChartModifier>
+            <s3D:ModifierGroup3D>
+                <s3D:MouseWheelZoomModifier3D/>
+                <s3D:OrbitModifier3D/>
+            </s3D:ModifierGroup3D>
+        </s3D:SciChart3DSurface.ChartModifier>
+        
+    </s3D:SciChart3DSurface>
+</UserControl>

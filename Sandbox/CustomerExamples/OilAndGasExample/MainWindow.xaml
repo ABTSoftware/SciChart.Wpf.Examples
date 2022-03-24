@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:gc="clr-namespace:OilAndGasExample.GridCharts"
         xmlns:vc="clr-namespace:OilAndGasExample.VerticalCharts"
+        xmlns:tc="clr-namespace:OilAndGasExample.ThreeDCharts"
         Title="Oil &amp; Gas Example"
         Height="850"
         Width="1366"
@@ -12,12 +13,13 @@
     <Window.Resources>
         <gc:GridPanelViewModel x:Key="GridPanelViewModel"/>
         <vc:VerticalPanelViewModel x:Key="VerticalPanelViewModel"/>
+        <tc:Chart3DPanelViewModel x:Key="Chart3DPanelViewModel"/>
     </Window.Resources>
 
     <Grid Background="#3C3C3E">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="40*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -34,13 +36,8 @@
                           Grid.Column="1"
                           DataContext="{StaticResource VerticalPanelViewModel}"/>
 
-        <TextBlock Grid.Row="1"
-                   Grid.Column="0"
-                   Text="TODO: 3D Chart"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Foreground="Gray"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <tc:Chart3DPanel Grid.Row="1"
+                         Grid.Column="0"
+                         DataContext="{StaticResource Chart3DPanelViewModel}"/>
     </Grid>
 </Window>

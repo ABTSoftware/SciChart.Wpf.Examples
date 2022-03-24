@@ -5,7 +5,7 @@ using SciChart.Charting.Visuals;
 
 namespace OilAndGasExample.Behaviors
 {
-    public class SurfaceToViewModelBehavior : Behavior<SciChartSurface>
+    public class SurfaceToViewModelBehavior : Behavior<SciChartSurfaceBase>
     {
         protected override void OnAttached()
         {
@@ -26,6 +26,11 @@ namespace OilAndGasExample.Behaviors
             if (AssociatedObject.DataContext is ChartViewModel chartViewModel)
             {
                 chartViewModel.Suspendable = AssociatedObject;
+            }
+
+            if (AssociatedObject.DataContext is Chart3DViewModel chart3DViewModel)
+            {
+                chart3DViewModel.Suspendable = AssociatedObject;
             }
         }
     }
