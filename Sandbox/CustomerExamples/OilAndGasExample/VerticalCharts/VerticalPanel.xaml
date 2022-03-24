@@ -50,6 +50,7 @@
                                     <s:RolloverModifier ShowAxisLabels="False"
                                                         ShowTooltipOn="Always"
                                                         ReceiveHandledEvents="True"
+                                                        UseInterpolation="True"
                                                         LineOverlayStyle="{StaticResource RolloverLineStyle}"/>
                                 </s:ModifierGroup>
                             </s:SciChartSurface.ChartModifier>
