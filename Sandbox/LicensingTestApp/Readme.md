@@ -17,15 +17,15 @@ Follow these steps to debug licenses.
  1. Download this Licensing Test App and unzip it to your computer.
  2. Enter your Runtime License key from your Profile page at [www.scichart.com/profile](https://www.scichart.com/profile/) in App.xaml.cs & compile the Licensing Test App
  3. Run the Licensing Test App on the other computer where you are experiencing problems. 
-     -- Make sure this is a computer without an activated developer license. This is because the Activated Developer license will interfere with this test.
-     -- **Expected Result:** You should not see a ‘Powered by SciChart’ watermark or a trial expired when running the Licensing Test App.
-     -- If you do, contact us, you’ve probably found a bug 🙂
+  3.1 Make sure this is a computer without an activated developer license. This is because the Activated Developer license will interfere with this test.
+  3.2 **Expected Result:** You should not see a ‘Powered by SciChart’ watermark or a trial expired when running the Licensing Test App.
+  3.3 If you do, contact us, you’ve probably found a bug 🙂
  4. Debug the Licensing Test App on another computer.
-     -- Make sure this is a computer without an activated developer license. This is because the Activated Developer license will interfere with this test.
-     -- **Expected Result:** You should see a ‘Powered by SciChart’ watermark or a trial expired notice.
-     -- This is expected behaviour as SciChart has detected you are running inside Visual Studio and is searching for a developer license.
+  4.1 Make sure this is a computer without an activated developer license. This is because the Activated Developer license will interfere with this test.
+  4.2 **Expected Result:** You should see a ‘Powered by SciChart’ watermark or a trial expired notice.
+  4.3 This is expected behaviour as SciChart has detected you are running inside Visual Studio and is searching for a developer license.
  5. Activate your developer licnse and repeat the test above running the app inside debugger. 
-     -- **Expected Result:** You should not see a ‘Powered by SciChart’ watermark or a trial expired when running the Licensing Test App.
+  5.1 **Expected Result:** You should not see a ‘Powered by SciChart’ watermark or a trial expired when running the Licensing Test App.
 	 
 If either expectation above fails, please contact tech support and we will be glad to assist. Please tell us what you tried, and what version of SciChart you are using and share your runtime key with us.
 
