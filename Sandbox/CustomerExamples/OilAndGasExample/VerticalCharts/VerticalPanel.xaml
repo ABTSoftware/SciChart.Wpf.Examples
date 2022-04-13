@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#3C3C3E">
+    <Grid Background="{StaticResource GridBackgroundBrush}">
         <ItemsControl Margin="4,0,-4,0" ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -56,18 +56,18 @@
                             </s:SciChartSurface.ChartModifier>
                         </s:SciChartSurface>
 
-                        <Border Grid.Row="1" Margin="0,-2,0,0" Background="#2C2C2E">
+                        <Border Grid.Row="1" Margin="0,-2,0,0" Background="{StaticResource GridPanelBackgroundBrush}">
                             <TextBlock Text="{Binding ChartTitle}"
                                        FontSize="12"
                                        FontWeight="SemiBold"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       Foreground="LightGray"/>
+                                       Foreground="{StaticResource GridForegroundBrush}"/>
                         </Border>
 
                         <Border Grid.RowSpan="2"
                                 BorderThickness="3,0"                 
-                                BorderBrush="#3C3C3E"
+                                BorderBrush="{StaticResource GridBackgroundBrush}"
                                 Margin="-1,0"/>
                     </Grid>
                 </DataTemplate>

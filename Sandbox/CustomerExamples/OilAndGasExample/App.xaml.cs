@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SciChart.Charting;
 
 namespace OilAndGasExample
 {

@@ -7,7 +7,7 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawMinorTicks" Value="False"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="TickTextBrush" Value="LightGray"/>
+        <Setter Property="TickTextBrush" Value="{StaticResource GridForegroundBrush}"/>
     </Style>
 
     <Style x:Key="ScatterMarkerColorSeriesStyle" TargetType="s3D:ScatterRenderableSeries3D">

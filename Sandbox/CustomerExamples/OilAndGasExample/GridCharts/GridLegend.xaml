@@ -14,7 +14,7 @@
                 <Setter Property="FontSize" Value="11"/>
                 <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-                <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="Foreground" Value="{StaticResource GridForegroundBrush}"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="5,0"/>

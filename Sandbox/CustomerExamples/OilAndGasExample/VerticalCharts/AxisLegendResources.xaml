@@ -10,14 +10,14 @@
 
     <Style x:Key="AxisLegendGridStyle" TargetType="Grid">
         <Setter Property="MinHeight" Value="100"/>
-        <Setter Property="Background" Value="#2C2C2E"/>
+        <Setter Property="Background" Value="{ StaticResource GridPanelHeaderBrush}"/>
     </Style>
 
     <Style x:Key="AxisLegendTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="Foreground" Value="{StaticResource GridForegroundBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="8,0"/>

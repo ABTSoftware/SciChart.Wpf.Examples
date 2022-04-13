@@ -16,7 +16,7 @@
         <tc:Chart3DPanelViewModel x:Key="Chart3DPanelViewModel"/>
     </Window.Resources>
 
-    <Grid Background="#3C3C3E">
+    <Grid Background="{StaticResource GridBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

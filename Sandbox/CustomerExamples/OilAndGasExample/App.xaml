@@ -1,8 +1,38 @@
 ﻿<Application x:Class="OilAndGasExample.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              StartupUri="MainWindow.xaml">
 
-    <Application.Resources/>
+    <Application.Resources>
+        <!-- Light theme resources --> 
+
+        <!-- <SolidColorBrush x:Key="GridBackgroundBrush">#EEEEEE</SolidColorBrush> -->
+        <!-- <SolidColorBrush x:Key="GridPanelHeaderBrush">#EEEEEE</SolidColorBrush> -->
+        <!-- <SolidColorBrush x:Key="GridPanelBackgroundBrush">#FFFFFF</SolidColorBrush> -->
+        <!-- <SolidColorBrush x:Key="GridForegroundBrush">#333333</SolidColorBrush> -->
+        <!-- -->
+        <!-- <Style TargetType="s:SciChartSurface"> -->
+        <!--     <Setter Property="s:ThemeManager.Theme" Value="BrightSpark"/> -->
+        <!-- </Style> -->
+        <!-- <Style TargetType="s3D:SciChart3DSurface"> -->
+        <!--     <Setter Property="s:ThemeManager.Theme" Value="BrightSpark"/> -->
+        <!-- </Style> -->
+
+        <!-- Dark theme resources -->
+        <SolidColorBrush x:Key="GridBackgroundBrush">#3C3C3E</SolidColorBrush>
+        <SolidColorBrush x:Key="GridPanelHeaderBrush">#2C2C2E</SolidColorBrush>
+        <SolidColorBrush x:Key="GridPanelBackgroundBrush">#2C2C2E</SolidColorBrush>
+        <SolidColorBrush x:Key="GridForegroundBrush">LightGray</SolidColorBrush>
+        
+        <Style TargetType="s:SciChartSurface">
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+        </Style>
+        <Style TargetType="s3D:SciChart3DSurface">
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+        </Style>
+
+    </Application.Resources>
 
 </Application>
