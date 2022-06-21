@@ -1,9 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-
-
 using SciChart.Charting.Common.Helpers;
-using SciChart.Examples.Demo.Behaviors;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.Demo.Helpers.ProjectExport;
 using SciChart.UI.Reactive.Observability;
@@ -13,17 +10,12 @@ namespace SciChart.Examples.Demo.ViewModels
     public class ExportExampleViewModel : ViewModelWithTraitsBase, IDataErrorInfo
     {
         private readonly ExampleViewModel _parent;
-        private readonly ActionCommand _selectExportPathCommand;
-        private readonly ActionCommand _selectLibraryCommand;
-        private readonly ActionCommand _okCommand;
-        private readonly ActionCommand _cancelCommand;
 
         public ExportExampleViewModel(IModule module, ExampleViewModel parent)
         {
             _parent = parent;
-            WithTrait<DiscoverCoreAssembliesBehavior>();
 
-            _selectExportPathCommand = new ActionCommand(() =>
+            SelectExportPathCommand = new ActionCommand(() =>
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -32,7 +24,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 }
             });
 
-            _selectLibraryCommand = new ActionCommand(() =>
+            SelectLibraryCommand = new ActionCommand(() =>
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -41,34 +33,33 @@ namespace SciChart.Examples.Demo.ViewModels
                 }
             });
 
-            _okCommand = new ActionCommand(
-                () =>
+            ExportCommand = new ActionCommand(() =>
+            {
+                ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath);
+                if (_parent.Usage != null)
                 {
-                    ProjectWriter.WriteProject(module.CurrentExample, ExportPath + @"\", LibrariesPath);
-                    if (_parent.Usage != null)
-                    {
-                        _parent.Usage.Exported = true;
-                    }
-                    CloseTrigger = true;
-                },
-                () => !string.IsNullOrEmpty(ExportPath) && ValidateExportPath() == null);
+                    _parent.Usage.Exported = true;
+                }
+                CloseTrigger = true;
 
-            _cancelCommand = new ActionCommand(() => IsExportVisible = false);
+            }, () => ValidateExportPath() == null && ValidateLibrariesPath() == null);
 
-            ExportPath = "";
+            CancelCommand = new ActionCommand(() => IsExportVisible = false);
+       
+            LibrariesPath = ExportExampleHelper.TryAutomaticallyFindAssemblies();   
         }
 
         public bool IsExportVisible
         {
             get
             {
-                return GetDynamicValue<bool>("IsExportVisible");                
+                return GetDynamicValue<bool>();
             }
             set
             {
                 if (IsExportVisible != value)
                 {
-                    this.SetDynamicValue(value);
+                    SetDynamicValue(value);
 
                     if (IsExportVisible)
                     {
@@ -83,51 +74,38 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public string ExportPath
         {
-            get => this.GetDynamicValue<string>(); 
+            get => GetDynamicValue<string>();
             set
             {
-                this.SetDynamicValue(value);
-                OkCommand.RaiseCanExecuteChanged();
+                SetDynamicValue(value);
+                ExportCommand.RaiseCanExecuteChanged();
             }
         }
 
         public string LibrariesPath
         {
-            get => this.GetDynamicValue<string>(); 
-            set => this.SetDynamicValue(value);
-        }
-
-        public bool IsAssemblyOk
-        {
-            get => this.GetDynamicValue<bool>(); 
-            set => this.SetDynamicValue(value);
+            get => GetDynamicValue<string>();
+            set
+            {
+                SetDynamicValue(value);
+                ExportCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool CloseTrigger
         {
-            get => this.GetDynamicValue<bool>(); 
-            set => this.SetDynamicValue(value);
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
         }
 
-        public ActionCommand SelectExportPathCommand
-        {
-            get { return _selectExportPathCommand; }
-        }
-        
-        public ActionCommand SelectLibraryCommand
-        {
-            get { return _selectLibraryCommand; }
-        }    
-        
-        public ActionCommand OkCommand
-        {
-            get { return _okCommand; }
-        }   
-        
-        public ActionCommand CancelCommand
-        {
-            get { return _cancelCommand; }
-        }
+        public ActionCommand SelectExportPathCommand { get; }
+
+        public ActionCommand SelectLibraryCommand { get; }
+
+        public ActionCommand ExportCommand { get; }
+
+        public ActionCommand CancelCommand { get; }
+
 
         #region IDataErrorInfo
 
@@ -143,22 +121,24 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private static readonly string[] ValidatedProperties =
         {
-            "ExportPath",
-            "LibrariesPath"
+            nameof(ExportPath),
+            nameof(LibrariesPath)
         };
 
         private string GetValidationError(string propertyName)
         {
             if (Array.IndexOf(ValidatedProperties, propertyName) < 0)
                 return null;
+
             string error = null;
 
             switch (propertyName)
             {
-                case "ExportPath":
+                case nameof(ExportPath):
                     error = ValidateExportPath();
                     break;
-                case "LibrariesPath":
+
+                case nameof(LibrariesPath):
                     error = ValidateLibrariesPath();
                     break;
             }
@@ -168,9 +148,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private string ValidateExportPath()
         {
-            string error;
-
-            if (DirectoryHelper.IsValidPath(ExportPath, out error))
+            if (DirectoryHelper.IsValidPath(ExportPath, out string error))
             {
                 DirectoryHelper.HasWriteAccessToFolder(ExportPath, out error);
             }
@@ -180,12 +158,9 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private string ValidateLibrariesPath()
         {
-            string error = null;
-
-            if (ViewModelTraits.Contains<DiscoverCoreAssembliesBehavior>())
-            {                
-                var assembliesExist = ExportExampleHelper.SearchForCoreAssemblies(ExportPath);
-                if (!assembliesExist)
+            if (DirectoryHelper.IsValidPath(LibrariesPath, out string error))
+            {
+                if (!ExportExampleHelper.SearchForCoreAssemblies(LibrariesPath))
                 {
                     error = "We are sorry, but you have to manually select path to SciChart installation folder!";
                 }

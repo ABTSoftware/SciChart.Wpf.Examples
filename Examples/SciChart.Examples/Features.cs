@@ -77,6 +77,7 @@ namespace SciChart.Examples
         Statistics,
         Stem,
         Stock,
+        Stripe,
         Style,
         Ticks,
         Theme,

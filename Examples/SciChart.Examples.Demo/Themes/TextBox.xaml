@@ -210,22 +210,13 @@
                                                       ContentTemplate="{Binding Path=(behaviors:TextBoxHelpers.WatermarkContentTemplate), RelativeSource={RelativeSource TemplatedParent}}"
                                                       IsHitTestVisible="False"
                                                       Opacity="0.5"
-                                                      tz:Transitionz.Opacity="{tz:OpacityParams Duration=120, From=0, To=0.5, TransitionOn=Visibility, FillBehavior=HoldEnd}"
-                                                      tz:Transitionz.Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibilityConverter}}"/>
-                                    
-                                    <ScrollViewer x:Name="ContentElement"
-                                                  BorderThickness="0"
-                                                  IsTabStop="False"
-                                                  Margin="0,5"
-                                                  Padding="{TemplateBinding Padding}"
-                                                  s:FrameworkVisibilityManager.VisibleIn="Silverlight" />
+                                                      Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibilityConverter}}"/>
                                     
                                     <ScrollViewer x:Name="PART_ContentHost"
                                                   BorderThickness="0"
                                                   Margin="0,5"
                                                   IsTabStop="False"
-                                                  Padding="{TemplateBinding Padding}"
-                                                  s:FrameworkVisibilityManager.VisibleIn="Wpf" />
+                                                  Padding="{TemplateBinding Padding}" />
                                 </Grid>                                
                             </Grid>
                         </Border>

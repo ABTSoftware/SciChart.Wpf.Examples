@@ -23,14 +23,11 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static bool IsValidPath(string path, out string error)
         {
             error = null;
-            switch (path)
+
+            if (string.IsNullOrEmpty(path))
             {
-                case null: 
-                    error = "Path can't be null";
-                    return false;
-                case "":
-                    error = "";
-                    return false;
+                error = "Path cannot be empty";
+                return false;
             }
 
             if (path.Length < 3)
@@ -39,7 +36,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 return false;
             }
 
-            string drive = path.Substring(0, 3);   // e.g. K:\
+            string drive = path.Substring(0, 3); // e.g. C:\
 
             var driveCheck = new Regex(@"^[a-zA-Z]:\\$");
             if (!driveCheck.IsMatch(drive))

@@ -1,0 +1,53 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/CreateMultiseriesChart/GanttChart/GanttChartView.xaml</View>
+	<ViewModel>Examples.CreateMultiseriesChart.GanttChart.GanttChartViewModel</ViewModel>
+	<ImagePath/>
+	<IconPath>IconGantt</IconPath>
+	<ToolTipDescription>Shows how to create a Gantt chart</ToolTipDescription>
+	<Description>
+		The Gantt Chart demo showcases a timeline of a project.
+
+		It uses the FastStripeRenderableSeries which requires the StripeDataSeries as data source.
+
+		The DiscontinuousDateTimeAxis on the top shows the timeline and excludes weekends using the Calendar with time ranges to skip.
+
+		The left panel lists project activities with information about task, department and percentage of completion.
+
+		The VerticalLineAnnotation shows the end date of the project. The VerticalSliceModifier shows the current date and it can be used to overview the progress of the project.
+
+		[b]The following interactions are possible:[/b]
+
+		- [b][Mouse Wheel][/b]
+		[i]Zooming data in and out[/i]
+
+		- [b][CTRL + Mouse Wheel][/b]
+		[i]Scrolling data up and down[/i]
+
+		- [b][SHIFT + Mouse Wheel][/b]
+		- Click and drag [b][Left Mouse Button][/b]
+		[i]Panning data left and right[/i]
+
+		- Double-click [b][Left Mouse Button][/b]
+		[i]Zooming to data extents[/i]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttChartResources.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttChartView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttChartView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttChartViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttItemViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttTextLabelProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GridItemsPanelBehavior.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GridItemsScrollBehavior.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/WeekDaysAxisCalendar.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Custom</Features>
+		<Features>LabelProvider</Features>
+		<Features>MVVM</Features>
+		<Features>MultipleAxis</Features>
+		<Features>Scrolling</Features>
+		<Features>Stripe</Features>
+		<Features>Style</Features>
+	</Features>
+</ExampleDefinition>

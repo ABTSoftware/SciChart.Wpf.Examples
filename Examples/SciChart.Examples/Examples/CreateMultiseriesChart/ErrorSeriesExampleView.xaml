@@ -24,7 +24,7 @@
                     <StackPanel Orientation="Vertical" MinWidth="150">
                         <TextBlock Text="ErrorBars.DataPointWidth" />
                         <ext:FlyoutSeparator/>
-                        <Slider Margin="4,0" Maximum="1.0" Minimum="0.0" Orientation="Horizontal" Value="{Binding DataPointWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Slider Margin="4,0" Minimum="0.0" Maximum="40.0" Orientation="Horizontal" Value="{Binding DataPointWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Text="ErrorBars.StrokeThickness" Margin="4,16,4,4"/>
                         <ext:FlyoutSeparator/>
@@ -40,21 +40,25 @@
                 <!--  Line and Error series are bound to the same (first) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
                 <s:FastErrorBarsRenderableSeries x:Name="errorSeries1"
+                                                 DataPointWidthMode="Absolute"
                                                  DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
                                                  DataSeries="{Binding DataSeries0, Mode=OneWay}"
-                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}"
+                                                 Stroke="Blue"
+                                                 ErrorDirection="YAxis">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
+                    <s:FastErrorBarsRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Width="7"
+                                              Height="7"
+                                              Fill="Transparent"
+                                              Stroke="White" />
+                    </s:FastErrorBarsRenderableSeries.PointMarker>
                 </s:FastErrorBarsRenderableSeries>
 
-                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0, Mode=OneWay}"
+                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0, Mode=OneWay}" 
                                             StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
-                    <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="5"
-                                              Height="5"
-                                              Fill="White" />
-                    </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
@@ -63,26 +67,23 @@
                 <!--  Scatter and Error series are bound to the same (second) ErrorDataSeries  -->
                 <!--  The line series uses X Y points from the DataSeries, but ErrorBars renderable series uses X Y YHigh YLow  -->
                 <s:FastErrorBarsRenderableSeries x:Name="errorSeries2"
+                                                 DataPointWidthMode="Absolute"
                                                  DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
                                                  DataSeries="{Binding DataSeries1, Mode=OneWay}"
-                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
+                                                 StrokeThickness="{Binding StrokeThickness, Mode=OneWay}"
+                                                 Stroke="Green"
+                                                 ErrorDirection="XAxis">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
-                </s:FastErrorBarsRenderableSeries>
-
-                <s:XyScatterRenderableSeries DataSeries="{Binding DataSeries1, Mode=OneWay}"
-                                             StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
-                    <s:XyScatterRenderableSeries.PointMarker>
+                    <s:FastErrorBarsRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
                                               Fill="Transparent"
                                               Stroke="White" />
-                    </s:XyScatterRenderableSeries.PointMarker>
-                    <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
-                    </s:XyScatterRenderableSeries.SeriesAnimation>
-                </s:XyScatterRenderableSeries>
+                    </s:FastErrorBarsRenderableSeries.PointMarker>
+                </s:FastErrorBarsRenderableSeries>
+
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -90,7 +91,7 @@
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis DrawMajorBands="True"/>
+                <s:NumericAxis DrawMajorBands="True" GrowBy="0.01, 0.01"/>
             </s:SciChartSurface.YAxis>
 
         </s:SciChartSurface>

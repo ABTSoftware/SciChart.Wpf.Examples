@@ -624,6 +624,18 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return doubleSeries;
         }
 
+        public DoubleSeries GetExponentialCurve(int pointCount = 100)
+        {
+            var doubleSeries = new DoubleSeries(pointCount);
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                var y = Math.Pow(Math.E, 0.1 * i);
+                doubleSeries.Add(new XYPoint() { X = i, Y = y });
+            }
+            return doubleSeries;
+        }
+
         public DoubleSeries GetLissajousCurve(double alpha, double beta, double delta, int count=200)
         {
             // From http://en.wikipedia.org/wiki/Lissajous_curve

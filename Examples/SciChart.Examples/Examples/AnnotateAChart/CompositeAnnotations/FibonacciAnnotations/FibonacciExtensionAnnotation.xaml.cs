@@ -13,6 +13,7 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using System.Windows;
 using System.Windows.Media;
 using SciChart.Charting.Visuals.Annotations;
 
@@ -36,6 +37,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Fibonac
         public FibonacciExtensionAnnotation()
         {
             InitializeComponent();
+        }
+
+        private void FibonacciExtensionAnnotation_OnLoaded(object sender, RoutedEventArgs e)
+        {
             DataContext = new FibonacciRetracementViewModel(_ratios);
         }
     }

@@ -4,4 +4,5 @@
                        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
                        Annotations="{Binding Annotations, Mode=TwoWay}"
                        Canvas.ZIndex="99"
-                       IsSelected="{Binding IsSelected}" Loaded="FibonacciRetracementAnnotation_OnLoaded" />
+                       IsSelected="{Binding IsSelected}" 
+                       Loaded="FibonacciRetracementAnnotation_OnLoaded" />

@@ -16,42 +16,42 @@ namespace SciChart.Examples.Demo.ViewModels
 {
     public class ExportExampleHelper
     {
-        private static readonly string DefaultExportPath;
-        public const string FolderName = "ExportedSolutions";
+        private static string _scriptPath;
+        private static string _exportPath;
 
+        public const string FolderName = "ExportedSolutions";
         private const string RegistryKeyString = @"Software\SciChart Ltd\SciChart";
 
         static ExportExampleHelper()
         {
             DefaultExportPath = AppDomain.CurrentDomain.BaseDirectory + FolderName + "\\";
-           // ScriptPath = Path.Combine(ExportPath, "CompileExamples.bat");
+
+            AssemblyVersion = GetSciChartVersion();
         }
 
-        private static string _ScriptPath;
+        public static string DefaultExportPath { get; }
+
+        public static string AssemblyVersion { get; }
 
         public static string ScriptPath
         {
             get
             {
-                if (_ScriptPath == null)
+                if (_scriptPath == null)
                 {
-                    return Path.Combine(ExportPath, "CompileExamples.bat"); 
+                    return Path.Combine(_exportPath, "CompileExamples.bat"); 
                 }
 
-                return _ScriptPath;
+                return _scriptPath;
             }
             set
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    _ScriptPath = value;
+                    _scriptPath = value;
                 }
-            }
-            
+            }           
         }
-
-        private static string ExportPath { get; set; }
-
 
         public static void ExportExamplesToSolutions(IModule module)
         {
@@ -60,18 +60,18 @@ namespace SciChart.Examples.Demo.ViewModels
 
             if (string.IsNullOrEmpty(basePath)) return;
 
-            ExportPath = basePath + "\\" + FolderName + "\\";
+            _exportPath = basePath + "\\" + FolderName + "\\";
 
             try
             {
                 if (File.Exists(ScriptPath))
                     File.Delete(ScriptPath);
 
-                if (Directory.Exists(ExportPath))
-                    Directory.Delete(ExportPath, true);
+                if (Directory.Exists(_exportPath))
+                    Directory.Delete(_exportPath, true);
 
-                if (!Directory.Exists(ExportPath))
-                    Directory.CreateDirectory(ExportPath);
+                if (!Directory.Exists(_exportPath))
+                    Directory.CreateDirectory(_exportPath);
             }
             catch (Exception ex)
             {
@@ -115,7 +115,7 @@ namespace SciChart.Examples.Demo.ViewModels
         private static void ExportExampleToSolution(ref string lastGroup, Example current)
         {
             string projectName = ProjectWriter.WriteProject(
-                current, ExportPath + @"\", TryAutomaticallyFindAssemblies(), false);
+                current, _exportPath + @"\", TryAutomaticallyFindAssemblies(), false);
 
             if (!File.Exists(ScriptPath))
             {
@@ -160,9 +160,9 @@ namespace SciChart.Examples.Demo.ViewModels
             if (!string.IsNullOrEmpty(path))
             {
                 var folderPath = GetFolderFromFullPath(path);
-                var isAssembliesOk = SearchForCoreAssemblies(folderPath);
+                var isAssembliesValid = SearchForCoreAssemblies(folderPath);
 
-                return !isAssembliesOk ? GetAssemblyPathFromRegistry() : GetFolderFromFullPath(path);
+                return isAssembliesValid ? folderPath : GetAssemblyPathFromRegistry();
             }
             return null;
         }
@@ -195,8 +195,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public static bool IsAssemblyExist(string folderPath, string assemblyName)
         {
-            //var fullPath = string.Format(@"{0}\{1}", folderPath, assemblyName);
-            var fullPath = string.Format(@"{0}{1}", folderPath, assemblyName);
+            string fullPath = Path.Combine(folderPath, assemblyName);
 
             bool isExists = File.Exists(fullPath);
 
@@ -205,10 +204,9 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public static bool IsAssemblyVersionMatch(string folderPath, string assemblyName)
         {
-            //var fullPath = string.Format(@"{0}\{1}", folderPath, assemblyName);
-            var fullPath = string.Format(@"{0}{1}", folderPath, assemblyName);
+            string fullPath = Path.Combine(folderPath, assemblyName);
 
-            bool isMatch = FileVersionInfo.GetVersionInfo(fullPath).FileVersion == GetSciChartVersion();
+            bool isMatch = FileVersionInfo.GetVersionInfo(fullPath).FileVersion == AssemblyVersion;
 
             return isMatch;
         }
@@ -219,7 +217,8 @@ namespace SciChart.Examples.Demo.ViewModels
             {
                 if (registryKey != null)
                 {
-                    var assemblyPathFromRegistry = string.Format("{0}{1}", registryKey.GetValue("Path"), @"Lib\net40\");
+                    var assemblyPathFromRegistry = Path.Combine((string)registryKey.GetValue("Path"), @"Lib\net40\");
+                    
                     return assemblyPathFromRegistry;
                 }
             }
@@ -230,6 +229,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public static string GetSciChartVersion()
         {
             var assemblyName = new AssemblyName(typeof(SciChartSurface).Assembly.FullName);
+
             return assemblyName.Version.ToString();
         }    
     }

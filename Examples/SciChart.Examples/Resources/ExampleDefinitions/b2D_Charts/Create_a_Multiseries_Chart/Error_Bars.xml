@@ -5,19 +5,23 @@
   <IconPath>IconErrorBars</IconPath>
   <ToolTipDescription>Demonstrates how to add Error Bars to a Line or Scatter Chart</ToolTipDescription>
   <Description>
-    Demonstrates how to add Error Bars to a Line or Scatter Chart.
+	  Demonstrates how to create Error Bars and use it with a Line or Scatter Chart.
 
-    The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] requires a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries[/url] as data source. This includes X,Y,YHigh,YLow for each series entry. In this example the same HlcDataSeries is re-used to render a Line or Scatter chart, as these only take the X,Y values.
+	  The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] can be used to produce Horizontal or Vertical Error Bar Chart. Direction of Error Bars can be specified setting the ErrorDirection property
 
-    [b][i]Tip![/i][/b]
+	  The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] requires a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries[/url] as data source. This includes X, Y, High Error value, Low Error value for each series entry. One-sided Error Bars can be achieved using Double.NaN as High or Low Error value.
 
-    Do you need to change the width of the Error Bars? Try setting [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastErrorBarsRenderableSeries~DataPointWidth.html']DataPointWidth[/url] from 0.0 to 1.0. This alters how much space the bar takes up.
+	  Also, in this example the same HlcDataSeries is re-used to render a Line or Scatter chart, as these only take the X,Y values.
 
-    [b]Documentation Links[/b]
+	  [b][i]Tip![/i][/b]
 
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries Type[/url]
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries Type[/url]
-    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+	  Do you need to change the width of the Error Bars? Try setting DataPointWidthMode to "Absolute", then assigning the desired width in pixels to the DataPointWidth property.
+
+	  [b]Documentation Links[/b]
+
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries Type[/url]
+	  - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries Type[/url]
+	  - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ErrorSeriesExampleView.xaml.txt</string>
