@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
@@ -206,7 +207,8 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             string fullPath = Path.Combine(folderPath, assemblyName);
 
-            bool isMatch = FileVersionInfo.GetVersionInfo(fullPath).FileVersion == AssemblyVersion;
+            var pattern = new Regex(@"^\d+\.\d+");
+            bool isMatch = pattern.Match(FileVersionInfo.GetVersionInfo(fullPath).FileVersion).Value == pattern.Match(AssemblyVersion).Value;
 
             return isMatch;
         }
