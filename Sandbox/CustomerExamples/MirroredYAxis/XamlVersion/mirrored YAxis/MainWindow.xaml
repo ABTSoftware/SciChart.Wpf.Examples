@@ -2,15 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-        xmlns:wpfApplication14="clr-namespace:WpfApplication14"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+        Height="350"
+        Width="525">
 
     <Grid>
         <s:SciChartSurface>
-
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries"/>
             </s:SciChartSurface.RenderableSeries>
+
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>

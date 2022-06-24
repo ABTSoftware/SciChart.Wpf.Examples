@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart" Version="*" />
-    <PackageReference Include="SciChart.DirectX" Version="*" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

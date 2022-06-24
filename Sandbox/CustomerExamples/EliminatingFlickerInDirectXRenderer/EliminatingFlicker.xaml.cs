@@ -2,8 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using SciChart.Charting;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Drawing.DirectX.Context.D3D11;
+
 
 namespace EliminatingFlickerExamplee
 {
@@ -62,14 +63,14 @@ namespace EliminatingFlickerExamplee
         {
             bool isChecked = ((CheckBox) sender).IsChecked == true;
 
-            Direct3D11RenderSurface.UseAlternativeFillSource = isChecked;
+            VisualXcceleratorEngine.UseAlternativeFillSource = isChecked;
         }
 
         private void EnableForceWait_OnChecked(object sender, RoutedEventArgs e)
         {
             bool isChecked = ((CheckBox)sender).IsChecked == true;
 
-            Direct3D11RenderSurface.EnableForceWaitForGPU = isChecked;
+            VisualXcceleratorEngine.EnableForceWaitForGPU = isChecked;
         }
     }
 }
