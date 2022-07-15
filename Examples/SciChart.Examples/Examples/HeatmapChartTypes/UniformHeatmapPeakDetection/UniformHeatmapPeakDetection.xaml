@@ -84,8 +84,8 @@
                                 <Setter.Value>
                                     <s:HeatmapColorPalette Minimum="-70" Maximum="0">
                                         <s:HeatmapColorPalette.GradientStops>
-                                            <GradientStop Offset="0" Color="Transparent" />
-                                            <GradientStop Offset="0.0001" Color="DarkBlue" />
+                                            <GradientStop Offset="0" Color="DarkBlue" />
+                                            <GradientStop Offset="0.0001" Color="Blue" />
                                             <GradientStop Offset="0.2" Color="CornflowerBlue" />
                                             <GradientStop Offset="0.4" Color="DarkGreen" />
                                             <GradientStop Offset="0.6" Color="Chartreuse" />

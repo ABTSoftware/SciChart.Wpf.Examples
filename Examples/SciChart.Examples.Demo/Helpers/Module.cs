@@ -41,10 +41,10 @@ namespace SciChart.Examples.Demo.Helpers
                 if (lastExamplePage != null)
                 {
                     // Required to release memory on example switch
-                    lastExamplePage.ViewModel = null;                    
+                    lastExamplePage.ViewModel = null;
                 }
 
-                GC.Collect(); //NOSONAR
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); //NOSONAR
                 GC.WaitForPendingFinalizers();
                 GC.Collect(); //NOSONAR
             });

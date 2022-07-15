@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using SciChart.Charting.Common.Helpers;
+using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 using SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer.Common;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -67,10 +68,13 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
                 // Clear ViewModels
                 foreach (var channelVm in ChannelViewModels)
                 {
-                    channelVm.Clear();
+                    channelVm.Dispose();
                 }
                 ChannelViewModels.Clear();
                 XRange = null;
+
+                // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
 
                 // Create a bunch of Digital channels
                 await AddChannels(SelectedChannelCount, 0);
@@ -80,6 +84,15 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             });
 
             LoadChannelsCommand.Execute(null);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            ChannelViewModels?.ForEachDo(cvm => cvm.Dispose());
+            ChannelViewModels.Clear();
+
+            // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
         private async Task AddChannels(int digitalChannelsCount, int analogChannelsCount)

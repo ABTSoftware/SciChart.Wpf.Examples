@@ -5,18 +5,24 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 {
     public class NoLockTimer : IDisposable
     {
-        private readonly Timer _timer;
+        private Timer _timer;
+        private Action _callback;
 
         public NoLockTimer(TimeSpan interval, Action callback)
         {
             _timer = new Timer { AutoReset = false, Interval = interval.TotalMilliseconds };
+            _callback = callback;
 
-            _timer.Elapsed += delegate
+            _timer.Elapsed += this.InternalCallback;
+        }
+
+        private void InternalCallback(object sender, ElapsedEventArgs e)
+        {
+            if (_callback != null)
             {
-                callback();
-
+                _callback();
                 _timer.Start();
-            };
+            }
         }
 
         public void Start()
@@ -31,7 +37,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         public void Dispose()
         {
-            _timer?.Dispose();
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Elapsed -= this.InternalCallback;
+                _callback = null;
+                _timer.Dispose();
+                _timer = null;
+            }
         }
     }
 }

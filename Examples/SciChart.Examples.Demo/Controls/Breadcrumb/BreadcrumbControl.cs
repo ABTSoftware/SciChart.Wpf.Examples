@@ -57,11 +57,5 @@ namespace SciChart.Examples.Demo.Controls.Breadcrumb
             get { return (DataTemplate)GetValue(SeparatorTemplateProperty); }
             set { SetValue(SeparatorTemplateProperty, value); }
         }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            int i = 0;
-        }
     }
 }

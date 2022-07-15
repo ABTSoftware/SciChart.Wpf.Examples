@@ -23,8 +23,22 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
     {
         private class ApplicationPageWrapper
         {
+            private UserControl _view;
             public AppPage AppPage { get; set; }
-            public UserControl View { get; set; }
+            public UserControl View
+            {
+                get { return _view; }
+                set
+                {
+                    var dView = _view as IDisposable;
+                    if (dView != null)
+                    {
+                        // Disposes the view if it implements IDisposable
+                        dView.Dispose();
+                    }
+                    _view = value;
+                }
+            }
         }
 
         #region AttachedProperties
@@ -139,7 +153,6 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             GoBackCommand.RaiseCanExecuteChanged();
             GoForwardCommand.RaiseCanExecuteChanged();
             NavigateToHomeCommand.RaiseCanExecuteChanged();
-
             if (CurrentExample is ExampleAppPage lastExamplePage)
             {
                 // Required to release memory from last example 
@@ -151,7 +164,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
@@ -177,7 +190,6 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             GoBackCommand.RaiseCanExecuteChanged();
             GoForwardCommand.RaiseCanExecuteChanged();
             NavigateToHomeCommand.RaiseCanExecuteChanged();
-
             if (CurrentExample is ExampleAppPage lastExamplePage)
             {
                 // Required to release memory from last example 
@@ -189,7 +201,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
@@ -200,7 +212,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             {
                 _currentExample.View = null;
 
-                GC.Collect();
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
             }
@@ -328,7 +340,6 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
 
             // Clears memory on going to home
             ((TransitioningFrame)_examplesFrame.Frame).SetContentNull();
-
             if (CurrentExample is ExampleAppPage lastExamplePage)
             {
                 // Required to release memory from last example 
@@ -340,7 +351,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }

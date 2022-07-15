@@ -94,8 +94,7 @@
 
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis AxisAlignment="{Binding Source={x:Reference Name=cboXAxisAlignment}, Path=SelectedItem}"
-                               DrawMajorBands="True"
-                               VisibleRange="0.0, 10.0" />
+                               DrawMajorBands="True" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>

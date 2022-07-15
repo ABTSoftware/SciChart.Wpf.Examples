@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -30,7 +31,16 @@ namespace SciChart.Examples.Demo.Helpers
 
                 return _viewModel;
             }
-            internal set { _viewModel = value; }
+            internal set
+            {
+                // Disposes the viewmodel if it implements IDisposable
+                if (_viewModel != null)
+                {
+                    // Trace.Write("Disposing viewmodel " + _viewModel.GetType());
+                    _viewModel.Dispose();
+                }
+                _viewModel = value;
+            }
         }
 
         public void NewViewModel()

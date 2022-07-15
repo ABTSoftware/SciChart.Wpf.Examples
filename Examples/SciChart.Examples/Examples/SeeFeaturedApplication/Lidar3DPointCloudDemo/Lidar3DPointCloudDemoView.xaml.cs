@@ -13,6 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,6 +33,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
     /// </summary>
     public partial class Lidar3DPointCloudDemoView : UserControl
     {
+
         public Lidar3DPointCloudDemoView()
         {
             InitializeComponent();

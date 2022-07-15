@@ -4,13 +4,15 @@ using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 using SciChart.Data.Numerics;
 using SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer.Common;
+using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 {
-    public class ChannelViewModel : BindableObject
+    public class ChannelViewModel : BaseViewModel
     {
         private Lazy<ObservableCollection<IRenderableSeries>> _renderableSeries;
         private readonly IDataSeries _dataSeries;
@@ -148,6 +150,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
             {
                 ChannelHeight = newHeight;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.Clear();
         }
     }
 }

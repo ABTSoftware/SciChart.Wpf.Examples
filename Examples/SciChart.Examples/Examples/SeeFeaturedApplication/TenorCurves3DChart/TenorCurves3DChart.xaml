@@ -73,15 +73,14 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D x:Name="XAx3D" VisibleRange="0,10" AxisTitle="Tenor" AxisTitleOffset="60"/>
+                <s3D:NumericAxis3D x:Name="XAx3D" AxisTitle="Tenor" AxisTitleOffset="60"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
                 <s3D:NumericAxis3D x:Name="YAx3D"
                                    AxisTitle="Rate (%)"
                                    AxisTitleOffset="60"
-                                   TextFormatting="#"
-                                   VisibleRange="0,10" />
+                                   TextFormatting="#" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>

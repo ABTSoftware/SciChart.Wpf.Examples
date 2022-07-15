@@ -18,7 +18,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
     {
         private bool _isStopped;
         private string _loadingMessage;
-        private readonly NoLockTimer _timer;
+        private NoLockTimer _timer;
 
         private const int AppendCount = 10_000; // The number of points to append per timer tick
         private const int TimerIntervalMs = 10; // Interval of timer tick 
@@ -27,6 +27,8 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         private readonly float[] _yBuffer = new float[AppendCount];
 
         private PointCount _selectedPointCount;
+        private static int _instanceCount = 0;
+        private int _instanceId = _instanceCount++;
 
         public FifoBillionPointsPageViewModel()
         {
@@ -200,6 +202,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                     };
                 });
 
+                // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
                 // Force a GC Collect before we begin
                 GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
 
@@ -252,11 +255,22 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                 _timer.Stop();
                 IsStopped = true;
 
-                Series.ForEachDo(x => x.DataSeries.FifoCapacity = 1);
+                Series.ForEachDo(x => x.DataSeries.Clear(true));
                 Series.Clear();
             }
 
+            // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+        }
+
+        /// <summary>
+        /// Free memory when the example is unloaded 
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            OnStop();
+            _timer?.Dispose();
+            _timer = null;
         }
 
         private void OnTimerTick()
