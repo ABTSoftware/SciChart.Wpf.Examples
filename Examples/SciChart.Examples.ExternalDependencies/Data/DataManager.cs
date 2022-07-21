@@ -76,6 +76,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             return GetPriceData(string.Format("{0}_{1}", dataset, timeFrame));
         }
+
+        public PriceSeries GetPriceData(string dataset, TimeFrame timeFrame, bool swapOpenClose)
+        {
+            return GetPriceData(string.Format("{0}_{1}", dataset, timeFrame), swapOpenClose);
+        }
         
         public DoubleSeries GetDampedSinewave(double amplitude, double dampingFactor, int pointCount, int freq = 10)
         {
@@ -440,46 +445,62 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return _acousticPlotData[channelNumber];
         }
 
-        public PriceSeries GetPriceData(string dataset)
+        public PriceSeries GetPriceData(string dataset, bool swapOpenClose = false)
         {
-            if (_dataSets.ContainsKey(dataset))
-            {
-                return _dataSets[dataset];
-            }
-
+            var dataSetKey = swapOpenClose ? $"{dataset}_OCSwap" : dataset;
+            if (_dataSets.ContainsKey(dataSetKey))
+                return _dataSets[dataSetKey];           
+            
             // e.g. resource format: SciChart.Examples.ExternalDependencies.Resources.Data.EURUSD_Daily.csv 
             var csvResource = string.Format("{0}.{1}", ResourceDirectory, Path.ChangeExtension(dataset, "csv.gz"));
-
-            var priceSeries = new PriceSeries();
-            priceSeries.Symbol = dataset;
-
+            var priceSeries = new PriceSeries {Symbol = dataset};
             var assembly = typeof(DataManager).Assembly;
-            // Debug.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
+
             using (var stream = assembly.GetManifestResourceStream(csvResource))
             using (var gz = new GZipStream(stream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gz))
             {
-                string line = streamReader.ReadLine();
+                var lineIndex = 0;
+                var line = streamReader.ReadLine();
+
                 while (line != null)
                 {
                     var priceBar = new PriceBar();
-                    // Line Format: 
+
                     // Date, Open, High, Low, Close, Volume 
                     // 2007.07.02 03:30, 1.35310, 1.35310, 1.35280, 1.35310, 12 
                     var tokens = line.Split(',');
-                    priceBar.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo);
+
+                    priceBar.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo);                  
                     priceBar.Open = double.Parse(tokens[1], NumberFormatInfo.InvariantInfo);
                     priceBar.High = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo);
                     priceBar.Low = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo);
                     priceBar.Close = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo);
                     priceBar.Volume = long.Parse(tokens[5], NumberFormatInfo.InvariantInfo);
+
+                    if (swapOpenClose)
+                    {
+                        if (lineIndex % 5 == 0)
+                        {
+                            var open = priceBar.Open;
+                            var close = priceBar.Close;
+
+                            priceBar.Open = close;
+                            priceBar.Close = open;
+                        }
+                        
+                        if (lineIndex > 0 && lineIndex % 20 == 0)
+                            priceSeries[lineIndex - 1].Close = priceBar.Close;                       
+                    }
+
                     priceSeries.Add(priceBar);
 
+                    lineIndex++;
                     line = streamReader.ReadLine();
                 }
             }
 
-            _dataSets.Add(dataset, priceSeries);
+            _dataSets.Add(dataSetKey, priceSeries);
 
             return priceSeries;
         }
