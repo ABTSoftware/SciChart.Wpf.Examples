@@ -100,15 +100,15 @@
     <Resource Include="Resources\Images\type_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.6.0.26490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" />
+    <PackageReference Include="SciChart" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.6.0.26490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" />
+    <PackageReference Include="SciChart3D" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26490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" />
+    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26490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" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26505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" />
   </ItemGroup>
 </Project>
