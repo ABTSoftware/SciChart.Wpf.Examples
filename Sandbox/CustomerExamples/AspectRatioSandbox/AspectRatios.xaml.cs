@@ -15,7 +15,7 @@ namespace SciChart.Sandbox.Examples.AspectRatios
             // Draw a circle on the chart
             double radius = 3;
             var dataSeries = new XyDataSeries<double>() { AcceptsUnsortedData = true };
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i <= 100; i++)
             {
                 double x = radius * Math.Cos(2 * Math.PI * i / 100) + 5;
                 double y = radius * Math.Sin(2 * Math.PI * i / 100) + 5;
