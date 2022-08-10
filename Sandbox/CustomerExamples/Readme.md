@@ -32,7 +32,7 @@ A simple example demonstrating how to animate a dataseries
 
 ### Axis MVVM Apply Style
 
-Shows how to apply a <style> via StyleKey to an Axis when created using the AxisBinding MVVM Api 
+Shows how to apply a style via StyleKey to an Axis when created using the AxisBinding MVVM Api 
 
 ### Axis MVVM with Scrollbar 
 
