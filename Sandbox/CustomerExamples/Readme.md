@@ -106,6 +106,10 @@ Demonstrates a SciChart WPF Chart with DateTimeAxis and two rows of labels, one 
 
 Demonstrates big data-sets in GridDataSeries3D using resampling (downsampling) in a SciChart WPF 3D Chart
 
+### Select Series on Hover
+
+Demonstrates how to use the Custom ChartModifier API to perform a hit-test and set Series.IsSelected on mouse hover 
+
 ### Scrollbars above Axis
 
 Demonstrates how to place a scrollbar above an axis in a SciChart WPF Chart 
