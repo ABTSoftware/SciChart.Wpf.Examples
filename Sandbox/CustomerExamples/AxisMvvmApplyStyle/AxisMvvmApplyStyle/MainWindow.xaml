@@ -35,7 +35,7 @@
     </Window.Resources>
 
     <Grid DataContext="{StaticResource vm}" Background="#222">
-        <s:SciChartSurface Margin="20" 
+        <s:SciChartSurface Margin="20" ShowLicensingWarnings="False"
                            YAxes="{s:AxesBinding YAxisViewModels}"
                            XAxes="{s:AxesBinding XAxisViewModels}">
 
