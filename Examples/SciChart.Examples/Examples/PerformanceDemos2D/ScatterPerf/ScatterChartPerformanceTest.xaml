@@ -8,7 +8,7 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -22,28 +22,14 @@
             <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PM" Padding="0">
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-                        <StackPanel.Resources>
-                            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                <Setter Property="Margin" Value="4"/>
-                                <Setter Property="Foreground" Value="#999"/>
-                                <Setter Property="IsHitTestVisible" Value="True"/>
-                                <Setter Property="s:ToggleButtonExtensions.GroupName" Value="PointMarkersGroup"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter Property="IsHitTestVisible" Value="False"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Resources>
                         <TextBlock Text="Point Markers" />
-                        <ext:FlyoutSeparator/>
-                        <CheckBox x:Name="ChkEllipse" Content="Ellipse" IsChecked="True" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkTriangle" Content="Triangle" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkTriangleInverse" Content="Inverted Triangle" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkSquare" Content="Square" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkCross" Content="Cross" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkX" Content="X" Checked="Chk_OnChecked"/>
-                        <CheckBox x:Name="ChkSprite" Content="Sprite (Custom)" Checked="Chk_OnChecked"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkEllipse" Content="Ellipse" IsChecked="True"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkTriangle" Content="Triangle" />
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkTriangleInverse" Content="Inverted Triangle" />
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkSquare" Content="Square" />
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkCross" Content="Cross" />
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkX" Content="X" />
+                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkSprite" Content="Sprite (Custom)" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -126,7 +112,7 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis VisibleRange="-1,1" GrowBy="0.15,0.4"/>
             </s:SciChartSurface.YAxis>
-            
+
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:MouseWheelZoomModifier/>

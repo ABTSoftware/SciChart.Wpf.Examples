@@ -70,8 +70,8 @@
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Text="Additional Controls" />
-                        <CheckBox Margin="4" Name="UseLineSeries" Content="Use Line Series" IsChecked="True" s:ToggleButtonExtensions.GroupName="SeriesToggleGroup" />
-                        <CheckBox Margin="4" Name="UseMountainSeries" Content="Use Mountain Series" s:ToggleButtonExtensions.GroupName="SeriesToggleGroup" />
+                        <RadioButton Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="UseLineSeries" Content="Use Line Series" IsChecked="True" GroupName="SeriesToggleGroup" />
+                        <RadioButton Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="UseMountainSeries" Content="Use Mountain Series" GroupName="SeriesToggleGroup" />
                         <ext:FlyoutSeparator/>
                         <TextBlock Text="Stroke Thickness" />
                         <Slider x:Name="strokeThicknessSlider" Margin="4" Maximum="5.0" Minimum="1.0" Orientation="Horizontal" ToolTipService.ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}" Value="2.0" />
@@ -178,7 +178,7 @@
 
         <!--  Render SciChart using Direct X Render Surface  -->
         <!--  The only line required to enable this feature is s:VisualXcceleratorEngine.IsEnabled -->
-        <s:SciChartSurface x:Name="ChartSurface3" Grid.Row="1" Grid.Column="1" s:VisualXcceleratorEngine.IsEnabled="True">
+        <s:SciChartSurface x:Name="ChartSurface3" Grid.Row="1" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->

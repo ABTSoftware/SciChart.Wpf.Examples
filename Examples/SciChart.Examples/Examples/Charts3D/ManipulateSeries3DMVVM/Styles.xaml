@@ -65,12 +65,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="Mountain3DStyle" TargetType="renderableSeries:MountainRenderableSeries3DForMvvm">
-        <Setter Property="Fill" Value="MediumPurple"/>
-        <Setter Property="Stroke" Value="MediumPurple" />
-    </Style>
-
-
     <Style x:Key="Scatter3DStyle" TargetType="renderableSeries:ScatterRenderableSeries3DForMvvm">
         <Setter Property="PointMarker">
             <Setter.Value>

@@ -13,7 +13,6 @@ using SciChart.Data.Numerics.PointResamplers;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common;
-using SciChart.Examples.Demo.Helpers.Navigation;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Observability;
 using FullScreenAntiAliasingMode = SciChart.Charting3D.FullScreenAntiAliasingMode;
@@ -27,9 +26,9 @@ namespace SciChart.Examples.Demo.ViewModels
         public SettingsViewModel()
         {
             SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration &&
-                               !VisualXcceleratorEngine.IsGpuBlacklisted
-                ? typeof (VisualXcceleratorRenderSurface)
-                : typeof (HighSpeedRenderSurface);          
+                              !VisualXcceleratorEngine.IsGpuBlacklisted
+                ? typeof(VisualXcceleratorRenderSurface)
+                : typeof(HighSpeedRenderSurface);
 
             WithTrait<AllowFeedbackSettingBehaviour>();
             IsDirectXAvailable = VisualXcceleratorEngine.SupportsHardwareAcceleration;
@@ -62,7 +61,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
             Observable.CombineLatest(
                 this.WhenPropertyChanged(x => x.UseAlternativeFillSourceD3D),
-                this.WhenPropertyChanged(x => EnableForceWaitForGPU), 
+                this.WhenPropertyChanged(x => EnableForceWaitForGPU),
                 Tuple.Create)
                 .Subscribe(t =>
                 {
@@ -72,8 +71,8 @@ namespace SciChart.Examples.Demo.ViewModels
                     Viewport3D.ForceStallUntilGPUIsIdle = t.Item2;
                     VisualXcceleratorRenderSurface.UseAlternativeFillSource = t.Item1;
                     VisualXcceleratorRenderSurface.ForceStallUntilGPUIsIdle = t.Item2;
-                    CreateGlobalStyle<SciChartSurface>();
-                    CreateGlobalStyle<SciStockChart>();
+
+                    RecreateStyles();
                 })
                 .DisposeWith(this);
 
@@ -88,9 +87,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 .Throttle(TimeSpan.FromMilliseconds(1))
                 .ObserveOn(DispatcherSchedulerEx.Current)
                 .Subscribe(t =>
-                {                    
-                    GoHomeInCaseOfProblemExample();
-
+                {
                     // Restart 3D Engine with D3D9/D3D10/Auto, AntiAliasing mode 
                     Viewport3D.Restart3DEngineWith(
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
@@ -107,71 +104,51 @@ namespace SciChart.Examples.Demo.ViewModels
                 .DisposeWith(this);
         }
 
-        /// <summary>
-        /// Work around for SC-4346:
-        ///   Go home is case current example is one of examples that can cause application crash
-        ///   during 3D engine renderer switch.
-        /// </summary>
-        private static void GoHomeInCaseOfProblemExample()
-        {
-            var curExampleUri = Navigator.Instance.CurrentExample?.Uri;
-            var problemExamples = new []
-            {
-                "SciChart.Examples;component/Examples/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml"
-            };
-
-            bool needGoHome = !string.IsNullOrWhiteSpace(curExampleUri) && problemExamples.Any(ex => ex == curExampleUri);
-            if (needGoHome && Navigator.Instance.NavigateToHomeCommand.CanExecute(null))
-            {
-                Navigator.Instance.NavigateToHomeCommand.Execute(null);
-            }
-        }
-
         public bool UseD3D11
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool UseD3D10AsFallback
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool UseD3D9
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool Use3DAANone
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool Use3DAA4x
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool AllowFeedback
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool EnableDropShadows
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool EnableResamplingCPlusPlus
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set
             {
                 SetDynamicValue(value);
@@ -204,7 +181,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool EnableExtremeDrawingManager
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set
             {
                 SetDynamicValue(value);
@@ -215,11 +192,6 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private void RecreateStyles()
         {
-            // Creates a style with this markup and adds to application resource to affect all charts
-            // <Style TargetType="s:SciChartSurface">
-            //   <Setter Property="RenderSurfaceBase.RenderSurfaceType" Value="_selectedRenderer"/>
-            // </Style>
-
             CreateGlobalStyle<SciChartSurface>();
             CreateGlobalStyle<SciStockChart>();
         }
@@ -247,20 +219,14 @@ namespace SciChart.Examples.Demo.ViewModels
                         return;
                     }
                 }
-
-                // Creates a style with this markup and adds to application resource to affect all charts
-                // <Style TargetType="s:SciChartSurface">
-                //   <Setter Property="RenderSurfaceBase.RenderSurfaceType" Value="_selectedRenderer"/>
-                // </Style>
-
-                CreateGlobalStyle<SciChartSurface>();
-                CreateGlobalStyle<SciStockChart>();
+                
+                RecreateStyles();
             }
         }
 
         public bool EnableForceWaitForGPU
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
@@ -272,13 +238,13 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool UseAlternativeFillSourceD3D
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
         public bool IsDirectXAvailable
         {
-            get => GetDynamicValue<bool>(); 
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
@@ -286,14 +252,7 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             var overrideStyle = new Style(typeof(T));
 
-            if (SelectedRenderer == typeof(VisualXcceleratorRenderSurface) && !App.UIAutomationTestMode)
-            {
-                overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.IsEnabledProperty, true));
-            }
-            else
-            {
-                overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, _selectedRenderer.AssemblyQualifiedName));
-            }
+            overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, SelectedRenderer.AssemblyQualifiedName));
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
             overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));

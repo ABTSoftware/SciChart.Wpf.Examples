@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -24,9 +24,9 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
 {
     public class HistogramViewModel : BaseViewModel
     {
-        private static readonly double[] BlueSeriesData = {1, 1, 0, 2, 3, 1, 1, 6, 3, 12, 15, 6, 10, 4, 8, 5, 3, 2, 3, 2};
-        private static readonly double[] RedSeriesData = {0, 0, 1, 2, 3, 1, 2, 6, 9, 9, 10, 6, 5, 13, 4, 8, 8, 4, 3, 4};
-        private static readonly double[] GreenSeriesData = {1, 2, 4, 4, 5, 8, 7, 10, 10, 6, 8, 6, 11, 3, 7, 4, 1, 0, 0, 1};
+        private static readonly double[] BlueSeriesData = { 1, 1, 0, 2, 3, 1, 1, 6, 3, 12, 15, 6, 10, 4, 8, 5, 3, 2, 3, 2 };
+        private static readonly double[] RedSeriesData = { 0, 0, 1, 2, 3, 1, 2, 6, 9, 9, 10, 6, 5, 13, 4, 8, 8, 4, 3, 4 };
+        private static readonly double[] GreenSeriesData = { 1, 2, 4, 4, 5, 8, 7, 10, 10, 6, 8, 6, 11, 3, 7, 4, 1, 0, 0, 1 };
 
         public HistogramViewModel()
         {
@@ -36,11 +36,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
             RenderableSeriesViewModels = new List<IRenderableSeriesViewModel>
             {
                 GenerateColumn(-2.5, BlueSeriesData, "BlueColumnStyle"),
-                GenerateAvarage(-2.5, BlueSeriesData, "BlueLineStyle"),
+                GenerateAverage(-2.5, BlueSeriesData, "BlueLineStyle"),
                 GenerateColumn(0, RedSeriesData, "RedColumnStyle"),
-                GenerateAvarage(0, BlueSeriesData, "RedLineStyle"),
+                GenerateAverage(0, BlueSeriesData, "RedLineStyle"),
                 GenerateColumn(2.5, GreenSeriesData, "GreenColumnStyle"),
-                GenerateAvarage(2.5, BlueSeriesData, "GreenLineStyle"),
+                GenerateAverage(2.5, BlueSeriesData, "GreenLineStyle"),
             };
         }
 
@@ -50,15 +50,14 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
 
         private IRenderableSeriesViewModel GenerateColumn(double startsAt, double[] data, string styleKey)
         {
-            var dataSeries = new XyDataSeries<double, double>();
-            
-            var xValues = GeneratexValues(startsAt, data.Length);
-            dataSeries.Append(xValues, data);
+            var dataSeries = new UniformXyDataSeries<double>(startsAt, 0.25);
+
+            dataSeries.Append(data);
 
             // Annotations for text labels
-            for (var i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
-                ChartLabels.Add(new HistogramLabelViewModel(xValues[i], data[i],data[i].ToString(CultureInfo.InvariantCulture)));
+                ChartLabels.Add(new HistogramLabelViewModel(startsAt + (0.25 * i), data[i], data[i].ToString(CultureInfo.InvariantCulture)));
             }
 
             return new ColumnRenderableSeriesViewModel
@@ -68,30 +67,17 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
             };
         }
 
-        private IRenderableSeriesViewModel GenerateAvarage(double startsAt, double[] data, string styleKey)
+        private IRenderableSeriesViewModel GenerateAverage(double startsAt, IEnumerable<double> data, string styleKey)
         {
-            var dataSeries = new XyDataSeries<double, double>();
+            var dataSeries = new UniformXyDataSeries<double>(startsAt, 0.25);
 
-            var xValues = GeneratexValues(startsAt, data.Length);
-            dataSeries.Append(xValues, data.MovingAverage(3));
+            dataSeries.Append(data.MovingAverage(3));
 
             return new LineRenderableSeriesViewModel
             {
                 DataSeries = dataSeries,
                 StyleKey = styleKey,
             };
-        }
-
-        private double[] GeneratexValues(double startsAt, int count)
-        {
-            var xValues = new double[count];
-            for (var i = 0; i < count; i++)
-            {
-                xValues[i] = startsAt;
-                startsAt += 0.25;
-            }
-
-            return xValues;
         }
     }
 }

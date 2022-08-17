@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -36,20 +36,19 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             var cucumberData = new double[] { 16, 10, 9, 8, 22, 14, 12, 27, 25, 23, 17, 17 };
             var pepperData = new double[] { 7, 24, 21, 11, 19, 17, 14, 27, 26, 22, 28, 16 };
 
-            var dataSeries1 = new XyDataSeries<double, double> { SeriesName = "Pork" };
-            var dataSeries2 = new XyDataSeries<double, double> { SeriesName = "Veal" };
-            var dataSeries3 = new XyDataSeries<double, double> { SeriesName = "Tomato" };
-            var dataSeries4 = new XyDataSeries<double, double> { SeriesName = "Cucumber" };
-            var dataSeries5 = new XyDataSeries<double, double> { SeriesName = "Pepper" };
+            var dataSeries1 = new UniformXyDataSeries<double>(1992d, 1d) { SeriesName = "Pork" };
+            var dataSeries2 = new UniformXyDataSeries<double>(1992d, 1d) { SeriesName = "Veal" };
+            var dataSeries3 = new UniformXyDataSeries<double>(1992d, 1d) { SeriesName = "Tomato" };
+            var dataSeries4 = new UniformXyDataSeries<double>(1992d, 1d) { SeriesName = "Cucumber" };
+            var dataSeries5 = new UniformXyDataSeries<double>(1992d, 1d) { SeriesName = "Pepper" };
 
-            const int data = 1992;
             for (int i = 0; i < porkData.Length; i++)
             {
-                dataSeries1.Append(data + i, porkData[i]);
-                dataSeries2.Append(data + i, vealData[i]);
-                dataSeries3.Append(data + i, tomatoesData[i]);
-                dataSeries4.Append(data + i, cucumberData[i]);
-                dataSeries5.Append(data + i, pepperData[i]);
+                dataSeries1.Append(porkData[i]);
+                dataSeries2.Append(vealData[i]);
+                dataSeries3.Append(tomatoesData[i]);
+                dataSeries4.Append(cucumberData[i]);
+                dataSeries5.Append(pepperData[i]);
             }
 
             using (SciChart.SuspendUpdates())

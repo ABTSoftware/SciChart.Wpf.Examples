@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -27,7 +27,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((bool)value) ? 2.2 : 1.5;
+            return (value is bool isBeat && isBeat) ? 2.2 : 1.5;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

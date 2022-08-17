@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -14,11 +14,6 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Timers;
 using System.Windows.Input;
 using SciChart.Charting.Common.Helpers;
@@ -32,22 +27,25 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
     public class ECGMonitorViewModel : BaseViewModel
     {
         private Timer _timer;
-        private IXyDataSeries<double, double> _series0;
-        private double[] _sourceData;
+        private readonly object _timerLock = new object();
+
+        private IUniformXyDataSeries<double> _dataSeries;
+        private readonly double[] _sourceData;
+
         private int _currentIndex;
-        private int _totalIndex;
+        private double _totalTime;
+
         private DoubleRange _xVisibleRange;
         private DoubleRange _yVisibleRange;
-        private bool _isBeat;
+
         private int _heartRate;
+        private bool _isBeat;
         private bool _lastBeat;
         private DateTime _lastBeatTime;
 
-        private ICommand _startCommand;
-        private ICommand _stopCommand;
-
-        private const double WindowSize = 5.0;
+        private const double WindowSize = 5d;
         private const int TimerInterval = 20;
+        private const int SampleRate = 400;
 
         public ECGMonitorViewModel()
         {
@@ -56,31 +54,31 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
             // At the sample rate of ~500Hz and 5 seconds
             // visible range we'll need 2500 points in the FIFO. 
             // We set 5000 so no data gets discarded while still in view
-            _series0 = new XyDataSeries<double, double>() { FifoCapacity = 5000 };
+            _dataSeries = new UniformXyDataSeries<double>(0d, 1d / SampleRate) { FifoCapacity = 5000 };
 
             // Simulate waveform
             _sourceData = DataManager.Instance.LoadWaveformData();
 
-            // Fix chart range in Y-Direction
+            XVisibleRange = new DoubleRange(0d, WindowSize);
             YVisibleRange = new DoubleRange(-0.5, 1.5);
 
-            _startCommand = new ActionCommand(OnExampleEnter);
-            _stopCommand = new ActionCommand(OnExampleExit);
+            StartCommand = new ActionCommand(OnExampleEnter);
+            StopCommand = new ActionCommand(OnExampleExit);
         }
 
-        public ICommand StartCommand { get { return _startCommand; } }
-        public ICommand StopCommand { get { return _stopCommand; } }
+        public ICommand StartCommand { get; }
+        public ICommand StopCommand { get; }
 
         /// <summary>
         /// SciChartSurface.DataSet binds to this
         /// </summary>
-        public IXyDataSeries<double, double> EcgDataSeries
+        public IUniformXyDataSeries<double> EcgDataSeries
         {
-            get { return _series0; }
+            get => _dataSeries;
             set
             {
-                _series0 = value;
-                OnPropertyChanged("EcgDataSeries");
+                _dataSeries = value;
+                OnPropertyChanged(nameof(EcgDataSeries));
             }
         }
 
@@ -89,11 +87,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
         /// </summary>
         public DoubleRange YVisibleRange
         {
-            get { return _yVisibleRange; }
+            get => _yVisibleRange;
             set
             {
                 _yVisibleRange = value;
-                OnPropertyChanged("YVisibleRange");
+                OnPropertyChanged(nameof(YVisibleRange));
             }
         }
 
@@ -102,13 +100,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
         /// </summary>
         public DoubleRange XVisibleRange
         {
-            get { return _xVisibleRange; }
+            get => _xVisibleRange;
             set
             {
                 if (!value.Equals(_xVisibleRange))
                 {
                     _xVisibleRange = value;
-                    OnPropertyChanged("XVisibleRange");
+                    OnPropertyChanged(nameof(XVisibleRange));
                 }
             }
         }
@@ -118,13 +116,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
         /// </summary>
         public bool IsBeat
         {
-            get { return _isBeat; }
+            get => _isBeat;
             set
             {
                 if (_isBeat != value)
                 {
                     _isBeat = value;
-                    OnPropertyChanged("IsBeat");
+                    OnPropertyChanged(nameof(IsBeat));
                 }
             }
         }
@@ -134,11 +132,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
         /// </summary>
         public int HeartRate
         {
-            get { return _heartRate; }
+            get => _heartRate;
             set
             {
                 _heartRate = value;
-                OnPropertyChanged("HeartRate");
+                OnPropertyChanged(nameof(HeartRate));
             }
         }
 
@@ -162,31 +160,36 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
 
         private void TimerElapsed(object sender, EventArgs e)
         {
-            lock (this)
+            lock (_timerLock)
             {
                 // As timer cannot tick quicker than ~20ms, we append 10 points
                 // per tick to simulate a sampling frequency of 500Hz (e.g. 2ms per sample)
                 for (int i = 0; i < 10; i++)
-                    AppendPoint(400);
+                {
+                    AppendPoint();
+                }
 
                 // Assists heartbeat - it must show for 120ms before being deactivated
-                if ((DateTime.Now - _lastBeatTime).TotalMilliseconds < 120) return;
+                if ((DateTime.Now - _lastBeatTime).TotalMilliseconds < 120d)
+                {
+                    return;
+                }
 
                 // Threshold the ECG voltage to determine if a heartbeat peak occurred
-                IsBeat = _series0.YValues[_series0.Count - 3] > 0.5 ||
-                         _series0.YValues[_series0.Count - 5] > 0.5 ||
-                         _series0.YValues[_series0.Count - 8] > 0.5;
+                IsBeat = _dataSeries.YValues[_dataSeries.Count - 3] > 0.5 ||
+                         _dataSeries.YValues[_dataSeries.Count - 5] > 0.5 ||
+                         _dataSeries.YValues[_dataSeries.Count - 8] > 0.5;
 
                 // If so, compute the heart rate, update the last beat time
                 if (IsBeat && !_lastBeat)
                 {
-                    HeartRate = (int)(60.0 / (DateTime.Now - _lastBeatTime).TotalSeconds);
+                    HeartRate = (int)(60d / (DateTime.Now - _lastBeatTime).TotalSeconds);
                     _lastBeatTime = DateTime.Now;
                 }
             }
         }
 
-        private void AppendPoint(double sampleRate)
+        private void AppendPoint()
         {
             if (_currentIndex >= _sourceData.Length)
             {
@@ -195,52 +198,29 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.ECGMonitor
 
             // Get the next voltage and time, and append to the chart
             double voltage = _sourceData[_currentIndex];
-            double time = _totalIndex / sampleRate;
-            _series0.Append(time, voltage);
+            _dataSeries.Append(voltage);
 
             // Calculate the next visible range
-            XVisibleRange = ComputeXAxisRange(time);
+            ComputeXAxisRange(_totalTime);
 
             _lastBeat = IsBeat;
             _currentIndex++;
-            _totalIndex++;
+            _totalTime += 1d / SampleRate;
         }
 
-        private static DoubleRange ComputeXAxisRange(double t)
+        private void ComputeXAxisRange(double time)
         {
-            if (t < WindowSize)
+            if (time >= XVisibleRange.Max)
             {
-                return new DoubleRange(0, WindowSize);
+                // Calculates a visible range. When the trace touches the right edge of the chart
+                // (governed by WindowSize), shift the entire range 50% so that the trace is in the 
+                // middle of the chart 
+                double fractionSize = WindowSize * 0.5;
+                double newMin = fractionSize * Math.Floor((time - fractionSize) / fractionSize);
+                double newMax = newMin + WindowSize;
+
+                XVisibleRange = new DoubleRange(newMin, newMax);
             }
-
-            // Calculates a visible range. When the trace touches the right edge of the chart
-            // (governed by WindowSize), shift the entire range 50% so that the trace is in the 
-            // middle of the chart 
-            double fractionSize = WindowSize * 0.5;
-            double newMin = fractionSize * Math.Floor((t - fractionSize) / fractionSize);
-            double newMax = newMin + WindowSize;
-
-            return new DoubleRange(newMin, newMax);
-        }
-
-        private double[] LoadWaveformData(string filename)
-        {
-            var values = new List<double>();
-            var asm = Assembly.GetExecutingAssembly();
-            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains(filename));
-
-            using (var stream = asm.GetManifestResourceStream(resourceString))
-            using (var streamReader = new StreamReader(stream))
-            {
-                string line = streamReader.ReadLine();
-                while (line != null)
-                {
-                    values.Add(double.Parse(line, NumberFormatInfo.InvariantInfo));
-                    line = streamReader.ReadLine();
-                }
-            }
-
-            return values.ToArray();
         }
     }
 }

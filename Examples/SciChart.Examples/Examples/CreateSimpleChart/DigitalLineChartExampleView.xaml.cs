@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -31,12 +31,10 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private void DigitalLineChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Create a dataseries of type X=double, Y=double
-            var dataSeries = new XyDataSeries<double, double>();
-
-            var data = DataManager.Instance.GetFourierSeries(1.0, 0.1);
+            var dataSeries = new UniformXyDataSeries<double>(0d, 0.002);
 
             // Append data to series. SciChart automatically redraws
-            dataSeries.Append(data.XData, data.YData);
+            dataSeries.Append(DataManager.Instance.GetFourierYData(1.0, 0.1));
 
             lineRenderSeries.DataSeries = dataSeries;
 

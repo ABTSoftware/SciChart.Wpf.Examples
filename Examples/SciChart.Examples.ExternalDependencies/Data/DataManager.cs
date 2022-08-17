@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -34,7 +34,10 @@ namespace SciChart.Examples.ExternalDependencies.Data
     {
         private readonly IDictionary<string, PriceSeries> _dataSets = new Dictionary<string, PriceSeries>();
         private readonly List<DoubleSeries> _acousticPlotData = new List<DoubleSeries>();
+        
         private static readonly DataManager _instance = new DataManager();
+        private static readonly object _locker = new object();
+
         private IList<Instrument> _availableInstruments;
         private IDictionary<Instrument, IList<TimeFrame>> _availableTimeFrames;
 
@@ -73,15 +76,30 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             return GetPriceData(string.Format("{0}_{1}", dataset, timeFrame));
         }
+
+        public PriceSeries GetPriceData(string dataset, TimeFrame timeFrame, bool swapOpenClose)
+        {
+            return GetPriceData(string.Format("{0}_{1}", dataset, timeFrame), swapOpenClose);
+        }
         
-        public DoubleSeries GetDampedSinewave(double amplitude, double dampingFactor, int pointCount, int freq=10)
+        public DoubleSeries GetDampedSinewave(double amplitude, double dampingFactor, int pointCount, int freq = 10)
         {
             return GetDampedSinewave(0, amplitude, 0.0, dampingFactor, pointCount, freq);
+        }
+
+        public double[] GetDampedSinewaveYData(double amplitude, double dampingFactor, int pointCount, int freq = 10)
+        {
+            return GetDampedSinewaveYData(0, amplitude, 0.0, dampingFactor, pointCount, freq);
         }
 
         public DoubleSeries GetSinewave(double amplitude, double phase, int pointCount, int freq = 10)
         {
             return GetDampedSinewave(0, amplitude, phase, 0.0, pointCount, freq);
+        }
+
+        public double[] GetSinewaveYData(double amplitude, double phase, int pointCount, int freq = 10)
+        {
+            return GetDampedSinewaveYData(0, amplitude, phase, 0.0, pointCount, freq);
         }
 
         public DoubleSeries GetNoisySinewave(double amplitude, double phase, int pointCount, double noiseAmplitude)
@@ -91,7 +109,20 @@ namespace SciChart.Examples.ExternalDependencies.Data
             // Add some noise
             for (int i = 0; i < pointCount; i++)
             {
-                sinewave[i].Y += _random.NextDouble()*noiseAmplitude - noiseAmplitude*0.5;
+                sinewave[i].Y += (_random.NextDouble() * noiseAmplitude) - (noiseAmplitude * 0.5);
+            }
+
+            return sinewave;
+        }
+
+        public double[] GetNoisySinewaveYData(double amplitude, double phase, int pointCount, double noiseAmplitude)
+        {
+            var sinewave = GetSinewaveYData(amplitude, phase, pointCount);
+
+            // Add some noise
+            for (int i = 0; i < pointCount; i++)
+            {
+                sinewave[i] += (_random.NextDouble() * noiseAmplitude) - (noiseAmplitude * 0.5);
             }
 
             return sinewave;
@@ -118,10 +149,31 @@ namespace SciChart.Examples.ExternalDependencies.Data
                 xyPoint.Y = amplitude * Math.Sin(j * wn + phase);
                 doubleSeries.Add(xyPoint);
 
-                amplitude *= (1.0 - dampingFactor);
+                amplitude *= 1.0 - dampingFactor;
             }
 
             return doubleSeries;
+        }
+
+        public double[] GetDampedSinewaveYData(int pad, double amplitude, double phase, double dampingFactor, int pointCount, int freq = 10)
+        {
+            var yValues = new double[pointCount];
+
+            for (int i = 0; i < pad; i++)
+            {
+                yValues[i] = 0;
+            }
+
+            for (int i = pad, j = 0; i < pointCount; i++, j++)
+            {
+                double wn = 2 * Math.PI / (pointCount / (double)freq);
+
+                yValues[i] = amplitude * Math.Sin(j * wn + phase);
+
+                amplitude *= 1.0 - dampingFactor;
+            }
+
+            return yValues;
         }
 
         public DoubleSeries GetFourierSeriesZoomed(double amplitude, double phaseShift, double xStart, double xEnd, int count = 5000)
@@ -144,7 +196,6 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
             var result = new DoubleSeries();
 
-
             var xData = data.XData.Skip(index0).Take(index1 - index0).ToArray();
             var yData = data.YData.Skip(index0).Take(index1 - index0).ToArray();
 
@@ -156,29 +207,45 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return result;
         }
 
+        private double GetFourierYValue(double amplitude, double phaseShift, int index, int count)
+        {
+            double wn = 2 * Math.PI / (count / 10);
+
+            return Math.PI * amplitude *
+                   (Math.Sin(index * wn + phaseShift) +
+                    (0.33 * Math.Sin(index * 3 * wn + phaseShift)) +
+                    (0.20 * Math.Sin(index * 5 * wn + phaseShift)) +
+                    (0.14 * Math.Sin(index * 7 * wn + phaseShift)) +
+                    (0.11 * Math.Sin(index * 9 * wn + phaseShift)) +
+                    (0.09 * Math.Sin(index * 11 * wn + phaseShift)));
+        }
+
         public DoubleSeries GetFourierSeries(double amplitude, double phaseShift, int count = 5000)
         {
             var doubleSeries = new DoubleSeries();
 
             for (int i = 0; i < count; i++)
             {
-                var xyPoint = new XYPoint();
-
-                double time = 10 * i / (double)count;
-                double wn = 2 * Math.PI / (count / 10);
-
-                xyPoint.X = time;
-                xyPoint.Y = Math.PI * amplitude *
-                            (Math.Sin(i * wn + phaseShift) +
-                             0.33 * Math.Sin(i * 3 * wn + phaseShift) +
-                             0.20 * Math.Sin(i * 5 * wn + phaseShift) +
-                             0.14 * Math.Sin(i * 7 * wn + phaseShift) +
-                             0.11 * Math.Sin(i * 9 * wn + phaseShift) +
-                             0.09 * Math.Sin(i * 11 * wn + phaseShift));
-                doubleSeries.Add(xyPoint);
+                doubleSeries.Add(new XYPoint
+                {
+                    X = 10 * i / (double)count,
+                    Y = GetFourierYValue(amplitude, phaseShift, i, count)
+                });
             }
 
             return doubleSeries;
+        }
+
+        public double[] GetFourierYData(double amplitude, double phaseShift, int count = 5000)
+        {
+            var yValues = new double[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                yValues[i] = GetFourierYValue(amplitude, phaseShift, i, count);
+            }
+
+            return yValues;
         }
 
         public DoubleSeries GetFourierSeriesForMountainExample(double amplitude, double phaseShift, int count = 5000)
@@ -247,11 +314,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
             {
                 if (_availableInstruments == null)
                 {
-                    lock (typeof(DataManager))
+                    lock (_locker)
                     {
                         if (_availableInstruments == null)
                         {
-                            var assembly = typeof (DataManager).Assembly;
+                            var assembly = typeof(DataManager).Assembly;
                             _availableInstruments = new List<Instrument>();
 
                             foreach (var resourceString in assembly.GetManifestResourceNames())
@@ -285,7 +352,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             if (_availableTimeFrames == null)
             {
-                lock (typeof (DataManager))
+                lock (_locker)
                 {
                     if (_availableTimeFrames == null)
                     {
@@ -378,46 +445,62 @@ namespace SciChart.Examples.ExternalDependencies.Data
             return _acousticPlotData[channelNumber];
         }
 
-        public PriceSeries GetPriceData(string dataset)
+        public PriceSeries GetPriceData(string dataset, bool swapOpenClose = false)
         {
-            if (_dataSets.ContainsKey(dataset))
-            {
-                return _dataSets[dataset];
-            }
-
+            var dataSetKey = swapOpenClose ? $"{dataset}_OCSwap" : dataset;
+            if (_dataSets.ContainsKey(dataSetKey))
+                return _dataSets[dataSetKey];           
+            
             // e.g. resource format: SciChart.Examples.ExternalDependencies.Resources.Data.EURUSD_Daily.csv 
             var csvResource = string.Format("{0}.{1}", ResourceDirectory, Path.ChangeExtension(dataset, "csv.gz"));
-
-            var priceSeries = new PriceSeries();
-            priceSeries.Symbol = dataset;
-
+            var priceSeries = new PriceSeries {Symbol = dataset};
             var assembly = typeof(DataManager).Assembly;
-            // Debug.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
+
             using (var stream = assembly.GetManifestResourceStream(csvResource))
             using (var gz = new GZipStream(stream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gz))
             {
-                string line = streamReader.ReadLine();
+                var lineIndex = 0;
+                var line = streamReader.ReadLine();
+
                 while (line != null)
                 {
                     var priceBar = new PriceBar();
-                    // Line Format: 
+
                     // Date, Open, High, Low, Close, Volume 
                     // 2007.07.02 03:30, 1.35310, 1.35310, 1.35280, 1.35310, 12 
                     var tokens = line.Split(',');
-                    priceBar.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo);
+
+                    priceBar.DateTime = DateTime.Parse(tokens[0], DateTimeFormatInfo.InvariantInfo);                  
                     priceBar.Open = double.Parse(tokens[1], NumberFormatInfo.InvariantInfo);
                     priceBar.High = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo);
                     priceBar.Low = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo);
                     priceBar.Close = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo);
                     priceBar.Volume = long.Parse(tokens[5], NumberFormatInfo.InvariantInfo);
+
+                    if (swapOpenClose)
+                    {
+                        if (lineIndex % 5 == 0)
+                        {
+                            var open = priceBar.Open;
+                            var close = priceBar.Close;
+
+                            priceBar.Open = close;
+                            priceBar.Close = open;
+                        }
+                        
+                        if (lineIndex > 0 && lineIndex % 20 == 0)
+                            priceSeries[lineIndex - 1].Close = priceBar.Close;                       
+                    }
+
                     priceSeries.Add(priceBar);
 
+                    lineIndex++;
                     line = streamReader.ReadLine();
                 }
             }
 
-            _dataSets.Add(dataset, priceSeries);
+            _dataSets.Add(dataSetKey, priceSeries);
 
             return priceSeries;
         }
@@ -455,10 +538,8 @@ namespace SciChart.Examples.ExternalDependencies.Data
                     line = streamReader.ReadLine();
                 }
             }
-
             return ticks;
         }
-
         public IList<VitalSignsData> GetVitalSignsData()
         {
             var csvResourceZipped = string.Format("{0}.{1}", ResourceDirectory, "VitalSignsTrace.csv.gz");
@@ -526,14 +607,26 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             var doubleSeries = new DoubleSeries(pointCount);
 
-            for (int i = 0; i <= pointCount; i++)
+            for (int i = 0; i < pointCount; i++)
             {
                 double x = i + 1;
-                double y = gradient * x + yIntercept;
-                doubleSeries.Add(new XYPoint() { X = x, Y = y });
+                double y = (gradient * x) + yIntercept;
+                doubleSeries.Add(new XYPoint { X = x, Y = y });
             }
 
             return doubleSeries;
+        }
+
+        public double[] GetStraightLineYData(double gradient, double yIntercept, int pointCount)
+        {
+            var yValues = new double[pointCount];
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                yValues[i] = (gradient * (i + 1)) + yIntercept;
+            }
+
+            return yValues;
         }
 
         public DoubleSeries GetExponentialCurve(double power, int pointCount)
@@ -549,6 +642,18 @@ namespace SciChart.Examples.ExternalDependencies.Data
                 doubleSeries.Add(new XYPoint() {X = x, Y = y});
             }
 
+            return doubleSeries;
+        }
+
+        public DoubleSeries GetExponentialCurve(int pointCount = 100)
+        {
+            var doubleSeries = new DoubleSeries(pointCount);
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                var y = Math.Pow(Math.E, 0.1 * i);
+                doubleSeries.Add(new XYPoint() { X = i, Y = y });
+            }
             return doubleSeries;
         }
 
@@ -597,6 +702,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public DoubleSeries GetRandomDoubleSeries(int pointCount)
         {
             var doubleSeries = new DoubleSeries();
+
             double amplitude = _random.NextDouble() + 0.5;
             double freq = Math.PI * (_random.NextDouble() + 0.5) * 10;
             double offset = _random.NextDouble() - 0.5;
@@ -607,6 +713,22 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
 
             return doubleSeries;
+        }
+
+        public double[] GetRandomDoubleData(int pointCount)
+        {
+            var doubleData = new double[pointCount];
+
+            double amplitude = _random.NextDouble() + 0.5;
+            double freq = Math.PI * (_random.NextDouble() + 0.5) * 10;
+            double offset = _random.NextDouble() - 0.5;
+
+            for(int i = 0; i < pointCount; i++)
+            {
+                doubleData[i] = offset + (amplitude * Math.Sin(freq * i));
+            }
+
+            return doubleData;
         }
 
         public Color GetRandomColor()
@@ -711,9 +833,9 @@ namespace SciChart.Examples.ExternalDependencies.Data
         public IEnumerable<TradeData> GetTradeticks()
         {
             var dataSource = new List<TradeData>();
-
             var asm = Assembly.GetExecutingAssembly();
             var csvResource = asm.GetManifestResourceNames().Single(x => x.ToUpper(CultureInfo.InvariantCulture).Contains("TRADETICKS.CSV.GZ"));
+           
             using (var stream = asm.GetManifestResourceStream(csvResource))
             using (var gz = new GZipStream(stream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gz))
@@ -736,6 +858,42 @@ namespace SciChart.Examples.ExternalDependencies.Data
                 }
             }
             return dataSource;
+        }
+
+        public List<WeatherData> LoadWeatherData()
+        {
+            var values = new List<WeatherData>();
+            var asm = Assembly.GetExecutingAssembly();
+            var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains("WeatherData.txt.gz"));
+            using (var stream = asm.GetManifestResourceStream(resourceString))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
+            {
+                string line = streamReader.ReadLine();
+                while (line != null)
+                {
+                    var tokens = line.Split(',');
+                    values.Add(new WeatherData
+                    {
+                        // ID, Date, MinTemp, MaxTemp, Rainfall, Sunshine, UVIndex, WindSpd, WindDir, Forecast, LocalStation
+                        ID = int.Parse(tokens[0], NumberFormatInfo.InvariantInfo),
+                        Date = DateTime.Parse(tokens[1], DateTimeFormatInfo.InvariantInfo),
+                        MinTemp = double.Parse(tokens[2], NumberFormatInfo.InvariantInfo),
+                        MaxTemp = double.Parse(tokens[3], NumberFormatInfo.InvariantInfo),
+                        Rainfall = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo),
+                        Sunshine = double.Parse(tokens[5], NumberFormatInfo.InvariantInfo),
+                        UVIndex = int.Parse(tokens[6], NumberFormatInfo.InvariantInfo),
+                        WindSpeed = int.Parse(tokens[7], NumberFormatInfo.InvariantInfo),
+                        WindDirection = (WindDirection) Enum.Parse(typeof(WindDirection), tokens[8]),
+                        Forecast = tokens[9],
+                        LocalStation = bool.Parse(tokens[10])
+                    });
+
+                    line = streamReader.ReadLine();
+                }
+            }
+
+            return values;
         }
 
         public double[] LoadWaveformData()

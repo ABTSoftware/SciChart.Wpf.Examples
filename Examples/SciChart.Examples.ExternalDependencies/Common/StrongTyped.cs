@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -31,13 +31,14 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            return Equals(obj as StrongTyped<T>);
         }
 
         public bool Equals(StrongTyped<T> other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+
             return Equals(other.Value, Value);
         }
 

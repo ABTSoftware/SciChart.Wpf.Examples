@@ -30,6 +30,10 @@ An example showing how to mimic the effect of a 2D chart on the wall of the Axis
 
 A simple example demonstrating how to animate a dataseries 
 
+### Axis MVVM Apply Style
+
+Shows how to apply a style via StyleKey to an Axis when created using the AxisBinding MVVM Api 
+
 ### Axis MVVM with Scrollbar 
 
 Demonstrates how to add a Scrollbar to an Axis in MVVM with Scichart WPF Charts 
@@ -106,6 +110,10 @@ Demonstrates a SciChart WPF Chart with DateTimeAxis and two rows of labels, one 
 
 Demonstrates big data-sets in GridDataSeries3D using resampling (downsampling) in a SciChart WPF 3D Chart
 
+### Select Series on Hover
+
+Demonstrates how to use the Custom ChartModifier API to perform a hit-test and set Series.IsSelected on mouse hover 
+
 ### Scrollbars above Axis
 
 Demonstrates how to place a scrollbar above an axis in a SciChart WPF Chart 
@@ -146,6 +154,10 @@ A sandbox application with a SciChart WPF Chart allowing you to test out all the
 
 WORK IN PROGRESS
 Demonstrates how to have two SciChart WPF charts, with YAxes with the same zero line, yet same scale
+
+### VS2022_Net60_Boilerplate
+
+A very simple example which you can open in VS2022 to show SciChart WPF working with .NET 6.0
 
 ### Zoom Extents after MVVM Series Changed
 

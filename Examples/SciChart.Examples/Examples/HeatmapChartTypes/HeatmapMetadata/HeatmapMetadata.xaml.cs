@@ -1,6 +1,20 @@
-﻿using System;
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+//  
+// Web: http://www.scichart.com
+//   Support: support@scichart.com
+//   Sales:   sales@scichart.com
+// 
+// HeatmapMetadata.xaml.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use. 
+// 
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied. 
+// *************************************************************************************
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,17 +38,19 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
         {
             InitializeComponent();
 
-            heatmapSeries.DataSeries = CreateSeries(); ;
+            heatmapSeries.DataSeries = CreateSeries();
         }
 
         private IDataSeries CreateSeries()
         {
             var data = new double[_height, _width];
+
             IPointMetadata[,] metaDatas = new IPointMetadata[_height, _width];
 
             var zValues = FillZValues();
 
             for (int y = 0; y < _height; y++)
+            {
                 for (int x = 0; x < _width; x++)
                 {
                     var dataValue = zValues[y * _width + x];
@@ -51,6 +67,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
                     data[y, x] = dataValue;
                     metaDatas[y, x] = metadata;
                 }
+            }
             return new UniformHeatmapDataSeries<int, int, double>(data, 0, 1, 0, 1, metaDatas);
         }
 
@@ -62,17 +79,12 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 
             // block1
             zValues[GetValueableIndex(0, 13)] = rnd.Next(20, 100);
-
-
             zValues[GetValueableIndex(1, 13)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(1, 14)] = rnd.Next(20, 100);
-
             zValues[GetValueableIndex(2, 13)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(2, 14)] = rnd.Next(20, 100);
-
             zValues[GetValueableIndex(3, 13)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(3, 14)] = rnd.Next(20, 100);
-
             zValues[GetValueableIndex(4, 9)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(4, 10)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(4, 11)] = rnd.Next(20, 100);
@@ -374,7 +386,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
             zValues[GetValueableIndex(23, 19)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(23, 20)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(23, 21)] = rnd.Next(20, 100);
-            
+
             zValues[GetValueableIndex(24, 1)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(24, 2)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(24, 3)] = rnd.Next(20, 100);
@@ -432,14 +444,14 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
             zValues[GetValueableIndex(27, 11)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(27, 12)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(27, 13)] = rnd.Next(20, 100);
-            
+
             zValues[GetValueableIndex(28, 6)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(28, 7)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(28, 8)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(28, 9)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(28, 10)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(28, 11)] = rnd.Next(20, 100);
-            
+
             zValues[GetValueableIndex(29, 8)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(29, 9)] = rnd.Next(20, 100);
             zValues[GetValueableIndex(29, 10)] = rnd.Next(20, 100);
@@ -457,7 +469,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 
         private int GetValueableIndex(int x, int y)
         {
-            return (y *_width) + x;
+            return (y * _width) + x;
         }
 
         private void EnableMetadatas(object sender, RoutedEventArgs e)
@@ -489,7 +501,6 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public bool IsSelected { get; set; }
-
         public Color CellColor { get; set; }
         public bool IsBody { get; set; }
         public string Tooltip { get; set; }
@@ -503,11 +514,10 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapMetadata
 
         public Color? OverrideCellColor(IRenderableSeries rSeries, int xIndex, int yIndex, IComparable zValue, Color cellColor, IPointMetadata metadata)
         {
-           if (metadata != null)
+            if (metadata != null)
             {
                 cellColor = ((UniformHeatmapMetaData)metadata).CellColor;
             }
-
             return cellColor;
         }
     }

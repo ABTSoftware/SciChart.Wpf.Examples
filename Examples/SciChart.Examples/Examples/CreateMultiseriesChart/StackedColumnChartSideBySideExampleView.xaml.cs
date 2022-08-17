@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -42,44 +42,44 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             var japan = new[] { 0.126, 0.127, 0.127, 0.094 };
             var restOfTheWorld = new[] { 2.466, 2.829, 3.005, 4.306 };
 
-            var chinaDataSeries = new XyDataSeries<int, double> { SeriesName = "China" };
-            var indiaDataSeries = new XyDataSeries<int, double> { SeriesName = "India" };
-            var usaDataSeries = new XyDataSeries<int, double> { SeriesName = "USA" };
-            var indoneziaDataSeries = new XyDataSeries<int, double> { SeriesName = "Indonesia" };
-            var brazilDataSeries = new XyDataSeries<int, double> { SeriesName = "Brazil" };
-            var pakistanDataSeries = new XyDataSeries<int, double> { SeriesName = "Pakistan" };
-            var nigeriaDataSeries = new XyDataSeries<int, double> { SeriesName = "Nigeria" };
-            var bangladeshDataSeries = new XyDataSeries<int, double> { SeriesName = "Bangladesh" };
-            var russiaDataSeries = new XyDataSeries<int, double> { SeriesName = "Russia" };
-            var japanDataSeries = new XyDataSeries<int, double> { SeriesName = "Japan" };
-            var restOfTheWorldDataSeries = new XyDataSeries<int, double> { SeriesName = "Rest Of The World" };
-            var totalDataSeries = new XyDataSeries<int, double> { SeriesName = "Total" };
+            var chinaDataSeries = new UniformXyDataSeries<double> { SeriesName = "China" };
+            var indiaDataSeries = new UniformXyDataSeries<double> { SeriesName = "India" };
+            var usaDataSeries = new UniformXyDataSeries<double> { SeriesName = "USA" };
+            var indoneziaDataSeries = new UniformXyDataSeries<double> { SeriesName = "Indonesia" };
+            var brazilDataSeries = new UniformXyDataSeries<double> { SeriesName = "Brazil" };
+            var pakistanDataSeries = new UniformXyDataSeries<double> { SeriesName = "Pakistan" };
+            var nigeriaDataSeries = new UniformXyDataSeries<double> { SeriesName = "Nigeria" };
+            var bangladeshDataSeries = new UniformXyDataSeries<double> { SeriesName = "Bangladesh" };
+            var russiaDataSeries = new UniformXyDataSeries<double> { SeriesName = "Russia" };
+            var japanDataSeries = new UniformXyDataSeries<double> { SeriesName = "Japan" };
+            var restOfTheWorldDataSeries = new UniformXyDataSeries<double> { SeriesName = "Rest Of The World" };
+            var totalDataSeries = new UniformXyDataSeries<double> { SeriesName = "Total" };
 
             for (int i = 0; i < 4; i++)
             {
-                chinaDataSeries.Append(i, china[i]);
+                chinaDataSeries.Append(china[i]);
                 if (i != 2)
                 {
-                    indiaDataSeries.Append(i, india[i]);
-                    usaDataSeries.Append(i, usa[i]);
-                    indoneziaDataSeries.Append(i, indonesia[i]);
-                    brazilDataSeries.Append(i, brazil[i]);
+                    indiaDataSeries.Append(india[i]);
+                    usaDataSeries.Append(usa[i]);
+                    indoneziaDataSeries.Append(indonesia[i]);
+                    brazilDataSeries.Append(brazil[i]);
                 }
                 else
                 {
-                    indiaDataSeries.Append(i, double.NaN);
-                    usaDataSeries.Append(i, double.NaN);
-                    indoneziaDataSeries.Append(i, double.NaN);
-                    brazilDataSeries.Append(i, double.NaN);
+                    indiaDataSeries.Append(double.NaN);
+                    usaDataSeries.Append(double.NaN);
+                    indoneziaDataSeries.Append(double.NaN);
+                    brazilDataSeries.Append(double.NaN);
                 }
-                pakistanDataSeries.Append(i, pakistan[i]);
-                nigeriaDataSeries.Append(i, nigeria[i]);
-                bangladeshDataSeries.Append(i, bangladesh[i]);
-                russiaDataSeries.Append(i, russia[i]);
-                japanDataSeries.Append(i, japan[i]);
-                restOfTheWorldDataSeries.Append(i, restOfTheWorld[i]);
-                totalDataSeries.Append(i, china[i] + india[i] + usa[i] + indonesia[i] + brazil[i] + pakistan[i] +
-                                          nigeria[i] + bangladesh[i] + russia[i] + japan[i] + restOfTheWorld[i]);
+                pakistanDataSeries.Append(pakistan[i]);
+                nigeriaDataSeries.Append(nigeria[i]);
+                bangladeshDataSeries.Append(bangladesh[i]);
+                russiaDataSeries.Append(russia[i]);
+                japanDataSeries.Append(japan[i]);
+                restOfTheWorldDataSeries.Append(restOfTheWorld[i]);
+                totalDataSeries.Append(china[i] + india[i] + usa[i] + indonesia[i] + brazil[i] + pakistan[i] +
+                                       nigeria[i] + bangladesh[i] + russia[i] + japan[i] + restOfTheWorld[i]);
             }
             using (SciChart.SuspendUpdates())
             {

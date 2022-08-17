@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -24,7 +24,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 {
     public partial class RealTimeGhostedTraces : UserControl
     {
-        private readonly CircularBuffer<XyDataSeries<double, double>> _dataSeries = new CircularBuffer<XyDataSeries<double, double>>(10);
+        private readonly CircularBuffer<UniformXyDataSeries<double>> _dataSeries = new CircularBuffer<UniformXyDataSeries<double>>(10);
         private double _lastAmplitude = 1.0;
 
         private DispatcherTimer _timer;
@@ -42,7 +42,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         /// </summary>
         private void TimerOnElapsed(object sender, EventArgs e)
         {
-            var newDataSeries = new XyDataSeries<double, double>();
+            var newDataSeries = new UniformXyDataSeries<double>(0d, 0.01);
 
             // Create a noisy sine wave and cache
             //  All this code is about the generation of data to create a nice randomized sine wave with 
@@ -50,11 +50,12 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             double randomAmplitude = Constrain(_lastAmplitude + (_random.NextDouble() - 0.50), -2.0, 2.0);
             const double phase = 0.0;
 
-            var noisySineWave = DataManager.Instance.GetNoisySinewave(randomAmplitude, phase, 1000, 0.25);
+            var noisySineWave = DataManager.Instance.GetNoisySinewaveYData(randomAmplitude, phase, 1000, 0.25);
+            
             _lastAmplitude = randomAmplitude;
 
             // Append to a new dataseries
-            newDataSeries.Append(noisySineWave.XData, noisySineWave.YData);
+            newDataSeries.Append(noisySineWave);
 
             // Enqueue to the circular buffer
             _dataSeries.Add(newDataSeries);
@@ -73,7 +74,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         /// a shift Dataseries 1-10 will be applied to renderableseries 0-9
         /// </summary>
         /// <param name="dataSeries"></param>
-        private void ReassignRenderableSeries(CircularBuffer<XyDataSeries<double, double>> dataSeries)
+        private void ReassignRenderableSeries(CircularBuffer<UniformXyDataSeries<double>> dataSeries)
         {
             // Prevent redrawing while reassigning
             using (sciChart.SuspendUpdates())

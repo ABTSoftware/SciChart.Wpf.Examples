@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -22,15 +22,17 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
     {
         private IComparable _x1, _x2;
 
-        public ISciChartSurface Surface
-        { get; set; }
+        public ISciChartSurface Surface { get; set; }
 
         public void SetSelectionRect(double x1, double width)
         {
-            var xCalc = Surface.XAxis != null ? Surface.XAxis.GetCurrentCoordinateCalculator() : null;
-           
-            _x1 = xCalc.GetDataValue(x1);
-            _x2 = xCalc.GetDataValue(x1 + width);
+            var xCalc = Surface.XAxis?.GetCurrentCoordinateCalculator();
+
+            if (xCalc != null)
+            {
+                _x1 = xCalc.GetDataValue(x1);
+                _x2 = xCalc.GetDataValue(x1 + width);
+            }
         }
 
         /// <summary>

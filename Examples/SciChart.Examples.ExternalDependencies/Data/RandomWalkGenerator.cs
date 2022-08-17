@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,24 +16,23 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
     public class RandomWalkGenerator
     {
-        private readonly Random _random = new Random();
+        private int _index;
         private double _last;
-        private int _i;        
+
+        private readonly Random _random = new Random();
         private readonly double _bias = 0.01;
 
         public RandomWalkGenerator(double bias = 0.01)
         {
             _bias = bias;
+
             if (!SeriesAnimationBase.GlobalEnableAnimations)
             {
                 _random = new Random(0);
@@ -47,7 +46,7 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
         public void Reset()
         {
-            _i = 0;
+            _index = 0;
             _last = 0;
         }
 
@@ -61,12 +60,28 @@ namespace SciChart.Examples.ExternalDependencies.Data
             for(int i = 0; i < count; i++)
             {
                 double next = _last + (_random.NextDouble() - 0.5 + _bias);
+                doubleSeries.Add(new XYPoint { X = _index++, Y = next});
                 _last = next;
-                
-                doubleSeries.Add(new XYPoint() { X = _i++, Y = next});
             }
 
             return doubleSeries;
+        }
+
+        public double[] GetRandomWalkYData(int count)
+        {
+            var doubleYData = new double[count];
+
+            // Generate a slightly positive biased random walk
+            // y[i] = y[i-1] + random, 
+            // where random is in the range -0.5, +0.5
+            for (int i = 0; i < count; i++)
+            {
+                double next = _last + (_random.NextDouble() - 0.5 + _bias);
+                doubleYData[i] = next;
+                _last = next;
+            }
+
+            return doubleYData;
         }
 
         public double GetRandomDouble()

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -32,12 +32,10 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private void ScatterChartExampleView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             // Create a data series of type X=double, Y=double
-            var dataSeries = new XyDataSeries<double, double>();
-
-            var data = DataManager.Instance.GetDampedSinewave(1.0, 0.02, 200);
+            var dataSeries = new UniformXyDataSeries<double>(0d, 0.05);
 
             // Append data to series. SciChart automatically redraws
-            dataSeries.Append(data.XData, data.YData);
+            dataSeries.Append(DataManager.Instance.GetDampedSinewaveYData(1.0, 0.02, 200));
 
             scatterRenderSeries.DataSeries = dataSeries;
 

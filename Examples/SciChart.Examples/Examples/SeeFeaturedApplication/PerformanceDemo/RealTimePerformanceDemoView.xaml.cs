@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -43,10 +43,10 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
 
         // X, Y buffers used to buffer data into the Scichart in blocks of BufferSize
         // This gives an increase in rendering throughput over one off appends of X, Y points
-        private int[] xBuffer = new int[BufferSize];
-        private float[] yBuffer = new float[BufferSize];
-        private float[] maLowBuffer = new float[BufferSize];
-        private float[] maHighBuffer = new float[BufferSize];
+        private readonly int[] xBuffer = new int[BufferSize];
+        private readonly float[] yBuffer = new float[BufferSize];
+        private readonly float[] maLowBuffer = new float[BufferSize];
+        private readonly float[] maHighBuffer = new float[BufferSize];
 
         private Timer _timer;
         private TimedMethod _startDelegate;
@@ -59,7 +59,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
             InitializeComponent();
 
             ResamplingCombo.Items.Add(ResamplingMode.None);
-            ResamplingCombo.Items.Add(ResamplingMode.MinMax);            
+            ResamplingCombo.Items.Add(ResamplingMode.MinMax);
             ResamplingCombo.Items.Add(ResamplingMode.Mid);
             ResamplingCombo.Items.Add(ResamplingMode.Min);
             ResamplingCombo.Items.Add(ResamplingMode.Max);
@@ -95,8 +95,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
                 for (int i = 0; i < BufferSize; i++)
                 {
                     // Generate a new X,Y value in the random walk and buffer
-                    xValue = xValue + 1;
-                    yValue = (double)(yValue + (_random.NextDouble() - 0.5));
+                    xValue++;
+                    yValue += _random.NextDouble() - 0.5;
 
                     xBuffer[i] = xValue;
                     yBuffer[i] = (float)yValue;
@@ -231,7 +231,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
                 _maLow = new MovingAverage(200);
                 _maHigh = new MovingAverage(1000);
                 _fpsAverage = new MovingAverage(50);
-                _random = new Random((int)(DateTime.Now.Ticks));
+                _random = new Random((int)DateTime.Now.Ticks);
                 _lastFrameTime = 0;
                 _stopWatch = new Stopwatch();
 
@@ -327,7 +327,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
             // Manages the state of example on enter
             Reset();
 
-            _startDelegate = TimedMethod.Invoke(this.Start).After(500).Go();
+            _startDelegate = TimedMethod.Invoke(Start).After(500).Go();
         }
 
         private void OnExampleUnloaded(object sender, RoutedEventArgs e)

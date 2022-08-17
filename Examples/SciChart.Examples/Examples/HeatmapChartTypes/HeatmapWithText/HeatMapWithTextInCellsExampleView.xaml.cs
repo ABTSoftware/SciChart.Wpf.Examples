@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -17,8 +17,8 @@ using System;
 using System.Globalization;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.Visuals.Axes.LabelProviders;
 using SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries;
+using SciChart.Charting.Visuals.Axes.LabelProviders;
 using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
@@ -104,8 +104,10 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.HeatmapWithText
         public HeatMapWithTextInCellsExampleView()
         {
             InitializeComponent();
+
             yAxis.LabelProvider = new YAxisLabelProvider();
             xAxis.LabelProvider = new XAxisLabelProvider();
+
             heatmapSeries.DataSeries = CreateSeries();      
         }
     }

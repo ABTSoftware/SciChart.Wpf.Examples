@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors">
+
+    <ResourceDictionary.MergedDictionaries>
+        <behaviors:SharedResourceDictionary RelativeSource="/Themes/Common.xaml"/>
+        <behaviors:SharedResourceDictionary RelativeSource="/Resources/Styles/Brushes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="CheckRadioBtn" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <CheckBox x:Name="InnerCheckBox"
+                              IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="InnerCheckBox" Property="IsChecked" Value="True">
+                            <Setter TargetName="InnerCheckBox" Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

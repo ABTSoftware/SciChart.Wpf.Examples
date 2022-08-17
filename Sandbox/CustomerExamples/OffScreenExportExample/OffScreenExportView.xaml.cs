@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using SciChart.Charting.Visuals;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using SciChart.Charting;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Charting.Visuals.Axes;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core;
-using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 
 namespace OffScreenExportExample
@@ -163,12 +160,18 @@ namespace OffScreenExportExample
         private IEnumerable<SciChartSurface> GetMultippleCharts()
         {
             var collectionToReturn = new List<SciChartSurface>();
-            var random = new Random();
+
+            Color[] colors = 
+            {
+                Color.FromRgb(215, 248, 173),
+                Color.FromRgb(223, 183, 61),
+                Color.FromRgb(45, 192, 85),
+                Color.FromRgb(77, 59, 169),
+                Color.FromRgb(55, 214, 229),
+            };
 
             for (var i = 0; i < 5; i++)
             {
-                var b = new byte[3];
-                random.NextBytes(b);
                 var surface = new SciChartSurface
                 {
                     XAxis = new NumericAxis { GrowBy = new DoubleRange(0.1, 0.1) },
@@ -180,8 +183,8 @@ namespace OffScreenExportExample
                         new FastLineRenderableSeries
                         {
                             DataSeries = GetLineDataseries(0.1, 0.1, 3000),
-                            Stroke = Color.FromRgb(b[0], b[1], b[2]),
-                            StrokeThickness = random.Next(12),
+                            Stroke = colors[i],
+                            StrokeThickness = 8
                         }
                     },
                     // Add Annotations

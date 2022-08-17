@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -49,6 +49,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
 
         private Timer _timer;
         private const double TimerIntervalMs = 20;
+
+        private readonly object _tickLocker = new object();
 
         public OscilloscopeViewModel()
         {
@@ -124,7 +126,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
 
                 _selectedDataSource = value;
 
-                lock (this)
+                lock (_tickLocker)
                 {
                     if (_selectedDataSource == "Lissajous")
                     {
@@ -271,7 +273,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
         // Reset state when example exits
         public void OnExampleExit()
         {
-            lock (this)
+            lock (_tickLocker)
             {
                 if (_timer != null)
                 {
@@ -302,7 +304,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
 
         private void OnTick(object sender, EventArgs e)
         {
-            lock (this)
+            lock (_tickLocker)
             {
                 // Generate data at this phase depending on data source type
                 DoubleSeries dataSource = SelectedDataSource == "Lissajous"

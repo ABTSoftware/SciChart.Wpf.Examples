@@ -6,7 +6,8 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600"
+             d:DesignWidth="800">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -28,11 +29,25 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar Grid.Column="0" TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+        <ext:SciChartInteractionToolbar Grid.Column="0" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering"/>
+                        <CheckBox x:Name="textureSwitch"
+                                  Margin="4"
+                                  Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
             <s:SciChartSurface.RenderableSeries>
-                <s:FastNonUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9" DrawTextInCell="True">
+                <s:FastNonUniformHeatmapRenderableSeries x:Name="heatmapSeries"
+                                                         Opacity="0.9"
+                                                         DrawTextInCell="True"
+                                                         UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}">
                     <s:FastNonUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
                             <GradientStop Color="Blue" Offset="0"/>
@@ -64,20 +79,20 @@
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
 
-        <s:HeatmapColorMap Margin="40,20" 
-                          Grid.Column="1"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Stretch"
-                          Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
-                          Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
-                          ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
-                          Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
-                          Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
-                          TextFormatting="0.00"
-                          Opacity="0.8"
-                          BorderBrush="#777"
-                          BorderThickness="1"
-                          Orientation="Vertical" >
+        <s:HeatmapColorMap Grid.Column="1"
+                           Margin="40,20" 
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Stretch"
+                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                           ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
+                           Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
+                           TextFormatting="0.00"
+                           Opacity="0.8"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           Orientation="Vertical">
             <s:HeatmapColorMap.AxisStyle>
                 <Style TargetType="{x:Type s:NumericAxis}">
                     <Setter Property="Margin" Value="-15,0,-10,0"/>
@@ -88,7 +103,5 @@
                 </Style>
             </s:HeatmapColorMap.AxisStyle>
         </s:HeatmapColorMap>
-
     </Grid>
-
 </UserControl>

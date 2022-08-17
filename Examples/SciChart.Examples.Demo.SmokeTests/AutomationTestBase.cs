@@ -55,7 +55,7 @@ namespace SciChart.Examples.Demo.SmokeTests
                 SaveToPng(pathString, actualBitmap);
             }
 
-            ProcessStartInfo startInfo = new ProcessStartInfo(pathString) { Verb = "edit" };
+            ProcessStartInfo startInfo = new ProcessStartInfo(pathString);
             Process.Start(startInfo);
         }
 

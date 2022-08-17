@@ -1,11 +1,11 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHARTВ® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
 //   Sales:   sales@scichart.com
 // 
-// AssemblyInfoCommon.cs is part of SCICHART®, High Performance Scientific Charts
+// AssemblyInfoCommon.cs is part of SCICHARTВ®, High Performance Scientific Charts
 // For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
 // 
 // This source code is protected by international copyright law. Unauthorized
@@ -23,8 +23,8 @@ using System.Runtime.InteropServices;
 //[assembly: Obfuscation(Feature = "msil encryption, string encryption, value encryption", Exclude = true, StripAfterObfuscation = true)]
 
 [assembly: AssemblyCompany("SciChart Ltd")]
-[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2021, www.scichart.com")]
-[assembly: AssemblyTrademark("SCICHART™")]
+[assembly: AssemblyCopyright("Copyright В© SciChart Ltd 2011-2022, www.scichart.com")]
+[assembly: AssemblyTrademark("SCICHARTв„ў")]
  
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("PublicPrivateKeyFile.snk")]
@@ -42,4 +42,4 @@ using System.Runtime.InteropServices;
 
 // NOTE: MASTER SHOULD KEEP THIS AS V7.x WHEN MERGING. 
 // This is to prevent conflicts in teamcity when tests are run on both master & v6 branch at the same time. 
-[assembly: AssemblyVersion("6.4.0.13681")]
+[assembly: AssemblyVersion("6.6.0.26505")]

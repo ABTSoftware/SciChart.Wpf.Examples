@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,6 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Linq;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -22,34 +24,35 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
 {
     public class ErrorSeriesExampleViewModel : BaseViewModel
     {
-        private double _dataPointWidth = 0.7;
+        private double _dataPointWidth = 10;
         private int _strokeThickness = 1;
 
         public ErrorSeriesExampleViewModel()
         {
             // Generate some data to display 
             DataManager.Instance.SetRandomSeed(seed: 0);
-            var data = DataManager.Instance.GetFourierSeriesZoomed(1.0, 0.1, 5.0, 5.15);
+            var data0 = DataManager.Instance.GetExponentialCurve(40);
 
             // Append data to series. SciChart automatically redraws
             DataSeries0 = new HlcDataSeries<double, double>();
             DataSeries1 = new HlcDataSeries<double, double>();
 
-            FillSeries(DataSeries0, data, 1.0);
-            FillSeries(DataSeries1, data, 1.3);
+            FillSeries(DataSeries0, data0, 1.0, 0.0, 4.0, false);
+            FillSeries(DataSeries1, data0, 2.0, 10.0, 2.0, true);
         }
 
-        private void FillSeries(HlcDataSeries<double, double> hlcDataSeries, DoubleSeries sourceData, double scale)
+        private void FillSeries(HlcDataSeries<double, double> hlcDataSeries, DoubleSeries sourceData, double yDataScale, double yOffset, double errorScale, bool isHorizontalError)
         {
             var xData = sourceData.XData;
-            var yData = sourceData.YData.Select(x => x * scale).ToArray();
+            var yData = sourceData.YData.Select(x => x * yDataScale + yOffset).ToArray();
 
             // Generate some random error data. Errors must be absolute values, 
             // e.g. if a series has a Y-value of 5.0, and YError of =/-10% then you must enter YErrorHigh=5.5, YErrorLow=4.5 into the HlcDataSeries
             var random = new RandomWalkGenerator(seed: 0);
 
-            var yErrorHigh = yData.Select(y => y + (random.GetRandomDouble() * 0.2));
-            var yErrorLow = yData.Select(y => y - (random.GetRandomDouble() * 0.2));
+            var errorBase = isHorizontalError ? xData : yData;
+            var yErrorHigh = errorBase.Select((y, index) => index % 8 == 0 ? double.NaN : y + (random.GetRandomDouble() * errorScale));
+            var yErrorLow = errorBase.Select((y, index) => index % 10 == 0 ? double.NaN : y - (random.GetRandomDouble() * errorScale));
 
             // HlcDataSeries requires X, Y, High, Low. 
             // For Error bars the High, Low becomes the High Low error, 

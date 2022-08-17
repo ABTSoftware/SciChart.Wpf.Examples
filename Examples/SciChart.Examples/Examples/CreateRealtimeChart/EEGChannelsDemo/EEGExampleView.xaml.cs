@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using SciChart.Drawing.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
@@ -38,21 +39,24 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             _stopWatch = Stopwatch.StartNew();
             _fpsAverage = new MovingAverage(5);         
    
-            this.Loaded += OnLoaded;
-            this.Unloaded += OnUnloaded;
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs routedEventArgs)
         {
+            RenderSurfaceBase.UseThreadedRenderTimer = false;
+
             CompositionTarget.Rendering -= CompositionTarget_Rendering;            
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
+            RenderSurfaceBase.UseThreadedRenderTimer = true;
+
             CompositionTarget.Rendering -= CompositionTarget_Rendering;         
             CompositionTarget.Rendering += CompositionTarget_Rendering;            
         }
-
 
         /// <summary>
         /// Purely for stats reporting (FPS). Not needed for SciChart rendering

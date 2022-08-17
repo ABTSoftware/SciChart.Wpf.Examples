@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -22,7 +22,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
     public class EEGChannelViewModel : BaseViewModel
     {
         private Color _color;
-        private IXyDataSeries<double, double> _channelDataSeries;
+        private IUniformXyDataSeries<double> _channelDataSeries;
 
         public EEGChannelViewModel(int size, Color color)
         {
@@ -31,12 +31,12 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             // Add an empty First In First Out series. When the data reaches capacity (int size) then old samples
             // will be pushed out of the series and new appended to the end. This gives the appearance of 
             // a scrolling chart window
-            ChannelDataSeries = new XyDataSeries<double, double> {FifoCapacity = size};
+            ChannelDataSeries = new UniformXyDataSeries<double> { FifoCapacity = size };
 
             // Pre-fill with NaN up to size. This stops the stretching effect when Fifo series are filled with AutoRange
             for (int i = 0; i < size; i++)
             {
-                ChannelDataSeries.Append(i, double.NaN);
+                ChannelDataSeries.Append(double.NaN);
             }
         }
 
@@ -52,7 +52,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             }
         }
 
-        public IXyDataSeries<double, double> ChannelDataSeries
+        public IUniformXyDataSeries<double> ChannelDataSeries
         {
             get => _channelDataSeries;
             set

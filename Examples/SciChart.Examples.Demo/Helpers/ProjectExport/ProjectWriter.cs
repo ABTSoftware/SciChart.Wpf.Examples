@@ -77,11 +77,13 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 files.Add(codeFile.Key, codeFile.Value);
             }
 
-            WriteProjectFiles(files, Path.Combine(selectedPath, projectName));
+            string exportPath = Path.Combine(selectedPath, projectName);
+
+            WriteProjectFiles(files, exportPath);
 
             if (showMessageBox && Application.Current.MainWindow != null)
             {
-                var message = $"The {example.Title} example was successfully exported to {selectedPath + projectName}"; 
+                var message = $"The {example.Title} example was successfully exported to {exportPath}"; 
                 MessageBox.Show(Application.Current.MainWindow, message, "Success!");
             }
 

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -34,11 +34,10 @@ namespace SciChart.Examples.Examples.InspectDatapoints.CustomPointMarker
             var count = 100;
 
             // Create a DataSeriesSet
-            var dataSeries = new XyDataSeries<double, double>();
+            var dataSeries = new UniformXyDataSeries<double>();
 
             // Create a single data-series
             _dataSource = new RandomWalkGenerator();
-            var data = _dataSource.GetRandomWalkSeries(count);
 
             // Create a single metadata
             IList<IPointMetadata> metadata = new List<IPointMetadata>();
@@ -56,7 +55,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.CustomPointMarker
             }
 
             // Append data to series.
-            dataSeries.Append(data.XData, data.YData, metadata);
+            dataSeries.Append(_dataSource.GetRandomWalkYData(count), metadata);
             fastLineSeries.DataSeries = dataSeries;
         }
     }

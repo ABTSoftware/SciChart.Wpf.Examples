@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using SciChart.Examples.Demo.Common;
-using SciChart.UI.Reactive.Services;
 
 namespace SciChart.Examples.Demo.Helpers
 {
@@ -62,7 +61,9 @@ namespace SciChart.Examples.Demo.Helpers
                 .Replace("[/b][/i]", "</em></strong>")
                 .Replace("[/i][/b]", "</em></strong>")
                 .Replace("[/b]", "</strong>")
-                .Replace("[/i]", "</em>");
+                .Replace("[/i]", "</em>")
+                .Replace("[gt]", "&gt;")
+                .Replace("[lt]", "&lt;");
 
             const string replace = "<a href=\"$1\" target=\"_blank\">$2</a>";
 
@@ -86,37 +87,11 @@ namespace SciChart.Examples.Demo.Helpers
                 .Replace("[/b][/i]", "</Run>")
                 .Replace("[/i][/b]", "</Run>")
                 .Replace("[/b]", "</Run>")
-                .Replace("[/i]", "</Run>");
+                .Replace("[/i]", "</Run>")
+                .Replace("[gt]", "&gt;")
+                .Replace("[lt]", "&lt;");
 
-#if SILVERLIGHT
-            const string replace = "<Hyperlink Foreground=\"{StaticResource SciChartGreenBrush}\" " +
-                                            "MouseOverForeground=\"{StaticResource SciChartDarkGreenBrush}\" " + 
-                                            "TextDecorations=\"Underline\" " + 
-                                            "MouseOverTextDecorations=\"None\" " + 
-                                            "NavigateUri=\"$1\" TargetName=\"_blank\">" + 
-                                                "<Run>$2</Run>" + 
-                                   "</Hyperlink>";
-#else 
             const string replace = "<Hyperlink Style=\"{DynamicResource HyperlinkStyle}\" NavigateUri=\"$1\"><Run>$2</Run></Hyperlink>";
-#endif
-
-            // TO dump all links out to console, uncomment 
-            // 
-
-//            Regex urlRegexShort = new Regex(@"\[url='(.*?)'?\]");
-//            var allLinks = urlRegexShort.Matches(formatted)
-//                .Cast<Match>()
-//                .Select(x => x.ToString().Replace("url=[", "").Replace("]", ""))
-//                .Distinct()
-//                .Select(y => string.Format("{0}\t{1}", this.Title, y))
-//                .OrderBy(x => x)
-//                .ToList();
-//
-//            foreach (var match in allLinks)
-//            {
-//                Trace.WriteLine(match);
-//            }
-                
 
             formatted = _urlRegex.Replace(formatted, replace);
 
@@ -138,6 +113,8 @@ namespace SciChart.Examples.Demo.Helpers
                 .Replace("[/b]", string.Empty)
                 .Replace("[i]", string.Empty)
                 .Replace("[i]", string.Empty)
+                .Replace("[gt]", ">")
+                .Replace("[lt]", "<")
                 .Trim();
 
             formatted = _urlRegex.Replace(formatted, "$2");
@@ -197,6 +174,7 @@ namespace SciChart.Examples.Demo.Helpers
                 {
                     var index = file.LastIndexOf('/') + 1;
                     var fileName = file.Substring(index).Replace(".txt", String.Empty);
+
                     _sourceFiles[fileName] = ExampleLoader.LoadSourceFile(file);
                 });
             }

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -38,21 +38,21 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Task.Factory.StartNew(() =>
+            {
+                // Creates 8 dataseries with data on a background thread
+                var dataSeries = new List<IDataSeries>();
+                for (int i = 0; i < 8; i++)
                 {
-                    // Creates 8 dataseries with data on a background thread
-                    var dataSeries = new List<IDataSeries>();
-                    for (int i = 0; i < 8; i++)
-                    {
-                        var ds = new XyDataSeries<double, double>();
-                        dataSeries.Add(ds);
-                        var someData = DataManager.Instance.GetAcousticChannel(i);
+                    var ds = new XyDataSeries<double, double>();
+                    dataSeries.Add(ds);
 
-                        ds.Append(someData.XData, someData.YData);
-                    }
+                    var someData = DataManager.Instance.GetAcousticChannel(i);
+                    ds.Append(someData.XData, someData.YData);
+                }
 
-                    // Creates 8 renderable series on the UI thread
-                    Dispatcher.BeginInvoke(new Action(() => CreateRenderableSeries(dataSeries)));
-                });            
+                // Creates 8 renderable series on the UI thread
+                Dispatcher.BeginInvoke(new Action(() => CreateRenderableSeries(dataSeries)));
+            });
         }
 
         private void CreateRenderableSeries(List<IDataSeries> result)

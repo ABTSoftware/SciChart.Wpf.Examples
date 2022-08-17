@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              mc:Ignorable="d"
              d:DesignHeight="400"
              d:DesignWidth="600">
@@ -55,51 +54,40 @@
                                   Padding="0">
 
                 <ext:FlyoutMenuButton.PopupContent>
-                    <Grid MinWidth="150">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" MinWidth="150" Orientation="Vertical">
 
-                        <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <!-- Check boxes to decide how the chart should be filled -->
+                        <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Gradient Stroke Y" x:Name="ckbStrokeY" IsChecked="True" GroupName="StrokePaletteFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Gradient Stroke Z" x:Name="ckbStrokeZ" GroupName="StrokePaletteFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Solid Color (Green)" x:Name="ckbStrokeSolidColor" GroupName="StrokePaletteFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="None (Transparent)" x:Name="ckbStrokeTransparent" GroupName="StrokePaletteFillDirection"/>
 
-                            <StackPanel.Resources>
+                        <ext:FlyoutSeparator/>
+
+                        <!-- Check boxes to decide how the chart should be filled -->
+                        <TextBlock FontSize="12" Text="GradientFill Direction:" />
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" GroupName="GradientFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" GroupName="GradientFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Solid Color Fill (Blue)" x:Name="ckbFillSolid" GroupName="GradientFillDirection"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="None (Transparent)" x:Name="ckbFillTransparent" GroupName="GradientFillDirection"/>
+
+                        <ext:FlyoutSeparator/>
+
+                        <CheckBox FontSize="12" Margin="4" Content="Is Volumetric?" x:Name="ckbIsVolumetric"/>
+                        <CheckBox FontSize="12" Margin="4" Content="Show PointMarkers?" x:Name="ckbShowPointMarkers">
+                            <CheckBox.Style>
                                 <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
                                     <Style.Triggers>
-                                        <Trigger Property="IsChecked"  Value="True">
+                                        <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
+                                            <Setter Property="IsChecked" Value="False"/>
                                             <Setter Property="IsEnabled" Value="False"/>
-                                        </Trigger>
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </StackPanel.Resources>
-
-                            <!-- Check boxes to decide how the chart should be filled -->
-                            <TextBlock FontSize="12" Text="Stroke ColorPalette:" />
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Y" x:Name="ckbStrokeY" IsChecked="True" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Stroke Z" x:Name="ckbStrokeZ" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Solid Color (Green)" x:Name="ckbStrokeSolidColor" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbStrokeTransparent" s:ToggleButtonExtensions.GroupName="StrokePaletteFillDirection"/>
-
-                            <ext:FlyoutSeparator/>
-
-                            <!-- Check boxes to decide how the chart should be filled -->
-                            <TextBlock FontSize="12" Text="GradientFill Direction:" />
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Solid Color Fill (Blue)" x:Name="ckbFillSolid" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-                            <CheckBox FontSize="12" Margin="4" Content="None (Transparent)" x:Name="ckbFillTransparent" s:ToggleButtonExtensions.GroupName="GradientFillDirection"/>
-
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1" Orientation="Vertical">
-
-                            <ext:FlyoutSeparator/>
-
-                            <CheckBox FontSize="12" Margin="4" Content="Show PointMarkers?" x:Name="ckbShowPointMarkers" s:ToggleButtonExtensions.GroupName="MarkerVolumetricChartGroup"/>
-                            <CheckBox FontSize="12" Margin="4" Content="Is Volumetric?" x:Name="ckbIsVolumetric" s:ToggleButtonExtensions.GroupName="MarkerVolumetricChartGroup"/>
-
-                        </StackPanel>
-                    </Grid>
+                            </CheckBox.Style>
+                        </CheckBox>
+                    </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>

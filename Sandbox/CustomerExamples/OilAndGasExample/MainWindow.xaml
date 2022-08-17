@@ -1,0 +1,43 @@
+﻿<Window x:Class="OilAndGasExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gc="clr-namespace:OilAndGasExample.GridCharts"
+        xmlns:vc="clr-namespace:OilAndGasExample.VerticalCharts"
+        xmlns:tc="clr-namespace:OilAndGasExample.ThreeDCharts"
+        Title="Oil &amp; Gas Example"
+        Height="850"
+        Width="1366"
+        MinHeight="750"
+        MinWidth="1024">
+
+    <Window.Resources>
+        <gc:GridPanelViewModel x:Key="GridPanelViewModel"/>
+        <vc:VerticalPanelViewModel x:Key="VerticalPanelViewModel"/>
+        <tc:Chart3DPanelViewModel x:Key="Chart3DPanelViewModel"/>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource GridBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="55*"/>
+        </Grid.ColumnDefinitions>
+
+        <gc:GridPanel Grid.Row="0"
+                      Grid.Column="0"
+                      DataContext="{StaticResource GridPanelViewModel}"/>
+
+        <vc:VerticalPanel Grid.Row="0"
+                          Grid.RowSpan="2"
+                          Grid.Column="1"
+                          DataContext="{StaticResource VerticalPanelViewModel}"/>
+
+        <tc:Chart3DPanel Grid.Row="1"
+                         Grid.Column="0"
+                         DataContext="{StaticResource Chart3DPanelViewModel}"/>
+    </Grid>
+</Window>

@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -76,6 +76,9 @@ namespace SciChart.Examples.ExternalDependencies.Common
             _root = GetTemplateChild("RootElement") as Grid;
             _callout = GetTemplateChild("Callout") as Callout;
 
+            _popup.Placement = PlacementMode.Custom;
+            _popup.CustomPopupPlacementCallback = new CustomPopupPlacementCallback(placePopup);
+
             if (_root == null) return;
             _fadeStoryboard = ((Storyboard)_root.TryFindResource("FadeBorderAnimation"));
 
@@ -126,7 +129,14 @@ namespace SciChart.Examples.ExternalDependencies.Common
                     _fadeStoryboard.Stop();
                 }).After(200).Go();
             };
+        }
 
+        public CustomPopupPlacement[] placePopup(Size popupSize, Size targetSize, Point offset)
+        {
+            return new[]
+            {
+                new CustomPopupPlacement(new Point(40, 0), PopupPrimaryAxis.Horizontal)
+            };
         }
     }
 }

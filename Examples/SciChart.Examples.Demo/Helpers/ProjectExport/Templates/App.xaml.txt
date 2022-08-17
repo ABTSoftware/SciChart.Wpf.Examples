@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              StartupUri="MainWindow.xaml">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,13 +14,9 @@
 			<!-- Enables the SciChart Visual Xccelerator engine https://www.scichart.com/documentation/win/current/Enabling%20The%20Visual%20Xccelerator%20Engine.html -->
 			<Style TargetType="{x:Type s:SciChartSurface}">
 				<Setter Property="s:VisualXcceleratorEngine.IsEnabled" Value="True"/>
-				<Setter Property="s:VisualXcceleratorEngine.DowngradeWithoutException" Value="True"/>
 				<!-- Change this to True for some examples, e.g. the Billion Point demo --> 
 				<Setter Property="s:VisualXcceleratorEngine.EnableImpossibleMode" Value="False"/>
-				<!-- Choose a renderer to downgrade to if directx is not available --> 
-				<Setter Property="s:VisualXcceleratorEngine.FallbackType" Value="{x:Type s:HighQualityRenderSurface}"/>
 			</Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

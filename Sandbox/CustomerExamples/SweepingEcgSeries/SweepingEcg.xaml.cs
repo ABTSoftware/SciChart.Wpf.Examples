@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
-using System.Windows.Threading;
 using SciChart.Charting.Model.DataSeries;
+using Timer = System.Timers.Timer;
 
 namespace SweepingEcgExample
 {
@@ -22,57 +23,61 @@ namespace SweepingEcgExample
 
     public partial class SweepingEcg : Window
     {
-        private double[] _sourceData;
-        private DispatcherTimer _timer;
         private const int TimerInterval = 20;
-        private int _currentIndex;
-        private int _totalIndex;
-        private TraceAOrB _whichTrace = TraceAOrB.TraceA;
-        private XyzDataSeries<double, double, double> _dataSeriesA;
-        private XyzDataSeries<double, double, double> _dataSeriesB;
-        private int _dataSeriesIndex;
+        private const int MaxDataSeriesCount = 4000;
 
-        private enum TraceAOrB
-        {
-            TraceA, 
-            TraceB,
-        }
+        private int _currentIndex;
+        private int _dataSeriesIndex;
+        private int _totalIndex;
+
+        private Timer _timer;
+        private readonly object _timerLock = new object();
+        private readonly SynchronizationContext _syncContext;
+
+        private double[] _sourceData;
+        private XyzDataSeries<double, double, double> _dataSeries;
 
         public SweepingEcg()
         {
-            InitializeComponent();  
+            InitializeComponent();
 
-            this.Loaded += SweepingEcg_Loaded;
+            Loaded += SweepingEcg_Loaded;
+
+            _syncContext = SynchronizationContext.Current;
         }
 
         void SweepingEcg_Loaded(object sender, RoutedEventArgs e)
         {
             // Create an XyzDataSeries to store the X,Y value and Z-value is used to compute an opacity 
-            _dataSeriesA = new XyzDataSeries<double, double, double>();
+            _dataSeries = new XyzDataSeries<double, double, double>();
 
             // Simulate waveform
             _sourceData = LoadWaveformData("Waveform.csv");
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(TimerInterval);
-            _timer.Tick += TimerElapsed;
+            _timer = new Timer(TimerInterval) { AutoReset = true };
+            _timer.Elapsed += TimerElapsed;
             _timer.Start();
 
-            traceSeriesA.DataSeries = _dataSeriesA;
-            traceSeriesB.DataSeries = _dataSeriesB;
+            traceSeries.DataSeries = _dataSeries;
+            traceSeries.PaletteProvider = new DimTracePaletteProvider(MaxDataSeriesCount);
         }
 
         private void TimerElapsed(object sender, EventArgs e)
         {
-            // This constant is just used to calculate the X (time) values from the point index. 
-            // The SampleRate, FIFO size are chosen to get exactly '10 seconds' of data in the viewport
-            // The XAxis.VisibleRange is also chosen to be 10 seconds. 
-            const double sampleRate = 400;
+            lock (_timerLock)
+            {
+                // This constant is just used to calculate the X (time) values from the point index. 
+                // The SampleRate, FIFO size are chosen to get exactly '10 seconds' of data in the viewport
+                // The XAxis.VisibleRange is also chosen to be 10 seconds. 
+                const double sampleRate = 400;
 
-            // As timer cannot tick quicker than ~20ms, we append 10 points
-            // per tick to simulate a sampling frequency of 500Hz (e.g. 2ms per sample)
-            for (int i = 0; i < 10; i++)
-                AppendPoint(sampleRate);
+                // As timer cannot tick quicker than ~20ms, we append 10 points
+                // per tick to simulate a sampling frequency of 500Hz (e.g. 2ms per sample)
+                for (int i = 0; i < 10; i++)
+                {
+                    AppendPoint(sampleRate);
+                }
+            }
         }
 
         private void AppendPoint(double sampleRate)
@@ -84,16 +89,17 @@ namespace SweepingEcgExample
 
             // Get the next voltage and time, and append to the chart
             double voltage = _sourceData[_currentIndex];
-            double actualTime = (_totalIndex / sampleRate);
-            double time = actualTime%10;
+            double time = _totalIndex / sampleRate % 10;
 
-            const int MaxDataSeriesCount = 4000;
+            // Update the DataSeries.Tag, used by PaletteProvider to dim the trace
+            _dataSeries.Tag = _totalIndex;
 
-            if (_dataSeriesA.Count < MaxDataSeriesCount)
+            if (_dataSeries.Count < MaxDataSeriesCount)
             {
                 // For the first N points we append time, voltage, actual time
                 // Time must be ascending in X for scichart to perform the best, so we clip this to 0-10s
-                _dataSeriesA.Append(time, voltage, actualTime);                
+                _dataSeries.Append(time, voltage, _totalIndex);
+
             }
             else
             {
@@ -101,19 +107,19 @@ namespace SweepingEcgExample
 
                 // For subsequent points (after reaching the edge of the trace) we wrap traces around
                 // We re-use the same data-series just update its Y,Z values then trigger a redraw
-                _dataSeriesA.YValues[_dataSeriesIndex] = voltage;
-                _dataSeriesA.ZValues[_dataSeriesIndex] = actualTime;
-                _dataSeriesA.InvalidateParentSurface(RangeMode.None, hasDataChanged:true);
+                _dataSeries.YValues[_dataSeriesIndex] = voltage;
+                _dataSeries.ZValues[_dataSeriesIndex] = _totalIndex;
 
-                //_dataSeriesA.OutputCsv();
+                _dataSeries.InvalidateParentSurface(RangeMode.None, true);
             }
 
             // Update the position of the latest Trace annotation
-            latestTrace.X1 = time;
-            latestTrace.Y1 = voltage;
+            _syncContext.Post(_ =>
+            {
+                latestTrace.X1 = time;
+                latestTrace.Y1 = voltage;
 
-            // Update the DataSeries.Tag, used by PaletteProvider to dim the trace as time passes
-            _dataSeriesA.Tag = time;
+            }, null);
 
             _currentIndex++;
             _totalIndex++;
@@ -125,7 +131,7 @@ namespace SweepingEcgExample
             var values = new List<double>();
 
             // Load the waveform.csv file for the source data 
-            var asm = typeof (SweepingEcg).Assembly; 
+            var asm = typeof(SweepingEcg).Assembly;
             var resourceString = asm.GetManifestResourceNames().Single(x => x.Contains(filename));
 
             using (var stream = asm.GetManifestResourceStream(resourceString))

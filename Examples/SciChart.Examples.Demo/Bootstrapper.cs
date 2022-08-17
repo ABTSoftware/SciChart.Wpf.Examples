@@ -62,8 +62,6 @@ namespace SciChart.Examples.Demo
                     // Bootstrap D3D to save time on startup     
                     _logger.InfoFormat("... 4of4 D3D11.Initialize()");
 
-                    //Direct3D11RenderSurface.InitEngineAsync().Then(r =>
-                    //{
                     if (App.UIAutomationTestMode)
                     {
                         VisualXcceleratorEngine.UseAlternativeFillSource = true;
@@ -75,7 +73,6 @@ namespace SciChart.Examples.Demo
                         await Task.Delay(3000);
                     }
                     vm.InitReady = true;
-                    //});
                 }
                 catch (Exception e)
                 {

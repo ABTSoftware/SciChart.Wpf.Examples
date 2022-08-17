@@ -1,0 +1,54 @@
+﻿<Window x:Class="RotatedAxisLabelsExample.RotatedAxisLabels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="RotatedAxisLabels" Height="450" Width="800">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="RotatedTickLabelStyle" TargetType="s:DefaultTickLabel">
+                <Setter Property="Foreground" Value="Orange"></Setter>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                
+                <!-- Apply rotation transform to text labels -->
+                <Setter Property="LayoutTransform">
+                    <Setter.Value>
+                        <TransformGroup>
+                            <RotateTransform Angle="-45" />
+                        </TransformGroup>
+                    </Setter.Value>
+                </Setter>
+
+                <!-- <Setter Property="HorizontalAnchorPoint" Value="Right"/> -->
+                
+                <!-- Optionally override ControlTemplate for the label -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="s:DefaultTickLabel">
+                            <ContentControl Content="{Binding}" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}"
+                                            IsTabStop="False" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="MajorTickStyle" TargetType="Line">
+                <Setter Property="Stroke" Value="Orange"/>
+            </Style>
+        </Grid.Resources>
+        
+        <s:SciChartSurface x:Name="scs">
+            <!--  Create XAxis  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisTitle="Styled XAxis" TextFormatting="0.000" TickLabelStyle="{StaticResource RotatedTickLabelStyle}"
+                               MajorTickLineStyle="{StaticResource MajorTickStyle}" IsLabelCullingEnabled="False"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

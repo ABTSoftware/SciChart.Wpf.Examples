@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -29,11 +29,10 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
 
         private void ImpulseChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var dataSeries = new XyDataSeries<double, double>();
+            var dataSeries = new UniformXyDataSeries<double>(0d, 0.1);
 
             // Substitute for your own data
-            var dummyData = DataManager.Instance.GetDampedSinewave(1.0, 0.05, 100);
-            dataSeries.Append(dummyData.XData, dummyData.YData);
+            dataSeries.Append(DataManager.Instance.GetDampedSinewaveYData(1.0, 0.05, 100));
 
             impulseRenderSeries.DataSeries = dataSeries;
 

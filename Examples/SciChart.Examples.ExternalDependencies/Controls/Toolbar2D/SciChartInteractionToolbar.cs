@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,14 +16,12 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -33,6 +31,7 @@ using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.Annotations;
+using SciChart.Charting.Visuals.Axes;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers;
@@ -53,7 +52,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
             public IChartModifier Modifier
             {
-                get { return _modifier; }
+                get => _modifier;
                 set
                 {
                     _modifier = value;
@@ -93,42 +92,26 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             }
         }
 
-        public static readonly DependencyProperty AppearceInToolbarProperty =
-            DependencyProperty.RegisterAttached("AppearceInToolbar",
-                typeof (bool),
-                typeof (SciChartInteractionToolbar),
-                new PropertyMetadata(true));
-
-        public static void SetAppearceInToolbar(ChartModifierBase element, String value)
-        {
-            element.SetValue(AppearceInToolbarProperty, value);
-        }
-
-        public static bool GetAppearceInToolbar(ChartModifierBase element)
-        {
-            return (bool) element.GetValue(AppearceInToolbarProperty);
-        }
+        public static readonly DependencyProperty AppearceInToolbarProperty =DependencyProperty.RegisterAttached
+            ("AppearceInToolbar", typeof(bool), typeof(SciChartInteractionToolbar), new PropertyMetadata(true));
 
         public static readonly DependencyProperty IsZoomXAxisOnlyProperty = DependencyProperty.Register(
-            "IsZoomXAxisOnly", typeof (bool), typeof (SciChartInteractionToolbar), new PropertyMetadata(default(bool)));
+            "IsZoomXAxisOnly", typeof(bool), typeof(SciChartInteractionToolbar), new PropertyMetadata(default(bool)));
 
-        public static readonly DependencyProperty TargetSurfaceProperty =
-            DependencyProperty.Register("TargetSurface", typeof (ISciChartSurface),
-                typeof (SciChartInteractionToolbar),
-                new PropertyMetadata(default(ISciChartSurface), OnTargetSurfaceDependencyPropertyChanged));
+        public static readonly DependencyProperty TargetSurfaceProperty =DependencyProperty.Register
+            ("TargetSurface", typeof(ISciChartSurface), typeof(SciChartInteractionToolbar),
+            new PropertyMetadata(default(ISciChartSurface), OnTargetSurfaceDependencyPropertyChanged));
 
-        public static readonly DependencyProperty ExtraContentProperty =
-            DependencyProperty.Register("ExtraContent", typeof (List<ContentControl>),
-                typeof (SciChartInteractionToolbar), new PropertyMetadata(OnExtraContentChanged));
+        public static readonly DependencyProperty ExtraContentProperty = DependencyProperty.Register
+            ("ExtraContent", typeof(List<ContentControl>), typeof(SciChartInteractionToolbar),
+            new PropertyMetadata(OnExtraContentChanged));
 
-        public static readonly DependencyProperty IsDeveloperModeProperty =
-            DependencyProperty.Register("IsDeveloperMode", typeof (bool),
-                typeof (SciChartInteractionToolbar),
-                new PropertyMetadata(default(bool), OnIsDeveloperModeChanged));
+        public static readonly DependencyProperty IsDeveloperModeProperty = DependencyProperty.Register
+            ("IsDeveloperMode", typeof(bool), typeof(SciChartInteractionToolbar),
+            new PropertyMetadata(default(bool), OnIsDeveloperModeChanged));
 
-        public static readonly DependencyProperty ModifiersSourceProperty =
-            DependencyProperty.Register("ModifiersSource", typeof (ICollection<ToolbarItem>),
-                typeof (SciChartInteractionToolbar));
+        public static readonly DependencyProperty ModifiersSourceProperty = DependencyProperty.Register
+            ("ModifiersSource", typeof(ICollection<ToolbarItem>), typeof(SciChartInteractionToolbar));
 
         private WrapPanel _toolBarWrapPanel;
         private ModifierGroup _modifiersInDevMode;
@@ -138,8 +121,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
         public SciChartInteractionToolbar()
         {
             DefaultStyleKey = typeof (SciChartInteractionToolbar);
-
             ExtraContent = new List<ContentControl>();
+
             _modifiersInDevMode = new ModifierGroup();
             _modifiersInUserMode = new ModifierGroup();
             _modifiersInAllMode = new ModifierGroup();
@@ -147,32 +130,42 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
         public bool IsZoomXAxisOnly
         {
-            get { return (bool) GetValue(IsZoomXAxisOnlyProperty); }
-            set { SetValue(IsZoomXAxisOnlyProperty, value); }
+            get => (bool)GetValue(IsZoomXAxisOnlyProperty);
+            set => SetValue(IsZoomXAxisOnlyProperty, value);
         }
 
         public ICollection<ToolbarItem> ModifiersSource
         {
-            get { return (ICollection<ToolbarItem>) GetValue(ModifiersSourceProperty); }
-            set { SetValue(ModifiersSourceProperty, value); }
+            get => (ICollection<ToolbarItem>)GetValue(ModifiersSourceProperty);
+            set => SetValue(ModifiersSourceProperty, value);
         }
 
         public List<ContentControl> ExtraContent
         {
-            get { return (List<ContentControl>) GetValue(ExtraContentProperty); }
-            set { SetValue(ExtraContentProperty, value); }
+            get => (List<ContentControl>)GetValue(ExtraContentProperty);
+            set => SetValue(ExtraContentProperty, value);
         }
 
         public ISciChartSurface TargetSurface
         {
-            get { return (ISciChartSurface) GetValue(TargetSurfaceProperty); }
-            set { SetValue(TargetSurfaceProperty, value); }
+            get => (ISciChartSurface)GetValue(TargetSurfaceProperty);
+            set => SetValue(TargetSurfaceProperty, value);
         }
 
         public bool IsDeveloperMode
         {
-            get { return (bool) GetValue(IsDeveloperModeProperty); }
-            set { SetValue(IsDeveloperModeProperty, value); }
+            get => (bool)GetValue(IsDeveloperModeProperty);
+            set => SetValue(IsDeveloperModeProperty, value);
+        }
+
+        public static void SetAppearceInToolbar(ChartModifierBase element, String value)
+        {
+            element.SetValue(AppearceInToolbarProperty, value);
+        }
+
+        public static bool GetAppearceInToolbar(ChartModifierBase element)
+        {
+            return (bool)element.GetValue(AppearceInToolbarProperty);
         }
 
         private static void OnIsDeveloperModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -183,22 +176,18 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             if (scs != null)
             {
                 bool devModOn = (bool) e.NewValue;
-
                 scs.ChartModifier = devModOn ? toolbar._modifiersInDevMode : toolbar._modifiersInUserMode;
 
                 var listMod = new List<ToolbarItem>();
-
                 var wrappers = WrapModifiers(toolbar.IsDeveloperMode
                     ? toolbar._modifiersInDevMode.ChildModifiers
                     : toolbar._modifiersInUserMode.ChildModifiers);
 
                 listMod.AddRange(wrappers);
 
-                if (
-                    listMod.Any(
-                        x =>
-                            x.Modifier.ModifierName == "AnnotationCreationModifier" ||
-                            x.Modifier is VerticalSliceModifier))
+                if (listMod.Any(x =>
+                    x.Modifier.ModifierName == "AnnotationCreationModifier" ||
+                    x.Modifier is VerticalSliceModifier))
                 {
                     listMod.Remove(listMod.FirstOrDefault(x => x.Modifier.ModifierName == "AnnotationCreationModifier"));
                     listMod.Remove(listMod.FirstOrDefault(x => x.Modifier is VerticalSliceModifier));
@@ -246,24 +235,24 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             toolbar.AddExtraContent();
         }
 
-        private static void OnTargetSurfaceDependencyPropertyChanged(DependencyObject d,
-            DependencyPropertyChangedEventArgs e)
+        private static void OnTargetSurfaceDependencyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var toolbar = (SciChartInteractionToolbar) d;
             var scs = e.NewValue as ISciChartSurface;
 
-            if (scs == null)
-                return;
-
-            toolbar.OnCreateModifiers(toolbar, scs);
+            if (scs != null)
+            { 
+                toolbar.OnCreateModifiers(toolbar, scs);
+            }
         }
 
         protected virtual void OnCreateModifiers(SciChartInteractionToolbar toolbar, ISciChartSurface scs)
         {
+            var isPolar = (scs is SciChartSurface surface) && (surface.IsPolarChart ||
+                surface.XAxes.Any(x => x.IsPolarAxis) ||
+                surface.YAxes.Any(x => x.IsPolarAxis));
+                     
             var listMod = new List<ToolbarItem>();
-
-            var surface = scs as SciChartSurface;
-            var isPolar = surface != null && (surface.IsPolarChart || surface.XAxes.Any(x => x.IsPolarAxis) || surface.YAxes.Any(x => x.IsPolarAxis));
 
             // RubberBandXyZoomModifier
             var rbzm = new RubberBandXyZoomModifier { IsXAxisOnly = IsZoomXAxisOnly };
@@ -298,7 +287,12 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             _modifiersInDevMode.ChildModifiers.Add(seriesSelection);
 
             // AnnotationCreationModifier
-            var annotationMod = new CustomAnnotationCreationModifier();
+            var annotationMod = new CustomAnnotationCreationModifier
+            {
+                XAxisId = scs.XAxes.Any() ? scs.XAxes.First().Id : AxisCore.DefaultAxisId,
+                YAxisId = scs.YAxes.Any() ? scs.YAxes.First().Id : AxisCore.DefaultAxisId
+            };
+
             annotationMod.AnnotationCreated += (sender, args) =>
             {
                 var modifier = (CustomAnnotationCreationModifier)sender;
@@ -306,8 +300,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
                 {
                     foreach (var annotation in scs.Annotations)
                     {
-                        var newAnnotation = (annotation as AnnotationBase);
-                        if (newAnnotation != null)
+                        if (annotation is AnnotationBase newAnnotation)
                         {
                             newAnnotation.IsEditable = true;
                             newAnnotation.CanEditText = true;
@@ -322,9 +315,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
             // CustomRotateChartModifier
             var rotate = new CustomRotateChartModifier();
-
             var propertyPath = new PropertyPath(CustomRotateChartModifier.IsRotationEnabledProperty);
             var binding = new Binding() { Source = this, Path = propertyPath };
+            
             rotate.SetBinding(ChartModifierBase.IsEnabledProperty, binding);
 
             _modifiersInDevMode.ChildModifiers.Add(rotate);
@@ -404,9 +397,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
                 _modifiersInDevMode.ChildModifiers.Add(xAxisDrag);
             }
 
-            var exampleModifiers = (scs.ChartModifier as ModifierGroup);
-
-            if (exampleModifiers == null)
+            if (!(scs.ChartModifier is ModifierGroup exampleModifiers))
             {
                 exampleModifiers = new ModifierGroup();
 
@@ -517,8 +508,7 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
         private bool HasToAddUserModifierToModifierGroup(IChartModifier userModifier, ModifierGroup modifierGroup)
         {
-            AxisDragModifierBase axisModifier = userModifier as AxisDragModifierBase;
-            if (axisModifier == null)
+            if (!(userModifier is AxisDragModifierBase axisModifier))
             {
                 return !modifierGroup.ChildModifiers.Any(x => x.ModifierName == userModifier.ModifierName);
             }
@@ -532,4 +522,3 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
         }
     }
 }
-

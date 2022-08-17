@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -152,7 +152,15 @@ namespace SciChart.Examples.ExternalDependencies.Controls.CoverFlow
         public int SelectedIndex
         {
             get => _selectedIndex;
-            set => IndexSelected(value, false);
+            set
+            {
+                IndexSelected(value, false);
+                
+                if (_items.Count > 0)
+                {
+                    _selectedIndex = value;
+                }
+            }
         }
 
         public new object SelectedItem

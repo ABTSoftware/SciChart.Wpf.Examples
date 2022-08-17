@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,11 +16,16 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
+
+using System;
 using System.ComponentModel;
 
 namespace SciChart.Examples.ExternalDependencies.Common
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// A BaseViewModel class used in the SciChart WPF Examples suite
+    /// </summary>
+    public abstract class BaseViewModel : INotifyPropertyChanged, IDisposable
     {        
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,6 +66,24 @@ namespace SciChart.Examples.ExternalDependencies.Common
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        /// <summary>
+        /// Called by the SciChart Examples Framework when an example is unloaded. Used to de-initialize memory, timers etc.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~BaseViewModel()
+        {
+            Dispose(false);
         }
     }
 }

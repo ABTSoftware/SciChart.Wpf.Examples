@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -30,12 +30,18 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Spectrogram
     {
         private readonly DispatcherTimer _timer;
         private readonly XyDataSeries<double, double> _xyDataSeries = new XyDataSeries<double>();
+
         private readonly Random _random = new Random();        
         private readonly FFT2 _transform;
+
+        private readonly object _tickLocker = new object();
+
         private readonly double[] _re = new double[1024];
         private readonly double[] _im = new double[1024];
+
         private readonly double[,] _spectrogramBuffer = new double[100, 1024];
         private readonly double[,] _pastFrame = new double[100, 1024];
+
         private readonly IDataSeries _uniformHeatmapDataSeries;
 
         public SpectrogramDemoView()
@@ -112,7 +118,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Spectrogram
 
         private void UpdateXyDataSeries()
         {
-            lock (this)
+            lock (_tickLocker)
             {               
                 for (int i = 0; i < 1024; i++)
                 {

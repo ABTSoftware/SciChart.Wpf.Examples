@@ -78,7 +78,7 @@
                                       Content="Pitchfork"
                                       IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
                                       Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
+
                         <ToggleButton Width="auto"
                                       Margin="0"
                                       HorizontalAlignment="Stretch"

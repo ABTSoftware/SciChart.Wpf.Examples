@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<TargetFramework>net452</TargetFramework>
+		<OutputType>WinExe</OutputType>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Copyright>Copyright Р’В© 2011-2021</Copyright>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+		<PackageReference Include="SciChart" Version="*-*" />
+		<PackageReference Include="SciChart3D" Version="*-*" />
+		<PackageReference Include="SciChart.ExternalDependencies" Version="*-*" />
+		<PackageReference Include="SciChart.DrawingTools" Version="*-*" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="PresentationCore" />
+		<Reference Include="PresentationFramework" />
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Xaml">
+			<RequiredTargetFramework>4.5.2</RequiredTargetFramework>
+		</Reference>
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="WindowsBase" />
+	</ItemGroup>
+</Project>

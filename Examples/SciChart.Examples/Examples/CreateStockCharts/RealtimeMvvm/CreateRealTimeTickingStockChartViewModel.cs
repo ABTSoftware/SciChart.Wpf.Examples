@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -29,6 +29,8 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
 {
     public class CreateRealTimeTickingStockChartViewModel : BaseViewModel
     {
+        private readonly object _tickLocker = new object();
+
         private readonly IMarketDataService _marketDataService;        
         private readonly MovingAverage _sma50 = new MovingAverage(50);
 
@@ -166,7 +168,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
         private void OnNewPrice(PriceBar price)
         {
             // Ensure only one update processed at a time from multi-threaded timer
-            lock (this)
+            lock (_tickLocker)
             {
                 // Update the last price, or append? 
                 var ds0 = (IOhlcDataSeries<DateTime, double>) _seriesViewModels[0].DataSeries;

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -25,24 +25,23 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
     public partial class RealtimeFifoChartView : UserControl
     {
         // Data Sample Rate (sec) - 20 Hz
-        private readonly double dt = 0.02;
+        private const double dt = 0.02;
 
         // FIFO Size is 200 samples, meaning after 200 samples have been appended, each new sample appended
         // results in one sample being discarded
-        private readonly int FifoSize = 200;
+        private const int FifoSize = 200;
 
         // Timer to process updates
         private readonly Timer _timerNewDataUpdate;
 
         // The current time
-        private double t;
-
-        readonly Random _random = new Random();
+        private double t = -5d;
+        private readonly Random _random = new Random();
 
         // The dataseries to fill
-        private IXyDataSeries<double, double> series0;
-        private IXyDataSeries<double, double> series1;
-        private IXyDataSeries<double, double> series2;
+        private IUniformXyDataSeries<double> series0;
+        private IUniformXyDataSeries<double> series1;
+        private IUniformXyDataSeries<double> series2;
 
         private TimedMethod _startDelegate;
 
@@ -50,18 +49,18 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
         {
             InitializeComponent();
 
-            _timerNewDataUpdate = new Timer(dt * 1000) {AutoReset = true};
+            _timerNewDataUpdate = new Timer(dt * 1000) { AutoReset = true };
             _timerNewDataUpdate.Elapsed += OnNewData;
-            
+
             CreateDataSetAndSeries();
         }
 
         private void CreateDataSetAndSeries()
         {
             // Create new Dataseries of type X=double, Y=double
-            series0 = new XyDataSeries<double, double>();
-            series1 = new XyDataSeries<double, double>();
-            series2 = new XyDataSeries<double, double>();
+            series0 = new UniformXyDataSeries<double>(t, dt);
+            series1 = new UniformXyDataSeries<double>(t, dt);
+            series2 = new UniformXyDataSeries<double>(t, dt);
 
             if (IsFifoCheckBox.IsChecked == true)
             {
@@ -74,7 +73,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
                 series0.FifoCapacity = FifoSize;
                 series1.FifoCapacity = FifoSize;
                 series2.FifoCapacity = FifoSize;
-            }         
+            }
 
             // Set the dataseries on the chart's RenderableSeries
             RenderableSeries0.DataSeries = series0;
@@ -104,9 +103,9 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             using (sciChart.SuspendUpdates())
             {
                 // Append x,y data to previously created series
-                series0.Append(t, y1);
-                series1.Append(t, y2);
-                series2.Append(t, y3);
+                series0.Append(y1);
+                series1.Append(y2);
+                series2.Append(y3);
             }
 
             // Increment current time
@@ -146,7 +145,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
 
             IsFifoCheckBox.IsEnabled = true;
 
-            t = -5.0;
+            t = -5d;
 
             ClearDataSeries();
         }

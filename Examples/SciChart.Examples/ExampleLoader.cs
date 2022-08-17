@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -56,6 +56,14 @@ namespace SciChart.Examples
 
     public class ExampleLoader
     {
+        private readonly XmlSerializer _deserializer;
+
+        public ExampleLoader()
+        {
+            // Load XmlDeserializer - workaround that prevents an Exception in System.Xml
+            _deserializer = XmlSerializer.FromTypes(new[] { typeof(ExampleDefinition) })[0];
+        }
+
         public ExampleDefinition Parse(KeyValuePair<ExampleKey, string> xmlExample)
         {
             return Deserialize(xmlExample);
@@ -65,13 +73,10 @@ namespace SciChart.Examples
         {
             try
             {
-                // Load XmlDeserializer - workaround that prevents an Exception in System.Xml
-                XmlSerializer deserializer = XmlSerializer.FromTypes(new[] { typeof(ExampleDefinition) })[0];
-
                 var stringReader = new StringReader(xmlExample.Value);
                 var xmlReader = XmlReader.Create(stringReader);
 
-                var res = deserializer.Deserialize(xmlReader) as ExampleDefinition;
+                var res = _deserializer.Deserialize(xmlReader) as ExampleDefinition;
 
                 xmlReader.Close();
                 stringReader.Close();

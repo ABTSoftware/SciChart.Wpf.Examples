@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,7 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Axes;
@@ -44,13 +43,13 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart
             var yValues2 = new[] { 2.0, 10.1, 10.2, 10.4, 10.8, 1.1, 11.5, 3.4, 4.6, 0.1, 1.7, 14.4, 16.0, 13.7, 10.1, 6.4, 3.5, 2.5, 1.4, 0.4, 10.1, 0.0, 0.0 };
             var yValues3 = new[] { 20.0, 4.1, 4.2, 10.4, 10.8, 1.1, 11.5, 3.4, 4.6, 5.1, 5.7, 14.4, 16.0, 13.7, 10.1, 6.4, 3.5, 2.5, 1.4, 10.4, 8.1, 10.0, 15.0 };
 
-            var dataSeries1 = new XyDataSeries<double, double> { SeriesName = "data1" };
-            var dataSeries2 = new XyDataSeries<double, double> { SeriesName = "data2" };
-            var dataSeries3 = new XyDataSeries<double, double> { SeriesName = "data3" };
+            var dataSeries1 = new UniformXyDataSeries<double> { SeriesName = "data1" };
+            var dataSeries2 = new UniformXyDataSeries<double> { SeriesName = "data2" };
+            var dataSeries3 = new UniformXyDataSeries<double> { SeriesName = "data3" };
 
-            for (int i = 0; i < yValues1.Length; i++) dataSeries1.Append(i, yValues1[i]);
-            for (int i = 0; i < yValues2.Length; i++) dataSeries2.Append(i, yValues2[i]);
-            for (int i = 0; i < yValues3.Length; i++) dataSeries3.Append(i, yValues3[i]);
+            for (int i = 0; i < yValues1.Length; i++) dataSeries1.Append(yValues1[i]);
+            for (int i = 0; i < yValues2.Length; i++) dataSeries2.Append(yValues2[i]);
+            for (int i = 0; i < yValues3.Length; i++) dataSeries3.Append(yValues3[i]);
 
             using (sciChart.SuspendUpdates())
             {

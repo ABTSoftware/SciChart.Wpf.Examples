@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,12 +13,9 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System.Collections.ObjectModel;
-using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.ViewportManagers;
 using SciChart.Charting.Visuals.PaletteProviders;
-using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
 
@@ -28,36 +25,22 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
     {
         private readonly RedIfOverThresholdPaletteProvider _paletteProvider;
 
-        // Allows us to call SciChart.InvalidateElement() from the viewmodel
-        private readonly IViewportManager _viewportManager = new DefaultViewportManager();
-        private readonly XyDataSeries<double, double> _dataSeries;
-
         public DragThresholdMvvmViewModel()
         {
-            _dataSeries = new XyDataSeries<double, double>();
-            var someData = DataManager.Instance.GetDampedSinewave(1.0, 0.01, 300);
-            _dataSeries.Append(someData.XData, someData.YData);
-            
+            ColumnDataSeries = new UniformXyDataSeries<double>(0d, 0.033);
+            ColumnDataSeries.Append(DataManager.Instance.GetDampedSinewaveYData(1.0, 0.01, 300));
+
             _paletteProvider = new RedIfOverThresholdPaletteProvider();
             Threshold = 0.5;
         }
 
-        public IViewportManager ViewportManager
-        {
-            get { return _viewportManager; }
-        }
+        public IViewportManager ViewportManager { get; } = new DefaultViewportManager();
 
         // We use a PaletteProvider type to override render colors for the column depending on threshold
-        public IPaletteProvider ThresholdPaletteProvider
-        {
-            get { return _paletteProvider; }
-        }
+        public IPaletteProvider ThresholdPaletteProvider => _paletteProvider;
 
         // We expose a DataSeries that is bound to in the view to RenderableSeries.DataSeriesProperty
-        public XyDataSeries<double, double> ColumnDataSeries
-        {
-            get { return _dataSeries; }
-        }
+        public IUniformXyDataSeries<double> ColumnDataSeries { get; private set; }
 
         /// <summary>
         /// We bind to Threshold in the view. This is the Y-value of the horizontal line. We pass through the value to the PaletteProvider, which 
@@ -65,12 +48,12 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
         /// </summary>
         public double Threshold
         {
-            get { return _paletteProvider.Threshold; }
-            set 
-            { 
+            get => _paletteProvider.Threshold;
+            set
+            {
                 _paletteProvider.Threshold = value;
-                _viewportManager.InvalidateParentSurface(RangeMode.None);
-                OnPropertyChanged("Threshold");
+                ViewportManager.InvalidateParentSurface(RangeMode.None);
+                OnPropertyChanged(nameof(Threshold));
             }
         }
     }

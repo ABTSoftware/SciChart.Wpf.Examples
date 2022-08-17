@@ -1,25 +1,21 @@
 ﻿<Window x:Class="SweepingEcgExample.SweepingEcg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SweepingEcg" Height="300" Width="300"
+        Title="SweepingEcg"
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-        xmlns:sweepingEcg="clr-namespace:Abt.Controls.SciChart.Wpf.TestSuite.ExampleSandbox.SweepingEcg">
-    
-    <Window.Resources>
-        <sweepingEcg:DimTracePaletteProvider x:Key="DimTracePaletteProvider"/>
-    </Window.Resources>
+        Height="500"
+        Width="800">
+
     <Grid>
         <s:SciChartSurface s:ThemeManager.Theme="Electric" 
                            x:Name="sciChartSurface" 
-                           s3D:DirectXHelper.TryApplyDirectXRenderer="True">
-           
-            
+                           s:VisualXcceleratorEngine.IsEnabled="True"
+                           s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}">
+
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="traceSeriesA" StrokeThickness="2" PaletteProvider="{StaticResource DimTracePaletteProvider}"/>
-                <s:FastLineRenderableSeries x:Name="traceSeriesB" StrokeThickness="2" PaletteProvider="{StaticResource DimTracePaletteProvider}"/>
+                <s:FastLineRenderableSeries x:Name="traceSeries" ResamplingPrecision="2" StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
-            
+
             <s:SciChartSurface.XAxis>
                 <!-- Axis is given a range of 10 seconds. We have chosen our FIFO capacity given the sample rate -->
                 <!-- to show exactly 10 seconds of data as well -->
@@ -28,10 +24,9 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis AxisTitle="Volts (v)" VisibleRange="-0.5, 1.5"/>
             </s:SciChartSurface.YAxis>
-            
+
             <s:SciChartSurface.Annotations>
-                
-                <!-- Annotation used to highlight the latest point in the series, position is updated in the Append method --> 
+                <!-- Annotation used to highlight the latest point in the series, position is updated in the Append method -->
                 <s:CustomAnnotation x:Name="latestTrace" HorizontalAnchorPoint="Center" VerticalAnchorPoint="Center" X1="5" Y1="0.4">
                     <s:CustomAnnotation.Content>
                         <Ellipse Width="10" Height="10" Fill="#FFCCFAFF" StrokeThickness="0">

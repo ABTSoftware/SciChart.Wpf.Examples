@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -19,7 +19,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
 using SciChart.Charting.Model.ChartData;
 using SciChart.Charting.Model.DataSeries;
 
@@ -32,16 +31,21 @@ namespace SciChart.Examples.Examples.InspectDatapoints
             InitializeComponent();
 
             // Append some data
-            var series0 = new XyDataSeries<double, double> { SeriesName = "Line Series"};
-            series0.Append(new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new double[] { 0, 0.1, 0.3, 0.5, 0.4, 0.35, 0.3, 0.25, 0.2, 0.1 });
+            var series0 = new UniformXyDataSeries<double> { SeriesName = "Line Series"};
+            series0.Append(new[] { 0, 0.1, 0.3, 0.5, 0.4, 0.35, 0.3, 0.25, 0.2, 0.1 });
             renderableLineSeries.DataSeries = series0;
 
-            var series1 = new XyDataSeries<double, double> { SeriesName = "Column Series"};
-            series1.Append(series0.XValues, series0.YValues.Select(x => x * 0.7));
+            var series1 = new UniformXyDataSeries<double> { SeriesName = "Column Series"};
+            series1.Append(series0.YValues.Select(x => x * 0.7));
             renderableColumnSeries.DataSeries = series1;
 
-            var series2 = new OhlcDataSeries<double, double> {SeriesName = "Candlestick Series"};
-            series2.Append(series0.XValues, series0.YValues.Select(x => x + 0.5), series0.YValues.Select(x => x + 1.0), series0.YValues.Select(x => x + 0.3), series0.YValues.Select(x => x + 0.7));
+            var series2 = new OhlcDataSeries<double, double> { SeriesName = "Candlestick Series" };
+            series2.Append(new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                series0.YValues.Select(x => x + 0.5),
+                series0.YValues.Select(x => x + 1.0),
+                series0.YValues.Select(x => x + 0.3),
+                series0.YValues.Select(x => x + 0.7));
+
             renderableCandlestickSeries.DataSeries = series2;
         }
 

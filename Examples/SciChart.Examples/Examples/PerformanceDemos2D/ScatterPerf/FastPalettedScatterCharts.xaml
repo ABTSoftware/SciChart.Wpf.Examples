@@ -6,7 +6,9 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="500"
+             d:DesignWidth="800">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -16,23 +18,24 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
-        </ext:SciChartInteractionToolbar>
-        
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>
+
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.YAxis>
-            
+
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation x:Name="warningText" 
                                   Text="The ExtremeScatterRenderableSeries is only available when DirectX hardware acceleration is available." 
-                                  X1="0.5" Y1="0.5" CoordinateMode="Relative"
-                                  HorizontalAnchorPoint="Center" Foreground="#FF6600"/>
+                                  X1="0.5" Y1="0.5"
+                                  CoordinateMode="Relative"
+                                  HorizontalAnchorPoint="Center"
+                                  Foreground="#FF6600"/>
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
     </Grid>

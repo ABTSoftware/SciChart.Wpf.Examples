@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,8 +13,11 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting3D.Extensions;
@@ -30,13 +33,18 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
     /// </summary>
     public partial class Lidar3DPointCloudDemoView : UserControl
     {
+
         public Lidar3DPointCloudDemoView()
         {
             InitializeComponent();
-            ReadLidarData();
         }
 
-        private async void ReadLidarData()
+        private async void Lidar3DPointCloudDemoView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await ReadLidarData();
+        }
+
+        private async Task ReadLidarData()
         {
             // The LinearColorMap type in SciChart allows you to generate a colour map based on a 
             // minimum and maximum value, e.g. min=0, max=50 means the gradient brush below is mapped into that range

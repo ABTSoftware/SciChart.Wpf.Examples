@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2021. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -28,37 +28,38 @@ namespace SciChart.Examples.Examples.StyleAChart
         }
         private void UsePointMarkers_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var dataSeries1 = new XyDataSeries<double, double>() { SeriesName = "Ellipse Marker" };
-            var dataSeries2 = new XyDataSeries<double, double>() { SeriesName = "Square Marker" };
-            var dataSeries3 = new XyDataSeries<double, double>() { SeriesName = "Triangle Marker" };
-            var dataSeries4 = new XyDataSeries<double, double>() { SeriesName = "Cross Marker" };
-            var dataSeries5 = new XyDataSeries<double, double>() { SeriesName = "Sprite Marker" };
+            var dataSeries1 = new UniformXyDataSeries<double> { SeriesName = "Ellipse Marker" };
+            var dataSeries2 = new UniformXyDataSeries<double> { SeriesName = "Square Marker" };
+            var dataSeries3 = new UniformXyDataSeries<double> { SeriesName = "Triangle Marker" };
+            var dataSeries4 = new UniformXyDataSeries<double> { SeriesName = "Cross Marker" };
+            var dataSeries5 = new UniformXyDataSeries<double> { SeriesName = "Sprite Marker" };
 
             const int dataSize = 30;
             var rnd = new Random(0);
-            for (int i = 0; i < dataSize; i++) dataSeries1.Append(i, rnd.NextDouble());
-            for (int i = 0; i < dataSize; i++) dataSeries2.Append(i, 1 + rnd.NextDouble());
-            for (int i = 0; i < dataSize; i++) dataSeries3.Append(i, 1.8 + rnd.NextDouble());
-            for (int i = 0; i < dataSize; i++) dataSeries4.Append(i, 2.5 + rnd.NextDouble());
-            for (int i = 0; i < dataSize; i++) dataSeries5.Append(i, 3.5 + rnd.NextDouble());
+
+            for (int i = 0; i < dataSize; i++) dataSeries1.Append(rnd.NextDouble());
+            for (int i = 0; i < dataSize; i++) dataSeries2.Append(1 + rnd.NextDouble());
+            for (int i = 0; i < dataSize; i++) dataSeries3.Append(1.8 + rnd.NextDouble());
+            for (int i = 0; i < dataSize; i++) dataSeries4.Append(2.5 + rnd.NextDouble());
+            for (int i = 0; i < dataSize; i++) dataSeries5.Append(3.5 + rnd.NextDouble());
 
             // insert a break into the line - we do this to test double.NaN for the point marker types 
-            dataSeries1.Update(dataSeries1.XValues[15], double.NaN);
-            dataSeries2.Update(dataSeries1.XValues[15], double.NaN);
-            dataSeries3.Update(dataSeries1.XValues[15], double.NaN);
-            dataSeries4.Update(dataSeries1.XValues[15], double.NaN);
-            dataSeries5.Update(dataSeries1.XValues[15], double.NaN);
+            dataSeries1.Update(15, double.NaN);
+            dataSeries2.Update(15, double.NaN);
+            dataSeries3.Update(15, double.NaN);
+            dataSeries4.Update(15, double.NaN);
+            dataSeries5.Update(15, double.NaN);
 
-            using (this.sciChart.SuspendUpdates())
+            using (sciChart.SuspendUpdates())
             {
-                this.lineSeries1.DataSeries = dataSeries1;
-                this.lineSeries2.DataSeries = dataSeries2;
-                this.lineSeries3.DataSeries = dataSeries3;
-                this.lineSeries4.DataSeries = dataSeries4;
-                this.lineSeries5.DataSeries = dataSeries5;
+                lineSeries1.DataSeries = dataSeries1;
+                lineSeries2.DataSeries = dataSeries2;
+                lineSeries3.DataSeries = dataSeries3;
+                lineSeries4.DataSeries = dataSeries4;
+                lineSeries5.DataSeries = dataSeries5;
             }
 
-            this.sciChart.ZoomExtents();
+            sciChart.ZoomExtents();
         }
     }
 }

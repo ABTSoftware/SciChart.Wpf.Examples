@@ -26,6 +26,7 @@
                 <ResourceDictionary Source="Themes/Scrollbars.Wpf.xaml" />
                 <ResourceDictionary Source="Themes/ComboBox.Wpf.xaml" />
                 <ResourceDictionary Source="Themes/CheckBox.xaml" />
+                <ResourceDictionary Source="Themes/RadioButton.xaml" />
                 <ResourceDictionary Source="Themes/Hyperlink.xaml" />
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ButtonNew.xaml" />
                 <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToggleButtonNew.xaml" />

@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon />
     <StartupObject />
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
@@ -33,10 +33,12 @@
     <None Remove="Resources\Data\EURUSD_Minute5.csv.gz" />
     <None Remove="Resources\Data\INDU_Daily.csv.gz" />
     <None Remove="Resources\Data\LIDARtq3080DSM2M.asc.gz" />
+    <None Remove="Resources\Data\ParallelCoordinatePlotData.txt.gz" />
     <None Remove="Resources\Data\TickData.csv.gz" />
     <None Remove="Resources\Data\TradeTicks.csv.gz" />
     <None Remove="Resources\Data\VitalSignsTrace.csv.gz" />
     <None Remove="Resources\Data\Waveform.txt.gz" />
+    <None Remove="Resources\Data\WeatherData.txt.gz" />
     <None Remove="Resources\Images\cursor.png" />
     <None Remove="Resources\Images\globe_heightmap.png" />
     <None Remove="Resources\Images\SciChartLogo_Dark.png" />
@@ -52,9 +54,6 @@
     <None Remove="Resources\Objects\WhiteWoodTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfoCommon.cs" Link="Properties\AssemblyInfoCommon.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Data\AcousticPlots.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Daily.csv.gz" />
     <EmbeddedResource Include="Resources\Data\EURUSD_Hourly.csv.gz" />
@@ -65,6 +64,7 @@
     <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
     <EmbeddedResource Include="Resources\Data\VitalSignsTrace.csv.gz" />
     <EmbeddedResource Include="Resources\Data\Waveform.txt.gz" />
+    <EmbeddedResource Include="Resources\Data\WeatherData.txt.gz" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
@@ -92,15 +92,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart3D" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26505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" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.4.0.13681-beta" />
+    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26505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" />
   </ItemGroup>
 </Project>

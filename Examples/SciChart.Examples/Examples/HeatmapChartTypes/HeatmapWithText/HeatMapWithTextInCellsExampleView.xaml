@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
+
     <UserControl.Resources>
         <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -22,15 +22,29 @@
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
-        
-        <s:SciChartSurface x:Name="sciChart" Grid.Column="1"
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering"/>
+                        <CheckBox x:Name="textureSwitch"
+                                  Margin="4"
+                                  Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
+        <s:SciChartSurface Grid.Column="1"                          
+                           x:Name="sciChart" 
                            Padding="0"
                            BorderThickness="0">
+
             <s:SciChartSurface.RenderableSeries>
                 <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries"
-                                               DrawTextInCell="True"
-                                               Opacity="0.9">
+                                                      DrawTextInCell="True"
+                                                      Opacity="0.9"
+                                                      UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}">
                     <s:FastUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
                             <GradientStop Color="Blue" Offset="0"/>
@@ -81,6 +95,5 @@
                            Maximum="{Binding ColorMap.Maximum}"
                            TextFormatting="n0"
                            Opacity="0.9" />
-
     </Grid>
 </UserControl>
