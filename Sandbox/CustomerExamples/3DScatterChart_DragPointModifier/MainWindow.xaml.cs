@@ -3,7 +3,7 @@ using System.Windows;
 using SciChart.Charting.Common.Extensions;
 using SciChart.Charting3D.Model;
 
-namespace _3DChartScatterSeriesWithDraggablePoints
+namespace Scatter3DChart_DragPointModifier
 {
     public partial class MainWindow : Window
     {

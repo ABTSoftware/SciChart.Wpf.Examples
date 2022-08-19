@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace _3DChartScatterSeriesWithDraggablePoints
+namespace Scatter3DChart_DragPointModifier
 {
     public partial class App : Application
     {

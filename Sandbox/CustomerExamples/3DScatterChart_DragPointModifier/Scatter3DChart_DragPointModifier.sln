@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32804.467
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DChartScatterSeriesWithDraggablePoints", "3DChartScatterSeriesWithDraggablePoints.csproj", "{AF18005B-4AEB-4411-8FFB-1729F9F6BEBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scatter3DChart_DragPointModifier", "Scatter3DChart_DragPointModifier.csproj", "{AF18005B-4AEB-4411-8FFB-1729F9F6BEBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

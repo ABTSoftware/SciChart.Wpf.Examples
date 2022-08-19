@@ -10,7 +10,7 @@ using SciChart.Charting3D.RenderableSeries;
 using SciChart.Core.Extensions;
 using SciChart.Core.Utility.Mouse;
 
-namespace _3DChartScatterSeriesWithDraggablePoints
+namespace Scatter3DChart_DragPointModifier
 {
     public struct DragPointEventArgs
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _3DChartScatterSeriesWithDraggablePoints.Properties
+namespace Scatter3DChart_DragPointModifier.Properties
 {
 
 

@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("3DChartScatterSeriesWithDraggablePoints")]
+[assembly: AssemblyTitle("Scatter3DChart_DragPointModifier")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("3DChartScatterSeriesWithDraggablePoints")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2022")]
+[assembly: AssemblyProduct("Scatter3DChart_DragPointModifier")]
+[assembly: AssemblyCopyright("Copyright © SciChart 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
