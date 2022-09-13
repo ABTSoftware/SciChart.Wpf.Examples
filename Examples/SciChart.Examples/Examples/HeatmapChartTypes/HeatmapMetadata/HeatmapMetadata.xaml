@@ -83,6 +83,7 @@
                 <local:CustomUniformHeatmapRenderableSeries x:Name="heatmapSeries"
                                                             DrawTextInCell="True"
                                                             Opacity="0.9"
+                                                            TextFormatting="n0"
                                                             UseLinearTextureFiltering="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}"
                                                             Style="{StaticResource HeatmapStyle}">
                     <local:CustomUniformHeatmapRenderableSeries.ColorMap>

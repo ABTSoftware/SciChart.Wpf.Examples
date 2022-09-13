@@ -8,7 +8,6 @@ using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.ViewportManagers;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -18,7 +17,9 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
     {
         private bool _isStopped;
         private string _loadingMessage;
+
         private NoLockTimer _timer;
+        private PointCount _selectedPointCount;
 
         private const int AppendCount = 10_000; // The number of points to append per timer tick
         private const int TimerIntervalMs = 10; // Interval of timer tick 
@@ -26,9 +27,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         private readonly float[] _xBuffer = new float[AppendCount];
         private readonly float[] _yBuffer = new float[AppendCount];
 
-        private PointCount _selectedPointCount;
-        private static int _instanceCount = 0;
-        private int _instanceId = _instanceCount++;
+        private readonly object _syncLock = new object();
 
         public FifoBillionPointsPageViewModel()
         {
@@ -36,7 +35,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
 
             RunCommand = new ActionCommand(OnRun, () => !IsLoading);
-            PauseCommand = new ActionCommand(OnPause, ()=> !IsLoading && !IsStopped);
+            PauseCommand = new ActionCommand(OnPause, () => !IsLoading && !IsStopped);
             StopCommand = new ActionCommand(OnStop, () => !IsLoading);
 
             // Add the point count options 
@@ -44,16 +43,16 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             AllPointCounts.Add(new PointCount("5 Million", 5, 1_000_000));
             AllPointCounts.Add(new PointCount("10 Million", 5, 2_000_000));
             AllPointCounts.Add(new PointCount("50 Million", 5, 10_000_000));
-            
+
             // If you have 8GB of RAM or more you can render 100M (will require just 1GB but to be safe...)
-            if (SysInfo.GetRamGb() >= 8)
+            if (SystemMemoryInfo.GetRamGb() >= 8)
             {
                 AllPointCounts.Add(new PointCount("100 Million", 5, 20_000_000));
             }
 
             // Add further test cases depending on system RAM and 64/32bit status and how much RAM
             // 1 Billion points requires 8GB of free RAM or it will hit swap drive 
-            if (Environment.Is64BitProcess && SysInfo.GetRamGb() >= 16)
+            if (Environment.Is64BitProcess && SystemMemoryInfo.GetRamGb() >= 16)
             {
                 // Note: these point counts require the experimental VisualXccelerator.EnableImpossibleMode flag set to true on the chart 
                 AllPointCounts.Add(new PointCount("500 Million", 5, 100_000_000));
@@ -75,7 +74,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         public ObservableCollection<PointCount> AllPointCounts { get; } = new ObservableCollection<PointCount>();
 
-        public DefaultViewportManager ViewportManager { get; } = new DefaultViewportManager();
+        public SuspendableViewportManager ViewportManager { get; } = new SuspendableViewportManager();
 
         public PointCount SelectedPointCount
         {
@@ -136,7 +135,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
             // Load the points
             var series = await CreateSeriesAsync(seriesCount, pointCount);
-            using (ViewportManager.SuspendUpdates())
+            using (ViewportManager.ParentSurface.SuspendUpdates())
             {
                 series.ForEachDo(x => Series.Add(x));
             }
@@ -146,7 +145,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             LoadingMessage = null;
         }
 
-        private static async Task<List<IRenderableSeriesViewModel>> CreateSeriesAsync(int seriesCount, int pointCount)
+        private async Task<List<IRenderableSeriesViewModel>> CreateSeriesAsync(int seriesCount, int pointCount)
         {
             return await Task.Run(() =>
             {
@@ -160,8 +159,9 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                     var xBuffer = new float[AppendCount];
                     var yBuffer = new float[AppendCount];
 
-                    int randomSeed = i * short.MaxValue;
+                    var randomSeed = i * short.MaxValue;
                     var randomWalkGenerator = new Rand(randomSeed);
+
                     var xyDataSeries = new XyDataSeries<float, float>
                     {
                         // Required for scrolling / streaming 'first in first out' charts
@@ -182,7 +182,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                         Tag = randomWalkGenerator
                     };
 
-                    int yOffset = i + i;
+                    int yOffset = i * 2;
                     for (int j = 0; j < pointCount; j += AppendCount)
                     {
                         for (int k = 0; k < AppendCount; k++)
@@ -210,7 +210,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             });
         }
 
-        private static Color GetRandomColor()
+        private Color GetRandomColor()
         {
             return Color.FromRgb(Rand.NextByte(55), Rand.NextByte(55), Rand.NextByte(55));
         }
@@ -219,7 +219,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         {
 #if DEBUG
             // Debug mode is the cause of all performance woes. Try release mode?
-            var warnings = new List<string> {"Debug mode is slow, try Release"};
+            var warnings = new List<string> { "Debug mode is slow, try Release" };
 #else
             var warnings = new List<string>();
 #endif
@@ -229,7 +229,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                 warnings.Add("Debugger is attached, try without");
             }
 
-            if (SysInfo.GetRamGb() <= 8)
+            if (SystemMemoryInfo.GetRamGb() <= 8)
             {
                 // Hmm, time to upgrade? :) 
                 warnings.Add("Low system RAM, try on 16GB machine?");
@@ -240,9 +240,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         private void OnPause()
         {
-            lock (Series)
+            lock (_syncLock)
             {
                 _timer.Stop();
+                ViewportManager.ZoomExtentsX();
             }
         }
 
@@ -250,7 +251,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         {
             if (IsStopped) return;
 
-            lock (Series)
+            lock (_syncLock)
             {
                 _timer.Stop();
                 IsStopped = true;
@@ -268,33 +269,41 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            OnStop();
-            _timer?.Dispose();
+            if (disposing)
+            {
+                OnStop();
+            }
+
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Dispose();
+            }
+
             _timer = null;
         }
 
         private void OnTimerTick()
         {
-            lock (Series)
+            lock (_syncLock)
             {
-                // Freeze updates on scichart UI 
-                using (ViewportManager.SuspendUpdates())
+                using (ViewportManager.ParentSurface.SuspendUpdates())
                 {
                     int seriesIndex = 0;
                     foreach (var series in Series)
                     {
                         var dataSeries = (XyDataSeries<float, float>)series.DataSeries;
                         var randomWalkGenerator = (Rand)dataSeries.Tag;
-                        int startIndex = (int)dataSeries.XValues.Last() + 1;
+                        var startIndex = (int)dataSeries.XValues.Last() + 1;
 
-                        int yOffset = seriesIndex + seriesIndex;
+                        int yOffset = seriesIndex * 2;
                         for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
                         {
                             _xBuffer[i] = j;
                             _yBuffer[i] = randomWalkGenerator.NextWalk() + yOffset;
                         }
-                        dataSeries.Append(_xBuffer, _yBuffer);
 
+                        dataSeries.Append(_xBuffer, _yBuffer);
                         seriesIndex++;
                     }
                 }

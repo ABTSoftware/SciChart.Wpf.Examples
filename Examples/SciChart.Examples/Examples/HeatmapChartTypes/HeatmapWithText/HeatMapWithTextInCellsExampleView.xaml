@@ -60,7 +60,7 @@
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis x:Name="xAxis"
                                FlipCoordinates="True"
-                               GrowBy="0.1,0.1"
+                               GrowBy="0.05,0.05"
                                ScientificNotation="None" 
                                DrawMajorBands="True" />
             </s:SciChartSurface.XAxis>

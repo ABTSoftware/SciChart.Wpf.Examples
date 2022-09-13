@@ -13,7 +13,7 @@
 
     This kind of chart can be used in [b]real-time monitoring or visualizing output of telemetry sensors which produce huge data-sets[/b]. It uses FIFO series, the series that discards old data-points once a predefined number of points is met. This type of data-series is extremely efficient for scrolling charts, where you do not care about discarded (off-screen) data.
 
-    This demo is possible due to our newly introduced [b]Visual Xccelerator(TM)[/b] engine, a completely in-house, proprietary, cross-platform C++ game engine, fully GPU accelerated using pixel and vertex shaders, which we’ve built layers on top of to create 2D/3D charts.
+    This demo is possible due to our newly introduced [b]Visual Xccelerator(TM)[/b] engine, a completely in-house, proprietary, cross-platform C++ game engine, fully GPU accelerated using pixel and vertex shaders, which we've built layers on top of to create 2D/3D charts.
     
     [b]Documentation Links[/b]
 
@@ -28,7 +28,8 @@
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/NoLockTimer.cs.txt</string>
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/PointCount.cs.txt</string>
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/Rand.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SysInfo.cs.txt</string>
+	<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SuspendableViewportManager.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SystemMemoryInfo.cs.txt</string>
   </CodeFiles>
   <Features>
     <Features>Realtime</Features>

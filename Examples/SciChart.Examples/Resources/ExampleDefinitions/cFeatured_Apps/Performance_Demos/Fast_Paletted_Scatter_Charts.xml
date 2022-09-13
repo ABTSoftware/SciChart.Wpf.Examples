@@ -11,7 +11,7 @@
 
     This feature was notoriously slow when used in conjunction with XyScatterRenderableSeries and users demanded more performance.
 
-    As a result, we developed the ExtremeScatterRenderableSeries - a DirectX only scatter series type optimised for Big-Data and color changes via a PaletteProvider-like API. 
+    We're using here our redesigned and fast XyScatterRenderableSeries type that is optimised for Big-Data and color changes via a PaletteProvider-like API. 
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/FastPalettedScatterCharts.xaml.txt</string>

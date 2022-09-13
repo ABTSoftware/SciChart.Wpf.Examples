@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.PointMarkers;
 using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Data.Model;
@@ -43,13 +44,13 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
                 dataPointColors.Add(GetRandomColor(random));
             }
 
-            var scatterSeries = new ExtremeScatterRenderableSeries()
+            var scatterSeries = new XyScatterRenderableSeries()
             {
                 PointMarker = new EllipsePointMarker() {Width = 5, Height = 5}
             };
             sciChart.RenderableSeries.Add(scatterSeries);
             scatterSeries.DataSeries = dataSeries;
-            scatterSeries.PaletteProvider = new TestPaletteProvider(dataPointColors);
+            scatterSeries.PaletteProvider = new ScatterSeriesPaletteProvider(dataPointColors);
         }
 
         private static Color GetRandomColor(Random random)
@@ -58,31 +59,26 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.ScatterPerf
         }
     }
 
-    public class TestPaletteProvider : IExtremePointMarkerPaletteProvider
+    public class ScatterSeriesPaletteProvider : IPointMarkerPaletteProvider 
     {
         private readonly List<Color> _dataPointColors;
         private readonly Values<Color> _colors = new Values<Color>();
 
-        public TestPaletteProvider(List<Color> dataPointColors)
+        public ScatterSeriesPaletteProvider(List<Color> dataPointColors)
         {
             _dataPointColors = dataPointColors;
         }
 
-        public Values<Color> Colors { get { return _colors; } }
-
         public void OnBeginSeriesDraw(IRenderableSeries rSeries)
         {
-            var indexes = rSeries.CurrentRenderPassData.PointSeries.Indexes;
+        }
 
-            var count = indexes.Count;
-            _colors.Count = count;
-
-            // copy required colors from list using data point indices
-            for (int i = 0; i < count; i++)
-            {
-                var dataPointIndex = indexes[i];
-                _colors[i] = _dataPointColors[dataPointIndex];
-            }
+        public PointPaletteInfo? OverridePointMarker(IRenderableSeries rSeries, int index, IPointMetadata metadata)
+        {
+            var ppi = new PointPaletteInfo();
+            ppi.Stroke = _dataPointColors[index];
+            ppi.Fill = _dataPointColors[index];
+            return ppi;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 {
-    public class SysInfo
+    public class SystemMemoryInfo
     {
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -11,6 +11,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         public static long GetRamGb()
         {
             GetPhysicallyInstalledSystemMemory(out var memKb);
+
             return(memKb / 1024 / 1024);
         }
     }

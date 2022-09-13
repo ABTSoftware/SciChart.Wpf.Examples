@@ -16,7 +16,6 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-
 using System;
 using System.ComponentModel;
 
@@ -27,45 +26,17 @@ namespace SciChart.Examples.ExternalDependencies.Common
     /// </summary>
     public abstract class BaseViewModel : INotifyPropertyChanged, IDisposable
     {        
+        /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
 
-#if SILVERLIGHT
-        private static Dispatcher _dispatcher;
-        public BaseViewModel()
-        {
-            TryGetDispatcher();
-        }
-
-        private void TryGetDispatcher()
-        {
-            try
-            {
-                if (Application.Current.RootVisual != null && _dispatcher == null)
-                    _dispatcher = Application.Current.RootVisual.Dispatcher;
-            }
-            catch
-            {
-            }
-        }
-#endif
-
+        /// <summary>
+        /// Raises the PropertyChanged event on the view-model property.
+        /// </summary>
         protected void OnPropertyChanged(string propertyName)
         {            
-#if SILVERLIGHT
-            if (_dispatcher == null) TryGetDispatcher();
-
-            if (_dispatcher != null && !_dispatcher.CheckAccess())
-            {
-                _dispatcher.BeginInvoke(() => OnPropertyChanged(propertyName));
-                return;
-            }
-#endif            
-
             var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));          
         }
 
         /// <summary>
@@ -75,12 +46,19 @@ namespace SciChart.Examples.ExternalDependencies.Common
         {
         }
 
+        /// <summary>
+        /// Called by the SciChart Examples Framework when an example is unloaded. Used to de-initialize memory, timers etc.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
+
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Destructor to de-initialize memory, timers etc.
+        /// </summary>
         ~BaseViewModel()
         {
             Dispose(false);

@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
@@ -49,7 +48,7 @@
                                RenderableSeries="{s:SeriesBinding Series}" 
                                ViewportManager="{Binding ViewportManager}"
                                s:VisualXcceleratorEngine.EnableImpossibleMode="True">
-                
+
                 <s:SciChartSurface.XAxis>
                     <s:NumericAxis AutoRange="{Binding IsChecked, Source={x:Reference RunBtn}, Converter={StaticResource AutoRangeConverter}}"
                                    DrawMinorGridLines="False"
