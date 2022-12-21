@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SciChartSurfaceMeshSelection"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+        <Style TargetType="{x:Type s3D:SciChart3DSurface}">
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+        </Style>
 
         <Style x:Key="DefaultDragReticuleStyle" TargetType="{x:Type Rectangle}">
             <Setter Property="OverridesDefaultStyle" Value="False" />

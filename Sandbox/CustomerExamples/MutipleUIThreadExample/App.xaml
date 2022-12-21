@@ -14,6 +14,7 @@
                     <!--<s:HighSpeedRenderSurface/>-->
                 </Setter.Value>
             </Setter>
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
         </Style>
     </Application.Resources>
 </Application>

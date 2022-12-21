@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{7E5100D9-B611-425D-908E-8E547BFC5511}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrokeDashArrayPointMarkers", "StrokeDashArrayPointMarkers\StrokeDashArrayPointMarkers.csproj", "{7E5100D9-B611-425D-908E-8E547BFC5511}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

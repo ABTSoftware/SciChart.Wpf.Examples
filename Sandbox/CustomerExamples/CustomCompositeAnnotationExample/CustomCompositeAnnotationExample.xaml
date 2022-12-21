@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
     Title="CustomCompositeAnnotationExample"
+    Background="#1c1c1e"
     Width="1000"
     Height="650"
     mc:Ignorable="d">

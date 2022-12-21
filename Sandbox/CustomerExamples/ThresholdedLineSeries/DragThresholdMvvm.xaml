@@ -53,16 +53,12 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis AxisAlignment="{Binding ElementName=cboXAxisAlignment,
-                                                       Path=SelectedItem}"
-                               DrawMajorBands="True"
+                <s:NumericAxis DrawMajorBands="True"
                                VisibleRange="0.0, 10.0" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis AxisAlignment="{Binding ElementName=cboYAxisAlignment,
-                                                       Path=SelectedItem}"
-                               DrawMajorBands="True"
+                <s:NumericAxis DrawMajorBands="True"
                                VisibleRange="-1.0, 1.0" />
             </s:SciChartSurface.YAxis>
 

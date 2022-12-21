@@ -50,8 +50,8 @@
                     <!-- Zoom and pan modifiers -->
                     <s:PinchZoomModifier IsEnabled="{Binding ElementName=PinchEnabledCheckbox, Path=IsChecked}"/>
                     <s:ZoomPanModifier  IsEnabled="{Binding ElementName=ZoomEnabledCheckbox, Path=IsChecked}"/>
-                    <s:YAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabledCheckbox, Path=IsChecked}"/>
-                    <s:XAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabledCheckbox, Path=IsChecked}"/>
+                    <s:YAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabled, Path=IsChecked}"/>
+                    <s:XAxisDragModifier IsEnabled="{Binding ElementName=AxisDragEnabled, Path=IsChecked}"/>
                     <s:MouseWheelZoomModifier />
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>
                     

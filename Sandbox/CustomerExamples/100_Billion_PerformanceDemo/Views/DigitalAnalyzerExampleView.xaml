@@ -171,7 +171,7 @@
 
             <Border Grid.Column="0" Background="#1C1C1E"/>
 
-            <local:SciChartSurfaceEx Grid.Column="1">
+            <s:SciChartSurface Grid.Column="1">
                 <s:SciChartSurface.XAxis>
                     <s:NumericAxis Height="30"
                                    AxisAlignment="Bottom"
@@ -183,7 +183,7 @@
                 <s:SciChartSurface.YAxis>
                     <s:NumericAxis Visibility="Collapsed"/>
                 </s:SciChartSurface.YAxis>
-            </local:SciChartSurfaceEx>
+            </s:SciChartSurface>
         </Grid>
 
         <!-- Channels -->
@@ -230,7 +230,7 @@
                                     </DockPanel>
                                 </Border>
 
-                                <local:SciChartSurfaceEx x:Name="channelSurface" Grid.Column="1"
+                                <s:SciChartSurface x:Name="channelSurface" Grid.Column="1"
                                                      ShowLicensingWarnings="False"
                                                      RenderableSeries="{Binding RenderableSeries}">
 
@@ -256,7 +256,7 @@
                                             <s:MouseWheelZoomModifier XyDirection="XDirection" />
                                         </s:ModifierGroup>
                                     </s:SciChartSurface.ChartModifier>
-                                </local:SciChartSurfaceEx>
+                                </s:SciChartSurface>
 
                                 <Border Grid.Column="1"
                                         BorderThickness="0,0,0,1"
