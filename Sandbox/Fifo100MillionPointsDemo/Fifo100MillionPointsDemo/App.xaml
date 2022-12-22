@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Fifo100MillionPointsDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Fifo100MillionPointsDemo"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,6 +11,10 @@
                 <ResourceDictionary Source="Resources/ComboBox.Common.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources/ComboBox.Wpf.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="{x:Type s:SciChartSurface}">
+                <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
