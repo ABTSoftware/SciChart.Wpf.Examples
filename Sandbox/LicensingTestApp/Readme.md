@@ -16,7 +16,7 @@ Follow these steps to debug licenses.
 
 1. Download this Licensing Test App and unzip it to your computer.
 2. Enter your Runtime License key from your Profile page at [www.scichart.com/profile](https://www.scichart.com/profile/) in App.xaml.cs & compile the Licensing Test App
-3. Run the Licensing Test App on the other computer where you are experiencing problems.
+3. Run the Licensing Test App (DO NOT DEBUG, BUT RUN) on the other computer where you are experiencing problems.
 
    - _Make sure this is a computer without an activated developer license. This is because the Activated Developer license will interfere with this test._<br/>
    - **Expected Result:** You should not see a ‘Powered by SciChart’ watermark or a trial expired when running the Licensing Test App.<br/>
