@@ -179,8 +179,8 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
     </PackageReference>
-    <PackageReference Include="SciChart" Version="*" />
-    <PackageReference Include="SciChart3D" Version="*" />
+    <PackageReference Include="SciChart" Version="6.6.0.26505" />
+    <PackageReference Include="SciChart3D" Version="6.6.0.26505" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
