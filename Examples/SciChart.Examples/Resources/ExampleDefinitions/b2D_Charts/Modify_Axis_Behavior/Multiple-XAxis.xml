@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/MultipleXAxes.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultiXAxis.png</ImagePath>
+  <IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates a line chart with four series and multiple top / bottom X-Axis and left / right Y-Axis. SciChart supports multiple top or bottom X-Axes and multiple left and right Y-Axes. This example shows in a simple way how to register a line series on each axis</ToolTipDescription>
+  <Description>
+    Demonstrates a line chart with four series and multiple top / bottom X-Axis and left / right Y-Axis. SciChart supports multiple top or bottom X-Axes and multiple left and right Y-Axes. This example shows in a simple way how to register a line series on each axis.
+
+    [b][i]Example Usage[/i][/b]
+
+    - Drag any axis to scale.
+    - Drag the chart to zoom.
+    - Double click to reset zoom.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2008%20-%20Adding%20Multiple%20Axis.html']Tutorial: Creating a Chart with Multiple X and Y Axes[/url]    
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/MultipleXAxes.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/MultipleXAxes.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>
+    <Features>MultipleAxis</Features>    
+  </Features>
+</ExampleDefinition>

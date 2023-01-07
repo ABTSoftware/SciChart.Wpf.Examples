@@ -1,0 +1,23 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateTernaryChart/ScatterSeriesTernaryChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconTernary</IconPath>
+  <ToolTipDescription>Generates a simple Ternary Scatter chart in code</ToolTipDescription>
+  <Description>
+    Generates a [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Ternary%20Scatter%20Type.html']Ternary Scatter chart[/url] in code. The TernaryScatterRenderableSeries can be used to render an [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.XyzDataSeries%601.html']XyzDataSeries[/url].
+
+    The scatter chart uses the [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url] to define the marker shape and size. This can be customized in code or you can create your own Point-Markers using our [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.SpritePointMarker.html']SpritePointMarker[/url] or [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.PointMarkers.BasePointMarker.html']BasePointMarker[/url] type.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20a%20Ternary%20Chart.html']What is a Ternary Chart?[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Ternary%20Scatter%20Type.html']The Ternary Scatter Series type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/ScatterSeriesTernaryChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateTernaryChart/ScatterSeriesTernaryChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+  </Features>
+</ExampleDefinition>

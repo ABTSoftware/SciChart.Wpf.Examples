@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="WpfApplication1.LoadingContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApplication1"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#222">
+    <UserControl.Resources>
+        <ExponentialEase x:Key="ExpEase"/>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
+           <TextBlock FontStyle="Italic" Text="I am loading your app!" Foreground="White" FontSize="20" TextAlignment="Center"
+                      tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Loaded}"
+                      tz:Transitionz.Translate="{tz:TranslateParams From='0,10', To='0,0', Duration=200, TransitionOn=Loaded, Ease={StaticResource ExpEase}}"/>
+           <TextBlock FontStyle="Italic" Text="Check App.xaml.cs and MainWindow.xaml.cs for how we async load liensing before SciChart" Foreground="White" FontSize="12" TextAlignment="Center" Margin="20"
+                      tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, BeginTime=0, Duration=200, TransitionOn=Loaded}"
+                      tz:Transitionz.Translate="{tz:TranslateParams From='0,10', To='0,0', BeginTime=0, Duration=200, TransitionOn=Loaded, Ease={StaticResource ExpEase}}"/>
+        <TextBlock FontStyle="Normal" x:Name="timerTextBlock" Text="00:00:00" Foreground="White" FontSize="16" TextAlignment="Center" Margin="20"
+               tz:Transitionz.Opacity="{tz:OpacityParams BeginTime=00, Duration=200, From=0, TransitionOn=Loaded, To=1}"
+               tz:Transitionz.Translate="{tz:TranslateParams BeginTime=00, Duration=200, Ease={StaticResource ExpEase}, From=0\,10, TransitionOn=Loaded, To=0\,0}"/>
+    </StackPanel>
+</UserControl>

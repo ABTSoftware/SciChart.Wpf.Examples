@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ModifyAxisBehaviour.QuadLeftRightAxes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="QuadLeftRightAxes_Loaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Growby's are not necessary but are used to push series into top/bottom half of the chart, to give a cleaner visual appearance  -->
+        <s:DoubleRange x:Key="GrowBy1"
+                       Max="3.0"
+                       Min="0" />
+        <s:DoubleRange x:Key="GrowBy2"
+                       Max="2.0"
+                       Min="1.0" />
+        <s:DoubleRange x:Key="GrowBy3"
+                       Max="1.0"
+                       Min="2.0" />
+        <s:DoubleRange x:Key="GrowBy4"
+                       Max="0"
+                       Min="3.0" />
+
+    </UserControl.Resources>
+
+    <Grid>
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart">
+
+            <!--  Declare RenderableSeries and assign to Y-Axis  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries Stroke="#FFFF1919"
+                                            StrokeThickness="1"
+                                            YAxisId="Left1" />
+                <s:FastLineRenderableSeries Stroke="#FFCCCCCC"
+                                            StrokeThickness="1"
+                                            YAxisId="Left2" />
+                <s:FastLineRenderableSeries Stroke="#FFFC9C29"
+                                            StrokeThickness="1"
+                                            YAxisId="Left3" />
+                <s:FastLineRenderableSeries Stroke="#FF4083B7"
+                                            StrokeThickness="1"
+                                            YAxisId="Left4" />
+                <s:FastLineRenderableSeries Stroke="#FF4083B7"
+                                            StrokeThickness="1"
+                                            YAxisId="Right1" />
+                <s:FastLineRenderableSeries Stroke="#FF279B27"
+                                            StrokeThickness="1"
+                                            YAxisId="Right2" />
+                <s:FastLineRenderableSeries Stroke="#FFFF1919"
+                                            StrokeThickness="1"
+                                            YAxisId="Right3" />
+                <s:FastLineRenderableSeries Stroke="#FFCCCCCC"
+                                            StrokeThickness="1"
+                                            YAxisId="Right4" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis AxisTitle="DateTime X Axis" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create Y Axes on the Left and Right  -->
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis AxisAlignment="Left"
+                               AxisTitle="Left Axis 1"
+                               BorderBrush="#FFFF1919"
+                               BorderThickness="0,0,1,0"
+                               GrowBy="{StaticResource GrowBy1}"
+                               Id="Left1"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FFFF1919" />
+                <s:NumericAxis AxisAlignment="Left"
+                               AxisTitle="Left Axis 2"
+                               BorderBrush="#FFCCCCCC"
+                               BorderThickness="0,0,1,0"
+                               GrowBy="{StaticResource GrowBy1}"
+                               Id="Left2"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FFCCCCCC" />
+                <s:NumericAxis AxisAlignment="Left"
+                               AxisTitle="Left Axis 3"
+                               BorderBrush="#FFFC9C29"
+                               BorderThickness="0,0,1,0"
+                               GrowBy="{StaticResource GrowBy2}"
+                               Id="Left3"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FFFC9C29" />
+                <s:NumericAxis AxisAlignment="Left"
+                               AxisTitle="Left Axis 4"
+                               BorderBrush="#FF4083B7"
+                               BorderThickness="0,0,1,0"
+                               GrowBy="{StaticResource GrowBy2}"
+                               Id="Left4"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FF4083B7" />
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Right Axis 1"
+                               BorderBrush="#FF4083B7"
+                               BorderThickness="1,0,0,0"
+                               GrowBy="{StaticResource GrowBy3}"
+                               Id="Right1"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FF4083B7" />
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Right Axis 2"
+                               BorderBrush="#FF279B27"
+                               BorderThickness="1,0,0,0"
+                               GrowBy="{StaticResource GrowBy3}"
+                               Id="Right2"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FF279B27" />
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Right Axis 3"
+                               BorderBrush="#FFFF1919"
+                               BorderThickness="1,0,0,0"
+                               GrowBy="{StaticResource GrowBy4}"
+                               Id="Right3"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FFFF1919" />
+                <s:NumericAxis AxisAlignment="Right"
+                               AxisTitle="Right Axis 4"
+                               BorderBrush="#FFCCCCCC"
+                               BorderThickness="1,0,0,0"
+                               GrowBy="{StaticResource GrowBy4}"
+                               Id="Right4"
+                               TextFormatting="#.0"
+                               TickTextBrush="#FFCCCCCC" />
+            </s:SciChartSurface.YAxes>
+
+            <!--  Create chart modifiers to zoom, drag X,Y Axes and double click to zoom extents  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" />
+                    <s:XAxisDragModifier />
+                    <s:YAxisDragModifier AxisId="Left1" />
+                    <s:YAxisDragModifier AxisId="Left2" />
+                    <s:YAxisDragModifier AxisId="Left3" />
+                    <s:YAxisDragModifier AxisId="Left4" />
+                    <s:YAxisDragModifier AxisId="Right1" />
+                    <s:YAxisDragModifier AxisId="Right2" />
+                    <s:YAxisDragModifier AxisId="Right3" />
+                    <s:YAxisDragModifier AxisId="Right4" />
+                    <s:ZoomPanModifier ExecuteOn="MouseRightButton" />
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                    <s:LegendModifier Margin="10" ShowLegend="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

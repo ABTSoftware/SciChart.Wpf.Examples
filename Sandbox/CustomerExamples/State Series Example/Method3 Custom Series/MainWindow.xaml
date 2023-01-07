@@ -1,0 +1,49 @@
+﻿<Window x:Class="State_Series_Example.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:State_Series_Example"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    <Window.Resources>
+        <local:MainWindowViewModel x:Key="vm"/>
+
+        <local:StatePaletteProvider x:Key="StatePaletteProvider" ErrorColor="Crimson" WarningColor="Orange" NormalColor="LimeGreen"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <s:SciChartSurface x:Name="PrimaryChart" ShowLicensingWarnings="False">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries DataSeries="{Binding LineSeriesData}"/>
+
+                <local:StateRenderableSeries DataSeries="{Binding ScatterSeriesData}" 
+                                             VerticalAlignment="Top" Margin="0,10"
+                                             PaletteProvider="{StaticResource StatePaletteProvider}">
+                    <local:StateRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker/>
+                    </local:StateRenderableSeries.PointMarker>
+                </local:StateRenderableSeries>
+
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</Window>

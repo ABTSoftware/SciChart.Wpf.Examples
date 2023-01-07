@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/StyleAChart/XamlStyling.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoXamlStyling.png</ImagePath>
+  <IconPath>IconThemes</IconPath>
+  <ToolTipDescription>Using garish colors to demonstrate Xaml styling of the chart, Axis, grid lines, tick lines and common series types</ToolTipDescription>
+  <Description>
+    Using garish colors to demonstrate Xaml styling of the chart, Axis, grid lines, tick lines and common series types.
+
+    Almost any element in SciChart is stylable in Xaml and most parts of the chart are templated. You can easily set background, grid-line, axis label, viewport background and chart series colors in Xaml.
+
+    Take a look at the article on [url='https://www.scichart.com/documentation/win/current/webframe.html#Templating%20and%20Styling%20Chart%20Parts.html']Styling Axis Labels, Axis Titles, Rotating Axis Labels[/url] for further details.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Templating%20and%20Styling%20Chart%20Parts.html']Styling Axis Labels, Axis Titles, Rotating Axis Labels[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']How to Create a Custom Theme for SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Scrollbars.html']Styling the SciChartOverview and SciChartScrollBar[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/StyleAChart/XamlStyling.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/XamlStyling.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Theme</Features>
+    <Features>Style</Features>
+    <Features>XAML</Features>
+  </Features>
+</ExampleDefinition>

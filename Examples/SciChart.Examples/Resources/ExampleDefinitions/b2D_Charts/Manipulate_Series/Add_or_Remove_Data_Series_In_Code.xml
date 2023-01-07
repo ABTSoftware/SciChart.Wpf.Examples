@@ -1,0 +1,21 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ManipulateSeries/AddRemoveDataSeriesExampleView.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAddRemoveDataSeries.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates how to add and remove data-series and their associated RenderableSeries using SciChart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to programmatically add and remove series in code. This is achieved by changing the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime.
+
+    Click 'Add Series' several times. Now click to select a series. With a series selected, click 'Delete Series'.
+
+    The same thing can be achieved in MVVM, using our new MVVM [url='https://www.scichart.com/documentation/win/current/webframe.html#MVVM%20DataSeries%20RenderableSeries%20API.html']SeriesBinding[/url] Markup Extension.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ManipulateSeries/AddRemoveDataSeriesExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ManipulateSeries/AddRemoveDataSeriesExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>DataSeries</Features>
+  </Features>
+</ExampleDefinition> 

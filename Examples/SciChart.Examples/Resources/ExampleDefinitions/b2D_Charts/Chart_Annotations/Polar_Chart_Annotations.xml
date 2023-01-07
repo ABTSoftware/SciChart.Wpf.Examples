@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/AnnotateAChart/PolarChartAnnotations.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPolarChartAnnotations.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates the Annotations API with Polar Chart</ToolTipDescription>
+  <Description>
+    Generates polar charts with all supported annotation types.
+
+    [b][i]Note![/i][/b] Polar Chart currently does not support HorizontalLineAnnotation and VerticalLineAnnotation.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/The%20Polar%20charts%20Type.html']Polar Chart Types[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Intro%20to%20the%20Annotations%20API.html']Annotations API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']Databinding Annotations with MVVM[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/PolarChartAnnotations.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/PolarChartAnnotations.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Polar</Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

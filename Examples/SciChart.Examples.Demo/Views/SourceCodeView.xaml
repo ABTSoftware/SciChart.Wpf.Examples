@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="SciChart.Examples.Demo.Views.SourceCodeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
+             AutomationProperties.AutomationId="SourceCodeView">
+
+    <UserControl.Resources>
+        
+        <converters:StringToLanguageTypeConverter x:Key="StringToLanguageTypeConverter" />
+
+        <SolidColorBrush x:Key="DialogBackgroundDarkest"
+                         Opacity="0.87"
+                         Color="{StaticResource ApplicationBackgroundColor}" />
+
+        <ElasticEase x:Key="BounceEase" Oscillations="1" />
+
+    </UserControl.Resources>
+
+    <Grid UseLayoutRounding="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="FilesListBox"
+                 Grid.Column="0"
+                 Margin="0"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Background="{StaticResource HeaderBackgroundBrush}"
+                 BorderThickness="0,0,1,0"
+                 BorderBrush="#323539"
+                 SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
+                 ItemContainerStyle="{StaticResource SourceCodeFileItemStyle}"
+                 ItemTemplate="{StaticResource SourceCodeFileItemTemplate}"
+                 ItemsSource="{Binding SelectedExample.SourceFiles}"
+                 Padding="5,10"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        </ListBox>
+
+        <RichTextBox Grid.Column="1"
+                     Background="{StaticResource ApplicationBackgroundBrush}"
+                     Foreground="WhiteSmoke"
+                     IsReadOnly="True"
+                     BorderThickness="0"
+                     Padding="5"
+                     VerticalScrollBarVisibility="Auto"
+                     helpers:CodeHighlighter.SourceLanguage="{Binding SelectedFile.Key, Converter={StaticResource StringToLanguageTypeConverter}}"
+                     helpers:CodeHighlighter.SourceCode="{Binding SelectedFile.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     tz:Transitionz.Opacity="{Binding SourceOpacityParams}">
+        </RichTextBox>
+
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Background="{StaticResource DialogBackgroundDarkest}"
+                Canvas.ZIndex="3"
+                Opacity="1"
+                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,
+                                                            From=0,
+                                                            To=1,
+                                                            TransitionOn=Visibility}"
+                tz:Transitionz.Visibility="{Binding Path=IsShowingSourceCodeHelp,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+            <views:SourceTipsView Margin="20" tz:Transitionz.Translate="{tz:TranslateParams Duration=400, From='50,0', To='0,0', Ease={StaticResource BounceEase}, TransitionOn=Loaded}" />
+        </Border>
+
+
+    </Grid>
+</UserControl>

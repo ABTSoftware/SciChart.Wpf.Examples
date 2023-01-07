@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:abt="http://schemas.abtsoftware.co.uk/presentation">
+
+    <BooleanToVisibilityConverter x:Key="b2vc"/>
+
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#222"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#EEE"/>
+
+    <abt:BoolToValueConverter x:Key="InverseBooleanToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+    <SolidColorBrush x:Key="TextBoxOutlineBrush" Color="#ff323539"/>
+    <SolidColorBrush x:Key="TextBoxForeground" Color="#FFF"/>
+
+    <SolidColorBrush x:Key="IconFillDefault" Color="#FFDFE0E6"/>
+
+    <SolidColorBrush x:Key="IconForeground" Color="#FF5B5B5B"></SolidColorBrush>
+    <Color x:Key="ForegroundDefault">#FFF</Color>
+    <SolidColorBrush x:Key="IconForegroundLight" Color="{StaticResource ForegroundDefault}"></SolidColorBrush>
+
+    <Color x:Key="SciChartGreen">#FF42b649</Color>
+    <SolidColorBrush x:Key="SciChartGreenBrush" Color="{StaticResource SciChartGreen}"/>
+
+    <Color x:Key="SciChartDarkGreen">#FF0FA32D</Color>
+    <SolidColorBrush x:Key="SciChartDarkGreenBrush" Color="{StaticResource SciChartDarkGreen}"/>
+
+
+    <Color x:Key="ApplicationBackgroundColor">#FF1C1C1C</Color>
+    <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="#FF232426"/>
+
+    <Color x:Key="TileBackgroundColor" >#FF323539</Color>
+    <SolidColorBrush x:Key="TildBackgroundBrush" Color="{StaticResource TileBackgroundColor}"></SolidColorBrush>
+
+    <Style TargetType="abt:BusyPanel">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"></Setter>
+    </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="BorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="Background" Value="#BB222222" />
+        <Setter Property="Margin" Value="10,10,10,5" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#55EEEEEE" Offset="0"></GradientStop>
+                    <GradientStop Color="#AAEEEEEE" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#BB222222" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Margin="{TemplateBinding Margin}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

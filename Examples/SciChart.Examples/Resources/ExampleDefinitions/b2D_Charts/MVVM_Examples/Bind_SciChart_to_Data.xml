@@ -1,0 +1,22 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/UseSciChartWithMvvm/BindToDataSeriesSet/BindToDataSeriesSetView.xaml</View>
+  <ViewModel>Examples.UseSciChartWithMvvm.BindToDataSeriesSet.BindToDataSeriesSetViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSingleChartMvvm.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates how to use MVVM to databind SciChart to a DataSeriesSet. This example uses a single line chart, with View and ViewModel and shows how to bind SciChart to a data-source and append new data using the MVVM pattern.</ToolTipDescription>
+  <Description>
+    Demonstrates how to use MVVM to databind a SciChart RenderableSeries declared in XAML to a DataSeries declared in a ViewModel.
+
+    This example uses a single line chart, with View and ViewModel and shows how to bind SciChart to a data-source and append new data using the MVVM pattern.
+
+    [i][b]Note:[/b][/i] Also see the documentation and examples featuring the [url='https://www.scichart.com/documentation/win/current/webframe.html#MVVM%20DataSeries%20RenderableSeries%20API.html']SeriesBinding Markup Extension[/url], as this shows how to declare RenderableSeries and DataSeries from your ViewModel, for a true MVVM application.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/BindToDataSeriesSet/BindToDataSeriesSetView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/BindToDataSeriesSet/BindToDataSeriesSetView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/BindToDataSeriesSet/BindToDataSeriesSetViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>MVVM</Features>
+  </Features>
+</ExampleDefinition>

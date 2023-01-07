@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/CursorModifierExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHitTest.png</ImagePath>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>TODO </ToolTipDescription>
+  <Description>
+    This example demonstrates the [url='https://www.scichart.com/documentation/win/current/webframe.html#CursorModifier.html']CursorModifier[/url]: a ChartModifier derived type which adds a cross-hairs (cursor) to the chart, as well as displaying an aggregated tooltip for all series.
+
+    The Tooltip may be templated to display custom data, or configured to show only on mouse-over of a series, or always. It is also possible to show/hide Axis Labels, Show/Hide the crosshairs and style the Crosshairs lines.
+
+    Alternative modifiers for displaying Tooltips include the [url='https://www.scichart.com/documentation/win/current/webframe.html#TooltipModifier.html']TooltipModifier[/url], the [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier[/url] and the [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']VerticalSliceModifier[/url].
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20ChartModifier%20API.html']ChartModifiers in SciChart[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#CursorModifier.html']CursorModifier Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CursorModifierExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CursorModifierExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Tooltips</Features>
+    <Features>Cursor</Features>
+    <Features>HitTest</Features>
+  </Features>
+</ExampleDefinition>

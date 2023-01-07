@@ -1,0 +1,51 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+  <View>Examples/AnnotateAChart/TradeAnnotations/TradeAnnotations.xaml</View>
+  <ViewModel>Examples.AnnotateAChart.TradeAnnotations.TradeAnnotationsViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAnnotationsAreEasy.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>
+  </ToolTipDescription>
+  <Description>
+
+    Demonstrates how to place the trading annotations, that are commonly used in trading and financial applications over a chart
+    by click in realtime as well as in code-behind.
+
+    The Trading annotations are created via TradingAnnotationCreationModifier, or with TradingAnnotationCreationModifierMvvm in MVVM.
+    TradingAnnotationCreationModifier is derived from AnnotationsBase.
+
+    You can find more information on this, following this links:
+
+    - [url='https://www.scichart.com/documentation/win/current/Editing%20and%20Interacting%20with%20Annotations.html']AnnotationCreationModifier[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']MVVM Annotations API[/url]
+
+    In order to create the annotation in code-behind or in ViewModelyou will use method SetBasePoint (iComparable x, iComparable y).
+
+    [b]Annotation Types Include:[/b]
+
+    - [url='link?']AxisMarkerAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Freedraw%20(Brush)%20Drawing%20Tool.html']BrushAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Elliot%20Wave%20Drawing%20Tool.html']ElliotWaveAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/XABCD%20(Gartley%20or%20Harmonic)%20Drawing%20Tool.html']XabcdAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Head%20%26%20Shoulders%20Drawing%20Tool.html']HeadAndShouldersAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Fibonacci%20Retracement%20Drawing%20Tool.html']FibonacciRetracementAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Fibonacci%20Extension%20Drawing%20Tool.html']FibonacciExtensionAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Pitchfork%20Drawing%20Tool.html']PitchforkAnnotation[/url]
+
+    Also you can find more info about TradingAnnotationCreation modifier, following this links:
+
+    - [url='https://www.scichart.com/documentation/win/current/TradingAnnotationCreationModifier.html']TradingAnnotationCreationModifier[/url]
+
+    You can change styling of the annotations by changing the annotation properties such as line color and thickness, as well as fill color.
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/TradeAnnotations/TradeAnnotations.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/TradeAnnotations/TradeAnnotations.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/TradeAnnotations/TradeAnnotationsViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/TradeAnnotations/Converters.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/TradeAnnotations/DrawingToolsEditPanelResourceDictionary.xaml.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

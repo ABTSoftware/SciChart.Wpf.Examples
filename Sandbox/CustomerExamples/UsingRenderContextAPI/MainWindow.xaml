@@ -1,0 +1,23 @@
+﻿<Window x:Class="UsingRenderContextApiExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <s:VisualXcceleratorRenderSurface x:Name="RenderSurface" Grid.Row="1"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Click="OnDrawEllipseClick" HorizontalAlignment="Left" Margin="5" >Draw Ellipse</Button>
+            <Button Click="OnDrawImageClick" HorizontalAlignment="Left" Margin="5" >Draw Texture</Button>
+            <Button Click="OnClearClick" HorizontalAlignment="Left" Margin="5" >Clear All</Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="DirectXDeploymentTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectXDeploymentTestApp"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <s:SciChartSurface x:Name="scs">
+            <s:SciChartSurface.Style>
+                <Style TargetType="{x:Type s:SciChartSurface}">
+                    <Style.Triggers>
+                        <!-- Enable DirectX only when not in designer -->
+                        <Trigger Property="componentModel:DesignerProperties.IsInDesignMode" Value="False">
+                            <Setter Property="s3D:DirectXHelper.TryApplyDirectXRenderer" Value="True" />
+                            <Setter Property="s3D:DirectXHelper.FallbackType" Value="{x:Type s:HighSpeedRenderSurface}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </s:SciChartSurface.Style>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation Foreground="Orange" X1="0.5" Y1="0.2" CoordinateMode="Relative" HorizontalAnchorPoint="Center" Text="Run this application to dynamically switch to DirectX"/>
+                <s:TextAnnotation Foreground="LightSteelBlue" X1="0.5" Y1="0.5" CoordinateMode="Relative" HorizontalAnchorPoint="Center" 
+                                  DataContext="{Binding ElementName=scs, Path=RenderSurface}" Text="{Binding Path=.}" FontSize="16"/>
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

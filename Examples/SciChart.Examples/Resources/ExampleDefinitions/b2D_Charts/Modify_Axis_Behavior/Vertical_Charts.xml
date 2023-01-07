@@ -1,0 +1,31 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/VerticalCharts.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoVerticalCharts.png</ImagePath>
+<IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates a vertical chart with XAxis on the Left, Right, and YAxes at the Top. SciChart supports unlimited X and Y axis and allows placement of any axis on the Left, Right, Top, Bottom of the chart. Placing an XAxis on the left rotates the chart, giving a vertical chart effect.</ToolTipDescription>
+  <Description>
+    Demonstrates a vertical chart with XAxis on the Left, Right, and YAxes at the Top. SciChart supports unlimited X and Y axis and allows placement of any axis on the Left, Right, Top, Bottom of the chart.
+
+    The Vertical Chart is created by setting [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']XAxis.AxisAlignment[/url] = Left, and [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.AxisBase~AxisAlignment.html']YAxis.AxisAlignment[/url] = Top.
+
+    [b][i]Interactivity Options[/i][/b]
+
+    - Drag any axis to scale.
+    - Drag the chart to zoom.
+    - Double click to reset zoom.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Alignment%20-%20Rotating%20a%20Chart%20Vertically.html']Rotating the chart vertically[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/VerticalCharts.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/VerticalCharts.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Vertical</Features>
+    <Features>Rotate</Features>
+    <Features>Axis</Features>
+  </Features>
+</ExampleDefinition>

@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsView.xaml</View>
+  <ViewModel>Examples.UseSciChartWithMvvm.SciChartMVVMBinding.SciChartMvvmBindingsViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultipleChartsMvvm.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Demonstrates how to use MVVM to databind IRednerableSeriesViewModel to RenderableSeries on SciChartSurface.</ToolTipDescription>
+  <Description>
+    Demonstrates how to use MVVM to databind IAxisViewModels to a SciChartSurface using the new [url='https://www.scichart.com/documentation/win/current/webframe.html#MVM%20Axis%20API.html']AxisBinding Markup Extension[/url], which forms part of the MVVM API in SciChart.
+
+    By binding SciChartSurface.YAxes or XAxes to a collection of [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.ChartSeries.AxisBaseViewModel.html']AxisBaseViewModel derived Types[/url] via the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Common.MarkupExtensions.AxesBinding.html']AxesBinding Markup Extension[/url], you can have full control over the series type, style, properties and data displayed on the chart from your ViewModel.
+
+    Check the source-code of this example for more details on how we achieve this with SciChart.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#MVM%20Axis%20API.html']MVVM Axis API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/ArrowAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/ArrowAnnotation.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SciChartMVVMBindings/ArrowAnnotationViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>MVVM</Features>
+  </Features>
+</ExampleDefinition>

@@ -1,0 +1,36 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateMultiseriesChart/CandlestickWithLinesView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconCandlestick</IconPath>
+  <ToolTipDescription>Demonstrates how to simple multi-series financial charts, with a Candlestick chart rendering OHLC data and three line series rendering Moving Average indicators</ToolTipDescription>
+  <Description>
+    Demonstrates a multi-series chart using the [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries[/url] with three [url='https://www.scichart.com/documentation/win/current/The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url] showing the moving average of the closing price.
+
+    The example uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis[/url] which collapses overnight and weekend gaps in data, but, uses the Index to the data to calculate X-position. This means that [b]all DataSeries must have the same number of data-points[/b] [i](you can pad DataSeries using double.NaN for null or empty points)[/i].
+
+    [b]Example Usage[/b]
+
+    - ZoomPan, left-mouse drag to pan the chart
+    - Mousewheel, roll the mousewheel to zoom
+    - ZoomExtents, double click to zoom to extents
+
+    [b][i]Tip![/i][/b] To get the effect of hiding the line for the first N points of a moving average, you can [url='http://www.scichart.com/questions/question/hiding-data-when-using-a-line-series']insert double.NaN into the XyDataSeries[/url]. double.NaN can be used to render gaps or continuous lines.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis vs. NumericAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/CandlestickWithLinesView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/CandlestickWithLinesView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Candlestick</Features>
+    <Features>Line</Features>
+    <Features>Ohlc</Features>
+  </Features>
+</ExampleDefinition>

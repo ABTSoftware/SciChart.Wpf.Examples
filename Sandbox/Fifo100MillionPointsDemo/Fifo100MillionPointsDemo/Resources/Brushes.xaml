@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="TextBrush" Color="#FFFFFFFF" />
+    <Color x:Key="HeadingTextColor">#FFdfe0e6</Color>
+    <SolidColorBrush x:Key="HeadingTextBrush" Color="{StaticResource HeadingTextColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="GroupsItemBorderBrush" Color="#22692f" />
+
+    <SolidColorBrush x:Key="AutoCompleteBoxBackgroundBrush" Color="#FF333333" />
+
+    <SolidColorBrush x:Key="GroupsItemBrush" Color="#FF323539"/>
+
+    <LinearGradientBrush x:Key="ExampleItemBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+        <GradientStop Color="#FF067118" Offset="0"/>
+        <GradientStop Color="#FF168328" Offset="1"/>
+    </LinearGradientBrush>
+
+</ResourceDictionary>

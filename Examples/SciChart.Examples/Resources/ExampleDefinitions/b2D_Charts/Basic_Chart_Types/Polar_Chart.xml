@@ -1,0 +1,29 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateSimpleChart/PolarChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPolarChartExample.png</ImagePath>
+  <IconPath>IconPolar</IconPath>
+  <ToolTipDescription>Generate simple polar chart</ToolTipDescription>
+  <Description>
+    Generate simple polar chart. Demonstrates how to define polar chart with line series.
+
+    The Polar Chart is not defined by a series, but actually a special Polar Axis type. Most of the SciChart RenderableSeries have been converted to work with Polar Charts. 
+    
+    [b][i]Tips![/i][/b]
+
+    You can change AxisAlignment of XAxis and YAxis. You can also change the YAxis Angle using slider at the top.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/The%20Polar%20charts%20Type.html']Polar Chart Types[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarXAxis.html']Polar XAxis[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.PolarYAxis.html']Polar YAxis[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/PolarChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/PolarChartExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Polar</Features>
+  </Features>
+</ExampleDefinition>

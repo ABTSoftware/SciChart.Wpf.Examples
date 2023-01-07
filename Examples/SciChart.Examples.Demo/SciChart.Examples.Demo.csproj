@@ -1,0 +1,119 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>SciChartDemoIcon32.ico</ApplicationIcon>
+    <StartupObject />
+    <LangVersion>Latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <OutputPath>..\..\Build\Release</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Helpers\HtmlExport\ExportedExampleIndex.html" />
+    <None Remove="Helpers\HtmlExport\ExportedExampleTemplate.html" />
+    <None Remove="Helpers\ProjectExport\Templates\App.xaml.c.txt" />
+    <None Remove="Helpers\ProjectExport\Templates\App.xaml.txt" />
+    <None Remove="Helpers\ProjectExport\Templates\MainWindow.xaml.c.txt" />
+    <None Remove="Helpers\ProjectExport\Templates\MainWindow.xaml.txt" />
+    <None Remove="Helpers\ProjectExport\Templates\ProjectFile.csproj.txt" />
+    <None Remove="Helpers\ProjectExport\Templates\SolutionFile.sln.txt" />
+    <None Remove="Resources\codeStopwords.dat" />
+    <None Remove="Resources\Fonts\Marlett.ttf" />
+    <None Remove="Resources\Fonts\NEUROPOL.ttf" />
+    <None Remove="Resources\Images\HomeBackground.jpg" />
+    <None Remove="Resources\Images\scichartlogo.png" />
+    <None Remove="Resources\Images\search.png" />
+    <None Remove="Resources\stopwords.dat" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452'">
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\HtmlExport\ExportedExampleIndex.html" />
+    <EmbeddedResource Include="Helpers\HtmlExport\ExportedExampleTemplate.html" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\App.xaml.c.txt" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\App.xaml.txt" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\MainWindow.xaml.c.txt" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\MainWindow.xaml.txt" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\ProjectFile.csproj.txt" />
+    <EmbeddedResource Include="Helpers\ProjectExport\Templates\SolutionFile.sln.txt" />
+    <EmbeddedResource Include="Resources\codeStopwords.dat" />
+    <EmbeddedResource Include="Resources\stopwords.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.90" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="3.1.251" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj">
+      <Project>{113EBB05-8D70-4B05-BB73-121A552A5754}</Project>
+      <Name>SciChart.Examples.ExternalDependencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SciChart.Examples\SciChart.Examples.csproj">
+      <Project>{52AF4E20-50EA-4C0F-9E5C-057613BAB9A7}</Project>
+      <Name>SciChart.Examples</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Marlett.ttf" />
+    <Resource Include="Resources\Fonts\NEUROPOL.ttf" />
+    <Resource Include="Resources\Images\HomeBackground.jpg" />
+    <Resource Include="Resources\Images\scichartlogo.png" />
+    <Resource Include="Resources\Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="sharpdx_direct3d11_1_effects_x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sharpdx_direct3d11_1_effects_x86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart3D" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26595" />
+  </ItemGroup>
+</Project>

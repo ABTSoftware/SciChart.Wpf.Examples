@@ -1,0 +1,35 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+  <View>Examples/AnnotateAChart/AnnotationsAreEasy.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAnnotationsAreEasy.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates the Annotations API to create Text, Line, Box, LineArrow and Custom Annotations in Xaml.</ToolTipDescription>
+  <Description>
+    An introduction to the UIElement Annotations API, which allows WPF UIElements to be placed over the chart at specific X and Y data-values.
+
+    [b]Annotation Types Include:[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/The%20AxisMarkerAnnotation%20Type.html']AxisMarkerAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20BoxAnnotation%20Type.html']BoxAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20CompositeAnnotation%20Type.html']CompositeAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20CustomAnnotation%20Type.html']CustomAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20HorizontalLineAnnotation%20Type.html']HorizontalLineAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20LineAnnotation%20Type.html']LineAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20LineArrowAnnotation%20Type.html']LineArrowAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20TextAnnotation%20Type.html']TextAnnotation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20VerticalLineAnnotation%20Type.html']VerticalLineAnnotation[/url]
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/Intro%20to%20the%20Annotations%20API.html']Annotations API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']Databinding Annotations with MVVM[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20CustomAnnotation%20Type.html']Custom Annotations - Adding a WaterMark to a Chart[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/AnnotationsAreEasy.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/AnnotationsAreEasy.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

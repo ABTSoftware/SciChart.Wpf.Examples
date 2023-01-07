@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateSimpleChart.CandlestickChartExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateSimpleChart"
+             Loaded="CandlestickChartExampleView_OnLoaded">
+
+    <UserControl.Resources>
+        <local:HollowSolidPaletteProvider x:Key="HollowSolidPaletteProvider" FillNeutral="Gray"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+        <!-- to the chart and is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="CTRL" FontSize="10" Padding="0">
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="12" Text="Candlestick Chart"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Regular" IsChecked="True"/>
+                        <RadioButton FontSize="12" Margin="4" Style="{StaticResource CheckRadioBtn}" Content="Hollow/Solid" x:Name="chHollowSolid"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart" Grid.Column="1"
+                           Padding="0"
+                           BorderThickness="0">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+
+                <!--  Candlestick bodies now support gradients as well as solid colours  -->
+                <s:FastCandlestickRenderableSeries x:Name="candlestickSeries">
+                    <s:FastCandlestickRenderableSeries.FillUp>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#55002200"/>
+                            <GradientStop Offset="1" Color="#FF00AA00"/>
+                        </LinearGradientBrush>
+                    </s:FastCandlestickRenderableSeries.FillUp>
+                    <s:FastCandlestickRenderableSeries.FillDown>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#55441111"/>
+                            <GradientStop Offset="1" Color="#FFFF0000"/>
+                        </LinearGradientBrush>
+                    </s:FastCandlestickRenderableSeries.FillDown>
+                    <s:FastCandlestickRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:4"/>
+                    </s:FastCandlestickRenderableSeries.SeriesAnimation>
+                    <s:FastCandlestickRenderableSeries.Style>
+                        <Style TargetType="s:FastCandlestickRenderableSeries">
+                            <Setter Property="PaletteProvider" Value="{x:Null}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=chHollowSolid}" Value="True">
+                                    <Setter Property="PaletteProvider" Value="{StaticResource HollowSolidPaletteProvider}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </s:FastCandlestickRenderableSeries.Style>
+                </s:FastCandlestickRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis  -->
+            <s:SciChartSurface.XAxis>
+                <s:CategoryDateTimeAxis DrawMajorBands="True"/>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with GrowBy  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1" DrawMajorBands="True"/>
+            </s:SciChartSurface.YAxis>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

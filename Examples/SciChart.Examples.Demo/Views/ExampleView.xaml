@@ -1,0 +1,474 @@
+﻿<UserControl x:Class="SciChart.Examples.Demo.Views.ExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:breadcrumb="clr-namespace:SciChart.Examples.Demo.Controls.Breadcrumb"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:SciChart.Examples.Demo.Helpers.Navigation"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
+             mc:Ignorable="d"
+             AutomationProperties.AutomationId="ExampleView">
+
+    <UserControl.Resources>
+
+        <ext:ScrollViewerWidthMultiConverter x:Key="multiplyConverter" />
+
+        <Style x:Key="ourAnimatedExpanderStyle" TargetType="{x:Type Expander}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <DockPanel>
+
+                            <ScrollViewer x:Name="ExpanderContentScrollView"
+                                          DockPanel.Dock="Bottom"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden">
+                                <ScrollViewer.Tag>
+                                    <system:Double>0.0</system:Double>
+                                </ScrollViewer.Tag>
+                                <ScrollViewer.Width>
+                                    <MultiBinding Converter="{StaticResource multiplyConverter}">
+                                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </ScrollViewer.Width>
+                                <ContentPresenter x:Name="ExpandSite"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Focusable="false" />
+                            </ScrollViewer>
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.4"
+                                                             Storyboard.TargetName="ExpanderContentScrollView"
+                                                             Storyboard.TargetProperty="Tag"
+                                                             To="270" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.4"
+                                                             Storyboard.TargetName="ExpanderContentScrollView"
+                                                             Storyboard.TargetProperty="Tag"
+                                                             To="0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToolbarSeparatorStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Fill" Value="{StaticResource IconForeground}" />
+            <Setter Property="UseLayoutRounding" Value="True" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+
+        <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <ext:BoolToValueConverter x:Key="BoolToValueVisibilityConverter"
+                                  FalseValue="Collapsed"
+                                  TrueValue="Visible" />
+
+        <SolidColorBrush x:Key="DialogBackground"
+                         Opacity="0.8"
+                         Color="{StaticResource ApplicationBackgroundColor}" />
+
+        <ElasticEase x:Key="BounceEase" Oscillations="1" />
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition x:Name="InfoPanelColumn" Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!--  BreadCrumb / Toolbar  -->
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Background="{StaticResource HeaderBackgroundBrush}"
+                BorderBrush="#323539"
+                BorderThickness="0,0,0,1">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Breadcrumb  -->
+                <breadcrumb:BreadcrumbControl BreadcrumbItems="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels}" HomeCommand="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels[0].Command}">
+                    <breadcrumb:BreadcrumbControl.BreadcrumbItemStyle>
+                        <Style BasedOn="{StaticResource IconButtonStyle}" TargetType="Button">
+                            <Setter Property="Width" Value="NaN" />
+                            <Setter Property="Command" Value="{Binding Command}" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Border Background="Transparent" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+                                            <TextBlock Foreground="White" Text="{Binding Content}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </breadcrumb:BreadcrumbControl.BreadcrumbItemStyle>
+                </breadcrumb:BreadcrumbControl>
+
+                <!--  Toolbar for all examples  -->
+                <StackPanel Grid.Column="1"
+                            Margin="10,0"
+                            Orientation="Horizontal">
+
+                    <!--  Smile Frown  -->
+                    <ToggleButton x:Name="SmileButton"
+                                  Command="{Binding SendSmileCommand}"
+                                  IsChecked="{Binding Path=SmileFrownViewModel.SmileVisible, Mode=OneWay}"
+                                  Style="{StaticResource SmileButtonStyle}"
+                                  ToolTipService.ToolTip="Send us some positive feedback! :) Your encouragement goes a long way!"/>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <ToggleButton Command="{Binding SendFrownCommand}"
+                                  IsChecked="{Binding Path=SmileFrownViewModel.FrownVisible, Mode=OneWay}"
+                                  Style="{StaticResource FrownButtonStyle}"
+                                  ToolTipService.ToolTip="Send us some negative feedback :( We take all feedback seriously, good or bad!"/>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <!--  Show Example  -->
+                    <ToggleButton Width="NaN"
+                                  IsChecked="{Binding ShowExample, Mode=TwoWay}"
+                                  Style="{StaticResource IconToggleButtonStyle}"
+                                  ToolTipService.ToolTip="Switch back to example view">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Example"
+                                           VerticalAlignment="Center"
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground),
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}"/>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                    </ToggleButton>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <!--  Show Source Code  -->
+                    <ToggleButton Width="NaN"
+                                  IsChecked="{Binding ShowSourceCode, Mode=TwoWay}"
+                                  Style="{StaticResource IconToggleButtonStyle}"
+                                  ToolTipService.ToolTip="View the Source Code for this example right here in the app">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Source Code"
+                                           VerticalAlignment="Center"
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground),
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}" />
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                    </ToggleButton>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <!-- Export -->
+                     <ToggleButton Width="NaN" 
+                                   Margin="0,5,0,0" 
+                                   VerticalAlignment="Top" 
+                                   AutomationProperties.AutomationId="ExampleView.Export"
+                                   IsChecked="{Binding ExportExampleViewModel.IsExportVisible, Mode=TwoWay}" 
+                                   Style="{StaticResource IconToggleButtonStyle}" 
+                                   ToolTipService.ToolTip="Export this example to a standalone Visual Studio solution"> 
+                         <ToggleButton.ContentTemplate> 
+                             <DataTemplate>
+                                <TextBlock Text="Export Solution"
+                                           VerticalAlignment="Center" 
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground),
+                                                RelativeSource={RelativeSource FindAncestor, 
+                                                AncestorType=ContentPresenter}}" /> 
+                             </DataTemplate> 
+                         </ToggleButton.ContentTemplate> 
+                     </ToggleButton>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <Button Width="NaN" Command="{Binding ShowGithubCommand}"
+                            Style="{StaticResource IconButtonStyle}"
+                            ToolTipService.ToolTip="NEW! Visit the Github page where this example code lives"
+                            Cursor="Hand">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center"
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}"
+                                           Text="View Source on Github" >
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.Setters>
+                                                        <Setter Property="Foreground" Value="{StaticResource SciChartGreenBrush}"/>
+                                                    </Trigger.Setters>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <Button Width="NaN" Command="{Binding GoToDocumentationCommand}"
+                            Style="{StaticResource IconButtonStyle}"
+                            ToolTipService.ToolTip="NEW! Go to Documentation for SciChart.WPF"
+                            Cursor="Hand">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center"
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}"
+                                           Text="Go to Documentation" >
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.Setters>
+                                                        <Setter Property="Foreground" Value="{StaticResource SciChartGreenBrush}"/>
+                                                    </Trigger.Setters>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+
+                    <Rectangle Style="{StaticResource ToolbarSeparatorStyle}" />
+
+                    <!--  Info Panel  -->
+                    <ToggleButton x:Name="InfoPanelButton"
+                                  Width="NaN"
+                                  IsChecked="{Binding IsInfoVisible, Mode=TwoWay}"
+                                  Style="{StaticResource IconToggleButtonStyle}">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Info"
+                                           VerticalAlignment="Center"
+                                           Foreground="{Binding Path=(ext:TextElementEx.Foreground),
+                                                RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=ContentPresenter}}" />
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                    </ToggleButton>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="ExampleAndSourceCodeFrame"
+              Grid.Row="1"
+              Margin="0"
+              HorizontalAlignment="Stretch"
+              Canvas.ZIndex="0"
+              tz:Transitionz.Blur="{Binding Path=BackgroundBlurParams, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Source Code View  -->
+            <views:SourceCodeView HorizontalAlignment="Stretch"
+                                  tz:Transitionz.Opacity="{tz:OpacityParams From=0,
+                                                                              To=1,
+                                                                              Duration=100,
+                                                                              TransitionOn=Visibility}"
+                                  tz:Transitionz.Visibility="{Binding Path=ShowSourceCode,
+                                                                       Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+
+            <!--  Description / Info Box  -->
+            <Expander x:Name="DescriptionBoxExpander"
+                      Grid.Column="1"
+                      ExpandDirection="Left"
+                      IsExpanded="{Binding ElementName=InfoPanelButton,
+                                           Path=IsChecked}"
+                      Style="{StaticResource ourAnimatedExpanderStyle}">
+
+                <Border x:Name="DescriptionBox"
+                        Width="270"
+                        Margin="0,2,0,0"
+                        Background="#1c1c1f"
+                        BorderBrush="{StaticResource IconForeground}"
+                        BorderThickness="2,0,0,0"
+                        Canvas.ZIndex="1"
+                        SizeChanged="OnExamplesPopupSizeChanged">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Width="32"
+                                     Height="32"
+                                     Margin="5"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center">
+                                <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding SelectedExample.IconPath}" />
+                            </Viewbox>
+                            <TextBlock Margin="5,10"
+                                       MaxWidth="190"
+                                       HorizontalAlignment="Left"
+                                       Style="{StaticResource GroupHeaderTextStyle}"
+                                       Text="{Binding SelectedExample.Title}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <Button Grid.Column="1"
+                                Margin="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Command="{Binding HideDescriptionCommand}"
+                                Style="{StaticResource CloseButtonStyle}" />
+                        <Border Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Height="1"
+                                Margin="0,10"
+                                HorizontalAlignment="Stretch"
+                                Background="{StaticResource IconForeground}" />
+                        <RichTextBox Grid.Row="2"
+                                     Grid.ColumnSpan="2"
+                                     Margin="10,20"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Foreground="#EEE"
+                                     IsReadOnly="True"
+                                     helpers:RichTextBoxHelper.Text="{Binding SelectedExample.FormattedDescription}" />
+                    </Grid>
+                </Border>
+            </Expander>
+
+            <!--  Example Frame itself  -->
+            <helpers:TransitioningFrame x:Name="ExamplesFrame"
+                                        HorizontalAlignment="Stretch"
+                                        IsHitTestVisible="True"
+                                        Style="{StaticResource transitioningFrameStyle}"
+                                        AutomationProperties.AutomationId="ExampleView.TransitioningFrame"
+                                        tz:Transitionz.Opacity="{tz:OpacityParams From=0,
+                                                                                    To=1,
+                                                                                    Duration=100,
+                                                                                    TransitionOn=Visibility}"
+                                        tz:Transitionz.Visibility="{Binding Path=ShowExample,
+                                                                             Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        navigation:Navigator.ExampleStartPage="{Binding SelectedExample.PageId,
+                                                                                        Mode=OneTime}" />
+            
+        </Grid>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource DialogBackground}"
+                Opacity="0"
+                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,
+                                                            From=0,
+                                                            To=1,
+                                                            TransitionOn=Visibility}"
+                tz:Transitionz.Visibility="{Binding Path=SmileFrownViewModel.SmileVisible,
+                                                     Converter={StaticResource BoolToValueVisibilityConverter}}">
+            <views:SmileView HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             DataContext="{Binding SmileFrownViewModel}" />
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource DialogBackground}"
+                Opacity="0"
+                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,
+                                                            From=0,
+                                                            To=1,
+                                                            TransitionOn=Visibility}"
+                tz:Transitionz.Visibility="{Binding Path=SmileFrownViewModel.FrownVisible,
+                                                     Converter={StaticResource BoolToValueVisibilityConverter}}">
+            <views:FrownView HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             DataContext="{Binding SmileFrownViewModel}" />
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource DialogBackground}"
+                Opacity="0">
+            <tz:Transitionz.Visibility>
+                <Binding Path="ExportExampleViewModel.IsExportVisible"
+                         Converter="{StaticResource BooleanToVisibilityConverter}" />
+            </tz:Transitionz.Visibility>
+            <tz:Transitionz.Opacity>
+                <tz:OpacityParams Duration="200" From="0" To="1" TransitionOn="Visibility" />
+            </tz:Transitionz.Opacity>
+            <views:ExportExampleView HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="ExportExampleView"
+                                     DataContext="{Binding ExportExampleViewModel}" />
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource DialogBackground}"
+                Opacity="0"
+                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,
+                                                            From=0,
+                                                            To=1,
+                                                            TransitionOn=Visibility}"
+                tz:Transitionz.Visibility="{Binding Path=BreadCrumbViewModel.IsShowingBreadcrumbNavigation,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+            <views:ExampleNavigationView DataContext="{Binding BreadCrumbViewModel}" />
+        </Border>
+
+        <Border Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Background="{StaticResource DialogBackground}"
+                Canvas.ZIndex="3"
+                Opacity="1"
+                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200,
+                                                            From=0,
+                                                            To=1,
+                                                            TransitionOn=Visibility}"
+                tz:Transitionz.Visibility="{Binding Path=IsShowingHelp,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+            <views:TipsView Margin="20" tz:Transitionz.Translate="{tz:TranslateParams Duration=400, From='50,0', To='0,0', Ease={StaticResource BounceEase}, TransitionOn=Loaded}" />
+        </Border>
+
+
+    </Grid>
+</UserControl>

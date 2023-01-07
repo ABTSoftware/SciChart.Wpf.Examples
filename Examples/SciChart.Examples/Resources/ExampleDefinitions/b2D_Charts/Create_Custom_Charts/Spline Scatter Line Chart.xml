@@ -1,0 +1,32 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoLine.png</ImagePath>
+  <IconPath>IconLine</IconPath>
+  <ToolTipDescription>Generates a spline scatter-line chart in code</ToolTipDescription>
+  <Description>
+    Generates a spline scatter-line chart in code. Uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#Custom%20Series%20(CustomRenderableSeries).html']CustomRenderableSeries[/url] type to demonstrate how to create your own series types. Here we implement a Cubic Spline line series with optional scatter points.
+
+    [b][i]Tips![/i][/b]
+
+    As well as Stroke, you can set [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']StrokeThickness[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']AntiAliasing[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']IsVisible[/url] properties to change how the series is rendered.[
+
+    You can add data-point markers to a line series using the [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Custom%20Series%20(CustomRenderableSeries).html']CustomRenderableSeries API Overview[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/SplineLineRenderableSeries.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/CubicSpline.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateACustomChart/SplineLineSeries/TriDiagonalMatrix.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Custom</Features>
+    <Features>Spline</Features>
+    <Features>Line</Features>
+  </Features>
+</ExampleDefinition>

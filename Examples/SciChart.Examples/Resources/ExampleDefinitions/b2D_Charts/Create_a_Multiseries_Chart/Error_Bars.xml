@@ -1,0 +1,37 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateMultiseriesChart/ErrorSeriesExampleView.xaml</View>
+  <ViewModel>Examples.CreateMultiseriesChart.ErrorSeriesExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoErrorBars.png</ImagePath>
+  <IconPath>IconErrorBars</IconPath>
+  <ToolTipDescription>Demonstrates how to add Error Bars to a Line or Scatter Chart</ToolTipDescription>
+  <Description>
+	  Demonstrates how to create Error Bars and use it with a Line or Scatter Chart.
+
+	  The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] can be used to produce Horizontal or Vertical Error Bar Chart. Direction of Error Bars can be specified setting the ErrorDirection property
+
+	  The [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries[/url] requires a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries[/url] as data source. This includes X, Y, High Error value, Low Error value for each series entry. One-sided Error Bars can be achieved using Double.NaN as High or Low Error value.
+
+	  Also, in this example the same HlcDataSeries is re-used to render a Line or Scatter chart, as these only take the X,Y values.
+
+	  [b][i]Tip![/i][/b]
+
+	  Do you need to change the width of the Error Bars? Try setting DataPointWidthMode to "Absolute", then assigning the desired width in pixels to the DataPointWidth property.
+
+	  [b]Documentation Links[/b]
+
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Error%20Bars%20Type.html']FastErrorBarsRenderableSeries Type[/url]
+	  - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.HlcDataSeries%602.html']HlcDataSeries Type[/url]
+	  - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ErrorSeriesExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ErrorSeriesExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/ErrorSeriesExampleViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Line</Features>
+    <Features>ErrorBars</Features>
+    <Features>Scientific</Features>
+    <Features>Statistics</Features>
+  </Features>
+</ExampleDefinition>

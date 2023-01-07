@@ -1,0 +1,31 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleView.xaml</View>
+  <ViewModel>Examples.SeeFeaturedApplication.SpectrumAnalyzer.SpectrumAnalyzerExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSpectrumAnalyzer.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+    <ToolTipDescription>The Spectrum Analyzer Demo showcases a real-time frequency domain chart with cursors and axis drag interactivity in an MVVM code example. 
+    At a refresh rate of 50Hz the example computes a random fourier series and transforms using a Radix-2 FFT, before updating the screen with the result.    
+    A shader effect is used to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.
+  </ToolTipDescription>
+  <Description>
+    The Spectrum Analyzer Demo showcases a real-time frequency domain chart with cursors and axis drag interactivity in an MVVM code example.
+
+    At a refresh rate of 50Hz the example computes a random fourier series and transforms using a Radix-2 FFT, before updating the screen with the result.
+
+    A shader effect is used to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']SciChart WPF v6 'Xccelerated Edition' Up to 100x Faster WPF Charts![/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/SpectrumAnalyzer/SpectrumAnalyzerExampleViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+  </Features>
+</ExampleDefinition>

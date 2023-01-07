@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata.SeriesWithMetadata"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:seriesWithMetadata="clr-namespace:SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600"
+             Loaded="OnSeriesWithMetadataLoaded">
+    <Grid>
+        <Grid.Resources>
+            <seriesWithMetadata:GainLossPaletteProvider x:Key="GainLossPaletteProvider" GainColor="LimeGreen" LossColor="Red"/> 
+            
+            <DataTemplate x:Key="LegendTemplate">
+               <Grid>
+                   <Grid.RowDefinitions>
+                       <RowDefinition />
+                       <RowDefinition />
+                    </Grid.RowDefinitions>
+                   <Grid.ColumnDefinitions>
+                       <ColumnDefinition Width="50"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Line StrokeThickness="3" X2="1" Stretch="Fill" Stroke="LimeGreen" />
+                    <TextBlock Grid.Column="1" FontSize="20" Text="Net Gain" Margin="10,0,0,0"/>
+
+                    <Line Grid.Row="1" Stretch="Fill" X2="1" StrokeThickness="3" Stroke="Red"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="Net Loss" Margin="10,0,0,0"/>
+                </Grid> 
+            </DataTemplate>
+            
+            <Style x:Key="CursorTooltipContainerStyle" TargetType="s:CursorLabelControl">
+                <Setter Property="Background" Value="{s:ThemeBinding DefaultPath=CursorLabelBackgroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+            
+            <DataTemplate x:Key="CursorTooltipTemplate" DataType="s:XySeriesInfo">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="15" Foreground="White">
+                        <Run FontWeight="Bold" Text="CEO: "/>
+                        <Run FontWeight="Normal" Text="{Binding PointMetadata.CEO, StringFormat='{}{0}'}"/>
+                    </TextBlock>
+                    <TextBlock FontSize="15" Foreground="White">
+                        <Run FontWeight="Bold" Text="{Binding FormattedXValue, StringFormat='{}{0}: ', Mode=OneWay}"/>
+                        <Run FontWeight="Normal" Text="{Binding PointMetadata.GainLossValue, StringFormat='{}{0:##0.00}$'}"/>
+                    </TextBlock>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar ext:CustomRotateChartModifier.IsRotationEnabled="False"  TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart"
+                           Grid.Column="1"
+                           BorderThickness="0"
+                           Padding="0"
+                           ChartTitle="Yearly Budget Deficit or Surplus, $ Billions">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries"
+                                            StrokeThickness="2"
+                                            PaletteProvider="{StaticResource GainLossPaletteProvider}"
+                                            s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate}">
+                    <s:FastLineRenderableSeries.PointMarker>
+                        <seriesWithMetadata:AnnotatedPointMarker Width="5" Height="7" GainMarkerFill="LimeGreen" LossMarkerFill="Red" Stroke="White" StrokeThickness="1"/>
+                    </s:FastLineRenderableSeries.PointMarker>
+
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis with Growby  -->
+            <s:SciChartSurface.XAxis>
+                <s:DateTimeAxis GrowBy="0,0.1"
+                                DrawMajorBands="True"
+                                DrawMinorTicks="False"
+                                DrawMinorGridLines="False"
+                                TextFormatting="yyyy"
+                                CursorTextFormatting="yyyy"/>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with Growby. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis  GrowBy="0.1,0.1"
+                                DrawMajorBands="False"
+                                DrawMinorTicks="False"
+                                DrawMinorGridLines="False"/>
+            </s:SciChartSurface.YAxis>
+            
+            <s:SciChartSurface.Annotations>
+                <s:HorizontalLineAnnotation Stroke="Red" ShowLabel="False" Y1="0" Opacity="0.7" HorizontalAlignment="Stretch">
+                    <s:AnnotationLabel Text="break-even balance point" LabelPlacement="Top" FontSize="14"/>    
+                </s:HorizontalLineAnnotation>
+            </s:SciChartSurface.Annotations>
+            
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:LegendModifier ShowLegend="True" Margin="10" 
+                                      LegendItemTemplate="{StaticResource LegendTemplate}" />
+                    <s:CursorModifier ShowTooltip="True" 
+                                      ShowTooltipOn="MouseHover" 
+                                      ReceiveHandledEvents="True" 
+                                      TooltipContainerStyle="{StaticResource CursorTooltipContainerStyle}"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

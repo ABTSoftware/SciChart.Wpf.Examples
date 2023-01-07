@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="WpfApplication1.SciChartContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApplication1"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, TransitionOn=Loaded}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <s:SciChartSurface Grid.Column="0">
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+        </s:SciChartSurface>
+
+        <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" Foreground="Orange" Text="SciChart 2D Package"/>
+
+        <s3D:SciChart3DSurface Grid.Column="1">
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.ZAxis>
+        </s3D:SciChart3DSurface>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" Foreground="Orange" Text="SciChart 3D Package"/>
+
+        <TextBlock x:Name="VersionTextBlock" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40" Foreground="GreenYellow" />
+    </Grid>
+</UserControl>

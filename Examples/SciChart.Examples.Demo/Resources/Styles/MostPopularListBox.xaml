@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:UsageToRatingConverter x:Key="UsageToRatingConverter"/>
+    <converters:UsageToVisitedCountConverter x:Key="UsageToVisitedCountConverter"/>
+    
+    <Style x:Key="MostPopularItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Margin" Value="0,0,8,8" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="260" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{StaticResource GroupsItemBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+
+                    <Grid Margin="{TemplateBinding Padding}">
+
+                        <Rectangle x:Name="ListItemBorder"
+                                   Fill="{TemplateBinding Background}"
+                                   Stroke="{TemplateBinding BorderBrush}"
+                                   StrokeThickness="{TemplateBinding BorderThickness}" />
+
+                        <ContentPresenter x:Name="contentPresenter"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ListItemBorder" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#1670cc" />
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused" />
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="MostPopularDataTemplate">
+        <Grid >
+            <TextBlock Margin="10,10,0,10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Style="{StaticResource GroupHeaderTextStyle}"
+                       Text="{Binding Example.Title}"
+                       TextWrapping="Wrap" />
+            <TextBlock HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Foreground="White">
+                <Run Text="{Binding Rating, StringFormat='{}Usage {0}', Converter={StaticResource UsageToVisitedCountConverter}}" />
+                <Run Text="{Binding Rating, StringFormat='{}Rating: {0} ', Converter={StaticResource UsageToRatingConverter}}" />
+            </TextBlock>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

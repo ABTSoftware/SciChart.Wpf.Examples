@@ -1,0 +1,26 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateRadarChart/RadarChartCustomizationExampleView.xaml</View>
+  <ViewModel>Examples.CreateRadarChart.RadarChartCustomizationExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconPolar</IconPath>
+  <ToolTipDescription>Radar Chart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a customization Radar Chart. A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point. The relative position and angle of the axes is typically uninformative.
+
+    [i][b]Tips![/i][/b]
+    [i]You can configurate AxisLength and Angle properties in RadarYAxis. But before you should set to false AutoAxisLength or AutoAxisAngleCalculation properties in SciChartRadarSurface.[/i]
+
+    [i]For customizate axis label you should use label provider on axis [/i]
+
+    [b]Documentation Links[/b]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationExampleViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateRadarChart/RadarChartCustomizationLabelProviders.cs.txt</string>
+  </CodeFiles>
+  <Features>
+  </Features>
+</ExampleDefinition>

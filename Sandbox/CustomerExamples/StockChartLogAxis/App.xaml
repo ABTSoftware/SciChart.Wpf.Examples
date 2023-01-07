@@ -1,0 +1,11 @@
+﻿<Application x:Class="StockChartLogAxisExample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             StartupUri="StockChartLogAxis.xaml">
+    <Application.Resources>
+        <Style TargetType="{x:Type s:SciChartSurface}">
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+        </Style>
+    </Application.Resources>
+</Application>

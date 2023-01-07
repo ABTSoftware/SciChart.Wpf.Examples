@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SciChartSurfaceMeshSelection", "SciChartSurfaceMeshSelection.csproj", "{7C23DCE8-65F0-4C0F-AACD-CF426CB83CDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C23DCE8-65F0-4C0F-AACD-CF426CB83CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C23DCE8-65F0-4C0F-AACD-CF426CB83CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C23DCE8-65F0-4C0F-AACD-CF426CB83CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C23DCE8-65F0-4C0F-AACD-CF426CB83CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {307C24FE-E379-4D53-B38C-D09745A96D7B}
+	EndGlobalSection
+EndGlobal

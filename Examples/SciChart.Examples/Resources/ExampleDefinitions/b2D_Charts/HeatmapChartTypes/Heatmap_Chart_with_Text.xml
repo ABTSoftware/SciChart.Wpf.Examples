@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/HeatmapChartTypes/HeatmapWithText/HeatMapWithTextInCellsExampleView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHeatmapWithText.png</ImagePath>
+  <IconPath>IconHeat</IconPath>
+  <ToolTipDescription>Demonstrates how to create a Heatmap with Text in the cells SciChart. Accepts a 2D Array of data and has a user-defined colour map which can be displayed as a legend over the chart.</ToolTipDescription>
+  <Description>
+    Demonstrates how to create a Heatmap with Text in the cells SciChart. Accepts a 2D Array of data and has a user-defined colour map which can be displayed as a legend over the chart.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries class[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.NonUniformHeatmapDataSeries%601.html']NonUniformHeatmapDataSeries class[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/HeatmapWithText/HeatMapWithTextInCellsExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/HeatmapChartTypes/HeatmapWithText/HeatMapWithTextInCellsExampleView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Heatmap</Features>
+  </Features>
+</ExampleDefinition>

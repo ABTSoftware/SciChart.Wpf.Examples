@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/CategoryVsValueAxis.xaml</View>
+  <ViewModel>Examples.ModifyAxisBehaviour.CategoryVsValueAxisViewModel</ViewModel>
+  <ImagePath></ImagePath>
+  <IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates switching from Value to Category axis dynamically</ToolTipDescription>
+  <Description>
+    This example demonstrates the CategoryNumericAxis type - a new Category axis which has been added to v4.1 of SciChart WPF, which behaves like a CategoryDateTimeAxis but allows numeric values on the XAxis instead of dates.
+
+    Using a simple attached property we are able to change axis type. Take a look at the source-code to see how we do this.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']Category Axis vs. Value Axis types[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/CategoryVsValueAxis.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/CategoryVsValueAxis.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/CategoryVsValueAxisViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/SwitchAxisTypeBehavior.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>
+  </Features>
+</ExampleDefinition>

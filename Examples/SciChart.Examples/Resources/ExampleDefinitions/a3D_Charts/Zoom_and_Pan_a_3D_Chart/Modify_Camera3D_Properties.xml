@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/ZoomAndPanA3DChart/ModifyCameraProperties.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconZoom</IconPath>
+  <ToolTipDescription>
+    Demonstrates the properties of the [url='https://www.scichart.com/documentation/win/current/The%20SciChart3DSurface%20Camera.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
+  </ToolTipDescription>
+  <Description>
+    Demonstrates the properties of the [url='https://www.scichart.com/documentation/win/current/The%20SciChart3DSurface%20Camera.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...
+
+    The Camera3D is attached to the [url='https://www.scichart.com/documentation/win/current/The%20SciChart3DSurface%20Camera.html']SciChart3DSurface.Camera[/url] property and may be changed from perspective to orthogonal and zoomed to fit the 3D Chart. The Camera3D can also be animated from position to position, and multiple cameras can be enabled on a scene.
+
+    [b][i]Tip![/i][/b]
+
+    [b]Click CAM1 and CAM2 on the left to switch between cameras. You can also change camera properties to see how the viewport of the 3D Chart changes.[/b]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ModifyCameraProperties.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ModifyCameraProperties.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Bubble3D</Features>
+  </Features>
+</ExampleDefinition>

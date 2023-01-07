@@ -1,0 +1,27 @@
+﻿<Window x:Class="SciChart.Sandbox.Examples.AspectRatios.AspectRatios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SciChart.Sandbox.Examples.AspectRatios"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="TicklinesUniformGrid" Height="300" Width="300">
+    <Grid>
+        <s:SciChartSurface x:Name="sciChart" s:ThemeManager.Theme="Chrome" ShowLicensingWarnings="False">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries StrokeThickness="5" Stroke="LightSteelBlue" x:Name="lineSeries"/>
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis x:Name="xAxis" IsLabelCullingEnabled="False" VisibleRange="0, 10"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="yAxis" IsLabelCullingEnabled="False" VisibleRange="0, 10"/>
+            </s:SciChartSurface.YAxis>
+            
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation Text="Resize the window to maintain constant aspect ratio" CoordinateMode="Relative"/>
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

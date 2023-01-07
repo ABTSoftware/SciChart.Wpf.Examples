@@ -1,0 +1,33 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCreateAnnotationsDynamically.png</ImagePath>
+  <IconPath>IconAnnotations</IconPath>
+  <ToolTipDescription>Demonstrates the Modifiers API to create Text, Line, Box, LineArrow and Custom Annotations dynamically.</ToolTipDescription>
+  <Description>
+    Using the [url='https://www.scichart.com/documentation/win/current/Editing%20and%20Interacting%20with%20Annotations.html']AnnotationCreationModifier[/url] you can give your users the ability to create annotations dynamically via mouse-clicks.
+
+    [b][i]Tips![/i][/b]
+
+    To create [url='https://www.scichart.com/documentation/win/current/The%20TextAnnotation%20Type.html']TextAnnotations[/url], [url='https://www.scichart.com/documentation/win/current/The%20AxisMarkerAnnotation%20Type.html']AxisMarkerAnnotations[/url], [url='https://www.scichart.com/documentation/win/current/The%20CustomAnnotation%20Type.html']CustomAnnotations[/url], - [url='https://www.scichart.com/documentation/win/current/The%20HorizontalLineAnnotation%20Type.html']HorizontalLineAnnotations[/url] and - [url='https://www.scichart.com/documentation/win/current/The%20VerticalLineAnnotation%20Type.html']VerticalLineAnnotations[/url], simply click once.
+
+    To create [url='https://www.scichart.com/documentation/win/current/The%20BoxAnnotation%20Type.html']BoxAnnotations[/url], [url='https://www.scichart.com/documentation/win/current/The%20LineAnnotation%20Type.html']LineAnnotations[/url] and [url='https://www.scichart.com/documentation/win/current/The%20LineArrowAnnotation%20Type.html']LineArrowAnnotations[/url] click and drag.
+
+    After creating and selecting an annotation, you can drag, resize and delete it.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/Editing%20and%20Interacting%20with%20Annotations.html']AnnotationCreationModifier Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Intro%20to%20the%20Annotations%20API.html']Annotations API Documentation[/url]
+    - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']Databinding Annotations with MVVM[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml.cs.txt</string>    
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/MyCustomAnnotation.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/AnnotateAChart/CreateAnnotationsDynamically/MyCustomAnnotation.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+  </Features>
+</ExampleDefinition>

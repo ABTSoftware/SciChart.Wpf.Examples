@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/CustomTooltipsWithModifiers.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>Demonstrates how to use custom tooltips with RolloverModifier, TooltipModifier, VerticalSliceModifier and CursorModifier.</ToolTipDescription>
+  <Description>
+    Demonstrates how to apply custom ControlTemplates and DataTemplates to various Tooltip modifiers within SciChart.
+
+    All the tooltip modifiers such as [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#TooltipModifier.html']TooltipModifier[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']VerticalSliceModifier[/url] and [url='https://www.scichart.com/documentation/win/current/webframe.html#CursorModifier.html']CursorModifier[/url] have pre-defined DataTemplates set as attached properties on RenderableSeries.
+
+    These can be overridden if you wish to display a custom tooltip on the chart.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier~SetTooltipTemplate.html']VerticalSliceModifier TooltipTemplate[/url] attached property
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier~SetTooltipTemplate.html']RolloverModifier TooltipTemplate[/url] attached property
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.TooltipModifier~SetTooltipTemplate.html']TooltipModifier TooltipTemplate[/url] attached property
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier~TooltipContainerStyle.html']CursorModifier TooltipContainerStyle[/url] property
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomTooltipsWithModifiers.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomTooltipsWithModifiers.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Selection</Features>    
+  </Features>
+</ExampleDefinition>

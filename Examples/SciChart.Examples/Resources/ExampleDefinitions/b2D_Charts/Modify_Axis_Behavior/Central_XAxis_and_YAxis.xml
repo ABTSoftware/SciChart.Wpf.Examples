@@ -1,0 +1,24 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/ShiftedAxes/ShiftedAxes.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoShiftedAxes.png</ImagePath>
+  <IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Shows how to create chart with shifted X and Y axes</ToolTipDescription>
+  <Description>
+    Demonstrates how to place X and Y Axes at the Center of the SciChartSurface using our ShiftedAxesBehavior.
+
+    ShiftedAxesBehavior allows to place Axis centrally which is common in Oscilloscope and VDU displays.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Alignment%20-%20Placing%20Axis%20Central%20in%20the%20Chart.html']Creating a Chart with Center Axis[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/ShiftedAxes/ShiftedAxes.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/ShiftedAxes/ShiftedAxes.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/ShiftedAxes/ShiftedAxesBehavior.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>    
+  </Features>
+</ExampleDefinition>

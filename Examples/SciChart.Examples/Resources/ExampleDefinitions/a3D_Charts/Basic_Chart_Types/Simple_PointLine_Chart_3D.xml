@@ -1,0 +1,18 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/CreateA3DChart/CreateAPointLine3DChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconScatter3D</IconPath>
+  <ToolTipDescription>
+    The PointLine Chart demo shows how to create high-performance 3D PointLine with two-dimensional markers chart using the SciChart 3D Component.
+  </ToolTipDescription>
+  <Description>
+    The PointLine Chart demo shows how to create high-performance 3D PointLine with three-dimensional markers chart using the SciChart 3D Component.
+
+    The 3D PointLine chart is defined by the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.PointLineRenderableSeries3D.html']PointLineRenderableSeries3D[/url].
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/CreateAPointLine3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/CreateAPointLine3DChart.xaml.cs.txt</string>
+  </CodeFiles>
+</ExampleDefinition>

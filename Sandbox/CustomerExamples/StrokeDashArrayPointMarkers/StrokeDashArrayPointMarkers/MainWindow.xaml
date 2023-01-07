@@ -1,0 +1,60 @@
+﻿<Window x:Class="StrokeDashArrayPointMarkers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StrokeDashArrayPointMarkers"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <s:SciChartSurface x:Name="sciChart0" ChartTitle="HQ Software Renderer" ShowLicensingWarnings="False">
+            <s:SciChartSurface.RenderSurface>
+                <s:HighQualityRenderSurface/>
+            </s:SciChartSurface.RenderSurface>
+            <s:SciChartSurface.RenderableSeries>
+                <s:XyScatterRenderableSeries>
+                    <local:CirclePointMarker2 Width="15" Height="15" Fill="Green" StrokeThickness="2" Stroke="White"/>
+                </s:XyScatterRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+            
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation DataContext="{Binding ElementName=sciChart0, Path=RenderSurface}" Text="{Binding Path=.}"
+                                  X1="0.5" Y1="0.5" CoordinateMode="Relative" HorizontalAnchorPoint="Center"/>
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+
+        <s:SciChartSurface x:Name="sciChart1" Grid.Column="1" ChartTitle="Vx Renderer"
+                           s:VisualXcceleratorEngine.IsEnabled="True"
+                           ShowLicensingWarnings="False">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:XyScatterRenderableSeries>
+                    <local:CirclePointMarker2 Width="15" Height="15" Fill="Green" StrokeThickness="2" Stroke="White"/>
+                </s:XyScatterRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1, 0.1"/>
+            </s:SciChartSurface.YAxis>
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation DataContext="{Binding ElementName=sciChart1, Path=RenderSurface}" Text="{Binding Path=.}"
+                                  X1="0.5" Y1="0.5" CoordinateMode="Relative" HorizontalAnchorPoint="Center"/>
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

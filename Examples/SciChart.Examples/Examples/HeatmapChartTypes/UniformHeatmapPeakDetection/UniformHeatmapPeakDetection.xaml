@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.UniformHeatmapPeakDetection.UniformHeatmapPeakDetection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.RowSpan="2"
+                Background="#232426"
+                BorderBrush="#323539"
+                BorderThickness="0,0,2,0">
+            <StackPanel>
+                <ToggleButton x:Name="RubberBandToggle"
+                              HorizontalAlignment="Left"
+                              Content="Zoom"
+                              IsChecked="True"
+                              Style="{StaticResource ZoomButtonStyle}"
+                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+
+                <ToggleButton x:Name="ZoomPanToggle"
+                              HorizontalAlignment="Left"
+                              Content="Pan"
+                              IsChecked="False"
+                              Style="{StaticResource PanButtonStyle}"
+                              ToolTipService.ToolTip="Toggle Zoom-Pan"
+                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+
+                <Button HorizontalAlignment="Left"
+                        Command="{Binding AnimateZoomExtentsCommand, Source={x:Reference SciChartSurface}}"
+                        Content="Zoom Extents"
+                        Style="{StaticResource ZoomExtentsButtonStyle}"
+                        ToolTipService.ToolTip="Zoom to Extents"/>
+
+                <ext:FlyoutSeparator/>
+
+                <ToggleButton x:Name="PeakDetectorToggle"
+                              HorizontalAlignment="Left"
+                              Content="PD"
+                              IsChecked="True"
+                              Style="{StaticResource DefaultToggleButtonStyle}"
+                              ToolTipService.ToolTip="Toggle Auto Peak Detection"/>
+
+                <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+                    <ext:FlyoutMenuButton.PopupContent>
+                        <StackPanel MinWidth="150" Orientation="Vertical">
+                            <TextBlock Text="Texture Filtering"/>
+                            <CheckBox x:Name="textureSwitch"
+                                      Margin="4"
+                                      Content="UseLinearTextureFiltering"/>
+                        </StackPanel>
+                    </ext:FlyoutMenuButton.PopupContent>
+                </ext:FlyoutMenuButton>
+            </StackPanel>
+        </Border>
+
+        <s:SciChartSurface x:Name="SciChartSurface" Grid.Row="1" Grid.Column="1">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries">
+                    <s:FastUniformHeatmapRenderableSeries.Style>
+                        <Style TargetType="{x:Type s:FastUniformHeatmapRenderableSeries}">
+                            <Setter Property="AutoPeakDetection" Value="{Binding IsChecked, Mode=OneWay, Source={x:Reference PeakDetectorToggle}}"/>
+                            <Setter Property="UseLinearTextureFiltering" Value="{Binding IsChecked, Mode=OneWay, Source={x:Reference Name=textureSwitch}}"/>
+                            <Setter Property="ColorMap">
+                                <Setter.Value>
+                                    <s:HeatmapColorPalette Minimum="-70" Maximum="0">
+                                        <s:HeatmapColorPalette.GradientStops>
+                                            <GradientStop Offset="0" Color="DarkBlue" />
+                                            <GradientStop Offset="0.0001" Color="Blue" />
+                                            <GradientStop Offset="0.2" Color="CornflowerBlue" />
+                                            <GradientStop Offset="0.4" Color="DarkGreen" />
+                                            <GradientStop Offset="0.6" Color="Chartreuse" />
+                                            <GradientStop Offset="0.8" Color="Yellow" />
+                                            <GradientStop Offset="1" Color="Red" />
+                                        </s:HeatmapColorPalette.GradientStops>
+                                    </s:HeatmapColorPalette>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:FastUniformHeatmapRenderableSeries.Style>
+                </s:FastUniformHeatmapRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AutoRange="Once" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Once"/>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomExtentsModifier IsEnabled="True"/>
+                    <s:ZoomPanModifier IsEnabled="{Binding IsChecked, Source={x:Reference ZoomPanToggle}}"/>
+                    <s:RubberBandXyZoomModifier IsEnabled="{Binding IsChecked, Source={x:Reference RubberBandToggle}}"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <s:HeatmapColorMap Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           BorderThickness="0"
+                           Background="Transparent"
+                           ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderableSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderableSeries}}"
+                           Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderableSeries}}"
+                           Orientation="Horizontal"
+                           EnableAxisDrag="True"
+                           TextFormatting="0">
+
+            <s:HeatmapColorMap.AxisStyle>
+                <Style TargetType="s:AxisBase">
+                    <Setter Property="Margin" Value="0,-15,0,0"/>
+                    <Setter Property="DrawMajorBands" Value="False"/>
+                    <Setter Property="DrawMinorTicks" Value="False"/>
+                    <Setter Property="DrawMajorGridLines" Value="False"/>
+                    <Setter Property="DrawMinorGridLines" Value="False"/>
+                </Style>
+            </s:HeatmapColorMap.AxisStyle>
+        </s:HeatmapColorMap>
+    </Grid>
+</UserControl>

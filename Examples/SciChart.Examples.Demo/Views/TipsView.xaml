@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="SciChart.Examples.Demo.Views.TipsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="850"
+             AutomationProperties.AutomationId="TipsView">
+    <Grid>
+
+        <!-- Breadcrumb section -->
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Width="94.163645" Height="72.165172" Grid.Column="0">
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M 94.12087 71.842349 C 14.679228 61.315909 0.9005563 0.96161919 0.9005563 0.96161919"/>
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M -1.6964286 8.4151727 0.98214285 1.2723156 7.5892857 5.7366013"/>
+            </Canvas>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,-10,5,5">
+                <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Breadcrumb Navigation" TextAlignment="Center"/>
+                <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
+                <Run Text="Ended up in the wrong place?"></Run><LineBreak/>
+                <Run Text="Don't worry, you can quickly"></Run><LineBreak/>
+                <Run Text="navigate back through this!"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <!-- Toolbar section -->
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Width="94.163645" Height="140" Grid.Column="1" HorizontalAlignment="Left">
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M 0.62597766 1.2118522 C 60.495915 10.728139 93.845653 131.17806 93.845653 131.17806"/>
+                <Path  StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 4.8938607 6.9986745 0.17983199 1.000918 7.4256299 -2.328135"/>
+            </Canvas>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,-10,5,5">
+                <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Toolbar" TextAlignment="Center"/>
+                <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
+                <Run Text="Interact with the current example"></Run><LineBreak/>
+                <Run Text="e.g. you can Zoom, Pan, change properties,"></Run><LineBreak/>
+                <Run Text="start and stop demos"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <!-- Feedback section -->
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="320, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Width="57.431043" Height="130.72422" HorizontalAlignment="Right" Margin="40,5">
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M 57.109584 0.05113946 C 45.453932 73.317426 0.25539967 130.52243 0.25539967 130.52243"/>
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 60.76726 6.4535743 57.184869 -0.28152996 51.212565 5.0020079"/>
+            </Canvas>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Feedback" TextAlignment="Center"/>
+                <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
+                    <Run Text="Knowing what is right and"></Run><LineBreak/>
+                    <Run Text="wrong is essential to us. We want to"></Run><LineBreak/>
+                    <Run Text="know what you think so we can"></Run><LineBreak/>
+                    <Run Text="build upon what we have!"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <!-- Source Code section -->
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 120,80,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Width="57.431043" Height="130.72422" HorizontalAlignment="Right" Margin="30,5">
+                <Canvas.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1.5" CenterY="130"/>
+                </Canvas.RenderTransform>
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M 57.109584 0.05113946 C 45.453932 73.317426 0.25539967 130.52243 0.25539967 130.52243"/>
+                <Path StrokeThickness="2" Stroke="{StaticResource SciChartGreenBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 60.76726 6.4535743 57.184869 -0.28152996 51.212565 5.0020079"/>
+            </Canvas>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Example Source Code" TextAlignment="Center"/>
+                <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
+                    <Run Text="Switch views from the example to source-code."></Run><LineBreak/>
+                    <Run Text="You can also view the code on Github!"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <!-- Documentation section -->
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20, 0, 80, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Width="94.163645" Height="72.165172" Grid.Column="1">
+                <Canvas.RenderTransform>
+                    <ScaleTransform ScaleX="-1" ScaleY="0.5" CenterX="45" CenterY="90"/>
+                </Canvas.RenderTransform>
+                <Path StrokeThickness="3" Stroke="{StaticResource SciChartGreenBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="M 94.12087 71.842349 C 14.679228 61.315909 0.9005563 0.96161919 0.9005563 0.96161919"/>
+                <Path StrokeThickness="3" Stroke="{StaticResource SciChartGreenBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M -1.6964286 8.4151727 0.98214285 1.2723156 7.5892857 5.7366013"/>
+            </Canvas>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,-10,5,5">
+                <TextBlock Style="{StaticResource GroupHeaderTextStyle}" Text="Documentation" TextAlignment="Center"/>
+                <Border HorizontalAlignment="Stretch" Height="1" Background="{StaticResource SciChartGreenBrush}"/>
+                <TextBlock Style="{StaticResource DefaultTextStyle}" TextWrapping="Wrap" TextAlignment="Center">
+                    <Run Text="The documentation panel on the right"></Run><LineBreak/>
+                    <Run Text="contains links to our documentation"></Run><LineBreak/>
+                    <Run Text="as well as other useful info!"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center"  HorizontalAlignment="Center" >                    
+            <TextBlock Text="SciChart Examples | Help" Style="{StaticResource GroupHeaderTextStyle}" Margin="5" Opacity="0.5"/>
+
+            <Border Height="1" Background="#333" VerticalAlignment="Bottom" Margin="5,0"/>
+        
+            <Button AutomationProperties.AutomationId="TipsView.GotItButton" 
+                    Style="{StaticResource IconButtonStyle}" Width="NaN" Height="NaN" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Command="{Binding CloseHelpCommand}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="2" Background="#1e1e1e" CornerRadius="5" BorderBrush="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="36" Margin="10" Foreground="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}" Text="Got it!">
+                                </TextBlock>
+                                <TextBlock FontSize="36" Margin="0,5,10,0" VerticalAlignment="Center" FontFamily="Marlett" Foreground="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}" Text="r">
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

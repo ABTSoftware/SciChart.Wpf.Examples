@@ -1,0 +1,37 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/ModifyAxisBehaviour/ModifyAxisProperties.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoModifyAxisProperties.png</ImagePath>
+<IconPath>IconAxis3D</IconPath>
+  <ToolTipDescription>Demonstrates the properties on NumericAxis and DateTimeAxis including TextFormatting, VisibleRange, AxisAlignment and the effect of changing them. Includes how to collapse gaps in a Candlestick or OHLC Chart</ToolTipDescription>
+  <Description>
+    Demonstrates the properties on NumericAxis and DateTimeAxis including TextFormatting, VisibleRange, AxisAlignment and the effect of changing them.
+
+    [b][i]Example Usage[/i][/b]
+
+    - Show/Hide Major Grid Lines and Ticks.
+    - Change XAxis or YAxis Text Formatting.
+    - Swap YAxis from Right to Left alignment.
+    - Manually change XAxis or YAxis VisibleRange.
+
+    [b]Documentation Links[/b]
+
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17195/30/turning-gridlines-axis-labels-on-or-off']Turning Gridlines, Axis Labels On or Off[/url]
+    - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17196/30/drawing-axis-bands']Drawing Axis Bands[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Ranging%20-%20AutoRange%20and%20VisibleRange.html']Setting Axis VisibleRange in Code or MVVM[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Types%20in%20SciChart.html']Axis Types in SciChart[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.NumericAxis.html']NumericAxis Type[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.DateTimeAxis.html']DateTimeAxis Type[/url]
+
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/ModifyAxisProperties.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/ModifyAxisProperties.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/CompatibleDatePicker.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Axis</Features>
+    <Features>Gridlines</Features>
+    <Features>Ticks</Features>
+  </Features>
+</ExampleDefinition>

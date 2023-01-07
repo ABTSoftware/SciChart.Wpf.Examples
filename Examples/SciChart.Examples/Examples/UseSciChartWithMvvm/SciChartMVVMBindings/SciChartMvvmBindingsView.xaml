@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding.SciChartMvvmBindingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style x:Key="DateTimeAxisStyle" BasedOn="{StaticResource {x:Type s:DateTimeAxisForMvvm}}" TargetType="s:DateTimeAxisForMvvm">
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="Background" Value="DarkBlue"/>
+                <Setter Property="BorderBrush" Value="CadetBlue"/>
+            </Style>
+        </Grid.Resources>
+
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <!--<ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>-->
+
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           ClipModifierSurface="True"
+                           Padding="0"
+                           Annotations="{s:AnnotationsBinding AnnotationViewModels}"
+                           RenderableSeries="{s:SeriesBinding RenderableSeries}"
+                           XAxes="{s:AxesBinding XAxes}"
+                           YAxes="{s:AxesBinding YAxes}">
+            <s:SciChartSurface.Resources>
+                <ControlTemplate x:Key="CustomBoxTemplate">
+                    <Border x:Name="PART_BoxAnnotationRoot" Background="Transparent" BorderThickness="0">
+                        <Ellipse  Fill="{TemplateBinding Background}" Stretch="Fill"/>
+                    </Border>
+                </ControlTemplate>
+                <Style x:Key="CustomBoxAnnotationStyle" BasedOn="{StaticResource {x:Type s:BoxAnnotationForMvvm}}" TargetType="s:BoxAnnotationForMvvm">
+                    <Setter Property="Background" Value="Gold" />
+                    <Setter Property="Template" Value="{StaticResource CustomBoxTemplate}"/>
+                </Style>
+            </s:SciChartSurface.Resources>
+        </s:SciChartSurface>
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts.SeriesCustomTooltips3DChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:cd="clr-namespace:SciChart.Charting3D.Model.ChartData;assembly=SciChart.Charting3D"
+             xmlns:t3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D">
+
+    <UserControl.Resources>
+
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          BlurRadius="5"
+                          Direction="-45"
+                          ShadowDepth="10"
+                          Color="Black" />
+
+        <Style x:Key="TooltipStyle" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="#ff6495ed"
+                                BorderBrush="#ff4d81dd"
+                                BorderThickness="2"
+                                Effect="{StaticResource DropShadowEffect}"
+                                Opacity="0.9"
+                                Padding="5">
+
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="XyzSeriesTooltipTemplate" DataType="cd:BaseXyzSeriesInfo3D">
+            <StackPanel>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="This is the Custom tooltip DataTemplate" />
+                </TextBlock>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="VertexId: " />
+                        <Run Text="{Binding VertexId}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="PointMetadata: " />
+                        <Run Text="{Binding PointMetadata.Tag}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="X: " />
+                        <Run Text="{Binding FormattedXValue, Mode=OneWay}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="Y: " />
+                        <Run Text="{Binding FormattedYValue, Mode=OneWay}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold" Text="Z: " />
+                        <Run Text="{Binding FormattedZValue, Mode=OneWay}" />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChart3DInteractionToolbar Grid.Column="0" TargetSurface="{Binding Source={x:Reference Name=SciChart}}" />
+
+        <s3D:SciChart3DSurface x:Name="SciChart"
+                               Grid.Column="1"
+                               BorderThickness="0"
+                               WorldDimensions="200,200,200">
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:ScatterRenderableSeries3D t3D:TooltipModifier3D.TooltipContainerStyle="{StaticResource TooltipStyle}" t3D:TooltipModifier3D.TooltipTemplate="{StaticResource XyzSeriesTooltipTemplate}">
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Fill="#88ffffff" Size="2.0" />
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-1.1, 1.1" />
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-1.1, 1.1" />
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D GrowBy="0.2,0.2" VisibleRange="-1.1, 1.1" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton" IsEnabled="True" />
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" IsEnabled="False" />
+                    <t3D:TooltipModifier3D HoverDelay="150" ShowTooltipOn="MouseOver" />
+                    <s3D:MouseWheelZoomModifier3D />
+                    <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
+                                               AutoFitRadius="True"
+                                               ResetPosition="-200, 100, -200" />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+    </Grid>
+</UserControl>

@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.ModifyAxisBehaviour.SwitchAxisTypeAtRuntime"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:m="clr-namespace:SciChart.Examples.Examples.ModifyAxisBehaviour"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ToggleButton HorizontalAlignment="Left"
+                          Content="Log"
+                          IsChecked="{Binding UseLogarithmicAxis, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Y-Axis Logarithmic?" />
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Declare the SciChartSurface  -->
+        <!--  Because in this example we are dynamically changing axis type from Linear to Logarithmic,  -->
+        <!--  Then we have a binding between SciChartSurface.XAxis and the code-behind XAxis property  -->
+        <!--  Likewise SciChartSurface.YAxis and the code-behind YAxis property  -->
+        <!--  In reality, if you wanted just a Logarithmic chart, please use type LogarithmicNumericAxis  -->
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           m:SwitchAxisTypeBehavior.UseAlternateYAxis="{Binding UseLogarithmicAxis}">
+
+            <m:SwitchAxisTypeBehavior.DefaultYAxis>
+                <s:NumericAxis Id="YNumAxis"
+                               AutoRange="Never"
+                               AxisTitle="Numeric Axis"
+                               DrawMajorBands="True"
+                               VisibleRange="0, 10" />
+            </m:SwitchAxisTypeBehavior.DefaultYAxis>
+
+            <m:SwitchAxisTypeBehavior.AlternativeYAxis>
+                <s:LogarithmicNumericAxis Id="YLogAxis"
+                                          AxisTitle="Logarithmic Axis"
+                                          CursorTextFormatting="0.0"
+                                          DrawMajorBands="True"
+                                          LogarithmicBase="10"
+                                          TextFormatting="0.0"
+                                          VisibleRange="0.1, 10000" />
+            </m:SwitchAxisTypeBehavior.AlternativeYAxis>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisTitle="Numeric Axis" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier x:Name="zoomModifier" />
+                    <s:ZoomPanModifier x:Name="panModifier" />
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomExtentsModifier />
+                    <s:XAxisDragModifier ClipModeX="None" />
+                    <s:YAxisDragModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+            <s:SciChartSurface.Annotations>
+
+                <s:CustomAnnotation CoordinateMode="Relative" 
+                                    HorizontalAnchorPoint="Left"
+                                    VerticalAnchorPoint="Center" 
+                                    Margin="5,18,0,0" 
+                                    X1="0" 
+                                    Y1="0" >
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock FontSize="20" 
+                                   Opacity="0.7"
+                                   Background="#232323"
+                                   Margin="0 0 5 0"
+                                   Text="Switch between logarithmic and numeric y-axis at realtime" 
+                                   Foreground="#FFF" />
+
+                        <Image Width="32"
+                               Height="32"
+                               Source="/SciChart.Examples;component/Resources/Images/logarithmic_button.png"
+                               Stretch="None" />
+
+                    </StackPanel>
+                </s:CustomAnnotation> 
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

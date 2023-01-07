@@ -1,0 +1,114 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon />
+    <StartupObject />
+    <LangVersion>Latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+    <OutputPath>..\..\Build\Release</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <OutputPath>..\..\Build\Release</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <Compile Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <Compile Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <EmbeddedResource Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+    <None Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <None Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <None Remove="Resources\ExampleDefinitions\**\*.xml" />
+    <None Remove="Resources\ExampleSourceFiles\**\*.txt" />
+    <None Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+    <None Remove="Images\*.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExampleDefinitions\**\*.xml" />
+  </ItemGroup>
+  <Target Name="PackExampleSources" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <ExampleSources Include="@(Page);@(Compile)" Condition="$([System.String]::new('%(Directory)').Contains('SciChart.Examples\Examples\'))" />
+      <EmbeddedResource Include="@(ExampleSources)" />
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Reactive" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\*.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
+    <Page Remove="Examples\HeatmapChartTypes\NewFolder\**" />
+    <Page Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Images\add_button.png" />
+    <None Remove="Resources\Images\annotation_icon.png" />
+    <None Remove="Resources\Images\chart_line_2.png" />
+    <None Remove="Resources\Images\cursor_arrow.png" />
+    <None Remove="Resources\Images\cursor_drag_arrow.png" />
+    <None Remove="Resources\Images\del_button.png" />
+    <None Remove="Resources\Images\hexgridgenerated.png" />
+    <None Remove="Resources\Images\load_button.png" />
+    <None Remove="Resources\Images\logarithmic_button.png" />
+    <None Remove="Resources\Images\pointbutton_icon.png" />
+    <None Remove="Resources\Images\point_count_icon.png" />
+    <None Remove="Resources\Images\point_marker_icon.png" />
+    <None Remove="Resources\Images\select_icon.png" />
+    <None Remove="Resources\Images\sq_br_next.png" />
+    <None Remove="Resources\Images\start_button.png" />
+    <None Remove="Resources\Images\step_line.png" />
+    <None Remove="Resources\Images\type_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\ExampleSourceFiles\HeatmapChartTypes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\add_button.png" />
+    <Resource Include="Resources\Images\annotation_icon.png" />
+    <Resource Include="Resources\Images\chart_line_2.png" />
+    <Resource Include="Resources\Images\cursor_arrow.png" />
+    <Resource Include="Resources\Images\cursor_drag_arrow.png" />
+    <Resource Include="Resources\Images\del_button.png" />
+    <Resource Include="Resources\Images\hexgridgenerated.png" />
+    <Resource Include="Resources\Images\load_button.png" />
+    <Resource Include="Resources\Images\logarithmic_button.png" />
+    <Resource Include="Resources\Images\pointbutton_icon.png" />
+    <Resource Include="Resources\Images\point_count_icon.png" />
+    <Resource Include="Resources\Images\point_marker_icon.png" />
+    <Resource Include="Resources\Images\select_icon.png" />
+    <Resource Include="Resources\Images\sq_br_next.png" />
+    <Resource Include="Resources\Images\start_button.png" />
+    <Resource Include="Resources\Images\step_line.png" />
+    <Resource Include="Resources\Images\type_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart3D" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26595" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26595" />
+  </ItemGroup>
+</Project>

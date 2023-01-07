@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfApplication14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        Title="MainWindow"
+        Height="350"
+        Width="525">
+
+    <Grid>
+        <s:SciChartSurface>
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineSeries"/>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis x:Name="primaryAxis" AxisAlignment="Right" DrawMajorBands="True" />
+                <s:NumericAxis x:Name="secondaryAxis" AxisAlignment="Left" Id="SecondaryAxis"
+                               DrawMajorBands="False" DrawMajorGridLines="False" DrawMinorGridLines="False" AutoRange="Never"
+                               VisibleRange="{Binding ElementName=primaryAxis, Path=VisibleRange, Mode=TwoWay}"/>
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier ClipModeX="None"/>
+                    <s:ZoomExtentsModifier/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</Window>

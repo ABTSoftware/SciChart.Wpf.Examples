@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D.AddGeometryTo3DChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <Grid>
+        <s3D:SciChart3DSurface x:Name="sciChart3DSurface" WorldDimensions="400,0,400">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D Target="0,50,0" Position="-400,200,400"></s3D:Camera3D>
+            </s3D:SciChart3DSurface.Camera>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D/>
+            </s3D:SciChart3DSurface.ZAxis>
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseLeftButton" ExecuteWhen="Shift"/>
+                    <s3D:OrbitModifier3D ExecuteOn="MouseLeftButton"/>
+                    <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:ZoomExtentsModifier3D ResetPosition="-400,200,400" ResetTarget="0,50,0"  AnimateDurationMs="500"/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+    </Grid>
+</UserControl>

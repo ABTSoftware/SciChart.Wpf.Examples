@@ -1,0 +1,77 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals">
+
+    <Style x:Key="HeaderButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="80" />
+        <Setter Property="Margin" Value="0,0,10,0" />
+    </Style>
+
+    <Style x:Key="DevModeButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="140"/>
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="Background" Value="#FF323539"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="BorderBrush" Value="#FF5B5B5B"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootElement" Background="Transparent">
+                        <Border x:Name="Border"
+                                CornerRadius="2"
+                                SnapsToDevicePixels="True"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"/>
+                        
+                        <ContentPresenter x:Name="ContentHost"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ext:TextElementEx.Foreground="{TemplateBinding Foreground}"/>
+
+                        <Border x:Name="DisabledVisualElement"
+                                CornerRadius="2"
+                                SnapsToDevicePixels="True"
+                                Background="#BB292929"
+                                BorderBrush="#5E292929"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                IsHitTestVisible="False"
+                                Opacity="0" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                            <Setter TargetName="Border" Property="Background" Value="#FF424549"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                            <Setter TargetName="Border" Property="Background" Value="#FF5B5B5B"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ExportExampleButtonStyle" BasedOn="{StaticResource DevModeButtonStyle}" TargetType="Button">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="SubmitFeedbackButtonStyle" BasedOn="{StaticResource DevModeButtonStyle}" TargetType="Button">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+</ResourceDictionary>

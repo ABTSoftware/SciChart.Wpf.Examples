@@ -1,0 +1,52 @@
+﻿<Window x:Class="WpfApp33.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        xmlns:wpfApp33="clr-namespace:WpfApp33"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="DynamicPanel">
+            <UniformGrid Columns="1"/>
+        </ItemsPanelTemplate>
+
+        <wpfApp33:MainViewModel x:Key="vm"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Content="Add Series" Command="{Binding AddSeriesCommand}"/>
+            <Button Content="Remove Series" Command="{Binding RemoveSeriesCommand}"/>
+        </StackPanel>
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Row="1"
+                            YAxes="{s:AxesBinding YAxis}"
+                            RenderableSeries="{s:SeriesBinding Series}"
+                            LeftAxesPanelTemplate="{StaticResource DynamicPanel}">
+
+            <!--  Create an X Axis with Growby  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" />
+                    <s:ZoomExtentsModifier />
+                    <s:CursorModifier ShowAxisLabels="False" ShowTooltip="False" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</Window>

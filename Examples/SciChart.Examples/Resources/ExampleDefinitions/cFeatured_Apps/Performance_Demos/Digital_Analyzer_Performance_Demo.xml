@@ -1,0 +1,64 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/PerformanceDemos2D/DigitalAnalyzer/DigitalAnalyzerExampleView.xaml</View>
+  <ViewModel>Examples.PerformanceDemos2D.DigitalAnalyzer.DigitalAnalyzerExampleViewModel</ViewModel>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    The Digital Analyzer demo shows a multi-surface pane, interactive MVVM demo rendering FastLineRenderableSeries that uses UniformXyDataSeries as data source. 
+  </ToolTipDescription>
+  <Description>
+    A Digital Analyzer is an electronic instrument that captures and displays multiple signals from a piece of hardware, such as a Data Acquisition Card or Logic Analyzer. 
+    
+    The Digital Analyzer demo shows multiple channels with randomly generated binary data with a common XAxis. 
+    It is implemented using the MVVM pattern to display multi-surface pane rendering FastLineRenderableSeries that use UniformXyDataSeries as data source. This DataSeries type requires Y-Values only, thus reducing memory consumption.
+    In this way it is possible to display tens of billions of points on a single view.
+
+    This demo loads up to 64 Billion Datapoints! (Requires 64GB RAM). 100 Billion Datapoints are also possible with 128GB of RAM.
+    
+    Interactivity is provided by ChartModifiers.
+
+    [b][i] The following interactions are possible:[/i][/b]
+
+    - [b][CTRL + MouseWheel][/b] to scroll channels up and down
+    - [b][SHIFT + MouseWheel][/b] to change the hight of channels
+    - [b][Mousewheel][/b] to zoom channels data in and out
+    - Click and drag [b][Left Mouse Button][/b] to zoom in channels data
+    - Double-click [b][Left Mouse Button][/b] to zoom to data extents
+
+    [b][i] Toolbar actions: [/i][/b]
+
+    - Toggle [b][Pan Button][/b] in the Toolbar to enable panning
+    - Press [b][+][/b] to add a new channel
+    - Hover over [b][CT][/b] to select type of channel to add from a Dropdown
+    - Hover over [b][PC][/b] to choose amount of channels and points per channel
+    - Press [b][LOAD][/b] to generate and load new channels list
+
+    [b]Documentation Links:[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.FastLineRenderableSeries.html']FastLineRenderableSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Synchronizing%20Multiple%20Charts.html']Synchronizing ChartModifier Mouse Events Across Charts[/url]
+  </Description>
+  
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/DigitalAnalyzerExampleView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/DigitalAnalyzerExampleView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/DigitalAnalyzerExampleViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/ChannelViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/ChannelGenerationHelper.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/ColorHelper.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/DigitalAnalyzerScrollBehavior.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/FocusedChannelScrollBehavior.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/PointCountToLabelConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/RandomGenerator.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/TimeLabelProvider.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/DigitalAnalyzer/Common/UniformDataManager.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Performance</Features>
+    <Features>Line</Features>
+    <Features>MVVM</Features>
+    <Features>Scientific</Features>
+    <Features>Vertical</Features>
+    <Features>LabelProvider</Features>
+  </Features>
+</ExampleDefinition>

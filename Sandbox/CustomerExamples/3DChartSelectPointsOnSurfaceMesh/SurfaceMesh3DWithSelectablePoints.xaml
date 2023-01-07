@@ -1,0 +1,86 @@
+﻿<Window x:Class="_3DChartChangePropertiesDynamically.SurfaceMesh3DWithSelectablePoints"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        mc:Ignorable="d"
+        Title="SurfaceMesh3DWithSelectablePoints" Height="450" Width="800">
+    <Window.Resources>
+
+        <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
+            <s3D:GradientColorPalette.GradientStops>
+                <GradientStop Offset="1" Color="DarkRed"/>
+                <GradientStop Offset="0.9" Color="Red"/>
+                <GradientStop Offset="0.7" Color="Yellow"/>
+                <GradientStop Offset="0.5" Color="GreenYellow"/>
+                <GradientStop Offset="0.3" Color="Cyan"/>
+                <GradientStop Offset="0.1" Color="Blue"/>
+                <GradientStop Offset="0.0" Color="#1D2C6B"/>
+            </s3D:GradientColorPalette.GradientStops>
+        </s3D:GradientColorPalette>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Background="Black">
+            <CheckBox Content="Flip XAxis" x:Name="flipXAxis" Foreground="White" Margin="5"/>
+            <CheckBox Content="Flip YAxis" x:Name="flipYAxis" Foreground="White" Margin="5"/>
+            <CheckBox Content="Flip ZAxis" x:Name="flipZAxis" Foreground="White" Margin="5"/>
+        </StackPanel>
+        <s3D:SciChart3DSurface Grid.Row="1" x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+            </s3D:SciChart3DSurface.Camera>
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries" 
+                                                   DrawMeshAs="SolidWireFrame" 
+                                                   Stroke="#77228B22" 
+                                                   ContourStroke="#77228B22"
+                                                   StrokeThickness="2.0"
+                                                   DrawSkirt="False" 
+                                                   Opacity="0.8"
+                                                   Shininess="100"
+                                                   CellHardnessFactor="0.24"
+                                                   MeshColorPalette="{StaticResource HeightColorMap}"/>
+
+                <s3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D">
+                    <s3D:ScatterRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Fill="Aquamarine" Size="3" SelectedFill="Red"/>
+                    </s3D:ScatterRenderableSeries3D.PointMarker>
+                </s3D:ScatterRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D FlipCoordinates="{Binding ElementName=flipXAxis, Path=IsChecked}" />
+            </s3D:SciChart3DSurface.XAxis>
+
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D VisibleRange="0,0.3" FlipCoordinates="{Binding ElementName=flipYAxis, Path=IsChecked}" />
+            </s3D:SciChart3DSurface.YAxis>
+
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D FlipCoordinates="{Binding ElementName=flipZAxis, Path=IsChecked}" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D/>
+                    <s3D:VertexSelectionModifier3D ExecuteWhen="Ctrl"/>
+                    <s3D:ZoomExtentsModifier3D/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+
+        </s3D:SciChart3DSurface>
+
+        <TextBlock Foreground="#FF6600" IsHitTestVisible="False" Margin="5" Grid.Row="1" VerticalAlignment="Top">
+            <Run Text="CTRL + Drag to select, CTRL + Click to deselect all" />
+        </TextBlock>
+    </Grid>
+</Window>

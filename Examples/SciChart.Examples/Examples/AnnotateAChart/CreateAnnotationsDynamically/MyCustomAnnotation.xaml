@@ -1,0 +1,17 @@
+﻿<s:CustomAnnotation x:Class="SciChart.Examples.Examples.AnnotateAChart.CreateAnnotationsDynamically.MyCustomAnnotation"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                    Background="Transparent"
+                    d:DesignHeight="400"
+                    d:DesignWidth="600"
+                    mc:Ignorable="d">
+
+    <Image Width="178"
+           Height="74"
+           Source="/SciChart.Examples.ExternalDependencies;Component/Resources/Images/SciChartLogo_Dark.png"
+           Stretch="None"/>
+
+</s:CustomAnnotation>

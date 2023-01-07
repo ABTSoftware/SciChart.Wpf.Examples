@@ -1,0 +1,12 @@
+﻿<Application x:Class="ResamplingOfGridDataSeries3DExample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             StartupUri="ResamplingOfGridDataSeries3D.xaml">
+    <Application.Resources>
+        <Style TargetType="{x:Type s3D:SciChart3DSurface}">
+            <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
+        </Style>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,38 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesValueMarkersView.xaml</View>
+  <ViewModel>Examples.InspectDatapoints.CustomSeriesValueMarkers.CustomSeriesValueMarkersViewModel</ViewModel>
+  <ImagePath/>
+  <IconPath>IconCursor</IconPath>
+  <ToolTipDescription>
+    Demonstrates how to add multiple axis markers on composite renderable series
+  </ToolTipDescription>
+  <Description>
+    Demonstrates how to add multiple axis markers for the [url='https://www.scichart.com/documentation/win/current/webframe.html#SeriesValueModifier.html']SeriesValueModifier[/url] on composite renderable series.
+
+    By default, SeriesValueModifier shows multiple axis markers for the following composite series:
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Band%20Series%20Type.html']Band Series[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Digital%20Band%20Series%20Type.html']Digital Band Series[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Grouped%20Column%20Series%20Type.html']Grouped Column Series[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Columns%20Type.html']Stacked Column Series[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Stacked%20Mountains%20Type.html']Stacked Mountain Series[/url]
+
+    If you need to create additional SeriesValue markers, you can inherit the default SeriesInfo provider and override the OnAppendDataColumnInfo method.
+
+    [b][i]Example Usage[/i][/b]
+
+    Click the START button to start the example. Now you can zoom and pan the chart, it continues to tick and update in real-time.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesInfoProvider.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesValueMarkersView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesValueMarkersView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesValueMarkersViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomSeriesValueMarkers/OnRenderedActionViewportManager.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Annotations</Features>
+    <Features>Custom</Features>
+    <Features>HitTest</Features>
+    <Features>Tooltips</Features>
+  </Features>
+</ExampleDefinition>
