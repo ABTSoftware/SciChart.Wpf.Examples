@@ -1,11 +1,11 @@
 ﻿<Window x:Class="OffScreenExportExample.OffScreenExportView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OffScreenExportExample"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="324" WindowStartupLocation="CenterScreen">
+        Title="MainWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
 
     <Border Margin="5" BorderBrush="Black" BorderThickness="2">
         <Grid Margin="5">
@@ -16,8 +16,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="FolderTxtblck" VerticalContentAlignment="Center" Height="28" Width="200" IsReadOnly="True" />
-                <Button Content="Pick Folder" Click="OnPickFolder_Clicked" Margin="10, 0,0,0" Height="28" Padding="2"/>
+                <TextBox x:Name="FolderTxtblck" VerticalContentAlignment="Center" Height="24" Width="200" IsReadOnly="True" />
+                <Button Content="Pick Folder" Click="OnPickFolder_Clicked" Margin="10,0,0,0" Height="24" Padding="5,0"/>
             </StackPanel>
 
             <Grid Grid.Row="2">
@@ -31,13 +31,13 @@
                 </Grid.RowDefinitions>
 
                 <Grid.Resources>
-                    
+
                     <local:TextToBooleanConverter x:Key="TextToBooleanConverter"/>
 
                     <Style TargetType="Button">
                         <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Width" Value="120"/>
-                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="Width" Value="130"/>
+                        <Setter Property="Height" Value="24"/>
                         <Setter Property="IsEnabled" Value="{Binding ElementName=FolderTxtblck, Path=Text, Converter={StaticResource TextToBooleanConverter}}"/>
                     </Style>
                 </Grid.Resources>
@@ -46,9 +46,7 @@
                 <Button Grid.Row="2" Content="Export multiple charts" Click="OnExportMultipleCharts_Clicked" />
                 <Button Grid.Row="4" Content="Export with cloning" Click="OnExportWithCloning_Clicked" />
 
-
             </Grid>
         </Grid>
     </Border>
-
 </Window>

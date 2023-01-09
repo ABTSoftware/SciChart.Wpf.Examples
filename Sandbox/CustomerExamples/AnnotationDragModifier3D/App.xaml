@@ -4,9 +4,11 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              StartupUri="AnnotationDragModifier3D.xaml">
+
     <Application.Resources>
         <Style TargetType="{x:Type s3D:SciChart3DSurface}">
             <Setter Property="s:ThemeManager.Theme" Value="SciChartv4Dark"/>
         </Style>
     </Application.Resources>
+
 </Application>

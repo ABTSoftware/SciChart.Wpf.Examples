@@ -1,61 +1,47 @@
-﻿using ChartProviders.Common;
-using SciChart.Drawing.DirectX.Context.D3D11;
-using SciChart.Drawing.HighQualityRasterizer;
-using SciChart.Drawing.HighSpeedRasterizer;
-using System;
-using System.Reflection;
+﻿using System.Reflection;
+using ChartProviders.Common;
 using SciChart.Charting.Visuals;
 
 namespace ChartProviderSciChart_Trunk
 {
     public enum Renderer
     {
-        DirectX, 
-        SoftwareHS,
-        SoftwareHQ,
+        VisualXccelerator,
+        SoftwareHighSpeed,
+        SoftwareHighQuality
     }
 
     public class ChartingProviderSciChart_Trunk : IChartingProvider
     {
-        private readonly Type _selectedRenderSurface;
+        private readonly string _selectedRenderSurface;
 
         private const bool _enableExtremeResamplers = true;
         private const bool _enableExtremeDrawingManager = true;
 
         public ChartingProviderSciChart_Trunk(Renderer whichRenderer)
         {
-            if (whichRenderer == Renderer.DirectX)
+            if (whichRenderer == Renderer.VisualXccelerator)
             {
-                _selectedRenderSurface = typeof(Direct3D11RenderSurface);
+                _selectedRenderSurface = "VisualXcceleratorRenderSurface";
             }
-            else if (whichRenderer == Renderer.SoftwareHS)
+            else if (whichRenderer == Renderer.SoftwareHighSpeed)
             {
-                _selectedRenderSurface = typeof(HighSpeedRenderSurface);
+                _selectedRenderSurface = "HighSpeedRenderSurface";
             }
             else
             {
-                _selectedRenderSurface = typeof(HighQualityRenderSurface);
+                _selectedRenderSurface = "HighQualityRenderSurface";
             }                      
         }
 
         public ISpeedTest ScatterPointsSpeedTest()
 		{
-            //return new SciChartScatterSeries
-            //{
-            //    DataContext = new
-            //    {
-            //        Version = Name,
-            //        RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
-            //        EnableExtremeResamplers = false,
-            //    }
-            //};
-
             return new SciChartExtremeScatterSeries
 		    {
 		        DataContext = new
 		        {
 		            Version = Name,
-		            RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
+		            RenderSurface = _selectedRenderSurface,
 		            EnableExtremeResamplers = _enableExtremeResamplers,
                     EnableExtremeDrawingManager = _enableExtremeDrawingManager,
 		        }
@@ -69,7 +55,7 @@ namespace ChartProviderSciChart_Trunk
                 DataContext = new
                 {
                     Version = Name,
-                    RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
+                    RenderSurface = _selectedRenderSurface,
                     EnableExtremeResamplers = _enableExtremeResamplers,
                     EnableExtremeDrawingManager = _enableExtremeDrawingManager,
                 }
@@ -83,7 +69,7 @@ namespace ChartProviderSciChart_Trunk
                 DataContext = new
                 {
                     Version = Name,
-                    RenderSurface =_selectedRenderSurface.AssemblyQualifiedName,
+                    RenderSurface =_selectedRenderSurface,
                     EnableExtremeResamplers = _enableExtremeDrawingManager,
                     EnableExtremeDrawingManager = _enableExtremeDrawingManager,
                 }
@@ -96,13 +82,13 @@ namespace ChartProviderSciChart_Trunk
             {
                 DataContext = new
                 {
-                    RenderSurface = _selectedRenderSurface.AssemblyQualifiedName,
+                    RenderSurface = _selectedRenderSurface,
                     EnableExtremeResamplers = _enableExtremeDrawingManager,
                     EnableExtremeDrawingManager = _enableExtremeDrawingManager,
                 }
             };
         }
 
-        public string Name => $"SciChart {Assembly.GetAssembly(typeof(SciChartSurface)).GetName().Version} ({_selectedRenderSurface.Name})";    
+        public string Name => $"SciChart {Assembly.GetAssembly(typeof(SciChartSurface)).GetName().Version} ({_selectedRenderSurface})";    
     }
 }

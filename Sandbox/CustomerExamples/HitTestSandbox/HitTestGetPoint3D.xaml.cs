@@ -51,7 +51,7 @@ namespace HitTestSandboxExample
                 // Convert the hit test result to a series info
                 var seriesInfo = renderSeries.ToSeriesInfo(hitTestInfo);
                 // Retrieve XYZ of clicked point from series info
-                MessageBox.Show($"Clicked point: X [ {seriesInfo.HitVertex.X} ] Y [ {seriesInfo.HitVertex.Y} ] Z [ {seriesInfo.HitVertex.Z} ]");
+                MessageBox.Show($"Clicked point X: {seriesInfo.HitVertex.X:N2} Y: {seriesInfo.HitVertex.Y:N2} Z: {seriesInfo.HitVertex.Z:N2}");
             }
         }
     }

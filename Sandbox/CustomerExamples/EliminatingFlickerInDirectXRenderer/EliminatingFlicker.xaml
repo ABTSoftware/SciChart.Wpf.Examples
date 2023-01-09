@@ -6,7 +6,7 @@
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         mc:Ignorable="d"
         Title="EliminatingFlicker"
-        Height="450"
+        Height="550"
         Width="800">
     
     <Grid>

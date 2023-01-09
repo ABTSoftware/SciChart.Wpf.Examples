@@ -1,15 +1,11 @@
-﻿<Window
-    x:Class="CustomCompositeAnnotationExampleExample.CustomCompositeAnnotationExample"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-    Title="CustomCompositeAnnotationExample"
-    Background="#1c1c1e"
-    Width="1000"
-    Height="650"
-    mc:Ignorable="d">
+﻿<Window x:Class="CustomCompositeAnnotationExampleExample.CustomCompositeAnnotationExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        Title="CustomCompositeAnnotationExample"
+        Background="#1C1C1E"
+        Width="1000"
+        Height="650">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,30 +13,25 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ToggleButton
-            x:Name="LineSquare"
-            Margin="3"
-            Height="35"
-            HorizontalAlignment="Left"
-            Checked="LineSquare_OnChecked"
-            Content="Sq"
-            Unchecked="AnnotationTypeUnchecked" />
+        <ToggleButton x:Name="LineSquare"
+                      Margin="5"
+                      Height="30"
+                      Width="30"
+                      HorizontalAlignment="Left"
+                      Checked="LineSquare_OnChecked"
+                      Content="Sq"
+                      Unchecked="AnnotationTypeUnchecked" />
 
-        <s:SciChartSurface
-            x:Name="SciChart"
-            Grid.Column="1"
-            RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
-            <!--  Styles.xaml resource keys must match StyleKey in RenderableSeriesViewModel  -->
-            <s:SciChartSurface.Resources>
-                <!--  <ResourceDictionary Source="Styles.xaml" />  -->
-            </s:SciChartSurface.Resources>
+        <s:SciChartSurface x:Name="SciChart"
+                           Grid.Column="1"
+                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
 
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis />
+                <s:CategoryDateTimeAxis/>
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis />
+                <s:NumericAxis/>
             </s:SciChartSurface.YAxis>
 
             <s:SciChartSurface.ChartModifier>
@@ -48,8 +39,6 @@
                     <s:AnnotationCreationModifier x:Name="AnnotationCreation" AnnotationCreated="OnAnnotationCreated" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
         </s:SciChartSurface>
-
     </Grid>
 </Window>

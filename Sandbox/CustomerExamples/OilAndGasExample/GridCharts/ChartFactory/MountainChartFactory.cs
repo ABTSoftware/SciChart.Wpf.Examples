@@ -47,7 +47,7 @@ namespace OilAndGasExample.GridCharts.ChartFactory
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead(Path.Combine("../../GridCharts/Data", _dataFileName)))
+            using (var fileStream = File.OpenRead(Path.Combine("../../../GridCharts/Data", _dataFileName)))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

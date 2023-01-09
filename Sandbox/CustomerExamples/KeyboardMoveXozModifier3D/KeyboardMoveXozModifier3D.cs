@@ -9,6 +9,11 @@ namespace KeyboardMoveXozModifier3DExample
     {
         private static readonly Vector3 _unitY = new Vector3(0, 1, 0);
 
+        public KeyboardMoveXozModifier3D()
+        {
+            BackKey = Key.S;
+        }
+
         /// <summary>
         /// Computes position, target vectors and ortho zoom factor depending on keys pressed
         /// </summary>

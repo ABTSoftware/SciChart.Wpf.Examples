@@ -14,7 +14,8 @@ namespace EventOnZoomExtentsCompleted
             InitializeComponent();
 
             var data = new XyDataSeries<double>();
-            data.Append(0,0);
+
+            data.Append(0, 0);
             data.Append(1, 1);
             data.Append(2, 2);
 
@@ -23,7 +24,7 @@ namespace EventOnZoomExtentsCompleted
 
         private void OnZoomExtentsCompleted(object sender, EventArgs e)
         {
-            MessageBox.Show("Zoom extents completed!");
+            MessageBox.Show(this, "Zoom extents completed!");
         }
     }
 }

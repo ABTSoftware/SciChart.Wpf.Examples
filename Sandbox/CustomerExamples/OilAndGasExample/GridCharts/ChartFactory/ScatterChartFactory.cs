@@ -49,7 +49,7 @@ namespace OilAndGasExample.GridCharts.ChartFactory
 
             var dataSeries = new[] { dataSeries1, dataSeries2, dataSeries3 };
 
-            using (var fileStream = File.OpenRead(Path.Combine("../../GridCharts/Data", _dataFileName)))
+            using (var fileStream = File.OpenRead(Path.Combine("../../../GridCharts/Data", _dataFileName)))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

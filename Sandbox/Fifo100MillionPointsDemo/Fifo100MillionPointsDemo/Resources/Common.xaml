@@ -44,15 +44,7 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="Background" Value="#BB222222" />
         <Setter Property="Margin" Value="10,10,10,5" />
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#55EEEEEE" Offset="0"></GradientStop>
-                    <GradientStop Color="#AAEEEEEE" Offset="0.2"></GradientStop>
-                    <GradientStop Color="#BB222222" Offset="1"></GradientStop>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BorderBrush" Value="#55EEEEEE" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 

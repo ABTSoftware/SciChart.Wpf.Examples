@@ -6,8 +6,8 @@
         xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
         mc:Ignorable="d">
-    <Grid>
 
+    <Grid>
         <s3D:SciChart3DSurface x:Name="SciChart" Grid.Column="1" BorderThickness="0" WorldDimensions="200,100,200">
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True"/>

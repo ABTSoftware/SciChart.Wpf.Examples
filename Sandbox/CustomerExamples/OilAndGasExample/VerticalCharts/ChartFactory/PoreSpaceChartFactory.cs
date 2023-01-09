@@ -38,7 +38,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var dataSeries2 = new XyDataSeries<double>();
             var dataSeries3 = new XyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/PoreSpace.csv.gz"))
+            using (var fileStream = File.OpenRead("../../../VerticalCharts/Data/PoreSpace.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

@@ -42,7 +42,7 @@
         </s3D:SciChart3DSurface>
 
         <TextBlock x:Name="textBlock" Foreground="Orange" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Right" IsHitTestVisible="False" 
-                   Text="Use the keyboard w,a,d,x to move the scene" />
+                   Text="Use the keyboard W,A,S,D to move the scene" />
         
     </Grid>
 </UserControl>

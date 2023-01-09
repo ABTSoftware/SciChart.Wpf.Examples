@@ -1,6 +1,5 @@
 ﻿using System;
 using SciChart.Charting.ChartModifiers;
-using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.Events;
 using SciChart.Core.Utility.Mouse;
 

@@ -7,10 +7,9 @@
         xmlns:scrollbarMvvmAxisExample="clr-namespace:ScrollbarMvvmAxisExample"
         mc:Ignorable="d"
         Title="ScrollbarMvvmAxis" Height="450" Width="800">
-    
+
     <Window.Resources>
         <scrollbarMvvmAxisExample:ScrollbarMvvmAxisViewModel x:Key="viewModel"/>
-
         <Style x:Key="ScrollbarAxisStyle" TargetType="s:NumericAxis" x:Shared="False">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding HasScrollbar}" Value="True">
@@ -20,32 +19,31 @@
                                 <s:SciChartScrollbar/>
                             </Setter.Value>
                         </Setter>
-                        <Setter Property="AxisTitle" Value="This axis has a scrollbar"></Setter>
+                        <Setter Property="AxisTitle" Value="This axis has a scrollbar"/>
                     </DataTrigger.Setters>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding HasScrollbar}" Value="False">
                     <DataTrigger.Setters>
                         <Setter Property="Scrollbar" Value="{x:Null}"/>
-                            <Setter Property="AxisTitle" Value="No scrollbar here!"></Setter>
+                        <Setter Property="AxisTitle" Value="No scrollbar here!"/>
                     </DataTrigger.Setters>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <s:SciChartSurface DataContext="{StaticResource viewModel}" 
                            YAxes="{s:AxesBinding YAxes}"
                            XAxes="{s:AxesBinding XAxes}"
                            RenderableSeries="{s:SeriesBinding RenderableSeries}">
-            
+
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:RubberBandXyZoomModifier/>
                     <s:ZoomExtentsModifier/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-            
         </s:SciChartSurface>
     </Grid>
 </Window>

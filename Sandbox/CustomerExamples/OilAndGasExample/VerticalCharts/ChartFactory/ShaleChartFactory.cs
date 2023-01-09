@@ -54,7 +54,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
                 new PaletteRange(900, 950, Brushes.Aqua)
             });
 
-            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Shale.csv.gz"))
+            using (var fileStream = File.OpenRead("../../../VerticalCharts/Data/Shale.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

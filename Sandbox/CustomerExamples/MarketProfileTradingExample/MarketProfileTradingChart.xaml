@@ -304,6 +304,8 @@
 
         <!--  Create the chart surface with vertical histogram on the right side  -->
         <s:SciChartSurface
+            Grid.Row="0"
+            Grid.RowSpan="3"
             Grid.Column="2"
             Padding="0"
             BorderThickness="0">
@@ -330,6 +332,7 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis
                     Visibility="Visible"
+                    DrawMajorGridLines="False"
                     Style="{StaticResource NumericAxisStyle}"
                     VisibleRange="{Binding YVisibleRange, Mode=TwoWay}" />
             </s:SciChartSurface.YAxis>

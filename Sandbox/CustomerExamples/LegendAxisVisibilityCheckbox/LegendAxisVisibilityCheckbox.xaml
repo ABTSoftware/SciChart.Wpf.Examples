@@ -54,8 +54,8 @@
                 <s:NumericAxis />
             </s:SciChartSurface.XAxis>
             <s:SciChartSurface.YAxes>
-                <s:NumericAxis Id="PrimaryAxis" BorderBrush="GreenYellow" BorderThickness="1,0,0,0"/>
-                <s:NumericAxis Id="SecondaryAxis" BorderBrush="OrangeRed" BorderThickness="1,0,0,0"/>
+                <s:NumericAxis Id="PrimaryAxis" BorderBrush="GreenYellow" Margin="0,0,10,0" BorderThickness="1,0,0,0"/>
+                <s:NumericAxis Id="SecondaryAxis" BorderBrush="OrangeRed" Margin="0,0,5,0" BorderThickness="1,0,0,0"/>
             </s:SciChartSurface.YAxes>
             <s:SciChartSurface.ChartModifier>
                 <s:LegendModifier  LegendItemTemplate="{StaticResource SciChartLegendItemTemplate}"/>

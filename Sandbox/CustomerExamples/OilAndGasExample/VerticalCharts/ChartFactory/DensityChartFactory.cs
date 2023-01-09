@@ -35,7 +35,7 @@ namespace OilAndGasExample.VerticalCharts.ChartFactory
             var renderSeries = new List<IRenderableSeriesViewModel>(1);
             var dataSeries = new XyyDataSeries<double>();
 
-            using (var fileStream = File.OpenRead("../../VerticalCharts/Data/Density.csv.gz"))
+            using (var fileStream = File.OpenRead("../../../VerticalCharts/Data/Density.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

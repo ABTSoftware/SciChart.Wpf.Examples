@@ -22,7 +22,7 @@ namespace WpfApp33
             var axisId = Guid.NewGuid().ToString();
             Series.Add(new LineRenderableSeriesViewModel() { DataSeries = GetData(), YAxisId = axisId});
             // important, left alignment has been templated as vertically stacked axis
-            YAxis.Add(new NumericAxisViewModel() { Id = axisId, AxisAlignment = AxisAlignment.Left}); 
+            YAxis.Add(new NumericAxisViewModel() { Id = axisId, AxisAlignment = AxisAlignment.Left, FontSize = 12}); 
         });
 
         public ICommand RemoveSeriesCommand => new ActionCommand(() =>

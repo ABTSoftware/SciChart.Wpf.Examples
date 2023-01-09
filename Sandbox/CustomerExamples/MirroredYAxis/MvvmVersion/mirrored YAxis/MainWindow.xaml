@@ -10,7 +10,7 @@
     <Window.Resources>
         <local:MainViewModel x:Key="ViewModel"/>
         <Style x:Key="YAxisStyle" TargetType="{x:Type s:AxisBase}">
-            <Setter Property="VisibleRange" Value="{Binding YAxisVisibleRange, Mode=TwoWay}"/>
+            <Setter Property="VisibleRange" Value="{Binding YVisibleRange, Mode=TwoWay, Source={StaticResource ViewModel}}"/>
             <Setter Property="TextFormatting" Value="0.00"/>
             <Setter Property="MaxAutoTicks" Value="5"/>
         </Style>

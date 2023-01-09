@@ -24,6 +24,7 @@ namespace SelectSeriesOnHover
         private void DeselectAllBut(IRenderableSeries series)
         {
             DeselectAll();
+
             if (series != null)
             {
                 series.IsSelected = true;

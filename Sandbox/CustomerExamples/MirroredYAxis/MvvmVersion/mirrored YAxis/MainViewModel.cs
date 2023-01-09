@@ -16,6 +16,8 @@ namespace mirrored_YAxis
             XAxis.Add(new NumericAxisViewModel());
             YAxis.Add(new NumericAxisViewModel() { AxisAlignment = AxisAlignment.Right, StyleKey = "YAxisStyle"});
             YAxis.Add(new NumericAxisViewModel() { AxisAlignment = AxisAlignment.Left, Id="LeftAxis", StyleKey = "YAxisStyle"});
+
+            YVisibleRange = new DoubleRange(0, 20);
         }
 
         public ObservableCollection<IAxisViewModel> XAxis { get; } = new ObservableCollection<IAxisViewModel>();

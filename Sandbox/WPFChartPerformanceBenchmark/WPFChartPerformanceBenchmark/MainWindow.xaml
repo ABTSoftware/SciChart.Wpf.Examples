@@ -10,6 +10,7 @@
     <Window.Resources>
         <wpfChartPerformanceBenchmark:MainViewModel x:Key="vm" />
     </Window.Resources>
+    
     <Window.DataContext>
         <StaticResource ResourceKey="vm" />
     </Window.DataContext>
@@ -38,11 +39,14 @@
 
         <DataGrid Name="dataGrid1" Grid.Row="1"
                   Grid.ColumnSpan="2"
+                  FontSize="10"
                   Margin="0,5,0,0"
-                  AutoGenerateColumns="false"
-                  
+                  AutoGenerateColumns="false"                  
                   ItemsSource="{Binding Results}"
-                  extensions:DataGridExtension.Columns="{Binding Columns}" FontSize="10" IsSynchronizedWithCurrentItem="True" ClipboardCopyMode="IncludeHeader" EnableRowVirtualization="False" />
+                  extensions:DataGridExtension.Columns="{Binding Columns}"
+                  IsSynchronizedWithCurrentItem="True"
+                  ClipboardCopyMode="IncludeHeader"
+                  EnableRowVirtualization="False" />
 
         <GridSplitter Grid.Row="1"
                       Grid.Column="0"
@@ -56,13 +60,14 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
+
             <Button Click="Run_Click"
                     Content="Start!"
                     Padding="20,0,20,0" />
+
             <Button Click="Clipboard_Click"
                     Content="Copy to Clipboard"
                     Padding="20,0,20,0" />
         </StackPanel>
-
     </Grid>
 </Window>

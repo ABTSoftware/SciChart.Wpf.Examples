@@ -23,7 +23,7 @@ namespace UsingRenderContextApiExample
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // Read image pixels
-            var path = Path.Combine(Environment.CurrentDirectory, @"Resources", "TestImage.jpg");
+            var path = Path.Combine(Environment.CurrentDirectory, "Resources", "TestImage.jpg");
             BitmapSource bitmap = new BitmapImage(new Uri(path));
             _pixels = new int[bitmap.PixelWidth * bitmap.PixelHeight];
             bitmap.CopyPixels(_pixels, bitmap.PixelWidth * 4, 0);

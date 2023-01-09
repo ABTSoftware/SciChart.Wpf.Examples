@@ -10,7 +10,7 @@ namespace WPFChartPerformanceBenchmark
             return new IChartingProvider[]
             {
                 // Runs tests for SciChart with DirectX
-                new ChartingProviderSciChart_Trunk(Renderer.DirectX),                                       
+                new ChartingProviderSciChart_Trunk(Renderer.VisualXccelerator),                                       
 
                 // Runs tests for SciChart with Software (High Speed)
                 //new ChartingProviderSciChart_Trunk(Renderer.SoftwareHS),

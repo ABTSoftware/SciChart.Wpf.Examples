@@ -68,7 +68,7 @@ namespace OilAndGasExample.ThreeDCharts.ChartFactory
                 return index < colors.Length ? colors[index] : colors[colors.Length - 1];
             }
 
-            using (var fileStream = File.OpenRead("../../ThreeDCharts/Data/Scatter-XYZ.csv.gz"))
+            using (var fileStream = File.OpenRead("../../../ThreeDCharts/Data/Scatter-XYZ.csv.gz"))
             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
             using (var streamReader = new StreamReader(gzStream))
             {

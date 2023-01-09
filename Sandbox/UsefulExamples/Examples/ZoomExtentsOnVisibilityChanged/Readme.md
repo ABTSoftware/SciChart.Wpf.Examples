@@ -1,1 +1,0 @@
-All useful examples have been moved to SciChart.Wpf.Examples/Sandbox/CustomerExamples as individual / stand alone solutions 
