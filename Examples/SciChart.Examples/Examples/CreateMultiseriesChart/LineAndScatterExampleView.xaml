@@ -28,17 +28,17 @@
                 <!-- Series0 is a Scatter Series -->
                 <s:XyScatterRenderableSeries DataSeries="{Binding ScatterData}">
                     <s:XyScatterRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="9" Height="9" Fill="#AAFFFFFF" Stroke="SteelBlue" StrokeThickness="2" />
+                        <s:EllipsePointMarker Width="9" Height="9" Fill="{StaticResource SecondaryTransparentStrokeColor}" Stroke="{StaticResource SecondaryThemeStrokeColor}" StrokeThickness="2" />
                     </s:XyScatterRenderableSeries.PointMarker>
                     <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:XyScatterRenderableSeries.SeriesAnimation>
                 </s:XyScatterRenderableSeries>
 
                 <!-- Series1 is a Line Series -->
-                <s:FastLineRenderableSeries DataSeries="{Binding FittedData}" Stroke="#279B27" StrokeThickness="1" >
+                <s:FastLineRenderableSeries DataSeries="{Binding FittedData}" Stroke="{StaticResource MainThemeStrokeColor}" StrokeThickness="1" >
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 

@@ -10,14 +10,12 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer.Common
         {
             DimColors = new[]
             {
-                Colors.DarkGoldenrod,
-                Colors.DarkCyan,
-                Colors.DarkGray,
-                Colors.DarkKhaki,
-                Colors.DarkGreen,
-                Colors.DarkMagenta,
-                Colors.DarkOliveGreen,
-                Colors.DarkSalmon
+                Color.FromArgb(0xAA, 0x27, 0x4b, 0x92),
+                Color.FromArgb(0xAA, 0x47, 0xbd, 0xe6),
+                Color.FromArgb(0xAA, 0xa3, 0x41, 0x8d),
+                Color.FromArgb(0xAA, 0xe9, 0x70, 0x64),
+                Color.FromArgb(0xAA, 0x68, 0xbc, 0xae),
+                Color.FromArgb(0xAA, 0x63, 0x4e, 0x96),
             };
         }
         

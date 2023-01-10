@@ -13,22 +13,14 @@
         <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
         <Style x:Key="Series1SelectedStyle" TargetType="s:FastLineRenderableSeries">
-            <Setter Property="Stroke" Value="LightSteelBlue" />
+            <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
             <Setter Property="StrokeThickness" Value="3" />
         </Style>
 
         <Style x:Key="Series2SelectedStyle" TargetType="s:FastLineRenderableSeries">
-            <Setter Property="Stroke" Value="LimeGreen" />
+            <Setter Property="Stroke" Value="{StaticResource SecondaryThemeStrokeColor}" />
             <Setter Property="StrokeThickness" Value="3" />
         </Style>
-        
-        <s:EffectConverter x:Key="EffectConverter"/>
-
-        <DropShadowEffect x:Key="LegendDropShadow" 
-                          BlurRadius="10"
-                          Direction="-45"
-                          ShadowDepth="5"
-                          Color="Black" />
 
     </UserControl.Resources>
 
@@ -56,7 +48,7 @@
 
                 <!--  Declare first line series with a PointMarker and RolloverMarker control template  -->
                 <s:FastLineRenderableSeries SelectedSeriesStyle="{StaticResource Series1SelectedStyle}"
-                                            Stroke="SteelBlue"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2">
                     
                     <s:FastLineRenderableSeries.PointMarker>
@@ -67,14 +59,14 @@
                     </s:FastLineRenderableSeries.PointMarker>
                     
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.4"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                     
                 </s:FastLineRenderableSeries>
 
                 <!--  Declare second line series with a PointMarker and RolloverMarker control template  -->
                 <s:FastLineRenderableSeries SelectedSeriesStyle="{StaticResource Series2SelectedStyle}"
-                                            Stroke="DarkGreen"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2">
                     
                     <s:FastLineRenderableSeries.PointMarker>
@@ -85,12 +77,12 @@
                     </s:FastLineRenderableSeries.PointMarker>
 
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.4"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
 
                 </s:FastLineRenderableSeries>
 
-                <s:FastLineRenderableSeries IsVisible="False" Stroke="DarkRed" />
+                <s:FastLineRenderableSeries IsVisible="False" Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
 
             </s:SciChartSurface.RenderableSeries>
 
@@ -119,11 +111,10 @@
                 Margin="23,23"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="#77222222"
+                Background="{StaticResource ThemedChartBackground}"
                 BorderBrush="#323539"
                 BorderThickness="2"
-                Padding="5"
-                Effect="{Binding Path=(s:EffectManager.EnableDropShadows), Converter={StaticResource EffectConverter}, ConverterParameter={StaticResource LegendDropShadow}}">
+                Padding="5">
             <ItemsControl ItemsSource="{Binding Source={x:Reference Name=RolloverModifier}, Path=SeriesData.SeriesInfo}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

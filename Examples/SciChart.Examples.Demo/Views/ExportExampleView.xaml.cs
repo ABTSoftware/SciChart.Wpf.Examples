@@ -14,7 +14,7 @@ namespace SciChart.Examples.Demo.Views
             InitializeComponent();
         }
 
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Process.Start("explorer.exe", Urls.GithubRootUrl);
         }

@@ -18,13 +18,7 @@
                 <!--  renders it to bitmap once, for repeated blitting on the screen. Note you cannot use triggers or  -->
                 <!--  bindings in a SpritePointMarkers' template  -->
                 <ResourceDictionary Source="UsePointMarkersResourceDictionary.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-
-            <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter"
-                                      FalseValue="Collapsed"
-                                      TrueValue="Visible" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -36,53 +30,36 @@
 
         <!--  Define the Toolbar  -->
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton Content="PS"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  Visibility="{Binding ElementName=UserToolbar, Path=IsDeveloperMode,
-                                                       Converter={StaticResource BoolToVisibilityConverter}}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-
-                        <TextBlock Text="PointMarker Width" />
-
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Point Marker Width" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="WidthSlider"
-                                Margin="4"
+                                Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 Maximum="25"
-                                Minimum="2"
-                                Orientation="Horizontal"
+                                Minimum="2"                 
                                 Value="9"/>
 
-                        <ext:FlyoutSeparator />
-
-                        <TextBlock Text="PointMarker Height" />
-
+                        <TextBlock Text="Point Marker Height" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="HeightSlider"
-                                Margin="4"
+                                Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 Maximum="25"
-                                Minimum="2"
-                                Orientation="Horizontal"
+                                Minimum="2"     
                                 Value="9"/>
 
-                        <ext:FlyoutSeparator />
-
-                        <TextBlock Text="PointMarker StrokeThickness " />
-
+                        <TextBlock Text="Stroke Thickness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="StrokeThicknessSlider"
-                                Margin="4"
+                                Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 Maximum="5"
-                                Minimum="1"
-                                Orientation="Horizontal"
-                                Value="2" />
-
+                                Minimum="1"           
+                                Value="2"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
 
         <!--  Create the chart surface  -->
@@ -97,74 +74,74 @@
                         <s:EllipsePointMarker Width="{Binding Source={x:Reference WidthSlider}, Path=Value}"
                                               Height="{Binding Source={x:Reference HeightSlider},
                                                                Path=Value}"
-                                              Fill="#990077FF"
-                                              Stroke="LightBlue"
+                                              Fill="{StaticResource MainThemeTransparentStrokeColor}"
+                                              Stroke="{StaticResource MainThemeStrokeColor}"
                                               StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                         Path=Value}" />
-                        
+
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries2"
-                                            Stroke="Red"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                              Path=Value}"
                                              Height="{Binding Source={x:Reference HeightSlider},
                                                               Path=Value}"
-                                             Fill="#99FF0000"
-                                             Stroke="Red"
+                                             Fill="{StaticResource SecondaryTransparentStrokeColor}"
+                                             Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                              StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                        Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries3"
-                                            Stroke="Yellow"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                                Path=Value}"
                                                Height="{Binding Source={x:Reference HeightSlider},
                                                                 Path=Value}"
-                                               Fill="#FFDD00"
-                                               Stroke="#FF6600"
+                                               Fill="{StaticResource ExtraThemeStrokeColor_3}"
+                                               Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                                StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                          Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries4"
-                                            Stroke="Magenta"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_1}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:CrossPointMarker Width="{Binding Source={x:Reference WidthSlider},
                                                             Path=Value}"
                                             Height="{Binding Source={x:Reference HeightSlider},
                                                              Path=Value}"
-                                            Stroke="Magenta"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_1}"
                                             StrokeThickness="{Binding Source={x:Reference Name=StrokeThicknessSlider},
                                                                       Path=Value}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries5"
-                                            Stroke="Wheat"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_5}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:SpritePointMarker PointMarkerTemplate="{StaticResource AnyWpfControlTemplateCanGoHere}"/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

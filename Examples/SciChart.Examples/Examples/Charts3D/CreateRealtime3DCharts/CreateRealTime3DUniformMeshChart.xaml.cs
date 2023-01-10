@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -31,23 +31,16 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
     public partial class CreateRealTime3DSurfaceMeshChart : UserControl
     {
         private Timer _timer;
-        private bool _processingUpdate;
-        private object _syncRoot = new object();
+        private bool _isRunning;
+        private readonly object _syncRoot = new object();
 
         public CreateRealTime3DSurfaceMeshChart()
         {
             InitializeComponent();
 
-            this.Loaded += (s, e) =>
-            {
-                this.StartButton.IsChecked = true;
-                this.OnStart();
-            };
+            Loaded += (s, e) => OnStart();
 
-            this.Unloaded += (s, e) =>
-            {
-                this.OnStop();
-            };
+            Unloaded += (s, e) => OnStop();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -62,16 +55,21 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
         private void DataCombo_OnSelectionChanged(object sender, EventArgs e)
         {
+            _isRunning = false;
+
             OnStart();
         }
 
         private void OnStart()
         {
-            if (!IsLoaded) return;
+            if (!IsLoaded || _isRunning) return;
+
+            _isRunning = true;
 
             string whatData = (string)DataCombo.SelectedItem;
             int w = 0, h = 0;
             if (whatData == "3D Sinc 10 x 10") w = h = 10;
+            if (whatData == "3D Sinc 25 x 25") w = h = 25;
             if (whatData == "3D Sinc 50 x 50") w = h = 50;
             if (whatData == "3D Sinc 100 x 100") w = h = 100;
             if (whatData == "3D Sinc 500 x 500") w = h = 500;
@@ -79,7 +77,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
             lock (_syncRoot)
             {
-                OnStop();
+                _timer?.Stop();
             }
 
             var dataSeries = new UniformGridDataSeries3D<double>(w, h)
@@ -133,19 +131,23 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
                     }
                 }
             };
+
             SurfaceMesh.DataSeries = dataSeries;
             _timer.Start();
-            StartButton.IsEnabled = false;
-            PauseButton.IsEnabled = true;
+
+            StartButton.IsChecked = true;
+            PauseButton.IsChecked = false;
         }
 
         private void OnStop()
         {
-            if (_timer != null)
+            if (_isRunning)
             {
-                _timer.Stop();
-                StartButton.IsEnabled = true;
-                PauseButton.IsEnabled = false;
+                _isRunning = false;
+                _timer?.Stop();
+                
+                StartButton.IsChecked = false;
+                PauseButton.IsChecked = true;
             }
         }
 

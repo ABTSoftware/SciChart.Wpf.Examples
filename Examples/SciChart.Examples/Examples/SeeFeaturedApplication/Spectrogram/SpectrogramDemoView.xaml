@@ -12,43 +12,35 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
+        <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible" />
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <Style x:Key="AxisStyle" TargetType="s:AxisBase">
+            <Setter Property="DrawMajorBands" Value="False" />
+            <Setter Property="IsPrimaryAxis" Value="False" />
+            <Setter Property="AxisBandsFill" Value="Transparent" />
+            <Setter Property="DrawMajorGridLines" Value="false" />
+            <Setter Property="DrawMinorGridLines" Value="false" />
 
-            <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible" />
-            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
 
-            <Style x:Key="AxisStyle" TargetType="s:AxisBase">
-                <Setter Property="DrawMajorBands" Value="False" />
-                <Setter Property="IsPrimaryAxis" Value="False" />
-                <Setter Property="AxisBandsFill" Value="Transparent" />
-                <Setter Property="DrawMajorGridLines" Value="false" />
-                <Setter Property="DrawMinorGridLines" Value="false" />
-
-                <Setter Property="MajorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-
-                <Setter Property="MinorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-        </ResourceDictionary>
+            <Setter Property="MinorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-    <Grid Background="#FF1C1C1E">
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -70,7 +62,7 @@
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="#279B27" />
+                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="{StaticResource MainThemeStrokeColor}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -84,20 +76,20 @@
         </s:SciChartSurface>
 
         <s:HeatmapColorMap Grid.RowSpan="2"
-                            Grid.Column="2"
-                            Margin="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Stretch"
-                            Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}"
-                            BorderBrush="#777"
-                            BorderThickness="1"
-                            ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
-                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
-                            Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
-                            Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
-                            Opacity="0.8"
-                            Orientation="Vertical"
-                            TextFormatting="0.00"/>
+                           Grid.Column="2"
+                           Margin="10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Stretch"
+                           Background="{StaticResource ThemedSurfaceChartBackground}"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
+                           Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
+                           Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
+                           Opacity="0.8"
+                           Orientation="Vertical"
+                           TextFormatting="0.00"/>
 
         <s:SciChartSurface x:Name="sciChart2"
                            Grid.Row="1"
@@ -110,12 +102,13 @@
                         <s:HeatmapColorPalette Minimum="-70" Maximum="0">
                             <s:HeatmapColorPalette.GradientStops>
                                 <GradientStop Offset="0" Color="Transparent" />
-                                <GradientStop Offset="0.0001" Color="DarkBlue" />
-                                <GradientStop Offset="0.2" Color="CornflowerBlue" />
-                                <GradientStop Offset="0.4" Color="DarkGreen" />
-                                <GradientStop Offset="0.6" Color="Chartreuse" />
-                                <GradientStop Offset="0.8" Color="Yellow" />
-                                <GradientStop Offset="1" Color="Red" />
+                                <GradientStop Offset="0.0001" Color="{StaticResource ColorMapColor_1}" />
+                                <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
+                                <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_3}" />
+                                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_4}" />
+                                <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
+                                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+                                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
                             </s:HeatmapColorPalette.GradientStops>
                         </s:HeatmapColorPalette>
                     </s:FastUniformHeatmapRenderableSeries.ColorMap>

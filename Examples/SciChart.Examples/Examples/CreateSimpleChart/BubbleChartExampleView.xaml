@@ -8,6 +8,7 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -18,14 +19,12 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="BBL">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Slide to change ZScaleFactor" />
-                        <ext:FlyoutSeparator/>
-                        <!-- Create the Z slider -->
-                        <Slider Minimum="0.5" Maximum="5.0" x:Name="zScaleSlider" Value="2.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
+                        <TextBlock Text="Z-Scale Factor" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.5" Maximum="5.0" x:Name="zScaleSlider" Value="2.0" Margin="0,5" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -38,22 +37,23 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="lineSeries" ResamplingMode="MinMax" Stroke="#FFFF3333">
+                <s:FastLineRenderableSeries x:Name="lineSeries" ResamplingMode="MinMax" Stroke="{StaticResource MainThemeStrokeColor}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="10650">
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:0.5" ZeroLine="10650">
                             <s:ScaleAnimation.EasingFunction>
-                                <ElasticEase EasingMode="EaseOut"></ElasticEase>
+                                <ElasticEase EasingMode="EaseOut" Springiness="0.1" Oscillations="1"></ElasticEase>
                             </s:ScaleAnimation.EasingFunction>
                         </s:ScaleAnimation>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
+                
                 <s:FastBubbleRenderableSeries x:Name="bubbleSeries" ZScaleFactor="{Binding Source={x:Reference Name=zScaleSlider}, 
                                                 Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ResamplingMode="None" 
-                                              BubbleColor="#77333333" AutoZRange="False">
+                                              BubbleColor="{StaticResource SecondaryTransparentStrokeColor}" AutoZRange="False">
                     <s:FastBubbleRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="10650">
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:0.5" ZeroLine="10650">
                             <s:ScaleAnimation.EasingFunction>
-                                <ElasticEase EasingMode="EaseOut"></ElasticEase>
+                                <ElasticEase EasingMode="EaseOut" Springiness="0.1" Oscillations="1" ></ElasticEase>
                             </s:ScaleAnimation.EasingFunction>
                         </s:ScaleAnimation>
                     </s:FastBubbleRenderableSeries.SeriesAnimation>

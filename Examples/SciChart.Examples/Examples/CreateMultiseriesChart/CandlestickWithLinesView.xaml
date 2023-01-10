@@ -24,23 +24,10 @@
         <s:SciChartSurface x:Name="sciChart" Padding="0" BorderThickness="0" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastCandlestickRenderableSeries>
-                    <s:FastCandlestickRenderableSeries.FillUp>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#55002200" />
-                            <GradientStop Offset="1" Color="#FF00AA00" />
-                        </LinearGradientBrush>
-                    </s:FastCandlestickRenderableSeries.FillUp>
-                    <s:FastCandlestickRenderableSeries.FillDown>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#55441111" />
-                            <GradientStop Offset="1" Color="#FFFF0000" />
-                        </LinearGradientBrush>
-                    </s:FastCandlestickRenderableSeries.FillDown>
-                </s:FastCandlestickRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FF1919" />
-                <s:FastLineRenderableSeries Stroke="#1964FF" />
-                <s:FastLineRenderableSeries Stroke="#FF9B27" />
+                <s:FastCandlestickRenderableSeries FillUp="{StaticResource MainFillGradient}" FillDown="{StaticResource SecondaryFillGradient}"/>
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_1}" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_3}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

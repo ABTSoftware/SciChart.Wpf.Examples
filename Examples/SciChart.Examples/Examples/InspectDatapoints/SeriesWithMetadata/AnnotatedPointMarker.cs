@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -27,8 +27,9 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
 {
     public class AnnotatedPointMarker : BasePointMarker
     {
-        private const float TextSize = 14f;
+        private const float TextSize = 12f;
         private const double TextIndent = 3f;
+        private Color _checkedPointMarkerTextColor = Color.FromArgb(0xFF, 0x6B, 0xC4, 0xA9);
 
         private IList<IPointMetadata> _dataPointMetadata;
         private IList<int> _dataPointIndexes;
@@ -47,14 +48,14 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
         {
             _dataPointIndexes = new List<int>();
 
-            _textBlock = new TextBlock { FontSize = TextSize };
+            _textBlock = new TextBlock { FontSize = TextSize, Margin = new Thickness(TextIndent) };
 
             SetCurrentValue(PointMarkerBatchStrategyProperty, new DefaultPointMarkerBatchStrategy());
         }
 
         public override void BeginBatch(IRenderContext2D context, Color? strokeColor, Color? fillColor)
         {
-            _dataPointMetadata = _dataPointMetadata ?? RenderableSeries.DataSeries.Metadata;
+            _dataPointMetadata ??= RenderableSeries.DataSeries.Metadata;
 
             _dataPointIndexes = new List<int>();
 
@@ -92,7 +93,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
                         var gainLossValue = metadata.GainLossValue + "$";
 
                         DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
-       
+
                         _textBlock.Text = gainLossValue;
                         _textBlock.MeasureArrange();
 
@@ -107,10 +108,13 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
                         yPos += yOffset;
 
                         var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
-                        context.DrawText(textRect, Stroke, TextSize, gainLossValue, FontFamily, FontWeight, FontStyle);
-
-                        if (metadata.IsCheckPoint)
-                            context.DrawQuad(_strokePen, textRect.TopLeft, textRect.BottomRight);
+                        context.DrawText(textRect,
+                                        !metadata.IsCheckPoint ? isGain ? GainMarkerFill : LossMarkerFill : _checkedPointMarkerTextColor,
+                                        TextSize,
+                                        gainLossValue,
+                                        FontFamily,
+                                        FontWeight,
+                                        FontStyle);
 
                         locationIndex++;
                     }
@@ -123,9 +127,9 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             if (!context.IsCompatibleType(_strokePen))
                 Dispose();
 
-            _strokePen = _strokePen ?? context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
-            _gainFillBrush = _gainFillBrush ?? context.CreateBrush(GainMarkerFill);
-            _lossFillBrush = _lossFillBrush ?? context.CreateBrush(LossMarkerFill);
+            _strokePen ??= context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
+            _gainFillBrush ??= context.CreateBrush(GainMarkerFill);
+            _lossFillBrush ??= context.CreateBrush(LossMarkerFill);
         }
 
         private void DrawDiamond(IRenderContext2D context, Point center, double width, double height, IPen2D stroke, IBrush2D fill)

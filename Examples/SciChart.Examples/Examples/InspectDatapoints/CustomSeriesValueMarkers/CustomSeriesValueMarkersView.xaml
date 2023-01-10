@@ -16,54 +16,38 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426"
-                BorderBrush="#FF323539"
-                BorderThickness="0,0,2,0"
-                Canvas.ZIndex="9999">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="IsZoomEnabled"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_Modifiers" />
+            <ToggleButton x:Name="IsZoomEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_Modifiers">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsPanEnabled"
-                              IsChecked="True"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_Modifiers" />
+            <ToggleButton x:Name="IsPanEnabled"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_Modifiers">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator />
+            <ext:FlyoutSeparator/>
 
-                <ToggleButton Command="{Binding StartUpdatesCommand}"
-                              s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_StartStop">
-                    <ToggleButton.Style>
-                        <Style BasedOn="{StaticResource PlayButtonStyle}"
-                               TargetType="{x:Type ToggleButton}">
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked"  Value="True">
-                                    <Setter Property="IsHitTestVisible" Value="False"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
+            <ToggleButton Command="{Binding StartUpdatesCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_StartStop">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Command="{Binding StopUpdatesCommand}"
-                              s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_StartStop">
-                    <ToggleButton.Style>
-                        <Style BasedOn="{StaticResource PauseButtonStyle}"
-                               TargetType="{x:Type ToggleButton}">
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked"  Value="True">
-                                    <Setter Property="IsHitTestVisible" Value="False"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-            </StackPanel>
-        </Border>
+            <ToggleButton Command="{Binding StopUpdatesCommand}"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="CustomSeriesValueMarkers_StartStop">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart"
@@ -86,17 +70,16 @@
                                DrawMajorBands="True"
                                AutoRange="Always"/>
             </s:SciChartSurface.YAxis>
-            
+
             <!--  Create a composite SeriesValueModifier  -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:SeriesValueModifier/>
                     <s:ZoomExtentsModifier/>
                     <s:MouseWheelZoomModifier/>
-                    <s:ZoomPanModifier IsEnabled="{Binding IsChecked, ElementName=IsPanEnabled}"/>
-                    <s:RubberBandXyZoomModifier IsEnabled="{Binding IsChecked, ElementName=IsZoomEnabled}"/>
+                    <s:ZoomPanModifier IsEnabled="{Binding IsChecked, Source={x:Reference IsPanEnabled}}"/>
+                    <s:RubberBandXyZoomModifier IsEnabled="{Binding IsChecked, Source={x:Reference IsZoomEnabled}}"/>
                 </s:ModifierGroup>
-
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
     </Grid>

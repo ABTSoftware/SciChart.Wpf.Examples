@@ -20,14 +20,13 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
-
         <!--  Adds a glow effect to the render surface (Surface that holds the series)  -->
         <Style TargetType="s:RenderSurfaceBase">
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect BlurRadius="5"
                                       ShadowDepth="0"
-                                      Color="#FFB3E8F6" />
+                                      Color="{StaticResource MainThemeStrokeColor}" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -42,7 +41,7 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding EcgDataSeries}"
-                                            Stroke="#FFB3E8F6"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
 
@@ -71,7 +70,7 @@
             <StackPanel.Effect>
                 <DropShadowEffect BlurRadius="5"
                                   ShadowDepth="0"
-                                  Color="#FFB3E8F6" />
+                                  Color="{StaticResource MainThemeStrokeColor}" />
             </StackPanel.Effect>
 
             <!--  Heartbeat, binds to IsBeat and uses a converter to change the size of the heart icon  -->
@@ -98,14 +97,14 @@
                        FontFamily="ArialBlack"
                        FontSize="36"
                        FontWeight="Bold"
-                       Foreground="#FFB0E6F4"
+                       Foreground="{StaticResource ExtraThemeStrokeBrush_2}"
                        Text="{Binding HeartRate}" />
             <TextBlock HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontFamily="ArialBlack"
                        FontSize="36"
                        FontWeight="Bold"
-                       Foreground="#FFB0E6F4"
+                       Foreground="{StaticResource ExtraThemeStrokeBrush_2}"
                        Text="BPM" />
         </StackPanel>
     </Grid>

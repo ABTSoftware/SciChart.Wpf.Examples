@@ -30,7 +30,6 @@
             <Setter Property="StrokeThickness" Value="2" />
             <Setter Property="StrokeDashArray" Value="3 2" />
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -38,25 +37,27 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries x:Name="mountainRenderableSeries1"
-                                                Stroke="#FF3376E5"
-                                                StrokeThickness="2">
-                    <s:FastMountainRenderableSeries.Fill>
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
+                                                StrokeThickness="2"
+                                                Fill="{StaticResource MainThemeTransparentSolidBrush}">
+                    <!--<s:FastMountainRenderableSeries.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Offset="0" Color="#A83376E5" />
                             <GradientStop Offset="1" Color="#333376E5" />
                         </LinearGradientBrush>
-                    </s:FastMountainRenderableSeries.Fill>
+                    </s:FastMountainRenderableSeries.Fill>-->
                 </s:FastMountainRenderableSeries>
 
                 <s:FastMountainRenderableSeries x:Name="mountainRenderableSeries2"
-                                                Stroke="#FF39E345"
-                                                StrokeThickness="2">
-                    <s:FastMountainRenderableSeries.Fill>
+                                                Stroke="{StaticResource SecondaryThemeStrokeColor}"
+                                                StrokeThickness="2"
+                                                Fill="{StaticResource SecondaryThemeTransparentSolidBrush}">
+                    <!--<s:FastMountainRenderableSeries.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Offset="0" Color="#A839E345" />
                             <GradientStop Offset="1" Color="#3339E345" />
                         </LinearGradientBrush>
-                    </s:FastMountainRenderableSeries.Fill>
+                    </s:FastMountainRenderableSeries.Fill>-->
                 </s:FastMountainRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 

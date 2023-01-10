@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid>
-        <s3D:SciChart3DSurface x:Name="sciChart3DSurface" WorldDimensions="400,0,400">
+        <s3D:SciChart3DSurface x:Name="sciChart3DSurface" WorldDimensions="400,0,400" BorderThickness="0">
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D Target="0,50,0" Position="-400,200,400"></s3D:Camera3D>
             </s3D:SciChart3DSurface.Camera>

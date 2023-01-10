@@ -11,7 +11,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
         <!--  Converter used by feedback panel below SciChartSurface  -->
         <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
@@ -36,8 +35,7 @@
                          Margin="5,0,20,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Center"
-                         Fill="{Binding Stroke,
-                                        Converter={StaticResource ColorToBrushConverter}}" />
+                         Fill="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}" />
 
                 <!--  Series name (SeriesInfo.SeriesName)  -->
                 <TextBlock Grid.Column="1"
@@ -51,11 +49,9 @@
                     <!--  Binds to SeriesInfo.IsVisible to show and hide the series  -->
                     <CheckBox HorizontalAlignment="Left"
                               VerticalAlignment="Center"
-                              Content="R-Series Visible?"
-                              Foreground="{Binding Stroke,
-                                                   Converter={StaticResource ColorToBrushConverter}}"
-                              IsChecked="{Binding IsVisible,
-                                                  Mode=TwoWay}" />
+                              Content="R-Series Visible"
+                              Foreground="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
+                              IsChecked="{Binding IsVisible, Mode=TwoWay}" />
                 </Grid>
 
                 <!--  Binds to SeriesInfo.RenderableSeries, attached property SeriesValueModifier.IsSeriesValueModifierEnabled  -->
@@ -65,16 +61,13 @@
                           Margin="10,0,0,0"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center"
-                          Content="IsSeriesValueModifierEnabled?"
+                          Content="IsSeriesValueModifierEnabled"
                           DataContext="{Binding RenderableSeries}"
-                          Foreground="{Binding Stroke,
-                                               Converter={StaticResource ColorToBrushConverter}}"
-                          IsChecked="{Binding Path=(s:SeriesValueModifier.IncludeSeries),
-                                              Mode=TwoWay}" />
+                          Foreground="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
+                          IsChecked="{Binding Path=(s:SeriesValueModifier.IncludeSeries), Mode=TwoWay}" />
 
             </Grid>
         </DataTemplate>
-
     </UserControl.Resources>
 
     <!--  This is where the example starts  -->
@@ -86,13 +79,13 @@
                 <!--  If you set RenderableSeries.IsVisible = false, it will hide the renderableseries but not the Axis Marker  -->
                 <!--  If you set SeriesValueModifier.IsSeriesValueModifierEnabled=False on the RenderableSeries, it will hide the axis marker but not the series  -->
                 <s:FastLineRenderableSeries x:Name="renderableSeries0"
-                                            Stroke="DarkOrange"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2" />
                 <s:FastLineRenderableSeries x:Name="renderableSeries1"
-                                            Stroke="SteelBlue"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2" />
                 <s:FastLineRenderableSeries x:Name="renderableSeries2"
-                                            Stroke="DarkOliveGreen"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
 

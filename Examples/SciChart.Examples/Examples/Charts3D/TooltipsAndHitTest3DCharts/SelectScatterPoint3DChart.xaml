@@ -12,12 +12,7 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <local:ExamplePointCloudPaletteProvider x:Key="CloudPaletteProvider" />
-        </ResourceDictionary>
+        <local:ExamplePointCloudPaletteProvider x:Key="CloudPaletteProvider" />
     </UserControl.Resources>
 
     <Grid>
@@ -30,8 +25,9 @@
 
         <s3D:SciChart3DSurface x:Name="sciChartSurface"
                                Grid.Column="1"
+                               BorderThickness="0"
                                WorldDimensions="200,100,200"
-                               s:ThemeManager.Theme="SciChartv4Dark">
+                               s:ThemeManager.Theme="SciChartv7Navy">
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ScatterRenderableSeries3D x:Name="renderableSeries3D" PaletteProvider="{StaticResource CloudPaletteProvider}" >
@@ -62,75 +58,63 @@
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
         </s3D:SciChart3DSurface>
-        
-        <ListBox x:Name="selectedList"
-                 Grid.Column="1"
-                 Width="200"
-                 Height="Auto"
-                 MaxHeight="305"
-                 VerticalAlignment="Bottom"
-                 HorizontalAlignment="Right"
-                 ScrollViewer.HorizontalScrollBarVisibility ="Disabled"
-                 Margin="5"
-                 Opacity="0.6">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox IsChecked="{Binding PointMetadata3D.IsSelected, Mode=TwoWay}">
-                        <TextBlock Foreground="#474747" VerticalAlignment="Center">
+        <ScrollViewer x:Name="selectedPanel"
+                      Grid.Column="1"
+                      Background="{StaticResource ThemedChartBackground}"
+                      Width="200"
+                      MaxHeight="305"
+                      Margin="5"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Right"
+                      HorizontalScrollBarVisibility ="Disabled">
+
+            <ItemsControl x:Name="selectedList" Margin="5">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding PointMetadata3D.IsSelected, Mode=TwoWay}">
+                            <TextBlock Foreground="White" VerticalAlignment="Center">
                             <Run Text="X:" FontWeight="Bold"/>
                             <Run Text="{Binding X, StringFormat='0.00'}"/>
                             <Run Text="Y:" FontWeight="Bold"/>
                             <Run Text="{Binding Y, StringFormat='0.00'}"/>
                             <Run Text="Z:" FontWeight="Bold"/>
                             <Run Text="{Binding Z, StringFormat='0.00'}"/>
-                        </TextBlock>
-                    </CheckBox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                            </TextBlock>
+                        </CheckBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
 
-        <StackPanel Grid.Column="1"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Orientation="Vertical">
+        <Border Grid.Column="1"
+                CornerRadius="5" 
+                Margin="5"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Background="{StaticResource MainThemeTransparentSolidBrush}">
 
-            <TextBlock FontSize="20" 
-                       Opacity="0.7"
-                       Background="#232323"
-                       Margin="5"
-                       HorizontalAlignment="Left"
-                       Text="Press the left mouse button and drag the rectangle to select all point markers that fall inside!" 
-                       Foreground="#FFF" />
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock FontSize="16" 
+                           Opacity="0.7"               
+                           Margin="5,0"
+                           VerticalAlignment="Center"
+                           Text="Press the left mouse button and drag the rectangle to select all point markers that fall inside!" 
+                           Foreground="#FFF"/>
 
-            <TextBlock FontSize="20" 
-                       Opacity="0.7"
-                       Background="#232323"
-                       Margin="5 0"
-                       HorizontalAlignment="Left"
-                       Text="Also it is possible to select a single point marker by clicking on it." 
-                       Foreground="#FFF" />
-            
-            <StackPanel Margin="5" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="16" 
+                               Opacity="0.7"               
+                               Margin="5,0"
+                               VerticalAlignment="Center"
+                               Text="Also it is possible to select a single point marker by clicking on it. To disable selection, uncheck" 
+                               Foreground="#FFF"/>
 
-                <TextBlock FontSize="20" 
-                           Opacity="0.7"
-                           Background="#232323"
-                           Text="To disable selection, uncheck" 
-                           Foreground="#FFF" />
-
-                <Image Width="32"
-                       Height="32"
-                       Margin="5 0"
-                       Source="/SciChart.Examples;component/Resources/Images/select_icon.png"
-                       Stretch="None" />
-
-                <TextBlock FontSize="20" 
-                           Opacity="0.7"
-                           Background="#232323"
-                           Text="More selection options can be found in the button's popup menu." 
-                           Foreground="#FFF" />
+                    <Border Width="26" Height="26" Margin="5,5,5,0" CornerRadius="5" Background="#FF2A354B">
+                        <ext:ToolbarIcon Kind="ArrowTopLeft" Height="12" Width="12" Foreground="#FFF" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                    </Border>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

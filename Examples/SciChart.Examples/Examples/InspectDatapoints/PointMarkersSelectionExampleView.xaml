@@ -11,17 +11,10 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            
-            <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-        </ResourceDictionary>
+        <s:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -34,48 +27,47 @@
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <!--  Create the chart surface  -->
-        <s:SciChartSurface Name="sciChart"
-                           Grid.Column="1">
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries1"
-                                            Stroke="#4AB748"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="1"
                                             YAxisId="Right">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Fill="#138A43" />
+                        <s:EllipsePointMarker Fill="{StaticResource MainThemeStrokeColor}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SelectedPointMarker>
-                        <s:EllipsePointMarker Fill="#C4ECA0"
+                        <s:EllipsePointMarker Fill="{StaticResource MainThemeTransparentStrokeColor}"
                                               Width="12"
                                               Height="12" />
                     </s:FastLineRenderableSeries.SelectedPointMarker>
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries2"
-                                            Stroke="Blue"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="1"
                                             YAxisId="Left">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Fill="Blue" />
+                        <s:EllipsePointMarker Fill="{StaticResource SecondaryThemeStrokeColor}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SelectedPointMarker>
-                        <s:EllipsePointMarker Fill="CornflowerBlue"
+                        <s:EllipsePointMarker Fill="{StaticResource SecondaryTransparentStrokeColor}"
                                               Width="12"
                                               Height="12" />
                     </s:FastLineRenderableSeries.SelectedPointMarker>
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries3"
-                                            Stroke="Yellow"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="1"
                                             YAxisId="Right">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Fill="Yellow" />
+                        <s:EllipsePointMarker Fill="{StaticResource ExtraThemeStrokeColor_2}" />
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SelectedPointMarker>
-                        <s:EllipsePointMarker Fill="YellowGreen"
+                        <s:EllipsePointMarker Fill="{StaticResource ExtraThemeTransparentStrokeColor_2}"
                                               Width="12"
                                               Height="12" />
                     </s:FastLineRenderableSeries.SelectedPointMarker>
@@ -98,10 +90,10 @@
             <!-- Setting IsEnabled enables or disables a modifier in the Toolbar -->
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:DataPointSelectionModifier Name="PointMarkersSelectionModifier"
+                    <s:DataPointSelectionModifier x:Name="PointMarkersSelectionModifier"
                                                   IsEnabled="True"
                                                   SelectionFill="#B1B5B2B2" 
-                                                  SelectionStroke="#009E9C9C" />
+                                                  SelectionStroke="#009E9C9C"/>
                     <s:MouseWheelZoomModifier IsEnabled="True" />
                     <s:RubberBandXyZoomModifier IsEnabled="False" />
                 </s:ModifierGroup>
@@ -109,34 +101,29 @@
         </s:SciChartSurface>
 
         <!-- The list of selected points -->
-        <Grid Grid.Column="2" Background="#1C1C1F">
-            <TextBlock Margin="10"
-                       Text="Selected PointMarkers:"
-                       Foreground="#C6C6C6" />
-            <ListBox ItemsSource="{Binding Source={x:Reference Name=PointMarkersSelectionModifier}, Path=SelectedPointMarkers}"
-                     Foreground="#57A54A"
-                     BorderBrush="Transparent"
-                     Margin="5"
-                     Background="#1C1C1F"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <!-- Disable items selection in the listbox -->
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="IsEnabled" Value="False"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="s:DataPointInfo">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="{Binding RenderableSeries.Stroke, Converter={StaticResource ColorToBrushConverter}}" Text="{Binding DataSeriesName}"/>
-                            <TextBlock Foreground="{Binding RenderableSeries.Stroke, Converter={StaticResource ColorToBrushConverter}}" Text="{Binding XValue, StringFormat=', X:{0:##0.##}'}"/>
-                            <TextBlock Foreground="{Binding RenderableSeries.Stroke, Converter={StaticResource ColorToBrushConverter}}" Text="{Binding YValue, StringFormat=', Y:{0:##0.##}'}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-           </ListBox>
-        </Grid>
+        <ListBox Grid.Column="2"
+                 BorderThickness="0"
+                 Background="Transparent"
+                 ItemsSource="{Binding Source={x:Reference Name=PointMarkersSelectionModifier}, Path=SelectedPointMarkers}"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <!-- Disable items selection in the listbox -->
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="s:DataPointInfo">
+                    <TextBlock Margin="5,2" TextTrimming="CharacterEllipsis" Foreground="{Binding RenderableSeries.Stroke, Converter={StaticResource ColorToBrushConverter}}">
+                        <Run Text="{Binding DataSeriesName, Mode=OneWay}"/>
+                        <Run Text="{Binding XValue, Mode=OneWay, StringFormat=', X:{0:##0.##}'}"/>
+                        <Run Text="{Binding YValue, Mode=OneWay, StringFormat=', Y:{0:##0.##}'}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

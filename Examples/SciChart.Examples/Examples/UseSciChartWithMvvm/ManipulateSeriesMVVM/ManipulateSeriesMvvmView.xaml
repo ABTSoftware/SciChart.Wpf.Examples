@@ -9,24 +9,6 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
-    <UserControl.Resources>
-
-        <Viewbox x:Key="FlyoutButtonContent">
-            <ContentPresenter Content="{Binding SelectedSeriesType}" ext:ContentPresenterHelper.ContentTemplate="{Binding IconPath}" />
-        </Viewbox>
-
-        <DataTemplate x:Key="ComboBoxItemTemplate" DataType="local:SeriesType">
-            <StackPanel Orientation="Horizontal">
-                <Viewbox Width="35" Height="35">
-                    <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding IconPath}" />
-                </Viewbox>
-                <TextBlock VerticalAlignment="Center" Text="{Binding Type.Name}" />
-            </StackPanel>
-        </DataTemplate>
-
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -37,39 +19,35 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
-
             <Button Command="{Binding AddCommand}"
-                    Content="+"
-                    FontSize="18"
-                    Padding="0"
                     Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="Add Series of Selected Type" />
-            <Button Command="{Binding RemoveCommand}"
-                    Content="-"
-                    FontSize="18"
-                    Padding="0"
-                    Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="Remove Selected Series" />
-            <Button Command="{Binding ClearCommand}"
-                    Content="CLR"
-                    FontSize="11"
-                    Padding="0"
-                    Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="Clear all series" />
+                    ToolTipService.ToolTip="Add Series of Selected Type">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-            <ext:FlyoutMenuButton Content="{StaticResource FlyoutButtonContent}" Padding="0">
+            <Button Command="{Binding RemoveCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Remove Selected Series">
+                <ext:ToolbarIcon Kind="Minus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+
+            <Button Command="{Binding ClearCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Clear all series">
+                <ext:ToolbarIcon Kind="Close" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="ChartTimelineVariant" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Select Series Type" />
-                        <ext:FlyoutSeparator />
-                        <ComboBox Margin="4"
-                                  ItemTemplate="{StaticResource ComboBoxItemTemplate}"
+                    <StackPanel Margin="5" Width="250" Orientation="Vertical">
+                        <TextBlock Text="Select Series Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox DisplayMemberPath="Type.Name"
                                   ItemsSource="{Binding SeriesTypes}"
-                                  SelectedItem="{Binding SelectedSeriesType}" />
+                                  SelectedItem="{Binding SelectedSeriesType}"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
 
         <!--  Shows the SciChartSurface and binds ZoomHistoryManager to the instance in the viewmodel  -->

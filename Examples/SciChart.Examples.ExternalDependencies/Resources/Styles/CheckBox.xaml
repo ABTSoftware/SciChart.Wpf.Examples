@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ToolbarPopupCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource ToolbarPopupCheckBoxForegroundBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,2"/>
+        <Setter Property="Padding" Value="5,0,0,0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse x:Name="CheckEllipse"
+                                 Grid.Column="0"
+                                 Width="16"
+                                 Height="16"
+                                 StrokeThickness="1.5"
+                                 Stroke="{DynamicResource ToolbarPopupCheckBoxStrokeBrush}"                     
+                                 Fill="Transparent"/>
+
+                        <Path x:Name="CheckIcon"
+                              Grid.Column="0"
+                              Opacity="0"
+                              Height="16"
+                              Width="16" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Stretch="Uniform"
+                              Fill="{DynamicResource ToolbarPopupCheckBoxCheckedStrokeBrush}"                              
+                              Data="M19.354679,8.7028606 A8,8,0,0,1,10.354681,20.023246 A8,8,0,0,1,4.1943006,12.388335 A8,8,0,0,1,11.881463,3.9498797
+                                    C14.650597,3.8827492 16.006979,5.1085372 16.132713,5.0166257 L17.369384,3.5722705 C14.684163,1.9443553 12.705235,2.1190841 12.458237,2.043419
+                                    A10,10,0,0,0,2,12 A10,10,0,0,0,11.867906,22.161821 A10,10,0,0,0,20.923279,7.388868 M7.91,10.08 L6.5,11.5 11,16 21.54608,4.2165651 20.2139,2.9907887 11,13.17 7.91,10.08 z"/>
+
+                        <ContentPresenter Grid.Column="1"
+                                          x:Name="contentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CheckEllipse" Property="Stroke" Value="{DynamicResource ToolbarPopupCheckBoxMouseOverStrokeBrush}"/>
+                            <Setter TargetName="CheckEllipse" Property="Fill" Value="{DynamicResource ToolbarPopupCheckBoxMouseOverFillBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckEllipse" Property="StrokeThickness" Value="0"/>
+                            <Setter TargetName="CheckIcon" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

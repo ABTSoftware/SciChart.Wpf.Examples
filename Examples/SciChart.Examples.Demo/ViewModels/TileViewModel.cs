@@ -1,11 +1,11 @@
 ﻿using System;
-using SciChart.Examples.Demo.Controls.TileControl;
+using SciChart.Examples.Demo.Controls.Tile;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
-    public class TileViewModel :BaseViewModel
+    public class TileViewModel : BaseViewModel
     {
         private static readonly Random Random = new Random();
 
@@ -14,7 +14,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public TileViewModel()
         {
             TransitionSeed = Random.Next(1, 10) * 3;
-            TransitionTime = TimeSpan.FromSeconds(Random.Next(6, 22)*2 / 10d);
+            TransitionTime = TimeSpan.FromSeconds(Random.Next(6, 22) * 2 / 10d);
         }
 
         public TileState TileState
@@ -40,6 +40,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 case TileState.Main:
                     TileState = TileState.Details;
                     break;
+
                 case TileState.Details:
                     TileState = TileState.Main;
                     break;

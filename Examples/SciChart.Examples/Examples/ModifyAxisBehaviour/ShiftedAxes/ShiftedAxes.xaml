@@ -57,7 +57,7 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries" StrokeThickness="1">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.4"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.4"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

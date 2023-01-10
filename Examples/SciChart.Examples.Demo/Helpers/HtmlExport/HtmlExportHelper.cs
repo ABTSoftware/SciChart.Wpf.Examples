@@ -75,7 +75,7 @@ namespace SciChart.Examples.Demo.Helpers.HtmlExport
                         }
 
                         control.Loaded -= controlOnLoaded;
-                    }).After(1000).Go();
+                    }).After(3000).Go();
                 };
                 control.Loaded += controlOnLoaded;
             };

@@ -24,7 +24,7 @@
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Name="lineSeries1" Stroke="Green" />
+                <s:FastLineRenderableSeries Name="lineSeries1" Stroke="{StaticResource MainThemeStrokeColor}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxes>
@@ -38,48 +38,44 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation CanEditText="True"
                                   IsEditable="True"
-                                  Text="{Binding Y1,
-                                                 RelativeSource={RelativeSource Self},
-                                                 StringFormat=\{0:0.##\}}"
-                                  X1="20"
-                                  Y1="0" />
+                                  Text="{Binding Y1, RelativeSource={RelativeSource Self}, StringFormat=\{0:0.##\}}"
+                                  X1="20" Y1="0"/>
 
-                <s:CustomAnnotation IsEditable="True"
-                                    X1="76"
-                                    Y1="-40">
-                    <Image Width="178"
-                           Height="74"
-                           Source="/SciChart.Examples.ExternalDependencies;Component/Resources/Images/SciChartLogo_Dark.png"
-                           Stretch="None" />
+                <s:CustomAnnotation IsEditable="True" X1="76" Y1="-40">
+                    <Image Width="180"
+                           Height="42"
+                           UseLayoutRounding="True"
+                           Source="/SciChart.Examples.ExternalDependencies;Component/Resources/Images/SciChartLogo_Navy.png"
+                           Stretch="None"/>
                 </s:CustomAnnotation>
 
                 <s:AxisMarkerAnnotation AnnotationCanvas="XAxis"
-                                        Background="#FF6600"
+                                        Background="{StaticResource ExtraThemeStrokeBrush_3}"
                                         IsEditable="True"
                                         X1="70" />
 
-                <s:AxisMarkerAnnotation Background="#FF6600"
+                <s:AxisMarkerAnnotation Background="{StaticResource ExtraThemeStrokeBrush_3}"
                                         FontSize="11"
                                         IsEditable="True"
                                         Y1="-20" />
 
                 <s:LineAnnotation IsEditable="True"
-                                  Stroke="Red"
+                                  Stroke="{StaticResource ExtraThemeStrokeBrush_1}"
                                   X1="20"
                                   X2="270"
                                   Y1="50"
                                   Y2="80" />
 
                 <s:LineArrowAnnotation IsEditable="True"
-                                       Stroke="Red"
+                                       Stroke="{StaticResource ExtraThemeStrokeBrush_1}"
                                        StrokeThickness="2"
                                        X1="200"
                                        X2="120"
                                        Y1="0"
                                        Y2="70" />
 
-                <s:BoxAnnotation Background="#AC21953A"
-                                 BorderBrush="Blue"
+                <s:BoxAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_2}"
+                                 BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                                  BorderThickness="1"
                                  CornerRadius="3"
                                  IsEditable="True"

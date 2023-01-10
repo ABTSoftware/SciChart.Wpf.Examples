@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -114,19 +114,19 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                     new StackedColumnRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 0, 2, 195)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4)),
                         StackedGroupId = "stackedColumns"
                     },
                     new StackedColumnRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 0, 143, 255)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x5C, 0x43, 0x9B)),
                         StackedGroupId = "stackedColumns"
                     },
                     new StackedColumnRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 0, 255, 84)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x6B, 0xC4, 0xA9)),
                         StackedGroupId = "stackedColumns"
                     });
             }
@@ -137,19 +137,19 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStylePolarC
                     new StackedMountainRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 57, 255, 0)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4)),
                         StackedGroupId = "stackedMountains",
                     },
                     new StackedMountainRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 251, 255, 0)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x5C, 0x43, 0x9B)),
                         StackedGroupId = "stackedMountains",
                     },
                     new StackedMountainRenderableSeriesViewModel
                     {
                         DataSeries = GetXyDataSeries(data),
-                        Fill = new SolidColorBrush(Color.FromArgb(255, 0, 90, 255)),
+                        Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x6B, 0xC4, 0xA9)),
                         StackedGroupId = "stackedMountains",
                     });
             }

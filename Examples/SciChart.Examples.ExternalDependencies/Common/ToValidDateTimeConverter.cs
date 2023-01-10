@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -29,37 +29,37 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (XVisibleRange == null || value == null) return value;
-
-            return ValidateDate(value, parameter);
-        }
-
-        private object ValidateDate(object value, object parameter)
-        {
-            var newDate = (DateTime) value;
-            switch (parameter.ToString())
+            if (XVisibleRange != null && value is DateTime dateTime)
             {
-                case "Max":
-                    if (XVisibleRange.Min >= newDate)
-                    {
-                        newDate = XVisibleRange.Max;
-                    }
-                    break;
-                case "Min":
-                    if (XVisibleRange.Max <= newDate)
-                    {
-                        newDate = XVisibleRange.Min;
-                    }
-                    break;
+                return ValidateDate(dateTime, parameter).ToString();
             }
-            return newDate;
+            return DateTime.MinValue.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (XVisibleRange == null || value == null) return value;
+            if (XVisibleRange != null && value is string dateString)
+            {
+                return ValidateDate(DateTime.Parse(dateString), parameter);
+            }
+            return DateTime.MinValue;
+        }
 
-            return ValidateDate(value, parameter);
+        private object ValidateDate(DateTime dateTime, object parameter)
+        {
+            if (parameter is string rangeProperty)
+            {
+                if (rangeProperty == "Max" && XVisibleRange.Min >= dateTime)
+                {
+                    dateTime = XVisibleRange.Max;
+                }
+
+                if (rangeProperty == "Min" && XVisibleRange.Max <= dateTime)
+                {
+                    dateTime = XVisibleRange.Min;
+                }
+            }
+            return dateTime;
         }
     }
 }

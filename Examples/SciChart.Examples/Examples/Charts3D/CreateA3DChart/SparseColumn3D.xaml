@@ -25,15 +25,13 @@
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
 
-            <ext:FlyoutSeparator Background="#444" />
+            <ext:FlyoutSeparator/>
 
-            <ext:FlyoutMenuButton Content="SP"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Shape" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Column Shape Type" />
-                        <ext:FlyoutSeparator />
+                    <StackPanel Margin="5" Width="170" Orientation="Vertical">
+                        <TextBlock Text="Column Shape Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <ComboBox x:Name="PointMarkerCombo"
                                   DisplayMemberPath="Name"
                                   SelectedIndex="0">
@@ -48,56 +46,45 @@
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Content="SIZE"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="DiameterOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Slide to change Column Size" />
-                        <ext:FlyoutSeparator />
-                        <!--  Create the size slider  -->
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Column Size" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="SizeSlider"
-                                Margin="4"
+                                Margin="0,5"
                                 HorizontalAlignment="Stretch"
                                 Maximum="1"
-                                Minimum="0"
+                                Minimum="0.1"
                                 Orientation="Horizontal"
                                 Value="0.5" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Content="OP"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="CircleOpacity" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Slide to change Column Opacity" />
-                        <ext:FlyoutSeparator />
-                        <!--  Create the opacity slider  -->
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Column Opacity" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="OpacitySlider"
-                                Margin="4"
-                                HorizontalAlignment="Stretch"
+                                Margin="0,5"
                                 Maximum="1.0"
                                 Minimum="0.1"
                                 Orientation="Horizontal"
-                                Value="1.0" />
+                                Value="1.0"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
-                                  Content="MTRL" 
-                                  FontSize="10" 
-                                  Padding="0">
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-
-                        <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <TextBlock FontSize="12" Text="Specular Strength" />
-                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Shininess" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="Specular Strength" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -116,8 +103,8 @@
                 <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
                 <s3D:ColumnRenderableSeries3D ColumnShape="{Binding Source={x:Reference PointMarkerCombo}, Path=SelectedValue}"
                                               DataPointWidthX="{Binding Source={x:Reference SizeSlider}, Path=Value}"
-                                              SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
-                                              Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
+                                              SpecularStrength="{Binding Source={x:Reference specularStrengthSlider}, Path=Value, Mode=TwoWay}"
+                                              Shininess="{Binding Source={x:Reference shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                               Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}" />
 
             </s3D:SciChart3DSurface.RenderableSeries>

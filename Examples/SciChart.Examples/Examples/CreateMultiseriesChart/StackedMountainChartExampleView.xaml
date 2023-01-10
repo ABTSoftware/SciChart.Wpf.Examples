@@ -10,15 +10,20 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <LinearGradientBrush x:Key="chartFill1" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#DDDBE0E1" />
-            <GradientStop Offset="1.0" Color="#88B6C1C3" />
-        </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="chartFill0" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#DDACBCCA" />
-            <GradientStop Offset="1.0" Color="#88439AAF" />
-        </LinearGradientBrush>
+        <ResourceDictionary>
+
+            <LinearGradientBrush x:Key="chartFill1" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#DDDBE0E1" />
+                <GradientStop Offset="1.0" Color="#88B6C1C3" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="chartFill0" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#DDACBCCA" />
+                <GradientStop Offset="1.0" Color="#88439AAF" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+
     </UserControl.Resources>
 
     <Grid>
@@ -34,25 +39,25 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                
+
                 <s:StackedMountainRenderableSeries x:Name="mountainSeries1"
-                                                   Fill="{StaticResource chartFill0}"
-                                                   Stroke="#EEE"
-                                                   StrokeThickness="2">
+                                                   Fill="{StaticResource GroupSeriesFill_2}"
+                                                   Stroke="{StaticResource GroupSeriesColor_2}"
+                                                   StrokeThickness="3">
                     <s:StackedMountainRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:StackedMountainRenderableSeries.SeriesAnimation>
                 </s:StackedMountainRenderableSeries>
-                
+
                 <s:StackedMountainRenderableSeries x:Name="mountainSeries2"
-                                                   Fill="{StaticResource chartFill1}"
-                                                   Stroke="#EEE"
-                                                   StrokeThickness="2">
+                                                   Fill="{StaticResource GroupSeriesFill_1}"
+                                                   Stroke="{StaticResource GroupSeriesColor_1}"
+                                                   StrokeThickness="3">
                     <s:StackedMountainRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:StackedMountainRenderableSeries.SeriesAnimation>
                 </s:StackedMountainRenderableSeries>
-                
+
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->

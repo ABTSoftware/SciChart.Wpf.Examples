@@ -17,12 +17,19 @@
 
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
-            <ext:FlyoutSeparator Background="#444"/>
+            <ext:FlyoutSeparator/>
 
-            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
-            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
-            <ToggleButton x:Name="ResetButton" Click="ResetButton_Click" Style="{StaticResource StopButtonStyle}" Padding="7"/>
+            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
+            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton x:Name="ResetButton" Click="ResetButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
         </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0">
@@ -34,9 +41,9 @@
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
-                        <s3D:EllipsePointMarker3D Fill="#77ADFF2F"/>
+                        <s3D:EllipsePointMarker3D Fill="{StaticResource MainThemeTransparentStrokeColor}"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
-                </s3D:ScatterRenderableSeries3D>                
+                </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
 
 

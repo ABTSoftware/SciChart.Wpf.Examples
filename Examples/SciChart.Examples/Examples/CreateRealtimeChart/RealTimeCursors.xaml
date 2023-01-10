@@ -22,11 +22,9 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="13" />
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -35,65 +33,33 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar x:Name="UserToolbar" >
-
+        <ext:SciChartInteractionToolbar x:Name="UserToolbar">
             <ext:FlyoutMenuToggleButton x:Name="RollFlyoutMenuButton"
-                                       HorizontalAlignment="Left"
-                                       Content="ROLL"
-                                       HorizontalContentAlignment="Center"
-                                       IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=IsEnabled,  Mode=TwoWay}"
-                                       Style="{StaticResource FlyoutMenuToggleButtonStyle}"
-                                       FontSize="10"
-                                       Padding="0"
-                                       ToolTipService.ToolTip="Rollover"
-                                       s:ToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+                                        IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=IsEnabled,  Mode=TwoWay}"
+                                        ToolTipService.ToolTip="Rollover"
+                                        ext:FlyoutMenuToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+
+                <ext:ToolbarIcon Style="{StaticResource ToolbarButtonIconStyle}"
+                                 Path="M22.303633,3.0000001 C23.744555,3 24.99753,4.2580881 24.99753,5.7048893 L24.999998,25 25.000001,25.027508 24.999342,25.027512 24.996372,25.151785
+                                       C24.921722,26.713037 23.705593,28.040001 22.313569,28.040001 L17.024437,28.031252 17,25.017069 22.315462,25.005728 22.223639,5.7164941 17.012253,5.738297
+                                       17,3.0225473 z M2.6875,3.0000001 L8,3.0000001 8,5.8039582 2.6875,5.8039582 2.6875,25.236042 8,25.236042 8,28.039999 2.6875,28.039999 C1.25,28.039999 0,26.735832
+                                       0,25.236042 L0,5.8039582 C0,4.3041667 1.25,3 2.6875,3.0000001 z M11,0 L14,0 14,30.039999 11,30.039999 z"/>
 
                 <ext:FlyoutMenuToggleButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock FontSize="12" Text="Rollover mode" />
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Rollover mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                        <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
-                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
+                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}"/>
 
-                        <ext:FlyoutSeparator />
-
-                        <TextBlock FontSize="12" Text="Show tooltip mode" />
-
-                        <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
-                                  SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}" />
-
-                        <ext:FlyoutSeparator />
-
-                        <CheckBox Margin="3"
-                              FontSize="12"
-                              VerticalAlignment="Center"
-                              Content="Show axis label"
-                              IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
-
+                        <CheckBox Content="Show Axis Label" Margin="0,10,0,0" IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}"/>
+                        <CheckBox x:Name="useInterpolation" Margin="0,10,0,5" Content="Use Interpolation" IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=UseInterpolation, Mode=TwoWay}"/>
                     </StackPanel>
                 </ext:FlyoutMenuToggleButton.PopupContent>
             </ext:FlyoutMenuToggleButton>
-
-            <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                  Content="URI"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  ToolTipService.ToolTip="Use RolloverModifier interpolation">
-
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-
-                        <!--  Sets a flag on how RolloverModifier should behave. If true, uses interpolation between points, else snaps to points  -->
-                        <CheckBox x:Name="useInterpolation"
-                                  Margin="3"
-                                  VerticalAlignment="Center"
-                                  Content="Use RolloverModifier interpolation?"
-                                  IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=UseInterpolation, Mode=TwoWay}" />
-
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
 
         <!--  Define a SciChartSurface with RolloverModifier  -->
@@ -103,7 +69,7 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="renderableSeries0"
-                                            Stroke="DarkOrange"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2">
 
                     <s:FastLineRenderableSeries.PointMarker>
@@ -116,7 +82,7 @@
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries x:Name="renderableSeries1"
-                                            Stroke="SteelBlue"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="6"
@@ -127,7 +93,7 @@
                 </s:FastLineRenderableSeries>
 
                 <s:FastLineRenderableSeries x:Name="renderableSeries2"
-                                            Stroke="DarkOliveGreen"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="6"
@@ -155,7 +121,7 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:RolloverModifier x:Name="rolloverModifier" ShowAxisLabels="False" UseInterpolation="True" ShowTooltipOn="Always" />
+                    <s:RolloverModifier x:Name="rolloverModifier" ShowAxisLabels="False" UseInterpolation="True" ShowTooltipOn="Always"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
 

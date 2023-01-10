@@ -11,27 +11,10 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate x:Key="CustomZoomButtonStyle">
-                <Viewbox>
-                    <Grid Width="26" Height="26">
-                        <Path Data="M 21,13 26,10 26,16 z M 5,13 0,10 0,16 z M 7,0 7,26 M 19,0 19,26 M 9,5 17,1 M 9,8 17,4 M 9,11 17,7 M 9,14 17,10 M 9,17 17,13 M 9,20 17,16 M 9,23 17,19 M 9,26 17,22" Style="{StaticResource ButtonPathStyle}" />
-                    </Grid>
-                </Viewbox>
-            </DataTemplate>
-
-            <ext:BoolToValueConverter x:Key="BoolToSwitchValueConverter"
-                                      FalseValue="True"
-                                      TrueValue="False" />
-
-        </ResourceDictionary>
+        <ext:BoolToValueConverter x:Key="BoolToSwitchValueConverter" FalseValue="True" TrueValue="False"/>
     </UserControl.Resources>
 
-    <Grid Background="#FF1C1C1E">
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -48,16 +31,13 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
             <ToggleButton x:Name="customRubberBandButton"
-                          HorizontalAlignment="Left"
-                          Content="Zoom"
-                          ContentTemplate="{StaticResource CustomZoomButtonStyle}"
                           IsChecked="{Binding Source={x:Reference Name=customRubberBandModifier}, Path=IsEnabled, Mode=TwoWay}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
                           ToolTipService.ToolTip="Custom Toggle Rubber-Band Zoom"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
-
+                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart"
@@ -68,7 +48,7 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    
+
                     <s:RubberBandXyZoomModifier ext:SciChartInteractionToolbar.AppearceInToolbar="False" />
                     <s:AnnotationCreationModifier ext:SciChartInteractionToolbar.AppearceInToolbar="False" />
                     <s:YAxisDragModifier IsEnabled="False" />
@@ -84,11 +64,11 @@
                                                                             IsXAxisOnly="True"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-            <s:SciChartSurface.Annotations>
 
+            <s:SciChartSurface.Annotations>
                 <s:AxisMarkerAnnotation x:Name="AxisMarkerAnnotation"
                                         AnnotationCanvas="XAxis"
-                                        Background="Green"
+                                        Background="{StaticResource ExtraThemeStrokeBrush_1}"
                                         FormattedValue="{Binding RelativeSource={RelativeSource Self},
                                                                  Path=AxisInfo.CursorFormattedDataValue}"
                                         IsEditable="True"
@@ -99,18 +79,15 @@
                                         XAxisId="AxisX0"
                                         Y1="0"
                                         YAxisId="AxisY0" />
-
             </s:SciChartSurface.Annotations>
-
         </s:SciChartSurface>
 
         <s:SciChartSurface x:Name="sciChart2"
                            Grid.Row="1"
                            Grid.Column="1"
                            Margin="5">
-
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="Aqua" />
+                <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -145,7 +122,7 @@
                            Margin="5">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="LineRenderableSeries2" Stroke="Goldenrod" />
+                <s:FastLineRenderableSeries x:Name="LineRenderableSeries2" Stroke="{StaticResource SecondaryThemeStrokeColor}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -155,9 +132,6 @@
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis GrowBy="0.1,0.1" />
             </s:SciChartSurface.YAxis>
-
         </s:SciChartSurface>
-
-
     </Grid>
 </UserControl>

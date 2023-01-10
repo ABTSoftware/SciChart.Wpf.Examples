@@ -17,39 +17,35 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="CTRL" Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                        <TextBlock Text="When Dragging to Zoom" />
-                        <ext:FlyoutSeparator/>
-                        <CheckBox x:Name="zoomXAxisOnly" Margin="4" Content="Zoom X-Axis Only" ToolTipService.ToolTip="When checked, the zoom reticule expands vertically, and a zoom on the X-Axis is performed"/>
-                        <CheckBox x:Name="zoomExtentsY" Margin="4" Content="Zoom Extents Y-Axis" ToolTipService.ToolTip="Used in conjunction with Zoom X-Axis Only, when checked performs a Zoom to extents in the Y-direction on zoom, else leaves Y-direction unchanged"/>
-                        <CheckBox x:Name="useAnimation"  Margin="4" Content="Use Animation" IsChecked="True" ToolTipService.ToolTip="When checked, zoom operations are performed using animation. Disabling this feature performs an instant zoom to the new visible ranges"/>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="When Dragging to Zoom" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="zoomXAxisOnly" Margin="0,5" Content="Zoom X-Axis Only" ToolTipService.ToolTip="When checked, the zoom reticule expands vertically, and a zoom on the X-Axis is performed"/>
+                        <CheckBox x:Name="zoomExtentsY" Margin="0,5" Content="Zoom Extents Y-Axis" ToolTipService.ToolTip="Used in conjunction with Zoom X-Axis Only, when checked performs a Zoom to extents in the Y-direction on zoom, else leaves Y-direction unchanged"/>
+                        <CheckBox x:Name="useAnimation" Margin="0,5" Content="Use Animation" IsChecked="True" ToolTipService.ToolTip="When checked, zoom operations are performed using animation. Disabling this feature performs an instant zoom to the new visible ranges"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
-
-        <s:SciChartSurface x:Name="sciChart"
-                                Grid.Column="1">
-
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries x:Name="mountainSeries" 
-                                                    Fill="#771964FF"
-                                                    Stroke="#FF0944CF"
-                                                    YAxisId="SecondaryAxis">
+                                                Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
+                                                YAxisId="SecondaryAxis">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
                 <s:FastLineRenderableSeries x:Name ="lineSeries" 
-                                                Stroke="#FF279B27"
-                                                StrokeThickness="2"
-                                                YAxisId="PrimaryAxis">
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
+                                            StrokeThickness="2"
+                                            YAxisId="PrimaryAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -61,34 +57,31 @@
             <!--  Create Y Axes on the Left and Right  -->
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis AxisAlignment="Right"
-                                    Id="PrimaryAxis"
-                                    TickTextBrush="#FF279B27"
-                                    GrowBy="0.1, 0.1"/>
+                               Id="PrimaryAxis"
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}"
+                               GrowBy="0.1, 0.1"/>
+
                 <s:NumericAxis AxisAlignment="Left"
-                                    Id="SecondaryAxis"
-                                    TickTextBrush="#FF4083B7" 
-                                    GrowBy="0.1, 0.1"/>
+                               Id="SecondaryAxis"
+                               TickTextBrush="#FF4083B7" 
+                               GrowBy="0.1, 0.1"/>
             </s:SciChartSurface.YAxes>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-
                     <!-- Adding the RubberBandXyZoomModifier gives SciChart the ability to zoom on mouse-drag  -->
                     <!-- Note IsEnabled, IsXAxisOnly, ZoomExtentsY and IsAnimated properties are ound to controls in the example -->
                     <!-- Note default styling is provided by the themes, but you can override RubberBandFill, RubberBandStroke, RubberBandStrokeDashArray -->
                     <s:RubberBandXyZoomModifier IsXAxisOnly="{Binding Source={x:Reference Name=zoomXAxisOnly}, Path=IsChecked, Mode=TwoWay}" 
-                                            ZoomExtentsY="{Binding Source={x:Reference Name=zoomExtentsY}, Path=IsChecked, Mode=TwoWay}"
-                                            IsAnimated="{Binding Source={x:Reference Name=useAnimation}, Path=IsChecked, Mode=TwoWay}"
-                                            RubberBandFill="#55FFFFFF"
-                                            RubberBandStroke="#FFFFFFFF"
-                                            RubberBandStrokeDashArray="2 2">
-                    </s:RubberBandXyZoomModifier>
+                                                ZoomExtentsY="{Binding Source={x:Reference Name=zoomExtentsY}, Path=IsChecked, Mode=TwoWay}"
+                                                IsAnimated="{Binding Source={x:Reference Name=useAnimation}, Path=IsChecked, Mode=TwoWay}"
+                                                RubberBandFill="#55FFFFFF"
+                                                RubberBandStroke="#FFFFFFFF"
+                                                RubberBandStrokeDashArray="2 2"/>
 
                     <s:ZoomExtentsModifier IsAnimated="{Binding ElementName=useAnimation, Path=IsChecked, Mode=TwoWay}"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
         </s:SciChartSurface>
-
     </Grid>
 </UserControl>

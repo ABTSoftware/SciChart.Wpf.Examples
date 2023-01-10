@@ -30,16 +30,16 @@
             <!--  Declare renderable series  -->
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastImpulseRenderableSeries x:Name="impulseRenderSeries" Stroke="#0066FF">
+                <s:FastImpulseRenderableSeries x:Name="impulseRenderSeries" Stroke="{StaticResource ExtraThemeStrokeColor_3}">
                     <!--  Declare an optional point marker at the tip of each line  -->
                     <s:FastImpulseRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5"
                                               Height="5"
-                                              Fill="#0066FF" />
+                                              Fill="{StaticResource ExtraThemeStrokeColor_3}" />
                     </s:FastImpulseRenderableSeries.PointMarker>
 
                     <s:FastImpulseRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:1" ZeroLine="0"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="0"/>
                     </s:FastImpulseRenderableSeries.SeriesAnimation>
 
                 </s:FastImpulseRenderableSeries>

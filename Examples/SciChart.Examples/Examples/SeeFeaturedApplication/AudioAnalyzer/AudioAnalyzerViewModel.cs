@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -28,7 +28,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
 {
     public class AudioAnalyzerViewModel : BaseViewModel
     {
-        private IXyDataSeries<int, double> _dataSeries;
+        private IXyDataSeries<int, double> _audioHistoryDataSeries;
+        private IUniformXyDataSeries<double> _audioLiveDataSeries;
         private IXyDataSeries<int, double> _frequencyDataSeries;
         private IDataSeries _uniformHeatmapDataSeries;
         private Dispatcher _dispatcher;
@@ -50,13 +51,23 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
         public ICommand StartCommand { get; }
         public ICommand StopCommand { get; }
 
-        public IXyDataSeries<int, double> DataSeries
+        public IUniformXyDataSeries<double> AudioLiveDataSeries
         {
-            get { return _dataSeries; }
+            get { return _audioLiveDataSeries; }
             set
             {
-                _dataSeries = value;
-                OnPropertyChanged(nameof(DataSeries));
+                _audioLiveDataSeries = value;
+                OnPropertyChanged(nameof(AudioLiveDataSeries));
+            }
+        }
+
+        public IXyDataSeries<int, double> AudioHistoryDataSeries
+        {
+            get { return _audioHistoryDataSeries; }
+            set
+            {
+                _audioHistoryDataSeries = value;
+                OnPropertyChanged(nameof(AudioHistoryDataSeries));
             }
         }
 
@@ -146,10 +157,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
 
         private void Update(AudioDataAnalyzer analyzer)
         {
-            using (_dataSeries.SuspendUpdates())
+            using (_audioHistoryDataSeries.SuspendUpdates())
             {
-                _dataSeries.Clear();
-                _dataSeries.Append(analyzer.PrimaryIndices, analyzer.Samples);
+                _audioHistoryDataSeries.Clear();
+                _audioHistoryDataSeries.Append(analyzer.PrimaryIndices, analyzer.Samples);
+            }
+
+            using (_audioLiveDataSeries.SuspendUpdates())
+            {
+                _audioLiveDataSeries.Clear();
+                _audioLiveDataSeries.Append(analyzer.CurrentSamples);
             }
 
             using (_frequencyDataSeries.SuspendUpdates())
@@ -167,7 +184,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
 
             var dataSeries = new XyDataSeries<int, double>(handler.BufferSize);
             dataSeries.Append(analyzer.PrimaryIndices, analyzer.Samples);
-            DataSeries = dataSeries;
+            AudioHistoryDataSeries = dataSeries;
+
+            var audioDataSeries = new UniformXyDataSeries<double>(handler.SamplesPerSecond);
+            audioDataSeries.Append(new double[handler.SamplesPerSecond]);
+            AudioLiveDataSeries = audioDataSeries;
 
             var freqDataSeries = new XyDataSeries<int, double>(analyzer.FftDataPoints);
             freqDataSeries.Append(analyzer.FftIndices, analyzer.DbValues);

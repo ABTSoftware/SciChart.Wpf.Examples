@@ -9,7 +9,7 @@
 
     [b][i]Tips![/i][/b]
 
-    As well as Stroke, you can set [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']StrokeThickness[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']AntiAliasing[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']IsVisible[/url] properties to change how the series is rendered.[
+    As well as Stroke, you can set [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']StrokeThickness[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']AntiAliasing[/url], [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']IsVisible[/url] properties to change how the series is rendered.
 
     You can add data-point markers to a line series using the [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url]. This is very performant and uses the same bitmap rendering as our Scatter-Charts.
 

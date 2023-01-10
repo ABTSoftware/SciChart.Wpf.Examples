@@ -113,8 +113,8 @@ namespace SciChart.Examples.Demo.Helpers
                 .Replace("[/b]", string.Empty)
                 .Replace("[i]", string.Empty)
                 .Replace("[i]", string.Empty)
-                .Replace("[gt]", ">")
-                .Replace("[lt]", "<")
+                .Replace("[gt]", string.Empty)
+                .Replace("[lt]", string.Empty)
                 .Trim();
 
             formatted = _urlRegex.Replace(formatted, "$2");

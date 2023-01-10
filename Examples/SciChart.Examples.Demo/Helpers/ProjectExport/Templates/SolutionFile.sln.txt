@@ -2,7 +2,7 @@
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[PROJECTNAME]", "[PROJECTNAME].csproj", "{984E36A0-D1F4-4ECC-9415-0A3BE0EBF9D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[PROJECT_NAME]", "[PROJECT_NAME].csproj", "{984E36A0-D1F4-4ECC-9415-0A3BE0EBF9D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

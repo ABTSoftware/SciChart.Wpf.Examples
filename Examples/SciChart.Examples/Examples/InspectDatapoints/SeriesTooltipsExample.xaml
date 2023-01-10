@@ -34,9 +34,9 @@
         </Style>
 
         <local:ThresholdBackgroundConverter x:Key="ThresholdForegroundConverter"
-                                            DefaultBrush="Yellow"
-                                            HighThresholdBrush="#00AA00"
-                                            LowThresholdBrush="Red"/>
+                                            DefaultBrush="{StaticResource ExtraThemeStrokeBrush_2}"
+                                            HighThresholdBrush="{StaticResource ExtraThemeStrokeBrush_1}"
+                                            LowThresholdBrush="{StaticResource ExtraThemeStrokeBrush_6}"/>
 
         <DataTemplate x:Key="TooltipItemTemplate" DataType="local:TooltipViewModel">
             <Grid>
@@ -82,29 +82,29 @@
     </UserControl.Resources>
 
     <Grid>
-        <s:SciChartSurface DataContext="{StaticResource SeriesTooltipsViewModel}" s:ThemeManager.Theme="SciChartv4Dark">
+        <s:SciChartSurface DataContext="{StaticResource SeriesTooltipsViewModel}" s:ThemeManager.Theme="SciChartv7Navy">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries1}"
-                                            Stroke="SteelBlue"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             s:TooltipModifier.TooltipTemplate="{StaticResource TooltipItemTemplate}">
                     <s:FastLineRenderableSeries.PointMarkerTemplate>
                         <ControlTemplate>
                             <s:EllipsePointMarker Width="5"
                                                   Height="5"
-                                                  Stroke="Blue"
-                                                  Fill="SteelBlue" />
+                                                  Stroke="{StaticResource MainThemeStrokeColor}"
+                                                  Fill="{StaticResource MainThemeTransparentStrokeColor}" />
                         </ControlTemplate>
                     </s:FastLineRenderableSeries.PointMarkerTemplate>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries2}"
-                                            Stroke="#FF3333"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             s:TooltipModifier.TooltipTemplate="{StaticResource TooltipItemTemplate}">
                     <s:FastLineRenderableSeries.PointMarkerTemplate>
                         <ControlTemplate>
                             <s:EllipsePointMarker Width="5"
                                                   Height="5"
-                                                  Stroke="Blue"
-                                                  Fill="#FF3333" />
+                                                  Stroke="{StaticResource SecondaryThemeStrokeColor}"
+                                                  Fill="{StaticResource SecondaryTransparentStrokeColor}" />
                         </ControlTemplate>
                     </s:FastLineRenderableSeries.PointMarkerTemplate>
                 </s:FastLineRenderableSeries>

@@ -18,7 +18,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
         {
             if (rSeries.IsSelected)
             {
-                return Colors.Aqua;
+                return Colors.Red;
             }
 
             if (index == SelectedIndex)

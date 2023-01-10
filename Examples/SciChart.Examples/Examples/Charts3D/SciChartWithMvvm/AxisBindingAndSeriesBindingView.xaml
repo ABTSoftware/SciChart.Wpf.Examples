@@ -12,17 +12,13 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
 
-    <UserControl.DataContext>
-        <sciChartWithMvvm:AxisBindingAndSeriesBindingViewModel/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
 
         <Style x:Key="CustomNumeric3DStyle" BasedOn="{StaticResource {x:Type axis:NumericAxis3DForMvvm}}" TargetType="axis:NumericAxis3DForMvvm">
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Chocolate"/>
+                        <Setter Property="Stroke" Value="{StaticResource SecondaryThemeSolidBrush}"/>
                         <Setter Property="StrokeThickness" Value="3" />
                     </Style>
                 </Setter.Value>
@@ -33,7 +29,7 @@
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="GreenYellow"/>
+                        <Setter Property="Stroke" Value="{StaticResource MainThemeSolidBrush}"/>
                         <Setter Property="StrokeThickness" Value="2" />
                     </Style>
                 </Setter.Value>
@@ -44,7 +40,7 @@
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="OrangeRed"/>
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_2}"/>
                         <Setter Property="StrokeThickness" Value="1" />
                     </Style>
                 </Setter.Value>

@@ -5,8 +5,8 @@
     <Style x:Key="ColumnStyle" TargetType="s:FastColumnRenderableSeries">
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="DataPointWidth" Value="0.5" />
-        <Setter Property="Stroke" Value="#FF2F74F0" />
-        <Setter Property="Fill" Value="#FF6495ED" />
+        <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
+        <Setter Property="Fill" Value="{StaticResource MainThemeTransparentSolidBrush}" />
         <Setter Property="SelectedSeriesStyle">
             <Setter.Value>
                 <Style TargetType="s:FastColumnRenderableSeries">
@@ -37,7 +37,7 @@
     </Style>
 
     <Style x:Key="LineStyle" TargetType="s:FastLineRenderableSeries">
-        <Setter Property="Stroke" Value="#FFFF4500" />
+        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_2}" />
         <Setter Property="StrokeThickness" Value="2" />
         <Setter Property="SelectedSeriesStyle">
             <Setter.Value>
@@ -50,7 +50,7 @@
                                                       Height="10"
                                                       StrokeThickness="3"
                                                       Stroke="{Binding DataContext.Stroke, RelativeSource={RelativeSource TemplatedParent}}"
-                                                      Fill="Red" />
+                                                      Fill="{StaticResource SecondaryThemeStrokeColor}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -72,7 +72,7 @@
                                                       Height="10"
                                                       StrokeThickness="3"
                                                       Stroke="{Binding DataContext.Stroke, RelativeSource={RelativeSource TemplatedParent}}"
-                                                      Fill="Red" />
+                                                      Fill="{StaticResource ExtraThemeStrokeColor_1}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -89,7 +89,7 @@
                     <s:EllipsePointMarker Width="10"
                                           Height="10"
                                           Fill="{Binding DataContext.Stroke, RelativeSource={RelativeSource TemplatedParent}}"
-                                          Stroke="#FF000000" />
+                                          Stroke="{StaticResource ExtraThemeStrokeColor_4}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -101,7 +101,7 @@
                             <ControlTemplate>
                                 <s:EllipsePointMarker Width="15"
                                                       Height="15"
-                                                      Fill="Red"
+                                                      Fill="{StaticResource SecondaryThemeStrokeColor}"
                                                       Stroke="{Binding DataContext.Stroke, RelativeSource={RelativeSource TemplatedParent}}"
                                                       StrokeThickness="3" />
                             </ControlTemplate>

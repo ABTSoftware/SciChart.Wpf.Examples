@@ -8,11 +8,9 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    
+
     <UserControl.Resources>
-
         <ext:BoolToValueConverter x:Key="InvertBooleanConverter" TrueValue="False" FalseValue="True"/>
-
     </UserControl.Resources>
 
     <Grid>
@@ -22,33 +20,18 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton Click="AddSeriesClick"
-                                  Content="ADD"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  ToolTipService.ToolTip="Add a Series">
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Add one or more series to the chart" />
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
-            <ext:FlyoutMenuButton x:Name="deleteSeriesButton"
-                                  Click="DeleteSeriesClick"
-                                  Content="DEL"
-                                  IsEnabled="False"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  ToolTipService.ToolTip="Delete Selected Series">
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Now select a series and delete it!" />
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
+            <Button Click="AddSeriesClick"
+                    ToolTipService.ToolTip="Add Series"
+                    Style="{StaticResource DefaultButtonStyle}">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+            <Button x:Name="deleteSeriesButton"
+                    IsEnabled="False"
+                    Click="DeleteSeriesClick"
+                    ToolTipService.ToolTip="Delete Selected Series"
+                    Style="{StaticResource DefaultButtonStyle}">
+                <ext:ToolbarIcon Kind="DeleteForever" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
@@ -87,57 +70,41 @@
 
                 <s:CustomAnnotation CoordinateMode="Relative" 
                                     HorizontalAnchorPoint="Left"
-                                    VerticalAnchorPoint="Center" 
-                                    Margin="5,18,0,0" 
-                                    X1="0" 
-                                    Y1="0" >
+                                    VerticalAnchorPoint="Top" 
+                                    Margin="5" 
+                                    X1="0" Y1="0">
 
-                    <StackPanel Orientation="Horizontal">
+                    <Border CornerRadius="5" Background="{StaticResource MainThemeTransparentSolidBrush}">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" 
+                                           Opacity="0.7"               
+                                           Margin="5,0"
+                                           VerticalAlignment="Center"
+                                           Text="To add one or more series to the chart, click" 
+                                           Foreground="#FFF"/>
 
-                        <TextBlock FontSize="20" 
-                                   Opacity="0.7"
-                                   Background="#232323"
-                                   Margin="0 0 5 0"
-                                   Text="Add one or more series to the chart" 
-                                   Foreground="#FFF" />
+                                <Border Width="26" Height="26" Margin="5,0" CornerRadius="5" Background="#FF2A354B">
+                                    <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                                </Border>
+                            </StackPanel>
 
-                        <Image Width="32"
-                               Height="32"
-                               Source="/SciChart.Examples;component/Resources/Images/add_button.png"
-                               Stretch="None" />
-                        
-                    </StackPanel>
-                    
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" 
+                                           Opacity="0.7"               
+                                           Margin="5,0"
+                                           VerticalAlignment="Center"
+                                           Text="You can delete the selected series, clicking" 
+                                           Foreground="#FFF"/>
+
+                                <Border Width="26" Height="26" Margin="5,5,5,0" CornerRadius="5" Background="#FF2A354B">
+                                    <ext:ToolbarIcon Kind="DeleteForever" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </s:CustomAnnotation>
-
-                <s:CustomAnnotation CoordinateMode="Relative" 
-                                    HorizontalAnchorPoint="Left"
-                                    Margin="5,50,0,0" 
-                                    VerticalAnchorPoint="Center" 
-                                    IsHidden="{Binding ElementName=sciChart, Path=RenderableSeries.Count, Converter={StaticResource InvertBooleanConverter}}"
-                                    X1="0" 
-                                    Y1="0" >
-                    
-                    <StackPanel Orientation="Horizontal">
-
-                        <TextBlock FontSize="20" 
-                                   Opacity="0.7"
-                                   Background="#232323"
-                                   Margin="0 0 5 0"
-                                   Text="Now select a series and delete it!" 
-                                   Foreground="#FFF" />
-                        
-                        <Image Width="32"
-                               Height="32"
-                               Source="/SciChart.Examples;component/Resources/Images/del_button.png"
-                               Stretch="None" />
-                        
-                    </StackPanel>
-
-                </s:CustomAnnotation>
-                
             </s:SciChartSurface.Annotations>
-
         </s:SciChartSurface>
     </Grid>
 </UserControl>

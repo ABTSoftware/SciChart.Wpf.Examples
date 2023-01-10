@@ -30,19 +30,12 @@
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastColumnRenderableSeries x:Name="columnSeries"
-                                              DataPointWidth="1"
-                                              Stroke="#A99A8A">
-                    <s:FastColumnRenderableSeries.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="LightSteelBlue" />
-                            <GradientStop Offset="1.0" Color="SteelBlue" />
-                        </LinearGradientBrush>
-                    </s:FastColumnRenderableSeries.Fill>
-                    
+                                              DataPointWidth="0.7"
+                                              Stroke="#E4F5FC"
+                                              Fill="{StaticResource MainFillGradient}">
                     <s:FastColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.2" />
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.2" />
                     </s:FastColumnRenderableSeries.SeriesAnimation>
-
                 </s:FastColumnRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 

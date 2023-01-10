@@ -4,9 +4,6 @@ using System.Windows.Input;
 
 namespace SciChart.Examples.Demo
 {
-    /// <summary>
-    /// Interaction logic for Splash.xaml
-    /// </summary>
     public partial class Splash : UserControl
     {
         public Splash()

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,14 +13,10 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Windows;
 using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Visuals;
@@ -32,17 +28,32 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
     public class UsingDonutChartExampleViewModel : BaseViewModel
     {
         private readonly ObservableCollection<IPieSegmentViewModel> _donutModels;
+        private readonly List<IPieSegmentViewModel> _selectedModels;
+
+        private readonly Color _colorForSegment1 = Color.FromArgb(0xFF, 0x83, 0x98, 0xBA);
+        private readonly Color _colorForSegment2 = Color.FromArgb(0xFF, 0x27, 0x4B, 0x92);
+        private readonly Color _colorForSegment3 = Color.FromArgb(0xFF, 0x27, 0x4B, 0x92);
+        private readonly Color _colorForSegment4 = Color.FromArgb(0xFF, 0x47, 0x81, 0xED);
+        private readonly Color _colorForSegment5 = Color.FromArgb(0xFF, 0xE2, 0x69, 0xAE);
+        private readonly Color _colorForSegment6 = Color.FromArgb(0xFF, 0xE8, 0xC6, 0x67);
 
         public UsingDonutChartExampleViewModel()
-        {            
+        {           
+            NewSegmentText = "New";
+            NewSegmentValue = "10";
+
+            AllBrushes = typeof(Brushes).GetProperties().Select(x => new DonutBrushesModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();                  
+            NewSegmentBrush = AllBrushes.First(x => x.BrushName == "Aquamarine");
+
+            _selectedModels = new List<IPieSegmentViewModel>();
             _donutModels = new ObservableCollection<IPieSegmentViewModel>
             {
-                new DonutSegmentViewModel {Value = 75, Name = "Rent", Stroke = ToShade(Colors.Orange, 0.8), Fill = ToGradient(Colors.Orange), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 19, Name = "Food", Stroke = ToShade(Colors.Green, 0.8), Fill = ToGradient(Colors.Green), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 9, Name = "Utilities", Stroke = ToShade(Colors.DodgerBlue, 0.8), Fill = ToGradient(Colors.DodgerBlue), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 9, Name = "Fun", Stroke = ToShade(Colors.Gray, 0.8), Fill = ToGradient(Colors.Gray), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 10, Name = "Clothes", Stroke = ToShade(Colors.Firebrick, 0.8), Fill = ToGradient(Colors.Firebrick), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 5, Name = "Phone", Stroke = ToShade(Colors.DarkSalmon, 0.8), Fill = ToGradient(Colors.DarkSalmon), StrokeThickness = 2}
+                new DonutSegmentViewModel {Value = 75, Name = "Rent", Stroke = ToShade(_colorForSegment1, 0.8), Fill = ToGradient(_colorForSegment1), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 19, Name = "Food", Stroke = ToShade(_colorForSegment2, 0.8), Fill = ToGradient(_colorForSegment2), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 9, Name = "Utilities", Stroke = ToShade(_colorForSegment3, 0.8), Fill = ToGradient(_colorForSegment3), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 9, Name = "Fun", Stroke = ToShade(_colorForSegment4, 0.8), Fill = ToGradient(_colorForSegment4), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 10, Name = "Clothes", Stroke = ToShade(_colorForSegment5, 0.8), Fill = ToGradient(_colorForSegment5), StrokeThickness = 2},
+                new DonutSegmentViewModel {Value = 5, Name = "Phone", Stroke = ToShade(_colorForSegment6, 0.8), Fill = ToGradient(_colorForSegment6), StrokeThickness = 2},
             };
 
             AddNewItemCommand = new ActionCommand(() =>
@@ -54,10 +65,8 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
                     Fill = ToGradient(((SolidColorBrush) NewSegmentBrush.Brush).Color),
                     Stroke = ToShade(((SolidColorBrush) NewSegmentBrush.Brush).Color, 0.8)
                 });
-            }, () =>
-            {
-                return !NewSegmentText.IsNullOrEmpty() && (!NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0) && NewSegmentBrush != null ;
-            });
+
+            }, () =>!NewSegmentText.IsNullOrEmpty() && !NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0 && NewSegmentBrush != null);
 
             SegmentSelectionCommand = new ActionCommand<NotifyCollectionChangedEventArgs>(OnSegmentSelectionExecute);
         }
@@ -66,9 +75,15 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         {
             if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
             {
-                var selectedSegment = e.NewItems[0];
-                SelectedSegment = (IPieSegmentViewModel) selectedSegment;
+                _selectedModels.Add((IPieSegmentViewModel) e.NewItems[0]);
             }
+
+            if (!e.OldItems.IsNullOrEmptyList() && e.OldItems[0] != null)
+            {
+                _selectedModels.Remove((IPieSegmentViewModel) e.OldItems[0]);
+            }
+            
+            SelectedSegment = _selectedModels?.LastOrDefault();     
         }
 
         private IPieSegmentViewModel _selectedSegment;
@@ -79,9 +94,13 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _selectedSegment = value;
-                OnPropertyChanged("SelectedSegment");
+                OnPropertyChanged(nameof(SelectedSegment));
+                OnPropertyChanged(nameof(IsSelected));
             }
         }
+        
+        public bool IsSelected => SelectedSegment != null;
+
         // Binds to ItemsSource of Donut Chart
         public ObservableCollection<IPieSegmentViewModel> DonutModels { get { return _donutModels; } }
 
@@ -91,10 +110,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         public ActionCommand<NotifyCollectionChangedEventArgs> SegmentSelectionCommand { get; set; }
         
         // Populates combo box for choosing color of new item to add
-        public List<DonutBrushesModel> AllBrushes
-        {
-            get { return typeof(Brushes).GetProperties().Select(x => new DonutBrushesModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList(); }
-        }
+        public List<DonutBrushesModel> AllBrushes { get; }
 
         // For managing 'Add New Segment'
         private DonutBrushesModel _newSegmentBrush;
@@ -107,7 +123,8 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _newSegmentBrush = value;
-                AddNewItemCommand.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentBrush));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -117,7 +134,8 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set 
             {
                 _newSegmentText = value;
-                AddNewItemCommand.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentText));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -127,10 +145,10 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _newSegmentValue = value;
-                AddNewItemCommand.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentValue));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
-
 
         // Helper functions to create nice brushes out of colors
         private Brush ToGradient(Color baseColor)

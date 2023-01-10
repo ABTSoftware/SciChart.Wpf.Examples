@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -14,7 +14,10 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
+using System.Windows.Input;
+using Microsoft.Xaml.Behaviors.Core;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.ViewportManagers;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -23,6 +26,7 @@ namespace SciChart.Examples.Examples.StyleAChart
     public class UseHighQualityRenderingViewModel : BaseViewModel
     {
         private IRange _sharedXVisibleRange;
+        private IRange _sharedYVisibleRange;
 
         public IRange SharedXVisibleRange
         {
@@ -34,11 +38,29 @@ namespace SciChart.Examples.Examples.StyleAChart
             }
         }
 
+        public IRange SharedYVisibleRange
+        {
+            get => _sharedYVisibleRange;
+            set
+            {
+                _sharedYVisibleRange = value;
+                OnPropertyChanged(nameof(SharedYVisibleRange));
+            }
+        }
+
         public IXyDataSeries<double, double> DataSeries { get; }
+
+        public IViewportManager ViewportManager { get; }
+
+        public ICommand ZoomExtentsCommand { get;}
 
         public UseHighQualityRenderingViewModel()
         {
             DataSeries = CreateDataSeries();
+
+            ViewportManager = new DefaultViewportManager();
+
+            ZoomExtentsCommand = new ActionCommand(() => ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500)));
         }
 
         private IXyDataSeries<double, double> CreateDataSeries()

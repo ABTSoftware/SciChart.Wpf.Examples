@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -151,6 +151,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
 
             StartButton.IsChecked = true;
             PauseButton.IsChecked = false;
+            PauseButton.IsEnabled = true;
             ResetButton.IsChecked = false;
         }
 
@@ -168,7 +169,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.PerformanceDemo
             Reset();
 
             StartButton.IsChecked = false;
-            PauseButton.IsChecked = false;
+            PauseButton.IsChecked = false;          
+            PauseButton.IsEnabled = false;
             ResetButton.IsChecked = true;
         }
 

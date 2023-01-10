@@ -23,8 +23,8 @@ using System.Runtime.InteropServices;
 //[assembly: Obfuscation(Feature = "msil encryption, string encryption, value encryption", Exclude = true, StripAfterObfuscation = true)]
 
 [assembly: AssemblyCompany("SciChart Ltd")]
-[assembly: AssemblyCopyright("Copyright В© SciChart Ltd 2011-2022, www.scichart.com")]
-[assembly: AssemblyTrademark("SCICHARTв„ў")]
+[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2022, www.scichart.com")]
+[assembly: AssemblyTrademark("SCICHART™")]
  
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("PublicPrivateKeyFile.snk")]
@@ -42,4 +42,4 @@ using System.Runtime.InteropServices;
 
 // NOTE: MASTER SHOULD KEEP THIS AS V7.x WHEN MERGING. 
 // This is to prevent conflicts in teamcity when tests are run on both master & v6 branch at the same time. 
-[assembly: AssemblyVersion("6.6.0.26595")]
+[assembly: AssemblyVersion("7.0.0.26941")]

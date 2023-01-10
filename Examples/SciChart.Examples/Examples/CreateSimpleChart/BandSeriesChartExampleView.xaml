@@ -10,17 +10,6 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -32,7 +21,6 @@
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
-
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart"
                            Grid.Column="1"
@@ -41,12 +29,15 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastBandRenderableSeries x:Name="bandSeries" Fill="#33279B27"
-                                            FillY1="#33FF1919"
-                                            Stroke="#FFFF1919"
-                                            StrokeY1="#FF279B27">
+                <!--Stroke="#FFFF1919"
+                StrokeY1="#FF279B27"-->
+                <s:FastBandRenderableSeries x:Name="bandSeries" 
+                                            Fill="{StaticResource MainThemeTransparentStrokeColor}"
+                                            FillY1="{StaticResource SecondaryTransparentStrokeColor}"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
+                                            StrokeY1="{StaticResource SecondaryThemeStrokeColor}">
                     <s:FastBandRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.2"/>
                     </s:FastBandRenderableSeries.SeriesAnimation>
                 </s:FastBandRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

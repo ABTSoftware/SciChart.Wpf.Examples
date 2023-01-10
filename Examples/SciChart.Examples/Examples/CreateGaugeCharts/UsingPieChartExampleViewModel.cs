@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,8 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -31,40 +29,41 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 {
     public class UsingPieChartExampleViewModel : BaseViewModel
     {
-        private IPieSegmentViewModel _oneSelectedSegment;
+        private readonly List<IPieSegmentViewModel> _selectedModels;
 
         public UsingPieChartExampleViewModel()
         {
-            _oneSelectedSegment = new PieSegmentViewModel {Value = 60, Name = "Fruit", IsSelected = true};
+            NewSegmentText = "New";
+            NewSegmentValue = "10";
 
+            AllBrushes = typeof(Brushes).GetProperties().Select(x => new PieBrushesModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();
+            NewSegmentBrush = AllBrushes.First(x => x.BrushName == "Aquamarine");
+
+            _selectedModels = new List<IPieSegmentViewModel>();
             SegmentsDataCollection = new ObservableCollection<IPieSegmentViewModel>
             {
-                _oneSelectedSegment,
+                new PieSegmentViewModel {Value = 60, Name = "Fruit"},
                 new PieSegmentViewModel {Value = 46, Name = "Protein"},
                 new PieSegmentViewModel {Value = 36, Name = "Vegetables"},
-                new PieSegmentViewModel {Value = 30, Name = "Diary" },
-                new PieSegmentViewModel {Value = 18, Name = "Grains" },
-                new PieSegmentViewModel {Value = 10, Name = "Other" },
+                new PieSegmentViewModel {Value = 30, Name = "Diary"},
+                new PieSegmentViewModel {Value = 18, Name = "Grains"},
+                new PieSegmentViewModel {Value = 10, Name = "Other"}
             };
 
-            SelectedSegment = _oneSelectedSegment;
-
-            AddNewItem = new ActionCommand(() =>
+            AddNewItemCommand = new ActionCommand(() =>
             {
                 SegmentsDataCollection.Add(new PieSegmentViewModel
                 {
                     Value = NewSegmentValue.ToDouble(),
                     Name = NewSegmentText,
                     Fill = ToGradient(((SolidColorBrush)NewSegmentBrush.Brush).Color),
-                    Stroke = ToShade(((SolidColorBrush)NewSegmentBrush.Brush).Color, 0.8), 
+                    Stroke = ToShade(((SolidColorBrush)NewSegmentBrush.Brush).Color, 0.8),
                     IsSelected = true,
                 });
-            }, () =>
-            {
-                return !NewSegmentText.IsNullOrEmpty() && (!NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0) && NewSegmentBrush != null;
-            });
 
-            DeleteSegment = new ActionCommand(() => { SegmentsDataCollection.RemoveAt(0);});
+            }, () => !NewSegmentText.IsNullOrEmpty() && !NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0 && NewSegmentBrush != null);
+
+            DeleteSegment = new ActionCommand(() => SegmentsDataCollection.RemoveAt(0));
             SegmentSelectionCommand = new ActionCommand<NotifyCollectionChangedEventArgs>(OnSegmentSelectionExecute);
         }
 
@@ -72,17 +71,21 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         {
             if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
             {
-                SelectedSegment = (IPieSegmentViewModel) e.NewItems[0];
+                _selectedModels.Add((IPieSegmentViewModel)e.NewItems[0]);
             }
+
+            if (!e.OldItems.IsNullOrEmptyList() && e.OldItems[0] != null)
+            {
+                _selectedModels.Remove((IPieSegmentViewModel)e.OldItems[0]);
+            }
+
+            SelectedSegment = _selectedModels?.LastOrDefault();
         }
 
         public ObservableCollection<IPieSegmentViewModel> SegmentsDataCollection { get; set; }
 
         // Populates combo box for choosing color of new item to add
-        public List<PieBrushesModel> AllBrushes
-        {
-            get { return typeof (Brushes).GetProperties().Select(x => new PieBrushesModel {BrushName = x.Name, Brush = (Brush) x.GetValue(null, null)}).ToList(); }
-        }
+        public List<PieBrushesModel> AllBrushes { get; }
 
         // For managing 'Add New Segment'
         private PieBrushesModel _newSegmentBrush;
@@ -96,7 +99,8 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _newSegmentBrush = value;
-                AddNewItem.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentBrush));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -106,9 +110,12 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _selectedSegment = value;
-                OnPropertyChanged("SelectedSegment");
+                OnPropertyChanged(nameof(SelectedSegment));
+                OnPropertyChanged(nameof(IsSelected));
             }
         }
+
+        public bool IsSelected => SelectedSegment != null;
 
         public string NewSegmentText
         {
@@ -116,7 +123,8 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _newSegmentText = value;
-                AddNewItem.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentText));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -126,12 +134,14 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             set
             {
                 _newSegmentValue = value;
-                AddNewItem.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(NewSegmentValue));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
             }
         }
-        public ActionCommand AddNewItem { get; set; }
+        public ActionCommand AddNewItemCommand { get; set; }
 
         public ActionCommand DeleteSegment { get; set; }
+
         public ActionCommand<NotifyCollectionChangedEventArgs> SegmentSelectionCommand { get; set; }
 
         // Helper functions to create nice brushes out of colors
@@ -147,7 +157,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         private SolidColorBrush ToShade(Color baseColor, double shade)
         {
             return new SolidColorBrush(Color.FromArgb(baseColor.A, (byte)(baseColor.R * shade), (byte)(baseColor.G * shade), (byte)(baseColor.B * shade)));
-        }  
+        }
     }
 
     public class PieBrushesModel

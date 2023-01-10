@@ -13,8 +13,8 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries Name="mountainSeries"
-                                                Fill="#80012E94"
-                                                Stroke="#012E94"
+                                                Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
                                                 XAxisId="XAxis1"
                                                 YAxisId="YAxis1" />
 
@@ -24,29 +24,29 @@
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="10"
                                               Height="10"
-                                              Fill="#0F5C04"
-                                              Stroke="Black" />
+                                              Fill="{StaticResource SecondaryTransparentStrokeColor}"
+                                              Stroke="{StaticResource SecondaryThemeStrokeColor}" />
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
 
                 <s:FastLineRenderableSeries Name="lineSeries"
-                                            Stroke="#FE0B21"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="2"
                                             XAxisId="XAxis3"
                                             YAxisId="YAxis3" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxes>
-                <s:PolarXAxis Background="#50012E94"
-                              BorderBrush="#FF012E94"
+                <s:PolarXAxis Background="{StaticResource MainThemeTransparentSolidBrush}"
+                              BorderBrush="{StaticResource MainThemeSolidBrush}"
                               BorderThickness="0,0,0,4"
                               Id="XAxis1" />
-                <s:PolarXAxis Background="#500F5C04"
-                              BorderBrush="#FF0F5C04"
+                <s:PolarXAxis Background="{StaticResource SecondaryThemeTransparentSolidBrush}"
+                              BorderBrush="{StaticResource SecondaryThemeSolidBrush}"
                               BorderThickness="0,0,0,4"
                               Id="XAxis2" />
-                <s:PolarXAxis Background="#50FE0B21"
-                              BorderBrush="#FFFE0B21"
+                <s:PolarXAxis Background="{StaticResource ExtraThemeTransparentStrokeBrush_2}"
+                              BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                               BorderThickness="0,0,0,4"
                               Id="XAxis3" />
             </s:SciChartSurface.XAxes>

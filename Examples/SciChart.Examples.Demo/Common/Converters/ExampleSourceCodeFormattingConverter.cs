@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using SciChart.Core.Extensions;
-using Unity;
 using SciChart.UI.Bootstrap;
+using Unity;
 
 namespace SciChart.Examples.Demo.Common.Converters
 {
@@ -13,24 +13,21 @@ namespace SciChart.Examples.Demo.Common.Converters
     {
         private IMainWindowViewModel _mainWindowViewModel;
 
-        public IMainWindowViewModel MainWindowViewModel
-        {
-            get { return _mainWindowViewModel ?? (_mainWindowViewModel = ServiceLocator.Container.Resolve<IMainWindowViewModel>()); }
-        }
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (MainWindowViewModel.SearchText.IsNullOrEmpty())
+            _mainWindowViewModel ??= ServiceLocator.Container.Resolve<IMainWindowViewModel>();
+
+            if (_mainWindowViewModel.SearchText.IsNullOrEmpty())
             {
                 return string.Empty;
             }
 
-            var terms = MainWindowViewModel.SearchText.Split(' ').Where(word => word != "").Select(x => x.ToLower()).ToArray();
+            var terms = _mainWindowViewModel.SearchText.Split(' ').Where(word => word != "").Select(x => x.ToLower()).ToArray();
             var codeFiles = (Dictionary<string, string>) value;
 
             var uiCodeFiles = codeFiles.Where(x => x.Key.EndsWith(".xaml"));
-
             var lines = new List<string>();
+
             foreach (var file in uiCodeFiles)
             {
                 lines.AddRange(file.Value.Split(new[] {"\r\n"}, StringSplitOptions.None));
@@ -56,7 +53,7 @@ namespace SciChart.Examples.Demo.Common.Converters
                 result = string.Join("\n", sentences);
             }
 
-            return result;
+            return string.IsNullOrEmpty(result) ? "[No Results]" : result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

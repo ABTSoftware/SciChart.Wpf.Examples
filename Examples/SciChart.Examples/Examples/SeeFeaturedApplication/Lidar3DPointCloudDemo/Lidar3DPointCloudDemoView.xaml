@@ -13,11 +13,13 @@
     <Grid>
         <Grid.Resources>
             <LinearGradientBrush x:Key="ColorMap" StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Offset="0.0" Color="DodgerBlue"/>
-                <GradientStop Offset="0.2" Color="LimeGreen"/>
-                <GradientStop Offset="0.5" Color="Orange"/>
-                <GradientStop Offset="0.7" Color="OrangeRed"/>
-                <GradientStop Offset="1.0" Color="Purple"/>
+                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}"/>
+                <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}"/>
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}"/>
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}"/>
+                <GradientStop Offset="1.0" Color="{StaticResource ColorMapColor_7}"/>
             </LinearGradientBrush>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -80,7 +82,8 @@
                     <s3D:ScatterRenderableSeries3D.PointMarker>
                         <!-- Apply a pixel pointmarker to render the point-cloud -->
                         <!-- other types include the Ellipse, Quad or Sphere pointmarker -->
-                        <s3D:PixelPointMarker3D Fill="LimeGreen" Opacity="{Binding ElementName=pointCloud, Path=Opacity}"/>
+                        <s3D:PixelPointMarker3D Fill="{StaticResource MainThemeStrokeColor}"
+                                                Opacity="{Binding ElementName=pointCloud, Path=Opacity}"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
 
@@ -93,7 +96,7 @@
                                                    ContourStrokeThickness="2"
                                                    Minimum="0"
                                                    Maximum="50"
-                                                   Opacity="0.5">
+                                                   Opacity="0.7">
                     <s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
                         <s3D:BrushColorPalette Brush="{StaticResource ColorMap}"/>
                     </s3D:SurfaceMeshRenderableSeries3D.MeshColorPalette>
@@ -141,7 +144,7 @@
         <s:HeatmapColorMap Margin="25"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Stretch"
-                           Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
+                           Background="{StaticResource ThemedSurfaceChartBackground}"
                            Foreground="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Foreground}"
                            ColorMap="{StaticResource ColorMap}"
                            Minimum="0"

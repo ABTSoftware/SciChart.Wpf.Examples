@@ -1,0 +1,144 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Main Window -->
+    
+    <SolidColorBrush x:Key="MetroWindowTitleBrush" Color="#FFE5E5E5"/>
+    <SolidColorBrush x:Key="MetroWindowHeaderBrush" Color="#FF232426"/>
+    <SolidColorBrush x:Key="MetroNonActiveWindowHeaderBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="MetroWindowGlowBrush" Color="#FF1C1C1C"/>
+    <SolidColorBrush x:Key="MetroNonActiveWindowGlowBrush" Color="#FF2C3135"/>
+
+    <SolidColorBrush x:Key="MetroWindowButtonForegroundBrush" Color="#FFE5E5E5"/>
+    <SolidColorBrush x:Key="MetroWindowButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="MetroWindowButtonMouseOverBrush" Color="#FF151515"/>
+
+    <SolidColorBrush x:Key="MetroWindowDialogViewBackgroundBrush" Color="#90000000"/>
+
+    <Color x:Key="ApplicationBackgroundColor">#FF1C1C1C</Color>
+    <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FF1C1C1C"/>
+
+    <SolidColorBrush x:Key="HeadingTextBrush" Color="#FFDFE0E6"/>
+
+    <!-- Hyperlinks -->
+
+    <SolidColorBrush x:Key="HyperlinkForegroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="HyperlinkAlternativeForegroundBrush" Color="#FF42B649"/>
+
+    <!-- Scrollbars -->
+
+    <SolidColorBrush x:Key="ScrollBarThumbBackgroundBrush" Color="#FF8C8C8C"/>
+    <SolidColorBrush x:Key="ScrollBarTrackBackgroundBrush" Color="#706C6C6C"/>
+
+    <!-- Search Box -->
+
+    <SolidColorBrush x:Key="SearchBoxBorderBrush" Color="#FF323539"/>
+    <SolidColorBrush x:Key="SearchBoxBackgroundBrush" Color="#FF232426"/>
+    <SolidColorBrush x:Key="SearchBoxWatermarkForegroundBrush" Color="#FFDFE0E6"/>
+    <SolidColorBrush x:Key="SearchBoxItemMouseOverBackgroundBrush" Color="#FF42B649"/>
+
+    <!-- Navigation Buttons (Prev, Home, Next + Settings) -->
+
+    <SolidColorBrush x:Key="NavigationButtonForegroundBrush" Color="#50FFFFFF"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="NavigationButtonBorderBrush" Color="#FF323539"/>
+
+    <SolidColorBrush x:Key="NavigationButtonMouseOverForegroundBrush" Color="#80FFFFFF"/>
+    <SolidColorBrush x:Key="NavigationButtonMouseOverBackgroundBrush" Color="#FF232426"/>
+    <SolidColorBrush x:Key="NavigationButtonMouseOverBorderBrush" Color="#FF525559"/>
+    
+    <!-- Chart Icons -->
+
+    <SolidColorBrush x:Key="ChartIconStrokeBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ChartIconColor1Brush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ChartIconColor2Brush" Color="#FFFFFFFF"/>
+
+    <!-- Example List -->
+
+    <SolidColorBrush x:Key="ExampleListGroupSeparatorBrush" Color="#FF606060"/>
+    <SolidColorBrush x:Key="ExampleListBusyIndeterminateBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="ExampleListSortComboBoxBackgroundBrush" Color="#FF2C3135"/>
+
+    <SolidColorBrush x:Key="ExampleListItemBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="ExampleListItemBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ExampleListItemForegroundBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="ExampleListItemMouseOverBackgroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="ExampleListItemMouseOverBorderBrush" Color="Transparent"/>
+
+    <!-- Breadcrumb -->
+
+    <SolidColorBrush x:Key="BreadcrumbForegroundBrush" Color="#50FFFFFF"/>
+    <SolidColorBrush x:Key="BreadcrumbMouseOverForegroundBrush" Color="#FFC0C2C3"/>
+    <SolidColorBrush x:Key="BreadcrumbSelectedForegroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="BreadcrumbSeparatorBrush" Color="#FF323539"/>
+
+    <!-- Main Toolbar -->
+
+    <SolidColorBrush x:Key="MainToolbarForegroundBrush" Color="#50FFFFFF"/>
+    <SolidColorBrush x:Key="MainToolbarMouseOverForegroundBrush" Color="#FFC0C2C3"/>
+    <SolidColorBrush x:Key="MainToolbarSelectedForegroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="MainToolbarSeparatorBrush" Color="#FF323539"/>
+
+    <!-- Example Navigation View -->
+
+    <SolidColorBrush x:Key="ExampleNavigationViewBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="ExampleNavigationViewSeparatorBrush" Color="#FF606060"/>
+    <SolidColorBrush x:Key="ExampleNavigationViewForegroundBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="ExampleNavigationViewItemBackgroundBrush" Color="#FF232426"/>
+    <SolidColorBrush x:Key="ExampleNavigationViewMouseOverItemBackgroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="ExampleNavigationViewSelectedItemBackgroundBrush" Color="#FF42B649"/>
+
+    <!-- Settings View -->
+
+    <SolidColorBrush x:Key="SettingsViewBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="SettingsViewSeparatorBrush" Color="#FF606060"/>
+    <SolidColorBrush x:Key="SettingsViewForegroundBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="DevModeButtonForegroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="DevModeButtonBackgroundBrush" Color="#FF232426"/>
+    <SolidColorBrush x:Key="DevModeButtonBorderBrush" Color="#FF5B5B5B"/>
+
+    <SolidColorBrush x:Key="DevModeButtonMouseOverForegroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="DevModeButtonMouseOverBackgroundBrush" Color="#FF333436"/>
+    <SolidColorBrush x:Key="DevModeButtonMouseOverBorderBrush" Color="#FF7B7B7B"/>
+
+    <!-- Feedback / Export View -->
+
+    <SolidColorBrush x:Key="FeedbackExportViewBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="FeedbackExportViewSeparatorBrush" Color="#FF606060"/>
+    <SolidColorBrush x:Key="FeedbackExportHeaderForegroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="FeedbackExportMessageForegroundBrush" Color="#50FFFFFF"/>
+
+    <!-- Search View -->
+
+    <SolidColorBrush x:Key="SearchViewSeparatorBrush" Color="#FF606060"/>
+    <SolidColorBrush x:Key="SearchViewBusyIndeterminateBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="SearchViewNoResultsForegroundBrush" Color="#30FFFFFF"/>
+
+    <SolidColorBrush x:Key="SearchViewItemForegroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="SearchViewItemMatchForegroundBrush" Color="#FFC2C4CB"/>
+    <SolidColorBrush x:Key="SearchViewItemMatchHighlightBrush" Color="#FF42B649"/>
+
+    <SolidColorBrush x:Key="SearchViewItemBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="SearchViewItemBorderBrush" Color="Transparent"/>
+
+    <SolidColorBrush x:Key="SearchViewItemMouseOverBackgroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="SearchViewItemMouseOverBorderBrush" Color="Transparent"/>
+
+    <!-- Source Code View -->
+
+    <SolidColorBrush x:Key="SourceCodeViewBackgroundBrush" Color="#FF181818"/>
+
+    <!-- Tips View -->
+
+    <Color x:Key="SciChartTipsColor">#FFFFFFFF</Color>
+    <SolidColorBrush x:Key="SciChartTipsBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="TipsBorderBackground" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="TipsButtonBackground" Color="#FF2C3135"/>
+
+    <SolidColorBrush x:Key="InfoPanelBackgroundBrush" Color="#1C1C1F"/>
+
+</ResourceDictionary>

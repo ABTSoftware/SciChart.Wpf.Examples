@@ -34,19 +34,24 @@
 
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart3DSurface}}">
             
-            <ext:FlyoutSeparator Background="#444"/>
+            <ext:FlyoutSeparator/>
 
-            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
-            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
+            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-            <ext:FlyoutSeparator Background="#444"/>
+            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="MESH" FontSize="9" Padding="0">
+            <ext:FlyoutSeparator/>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                        <TextBlock Text="Opacity" FontSize="11"/>
-                        <ext:FlyoutSeparator/>
-                        <ComboBox x:Name="OpacityCombo" SelectedIndex="0" Margin="3,5" FontSize="11">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Opacity" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="OpacityCombo" SelectedIndex="0">
                             <ComboBox.Items>
                                 <system:Double>1.0</system:Double>
                                 <system:Double>0.8</system:Double>
@@ -56,27 +61,24 @@
                             </ComboBox.Items>
                         </ComboBox>
 
-                        <TextBlock Text="Draw Mesh As" FontSize="11"/>
-                        <ext:FlyoutSeparator/>
-                        <ComboBox x:Name="DrawMeshAsCombo" SelectedIndex="0" Margin="3,5" FontSize="11">
+                        <TextBlock Text="Draw Mesh As" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="DrawMeshAsCombo" SelectedIndex="0">
                             <ComboBox.Items>
                                 <s3D:DrawMeshAs>SolidMesh</s3D:DrawMeshAs>
                                 <s3D:DrawMeshAs>SolidWireFrame</s3D:DrawMeshAs>
                                 <s3D:DrawMeshAs>Wireframe</s3D:DrawMeshAs>
                             </ComboBox.Items>
                         </ComboBox>
-
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="DATA" FontSize="9"  Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="DatabaseArrowRight" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    
-                  <StackPanel Orientation="Vertical" MinWidth="150" >
-                        <TextBlock Text="Choose what data to Render" FontSize="11"/>
-                        <ext:FlyoutSeparator/>
-                        <ComboBox x:Name="DataCombo" SelectedIndex="2" Margin="3,5" SelectionChanged="DataCombo_OnSelectionChanged" FontSize="11">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Data to Render" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="DataCombo" SelectedIndex="2" SelectionChanged="DataCombo_OnSelectionChanged">
                             <ComboBox.Items>
                                 <system:String>3D Geoid 10 x 10</system:String>
                                 <system:String>3D Geoid 50 x 50</system:String>
@@ -86,20 +88,15 @@
                             </ComboBox.Items>
                         </ComboBox>
 
-                      <TextBlock Text="Change scale of the Displacement Map" FontSize="11"/>
-                      <ext:FlyoutSeparator/>
-                      <Slider x:Name="sliderHeightOffsetsScale"
-                              Width="200"
-                              Margin="3"
-                              HorizontalAlignment="Left"
-                              Minimum="0" Maximum="1"
-                              Orientation="Horizontal"
-                              Value="0.5" />
+                        <TextBlock Text="Displacement Map Scale" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider x:Name="sliderHeightOffsetsScale"
+                                Minimum="0"
+                                Maximum="1"
+                                Orientation="Horizontal"
+                                Value="0.5"/>
                     </StackPanel>
-                  
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-          
         </ext:SciChart3DInteractionToolbar>
 
       <s3D:SciChart3DSurface x:Name="SciChart3DSurface" Grid.Column="1" WorldDimensions="200,200,200" BorderThickness="0">

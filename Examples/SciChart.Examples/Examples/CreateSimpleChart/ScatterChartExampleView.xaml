@@ -23,17 +23,31 @@
 
             <!-- Declare RenderableSeries -->
             <s:SciChartSurface.RenderableSeries>
-                <s:XyScatterRenderableSeries x:Name="scatterRenderSeries">
+                <!-- Series A -->
+                <s:XyScatterRenderableSeries x:Name="scatterRenderSeries0" Opacity="0.67">
                     <s:XyScatterRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Width="9"
-                                              Height="9"
-                                              Fill="SteelBlue"
-                                              Stroke="LightSteelBlue"
-                                              StrokeThickness="2" />
+                        <s:EllipsePointMarker Width="14"
+                                              Height="14"
+                                              Fill="{StaticResource PointMarkerFillColor}" 
+                                              StrokeThickness="0" />
                     </s:XyScatterRenderableSeries.PointMarker>
 
                     <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:2"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:0.6" />
+                    </s:XyScatterRenderableSeries.SeriesAnimation>
+
+                </s:XyScatterRenderableSeries>
+                <!-- Series B -->
+                <s:XyScatterRenderableSeries x:Name="scatterRenderSeries1" Opacity="0.67">
+                    <s:XyScatterRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Width="14"
+                                              Height="14"
+                                              Fill="{StaticResource ExtraThemeStrokeColor_5}" 
+                                              StrokeThickness="0" />
+                    </s:XyScatterRenderableSeries.PointMarker>
+
+                    <s:XyScatterRenderableSeries.SeriesAnimation>
+                        <s:SweepAnimation AnimationDelay="0:0:1.2" Duration="0:0:0.6"/>
                     </s:XyScatterRenderableSeries.SeriesAnimation>
 
                 </s:XyScatterRenderableSeries>

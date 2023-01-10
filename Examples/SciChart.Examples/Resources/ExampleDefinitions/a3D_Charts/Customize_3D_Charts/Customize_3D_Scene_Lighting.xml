@@ -13,7 +13,7 @@
 
     [b][i]Tip![/i][/b]
 
-    Click LD on the left to switch between main light modes. You can also change X,Y,Z light direction properties to see how the viewport of the 3D Chart changes.
+    Use the toolbar on the left to switch between main light modes. You can also change X,Y,Z light direction properties to see how the viewport of the 3D Chart changes.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/Customize3DSceneLighting.xaml.txt</string>

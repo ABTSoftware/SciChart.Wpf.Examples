@@ -35,70 +35,53 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Grid.RowSpan="2"
-                Background="#FF232426"
-                BorderBrush="#FF323539"
-                BorderThickness="0,0,2,0"
-                Canvas.ZIndex="9999">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="IsZoomEnabled"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_Modifiers" />
+            <ToggleButton x:Name="IsPanEnabled"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="Modifiers">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsPanEnabled"
-                              IsChecked="True"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_Modifiers" />
+            <ToggleButton x:Name="IsZoomEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="Modifiers">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator />
+            <ToggleButton Command="{Binding StartUpdatesCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="StartStop">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Command="{Binding StartUpdatesCommand}"
-                              Style="{StaticResource PlayButtonStyle}"
-                              s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
+            <ToggleButton Command="{Binding StopUpdatesCommand}"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="StartStop">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Command="{Binding StopUpdatesCommand}"
-                              Style="{StaticResource PauseButtonStyle}"
-                              s:ToggleButtonExtensions.GroupName="RealtimeTickingStockChart_StartStop" />
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5,5,5,10" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Stroke Thickness" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding StrokeThicknesses}"
+                                  SelectedItem="{Binding SelectedStrokeThickness, Mode=TwoWay}"/>
 
-                <ext:FlyoutSeparator />
+                        <TextBlock Text="Series Styles" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding SeriesStyles}"
+                                  SelectedItem="{Binding SelectedSeriesStyle, Mode=TwoWay}"/>
 
-                <ext:FlyoutMenuButton Content="CTRL"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="RenderableSeries Controls" />
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock Text="Stroke Thickness:" />
-                            <ComboBox Margin="4"
-                                      ItemsSource="{Binding StrokeThicknesses}"
-                                      SelectedItem="{Binding SelectedStrokeThickness, Mode=TwoWay}" >
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Foreground="#FFF"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-
-                            <TextBlock Text="Series Styles:" />
-                            <ComboBox Margin="4"
-                                      ItemsSource="{Binding SeriesStyles}"
-                                      SelectedItem="{Binding SelectedSeriesStyle, Mode=TwoWay}"/>
-                            
-                            <CheckBox x:Name="UseAntiAliasing"
-                                      Margin="4"
-                                      Content="Use Antialiasing?"
-                                      IsChecked="False" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-            </StackPanel>
-        </Border>
+                        <CheckBox x:Name="UseAntiAliasing" Margin="0,10,0,0" Content="Use Antialiasing" IsChecked="False"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Define the StockChart control, binding to PriceData  -->
         <s:SciStockChart x:Name="PriceChart"
@@ -143,7 +126,8 @@
         <!--  This grid is used to space Overview Control so its width matches parent chart XAxis  -->
         <Grid Grid.Row="1"
               Grid.Column="1"
-              Height="32">
+              Height="32"
+              Background="{StaticResource ThemedSurfaceChartBackground}">
 
             <!--  The grid is used to set the padding on the Overview, so that the size of the Overview matches the size of the XAxis on the parent chart  -->
             <Grid.ColumnDefinitions>

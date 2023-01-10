@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -63,7 +63,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             if (ScatterSeries3D != null && OpacitySlider != null && SizeSlider != null)
             {
                 ScatterSeries3D.PointMarker = (BasePointMarker3D)Activator.CreateInstance((Type)((ComboBox)sender).SelectedItem);
-                ScatterSeries3D.PointMarker.Fill = Colors.LimeGreen;
+                ScatterSeries3D.PointMarker.Fill = Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4);
                 ScatterSeries3D.PointMarker.Size = (float)SizeSlider.Value;
                 ScatterSeries3D.PointMarker.Opacity = OpacitySlider.Value;
             }

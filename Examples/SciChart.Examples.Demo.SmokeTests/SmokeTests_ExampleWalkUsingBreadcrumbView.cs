@@ -8,11 +8,8 @@ using System.Windows.Media.Imaging;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Capturing;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
-using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3;
-using FlaUI.UIA3.Patterns;
 using NUnit.Framework;
 
 namespace SciChart.Examples.Demo.SmokeTests
@@ -50,7 +47,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         private const string Group_2D_Radar = "Create a Radar Chart";
         private const string Group_2D_Ternary = "Create a Ternary Chart";
         private const string Group_2D_Custom = "Create Custom Charts";
-        private const string Group_2D_RealtimeCharts = "Create Realtime Charts";
+        //private const string Group_2D_RealtimeCharts = "Create Realtime Charts";
         private const string Group_2D_StockCharts = "Create Stock Charts";
         private const string Group_2D_ExportAChart = "Export a Chart";
         private const string Group_2D_FiltersApi = "Filters API";
@@ -71,9 +68,9 @@ namespace SciChart.Examples.Demo.SmokeTests
 
         // Featured Apps example groups
         private const string Group_Featured_PerformanceDemos = "Performance Demos";
-        private const string Group_Featured_ScientificCharts = "Scientific Charts";
-        private const string Group_Featured_MedicalCharts = "Medical Charts";
-        private const string Group_Featured_FinancialCharts = "Financial Charts";
+        //private const string Group_Featured_ScientificCharts = "Scientific Charts";
+        //private const string Group_Featured_MedicalCharts = "Medical Charts";
+        //private const string Group_Featured_FinancialCharts = "Financial Charts";
 
         // Todo ... more groups...
 
@@ -82,7 +79,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         {
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             Directory.SetCurrentDirectory(dir);
-            _theApp = FlaUI.Core.Application.Launch(new ProcessStartInfo("SciChart.Examples.Demo.exe", "/uiautomationTestMode"));
+            _theApp = Application.Launch(new ProcessStartInfo("SciChart.Examples.Demo.exe", "/uiautomationTestMode"));
             _automation = new UIA3Automation();
             _mainWindow = _theApp.GetMainWindow(_automation);
 
@@ -283,8 +280,8 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Per-Axis Scrollbars", "Charts2D/ZoomPan/PerAxisScrollbars.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomPan, "Scroll Chart using Overview Control", "Charts2D/ZoomPan/OverviewControl.png"),
             // 2D Charts, Zoom History Manager
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Simple Undo Redo", "Charts2D/ZoomHistory/UndoRedo.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Zoom History MVVM", "Charts2D/ZoomHistory/ZoomHistoryMVVM.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Simple Undo Redo", "Charts2D/ZoomHistory/UndoRedo.png", (window) => Thread.Sleep(1500)),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ZoomHistory, "Zoom History MVVM", "Charts2D/ZoomHistory/ZoomHistoryMVVM.png", (window) => Thread.Sleep(1500)),
             // 3D Charts, Create Simple Charts
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Closed Mesh 3D Chart", "Charts3D/BasicChartTypes/ClosedSurfaceMesh3D.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Bubble 3D Chart", "Charts3D/BasicChartTypes/SimpleBubble3DChart.png"),
@@ -309,11 +306,11 @@ namespace SciChart.Examples.Demo.SmokeTests
             // Any custom operations before test? 
             testCase.BeforeFunc?.Invoke(_mainWindow);
 
-            // 1. Run the screenshot test 
+            // 1. Run the screenshot test
             RunScreenshotTest(testCase);
 
             // 2. Run the export test
-            RunExportExampleTest(testCase);
+            // RunExportExampleTest(testCase);
         }
 
         private void SwitchToExampleViaBreadCrumb(string category, string group, string example)
@@ -364,18 +361,8 @@ namespace SciChart.Examples.Demo.SmokeTests
             WaitUntilClosed(exampleNavView);
         }
 
-        private void RunExportExampleTest(ExampleStartTestCase testCase)
+        /*private void RunExportExampleTest(ExampleStartTestCase testCase)
         {
-            return;
-
-            // Useful UIAutomation Ids
-
-            // ExportExampleView
-            // ExportExampleView.ExportPathTextBox
-            // ExportExampleView.ExportButton
-            // ExportExampleView.CloseButton
-            // ExampleView.Export
-
             // Toggle the export button, this shows ExportExampleView
             var exportButton = _mainWindow.FindFirstDescendant("ExampleView.Export").AsToggleButton();
             exportButton?.Toggle();
@@ -420,7 +407,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             {
                 Directory.Delete(exportPath, true);
             }
-        }
+        }*/
 
         private void RunScreenshotTest(ExampleStartTestCase testCase)
         {
@@ -442,7 +429,7 @@ namespace SciChart.Examples.Demo.SmokeTests
                 if (testCase.ExportActual)
                 {
                     var pathString = Path.Combine(ExportActualPath, testCase.ResourceName);
-                    base.SaveToPng(pathString, actualBitmap);
+                    SaveToPng(pathString, actualBitmap);
 
                     // Export the actual 
                     ProcessStartInfo startInfo = new ProcessStartInfo(pathString);
@@ -453,7 +440,7 @@ namespace SciChart.Examples.Demo.SmokeTests
                 WriteableBitmap expectedBitmap = null;
                 try
                 {
-                    expectedBitmap = this.LoadResource(testCase.ResourceName);
+                    expectedBitmap = LoadResource(testCase.ResourceName);
                 }
                 catch (Exception caught)
                 {

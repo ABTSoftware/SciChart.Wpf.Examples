@@ -15,7 +15,7 @@ namespace SciChartExport
 			 InitializeComponent();
 
 			 // TODO: Put your SciChart License Key here if needed
-			 // SciChartSurface.SetRuntimeLicenseKey(@"{YOUR SCICHART WPF v6 LICENSE KEY}");
+			 // SciChartSurface.SetRuntimeLicenseKey(@"{YOUR SCICHART WPF v7 LICENSE KEY}");
         }
 
 		private void App_DispatcherUnhandledException(object sender,

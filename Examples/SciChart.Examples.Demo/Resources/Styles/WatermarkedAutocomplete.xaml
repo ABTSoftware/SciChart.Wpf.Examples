@@ -1,0 +1,191 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+                    xmlns:behaviors="clr-namespace:SciChart.Examples.Demo.Behaviors"
+                    xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls.WatermarkedAutocomplete"
+                    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="TextBlock.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:ThicknessToNegativeThicknessConverter x:Key="ThicknessToNegativeThicknessConverter"/>
+    <ext:StringNullEmptyToVisibilityConverter x:Key="NullToVisibilityConverter" NullOrEmpty="Visible" NotNullOrEmpty="Collapsed"/>
+
+    <Style x:Key="AutocompleteItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="MinWidth" Value="240"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Margin="{TemplateBinding Padding}">
+                        <Border x:Name="ListItemBorder"
+                                CornerRadius="5"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+
+                        <Border x:Name="ListItemMouseOver"
+                                CornerRadius="5"
+                                Opacity ="0"
+                                Background="{DynamicResource SearchBoxItemMouseOverBackgroundBrush}"/>
+
+                        <ContentPresenter x:Name="contentPresenter"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" >
+                                    <Storyboard>
+                                        <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetName="ListItemMouseOver" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused" />
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="AutocompleteItemTemplate">
+        <TextBlock Margin="10,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="{Binding}"
+                   TextWrapping="Wrap" 
+                   Style="{StaticResource DefaultTextStyle}"/>
+    </DataTemplate>
+
+    <Style TargetType="controls:WatermarkedAutocomplete">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Foreground" Value="#FFF" />
+        <Setter Property="Background" Value="{DynamicResource SearchBoxBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SearchBoxBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource AutocompleteItemTemplate}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="behaviors:AutocompleteHelper.LoseFocusOnEscape" Value="False"/>
+        <Setter Property="behaviors:AutocompleteHelper.WatermarkContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="Search..." Foreground="#FFF" Opacity="0.5" FontFamily="Segoe UI" FontSize="16"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:WatermarkedAutocomplete">
+                    <Grid VerticalAlignment="Stretch">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="PopupStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.1" To="PopupOpened" />
+                                    <VisualTransition GeneratedDuration="0:0:0.2" To="PopupClosed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="PopupOpened">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PopupBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1.0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PopupClosed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PopupBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0.0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"                                 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10"/>
+
+                        <TextBox x:Name="Text"                        
+                                 BorderThickness="0"                                              
+                                 Background="Transparent"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 Margin="{TemplateBinding Padding}"
+                                 IsTabStop="True"
+                                 CaretBrush="#AAFFFFFF"
+                                 FontSize="18"
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                 MaxLength="50"/>
+
+                        <ContentPresenter x:Name="Watermark"
+                                          Opacity="1"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{Binding Path=(behaviors:AutocompleteHelper.WatermarkContent), RelativeSource={RelativeSource TemplatedParent}}"
+                                          ContentTemplate="{Binding Path=(behaviors:AutocompleteHelper.WatermarkContentTemplate), RelativeSource={RelativeSource TemplatedParent}}"
+                                          IsHitTestVisible="False"
+                                          Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibilityConverter}}"/>
+
+                        <Popup x:Name="Popup" AllowsTransparency="True">
+                            <StackPanel Margin="0,0,10,10">
+                                <Border Height="10" Background="Transparent"/>
+                                <Border x:Name="PopupBorder"  
+                                        UseLayoutRounding="True"
+                                        HorizontalAlignment="Stretch"
+                                        Width="{TemplateBinding ActualWidth}"
+                                        Background="{DynamicResource SearchBoxBackgroundBrush}"
+                                        BorderBrush="{DynamicResource SearchBoxBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Opacity="0">
+
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Black" ShadowDepth="5" Opacity="0.4"/>
+                                    </Border.Effect>
+
+                                    <ListBox x:Name="Selector"
+                                             Margin="5"     
+                                             BorderThickness="0"
+                                             Background="Transparent"
+                                             Foreground="{DynamicResource HeadingTextBrush}"
+                                             ItemTemplate="{TemplateBinding ItemTemplate}"
+                                             ItemContainerStyle="{StaticResource AutocompleteItemContainerStyle}"                      
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                                </Border>
+                            </StackPanel>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="Text" Property="IsFocused" Value="True">
+                            <Setter TargetName="Watermark" Property="Opacity" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,14 +1,13 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter.UpdateScatterPoints"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             Background="#333"
-             d:DesignHeight="400"
-             d:DesignWidth="600"
-             mc:Ignorable="d">
+             Background="{StaticResource ThemedChartBackground}">
+
+    <UserControl.Resources>
+        <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -18,6 +17,7 @@
 
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Row="1"
+                           RenderSurface="{Binding RenderSurface, Mode=OneWayToSource}"
                            ext:ExampleHelpers.LoadedEventCommand="{Binding RunExampleCommand}"
                            ext:ExampleHelpers.UnloadedEventCommand="{Binding StopExampleCommand}">
 
@@ -26,7 +26,7 @@
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="1"
                                               Height="1"
-                                              Fill="Green"
+                                              Fill="{StaticResource MainThemeStrokeColor}"
                                               StrokeThickness="0" />
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
@@ -34,18 +34,19 @@
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="1"
                                               Height="1"
-                                              Fill="Red"
+                                              Fill="{StaticResource SecondaryThemeStrokeColor}"
                                               StrokeThickness="0" />
                     </s:XyScatterRenderableSeries.PointMarker>
                 </s:XyScatterRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
-            <s:SciChartSurface.YAxis>
-                <s:NumericAxis AutoRange="Never" VisibleRange="0,1" />
-            </s:SciChartSurface.YAxis>
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis AutoRange="Never" VisibleRange="0,1" />
             </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis AutoRange="Never" VisibleRange="0,1" />
+            </s:SciChartSurface.YAxis>
         </s:SciChartSurface>
 
         <s:SciChartPerformanceOverlay Grid.Row="1"
@@ -56,6 +57,14 @@
                                       Foreground="#FFF"
                                       Padding="10"
                                       IsHitTestVisible="False"
-                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+
+        <TextBlock Grid.Row="1"
+                   FontWeight="SemiBold"
+                   Text="The &quot;NBody 2D Scatter Chart Simulation&quot; is only available with Visual Xccelerator Engine." 
+                   Visibility="{Binding WarningIsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="#FFDC7969"/>
     </Grid>
 </UserControl>

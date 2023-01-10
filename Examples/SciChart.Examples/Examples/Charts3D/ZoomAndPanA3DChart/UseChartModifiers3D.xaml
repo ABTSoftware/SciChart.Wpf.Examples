@@ -16,17 +16,17 @@
 
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
 
-            <Button HorizontalAlignment="Left"
-                    Click="OnClickHorizontalRotate"
-                    Content="RH"
+            <Button Click="OnClickHorizontalRotate"
                     Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="Rotate the Chart horizontal"/>
+                    ToolTipService.ToolTip="Rotate the Chart horizontal">
+                <ext:ToolbarIcon Kind="AxisZRotateClockwise" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-            <Button HorizontalAlignment="Left"
-                    Click="OnClickVerticalRotate"
-                    Content="RV"
+            <Button Click="OnClickVerticalRotate"
                     Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="Rotate the Chart vertical" />
+                    ToolTipService.ToolTip="Rotate the Chart vertical">
+                <ext:ToolbarIcon Kind="HorizontalRotateCounterclockwise" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
         </ext:SciChart3DInteractionToolbar>
 

@@ -8,7 +8,7 @@
   <Description>
     The Parallel Coordinate Plot is a WPF chart type for visualizing and analyzing multi dimensional datasets. For example, it can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (each represented by an axis).
 
-    This example demonstrates how to create, use and interact with Parallel Coordinates Plot with SciChart WPF v6.
+    This example demonstrates how to create, use and interact with SciChart Parallel Coordinates Plot.
 
     [b][i] The following interactions are possible:[/i][/b]
 
@@ -20,8 +20,8 @@
 
     - Toggle [b][Pan Button][/b] to enable panning with [b][Left Mouse Button][/b]
     - Toggle [b][Reorder Button][/b] to enable reordering of Y-Axes. This allows swapping positions of two axes by drag-and-drop
-    - Toggle [b][Selection Button][/b] to enable Series selection. It allows clicking on a Series to select it, or multi-select by holding down [b][CTRL][/b]
-    - Toggle [b][Splines Button][/b] to draw Series as splines
+    - Toggle [b][Selection Button][/b] to enable series selection. It allows clicking on a series to select it, or multi-select by holding down [b]CTRL[/b]
+    - Toggle [b][Spline Button][/b] to draw series as spline lines
 
     [b]Documentation Links:[/b]
 

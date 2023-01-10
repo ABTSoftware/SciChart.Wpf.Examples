@@ -13,7 +13,15 @@
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawAxisScaleBands" Value="False"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="BorderBrush" Value="#2C2C2E"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainThemeTransparentSolidBrush}"/>
+        <Setter Property="MajorGridLineStyle">
+            <Setter.Value>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="{StaticResource MainThemeTransparentSolidBrush}"/>
+                    <Setter Property="StrokeThickness" Value="1"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="XAxisLabelStyle" TargetType="s:AnnotationLabel">
@@ -25,7 +33,7 @@
     </Style>
 
     <ItemsPanelTemplate x:Key="YAxesPanel">
-        <Grid Background="#2C2C2E">
+        <Grid Background="Transparent">
             <b:Interaction.Behaviors>
                 <local:GridItemsPanelBehavior IsReverseOrder="True"/>
             </b:Interaction.Behaviors>
@@ -151,21 +159,18 @@
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Border Height="Auto"
                             Width="Auto"
-                            CornerRadius="2"
-                            BorderThickness="1"
-                            BorderBrush="#121212"
+                            CornerRadius="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"       
-                            Background="{TemplateBinding Background}"/>
+                            Background="#FF656D80"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Foreground" Value="#535353"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="#2B364C"/>
         <Setter Property="MinWidth" Value="8"/>
         <Setter Property="MinHeight" Value="8"/>
         <Setter Property="Width" Value="8"/>
@@ -174,12 +179,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
                     <Grid x:Name="GridRoot" Background="{TemplateBinding Background}">
-                        <Border x:Name="BorderBackground" CornerRadius="0" Background="Transparent">
+                        <Border x:Name="BorderBackground" Background="Transparent">
                             <Track x:Name="PART_Track" IsDirectionReversed="True" Focusable="False">
                                 <Track.Thumb>
-                                    <Thumb x:Name="Thumb"
-                                           Background="{TemplateBinding Foreground}"
-                                           Style="{DynamicResource ScrollThumbStyle}"/>
+                                    <Thumb x:Name="Thumb" Style="{DynamicResource ScrollThumbStyle}"/>
                                 </Track.Thumb>
                                 <Track.IncreaseRepeatButton>
                                     <RepeatButton x:Name="PageUp"                       
@@ -197,13 +200,8 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Thumb" Property="Background" Value="#838383"/>
-                            <Setter TargetName="BorderBackground" Property="Background" Value="#262728"/>
-                        </Trigger>
-
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -211,27 +209,50 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ScrollGripStyle" TargetType="s:ScrollbarResizeGrip">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Template">
+    <Style x:Key="SciChartScrollBarStyle" TargetType="s:SciChartScrollbar">
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="GripsThickness" Value="7"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="GripsStyle">
             <Setter.Value>
-                <ControlTemplate TargetType="s:ScrollbarResizeGrip">
-                    <Border x:Name="Thumb"
-                            Height="16"
-                            Width="8"             
-                            CornerRadius="2"
-                            BorderThickness="1"
-                            BorderBrush="#121212"
-                            Background="#535353"/>
-                    
-                    <ControlTemplate.Triggers>
-                        <Trigger SourceName="Thumb" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Thumb" Property="Background" Value="#838383"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
+                <Style TargetType="s:ScrollbarResizeGrip">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:ScrollbarResizeGrip">
+                                <Border x:Name="Thumb"
+                                        Height="14"
+                                        Width="7"             
+                                        CornerRadius="3"
+                                        BorderThickness="0"
+                                        Background="#FF656D80"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ViewportStyle">
+            <Setter.Value>
+                <Style TargetType="Control">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Control">
+                                <Border Background="#50656D80"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="NonSelectedAreaStyle">
+            <Setter.Value>
+                <Style TargetType="Path">
+                    <Setter Property="Fill" Value="Transparent"/>
+                </Style>
             </Setter.Value>
         </Setter>
     </Style>
+    
 </ResourceDictionary>

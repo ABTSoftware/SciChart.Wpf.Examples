@@ -16,23 +16,24 @@
 
         <s3D:GradientColorPalette x:Key="ColorPalette" IsStepped="False">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="0" Color="DarkBlue" />
-                <GradientStop Offset="0.2" Color="MediumBlue" />
-                <GradientStop Offset="0.4" Color="Blue" />
-                <GradientStop Offset="0.6" Color="Green" />
-                <GradientStop Offset="0.8" Color="Yellow" />
-                <GradientStop Offset="1" Color="Red" />
+                <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+                <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
         <LinearGradientBrush x:Key="ColorMapGradient">
-            <GradientStop Offset="0" Color="DarkBlue" />
-            <GradientStop Offset="0.2" Color="MediumBlue" />
-            <GradientStop Offset="0.4" Color="Blue" />
-            <GradientStop Offset="0.6" Color="Green" />
-            <GradientStop Offset="0.8" Color="Yellow" />
-            <GradientStop Offset="1" Color="Red" />
-
+            <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+            <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+            <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+            <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+            <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+            <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+            <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
         </LinearGradientBrush>
 
         <Style x:Key="Axis2DStyle" TargetType="s:AxisBase">
@@ -46,7 +47,7 @@
 
     </UserControl.Resources>
 
-    <Grid Background="#FF1C1C1E">
+    <Grid Background="{StaticResource ThemedChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -68,7 +69,7 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries
                     x:Name="RenderableSeries0"
-                    Stroke="#FF4083B7"
+                    Stroke="{StaticResource MainThemeStrokeColor}"
                     StrokeThickness="1" />
             </s:SciChartSurface.RenderableSeries>
 
@@ -170,7 +171,7 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries
                     x:Name="RenderableSeries1"
-                    Stroke="Chocolate"
+                    Stroke="{StaticResource SecondaryThemeStrokeColor}"
                     StrokeThickness="1" />
             </s:SciChartSurface.RenderableSeries>
 
@@ -273,7 +274,7 @@
             Margin="10"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Background="{Binding Source={x:Reference SciChart3DSurface}, Path=Background}"
+            Background="{StaticResource ThemedSurfaceChartBackground}"
             BorderBrush="#777"
             BorderThickness="1"
             ColorMap="{StaticResource ColorMapGradient}"

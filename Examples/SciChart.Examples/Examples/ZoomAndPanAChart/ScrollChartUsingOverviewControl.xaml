@@ -32,11 +32,11 @@
             <s:SciChartSurface.RenderableSeries>
 
                 <s:FastMountainRenderableSeries x:Name="mountainSeries"
-                                                Fill="#771964FF"
-                                                Stroke="#FF0944CF"/>
+                                                Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"/>
 
                 <s:FastLineRenderableSeries x:Name="lineSeries"
-                                            Stroke="#FF279B27"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2"/>
 
             </s:SciChartSurface.RenderableSeries>

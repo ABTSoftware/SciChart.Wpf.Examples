@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -14,6 +14,7 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
+using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,14 +32,9 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
     public partial class HeatMapExampleView : UserControl
     {
         /// <summary>
-        /// list of data series to be displayed in loop on timer
-        /// </summary>
-        private readonly IDataSeries[] _dataSeries = new IDataSeries[seriesPerPeriod];
-
-        /// <summary>
         /// number of series to be displayed in a loop (period)
         /// </summary>
-        private const int seriesPerPeriod = 30;
+        private const int seriesPerPeriod = 100;
 
         private readonly DispatcherTimer _timer;
 
@@ -48,17 +44,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
         {
             InitializeComponent();
 
-            var colormap = heatmapSeries.ColorMap;
-            var cpMin = colormap.Minimum;
-            var cpMax = colormap.Maximum;
-
-            // Create data for our heatmaps in parallel
-            Parallel.For(0, seriesPerPeriod, (i) =>
-            {
-                _dataSeries[i] = CreateSeries(i, 300, 200, cpMin, cpMax);
-            });
-
-            heatmapSeries.DataSeries = _dataSeries[0];
+            heatmapSeries.DataSeries = CreateSeries(0, 300, 200, 0, heatmapSeries.ColorMap.Maximum);
 
             _timer = new DispatcherTimer(DispatcherPriority.Render)
             {
@@ -75,8 +61,12 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
         /// </summary>
         private void TimerOnTick(object sender, EventArgs eventArgs)
         {
+            var colormap = heatmapSeries.ColorMap;
+            var cpMax = colormap.Maximum;
+
+            // _dataSeries[i] = CreateSeries(i, 300, 200, cpMin, cpMax);
             _timerIndex++;
-            heatmapSeries.DataSeries = _dataSeries[_timerIndex % _dataSeries.Length];
+            heatmapSeries.DataSeries = CreateSeries((int)(_timerIndex % seriesPerPeriod), 300, 200, 0, cpMax);
         }
 
         private IDataSeries CreateSeries(int index, int width, int height, double cpMin, double cpMax)
@@ -97,7 +87,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
                     var cx = w / 2; var cy = h / 2;
                     var r = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
                     var exp = Math.Max(0, 1 - r * 0.008);
-                    var zValue = (v * exp + random.NextDouble() * 50);
+                    var zValue = (v * exp + random.NextDouble() * 10);
                     data[y, x] = (zValue > cpMax) ? cpMax : zValue;
                 }
             }

@@ -10,38 +10,34 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:AudioAnalyzerViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
 
-            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
 
-            <Style x:Key="AxisStyle" TargetType="s:AxisBase">
-                <Setter Property="DrawMajorBands" Value="False" />
-                <Setter Property="IsPrimaryAxis" Value="False" />
-                <Setter Property="AxisBandsFill" Value="Transparent" />
-                <Setter Property="DrawMajorGridLines" Value="false" />
-                <Setter Property="DrawMinorGridLines" Value="false" />
+        <Style x:Key="AxisStyle" TargetType="s:AxisBase">
+            <Setter Property="DrawMajorBands" Value="False" />
+            <Setter Property="IsPrimaryAxis" Value="False" />
+            <Setter Property="AxisBandsFill" Value="Transparent" />
+            <Setter Property="DrawMajorGridLines" Value="false" />
+            <Setter Property="DrawMinorGridLines" Value="false" />
 
-                <Setter Property="MajorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
 
-                <Setter Property="MinorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
+            <Setter Property="MinorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -54,32 +50,26 @@
     </i:Interaction.Triggers>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <local:AudioAnalyzerInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChartFreq}}">
-            <ext:FlyoutMenuButton Content="INP"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Select Input Device">
+                <ext:ToolbarIcon Kind="AudioInputRca" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150"
-                                Margin="0,0,0,4"
-                                Orientation="Vertical">
-                        <TextBlock Text="Audio input device"/>
-                        <ext:FlyoutSeparator />
-                        <ComboBox Margin="4"
-                                  SelectedValue="{Binding SelectedDeviceId}"
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Audio input device"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox SelectedValue="{Binding SelectedDeviceId}"
                                   ItemsSource="{Binding AvailableDevices}"
                                   DisplayMemberPath="DisplayName"
-                                  SelectedValuePath="ID">
-                        </ComboBox>
+                                  SelectedValuePath="ID"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-        </local:AudioAnalyzerInteractionToolbar>
+        </ext:SciChartInteractionToolbar>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -89,55 +79,60 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="90" />
             </Grid.ColumnDefinitions>
             <!--  Create the chart surface  -->
             <s:SciChartSurface Grid.Row="0" Grid.ColumnSpan="3">
-                <s:SciChartSurface.ViewportManager>
-                    <local:YPeakViewportManager/>
-                </s:SciChartSurface.ViewportManager>
 
                 <!--  Declare RenderableSeries  -->
                 <s:SciChartSurface.RenderableSeries>
-                    <s:FastLineRenderableSeries DataSeries="{Binding DataSeries}"
-                                                Stroke="#FF99EE99"
-                                                StrokeThickness="2">
+                    <!-- Current audio frame trace -->
+                    <s:FastLineRenderableSeries DataSeries="{Binding AudioLiveDataSeries}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
+                                                XAxisId="AudioHistoryXAxis"
+                                                StrokeThickness="2"
+                                                Opacity="1">
+                    </s:FastLineRenderableSeries>
+                    <!-- Audio history trace -->
+                    <s:FastLineRenderableSeries DataSeries="{Binding AudioHistoryDataSeries}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
+                                                StrokeThickness="1"
+                                                Opacity="0.3">
                     </s:FastLineRenderableSeries>
                 </s:SciChartSurface.RenderableSeries>
 
                 <!--  Create an X Axis  -->
-                <s:SciChartSurface.XAxis>
+                <s:SciChartSurface.XAxes>
                     <s:NumericAxis AutoRange="Always" Visibility="Collapsed" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
-                </s:SciChartSurface.XAxis>
+                    <s:NumericAxis Id="AudioHistoryXAxis" AutoRange="Always" Visibility="Collapsed" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
+                </s:SciChartSurface.XAxes>
 
                 <!--  Create a Y Axis  -->
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis AutoRange="Always" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
+                    <s:NumericAxis AutoRange="Never" VisibleRange="-0.2, 0.2" DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"/>
                 </s:SciChartSurface.YAxis>
 
             </s:SciChartSurface>
             <s:SciChartSurface Grid.Row="1" Grid.Column="0" x:Name="sciChartFreq">
-                <s:SciChartSurface.ViewportManager>
-                    <local:YPeakViewportManager/>
-                </s:SciChartSurface.ViewportManager>
 
                 <!--  Declare RenderableSeries  -->
                 <s:SciChartSurface.RenderableSeries>
                     <s:FastMountainRenderableSeries DataSeries="{Binding FrequencyDataSeries}"
                                                     AntiAliasing="True"
-                                                    Stroke="Transparent"
+                                                    StrokeThickness="3"
                                                     ZeroLineY="-1000">
+                        <s:FastMountainRenderableSeries.PointMarker>
+                            <s:EllipsePointMarker Width="11" Height="11" StrokeThickness="0" />
+                        </s:FastMountainRenderableSeries.PointMarker>
                         <s:FastMountainRenderableSeries.PaletteProvider>
-                            <local:AudioAnalyzerPaletteProvider>
+                            <local:AudioAnalyzerPaletteProvider FillOpacity="0.17" PointOpacity="0.37">
                                 <local:AudioAnalyzerPaletteProvider.Palette>
-                                    <s:HeatmapColorPalette Minimum="-250" Maximum="0">
+                                    <s:HeatmapColorPalette Minimum="10" Maximum="10000">
                                         <s:HeatmapColorPalette.GradientStops>
-                                            <GradientStop Offset="0" Color="DarkBlue" />
-                                            <GradientStop Offset="0.3" Color="CornflowerBlue" />
-                                            <GradientStop Offset="0.5" Color="DarkGreen" />
-                                            <GradientStop Offset="0.6" Color="Chartreuse" />
-                                            <GradientStop Offset="0.75" Color="Yellow" />
-                                            <GradientStop Offset="0.95" Color="Red" />
+                                            <GradientStop Offset="0" Color="#36B8E6" />
+                                            <GradientStop Offset="0.01" Color="#5D8CC2" />
+                                            <GradientStop Offset="0.1" Color="#8166A2" />
+                                            <GradientStop Offset="0.5" Color="#AE418C" />
+                                            <GradientStop Offset="1" Color="#CA5B79" />
                                         </s:HeatmapColorPalette.GradientStops>
                                     </s:HeatmapColorPalette>
                                 </local:AudioAnalyzerPaletteProvider.Palette>
@@ -148,30 +143,16 @@
 
                 <!--  Create an X Axis  -->
                 <s:SciChartSurface.XAxis>
-                    <s:NumericAxis AutoRange="Always" AxisTitle="Frequency, Hz"/>
+                    <s:LogarithmicNumericAxis VisibleRange="100, 20000" MajorDelta="1" MinorDelta="0.1" AutoTicks="False" 
+                                              LogarithmicBase="10" AxisTitle="Frequency, Hz" TextFormatting="0.#"/>
                 </s:SciChartSurface.XAxis>
 
-                <!--  Create a Y Axis  -->
+                <!--  Create a Y Axis -->
                 <s:SciChartSurface.YAxis>
-                    <s:NumericAxis AutoRange="Always" AxisTitle="Relative Amplitude, dB"/>
+                    <s:NumericAxis VisibleRange="-200, 0" AutoRange="Never" AxisTitle="Relative Amplitude, dB"/>
                 </s:SciChartSurface.YAxis>
 
             </s:SciChartSurface>
-            <s:HeatmapColorMap Grid.Row="1" Grid.Column="2"
-                                Margin="0 0 0 48"
-                                BorderBrush="#777"
-                                BorderThickness="1"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Stretch"
-                                Orientation="Vertical"
-                                TextFormatting="0.00"
-                                Background="{Binding Source={x:Reference Name=sciChartHeatMap}, Path=Background}"
-                                Foreground="{Binding Source={x:Reference Name=sciChartHeatMap}, Path=Foreground}"
-                                Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
-                                Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
-                                ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}">
-
-            </s:HeatmapColorMap>
 
             <s:SciChartSurface x:Name="sciChartHeatMap"
                                Grid.Row="1"
@@ -184,13 +165,12 @@
                         <s:FastUniformHeatmapRenderableSeries.ColorMap>
                             <s:HeatmapColorPalette Minimum="-200" Maximum="0">
                                 <s:HeatmapColorPalette.GradientStops>
-                                    <GradientStop Offset="0" Color="Transparent" />
-                                    <GradientStop Offset="0.0001" Color="DarkBlue" />
-                                    <GradientStop Offset="0.2" Color="CornflowerBlue" />
-                                    <GradientStop Offset="0.45" Color="DarkGreen" />
-                                    <GradientStop Offset="0.5" Color="Chartreuse" />
-                                    <GradientStop Offset="0.7" Color="Yellow" />
-                                    <GradientStop Offset="0.9" Color="Red" />
+                                    <GradientStop Offset="0" Color="#000000" />
+                                    <GradientStop Offset="0.2" Color="#000000" />
+                                    <GradientStop Offset="0.5" Color="#800080" />
+                                    <GradientStop Offset="0.65" Color="#FF0000" />
+                                    <GradientStop Offset="0.75" Color="#FFFF00" />
+                                    <GradientStop Offset="1" Color="#FFFFFF" />
                                 </s:HeatmapColorPalette.GradientStops>
                             </s:HeatmapColorPalette>
                         </s:FastUniformHeatmapRenderableSeries.ColorMap>
@@ -207,6 +187,21 @@
                 </s:SciChartSurface.YAxis>
 
             </s:SciChartSurface>
+
+            <s:HeatmapColorMap Grid.Row="1" Grid.Column="1"
+                               BorderBrush="#333"
+                               BorderThickness="1"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Margin="10,10,10,60"
+                               Orientation="Vertical"
+                               TextFormatting="0"
+                               Opacity="1"
+                               Background="{StaticResource ThemedSurfaceChartBackground}"
+                               Foreground="{Binding Source={x:Reference Name=sciChartHeatMap}, Path=Foreground}"
+                               Maximum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Maximum}"
+                               Minimum="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.Minimum}"
+                               ColorMap="{Binding Source={x:Reference Name=HeatmapRenderableSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}}"/>
         </Grid>
     </Grid>
 </UserControl>

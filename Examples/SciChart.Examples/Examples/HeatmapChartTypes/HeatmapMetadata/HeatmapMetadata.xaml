@@ -11,30 +11,23 @@
              d:DesignWidth="300">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
 
-            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
 
-            <!--Tooltip template-->
-            <DataTemplate x:Key="TooltipItemTemplate">
-                <Grid DataContext="{Binding PointMetadata}">
-                    <TextBlock Text="{Binding Tooltip}"/>
-                </Grid>
-            </DataTemplate>
+        <!--Tooltip template-->
+        <DataTemplate x:Key="TooltipItemTemplate">
+            <TextBlock Text="{Binding PointMetadata.Tooltip}"/>
+        </DataTemplate>
 
-            <Style x:Key="HeatmapStyle"
-                   TargetType="local:CustomUniformHeatmapRenderableSeries"
-                   BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Source={x:Reference Name=metadataSwitch}, Path=IsChecked}" Value="True">
-                        <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </ResourceDictionary>
+        <Style x:Key="HeatmapStyle"
+               TargetType="local:CustomUniformHeatmapRenderableSeries"
+               BasedOn="{StaticResource {x:Type s:FastUniformHeatmapRenderableSeries}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Reference Name=metadataSwitch}, Path=IsChecked}" Value="True">
+                    <Setter Property="s:TooltipModifier.TooltipTemplate" Value="{StaticResource TooltipItemTemplate}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -49,26 +42,14 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ext:FlyoutMenuButton Content="MD" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Get data from Metadata"/>
-                        <CheckBox x:Name="metadataSwitch"
-                                  Margin="4"
-                                  Content="UseMetaData"
-                                  Checked="EnableMetadatas"
-                                  Unchecked="DisableMetadatas"/>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
-            <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Texture Filtering"/>
-                        <CheckBox x:Name="textureSwitch"
-                                  Margin="4"
-                                  Content="UseLinearTextureFiltering"/>
+                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
+                        <TextBlock Text="Metadata" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="metadataSwitch" Margin="0,5" Content="Use Metadata" Checked="EnableMetadatas" Unchecked="DisableMetadatas"/>
+                        <TextBlock Text="Texture Filtering" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="textureSwitch" Margin="0,5" Content="Use LinearTextureFiltering"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -88,11 +69,12 @@
                                                             Style="{StaticResource HeatmapStyle}">
                     <local:CustomUniformHeatmapRenderableSeries.ColorMap>
                         <s:HeatmapColorPalette Minimum="0" Maximum="100">
-                            <GradientStop Color="Blue" Offset="0"/>
-                            <GradientStop Color="White" Offset="0.3"/>
-                            <GradientStop Color="Green" Offset="0.5"/>
-                            <GradientStop Color="Yellow" Offset="0.7"/>
-                            <GradientStop Color="Red" Offset="1"/>
+                            <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+                            <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
+                            <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}" />
+                            <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_4}" />
+                            <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
+                            <GradientStop Offset="1" Color="{StaticResource ColorMapColor_6}" />
                         </s:HeatmapColorPalette>
                     </local:CustomUniformHeatmapRenderableSeries.ColorMap>
                 </local:CustomUniformHeatmapRenderableSeries>
@@ -125,7 +107,7 @@
 
         <s:HeatmapColorMap Grid.Row="1"
                            Grid.Column="1"
-                           Background="{Binding Source={x:Reference Name=sciChart}, Path=Background}" 
+                           Background="{StaticResource ThemedSurfaceChartBackground}"
                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}" 
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"

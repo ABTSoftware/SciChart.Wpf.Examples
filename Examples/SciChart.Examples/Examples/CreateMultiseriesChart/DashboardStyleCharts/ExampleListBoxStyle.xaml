@@ -73,13 +73,13 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                     <Rectangle x:Name="fillColor"
-                                               Fill="#FF0FA32D"
+                                               Fill="{StaticResource MainThemeSolidBrush}"
                                                IsHitTestVisible="False"
                                                Opacity="0"
                                                RadiusX="1"
                                                RadiusY="1" />
                                     <Rectangle x:Name="fillColor2"
-                                               Fill="#FF0FA32D"
+                                               Fill="{StaticResource MainThemeSolidBrush}"
                                                IsHitTestVisible="False"
                                                Opacity="0"
                                                RadiusX="1"
@@ -92,7 +92,7 @@
                                     <Rectangle x:Name="FocusVisualElement"
                                                RadiusX="1"
                                                RadiusY="1"
-                                               Stroke="#FF0FA32D"
+                                               Stroke="{StaticResource MainThemeSolidBrush}"
                                                StrokeThickness="1"
                                                Visibility="Collapsed" />
                                 </Grid>

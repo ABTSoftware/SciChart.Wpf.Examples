@@ -15,21 +15,21 @@
         <Grid.Resources>
             <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="Red"/>
-                    <GradientStop Offset="0.25" Color="Orange"/>
-                    <GradientStop Offset="0.50" Color="Yellow"/>
-                    <GradientStop Offset="0.75" Color="Green"/>
-                    <GradientStop Offset="1.00" Color="DarkGreen"/>
+                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
+                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
+                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
+                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
+                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
 
             <s3D:GradientColorPalette x:Key="StrokeColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="Red"/>
-                    <GradientStop Offset="0.25" Color="Orange"/>
-                    <GradientStop Offset="0.50" Color="Yellow"/>
-                    <GradientStop Offset="0.75" Color="Green"/>
-                    <GradientStop Offset="1.00" Color="DarkGreen"/>
+                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
+                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
+                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
+                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
+                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
 
@@ -63,24 +63,6 @@
                     <x:Type TypeName="s3D:ClipMode"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-
-            <Style x:Key="MyRadioButton" TargetType="{x:Type RadioButton}">
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Margin" Value="4"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type RadioButton}">
-                            <Border Background="Transparent">
-                                <CheckBox Content="{TemplateBinding Content}" 
-                                          IsChecked="{TemplateBinding IsChecked}"
-                                          IsHitTestVisible="False"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -92,37 +74,24 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  x:Name="CTRLButton"
-                                  Content="CTRL"
-                                  FontSize="10"
-                                  Padding="0">
-
+            <ext:FlyoutMenuButton x:Name="CTRLButton">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-
-                        <!-- Checkboxes to decide how the chart should be filled -->
-                        <TextBlock FontSize="12" Text="Gradient fill direction:" />
-
-                        <RadioButton x:Name="ckbFillY" Content="Along Y Axis" IsChecked="True" Style="{StaticResource MyRadioButton}"/>
-                        <RadioButton x:Name="ckbFillZ" Content="Along Z Axis" Style="{StaticResource MyRadioButton}"/>
-
-                        <ext:FlyoutSeparator/>
-
-                        <!-- Checkbox to decide which data points appear -->
-                        <TextBlock FontSize="12" Text="Clip values:" />
-                        <ComboBox  FontSize="12" Margin="4" x:Name="ckbClipMode" ItemsSource="{Binding Source={StaticResource ClipModeEnum}}" SelectedItem="{x:Static s3D:ClipMode.BelowZero}"/>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Gradient Fill Direction" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <RadioButton x:Name="ckbFillY" Margin="0,5" Content="Along Y Axis" />
+                        <RadioButton x:Name="ckbFillZ" Margin="0,5" Content="Along Z Axis" IsChecked="True"/>
+                        <TextBlock Text="Clip Values" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="ckbClipMode" ItemsSource="{Binding Source={StaticResource ClipModeEnum}}" SelectedItem="{x:Static s3D:ClipMode.BelowZero}"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  Content="MESH"
-                                  FontSize="9"
-                                  Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="CubeOutline" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel>
-                        <TextBlock FontSize="12" Text="Change series Type:"/>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Change Series Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <ComboBox SelectionChanged="SelectedTypeChanged" SelectedIndex="1">
                             <ComboBox.Items>
                                 <system:String>Surface Mesh</system:String>
@@ -132,16 +101,15 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChart3DInteractionToolbar>
-        
+
         <s3D:SciChart3DSurface x:Name="SciChart"
                                Grid.Column="1"
                                BorderThickness="0"
                                WorldDimensions="200,100,200">
 
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+                <s3D:Camera3D Position="-200,150,-200" Target="0,50,0"/>
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>

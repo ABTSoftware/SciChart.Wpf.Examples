@@ -10,70 +10,66 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate x:Key="SeriesInfoTemplate" DataType="s:SeriesInfo">
-                <StackPanel  Margin="0 1" Orientation="Vertical">
-                    <TextBlock Text="{Binding SeriesName, StringFormat='{}{0}:'}"/>
-                    <TextBlock Text="{Binding FormattedYValue, StringFormat='Y: {0}'}" />
-                </StackPanel>
-            </DataTemplate>
-            
-            <!-- Demonstrates a custom cursor tooltip style --> 
-            <Style x:Key="CursorTooltipStyle" TargetType="s:CursorLabelControl">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="s:CursorLabelControl">
-                            <Border Background="#AAFF6600"
-                                    BorderBrush="#FFFF6600"
+        <DataTemplate x:Key="SeriesInfoTemplate" DataType="s:SeriesInfo">
+            <StackPanel  Margin="0 1" Orientation="Vertical">
+                <TextBlock Text="{Binding SeriesName, StringFormat='{}{0}:'}"/>
+                <TextBlock Text="{Binding FormattedYValue, StringFormat='Y: {0}'}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Demonstrates a custom cursor tooltip style -->
+        <Style x:Key="CursorTooltipStyle" TargetType="s:CursorLabelControl">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:CursorLabelControl">
+                        <Border Background="{StaticResource ExtraThemeTransparentStrokeBrush_6}"
+                                    BorderBrush="{StaticResource ExtraThemeStrokeBrush_6}"
                                     BorderThickness="2"
                                     Opacity="0.7"
                                     Padding="2.5">
-                                <ItemsControl ItemsSource="{Binding DataContext.SeriesData.SeriesInfo, RelativeSource={RelativeSource TemplatedParent}}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate DataType="s:SeriesInfo">
-                                            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource SeriesInfoTemplate}" />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                            <ItemsControl ItemsSource="{Binding DataContext.SeriesData.SeriesInfo, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="s:SeriesInfo">
+                                        <ContentControl Content="{Binding}" ContentTemplate="{StaticResource SeriesInfoTemplate}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!-- Demonstrates custom cursor line style --> 
-            <Style x:Key="CursorLineStyle" TargetType="Line">
-                <Setter Property="StrokeThickness" Value="2" />
-                <Setter Property="Stroke" Value="#AAFF6600" />
-            </Style>
+        <!-- Demonstrates custom cursor line style -->
+        <Style x:Key="CursorLineStyle" TargetType="Line">
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeTransparentStrokeBrush_6}" />
+        </Style>
 
-            <!--  Label used in cursors  -->
-            <Style x:Key="HintDataItemsStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="#FFF" />
-                <Setter Property="FontWeight" Value="Thin" />
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontSize" Value="11" />
-                <Setter Property="Margin" Value="2 1" />
-            </Style>
+        <!--  Label used in cursors  -->
+        <Style x:Key="HintDataItemsStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFF" />
+            <Setter Property="FontWeight" Value="Thin" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Margin" Value="2 1" />
+        </Style>
 
-            <!-- Demonstrates custom axis label style --> 
-            <Style x:Key="CursorModAxisLabelStyle" TargetType="s:AxisLabelControl">
-                <Setter Property="Background" Value="#AAFF6600" />
-                <Setter Property="BorderBrush" Value="#FFFF6600" />
-                <Setter Property="BorderThickness" Value="1" />
-            </Style>
+        <!-- Demonstrates custom axis label style -->
+        <Style x:Key="CursorModAxisLabelStyle" TargetType="s:AxisLabelControl">
+            <Setter Property="Background" Value="{StaticResource ExtraThemeTransparentStrokeBrush_6}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
 
-            <DataTemplate x:Key="CursorModAxisLabelTemplate" DataType="s:AxisInfo">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding DataValue, StringFormat='{}{0:0.00}'}" />
-                </StackPanel>
-            </DataTemplate>
-
-        </ResourceDictionary>
+        <DataTemplate x:Key="CursorModAxisLabelTemplate" DataType="s:AxisInfo">
+            <StackPanel>
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding DataValue, StringFormat='{}{0:0.00}'}" />
+            </StackPanel>
+        </DataTemplate>
+        
     </UserControl.Resources>
 
     <Grid>
@@ -90,28 +86,28 @@
             <!--  Declare line RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
 
-                <s:FastLineRenderableSeries Stroke="#FF177B17" StrokeThickness="2">
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}" StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FFDD0909"
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="3"
                                             s:CursorModifier.SnapToSeries="True">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="Gray" StrokeThickness="5">
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" StrokeThickness="5">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
                 <s:FastLineRenderableSeries IsVisible="False"
                                             Stroke="Gold"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 

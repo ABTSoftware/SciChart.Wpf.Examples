@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -28,12 +28,17 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
     {
         private ObservableCollection<EEGChannelViewModel> _channelViewModels;
 
-        private readonly IList<Color> _colors = new[] 
+        private readonly SeriesStrokeProvider _seriesStrokeProvider = new SeriesStrokeProvider()
         {
-            Colors.White, Colors.Yellow, Color.FromArgb(255, 0, 128, 128), Color.FromArgb(255, 176, 196, 222), 
-            Color.FromArgb(255, 255, 182, 193), Colors.Purple, Color.FromArgb(255, 245, 222, 179),Color.FromArgb(255, 173, 216, 230), 
-            Color.FromArgb(255, 250, 128, 114), Color.FromArgb(255, 144, 238, 144), Colors.Orange, Color.FromArgb(255, 192, 192, 192), 
-            Color.FromArgb(255, 255, 99, 71), Color.FromArgb(255, 205, 133, 63), Color.FromArgb(255, 64, 224, 208), Color.FromArgb(255, 244, 164, 96)
+            StrokePalette = new[]
+            {
+                Color.FromArgb(0xAA, 0x27, 0x4b, 0x92),
+                Color.FromArgb(0xAA, 0x47, 0xbd, 0xe6),
+                Color.FromArgb(0xAA, 0xa3, 0x41, 0x8d),
+                Color.FromArgb(0xAA, 0xe9, 0x70, 0x64),
+                Color.FromArgb(0xAA, 0x68, 0xbc, 0xae),
+                Color.FromArgb(0xAA, 0x63, 0x4e, 0x96),
+            }
         };
 
         private readonly Random _random = new Random();
@@ -45,36 +50,36 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         private uint _timerInterval = 20; // Interval of the timer to generate data in ms        
         private int _bufferSize = 15;     // Number of points to append to each channel each timer tick
 
-        private Timer _timer;        
+        private Timer _timer;
         private readonly object _syncRoot = new object();
 
         private bool _running;
         private bool _isReset;
 
         private readonly ActionCommand _startCommand;
+        private readonly ActionCommand _pauseCommand;
         private readonly ActionCommand _stopCommand;
-        private readonly ActionCommand _resetCommand;
 
         public EEGExampleViewModel()
         {
-            _startCommand = new ActionCommand(Start, () => !IsRunning);
-            _stopCommand = new ActionCommand(Stop, () => IsRunning);
-            _resetCommand = new ActionCommand(Reset, () => !IsRunning && !IsReset);         
+            _startCommand = new ActionCommand(Start);
+            _pauseCommand = new ActionCommand(Pause);
+            _stopCommand = new ActionCommand(Stop);
         }
 
         public ObservableCollection<EEGChannelViewModel> ChannelViewModels
         {
             get => _channelViewModels;
-            set 
-            { 
+            set
+            {
                 _channelViewModels = value;
                 OnPropertyChanged("ChannelViewModels");
             }
-        }        
+        }
 
         public ICommand StartCommand => _startCommand;
+        public ICommand PauseCommand => _pauseCommand;
         public ICommand StopCommand => _stopCommand;
-        public ICommand ResetCommand => _resetCommand;
 
         public int PointCount => _currentSize * ChannelCount;
 
@@ -106,11 +111,6 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _isReset = value;
-
-                _startCommand.RaiseCanExecuteChanged();
-                _stopCommand.RaiseCanExecuteChanged();
-                _resetCommand.RaiseCanExecuteChanged();
-
                 OnPropertyChanged("IsReset");
             }
         }
@@ -118,15 +118,10 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         public bool IsRunning
         {
             get => _running;
-            set 
-            { 
+            set
+            {
                 _running = value;
-
-                _startCommand.RaiseCanExecuteChanged();
-                _stopCommand.RaiseCanExecuteChanged();
-                _resetCommand.RaiseCanExecuteChanged();
-
-                OnPropertyChanged("IsRunning");                
+                OnPropertyChanged("IsRunning");
             }
         }
 
@@ -134,7 +129,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         {
             if (_channelViewModels == null || _channelViewModels.Count == 0)
             {
-                Reset();
+                Stop();
             }
 
             if (!IsRunning)
@@ -149,7 +144,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             }
         }
 
-        private void Stop()
+        private void Pause()
         {
             if (IsRunning)
             {
@@ -158,21 +153,24 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             }
         }
 
-        private void Reset()
+        private void Stop()
         {
-            Stop();
-
-            // Initialize N EEGChannelViewModels. Each of these will be represented as a single channel
-            // of the EEG on the view. One channel = one SciChartSurface instance
-            ChannelViewModels = new ObservableCollection<EEGChannelViewModel>();
-
-            for (int i = 0; i < ChannelCount; i++)
+            if (!IsReset)
             {
-                var channelViewModel = new EEGChannelViewModel(Size, _colors[i % 16]) {ChannelName = "Channel " + i};
-                ChannelViewModels.Add(channelViewModel);
-            }
+                Pause();
 
-            IsReset = true;
+                // Initialize N EEGChannelViewModels. Each of these will be represented as a single channel
+                // of the EEG on the view. One channel = one SciChartSurface instance
+                ChannelViewModels = new ObservableCollection<EEGChannelViewModel>();
+
+                for (int i = 0; i < ChannelCount; i++)
+                {
+                    var channelViewModel = new EEGChannelViewModel(Size, _seriesStrokeProvider.GetStroke(i, ChannelCount)) { ChannelName = "Channel " + i };
+                    ChannelViewModels.Add(channelViewModel);
+                }
+
+                IsReset = true;
+            }
         }
 
         private void OnTick(object sender, EventArgs e)

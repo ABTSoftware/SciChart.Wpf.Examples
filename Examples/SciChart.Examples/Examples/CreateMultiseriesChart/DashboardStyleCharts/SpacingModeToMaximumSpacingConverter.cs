@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -24,6 +24,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null) return 1;
             var mode = (SpacingMode)value;
             return mode == SpacingMode.Relative ? 1 : 20;
         }

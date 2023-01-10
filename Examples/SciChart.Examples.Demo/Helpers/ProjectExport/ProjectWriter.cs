@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Xml.Linq;
 using SciChart.Charting.Common.Extensions;
 
@@ -27,12 +26,17 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             "VitalSignsMonitorDemo;System.Reactive;3.1.1"
         };
 
+        public static readonly string ExampleTheme = "Navy";
         public static readonly string ExternalDependencies = "SciChart.Examples.ExternalDependencies.dll";
 
-        public static readonly string ProjectFileName = "ProjectFile.csproj";
-        public static readonly string SolutionFileName = "SolutionFile.sln";
-        public static readonly string MainWindowFileName = "MainWindow.xaml";
         public static readonly string AssemblyInfoFileName = "AssemblyInfo.cs";
+        public static readonly string SolutionFileName = "SolutionFile.sln";
+        public static readonly string ProjectFileName = "ProjectFile.csproj";
+
+        public static readonly string ApplicationFileName = "App.xaml";
+        public static readonly string MainWindowFileName = "MainWindow.xaml";
+        public static readonly string ExampleResourcesFileName = "ExampleResources.xaml";
+
         public static readonly string ClrNamespace = "clr-namespace:";
         public static readonly string ViewModelKey = "ViewModel";
 
@@ -70,22 +74,22 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             files.RenameKey(ProjectFileName, projectName + ".csproj");
             files.RenameKey(SolutionFileName, projectName + ".sln");
 
-            files[MainWindowFileName] = GenerateShellFile(files[MainWindowFileName], example).Replace("[ExampleTitle]", example.Title);
+            files[ApplicationFileName] = GenerateApplicationFile(files[ApplicationFileName], ExampleTheme);
+            files[MainWindowFileName] = GenerateShellFile(files[MainWindowFileName], example).Replace("[EXAMPLE_TITLE]", example.Title);
 
             foreach (var codeFile in example.SourceFiles)
             {
                 files.Add(codeFile.Key, codeFile.Value);
             }
 
+            if (!files.ContainsKey(ExampleResourcesFileName))
+            {
+                files.Add(ExampleResourcesFileName, GenerateExampleResourcesFile(ExampleTheme));
+            }
+
             string exportPath = Path.Combine(selectedPath, projectName);
 
             WriteProjectFiles(files, exportPath);
-
-            if (showMessageBox && Application.Current.MainWindow != null)
-            {
-                var message = $"The {example.Title} example was successfully exported to {exportPath}"; 
-                MessageBox.Show(Application.Current.MainWindow, message, "Success!");
-            }
 
             return projectName;
         }
@@ -99,8 +103,21 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         }
 
         private static string GenerateSolutionFile(string file, string projectName)
-        { 
-            return file.Replace("[PROJECTNAME]", projectName);
+        {
+            return file.Replace("[PROJECT_NAME]", projectName);
+        }
+
+        private static string GenerateApplicationFile(string file, string themeName)
+        {
+            return file.Replace("[THEME_NAME]", themeName);
+        }
+
+        private static string GenerateExampleResourcesFile(string themeName)
+        {
+            var dictionary = ThemeLoader.LoadThemeFile(themeName);
+            var pattern = "<ResourceDictionary\\.MergedDictionaries>[\\s\\S]*?<\\/ResourceDictionary\\.MergedDictionaries>";
+
+            return Regex.Replace(dictionary, pattern, string.Empty);
         }
 
         private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath)
@@ -143,13 +160,20 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                             }
                         }
                     }
-#if NET452
-                    return projXml.ToString().Replace("[PROJECTTARGET]", "net452");
-#else
-                    elements[2].Remove(); // Remove 'net452' references
 
-                    return projXml.ToString().Replace("[PROJECTTARGET]", "netcoreapp3.1");
+                    var targetFramework =
+#if NETFRAMEWORK
+                        "net462"
+#elif NET
+                        "net6.0-windows"
+#elif NETCOREAPP3_1
+                        "netcoreapp3.1"
+#else
+                        "net6.0-windows"
 #endif
+                    ;
+
+                    return projXml.ToString().Replace("[PROJECT_TARGET]", targetFramework);
                 }
             }
 

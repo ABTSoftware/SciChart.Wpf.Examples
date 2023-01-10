@@ -8,6 +8,7 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -18,23 +19,22 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="GAP" Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="VectorLine" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,5">
-                        <TextBlock Text="RenderableSeries.DrawNaNAs" />
-                        <ext:FlyoutSeparator/>
-
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="DrawNaNAs" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        
                         <CheckBox x:Name="gapsCheckbox"
+                                  Margin="0,5"
                                   Content="Gaps"
-                                  Margin="4"
                                   IsChecked="True"
                                   Checked="GapsCheckbox_CheckedChanged"
                                   Unchecked="GapsCheckbox_CheckedChanged"/>
 
                         <CheckBox x:Name="closedLinesCheckbox"
+                                  Margin="0,5"
                                   Content="Closed Lines"
-                                  Margin="4"
                                   Checked="ClosedCheckbox_CheckedChanged"
                                   Unchecked="ClosedCheckbox_CheckedChanged"/>
                     </StackPanel>
@@ -50,48 +50,48 @@
             <s:SciChartSurface.RenderableSeries>
 
                 <!-- Column Series -->
-                <s:FastColumnRenderableSeries x:Name="renderableColumnSeries" Stroke="OrangeRed">
-                    
+                <s:FastColumnRenderableSeries x:Name="renderableColumnSeries" Stroke="{StaticResource MainThemeStrokeColor}">
+
                     <s:FastColumnRenderableSeries.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#FFFF867B" />
-                            <GradientStop Offset="0.7" Color="#88FFFF9B" />
+                            <GradientStop Offset="0" Color="{StaticResource MainThemeStrokeColor}" />
+                            <GradientStop Offset="0.7" Color="{StaticResource MainThemeTransparentStrokeColor}" />
                             <GradientStop Offset="1" Color="#22FFFFFF" />
                         </LinearGradientBrush>
 
                     </s:FastColumnRenderableSeries.Fill>
                     <s:FastColumnRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastColumnRenderableSeries.SeriesAnimation>
-                    
+
                 </s:FastColumnRenderableSeries>
 
                 <!-- Mountain Series -->
                 <s:FastMountainRenderableSeries x:Name="renderableMountainSeries"
-                                                Fill="#33FFFF00"
-                                                Stroke="#FFFF00">
+                                                Fill="{StaticResource SecondaryThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource SecondaryThemeStrokeColor}">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
 
                 <!-- Line Series -->
                 <s:FastLineRenderableSeries x:Name="renderableLineSeries"
-                                            Stroke="OrangeRed"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_1}"
                                             StrokeDashArray="2,2,9,2">
 
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="11"
                                               Height="11"
-                                              Fill="Red"
+                                              Fill="{StaticResource ExtraThemeStrokeColor_1}"
                                               Stroke="Lavender"
                                               StrokeThickness="2" />
                     </s:FastLineRenderableSeries.PointMarker>
-                    
+
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
-                    
+
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 

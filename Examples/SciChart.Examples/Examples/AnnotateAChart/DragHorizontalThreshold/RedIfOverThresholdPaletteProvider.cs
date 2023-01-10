@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -33,7 +33,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.DragHorizontalThreshold
 
         public RedIfOverThresholdPaletteProvider()
         {
-            _overriddenColor = Color.FromArgb(0xFF, 0xFF, 0x33, 0x33);
+            _overriddenColor = Color.FromArgb(0xFF, 0xDC, 0x79, 0x69);
             _overriddenFill = new SolidColorBrush(_overriddenColor);
         }
 

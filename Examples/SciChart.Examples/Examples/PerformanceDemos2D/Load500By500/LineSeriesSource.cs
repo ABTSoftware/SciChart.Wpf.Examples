@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,11 +16,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Charting3D.RenderableSeries;
+using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
 {
@@ -34,6 +37,23 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
                                                 typeof(LineSeriesSource),
                                                 new PropertyMetadata(default(IEnumerable<IDataSeries>),
                                                                      OnDataSeriesDependencyPropertyChanged));
+
+        private static readonly SeriesStrokeProvider SeriesStrokeProvider;
+
+        static LineSeriesSource()
+        {
+            // Picks linearly interpolated series strokes from this list
+            SeriesStrokeProvider = new SeriesStrokeProvider();
+            SeriesStrokeProvider.StrokePalette = new[]
+            {
+                Color.FromArgb(0xAA, 0x27, 0x4b, 0x92),
+                Color.FromArgb(0xAA, 0x47, 0xbd, 0xe6),
+                Color.FromArgb(0xAA, 0xa3, 0x41, 0x8d),
+                Color.FromArgb(0xAA, 0xe9, 0x70, 0x64),
+                Color.FromArgb(0xAA, 0x68, 0xbc, 0xae),
+                Color.FromArgb(0xAA, 0x63, 0x4e, 0x96),
+            };
+        }
 
         public static void SetDataSeries(UIElement element, IEnumerable<IDataSeries> value)
         {
@@ -61,19 +81,19 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.Load500By500
             {
                 sciChartSurface.RenderableSeries.Clear();
 
-                var random = new Random();
                 var itr = (IEnumerable<IDataSeries>)e.NewValue;
                 var renderSeries = new List<IRenderableSeries>();
+
+                int index = 0;
+                int max = itr.Count();
                 foreach (var dataSeries in itr)
                 {
                     if (dataSeries == null) continue;
 
-                    var rgb = new byte[3];
-                    random.NextBytes(rgb);
                     var renderableSeries = new FastLineRenderableSeries()
                     {
                         AntiAliasing = true,
-                        Stroke = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]),
+                        Stroke = SeriesStrokeProvider.GetStroke(index++, max),
                         DataSeries = dataSeries,
                         StrokeThickness = 1,
                     };

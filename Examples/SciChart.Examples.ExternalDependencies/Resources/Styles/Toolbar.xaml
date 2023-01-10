@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:common="clr-namespace:SciChart.Examples.ExternalDependencies.Common"
+                    xmlns:toolbar2D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D"
+                    xmlns:toolbar3D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionToolbar">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Annotations.xaml"/>
+        <ResourceDictionary Source="CheckBox.xaml"/>
+        <ResourceDictionary Source="ComboBox.xaml"/>
+        <ResourceDictionary Source="DatePicker.xaml"/>
+        <ResourceDictionary Source="Slider.xaml"/>
+        <ResourceDictionary Source="TextBox.xaml"/>
+        <ResourceDictionary Source="ToolbarButtons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Toolbar 2D -->
+    
+    <Style x:Key="SciChartExampleToolbarStyle" TargetType="toolbar2D:SciChartInteractionToolbar">
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource ToolbarPopupButtonStyle}"/>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource ToolbarPopupCheckBoxStyle}"/>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource ToolbarPopupComboBoxStyle}"/>
+            <Style TargetType="DatePicker" BasedOn="{StaticResource ToolbarPopupDatePickerStyle}"/>
+            <Style TargetType="RadioButton" BasedOn="{StaticResource ToolbarPopupRadioButtonStyle}"/>
+            <Style TargetType="Slider" BasedOn="{StaticResource ToolbarPopupSliderStyle}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource ToolbarPopupTextBoxStyle}"/>
+        </Style.Resources>
+        <Setter Property="IsDeveloperMode" Value="{Binding Source={x:Static common:DeveloperModManager.Manage}, Path=IsDeveloperMode}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolbar2D:SciChartInteractionToolbar">
+                    <Border Background="{DynamicResource ToolbarBackgroundBrush}"
+                            BorderThickness="0"
+                            CornerRadius="0">
+
+                        <WrapPanel x:Name="PART_Container"
+                                   HorizontalAlignment="Left"
+                                   Orientation="Vertical">
+
+                            <ItemsControl x:Name="PART_ItemsControl"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Stretch"
+                                          ItemsSource="{TemplateBinding ModifiersSource}">
+
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Left" Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplateSelector>
+                                    <toolbar2D:ModifierButtonTemplateSelector AnimationsModifierTemplate="{StaticResource AnimationsModifierTemplate}"
+                                                                              AnnotationCreationModifierTemplate="{StaticResource AnnotationCreationModifierTemplate}"
+                                                                              CursorModifierTemplate="{StaticResource CursorModifierTemplate}"
+                                                                              EmptyTemplate="{StaticResource EmptyTemplate}"
+                                                                              FlipModifierTemplate="{StaticResource CustomFlipModifierTemplate}"
+                                                                              FlyoutSeparatorTemplate="{StaticResource FlyoutSeparatorTemplate}"
+                                                                              LegendModifierTemplate="{StaticResource LegendModifier2DTemplate}"
+                                                                              MouseWheelZoomModifierTemplate="{StaticResource MouseWheelZoomModifierTemplate}"
+                                                                              PointMarkersModifierTemplate="{StaticResource PointMarkersTemplate}"
+                                                                              ExportModifierTemplate="{StaticResource CustomExportModifierTemplate}"
+                                                                              RolloverModifierTemplate="{StaticResource RolloverModifierTemplate}"                                                                        
+                                                                              RotateChartModifierTemplate="{StaticResource CustomRotateChartModifierTemplate}"
+                                                                              RubberBandXyZoomModifierTemplate="{StaticResource RubberBandXyZoomModifierTemplate}"
+                                                                              SeriesSelectionModifierTemplate="{StaticResource SeriesSelectionModifierTemplate}"
+                                                                              ThemeModifierTemplate="{StaticResource CustomThemeModifierTemplate}"
+                                                                              TooltipModifierTemplate="{StaticResource TooltipModifierTemplate}"
+                                                                              ZoomExtentsModifierTemplate="{StaticResource ZoomExtentsModifierTemplate}"
+                                                                              ZoomPanModifierTemplate="{StaticResource ZoomPanModifierModifierTemplate}"/>
+                                </ItemsControl.ItemTemplateSelector>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource SciChartExampleToolbarStyle}" TargetType="toolbar2D:SciChartInteractionToolbar"/>
+
+    
+    <!-- Toolbar 3D -->
+
+    <Style x:Key="SciChartExampleToolbar3DStyle" TargetType="toolbar3D:SciChart3DInteractionToolbar">
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource ToolbarPopupButtonStyle}"/>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource ToolbarPopupCheckBoxStyle}"/>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource ToolbarPopupComboBoxStyle}"/>
+            <Style TargetType="DatePicker" BasedOn="{StaticResource ToolbarPopupDatePickerStyle}"/>
+            <Style TargetType="RadioButton" BasedOn="{StaticResource ToolbarPopupRadioButtonStyle}"/>
+            <Style TargetType="Slider" BasedOn="{StaticResource ToolbarPopupSliderStyle}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource ToolbarPopupTextBoxStyle}"/>
+        </Style.Resources>
+        <Setter Property="IsDeveloperMode" Value="{Binding Source={x:Static common:DeveloperModManager.Manage}, Path=IsDeveloperMode}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolbar3D:SciChart3DInteractionToolbar">
+                    <Border Background="{DynamicResource ToolbarBackgroundBrush}"
+                            BorderThickness="0"
+                            CornerRadius="0">
+
+                        <WrapPanel x:Name="PART_Container"
+                                   HorizontalAlignment="Left"
+                                   Orientation="Vertical">
+
+                            <ItemsControl x:Name="PART_ItemsControl"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Stretch"
+                                          ItemsSource="{TemplateBinding ModifiersSource}">
+
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Left" Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplateSelector>
+                                    <toolbar3D:SciChart3DModifierButtonTemplateSelector CustomZoomExtentsModifier3DTemplate="{StaticResource ZoomExtents3DModifierTemplate}"
+                                                                                        FreeLookModifierTemplate="{StaticResource FreeZoom3DModifierTemplate}"
+                                                                                        LegendModifier3DTemplate="{StaticResource LegendModifier3DTemplate}"
+                                                                                        MouseWheel3DModifierTemplate="{StaticResource MouseWheelModifier3DTemplate}"
+                                                                                        OrbitModifierTemplate="{StaticResource Orbit3DModifierTemplate}"
+                                                                                        TooltipModifier3DTemplate="{StaticResource TooltipModifier3DTemplate}"
+                                                                                        VertexSelectionModifier3DTemplate="{StaticResource VertexSelectionModifier3DTemplate}"
+                                                                                        EmptyTemplate="{StaticResource EmptyDataTemplate}"/>
+                                </ItemsControl.ItemTemplateSelector>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource SciChartExampleToolbar3DStyle}" TargetType="toolbar3D:SciChart3DInteractionToolbar"/>
+
+</ResourceDictionary>

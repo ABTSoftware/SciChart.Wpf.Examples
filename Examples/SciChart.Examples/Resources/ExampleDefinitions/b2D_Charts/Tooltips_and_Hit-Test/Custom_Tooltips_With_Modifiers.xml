@@ -13,10 +13,10 @@
 
     [b]Documentation Links[/b]
 
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier~SetTooltipTemplate.html']VerticalSliceModifier TooltipTemplate[/url] attached property
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier~SetTooltipTemplate.html']RolloverModifier TooltipTemplate[/url] attached property
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.TooltipModifier~SetTooltipTemplate.html']TooltipModifier TooltipTemplate[/url] attached property
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier~TooltipContainerStyle.html']CursorModifier TooltipContainerStyle[/url] property
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.VerticalSliceModifier~SetTooltipTemplate.html']VerticalSliceModifier TooltipTemplate[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.RolloverModifier~SetTooltipTemplate.html']RolloverModifier TooltipTemplate[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.TooltipModifier~SetTooltipTemplate.html']TooltipModifier TooltipTemplate[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.ChartModifiers.CursorModifier~TooltipContainerStyle.html']CursorModifier TooltipContainerStyle[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/InspectDatapoints/CustomTooltipsWithModifiers.xaml.txt</string>

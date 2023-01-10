@@ -16,95 +16,81 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
-            <StackPanel Orientation="Vertical">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ToggleButton x:Name="SelectionEnabledToggle"
+                          ToolTipService.ToolTip="Toggle Series Selection"
+                          Style="{StaticResource DefaultToggleButtonStyle}"      
+                          IsChecked="True">
+                <ext:ToolbarIcon Kind="ArrowTopLeft" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Margin="3" x:Name="SelectionEnabledToggle"
-                                      Content="SeriesSelection"
-                                      HorizontalAlignment="Left"
-                                      ToolTipService.ToolTip="Toggle Series Selection"
-                                      Style="{StaticResource PointerButtonStyle}"      
-                                      IsChecked="True"/>
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Legend Placement" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboLegendPlacement" SelectionChanged="OnLegendPlacementChanged"/>
 
-                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="SRC" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150">
-                            <TextBlock Text="Legend Source" />
-                            <ext:FlyoutSeparator/>
-                            <ComboBox Margin="4"  x:Name="cboGetLegendFor" SelectionChanged="OnLegendModeChanged" />
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
+                        <TextBlock Text="Legend Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboLegendOrientation" SelectionChanged="OnLegendOrientationChanged"/>
 
-                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PLC" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-                            <TextBlock Text="Legend.LegendPlacement" />
-                            <ext:FlyoutSeparator/>
-                            <ComboBox Margin="4" x:Name="cboLegendPlacement" SelectionChanged="OnLegendPlacementChanged" />
+                        <TextBlock Text="Horizontal Alignment" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboHorizontalAlignment" SelectionChanged="OnLegendHorizontalAlignmentChanged"/>
 
-                            <TextBlock Text="Legend.Orientation" />
-                            <ext:FlyoutSeparator/>
-                            <ComboBox x:Name="cboLegendOrientation" SelectionChanged="OnLegendOrientationChanged" Margin="4"/>
+                        <TextBlock Text="Vertical Alignment" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboVerticalAlignment" SelectionChanged="OnLegendVerticalAlignmentChanged"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-                            <TextBlock Text="Legend.HorizontalAlignment" />
-                            <ext:FlyoutSeparator/>
-                            <ComboBox x:Name="cboHorizontalAlignment" SelectionChanged="OnLegendHorizontalAlignmentChanged" Margin="4"/>
-
-                            <TextBlock Text="Legend.VerticalAlignment" />
-                            <ext:FlyoutSeparator/>
-                            <ComboBox x:Name="cboVerticalAlignment" SelectionChanged="OnLegendVerticalAlignmentChanged" Margin="4"/>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="LEG" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-                            <TextBlock Text="Legend Controls" />
-                            <ext:FlyoutSeparator/>
-                            <CheckBox Margin="4" Content="Show legend" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowLegend, Mode=TwoWay}" />
-                            <CheckBox Margin="4" Content="Show checkboxes" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowVisibilityCheckboxes, Mode=TwoWay}" />
-                            <CheckBox Margin="4" Content="Show series markers" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowSeriesMarkers, Mode=TwoWay}" />
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-            </StackPanel>
-        </Border>
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="ViewSplitVertical" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Legend Source" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboGetLegendFor" SelectionChanged="OnLegendModeChanged"/>
+                        
+                        <TextBlock Text="Legend Controls" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox Margin="0,5" Content="Show legend" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowLegend, Mode=TwoWay}" />
+                        <CheckBox Margin="0,5" Content="Show checkboxes" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowVisibilityCheckboxes, Mode=TwoWay}" />
+                        <CheckBox Margin="0,5" Content="Show series markers" IsChecked="{Binding Source={x:Reference Name=legendModifier}, Path=ShowSeriesMarkers, Mode=TwoWay}" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="Yellow">
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:EllipsePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
-                <s:FastLineRenderableSeries Stroke="#279B27">
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:TrianglePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
-                <s:FastLineRenderableSeries Stroke="#FF1919">
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:SquarePointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:2" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:2" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
-                <s:FastLineRenderableSeries Stroke="#1964FF" IsVisible="False">
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_1}" IsVisible="False">
                     <s:FastLineRenderableSeries.PointMarker>
                         <s:CrossPointMarker/>
                     </s:FastLineRenderableSeries.PointMarker>

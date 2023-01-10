@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -32,11 +32,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
         private SampleReader _reader;
         private readonly double[] _input;
         private readonly double[] _inputBack;
+        private double[] _currentBuffer;
 
         public int SamplesPerSecond { get; }
         public int BufferSize { get; }
 
         public double[] Samples => _inputBack;
+        public double[] CurrentBuffer => _currentBuffer;
 
         public event EventHandler DataReceived;
 
@@ -53,6 +55,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
 
             _input = new double[BufferSize];
             _inputBack = new double[BufferSize];
+            _currentBuffer = new double[(int)(SamplesPerSecond * 0.1)];
 
             var capture = new WasapiCapture(device, false, 10) { WaveFormat = _waveFormat };
             capture.DataAvailable += DataAvailable;
@@ -84,6 +87,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
                     lock (_input)
                     {
                         Array.Copy(_input, _inputBack, _input.Length);
+                        Array.Copy(_input, _input.Length - _currentBuffer.Length - 1, _currentBuffer, 0, _currentBuffer.Length);
                     }
                     DataReceived?.Invoke(this, EventArgs.Empty);
                 }

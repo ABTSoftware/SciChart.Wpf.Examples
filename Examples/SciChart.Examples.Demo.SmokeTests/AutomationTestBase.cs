@@ -21,7 +21,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         public static string ExportActualPath = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                         "SciChart",
-                        "SciChartAutomationTests_v6", // NOTE FOR MERGES: Master/v6 branch must have different folders here to avoid conflict in teamcity
+                        "SciChartAutomationTests_v7", // NOTE FOR MERGES: Master/v7 branch must have different folders here to avoid conflict in teamcity
                         "Actuals");
 
         static AutomationTestBase()

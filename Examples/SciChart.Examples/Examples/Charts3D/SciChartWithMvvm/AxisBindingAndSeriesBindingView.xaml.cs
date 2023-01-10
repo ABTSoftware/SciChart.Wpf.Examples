@@ -11,6 +11,5 @@ namespace SciChart.Examples.Examples.Charts3D.SciChartWithMvvm
         {
             InitializeComponent();
         }
-
     }
 }

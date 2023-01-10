@@ -61,42 +61,30 @@ namespace SciChart.Examples.Examples.CreateRadarChart
                 {
                     DataSeries = productADataSeries,
                     SeriesName = "Product A",
-                    Stroke = Colors.Blue,
                     StrokeThickness = 2,
-                    StyleKey = "BlueRadarSeriesStyle",
-                    Fill = new SolidColorBrush {Color = Colors.Blue, Opacity = 0.4},
-                    PointMarker = new TrianglePointMarker { Width = 10, Height = 10, Fill = Colors.Blue, StrokeThickness = 0}
+                    StyleKey = "FirstRadarSeriesStyle",
                 },
 
                 new RadarPolygonRenderableSeriesViewModel()
                 {
                     DataSeries = productBDataSeries,
                     SeriesName = "Product B",
-                    Stroke = Colors.Coral,
                     StrokeThickness = 2,
-                    StyleKey = "CoralRadarSeriesStyle",
-                    Fill = new SolidColorBrush {Color = Colors.Coral, Opacity = 0.4},
-                    PointMarker = new EllipsePointMarker { Width = 10, Height = 10, Fill = Colors.Coral, StrokeThickness = 0}
+                    StyleKey = "SecondRadarSeriesStyle",
                 },
                 new RadarPolygonRenderableSeriesViewModel()
                 {
                     DataSeries = productCDataSeries,
                     SeriesName = "Product C",
-                    Stroke = Colors.Green,
                     StrokeThickness = 2,
-                    StyleKey = "GreenRadarSeriesStyle",
-                    Fill = new SolidColorBrush {Color = Colors.Green, Opacity = 0.4},
-                    PointMarker = new CrossPointMarker { Width = 10, Height = 10, Stroke = Colors.Green, StrokeThickness = 2}
+                    StyleKey = "ThirdRadarSeriesStyle",
                 },
                 new RadarPolygonRenderableSeriesViewModel()
                 {
                     DataSeries = productDDataSeries, 
                     SeriesName = "Product D",
-                    Stroke = Colors.YellowGreen,
                     StrokeThickness = 2,
-                    StyleKey = "YellowGreenRadarSeriesStyle",
-                    Fill = new SolidColorBrush {Color = Colors.YellowGreen, Opacity = 0.4},
-                    PointMarker = new SquarePointMarker { Width = 10, Height = 10, Fill = Colors.YellowGreen, StrokeThickness = 0}
+                    StyleKey = "FourthtRadarSeriesStyle",
                 }
             };
         }

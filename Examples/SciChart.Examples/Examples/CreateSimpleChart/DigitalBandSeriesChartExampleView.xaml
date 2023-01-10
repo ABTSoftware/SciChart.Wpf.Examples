@@ -30,13 +30,13 @@
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastBandRenderableSeries x:Name="bandRenderSeries"
-                                            Fill="#33279B27"
-                                            FillY1="#33FF1919"
                                             IsDigitalLine="True"
-                                            StrokeY1="#FF279B27"
-                                            Stroke="#FFFF1919">
+                                            Fill="{StaticResource MainThemeTransparentStrokeColor}"
+                                            FillY1="{StaticResource SecondaryTransparentStrokeColor}"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
+                                            StrokeY1="{StaticResource SecondaryThemeStrokeColor}">
                     <s:FastBandRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:1"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastBandRenderableSeries.SeriesAnimation>
                 </s:FastBandRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting3D.RenderableSeries;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -15,6 +16,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 {
     public class FifoBillionPointsPageViewModel : BaseViewModel
     {
+        private bool _isRunning;
         private bool _isStopped;
         private string _loadingMessage;
 
@@ -31,12 +33,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         public FifoBillionPointsPageViewModel()
         {
+            _isRunning = false;
             _isStopped = true;
+
             _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
 
-            RunCommand = new ActionCommand(OnRun, () => !IsLoading);
-            PauseCommand = new ActionCommand(OnPause, () => !IsLoading && !IsStopped);
-            StopCommand = new ActionCommand(OnStop, () => !IsLoading);
+            RunCommand = new ActionCommand(OnRun);
+            PauseCommand = new ActionCommand(OnPause);
+            StopCommand = new ActionCommand(OnStop);
 
             // Add the point count options 
             AllPointCounts.Add(new PointCount("1 Million", 5, 200_000));
@@ -90,6 +94,16 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         public ActionCommand PauseCommand { get; }
         public ActionCommand StopCommand { get; }
 
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set
+            {
+                _isRunning = value;
+                OnPropertyChanged(nameof(IsRunning));
+            }
+        }
+
         public bool IsStopped
         {
             get => _isStopped;
@@ -97,7 +111,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             {
                 _isStopped = value;
                 OnPropertyChanged(nameof(IsStopped));
-                PauseCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -112,41 +125,49 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
                 OnPropertyChanged(nameof(LoadingMessage));
                 OnPropertyChanged(nameof(IsLoading));
-
-                RunCommand.RaiseCanExecuteChanged();
-                PauseCommand.RaiseCanExecuteChanged();
-                StopCommand.RaiseCanExecuteChanged();
             }
         }
 
         private async void OnRun()
         {
-            if (!IsStopped)
+            if (!IsRunning)
             {
+                IsRunning = true;
+
+                if (IsStopped)
+                {
+                    int seriesCount = SelectedPointCount.SeriesCount;
+                    int pointCount = SelectedPointCount.PointsCount;
+
+                    LoadingMessage = $"Generating {SelectedPointCount.DisplayName} Points...";
+
+                    var series = await CreateSeriesAsync(seriesCount, pointCount);
+                    using (ViewportManager.ParentSurface.SuspendUpdates())
+                    {
+                        series.ForEachDo(x => Series.Add(x));
+                    }
+
+                    LoadingMessage = null;
+                }
+
+                IsStopped = false;
+
                 _timer.Start();
-                return;
             }
-
-            int seriesCount = SelectedPointCount.SeriesCount;
-            int pointCount = SelectedPointCount.PointsCount;
-
-            LoadingMessage = $"Generating {SelectedPointCount.DisplayName} Points...";
-            IsStopped = false;
-
-            // Load the points
-            var series = await CreateSeriesAsync(seriesCount, pointCount);
-            using (ViewportManager.ParentSurface.SuspendUpdates())
-            {
-                series.ForEachDo(x => Series.Add(x));
-            }
-
-            _timer.Start();
-
-            LoadingMessage = null;
         }
 
         private async Task<List<IRenderableSeriesViewModel>> CreateSeriesAsync(int seriesCount, int pointCount)
         {
+            var seriesColors = new Color[]
+            {
+                ColorUtil.FromUInt(0xFF50C7E0),
+                ColorUtil.FromUInt(0xFFF48420),
+                ColorUtil.FromUInt(0xFF882B91),
+                ColorUtil.FromUInt(0xFF30BC9A),
+                ColorUtil.FromUInt(0xFFEC0F6C),
+                ColorUtil.FromUInt(0xFF364BA0),
+            };
+
             return await Task.Run(() =>
             {
                 // Create N series of M points async. Return to calling code to set on the chart 
@@ -198,7 +219,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                     series[i] = new LineRenderableSeriesViewModel
                     {
                         DataSeries = xyDataSeries,
-                        Stroke = GetRandomColor()
+                        Stroke = i >= seriesColors.Length ? GetRandomColor() : seriesColors[i]
                     };
                 });
 
@@ -219,29 +240,32 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         {
 #if DEBUG
             // Debug mode is the cause of all performance woes. Try release mode?
-            var warnings = new List<string> { "Debug mode is slow, try Release" };
+            var warnings = new List<string> { "Debug mode is slow, try Release." };
 #else
             var warnings = new List<string>();
 #endif
             if (Debugger.IsAttached)
             {
                 // Its considerably slower to run the code when debugger is attached. Warn the user
-                warnings.Add("Debugger is attached, try without");
+                warnings.Add("Debugger is attached, try without.");
             }
 
             if (SystemMemoryInfo.GetRamGb() <= 8)
             {
                 // Hmm, time to upgrade? :) 
-                warnings.Add("Low system RAM, try on 16GB machine?");
+                warnings.Add("Low system RAM, try on 16GB machine.");
             }
 
-            return warnings.Any() ? "Performance warnings! " + string.Join(". ", warnings) : null;
+            return warnings.Any() ? "Performance warnings! " + string.Join(" ", warnings) : null;
         }
 
         private void OnPause()
         {
             lock (_syncLock)
             {
+                IsRunning = false;
+                IsStopped = false;
+
                 _timer.Stop();
                 ViewportManager.ZoomExtentsX();
             }
@@ -249,15 +273,18 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         private void OnStop()
         {
-            if (IsStopped) return;
-
             lock (_syncLock)
             {
-                _timer.Stop();
-                IsStopped = true;
+                if (!IsStopped)
+                {
+                    _timer.Stop();
 
-                Series.ForEachDo(x => x.DataSeries.Clear(true));
-                Series.Clear();
+                    IsRunning = false;
+                    IsStopped = true;
+
+                    Series.ForEachDo(x => x.DataSeries.Clear(true));
+                    Series.Clear();
+                }
             }
 
             // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app

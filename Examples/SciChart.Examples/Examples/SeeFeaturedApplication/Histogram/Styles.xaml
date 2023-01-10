@@ -11,17 +11,17 @@
     <Style x:Key="BlueColumnStyle"
            BasedOn="{StaticResource BaseColumnStyle}"
            TargetType="s:FastColumnRenderableSeries">
-        <Setter Property="Fill" Value="CornflowerBlue" />
+        <Setter Property="Fill" Value="{StaticResource MainThemeSolidBrush}" />
     </Style>
     <Style x:Key="RedColumnStyle"
            BasedOn="{StaticResource BaseColumnStyle}"
            TargetType="s:FastColumnRenderableSeries">
-        <Setter Property="Fill" Value="DarkRed" />
+        <Setter Property="Fill" Value="{StaticResource SecondaryThemeSolidBrush}" />
     </Style>
     <Style x:Key="GreenColumnStyle"
            BasedOn="{StaticResource BaseColumnStyle}"
            TargetType="s:FastColumnRenderableSeries">
-        <Setter Property="Fill" Value="ForestGreen" />
+        <Setter Property="Fill" Value="{StaticResource ExtraThemeStrokeBrush_2}" />
     </Style>
 
     <Style x:Key="BaseLineStyle" TargetType="s:FastLineRenderableSeries">
@@ -31,17 +31,17 @@
     <Style x:Key="BlueLineStyle"
            BasedOn="{StaticResource BaseLineStyle}"
            TargetType="s:FastLineRenderableSeries">
-        <Setter Property="Stroke" Value="CornflowerBlue" />
+        <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
     </Style>
     <Style x:Key="RedLineStyle"
            BasedOn="{StaticResource BaseLineStyle}"
            TargetType="s:FastLineRenderableSeries">
-        <Setter Property="Stroke" Value="DarkRed" />
+        <Setter Property="Stroke" Value="{StaticResource SecondaryThemeStrokeColor}" />
     </Style>
     <Style x:Key="GreenLineStyle"
            BasedOn="{StaticResource BaseLineStyle}"
            TargetType="s:FastLineRenderableSeries">
-        <Setter Property="Stroke" Value="ForestGreen" />
+        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_2}" />
     </Style>
 
 </ResourceDictionary>

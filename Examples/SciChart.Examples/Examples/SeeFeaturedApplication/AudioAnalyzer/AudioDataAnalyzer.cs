@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -37,6 +37,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.AudioAnalyzer
         public int[] FftIndices { get; }
 
         public double[] Samples => _handler.Samples;
+        public double[] CurrentSamples => _handler.CurrentBuffer;
 
         public event EventHandler Update;
 

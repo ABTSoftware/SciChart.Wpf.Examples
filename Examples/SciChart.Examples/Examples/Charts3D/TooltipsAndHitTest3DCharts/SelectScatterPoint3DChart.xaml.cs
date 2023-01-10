@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -73,12 +73,12 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
 
             if (!selectedPoints.IsNullOrEmpty())
             {
-                selectedList.Visibility = Visibility.Visible;
+                selectedPanel.Visibility = Visibility.Visible;
                 selectedList.ItemsSource = selectedPoints;
             }
             else
             {
-                selectedList.Visibility = Visibility.Collapsed;
+                selectedPanel.Visibility = Visibility.Collapsed;
                 selectedList.ItemsSource = null;
             }
         }

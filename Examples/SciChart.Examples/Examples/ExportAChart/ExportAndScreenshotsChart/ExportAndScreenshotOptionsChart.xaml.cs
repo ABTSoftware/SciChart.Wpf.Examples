@@ -31,10 +31,10 @@ namespace SciChart.Examples.Examples.ExportAChart.ExportAndScreenshotsChart
         private void OnLoaded_SciChartSurface(object sender, RoutedEventArgs e)
         {
             // Create multiple DataSeries to store OHLC candlestick data, and Xy moving average data
-            var dataSeries0 = new OhlcDataSeries<DateTime, double>() {SeriesName = "Candles"};
-            var dataSeries1 = new XyDataSeries<DateTime, double>() { SeriesName = "Red" };
-            var dataSeries2 = new XyDataSeries<DateTime, double>() { SeriesName = "Blue" };
-            var dataSeries3 = new XyDataSeries<DateTime, double>() { SeriesName = "Yellow" };
+            var dataSeries0 = new OhlcDataSeries<DateTime, double>() {SeriesName = "Light Blue"};
+            var dataSeries1 = new XyDataSeries<DateTime, double>() { SeriesName = "Violet" };
+            var dataSeries2 = new XyDataSeries<DateTime, double>() { SeriesName = "Aqua" };
+            var dataSeries3 = new XyDataSeries<DateTime, double>() { SeriesName = "Rosy" };
 
             // Prices are in the format Time, Open, High, Low, Close (all IList)
             var prices = DataManager.Instance.GetPriceData(Instrument.Indu.Value, TimeFrame.Daily);

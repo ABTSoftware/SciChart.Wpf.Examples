@@ -7,7 +7,7 @@
   <Description>
     Demonstrates how to programmatically add and remove series in code. This is achieved by changing the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~RenderableSeries.html']SciChartSurface.RenderableSeries[/url] collection at runtime.
 
-    Click 'Add Series' several times. Now click to select a series. With a series selected, click 'Delete Series'.
+    Click 'Plus' button several times to add series. Now click to select a series. With a series selected, click 'Delete' button.
 
     The same thing can be achieved in MVVM, using our new MVVM [url='https://www.scichart.com/documentation/win/current/webframe.html#MVVM%20DataSeries%20RenderableSeries%20API.html']SeriesBinding[/url] Markup Extension.
   </Description>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coverFlow="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.CoverFlow;assembly=SciChart.Examples.ExternalDependencies"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ex="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -24,7 +24,7 @@
             <system:String x:Key="XAxisId">XAxisId</system:String>
             <system:String x:Key="YAxis0Id">Y0AxisId</system:String>
             <system:String x:Key="YAxis1Id">Y1AxisId</system:String>
-            
+
             <Style x:Key="FirstLineRenderableSeriesStyle" TargetType="s:FastLineRenderableSeriesForMvvm">
                 <Setter Property="XAxisId" Value="{StaticResource XAxisId}"/>
                 <Setter Property="YAxisId" Value="{StaticResource YAxis0Id}"/>
@@ -37,7 +37,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#FF1C1C1E">
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -51,23 +51,19 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ex:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding ElementName=sciChart}">
-
+        <ext:SciChartInteractionToolbar Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference sciChart}}">
             <Button Command="{Binding UndoCommand}"
-                    Content="UN"
-                    FontSize="11"
-                    Padding="0"
                     Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="UNDO Zoom" />
+                    ToolTipService.ToolTip="Undo">
+                <ext:ToolbarIcon Kind="Undo" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
             <Button Command="{Binding RedoCommand}"
-                    Content="RE"
-                    FontSize="11"
-                    Padding="0"
                     Style="{StaticResource DefaultButtonStyle}"
-                    ToolTipService.ToolTip="REDO Zoom" />
-            
-        </ex:SciChartInteractionToolbar>
+                    ToolTipService.ToolTip="Redo">
+                <ext:ToolbarIcon Kind="Redo" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Shows the SciChartSurface and binds ZoomHistoryManager to the instance in the viewmodel  -->
         <!--  This is what we use to control zoom history as well as Undo Redo  -->
@@ -86,16 +82,16 @@
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis x:Name="YAxis0"
                                AxisAlignment="Left"
-                               BorderBrush="#FF6495ed"
+                               BorderBrush="{StaticResource MainThemeSolidBrush}"
                                Id="{StaticResource YAxis0Id}"
-                               TickTextBrush="#FF6495ed"
+                               TickTextBrush="{StaticResource MainThemeSolidBrush}"
                                VisibleRange="-5,25" />
 
                 <s:NumericAxis x:Name="YAxis1"
                                AxisAlignment="Right"
-                               BorderBrush="#FFFF4500"
+                               BorderBrush="{StaticResource SecondaryThemeSolidBrush}"
                                Id="{StaticResource YAxis1Id}"
-                               TickTextBrush="#FFFF4500"
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}"
                                VisibleRange="0,40" />
             </s:SciChartSurface.YAxes>
 
@@ -121,10 +117,6 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                    Command="{Binding UndoCommand}"
-                    Style="{StaticResource BackButtonPathStyle}" />
-
             <coverFlow:CoverFlowControl Grid.Column="1"
                                         Grid.ColumnSpan="3"
                                         Height="180"
@@ -133,59 +125,53 @@
                                         VerticalAlignment="Center"
                                         ItemsSource="{Binding RangesHistory, Mode=OneWay}"
                                         Scale="0.65"
-                                        SelectionColor="#FF2C3135"
+                                        SelectionColor="{StaticResource CoverFlowBackgroundColor}"
                                         SelectedItem="{Binding SelectedRange, Mode=TwoWay}"
                                         NextPrevSelectionOnly="True"
                                         SpaceBetweenItems="180"
                                         SpaceBetweenSelectedItemAndItems="50"
                                         HideOverlappedSideItems="True">
+
                 <coverFlow:CoverFlowControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#FF1C1C1E"
-                                BorderBrush="#FF2C3135"
-                                BorderThickness="3">
-                            <s:SciChartSurface Width="250"
-                                               Height="170"
-                                               Margin="-1"
-                                               FontSize="12"
-                                               RenderableSeries="{s:SeriesBinding DataContext.RenderableSeriesViewModels, RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                <s:SciChartSurface.Resources>
-                                    <Style BasedOn="{StaticResource ConciseAxisStyle}" TargetType="s:NumericAxis" />
-                                </s:SciChartSurface.Resources>
-                                <s:SciChartSurface.XAxis>
-                                    <s:NumericAxis Id="{StaticResource XAxisId}" VisibleRange="{Binding XAxisRange}" />
-                                </s:SciChartSurface.XAxis>
-                                <s:SciChartSurface.YAxes>
-                                    <s:NumericAxis Id="{StaticResource YAxis0Id}" VisibleRange="{Binding Y0AxisRange}" />
-                                    <s:NumericAxis Id="{StaticResource YAxis1Id}" VisibleRange="{Binding Y1AxisRange}" />
-                                </s:SciChartSurface.YAxes>
-                            </s:SciChartSurface>
-                        </Border>
+                        <s:SciChartSurface Width="250"   
+                                           Height="170"
+                                           Margin="5"
+                                           FontSize="12"
+                                           Background="Transparent"
+                                           RenderableSeries="{s:SeriesBinding DataContext.RenderableSeriesViewModels, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                            <s:SciChartSurface.Resources>
+                                <Style BasedOn="{StaticResource ConciseAxisStyle}" TargetType="s:NumericAxis" />
+                            </s:SciChartSurface.Resources>
+                            <s:SciChartSurface.XAxis>
+                                <s:NumericAxis Id="{StaticResource XAxisId}" VisibleRange="{Binding XAxisRange}" />
+                            </s:SciChartSurface.XAxis>
+                            <s:SciChartSurface.YAxes>
+                                <s:NumericAxis Id="{StaticResource YAxis0Id}" VisibleRange="{Binding Y0AxisRange}" />
+                                <s:NumericAxis Id="{StaticResource YAxis1Id}" VisibleRange="{Binding Y1AxisRange}" />
+                            </s:SciChartSurface.YAxes>
+                        </s:SciChartSurface>
                     </DataTemplate>
                 </coverFlow:CoverFlowControl.ItemTemplate>
             </coverFlow:CoverFlowControl>
 
-            <Border Grid.Column="1" Background="#FF1C1C1E">
+            <Border Grid.Column="1" Background="{StaticResource ThemedSurfaceChartBackground}">
                 <Border.OpacityMask>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Offset="0" Color="#FF1C1C1E"/>
+                        <GradientStop Offset="0" Color="Black"/>
                         <GradientStop Offset="1" Color="Transparent"/>
                     </LinearGradientBrush>
                 </Border.OpacityMask>
             </Border>
 
-            <Border Grid.Column="3" Background="#FF1C1C1E">
+            <Border Grid.Column="3" Background="{StaticResource ThemedSurfaceChartBackground}">
                 <Border.OpacityMask>
                     <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
-                        <GradientStop Offset="0" Color="#FF1C1C1E"/>
+                        <GradientStop Offset="0" Color="Black"/>
                         <GradientStop Offset="1" Color="Transparent"/>
                     </LinearGradientBrush>
                 </Border.OpacityMask>
             </Border>
-
-            <Button Grid.Column="4"
-                    Command="{Binding RedoCommand}"
-                    Style="{StaticResource NextButtonPathStyle}" />
         </Grid>
     </Grid>
 </UserControl>

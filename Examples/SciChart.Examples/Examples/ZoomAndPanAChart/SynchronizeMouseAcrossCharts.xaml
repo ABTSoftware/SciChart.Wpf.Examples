@@ -21,47 +21,46 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--  Define Toolbar  -->
-        <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Grid.RowSpan="2">
-            <StackPanel Orientation="Vertical">
+        <ext:SciChartInteractionToolbar Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
 
-                <ToggleButton Margin="3" x:Name="enableZoom"
-                                      Content="Zoom"
-                                      HorizontalAlignment="Left"
-                                      ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                                      Style="{StaticResource ZoomButtonStyle}"      
-                                      IsChecked="{Binding ZoomEnabled, Mode=TwoWay}"
-                                      s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup"/>
+            <ToggleButton x:Name="enableZoom"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          Style="{StaticResource DefaultToggleButtonStyle}"      
+                          IsChecked="{Binding ZoomEnabled, Mode=TwoWay}"
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Margin="3" x:Name="enablePan"
-                                      Content="Pan"
-                                      HorizontalAlignment="Left"
-                                      ToolTipService.ToolTip="Toggle Zoom-Pan"                                      
-                                      IsChecked="{Binding PanEnabled, Mode=TwoWay}"
-                                      Style="{StaticResource PanButtonStyle}"                                     
-                                      s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup" />
+            <ToggleButton x:Name="enablePan"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"                                      
+                          IsChecked="{Binding PanEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"                                     
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <Button Margin="3"
-                                HorizontalAlignment="Left"
-                                ToolTipService.ToolTip="Zoom to Extents"
-                                Style="{StaticResource ZoomExtentsButtonStyle}"
-                                Click="ZoomExtentsClick"
-                                Content="Zoom Extents" />
+            <Button ToolTipService.ToolTip="Zoom to Extents"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Click="ZoomExtentsClick">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                <ext:FlyoutSeparator Background="#444"/>                
+            <ext:FlyoutSeparator/>
 
-                <ToggleButton Margin="3" Style="{StaticResource PointerButtonStyle}"
-                              ToolTipService.ToolTip="Enable CursorModifier"
-                              IsChecked="{Binding CursorEnabled, Mode=TwoWay}" 
-                              s:ToggleButtonExtensions.GroupName="SyncMultiChartCursorGroup"/>
+            <ToggleButton IsChecked="{Binding CursorEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Enable CursorModifier"
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartCursorGroup">
+                <ext:ToolbarIcon Kind="CrosshairsGps" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Margin="3" Style="{StaticResource CalloutButtonStyle}" 
-                              ToolTipService.ToolTip="Enable RolloverModifier"
-                              IsChecked="{Binding RolloverEnabled, Mode=TwoWay}" 
-                              s:ToggleButtonExtensions.GroupName="SyncMultiChartCursorGroup"/>
-
-            </StackPanel>
-        </Border>
+            <ToggleButton IsChecked="{Binding RolloverEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}" 
+                          ToolTipService.ToolTip="Enable RolloverModifier"
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartCursorGroup">
+                <ext:ToolbarIcon Path="{StaticResource ToolbarRolloverIconPath}" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+        </ext:SciChartInteractionToolbar>
 
         <!-- HOW TO SYNCHRONIZE TWO OR MORE CHARTS TOGETHER                                                     -->
         <!--                                                                                                    -->
@@ -81,9 +80,9 @@
                            Grid.Column="1"
                            s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries DataSeries="{Binding ChartData0}" Stroke="#279B27">
+                <s:FastLineRenderableSeries DataSeries="{Binding ChartData0}" Stroke="{StaticResource MainThemeStrokeColor}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -127,9 +126,9 @@
                            Grid.Row="1" Grid.Column="1"
                            s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries DataSeries="{Binding ChartData1}" Stroke="#279B27">
+                <s:FastLineRenderableSeries DataSeries="{Binding ChartData1}" Stroke="{StaticResource MainThemeStrokeColor}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

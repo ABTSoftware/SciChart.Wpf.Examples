@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -33,17 +33,16 @@ namespace SciChart.Examples.Examples.ManipulateSeries
 
             Loaded += ChangeRenderableSeriesTypeLoaded;
 
-            seriesTypesCombo.Items.Add(typeof (FastLineRenderableSeries));
-            seriesTypesCombo.Items.Add(typeof (FastColumnRenderableSeries));
-            seriesTypesCombo.Items.Add(typeof (FastMountainRenderableSeries));
-            seriesTypesCombo.Items.Add(typeof (FastImpulseRenderableSeries));
+            seriesTypesCombo.Items.Add(typeof(FastLineRenderableSeries));
+            seriesTypesCombo.Items.Add(typeof(FastColumnRenderableSeries));
+            seriesTypesCombo.Items.Add(typeof(FastMountainRenderableSeries));
+            seriesTypesCombo.Items.Add(typeof(FastImpulseRenderableSeries));
         }
 
         private void SeriesComboSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // When the selected series type combo changes, update the selected series type
-            if (seriesTypesCombo.SelectedValue == null ||
-                !sciChart.SelectedRenderableSeries.Any()) return;
+            if (seriesTypesCombo.SelectedValue == null || !sciChart.SelectedRenderableSeries.Any()) return;
 
             // Get the selected series
             var oldSelectedSeries = sciChart.SelectedRenderableSeries.First();
@@ -53,10 +52,13 @@ namespace SciChart.Examples.Examples.ManipulateSeries
             int index = sciChart.RenderableSeries.IndexOf(oldSelectedSeries);
 
             var oldRenderableSeries = sciChart.RenderableSeries[index];
-            var newSelectedSeries = (BaseRenderableSeries)Activator.CreateInstance((Type) seriesTypesCombo.SelectedValue);
+            var newSelectedSeries = (BaseRenderableSeries)Activator.CreateInstance((Type)seriesTypesCombo.SelectedValue);
+
             newSelectedSeries.Stroke = oldSelectedSeries.Stroke;
-            sciChart.RenderableSeries[index] = newSelectedSeries;
             newSelectedSeries.DataSeries = oldRenderableSeries.DataSeries;
+            
+            sciChart.RenderableSeries[index] = newSelectedSeries;           
+            seriesTypesBtn.IsEnabled = false;
         }
 
         private void SeriesSelectionModifierSelectionChanged(object sender, EventArgs e)
@@ -74,7 +76,8 @@ namespace SciChart.Examples.Examples.ManipulateSeries
             var selectedSeries = sciChart.SelectedRenderableSeries;
             bool hasSelection = selectedSeries != null && selectedSeries.Count > 0;
 
-            seriesTypesCombo.IsEnabled = hasSelection;
+            seriesTypesBtn.IsEnabled = hasSelection;
+            
             if (hasSelection)
             {
                 seriesTypesCombo.SelectedValue = selectedSeries[0].GetType();
@@ -99,10 +102,10 @@ namespace SciChart.Examples.Examples.ManipulateSeries
             dataSeries.Append(data.XData, data.YData);
 
             sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
-                {
-                    Stroke = DataManager.Instance.GetRandomColor(),
-                    DataSeries = dataSeries,
-                });
+            {
+                Stroke = DataManager.Instance.GetRandomColor(),
+                DataSeries = dataSeries,
+            });
         }
     }
 }

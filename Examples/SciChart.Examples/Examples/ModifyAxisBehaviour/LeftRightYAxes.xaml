@@ -26,14 +26,14 @@
 
             <!-- Declare RenderableSeries -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="lineSeriesRight" Stroke="#FF279B27" StrokeThickness="2" YAxisId="RightAxis">
+                <s:FastLineRenderableSeries x:Name="lineSeriesRight" Stroke="{StaticResource MainThemeStrokeColor}" StrokeThickness="2" YAxisId="RightAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries x:Name="lineSeriesLeft" Stroke="#FF4083B7" StrokeThickness="2" YAxisId="LeftAxis">
+                <s:FastLineRenderableSeries x:Name="lineSeriesLeft" Stroke="{StaticResource SecondaryThemeStrokeColor}" StrokeThickness="2" YAxisId="LeftAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -45,8 +45,8 @@
 
             <!-- Create Y Axes on the Left and Right -->
             <s:SciChartSurface.YAxes>
-                <s:NumericAxis TickTextBrush="#FF279B27" Id="RightAxis" AxisAlignment="Right" GrowBy="0.1, 0.1" />
-                <s:NumericAxis TickTextBrush="#FF4083B7" Id="LeftAxis" AxisAlignment="Left" GrowBy="0.1, 0.1" />
+                <s:NumericAxis TickTextBrush="{StaticResource MainThemeSolidBrush}" Id="RightAxis" AxisAlignment="Right" GrowBy="0.1, 0.1" />
+                <s:NumericAxis TickTextBrush="{StaticResource SecondaryThemeSolidBrush}" Id="LeftAxis" AxisAlignment="Left" GrowBy="0.1, 0.1" />
             </s:SciChartSurface.YAxes>
 
         </s:SciChartSurface>

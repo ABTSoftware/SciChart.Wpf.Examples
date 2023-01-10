@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -31,9 +31,12 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
     {
         private XyzDataSeries3D<double> _xyzData;
         private DispatcherTimer _timer;
-        private int _pointCount = 100000;
 
+        private int _pointCount = 100000;
         private readonly Random _random = new Random();
+
+        private bool _isRunning;
+        private bool _isReset;
 
         public CreateRealTime3DPointCloudChart()
         {
@@ -44,44 +47,48 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
         private void OnStart()
         {
-            StartButton.IsChecked = true;
-            PauseButton.IsChecked = false;
-            ResetButton.IsChecked = false;
-
-            if (ScatterRenderableSeries3D.DataSeries == null)
+            if (!_isRunning)
             {
-                _xyzData = new XyzDataSeries3D<double>();
+                _isRunning = true;
+                _isReset = false;
 
-                // First load, fill with some random values                    
-                for (int i = 0; i < _pointCount; i++)
+                StartButton.IsChecked = true;
+                PauseButton.IsChecked = false;
+                PauseButton.IsEnabled = true;
+                ResetButton.IsChecked = false;
+
+                if (ScatterRenderableSeries3D.DataSeries == null)
                 {
-                    double x = DataManager.Instance.GetGaussianRandomNumber(50, 15);
-                    double y = DataManager.Instance.GetGaussianRandomNumber(50, 15);
-                    double z = DataManager.Instance.GetGaussianRandomNumber(50, 15);
+                    _xyzData = new XyzDataSeries3D<double>();
 
-                    _xyzData.Append(x, y, z);
+                    // First load, fill with some random values                    
+                    for (int i = 0; i < _pointCount; i++)
+                    {
+                        double x = DataManager.Instance.GetGaussianRandomNumber(50, 15);
+                        double y = DataManager.Instance.GetGaussianRandomNumber(50, 15);
+                        double z = DataManager.Instance.GetGaussianRandomNumber(50, 15);
+
+                        _xyzData.Append(x, y, z);
+                    }
+
+                    ScatterRenderableSeries3D.DataSeries = _xyzData;
                 }
 
-                ScatterRenderableSeries3D.DataSeries = _xyzData;
-            }
+                if (_timer == null)
+                {
+                    _timer = new DispatcherTimer(DispatcherPriority.Render);
+                    _timer.Interval = TimeSpan.FromMilliseconds(1);
+                    _timer.Tick += OnTimerTick;
+                }
 
-            if (_timer == null)
-            {
-                _timer = new DispatcherTimer(DispatcherPriority.Render);
-                _timer.Interval = TimeSpan.FromMilliseconds(1);
-                _timer.Tick += OnTimerTick;
+                _timer.Start();
             }
-
-            _timer.Start();
         }
 
         private void OnTimerTick(object sender, EventArgs e)
-        {           
-            
-
+        {
             // Subsequent load, update point positions using a sort of brownian motion by using random
-            // 
-
+            //
             // Access Raw 'arrays' to the inner data series. This is the fastest way to read and access data, however
             // any operations will not be thread safe, and will not trigger a redraw. This is why we invalidate below
             //
@@ -102,33 +109,46 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
             // Raise DataSeriesChanged event and trigger chart updates
             _xyzData.IsDirty = true;
-            _xyzData.OnDataSeriesChanged(DataSeriesUpdate.DataChanged, DataSeriesAction.Update);            
+            _xyzData.OnDataSeriesChanged(DataSeriesUpdate.DataChanged, DataSeriesAction.Update);
         }
 
         private void OnPause()
         {
-            _timer.Stop();
+            if (_isRunning)
+            {
+                _isRunning = false;
+                _isReset = false;
 
-            StartButton.IsChecked = false;
-            PauseButton.IsChecked = true;
-            ResetButton.IsChecked = false;
+                _timer.Stop();
+
+                StartButton.IsChecked = false;
+                PauseButton.IsChecked = true;
+                ResetButton.IsChecked = false;
+            }
         }
 
         private void OnReset()
         {
-            _timer.Stop();
-
-            StartButton.IsChecked = false;
-            PauseButton.IsChecked = false;
-            ResetButton.IsChecked = true;
-
-            using (sciChart.SuspendUpdates())
+            if (!_isReset)
             {
-                ScatterRenderableSeries3D.DataSeries = null;
-                sciChart.InvalidateElement();
+                _isRunning = false;
+                _isReset = true;
 
-                ScatterRenderableSeries3D.GetSceneEntity().Update();
-                ScatterRenderableSeries3D.GetSceneEntity().RootSceneEntity.Update();
+                _timer.Stop();
+
+                StartButton.IsChecked = false;
+                PauseButton.IsChecked = false;
+                PauseButton.IsEnabled = false;
+                ResetButton.IsChecked = true;
+
+                using (sciChart.SuspendUpdates())
+                {
+                    ScatterRenderableSeries3D.DataSeries = null;
+                    sciChart.InvalidateElement();
+
+                    ScatterRenderableSeries3D.GetSceneEntity().Update();
+                    ScatterRenderableSeries3D.GetSceneEntity().RootSceneEntity.Update();
+                }
             }
         }
 

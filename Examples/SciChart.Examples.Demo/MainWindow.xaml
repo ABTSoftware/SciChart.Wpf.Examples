@@ -1,23 +1,38 @@
-﻿<Window x:Class="SciChart.Examples.Demo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:demo="clr-namespace:SciChart.Examples.Demo"
-        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-        Title="SciChart &gt; Examples"
-        Width="1380"
-        Height="860"
-        MinWidth="1024"
-        MinHeight="768"
-        WindowStartupLocation="CenterScreen"
-        s:Device.SnapsToDevicePixels="True"
-        Background="#222">
+﻿<mahapps:MetroWindow x:Class="SciChart.Examples.Demo.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:demo="clr-namespace:SciChart.Examples.Demo"
+                     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+                     Title="SciChart"
+                     TitleBarHeight="40"
+                     TitleForeground="Transparent"         
+                     Background="{DynamicResource MetroWindowHeaderBrush}"   
+                     WindowTitleBrush="{DynamicResource MetroWindowHeaderBrush}"                    
+                     NonActiveWindowTitleBrush="{DynamicResource MetroNonActiveWindowHeaderBrush}"                     
+                     GlowBrush="{DynamicResource MetroWindowGlowBrush}"   
+                     NonActiveGlowBrush="{DynamicResource MetroNonActiveWindowGlowBrush}"
+                     WindowStartupLocation="CenterScreen"
+                     BorderThickness="1"
+                     Width="1200"
+                     Height="900"
+                     MinWidth="1024"
+                     MinHeight="768">
 
-    <Window.Resources>
-        <s:BooleanToVisibilityConverter x:Key="b2vConverter"/>
-    </Window.Resources>
-        
+    <mahapps:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <ContentPresenter Width="20" Height="20" Content="{StaticResource SciChartWhiteNoTextLogoImage}"/>
+        </DataTemplate>
+    </mahapps:MetroWindow.IconTemplate>
+
+    <mahapps:MetroWindow.WindowButtonCommands>
+        <mahapps:WindowButtonCommands LightMinButtonStyle="{StaticResource MetroWindowButtonStyle}"
+                                      LightMaxButtonStyle="{StaticResource MetroWindowButtonStyle}" 
+                                      LightCloseButtonStyle="{StaticResource MetroWindowButtonStyle}"/>
+    </mahapps:MetroWindow.WindowButtonCommands>
+
     <Grid>
         <demo:Splash/>
-        <demo:ShellControl AutomationProperties.AutomationId="ShellControl" Visibility="{Binding InitReady, Converter={StaticResource b2vConverter}, FallbackValue=Collapsed}"/>
+        <demo:ShellControl AutomationProperties.AutomationId="ShellControl"/>
     </Grid>
-</Window>
+
+</mahapps:MetroWindow>

@@ -12,7 +12,7 @@
     [b]Example Usage[/b]
 
     - ZoomPan, left-mouse drag to pan the chart
-    - Mousewheel, roll the mousewheel to zoom
+    - MouseWheel, roll the mouse wheel to zoom
     - ZoomExtents, double click to zoom to extents
 
     [b][i]Tip![/i][/b] To get the effect of hiding the line for the first N points of a moving average, you can [url='http://www.scichart.com/questions/question/hiding-data-when-using-a-line-series']insert double.NaN into the XyDataSeries[/url]. double.NaN can be used to render gaps or continuous lines.

@@ -15,10 +15,16 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.Resources>
+
+            <Style x:Key="MvvmExampleCustomTickLabelStyle" TargetType="s:DefaultTickLabel">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+
             <Style x:Key="DateTimeAxisStyle" BasedOn="{StaticResource {x:Type s:DateTimeAxisForMvvm}}" TargetType="s:DateTimeAxisForMvvm">
                 <Setter Property="BorderThickness" Value="3"/>
-                <Setter Property="Background" Value="DarkBlue"/>
-                <Setter Property="BorderBrush" Value="CadetBlue"/>
+                <Setter Property="TickLabelStyle" Value="{StaticResource MvvmExampleCustomTickLabelStyle}"/>
+                <Setter Property="Background" Value="{StaticResource MainThemeSolidBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_3}"/>
             </Style>
         </Grid.Resources>
 
@@ -42,7 +48,7 @@
                     </Border>
                 </ControlTemplate>
                 <Style x:Key="CustomBoxAnnotationStyle" BasedOn="{StaticResource {x:Type s:BoxAnnotationForMvvm}}" TargetType="s:BoxAnnotationForMvvm">
-                    <Setter Property="Background" Value="Gold" />
+                    <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_5}" />
                     <Setter Property="Template" Value="{StaticResource CustomBoxTemplate}"/>
                 </Style>
             </s:SciChartSurface.Resources>

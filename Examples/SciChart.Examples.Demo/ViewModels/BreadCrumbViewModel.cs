@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SciChart.Charting.Common.Helpers;
-using SciChart.UI.Reactive;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.ExternalDependencies.Common;
 using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
@@ -10,138 +8,124 @@ namespace SciChart.Examples.Demo.ViewModels
 {
     public class BreadCrumbViewModel : BaseViewModel
     {
+        private bool _isShowingNavigation;
+
         private readonly IModule _module;
         private readonly ExampleViewModel _parent;
         private readonly List<BreadcrumbItemViewModel> _breadcrumbItems;
-        private bool _isShowingNavigation;
-        private IEnumerable<Example> _examples;
-        private string _selectedTopLevelCategory;
-        private string _selectedChartGroup;
-        private Example _selectedExample;
-        private IEnumerable<string> _allChartGroups;
-        private IEnumerable<string> _allTopLevelCategories;
+
+        private IEnumerable<string> _allCategories;
+        private IEnumerable<string> _allCategoryGroups;
+        private IEnumerable<Example> _allGroupExamples;
+
+        private string _selectedCategory;
+        private string _selectedCategoryGroup;
+        private Example _selectedGroupExample;
 
         public BreadCrumbViewModel(IModule module, ExampleViewModel parent)
         {
+            ShowNavigationCommand = new ActionCommand(() => IsShowingBreadcrumbNavigation = true);
+            HideNavigationCommand = new ActionCommand(() => IsShowingBreadcrumbNavigation = false);
+
             _module = module;
             _parent = parent;
-            _breadcrumbItems = new List<BreadcrumbItemViewModel>() 
-            { 
+            _breadcrumbItems = new List<BreadcrumbItemViewModel>()
+            {
                 new BreadcrumbItemViewModel(parent.SelectedExample.TopLevelCategory, ShowNavigationCommand),
                 new BreadcrumbItemViewModel(parent.SelectedExample.Group, ShowNavigationCommand),
-                new BreadcrumbItemViewModel(parent.SelectedExample.Title, ShowNavigationCommand), 
+                new BreadcrumbItemViewModel(parent.SelectedExample.Title, ShowNavigationCommand, true),
             };
 
             UpdateSelectedExample();
         }
 
-        public ActionCommand ShowNavigationCommand
+        public ActionCommand ShowNavigationCommand { get; }
+        public ActionCommand HideNavigationCommand { get; }
+
+        public IEnumerable<string> AllCategories
         {
-            get
+            get => _allCategories;         
+            set
             {
-                return new ActionCommand(() =>
+                _allCategories = value;
+                OnPropertyChanged(nameof(AllCategories));
+            }
+        }
+
+        public string SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+                OnPropertyChanged(nameof(Is2DCharts));
+                OnPropertyChanged(nameof(Is3DCharts));
+
+                AllCategoryGroups = _module.GroupsByCategory[_selectedCategory];
+                SelectedCategoryGroup = AllCategoryGroups.FirstOrDefault(x => x == _parent.SelectedExample.Group) ?? AllCategoryGroups.First();
+            }
+        }
+
+        public bool Is2DCharts => SelectedCategory?.Contains("2D") == true;
+        public bool Is3DCharts => SelectedCategory?.Contains("3D") == true;
+
+        public IEnumerable<string> AllCategoryGroups
+        {
+            get => _allCategoryGroups;
+            set
+            {
+                _allCategoryGroups = value;
+                OnPropertyChanged(nameof(AllCategoryGroups));
+            }
+        }
+
+        public string SelectedCategoryGroup
+        {
+            get => _selectedCategoryGroup;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
                 {
-                    IsShowingBreadcrumbNavigation = true;
-                });
-            }
-        }
+                    _selectedCategoryGroup = value;
+                    OnPropertyChanged(nameof(SelectedCategoryGroup));
 
-        public ActionCommand HideNavigationCommand
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    IsShowingBreadcrumbNavigation = false;
-                });
-            }
-        }
-
-        public IEnumerable<string> AllTopLevelCategories
-        {
-            get
-            {
-                return _allTopLevelCategories;
-            }
-            set
-            {
-                _allTopLevelCategories = value;
-                OnPropertyChanged("AllTopLevelCategories");
-            }
-        }
-
-        public string SelectedTopLevelCategory
-        {
-            get { return _selectedTopLevelCategory; }
-            set
-            {
-                _selectedTopLevelCategory = value;
-                OnPropertyChanged("SelectedTopLevelCategory");
-
-                AllChartGroups = _module.GroupsByCategory[_selectedTopLevelCategory];
-                SelectedChartGroup = AllChartGroups.Any(x => x.Equals(SelectedChartGroup)) ? SelectedChartGroup : AllChartGroups.FirstOrDefault();
-            }
-        }
-
-        public IEnumerable<string> AllChartGroups
-        {
-            get
-            {
-                return _allChartGroups;
-            }
-            set
-            {
-                _allChartGroups = value;
-                OnPropertyChanged("AllChartGroups");
-            }
-        }
-
-        public string SelectedChartGroup
-        {
-            get { return _selectedChartGroup; }
-            set
-            {
-                _selectedChartGroup = value ?? _module.CurrentExample.Group;
-                Examples = _module.ExamplesByCategoryAndGroup(_selectedTopLevelCategory, _selectedChartGroup);
-                OnPropertyChanged("SelectedChartGroup");
-            }
-        }
-
-        public Example SelectedExample
-        {
-            get { return _selectedExample; }
-            set
-            {
-                _selectedExample = value;
-
-                if (_selectedExample != null && _parent.SelectedExample != _selectedExample)
-                {
-                    IsShowingBreadcrumbNavigation = false;
-                    _selectedExample.SelectCommand.Execute(_selectedExample);
-                    _parent.SelectedExample = _selectedExample;
-                    OnPropertyChanged("SelectedExample");
-                }
-                else if (_selectedExample == null)
-                {
-                    _selectedExample = _parent.SelectedExample;
-                    OnPropertyChanged("SelectedExample");
+                    AllGroupExamples = _module.ExamplesByCategoryAndGroup(_selectedCategory, _selectedCategoryGroup);
+                    SelectedGroupExample = AllGroupExamples.FirstOrDefault(x => x.Title == _parent.SelectedExample.Title);
                 }
             }
         }
 
-        public IEnumerable<Example> Examples
+        public IEnumerable<Example> AllGroupExamples
         {
-            get { return _examples; }
+            get => _allGroupExamples;
             set
             {
-                _examples = value;
-                OnPropertyChanged("Examples");
+                _allGroupExamples = value;
+                OnPropertyChanged(nameof(AllGroupExamples));
+            }
+        }
+
+        public Example SelectedGroupExample
+        {
+            get => _selectedGroupExample;
+            set
+            {
+                _selectedGroupExample = value;
+                OnPropertyChanged(nameof(SelectedGroupExample));
+
+                if (_selectedGroupExample != null && _selectedGroupExample != _parent.SelectedExample)
+                {
+                    IsShowingBreadcrumbNavigation = false;
+                    _selectedGroupExample.SelectCommand.Execute(_selectedGroupExample);
+                    _parent.SelectedExample = _selectedGroupExample;
+                }
             }
         }
 
         public bool IsShowingBreadcrumbNavigation
         {
-            get { return _isShowingNavigation; }
+            get => _isShowingNavigation;
             set
             {
                 if (_isShowingNavigation != value)
@@ -150,12 +134,12 @@ namespace SciChart.Examples.Demo.ViewModels
 
                     if (_isShowingNavigation)
                     {
-                        _parent.SmileFrownViewModel.SmileVisible = false;
-                        _parent.SmileFrownViewModel.FrownVisible = false;
+                        _parent.FeedbackViewModel.IsFeedbackVisible = false;
                         _parent.ExportExampleViewModel.IsExportVisible = false;
                     }
+
                     _parent.InvalidateDialogProperties();
-                    OnPropertyChanged("IsShowingBreadcrumbNavigation");
+                    OnPropertyChanged(nameof(IsShowingBreadcrumbNavigation));
                 }
             }
         }
@@ -163,22 +147,22 @@ namespace SciChart.Examples.Demo.ViewModels
         public IEnumerable<BreadcrumbItemViewModel> BreadCrumbItemViewModels { get { return _breadcrumbItems; } }
 
         public void UpdateSelectedExample()
-        {
-            _selectedExample = _module.CurrentExample;
-            _selectedTopLevelCategory = _module.CurrentExample.TopLevelCategory;
-            _selectedChartGroup = _module.CurrentExample.Group;
+        {            
+            _selectedGroupExample = _module.CurrentExample;
+            _selectedCategory = _module.CurrentExample.TopLevelCategory;
+            _selectedCategoryGroup = _module.CurrentExample.Group;
 
-            _breadcrumbItems[0].Content = _selectedTopLevelCategory;
-            _breadcrumbItems[1].Content = _selectedChartGroup;
-            _breadcrumbItems[2].Content = _selectedExample.Title;
+            _breadcrumbItems[0].Content = _selectedCategory;
+            _breadcrumbItems[1].Content = _selectedCategoryGroup;
+            _breadcrumbItems[2].Content = _selectedGroupExample.Title;
 
-            AllTopLevelCategories = _module.AllCategories;
-            AllChartGroups = _module.GroupsByCategory[_selectedTopLevelCategory];
-            Examples = _module.ExamplesByCategoryAndGroup(_selectedTopLevelCategory, _selectedChartGroup);
+            AllCategories = _module.AllCategories;
+            AllCategoryGroups = _module.GroupsByCategory[_selectedCategory];
+            AllGroupExamples = _module.ExamplesByCategoryAndGroup(_selectedCategory, _selectedCategoryGroup);
 
-            OnPropertyChanged("SelectedTopLevelCategory");
-            OnPropertyChanged("SelectedChartGroup");
-            OnPropertyChanged("SelectedExample");
+            OnPropertyChanged(nameof(SelectedCategory));
+            OnPropertyChanged(nameof(SelectedCategoryGroup));
+            OnPropertyChanged(nameof(SelectedGroupExample));
         }
     }
 }

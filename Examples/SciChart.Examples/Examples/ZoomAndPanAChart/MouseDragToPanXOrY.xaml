@@ -10,80 +10,50 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426"
-                BorderBrush="#323539"
-                Panel.ZIndex="9999"
-                BorderThickness="0,0,2,0">
-
-            <WrapPanel HorizontalAlignment="Left"
-                       Orientation="Vertical">
-
-                <ext:FlyoutMenuButton x:Name="panModExample"
-                                      HorizontalAlignment="Left"
-                                      Padding="0"
-                                      Content="Pan"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Pan">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock Text="Pan SciChart in" />
-                            <ComboBox x:Name="panXYDirection"
-                                      SelectedIndex="2"
-                                      SelectionChanged="PanXYDirection_OnSelectionChanged" />
-
-                            <StackPanel x:Name="zoomExtentsPanel">
-                                <ext:FlyoutSeparator />
-                                <TextBlock Text=" When panning in X: " />
-                                <CheckBox x:Name="chkZoomExtentsY"
-                                          Margin="3"
-                                          Checked="ZoomExtentsY_OnStateChanged"
-                                          Content="Zoom Extents on Y"
-                                          Unchecked="ZoomExtentsY_OnStateChanged" />
-                            </StackPanel>
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ext:FlyoutMenuButton x:Name="panModExample" ToolTipService.ToolTip="Pan">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Pan SciChart in" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="panXYDirection" SelectedIndex="2" SelectionChanged="PanXYDirection_OnSelectionChanged"/>
+                        <StackPanel x:Name="zoomExtentsPanel">
+                            <TextBlock Text=" When panning in X" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <CheckBox x:Name="chkZoomExtentsY" Margin="0,5" Content="Zoom Extents on Y"
+                                      Checked="ZoomExtentsY_OnStateChanged" Unchecked="ZoomExtentsY_OnStateChanged"/>
                         </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-                <Button HorizontalAlignment="Left"
-                        Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
-                        Content="Zoom Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents" />
-
-            </WrapPanel>
-        </Border>
+            <Button Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastMountainRenderableSeries Fill="#771964FF"
-                                                Stroke="#FF0944CF"
+                <s:FastMountainRenderableSeries Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
                                                 YAxisId="SecondaryAxis">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FF279B27"
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2"
                                             YAxisId="PrimaryAxis">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -97,11 +67,11 @@
                 <s:NumericAxis AxisAlignment="Right"
                                GrowBy="0.1, 0.1"
                                Id="PrimaryAxis"
-                               TickTextBrush="#FF279B27" />
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}" />
                 <s:NumericAxis AxisAlignment="Left"
                                GrowBy="0.1, 0.1"
                                Id="SecondaryAxis"
-                               TickTextBrush="#FF4083B7" />
+                               TickTextBrush="{StaticResource MainThemeSolidBrush}" />
             </s:SciChartSurface.YAxes>
 
             <!--  Adding the ZoomPanModifier gives SciChart the ability to pan on mouse-drag  -->

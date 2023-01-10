@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,36 +16,52 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media.Animation;
+using System.Windows.Input;
+using System.Windows.Media;
 using SciChart.Charting.Visuals.Shapes;
-using SciChart.Core.Utility;
 
 namespace SciChart.Examples.ExternalDependencies.Common
 {
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     public class FlyoutMenuToggleButton : ToggleButton
     {
-        public static readonly DependencyProperty PopupContentProperty = DependencyProperty.Register(
-            "PopupContent", typeof(object), typeof(FlyoutMenuToggleButton), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty AllowMouseUncheckProperty = DependencyProperty.Register
+            (nameof(AllowMouseUncheck), typeof(bool), typeof(FlyoutMenuToggleButton), new PropertyMetadata(true));
 
-        public static readonly DependencyProperty PopupAlignmentProperty =
-            DependencyProperty.Register("PopupAlignment", typeof(PopupAlignment), typeof(FlyoutMenuToggleButton), new PropertyMetadata(PopupAlignment.Left));
+        public static readonly DependencyProperty PopupContentProperty = DependencyProperty.Register
+            (nameof(PopupContent), typeof(object), typeof(FlyoutMenuToggleButton), new PropertyMetadata(default(object)));
+
+        public static readonly DependencyProperty PopupAlignmentProperty = DependencyProperty.Register
+            (nameof(PopupAlignment), typeof(PopupAlignment), typeof(FlyoutMenuToggleButton), new PropertyMetadata(PopupAlignment.Left));
+
+        public static readonly DependencyProperty PopupOffsetProperty = DependencyProperty.Register
+            (nameof(PopupOffset), typeof(double), typeof(FlyoutMenuToggleButton), new PropertyMetadata(0d));
 
         private Popup _popup;
         private Border _border;
-        private TimedMethod _popupCloseToken;
-        private Storyboard _fadeStoryboard;
+
         private Grid _root;
-        private Callout _callout;
+        private Panel _panel;
 
         public FlyoutMenuToggleButton()
         {
             DefaultStyleKey = typeof(FlyoutMenuToggleButton);
+        }
+
+        public bool AllowMouseUncheck
+        {
+            get => (bool)GetValue(AllowMouseUncheckProperty);
+            set => SetValue(AllowMouseUncheckProperty, value);
+        }
+
+        public object PopupContent
+        {
+            get => GetValue(PopupContentProperty);
+            set => SetValue(PopupContentProperty, value);
         }
 
         public PopupAlignment PopupAlignment
@@ -54,10 +70,10 @@ namespace SciChart.Examples.ExternalDependencies.Common
             set => SetValue(PopupAlignmentProperty, value);
         }
 
-        public object PopupContent
+        public double PopupOffset
         {
-            get => (object)GetValue(PopupContentProperty);
-            set => SetValue(PopupContentProperty, value);
+            get => (double)GetValue(PopupOffsetProperty);
+            set => SetValue(PopupOffsetProperty, value);
         }
 
         public override void OnApplyTemplate()
@@ -66,66 +82,78 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
             _popup = GetTemplateChild("PART_Popup") as Popup;
             _border = GetTemplateChild("PART_Border") as Border;
-            _root = GetTemplateChild("RootElement") as Grid;
-            _callout = GetTemplateChild("Callout") as Callout;
+            _root = GetTemplateChild("PART_Root") as Grid;
+            _panel = GetTemplateChild("PART_Panel") as Panel;
+
+            if (_root == null || _border == null || _panel == null || _popup == null) return;
 
             _popup.Placement = PlacementMode.Custom;
-            _popup.CustomPopupPlacementCallback = new CustomPopupPlacementCallback(placePopup);
+            _popup.CustomPopupPlacementCallback = new CustomPopupPlacementCallback(PlacePopup);
 
-            if (_root == null) return;
-            _fadeStoryboard = ((Storyboard)_root.TryFindResource("FadeBorderAnimation"));
-
-            if (_border == null || _callout == null || _popup == null) return;
+            if (_panel.Background == null || _panel.Background == Brushes.Transparent)
+            {
+                _panel.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.01 };
+            }
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
+                _popup.HorizontalOffset = GetPopupOffset();
+
                 _popup.IsOpen = true;
             }
 
+            _panel.MouseDown += (s, e) => e.Handled = true;
+
             MouseLeave += (s, e) =>
             {
-                _popupCloseToken = TimedMethod.Invoke(() =>
+                if (_popup.IsOpen)
                 {
                     _popup.IsOpen = false;
-                }).After(200).Go();
+                }
             };
+
             MouseEnter += (s, e) =>
             {
-                if (_popupCloseToken != null)
+                if (PopupContent != null && !_popup.IsOpen)
                 {
-                    _popupCloseToken.Dispose();
-                    _popupCloseToken = null;
-                }
-                if (!_popup.IsOpen)
-                {
+                    _popup.HorizontalOffset = GetPopupOffset();
+
                     _popup.IsOpen = true;
                 }
             };
-
-            _callout.MouseEnter += (s, e) =>
-            {
-                if (_popupCloseToken != null)
-                {
-                    _popupCloseToken.Dispose();
-                    _popupCloseToken = null;
-                }
-            };
-
-            _callout.MouseLeave += (s, e) =>
-            {
-                _popupCloseToken = TimedMethod.Invoke(() =>
-                {
-                    _popup.IsOpen = false;
-                }).After(200).Go();
-            };
         }
 
-        public CustomPopupPlacement[] placePopup(Size popupSize, Size targetSize, Point offset)
+        protected override void OnClick()
         {
-            return new[]
+            if (!AllowMouseUncheck && IsChecked == true) return;
+
+            var point = Mouse.GetPosition(this);
+
+            if (point.X >= 0 && point.X <= ActualWidth &&
+                point.Y >= 0 && point.Y <= ActualHeight)
             {
-                new CustomPopupPlacement(new Point(40, 0), PopupPrimaryAxis.Horizontal)
-            };
+                base.OnClick();
+            }
+        }
+
+        private double GetPopupOffset()
+        {
+            if (PopupAlignment == PopupAlignment.Left)
+            {
+                return PopupOffset;
+            }
+
+            if (PopupAlignment == PopupAlignment.Right)
+            {
+                return ActualWidth + PopupOffset;
+            }
+
+            return 0d;
+        }
+
+        private CustomPopupPlacement[] PlacePopup(Size popupSize, Size targetSize, Point offset)
+        {
+            return new[] { new CustomPopupPlacement(new Point(0, 0), PopupPrimaryAxis.Horizontal) };
         }
     }
 }

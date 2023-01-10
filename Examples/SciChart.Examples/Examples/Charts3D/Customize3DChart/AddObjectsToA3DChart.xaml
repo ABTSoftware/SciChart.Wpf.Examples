@@ -21,14 +21,14 @@
         <object:ObjectModelSource x:Key="QueenLowObj3DSource" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/Queen_Low.obj"/>
         <object:ObjectModelSource x:Key="RookLowObj3DSource" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/Rook_Low.obj"/>
 
-        <object:Rotation3D x:Key="ObjRotationState" Axis="YAxis" Angle="180" />
-        <object:TextureSource x:Key="BlackTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/BlackWoodTexture.jpg" />
-        <object:TextureSource x:Key="WhiteTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/WhiteWoodTexture.jpg" />
+        <object:Rotation3D x:Key="ObjRotationState" Axis="YAxis" Angle="180"/>
+        <object:TextureSource x:Key="BlackTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/BlackWoodTexture.jpg"/>
+        <object:TextureSource x:Key="WhiteTexture" Source="pack://application:,,,/SciChart.Examples.ExternalDependencies;component/Resources/Objects/WhiteWoodTexture.jpg"/>
 
         <s3D:GradientColorPalette x:Key="HeightColorMap">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1" Color="Black" />
-                <GradientStop Offset="0" Color="White" />
+                <GradientStop Offset="1" Color="Black"/>
+                <GradientStop Offset="0" Color="White"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
@@ -36,21 +36,22 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference sciChart3DSurface}}" />
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference sciChart3DSurface}}"/>
 
         <s3D:SciChart3DSurface Name="sciChart3DSurface"
                                Grid.Column="1"
-                               WorldDimensions="250,1,250">
+                               BorderThickness="0"
+                               WorldDimensions="250,2,250">
 
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D Position="-400,200,400" Target="0,50,0" />
+                <s3D:Camera3D Position="-400,200,400" Target="0,50,0"/>
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>
@@ -58,8 +59,9 @@
                                                    DrawMeshAs="SolidMesh"
                                                    HeightScaleFactor="0.0"
                                                    Maximum="4"
+                                                   Minimum="1"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"
-                                                   MeshPaletteMode="HeightMapSolidCells" />
+                                                   MeshPaletteMode="HeightMapSolidCells"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
@@ -90,7 +92,7 @@
                 <s3D:ModifierGroup3D>
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
                                                ResetPosition="-400,200,400"
-                                               ResetTarget="0,50,0" />
+                                               ResetTarget="0,50,0"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
 
@@ -113,8 +115,9 @@
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KingLowObj3DSource}" Position="0.0625, 0.6, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource QueenLowObj3DSource}" Position="0.0625, 0.6, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource BishopLowObj3DSource}" Position="0.0625, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
-                <object:ObjectModel3D DrawBoundingBox="True" BoundingBoxStroke="White" TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.3125, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource RookLowObj3DSource}" Position="0.0625, 0.6, 0.0625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
+
+                <object:ObjectModel3D DrawBoundingBox="True" BoundingBoxStroke="White" TextureSource="{StaticResource BlackTexture}" Source="{StaticResource KnightLowObj3DSource}" Position="0.3125, 0.6, 0.3125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2" Rotation="{StaticResource ObjRotationState}"/>
 
                 <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.9375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
                 <object:ObjectModel3D TextureSource="{StaticResource WhiteTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.8125, 0.6, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>

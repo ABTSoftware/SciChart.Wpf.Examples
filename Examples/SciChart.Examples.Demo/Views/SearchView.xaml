@@ -2,54 +2,97 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:e="clr-namespace:SciChart.Examples.Demo.Controls.EndlessItemsControl"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
-    <Border Background="#AA1c1c1f">
-        <Grid Margin="50">
-       
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <TextBlock Text="Search Results"  Grid.ColumnSpan="2" HorizontalAlignment="Left" Style="{StaticResource GroupHeaderTextStyle}"/>
-            <Button Margin="0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding HideSearchCommand}" 
-                    Style="{StaticResource CloseButtonStyle}" />
-            <Border Height="1" Background="{StaticResource IconForeground}" HorizontalAlignment="Stretch" Grid.Row="1" Margin="0,10" Grid.ColumnSpan="3"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-            <e:EndlessItemsControl Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" VerticalAlignment="Stretch"
-                                   AllItems="{Binding SearchResults}" 
-                                   Background="Transparent"
-                                   BorderThickness="0"
-                                   ItemContainerStyle="{StaticResource SearchItemContainerStyle}"
-                                   ItemTemplate="{StaticResource SearchItemTemplate}" 
-                                   Opacity="0"
-                                   tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, TransitionOn=Visibility, From=0, To=1}"
-                                   tz:Transitionz.Visibility="{Binding HasSearchResults, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBlock Grid.ColumnSpan="2"
+                   FontSize="20"
+                   FontWeight="SemiBold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource SearchViewItemForegroundBrush}"
+                   Style="{StaticResource GroupHeaderTextStyle}"
+                   Text="Search Results"/>
 
-            <Grid Grid.Row="2" Grid.ColumnSpan="3" Opacity="1" 
-                   tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, TransitionOn=Visibility, From=0, To=1}"
-                       tz:Transitionz.Visibility="{Binding HasSearchResults, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+        <Button Grid.Row="0"
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding HideSearchCommand}" 
+                Style="{StaticResource CloseButtonStyle}" />
 
-                <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="64">
-                    <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource IconFrown}" />
-                </Viewbox>
+        <Rectangle Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Height="1"
+                   Margin="0,10"
+                   Fill="{DynamicResource SearchViewSeparatorBrush}"
+                   HorizontalAlignment="Stretch"
+                   SnapsToDevicePixels="True"
+                   UseLayoutRounding="True"/>
+
+        <e:EndlessItemsControl Grid.Row="2"
+                               Grid.ColumnSpan="3"       
+                               Opacity="0"                    
+                               BorderThickness="0"
+                               Background="Transparent"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               AllItems="{Binding SearchResults}" 
+                               ItemContainerStyle="{StaticResource SearchItemContainerStyle}"
+                               ItemTemplate="{StaticResource SearchItemTemplate}" 
+                               tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, TransitionOn=Visibility, From=0, To=1}"
+                               tz:Transitionz.Visibility="{Binding HasSearchResults, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <StackPanel Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Opacity="1" 
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, TransitionOn=Visibility, From=0, To=1}"
+                    tz:Transitionz.Visibility="{Binding HasSearchResults, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+
+            <icons:PackIconMaterial Kind="TextBoxSearchOutline"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Width="100"
+                                    Height="100"
+                                    Foreground="{DynamicResource SearchViewNoResultsForegroundBrush}"/>
+
+            <TextBlock Margin="0,10,0,0"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource SearchViewNoResultsForegroundBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="No results found :("/>
+
+            <TextBlock Margin="0,10,0,0"
+                       FontSize="16"    
+                       LineHeight="26"
+                       TextAlignment="Center"
+                       Foreground="{DynamicResource SearchViewNoResultsForegroundBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
                 
-                <TextBlock Foreground="White" FontStyle="Italic" TextWrapping="Wrap"   Margin="70,20"
-                       Text="It's looking lonely in here ... Have you tried searching for something simpler? e.g. 'Realtime Charts'" />
-            </Grid>
+                <Run Text="We could not find what you are looking for."/><LineBreak/>
+                <Run Text="Try searching for something simpler (e.g. Realtime Charts)"/>
 
-        </Grid>
-    </Border>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
 </UserControl>

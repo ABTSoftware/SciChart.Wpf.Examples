@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -54,11 +54,13 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Lidar3DPointCloudDem
                 Maximum = 50,
                 GradientStops = new[]
                 {
-                    new ColorMapPoint { Color = Colors.DodgerBlue.ToArgb(), Offset = 0.0},
-                    new ColorMapPoint { Color = Colors.LimeGreen.ToArgb(), Offset = 0.2},
-                    new ColorMapPoint { Color = Colors.Orange.ToArgb(), Offset = 0.5},
-                    new ColorMapPoint { Color = Colors.OrangeRed.ToArgb(), Offset = 0.7},
-                    new ColorMapPoint { Color = Colors.Purple.ToArgb(), Offset = 1.0},
+                    new ColorMapPoint { Color = 0xFF14233C, Offset = 0.0},
+                    new ColorMapPoint { Color = 0xFF264B93, Offset = 0.2},
+                    new ColorMapPoint { Color = 0xFF50C7E0, Offset = 0.3},
+                    new ColorMapPoint { Color = 0xFF67BDAF, Offset = 0.5},
+                    new ColorMapPoint { Color = 0xFFDC7969, Offset = 0.7},
+                    new ColorMapPoint { Color = 0xFFF48420, Offset = 0.9},
+                    new ColorMapPoint { Color = 0xFFEC0F6C, Offset = 1.0},
                 }
             };
 

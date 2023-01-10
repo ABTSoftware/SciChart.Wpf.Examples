@@ -31,10 +31,10 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineRenderSeries"
                                             IsDigitalLine="True"
-                                            Stroke="#FF99EE99"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:1" PointDurationFraction="0.2" />
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.2" />
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

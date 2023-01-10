@@ -17,12 +17,7 @@ namespace SciChart.Examples.Demo.Helpers
 
             if (rtb != null)
             {
-                var blocks =
-#if SILVERLIGHT
-                    rtb.Blocks;
-#else
-                    rtb.Document.Blocks;
-#endif
+                var blocks = rtb.Document.Blocks;
                 blocks.Clear();
 
                 paragraph = new Paragraph();
@@ -43,7 +38,7 @@ namespace SciChart.Examples.Demo.Helpers
                 ILanguage language = CreateLanguageInstance(languageType);
 
                 var content = (string) rtb.GetValue(CodeHighlighter.SourceCodeProperty);
-                cc.Colorize(content, language, xif, new VS2013DarkStyleSheet());
+                cc.Colorize(content, language, xif, StyleSheets.GetStyleSheet());
 
                 blocks.Add(paragraph);
             }

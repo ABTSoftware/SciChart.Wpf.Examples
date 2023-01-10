@@ -56,16 +56,9 @@ namespace SciChart.Examples.Demo.ViewModels
                 ExportExampleViewModel.IsExportVisible = true;
             });
 
-            SendSmileCommand = new ActionCommand(() =>
+            SendFeedbackCommand = new ActionCommand(() =>
             {
-                SmileFrownViewModel.SmileVisible = !SmileFrownViewModel.SmileVisible;
-                SmileFrownViewModel.IsSmile = SmileFrownViewModel.SmileVisible;
-            });
-
-            SendFrownCommand = new ActionCommand(() =>
-            {
-                SmileFrownViewModel.FrownVisible = !SmileFrownViewModel.FrownVisible;
-                SmileFrownViewModel.IsFrown = SmileFrownViewModel.FrownVisible;
+                FeedbackViewModel.IsFeedbackVisible = true;
             });
 
             CloseHelpCommand = new ActionCommand(() =>
@@ -91,7 +84,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 Process.Start("explorer.exe", Urls.DocumentationRootUrl);
             });
 
-            SmileFrownViewModel = new SmileFrownViewModel(this);
+            FeedbackViewModel = new FeedbackViewModel(this);
             ExportExampleViewModel = new ExportExampleViewModel(module, this);
             BreadCrumbViewModel = new BreadCrumbViewModel(module, this);
 
@@ -103,7 +96,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public string Group { get; set; }
 
-        public SmileFrownViewModel SmileFrownViewModel { get; }
+        public FeedbackViewModel FeedbackViewModel { get; }
 
         public ExportExampleViewModel ExportExampleViewModel { get; }
 
@@ -120,7 +113,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 SelectedFile = _selectedExample.SourceFiles.FirstOrDefault();
                 OnPropertyChanged("SelectedExample");
 
-                SmileFrownViewModel?.ExampleChanged();
+                FeedbackViewModel?.ExampleChanged();
                 BreadCrumbViewModel?.UpdateSelectedExample();
 
                 ShowExample = true;
@@ -239,7 +232,7 @@ namespace SciChart.Examples.Demo.ViewModels
                     return null;
                 }
 
-                return (SmileFrownViewModel.SmileVisible | SmileFrownViewModel.FrownVisible | ExportExampleViewModel.IsExportVisible | BreadCrumbViewModel.IsShowingBreadcrumbNavigation)
+                return (FeedbackViewModel.IsFeedbackVisible | ExportExampleViewModel.IsExportVisible | BreadCrumbViewModel.IsShowingBreadcrumbNavigation)
                     ? _blurredParams
                     : _defaultParams;
             }
@@ -247,9 +240,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public ActionCommand ExportExampleCommand { get; }
 
-        public ActionCommand SendSmileCommand { get; }
-
-        public ActionCommand SendFrownCommand { get; }
+        public ActionCommand SendFeedbackCommand { get; }
 
         public void InvalidateDialogProperties()
         {

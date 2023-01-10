@@ -19,16 +19,14 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="BAR" Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                        <TextBlock Text="ErrorBars.DataPointWidth" />
-                        <ext:FlyoutSeparator/>
-                        <Slider Margin="4,0" Minimum="0.0" Maximum="40.0" Orientation="Horizontal" Value="{Binding DataPointWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Text="ErrorBars.StrokeThickness" Margin="4,16,4,4"/>
-                        <ext:FlyoutSeparator/>
-                        <Slider Margin="4,0,4,10" Maximum="5.0" Minimum="1.0" Orientation="Horizontal" Value="{Binding StrokeThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Data Point Width" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.0" Maximum="40.0" Orientation="Horizontal" Value="{Binding DataPointWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Stroke Thickness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Maximum="5.0" Minimum="1.0" Orientation="Horizontal" Value="{Binding StrokeThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -44,23 +42,23 @@
                                                  DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
                                                  DataSeries="{Binding DataSeries0, Mode=OneWay}"
                                                  StrokeThickness="{Binding StrokeThickness, Mode=OneWay}"
-                                                 Stroke="Blue"
+                                                 Stroke="{StaticResource MainThemeStrokeColor}"
                                                  ErrorDirection="YAxis">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                     <s:FastErrorBarsRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
                                               Fill="Transparent"
-                                              Stroke="White" />
+                                              Stroke="{StaticResource SecondaryThemeStrokeColor}" />
                     </s:FastErrorBarsRenderableSeries.PointMarker>
                 </s:FastErrorBarsRenderableSeries>
 
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries0, Mode=OneWay}" 
                                             StrokeThickness="{Binding StrokeThickness, Mode=OneWay}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
@@ -71,16 +69,16 @@
                                                  DataPointWidth="{Binding DataPointWidth, Mode=OneWay}"
                                                  DataSeries="{Binding DataSeries1, Mode=OneWay}"
                                                  StrokeThickness="{Binding StrokeThickness, Mode=OneWay}"
-                                                 Stroke="Green"
+                                                 Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                                  ErrorDirection="XAxis">
                     <s:FastErrorBarsRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastErrorBarsRenderableSeries.SeriesAnimation>
                     <s:FastErrorBarsRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
                                               Fill="Transparent"
-                                              Stroke="White" />
+                                              Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
                     </s:FastErrorBarsRenderableSeries.PointMarker>
                 </s:FastErrorBarsRenderableSeries>
 

@@ -9,12 +9,6 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <Grid>
-        <Grid.Resources>
-            <LinearGradientBrush x:Key="BoxFill" StartPoint="0,0" EndPoint="0.5,1">
-                <GradientStop Offset="0" Color="White" />
-                <GradientStop Offset="1" Color="LightSteelBlue" />
-            </LinearGradientBrush>
-        </Grid.Resources>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -33,10 +27,10 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastBoxPlotRenderableSeries x:Name="boxSeries"
-                                               Fill="{StaticResource BoxFill}"
-                                               Stroke="SteelBlue">
+                                               Fill="{StaticResource MainFillGradient}"
+                                               Stroke="{StaticResource MainThemeStrokeColor}">
                     <s:FastBoxPlotRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:2" ZeroLine="-2" />
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:0.5" ZeroLine="-2" />
                     </s:FastBoxPlotRenderableSeries.SeriesAnimation>   
                     
                 </s:FastBoxPlotRenderableSeries>

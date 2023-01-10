@@ -10,7 +10,8 @@
     Demonstrates the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']Filters API in SciChart WPF[/url], which gives you the ability to add simple filters to DataSeries in SciChart.
 
     Several built-in filters are included, such as [url='https://www.scichart.com/documentation/win/current/webframe.html#Moving%20Average%20Filter.html']Moving Average[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#Linear%20Trendline,%20Polynomial%20Trendline%20Filters.html']Linear Trendline, Polynomial Trendline[/url], [url='https://www.scichart.com/documentation/win/current/webframe.html#Scale,%20Offset%20Filters.html']Offset and Scale[/url]. You can also create your own filters by inheriting from FilterBase.
-    [b]Documentation Links[/b]
+    
+	[b]Documentation Links[/b]
 
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']What is the Filters API[/url]
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#Moving%20Average%20Filter.html']Moving Average Filter[/url]

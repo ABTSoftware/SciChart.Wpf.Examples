@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -48,10 +48,10 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
                 // Fill each dataset with 2,000 pts of X,Y values (Date,Double)
                 // and ensure RenderableSeries has its datasource
-                redLine.DataSeries = FillData(dataSeries0, "Red Line");
-                greenLine.DataSeries = FillData(dataSeries1, "Green Line");
-                yellowLine.DataSeries = FillData(dataSeries2, "Orange Line");
-                blueLine.DataSeries = FillData(dataSeries3, "Blue Line");
+                blueLine.DataSeries = FillData(dataSeries0, "Blue Line");
+                rosyLine.DataSeries = FillData(dataSeries1, "Rosy Line");
+                aquaLine.DataSeries = FillData(dataSeries2, "Aqua Line");
+                violetLine.DataSeries = FillData(dataSeries3, "Violet Line");
             }
 
             sciChart.ZoomExtents();

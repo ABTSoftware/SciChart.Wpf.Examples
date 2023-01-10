@@ -13,7 +13,7 @@
 
     - The X,Y values of the series under the cursor.
     - The series color.
-    - The series name
+    - The series name.
 
     This can be used to create Active legends which update values as the user moves the mouse. For more information, please see the [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']Adding TimeSeries Tooltips with the RolloverModifier[/url] article.       
 

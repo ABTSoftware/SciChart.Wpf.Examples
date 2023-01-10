@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -23,7 +23,7 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
     {
         public Color? OverridePointMarker(IRenderableSeries3D series, int index, IPointMetadata3D metadata)
         {
-            return metadata?.IsSelected == true ? Colors.White : Colors.Lime;
+            return metadata?.IsSelected == true ? Color.FromArgb(0xFF, 0xDC, 0x79, 0x69) : Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4);
         }
 
         public void OnAttach(IRenderableSeries3D renderSeries)

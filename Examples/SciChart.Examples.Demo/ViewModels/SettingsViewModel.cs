@@ -104,6 +104,19 @@ namespace SciChart.Examples.Demo.ViewModels
                 .DisposeWith(this);
         }
 
+#if NETFRAMEWORK
+
+        public string TargetFramework => ".NET Framework 4.6.2";
+
+#elif NETCOREAPP3_1
+
+        public string TargetFramework => ".NET Core 3.1";
+
+#elif NET
+
+        public string TargetFramework => ".NET 6.0 Windows";
+#endif
+
         public bool UseD3D11
         {
             get => GetDynamicValue<bool>();
@@ -219,7 +232,7 @@ namespace SciChart.Examples.Demo.ViewModels
                         return;
                     }
                 }
-                
+
                 RecreateStyles();
             }
         }
@@ -253,15 +266,16 @@ namespace SciChart.Examples.Demo.ViewModels
             var overrideStyle = new Style(typeof(T));
 
             overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, SelectedRenderer.AssemblyQualifiedName));
-            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
-            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
             overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
 
-            if (Application.Current.Resources.Contains(typeof(T)))
-            {
-                Application.Current.Resources.Remove(typeof(T));
-            }
+            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
+            overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
 
+            overrideStyle.Setters.Add(new Setter(ThemeManager.ThemeProperty, "SciChartv7Navy"));
+
+            if (Application.Current.Resources.Contains(typeof(T)))
+                Application.Current.Resources.Remove(typeof(T));
+            
             Application.Current.Resources.Add(typeof(T), overrideStyle);
         }
     }

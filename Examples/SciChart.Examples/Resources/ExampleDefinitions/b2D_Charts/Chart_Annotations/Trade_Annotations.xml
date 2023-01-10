@@ -18,7 +18,7 @@
     - [url='https://www.scichart.com/documentation/win/current/Editing%20and%20Interacting%20with%20Annotations.html']AnnotationCreationModifier[/url]
     - [url='https://www.scichart.com/documentation/win/current/MVVM%20Annotations%20API.html']MVVM Annotations API[/url]
 
-    In order to create the annotation in code-behind or in ViewModelyou will use method SetBasePoint (iComparable x, iComparable y).
+    In order to create the annotation in code-behind or in ViewModel you will use method SetBasePoint (IComparable x, IComparable y).
 
     [b]Annotation Types Include:[/b]
 

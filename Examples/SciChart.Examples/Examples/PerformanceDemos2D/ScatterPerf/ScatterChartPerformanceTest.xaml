@@ -19,17 +19,18 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="PM" Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="CircleMultipleOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-                        <TextBlock Text="Point Markers" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkEllipse" Content="Ellipse" IsChecked="True"/>
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkTriangle" Content="Triangle" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkTriangleInverse" Content="Inverted Triangle" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkSquare" Content="Square" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkCross" Content="Cross" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkX" Content="X" />
-                        <RadioButton GroupName="PointMarkersGroup" Margin="4" Style="{StaticResource CheckRadioBtn}" x:Name="ChkSprite" Content="Sprite (Custom)" />
+                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
+                        <TextBlock Text="Point Markers" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkEllipse" Content="Ellipse" IsChecked="True"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkTriangle" Content="Triangle"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkTriangleInverse" Content="Inverted Triangle"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkSquare" Content="Square"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkCross" Content="Cross"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkX" Content="X"/>
+                        <RadioButton GroupName="PointMarkersGroup" Margin="0,5" x:Name="ChkSprite" Content="Sprite (Custom)"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -38,7 +39,7 @@
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
                 <s:XyScatterRenderableSeries x:Name="ellipseScatterSeries" 
-                                             Stroke="CornflowerBlue" 
+                                             Stroke="{StaticResource MainThemeStrokeColor}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkEllipse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="5" Height="5"/>
@@ -46,7 +47,7 @@
                 </s:XyScatterRenderableSeries>
 
                 <s:XyScatterRenderableSeries x:Name="crossScatterSeries" 
-                                             Stroke="BlueViolet" 
+                                             Stroke="{StaticResource SecondaryThemeStrokeColor}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkCross}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:CrossPointMarker Width="5" Height="5"/>
@@ -54,7 +55,7 @@
                 </s:XyScatterRenderableSeries>
 
                 <s:XyScatterRenderableSeries x:Name="xScatterSeries" 
-                                             Stroke="DarkGray" 
+                                             Stroke="{StaticResource ExtraThemeStrokeColor_2}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkX}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:XPointMarker Width="5" Height="5"/>
@@ -62,7 +63,7 @@
                 </s:XyScatterRenderableSeries>
 
                 <s:XyScatterRenderableSeries x:Name="squareScatterSeries" 
-                                             Stroke="DarkOrange" 
+                                             Stroke="{StaticResource ExtraThemeStrokeColor_1}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkSquare}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="5" Height="5"/>
@@ -70,7 +71,7 @@
                 </s:XyScatterRenderableSeries>
 
                 <s:XyScatterRenderableSeries x:Name="triangleScatterSeries" 
-                                             Stroke="Crimson" 
+                                             Stroke="{StaticResource ExtraThemeStrokeColor_3}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkTriangle}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="5" Height="5"/>
@@ -78,7 +79,7 @@
                 </s:XyScatterRenderableSeries>
 
                 <s:XyScatterRenderableSeries x:Name="triangleInvScatterSeries" 
-                                             Stroke="Coral" 
+                                             Stroke="{StaticResource ExtraThemeStrokeColor_4}" 
                                              IsVisible="{Binding Source={x:Reference Name=ChkTriangleInverse}, Path=IsChecked, Mode=TwoWay}">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:InvertedTrianglePointMarker Width="5" Height="5"/>
@@ -93,10 +94,10 @@
                                 <ControlTemplate>
                                     <!-- Custom point marker rendering an asterisk style using Canvas + Line -->
                                     <Canvas Width="7" Height="7">
-                                        <Line StrokeThickness="1" Stroke="LimeGreen" X1="0" X2="7" Y1="0" Y2="7"/>
-                                        <Line StrokeThickness="1" Stroke="LimeGreen" X1="0" X2="7" Y1="7" Y2="0"/>
-                                        <Line StrokeThickness="1" Stroke="LimeGreen" X1="3.5" X2="3.5" Y1="7" Y2="0"/>
-                                        <Line StrokeThickness="1" Stroke="LimeGreen" X1="0" X2="7" Y1="3.5" Y2="3.5"/>
+                                        <Line StrokeThickness="1" Stroke="{StaticResource ExtraThemeStrokeBrush_5}" X1="0" X2="7" Y1="0" Y2="7"/>
+                                        <Line StrokeThickness="1" Stroke="{StaticResource ExtraThemeStrokeBrush_5}" X1="0" X2="7" Y1="7" Y2="0"/>
+                                        <Line StrokeThickness="1" Stroke="{StaticResource ExtraThemeStrokeBrush_5}" X1="3.5" X2="3.5" Y1="7" Y2="0"/>
+                                        <Line StrokeThickness="1" Stroke="{StaticResource ExtraThemeStrokeBrush_5}" X1="0" X2="7" Y1="3.5" Y2="3.5"/>
                                     </Canvas>
                                 </ControlTemplate>
                             </s:SpritePointMarker.PointMarkerTemplate>
@@ -120,30 +121,26 @@
             </s:SciChartSurface.ChartModifier>
 
             <s:SciChartSurface.Annotations>
-
                 <s:CustomAnnotation CoordinateMode="Relative" 
                                     HorizontalAnchorPoint="Left"
-                                    VerticalAnchorPoint="Center" 
-                                    Margin="10,150,0,0" 
-                                    X1="0" 
-                                    Y1="0" >
+                                    VerticalAnchorPoint="Top" 
+                                    Margin="5,125,0,0" 
+                                    X1="0" Y1="0">
+                    
+                    <Border CornerRadius="5" Background="{StaticResource MainThemeTransparentSolidBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock FontSize="16" 
+                                       Opacity="0.7"               
+                                       Margin="5,0"
+                                       VerticalAlignment="Center"
+                                       Text="To change point-marker type click" 
+                                       Foreground="#FFF"/>
 
-                    <StackPanel Orientation="Horizontal" Background="#80232323">
-
-                        <TextBlock FontSize="20" 
-                                   Opacity="0.7"
-                                   Margin="5,0"
-                                   Text="To change Point-Marker Type click" 
-                                   Foreground="#FFF" />
-
-                        <Image Width="32"
-                               Height="32"
-                               Margin="0,0,5,0"
-                               Source="/SciChart.Examples;component/Resources/Images/point_marker_icon.png"
-                               Stretch="None" />
-
-                    </StackPanel>
-
+                            <Border Width="26" Height="26" Margin="5,0" CornerRadius="5" Background="#FF2A354B">
+                                <ext:ToolbarIcon Kind="CircleMultipleOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
                 </s:CustomAnnotation>
 
                 <s:TextAnnotation CoordinateMode="Relative"

@@ -217,8 +217,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.VitalSignsMonitor
         private IEnumerable<IRenderableSeries> CreateRenderableSeries(string yAxisId,
             IDataSeries baseSeries, IDataSeries sweepSeries, IDataSeries lastSeries, Color color)
         {
-            const int strokeThickness = 1;
-            const int pointMarkerSize = 4;
+            const int strokeThickness = 2;
+            const int pointMarkerSize = 7;
 
             var rs1 = new FastLineRenderableSeries
             {
@@ -246,9 +246,9 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.VitalSignsMonitor
                 {
                     Width = pointMarkerSize,
                     Height = pointMarkerSize,
-                    Fill = color,
-                    Stroke = Colors.White,
-                    StrokeThickness = strokeThickness
+                    Fill = Colors.White,
+                    Stroke = color,
+                    StrokeThickness = 1
                 }
             };
 

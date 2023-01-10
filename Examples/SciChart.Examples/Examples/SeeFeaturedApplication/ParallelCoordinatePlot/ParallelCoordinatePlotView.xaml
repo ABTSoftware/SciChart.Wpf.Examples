@@ -3,99 +3,91 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart" xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              Loaded="ParallelCoordinatePlotView_OnLoaded"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml"/>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+        <SolidColorBrush x:Key="DefaultAxisBrush" Color="WhiteSmoke"/>
+        <SolidColorBrush x:Key="AlternativeAxisBrush" Color="Tan"/>
 
-            <SolidColorBrush x:Key="DefaultAxisBrush" Color="WhiteSmoke"/>
-            <SolidColorBrush x:Key="AlternativeAxisBrush" Color="Tan"/>
+        <!-- Defines a Style that is applied to Axes in code-behind -->
+        <Style x:Key="DefaultParallelAxisStyle" TargetType="{x:Type s:AxisBase}">
+            <Setter Property="BorderBrush" Value="{StaticResource DefaultAxisBrush}"/>
+            <Setter Property="BorderThickness" Value="1,0,0,0"/>
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type Line}">
+                        <Setter Property="Stroke" Value="{StaticResource DefaultAxisBrush}"/>
+                        <Setter Property="X2" Value="9"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinorTickLineStyle">
+                <Setter.Value>
+                    <Style  TargetType="{x:Type Line}">
+                        <Setter Property="Stroke" Value="{StaticResource DefaultAxisBrush}"/>
+                        <Setter Property="X2" Value="3"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TickLabelStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type s:DefaultTickLabel}">
+                        <Setter Property="Foreground" Value="{StaticResource DefaultAxisBrush}"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!-- Defines a Style that is applied to Axes in code-behind -->
-            <Style x:Key="DefaultParallelAxisStyle" TargetType="{x:Type s:AxisBase}">
-                <Setter Property="BorderBrush" Value="{StaticResource DefaultAxisBrush}"/>
-                <Setter Property="BorderThickness" Value="1,0,0,0"/>
-                <Setter Property="MajorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="{x:Type Line}">
-                            <Setter Property="Stroke" Value="{StaticResource DefaultAxisBrush}"/>
-                            <Setter Property="X2" Value="9"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="MinorTickLineStyle">
-                    <Setter.Value>
-                        <Style  TargetType="{x:Type Line}">
-                            <Setter Property="Stroke" Value="{StaticResource DefaultAxisBrush}"/>
-                            <Setter Property="X2" Value="3"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="TickLabelStyle">
-                    <Setter.Value>
-                        <Style TargetType="{x:Type s:DefaultTickLabel}">
-                            <Setter Property="Foreground" Value="{StaticResource DefaultAxisBrush}"/>
-                            <Setter Property="FontWeight" Value="SemiBold"/>
-                            <Setter Property="FontSize" Value="12"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <!-- Defines a Style that is applied to Axes in code-behind -->
+        <Style x:Key="AlternativeParallelAxisStyle" TargetType="{x:Type s:AxisBase}">
+            <Setter Property="BorderBrush" Value="{StaticResource AlternativeAxisBrush}"/>
+            <Setter Property="BorderThickness" Value="1,0,0,0"/>
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type Line}">
+                        <Setter Property="Stroke" Value="{StaticResource AlternativeAxisBrush}"/>
+                        <Setter Property="X2" Value="9"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinorTickLineStyle">
+                <Setter.Value>
+                    <Style  TargetType="{x:Type Line}">
+                        <Setter Property="Stroke" Value="{StaticResource AlternativeAxisBrush}"/>
+                        <Setter Property="X2" Value="3"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TickLabelStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type s:DefaultTickLabel}">
+                        <Setter Property="Foreground" Value="{StaticResource AlternativeAxisBrush}"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!-- Defines a Style that is applied to Axes in code-behind -->
-            <Style x:Key="AlternativeParallelAxisStyle" TargetType="{x:Type s:AxisBase}">
-                <Setter Property="BorderBrush" Value="{StaticResource AlternativeAxisBrush}"/>
-                <Setter Property="BorderThickness" Value="1,0,0,0"/>
-                <Setter Property="MajorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="{x:Type Line}">
-                            <Setter Property="Stroke" Value="{StaticResource AlternativeAxisBrush}"/>
-                            <Setter Property="X2" Value="9"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="MinorTickLineStyle">
-                    <Setter.Value>
-                        <Style  TargetType="{x:Type Line}">
-                            <Setter Property="Stroke" Value="{StaticResource AlternativeAxisBrush}"/>
-                            <Setter Property="X2" Value="3"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="TickLabelStyle">
-                    <Setter.Value>
-                        <Style TargetType="{x:Type s:DefaultTickLabel}">
-                            <Setter Property="Foreground" Value="{StaticResource AlternativeAxisBrush}"/>
-                            <Setter Property="FontWeight" Value="SemiBold"/>
-                            <Setter Property="FontSize" Value="12"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <Style x:Key="ParallelAxisTickLabelStyle" TargetType="{x:Type s:DefaultTickLabel}">
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
 
-            <Style x:Key="ParallelAxisTickLabelStyle" TargetType="{x:Type s:DefaultTickLabel}">
-                <Setter Property="FontSize" Value="14"/>
-            </Style>
-            
-            <Style x:Key="ParallelLineSeriesStyle" TargetType="{x:Type s:BaseRenderableSeries}">
-                <Setter Property="Stroke" Value="#504678B4"/>
-                <Setter Property="StrokeThickness" Value="1"/>
-                <Style.Triggers>
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Stroke" Value="White"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </ResourceDictionary>
+        <Style x:Key="ParallelLineSeriesStyle" TargetType="{x:Type s:BaseRenderableSeries}">
+            <Setter Property="Stroke" Value="#504678B4"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Stroke" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -104,53 +96,60 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426"
-                BorderBrush="#FF323539"
-                BorderThickness="0,0,2,0"
-                Canvas.ZIndex="9999">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="IsZoomEnabled"
-                              IsChecked="True"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers" />
+            <ToggleButton x:Name="IsZoomEnabled"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsPanEnabled"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers" />
+            <ToggleButton x:Name="IsPanEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsReorderEnabled"
-                              Style="{StaticResource ReorderButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Y-Axes Reorder"
-                              s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers" />
+            <ToggleButton x:Name="IsReorderEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Y-Axes Reorder"
+                          s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers">
+                <ext:ToolbarIcon Kind="SwapHorizontal" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsSelectionEnabled"
-                              Style="{StaticResource PointerButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Series Selection"
-                              s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers" />
+            <ToggleButton x:Name="IsSelectionEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Series Selection"
+                          s:ToggleButtonExtensions.GroupName="ParallelCoordinatePlot_Modifiers">
+                <ext:ToolbarIcon Kind="ArrowTopLeft" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator />
+            <ext:FlyoutSeparator/>
 
-                <ToggleButton x:Name="IsSplineEnabled" Style="{StaticResource SplineButtonStyle}"/>
-            </StackPanel>
-        </Border>
+            <ToggleButton x:Name="IsSplineEnabled" Style="{StaticResource DefaultToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="SineWave" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+        </ext:SciChartInteractionToolbar>
 
         <!-- Defines Parallel Coordinates Plot control -->
         <s:SciChartParallelCoordinateSurface Grid.Column="1"
-                                             x:Name="sciChart"
-                                             ChartTitle="Weather"
-                                             DrawSplines="{Binding IsChecked, Mode=OneWay, ElementName=IsSplineEnabled}"
+                                             x:Name="sciChart"                                 
+                                             ChartTitle="Weather"          
+                                             Padding="0,5"
+                                             DrawSplines="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsSplineEnabled}}"
                                              LabelStyle="{StaticResource ParallelAxisTickLabelStyle}"
                                              RenderableSeriesStyle="{StaticResource ParallelLineSeriesStyle}">
 
             <s:SciChartParallelCoordinateSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:ZoomPanModifier XyDirection="XDirection" IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=IsPanEnabled}"/>
-                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=IsZoomEnabled}"/>
-                    <s:ParallelAxisReorderModifier AxesReordered="OnAxisReordered" IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=IsReorderEnabled}"/>
-                    <s:SeriesSelectionModifier IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=IsSelectionEnabled}"/>
+                    <s:ZoomPanModifier XyDirection="XDirection" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsPanEnabled}}"/>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsZoomEnabled}}"/>
+                    <s:ParallelAxisReorderModifier AxesReordered="OnAxisReordered" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsReorderEnabled}}"/>
+                    <s:SeriesSelectionModifier IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsSelectionEnabled}}"/>
                     <s:MouseWheelZoomModifier XyDirection="XDirection"/>
                     <s:ZoomExtentsModifier/>
                 </s:ModifierGroup>

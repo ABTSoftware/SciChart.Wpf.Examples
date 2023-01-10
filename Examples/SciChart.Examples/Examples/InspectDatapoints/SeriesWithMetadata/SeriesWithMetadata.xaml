@@ -11,32 +11,34 @@
              Loaded="OnSeriesWithMetadataLoaded">
     <Grid>
         <Grid.Resources>
-            <seriesWithMetadata:GainLossPaletteProvider x:Key="GainLossPaletteProvider" GainColor="LimeGreen" LossColor="Red"/> 
-            
+            <seriesWithMetadata:GainLossPaletteProvider x:Key="GainLossPaletteProvider" 
+                                                        GainColor="{StaticResource MainThemeStrokeColor}" 
+                                                        LossColor="{StaticResource SecondaryThemeStrokeColor}"/>
+
             <DataTemplate x:Key="LegendTemplate">
-               <Grid>
-                   <Grid.RowDefinitions>
-                       <RowDefinition />
-                       <RowDefinition />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                   <Grid.ColumnDefinitions>
-                       <ColumnDefinition Width="50"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Line StrokeThickness="3" X2="1" Stretch="Fill" Stroke="LimeGreen" />
+                    <Line StrokeThickness="3" X2="1" Stretch="Fill" Stroke="{StaticResource MainThemeSolidBrush}" />
                     <TextBlock Grid.Column="1" FontSize="20" Text="Net Gain" Margin="10,0,0,0"/>
 
-                    <Line Grid.Row="1" Stretch="Fill" X2="1" StrokeThickness="3" Stroke="Red"/>
+                    <Line Grid.Row="1" Stretch="Fill" X2="1" StrokeThickness="3" Stroke="{StaticResource SecondaryThemeSolidBrush}"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="Net Loss" Margin="10,0,0,0"/>
-                </Grid> 
+                </Grid>
             </DataTemplate>
-            
+
             <Style x:Key="CursorTooltipContainerStyle" TargetType="s:CursorLabelControl">
                 <Setter Property="Background" Value="{s:ThemeBinding DefaultPath=CursorLabelBackgroundBrush}" />
                 <Setter Property="BorderThickness" Value="0" />
             </Style>
-            
+
             <DataTemplate x:Key="CursorTooltipTemplate" DataType="s:XySeriesInfo">
                 <StackPanel Orientation="Vertical">
                     <TextBlock FontSize="15" Foreground="White">
@@ -50,7 +52,7 @@
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -75,7 +77,10 @@
                                             PaletteProvider="{StaticResource GainLossPaletteProvider}"
                                             s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate}">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <seriesWithMetadata:AnnotatedPointMarker Width="5" Height="7" GainMarkerFill="LimeGreen" LossMarkerFill="Red" Stroke="White" StrokeThickness="1"/>
+                        <seriesWithMetadata:AnnotatedPointMarker Width="5" Height="7" 
+                                                                 GainMarkerFill="{StaticResource MainThemeStrokeColor}" 
+                                                                 LossMarkerFill="{StaticResource SecondaryThemeStrokeColor}" 
+                                                                 Stroke="White" StrokeThickness="1"/>
                     </s:FastLineRenderableSeries.PointMarker>
 
                 </s:FastLineRenderableSeries>
@@ -98,13 +103,13 @@
                                 DrawMinorTicks="False"
                                 DrawMinorGridLines="False"/>
             </s:SciChartSurface.YAxis>
-            
+
             <s:SciChartSurface.Annotations>
-                <s:HorizontalLineAnnotation Stroke="Red" ShowLabel="False" Y1="0" Opacity="0.7" HorizontalAlignment="Stretch">
-                    <s:AnnotationLabel Text="break-even balance point" LabelPlacement="Top" FontSize="14"/>    
+                <s:HorizontalLineAnnotation Stroke="{StaticResource SecondaryThemeSolidBrush}" ShowLabel="False" Y1="0" Opacity="0.7" HorizontalAlignment="Stretch">
+                    <s:AnnotationLabel Text="break-even balance point" LabelPlacement="Top" FontSize="14"/>
                 </s:HorizontalLineAnnotation>
             </s:SciChartSurface.Annotations>
-            
+
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:LegendModifier ShowLegend="True" Margin="10" 

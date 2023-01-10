@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -30,20 +30,20 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
 
         private static readonly string[] ColumnStyleKeys =
         {
-            "StackedColumnBlueStyle",
-            "StackedColumnOrangeStyle",
-            "StackedColumnRedStyle",
-            "StackedColumnGreenStyle",
-            "StackedColumnVioletStyle"
+            "StackedColumnFirstColorStyle",
+            "StackedColumnSecondColorStyle",
+            "StackedColumnThirdColorStyle",
+            "StackedColumnFourthColorStyle",
+            "StackedColumnFifthColorStyle"
         };
 
         private static readonly string[] MountainStyleKeys =
         {
-            "StackedMountainBlueStyle",
-            "StackedMountainOrangeStyle",
-            "StackedMountainRedStyle",
-            "StackedMountainGreenStyle",
-            "StackedMountainVioletStyle"
+            "StackedMountainFirstColorStyle",
+            "StackedMountainSecondColorStyle",
+            "StackedMountainThirdColorStyle",
+            "StackedMountainFourthColorStyle",
+            "StackedMountainFifthColorStyle"
         };
 
         public static double[] GetXValues()

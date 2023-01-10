@@ -13,25 +13,25 @@
 
         <s3D:GradientColorPalette x:Key="LinearHeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1" Color="DarkRed"/>
-                <GradientStop Offset="0.9" Color="Red"/>
-                <GradientStop Offset="0.7" Color="Yellow"/>
-                <GradientStop Offset="0.5" Color="GreenYellow"/>
-                <GradientStop Offset="0.3" Color="Cyan"/>
-                <GradientStop Offset="0.1" Color="Blue"/>
-                <GradientStop Offset="0.0" Color="#1D2C6B"/>
+                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_6}"/>
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_5}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_7}"/>
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}"/>
+                <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}"/>
+                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
         <s3D:GradientColorPalette x:Key="GeoHeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1" Color="DarkRed"/>
-                <GradientStop Offset="0.9" Color="Red"/>
-                <GradientStop Offset="0.7" Color="Yellow"/>
-                <GradientStop Offset="0.5" Color="GreenYellow"/>
-                <GradientStop Offset="0.0041" Color="Cyan"/>
-                <GradientStop Offset="0.004" Color="Blue"/>
-                <GradientStop Offset="0.0" Color="#1D2C6B"/>
+                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_6}"/>
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_5}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_7}"/>
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}"/>
+                <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}"/>
+                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
@@ -48,51 +48,39 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
-                            Content="CTRL"
-                            FontSize="10"
-                            Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Draw Mesh As" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}"
+                                  SelectedItem="{Binding DrawMeshAs, Source={x:Reference ellipsoidMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                        <!-- Checkboxes to decide how the mesh should be drawn -->
-                        <TextBlock FontSize="12" Text="Draw Mesh As" />
-                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding DrawMeshAs, Source={x:Reference ellipsoidMeshRenderableSeries}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        <TextBlock Text="Back Side" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="CheckDrawSkirt" Margin="0,5" Content="Draw Back Side" IsChecked="{Binding DrawBackSide, Source={x:Reference ellipsoidMeshRenderableSeries}, Mode=TwoWay}"/>
 
-                        <!-- Checkbox for Draw Back Side on or off -->
-                        <TextBlock FontSize="12" Text="Back Side" />
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Back Side?" IsChecked="{Binding DrawBackSide, Source={x:Reference ellipsoidMeshRenderableSeries}, Mode=TwoWay}"/>
+                        <TextBlock Text="Opacity" Margin="0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <ext:FlyoutSeparator/>
+                        <TextBlock Text="Lighting Factor" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <!-- Create the opacity slider -->
-                        <TextBlock FontSize="12" Text="Opacity" />
-                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="Shininess" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <TextBlock FontSize="12" Text="Lighting Factor" />
-                        <Slider Minimum="0.0" Maximum="1.0" x:Name="lightingFactorSlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <TextBlock FontSize="12" Text="Specular Strength" />
-                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-
+                        <TextBlock Text="Specular Strength" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.1" Maximum="5.0" x:Name="specularStrengthSlider" Value="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutSeparator Background="#444" />
+            <ext:FlyoutSeparator/>
 
-            <ext:FlyoutMenuButton Content="PM"
-                            Padding="0"
-                            Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Palette" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <!-- Create the palette mode -->
-                        <TextBlock FontSize="12" Text="Palette Mode" />
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Palette Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <ComboBox SelectionChanged="PaletteModeComboBox_OnSelectionChanged">
                             <ComboBoxItem IsSelected="True">Radial</ComboBoxItem>
                             <ComboBoxItem>Axial</ComboBoxItem>
@@ -102,7 +90,6 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChart3DInteractionToolbar>
 
         <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,200,200" BorderThickness="0">
@@ -113,9 +100,9 @@
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:FreeSurfaceRenderableSeries3D x:Name="ellipsoidMeshRenderableSeries"
                                              DrawMeshAs="SolidWireFrame"
-                                             Stroke="#77228B22"
+                                             Stroke="{StaticResource MainThemeTransparentStrokeColor}"
                                              ContourInterval="0.1"
-                                             ContourStroke="#77228B22"
+                                             ContourStroke="{StaticResource MainThemeTransparentStrokeColor}"
                                              StrokeThickness="2.0"
                                              LightingFactor="{Binding Source={x:Reference Name=lightingFactorSlider}, Path=Value, Mode=TwoWay}"
                                              Opacity="{Binding Source={x:Reference Name=opacitySlider}, Path=Value, Mode=TwoWay}"

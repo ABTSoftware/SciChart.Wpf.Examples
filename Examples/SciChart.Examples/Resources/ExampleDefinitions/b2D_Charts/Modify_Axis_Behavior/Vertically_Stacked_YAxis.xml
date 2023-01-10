@@ -9,7 +9,7 @@
 
     This is achieved by overriding the [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.SciChartSurface~LeftAxesPanelTemplate.html']SciChartSurface.LeftAxesPanelTemplate[/url]. This API may also be used to override how Axis are arranged on the Left, Top, Right or Bottom of a SciChartSurface.
 
-    [i][b]Note: [/b][/i] [i]it is also possible to arrange multiple SciChartSurfaces in a Grid or ItemsControl to get the same effect, where series do not need to overlap.[/i]
+    [i][b]Note: [/b][/i] [i]It is also possible to arrange multiple SciChartSurfaces in a Grid or ItemsControl to get the same effect, where series do not need to overlap.[/i]
 
     [b][i]Interactivity Options[/i][/b]
 

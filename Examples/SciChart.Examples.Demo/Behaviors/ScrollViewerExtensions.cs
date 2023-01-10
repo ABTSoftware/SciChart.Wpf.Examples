@@ -5,8 +5,21 @@ namespace SciChart.Examples.Demo.Behaviors
 {
     public class ScrollViewerExtensions
     {
-        public static readonly DependencyProperty CanContentScrollProperty = DependencyProperty.RegisterAttached(
-            "CanContentScroll", typeof (bool), typeof (ScrollViewerExtensions), new PropertyMetadata(true, OnCanContentScrollChanged));        
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached
+            ("CornerRadius", typeof(CornerRadius), typeof(ScrollViewerExtensions), new PropertyMetadata(new CornerRadius(0)));  
+
+        public static void SetCornerRadius(DependencyObject element, CornerRadius value)
+        {
+            element.SetValue(CornerRadiusProperty, value);
+        }
+
+        public static CornerRadius GetCornerRadius(DependencyObject element)
+        {
+            return (CornerRadius) element.GetValue(CornerRadiusProperty);
+        }
+
+        public static readonly DependencyProperty CanContentScrollProperty = DependencyProperty.RegisterAttached
+            ("CanContentScroll", typeof(bool), typeof(ScrollViewerExtensions), new PropertyMetadata(true, OnCanContentScrollChanged));        
 
         public static void SetCanContentScroll(DependencyObject element, bool value)
         {
@@ -20,12 +33,7 @@ namespace SciChart.Examples.Demo.Behaviors
 
         private static void OnCanContentScrollChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-#if !SILVERLIGHT
             ScrollViewer.SetCanContentScroll(d, (bool)e.NewValue);
-#else
-            
-#endif
-
         }
     }
 }

@@ -12,26 +12,32 @@
              mc:Ignorable="d">
     
     <UserControl.Resources>
-        <local:YearsLabelProvider x:Key="YearsLabelProvider" />
 
-        <Style TargetType="s:StackedColumnRenderableSeries">
-            <Setter Property="Stroke" Value="Transparent" />
-            <Setter Property="LegendMarkerTemplate">
-                <Setter.Value>
-                    <DataTemplate DataType="s:StackedColumnRenderableSeries">
-                        <Rectangle Width="10"
+        <ResourceDictionary>
+
+            <local:YearsLabelProvider x:Key="YearsLabelProvider" />
+
+            <Style TargetType="s:StackedColumnRenderableSeries">
+                <Setter Property="Stroke" Value="Transparent" />
+                <Setter Property="LegendMarkerTemplate">
+                    <Setter.Value>
+                        <DataTemplate DataType="s:StackedColumnRenderableSeries">
+                            <Rectangle Width="10"
                                    Fill="{Binding Fill}"
                                    Stretch="Fill" />
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <Style TargetType="s:SciChartLegend">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
+            <Style TargetType="s:SciChartLegend">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+        </ResourceDictionary>
+
     </UserControl.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -52,91 +58,91 @@
             <s:SciChartSurface.RenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="ChinaSeries"
                                                  DataPointWidth="0.9"
-                                                 Fill="#3399ff"
-                                                 Stroke="#3399ff"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_1}"
+                                                 Stroke="{StaticResource GroupSeriesColor_1}"
                                                  StackedGroupId="China">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="IndiaSeries"
-                                                 Fill="#014358"
-                                                 Stroke="#014358"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_2}"
+                                                 Stroke="{StaticResource GroupSeriesColor_2}"
                                                  StackedGroupId="India">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="USASeries"
-                                                 Fill="#1f8a71"
-                                                 Stroke="#1f8a71"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_3}"
+                                                 Stroke="{StaticResource GroupSeriesColor_3}"
                                                  StackedGroupId="USA">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="IndonesiaSeries"
-                                                 Fill="#bdd63b"
-                                                 Stroke="#bdd63b"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_4}"
+                                                 Stroke="{StaticResource GroupSeriesColor_4}"
                                                  StackedGroupId="Indonesia">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="BrazilSeries"
-                                                 Fill="#ffe00b"
-                                                 Stroke="#ffe00b"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_5}"
+                                                 Stroke="{StaticResource GroupSeriesColor_5}"
                                                  StackedGroupId="Brazil">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="PakistanSeries"
-                                                 Fill="#f27421"
-                                                 Stroke="#f27421"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_6}"
+                                                 Stroke="{StaticResource GroupSeriesColor_6}"
                                                  StackedGroupId="Pakistan">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="NigeriaSeries"
-                                                 Fill="#bb0000"
-                                                 Stroke="#bb0000"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_7}"
+                                                 Stroke="{StaticResource GroupSeriesColor_7}"
                                                  StackedGroupId="Nigeria">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="BangladeshSeries"
-                                                 Fill="#550033"
-                                                 Stroke="#550033"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_8}"
+                                                 Stroke="{StaticResource GroupSeriesColor_8}"
                                                  StackedGroupId="BangladeshSeries">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="RussiaSeries"
-                                                 Fill="#339933"
-                                                 Stroke="#339933"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_9}"
+                                                 Stroke="{StaticResource GroupSeriesColor_9}"
                                                  StackedGroupId="Russia">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="JapanSeries"
-                                                 Fill="#00aba9"
-                                                 Stroke="#00aba9"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_10}"
+                                                 Stroke="{StaticResource GroupSeriesColor_10}"
                                                  StackedGroupId="Japan">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
                 <s:StackedColumnRenderableSeries x:Name="RestOfTheWorldSeries"
-                                                 Fill="#560068"
-                                                 Stroke="#560068"
+                                                 Fill="{StaticResource GroupSeriesGradientBrush_11}"
+                                                 Stroke="{StaticResource GroupSeriesColor_11}"
                                                  StackedGroupId="RestOfTheWorld">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                        <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
             </s:SciChartSurface.RenderableSeries>

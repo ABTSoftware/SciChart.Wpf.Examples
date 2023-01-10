@@ -9,15 +9,6 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,54 +17,43 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                  Content="Drag"
-                                  Padding="0"
-                                  FontSize="11"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  ToolTipService.ToolTip="AxisDrag">
-
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Drag Mode" />
-
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Drag Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <ComboBox x:Name="dragModes"
                                   SelectedIndex="0"
-                                  SelectionChanged="DragModes_OnSelectionChanged" />
+                                  SelectionChanged="DragModes_OnSelectionChanged"/>
 
-                        <ext:FlyoutSeparator />
-
-                        <TextBlock Text="Direction" />
-
+                        <TextBlock Text="Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <ComboBox x:Name="dragXYDirection"
                                   SelectedIndex="2"
-                                  SelectionChanged="DragXYDirection_OnSelectionChanged" />
+                                  SelectionChanged="DragXYDirection_OnSelectionChanged"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
-        
+
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Column="1"
                            Padding="20,20,20,40">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastMountainRenderableSeries x:Name="mountainSeries"
-                                                Fill="#771964FF"
-                                                Stroke="#FF0944CF"
+                                                Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                                Stroke="{StaticResource MainThemeStrokeColor}"
                                                 YAxisId="LeftAxisId">
                     <s:FastMountainRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastMountainRenderableSeries.SeriesAnimation>
                 </s:FastMountainRenderableSeries>
                 <s:FastLineRenderableSeries x:Name="lineSeries"
-                                            Stroke="#FF279B27"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2"
                                             YAxisId="RightAxisId">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:FadeAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:FadeAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
@@ -93,7 +73,7 @@
                 <s:NumericAxis AxisAlignment="Right"
                                Id="RightAxisId"
                                TextFormatting="0.0"
-                               TickTextBrush="#FF279B27">
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}">
                     <s:NumericAxis.GrowBy>
                         <s:DoubleRange Max="0.1" Min="0.1" />
                     </s:NumericAxis.GrowBy>

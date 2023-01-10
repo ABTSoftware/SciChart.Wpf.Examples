@@ -30,7 +30,7 @@
                 <Style x:Key="LineSeriesStyle" TargetType="s:FastLineRenderableSeries">
                     <Setter Property="StrokeThickness" Value="2" />
                     <Setter Property="Opacity" Value="0.6" />
-                    <Setter Property="Stroke" Value="#ff99ed3f" />
+                    <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
                 </Style>
             </s:SciChartSurface.Resources>
 

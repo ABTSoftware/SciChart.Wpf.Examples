@@ -10,7 +10,6 @@
              mc:Ignorable="d">
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -41,8 +40,6 @@
                                DrawMajorBands="False"
                                TextFormatting="0.0#" />
             </s:SciChartSurface.YAxis>
-
-
 
             <s:SciChartSurface.Annotations>
 
@@ -79,7 +76,7 @@
                                   CoordinateMode="Relative"
                                   FontSize="72"
                                   FontWeight="Bold"
-                                  Foreground="#30008000"
+                                  Foreground="#3064BAE4"
                                   HorizontalAnchorPoint="Center"
                                   Text="Create Watermarks"
                                   VerticalAnchorPoint="Center"
@@ -91,7 +88,7 @@
                                   Text="Draw Lines with"
                                   X1="0.3"
                                   Y1="6.3" />
-                <s:LineAnnotation Stroke="#555"
+                <s:LineAnnotation Stroke="{StaticResource ExtraThemeStrokeBrush_1}"
                                   StrokeThickness="2"
                                   X1="1"
                                   X2="2"
@@ -102,7 +99,7 @@
                                   Text="or without arrows"
                                   X1="0.3"
                                   Y1="6.0" />
-                <s:LineArrowAnnotation Stroke="#555"
+                <s:LineArrowAnnotation Stroke="{StaticResource ExtraThemeStrokeBrush_1}"
                                        StrokeThickness="2"
                                        X1="1.2"
                                        X2="2.5"
@@ -114,8 +111,8 @@
                                   Text="Draw boxes"
                                   X1="3.3"
                                   Y1="6.3" />
-                <s:BoxAnnotation Background="#55279B27"
-                                 BorderBrush="#279B27"
+                <s:BoxAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_2}"
+                                 BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                                  BorderThickness="1"
                                  CornerRadius="3"
                                  X1="3.5"
@@ -123,8 +120,8 @@
                                  Y1="4"
                                  Y2="5" />
 
-                <s:BoxAnnotation Background="#55FF1919"
-                                 BorderBrush="#FF1919"
+                <s:BoxAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_3}"
+                                 BorderBrush="{StaticResource ExtraThemeStrokeBrush_3}"
                                  BorderThickness="1"
                                  CornerRadius="3"
                                  X1="4"
@@ -132,8 +129,8 @@
                                  Y1="4.5"
                                  Y2="5.5" />
 
-                <s:BoxAnnotation Background="#551964FF"
-                                 BorderBrush="#1964FF"
+                <s:BoxAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_4}"
+                                 BorderBrush="{StaticResource ExtraThemeStrokeBrush_4}"
                                  BorderThickness="1"
                                  CornerRadius="3"
                                  X1="4.5"
@@ -149,8 +146,8 @@
 
                 <s:CustomAnnotation X1="8" Y1="5.5">
                     <Path Data="m 4 14 4 0 0 -8 3 0 -5 -5 -5 5 3 0 z"
-                          Fill="#571CB61C"
-                          Stroke="#FF00B400"
+                          Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                          Stroke="{StaticResource MainThemeSolidBrush}"
                           StrokeThickness="1" />
                 </s:CustomAnnotation>
 
@@ -158,8 +155,8 @@
                                     X1="7.5"
                                     Y1="5">
                     <Path Data="m 3.5 0.5 4 0 0 8 3 0 -5 5 -5 -5 3 0 z"
-                          Fill="#57B22020"
-                          Stroke="#FF990000"
+                          Fill="{StaticResource SecondaryThemeTransparentSolidBrush}"
+                          Stroke="{StaticResource SecondaryThemeSolidBrush}"
                           StrokeThickness="1" />
                 </s:CustomAnnotation>
 
@@ -170,7 +167,7 @@
                                             LabelPlacement="TopLeft"
                                             LabelValue="Right Aligned, with text on left"
                                             ShowLabel="True"
-                                            Stroke="Orange"
+                                            Stroke="{StaticResource SecondaryThemeSolidBrush}"
                                             StrokeThickness="2"
                                             X1="5"
                                             Y1="3.2" />
@@ -180,7 +177,7 @@
                                             FontWeight="Bold"
                                             LabelPlacement="Axis"
                                             ShowLabel="True"
-                                            Stroke="Orange"
+                                            Stroke="{StaticResource SecondaryThemeSolidBrush}"
                                             StrokeThickness="2"
                                             X1="7"
                                             Y1="2.8" />
@@ -190,7 +187,7 @@
                                           FontSize="12"
                                           FontWeight="Bold"
                                           ShowLabel="True"
-                                          Stroke="Brown"
+                                          Stroke="{StaticResource MainThemeSolidBrush}"
                                           StrokeThickness="2"
                                           X1="9"
                                           Y1="4" />
@@ -199,7 +196,7 @@
                                           FontSize="12"
                                           FontWeight="Bold"
                                           ShowLabel="True"
-                                          Stroke="Brown"
+                                          Stroke="{StaticResource MainThemeSolidBrush}"
                                           StrokeThickness="2"
                                           X1="9.5"
                                           Y1="3">
@@ -212,11 +209,10 @@
                                   X1="0.3"
                                   Y1="2.5" />
 
-                <s:TextAnnotation Background="#87B22020"
-                                  BorderBrush="#990000"
+                <s:TextAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_3}"
+                                  BorderBrush="{StaticResource ExtraThemeStrokeBrush_3}"
                                   BorderThickness="2"
                                   CornerRadius="5"
-                                  Foreground="White"
                                   MouseEnter="TextAnnotation1_MouseEnter"
                                   Text="(Hover Me)"
                                   X1="0.3"
@@ -224,8 +220,8 @@
                                   Y1="2.0"
                                   Y2="1.0" />
 
-                <s:TextAnnotation Background="#87B22020"
-                                  BorderBrush="#990000"
+                <s:TextAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_3}"
+                                  BorderBrush="{StaticResource ExtraThemeStrokeBrush_3}"
                                   BorderThickness="2"
                                   CornerRadius="5"
                                   Foreground="White"
@@ -235,11 +231,11 @@
                                   X2="4.5"
                                   Y1="2.0"
                                   Y2="1.0" />
-                <s:TextAnnotation Background="#87B22020"
-                                  BorderBrush="#990000"
+                
+                <s:TextAnnotation Background="{StaticResource ExtraThemeTransparentStrokeBrush_3}"
+                                  BorderBrush="{StaticResource ExtraThemeStrokeBrush_3}"
                                   BorderThickness="2"
                                   CornerRadius="5"
-                                  Foreground="White"
                                   Text="(Tooltip)"
                                   ToolTipService.ToolTip="Tah-dah! I have a tooltip"
                                   X1="4.8"

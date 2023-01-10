@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -30,8 +30,9 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
         private const int SegmentsCount = 25;
         private const double YAngle = -65;
 
-        private readonly Color _blueColor = Color.FromArgb(0xFF, 0x00, 0x84, 0xCF);
-        private readonly Color _redColor = Color.FromArgb(0xFF, 0xEE, 0x11, 0x10);
+        
+        private readonly Color _mailColor = Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4);
+        private readonly Color _secondaryColor = Color.FromArgb(0xFF, 0xDC, 0x79, 0x69);
         private readonly double _rotationAngle;
 
         public SeriesTooltips3DChart()
@@ -61,11 +62,11 @@ namespace SciChart.Examples.Examples.Charts3D.TooltipsAndHitTest3DCharts
         {
             var temp = RotatePoint(new Point(-4, 0), DegreeToRadian(currentAngle));
             var point = RotateAroundZ(new Point3D(temp.X, y, temp.Y), DegreeToRadian(YAngle));
-            xyzDataSeries3D.Append(point.X, point.Y, point.Z, new PointMetadata3D(_blueColor));
+            xyzDataSeries3D.Append(point.X, point.Y, point.Z, new PointMetadata3D(_mailColor));
 
             temp = RotatePoint(new Point(4, 0), DegreeToRadian(currentAngle));
             point = RotateAroundZ(new Point3D(temp.X, y, temp.Y), DegreeToRadian(YAngle));
-            xyzDataSeries3D.Append(point.X, point.Y, point.Z, new PointMetadata3D(_redColor));
+            xyzDataSeries3D.Append(point.X, point.Y, point.Z, new PointMetadata3D(_secondaryColor));
         }
 
         private Point RotatePoint(Point point, double angle)

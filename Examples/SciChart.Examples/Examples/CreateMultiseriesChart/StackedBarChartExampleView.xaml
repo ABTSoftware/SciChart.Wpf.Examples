@@ -11,41 +11,40 @@
 
     <UserControl.Resources>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill0">
-            <GradientStop Offset="0" Color="#567893" />
-            <GradientStop Offset="1.0" Color="#3D5568" />
+            <GradientStop Offset="0.0" Color="#567893"/>
+            <GradientStop Offset="1.0" Color="#3D5568"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill1">
-            <GradientStop Offset="0" Color="#ACBCCA" />
-            <GradientStop Offset="1.0" Color="#439AAF" />
+            <GradientStop Offset="0.0" Color="#ACBCCA"/>
+            <GradientStop Offset="1.0" Color="#439AAF"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="chartFill2">
-            <GradientStop Offset="0" Color="#DBE0E1" />
-            <GradientStop Offset="1.0" Color="#B6C1C3" />
+            <GradientStop Offset="0.0" Color="#DBE0E1"/>
+            <GradientStop Offset="1.0" Color="#B6C1C3"/>
         </LinearGradientBrush>
     </UserControl.Resources>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
 
         <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="AXIS" Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-                        <TextBlock Text="YAxis.AxisAlignment" />
-                        <ext:FlyoutSeparator/>
-                        <ComboBox SelectionChanged="CboYAxisAlignment_OnSelectionChanged" Margin="4" x:Name="cboYAxisAlignment" SelectedIndex="0">
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Y-Axis Alignment" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboYAxisAlignment"
+                                  SelectionChanged="CboYAxisAlignment_OnSelectionChanged"
+                                  SelectedIndex="0">
                             <ComboBox.Items>
                                 <s:AxisAlignment>Bottom</s:AxisAlignment>
                                 <s:AxisAlignment>Top</s:AxisAlignment>
@@ -54,9 +53,10 @@
                             </ComboBox.Items>
                         </ComboBox>
 
-                        <TextBlock Text="Xaxis.AxisAlignment" />
-                        <ext:FlyoutSeparator/>
-                        <ComboBox SelectionChanged="CboXAxisAlignment_OnSelectionChanged" Margin="4" x:Name="cboXAxisAlignment" SelectedIndex="0">
+                        <TextBlock Text="X-Axis Alignment" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboXAxisAlignment"
+                                  SelectionChanged="CboXAxisAlignment_OnSelectionChanged"
+                                  SelectedIndex="0">
                             <ComboBox.Items>
                                 <s:AxisAlignment>Right</s:AxisAlignment>
                                 <s:AxisAlignment>Left</s:AxisAlignment>
@@ -69,7 +69,6 @@
             </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
-
         <!--  Create the chart surface  -->
 
         <s:SciChartSurface Name="sciChart"
@@ -80,25 +79,31 @@
             <!--  Declare RenderableSeries  -->
 
             <s:SciChartSurface.RenderableSeries>
-                
-                <s:StackedColumnRenderableSeries x:Name="columnSeries1" DataPointWidth="0.8" Stroke="#333" Fill="{StaticResource chartFill0}">
+
+                <s:StackedColumnRenderableSeries x:Name="columnSeries1" DataPointWidth="0.8" 
+                                                 Stroke="{StaticResource SeriesLightStroke}" 
+                                                 Fill="{StaticResource SecondaryThemeSolidBrush}">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
-                
-                <s:StackedColumnRenderableSeries x:Name="columnSeries2" Stroke="#333" Fill="{StaticResource chartFill1}">
+
+                <s:StackedColumnRenderableSeries x:Name="columnSeries2" 
+                                                 Stroke="{StaticResource SeriesLightStroke}" 
+                                                 Fill="{StaticResource MainThemeSolidBrush}">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
-                
-                <s:StackedColumnRenderableSeries x:Name="columnSeries3" Stroke="#333" Fill="{StaticResource chartFill2}">
+
+                <s:StackedColumnRenderableSeries x:Name="columnSeries3" 
+                                                 Stroke="{StaticResource SeriesLightStroke}" 
+                                                 Fill="{StaticResource ExtraThemeStrokeBrush_2}">
                     <s:StackedColumnRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:StackedColumnRenderableSeries.SeriesAnimation>
                 </s:StackedColumnRenderableSeries>
-                
+
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->

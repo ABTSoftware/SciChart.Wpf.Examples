@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,6 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using System;
+using System.Linq;
 using System.Windows.Controls;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -31,13 +33,17 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
 
         private void ScatterChartExampleView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Create a data series of type X=double, Y=double
-            var dataSeries = new UniformXyDataSeries<double>(0d, 0.05);
+            // Create some xValues, yValues arrays
+            var random = new Random(0);
+            
+            var xValues = DataManager.Instance.GetRangeD(0, 250);
+            var yValues = xValues.Select(x => 3 * x + x * random.NextDouble()).ToArray();
+            var y1Values = xValues.Select(x => x + (x * random.NextDouble())).ToArray();
 
-            // Append data to series. SciChart automatically redraws
-            dataSeries.Append(DataManager.Instance.GetDampedSinewaveYData(1.0, 0.02, 200));
+            // Create a DataSeries with the data for the chart
 
-            scatterRenderSeries.DataSeries = dataSeries;
+            scatterRenderSeries0.DataSeries = new XyDataSeries<double>(xValues, yValues);
+            scatterRenderSeries1.DataSeries = new XyDataSeries<double>(xValues, y1Values);
 
             sciChart.ZoomExtents();
         }

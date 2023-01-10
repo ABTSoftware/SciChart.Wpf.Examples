@@ -9,11 +9,14 @@
              d:DesignWidth="800">
 
     <UserControl.Resources>
-
-        <SolidColorBrush x:Key="HeartRateBrush" Color="#FF42B649"/>
-        <SolidColorBrush x:Key="BloodPressureBrush" Color="#FFFFFF00"/>
-        <SolidColorBrush x:Key="BloodVolumeBrush" Color="#FFB0C4DE"/>
-        <SolidColorBrush x:Key="BloodOxygenationBrush" Color="#FF6495ED"/>
+        <SolidColorBrush x:Key="HeartRateBrush" Color="{StaticResource SecondaryThemeStrokeColor}"/>
+        <!--green-->
+        <SolidColorBrush x:Key="BloodPressureBrush" Color="{StaticResource MainThemeStrokeColor}"/>
+        <!--yellow-->
+        <SolidColorBrush x:Key="BloodVolumeBrush" Color="{StaticResource ExtraThemeStrokeColor_3}"/>
+        <!--lightBlue-->
+        <SolidColorBrush x:Key="BloodOxygenationBrush" Color="{StaticResource ExtraThemeStrokeColor_2}"/>
+        <!--blue-->
 
         <ItemsPanelTemplate x:Key="YAxesPanel">
             <Grid>
@@ -42,7 +45,7 @@
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="White"/>
-            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Background" Value="{StaticResource ThemedChartBackground}"/>
         </Style>
 
         <Style x:Key="MonitorLargeTextBlockStyle" TargetType="{x:Type TextBlock}">

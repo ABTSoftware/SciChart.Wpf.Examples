@@ -21,88 +21,76 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
+        <!--  ItemTemplate for EEG Channels. Create a single SciChartSurface instance per EEGChannelViewModel  -->
+        <DataTemplate x:Key="ChannelItemTemplate">
+            <Grid IsHitTestVisible="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+                <TextBlock Margin="10,0"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Text="{Binding ChannelName}" />
 
-            <!--  ItemTemplate for EEG Channels. Create a single SciChartSurface instance per EEGChannelViewModel  -->
-            <DataTemplate x:Key="ChannelItemTemplate">
+                <!-- Declare the SciChartSurface. SciChartSurfaceEx enables hardware acceleration by default -->
+                <s:SciChartSurface Grid.Column="1"
+                                   Height="20"
+                                   Padding="0"
+                                   HorizontalAlignment="Stretch">
 
-                <Grid IsHitTestVisible="False">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <!--  Declare RenderableSeries, which are mapped to DataSet Series 1:1 and in order  -->
+                    <s:SciChartSurface.RenderableSeries>
+                        <s:FastLineRenderableSeries AntiAliasing="False"
+                                                    DataSeries="{Binding ChannelDataSeries}"
+                                                    ResamplingMode="None"
+                                                    Stroke="{Binding Stroke, Mode=OneWay}">
+                            <s:FastLineRenderableSeries.RolloverMarkerTemplate>
+                                <ControlTemplate>
+                                    <Ellipse Width="7" Height="7" Fill="White"/>
+                                </ControlTemplate>
+                            </s:FastLineRenderableSeries.RolloverMarkerTemplate>
+                        </s:FastLineRenderableSeries>
+                    </s:SciChartSurface.RenderableSeries>
 
-                    <TextBlock Margin="10,0"
-                             Foreground="White"
-                             Text="{Binding ChannelName}" />
+                    <!--  Axes are created implicitly when a dataset is created, but we override them here so we can style them  -->
+                    <s:SciChartSurface.XAxis>
+                        <s:NumericAxis AutoRange="Always"
+                                       DrawMajorGridLines="False"
+                                       DrawMinorGridLines="False"
+                                       DrawMajorBands="False"
+                                       Visibility="Collapsed">
+                        </s:NumericAxis>
+                    </s:SciChartSurface.XAxis>
 
-                    <!-- Declare the SciChartSurface. SciChartSurfaceEx enables hardware acceleration by default -->
-                    <s:SciChartSurface Grid.Column="1"
-                                       Height="20"
-                                       Padding="0"
-                                       HorizontalAlignment="Stretch">
+                    <s:SciChartSurface.YAxis>
+                        <s:NumericAxis AutoRange="Always"
+                                       DrawMajorGridLines="False"
+                                       DrawMinorGridLines="False"
+                                       DrawMajorBands="False"
+                                       Visibility="Collapsed"/>
+                    </s:SciChartSurface.YAxis>
+                </s:SciChartSurface>
+            </Grid>
+        </DataTemplate>
+        <!--  Style per ListBoxItem to ensure the chart stretches to fit  -->
+        <Style x:Key="ChannelListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
 
-                        <!--  Declare RenderableSeries, which are mapped to DataSet Series 1:1 and in order  -->
-                        <s:SciChartSurface.RenderableSeries>
-                            <s:FastLineRenderableSeries AntiAliasing="False"
-                                                  DataSeries="{Binding ChannelDataSeries}"
-                                                  ResamplingMode="None"
-                                                  Stroke="{Binding Stroke, Mode=OneWay}">
-                                <s:FastLineRenderableSeries.RolloverMarkerTemplate>
-                                    <ControlTemplate>
-                                        <Ellipse Width="7"
-                                     Height="7"
-                                     Fill="White" />
-                                    </ControlTemplate>
-                                </s:FastLineRenderableSeries.RolloverMarkerTemplate>
-                            </s:FastLineRenderableSeries>
-                        </s:SciChartSurface.RenderableSeries>
+        <!--  Style for Stats  -->
+        <Style x:Key="StatsStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#BBFC9C29" />
+            <Setter Property="FontFamily" Value="/Resources/Fonts/#Neuropol Regular" />
+        </Style>
 
-                        <!--  Axes are created implicitly when a dataset is created, but we override them here so we can style them  -->
-                        <s:SciChartSurface.XAxis>
-                            <s:NumericAxis AutoRange="Always"
-                                     DrawMajorGridLines="False"
-                                     DrawMinorGridLines="False"
-                                     DrawMajorBands="False"
-                                     Visibility="Collapsed">
-                            </s:NumericAxis>
-                        </s:SciChartSurface.XAxis>
-
-                        <s:SciChartSurface.YAxis>
-                            <s:NumericAxis AutoRange="Always"
-                                     DrawMajorGridLines="False"
-                                     DrawMinorGridLines="False"
-                                     DrawMajorBands="False"
-                                     Visibility="Collapsed" />
-                        </s:SciChartSurface.YAxis>
-                    </s:SciChartSurface>
-                </Grid>
-            </DataTemplate>
-
-            <!--  Style per ListBoxItem to ensure the chart stretches to fit  -->
-            <Style x:Key="ChannelListBoxItemStyle" TargetType="ListBoxItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Margin" Value="3,0,3,0"/>
-                <Setter Property="Padding" Value="0"/>
-            </Style>
-
-            <!--  Style for Stats  -->
-            <Style x:Key="StatsStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="26" />
-                <Setter Property="Margin" Value="0" />
-                <Setter Property="FontWeight" Value="Normal" />
-                <Setter Property="Foreground" Value="#BBFC9C29" />
-                <Setter Property="FontFamily" Value="/Resources/Fonts/#Neuropol Regular" />
-            </Style>
-
-            <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        </ResourceDictionary>
-
+        <s:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -112,106 +100,48 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
-            <WrapPanel HorizontalAlignment="Right" Orientation="Vertical">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ToggleButton x:Name="StartButton"
+                          Command="{Binding StartCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          IsChecked="True"
+                          s:ToggleButtonExtensions.GroupName="RealTimeEEG">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <!--  Define the Toolbar  -->
-                <ToggleButton Command="{Binding StartCommand}"
-                              Content="Play"
-                              Style="{StaticResource PlayButtonStyle}"
-                              ToolTip="Play"
-                              s:ToggleButtonExtensions.GroupName="RealTimeEEG" />
+            <ToggleButton x:Name="PauseButton"
+                          Command="{Binding PauseCommand}"
+                          IsEnabled="{Binding IsReset, Mode=OneWay, Converter={StaticResource InvertBooleanConverter}}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="RealTimeEEG">
+                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Command="{Binding StopCommand}"
-                              x:Name="StopButton"
-                              Content="Pause"
-                              Style="{StaticResource PauseButtonStyle}"
-                              ToolTip="Pause"
-                              s:ToggleButtonExtensions.GroupName="RealTimeEEG" />
+            <ToggleButton x:Name="StopButton"
+                          Command="{Binding StopCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="RealTimeEEG">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Command="{Binding ResetCommand}"
-                              x:Name="ResetButton"
-                              Content="Stop"
-                              Style="{StaticResource StopButtonStyle}"
-                              ToolTip="Stop"
-                              s:ToggleButtonExtensions.GroupName="RealTimeEEG" />
-
-                <ext:FlyoutMenuButton x:Name="IntervalFlyoutMenuButton"
-                                      HorizontalAlignment="Left"
-                                      Content="Interval"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Interval (ms)">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock Margin="3"
-                                       HorizontalAlignment="Left"
-                                       Foreground="White"
-                                       Text="Interval (ms): " />
-
-                            <Slider MinWidth="100"
-                                    DataContext="{Binding}"
-                                    IsEnabled="{Binding IsRunning,
-                                                        Converter={StaticResource BooleanToVisibilityConverter},
-                                                        ConverterParameter=INVERSE}"
-                                    Maximum="100"
-                                    Minimum="10"
-                                    Value="{Binding TimerInterval,
-                                                    Mode=TwoWay}">
-                                <ToolTipService.ToolTip>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Foreground="#222222" Text="{Binding TimerInterval}" />
-                                        <TextBlock Foreground="#222222" Text=" ms" />
-                                    </StackPanel>
-                                </ToolTipService.ToolTip>
-                            </Slider>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton x:Name="PointsFlyoutMenuButton"
-                                      HorizontalAlignment="Left"
-                                      Content="Points"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Points per Tick">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock Margin="3"
-                                       VerticalAlignment="Center"
-                                       Foreground="White"
-                                       Text="Points per Tick: " />
-
-                            <Slider MinWidth="100"
-                                    DataContext="{Binding}"
-                                    IsEnabled="{Binding IsRunning,
-                                                        Converter={StaticResource BooleanToVisibilityConverter},
-                                                        ConverterParameter=INVERSE}"
-                                    Maximum="100"
-                                    Minimum="10"
-                                    Value="{Binding BufferSize,
-                                                    Mode=TwoWay}">
-                                <ToolTipService.ToolTip>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Foreground="#222222" Text="{Binding BufferSize}" />
-                                        <TextBlock Foreground="#222222" Text=" Points/Tick" />
-                                    </StackPanel>
-                                </ToolTipService.ToolTip>
-                            </Slider>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-            </WrapPanel>
-        </Border>
+            <ext:FlyoutMenuButton IsEnabled="{Binding IsReset, Mode=OneWay}">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5,5,5,10" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="{Binding TimerInterval, Mode=OneWay, StringFormat='Interval: {0} ms'}"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Maximum="100" Minimum="10" Value="{Binding TimerInterval, Mode=TwoWay}"/>
+                        <TextBlock Text="{Binding BufferSize, Mode=OneWay, StringFormat='Points per tick: {0}'}"
+                                   Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Maximum="100" Minimum="10" Value="{Binding BufferSize, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Define the listbox which will host the N channels of the EEG  -->
         <ListBox Grid.Column="1"
-                 Background="#1c1c1e"
+                 Background="{StaticResource ThemedChartBackground}"
                  BorderThickness="0"
                  ItemContainerStyle="{StaticResource ChannelListBoxItemStyle}"
                  ItemTemplate="{StaticResource ChannelItemTemplate}"
@@ -221,7 +151,7 @@
 
         <!--  Define the Stats Panel  -->
         <Grid Grid.Column="1"
-              Margin="40,40,0,0"
+              Margin="100,20,0,0"
               HorizontalAlignment="Left"
               VerticalAlignment="Top">
 

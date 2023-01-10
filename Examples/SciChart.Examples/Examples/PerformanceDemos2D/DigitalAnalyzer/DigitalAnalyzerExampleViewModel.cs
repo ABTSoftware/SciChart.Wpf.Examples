@@ -88,11 +88,14 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 
         protected override void Dispose(bool disposing)
         {
-            ChannelViewModels?.ForEachDo(cvm => cvm.Dispose());
-            ChannelViewModels.Clear();
-
-            // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            if (disposing)
+            { 
+                ChannelViewModels?.ForEachDo(cvm => cvm.Dispose());
+                ChannelViewModels.Clear();
+                
+                // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            }
         }
 
         private async Task AddChannels(int digitalChannelsCount, int analogChannelsCount)

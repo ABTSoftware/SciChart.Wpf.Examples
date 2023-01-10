@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -118,7 +118,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             PauseButton.IsChecked = false;
             ResetButton.IsChecked = false;
 
-            IsFifoCheckBox.IsEnabled = false;
+            PauseButton.IsEnabled = true;
+            IsFifoButton.IsEnabled = false;
 
             // Start a timer to create new data and append on each tick
             _timerNewDataUpdate.Start();
@@ -132,7 +133,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             PauseButton.IsChecked = true;
             ResetButton.IsChecked = false;
 
-            IsFifoCheckBox.IsEnabled = false;
+            IsFifoButton.IsEnabled = false;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -143,7 +144,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             PauseButton.IsChecked = false;
             ResetButton.IsChecked = true;
 
-            IsFifoCheckBox.IsEnabled = true;
+            PauseButton.IsEnabled = false;
+            IsFifoButton.IsEnabled = true;
 
             t = -5d;
 

@@ -22,32 +22,32 @@
             <s:SquarePointMarker x:Key="SquarePointMarker"
                                  Width="8"
                                  Height="8"
-                                 Fill="Red"
-                                 Stroke="Orange"
+                                 Fill="{StaticResource ExtraThemeStrokeColor_6}"
+                                 Stroke="{StaticResource ExtraThemeStrokeColor_5}"
                                  StrokeThickness="1" />
 
             <s:EllipsePointMarker x:Key="EllipsePointMarker"
                                   Width="10"
                                   Height="10"
-                                  Fill="Red"
-                                  Stroke="Orange"
+                                  Fill="{StaticResource ExtraThemeStrokeColor_6}"
+                                 Stroke="{StaticResource ExtraThemeStrokeColor_5}"
                                   StrokeThickness="2" />
 
             <local:StrokeFillPaletteProvider x:Key="StrokeFillPaletteProvider"
                                              AreaSelection="{Binding [AreaSelectionModifier].AreaSelection,
                                                                      Mode=OneWay,
                                                                      Source={StaticResource Modifiers}}"
-                                             FillBrushOverride="Yellow"
+                                             FillBrushOverride="{StaticResource ExtraThemeStrokeBrush_2}"
                                              PointMarkerFillOverride="Yellow"
                                              PointMarkerStrokeOverride="Red"
-                                             StrokeOverride="Red" />
+                                             StrokeOverride="{StaticResource SecondaryThemeStrokeColor}" />
 
             <local:StrokeFillPaletteProvider x:Key="StrokeFillMountainPaletteProvider"
                                              AreaSelection="{Binding [AreaSelectionModifier].AreaSelection,
                                                                      Mode=OneWay,
                                                                      Source={StaticResource Modifiers}}"
-                                             FillBrushOverride="Purple"
-                                             StrokeOverride="Red" />
+                                             FillBrushOverride="{StaticResource ExtraThemeStrokeBrush_1}"
+                                             StrokeOverride="{StaticResource SecondaryThemeStrokeColor}" />
 
         </Grid.Resources>
 
@@ -63,9 +63,9 @@
 
                 <Style x:Key="ColumnSeriesStyle" TargetType="s:FastColumnRenderableSeries">
                     <Setter Property="DataPointWidth" Value="0.8" />
-                    <Setter Property="Stroke" Value="Blue" />
+                    <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
                     <Setter Property="ZeroLineY" Value="6000" />
-                    <Setter Property="Fill" Value="Blue" />
+                    <Setter Property="Fill" Value="{StaticResource MainThemeSolidBrush}" />
                     <Setter Property="PaletteProvider" Value="{StaticResource StrokeFillPaletteProvider}" />
                 </Style>
 

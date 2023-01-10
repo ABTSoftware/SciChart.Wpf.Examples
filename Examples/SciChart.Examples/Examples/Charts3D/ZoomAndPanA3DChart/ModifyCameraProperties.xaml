@@ -15,15 +15,41 @@
         <s3D:Vector3StringConverter StringFormat="n1" x:Key="Vector3StringConverter"/>
 
         <!-- These can also be declared in code behind and set on the SciChart3DSurface.Camera property -->
-        <s3D:Camera3D x:Key="OrthogonalCamera" CameraId="Ortho Camera"  OrthoWidth="600" OrthoHeight="400" ZoomToFitOnAttach="True" ProjectionMode="Orthogonal" Target="0,0,0" Position="-1000,0,-1000"/>
+        <s3D:Camera3D x:Key="OrthogonalCamera" CameraId="Ortho Camera" OrthoWidth="600" OrthoHeight="400" ZoomToFitOnAttach="True" ProjectionMode="Orthogonal" Target="0,0,0" Position="-1000,0,-1000"/>
 
         <!-- These can also be declared in code behind and set on the SciChart3DSurface.Camera property -->
         <s3D:Camera3D x:Key="PerspectiveCamera" CameraId="Perspective Camera" ProjectionMode="Perspective" ZoomToFitOnAttach="True" OrbitalYaw="45" OrbitalPitch="30"/>
 
+        <Style TargetType="{x:Type s3D:VectorEditor}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type s3D:VectorEditor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="X" Margin="0,0,5,0" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <TextBox x:Name="PART_XText" Grid.Column="1" FontWeight="Regular" FontSize="12" MinWidth="80" Width="80"/>
+
+                            <TextBlock Grid.Column="2" Text="Y" Margin="5,0" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <TextBox x:Name="PART_YText" Grid.Column="3" FontWeight="Regular" FontSize="12" MinWidth="80" Width="80"/>
+
+                            <TextBlock Grid.Column="4" Text="Z" Margin="5,0" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <TextBox x:Name="PART_ZText" Grid.Column="5" FontWeight="Regular" FontSize="12" MinWidth="80" Width="80"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -34,56 +60,79 @@
         <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
 
-            <ext:FlyoutSeparator Background="#444"/>
+            <ext:FlyoutSeparator/>
 
-            <ext:FlyoutMenuToggleButton x:Name="perspAttached" Style="{StaticResource FlyoutMenuToggleButtonStyle}" FontSize="9"  Content="CAM1" Padding="0" IsChecked="True" s:ToggleButtonExtensions.GroupName="ModifyCameraGroup" Checked="OnAttachPerspectiveChecked">
+            <ext:FlyoutMenuToggleButton x:Name="perspAttached" IsChecked="True" AllowMouseUncheck="False" Checked="OnAttachPerspectiveChecked">
+                <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ext:ToolbarIcon Kind="Video" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                    <TextBlock Text="1" FontSize="10" FontWeight="Bold" FontFamily="Segoe"
+                               Canvas.Left="4" Canvas.Top="4" Foreground="{StaticResource DefaultButtonBackgroundBrush}"/>
+                </Canvas>
                 <ext:FlyoutMenuToggleButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="240">
-                        <TextBlock Text="Camera 1 (Perspective)" FontSize="11"/>
-                        <ext:FlyoutSeparator/>
-                        <TextBlock Text="Position" FontSize="11"/>
-                        <s3D:VectorEditor FontSize="11" Vector="{Binding Source={StaticResource PerspectiveCamera}, Path=Position, Mode=TwoWay}"/>
-                        <TextBlock Text="Target" FontSize="11"/>
-                        <s3D:VectorEditor FontSize="11" Vector="{Binding Source={StaticResource PerspectiveCamera}, Path=Target, Mode=TwoWay}"/>
-                        <TextBlock Text="Pitch" FontSize="11"/>
+                    <StackPanel Margin="5" Width="290" Orientation="Vertical">
+                        <TextBlock Text="Camera 1 (Perspective)" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ext:FlyoutSeparator Margin="0,2"/>
+                        <TextBlock Text="Position" Margin="0,5,0,10" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <s3D:VectorEditor Vector="{Binding Source={StaticResource PerspectiveCamera}, Path=Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Target" Margin="0,10" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <s3D:VectorEditor Vector="{Binding Source={StaticResource PerspectiveCamera}, Path=Target, Mode=TwoWay}"/>
+                        <TextBlock Text="Pitch" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="-90" Maximum="90" Value="{Binding Source={StaticResource PerspectiveCamera}, Path=OrbitalPitch, Mode=TwoWay}"/>
-                        <TextBlock Text="Yaw" FontSize="11"/>
+                        <TextBlock Text="Yaw" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="0" Maximum="360" Value="{Binding Source={StaticResource PerspectiveCamera}, Path=OrbitalYaw, Mode=TwoWay}"/>
-                        <TextBlock Text="Radius" FontSize="11"/>
+                        <TextBlock Text="Radius" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="10" Maximum="3000" Value="{Binding Source={StaticResource PerspectiveCamera}, Path=Radius, Mode=TwoWay}"/>
-                        <TextBlock Text="Field Of View" FontSize="11"/>
+                        <TextBlock Text="Field Of View" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="10" Maximum="90" Value="{Binding Source={StaticResource PerspectiveCamera}, Path=FieldOfView, Mode=TwoWay}"/>
                     </StackPanel>
                 </ext:FlyoutMenuToggleButton.PopupContent>
             </ext:FlyoutMenuToggleButton>
 
-            <ext:FlyoutMenuToggleButton x:Name="orthoAttached"  Style="{StaticResource FlyoutMenuToggleButtonStyle}" FontSize="9" Content="CAM2" Padding="0" s:ToggleButtonExtensions.GroupName="ModifyCameraGroup" Checked="OnAttachOrthogonalChecked">
+            <ext:FlyoutMenuToggleButton x:Name="orthoAttached" AllowMouseUncheck="False" Checked="OnAttachOrthogonalChecked">
+                <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ext:ToolbarIcon Kind="Video" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                    <TextBlock Text="2" FontSize="10" FontWeight="Bold" FontFamily="Segoe"
+                               Canvas.Left="4" Canvas.Top="4" Foreground="{StaticResource DefaultButtonBackgroundBrush}"/>
+                </Canvas>
                 <ext:FlyoutMenuToggleButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="240">
-                        <TextBlock Text="Camera 2 (Orthogonal)" FontSize="11"/>
-                        <ext:FlyoutSeparator/>
-                        <TextBlock Text="Position" FontSize="11"/>
-                        <s3D:VectorEditor FontSize="11" Vector="{Binding Source={StaticResource OrthogonalCamera}, Path=Position, Mode=TwoWay}"/>
-                        <TextBlock Text="Target" FontSize="11"/>
+                    <StackPanel Margin="5" Width="290" Orientation="Vertical">
+                        <TextBlock Text="Camera 2 (Orthogonal)" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ext:FlyoutSeparator Margin="0,2"/>
+                        <TextBlock Text="Position" Margin="0,5,0,10" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <s3D:VectorEditor Vector="{Binding Source={StaticResource OrthogonalCamera}, Path=Position, Mode=TwoWay}"/>
+                        <TextBlock Text="Target" Margin="0,10" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <s3D:VectorEditor FontSize="11" Vector="{Binding Source={StaticResource OrthogonalCamera}, Path=Target, Mode=TwoWay}"/>
-                        <TextBlock Text="Pitch" FontSize="11"/>
+                        <TextBlock Text="Pitch" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="-90" Maximum="90" Value="{Binding Source={StaticResource OrthogonalCamera}, Path=OrbitalPitch, Mode=TwoWay}"/>
-                        <TextBlock Text="Yaw" FontSize="11"/>
+                        <TextBlock Text="Yaw" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="0" Maximum="360" Value="{Binding Source={StaticResource OrthogonalCamera}, Path=OrbitalYaw, Mode=TwoWay}"/>
-                        <TextBlock Text="OrthoWidth" FontSize="11"/>
+                        <TextBlock Text="OrthoWidth" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="1" Maximum="1000" Value="{Binding Source={StaticResource OrthogonalCamera}, Path=OrthoWidth, Mode=TwoWay}"/>
-                        <TextBlock Text="OrthoHeight" FontSize="11"/>
+                        <TextBlock Text="OrthoHeight" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider Minimum="1" Maximum="1000" Value="{Binding Source={StaticResource OrthogonalCamera}, Path=OrthoHeight, Mode=TwoWay}"/>
                     </StackPanel>
                 </ext:FlyoutMenuToggleButton.PopupContent>
             </ext:FlyoutMenuToggleButton>
 
-            <ToggleButton Style="{StaticResource DefaultToggleButtonStyle}" Content="LHS" IsChecked="True" FontSize="9" ToolTip="Use the Left Handed Coordinate system (Default)" Checked="OnUseLhsCoordinates" s:ToggleButtonExtensions.GroupName="CoordinateSystemGroup"/>
-            <ToggleButton Style="{StaticResource DefaultToggleButtonStyle}" Content="RHS" FontSize="9" ToolTip="Use the Right Handed Coordinate system" Checked="OnUseRhsCoordinates" s:ToggleButtonExtensions.GroupName="CoordinateSystemGroup"/>
-            
+            <ToggleButton IsChecked="True"          
+                          Checked="OnUseLhsCoordinates"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          ToolTip="Use the Left Handed Coordinate system (Default)"
+                          s:ToggleButtonExtensions.GroupName="CoordinateSystemGroup">
+                <ext:ToolbarIcon Kind="AxisXArrow" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+
+            <ToggleButton Checked="OnUseRhsCoordinates"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}"
+                          ToolTip="Use the Right Handed Coordinate system"
+                          s:ToggleButtonExtensions.GroupName="CoordinateSystemGroup">
+                <ext:ToolbarIcon Kind="AxisYArrow" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
         </ext:SciChart3DInteractionToolbar>
 
-        <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" Camera="{StaticResource PerspectiveCamera}">
+        <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" BorderThickness="0" Camera="{StaticResource PerspectiveCamera}">
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:NumericAxis3D/>
             </s3D:SciChart3DSurface.XAxis>
@@ -96,21 +145,29 @@
                 <s3D:NumericAxis3D/>
             </s3D:SciChart3DSurface.ZAxis>
         </s3D:SciChart3DSurface>
+        
+        <Border Grid.Column="1"
+                Background="{StaticResource MainThemeTransparentSolidBrush}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                BorderThickness="0"
+                CornerRadius="5"
+                Width="300"
+                Margin="5">
 
-        <Border Background="#555" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" 
-                BorderThickness="1" BorderBrush="White" CornerRadius="2" Opacity="0.4"
-                MinWidth="300">
-            <Grid TextElement.Foreground="#FFF" >
+            <Grid Margin="10,5">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Margin" Value="3,5"/>
+                        <Setter Property="Opacity" Value="0.7"/>
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                        <Setter Property="Foreground" Value="#FFF"/>
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -124,45 +181,27 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Bound Camera" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" FontWeight="Bold" Margin="0" Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.CameraId, FallbackValue='NA'}"/>
+                <Line Grid.Row="1" Grid.ColumnSpan="3" X2="1" StrokeThickness="0.5" Stroke="#FFF" Stretch="Fill" HorizontalAlignment="Stretch" Margin="0,5,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
 
-                <Border Background="#FFF" Height="1" Grid.Row="1" Margin="3,5" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Position" Grid.Row="2" FontWeight="Bold"/>
+                <TextBlock Text="Target" Grid.Row="3" FontWeight="Bold"/>
+                <TextBlock Text="Pitch" Grid.Row="4" FontWeight="Bold"/>
+                <TextBlock Text="Yaw" Grid.Row="5" FontWeight="Bold"/>
+                <TextBlock Text="Radius" Grid.Row="6" FontWeight="Bold"/>
+                <TextBlock Text="Projection Mode" Grid.Row="7" FontWeight="Bold"/>
+                <TextBlock Text="Field Of View" Grid.Row="8" FontWeight="Bold"/>
+                <TextBlock Text="Orthographic" Grid.Row="9" FontWeight="Bold"/>
 
-                <TextBlock Text="Position:" Grid.Row="2" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Position, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="2" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Target, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="3" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalPitch, FallbackValue='NA'}" Grid.Row="4" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalYaw, FallbackValue='NA'}" Grid.Row="5" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Radius, FallbackValue='NA'}" Grid.Row="6" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.ProjectionMode, FallbackValue='NA'}" Grid.Row="7" Grid.Column="2"/>
+                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.FieldOfView, FallbackValue='NA'}" Grid.Row="8" Grid.Column="2"/>
 
-                <TextBlock Text="Target:" Grid.Row="3" FontWeight="Bold"/>
-
-                <TextBlock Text="Pitch:" Grid.Row="4" FontWeight="Bold"/>
-
-                <TextBlock Text="Yaw:" Grid.Row="5" FontWeight="Bold"/>
-
-                <TextBlock Text="Radius:" Grid.Row="6" FontWeight="Bold"/>
-
-                <TextBlock Text="Projection Mode:" Grid.Row="7" FontWeight="Bold"/>
-
-                <TextBlock Text="Field Of View:" Grid.Row="8" FontWeight="Bold"/>
-
-                <TextBlock Text="Orthographic:" Grid.Row="9" FontWeight="Bold"/>
-
-                <TextBlock Grid.Row="0" Grid.Column="1">
-                    <Run Text="'"/><Run Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.CameraId, FallbackValue='NA'}"/><Run Text="'"/>
-                </TextBlock>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Position, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="2" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Target, FallbackValue='NA', Converter={StaticResource Vector3StringConverter}}" Grid.Row="3" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalPitch, FallbackValue='NA'}" Grid.Row="4" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrbitalYaw, FallbackValue='NA'}" Grid.Row="5" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.Radius, FallbackValue='NA'}" Grid.Row="6" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.ProjectionMode, FallbackValue='NA'}" Grid.Row="7" Grid.Column="1"/>
-
-                <TextBlock Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.FieldOfView, FallbackValue='NA'}" Grid.Row="8" Grid.Column="1"/>
-
-                <TextBlock Grid.Row="9" Grid.Column="1">
+                <TextBlock Grid.Row="9" Grid.Column="2">
                     <Run Text="Width="/>
                     <Run Text="{Binding Source={x:Reference Name=sciChart}, Path=Camera.OrthoWidth, FallbackValue='NA'}"/>
                     <Run Text=", Height="/>

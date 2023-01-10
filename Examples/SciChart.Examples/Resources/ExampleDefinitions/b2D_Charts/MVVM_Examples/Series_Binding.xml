@@ -14,7 +14,7 @@
     [b]Documentation Links[/b]
 
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#MVVM%20DataSeries%20RenderableSeries%20API.html']SeriesBinding Markup Extension[/url]
-    - List of [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartSeries_namespace.html']BaseRenderableSeriesViewModel derived Types[/url]
+    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.ChartSeries_namespace.html']BaseRenderableSeriesViewModel Derived Types[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/UseSciChartWithMvvm/SeriesBinding/SeriesBindingView.xaml.txt</string>

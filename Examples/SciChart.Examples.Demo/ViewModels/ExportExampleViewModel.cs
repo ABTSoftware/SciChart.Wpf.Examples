@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.Demo.Helpers.ProjectExport;
@@ -10,6 +11,7 @@ namespace SciChart.Examples.Demo.ViewModels
     public class ExportExampleViewModel : ViewModelWithTraitsBase, IDataErrorInfo
     {
         private readonly ExampleViewModel _parent;
+        private bool _onExported;
 
         public ExportExampleViewModel(IModule module, ExampleViewModel parent)
         {
@@ -33,16 +35,21 @@ namespace SciChart.Examples.Demo.ViewModels
                 }
             });
 
-            ExportCommand = new ActionCommand(() =>
+            ExportCommand = new ActionCommand(async() =>
             {
                 ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath);
+
+                OnExported = true;
+
                 if (_parent.Usage != null)
-                {
                     _parent.Usage.Exported = true;
-                }
+                
+                await Task.Delay(TimeSpan.FromMilliseconds(2000));
+
+                OnExported = false;
                 CloseTrigger = true;
 
-            }, () => ValidateExportPath() == null && ValidateLibrariesPath() == null);
+            }, () => IsValid);
 
             CancelCommand = new ActionCommand(() => IsExportVisible = false);
        
@@ -61,13 +68,27 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     SetDynamicValue(value);
 
+                    OnExported = false;
+
                     if (IsExportVisible)
                     {
-                        _parent.SmileFrownViewModel.SmileVisible = false;
-                        _parent.SmileFrownViewModel.FrownVisible = false;
+                        _parent.FeedbackViewModel.IsFeedbackVisible = false;
                         _parent.BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
                     }
                     _parent.InvalidateDialogProperties();
+                }
+            }
+        }
+
+        public bool OnExported
+        {
+            get => _onExported;
+            set
+            {
+                if (_onExported != value)
+                {
+                    _onExported = value;
+                    OnPropertyChanged(nameof(OnExported));
                 }
             }
         }
@@ -109,26 +130,40 @@ namespace SciChart.Examples.Demo.ViewModels
 
         #region IDataErrorInfo
 
-        string IDataErrorInfo.Error
-        {
-            get { return null; }
-        }
-
-        string IDataErrorInfo.this[string propertyName]
-        {
-            get { return GetValidationError(propertyName); }
-        }
-
         private static readonly string[] ValidatedProperties =
         {
             nameof(ExportPath),
             nameof(LibrariesPath)
         };
 
+        public bool IsValid
+        {
+            get
+            {
+                foreach (string property in ValidatedProperties)
+                {
+                    if (GetValidationError(property) != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        public string Error { get; private set; }
+
+        public string this[string propertyName]
+        {
+            get { return GetValidationError(propertyName); }
+        }
+
         private string GetValidationError(string propertyName)
         {
             if (Array.IndexOf(ValidatedProperties, propertyName) < 0)
+            {
                 return null;
+            }
 
             string error = null;
 

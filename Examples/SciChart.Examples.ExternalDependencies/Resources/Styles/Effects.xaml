@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+    
+    <s:EffectConverter x:Key="EffectConverter"/>
+
+    <DropShadowEffect x:Key="DefaultShadowEffect" Color="Black" ShadowDepth="5" Opacity="0.4"/>
+
+</ResourceDictionary>

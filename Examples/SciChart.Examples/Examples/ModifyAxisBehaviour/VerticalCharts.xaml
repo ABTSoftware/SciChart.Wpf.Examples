@@ -9,7 +9,7 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -23,8 +23,8 @@
                            s:HorizontalGroupHelper.HorizontalChartGroup="MyHorizontalGroup">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="DarkGray" YAxisId="Top1" />
-                <s:FastLineRenderableSeries Stroke="Brown" YAxisId="Top2" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" YAxisId="Top1" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_1}" YAxisId="Top2" />
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Define the XAxis for this chart on the Left. Optional bands give a cool look and feel for minimal performance impact  -->
@@ -36,17 +36,17 @@
 
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis AxisAlignment="Top"
-                               AxisTitle="Gray Line"
-                               BorderBrush="DarkGray"
+                               AxisTitle="Aqua Line"
+                               BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                                BorderThickness="0,0,0,1"
                                Id="Top1"
-                               TickTextBrush="DarkGray" />
+                               TickTextBrush="{StaticResource ExtraThemeStrokeBrush_2}" />
                 <s:NumericAxis AxisAlignment="Top"
-                               AxisTitle="Brown Line"
-                               BorderBrush="Brown"
+                               AxisTitle="Violet Line"
+                               BorderBrush="{StaticResource ExtraThemeStrokeBrush_1}"
                                BorderThickness="0,0,0,1"
                                Id="Top2"
-                               TickTextBrush="Brown" />
+                               TickTextBrush="{StaticResource ExtraThemeStrokeBrush_1}" />
             </s:SciChartSurface.YAxes>
 
             <s:SciChartSurface.ChartModifier>
@@ -64,8 +64,8 @@
                            s:HorizontalGroupHelper.HorizontalChartGroup="MyHorizontalGroup">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="Green" YAxisId="Top1" />
-                <s:FastLineRenderableSeries Stroke="DeepSkyBlue" YAxisId="Top2" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}" YAxisId="Top1" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}" YAxisId="Top2" />
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Define the XAxis for this chart on the Right. Optional bands give a cool look and feel for minimal performance impact  -->
@@ -76,25 +76,27 @@
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxes>
+                
                 <s:NumericAxis AxisAlignment="Top"
-                               AxisTitle="Blue Line"
-                               BorderBrush="DeepSkyBlue"
+                               AxisTitle="Orange Line"
+                               BorderBrush="{StaticResource SecondaryThemeSolidBrush}"
                                BorderThickness="0,0,0,1"
                                Id="Top1"
-                               TickTextBrush="DeepSkyBlue" />
-
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}" />
+                
                 <s:NumericAxis AxisAlignment="Top"
-                               AxisTitle="Green Line"
-                               BorderBrush="Green"
+                               AxisTitle="Light Blue Line"
+                               BorderBrush="{StaticResource MainThemeSolidBrush}"
                                BorderThickness="0,0,0,1"
                                Id="Top2"
-                               TickTextBrush="Green" />
+                               TickTextBrush="{StaticResource MainThemeSolidBrush}" />
             </s:SciChartSurface.YAxes>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup s:MouseManager.MouseEventGroup="myCustomGroup">
                     <s:RubberBandXyZoomModifier IsXAxisOnly="True" ReceiveHandledEvents="True" />
                     <s:ZoomExtentsModifier />
+                    <s:YAxisDragModifier IsEnabled="True" AxisId="Top1"></s:YAxisDragModifier>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>

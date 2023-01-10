@@ -12,17 +12,16 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
         <!-- The style for the rollover line -->
         <Style x:Key="RolloverLineStyle" TargetType="Line">
-            <Setter Property="Stroke" Value="DarkGreen"/>
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_1}"/>
             <Setter Property="StrokeThickness" Value="2"/>
             <Setter Property="StrokeDashArray" Value="2 2"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="UseLayoutRounding" Value="True"/>
         </Style>
-
     </UserControl.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -48,35 +47,35 @@
                 <!-- Draw the original line -->
                 <s:FastLineRenderableSeries x:Name="LineRenderSeries" Stroke="SteelBlue" StrokeThickness="1" RolloverMarkerTemplate="{x:Null}">
                     <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </s:FastLineRenderableSeries.SeriesAnimation>
                 </s:FastLineRenderableSeries>
 
                 <!-- Draw the spline series - custom renderable series -->
-                <local:SplineLineRenderableSeries x:Name="SplineRenderSeries" Stroke="DarkGreen" StrokeThickness="2"  
+                <local:SplineLineRenderableSeries x:Name="SplineRenderSeries" Stroke="{StaticResource MainThemeStrokeColor}" StrokeThickness="2"  
                                                   IsSplineEnabled="True" UpSampleFactor="10">
 
                     <local:SplineLineRenderableSeries.SeriesAnimation>
-                        <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                        <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                     </local:SplineLineRenderableSeries.SeriesAnimation>
-                    
+
                     <!-- LegendMarkerTemplate is required to show a marker in the legend next to SeriesName -->
                     <local:SplineLineRenderableSeries.LegendMarkerTemplate>
                         <DataTemplate>
-                            <Line VerticalAlignment="Center" Stretch="Fill" Stroke="DarkGreen"
+                            <Line VerticalAlignment="Center" Stretch="Fill" Stroke="{StaticResource MainThemeSolidBrush}"
                                     StrokeThickness="2" X1="0" X2="1" Y1="0.5" Y2="0.5" />
                         </DataTemplate>
                     </local:SplineLineRenderableSeries.LegendMarkerTemplate>
 
                     <!-- PointMarker is optional, to display a marker on each data point -->
                     <local:SplineLineRenderableSeries.PointMarker>
-                        <s:EllipsePointMarker Fill="White" Stroke="DarkGreen"/>
+                        <s:EllipsePointMarker Fill="{StaticResource SecondaryThemeStrokeColor}" Stroke="{StaticResource MainThemeStrokeColor}"/>
                     </local:SplineLineRenderableSeries.PointMarker>
 
                     <!-- RolloverMarker is optional, to display a marker on Rollover -->
                     <local:SplineLineRenderableSeries.RolloverMarkerTemplate>
                         <ControlTemplate>
-                            <Ellipse Width="9" Height="9" Fill="White" Stroke="DarkGreen" StrokeThickness="1"></Ellipse>
+                            <Ellipse Width="9" Height="9" Fill="{StaticResource SecondaryThemeSolidBrush}" Stroke="{StaticResource MainThemeSolidBrush}" StrokeThickness="1"></Ellipse>
                         </ControlTemplate>
                     </local:SplineLineRenderableSeries.RolloverMarkerTemplate>
 

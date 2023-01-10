@@ -6,23 +6,23 @@
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+
     <UserControl.Resources>
         <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1" Color="DarkRed"/>
-                <GradientStop Offset="0.8" Color="Red"/>
-                <GradientStop Offset="0.6" Color="Yellow"/>
-                <GradientStop Offset="0.4" Color="GreenYellow"/>
-                <GradientStop Offset="0.2" Color="Cyan"/>
-                <GradientStop Offset="0.1" Color="Blue"/>
-                <GradientStop Offset="0.0" Color="#1D2C6B"/>
+                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_6}"/>
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_5}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_7}"/>
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}"/>
+                <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}"/>
+                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}"/>
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
     </UserControl.Resources>
-    
+
     <Grid>
-        <s3D:SciChart3DSurface x:Name="scs" WorldDimensions="1100,400,400" >
+        <s3D:SciChart3DSurface x:Name="scs" WorldDimensions="1100,400,400" BorderThickness="0">
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True"/>
             </s3D:SciChart3DSurface.Camera>
@@ -32,16 +32,16 @@
                 <!-- Floor with Contours. Uses HeightScaleFactor and YOffset = YAxis.VisibleRange.Min to display mesh on the floor -->
                 <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWithContours"
                                                    HeightScaleFactor="0.0"
-                                                   Stroke="#FF228B22"                                                    
+                                                   Stroke="{StaticResource MainThemeStrokeColor}"                                                    
                                                    StrokeThickness="2.0"
                                                    Opacity="0.7"
                                                    Maximum="4"
                                                    MeshColorPalette="{StaticResource HeightColorMap}"/>
-                
+
                 <!-- SurfaceMesh with heights -->
                 <s3D:SurfaceMeshRenderableSeries3D x:Name="surfaceMeshRenderableSeries"  
                                                    DrawMeshAs="SolidWireFrame" 
-                                                   Stroke="#77228B22" 
+                                                   Stroke="{StaticResource MainThemeTransparentStrokeColor}" 
                                                    StrokeThickness="2.0"
                                                    DrawSkirt="False" 
                                                    Opacity="0.9" 
@@ -52,7 +52,7 @@
                 <s3D:SurfaceMeshRenderableSeries3D DrawMeshAs="SolidWithContours"
                                                    HeightScaleFactor="0.0"
                                                    Opacity="0.7"
-                                                   Stroke="#FF228B22" 
+                                                   Stroke="{StaticResource ExtraThemeStrokeColor_2}" 
                                                    StrokeThickness="2.0"
                                                    Maximum="4"
                                                    YOffset="{Binding Source={x:Reference Name=YAxis}, Path=VisibleRange.Max, Mode=OneWay}"
@@ -69,7 +69,7 @@
             <s3D:SciChart3DSurface.ZAxis>
                 <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.ZAxis>
-            
+
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:OrbitModifier3D/>

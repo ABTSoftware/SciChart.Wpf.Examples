@@ -5,143 +5,101 @@
 
     <dashboardStyleCharts:LabelForegroundConverter x:Key="LabelForegroundConverter" />
 
+    <!--TooltipTemplate for RolloverModifier-->
+    <DataTemplate x:Key="RolloverTooltipTemplateDashboard" DataType="s:SeriesInfo">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Foreground="Black" Text="{Binding SeriesName, StringFormat='{}{0}:'}" />
+            <TextBlock Foreground="Black" Text="{Binding FormattedYValue}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!--Columns colors-->
+
     <Style x:Key="BaseStackedStyle" TargetType="s:StackedColumnRenderableSeries">
         <Setter Property="LabelColor" Value="{Binding Stroke, RelativeSource={RelativeSource Self}, Converter={StaticResource LabelForegroundConverter}}" />
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="ShowLabel" Value="{Binding IsChecked, ElementName=ShowLabels, Mode=TwoWay}" />
         <Setter Property="DataPointWidth" Value="{Binding Value, ElementName=DataPointWidth, Mode=TwoWay}" />
         <Setter Property="Spacing" Value="{Binding Value, ElementName=Spacing, Mode=TwoWay}" />
-        <Setter Property="SpacingMode" Value="{Binding SelectedItem, ElementName=SpacingMode, Mode=TwoWay}" />
+        <Setter Property="SpacingMode" Value="{Binding SelectedItem, ElementName=SpacingModeCbx, Mode=TwoWay, TargetNullValue=Absolute}" />
     </Style>
 
-    <Style x:Key="StackedColumnBlueStyle"
+    <Style x:Key="StackedColumnFirstColorStyle"
            BasedOn="{StaticResource BaseStackedStyle}"
            TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="Stroke" Value="#ff226fb7" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ff226fb7" />
-                    <GradientStop Offset="1.0" Color="#ff1b5790" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_1}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_1}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedColumnOrangeStyle"
+    <Style x:Key="StackedColumnSecondColorStyle"
            BasedOn="{StaticResource BaseStackedStyle}"
            TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="Stroke" Value="#ffff9a2e" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffff9a2e" />
-                    <GradientStop Offset="1.0" Color="#ffd27f26" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_2}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_2}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedColumnRedStyle"
+    <Style x:Key="StackedColumnThirdColorStyle"
            BasedOn="{StaticResource BaseStackedStyle}"
            TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="Stroke" Value="#ffdc443f" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffdc443f" />
-                    <GradientStop Offset="1.0" Color="#ffbd3a36" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_3}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_3}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedColumnGreenStyle"
+    <Style x:Key="StackedColumnFourthColorStyle"
            BasedOn="{StaticResource BaseStackedStyle}"
            TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="Stroke" Value="#ffaad34f" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffaad34f" />
-                    <GradientStop Offset="1.0" Color="#ff91b443" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_4}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_4}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedColumnVioletStyle"
+    <Style x:Key="StackedColumnFifthColorStyle"
            BasedOn="{StaticResource BaseStackedStyle}"
            TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="Stroke" Value="#ff8562b4" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ff8562b4" />
-                    <GradientStop Offset="1.0" Color="#ff664b8a" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_5}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_5}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
+    <!--Mountains colors-->
 
-    <Style x:Key="StackedMountainBlueStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="Stroke" Value="#ff226fb7" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ff226fb7" />
-                    <GradientStop Offset="1.0" Color="#ff1b5790" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+    <DataTemplate x:Key="DigitalToolTipTemplate" DataType="s:XySeriesInfo">
+        <Border Style="{StaticResource BorderStyle}" BorderBrush="{Binding Stroke}">
+            <TextBlock Text="{Binding SeriesName, StringFormat='{}{0}'}" />
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="StackedMountainFirstColorStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_1}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_1}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedMountainOrangeStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="Stroke" Value="#ffff9a2e" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffff9a2e" />
-                    <GradientStop Offset="1.0" Color="#ffd27f26" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="StackedMountainSecondColorStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_2}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_2}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedMountainRedStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="Stroke" Value="#ffdc443f" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffdc443f" />
-                    <GradientStop Offset="1.0" Color="#ffbd3a36" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="StackedMountainThirdColorStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_3}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_3}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedMountainGreenStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="Stroke" Value="#ffaad34f" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ffaad34f" />
-                    <GradientStop Offset="1.0" Color="#ff91b443" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="StackedMountainFourthColorStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_4}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_4}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
-    <Style x:Key="StackedMountainVioletStyle" TargetType="s:StackedMountainRenderableSeries">
-        <Setter Property="Stroke" Value="#ff8562b4" />
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Offset="0.0" Color="#ff8562b4" />
-                    <GradientStop Offset="1.0" Color="#ff664b8a" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="StackedMountainFifthColorStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="Stroke" Value="{StaticResource GroupSeriesColor_5}" />
+        <Setter Property="Fill" Value="{StaticResource GroupSeriesGradientBrush_5}"/>
+        <Setter Property="s:RolloverModifier.TooltipTemplate" Value="{StaticResource RolloverTooltipTemplateDashboard}"/>
     </Style>
 
 </ResourceDictionary>

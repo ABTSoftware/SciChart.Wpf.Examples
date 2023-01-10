@@ -154,7 +154,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.DigitalAnalyzer
 
         protected override void Dispose(bool disposing)
         {
-            this.Clear();
+            if (disposing)
+            { 
+                Clear();
+            }
         }
     }
 }

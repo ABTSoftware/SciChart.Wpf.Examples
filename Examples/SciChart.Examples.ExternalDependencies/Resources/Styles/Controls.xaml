@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/CoverFlow.xaml"/>
+        <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/Toolbar.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

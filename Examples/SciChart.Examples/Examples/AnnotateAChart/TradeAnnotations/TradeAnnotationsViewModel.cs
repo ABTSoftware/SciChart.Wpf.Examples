@@ -33,6 +33,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         public TradeAnnotationsViewModel()
         {
+            AnnotationType = typeof(BrushAnnotationViewModel);
             Annotations = new ObservableCollection<IAnnotationViewModel>();
             Annotations.CollectionChanged += OnAnnotationsCollectionChanged;
 
@@ -71,8 +72,6 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
                 OnPropertyChanged("IsRubberBandEnabled");
             }
         }
-
-        public bool IsAnnotationDrawn { set; get; }
 
         public ObservableCollection<IRenderableSeriesViewModel> Series
         {
@@ -144,9 +143,6 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             }
 
             IsAnnotationCreationEnable = false;
-            IsAnnotationDrawn = false;
-
-            OnPropertyChanged("IsAnnotationDrawn");
         });
         
         public List<Brush> AllBrushes => typeof(Brushes).GetProperties().Select(x => (Brush)x.GetValue(null, null)).ToList();
@@ -184,14 +180,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 
         private void SetAnnotationTypeExecute(Type type)
         {
-            if (IsAnnotationCreationEnable && type.IsEquivalentTo(AnnotationType))
+            IsAnnotationCreationEnable = true;
+
+            if (!type.IsEquivalentTo(AnnotationType))
             {
-                IsAnnotationCreationEnable = false;
-                AnnotationType = null;
-            }
-            else
-            {
-                IsAnnotationCreationEnable = true;
                 AnnotationType = type;
             }
         }

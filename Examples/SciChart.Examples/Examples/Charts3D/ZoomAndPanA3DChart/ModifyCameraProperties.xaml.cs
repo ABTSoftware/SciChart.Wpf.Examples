@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -27,31 +27,33 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart
             InitializeComponent();
         }
 
-        private void OnAttachOrthogonalChecked(object sender, EventArgs e)
+        private void OnAttachOrthogonalChecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded) return;
 
             perspAttached.IsChecked = false;
+            orthoAttached.IsChecked = true;
+ 
             // You can also set these on the scichartsurface entirely in code, creating a new instance of 
             // Camera3D rather than declaring in XAML
-            var newCamera = TryFindResource("OrthogonalCamera") as Camera3D;
-            sciChart.Camera = newCamera;
+            sciChart.Camera = TryFindResource("OrthogonalCamera") as Camera3D;
         }
 
-        private void OnAttachPerspectiveChecked(object sender, EventArgs e)
+        private void OnAttachPerspectiveChecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded) return;
 
+            perspAttached.IsChecked = true;
             orthoAttached.IsChecked = false;
+
             // You can also set these on the scichartsurface entirely in code, creating a new instance of 
             // Camera3D rather than declaring in XAML
-            var newCamera = TryFindResource("PerspectiveCamera") as Camera3D;
-            sciChart.Camera = newCamera;
+            sciChart.Camera = TryFindResource("PerspectiveCamera") as Camera3D;
         }
 
         private void ModifyCameraProperties_OnLoaded(object sender, RoutedEventArgs e)
         {
-            OnAttachPerspectiveChecked(null, EventArgs.Empty);
+            OnAttachPerspectiveChecked(null, null);
         }
 
         private void OnUseLhsCoordinates(object sender, RoutedEventArgs e)

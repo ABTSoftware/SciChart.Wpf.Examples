@@ -13,16 +13,16 @@
         <s:SciChartSurface Name="sciChart">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="Red"
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}"
                                             XAxisId="XAxisLeft"
                                             YAxisId="YAxisTop1" />
-                <s:FastLineRenderableSeries Stroke="Black"
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             XAxisId="XAxisLeft"
                                             YAxisId="YAxisTop2" />
-                <s:FastLineRenderableSeries Stroke="Green"
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             XAxisId="XAxisBottom"
                                             YAxisId="YAxisRight1" />
-                <s:FastLineRenderableSeries Stroke="Blue"
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_1}"
                                             XAxisId="XAxisBottom"
                                             YAxisId="YAxisRight2" />
             </s:SciChartSurface.RenderableSeries>
@@ -39,29 +39,29 @@
             <s:SciChartSurface.YAxes>
                 <s:NumericAxis AxisAlignment="Top"
                                AxisTitle="Red Line"
-                               BorderBrush="Red"
+                               BorderBrush="{StaticResource MainThemeSolidBrush}"
                                BorderThickness="0,0,0,1"
                                Id="YAxisTop1"
-                               TickTextBrush="Red" />
+                               TickTextBrush="{StaticResource MainThemeSolidBrush}" />
                 <s:NumericAxis AxisAlignment="Top"
                                AxisTitle="Black Line"
-                               BorderBrush="Black"
+                               BorderBrush="{StaticResource SecondaryThemeSolidBrush}"
                                BorderThickness="0,0,0,1"
                                Id="YAxisTop2"
-                               TickTextBrush="Black" />
+                               TickTextBrush="{StaticResource SecondaryThemeSolidBrush}" />
 
                 <s:NumericAxis AxisAlignment="Right"
                                AxisTitle="Green Line"
-                               BorderBrush="Green"
+                               BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                                BorderThickness="0,0,0,1"
                                Id="YAxisRight1"
-                               TickTextBrush="Green" />
+                               TickTextBrush="{StaticResource ExtraThemeStrokeBrush_2}" />
                 <s:NumericAxis AxisAlignment="Right"
                                AxisTitle="Blue Line"
-                               BorderBrush="Blue"
+                               BorderBrush="{StaticResource ExtraThemeStrokeBrush_1}"
                                BorderThickness="0,0,0,1"
                                Id="YAxisRight2"
-                               TickTextBrush="Blue" />
+                               TickTextBrush="{StaticResource ExtraThemeStrokeBrush_1}" />
 
             </s:SciChartSurface.YAxes>
 

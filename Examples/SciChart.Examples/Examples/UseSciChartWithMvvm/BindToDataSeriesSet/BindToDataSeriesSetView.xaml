@@ -9,15 +9,6 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -25,22 +16,19 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
-
-            <Button Command="{Binding AppendDataCommand}"
-                    Content="+50"
-                    Padding="1"
-                    Style="{StaticResource DefaultButtonStyle}" />
-
+            <!--  Button is used to invoke a delegate in the ViewModel to append 50 points.  -->
+            <Button Command="{Binding AppendDataCommand}" Style="{StaticResource DefaultButtonStyle}">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
         </ext:SciChartInteractionToolbar>
-        <!--  Button is used to invoke a delegate in the ViewModel to append 50 points.  -->
-
+        
         <!--  Declare a SciChartSurface and bind to data  -->
         <s:SciChartSurface x:Name="SciChart"
                            Grid.Column="1"
                            ViewportManager="{Binding ViewportManager}">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries DataSeries="{Binding ChartData}" Stroke="#279B27" />
+                <s:FastLineRenderableSeries DataSeries="{Binding ChartData}" Stroke="{StaticResource SecondaryThemeStrokeColor}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>

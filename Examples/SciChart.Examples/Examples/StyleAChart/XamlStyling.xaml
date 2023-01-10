@@ -12,25 +12,25 @@
 
         <!--  Define styles for the SciChartSurface  -->
         <Style x:Key="SciChartSurfaceStyle" TargetType="s:SciChartSurface">
-            <Setter Property="Background" Value="Orange" />
+            <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
             <Setter Property="Padding" Value="20" />
-            <Setter Property="Foreground" Value="DarkOrchid" />
+            <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Arial Black" />
             <Setter Property="FontWeight" Value="Bold" />
             <!-- Displays a border on the inner SciChartSurface -->
             <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="BorderBrush" Value="SteelBlue" />
+            <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
         </Style>
 
         <!--  Define styles for the GridLinesPanel  -->
         <Style x:Key="GridLinesPanelStyle" TargetType="s:GridLinesPanel">
-            <Setter Property="Background" Value="Pink" />
+            <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
             <!-- NOTE: Do not set BorderThickness, BorderBrush here. Instead set it on SciChartSurface to get an inner chart border -->
         </Style>
 
         <Style x:Key="LeftAxisLabelStyle" TargetType="s:DefaultTickLabel">
-            <Setter Property="Foreground" Value="Green" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontWeight" Value="Bold" />
             <!--  Align labels to the left side  -->
@@ -201,7 +201,7 @@
                                             Stroke="SteelBlue"
                                             YAxisId="PrimaryAxisId">
                 <s:FastMountainRenderableSeries.SeriesAnimation>
-                    <s:ScaleAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:ScaleAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                 </s:FastMountainRenderableSeries.SeriesAnimation>
             </s:FastMountainRenderableSeries>
 
@@ -212,7 +212,7 @@
                                                StrokeUp="Green"
                                                YAxisId="PrimaryAxisId">
                 <s:FastCandlestickRenderableSeries.SeriesAnimation>
-                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                 </s:FastCandlestickRenderableSeries.SeriesAnimation>
             </s:FastCandlestickRenderableSeries>
 
@@ -221,7 +221,7 @@
                                         StrokeThickness="3"
                                         YAxisId="PrimaryAxisId">
                 <s:FastLineRenderableSeries.SeriesAnimation>
-                    <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3"/>
+                    <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1"/>
                 </s:FastLineRenderableSeries.SeriesAnimation>
             </s:FastLineRenderableSeries>
 
@@ -230,7 +230,7 @@
                                           Stroke="DarkOrange"
                                           YAxisId="SecondaryAxisId">
                 <s:FastColumnRenderableSeries.SeriesAnimation>
-                    <s:WaveAnimation AnimationDelay="0:0:1" Duration="0:0:3" PointDurationFraction="0.3"/>
+                    <s:WaveAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" PointDurationFraction="0.3"/>
                 </s:FastColumnRenderableSeries.SeriesAnimation>
             </s:FastColumnRenderableSeries>
             

@@ -12,92 +12,84 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml"/>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
 
-            <s:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-            <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <s:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-            <ext:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter"/>
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
+        <ext:IsSameObjectsMultiConverter x:Key="IsSameSeriesMultiConverter"/>
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
 
-            <Style x:Key="DataItemTextBlockStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"/>
-                <Setter Property="MinWidth" Value="80"/>
-                <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="FontFamily" Value="Arial"/>
-                <Setter Property="FontSize" Value="10"/>
-                <Setter Property="Margin" Value="0,0,20,0"/>
-            </Style>
+        <local:AggregationPriceToVisibilityConverter x:Key="PriceToVisibilityConverter"/>
 
-            <!--  DataTemplate for the SeriesInfo which are exposed on the RolloverModifier  -->
-            <DataTemplate x:Key="ChartDataTemplate" DataType="s:SeriesInfo">
-                <TextBlock Style="{StaticResource DataItemTextBlockStyle}">
+        <Style x:Key="DataItemTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"/>
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+
+        <!--  DataTemplate for the SeriesInfo which are exposed on the RolloverModifier  -->
+        <DataTemplate x:Key="ChartDataTemplate" DataType="s:SeriesInfo">
+            <TextBlock Style="{StaticResource DataItemTextBlockStyle}">
                     <Run Text="{Binding SeriesName, StringFormat=\{0\}:}"/>
                     <Run Text="{Binding Value, StringFormat=\{0:0.000\}}"/>
-                </TextBlock>
-            </DataTemplate>
+            </TextBlock>
+        </DataTemplate>
 
-            <!--  Style for the 50-period Moving Average  -->
-            <Style x:Key="Ma50SeriesStyle" TargetType="s:FastLineRenderableSeries">
-                <Setter Property="ResamplingMode" Value="MinMax"/>
-                <Setter Property="Stroke" Value="#FFE13219"/>
-                <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
+        <!--  Style for the 50-period Moving Average  -->
+        <Style x:Key="Ma50SeriesStyle" TargetType="s:FastLineRenderableSeries">
+            <Setter Property="ResamplingMode" Value="MinMax"/>
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_1}"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="RolloverMarkerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Ellipse Width="9"
                                      Height="9"
-                                     Fill="#AAE13219"
+                                     Fill="{StaticResource SecondaryThemeTransparentSolidBrush}"
                                      Stroke="White"
                                      StrokeThickness="2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!--  Style for 200 period Moving Average  -->
-            <Style x:Key="Ma200SeriesStyle" TargetType="s:FastLineRenderableSeries">
-                <Setter Property="ResamplingMode" Value="MinMax"/>
-                <Setter Property="Stroke" Value="#FFFFA500"/>
-                <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
+        <!--  Style for 200 period Moving Average  -->
+        <Style x:Key="Ma200SeriesStyle" TargetType="s:FastLineRenderableSeries">
+            <Setter Property="ResamplingMode" Value="MinMax"/>
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_6}"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="RolloverMarkerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Ellipse Width="9"
                                      Height="9"
-                                     Fill="#AAFFA500"
+                                     Fill="{StaticResource ExtraThemeTransparentStrokeBrush_5}"
                                      Stroke="White"
                                      StrokeThickness="2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!--  Style for Candlestick chart  -->
-            <Style x:Key="PriceSeriesStyle" TargetType="s:FastCandlestickRenderableSeries">
-                <Setter Property="StrokeUp" Value="#FF52CC54"/>
-                <Setter Property="StrokeDown" Value="#FFE26565"/>
-                <Setter Property="FillUp" Value="#7052CC54"/>
-                <Setter Property="FillDown" Value ="#70E26565"/>
-                <Setter Property="AntiAliasing" Value="False"/>
-                <Setter Property="ResamplingMode" Value="MinMax"/>
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
+        <!--  Style for Candlestick chart  -->
+        <Style x:Key="PriceSeriesStyle" TargetType="s:FastCandlestickRenderableSeries">
+            <Setter Property="AntiAliasing" Value="False"/>
+            <Setter Property="ResamplingMode" Value="MinMax"/>
+            <Setter Property="RolloverMarkerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Ellipse Width="9"
                                      Height="9"
-                                     Fill="#FF52CC54"
+                                     Fill="{StaticResource ExtraThemeFillGradient_2}"
                                      Stroke="White"
                                      StrokeThickness="2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -107,250 +99,150 @@
         </Grid.ColumnDefinitions>
 
         <!--  Define the Toolbar  -->
-        <Border Panel.ZIndex="9999"
-                Background="#232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            
+            <ToggleButton Command="{Binding SetRubberBandModifierCommand}"
+                          IsChecked="{Binding IsRubberBandZoomSelected, Mode=OneWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+            <ext:FlyoutMenuToggleButton Command="{Binding SetZoomPanModifierCommand}"
+                                        IsChecked="{Binding IsZoomPanSelected, Mode=OneWay}"
+                                        ToolTipService.ToolTip="Toggle Zoom-Pan">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Direction" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=ZoomPanMod}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
 
-                <ToggleButton Content="Zoom"
-                              HorizontalAlignment="Left"
-                              Command="{Binding SetRubberBandModifierCommand}"
-                              IsChecked="{Binding IsRubberBandZoomSelected, Mode=OneWay}"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"/>
+            <ext:FlyoutSeparator/>
 
-                <ext:FlyoutMenuToggleButton Content="Pan"
-                                            HorizontalAlignment="Left"
-                                            Command="{Binding SetZoomPanModifierCommand}"
-                                            IsChecked="{Binding IsZoomPanSelected, Mode=OneWay}"
-                                            Style="{StaticResource PanToggleButtonStyle}"
-                                            ToolTipService.ToolTip="Toggle Zoom-Pan">
+            <Button Command="{Binding Source={x:Reference Name=PriceChart}, Path=AnimateZoomExtentsCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Direction"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
-                                      SelectedItem="{Binding Source={x:Reference Name=ZoomPanMod}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="MouseWheel">
+                <ext:ToolbarIcon Kind="Tire" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Action Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}"
+                                  SelectedItem="{Binding ActionType, Source={x:Reference Name=MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
+                                  SelectedItem="{Binding XyDirection, Source={x:Reference Name=MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <!--  Rollover modifier  -->
+            <ext:FlyoutMenuToggleButton Command="{Binding SetRolloverModifierCommand}"
+                                        IsChecked="{Binding IsRolloverSelected, Mode=OneWay}"
+                                        ToolTipService.ToolTip="Rollover">
+                <ext:ToolbarIcon Path="{StaticResource ToolbarRolloverIconPath}" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Rollover mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                  SelectedItem="{Binding SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}"
+                                  SelectedItem="{Binding ShowTooltipMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+  
+                        <CheckBox Margin="0,10,0,5" Content="Show Axis Label" IsChecked="{Binding ShowAxisLabels, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
+
+            <!--  Cursor modifier  -->
+            <ext:FlyoutMenuToggleButton Command="{Binding SetCursorModifierCommand}"
+                                        IsChecked="{Binding IsCursorSelected, Mode=OneWay}"
+                                        ToolTipService.ToolTip="Cursor">
+                <ext:ToolbarIcon Kind="CrosshairsGps" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <StackPanel.Resources>
+                            <ext:SnappingModeToVisibilityConverter x:Key="SnappingModeToVisibilityConverter"/>
+                        </StackPanel.Resources>
+
+                        <TextBlock Text="Cursor mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                  SelectedItem="{Binding SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}"
+                                  SelectedItem="{Binding ShowTooltipMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Snapping mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="snappingModeCmbx"
+                                  ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=CursorMod}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <StackPanel Orientation="Vertical" Visibility="{Binding SelectedItem, Source={x:Reference Name=snappingModeCmbx}, Mode=OneWay, Converter={StaticResource SnappingModeToVisibilityConverter}}">
+                            <TextBlock Text="Snap to" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllSeriesNames, Mode=OneWay}"
+                                      SelectedItem="{Binding SelectedSeriesToSnap, Mode=TwoWay}"/>
                         </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
 
-                <ext:FlyoutSeparator/>
+                        <CheckBox Margin="0,10,0,5" Content="Show Axis Label" IsChecked="{Binding ShowAxisLabels, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
 
-                <Button Content="Zoom Extents"
-                        HorizontalAlignment="Left"
-                        Command="{Binding Source={x:Reference Name=PriceChart}, Path=AnimateZoomExtentsCommand}"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents"/>
+            <ext:FlyoutSeparator/>
 
-                <ext:FlyoutMenuButton Content="Wheel"
-                                      HorizontalAlignment="Left"
-                                      Style="{StaticResource MouseWheelButtonStyle}"
-                                      ToolTipService.ToolTip="MouseWheel">
+            <ext:FlyoutMenuButton x:Name="traderDataExample" ToolTipService.ToolTip="Data">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Aggregation Price" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="AggregationPriceCharts"
+                                  ItemsSource="{Binding AllAggregationPriceCharts}"
+                                  SelectedItem="{Binding SelectedAggregationPriceChart, Mode=TwoWay}"/>
 
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Action Type"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}"
-                                      SelectedItem="{Binding ActionType, Source={x:Reference Name=MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <TextBlock Text="Direction"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
-                                      SelectedItem="{Binding XyDirection, Source={x:Reference Name=MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                        <StackPanel Visibility="{Binding SelectedAggregationPriceChart, Mode=OneWay,
+                                    Converter={StaticResource PriceToVisibilityConverter}, ConverterParameter=Count}">
+                            <TextBlock Text="Count" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllCounts}" SelectedItem="{Binding SelectedCount, Mode=TwoWay}"/>
                         </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
 
-                <!--  Rollover modifier  -->
-                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
-                                            HorizontalContentAlignment="Center"
-                                            Command="{Binding SetRolloverModifierCommand}"
-                                            Content="ROLL"
-                                            FontSize="10"
-                                            IsChecked="{Binding IsRolloverSelected, Mode=OneWay}"
-                                            Padding="0"
-                                            Style="{StaticResource FlyoutMenuToggleButtonStyle}"
-                                            ToolTipService.ToolTip="Rollover">
-
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock FontSize="12" Text="Rollover mode"/>
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
-                                      SelectedItem="{Binding SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <TextBlock FontSize="12" Text="Show tooltip mode"/>
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}"
-                                      SelectedItem="{Binding ShowTooltipMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show axis label"
-                                      FontSize="12"
-                                      IsChecked="{Binding ShowAxisLabels, Mode=TwoWay}"/>
+                        <StackPanel Visibility="{Binding SelectedAggregationPriceChart, Mode=OneWay,
+                                    Converter={StaticResource PriceToVisibilityConverter}, ConverterParameter=Time}">
+                            <TextBlock Text="Time Frame (min)" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllTimeFrames}" SelectedItem="{Binding SelectedTimeFrame, Mode=TwoWay}"/>
                         </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
 
-                <!--  Cursor modifier  -->
-                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
-                                            HorizontalContentAlignment="Center"
-                                            Command="{Binding SetCursorModifierCommand}"
-                                            Content="CUR"
-                                            IsChecked="{Binding IsCursorSelected, Mode=OneWay}"
-                                            Padding="0"
-                                            Style="{StaticResource CursorButtonStyle}">
-
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <StackPanel.Resources>
-                                <ext:SnappingModeToVisibilityConverter x:Key="SnappingModeToVisibilityConverter"/>
-                            </StackPanel.Resources>
-
-                            <TextBlock Text="Cursor mode"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
-                                      SelectedItem="{Binding SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <TextBlock Text="Show tooltip mode"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}"
-                                      SelectedItem="{Binding ShowTooltipMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <TextBlock Text="Snapping mode"/>
-                            <ComboBox x:Name="snappingModeCmbx"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
-                                      SelectedItem="{Binding Source={x:Reference Name=CursorMod}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-                            <StackPanel Orientation="Vertical" Visibility="{Binding SelectedItem, Source={x:Reference Name=snappingModeCmbx}, Mode=OneWay, Converter={StaticResource SnappingModeToVisibilityConverter}}">
-                                <TextBlock Text="Snap to"/>
-                                <ComboBox FontSize="12"
-                                          ItemsSource="{Binding AllSeriesNames, Mode=OneWay}"
-                                          SelectedItem="{Binding SelectedSeriesToSnap, Mode=TwoWay}"/>
-                                <ext:FlyoutSeparator/>
-                            </StackPanel>
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show axis label"
-                                      IsChecked="{Binding ShowAxisLabels, Mode=TwoWay}"/>
+                        <StackPanel Visibility="{Binding SelectedAggregationPriceChart, Mode=OneWay,
+                                    Converter={StaticResource PriceToVisibilityConverter}, ConverterParameter=Volume}">
+                            <TextBlock Text="Volume" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllVolumes}" SelectedItem="{Binding SelectedVolume, Mode=TwoWay}"/>
                         </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
 
-                <ext:FlyoutSeparator/>
-
-                <ext:FlyoutMenuButton x:Name="traderDataExample"
-                                      HorizontalAlignment="Left"
-                                      Content="Data"
-                                      FontSize="11"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Data">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock FontSize="12" Text="Aggregation Price Chart:"/>
-                            <ComboBox Margin="2" x:Name="AggregationPriceCharts"
-                                      FontSize="12"
-                                      ItemsSource="{Binding AllAggregationPriceCharts}"
-                                      SelectedItem="{Binding SelectedAggregationPriceChart, Mode=TwoWay}"/>
-                            <ext:FlyoutSeparator/>
-
-                            <StackPanel>
-                                <TextBlock FontSize="12" Text="Count:"/>
-                                <ComboBox Margin="2"
-                                          FontSize="12"
-                                          ItemsSource="{Binding AllCounts}"
-                                          SelectedItem="{Binding SelectedCount, Mode=TwoWay}"/>
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Count">
-                                                <Setter Property="FrameworkElement.Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                            </StackPanel>
-
-                            <StackPanel>
-                                <TextBlock FontSize="12" Text="Time Frame (min):"/>
-                                <ComboBox Margin="2"
-                                          FontSize="12"
-                                          ItemsSource="{Binding AllTimeFrames}"
-                                          SelectedItem="{Binding SelectedTimeFrame, Mode=TwoWay}"/>
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Time">
-                                                <Setter Property="FrameworkElement.Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                            </StackPanel>
-
-                            <StackPanel>
-                                <TextBlock FontSize="12" Text="Volume:"/>
-                                <ComboBox Margin="2"
-                                          FontSize="12"
-                                          ItemsSource="{Binding AllVolumes}"
-                                          SelectedItem="{Binding SelectedVolume, Mode=TwoWay}"/>
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Volume">
-                                                <Setter Property="FrameworkElement.Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                            </StackPanel>
-
-                            <StackPanel>
-                                <TextBlock FontSize="12" Text="Range:"/>
-                                <ComboBox Margin="2"
-                                          FontSize="12"
-                                          ItemsSource="{Binding AllRanges}"
-                                          SelectedItem="{Binding SelectedRange, Mode=TwoWay}"/>
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Range">
-                                                <Setter Property="FrameworkElement.Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                            </StackPanel>
-
-                            <StackPanel>
-                                <TextBlock FontSize="12" Text="Brick size:"/>
-                                <ComboBox Margin="2"
-                                          FontSize="12"
-                                          ItemsSource="{Binding AllBrickSizes}"
-                                          SelectedItem="{Binding SelectedBrickSize, Mode=TwoWay}"/>
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedAggregationPriceChart}" Value="Renko">
-                                                <Setter Property="FrameworkElement.Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                            </StackPanel>
+                        <StackPanel Visibility="{Binding SelectedAggregationPriceChart, Mode=OneWay,
+                                    Converter={StaticResource PriceToVisibilityConverter}, ConverterParameter=Range}">
+                            <TextBlock Text="Range" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllRanges}" SelectedItem="{Binding SelectedRange, Mode=TwoWay}"/>
                         </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-            </WrapPanel>
-        </Border>
+
+                        <StackPanel Visibility="{Binding SelectedAggregationPriceChart, Mode=OneWay,
+                                    Converter={StaticResource PriceToVisibilityConverter}, ConverterParameter=Renko}">
+                            <TextBlock Text="Brick size" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <ComboBox ItemsSource="{Binding AllBrickSizes}" SelectedItem="{Binding SelectedBrickSize, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <Grid Grid.Column="1" Background="#333">
             <s:SciChartSurface x:Name="PriceChart">
@@ -410,7 +302,7 @@
                                           ShowTooltip="True"
                                           ShowTooltipOn="{Binding ShowTooltipMode}"
                                           SourceMode="{Binding SourceMode}"/>
-                        
+
                         <s:MouseWheelZoomModifier x:Name="MouseWheelZoomMod"
                                                   ReceiveHandledEvents="True"
                                                   XyDirection="XYDirection"

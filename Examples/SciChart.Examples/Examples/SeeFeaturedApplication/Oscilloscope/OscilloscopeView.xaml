@@ -22,161 +22,151 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
+        <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Margin" Value="3,2,2,2" />
+        </Style>
 
-            <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
-            <Style x:Key="TextBlockStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="FontWeight" Value="Bold" />
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontSize" Value="10" />
-                <Setter Property="Margin" Value="3,2,2,2" />
-            </Style>
-
-            <Style x:Key="HintDataItemsStyle"
+        <Style x:Key="HintDataItemsStyle"
                    BasedOn="{StaticResource TextBlockStyle}"
                    TargetType="TextBlock">
-                <Setter Property="FontSize" Value="13" />
-            </Style>
+            <Setter Property="FontSize" Value="13" />
+        </Style>
 
-            <Style x:Key="ChartDataItemsStyle"
+        <Style x:Key="ChartDataItemsStyle"
                    BasedOn="{StaticResource TextBlockStyle}"
                    TargetType="TextBlock">
-                <Setter Property="Foreground" Value="#FF93F2C1" />
-            </Style>
+            <Setter Property="Foreground" Value="{StaticResource MainThemeSolidBrush}" />
+        </Style>
 
-            <!--  Set the style for the series  -->
-            <Style x:Key="LineSeriesStyle" TargetType="s:FastLineRenderableSeries">
-                <Setter Property="StrokeThickness" Value="2" />
-                <Setter Property="AntiAliasing" Value="True" />
-                <Setter Property="Stroke" Value="#FFA3FFC9" />
-                <Setter Property="RolloverMarkerTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Ellipse Width="9"
+        <!--  Set the style for the series  -->
+        <Style x:Key="LineSeriesStyle" TargetType="s:FastLineRenderableSeries">
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="AntiAliasing" Value="True" />
+            <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
+            <Setter Property="RolloverMarkerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Ellipse Width="9"
                                      Height="9"
-                                     Fill="#7793F2C1"
-                                     Stroke="#FFA3FFC9"
+                                     Fill="{StaticResource MainThemeTransparentSolidBrush}"
+                                     Stroke="{StaticResource MainThemeSolidBrush}"
                                      StrokeThickness="2" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <DataTemplate x:Key="ChartDataTemplate">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+        <DataTemplate x:Key="ChartDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0"
+                <TextBlock Grid.Column="0"
                                Style="{StaticResource ChartDataItemsStyle}"
                                Text="{Binding SeriesName}" />
 
-                    <TextBlock Grid.Column="1"
+                <TextBlock Grid.Column="1"
                                Margin="0,2,2,2"
                                Style="{StaticResource ChartDataItemsStyle}"
                                Text=":" />
 
-                    <TextBlock Grid.Column="2"
+                <TextBlock Grid.Column="2"
                                Margin="3,2,20,2"
                                Style="{StaticResource ChartDataItemsStyle}"
                                Text="{Binding Value, StringFormat=\{0:0.0000\}}" />
-                </Grid>
-            </DataTemplate>
+            </Grid>
+        </DataTemplate>
 
-            <!--  Template for the CursorModifier tooltip to display AxisInfo collection (result of hit test)  -->
-            <DataTemplate x:Key="CursorAxisLabelTemplate" DataType="s:AxisInfo">
-                <Border Background="#33FFFFFF"
+        <!--  Template for the CursorModifier tooltip to display AxisInfo collection (result of hit test)  -->
+        <DataTemplate x:Key="CursorAxisLabelTemplate" DataType="s:AxisInfo">
+            <Border Background="#33FFFFFF"
                         BorderBrush="#FFFFFFFF"
                         BorderThickness="1"
                         CornerRadius="5">
-                    <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding AxisFormattedDataValue}" />
-                </Border>
-            </DataTemplate>
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding AxisFormattedDataValue}" />
+            </Border>
+        </DataTemplate>
 
-            <DataTemplate x:Key="EmptyDataTemplate" DataType="s:AxisInfo" />
+        <DataTemplate x:Key="EmptyDataTemplate" DataType="s:AxisInfo" />
 
-            <!--  Template for the CursorModifier tooltip to display AxisInfo collection (result of hit test)  -->
-            <local:CustomAxisInfoTemplateSelector x:Key="TemplateSelector"
+        <!--  Template for the CursorModifier tooltip to display AxisInfo collection (result of hit test)  -->
+        <local:CustomAxisInfoTemplateSelector x:Key="TemplateSelector"
                                                   EmptyDataTemplate="{StaticResource EmptyDataTemplate}"
                                                   XAxisDataTemplate="{StaticResource CursorAxisLabelTemplate}"
                                                   YAxisDataTemplate="{StaticResource CursorAxisLabelTemplate}" />
-          
-            <!--  Template for the RolloverModifier tooltip to display AxisInfo collection (result of hit test)  -->
-            <Style x:Key="TooltipStyle" TargetType="s:TooltipControl">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="s:TooltipControl">
-                            <Border Background="#33FFFFFF"
+
+        <!--  Template for the RolloverModifier tooltip to display AxisInfo collection (result of hit test)  -->
+        <Style x:Key="TooltipStyle" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="#33FFFFFF"
                                     BorderBrush="#FFFFFFFF"
                                     BorderThickness="1"
                                     CornerRadius="5">
-                                <ContentControl Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                            <ContentControl Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <DataTemplate x:Key="TooltipDataTemplate" DataType="s:SeriesInfo">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName}" />
-                    <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding Value}" />
-                </StackPanel>
-            </DataTemplate>
+        <DataTemplate x:Key="TooltipDataTemplate" DataType="s:SeriesInfo">
+            <StackPanel>
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding SeriesName}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding Value}" />
+            </StackPanel>
+        </DataTemplate>
 
-            <ItemsPanelTemplate x:Key="template">
-                <Canvas s:ClipToBoundsHelper.ClipToBounds="True" />
-            </ItemsPanelTemplate>
+        <ItemsPanelTemplate x:Key="template">
+            <Canvas s:ClipToBoundsHelper.ClipToBounds="True" />
+        </ItemsPanelTemplate>
 
-            <Style TargetType="s:NumericAxis">
-                <Setter Property="GrowBy" Value="0.1, 0.1" />
-                <Setter Property="BorderBrush" Value="#FFAAFFAA" />
-                <Setter Property="MajorTickLineStyle">
-                    <Setter.Value>
-                        <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="#FFAAFFAA" />
-                            <Setter Property="StrokeThickness" Value="2" />
-                            <Setter Property="StrokeEndLineCap" Value="Square" />
-                            <Setter Property="X2" Value="6" />
-                            <Setter Property="Y2" Value="6" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <Style TargetType="s:NumericAxis">
+            <Setter Property="GrowBy" Value="0.1, 0.1" />
+            <Setter Property="BorderBrush" Value="{StaticResource MainThemeSolidBrush}" />
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="{StaticResource MainThemeSolidBrush}" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                        <Setter Property="StrokeEndLineCap" Value="Square" />
+                        <Setter Property="X2" Value="6" />
+                        <Setter Property="Y2" Value="6" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <Style x:Key="IsStepLineButtonStyle"
+        <Style x:Key="IsStepLineButtonStyle"
                    BasedOn="{StaticResource DefaultToggleButtonStyle}"
                    TargetType="ToggleButton">
-                <Setter Property="ToolTipService.ToolTip" Value="Is Step Line" />
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <Border Background="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">
-                                <Image Source="/SciChart.Examples;component/Resources/Images/step_line.png" Stretch="None" />
-                            </Border>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            <Setter Property="ToolTipService.ToolTip" Value="Is Step Line" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Background="{Binding Path=(ext:TextElementEx.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType=ContentPresenter}}">
+                            <Image Source="/SciChart.Examples;component/Resources/Images/step_line.png" Stretch="None" />
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <Style x:Key="CursorAxisLabelStyle" TargetType="s:AxisLabelControl">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </Style>
+        <Style x:Key="CursorAxisLabelStyle" TargetType="s:AxisLabelControl">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
 
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
-
-        </ResourceDictionary>
-
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
     </UserControl.Resources>
 
     <Grid>
@@ -184,6 +174,104 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <!--  This toolbar adds zoom, pan, zoom extents and other functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+
+            <ToggleButton IsChecked="{Binding Source={x:Reference RubberBandModifier}, Path=IsEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton IsChecked="{Binding Source={x:Reference ZoomPanModifier}, Path=IsEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <Button Command="{Binding Source={x:Reference oscilloscopeChart},Path=AnimateZoomExtentsCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+
+            <ext:FlyoutSeparator/>
+            
+            <ext:FlyoutMenuToggleButton IsChecked="{Binding IsRolloverSelected, Mode=TwoWay}"
+                                        IsEnabled="{Binding CanExecuteRollover, Mode=OneWay}"
+                                        ToolTipService.ToolTip="Rollover"
+                                        ext:FlyoutMenuToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+                <ext:ToolbarIcon Path="{StaticResource ToolbarRolloverIconPath}" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Rollover mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" 
+                                  SelectedItem="{Binding Source={x:Reference rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
+                                  SelectedItem="{Binding Source={x:Reference rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <CheckBox Margin="0,10,0,5" Content="Show Axis Label" IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
+
+            <ext:FlyoutMenuToggleButton IsChecked="{Binding IsCursorSelected, Mode=TwoWay}"
+                                        ext:FlyoutMenuToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
+                <ext:ToolbarIcon Kind="CrosshairsGps" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <StackPanel.Resources>
+                            <ext:SnappingModeToVisibilityConverter x:Key="SnappingModeToVisibilityConverter"/>
+                        </StackPanel.Resources>
+
+                        <TextBlock Text="Cursor mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Snapping mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                        <CheckBox Margin="0,10,0,5" Content="Show Axis Label" IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowAxisLabels, Mode=TwoWay}"/>
+                        <CheckBox Margin="0,5" Content="Show Tooltip" IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltip, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
+
+            <ext:FlyoutSeparator/>
+
+            <ext:FlyoutMenuButton x:Name="OscilloscopeDataSourceExample" ToolTipService.ToolTip="Data Source">
+                <ext:ToolbarIcon Kind="DatabaseArrowRight" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Data Source" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox SelectedItem="{Binding SelectedDataSource, Mode=TwoWay}">
+                            <ComboBox.Items>
+                                <system:String>Fourier Series</system:String>
+                                <system:String>Lissajous</system:String>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ToggleButton Command="{Binding SetDigitalLineCommand}"
+                          IsChecked="{Binding IsDigitalLine, Mode=OneWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Digital Line">
+                <ext:ToolbarIcon Kind="SquareWave" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="oscilloscopeChart"
                            Grid.Column="1"
@@ -272,163 +360,5 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </Grid>
-        
-        <!--  This toolbar adds zoom, pan, zoom extents and other functionality  -->
-        <!--  to the chart and is included for example purposes.  -->
-        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <Border Grid.Column="0"
-                Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
-
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Zoom"
-                              IsChecked="{Binding Source={x:Reference Name=RubberBandModifier},
-                                                  Path=IsEnabled,
-                                                  Mode=TwoWay}"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Pan"
-                              IsChecked="{Binding Source={x:Reference Name=ZoomPanModifier},
-                                                  Path=IsEnabled,
-                                                  Mode=TwoWay}"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup" />
-
-                <Button HorizontalAlignment="Left"
-                        Command="{Binding Source={x:Reference Name=oscilloscopeChart},
-                                          Path=AnimateZoomExtentsCommand}"
-                        Content="Zoom Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents" />
-
-                <ext:FlyoutSeparator />
-
-                <ext:FlyoutMenuButton x:Name="OscilloscopeDataSourceExample"
-                                      HorizontalAlignment="Left"
-                                      Content="DS"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Data Source">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Data Source:" />
-                            <ComboBox SelectedItem="{Binding SelectedDataSource, Mode=TwoWay}">
-                                <ComboBox.Items>
-                                    <system:String>Fourier Series</system:String>
-                                    <system:String>Lissajous</system:String>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutSeparator />
-
-                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
-                                            Content="ROLL"
-                                            HorizontalContentAlignment="Center"
-                                            IsChecked="{Binding IsRolloverSelected, Mode=TwoWay}"
-                                            IsEnabled="{Binding CanExecuteRollover, Mode=OneWay}"
-                                            Style="{StaticResource FlyoutMenuToggleButtonStyle}"
-                                            FontSize="10"
-                                            Padding="0"
-                                            ToolTipService.ToolTip="Rollover"
-                                            s:ToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
-
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock FontSize="12" Text="Rollover mode" />
-
-                            <ComboBox FontSize="12" 
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" 
-                                      SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock FontSize="12" Text="Show tooltip mode" />
-
-                            <ComboBox FontSize="12" 
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" 
-                                      SelectedItem="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <CheckBox Margin="3"
-                                      FontSize="12"
-                                      VerticalAlignment="Center"
-                                      Content="Show axis label"
-                                      IsChecked="{Binding Source={x:Reference Name=rolloverModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
-
-                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
-                                            Content="CUR"
-                                            IsChecked="{Binding IsCursorSelected, Mode=TwoWay}"
-                                            HorizontalContentAlignment="Center"
-                                            Style="{StaticResource CursorButtonStyle}"
-                                            FontSize="11"
-                                            Padding="0"
-                                            s:ToggleButtonExtensions.GroupName="RollCursorTooltipSelectionGroup">
-
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <StackPanel.Resources>
-                                <ext:SnappingModeToVisibilityConverter x:Key="SnappingModeToVisibilityConverter" />
-                            </StackPanel.Resources>
-
-                            <TextBlock FontSize="12" Text="Cursor mode" />
-
-                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock FontSize="12" Text="Show tooltip mode" />
-
-                            <ComboBox FontSize="12" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock FontSize="12" Text="Snapping mode" />
-
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:CursorSnappingMode}}}"
-                                      SelectedItem="{Binding Source={x:Reference Name=cursorModifier}, Path=SnappingMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <CheckBox Margin="3"
-                                      FontSize="12"
-                                      VerticalAlignment="Center"
-                                      Content="Show axis label"
-                                      IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowAxisLabels, Mode=TwoWay}" />
-
-                            <CheckBox Margin="3"
-                                      FontSize="12"
-                                      VerticalAlignment="Center"
-                                      Content="Show tooltip"
-                                      IsChecked="{Binding Source={x:Reference Name=cursorModifier}, Path=ShowTooltip, Mode=TwoWay}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
-
-                <ext:FlyoutSeparator />
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Command="{Binding SetDigitalLineCommand}"
-                              IsChecked="{Binding IsDigitalLine, Mode=OneWay}"
-                              Style="{StaticResource IsStepLineButtonStyle}" />
-            </WrapPanel>
-        </Border>
     </Grid>
 </UserControl>

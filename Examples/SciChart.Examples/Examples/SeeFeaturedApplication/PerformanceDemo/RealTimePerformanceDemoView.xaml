@@ -12,15 +12,7 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <ext:BoolToValueConverter x:Key="InvertBooleanConverter" TrueValue="False" FalseValue="True"/>
-        </ResourceDictionary>
-
+        <ext:BoolToValueConverter x:Key="InvertBooleanConverter" TrueValue="False" FalseValue="True"/>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -30,56 +22,66 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="StartButton" Click="StartButton_Click" IsChecked="True" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
-                <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
-                <ToggleButton x:Name="ResetButton" Click="ResetButton_Click" Style="{StaticResource StopButtonStyle}" Padding="7"/>
+            <ToggleButton x:Name="StartButton"
+                          Click="StartButton_Click"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator Background="#444"/>
-                
-                <ToggleButton Margin="3"
-                              x:Name="enableZoom"
-                              IsChecked="False"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              Style="{StaticResource ZoomButtonStyle}"    
-                              s:ToggleButtonExtensions.GroupName="PerformanceDemoToolbar"/>
+            <ToggleButton x:Name="PauseButton"
+                          Click="PauseButton_Click"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton Margin="3" 
-                              x:Name="enablePan"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"  
-                              Style="{StaticResource PanButtonStyle}" 
-                              IsChecked="False"
-                              s:ToggleButtonExtensions.GroupName="PerformanceDemoToolbar" />
+            <ToggleButton x:Name="ResetButton"
+                          Click="ResetButton_Click"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <Button Margin="3" ToolTipService.ToolTip="Zoom to Extents"
-                                Style="{StaticResource ZoomExtentsButtonStyle}"
-                                Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"/>
+            <ext:FlyoutSeparator/>
 
-                <ext:FlyoutSeparator Background="#444"/>
-                
-                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="CTRL" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150">
-                            <TextBlock Text="RenderableSeries Controls" />
-                            <ext:FlyoutSeparator/>
+            <ToggleButton x:Name="enableZoom"
+                          IsChecked="False"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          Style="{StaticResource DefaultToggleButtonStyle}"    
+                          s:ToggleButtonExtensions.GroupName="PerformanceDemoToolbar">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                            <CheckBox Margin="4" Checked="CheckBox_Checked" Content="Use Antialiasing?" IsChecked="True" Unchecked="CheckBox_Checked" Foreground="#999"/>
+            <ToggleButton x:Name="enablePan"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"  
+                          Style="{StaticResource DefaultToggleButtonStyle}" 
+                          s:ToggleButtonExtensions.GroupName="PerformanceDemoToolbar">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                            <TextBlock Text="Resampling Mode:" />
-                            <ComboBox Margin="4" x:Name="ResamplingCombo" SelectionChanged="ComboBox_SelectionChanged" />
+            <Button ToolTipService.ToolTip="Zoom to Extents"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                            <TextBlock Text="Stroke Thickness:" />
-                            <ComboBox Margin="4" x:Name="StrokeCombo" MinWidth="50" SelectionChanged="ComboBox_SelectionChanged" />                                                        
-                            
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
+            <ext:FlyoutSeparator/>
 
-
-            </StackPanel>
-        </Border>
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Resampling Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="ResamplingCombo" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <TextBlock Text="Stroke Thickness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="StrokeCombo" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <CheckBox Margin="0,10,0,5" Content="Use Antialiasing" IsChecked="True"
+                                  Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart"
@@ -87,9 +89,9 @@
 
             <!--  Define RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries x:Name="RenderableSeries0" Stroke="#FF4083B7" />
-                <s:FastLineRenderableSeries x:Name="RenderableSeries1" Stroke="#FFFFA500" />
-                <s:FastLineRenderableSeries x:Name="RenderableSeries2" Stroke="#FFE13219" />
+                <s:FastLineRenderableSeries x:Name="RenderableSeries0" Stroke="{StaticResource MainThemeStrokeColor}" />
+                <s:FastLineRenderableSeries x:Name="RenderableSeries1" Stroke="{StaticResource SecondaryThemeStrokeColor}" />
+                <s:FastLineRenderableSeries x:Name="RenderableSeries2" Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Create an X Axis  -->
@@ -147,7 +149,7 @@
         <!--  ************************************************  -->
         <!--  IGNORE BELOW THIS LINE. Stats panel  -->
         <!--  ************************************************  -->
-        
+
         <!--  Define the Stats Panel  -->
         <Grid Grid.Column="1"
               Margin="10,10,0,0"
@@ -159,7 +161,7 @@
                     <Setter Property="FontSize" Value="26" />
                     <Setter Property="Margin" Value="0" />
                     <Setter Property="FontWeight" Value="Normal" />
-                    <Setter Property="Foreground" Value="#BBFC9C29" />
+                    <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                     <Setter Property="FontFamily" Value="pack://application:,,,/Resources/Fonts/#Neuropol Regular" />
                 </Style>
             </Grid.Resources>

@@ -18,60 +18,54 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.RowSpan="2"
-                Background="#232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
-            <StackPanel>
-                <ToggleButton x:Name="RubberBandToggle"
-                              HorizontalAlignment="Left"
-                              Content="Zoom"
-                              IsChecked="True"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+        <ext:SciChartInteractionToolbar Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
 
-                <ToggleButton x:Name="ZoomPanToggle"
-                              HorizontalAlignment="Left"
-                              Content="Pan"
-                              IsChecked="False"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+            <ToggleButton x:Name="RubberBandToggle"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <Button HorizontalAlignment="Left"
-                        Command="{Binding AnimateZoomExtentsCommand, Source={x:Reference SciChartSurface}}"
-                        Content="Zoom Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents"/>
+            <ToggleButton x:Name="ZoomPanToggle"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator/>
+            <Button Command="{Binding AnimateZoomExtentsCommand, Source={x:Reference SciChartSurface}}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                <ToggleButton x:Name="PeakDetectorToggle"
-                              HorizontalAlignment="Left"
-                              Content="PD"
-                              IsChecked="True"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Auto Peak Detection"/>
+            <ext:FlyoutSeparator/>
 
-                <ext:FlyoutMenuButton Content="TF" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Texture Filtering"/>
-                            <CheckBox x:Name="textureSwitch"
-                                      Margin="4"
-                                      Content="UseLinearTextureFiltering"/>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-            </StackPanel>
-        </Border>
+            <ToggleButton x:Name="PeakDetectorToggle"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Auto Peak Detection">
+                <ext:ToolbarIcon Kind="TrendingUp" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Texture Filtering" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="textureSwitch" Margin="0,5" Content="UseLinearTextureFiltering"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="SciChartSurface" Grid.Row="1" Grid.Column="1">
             <s:SciChartSurface.RenderableSeries>
@@ -83,15 +77,13 @@
                             <Setter Property="ColorMap">
                                 <Setter.Value>
                                     <s:HeatmapColorPalette Minimum="-70" Maximum="0">
-                                        <s:HeatmapColorPalette.GradientStops>
-                                            <GradientStop Offset="0" Color="DarkBlue" />
-                                            <GradientStop Offset="0.0001" Color="Blue" />
-                                            <GradientStop Offset="0.2" Color="CornflowerBlue" />
-                                            <GradientStop Offset="0.4" Color="DarkGreen" />
-                                            <GradientStop Offset="0.6" Color="Chartreuse" />
-                                            <GradientStop Offset="0.8" Color="Yellow" />
-                                            <GradientStop Offset="1" Color="Red" />
-                                        </s:HeatmapColorPalette.GradientStops>
+                                        <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+                                        <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+                                        <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+                                        <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+                                        <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+                                        <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+                                        <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
                                     </s:HeatmapColorPalette>
                                 </Setter.Value>
                             </Setter>
@@ -120,7 +112,7 @@
         <s:HeatmapColorMap Grid.Row="0"
                            Grid.Column="1"
                            HorizontalAlignment="Stretch"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            BorderThickness="0"
                            Background="Transparent"
                            ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderableSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"

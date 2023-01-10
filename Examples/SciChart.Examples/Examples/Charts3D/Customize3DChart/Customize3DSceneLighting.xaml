@@ -10,7 +10,7 @@
              d:DesignWidth="800">
 
     <UserControl.Resources>
-        <s3D:SolidColorBrushPalette x:Key="SolidHeightColorMap" Fill="#228B22" />
+        <s3D:SolidColorBrushPalette x:Key="SolidHeightColorMap" Fill="{StaticResource MainThemeStrokeColor}" />
     </UserControl.Resources>
 
     <Grid>
@@ -19,25 +19,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}"
-                                  Content="LD"
-                                  FontSize="12"
-                                  Padding="0">
-
+        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TrackLight" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-
-                        <TextBlock FontSize="12" Text="Main Light Mode" />
-                        <ComboBox x:Name="lightModeComboBox" Margin="4" SelectionChanged="LightMode_OnSelectionChanged">
-                            <ComboBox.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="White"/>
-                                </Style>
-                            </ComboBox.Resources>
-                        </ComboBox>
-
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Main Light Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="lightModeComboBox" SelectionChanged="LightMode_OnSelectionChanged"/>
                         <StackPanel x:Name="lightSlidersPanel">
                             <StackPanel.Style>
                                 <Style TargetType="{x:Type StackPanel}">
@@ -50,21 +38,25 @@
                                 </Style>
                             </StackPanel.Style>
 
-                            <TextBlock FontSize="12" Text="Light Direction X"/>
-                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderX" Value="0.5" Margin="4" ValueChanged="LightSlider_OnValueChanged"/>
-                            
-                            <TextBlock FontSize="12" Text="Light Direction Y"/>
-                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderY" Value="-0.25" Margin="4" ValueChanged="LightSlider_OnValueChanged"/>
-                            
-                            <TextBlock FontSize="12" Text="Light Direction Z"/>
-                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderZ" Value="-0.5" Margin="4" ValueChanged="LightSlider_OnValueChanged"/>
+                            <TextBlock Text="Light Direction X" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderX" Value="0.5" ValueChanged="LightSlider_OnValueChanged"/>
+
+                            <TextBlock Text="Light Direction Y" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderY" Value="-0.25" ValueChanged="LightSlider_OnValueChanged"/>
+
+                            <TextBlock Text="Light Direction Z" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                            <Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderZ" Value="-0.5" ValueChanged="LightSlider_OnValueChanged"/>
                         </StackPanel>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
         </ext:SciChart3DInteractionToolbar>
 
-        <s3D:SciChart3DSurface x:Name="sciChart" Grid.Column="1" WorldDimensions="200,200,200" Rendered="SciChart_OnRendered">
+        <s3D:SciChart3DSurface x:Name="sciChart"
+                               Grid.Column="1"
+                               BorderThickness="0"
+                               WorldDimensions="200,200,200"                  
+                               Rendered="SciChart_OnRendered">
 
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D Target="0,100,0" Radius="450" OrbitalPitch="25"/>
@@ -93,24 +85,25 @@
         </s3D:SciChart3DSurface>
 
         <Border Grid.Column="1"
-                Background="#555"
+                Background="{StaticResource MainThemeTransparentSolidBrush}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Margin="10" 
-                BorderThickness="1"
-                BorderBrush="White"
-                CornerRadius="2"
-                Opacity="0.4"
-                MinWidth="240">
+                BorderThickness="0"
+                CornerRadius="5"
+                Width="200"
+                Margin="5">
 
-            <Grid TextElement.Foreground="White" >
+            <Grid Margin="10,5">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Margin" Value="10,5"/>
+                        <Setter Property="Opacity" Value="0.7"/>
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                        <Setter Property="Foreground" Value="#FFF"/>
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -125,30 +118,31 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Main Light Mode" FontWeight="Bold"/>
-                <TextBlock x:Name="labelLightMode" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock x:Name="labelLightMode" FontWeight="Bold" Margin="0"/>
 
-                <Border Background="White" Height="1" Grid.Row="1" Margin="3,5" Grid.ColumnSpan="2"/>
+                <Line Grid.Row="1" Grid.ColumnSpan="3" X2="1" StrokeThickness="0.5" Stroke="#FFF" Margin="0,5,0,0" 
+                      Stretch="Fill" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
 
-                <TextBlock Text="Light Direction X:" Grid.Row="2" FontWeight="Bold"/>
-                <TextBlock x:Name="labelLightX" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="Light Direction X" Grid.Row="2" FontWeight="Bold"/>
+                <TextBlock x:Name="labelLightX" Grid.Row="2" Grid.Column="2"/>
 
-                <TextBlock Text="Light Direction Y:" Grid.Row="3" FontWeight="Bold"/>
-                <TextBlock x:Name="labelLightY" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="Light Direction Y" Grid.Row="3" FontWeight="Bold"/>
+                <TextBlock x:Name="labelLightY" Grid.Row="3" Grid.Column="2"/>
 
-                <TextBlock Text="Light Direction Z:" Grid.Row="4" FontWeight="Bold"/>
-                <TextBlock x:Name="labelLightZ" Grid.Row="4" Grid.Column="1"/>
+                <TextBlock Text="Light Direction Z" Grid.Row="4" FontWeight="Bold"/>
+                <TextBlock x:Name="labelLightZ" Grid.Row="4" Grid.Column="2"/>
 
-                <Border Background="White" Height="1" Grid.Row="5" Margin="3,5" Grid.ColumnSpan="2"/>
+                <Line Grid.Row="5" Grid.ColumnSpan="3" X2="1" StrokeThickness="0.5" Stroke="#FFF" Margin="0,5,0,0" 
+                      Stretch="Fill" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
 
-                <TextBlock Text="Camera Direction X:" Grid.Row="6" FontWeight="Bold"/>
-                <TextBlock x:Name="labelCameraX" Grid.Row="6" Grid.Column="1"/>
+                <TextBlock Text="Camera Direction X" Grid.Row="6" FontWeight="Bold"/>
+                <TextBlock x:Name="labelCameraX" Grid.Row="6" Grid.Column="2"/>
 
-                <TextBlock Text="Camera Direction Y:" Grid.Row="7" FontWeight="Bold"/>
-                <TextBlock x:Name="labelCameraY" Grid.Row="7" Grid.Column="1"/>
+                <TextBlock Text="Camera Direction Y" Grid.Row="7" FontWeight="Bold"/>
+                <TextBlock x:Name="labelCameraY" Grid.Row="7" Grid.Column="2"/>
 
-                <TextBlock Text="Camera Direction Z:" Grid.Row="8" FontWeight="Bold"/>
-                <TextBlock x:Name="labelCameraZ" Grid.Row="8" Grid.Column="1"/>
+                <TextBlock Text="Camera Direction Z" Grid.Row="8" FontWeight="Bold"/>
+                <TextBlock x:Name="labelCameraZ" Grid.Row="8" Grid.Column="2"/>
             </Grid>
         </Border>
     </Grid>

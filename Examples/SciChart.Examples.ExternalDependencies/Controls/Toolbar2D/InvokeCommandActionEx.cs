@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -21,7 +21,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
-using SciChart.Charting.Visuals.RenderableSeries;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 {
@@ -45,11 +44,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
             if (eventArgs != null)
             {
-                var selectedSeries = (eventArgs.AddedItems.Count > 0 ? eventArgs.AddedItems[0] : null) as BaseRenderableSeries;
+                var seriesName = (eventArgs.AddedItems.Count > 0 ? eventArgs.AddedItems[0] : null) as string;
 
-                if (selectedSeries != null && SnapToSelectedSeriesCommand != null)
+                if (seriesName != null && SnapToSelectedSeriesCommand != null)
                 {
-                    SnapToSelectedSeriesCommand.Execute(selectedSeries);
+                    SnapToSelectedSeriesCommand.Execute(seriesName);
                 }
             }
         }

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -30,42 +30,40 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
     public partial class CreateRealTime3DGeoidChart : UserControl
     {
         private DispatcherTimer _timer;
-        private object _syncRoot = new object();
+        private bool _isRunning;
+        private readonly object _syncRoot = new object();
 
         public CreateRealTime3DGeoidChart()
         {
             InitializeComponent();
 
-            this.Loaded += (s, e) =>
-            {
-                this.StartButton.IsChecked = true;
-                this.OnStart();
-            };
+            Loaded += (s, e) => OnStart();
 
-            this.Unloaded += (s, e) =>
-            {
-                this.OnStop();
-            };
+            Unloaded += (s, e) => OnStop();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            OnStart(); 
+            OnStart();
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             OnStop();
-        }        
+        }
 
         private void DataCombo_OnSelectionChanged(object sender, EventArgs e)
         {
+            _isRunning = false;
+
             OnStart();
         }
 
         private void OnStart()
         {
-            if (!IsLoaded) return;
+            if (!IsLoaded || _isRunning) return;
+
+            _isRunning = true;
 
             int countU, countV;
             switch (DataCombo.SelectedIndex)
@@ -91,7 +89,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
             lock (_syncRoot)
             {
-                OnStop();
+                _timer?.Stop();
             }
 
             BitmapImage bitmapImage = new BitmapImage();
@@ -140,7 +138,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
                 lock (_syncRoot)
                 {
                     double heightOffsetsScale = sliderHeightOffsetsScale.Value;
-                    double freq = (Math.Sin(frames++*0.1) + 1.0) / 2.0;
+                    double freq = (Math.Sin(frames++ * 0.1) + 1.0) / 2.0;
 
                     // Each set of geoHeightMap[i,j] schedules a redraw when the next Render event fires. Therefore, we suspend updates so that we can update the chart once
                     // We parallelize it by using Parallel.For for the outer loop
@@ -171,19 +169,23 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
                     }
                 }
             };
+
             SurfaceMesh.DataSeries = dataSeries;
             _timer.Start();
-            StartButton.IsEnabled = false;
-            PauseButton.IsEnabled = true;
+
+            StartButton.IsChecked = true;
+            PauseButton.IsChecked = false;
         }
 
         private void OnStop()
         {
-            if (_timer != null)
+            if (_isRunning)
             {
-                _timer.Stop();
-                StartButton.IsEnabled = true;
-                PauseButton.IsEnabled = false;
+                _isRunning = false;
+                _timer?.Stop();
+                
+                StartButton.IsChecked = false;
+                PauseButton.IsChecked = true;
             }
         }
     }

@@ -10,97 +10,72 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    <UserControl.Resources>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
-        </ResourceDictionary>
+    <UserControl.Resources>
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-          <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
-          <!--  to the chart and is included for example purposes.  -->
-          <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <Border Background="#FF232426" BorderBrush="#323539" Panel.ZIndex="9999" BorderThickness="0,0,2,0">
+        <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
+        <!--  to the chart and is included for example purposes.  -->
+        <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Mouse Wheel">
+                <ext:ToolbarIcon Kind="Tire" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Action Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}"
+                                  SelectedItem="{Binding ActionType, Source={x:Reference MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+                        <TextBlock Text="Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" 
+                                  SelectedItem="{Binding XyDirection, Source={x:Reference MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-                <ext:FlyoutMenuButton HorizontalAlignment="Left" Content="Wheel" Style="{StaticResource MouseWheelButtonStyle}" ToolTipService.ToolTip="MouseWheel">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Action Type"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}"
-                                      SelectedItem="{Binding ActionType, Source={x:Reference Name=MouseWheelZoomMod}, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                            <ext:FlyoutSeparator/>
-
-                            <TextBlock Text="Direction"/>
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" 
-                                      SelectedItem="{Binding ElementName=MouseWheelZoomMod, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton x:Name="realTimePolarSpeedTime"
-                          HorizontalAlignment="Left"
-                          Content="TS"
-                          Style="{StaticResource FlyoutMenuButtonStyle}"
-                          ToolTipService.ToolTip="MouseWheel">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock Margin="3"
-                               Foreground="White"
-                               Text="Timer Speed (ms): " />
-
-                            <Slider x:Name="Slider"
-                            Width="160"
-                            Margin="5"
-                            Maximum="500"
-                            Minimum="20"
-                            ValueChanged="Slider_OnValueChanged"
-                            Value="50" />
-
-                            <TextBlock Margin="5" Foreground="White">
-                      <Run Text="{Binding Source={x:Reference Name=Slider}, Path=Value, StringFormat=\{0:0.0\}}" />
-                      <Run Text="ms" />
-                            </TextBlock>
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-            </WrapPanel>
-        </Border>
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Timer Speed">
+                <ext:ToolbarIcon Kind="TimerOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="{Binding Source={x:Reference Name=Slider}, Path=Value, StringFormat='Timer Speed: {0:0} ms'}"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider x:Name="Slider"
+                                Width="160"
+                                Margin="0,5"
+                                Maximum="500"
+                                Minimum="20"
+                                ValueChanged="Slider_OnValueChanged"
+                                Value="50"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface Name="sciChartSurface" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries Name="lineSeries"
-                                            Stroke="#FF99EE99"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
                 <s:PolarXAxis AutoRange="Always"
-                              BorderBrush="#FFAAFFAA"
+                              BorderBrush="{StaticResource ExtraThemeStrokeBrush_2}"
                               BorderThickness="0,4,0,0" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
                 <s:PolarYAxis AutoRange="Never" VisibleRange="-2.0, 2.0" />
             </s:SciChartSurface.YAxis>
-            
+
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
                     <s:ZoomExtentsModifier />

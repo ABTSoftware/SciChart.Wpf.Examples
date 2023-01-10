@@ -1,19 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
-    <UseWPF>true</UseWPF>
-    <ApplicationIcon />
-    <StartupObject />
+    <TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <UseWPF>True</UseWPF>
     <LangVersion>Latest</LangVersion>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
-    <DocumentationFile>..\..\Build\Debug\net452\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
+    <DocumentationFile>..\..\Build\Debug\net462\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
     <OutputPath>..\..\Build\Release\</OutputPath>
-    <DocumentationFile>..\..\Build\Release\net452\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
+    <DocumentationFile>..\..\Build\Release\net462\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
@@ -22,6 +20,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
     <OutputPath>..\..\Build\Release</OutputPath>
     <DocumentationFile>..\..\Build\Release\netcoreapp3.1\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+    <DocumentationFile>..\..\Build\Debug\net6.0-windows\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
+    <OutputPath>..\..\Build\Release</OutputPath>
+    <DocumentationFile>..\..\Build\Release\net6.0-windows\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Controls\SciChartInteractionToolbar\MyCustomAnnotation.cs" />
@@ -39,11 +45,9 @@
     <None Remove="Resources\Data\VitalSignsTrace.csv.gz" />
     <None Remove="Resources\Data\Waveform.txt.gz" />
     <None Remove="Resources\Data\WeatherData.txt.gz" />
-    <None Remove="Resources\Images\cursor.png" />
     <None Remove="Resources\Images\globe_heightmap.png" />
     <None Remove="Resources\Images\SciChartLogo_Dark.png" />
-    <None Remove="Resources\Images\selection_view.png" />
-    <None Remove="Resources\Images\target.png" />
+    <None Remove="Resources\Images\SciChartLogo_Navy.png" />
     <None Remove="Resources\Objects\Bishop_Low.obj" />
     <None Remove="Resources\Objects\BlackWoodTexture.jpg" />
     <None Remove="Resources\Objects\King_Low.obj" />
@@ -67,16 +71,15 @@
     <EmbeddedResource Include="Resources\Data\WeatherData.txt.gz" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\cursor.png" />
     <Resource Include="Resources\Images\globe_heightmap.png" />
     <Resource Include="Resources\Images\SciChartLogo_Dark.png" />
-    <Resource Include="Resources\Images\selection_view.png" />
-    <Resource Include="Resources\Images\target.png" />
+    <Resource Include="Resources\Images\SciChartLogo_Navy.png" />
     <Resource Include="Resources\Objects\Bishop_Low.obj" />
     <Resource Include="Resources\Objects\BlackWoodTexture.jpg" />
     <Resource Include="Resources\Objects\King_Low.obj" />
@@ -87,20 +90,15 @@
     <Resource Include="Resources\Objects\WhiteWoodTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
+    <PackageReference Include="SciChart" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart3D" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart.DirectX" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26595" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart.DrawingTools" Version="7.0.0.26941-beta" />
   </ItemGroup>
 </Project>

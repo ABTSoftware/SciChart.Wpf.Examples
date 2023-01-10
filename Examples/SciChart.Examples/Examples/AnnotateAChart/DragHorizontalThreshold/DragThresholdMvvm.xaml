@@ -14,8 +14,8 @@
         <ControlTemplate x:Key="LegendTemplate">
             <Border HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Background="#88444444"
-                    BorderBrush="#88EEEEEE"
+                    Background="{StaticResource ExtraThemeTransparentStrokeBrush_4}"
+                    BorderBrush="{StaticResource ExtraThemeTransparentStrokeBrush_1}"
                     BorderThickness="1"
                     CornerRadius="3">
                 <TextBlock Margin="5"
@@ -26,10 +26,11 @@
                                           RelativeSource={RelativeSource AncestorType=s:SciChartSurface}}" />
             </Border>
         </ControlTemplate>
-
+        
         <!--  this is only included so the designer will work. In the example we bind to ViewportManager property in a ViewModel  -->
         <!--  so that we can control the chart from the ViewModel. Another way to solve this problem is to have a design time viewmodel  -->
         <s:DefaultViewportManager x:Key="DefaultViewportManager" />
+
     </UserControl.Resources>
 
     <Grid>
@@ -42,33 +43,30 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton Content="AXIS"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="FormatVerticalAlignCenter" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150"
-                                Margin="0,0,0,4"
-                                Orientation="Vertical">
-                        <TextBlock Text="YAxis.AxisAlignment" />
-                        <ext:FlyoutSeparator />
-                        <ComboBox x:Name="cboYAxisAlignment"
-                                  Margin="4"
-                                  SelectedIndex="0">
-                            <ComboBox.Items>
-                                <s:AxisAlignment>Right</s:AxisAlignment>
-                                <s:AxisAlignment>Left</s:AxisAlignment>
-                            </ComboBox.Items>
-                        </ComboBox>
-
-                        <TextBlock Text="Xaxis.AxisAlignment" />
-                        <ext:FlyoutSeparator />
-                        <ComboBox x:Name="cboXAxisAlignment"
-                                  Margin="4"
-                                  SelectedIndex="0">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="X-Axis Alignment" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboXAxisAlignment" SelectedIndex="0">
                             <ComboBox.Items>
                                 <s:AxisAlignment>Bottom</s:AxisAlignment>
                                 <s:AxisAlignment>Top</s:AxisAlignment>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="FormatHorizontalAlignCenter" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Y-Axis Alignment" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="cboYAxisAlignment" SelectedIndex="0">
+                            <ComboBox.Items>
+                                <s:AxisAlignment>Right</s:AxisAlignment>
+                                <s:AxisAlignment>Left</s:AxisAlignment>
                             </ComboBox.Items>
                         </ComboBox>
                     </StackPanel>
@@ -112,7 +110,7 @@
                                             LabelPlacement="Axis"
                                             LabelTextFormatting="0.00"
                                             ShowLabel="True"
-                                            Stroke="#FF42b649"
+                                            Stroke="{StaticResource ExtraThemeStrokeBrush_1}"
                                             StrokeThickness="2"
                                             Y1="{Binding Threshold,
                                                          Mode=TwoWay,

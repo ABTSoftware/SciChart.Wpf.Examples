@@ -50,13 +50,12 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ext:FlyoutMenuButton  Style="{StaticResource FlyoutMenuButtonStyle}" Content="TYPE" Padding="0">
+            <ext:FlyoutMenuButton x:Name="seriesTypesBtn">
+                <ext:ToolbarIcon Kind="ChartTimelineVariant" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                        <TextBlock Text="Selected Series Type" />
-                        <ext:FlyoutSeparator/>
-                        <ComboBox x:Name="seriesTypesCombo" SelectionChanged="SeriesComboSelectionChanged" Margin="4">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Selected Series Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="seriesTypesCombo" SelectionChanged="SeriesComboSelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource TypeToTypeNameConverter}}" />
@@ -66,9 +65,7 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
         </ext:SciChartInteractionToolbar>
-
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
             <s:SciChartSurface.XAxis>
@@ -111,61 +108,43 @@
 
             <!-- Some hints to the user -->
             <s:SciChartSurface.Annotations>
-
                 <s:CustomAnnotation CoordinateMode="Relative" 
                                     HorizontalAnchorPoint="Left"
-                                    Margin="5,18,0,0" 
-                                    VerticalAnchorPoint="Center" 
-                                    IsHidden="{Binding ElementName=sciChart, Path=SelectedRenderableSeries.Count}"
-                                    X1="0" 
-                                    Y1="0" >
+                                    VerticalAnchorPoint="Top" 
+                                    Margin="5"
+                                    X1="0" Y1="0">
 
-                    <StackPanel Orientation="Horizontal">
+                    <Border CornerRadius="5" Background="{StaticResource MainThemeTransparentSolidBrush}">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" 
+                                           Opacity="0.7"               
+                                           Margin="5,0"
+                                           VerticalAlignment="Center"
+                                           Text="Select a series by clicking on the chart. To enable selection, click" 
+                                           Foreground="#FFF"/>
 
-                        <TextBlock FontSize="20" 
-                                   Opacity="0.7"
-                                   Background="#232323"
-                                   Margin="0 0 5 0"
-                                   Text="Select a Series by clicking on the chart ..." 
-                                   Foreground="#FFF" />
+                                <Border Width="26" Height="26" Margin="5,0" CornerRadius="5" Background="#FF2A354B">
+                                    <ext:ToolbarIcon Kind="ArrowTopLeft" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                                </Border>
+                            </StackPanel>
 
-                        <Image Width="32"
-                               Height="32"
-                               Source="/SciChart.Examples;component/Resources/Images/pointbutton_icon.png"
-                               Stretch="None" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" 
+                                           Opacity="0.7"               
+                                           Margin="5,0"
+                                           VerticalAlignment="Center"
+                                           Text="Now change the series type at runtime using" 
+                                           Foreground="#FFF"/>
 
-                    </StackPanel>
-
+                                <Border Width="26" Height="26" Margin="5,0" CornerRadius="5" Background="#FF2A354B">
+                                    <ext:ToolbarIcon Kind="ChartTimelineVariant" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </s:CustomAnnotation>
-
-                <s:CustomAnnotation CoordinateMode="Relative" 
-                                    HorizontalAnchorPoint="Left"
-                                    VerticalAnchorPoint="Center"
-                                    IsHidden="{Binding ElementName=sciChart, Path=SelectedRenderableSeries.Count, Converter={StaticResource InvertBooleanConverter}}"
-                                    Margin="5,18,0,0" 
-                                    X1="0" 
-                                    Y1="0" >
-
-                    <StackPanel Orientation="Horizontal">
-
-                        <TextBlock FontSize="20" 
-                                   Opacity="0.7"
-                                   Background="#232323"
-                                   Margin="0 0 5 0"
-                                   Text="Now change the type at runtime!" 
-                                   Foreground="#FFF" />
-
-                        <Image Width="32"
-                               Height="32"
-                               Source="/SciChart.Examples;component/Resources/Images/type_button.png"
-                               Stretch="None" />
-
-                    </StackPanel>
-
-                </s:CustomAnnotation>
-                
             </s:SciChartSurface.Annotations>
-
         </s:SciChartSurface>
     </Grid>
 </UserControl>

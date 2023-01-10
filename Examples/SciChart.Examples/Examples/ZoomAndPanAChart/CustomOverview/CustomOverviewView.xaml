@@ -18,14 +18,16 @@
                 <Setter.Value>
                     <Style TargetType="Control">
                         <Setter Property="Background" Value="#33000000" />
-                        <Setter Property="BorderBrush" Value="#99000000" />
+                        <Setter Property="BorderBrush" Value="#FF193754" />
+                        <Setter Property="BorderThickness" Value="2" />
                     </Style>
                 </Setter.Value>
             </Setter>
             <Setter Property="GripsStyle">
                 <Setter.Value>
                     <Style TargetType="Control">
-                        <Setter Property="Background" Value="#535353" />
+                        <Setter Property="Background" Value="#FF656D80" />
+                        <Setter Property="BorderBrush" Value="#FF193754" />
                         <Setter Property="BorderThickness" Value="2" />
                     </Style>
                 </Setter.Value>
@@ -35,8 +37,7 @@
         <ext:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
     </UserControl.Resources>
 
-    <Grid Background="{Binding Source={x:Reference Name=MainChartSurface}, Path=Background}">
-
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

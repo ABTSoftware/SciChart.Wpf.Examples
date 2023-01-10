@@ -16,6 +16,7 @@
     [b]Change some of the options on the left-hand side to see what this versatile chart type is capable of doing.[/b]
   </Description>
   <CodeFiles>
+	<string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/ColorMapTemplateSelector.cs.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/CreateRealTime3DUniformMeshChart.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/Charts3D/CreateRealtime3DCharts/CreateRealTime3DUniformMeshChart.xaml.cs.txt</string>
   </CodeFiles>

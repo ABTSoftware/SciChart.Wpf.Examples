@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -16,54 +16,44 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model;
+using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifiers
 {
     public class CustomFlipModifier : ChartModifierBase
     {
-        public ICommand FlipXAxis
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    if (ParentSurface != null)
-                    {
-                        FlipAxes(ParentSurface.XAxes);
-                    }
+        public ICommand FlipXAxis { get; }
 
-                });
-            }
-        }
+        public ICommand FlipYAxis { get; }
 
-        public ICommand FlipYAxis
+        public CustomFlipModifier()
         {
-            get
+            FlipXAxis = new ActionCommand(() =>
             {
-                return new ActionCommand(() =>
+                if (ParentSurface != null)
                 {
-                    if (ParentSurface != null)
-                    {
-                        FlipAxes(ParentSurface.YAxes);
-                    }
-                });
-            }
+                    FlipAxes(ParentSurface.XAxes);
+                }
+            });
+
+            FlipYAxis = new ActionCommand(() =>
+            {
+                if (ParentSurface != null)
+                {
+                    FlipAxes(ParentSurface.YAxes);
+                }
+            });
         }
 
         public void FlipAxes(AxisCollection axes)
         {
             using (ParentSurface.SuspendUpdates())
             {
-                foreach (var axis in axes)
-                    axis.FlipCoordinates = !axis.FlipCoordinates;
+                axes.ForEachDo(axis => axis.FlipCoordinates = !axis.FlipCoordinates);
             }
         }
     }

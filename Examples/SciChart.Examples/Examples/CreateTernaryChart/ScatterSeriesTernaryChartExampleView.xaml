@@ -11,34 +11,24 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <Style x:Key="HintDataItemsTooltipTernaryStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="1" />
+        </Style>
 
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
-
-            <Style x:Key="HintDataItemsTooltipTernaryStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="FontSize" Value="12" />
-                <Setter Property="Margin" Value="1" />
-            </Style>
-
-            <DataTemplate x:Key="TooltipTernaryModifierLabelTemplate" DataType="s:TernarySeriesInfo">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}"
+        <DataTemplate x:Key="TooltipTernaryModifierLabelTemplate" DataType="s:TernarySeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}"
                                Text="{Binding SeriesName, StringFormat='{}{0}'}"
                                TextDecorations="Underline" />
-                    <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedXValue, StringFormat='{}Earth: {0}'}" />
-                    <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedYValue, StringFormat='{}Fire: {0}'}" />
-                    <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedZValue, StringFormat='{}Air: {0}'}" />
-                </StackPanel>
-            </DataTemplate>
-
-        </ResourceDictionary>
-
+                <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedXValue, StringFormat='{}Earth: {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedYValue, StringFormat='{}Fire: {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsTooltipTernaryStyle}" Text="{Binding FormattedZValue, StringFormat='{}Air: {0}'}" />
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid>
@@ -48,118 +38,62 @@
         </Grid.ColumnDefinitions>
 
         <!--  This toolbar adds cursor, tooltip, legend and theme change functionality  -->
-        <Border Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ToggleButton x:Name="cursorModButton"
+                          IsChecked="{Binding Source={x:Reference Name=cursorTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Cursor Ternary Modifier">
+                <ext:ToolbarIcon Kind="CrosshairsGps" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+            <ToggleButton x:Name="tooltipModButton"
+                          IsChecked="{Binding Source={x:Reference Name=tooltipTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="tooltip Ternary Modifier">
+                <ext:ToolbarIcon Kind="TooltipTextOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="cursorModButton"
-                              HorizontalAlignment="Left"
-                              Content="Cursor"
-                              IsChecked="{Binding Source={x:Reference Name=cursorTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
-                              Style="{StaticResource CursorTernaryButtonStyle}"
-                              ToolTipService.ToolTip="Cursor Ternary Modifier" />
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Legend">
+                <ext:ToolbarIcon Kind="ViewSplitVertical" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Legend source" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
+                                  SelectedItem="{Binding Path=GetLegendDataFor, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay, 
+                                                         Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                <ToggleButton x:Name="tooltipModButton"
-                              HorizontalAlignment="Left"
-                              Content="Tooltip"
-                              ContentTemplate="{StaticResource TooltipIconContentTemplate}"
-                              IsChecked="{Binding Source={x:Reference Name=tooltipTernaryModifier}, Path=IsEnabled, Mode=TwoWay}"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="tooltip Ternary Modifier" />
+                        <TextBlock Text="Legend placement" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" 
+                                  SelectedItem="{Binding Path=LegendPlacement, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay, 
+                                                         Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Leg"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Legend">
+                        <TextBlock Text="Legend orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type Orientation}}}"
+                                  SelectedItem="{Binding Path=Orientation, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay, 
+                                                         Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Legend source" />
+                        <CheckBox Content="Show Legend" Margin="0,10,0,5" IsChecked="{Binding Path=ShowLegend, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay}"/>
+                        <CheckBox Content="Show CheckBoxes" Margin="0,5" IsChecked="{Binding Path=ShowVisibilityCheckboxes, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay}"/>
+                        <CheckBox Content="Show Series Markers" Margin="0,5" IsChecked="{Binding Path=ShowSeriesMarkers, Source={x:Reference ternaryLegendModifier}, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:SourceMode}}}"
-                                      SelectedItem="{Binding Path=GetLegendDataFor,  
-                                                             Source={x:Reference ternaryLegendModifier},
-                                                             Mode=TwoWay, 
-                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock Text="Legend placement" />
-
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" 
-                                      SelectedItem="{Binding Path=LegendPlacement, 
-                                                             Source={x:Reference ternaryLegendModifier}, 
-                                                             Mode=TwoWay, 
-                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock Text="Legend orientation" />
-
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type Orientation}}}"
-                                      SelectedItem="{Binding Path=Orientation, 
-                                                             Source={x:Reference ternaryLegendModifier}, 
-                                                             Mode=TwoWay, 
-                                                             Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show legend"
-                                      IsChecked="{Binding Path=ShowLegend,
-                                                          Source={x:Reference ternaryLegendModifier},
-                                                          Mode=TwoWay}" />
-
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show checkboxes"
-                                      IsChecked="{Binding Path=ShowVisibilityCheckboxes,
-                                                          Source={x:Reference ternaryLegendModifier},
-                                                          Mode=TwoWay}" />
-
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show series markers"
-                                      IsChecked="{Binding Path=ShowSeriesMarkers,
-                                                          Source={x:Reference ternaryLegendModifier},
-                                                          Mode=TwoWay}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      HorizontalContentAlignment="Center"
-                                      Content="THM"
-                                      FontSize="10"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Theme changing">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock FontSize="12" Text="Update Theme" />
-                            <ext:FlyoutSeparator />
-
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                                      SelectedItem="{Binding Source={x:Reference sciTernaryChart},
-                                                             Path=(s:ThemeManager.Theme),
-                                                             Mode=TwoWay}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-            </WrapPanel>
-        </Border>
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Theme changing">
+                <ext:ToolbarIcon Kind="Brush" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Update Theme" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=sciTernaryChart}, Path=(s:ThemeManager.Theme), Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartTernarySurface x:Name="sciTernaryChart"
                                   Grid.Column="1"
-                                  s:ThemeManager.Theme="SciChartv4Dark">
+                                  s:ThemeManager.Theme="SciChartv7Navy">
 
             <s:SciChartTernarySurface.RenderableSeries>
 
@@ -167,8 +101,8 @@
                     <s:TernaryScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="7"
                                               Height="7"
-                                              Fill="Aqua"
-                                              Stroke="Black"
+                                              Fill="{StaticResource ExtraThemeStrokeColor_1}"
+                                              Stroke="{StaticResource MainThemeStrokeColor}"
                                               StrokeThickness="1" />
                     </s:TernaryScatterRenderableSeries.PointMarker>
                 </s:TernaryScatterRenderableSeries>
@@ -177,8 +111,8 @@
                     <s:TernaryScatterRenderableSeries.PointMarker>
                         <s:TrianglePointMarker Width="11"
                                                Height="11"
-                                               Fill="Blue"
-                                               Stroke="Black"
+                                               Fill="{StaticResource ExtraThemeStrokeColor_3}"
+                                               Stroke="{StaticResource MainThemeStrokeColor}"
                                                StrokeThickness="1" />
                     </s:TernaryScatterRenderableSeries.PointMarker>
                 </s:TernaryScatterRenderableSeries>
@@ -187,8 +121,8 @@
                     <s:TernaryScatterRenderableSeries.PointMarker>
                         <s:SquarePointMarker Width="7"
                                              Height="7"
-                                             Fill="OrangeRed"
-                                             Stroke="Black"
+                                             Fill="{StaticResource ExtraThemeStrokeColor_4}"
+                                             Stroke="{StaticResource MainThemeStrokeColor}"
                                              StrokeThickness="1" />
                     </s:TernaryScatterRenderableSeries.PointMarker>
                 </s:TernaryScatterRenderableSeries>
@@ -196,7 +130,7 @@
 
             <s:SciChartTernarySurface.XAxisStyle>
                 <Style TargetType="s:TernaryNumericAxis">
-                    <Setter Property="BorderBrush" Value="Blue" />
+                    <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                     <Setter Property="BorderThickness" Value="0,0,1,0" />
                     <Setter Property="VertexLabelStyle">
                         <Setter.Value>
@@ -209,7 +143,7 @@
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Bottom"
                                                        FontSize="20"
-                                                       Foreground="Blue"
+                                                       Foreground="{StaticResource ExtraThemeStrokeBrush_1}"
                                                        Text="Earth" />
                                         </DataTemplate>
                                     </Setter.Value>
@@ -220,11 +154,11 @@
                     <Setter Property="TickLabelStyle">
                         <Setter.Value>
                             <Style TargetType="s:TernaryAxisLabelTick">
-                                <Setter Property="Foreground" Value="Blue" />
+                                <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                                 <Setter Property="TickLineStyle">
                                     <Setter.Value>
                                         <Style TargetType="Line">
-                                            <Setter Property="Stroke" Value="Blue" />
+                                            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                                         </Style>
                                     </Setter.Value>
                                 </Setter>
@@ -233,9 +167,10 @@
                     </Setter>
                 </Style>
             </s:SciChartTernarySurface.XAxisStyle>
+
             <s:SciChartTernarySurface.YAxisStyle>
                 <Style TargetType="s:TernaryNumericAxis">
-                    <Setter Property="BorderBrush" Value="OrangeRed" />
+                    <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_3}" />
                     <Setter Property="BorderThickness" Value="1,0,0,0" />
                     <Setter Property="VertexLabelStyle">
                         <Setter.Value>
@@ -248,7 +183,7 @@
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Bottom"
                                                        FontSize="20"
-                                                       Foreground="OrangeRed"
+                                                       Foreground="{StaticResource ExtraThemeStrokeBrush_3}"
                                                        Text="Fire" />
                                         </DataTemplate>
                                     </Setter.Value>
@@ -260,11 +195,11 @@
                     <Setter Property="TickLabelStyle">
                         <Setter.Value>
                             <Style TargetType="s:TernaryAxisLabelTick">
-                                <Setter Property="Foreground" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_3}" />
                                 <Setter Property="TickLineStyle">
                                     <Setter.Value>
                                         <Style TargetType="Line">
-                                            <Setter Property="Stroke" Value="OrangeRed" />
+                                            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_3}" />
                                         </Style>
                                     </Setter.Value>
                                 </Setter>
@@ -273,9 +208,10 @@
                     </Setter>
                 </Style>
             </s:SciChartTernarySurface.YAxisStyle>
+
             <s:SciChartTernarySurface.ZAxisStyle>
                 <Style TargetType="s:TernaryNumericAxis">
-                    <Setter Property="BorderBrush" Value="Aqua" />
+                    <Setter Property="BorderBrush" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
                     <Setter Property="BorderThickness" Value="0,0,1,0" />
                     <Setter Property="VertexLabelStyle">
                         <Setter.Value>
@@ -288,7 +224,7 @@
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Bottom"
                                                        FontSize="20"
-                                                       Foreground="Aqua"
+                                                       Foreground="{StaticResource ExtraThemeStrokeBrush_4}"
                                                        Text="Air" />
                                         </DataTemplate>
                                     </Setter.Value>
@@ -300,11 +236,11 @@
                     <Setter Property="TickLabelStyle">
                         <Setter.Value>
                             <Style TargetType="s:TernaryAxisLabelTick">
-                                <Setter Property="Foreground" Value="Aqua" />
+                                <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
                                 <Setter Property="TickLineStyle">
                                     <Setter.Value>
                                         <Style TargetType="Line">
-                                            <Setter Property="Stroke" Value="Aqua" />
+                                            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
                                         </Style>
                                     </Setter.Value>
                                 </Setter>

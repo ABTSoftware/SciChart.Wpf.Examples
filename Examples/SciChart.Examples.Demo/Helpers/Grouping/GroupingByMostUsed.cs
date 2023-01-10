@@ -19,7 +19,7 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
         {
             var result = new ObservableCollection<TileViewModel>
             {
-                new TileViewModel {TileDataContext = new EverythingGroupViewModel {GroupingName = "MostUsedGroup"}}
+                new TileViewModel {TileDataContext = new EverythingGroupViewModel {GroupingName = "Most Used"}}
             };
 
             foreach (var example in examples.Select(x => x.Value))

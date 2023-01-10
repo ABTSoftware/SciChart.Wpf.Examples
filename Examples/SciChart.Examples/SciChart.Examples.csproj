@@ -1,22 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
-    <UseWPF>true</UseWPF>
-    <ApplicationIcon />
-    <StartupObject />
+    <TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <UseWPF>True</UseWPF>
     <LangVersion>Latest</LangVersion>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <OutputPath>..\..\Build\Release</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+    <OutputPath>..\..\Build\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
     <OutputPath>..\..\Build\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
@@ -40,6 +44,12 @@
     <ItemGroup>
       <ExampleSources Include="@(Page);@(Compile)" Condition="$([System.String]::new('%(Directory)').Contains('SciChart.Examples\Examples\'))" />
       <EmbeddedResource Include="@(ExampleSources)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="PackExampleThemes" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <ExampleThemes Include="@(Page);@(Compile)" Condition="$([System.String]::new('%(Directory)').Contains('SciChart.Examples\Themes\'))" />
+      <EmbeddedResource Include="@(ExampleThemes)" />
     </ItemGroup>
   </Target>
   <ItemGroup>
@@ -100,15 +110,15 @@
     <Resource Include="Resources\Images\type_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart3D" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart.DirectX" Version="7.0.0.26941-beta" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="6.6.0.26595" />
+    <PackageReference Include="SciChart.DrawingTools" Version="7.0.0.26941-beta" />
   </ItemGroup>
 </Project>

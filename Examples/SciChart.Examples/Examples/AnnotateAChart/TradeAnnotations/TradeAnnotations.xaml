@@ -16,17 +16,12 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
                 <ResourceDictionary Source="DrawingToolsEditPanelResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <ta:AnnotationViewModelToVisibilityConverter x:Key="AnnotationViewModelToVisibility" />
             <ta:DrawingToolViewModelToEditPanelOptionsConverter x:Key="DrawingToolViewModelToEditPanelOptionsConverter" />
-
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -42,91 +37,55 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference sciChart}}">
-            <ext:FlyoutMenuButton Padding="0"
-                                  HorizontalAlignment="Left"
-                                  Content="Tools"
-                                  FontSize="10">
+            <ext:FlyoutMenuToggleButton IsChecked="{Binding IsAnnotationCreationEnable, Mode=TwoWay}">
+                <ext:ToolbarIcon Kind="VectorSquarePlus" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <RadioButton Content="Pointer"
+                                     Margin="0,5"
+                                     IsChecked="True"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:BrushAnnotationViewModel}"/>
 
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:BrushAnnotationViewModel}"
-                                      Content="Pointer"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:ElliotWaveAnnotationViewModel}"
-                                      Content="Elliot Wave"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:PitchforkAnnotationViewModel}"
-                                      Content="Pitchfork"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
+                        <RadioButton Content="Elliot Wave"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:ElliotWaveAnnotationViewModel}"/>
 
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:XabcdAnnotationViewModel}"
-                                      Content="XABCD Pattern"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:HeadAndShouldersAnnotationViewModel}"
-                                      Content="Head and Shoulders"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:FibonacciExtensionAnnotationViewModel}"
-                                      Content="Fibonacci Extension"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
-                        
-                        <ToggleButton Width="auto"
-                                      Margin="0"
-                                      HorizontalAlignment="Stretch"
-                                      s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"
-                                      Command="{Binding SetAnnotationCreationTypeCommand}"
-                                      CommandParameter="{x:Type dt:FibonacciRetracementAnnotationViewModel}"
-                                      Content="Fibonacci Retracement"
-                                      IsChecked="{Binding IsAnnotationDrawn, Mode=TwoWay}"
-                                      Style="{StaticResource DefaultToggleButtonStyle}" />
+                        <RadioButton Content="Pitch Fork"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:PitchforkAnnotationViewModel}"/>
+
+                        <RadioButton Content="XABCD Pattern"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:XabcdAnnotationViewModel}"/>
+
+                        <RadioButton Content="Head and Shoulders"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:HeadAndShouldersAnnotationViewModel}"/>
+
+                        <RadioButton Content="Fibonacci Extension"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:FibonacciExtensionAnnotationViewModel}"/>
+
+                        <RadioButton Content="Fibonacci Retracement"
+                                     Margin="0,5"
+                                     Command="{Binding SetAnnotationCreationTypeCommand}"
+                                     CommandParameter="{x:Type dt:FibonacciRetracementAnnotationViewModel}"/>
                     </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-            
-            <Button HorizontalAlignment="Left"
-                    Command="{Binding DeleteSelectedAnnotationCommand}"
-                    Content="Del"
-                    Style="{StaticResource DefaultButtonStyle}" />
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
 
+            <Button Command="{Binding DeleteSelectedAnnotationCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTip="Delete Selected">
+                <ext:ToolbarIcon Kind="DeleteForever" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
+            
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart"

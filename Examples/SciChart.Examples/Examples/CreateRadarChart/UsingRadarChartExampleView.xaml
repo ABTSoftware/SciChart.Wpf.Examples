@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateRadarChart"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              d:DesignHeight="400"
@@ -11,16 +10,7 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary
-                    Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
-        </ResourceDictionary>
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -28,6 +18,102 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <!--  This toolbar adds tooltip, legend and theme change functionality  -->
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="HexagonOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Center Hole" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider x:Name="HoleValueSlider"
+                                HorizontalAlignment="Stretch"
+                                Orientation="Horizontal"
+                                Margin="0,5"
+                                Maximum="40"
+                                Minimum="0"
+                                Value="10"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="AngleAcute" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Start Angle" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider x:Name="AngleValueSlider"
+                                HorizontalAlignment="Stretch"
+                                Orientation="Horizontal"
+                                Margin="0,5"
+                                Maximum="360"
+                                Minimum="0"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Grid" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Grid Lines" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="GridLinesTypeSourceCombo"
+                                  ItemsSource="{Binding Source={ext:EnumValues {x:Type s:GridLinesType}}}"
+                                  SelectedIndex="0"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ToggleButton x:Name="TooltipEnablingButton"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Tooltip Radar Modifier">
+                <ext:ToolbarIcon Kind="TooltipTextOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton x:Name="LegendEnablingButton"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Legend Radar Modifier">
+                <ext:ToolbarIcon Kind="ViewSplitVertical" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton x:Name="DragDataPointButton" 
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Drag Data Point Modifier">
+                <ext:ToolbarIcon Kind="DragVariant" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton x:Name="FillingEnablingButton"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Is filled series">
+                <ext:ToolbarIcon Kind="FormatColorFill" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutMenuToggleButton x:Name="SelectionEnablingButton"
+                                        ToolTipService.ToolTip="Selection Modifier">
+                <ext:ToolbarIcon Kind="ArrowTopLeft" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Execute when" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="SelectionModeCombo" SelectedIndex="0" ItemsSource="{Binding Source={ext:EnumValues {x:Type s:MouseModifier}}}"/>
+                        <CheckBox x:Name="MultiSelectionEnablingCheckbox" Margin="0,10,0,5" Content="Allow Multi Selection"/>
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
+
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Theme changing">
+                <ext:ToolbarIcon Kind="Brush" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Update Theme" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=radarChart}, Path=(s:ThemeManager.Theme), Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <s:SciChartRadarSurface x:Name="radarChart"
                                 Grid.Column="1"
@@ -42,21 +128,32 @@
                             Value="{Binding Source={x:Reference FillingEnablingButton}, Path=IsChecked, Mode=TwoWay}" />
                 </Style>
 
-                <Style x:Key="BlueRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
-                 <Setter Property="SelectedSeriesStyle">
+                <Style x:Key="FirstRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}"/>
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource MainThemeStrokeColor}" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="PointMarker">
+                        <Setter.Value>
+                            <s:TrianglePointMarker Width="10" Height="10" StrokeThickness="0" Fill="{StaticResource MainThemeStrokeColor}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="SelectedSeriesStyle">
                         <Setter.Value>
                             <Style TargetType="s:RadarPolygonRenderableSeries">
                                 <Setter Property="StrokeThickness" Value="3" />
                                 <Setter Property="Fill">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Blue" Opacity="0.8"/>
+                                        <SolidColorBrush Color="{StaticResource MainThemeStrokeColor}" Opacity="0.8"/>
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="PointMarker">
                                     <Setter.Value>
                                         <s:TrianglePointMarker Width="15" 
                                                                Height="15" 
-                                                               Fill="Blue"
+                                                               Fill="{StaticResource MainThemeStrokeColor}"
                                                                StrokeThickness="0"/>
                                     </Setter.Value>
                                 </Setter>
@@ -64,14 +161,26 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-                <Style x:Key="CoralRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+
+                <Style x:Key="SecondRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="Stroke" Value="{StaticResource SecondaryThemeStrokeColor}"/>
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource SecondaryThemeStrokeColor}" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="PointMarker">
+                        <Setter.Value>
+                            <s:EllipsePointMarker Width="10" Height="10" StrokeThickness="0" Fill="{StaticResource SecondaryThemeStrokeColor}"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="SelectedSeriesStyle">
                         <Setter.Value>
                             <Style TargetType="s:RadarPolygonRenderableSeries">
                                 <Setter Property="StrokeThickness" Value="3" />
                                 <Setter Property="Fill">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Coral" 
+                                        <SolidColorBrush Color="{StaticResource SecondaryThemeStrokeColor}" 
                                                          Opacity="0.8"/>
                                     </Setter.Value>
                                 </Setter>
@@ -79,7 +188,7 @@
                                     <Setter.Value>
                                         <s:EllipsePointMarker Width="15"
                                                               Height="15"
-                                                              Fill="Coral"
+                                                              Fill="{StaticResource SecondaryThemeStrokeColor}"
                                                               StrokeThickness="0"/>
                                     </Setter.Value>
                                 </Setter>
@@ -87,14 +196,26 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-                <Style x:Key="GreenRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+
+                <Style x:Key="ThirdRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_2}"/>
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource ExtraThemeStrokeColor_2}" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="PointMarker">
+                        <Setter.Value>
+                            <s:CrossPointMarker Width="10" Height="10" StrokeThickness="0" Fill="{StaticResource ExtraThemeStrokeColor_2}"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="SelectedSeriesStyle">
                         <Setter.Value>
                             <Style TargetType="s:RadarPolygonRenderableSeries">
                                 <Setter Property="StrokeThickness" Value="3" />
                                 <Setter Property="Fill">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Green"  
+                                        <SolidColorBrush Color="{StaticResource ExtraThemeStrokeColor_2}"  
                                                          Opacity="0.8"/>
                                     </Setter.Value>
                                 </Setter>
@@ -102,7 +223,7 @@
                                     <Setter.Value>
                                         <s:CrossPointMarker Width="15"
                                                             Height="15" 
-                                                            Stroke="Green"
+                                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                                             StrokeThickness="3"/>
                                     </Setter.Value>
                                 </Setter>
@@ -110,14 +231,26 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-                <Style x:Key="YellowGreenRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+
+                <Style x:Key="FourthtRadarSeriesStyle" BasedOn="{StaticResource RadarSeriesStyle}" TargetType="s:RadarPolygonRenderableSeries">
+                    <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_1}"/>
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource ExtraThemeStrokeColor_1}" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="PointMarker">
+                        <Setter.Value>
+                            <s:SquarePointMarker Width="10" Height="10" StrokeThickness="0" Fill="{StaticResource ExtraThemeStrokeColor_1}"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="SelectedSeriesStyle">
                         <Setter.Value>
                             <Style TargetType="s:RadarPolygonRenderableSeries">
                                 <Setter Property="StrokeThickness" Value="3" />
                                 <Setter Property="Fill">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="YellowGreen" 
+                                        <SolidColorBrush Color="{StaticResource ExtraThemeStrokeColor_1}" 
                                                          Opacity="0.8"/>
                                     </Setter.Value>
                                 </Setter>
@@ -125,7 +258,7 @@
                                     <Setter.Value>
                                         <s:SquarePointMarker Width="15" 
                                                              Height="15" 
-                                                             Fill="YellowGreen"
+                                                             Fill="{StaticResource ExtraThemeStrokeColor_1}"
                                                              StrokeThickness="0"/>
                                     </Setter.Value>
                                 </Setter>
@@ -178,156 +311,6 @@
                 <s:RadarDragDataPointModifier
                     IsEnabled="{Binding Source={x:Reference DragDataPointButton}, Path=IsChecked, Mode=TwoWay}" />
             </s:SciChartRadarSurface.ChartModifiers>
-
         </s:SciChartRadarSurface>
-
-        <!--  This toolbar adds tooltip, legend and theme change functionality  -->
-        <Border Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
-
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
-
-                <ext:FlyoutMenuButton Content="Hole"
-                                      FontSize="11"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Slide to change Center Hole of Radar Chart" />
-                            <ext:FlyoutSeparator />
-                            <Slider Margin="4"
-                                    HorizontalAlignment="Stretch"
-                                    Maximum="40"
-                                    Minimum="0"
-                                    Orientation="Horizontal"
-                                    Value="10"
-                                    x:Name="HoleValueSlider" />
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton Content="Ang"
-                                      FontSize="12"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Slide to change Start Angle of Radar Chart" />
-                            <ext:FlyoutSeparator />
-                            <Slider Margin="4"
-                                    HorizontalAlignment="Stretch"
-                                    Maximum="360"
-                                    Minimum="0"
-                                    Orientation="Horizontal"
-                                    x:Name="AngleValueSlider" />
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ext:FlyoutMenuButton Content="GLine"
-                                      FontSize="9"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Change Grid Lines of Radar Chart" />
-                            <ext:FlyoutSeparator />
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:GridLinesType}}}"
-                                      SelectedIndex="0"
-                                      x:Name="GridLinesTypeSourceCombo" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Tooltip"
-                              ContentTemplate="{StaticResource TooltipIconContentTemplate}"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Tooltip Radar Modifier"
-                              x:Name="TooltipEnablingButton" />
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Leg"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Legend Radar Modifier"
-                              IsChecked="True"
-                              x:Name="LegendEnablingButton" />
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="DrgPnt"
-                              FontSize="10"
-                              Padding="0"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Drag Data Point Modifier"
-                              IsChecked="True"
-                              x:Name="DragDataPointButton" />
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Fill"
-                              FontSize="12"
-                              Padding="0"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Is filled series"
-                              IsChecked="True"
-                              x:Name="FillingEnablingButton" />
-
-                <ext:FlyoutMenuToggleButton HorizontalAlignment="Left"
-                                            Content="SLCT"
-                                            Padding="0"
-                                            FontSize="11"
-                                            x:Name="SelectionEnablingButton"
-                                            Style="{StaticResource FlyoutMenuToggleButtonStyle}"
-                                            ToolTipService.ToolTip="Selection Modifier">
-
-                    <ext:FlyoutMenuToggleButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock FontSize="12" Text="Execute when" />
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={ext:EnumValues {x:Type s:MouseModifier}}}"
-                                      SelectedIndex="0"
-                                      x:Name="SelectionModeCombo" />
-
-                            <ext:FlyoutSeparator />
-
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Allow Multi Selection"
-                                      x:Name="MultiSelectionEnablingCheckbox" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuToggleButton.PopupContent>
-                </ext:FlyoutMenuToggleButton>
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      HorizontalContentAlignment="Center"
-                                      Content="THM"
-                                      FontSize="10"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Theme changing">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock FontSize="12" Text="Update Theme" />
-                            <ext:FlyoutSeparator />
-
-                            <ComboBox FontSize="12"
-                                      ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                                      SelectedItem="{Binding Source={x:Reference radarChart},
-                                                             Path=(s:ThemeManager.Theme),
-                                                             Mode=TwoWay}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-            </WrapPanel>
-        </Border>
-
     </Grid>
 </UserControl>

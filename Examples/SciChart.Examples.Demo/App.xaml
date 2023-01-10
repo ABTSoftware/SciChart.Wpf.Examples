@@ -6,32 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Brushes.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Buttons.xaml" />
-                <ResourceDictionary Source="Resources/Styles/TextBlock.xaml" />
-                <ResourceDictionary Source="Resources/Styles/TransitioningFrame.xaml" />
-                <ResourceDictionary Source="Resources/Styles/ListBox.xaml" />
-                <ResourceDictionary Source="Resources/Styles/SearchListBox.xaml" />
-                <ResourceDictionary Source="Resources/Styles/SourceCodeListBox.xaml" />
-                <ResourceDictionary Source="Resources/Styles/EverythingListBox.xaml" />
-                <ResourceDictionary Source="Resources/Styles/MostPopularListBox.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Icons.xaml" />
-                <ResourceDictionary Source="Themes/IndeterminateProgressBar.xaml" />
-                <ResourceDictionary Source="Themes/TileConrol.xaml" />
-                <ResourceDictionary Source="Themes/WatermarkedAutocompleteControl.xaml" />
-                <ResourceDictionary Source="Themes/EndlessItemsControl.xaml" />
-                <ResourceDictionary Source="Themes/Common.xaml" />
-                <ResourceDictionary Source="Themes/BreadcrumbControl.xaml" />
-                <ResourceDictionary Source="Themes/TextBox.xaml" />
-                <ResourceDictionary Source="Themes/Scrollbars.Wpf.xaml" />
-                <ResourceDictionary Source="Themes/ComboBox.Wpf.xaml" />
-                <ResourceDictionary Source="Themes/CheckBox.xaml" />
-                <ResourceDictionary Source="Themes/RadioButton.xaml" />
-                <ResourceDictionary Source="Themes/Hyperlink.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ButtonNew.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToggleButtonNew.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/SciChartExampleToolbar.xaml" />
+                <ResourceDictionary Source="/SciChart.Examples;component/Themes/Navy.xaml"/>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Themes/Navy.xaml"/>
+                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="/SciChart.Examples.Demo;component/Themes/Navy.xaml"/>
+                <ResourceDictionary Source="/SciChart.Examples.Demo;component/Resources/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -11,105 +11,97 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
+        <!--  This allows setting the Height of a pane from a viewmodel  -->
+        <Style x:Key="ChartPaneStyle" TargetType="s:SciChartGroupPane">
+            <Setter Property="Height" Value="{Binding PaneViewModel.Height, Mode=TwoWay}" />
+        </Style>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <!--  This Scrollbar Style applied to the SciChartScrollbar inside the SciChartGroup ItemTemplate  -->
+        <Style x:Key="ScrollBarStyle" TargetType="s:SciChartScrollbar">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="NonSelectedAreaStyle">
+                <Setter.Value>
+                    <Style TargetType="Path">
+                        <Setter Property="Fill" Value="#BB06132E" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ViewportStyle">
+                <Setter.Value>
+                    <Style TargetType="Control">
+                        <Setter Property="Opacity" Value="0" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="GripsStyle">
+                <Setter.Value>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="#535353" />
+                        <Setter Property="BorderThickness" Value="2" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!--  This allows setting the Height of a pane from a viewmodel  -->
-            <Style x:Key="ChartPaneStyle" TargetType="s:SciChartGroupPane">
-                <Setter Property="Height" Value="{Binding PaneViewModel.Height, Mode=TwoWay}" />
-            </Style>
+        <Style x:Key="LegendStyle" TargetType="s:LegendModifier">
+            <Setter Property="LegendPlacement" Value="Inside" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="Margin" Value="10,30,10,10" />
+            <Setter Property="ShowVisibilityCheckboxes" Value="False" />
+        </Style>
 
-            <!--  This Scrollbar Style applied to the SciChartScrollbar inside the SciChartGroup ItemTemplate  -->
-            <Style x:Key="ScrollBarStyle" TargetType="s:SciChartScrollbar">
-                <Setter Property="GripsThickness" Value="7" />
-                <Setter Property="GripsLength" Value="18" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="NonSelectedAreaStyle">
-                    <Setter.Value>
-                        <Style TargetType="Path">
-                            <Setter Property="Fill" Value="#7FD3D3D3" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="ViewportStyle">
-                    <Setter.Value>
-                        <Style TargetType="Control">
-                            <Setter Property="Opacity" Value="0" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="GripsStyle">
-                    <Setter.Value>
-                        <Style TargetType="Control">
-                            <Setter Property="Background" Value="#535353" />
-                            <Setter Property="BorderThickness" Value="2" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <!--  The style applied to the chart behind the scrollbar  -->
+        <Style x:Key="OverviewChartStyle" TargetType="s:SciStockChart">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="IsAxisMarkersEnabled" Value="False" />
+            <Setter Property="IsCursorEnabled" Value="False" />
+            <Setter Property="IsXAxisVisible" Value="False" />
+            <Setter Property="IsRubberBandZoomEnabled" Value="False" />
+            <Setter Property="XAxisStyle">
+                <Setter.Value>
+                    <Style TargetType="s:CategoryDateTimeAxis">
+                        <Setter Property="AutoRange" Value="Always" />
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Setter Property="DrawMajorGridLines" Value="False" />
+                        <Setter Property="DrawMinorGridLines" Value="False" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="YAxisStyle">
+                <Setter.Value>
+                    <Style TargetType="s:NumericAxis">
+                        <Setter Property="AutoRange" Value="Always" />
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Setter Property="DrawMajorGridLines" Value="False" />
+                        <Setter Property="DrawMinorGridLines" Value="False" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <Style x:Key="LegendStyle" TargetType="s:LegendModifier">
-                <Setter Property="LegendPlacement" Value="Inside" />
-                <Setter Property="Orientation" Value="Vertical" />
-                <Setter Property="Margin" Value="10,30, 10, 10" />
-                <Setter Property="ShowVisibilityCheckboxes" Value="False" />
-            </Style>
-
-            <!--  The style applied to the chart behind the scrollbar  -->
-            <Style x:Key="OverviewChartStyle" TargetType="s:SciStockChart">
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Height" Value="20" />
-                <Setter Property="IsAxisMarkersEnabled" Value="False" />
-                <Setter Property="IsCursorEnabled" Value="False" />
-                <Setter Property="IsXAxisVisible" Value="False" />
-                <Setter Property="IsRubberBandZoomEnabled" Value="False" />
-                <Setter Property="XAxisStyle">
-                    <Setter.Value>
-                        <Style TargetType="s:CategoryDateTimeAxis">
-                            <Setter Property="AutoRange" Value="Always" />
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Setter Property="DrawMajorGridLines" Value="False" />
-                            <Setter Property="DrawMinorGridLines" Value="False" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="YAxisStyle">
-                    <Setter.Value>
-                        <Style TargetType="s:NumericAxis">
-                            <Setter Property="AutoRange" Value="Always" />
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Setter Property="DrawMajorGridLines" Value="False" />
-                            <Setter Property="DrawMinorGridLines" Value="False" />
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!--  A number of converters which change parameters of charts based on the IsFirstChartPane property  -->
-            <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter"
+        <!--  A number of converters which change parameters of charts based on the IsFirstChartPane property  -->
+        <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter"
                                       FalseValue="Collapsed"
                                       TrueValue="Visible" />
-            <ext:BoolToValueConverter x:Key="MinorsPerMajorConverter"
+        <ext:BoolToValueConverter x:Key="MinorsPerMajorConverter"
                                       FalseValue="2"
                                       TrueValue="4" />
-            <ext:BoolToValueConverter x:Key="MaxAutoTicksConverter"
+        <ext:BoolToValueConverter x:Key="MaxAutoTicksConverter"
                                       FalseValue="4"
                                       TrueValue="8" />
-            <ext:BoolToValueConverter x:Key="GrowByConverter">
-                <ext:BoolToValueConverter.TrueValue>
-                    <s:DoubleRange Max="0.05" Min="0.05" />
-                </ext:BoolToValueConverter.TrueValue>
-                <ext:BoolToValueConverter.FalseValue>
-                    <s:DoubleRange Max="0.0" Min="0.0" />
-                </ext:BoolToValueConverter.FalseValue>
-            </ext:BoolToValueConverter>
-        </ResourceDictionary>
-
+        <ext:BoolToValueConverter x:Key="GrowByConverter">
+            <ext:BoolToValueConverter.TrueValue>
+                <s:DoubleRange Max="0.05" Min="0.05" />
+            </ext:BoolToValueConverter.TrueValue>
+            <ext:BoolToValueConverter.FalseValue>
+                <s:DoubleRange Max="0.0" Min="0.0" />
+            </ext:BoolToValueConverter.FalseValue>
+        </ext:BoolToValueConverter>
     </UserControl.Resources>
 
     <Grid>
@@ -121,60 +113,43 @@
 
         <!--  ** IGNORE BELOW HERE **  -->
         <!--  Define the Toolbar  -->
-        <Border Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
+            <Button Command="{Binding ZoomExtentsCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                <Button HorizontalAlignment="Left"
-                        Command="{Binding ZoomExtentsCommand}"
-                        Content="Zoom Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents" />
+            <ToggleButton Command="{Binding PanModeCommand}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="Modifiers">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton HorizontalAlignment="Left"
-                              Command="{Binding PanModeCommand}"
-                              Content="Pan"
-                              Style="{StaticResource PanButtonStyle}"
-                              s:ToggleButtonExtensions.GroupName="Modifiers" />
+            <ToggleButton Command="{Binding ZoomModeCommand}"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="Modifiers">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton HorizontalAlignment="Left"
-                              Command="{Binding ZoomModeCommand}"
-                              Content="Zoom"
-                              IsChecked="True"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              s:ToggleButtonExtensions.GroupName="Modifiers" />
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Theme"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Theme changing">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Update Theme" />
-                            <ext:FlyoutSeparator />
-
-                            <ComboBox x:Name="ThemeCombo"
-                                      ItemsSource="{Binding AllThemes}"
-                                      SelectedItem="SciChartv4Dark" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-            </WrapPanel>
-        </Border>
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Update Theme">
+                <ext:ToolbarIcon Kind="Brush" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Update Theme" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="ThemeCombo" ItemsSource="{Binding AllThemes}" SelectedItem="SciChartv7Navy"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Databinds a SciChartGroup to a list of ChartPaneViewModels  -->
         <!--  Child chart panes are generated using the ItemTemplate below  -->
         <s:SciChartGroup Grid.Column="1"
                          ItemContainerStyle="{StaticResource ChartPaneStyle}"
-                         ItemsSource="{Binding ChartPaneViewModels}"
-                         s:ThemeManager.Theme="{Binding Source={x:Reference Name=ThemeCombo}, Path=SelectedItem}">
+                         ItemsSource="{Binding ChartPaneViewModels}">
             <s:SciChartGroup.ItemTemplate>
                 <DataTemplate>
 
@@ -185,7 +160,6 @@
                     <!--  It also includes a SciChartScrollbar to create a custom overview control, which is Collapsed for all but the last pane  -->
 
                     <Grid>
-
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -208,14 +182,15 @@
                                          RenderableSeries="{s:SeriesBinding ChartSeriesViewModels}"
                                          VerticalChartGroupId="{Binding ParentViewModel.VerticalChartGroupId}"
                                          ViewportManager="{Binding ViewportManager}"
-                                         multiPane:StockChartHelper.ShowTooltipLabel="True">
+                                         multiPane:StockChartHelper.ShowTooltipLabel="True"
+                                         s:ThemeManager.Theme="{Binding Source={x:Reference ThemeCombo}, Path=SelectedItem, TargetNullValue='SciChartv7Navy'}">
                             <s:SciStockChart.Resources>
                                 <Style x:Key="LowLineStyle" TargetType="s:FastLineRenderableSeries">
-                                    <Setter Property="Stroke" Value="#ffff3333" />
+                                    <Setter Property="Stroke" Value="{StaticResource SecondaryThemeStrokeColor}" />
                                     <Setter Property="StrokeThickness" Value="2" />
                                 </Style>
                                 <Style x:Key="HighLineStyle" TargetType="s:FastLineRenderableSeries">
-                                    <Setter Property="Stroke" Value="#ff33dd33" />
+                                    <Setter Property="Stroke" Value="{StaticResource MainThemeStrokeColor}" />
                                     <Setter Property="StrokeThickness" Value="2" />
                                 </Style>
                             </s:SciStockChart.Resources>
@@ -248,7 +223,8 @@
 
                             <!--  This is the Chart behind the scrollbar, bound to the First ChartPaneViewModel, first DataSeries  -->
                             <!--  It displays the data as a FastMountainRenderableSeries  -->
-                            <s:SciStockChart x:Name="PART_ScrollbarChartBackground" ShowLegend="False" Style="{StaticResource OverviewChartStyle}">
+                            <s:SciStockChart x:Name="PART_ScrollbarChartBackground" ShowLegend="False" Style="{StaticResource OverviewChartStyle}"
+                                             s:ThemeManager.Theme="{Binding Source={x:Reference ThemeCombo}, Path=SelectedItem, TargetNullValue='SciChartv7Navy'}">
 
                                 <s:SciStockChart.RenderableSeries>
                                     <s:FastMountainRenderableSeries DataSeries="{Binding ParentViewModel.ChartPaneViewModels[0].ChartSeriesViewModels[0].DataSeries}" />
@@ -261,11 +237,9 @@
                                                  Axis="{Binding Source={x:Reference Name=PART_ChartPaneView}, Path=XAxis}"
                                                  Style="{StaticResource ScrollBarStyle}" />
                         </Grid>
-
                     </Grid>
                 </DataTemplate>
             </s:SciChartGroup.ItemTemplate>
-
         </s:SciChartGroup>
     </Grid>
 </UserControl>

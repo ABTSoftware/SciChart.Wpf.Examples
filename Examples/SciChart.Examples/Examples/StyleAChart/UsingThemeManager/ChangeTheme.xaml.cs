@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -31,7 +31,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsingThemeManager
             InitializeComponent();
 
             // Fill theme combo box and set default theme
-            cboTheme.SelectedItem = ThemeManager.DefaultTheme;
+            cboTheme.SelectedItem = "SciChartv7Navy";
         }
 
         private void ChangeTheme_Loaded(object sender, RoutedEventArgs e)

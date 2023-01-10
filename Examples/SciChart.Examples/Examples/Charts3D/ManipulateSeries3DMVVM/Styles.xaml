@@ -7,29 +7,29 @@
                                       ContourColor="Black"
                                       ContourStrokeThickness="2.0">
         <s3D:GradientColorPalette.GradientStops>
-            <GradientStop Offset="1" Color="DarkRed" />
-            <GradientStop Offset="0.9" Color="Red" />
-            <GradientStop Offset="0.7" Color="Yellow" />
-            <GradientStop Offset="0.5" Color="GreenYellow" />
-            <GradientStop Offset="0.3" Color="Cyan" />
-            <GradientStop Offset="0.1" Color="Blue" />
-            <GradientStop Offset="0.0" Color="#1D2C6B" />
+            <GradientStop Offset="1" Color="{StaticResource ColorMapColor_6}"/>
+            <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_5}"/>
+            <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_7}"/>
+            <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}"/>
+            <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}"/>
+            <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}"/>
+            <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}"/>
         </s3D:GradientColorPalette.GradientStops>
     </s3D:GradientColorPalette>
 
     <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
         <s3D:GradientColorPalette.GradientStops>
-            <GradientStop Offset="0" Color="Red" />
-            <GradientStop Offset="0.25" Color="Orange" />
-            <GradientStop Offset="0.5" Color="Yellow" />
-            <GradientStop Offset="0.75" Color="Green" />
-            <GradientStop Offset="1" Color="DarkGreen" />
+            <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_6}"/>
+            <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_7}"/>
+            <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
+            <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
+            <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
         </s3D:GradientColorPalette.GradientStops>
     </s3D:GradientColorPalette>
 
     <Style x:Key="SurfaceMeshStyle" TargetType="renderableSeries:SurfaceMeshRenderableSeries3DForMvvm">
         <Setter Property="MeshColorPalette" Value="{StaticResource HeightColorMap}" />
-        <Setter Property="Stroke" Value="#77228B22" />
+        <Setter Property="Stroke" Value="{StaticResource MainThemeTransparentStrokeColor}" />
     </Style>
 
     <Style x:Key="WaterfallStyle" TargetType="renderableSeries:WaterfallRenderableSeries3DForMvvm" BasedOn="{StaticResource {x:Type renderableSeries:WaterfallRenderableSeries3DForMvvm}}" >
@@ -58,7 +58,7 @@
         <Setter Property="IsAntialiased" Value="True"/>
         <Setter Property="PointMarker">
             <Setter.Value>
-                <s3D:EllipsePointMarker3D Fill="LimeGreen"
+                <s3D:EllipsePointMarker3D Fill="{StaticResource MainThemeStrokeColor}"
                                                   Size="2"
                                                   Opacity="1"/>
             </Setter.Value>
@@ -68,7 +68,7 @@
     <Style x:Key="Scatter3DStyle" TargetType="renderableSeries:ScatterRenderableSeries3DForMvvm">
         <Setter Property="PointMarker">
             <Setter.Value>
-                <s3D:PyramidPointMarker3D Fill="PowderBlue" 
+                <s3D:PyramidPointMarker3D Fill="{StaticResource SecondaryThemeStrokeColor}" 
                                                   Size="2"
                                                   Opacity="1"/>
             </Setter.Value>

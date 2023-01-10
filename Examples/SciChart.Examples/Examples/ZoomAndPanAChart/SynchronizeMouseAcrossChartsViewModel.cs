@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -22,7 +22,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
 {
     public class SynchronizeMouseAcrossChartsViewModel : BaseViewModel
     {
-        private bool _mouseWheelEnabled;
         private bool _panEnabled;
         private bool _rolloverEnabled;
         private bool _cursorEnabled;
@@ -36,7 +35,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
             ChartData1 = CreateDataSeries();
 
             // Set default ChartModifier state
-            MouseWheelEnabled = false;
             PanEnabled = true;
             CursorEnabled = true;
 
@@ -62,19 +60,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
             }
         }
 
-        public bool MouseWheelEnabled
-        {
-            get => _mouseWheelEnabled;
-            set
-            {
-                if (_mouseWheelEnabled != value)
-                {
-                    _mouseWheelEnabled = value;
-                    OnPropertyChanged("MouseWheelEnabled");
-                }
-            }
-        }
-
         public bool PanEnabled
         {
             get => _panEnabled;
@@ -84,7 +69,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 {
                     _panEnabled = value;
                     OnPropertyChanged("PanEnabled");
-                    ZoomEnabled = !PanEnabled;
                 }
             }
         }
@@ -98,7 +82,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 {
                     _zoomEnabled = value;
                     OnPropertyChanged("ZoomEnabled");
-                    PanEnabled = !ZoomEnabled;
                 }
             }
         }
@@ -112,7 +95,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 {
                     _cursorEnabled = value;
                     OnPropertyChanged("CursorEnabled");
-                    RolloverEnabled = !CursorEnabled;
                 }
             }
         }
@@ -126,7 +108,6 @@ namespace SciChart.Examples.Examples.ZoomAndPanAChart
                 {
                     _rolloverEnabled = value;
                     OnPropertyChanged("RolloverEnabled");
-                    CursorEnabled = !RolloverEnabled;
                 }
             }
         }

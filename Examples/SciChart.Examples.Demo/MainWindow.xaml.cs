@@ -2,15 +2,13 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using Unity;
+using MahApps.Metro.Controls;
 using SciChart.UI.Bootstrap;
+using Unity;
 
 namespace SciChart.Examples.Demo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -18,20 +16,20 @@ namespace SciChart.Examples.Demo
 
             ServiceLocator.Container.Resolve<Bootstrapper>().WhenInit += (s, e) =>
             {
-                Action op = () => { DataContext = ServiceLocator.Container.Resolve<IMainWindowViewModel>(); };
-                Dispatcher.BeginInvoke(op);
+                Action operation = () => { DataContext = ServiceLocator.Container.Resolve<IMainWindowViewModel>(); };
+                Dispatcher.BeginInvoke(operation);
             };
 
             // Maximise a window that is too large for the screen 
-            if (this.Width > SystemParameters.WorkArea.Width || this.Height > SystemParameters.WorkArea.Height)
+            if (Width > SystemParameters.WorkArea.Width || Height > SystemParameters.WorkArea.Height)
             {
-                this.WindowState = WindowState.Maximized;                
+                WindowState = WindowState.Maximized;                
             }
 
             // Always topmost if /quickstart mode used by UIAutomationTests
             if (App.UIAutomationTestMode)
             {
-                this.Topmost = true;
+                Topmost = true;
             }
         }
 

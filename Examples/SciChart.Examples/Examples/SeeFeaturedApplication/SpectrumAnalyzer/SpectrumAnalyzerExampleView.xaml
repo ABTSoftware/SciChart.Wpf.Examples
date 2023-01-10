@@ -20,25 +20,16 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <!--  Gives the rendersurface a glow effect, similar to a VDU  -->
-            <Style TargetType="s:RenderSurfaceBase">
-                <Setter Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect BlurRadius="5"
+        <!--  Gives the rendersurface a glow effect, similar to a VDU  -->
+        <Style TargetType="s:RenderSurfaceBase">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5"
                                           ShadowDepth="0"
-                                          Color="#FFB3E8F6" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-        </ResourceDictionary>
-
+                                          Color="{StaticResource MainThemeStrokeColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -49,31 +40,23 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-
-            <ToggleButton HorizontalAlignment="Left"
-                          Content="Time"
-                          IsChecked="{Binding IsTimeDomain,
-                                              Mode=TwoWay}"
-                          Padding="1 3"
-                          Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Time Domain" />
-
-
-            <ToggleButton HorizontalAlignment="Left"
-                          Content="Freq"
-                          IsChecked="{Binding IsFrequencyDomain,
-                                              Mode=TwoWay}"
-                          Padding="1 3"
-                          Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Freq Domain" />
-
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
+                        <TextBlock Text="Spectrum Analyzer" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <RadioButton Content="Time" IsChecked="{Binding IsTimeDomain, Mode=TwoWay}" Margin="0,5"/>
+                        <RadioButton Content="Frequency" IsChecked="{Binding IsFrequencyDomain, Mode=TwoWay}" Margin="0,5"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries}"
-                                            Stroke="#FFB3E8F6"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2" />
             </s:SciChartSurface.RenderableSeries>
 
@@ -106,5 +89,3 @@
 
     </Grid>
 </UserControl>
-
-

@@ -11,142 +11,133 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    <!-- Defines the Toolbar. -->
-    <!-- It is included for example purposes. -->
-    <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-    <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Grid.RowSpan="2" Panel.ZIndex="999">
-      <StackPanel Orientation="Vertical">
+        <!-- Defines the Toolbar. -->
+        <!-- It is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-        <ToggleButton Margin="3" x:Name="enableZoom"
-                              Content="Zoom"
-                              HorizontalAlignment="Left"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              IsChecked="True"
-                              s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup"/>
+            <ToggleButton x:Name="enableZoom"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          IsChecked="True"
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-        <ToggleButton Margin="3" x:Name="enablePan"
-                              Content="Pan"
-                              HorizontalAlignment="Left"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              Style="{StaticResource PanButtonStyle}"
-                              s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup" />
+            <ToggleButton x:Name="enablePan"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          s:ToggleButtonExtensions.GroupName="SyncMultiChartMouseZoomGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-        <Button Margin="3"
-                        HorizontalAlignment="Left"
-                        ToolTipService.ToolTip="Zoom to Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        Command="{Binding Source={x:Reference Name=positiveScaleChart}, Path=ZoomExtentsCommand}"
-                        Content="Zoom Extents" />
+            <Button ToolTipService.ToolTip="Zoom to Extents"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Command="{Binding Source={x:Reference Name=positiveScaleChart}, Path=ZoomExtentsCommand}">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-        <ext:FlyoutSeparator Background="#444"/>
+            <ext:FlyoutSeparator/>
 
-        <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="LOG" Padding="0">
-          <ext:FlyoutMenuButton.PopupContent>
-            <StackPanel Orientation="Vertical" MinWidth="150" Margin="0,0,0,4">
-              <TextBlock Margin="4" Text="Use Logarithmic on: " />
-              <CheckBox x:Name="isYLogChbx" Foreground="#999"
-                            Margin="4" IsChecked="True" Checked="OnAxisTypeChanged"
-                            Unchecked="OnAxisTypeChanged" Content="Y-Axis" />
-              <CheckBox x:Name="isXLogChbx" Foreground="#999"
-                            Margin="4" IsChecked="True" Checked="OnAxisTypeChanged"
-                            Unchecked="OnAxisTypeChanged" Content="X-Axis" />
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="MathLog" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Use Logarithmic" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="isXLogChbx" Margin="0,5" IsChecked="True" Checked="OnAxisTypeChanged" Unchecked="OnAxisTypeChanged" Content="X-Axis"/>
+                        <CheckBox x:Name="isYLogChbx" Margin="0,5" IsChecked="True" Checked="OnAxisTypeChanged" Unchecked="OnAxisTypeChanged" Content="Y-Axis"/>
+                        <TextBlock Text="Logarithmic base" Margin="0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="logBasesChbx" SelectedIndex="2">
+                            <system:String>2</system:String>
+                            <system:String>5</system:String>
+                            <system:String>10</system:String>
+                            <system:String>E</system:String>
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
-              <ext:FlyoutSeparator/>
-              <TextBlock Margin="4" Text="Logarithmic base: " />
-              <ComboBox x:Name="logBasesChbx" VerticalAlignment="Center" Margin="4" SelectedIndex="2">
-                <system:String>2</system:String>
-                <system:String>5</system:String>
-                <system:String>10</system:String>
-                <system:String>E</system:String>
-              </ComboBox>
+        <!--  Declare two SciChartSurfaces  -->
+        <!--  Because in this example we are dynamically changing axis type from Linear to Logarithmic,  -->
+        <!--  The axes for both charts are set in code behind.  -->
+        <!--  In reality, if you wanted just a Logarithmic chart, please use type LogarithmicNumericAxis  -->
+        <Grid Grid.Column="1">
+            <Grid.Resources>
+                <Style x:Key="LineSeriesStyle" x:Shared="False" TargetType="s:FastLineRenderableSeries">
+                    <Setter Property="PointMarker">
+                        <Setter.Value>
+                            <s:EllipsePointMarker Width="5" Height="5" Fill="{Binding Stroke}"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
 
-            </StackPanel>
-          </ext:FlyoutMenuButton.PopupContent>
-        </ext:FlyoutMenuButton>
-      </StackPanel>
-    </Border>
+                <s:ModifierGroup x:Key="ModifierGroup" x:Shared="False" MouseEventGroup="SharedMouseEvents">
+                    <s:RubberBandXyZoomModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}" IsXAxisOnly="True" ZoomExtentsY="True" />
+                    <s:ZoomPanModifier IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}" ClipModeX="None" />
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomExtentsModifier />
+                </s:ModifierGroup>
+            </Grid.Resources>
 
-    <!--  Declare two SciChartSurfaces  -->
-    <!--  Because in this example we are dynamically changing axis type from Linear to Logarithmic,  -->
-    <!--  The axes for both charts are set in code behind.  -->
-    <!--  In reality, if you wanted just a Logarithmic chart, please use type LogarithmicNumericAxis  -->
-    <Grid Grid.Column="1">
-      <Grid.Resources>
-        <Style x:Key="LineSeriesStyle" x:Shared="False" TargetType="s:FastLineRenderableSeries">
-          <Setter Property="PointMarker">
-            <Setter.Value>
-              <s:EllipsePointMarker Width="5" Height="5" Fill="{Binding Stroke}"/>
-            </Setter.Value>
-          </Setter>
-        </Style>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <s:ModifierGroup x:Key="ModifierGroup" x:Shared="False" MouseEventGroup="SharedMouseEvents">
-            <s:RubberBandXyZoomModifier IsEnabled="{Binding Source={x:Reference Name=enableZoom}, Path=IsChecked}" IsXAxisOnly="True" ZoomExtentsY="True" />
-            <s:ZoomPanModifier IsEnabled="{Binding Source={x:Reference Name=enablePan}, Path=IsChecked}" ClipModeX="None" />
-            <s:MouseWheelZoomModifier />
-          <s:ZoomExtentsModifier />
-        </s:ModifierGroup>
-      </Grid.Resources>
-
-      <Grid.RowDefinitions>
-        <RowDefinition />
-        <RowDefinition />
-      </Grid.RowDefinitions>
-
-        <s:SciChartSurface x:Name="positiveScaleChart"
+            <s:SciChartSurface x:Name="positiveScaleChart"
                            Grid.Row="0"
                            ChartModifier="{StaticResource ModifierGroup}">
-        
-            <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-            </s:SciChartSurface.RenderableSeries>
-        
-        </s:SciChartSurface>
-        
-        <s:SciChartSurface x:Name="negativeScaleChart" 
+
+                <s:SciChartSurface.RenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                </s:SciChartSurface.RenderableSeries>
+
+            </s:SciChartSurface>
+
+            <s:SciChartSurface x:Name="negativeScaleChart" 
                            Grid.Row="1"
                            ChartModifier="{StaticResource ModifierGroup}">
-        
-            <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#279B27" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FF1919" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#1964FF" Style="{StaticResource LineSeriesStyle}">
-                    <s:FastLineRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1" Duration="0:0:3" ZeroLine="-1000000"/>
-                    </s:FastLineRenderableSeries.SeriesAnimation>
-                </s:FastLineRenderableSeries>
-            </s:SciChartSurface.RenderableSeries>
-        
-        </s:SciChartSurface>
+
+                <s:SciChartSurface.RenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="-1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="-1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                    <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" Style="{StaticResource LineSeriesStyle}">
+                        <s:FastLineRenderableSeries.SeriesAnimation>
+                            <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:1" ZeroLine="-1000000"/>
+                        </s:FastLineRenderableSeries.SeriesAnimation>
+                    </s:FastLineRenderableSeries>
+                </s:SciChartSurface.RenderableSeries>
+
+            </s:SciChartSurface>
+        </Grid>
     </Grid>
-  </Grid>
 </UserControl>

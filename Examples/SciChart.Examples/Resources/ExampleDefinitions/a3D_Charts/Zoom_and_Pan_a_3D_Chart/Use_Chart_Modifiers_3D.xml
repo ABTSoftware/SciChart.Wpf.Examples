@@ -11,7 +11,7 @@
 
     [b][i]Tip![/i][/b]
 
-    [b]Click RV to rotate camera verticaly or click RH and rotate camera horizontaly.[/b]
+    [b]Use toolbar buttons to rotate camera verticaly or horizontaly.[/b]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/UseChartModifiers3D.xaml.txt</string>

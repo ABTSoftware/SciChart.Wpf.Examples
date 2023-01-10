@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -48,13 +48,13 @@ namespace SciChart.Examples.Examples.FiltersAPI
             var filteredDataSpline = _originalData.ToSpline(5);
             var filteredDataCustom = new CustomFilter(_originalData);
 
-            var sweepAnimation1 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation2 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation3 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation4 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation5 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation6 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
-            var sweepAnimation7 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(1), Duration = TimeSpan.FromSeconds(3) };
+            var sweepAnimation1 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation2 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation3 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation4 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation5 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation6 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
+            var sweepAnimation7 = new SweepAnimation() { AnimationDelay = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(1) };
 
 
             _originalData.SeriesName = "Original Data";
@@ -65,13 +65,66 @@ namespace SciChart.Examples.Examples.FiltersAPI
             filteredDataSpline.SeriesName = "Spline, Tension=5";
             filteredDataCustom.FilteredDataSeries.SeriesName = "Custom Filter";
 
-            sciChart.RenderableSeries.Add(new XyScatterRenderableSeries() { DataSeries = _originalData, Stroke = Colors.Red, PointMarker = new EllipsePointMarker() { Fill = Colors.Red, Stroke = Colors.Red }, SeriesAnimation = sweepAnimation1 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataLinearTrendline, StrokeThickness = 2, Stroke = Colors.GreenYellow, SeriesAnimation = sweepAnimation2 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataPolynomialTrendline, StrokeThickness = 2, Stroke = Colors.Yellow, SeriesAnimation = sweepAnimation3 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataScale, StrokeThickness = 2, Stroke = Colors.DeepSkyBlue, SeriesAnimation = sweepAnimation4 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataSpline, StrokeThickness = 1, Stroke = Colors.DeepSkyBlue, Opacity = 0.5, SeriesAnimation = sweepAnimation5 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataOffset, StrokeThickness = 2, Stroke = Color.FromArgb(0x77, 0xFF, 0x33, 0x33), SeriesAnimation = sweepAnimation6 });
-            sciChart.RenderableSeries.Add(new FastLineRenderableSeries() { DataSeries = filteredDataCustom.FilteredDataSeries, StrokeThickness = 2, Stroke = Colors.MediumPurple, SeriesAnimation = sweepAnimation7 });
+            sciChart.RenderableSeries.Add(new XyScatterRenderableSeries()
+            {
+                DataSeries = _originalData,
+                Stroke = Color.FromArgb(0xFF, 0xE9, 0x70, 0x64),
+                PointMarker = new EllipsePointMarker()
+                {
+                    Fill = Color.FromArgb(0xFF, 0xE9, 0x70, 0x64),
+                    Stroke = Color.FromArgb(0xFF, 0xE9, 0x70, 0x64)
+                },
+                SeriesAnimation = sweepAnimation1
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataLinearTrendline,
+                StrokeThickness = 2,
+                Stroke = Color.FromArgb(0xFF, 0xAE, 0x41, 0x8D),
+                SeriesAnimation = sweepAnimation2
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataPolynomialTrendline,
+                StrokeThickness = 2,
+                Stroke = Color.FromArgb(0xFF, 0x68, 0xBC, 0xAE),
+                SeriesAnimation = sweepAnimation3
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataScale,
+                StrokeThickness = 2,
+                Stroke = Color.FromArgb(0xFF, 0x47, 0xBD, 0xE6),
+                SeriesAnimation = sweepAnimation4
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataSpline,
+                StrokeThickness = 1,
+                Stroke = Color.FromArgb(0xFF, 0x63, 0x4E, 0x96),
+                Opacity = 0.5,
+                SeriesAnimation = sweepAnimation5
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataOffset,
+                StrokeThickness = 2,
+                Stroke = Color.FromArgb(0xFF, 0x0B, 0xDE, 0xF4),
+                SeriesAnimation = sweepAnimation6
+            });
+
+            sciChart.RenderableSeries.Add(new FastLineRenderableSeries()
+            {
+                DataSeries = filteredDataCustom.FilteredDataSeries,
+                StrokeThickness = 2,
+                Stroke = Color.FromArgb(0xFF, 0xF6, 0x08, 0x6C),
+                SeriesAnimation = sweepAnimation7
+            });
 
             sweepAnimation1.StartAnimation();
             sweepAnimation2.StartAnimation();

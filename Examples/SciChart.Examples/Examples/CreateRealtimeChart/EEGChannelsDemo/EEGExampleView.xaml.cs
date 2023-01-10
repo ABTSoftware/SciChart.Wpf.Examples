@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -63,7 +63,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         /// </summary>
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            if (StopButton.IsChecked != true && ResetButton.IsChecked != true)
+            if (StartButton.IsChecked == true)
             {
                 // Compute the render time
                 double frameTime = _stopWatch.ElapsedMilliseconds;

@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -28,49 +28,49 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
 {
     public class CustomAnnotationCreationModifier : AnnotationCreationModifier
     {
-        public ICommand AddAnnotation
+        public Type SelectedType
         {
-            get
+            get => AnnotationType;
+            set
             {
-                return new ActionCommand(() =>
-                {
-                    IsEnabled = true;
-                    if (AnnotationType == null)
-                    {
-                        AnnotationType = typeof(LineAnnotation);
-                    }
-
-                    var resourceAnnotatinStyles = new ResourceDictionary();
-                    resourceAnnotatinStyles.Source =
-                        new Uri(
-                            "/SciChart.Examples.ExternalDependencies;component/Resources/Styles/AnnotationStylesResourceDictionary.xaml",
-                            UriKind.RelativeOrAbsolute);
-
-                    var resourceName = string.Format("{0}Style", AnnotationType.Name);
-                    var annotationStyle = (Style)resourceAnnotatinStyles[resourceName];
-
-                    if (annotationStyle != null)
-                        AnnotationStyle = annotationStyle;
-                });
+                IsEnabled = true;
+                AnnotationType = value;
+                ApplyAnnotationStyle();
             }
         }
 
-        public ICommand DeleteAnnotation
+        public ICommand DeleteAnnotation { get; }
+
+        public CustomAnnotationCreationModifier()
         {
-            get
+            SelectedType = typeof(LineAnnotation);
+            DeleteAnnotation = new ActionCommand(OnDeleteAnnotation);
+        }
+        private void ApplyAnnotationStyle()
+        {
+            var resourceAnnotatinStyles = new ResourceDictionary
             {
-                return new ActionCommand(() =>
+                Source = new Uri("/SciChart.Examples.ExternalDependencies;component/Resources/Styles/Annotations.xaml",
+                    UriKind.RelativeOrAbsolute)
+            };
+
+            var resourceName = string.Format("{0}Style", AnnotationType.Name);
+            var annotationStyle = (Style)resourceAnnotatinStyles[resourceName];
+
+            if (annotationStyle != null)
+                AnnotationStyle = annotationStyle;
+        }
+
+        private void OnDeleteAnnotation()
+        {
+            if (ParentSurface != null)
+            {
+                var selectedAnnotations = ParentSurface.Annotations.Where(annotation => annotation.IsSelected).ToList();
+                
+                foreach (var selectedAnnotation in selectedAnnotations)
                 {
-                    if (ParentSurface != null)
-                    {
-                        var selectedAnnotations =
-                            ParentSurface.Annotations.Where(annotation => annotation.IsSelected).ToList();
-                        foreach (var selectedAnnotation in selectedAnnotations)
-                        {
-                            ParentSurface.Annotations.Remove(selectedAnnotation);
-                        }
-                    }
-                });
+                    ParentSurface.Annotations.Remove(selectedAnnotation);
+                }
             }
         }
     }

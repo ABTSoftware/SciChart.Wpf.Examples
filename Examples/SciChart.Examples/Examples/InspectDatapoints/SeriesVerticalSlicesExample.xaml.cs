@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -13,10 +13,10 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Annotations;
@@ -29,9 +29,6 @@ namespace SciChart.Examples.Examples.InspectDatapoints
     /// </summary>
     public partial class SeriesVerticalSlicesExample : UserControl
     {
-        // A drop in replacement for System.Random which is 3x faster: https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
-        private readonly Random _random = new Random();
-
         public SeriesVerticalSlicesExample()
         {
             InitializeComponent();
@@ -64,24 +61,33 @@ namespace SciChart.Examples.Examples.InspectDatapoints
 
         private void OnCreateSliceClick(object sender, RoutedEventArgs e)
         {
-            MouseButtonEventHandler mouseClick = null;
-
-            mouseClick = (s, arg) =>
+            if (sender is ToggleButton toggleButton)
             {
-                MouseLeftButtonUp -= mouseClick;
-
-                var mousePoint = arg.GetPosition((UIElement)sciChart.GridLinesPanel).X;
-
-                var slice = new VerticalLineAnnotation()
+                if (toggleButton.IsChecked == true)
                 {
-                    X1 = sciChart.XAxis.GetDataValue(mousePoint),
-                    Style = (Style)Resources["sliceStyle"]
-                };
+                    MouseLeftButtonUp += OnMouseLeftButtonUp;
+                }
+                else
+                {
+                    MouseLeftButtonUp -= OnMouseLeftButtonUp;
+                }
+            }
+        }
 
-                sliceModifier.VerticalLines.Add(slice);
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MouseLeftButtonUp -= OnMouseLeftButtonUp;
+
+            var mousePoint = e.GetPosition((UIElement)sciChart.GridLinesPanel).X;
+
+            var slice = new VerticalLineAnnotation()
+            {
+                X1 = sciChart.XAxis.GetDataValue(mousePoint),
+                Style = (Style)Resources["sliceStyle"]
             };
 
-            MouseLeftButtonUp += mouseClick;
+            sliceModifier.VerticalLines.Add(slice);
+            addVerticalSliceBtn.IsChecked = false;
         }
 
         private void OnDeleteSelectedSliceClick(object sender, RoutedEventArgs e)
@@ -90,7 +96,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints
 
             foreach (var slice in selectedSlices)
             {
-                sciChart.Annotations.Remove(slice);
+                sliceModifier.VerticalLines.Remove(slice);
             }
         }
     }

@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="CoverFlowBackgroundColor">#FF1E2639</Color>
+    <Color x:Key="CoverFlowSelectionColor">#FF2F3A51</Color>
+
+    <SolidColorBrush x:Key="CoverFlowBackgroundBrush" Color="#701E2639"/>
+    <SolidColorBrush x:Key="CoverFlowBorderBrush" Color="#FF343A44"/>
+    <SolidColorBrush x:Key="CoverFlowTitleForegroundBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="CoverFlowSecondaryTitleForegroundBrush" Color="#FF000000"/>
+
+    <SolidColorBrush x:Key="DefaultButtonForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="DefaultButtonCheckedForegroundBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="DefaultButtonBackgroundBrush" Color="#FF2A354B"/>
+    <SolidColorBrush x:Key="DefaultButtonMouseOverBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="DefaultButtonCheckedBackgroundBrush" Color="#FF263147"/>
+
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="#FF151A25"/>
+    <SolidColorBrush x:Key="ToolbarSeparatorBrush" Color="#FF5C6375"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupBackgroundBrush" Color="#FF2F3A51"/>
+    <SolidColorBrush x:Key="ToolbarPopupBorderBrush" Color="#FF1E2332"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupButtonForegroundBrush" Color="#FF8F94A1"/>
+    <SolidColorBrush x:Key="ToolbarPopupButtonBackgroundBrush" Color="#DD1E2639"/>
+    <SolidColorBrush x:Key="ToolbarPopupButtonBorderBrush" Color="#FF454D60"/>
+    <SolidColorBrush x:Key="ToolbarPopupButtonMouseOverForegroundBrush" Color="#FFAFB4C1"/>
+    <SolidColorBrush x:Key="ToolbarPopupButtonMouseOverBackgroundBrush" Color="#FF1E2639"/>
+    <SolidColorBrush x:Key="ToolbarPopupButtonMouseOverBorderBrush" Color="#FF656D80"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupCheckBoxForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupCheckBoxStrokeBrush" Color="#FF5C6375"/>
+    <SolidColorBrush x:Key="ToolbarPopupCheckBoxMouseOverStrokeBrush" Color="#FFDC7969"/>
+    <SolidColorBrush x:Key="ToolbarPopupCheckBoxMouseOverFillBrush" Color="#40DC7969"/>
+    <SolidColorBrush x:Key="ToolbarPopupCheckBoxCheckedStrokeBrush" Color="#FFDC7969"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxBackgroundBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxBorderBrush" Color="#FF40434E"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxDropDownIconBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxDropDownBackgroundBrush" Color="#FF2F3A51"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxDropDownBorderBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxMouseOverBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxCheckedBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxItemMouseOverBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="ToolbarPopupComboBoxItemCheckedBackgroundBrush" Color="#FF1E2332"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupSliderTrackBrush" Color="#FF5C6375"/>
+    <SolidColorBrush x:Key="ToolbarPopupSliderTickBrush" Color="#FF5C6375"/>
+    <SolidColorBrush x:Key="ToolbarPopupSliderThumbBrush" Color="#FF263147"/>
+    <SolidColorBrush x:Key="ToolbarPopupSliderRangeBrush" Color="#FF64BAE4"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerBackgroundBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerBorderBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerFocusedBorderBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerMouseOverBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="ToolbarPopupDatePickerCalendarIconBrush" Color="#FF64BAE4"/>
+
+    <SolidColorBrush x:Key="ToolbarPopupCalendarBackgroundBrush" Color="#FF2F3A51"/>
+    <SolidColorBrush x:Key="ToolbarPopupCalendarBorderBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupCalendarButtonForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupCalendarButtonMouseOverForegroundBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="ToolbarPopupCalendarItemMouseOverBackgroundBrush" Color="#FF1E273E"/>
+    <SolidColorBrush x:Key="ToolbarPopupCalendarItemSelectedBackgroundBrush" Color="#FF64BAE4"/>
+
+    <Color x:Key="ToolbarPopupCalendarItemForegroundColor">#FFE3E3E3</Color>
+    <Color x:Key="ToolbarPopupCalendarItemSelectedForegroundColor">#FF1E2332</Color>
+    <Color x:Key="ToolbarPopupCalendarItemInactiveForegroundColor">#FF6C7385</Color>
+
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxForegroundBrush" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxWatermarkBrush" Color="#50E3E3E3"/>
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxBackgroundBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxBorderBrush" Color="#FF1E2332"/>
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxFocusedBorderBrush" Color="#FF64BAE4"/>
+    <SolidColorBrush x:Key="ToolbarPopupTextBoxValidationBrush" Color="#FFDB000C"/>
+
+</ResourceDictionary>

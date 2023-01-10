@@ -83,7 +83,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 
             AnnotationViewModels.Add(new LineAnnotationViewModel
             {
-                Stroke = Colors.Chartreuse,
+                Stroke = Color.FromArgb(0xFF, 0xDC, 0x79, 0x69),
                 StrokeThickness = 2,
                 Tooltip = "Hi, I am tooltip!",
                 X1 = 1,
@@ -100,7 +100,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 LabelPlacement = LabelPlacement.TopLeft,
                 LabelValue = "Right Aligned, with text on left",
                 ShowLabel = true,
-                Stroke = Colors.Orange,
+                Stroke = Color.FromArgb(0xFF, 0x5C, 0x43, 0x9B),
                 StrokeThickness = 2,
                 X1 = 5,
                 X2 = 6,
@@ -110,7 +110,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
 
             AnnotationViewModels.Add(new LineArrowAnnotationViewModel
             {
-                Stroke = Colors.Cyan,
+                Stroke = Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4),
                 StrokeThickness = 2,
                 X1 = 1.2,
                 X2 = 2.5,
@@ -126,19 +126,19 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 FontSize = 12,
                 FontWeight = FontWeights.Bold,
                 ShowLabel = true,
-                Stroke = Colors.Brown,
+                Stroke = Color.FromArgb(0xFF, 0xF6, 0x08, 0x6C),
                 LabelValue = "Vertical Line, hello everybody",
                 LabelPlacement = LabelPlacement.Bottom,
                 StrokeThickness = 2,
-                X1 = 9,
+                X1 = 8.5,
                 Y1 = 4,
                 IsEditable = true
             });
 
             AnnotationViewModels.Add(new BoxAnnotationViewModel
             {
-                Background = new SolidColorBrush(Colors.LawnGreen),
-                BorderBrush = new SolidColorBrush(Colors.DarkGreen),
+                Background = new SolidColorBrush(Color.FromArgb(0x77, 0xDC, 0x79, 0x69)),
+                BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0xDC, 0x79, 0x69)),
                 BorderThickness = new Thickness(5),
                 CornerRadius = new CornerRadius(3),
                 X1 = 5.5,
@@ -152,7 +152,7 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
             {
                 X1 = 4,
                 Y1 = 3,
-                Background = new SolidColorBrush(Colors.Red),
+                Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xE9, 0x70, 0x64)),
                 IsEditable = true
             });
 

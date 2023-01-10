@@ -11,19 +11,10 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter" />
-        </ResourceDictionary>
-
+        <ext:EnumValueToStringConverter x:Key="SelectedEnumValueConverter"/>
     </UserControl.Resources>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -32,51 +23,40 @@
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <Border Background="#FF232426"
-                BorderBrush="#323539"
-                Panel.ZIndex="9999"
-                BorderThickness="0,0,2,0">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
 
-            <WrapPanel HorizontalAlignment="Left"
-                       Orientation="Vertical">
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="MouseWheel">
+                <ext:ToolbarIcon Kind="Tire" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Action Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=ActionType, Mode=TwoWay,
+                                                         Converter={StaticResource SelectedEnumValueConverter}}"/>
+                        
+                        <TextBlock Text="Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}"
+                                  SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=XyDirection, Mode=TwoWay,
+                                                         Converter={StaticResource SelectedEnumValueConverter}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
 
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Wheel"
-                                      Style="{StaticResource MouseWheelButtonStyle}"
-                                      ToolTipService.ToolTip="MouseWheel">
+            <Button Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    ToolTipService.ToolTip="Zoom to Extents">
+                <ext:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-                            <TextBlock Text="Action Type" />
+        </ext:SciChartInteractionToolbar>
 
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <TextBlock Text="Direction" />
-
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Source={x:Reference Name=mouseWheelZoomModifier}, Path=XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <Button HorizontalAlignment="Left"
-                        Command="{Binding Source={x:Reference Name=sciChart}, Path=AnimateZoomExtentsCommand}"
-                        Content="Zoom Extents"
-                        Style="{StaticResource ZoomExtentsButtonStyle}"
-                        ToolTipService.ToolTip="Zoom to Extents" />
-
-            </WrapPanel>
-        </Border>
-        
         <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastCandlestickRenderableSeries x:Name="candlestickSeries" />
-                <s:FastLineRenderableSeries x:Name="lineSeries0" Stroke="#FF1919" />
-                <s:FastLineRenderableSeries x:Name="lineSeries1" Stroke="#1964FF" />
-                <s:FastLineRenderableSeries x:Name="lineSeries2" Stroke="#FF9B27" />
+                <s:FastLineRenderableSeries x:Name="lineSeries0" Stroke="{StaticResource ExtraThemeStrokeColor_1}" />
+                <s:FastLineRenderableSeries x:Name="lineSeries1" Stroke="{StaticResource ExtraThemeStrokeColor_2}" />
+                <s:FastLineRenderableSeries x:Name="lineSeries2" Stroke="{StaticResource ExtraThemeStrokeColor_5}" />
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
@@ -93,8 +73,7 @@
                     <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
+            
         </s:SciChartSurface>
     </Grid>
-
 </UserControl>

@@ -8,42 +8,35 @@
                     Y1="{Binding Y1}"
                     CoordinateMode="{Binding CoordinateMode}">
 
-  <s:CustomAnnotation.Resources>
-    <LinearGradientBrush x:Key="newsBulletBackground" StartPoint="0,0" EndPoint="0,1">
-      <GradientStop Offset="0.5" Color="#FFF" />
-      <GradientStop Offset="1" Color="#77C0D4EE" />
-    </LinearGradientBrush>
-  </s:CustomAnnotation.Resources>
+    <Grid>
 
-  <Grid>
-    
-    <!-- Low-cost drop shadow -->
-    <Border CornerRadius="2" BorderThickness="1" BorderBrush="#333" Background="#333" Opacity="0.8" Margin="2,2,0,0"/>
-    
-    <!-- News bullet body -->
-    <Border CornerRadius="2" BorderThickness="1" BorderBrush="#555" Background="{StaticResource newsBulletBackground}">
-      <TextBlock Text="N" Padding="3" FontWeight="Bold" FontSize="10"/>
-    </Border>
+        <!-- Low-cost drop shadow -->
+        <Border CornerRadius="2" BorderThickness="1" BorderBrush="#333" Background="#333" Opacity="0.8" Margin="2,2,0,0"/>
 
-      <!-- Creating the tooltip. In the TradeOverlayExampleViewModel we set a News 
+        <!-- News bullet body -->
+        <Border CornerRadius="2" BorderThickness="1" BorderBrush="#555" Background="{StaticResource NewsBulletGradientForMarkersExample}">
+            <TextBlock Text="N" Padding="3" FontWeight="Bold" FontSize="10"/>
+        </Border>
+
+        <!-- Creating the tooltip. In the TradeOverlayExampleViewModel we set a News 
        object as datacontext of this annotation -->
-      <ToolTipService.ToolTip>
-        <ToolTip Foreground="#222">
-          <Grid Margin="6" MaxHeight="100" MaxWidth="150" DataContext="{Binding NewsData}">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Headline}" FontSize="13" FontWeight="Bold" />
-            <TextBlock Grid.Row="1" Text="{Binding EventDate}" FontStyle="Italic" />
-            <TextBlock Grid.Row="2" Text="{Binding Body}" />
-            <!-- TextTrimming="Ellipsis"/>-->
-            <TextBlock Grid.Row="3" Text="[Read More]" Foreground="#3333FF"/>
-          </Grid>
-        </ToolTip>
-      </ToolTipService.ToolTip>
-  </Grid>  
-  
+        <ToolTipService.ToolTip>
+            <ToolTip Foreground="#222">
+                <Grid Margin="6" MaxHeight="100" MaxWidth="150" DataContext="{Binding NewsData}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Headline}" FontSize="13" FontWeight="Bold" />
+                    <TextBlock Grid.Row="1" Text="{Binding EventDate}" FontStyle="Italic" />
+                    <TextBlock Grid.Row="2" Text="{Binding Body}" />
+                    <!-- TextTrimming="Ellipsis"/>-->
+                    <TextBlock Grid.Row="3" Text="[Read More]" Foreground="#3333FF"/>
+                </Grid>
+            </ToolTip>
+        </ToolTipService.ToolTip>
+    </Grid>
+
 </s:CustomAnnotation>

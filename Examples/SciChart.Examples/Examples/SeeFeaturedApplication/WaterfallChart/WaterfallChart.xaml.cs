@@ -78,7 +78,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.WaterfallChart
                 series.PaletteProvider = _paletteProvider;
                 series.XAxisId = xAxis.Id;
                 series.DataSeries = UpdateXyDataSeries();
-                series.Stroke = Colors.DarkGreen;
+                series.Stroke = Color.FromArgb(0xFF, 0x64, 0xBA, 0xE4);
                 if (i != 0)
                 {
                     xAxis.Visibility = Visibility.Hidden;

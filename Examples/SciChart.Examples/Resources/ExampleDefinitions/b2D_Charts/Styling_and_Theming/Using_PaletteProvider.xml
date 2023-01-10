@@ -5,7 +5,7 @@
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates how to use the IPaletteProvider interface to colour lines and points individually. Using this interface you can colour a line, Column, Ohlc or Candlestick chart depending on a point value - useful for showing thresholds or areas of interest!</ToolTipDescription>
   <Description>
-    Demonstrates how to use the [url='https://www.scichart.com/documentation/win/current/Paletted%20Series.html']PaletteProvider API[/url] to color lines and points individually. Using this API you can color individual data points of the following RenderableSeries:
+    Demonstrates how to use the [url='https://www.scichart.com/documentation/win/current/RenderableSeries%20APIs%20-%20Paletted%20Serie.html']PaletteProvider API[/url] to color lines and points individually. Using this API you can color individual data points of the following RenderableSeries:
 
     - FastLineRenderableSeries
     - FastMountainRenderableSeries

@@ -15,8 +15,8 @@
 
         <!--  Define styles for the SciChart3DSurface  -->
         <Style x:Key="SciChartSurfaceStyle" TargetType="s3D:SciChart3DSurface">
-            <Setter Property="Background" Value="Orange" />
-            <Setter Property="Foreground" Value="DarkOrchid" />
+            <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_5}" />
+            <Setter Property="Foreground" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Arial Black" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -28,13 +28,13 @@
             <Setter Property="FontSize" Value="13" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="TickTextBrush" Value="Lime" />
+            <Setter Property="TickTextBrush" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
             <Setter Property="DrawMajorBands" Value="True" />
-            <Setter Property="AxisBandsFill" Value="DarkOliveGreen" />
+            <Setter Property="AxisBandsFill" Value="{StaticResource SecondaryThemeStrokeColor}" />
             <Setter Property="MajorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Lime" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeTransparentStrokeBrush_1}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="8" />
                         <Setter Property="Y2" Value="8" />
@@ -44,7 +44,7 @@
             <Setter Property="MinorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="MediumVioletRed" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="4" />
                         <Setter Property="Y2" Value="4" />
@@ -54,7 +54,7 @@
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Lime" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeTransparentStrokeBrush_1}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="StrokeDashArray" Value="10 5" />
                     </Style>
@@ -63,7 +63,7 @@
             <Setter Property="MinorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="DarkViolet" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_2}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="StrokeDashArray" Value="2 2" />
                     </Style>
@@ -75,13 +75,13 @@
             <Setter Property="FontSize" Value="10" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="TickTextBrush" Value="Firebrick" />
+            <Setter Property="TickTextBrush" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
             <Setter Property="DrawMajorBands" Value="True" />
-            <Setter Property="AxisBandsFill" Value="Tomato" />
+            <Setter Property="AxisBandsFill" Value="{StaticResource SecondaryThemeStrokeColor}" />
             <Setter Property="MajorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Firebrick" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeTransparentStrokeBrush_6}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="8" />
                         <Setter Property="Y2" Value="8" />
@@ -91,7 +91,7 @@
             <Setter Property="MinorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="IndianRed" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="4" />
                         <Setter Property="Y2" Value="4" />
@@ -101,7 +101,7 @@
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="DarkGreen" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="StrokeDashArray" Value="10 5" />
                     </Style>
@@ -110,7 +110,7 @@
             <Setter Property="MinorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="DeepSkyBlue" />
+                        <Setter Property="Stroke" Value="{StaticResource SecondaryThemeTransparentSolidBrush}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="StrokeDashArray" Value="2 2" />
                     </Style>
@@ -122,13 +122,13 @@
             <Setter Property="FontSize" Value="10" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="TickTextBrush" Value="PaleVioletRed" />
+            <Setter Property="TickTextBrush" Value="{StaticResource MainThemeTransparentSolidBrush}" />
             <Setter Property="DrawMajorBands" Value="True" />
-            <Setter Property="AxisBandsFill" Value="GreenYellow" />
+            <Setter Property="AxisBandsFill" Value="{StaticResource ExtraThemeStrokeColor_6}" />
             <Setter Property="MajorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="PaleVioletRed" />
+                        <Setter Property="Stroke" Value="{StaticResource MainThemeTransparentSolidBrush}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="8" />
                         <Setter Property="Y2" Value="8" />
@@ -138,7 +138,7 @@
             <Setter Property="MinorTickLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Chartreuse" />
+                        <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_1}" />
                         <Setter Property="StrokeThickness" Value="1" />
                         <Setter Property="X2" Value="4" />
                         <Setter Property="Y2" Value="4" />
@@ -181,20 +181,12 @@
 
         <s3D:SciChart3DSurface x:Name="sciChart"
                                Grid.Column="1"
-                               BorderBrush="Yellow"
+                               BorderBrush="{StaticResource MainThemeSolidBrush}"
                                BorderThickness="3"
                                Style="{StaticResource SciChartSurfaceStyle}"
+                               Background="{StaticResource Style3DChartBackground}"
                                WorldDimensions="200,100,200">
 
-            <s3D:SciChart3DSurface.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Offset="0.022" Color="#FF3D4703" />
-                    <GradientStop Offset="1" Color="Black" />
-                    <GradientStop Offset="0.36" Color="#FF232518" />
-                    <GradientStop Offset="0.6" Color="#FF13140D" />
-                    <GradientStop Offset="0.6" Color="#FF13140D" />
-                </LinearGradientBrush>
-            </s3D:SciChart3DSurface.Background>
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D ZoomToFitOnAttach="True" />
             </s3D:SciChart3DSurface.Camera>

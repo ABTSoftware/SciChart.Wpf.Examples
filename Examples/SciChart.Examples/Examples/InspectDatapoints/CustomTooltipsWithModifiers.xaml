@@ -40,8 +40,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="s:TooltipControl">
-                        <Border Background="#ffe2460c"
-                                BorderBrush="#ffff4500"
+                        <Border Background="{StaticResource SecondaryThemeSolidBrush}"
+                                BorderBrush="{StaticResource ExtraThemeStrokeBrush_5}"
                                 BorderThickness="2"
                                 Effect="{StaticResource DropShadowEffect}"
                                 Margin="0,0,10,10"         
@@ -58,8 +58,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="s:CursorLabelControl">
-                        <Border Background="#ffe2460c"
-                                BorderBrush="#ffff4500"
+                        <Border Background="{StaticResource SecondaryThemeSolidBrush}"
+                                BorderBrush="{StaticResource ExtraThemeStrokeBrush_5}"
                                 BorderThickness="2"
                                 Effect="{StaticResource DropShadowEffect}"
                                 Margin="0,0,10,10"         
@@ -80,11 +80,11 @@
 
         <Style x:Key="CursorLineStyle" TargetType="Line">
             <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Stroke" Value="#AAFFA500" />
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_2}" />
         </Style>
 
         <Style x:Key="CursorAxisLabelStyle" TargetType="s:AxisLabelControl">
-            <Setter Property="Background" Value="#FFFFA500" />
+            <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
             <Setter Property="Foreground" Value="White" />
         </Style>
 
@@ -164,14 +164,14 @@
 
 
         <Style x:Key="AxisLabelStyle" TargetType="s:AxisLabelControl">
-            <Setter Property="Background" Value="CornflowerBlue" />
-            <Setter Property="BorderBrush" Value="Blue" />
+            <Setter Property="Background" Value="{StaticResource MainThemeTransparentSolidBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MainThemeSolidBrush}" />
         </Style>
 
         <DataTemplate x:Key="AxisLabelTemplate" DataType="s:AxisInfo">
             <StackPanel>
                 <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding AxisId, StringFormat='{}AxisId : {0}'}" />
-                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding DataValue, StringFormat='{}Val : {0}'}" />
+                <TextBlock Style="{StaticResource HintDataItemsStyle}" Text="{Binding AxisFormattedDataValue, StringFormat='{}Value : {0}'}" />
             </StackPanel>
         </DataTemplate>
 
@@ -188,7 +188,7 @@
         <s:SciChartSurface Name="SciChart" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#ff6495ed"
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="2"
                                             s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate1}"
                                             s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipStyle1}"
@@ -197,7 +197,7 @@
                                             s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate1}"
                                             s:VerticalSliceModifier.TooltipContainerStyle="{StaticResource TooltipStyle1}"
                                             s:VerticalSliceModifier.TooltipTemplate="{StaticResource VerticalSliceTooltipTemplate1}" />
-                <s:FastLineRenderableSeries Stroke="#ffe2460c"
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="2"
                                             s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate2}"
                                             s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipStyle2}"

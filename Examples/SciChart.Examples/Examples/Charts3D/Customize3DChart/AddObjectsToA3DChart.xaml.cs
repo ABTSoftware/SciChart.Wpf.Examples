@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -24,14 +24,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
         {
             InitializeComponent();
 
-            var dataSeries = new UniformGridDataSeries3D<double>(9, 9)
-            {
-                StartX = 1,
-                StepX = 1,
-
-                StartZ = 100,
-                StepZ = 1
-            };
+            var dataSeries = new UniformGridDataSeries3D<double>(9, 9);
             
             for (int x = 0; x < 9; x++)
             {

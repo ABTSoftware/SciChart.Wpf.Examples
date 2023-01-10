@@ -12,7 +12,7 @@
     <s:SciChartSurface>
 
         <s:SciChartSurface.RenderableSeries>
-            <s:FastLineRenderableSeries DataSeries="{Binding ChartData}" Stroke="SteelBlue" />
+            <s:FastLineRenderableSeries DataSeries="{Binding ChartData}" Stroke="{StaticResource MainThemeStrokeColor}" />
         </s:SciChartSurface.RenderableSeries>
 
         <s:SciChartSurface.YAxis>

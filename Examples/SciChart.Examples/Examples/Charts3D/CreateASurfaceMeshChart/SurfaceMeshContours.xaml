@@ -13,17 +13,17 @@
 
         <s3D:GradientColorPalette x:Key="HeightColorMap" ContourColor="Black" ContourStrokeThickness="2.0">
             <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="1.0" Color="Brown"/>
-                <GradientStop Offset="0.9" Color="Brown"/>
-                <GradientStop Offset="0.8" Color="SaddleBrown"/>
-                <GradientStop Offset="0.7" Color="DarkOrange"/>
-                <GradientStop Offset="0.6" Color="GreenYellow"/>
-                <GradientStop Offset="0.5" Color="DarkSalmon"/>
-                <GradientStop Offset="0.4" Color="BurlyWood"/>
-                <GradientStop Offset="0.3" Color="DarkKhaki"/>
-                <GradientStop Offset="0.2" Color="ForestGreen"/>
-                <GradientStop Offset="0.1" Color="Green"/>
-                <GradientStop Offset="0.0" Color="Aqua"/>
+                <GradientStop Offset="1" Color="DarkRed" />
+                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+                <GradientStop Offset="0.8" Color="IndianRed" />
+                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+                <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_7}" />
+                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+                <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}" />
+                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_2}" />
+                <GradientStop Offset="0.2" Color="Blue" />
+                <GradientStop Offset="0.1" Color="DarkBlue" />
+                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}" />
             </s3D:GradientColorPalette.GradientStops>
         </s3D:GradientColorPalette>
 
@@ -40,92 +40,53 @@
         <!-- to the chart and is included for example purposes. -->
         <!-- If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite! -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
-
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
-                                  Content="CTRL" 
-                                  FontSize="10" 
-                                  Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
+                    <StackPanel Margin="5" Width="200" Orientation="Vertical">
+                        <TextBlock Text="Draw Mesh As" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}"
+                                  SelectedItem="{Binding Source={x:Reference surfaceMeshRenderableSeries}, Path=DrawMeshAs, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                        <!-- Checkboxes to decide how the mesh should be drawn -->
-                        <TextBlock FontSize="12" Text="Draw Mesh As" />
-                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s3D:DrawMeshAs}}}" SelectedItem="{Binding Source={x:Reference surfaceMeshRenderableSeries}, Path=DrawMeshAs, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        <TextBlock Text="Mesh Skirt" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="CheckDrawSkirt" Margin="0,5" Content="Draw Mesh Skirt?" IsChecked="True" Checked="CheckDrawSkirtChanged" Unchecked="CheckDrawSkirtChanged"/>
 
-                        <ext:FlyoutSeparator/>
+                        <TextBlock Text="Opacity" Margin="0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.8" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <!-- Checkbox for Mesh Skirt on or off -->
-                        <TextBlock FontSize="12" Text="Mesh Skirt" />
-                        <CheckBox FontSize="12" Margin="4" x:Name="CheckDrawSkirt" Content="Draw Mesh Skirt?" IsChecked="True" Checked="CheckDrawSkirtChanged" Unchecked="CheckDrawSkirtChanged"/>
+                        <TextBlock Text="Normal hardness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <ext:FlyoutSeparator/>
-
-                        <!-- Create the opacity slider -->
-                        <TextBlock FontSize="12" Text="Opacity" />
-                        <Slider Minimum="0.1" Maximum="1.0" x:Name="opacitySlider" Value="0.8" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <TextBlock FontSize="12" Text="Normal hardness" />
-                        <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <TextBlock FontSize="12" Text="Shininess" />
-                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
+                        <TextBlock Text="Shininess" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" 
-                                  Content="Cont" 
-                                  FontSize="10" 
-                                  Padding="0">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Waves" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Orientation="Vertical" MinWidth="150">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Contour thickness" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="1" Maximum="5" x:Name="contourThicknessSlider" Value="1" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <!-- Create the contour thickness slider -->
-                        <TextBlock FontSize="12" Text="Contour thickness" />
-                        <Slider Minimum="1" Maximum="5" x:Name="contourThicknessSlider" Value="1" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="Contour inteval" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="2" Maximum="30" x:Name="contourIntervalSlider" Value="20" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <!-- Create the contour inteval slider -->
-                        <TextBlock FontSize="12" Text="Contour inteval" />
-                        <Slider Minimum="2" Maximum="30" x:Name="contourIntervalSlider" Value="20" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="Contour offset" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0.1" Maximum="30" x:Name="contourOffsetSlider" Value="0.1" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <!-- Create the contour offset slider -->
-                        <TextBlock FontSize="12" Text="Contour offset" />
-                        <Slider Minimum="0.1" Maximum="30" x:Name="contourOffsetSlider" Value="0.1" Margin="4" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-
-                        <!-- The contour color -->
-                        <TextBlock FontSize="12" Text="Contour color" />
-                        <ComboBox x:Name="contourComboBox"
-                                  Width="200"
-                                  Margin="3"
-                                  Background="#FF1C1C1F"
-                                  SelectedIndex="1"
-                                  SelectionChanged="ContourColorSelectionChanged">
-
+                        <TextBlock Text="Contour color" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="contourComboBox" SelectedIndex="0" SelectionChanged="ContourColorSelectionChanged" Style="{StaticResource ToolbarPopupComboBoxStyle}">
                             <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="createASurfaceMeshChart:ColorModel">
-
-                                    <StackPanel Orientation="Horizontal">
-
-                                        <Rectangle Width="18"
-                                                   Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}"
-                                                   Margin="3 0"
-                                                   Fill="{Binding Brush}"
-                                                   RadiusX="2"
-                                                   RadiusY="2" />
-
-                                        <TextBlock Margin="3 0"
-                                                   VerticalAlignment="Center"
-                                                   FontSize="14"
-                                                   Foreground="White"
-                                                   Text="{Binding ColorName}" />
-
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Rectangle Width="12" Height="12" Fill="{Binding Brush}"/>
+                                        <TextBlock Margin="5,0" Text="{Binding ColorName}" FontWeight="Regular" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                                     </StackPanel>
-
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>

@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#FF1C1C1E">
+    <Grid Background="{StaticResource ThemedChartBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -29,61 +29,38 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
-
-            <ext:FlyoutMenuButton Content="ZM" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Zoom Controls" />
-                        <ext:FlyoutSeparator />
-                        <CheckBox Margin="4"
-                                  Content="Is Zoom Animated?"
-                                  IsChecked="{Binding IsZoomExtendsAnimated, Mode=TwoWay}" />
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Zoom Controls" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox Content="Is Zoom Animated" Margin="0,5" IsChecked="{Binding IsZoomExtendsAnimated, Mode=TwoWay}" />
+                        <TextBlock Text="Axis Controls" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="ShowLabels" Content="Show Labels" Margin="0,5" IsChecked="True"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
-
-            <ext:FlyoutMenuButton Content="LBL" Style="{StaticResource FlyoutMenuButtonStyle}">
+            
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Poll" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Axis Controls" />
-                        <ext:FlyoutSeparator />
-                        <CheckBox x:Name="ShowLabels"
-                                  Margin="4"
-                                  Content="ShowLabels?"
-                                  IsChecked="True" />
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Column Spacing Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="SpacingModeCbx" ItemsSource="{Binding SpacingModes}" SelectedIndex="1"/>
 
-            <ext:FlyoutMenuButton Content="COL" Padding="0" Style="{StaticResource FlyoutMenuButtonStyle}">
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Column.SpacingMode" />
-                        <ext:FlyoutSeparator />
-                        <ComboBox x:Name="SpacingMode"
-                                  MinWidth="75"
-                                  Margin="4,0"
-                                  ItemsSource="{Binding SpacingModes}"
-                                  SelectedIndex="1" />
-
-                        <TextBlock Margin="4,15,4,4" Text="Column.Spacing" />
-                        <ext:FlyoutSeparator />
+                        <TextBlock Margin="0,10,0,5" Text="Column Spacing" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="Spacing"
-                                Margin="4,0"
-                                Maximum="{Binding ElementName=SpacingMode, Path=SelectedItem,
-                                        Converter={StaticResource SpacingModeToMaximumSpacingConverter}}"
-                                Minimum="0.0"
                                 Orientation="Horizontal"
-                                Value="0.2" />
+                                Maximum="{Binding Source={x:Reference SpacingModeCbx}, Path=SelectedItem, Converter={StaticResource SpacingModeToMaximumSpacingConverter}}"
+                                Minimum="0.0"            
+                                Value="0.2"/>
 
-                        <TextBlock Margin="4,15,4,4" Text="Column.DataPointWidth" />
-                        <ext:FlyoutSeparator />
+                        <TextBlock Margin="0,10,0,5" Text="Data Point Width" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="DataPointWidth"
-                                Margin="4,0"
-                                Maximum="1.0"
-                                Minimum="0.0"
                                 Orientation="Horizontal"
-                                Value="0.8" />
+                                Maximum="1.0"
+                                Minimum="0.0"                    
+                                Value="0.8"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>

@@ -20,42 +20,35 @@
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            
+            <ext:FlyoutSeparator/>
 
-            <ext:FlyoutSeparator Background="#444" />
-
-            <ext:FlyoutMenuButton Content="SIZE"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="DiameterOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Slide to change PointMarker Size" />
-                        <ext:FlyoutSeparator />
-                        <!--  Create the size slider  -->
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Point Marker Size" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                         <Slider x:Name="sizeSlider"
-                                Margin="4"
-                                HorizontalAlignment="Stretch"
+                                Margin="0,5"
                                 Maximum="3.0"
                                 Minimum="0.1"
                                 Orientation="Horizontal"
-                                Value="2.0" />
+                                Value="2.0"/>
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton Content="LOG"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="MathLog" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock Text="Change Logarithm base property" />
-
-                        <ComboBox x:Name="logBasesChbx" VerticalAlignment="Center" Margin="4" SelectedIndex="2">
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Logarithm Base" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="logBasesChbx" SelectedIndex="2">
                             <system:String>2</system:String>
                             <system:String>5</system:String>
                             <system:String>10</system:String>
                             <system:String>E</system:String>
                         </ComboBox>
-
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>

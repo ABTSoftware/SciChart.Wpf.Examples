@@ -8,7 +8,7 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Frame">
@@ -21,7 +21,6 @@
                             <VisualStateGroup x:Name="TransitionStates">
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="Transition">
-
                                     <Storyboard>
                                         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetName="CurrentContentPresentationSite"
@@ -38,7 +37,7 @@
                                         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetName="PreviousContentPresentationSite"
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.9" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
                                             <SplineDoubleKeyFrame KeyTime="00:00:00.500" Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
@@ -49,7 +48,6 @@
                                             <SplineDoubleKeyFrame KeyTime="00:00:00.51" Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
-
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>

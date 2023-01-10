@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using SciChart.Charting.ChartModifiers;
+﻿using System.Collections.ObjectModel;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.Visuals.Axes;
-using SciChart.Charting.Visuals.RenderableSeries;
 using SciChart.Core.Utility.Mouse;
 using SciChart.Examples.ExternalDependencies.Common;
 
@@ -25,6 +18,7 @@ namespace SciChart.Examples.Examples.CreateRadarChart
         public RadarChartCustomizationExampleViewModel()
         {
             IsFilled = true;
+            ShowLegend = true;
 
             UkraineDataSeries = new ObservableCollection<IRadarPointViewModel>
             {

@@ -12,12 +12,12 @@
     <UserControl.Resources>
         <Style x:Key="sliceStyle" TargetType="s:VerticalLineAnnotation">
             <Setter Property="ShowLabel" Value="True" />
-            <Setter Property="Stroke" Value="#427EF6" />
+            <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
             <Setter Property="IsEditable" Value="True" />
             <Setter Property="LabelPlacement" Value="Axis" />
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_6}" />
                     <Setter Property="StrokeThickness" Value="3" />
                 </Trigger>
             </Style.Triggers>
@@ -32,60 +32,25 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar x:Name="UserToolbar" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuToggleButton x:Name="addVerticalSliceBtn" Click="OnCreateSliceClick">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ext:FlyoutMenuToggleButton>
 
-            <ext:FlyoutMenuButton x:Name="addVerticalSliceTooltip"
-                                  HorizontalAlignment="Left"
-                                  Click="OnCreateSliceClick"
-                                  Content="+"
-                                  FontSize="18"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
-
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock MaxWidth="150"
-                                   Margin="5"
-                                   FontSize="12"
-                                   Foreground="White"
-                                   Text="Click here then click on the chart to add a slice"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
-            <ext:FlyoutMenuButton x:Name="removeVerticalSliceTooltip"
-                                  HorizontalAlignment="Left"
-                                  Click="OnDeleteSelectedSliceClick"
-                                  Content="-"
-                                  FontSize="18"
-                                  Padding="0"
-                                  Style="{StaticResource FlyoutMenuButtonStyle}">
-
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel MinWidth="150" Orientation="Vertical">
-                        <TextBlock MaxWidth="150"
-                                   Margin="5"
-                                   FontSize="12"
-                                   Foreground="White"
-                                   Text="Now click a slice to delete it"
-                                   TextWrapping="Wrap" />
-
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-
+            <Button x:Name="removeVerticalSliceBtn" Click="OnDeleteSelectedSliceClick" Style="{StaticResource DefaultButtonStyle}">
+                <ext:ToolbarIcon Kind="DeleteForever" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface Name="sciChart" Grid.Column="1">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#E6F867"
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeDashArray="7 4"
                                             StrokeThickness="3" />
-                <s:FastLineRenderableSeries Stroke="#4EDE4B"
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeDashArray="5 8"
                                             StrokeThickness="3" />
-                <s:FastLineRenderableSeries Stroke="#E91FE9"
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeDashArray="7 9"
                                             StrokeThickness="3" />
             </s:SciChartSurface.RenderableSeries>

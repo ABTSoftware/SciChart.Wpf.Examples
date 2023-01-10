@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="SciChart.Examples.Demo.Views.FeedbackView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals">
+
+    <UserControl.Resources>
+
+        <Style BasedOn="{StaticResource ToolbarPopupTextBoxStyle}" TargetType="TextBox">
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <abt:BoolToValueConverter x:Key="b2vConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <abt:BoolToValueConverter x:Key="ib2vConverter" TrueValue="Hidden" FalseValue="Visible"/>
+
+    </UserControl.Resources>
+
+    <Border Width="450" CornerRadius="10" Background="{DynamicResource FeedbackExportViewBackgroundBrush}">
+        <Grid Margin="20,20,20,10" SnapsToDevicePixels="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       FontFamily="Segoe UI"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Text="Feedback"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
+
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding CloseCommand}" 
+                    Style="{StaticResource CloseButtonStyle}"/>
+
+            <Rectangle Grid.Row="1"
+                       Height="1"
+                       Margin="0,10,0,0"
+                       Fill="{DynamicResource FeedbackExportViewSeparatorBrush}"
+                       HorizontalAlignment="Stretch"
+                       UseLayoutRounding="True"/>
+
+            <TextBlock Grid.Row="2"
+                       Margin="0,10"
+                       FontFamily="Segoe UI"
+                       Foreground="{DynamicResource FeedbackExportMessageForegroundBrush}"
+                       TextWrapping="Wrap"
+                       Text="Please use the form below to send us feedback. If you'd like one of our team to contact you back, just leave your email below."/>
+
+            <TextBox Grid.Row="3"
+                     Height="40"
+                     Text="{Binding FeedbackEmail, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Mode=TwoWay}"
+                     ext:TextBoxHelper.Watermark="Your Email (So we can reply)"/>
+
+            <TextBox Grid.Row="4"
+                     Height="40"
+                     Text="{Binding FeedbackSubject,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Mode=TwoWay}"
+                     ext:TextBoxHelper.Watermark="Subject, e.g. 'Amazing Charts!'"/>
+
+            <TextBox Grid.Row="5"
+                     MinHeight="80"
+                     MaxHeight="160"
+                     VerticalContentAlignment="Top"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Text="{Binding FeedbackContent,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Mode=TwoWay}"
+                     VerticalScrollBarVisibility="Auto"
+                     ext:TextBoxHelper.Watermark="Feedback. Please tell us what you think!"/>
+
+            <Button Grid.Row="6"
+                    Content="Submit"
+                    Command="{Binding SubmitCommand}"
+                    Visibility="{Binding OnSubmitted, Converter={StaticResource ib2vConverter}}"
+                    Style="{StaticResource SubmitFeedbackButtonStyle}"/>
+
+            <TextBlock Grid.Row="6"
+                       Text="Thank you for your feedback!" 
+                       Foreground="{DynamicResource HyperlinkAlternativeForegroundBrush}"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding OnSubmitted, Converter={StaticResource b2vConverter}}"/>
+
+            <StackPanel Grid.Row="6"
+                        Margin="0,0,-5,0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+
+                <ToggleButton Width="30" Height="30"
+                              IsChecked="{Binding IsSmile, Mode=TwoWay}"
+                              Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                    <ext:ToolbarIcon Kind="ThumbUp" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </ToggleButton>
+
+                <ToggleButton Width="30" Height="30"
+                              IsChecked="{Binding IsFrown, Mode=TwoWay}"
+                              Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                    <ext:ToolbarIcon Kind="ThumbDown" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

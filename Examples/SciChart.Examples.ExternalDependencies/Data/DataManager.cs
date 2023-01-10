@@ -1,5 +1,5 @@
 // *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -922,6 +922,17 @@ namespace SciChart.Examples.ExternalDependencies.Data
             const string resourceName = "LIDARtq3080DSM2M.asc.gz";
 
             return await AscReader.ReadResourceToAscData(resourceName, colorMapFunction);
+        }
+
+        /// <summary>
+        /// Equivalent of Enumerable.Range but returning double[]
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public double[] GetRangeD(int start, int count)
+        {
+            return Enumerable.Range(start, count).Select(i => (double)i).ToArray();
         }
     }
 }

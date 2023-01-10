@@ -9,7 +9,7 @@
   <Description>
     This 3D Chart demo shows how to add Wavefront *.obj files to the SciChart3DSurface using our [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Primitives.BaseSceneEntity%601.html']BaseSceneEntity type[/url]
 
-    Entities may be added to the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.IViewport3D~RootEntity.html']SciChart3DSurface.Viewport3D.RootEntity[/url], which is a type of [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Primitives.BaseSceneEntity%601.html']BaseSceneEntity[/url]. Several objects are created and added to the scene. Some are transparent, some are opaque. Internally SciChart uses order-independent transparency algorithm to draw entities back to front so that transparency appears correctly to the user.[/url]
+    Entities may be added to the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.IViewport3D~RootEntity.html']SciChart3DSurface.Viewport3D.RootEntity[/url], which is a type of [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Primitives.BaseSceneEntity%601.html']BaseSceneEntity[/url]. Several objects are created and added to the scene. Some are transparent, some are opaque. Internally SciChart uses order-independent transparency algorithm to draw entities back to front so that transparency appears correctly to the user.
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml.txt</string>

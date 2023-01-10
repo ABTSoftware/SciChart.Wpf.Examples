@@ -23,9 +23,9 @@ namespace SciChart.Examples.Examples.CreateSimpleChart
         private void PointMarkersSelectionExampleView_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Create a DataSeries of type X=double, Y=double
-            var dataSeries1 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Green" };
-            var dataSeries2 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Blue" };
-            var dataSeries3 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Yellow" };
+            var dataSeries1 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Light Blue" };
+            var dataSeries2 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Terracotta" };
+            var dataSeries3 = new UniformXyDataSeries<double>(0d, 0.05) { SeriesName = "Aqua" };
 
             // Attach DataSeries to RenderableSeries
             lineRenderSeries1.DataSeries = dataSeries1;

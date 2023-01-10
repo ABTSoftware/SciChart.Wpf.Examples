@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -15,22 +15,24 @@
 // *************************************************************************************
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Timers;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Core;
+using SciChart.Drawing.Common;
+using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
 {
     public class UpdateScatterPointsViewModel : BaseViewModel
     {
-        private readonly string _exampleTitle;
-        private readonly string _exampleSubtitle;
-
         private XyDataSeries<double, double> _victims;
         private XyDataSeries<double, double> _defenders;
+
+        private IRenderSurface _renderSurface;
+        private bool _warningIsVisible;
+        private bool _isRunning;
 
         private World _simulation;
         private Timer _timer;
@@ -38,7 +40,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
         private readonly int _pointCount;
         private volatile bool _working = false;
 
-        private ObjectPool<XyDataSeries<double>> _seriesPool;
+        private readonly ObjectPool<XyDataSeries<double>> _seriesPool;
 
         public UpdateScatterPointsViewModel()
         {
@@ -49,39 +51,70 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
                 series.AcceptsUnsortedData = true;
                 series.Capacity = _pointCount;
                 return series;
-            }); 
+            });
 
             RunExampleCommand = new ActionCommand(OnRunExample);
-
             StopExampleCommand = new ActionCommand(OnStopExample);
         }
 
-        public ActionCommand RunExampleCommand { get; private set; }
+        public ActionCommand RunExampleCommand { get; }
 
-        public ActionCommand StopExampleCommand { get; private set; }
+        public ActionCommand StopExampleCommand { get; }
 
         public XyDataSeries<double, double> Victims
         {
-            get { return _victims; }
+            get => _victims;
             set
             {
                 if (_victims == value) return;
                 _victims = value;
-                OnPropertyChanged("Victims");
+                OnPropertyChanged(nameof(Victims));
             }
         }
 
         public XyDataSeries<double, double> Defenders
         {
-            get { return _defenders; }
+            get => _defenders;
             set
             {
                 if (_defenders == value) return;
                 _defenders = value;
-                OnPropertyChanged("Defenders");
+                OnPropertyChanged(nameof(Defenders));
             }
         }
 
+        public bool WarningIsVisible
+        {
+            get => _warningIsVisible;
+            set
+            {
+                if (_warningIsVisible == value) return;
+                _warningIsVisible = value;
+                OnPropertyChanged(nameof(WarningIsVisible));
+            }
+        }
+
+        public IRenderSurface RenderSurface
+        {
+            get => _renderSurface;
+            set
+            {
+                if (_renderSurface == value) return;
+
+                _renderSurface = value;
+
+                if (_renderSurface is VisualXcceleratorRenderSurface)
+                {
+                    WarningIsVisible = false;
+                    OnRunExample();
+                }
+                else
+                {
+                    WarningIsVisible = true;
+                    OnStopExample();
+                }
+            }
+        }
 
         public void OnStopExample()
         {
@@ -93,27 +126,32 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
                     _timer = null;
                 }
             }
+            
+            Victims?.Clear();
+            Defenders?.Clear();
 
-            if (Victims != null) Victims.Clear();
-            if (Defenders != null) Defenders.Clear();
+            _isRunning = false;
         }
 
         private void OnRunExample()
         {
-            OnStopExample();
+            if (!_isRunning && _renderSurface is VisualXcceleratorRenderSurface)
+            {
+                _simulation = new World(_pointCount);
+                _simulation.Populate();
 
-            _simulation = new World(_pointCount);
-            _simulation.Populate();
+                Victims = _seriesPool.Get();
+                Defenders = _seriesPool.Get();
 
-            Victims = _seriesPool.Get();
-            Defenders = _seriesPool.Get();
+                // We can append on a background thread.
+                // The simulation is computationally expensive, so we move this to another thread. 
+                _timer = new Timer(1000.0 / 60.0);
+                _timer.Elapsed += OnTimerElapsed;
+                _timer.Start();
 
-            // We can append on a background thread. the simulation is computationally expensive
-            // so we move this to another thread. 
-            _timer = new Timer(1000.0 / 60.0);
-            _timer.Elapsed += OnTimerElapsed;
-            _timer.Start();     
-        }        
+                _isRunning = true;
+            }
+        }
 
         private void OnTimerElapsed(object sender, EventArgs e)
         {
@@ -148,18 +186,26 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
                     victims.Clear();
                     defenders.Clear();
 
+                    victims.AcceptsUnsortedData = true;
+                    defenders.AcceptsUnsortedData = true;
+
                     var persons = _simulation.People;
                     for (int i = 0; i < persons.Length; ++i)
                     {
                         Person person = persons[i];
                         if (person.IsVictim)
+                        {
                             victims.Append(person.Pos.X, person.Pos.Y);
+                        }
                         else
+                        {
                             defenders.Append(person.Pos.X, person.Pos.Y);
+                        }
                     }
 
-                    _seriesPool.Put((XyDataSeries<double>) Victims);
-                    _seriesPool.Put((XyDataSeries<double>) Defenders);
+                    _seriesPool.Put((XyDataSeries<double>)Victims);
+                    _seriesPool.Put((XyDataSeries<double>)Defenders);
+
                     Victims = victims;
                     Defenders = defenders;
                 }

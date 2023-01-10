@@ -13,38 +13,30 @@
 
     <UserControl.Resources>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/ToolbarButtonsCommon.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            
-            <gauge:LegendPlacementToOrientationConverter x:Key="LegendPlacementToOrientationConverter"/>
-            
-            <Style x:Key="PieChartListBoxForegroundStyle" TargetType="ListBox">
-                <Setter Property="MinWidth" Value="160"/>
-                <Setter Property="Margin" Value="30"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Foreground" Value="#FFDFE0E6" />
-                <Setter Property="ItemsPanel">
-                    <Setter.Value>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="{Binding LegendPlacement, Source={x:Reference donutSurface}, Converter={StaticResource LegendPlacementToOrientationConverter}}"/>
-                        </ItemsPanelTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <gauge:LegendPlacementToOrientationConverter x:Key="LegendPlacementToOrientationConverter"/>
 
-            <DataTemplate x:Key="OutsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
-                <TextBlock Foreground="#FFDFE0E6" FontSize="14" Text="{Binding Name}"/>
-            </DataTemplate>
+        <Style x:Key="PieChartListBoxForegroundStyle" TargetType="ListBox">
+            <Setter Property="MinWidth" Value="160"/>
+            <Setter Property="Margin" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#FFDFE0E6" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="{Binding LegendPlacement, Source={x:Reference donutSurface}, Converter={StaticResource LegendPlacementToOrientationConverter}}"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <DataTemplate x:Key="InsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
-                <TextBlock Foreground="Black" FontSize="14" Text="{Binding Percentage, StringFormat={}{0:#.##}%}"/>
-            </DataTemplate>
+        <DataTemplate x:Key="OutsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
+            <TextBlock Foreground="#FFDFE0E6" FontSize="14" Text="{Binding Name}"/>
+        </DataTemplate>
 
-        </ResourceDictionary>
+        <DataTemplate x:Key="InsideLabelDataTemplate" DataType="s:IPieSegmentViewModel">
+            <TextBlock Foreground="Black" FontSize="14" Text="{Binding Percentage, StringFormat={}{0:#.##}%}"/>
+        </DataTemplate>
 
     </UserControl.Resources>
 
@@ -55,9 +47,81 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            <ToggleButton IsChecked="{Binding Source={x:Reference Name=donutSurface}, Path=ShowTooltip, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Tooltip">
+                <ext:ToolbarIcon Kind="TooltipTextOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Legend placement">
+                <ext:ToolbarIcon Kind="ViewSplitVertical" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Legend placement" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" SelectedItem="{Binding Source={x:Reference donutSurface}, Path=LegendPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                        <CheckBox Margin="0,10,0,5" Content="Show legend" IsChecked="{Binding ShowLegend, Mode=TwoWay, Source={x:Reference donutSurface}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ToggleButton IsChecked="{Binding Source={x:Reference Name=donutSurface}, Path=AllowMultiSelect, Mode=TwoWay}"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Allow multi select">
+                <ext:ToolbarIcon Kind="ChartDonut" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Add new item">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Text" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <TextBox x:Name="NewTextTBox" Text="{Binding NewSegmentText, Mode=TwoWay}"/>
+
+                        <TextBlock Text="Value" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <TextBox x:Name="NewValueTBox"
+                                 PreviewTextInput="NewValueTBox_OnPreviewTextInput"
+                                 Text="{Binding NewSegmentValue, Mode=TwoWay}"/>
+
+                        <TextBlock Text="Fill" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="BrushesComboBox"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding NewSegmentBrush, Mode=TwoWay}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="gauge:DonutBrushesModel">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Rectangle Width="12" Height="12" Fill="{Binding Brush}"/>
+                                        <TextBlock Margin="5,0" Text="{Binding BrushName}" FontWeight="Regular" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <Button Content="Add" Margin="0,10,0,0" Command="{Binding AddNewItemCommand}"/>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Edit selected segment" IsEnabled="{Binding IsSelected, Mode=OneWay}">
+                <ext:ToolbarIcon Kind="Pencil" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Text" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <TextBox Text="{Binding SelectedSegment.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <TextBlock Text="Value" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <TextBox PreviewTextInput="NewValueTBox_OnPreviewTextInput"
+                                 Text="{Binding SelectedSegment.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
         <s:SciChartDonutSurface x:Name="donutSurface"
                                 Grid.Column="1"
-                                Background="#FF1C1C1F"
+                                Background="{StaticResource ThemedChartBackground}"
                                 ChartTitle="Accounting"
                                 FontSize="20"
                                 SegmentSpacing="4"
@@ -70,7 +134,7 @@
                 <!-- Note: To use this in your own application, grab from github at https://github.com/ABTSoftware/SciChart.WPF.Examples/tree/master/v5.x/Examples/SciChart.Examples.ExternalDependencies/Behaviors -->
                 <ext:EventToCommandBehavior Command="{Binding SegmentSelectionCommand}" Event="SelectionChanged" PassArguments="True" />
             </i:Interaction.Behaviors>
-            
+
             <s:SciChartDonutSurface.ItemTemplate>
                 <DataTemplate DataType="gauge:DonutSegmentViewModel">
                     <s:DonutSegment Fill="{Binding Fill, Mode=TwoWay}" IsSelected="{Binding IsSelected, Mode=TwoWay}" SegmentValue="{Binding Value, Mode=TwoWay}" Text="{Binding Name, Mode=TwoWay}" Stroke="{Binding Stroke, Mode=TwoWay}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}" />
@@ -123,179 +187,9 @@
                                    VerticalAlignment="Center"
                                    FontSize="14"
                                    Text="{Binding Value}" />
-
                     </Grid>
                 </DataTemplate>
             </s:SciChartDonutSurface.SegmentTooltipTemplate>
-
         </s:SciChartDonutSurface>
-
-        <Border Panel.ZIndex="9999"
-                Background="#FF232426"
-                BorderBrush="#323539"
-                BorderThickness="0,0,2,0">
-
-            <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="Tooltip"
-                              ContentTemplate="{StaticResource TooltipIconContentTemplate}"
-                              IsChecked="{Binding Source={x:Reference Name=donutSurface}, Path=ShowTooltip, Mode=TwoWay}"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Tooltip" />
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Leg"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Legend placement">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock Text="Legend placement" />
-
-                            <ComboBox ItemsSource="{Binding Source={ext:EnumValues {x:Type s:LegendPlacement}}}" SelectedItem="{Binding Source={x:Reference donutSurface}, Path=LegendPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
-
-                            <ext:FlyoutSeparator />
-
-                            <CheckBox Margin="3"
-                                      VerticalAlignment="Center"
-                                      Content="Show legend"
-                                      IsChecked="{Binding ShowLegend, Mode=TwoWay, Source={x:Reference donutSurface}}" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <ToggleButton HorizontalAlignment="Left"
-                              Content="MSel"
-                              FontSize="9"
-                              IsChecked="{Binding Source={x:Reference Name=donutSurface}, Path=AllowMultiSelect, Mode=TwoWay}"
-                              Style="{StaticResource DefaultToggleButtonStyle}"
-                              ToolTipService.ToolTip="Allow multi select" />
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Add"
-                                      FontSize="11"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Add new item">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock HorizontalAlignment="Center" FontSize="14" Text="Add new donut segment" />
-
-                            <ext:FlyoutSeparator />
-
-                            <Grid>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Margin="3" FontSize="14" Text="Text: " />
-                                <TextBox x:Name="NewTextTBox" Text="{Binding NewSegmentText, Mode=TwoWay}"  Margin="3" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" />
-                                <TextBlock Margin="3" Grid.Row="1"  FontSize="14" Text="Value:" />
-                                <TextBox PreviewTextInput="NewValueTBox_OnPreviewTextInput" Text="{Binding NewSegmentValue, Mode=TwoWay}"  x:Name="NewValueTBox" Margin="3" Grid.Row="1" Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left" />
-                                <TextBlock Margin="3" Grid.Row="2" FontSize="14" Text="Fill:" />
-
-                                <ComboBox Grid.Row="2"
-                                          x:Name="BrushesComboBox"
-                                          Grid.Column="1"
-                                          Width="200"
-                                          Margin="3"
-                                          Background="#FF1C1C1F"
-                                          ItemsSource="{Binding AllBrushes}"
-                                          SelectedIndex="1"
-                                          SelectedItem="{Binding NewSegmentBrush, Mode=OneWayToSource}">
-
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate DataType="gauge:DonutBrushesModel">
-
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <Rectangle Width="18"
-                                                           Height="{Binding RelativeSource={RelativeSource Mode=Self},
-                                                                            Path=Width}"
-                                                           Margin="3 0"
-                                                           Fill="{Binding Brush}"
-                                                           RadiusX="2"
-                                                           RadiusY="2" />
-
-                                                <TextBlock Margin="3 0"
-                                                           VerticalAlignment="Center"
-                                                           FontSize="14"
-                                                           Foreground="White"
-                                                           Text="{Binding BrushName}" />
-
-                                            </StackPanel>
-
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-
-                            </Grid>
-
-                            <ext:FlyoutSeparator />
-
-                            <Button Width="80"
-                                    Margin="3"
-                                    HorizontalAlignment="Right"
-                                    Command="{Binding AddNewItemCommand}"
-                                    Content="Add" />
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-
-                <ext:FlyoutMenuButton HorizontalAlignment="Left"
-                                      Content="Edit"
-                                      FontSize="11"
-                                      Padding="0"
-                                      Style="{StaticResource FlyoutMenuButtonStyle}"
-                                      ToolTipService.ToolTip="Edit selected segment">
-
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel MinWidth="150" Orientation="Vertical">
-
-                            <TextBlock HorizontalAlignment="Center" FontSize="14" Text="Edit last selected pie segment"/>
-
-                            <ext:FlyoutSeparator />
-                            <Grid>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Margin="3" FontSize="14" Text="Text: " />
-                                <TextBox Margin="3" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Text="{Binding SelectedSegment.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBlock Margin="3" Grid.Row="1"  FontSize="14" Text="Value:" />
-                                <TextBox PreviewTextInput="NewValueTBox_OnPreviewTextInput" Margin="3" Grid.Row="1" Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left" Text="{Binding SelectedSegment.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                            </Grid>
-
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-            </WrapPanel>
-        </Border>
-
     </Grid>
-
 </UserControl>

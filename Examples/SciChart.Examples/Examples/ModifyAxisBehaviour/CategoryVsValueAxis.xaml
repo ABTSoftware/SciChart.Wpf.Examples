@@ -26,11 +26,15 @@
         </Grid.ColumnDefinitions>
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ToggleButton HorizontalAlignment="Left"
-                          Content="Cat"
-                          IsChecked="{Binding UseCategoryNumericAxis, Mode=TwoWay}"
-                          Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="X-Axis Category?" />
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="130" Orientation="Vertical">
+                        <TextBlock Text="X-Axis Category" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox Content="Use Category Axis" Margin="0,5" IsChecked="{Binding UseCategoryNumericAxis, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface Name="sciChart"
@@ -41,7 +45,7 @@
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries}"
-                                            Stroke="Green"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate}" />
             </s:SciChartSurface.RenderableSeries>
 

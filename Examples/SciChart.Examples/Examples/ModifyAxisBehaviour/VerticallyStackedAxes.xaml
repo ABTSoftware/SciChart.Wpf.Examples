@@ -71,17 +71,17 @@
 
             <!--  Declare RenderableSeries  -->
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries Stroke="#FFFF1919" YAxisId="Ch0" />
-                <s:FastLineRenderableSeries Stroke="#FFFC9C29" YAxisId="Ch1" />
-                <s:FastLineRenderableSeries Stroke="#FFFF1919" YAxisId="Ch2" />
-                <s:FastLineRenderableSeries Stroke="#FFFC9C29" YAxisId="Ch3" />
-                <s:FastLineRenderableSeries Stroke="#FF4083B7" YAxisId="Ch4" />
-                <s:FastLineRenderableSeries Stroke="#FF99EE99" YAxisId="Ch5" />
-                <s:FastMountainRenderableSeries Fill="{StaticResource MountainFillBrush}"
-                                                Stroke="#FF4083B7"
+                <s:FastLineRenderableSeries Stroke="{StaticResource MainThemeStrokeColor}" YAxisId="Ch0" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource SecondaryThemeStrokeColor}" YAxisId="Ch1" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_4}" YAxisId="Ch2" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_3}" YAxisId="Ch3" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_2}" YAxisId="Ch4" />
+                <s:FastLineRenderableSeries Stroke="{StaticResource ExtraThemeStrokeColor_1}" YAxisId="Ch5" />
+                <s:FastMountainRenderableSeries Fill="{StaticResource ExtraThemeTransparentStrokeBrush_4}"
+                                                Stroke="{StaticResource ExtraThemeStrokeColor_4}"
                                                 YAxisId="Ch6" />
-                <s:FastMountainRenderableSeries Fill="{StaticResource MountainFillBrush}"
-                                                Stroke="#FF4083B7"
+                <s:FastMountainRenderableSeries Fill="{StaticResource ExtraThemeTransparentStrokeBrush_4}"
+                                                Stroke="{StaticResource ExtraThemeStrokeColor_4}"
                                                 YAxisId="Ch7" />
             </s:SciChartSurface.RenderableSeries>
 

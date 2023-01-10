@@ -11,58 +11,52 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Examples.ExternalDependencies;component/Resources/Styles/MergedResources.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
+        <ext:SciChartInteractionToolbar Grid.Column="0">
+            
+            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource PlayButtonStyle}" Padding="4"/>
-                <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource PauseButtonStyle}" Padding="7"/>
-                <ToggleButton x:Name="ResetButton" Click="ResetButton_Click" Style="{StaticResource StopButtonStyle}" Padding="7"/>
+            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutMenuButton Style="{StaticResource FlyoutMenuButtonStyle}" Content="FIFO" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150">
-                            <TextBlock Text="Additional Control" />
-                            <ext:FlyoutSeparator/>
-                            <CheckBox x:Name="IsFifoCheckBox" Margin="4,4,4,8" Click="OnIsFifoSeriesChanged" Content="Use Fifo?" IsChecked="True" />
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-                
-                
-            </StackPanel>
-        </Border>
+            <ToggleButton x:Name="ResetButton" Click="ResetButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Kind="Stop" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutMenuButton x:Name="IsFifoButton">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="150" Orientation="Vertical">
+                        <TextBlock Text="Additional Control" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox x:Name="IsFifoCheckBox" Margin="0,5,0,0" Click="OnIsFifoSeriesChanged" Content="Use FIFO" IsChecked="True"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!--  Define the SciChartSurface  -->
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Column="1"
-                           >
+                           Background="{StaticResource ThemedChartBackground}">
 
             <!--  Create three RenderableSeries, which map 1:1 to the DataSeries created in code-behind  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="RenderableSeries0"
-                                            Stroke="#FFE13219"
+                                            Stroke="{StaticResource MainThemeStrokeColor}"
                                             StrokeThickness="3" />
                 <s:FastLineRenderableSeries x:Name="RenderableSeries1"
-                                            Stroke="#FFFFA500"
+                                            Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                             StrokeThickness="3" />
                 <s:FastLineRenderableSeries x:Name="RenderableSeries2"
-                                            Stroke="#FF4083B7"
+                                            Stroke="{StaticResource ExtraThemeStrokeColor_2}"
                                             StrokeThickness="3" />
             </s:SciChartSurface.RenderableSeries>
 
