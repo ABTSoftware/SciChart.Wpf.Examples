@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHARTВ® Copyright SciChart Ltd. 2011-2022. All rights reserved.
+// SCICHARTВ® Copyright SciChart Ltd. 2011-2023. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 //[assembly: Obfuscation(Feature = "msil encryption, string encryption, value encryption", Exclude = true, StripAfterObfuscation = true)]
 
 [assembly: AssemblyCompany("SciChart Ltd")]
-[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2022, www.scichart.com")]
+[assembly: AssemblyCopyright("Copyright © SciChart Ltd 2011-2023, www.scichart.com")]
 [assembly: AssemblyTrademark("SCICHART™")]
  
 //[assembly: AssemblyDelaySign(false)]
@@ -41,5 +41,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 
 // NOTE: MASTER SHOULD KEEP THIS AS V7.x WHEN MERGING. 
-// This is to prevent conflicts in teamcity when tests are run on both master & v6 branch at the same time. 
-[assembly: AssemblyVersion("7.0.0.26941")]
+// This is to prevent conflicts in teamcity when tests are run on both master & v7 branch at the same time. 
+[assembly: AssemblyVersion("7.0.0.26952")]
