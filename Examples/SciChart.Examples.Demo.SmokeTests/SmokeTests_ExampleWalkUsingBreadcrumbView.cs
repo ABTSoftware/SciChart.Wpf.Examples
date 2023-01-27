@@ -66,13 +66,20 @@ namespace SciChart.Examples.Demo.SmokeTests
         private const string Group_3D_BasicChartTypes = "Basic Chart Types";
         private const string Group_3D_SurfaceMesh = "Create A Surface Mesh Chart";
 
+        private const string Group_3D_StyleChart = "Style a 3D Chart";
+        private const string Group_3D_Customize = "Customize 3D Charts";
+        private const string Group_3D_ModifyAxis3DBehavior = "Modify Axis3D Behavior";
+        private const string Group_3D_MVVMExamples = "MVVM Examples";       
+
+
         // Featured Apps example groups
         private const string Group_Featured_PerformanceDemos = "Performance Demos";
-        //private const string Group_Featured_ScientificCharts = "Scientific Charts";
-        //private const string Group_Featured_MedicalCharts = "Medical Charts";
-        //private const string Group_Featured_FinancialCharts = "Financial Charts";
+        private const string Group_Featured_ScientificCharts = "Scientific Charts";
+        private const string Group_Featured_MedicalCharts = "Medical Charts";
+        private const string Group_Featured_FinancialCharts = "Financial Charts";
+        private const string Group_Featured_ParallelCoordinatePlot = "Parallel Coordinate Plot";
 
-        // Todo ... more groups...
+
 
         [OneTimeSetUp]
         public void FixtureSetup()
@@ -287,13 +294,53 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Bubble 3D Chart", "Charts3D/BasicChartTypes/SimpleBubble3DChart.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Cylindroid 3D Chart", "Charts3D/BasicChartTypes/SimpleCylindroid3DChart.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Ellipsoid 3D Chart", "Charts3D/BasicChartTypes/SimpleEllipsoid3DChart.png"),
+           //new
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Polar 3D Chart", "Charts3D/BasicChartTypes/SimplePolar3DChart.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Point-Cloud 3D Chart", "Charts3D/BasicChartTypes/SimplePointCloud3DChart.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Scatter Chart 3D", "Charts3D/BasicChartTypes/SimpleScatter3DChart.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Waterfall 3D Chart", "Charts3D/BasicChartTypes/SimpleWaterfall3DChart.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Uniform Column 3D", "Charts3D/BasicChartTypes/UniformColumn3DChart.png"),
+           
+             // 3D Charts, Style Chart
+            //new ExampleStartTestCase(Category_3DCharts, Group_3D_StyleChart, "Simple Theme Manager 3D Chart", "Charts3D/StyleChart/SimpleThemManager3DChart.png"),
+
             // 3D Charts, Surface Mesh Charts
             new ExampleStartTestCase(Category_3DCharts, Group_3D_SurfaceMesh, "Surface Mesh 3D Non-Uniform Data", "Charts3D/SurfaceMesh/NonUniformSurfaceMesh.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_SurfaceMesh, "Surface Mesh 3D Floor Ceiling", "Charts3D/SurfaceMesh/FloorCeilingSurfaceMesh.png"),
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_SurfaceMesh, "Surface Mesh 3D With Contours", "Charts3D/SurfaceMesh/WithContoursSurfaceMesh.png"),
+           
+
+           // 3D Charts, Customize 3D Charts            
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_Customize, "Add Geometry To a 3D Chart", "Charts3D/Customize/AddGeometryto3DChart.png"),
+           new ExampleStartTestCase(Category_3DCharts, Group_3D_Customize, "Add Objects To a 3D Chart", "Charts3D/Customize/AddObjectto3DChart.png"),
+           
+
+            // 3D Charts, Modify Axis3D Behavior            
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_ModifyAxis3DBehavior, "Logarithmic Axis3D", "Charts3D/ModifyAxis/LogarihtmicAxis3D.png"),
+           
+            // 3D Charts, MVVM Examples  
+            new ExampleStartTestCase(Category_3DCharts, Group_3D_MVVMExamples, "Axis Binding", "Charts3D/ModifyAxis/AxisBinding.png"),           
+
             // Featured Apps, Performance Demos
             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fifo 1Billion Points Demo", "FeaturedApps/PerformanceDemos/Fifo1BillionPoints.png"),
             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fast Paletted Scatter Charts", "FeaturedApps/PerformanceDemos/FastPalettedScatterCharts.png"),
             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Scatter Chart Performance Demo", "FeaturedApps/PerformanceDemos/ScatterChartPerformanceDemo.png",
                 (mw) => Thread.Sleep(1500)), // bit of a delay to allow example to show 
+             
+            // Featured Apps, Medical Charts 
+             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_MedicalCharts, "ECG Monitor Demo", "FeaturedApps/MedicalCharts/ECGMonitorDemo.png"),
+             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_MedicalCharts, "Vital Signs Monitor Demo", "FeaturedApps/MedicalCharts/VitalSignsMonitorDemo.png"),
+
+             // Featured Apps, ScientificCharts
+             new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ScientificCharts, "LIDAR PointCloud 3D Demo", "FeaturedApps/ScientificCharts/LIDARPointCloud3DDemo.png"),
+             
+             // Featured Apps, Financial Charts  
+             new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "Aggregation Filters", "FeaturedApps/FinancialCharts/AggregationFilters.png"),
+             new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "SciChart Trader Demo", "FeaturedApps/FinancialCharts/SciChartTraderDemo.png"),
+             
+             // Featured Apps, Parallel Coordinate Plot
+              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ParallelCoordinatePlot, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png"),
+
         };
 
         [Test]
@@ -359,6 +406,8 @@ namespace SciChart.Examples.Demo.SmokeTests
 
             // Wait for nav view to close
             WaitUntilClosed(exampleNavView);
+
+
         }
 
         /*private void RunExportExampleTest(ExampleStartTestCase testCase)

@@ -253,7 +253,10 @@ namespace SciChart.Examples.Demo.SmokeTests
 
         public void WaitUntilClosed(AutomationElement element)
         {
-            var result = Retry.WhileFalse(() => element.IsOffscreen, TimeSpan.FromMilliseconds(BigWaitTimeout));
+            var result = Retry.WhileFalse(() => element.IsOffscreen,
+                TimeSpan.FromMilliseconds(BigWaitTimeout),
+                TimeSpan.FromMilliseconds(SmallWaitTimeout));
+                      
             if (!result.Success)
             {
                 Assert.Fail($"Element failed to go offscreen within {BigWaitTimeout}ms");

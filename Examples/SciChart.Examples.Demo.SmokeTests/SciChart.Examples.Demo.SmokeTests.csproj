@@ -223,6 +223,53 @@
     <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\UndoRedo.png" />
     <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\ZoomHistoryMVVM.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePointCloud3DChart.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePolar3DChart.png" />
+    <EmbeddedResource Include="Resources\Charts3D\StyleChart\SimpleThemManager3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleUniformMeshCloud3DChart.png" />
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleWaterfall3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformColumn3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformOrthogonalHeatmap3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\FloorCeilingSurfaceMesh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\ModifyAxis\AxisBinding.png" />
+    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\WithContoursSurfaceMesh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\ModifyAxis\LogarihtmicAxis3D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\Customize\AddGeometryto3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\Customize\AddObjectto3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleScatter3DChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\ECGMonitorDemo.png" />
+    <EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\VitalSignsMonitorDemo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\ScientificCharts\LIDARPointCloud3DDemo.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\AggregationFilters.png" />
+    <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\SciChartTraderDemo.png" />
+    <EmbeddedResource Include="Resources\FeaturedApps\ParallelCoordinatePlot\ParallelCoordinatePlot.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

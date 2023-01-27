@@ -42,4 +42,4 @@ using System.Runtime.InteropServices;
 
 // NOTE: MASTER SHOULD KEEP THIS AS V7.x WHEN MERGING. 
 // This is to prevent conflicts in teamcity when tests are run on both master & v7 branch at the same time. 
-[assembly: AssemblyVersion("7.0.0.26956")]
+[assembly: AssemblyVersion("7.0.0.26970")]

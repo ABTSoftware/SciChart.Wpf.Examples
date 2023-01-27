@@ -16,7 +16,7 @@
 
         <ext:ScrollViewerWidthMultiConverter x:Key="multiplyConverter" />
 
-        <Style x:Key="ourAnimatedExpanderStyle" TargetType="{x:Type Expander}">
+        <Style x:Key="DescriptionBoxAnimatedExpanderStyle" TargetType="{x:Type Expander}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Expander}">
@@ -268,10 +268,10 @@
             <!--  Description / Info Box  -->
             <Expander x:Name="DescriptionBoxExpander"
                       Grid.Column="1"
-                      Margin="-1"
+                      Margin="-1,0"
                       ExpandDirection="Left"
                       IsExpanded="{Binding ElementName=InfoPanelButton, Path=IsChecked}"
-                      Style="{StaticResource ourAnimatedExpanderStyle}">
+                      Style="{StaticResource DescriptionBoxAnimatedExpanderStyle}">
 
                 <Border x:Name="DescriptionBox"
                         Width="270"
