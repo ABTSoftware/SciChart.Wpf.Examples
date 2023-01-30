@@ -32,10 +32,5 @@ namespace SciChart.Examples.Demo
                 Topmost = true;
             }
         }
-
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("explorer.exe", "https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/");
-        }
     }
 }

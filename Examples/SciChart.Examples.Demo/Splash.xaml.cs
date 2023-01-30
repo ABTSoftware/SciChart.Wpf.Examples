@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace SciChart.Examples.Demo
 {
@@ -11,7 +11,7 @@ namespace SciChart.Examples.Demo
             InitializeComponent();
         }
 
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
         {
             Process.Start("explorer.exe", Urls.ReleaseArticle);
         }

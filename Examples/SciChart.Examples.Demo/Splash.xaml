@@ -40,7 +40,9 @@
                 <Run Text="SciChart SDK v7."/>
                 <Run Text="The World's Fastest WPF Charts."/>
                 <Run Text="Find out more at"/>
-                <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Cursor="Hand" MouseDown="UIElement_OnMouseDown">scichart.com/scichart-wpf-v7-0-released/</Hyperlink>
+                <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Cursor="Hand" Click="Hyperlink_OnClick">
+                    scichart.com/scichart-wpf-v7-0-released/
+                </Hyperlink>
             </TextBlock>
 
             <TextBlock FontSize="16"

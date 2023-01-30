@@ -12,6 +12,8 @@
         public static string DocumentationRootUrl => "https://www.scichart.com/wpf-chart-documentation";
 
         public static string ReleaseArticle =>
-            "https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/";
+            "https://scichart.com/scichart-wpf-v7-0-released/";
+
+        public static string SciChartWebSite = "https://www.scichart.com";
     }
 }

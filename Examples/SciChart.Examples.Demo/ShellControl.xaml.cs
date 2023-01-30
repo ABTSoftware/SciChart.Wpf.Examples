@@ -17,7 +17,7 @@ namespace SciChart.Examples.Demo
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("explorer.exe", "http://www.scichart.com");
+            Process.Start("explorer.exe", Urls.SciChartWebSite);
         }
     }
 }
