@@ -27,6 +27,9 @@ namespace WpfApplication1
 
             this.VersionTextBlock.Text =
                 $"SciChart WPF {SciChartSurface.VersionAndLicenseInfo}";
+
+            // Debug licensing info
+            this.DebugInfoTextBox.Text = SciChartSurface.DumpInfo();
         }
     }
 }

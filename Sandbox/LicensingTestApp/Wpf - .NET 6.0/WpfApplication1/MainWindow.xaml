@@ -13,6 +13,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
         <s:SciChartSurface Grid.Column="0">
             <s:SciChartSurface.YAxis>
                 <s:NumericAxis/>
@@ -39,5 +44,7 @@
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" Foreground="Orange" Text="SciChart 3D Package"/>
 
         <TextBlock x:Name="VersionTextBlock" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40" Foreground="GreenYellow" />
+
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="DebugInfoTextBox"/>
     </Grid>
 </Window>
