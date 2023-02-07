@@ -120,9 +120,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="*" />
-    <PackageReference Include="SciChart.Wpf.UI" Version="*" />
-    <PackageReference Include="SciChart.Wpf.UI.Transitionz" Version="*" />
+    <PackageReference Include="SciChart" Version="6.6.0.26505" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="6.6.0.26505" />
+    <PackageReference Include="SciChart.Wpf.UI.Transitionz" Version="6.6.0.26505" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
