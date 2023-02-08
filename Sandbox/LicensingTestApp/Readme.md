@@ -2,7 +2,12 @@
 
 This is a troubleshooting application for applying licenses to SciChart WPF Charts in both WPF applications and WinForms.
 
-For more information, see the [SciChart Licensing Troubleshooting](https://www.scichart.com/licensing-scichart-wpf/) page.
+We've created a [video for troubleshooting below](https://www.youtube.com/watch?v=C1wQ0T6xxZo) with updated steps for users of SciChart WPF v6 and v7.
+
+[![Debugging SciChart WPF Licensing](video-thumb.jpg)](https://www.youtube.com/watch?v=C1wQ0T6xxZo)
+
+
+> Additional information can be found at the [SciChart Licensing Troubleshooting](https://www.scichart.com/licensing-scichart-wpf/) page.
 
 
 ### Steps to Troubleshoot Licenses
