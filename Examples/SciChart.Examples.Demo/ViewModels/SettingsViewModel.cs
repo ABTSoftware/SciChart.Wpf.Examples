@@ -48,6 +48,8 @@ namespace SciChart.Examples.Demo.ViewModels
             Use3DAA4x = false;
             Use3DAANone = true;
 
+            Is3DZAxisUp = false;
+
             EnableResamplingCPlusPlus = true;
             EnableExtremeDrawingManager = false;
 
@@ -56,6 +58,7 @@ namespace SciChart.Examples.Demo.ViewModels
             EnableDropShadows = true;
 
             UseAlternativeFillSourceD3D = true;
+
             // Always force wait for draw in UIAutomationTestMode 
             EnableForceWaitForGPU = App.UIAutomationTestMode;
 
@@ -98,6 +101,16 @@ namespace SciChart.Examples.Demo.ViewModels
                     VisualXcceleratorRenderSurface.RestartEngineWith(
                         UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect);
                 });
+
+            this.WhenPropertyChanged(x => x.Is3DZAxisUp)
+                .Subscribe(is3DZAxisUp =>
+                {
+                    Viewport3D.SetViewportOrientation(is3DZAxisUp
+                        ? Viewport3DOrientation.ZAxisUp
+                        : Viewport3DOrientation.YAxisUp);
+             
+                })
+                .DisposeWith(this);
 
             this.WhenPropertyChanged(x => x.EnableDropShadows)
                 .Subscribe(b => EffectManager.EnableDropShadows = b)
@@ -142,6 +155,12 @@ namespace SciChart.Examples.Demo.ViewModels
         }
 
         public bool Use3DAA4x
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool Is3DZAxisUp
         {
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);

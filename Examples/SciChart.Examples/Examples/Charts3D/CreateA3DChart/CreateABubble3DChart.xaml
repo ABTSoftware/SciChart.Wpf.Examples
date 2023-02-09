@@ -102,7 +102,8 @@
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>
-                <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
+                <!--  To create a 3D Bubble Chart, create a ScatterRenderableSeries3D and specify a 3D point marker type. Relative size of every bubble
+                is set in PointMetadata3D in code-behind -->
                 <s3D:ScatterRenderableSeries3D x:Name="ScatterSeries3D"
                                     SpecularStrength="{Binding Source={x:Reference Name=specularStrengthSlider}, Path=Value, Mode=TwoWay}"
                                     Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Converter={StaticResource LinearToLogarithmicValueConverter}}">

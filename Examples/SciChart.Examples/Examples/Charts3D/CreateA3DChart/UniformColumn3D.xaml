@@ -82,10 +82,11 @@
             </s3D:SciChart3DSurface.Camera>
 
             <s3D:SciChart3DSurface.RenderableSeries>
-                <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
+                <!--  To create a 3D Columns Chart, create a ColumnRenderableSeries3D. Optionally specify ZeroLineY, ColumnShape, Opacity  -->
                 <s3D:ColumnRenderableSeries3D ColumnShape="{Binding Source={x:Reference PointMarkerCombo}, Path=SelectedValue}"
                                               DataPointWidthX="{Binding Source={x:Reference SizeSlider}, Path=Value}"
-                                              Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}" />
+                                              Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}"
+                                              ZeroLineY="-0.15"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>

@@ -75,7 +75,7 @@
                                WorldDimensions="200,100,200">
 
             <s3D:SciChart3DSurface.RenderableSeries>
-                <!--  To create a Scatter Chart, create a ScatterRenderableSeries3D and use a 3D point marker type  -->
+                <!--  To create a 3D PointLine Chart, create a PointLineRenderableSeries3D. Optionally specify StrokeThickness, PointMarker, Opacity  -->
                 <s3D:PointLineRenderableSeries3D x:Name="PointLineSeries3D"
                                                  IsAntialiased="True"
                                                  Opacity="{Binding Source={x:Reference OpacitySlider}, Path=Value}"

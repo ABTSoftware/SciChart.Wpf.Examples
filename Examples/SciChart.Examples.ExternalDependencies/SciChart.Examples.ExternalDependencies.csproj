@@ -40,6 +40,7 @@
     <None Remove="Resources\Data\INDU_Daily.csv.gz" />
     <None Remove="Resources\Data\LIDARtq3080DSM2M.asc.gz" />
     <None Remove="Resources\Data\ParallelCoordinatePlotData.txt.gz" />
+    <None Remove="Resources\Data\PopulationData.csv.gz" />
     <None Remove="Resources\Data\TickData.csv.gz" />
     <None Remove="Resources\Data\TradeTicks.csv.gz" />
     <None Remove="Resources\Data\VitalSignsTrace.csv.gz" />
@@ -64,6 +65,7 @@
     <EmbeddedResource Include="Resources\Data\EURUSD_Minute5.csv.gz" />
     <EmbeddedResource Include="Resources\Data\INDU_Daily.csv.gz" />
     <EmbeddedResource Include="Resources\Data\LIDARtq3080DSM2M.asc.gz" />
+    <EmbeddedResource Include="Resources\Data\PopulationData.csv.gz" />
     <EmbeddedResource Include="Resources\Data\TickData.csv.gz" />
     <EmbeddedResource Include="Resources\Data\TradeTicks.csv.gz" />
     <EmbeddedResource Include="Resources\Data\VitalSignsTrace.csv.gz" />

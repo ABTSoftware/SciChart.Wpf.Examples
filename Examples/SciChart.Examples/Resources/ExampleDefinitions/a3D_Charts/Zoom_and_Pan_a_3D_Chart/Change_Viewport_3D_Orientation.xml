@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ZAxisUp3DChart.xaml</View>
+  <ViewModel>Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D.ZAxisUp3DChartViewModel</ViewModel>
+  <ImagePath/>
+  <IconPath>Icon3D</IconPath>
+  <ToolTipDescription>
+    This 3D Chart demo shows how to change 3D Viewport orientation to have either Z-Axis or Y-Axis pointing upwards
+  </ToolTipDescription>
+  <Description>
+	  Demonstrates the properties of the [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Viewport3D.html']Viewport3D[/url] class which allows configuring 3D scene globally.
+
+	  [b][i]Tip![/i][/b]
+
+	  [b]Click 'ZAxisUp' on the left to switch Viewport 3D orientation from Y-Axis up to Z-Axis up.[/b]
+  </Description>
+  <CodeFiles>
+	<string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ContinentsLegend.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ZAxisUp3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ZAxisUp3DChart.xaml.cs.txt</string>
+	<string>Resources/ExampleSourceFiles/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ZAxisUp3DChartViewModel.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Viewport3D</Features>
+  </Features>
+</ExampleDefinition>

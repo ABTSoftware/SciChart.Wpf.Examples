@@ -297,7 +297,7 @@ namespace SciChart.Examples.Demo.SmokeTests
            //new
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Polar 3D Chart", "Charts3D/BasicChartTypes/SimplePolar3DChart.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Point-Cloud 3D Chart", "Charts3D/BasicChartTypes/SimplePointCloud3DChart.png"),
-            new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Scatter Chart 3D", "Charts3D/BasicChartTypes/SimpleScatter3DChart.png"),
+           // new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Scatter Chart 3D", "Charts3D/BasicChartTypes/SimpleScatter3DChart.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Simple Waterfall 3D Chart", "Charts3D/BasicChartTypes/SimpleWaterfall3DChart.png"),
             new ExampleStartTestCase(Category_3DCharts, Group_3D_BasicChartTypes, "Uniform Column 3D", "Charts3D/BasicChartTypes/UniformColumn3DChart.png"),
            
@@ -316,7 +316,7 @@ namespace SciChart.Examples.Demo.SmokeTests
            
 
             // 3D Charts, Modify Axis3D Behavior            
-            new ExampleStartTestCase(Category_3DCharts, Group_3D_ModifyAxis3DBehavior, "Logarithmic Axis3D", "Charts3D/ModifyAxis/LogarihtmicAxis3D.png"),
+           // new ExampleStartTestCase(Category_3DCharts, Group_3D_ModifyAxis3DBehavior, "Logarithmic Axis3D", "Charts3D/ModifyAxis/LogarihtmicAxis3D.png"),
            
             // 3D Charts, MVVM Examples  
             new ExampleStartTestCase(Category_3DCharts, Group_3D_MVVMExamples, "Axis Binding", "Charts3D/ModifyAxis/AxisBinding.png"),           

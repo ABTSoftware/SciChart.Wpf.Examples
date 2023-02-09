@@ -106,14 +106,23 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
                 new Vector3(+0.0f, -1.0f, +0.0f), //bottom
             };
 
+            eSCRTUpAxis upaxis = VXccelEngine3D.GetUpAxis();
             // We create a mesh context. There are various mesh render modes. The simplest is Triangles
             // For this mode we have to draw a single triangle (three vertices) for each corner of the cube
             // You can see 
             using (var meshContext = BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
-                VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
-            
+                if (upaxis == eSCRTUpAxis.Z_UP)
+                {
+                    VXccelEngine3D.PushRasterizerState(RasterizerStates.Default.TSRRasterizerState);
+                }
+                else
+                {
+                    VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
+                }
+                
+
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(cubeColor);
             

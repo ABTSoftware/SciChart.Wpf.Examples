@@ -540,6 +540,41 @@ namespace SciChart.Examples.ExternalDependencies.Data
             }
             return ticks;
         }
+
+        public IList<PopulationData> GetPopulationData()
+        {
+            var csvResourceZipped = string.Format("{0}.{1}", ResourceDirectory, "PopulationData.csv.gz");
+            var populationData = new List<PopulationData>();
+            var assembly = typeof(DataManager).Assembly;
+
+            using (var stream = assembly.GetManifestResourceStream(csvResourceZipped))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
+            {
+                string line = streamReader.ReadLine(); 
+
+                while (line != null)
+                {
+                    // Line Format: 
+                    // Country, Year, Population, Continent, LifeExpectancy, GDPPerCapital
+                    // "Afghanistan", 1952, 8425333, "Asia", 28.801, 779.4453145  
+                    var tokens = line.Split(',');
+
+                    populationData.Add(new PopulationData
+                    {
+                        Country = tokens[0], 
+                        Year = int.Parse(tokens[1], NumberFormatInfo.InvariantInfo), 
+                        Population = int.Parse(tokens[2], NumberFormatInfo.InvariantInfo),
+                        Continent = (ContinentsEnum)(Enum.Parse(typeof(ContinentsEnum), tokens[3])),
+                        LifeExpectancy = double.Parse(tokens[4], NumberFormatInfo.InvariantInfo),
+                        GDPPerCapita = double.Parse(tokens[5], NumberFormatInfo.InvariantInfo),
+                    });
+                    line = streamReader.ReadLine();
+                }
+            }
+            return populationData;
+        }
+
         public IList<VitalSignsData> GetVitalSignsData()
         {
             var csvResourceZipped = string.Format("{0}.{1}", ResourceDirectory, "VitalSignsTrace.csv.gz");
