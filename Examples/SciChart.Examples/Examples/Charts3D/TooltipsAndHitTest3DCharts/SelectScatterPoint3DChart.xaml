@@ -26,8 +26,7 @@
         <s3D:SciChart3DSurface x:Name="sciChartSurface"
                                Grid.Column="1"
                                BorderThickness="0"
-                               WorldDimensions="200,100,200"
-                               s:ThemeManager.Theme="SciChartv7Navy">
+                               WorldDimensions="200,100,200">
 
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:ScatterRenderableSeries3D x:Name="renderableSeries3D" PaletteProvider="{StaticResource CloudPaletteProvider}" >

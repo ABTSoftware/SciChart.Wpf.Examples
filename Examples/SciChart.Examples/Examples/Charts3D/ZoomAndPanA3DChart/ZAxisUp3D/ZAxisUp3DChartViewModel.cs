@@ -1,16 +1,15 @@
-﻿using SciChart.Charting3D.Axis;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Media;
+using SciChart.Charting3D.Axis;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.Model.ChartSeries;
 using SciChart.Charting3D.PointMarkers;
-using SciChart.Charting3D.RenderableSeries;
 using SciChart.Charting3D.Visuals.RenderableSeries;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Media;
 
 namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
 {
@@ -28,9 +27,8 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
 
         public ZAxisUp3DChartViewModel()
         {
-            RenderableSeries = new ObservableCollection<IRenderableSeries3DViewModel>();
             InitializeAxes();
-            
+
             var populationData = DataManager.Instance.GetPopulationData();
 
             var year = populationData.Select(item => item.Year);
@@ -39,17 +37,20 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
             var continents = populationData.Select(item => item.Continent);
 
             ContinentsLegend = GetContinentsAndColors();
-            var metadata = FormatMetadata(continents, ContinentsLegend);
 
+            var metadata = FormatMetadata(continents, ContinentsLegend);
             var dataSeries3D = new XyzDataSeries3D<double, double, int>();
             dataSeries3D.Append(lifeExpectancy, gdpPerCapita, year, metadata);
 
-            var populationSeries = new ScatterRenderableSeries3DViewModel()
+            RenderableSeries = new ObservableCollection<IRenderableSeries3DViewModel>
             {
-                DataSeries = dataSeries3D,
-                PointMarker = new SpherePointMarker3D { Size = 8, Opacity = 0.9 },
+                new ScatterRenderableSeries3DViewModel
+                {
+                    DataSeries = dataSeries3D,
+                    Stroke = Colors.Transparent,
+                    PointMarker = new SpherePointMarker3D { Size = 8, Opacity = 0.9 }
+                }
             };
-            RenderableSeries.Add(populationSeries);
         }
 
         private void InitializeAxes()
@@ -60,10 +61,10 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
                 AxisTitleOffset = 50,
                 VisibleRange = new DoubleRange(30, 85),
                 FontSize = 18,
-                TickTextBrush = Brushes.Red,
+                TickTextBrush = Brushes.Red
             };
 
-            YAxis = new NumericAxis3DViewModel()
+            YAxis = new NumericAxis3DViewModel
             {
                 AxisTitle = "GDP per capita",
                 AxisTitleOffset = 50,
@@ -71,7 +72,7 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
                 FontSize = 18,
                 TickTextBrush = Brushes.Green,
                 PositiveSideClipping = AxisSideClipping.VisibleRange,
-                NegativeSideClipping = AxisSideClipping.VisibleRange,
+                NegativeSideClipping = AxisSideClipping.VisibleRange
             };
 
             ZAxis = new NumericAxis3DViewModel
@@ -81,10 +82,11 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
                 VisibleRange = new DoubleRange(1950, 2010),
                 FontSize = 18,
                 TickTextBrush = Brushes.Blue,
+                TextFormatting = "F0"
             };
         }
 
-        public ObservableCollection<ContinentsLegend> GetContinentsAndColors()
+        private ObservableCollection<ContinentsLegend> GetContinentsAndColors()
         {
             var result = new ObservableCollection<ContinentsLegend>
             {
@@ -92,17 +94,18 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
                 new ContinentsLegend { Continent = "Europe", Color  = Color.FromRgb(0xfb, 0x88, 0x21) },
                 new ContinentsLegend { Continent = "Africa", Color  = Color.FromRgb(0xd1, 0x73, 0x65) },
                 new ContinentsLegend { Continent = "Americas", Color  = Color.FromRgb(0x5c, 0xa8, 0x9f) },
-                new ContinentsLegend { Continent = "Oceania", Color  = Color.FromRgb(0x48, 0xb3, 0xce) },
+                new ContinentsLegend { Continent = "Oceania", Color  = Color.FromRgb(0x48, 0xb3, 0xce) }
             };
 
             return result;
         }
 
-        private IEnumerable<PointMetadata3D> FormatMetadata(IEnumerable<ContinentsEnum> continentsArray, ObservableCollection<ContinentsLegend> continentsLegend)
+        private IEnumerable<PointMetadata3D> FormatMetadata(IEnumerable<ContinentsEnum> continentsArray, IList<ContinentsLegend> continentsLegend)
         {
-            IEnumerable<PointMetadata3D> result = continentsArray.Select(x =>
+            var result = continentsArray.Select(x => new PointMetadata3D
             {
-                return new PointMetadata3D { PointScale = (float)(0.1 + 1), VertexColor = continentsLegend[(int)x].Color };
+                PointScale = (float)(0.1 + 1),
+                VertexColor = continentsLegend[(int)x].Color
             });
 
             return result;

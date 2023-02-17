@@ -1,13 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using SciChart.Charting3D;
-using SciChart.Charting3D.Model;
-using SciChart.Charting3D.Model.ChartData;
-using SciChart.Charting3D.PointMarkers;
-using SciChart.Examples.ExternalDependencies.Data;
 using Viewport3D = SciChart.Charting3D.Viewport3D;
 
 namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
@@ -27,13 +20,13 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
             Unloaded += OnUnLoaded;
         }
 
-        private void zUpAxisToggleButton_Checked(object sender, RoutedEventArgs e)
+        private void ZUpAxisToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             // Change Viewport orientation
             Viewport3D.SetViewportOrientation(Viewport3DOrientation.ZAxisUp);
         }
 
-        private void zUpAxisToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        private void ZUpAxisToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             // Change Viewport orientation
             Viewport3D.SetViewportOrientation(Viewport3DOrientation.YAxisUp);

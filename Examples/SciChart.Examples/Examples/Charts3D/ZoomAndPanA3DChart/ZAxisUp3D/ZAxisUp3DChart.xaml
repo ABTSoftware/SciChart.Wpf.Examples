@@ -36,14 +36,13 @@
             <!-- Clicking this button changes Viewport orientation -->
             <ToggleButton x:Name="zUpAxisToggleButton" 
                           Style="{StaticResource DefaultToggleButtonStyle}" 
-                          Checked="zUpAxisToggleButton_Checked"
-                          Unchecked="zUpAxisToggleButton_Unchecked"
+                          Checked="ZUpAxisToggleButton_Checked"
+                          Unchecked="ZUpAxisToggleButton_Unchecked"
                           ToolTipService.ToolTip="Is Z-Axis Up">
 
                 <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ext:ToolbarIcon x:Name="zAxisUpIcon" Kind="AxisZArrow" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                    <TextBlock Text="z" FontSize="10" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="14" Canvas.Top="0"
-                               Foreground="{Binding Foreground, Mode=OneWay, Source={x:Reference zAxisUpIcon}}"/>
+                    <ext:ToolbarIcon Kind="AxisZArrow" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                    <TextBlock Text="z" FontSize="10" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="14"/>
                 </Canvas>
                 
             </ToggleButton>
