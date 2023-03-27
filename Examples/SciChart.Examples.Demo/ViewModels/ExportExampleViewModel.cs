@@ -12,6 +12,7 @@ namespace SciChart.Examples.Demo.ViewModels
     {
         private readonly ExampleViewModel _parent;
         private bool _onExported;
+        private bool _isLibFromFolder;
 
         public ExportExampleViewModel(IModule module, ExampleViewModel parent)
         {
@@ -37,7 +38,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
             ExportCommand = new ActionCommand(async() =>
             {
-                ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath);
+                ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath, IsLibFromFolder);
 
                 OnExported = true;
 
@@ -77,6 +78,16 @@ namespace SciChart.Examples.Demo.ViewModels
                     }
                     _parent.InvalidateDialogProperties();
                 }
+            }
+        }
+
+        public bool IsLibFromFolder
+        {
+            get { return _isLibFromFolder; }
+            set 
+            { 
+                _isLibFromFolder = value;
+                OnPropertyChanged(nameof(IsLibFromFolder));
             }
         }
 

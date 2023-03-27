@@ -116,7 +116,7 @@ namespace SciChart.Examples.Demo.ViewModels
         private static void ExportExampleToSolution(ref string lastGroup, Example current)
         {
             string projectName = ProjectWriter.WriteProject(
-                current, _exportPath + @"\", TryAutomaticallyFindAssemblies(), false);
+                current, _exportPath + @"\", TryAutomaticallyFindAssemblies(), true, false);
 
             if (!File.Exists(ScriptPath))
             {
