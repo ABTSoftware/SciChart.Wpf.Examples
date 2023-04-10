@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
@@ -32,7 +33,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         private Window _mainWindow;
         private Stopwatch _stopwatch;
         const double DefaultTolerance = 0.2;
-        private const bool DefaultExportActualForTest =false;
+        private const bool DefaultExportActualForTest = false;
 
         // Top level example categories
         private const string Category_2DCharts = "2D Charts";
@@ -244,7 +245,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Category vs Value Axis", "Charts2D/ModifyAxisBehavior/CategoryVsValueAxis.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Central XAxis and YAxis", "Charts2D/ModifyAxisBehavior/CentralXYAxes.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Logarithmic Axis", "Charts2D/ModifyAxisBehavior/LogarithmicAxis.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Modify Axis Properties", "Charts2D/ModifyAxisBehavior/ModifyAxisProperties.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Modify Axis Properties", "Charts2D/ModifyAxisBehavior/ModifyAxisProperties.png", (window) => Thread.Sleep(1500)),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Multiple YAxis", "Charts2D/ModifyAxisBehavior/MultipleYAxis.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Multiple-XAxis", "Charts2D/ModifyAxisBehavior/MultipleXAxis.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ModifyAxisBehavior, "Polar Chart with Multiple Axis", "Charts2D/ModifyAxisBehavior/PolarChartManyAxes.png"),
@@ -259,13 +260,13 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Manipulate Series Mvvm", "Charts2D/MVVMExamples/ManipulateSeriesMvvm.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MVVMExamples, "Series Binding", "Charts2D/MVVMExamples/SeriesBinding.png", (window) => Thread.Sleep(1500)),
             // 2D Charts, Styling and Theming
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Create a Custom Theme", "Charts2D/StylingTheming/CustomTheme.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Create a Custom Theme", "Charts2D/StylingTheming/CustomTheme.png", (window) => Thread.Sleep(15000)),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Dashed Line Styling", "Charts2D/StylingTheming/DashedLineStyling.png"),
            // new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Use High Quality Rendering", "Charts2D/StylingTheming/UseHQRendering.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PaletteProvider", "Charts2D/StylingTheming/UsingPaletteProvider.png"),
             //new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PointMarkers", "Charts2D/StylingTheming/UsingPointMarkers.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using ThemeManager", "Charts2D/StylingTheming/UsingThemeManager.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Xaml Styling", "Charts2D/StylingTheming/Xaml Styling.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using ThemeManager", "Charts2D/StylingTheming/UsingThemeManager.png", (window) =>Task.Delay(1500)),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Xaml Styling", "Charts2D/StylingTheming/Xaml Styling.png", (window) => Thread.Sleep(1500)),
             // 2D Charts, Tooltips and Hit Test
             new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Custom Point Marker", "Charts2D/TooltipsAndHitTests/CustomPointMarker.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_TooltipsAndHitTest, "Custom Tooltips With Modifiers", "Charts2D/TooltipsAndHitTests/TooltipsAndModifiers.png"),
@@ -337,7 +338,7 @@ namespace SciChart.Examples.Demo.SmokeTests
              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "SciChart Trader Demo", "FeaturedApps/FinancialCharts/SciChartTraderDemo.png"),
              
              // Featured Apps, Parallel Coordinate Plot
-              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ParallelCoordinatePlot, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png"),
+              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ParallelCoordinatePlot, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png")
 
         };
 
