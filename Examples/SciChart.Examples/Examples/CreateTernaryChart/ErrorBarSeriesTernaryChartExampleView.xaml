@@ -103,8 +103,7 @@
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartTernarySurface x:Name="sciTernaryChart"
-                                  Grid.Column="1"
-                                  s:ThemeManager.Theme="SciChartv7Navy">
+                                  Grid.Column="1">
 
             <s:SciChartTernarySurface.RenderableSeries>
 

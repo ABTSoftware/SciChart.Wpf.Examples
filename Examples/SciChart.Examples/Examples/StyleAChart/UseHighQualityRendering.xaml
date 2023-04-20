@@ -8,15 +8,7 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <!-- What's this style for? It just overrides some styles in our examples App.xaml -->
-        <!-- So we can apply a render surface below. In your app you won't need it :) -->
-        <Style TargetType="s:SciChartSurface">
-            <Setter Property="s:ThemeManager.Theme" Value="SciChartv7Navy"/>
-        </Style>
-    </UserControl.Resources>
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -66,15 +58,11 @@
         </ext:SciChartInteractionToolbar>
 
         <!--  Render SciChart using High Speed Render Surface  -->
-        <!--  The only line required to enabl this feature is s:RenderSurfaceBase.RenderSurfaceType=  -->
         <s:SciChartSurface x:Name="ChartSurface1"
                            Grid.Row="0"
                            Grid.Column="1"
-                           ViewportManager="{Binding ViewportManager, Mode=OneWay}">
-
-            <s:SciChartSurface.RenderSurface>
-                <s:HighSpeedRenderSurface/>
-            </s:SciChartSurface.RenderSurface>
+                           ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                           s:RenderSurfaceExtensions.RenderSurfaceType="HighSpeedRenderSurface">
 
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
@@ -105,7 +93,7 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation AnnotationCanvas="AboveChart"
                                   CoordinateMode="Relative"
-                                  FontSize="32"
+                                  FontSize="28"
                                   FontWeight="Bold"
                                   HorizontalAnchorPoint="Center"
                                   Opacity="0.3"
@@ -116,16 +104,12 @@
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
-        <!--  Render SciChart using High Quality Render Surface  -->
-        <!--  The only line required to enable this feature is s:RenderSurfaceBase.RenderSurfaceType=  -->
+        <!--  Render SciChart using High Quality Render Surface  -->  
         <s:SciChartSurface x:Name="ChartSurface2"
                            Grid.Row="0"
                            Grid.Column="2"
-                           ViewportManager="{Binding ViewportManager, Mode=OneWay}">
-
-            <s:SciChartSurface.RenderSurface>
-                <s:HighQualityRenderSurface/>
-            </s:SciChartSurface.RenderSurface>
+                           ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                           s:RenderSurfaceExtensions.RenderSurfaceType="HighQualityRenderSurface">
 
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
@@ -156,7 +140,7 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation AnnotationCanvas="AboveChart"
                                   CoordinateMode="Relative"
-                                  FontSize="32"
+                                  FontSize="28"
                                   FontWeight="Bold"
                                   HorizontalAnchorPoint="Center"
                                   Opacity="0.3"
@@ -167,12 +151,12 @@
             </s:SciChartSurface.Annotations>
         </s:SciChartSurface>
 
-        <!--  Render SciChart using Direct X Render Surface  -->
-        <!--  The only line required to enable this feature is s:VisualXcceleratorEngine.IsEnabled -->
+        <!--  Render SciChart using Visual Xccelerator Render Surface  -->
         <s:SciChartSurface x:Name="ChartSurface3"
                            Grid.Row="1"
                            Grid.Column="1"
-                           ViewportManager="{Binding ViewportManager, Mode=OneWay}">
+                           ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                           s:RenderSurfaceExtensions.RenderSurfaceType="VisualXcceleratorRenderSurface">
 
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
@@ -203,11 +187,11 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation AnnotationCanvas="AboveChart"
                                   CoordinateMode="Relative"
-                                  FontSize="32"
+                                  FontSize="28"
                                   FontWeight="Bold"
                                   HorizontalAnchorPoint="Center"
                                   Opacity="0.3"
-                                  Text="Direct X Rasterizer"
+                                  Text="Visual Xccelerator Rasterizer"
                                   VerticalAnchorPoint="Center"
                                   X1="0.5"
                                   Y1="0.5" />
@@ -215,16 +199,12 @@
         </s:SciChartSurface>
 
         <!--  Render SciChart using Xaml Render Surface  -->
-        <!--  The only line required to enable this feature is s:RenderSurfaceBase.RenderSurfaceType=  -->
         <s:SciChartSurface x:Name="ChartSurface4"
                            Grid.Row="1"
                            Grid.Column="2"
-                           ViewportManager="{Binding ViewportManager, Mode=OneWay}">
-
-            <s:SciChartSurface.RenderSurface>
-                <s:XamlRenderSurface />
-            </s:SciChartSurface.RenderSurface>
-
+                           ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                           s:RenderSurfaceExtensions.RenderSurfaceType="XamlRenderSurface">
+            
             <s:SciChartSurface.RenderableSeries>
                 <!--  Toggle Line and MountainSeries visibility bound to same data via the toggle buttons  -->
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries, Mode=OneWay}"
@@ -254,7 +234,7 @@
             <s:SciChartSurface.Annotations>
                 <s:TextAnnotation AnnotationCanvas="AboveChart"
                                   CoordinateMode="Relative"
-                                  FontSize="32"
+                                  FontSize="28"
                                   FontWeight="Bold"
                                   HorizontalAnchorPoint="Center"
                                   Opacity="0.3"

@@ -23,18 +23,25 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource viewModel}">
+    <Grid Background="#1C1C1E" DataContext="{StaticResource viewModel}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <CheckBox Content="Use LogarithmicYAxis?" x:Name="useLogAxisCheckbox" IsChecked="False" ToolTip="Check to swap between Log and Linear Y-Axis"/>
-        </StackPanel>
-
-        <s:SciChartSurface x:Name="PriceChart" s:SciChartGroup.VerticalChartGroup="myCharts" Grid.Row="1" 
+        <CheckBox x:Name="useLogAxisCheckbox"
+                  Grid.Row="0"
+                  Content="Use Log Y-Axis"
+                  IsChecked="False"
+                  Foreground="White"
+                  Margin="10,0"
+                  VerticalAlignment="Center"
+                  ToolTip="Check to swap between Log and Linear Y-Axis"/>
+  
+        <s:SciChartSurface x:Name="PriceChart"
+                           Grid.Row="1" 
+                           s:SciChartGroup.VerticalChartGroup="myCharts" 
                            stockChartLogAxisExample:SwitchAxisTypeBehavior.UseAlternateYAxis="{Binding ElementName=useLogAxisCheckbox, Path=IsChecked}">
 
             <!--  Create Renderable Series, which bind to DataSet series 1:1 and in order  -->

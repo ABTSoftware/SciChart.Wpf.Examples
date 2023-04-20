@@ -88,6 +88,7 @@
             <s3D:SciChart3DSurface.RenderableSeries>
                 <s3D:FreeSurfaceRenderableSeries3D x:Name="polarMeshRenderableSeries"
                                              DrawMeshAs="SolidWireFrame"
+                                             DrawBackSide="True"
                                              Stroke="{StaticResource MainThemeTransparentStrokeColor}"
                                              ContourInterval="0.1"
                                              ContourStroke="{StaticResource MainThemeTransparentStrokeColor}"

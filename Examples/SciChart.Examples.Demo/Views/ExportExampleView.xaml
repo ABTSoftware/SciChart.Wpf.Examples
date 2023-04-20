@@ -28,6 +28,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -91,19 +92,36 @@
                                         Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
             </Button>
 
-            <TextBlock Grid.Row="5"
+            <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="0">
+                <RadioButton Content="Latest NUget" IsChecked="True" GroupName="LibsOptions"/>
+                <RadioButton x:Name="FromLibRbtn" Content="FromLib" GroupName="LibsOptions" Margin="0, 5, 0, 0" IsChecked="{Binding IsLibFromFolder}"/>
+            </StackPanel>
+
+            <Grid Grid.Row="6" 
+                  Grid.ColumnSpan="2"
+                  Visibility="{Binding IsLibFromFolder, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="0"
                        Grid.Column="0"
                        Margin="0,5"
                        Text="Please select SciChart installation folder" 
                        Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
 
-            <TextBox Grid.Row="6"
+                <TextBox Grid.Row="1"
                      Grid.Column="0"
                      AutomationProperties.AutomationId="ExportExampleView.SciChartLibPath"            
                      Text="{Binding LibrariesPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                      ext:TextBoxHelper.Watermark="SciChart Lib Path"/>
 
-            <Button Grid.Row="6"
+                <Button Grid.Row="1"
                     Grid.Column="1"
                     Width="30"
                     Height="30"
@@ -111,10 +129,11 @@
                     Command="{Binding SelectLibraryCommand}"
                     Style="{StaticResource DefaultButtonStyle}">
 
-                <icons:PackIconMaterial Kind="DotsHorizontal"
+                    <icons:PackIconMaterial Kind="DotsHorizontal"
                                         Height="12" Width="12"
                                         Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
-            </Button>
+                </Button>
+            </Grid>
 
             <Button Grid.Row="7"
                     Grid.Column="0"   

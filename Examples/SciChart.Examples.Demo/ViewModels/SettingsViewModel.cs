@@ -290,11 +290,19 @@ namespace SciChart.Examples.Demo.ViewModels
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeResamplersProperty, EnableResamplingCPlusPlus));
             overrideStyle.Setters.Add(new Setter(PerformanceHelper.EnableExtremeDrawingManagerProperty, EnableExtremeDrawingManager));
 
-            overrideStyle.Setters.Add(new Setter(ThemeManager.ThemeProperty, "SciChartv7Navy"));
+            var currentTheme = "SciChartv7Navy";
+
+            if (Application.Current.Resources[typeof(T)] is Style sourceStyle)
+            {
+                var sourceTheme = sourceStyle.Setters.OfType<Setter>().FirstOrDefault(s => s.Property.Name == "Theme");
+                currentTheme = sourceTheme?.Value.ToString() ?? currentTheme;
+            }
+
+            overrideStyle.Setters.Add(new Setter(ThemeManager.ThemeProperty, currentTheme));
 
             if (Application.Current.Resources.Contains(typeof(T)))
                 Application.Current.Resources.Remove(typeof(T));
-            
+
             Application.Current.Resources.Add(typeof(T), overrideStyle);
         }
     }

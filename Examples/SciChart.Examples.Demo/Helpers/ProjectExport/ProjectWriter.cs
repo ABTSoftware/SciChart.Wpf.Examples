@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SciChart.Charting.Common.Extensions;
@@ -43,10 +45,11 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-        public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool showMessageBox = true)
+        public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool useLibsFromFolder, bool showMessageBox = true)
         {
             var files = new Dictionary<string, string>();
             var assembly = typeof(ProjectWriter).Assembly;
+            var version = assembly.GetName().Version;
 
             var names = assembly.GetManifestResourceNames();
             var templateFiles = names.Where(x => x.Contains("Templates")).ToList();
@@ -68,7 +71,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
             string projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
 
-            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath);
+            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath, useLibsFromFolder, version);
             files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
 
             files.RenameKey(ProjectFileName, projectName + ".csproj");
@@ -120,7 +123,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             return Regex.Replace(dictionary, pattern, string.Empty);
         }
 
-        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath)
+        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath, bool isLibFromFolder, Version version)
         {
             var projXml = XDocument.Parse(projFileSource);
             if (projXml.Root != null)
@@ -128,17 +131,46 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 var elements = projXml.Root.Elements().Where(x => x.Name.LocalName == "ItemGroup").ToList();
                 if (elements.Count == 3)
                 {
-                    // Add appropriate references
-                    var el = new XElement("Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
-                    el.Add(new XElement("HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
-                    elements[0].Add(el);
-
-                    // Add assembly references
-                    foreach (var asmName in AssembliesNames)
+                    if (isLibFromFolder)
                     {
-                        el = new XElement("Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
-                        el.Add(new XElement("HintPath", Path.Combine(assembliesPath, asmName)));
+                        // Add appropriate references
+                        var el = new XElement("Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
+                        el.Add(new XElement("HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
                         elements[0].Add(el);
+
+                        // Add assembly references
+                        foreach (var asmName in AssembliesNames)
+                        {
+                            el = new XElement("Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
+                            el.Add(new XElement("HintPath", Path.Combine(assembliesPath, asmName)));
+                            elements[0].Add(el);
+                        }
+                    }
+                    else
+                    {
+                        // Add Package of SciChart libs
+                        var el = new XElement("PackageReference",
+                                    new XAttribute("Include", "SciChart"),
+                                    new XAttribute("Version", version));
+                        elements[1].Add(el);
+
+                        // Add Package of ExternalDependencies lib
+                        el = new XElement("PackageReference",
+                                    new XAttribute("Include", "SciChart.ExternalDependencies"),
+                                    new XAttribute("Version", version));
+                        elements[1].Add(el);
+
+                        // Add Package of DrawingTools lib
+                        el = new XElement("PackageReference",
+                                    new XAttribute("Include", "SciChart.DrawingTools"),
+                                    new XAttribute("Version", version));
+                        elements[1].Add(el);
+
+                        // Add Package of SciChart3D lib
+                        el = new XElement("PackageReference",
+                                    new XAttribute("Include", "SciChart3D"),
+                                    new XAttribute("Version", version));
+                        elements[1].Add(el);
                     }
 
                     // Add package references for specific example NuGet packages
@@ -152,7 +184,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                             var packageAttr = package.Split(';');
                             if (packageAttr.Length == 3)
                             {
-                                el = new XElement("PackageReference",
+                                var el = new XElement("PackageReference",
                                     new XAttribute("Include", packageAttr[1]),
                                     new XAttribute("Version", packageAttr[2]));
 

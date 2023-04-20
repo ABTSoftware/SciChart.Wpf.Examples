@@ -1,8 +1,0 @@
-<Window x:Class="SciChart_DigitalAnalyzerPerformanceDemo.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="SciChart | Digital Analyzer Performance Demo"
-        xmlns:sciChartDigitalAnalyzerPerformanceDemo="clr-namespace:SciChart_DigitalAnalyzerPerformanceDemo">
-  <!-- Note Visual Xccelerator Engine (DirectX is enabled in App.Xaml). You have to do this explicitly in your applications -->
-  <Window.Resources>
-    <sciChartDigitalAnalyzerPerformanceDemo:DigitalAnalyzerExampleViewModel x:Key="ViewModel" />
-  </Window.Resources>
-  <sciChartDigitalAnalyzerPerformanceDemo:DigitalAnalyzerExampleView DataContext="{StaticResource ViewModel}" />
-</Window>

@@ -16,7 +16,7 @@
 
         <s:InvertBooleanConverter x:Key="InvertBooleanConverter" />
         <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        
+
         <local:TimeLabelProvider x:Key="TimeLabelProvider"/>
         <local:PointCountToLabelConverter x:Key="PointCountToLabelConverter"/>
 
@@ -46,22 +46,22 @@
             <Setter Property="Y2" Value="3" />
         </Style>
 
+        <x:Array x:Key="ChannelTypeSource" Type="sys:String">
+            <sys:String>Digital</sys:String>
+            <sys:String>Analog</sys:String>
+        </x:Array>
+
         <x:Array x:Key="ChannelCountSource" Type="sys:Int32">
             <sys:Int32>8</sys:Int32>
             <sys:Int32>16</sys:Int32>
             <sys:Int32>32</sys:Int32>
             <sys:Int32>64</sys:Int32>
-            <sys:Int32>100</sys:Int32>
         </x:Array>
 
         <x:Array x:Key="PointCountSource" Type="sys:Int32">
-            <!-- 1M -->
             <sys:Int32>1000000</sys:Int32>
-            <!-- 10M -->
             <sys:Int32>10000000</sys:Int32>
-            <!-- 100M -->
             <sys:Int32>100000000</sys:Int32>
-            <!-- 1B -->
             <sys:Int32>1000000000</sys:Int32>
         </x:Array>
 
@@ -83,66 +83,47 @@
         </Grid.RowDefinitions>
 
         <!-- Toolbar -->
-        <Border Grid.RowSpan="3" Background="#FF232426" BorderThickness="0,0,2,0" BorderBrush="#323539" Canvas.ZIndex="9999">
-            <StackPanel Orientation="Vertical">
-                <ToggleButton x:Name="IsZoomEnabled"
-                              IsChecked="True"
-                              Style="{StaticResource ZoomButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
-                              s:ToggleButtonExtensions.GroupName="ToogleModifiersGroup" />
+        <ext:SciChartInteractionToolbar Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+            <ToggleButton x:Name="IsZoomEnabled"
+                          IsChecked="True"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
+                          s:ToggleButtonExtensions.GroupName="ToogleModifiersGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ToggleButton x:Name="IsPanEnabled"
-                              Style="{StaticResource PanButtonStyle}"
-                              ToolTipService.ToolTip="Toggle Zoom-Pan"
-                              s:ToggleButtonExtensions.GroupName="ToogleModifiersGroup" />
+            <ToggleButton x:Name="IsPanEnabled"
+                          Style="{StaticResource DefaultToggleButtonStyle}"
+                          ToolTipService.ToolTip="Toggle Zoom-Pan"
+                          s:ToggleButtonExtensions.GroupName="ToogleModifiersGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
 
-                <ext:FlyoutSeparator />
+            <ext:FlyoutSeparator/>
 
-                <Button Content="+"
-                        Padding="0"
-                        FontSize="18"
-                        ToolTipService.ToolTip="Add New Channel"
-                        Style="{StaticResource DefaultButtonStyle}"
-                        Command="{Binding AddChannelCommand}"/>
+            <Button Command="{Binding AddChannelCommand}" Style="{StaticResource DefaultButtonStyle}">
+                <ext:ToolbarIcon Kind="Plus" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </Button>
 
-                <ext:FlyoutSeparator/>
-
-                <ext:FlyoutMenuButton Content="PC" Padding="0">
-                    <ext:FlyoutMenuButton.PopupContent>
-                        <StackPanel Orientation="Vertical" MinWidth="150">
-                            <TextBlock Text="Channel Count:"/>
-                            <ComboBox Margin="5"
-                                      SelectedItem="{Binding SelectedChannelCount}"
-                                      ItemsSource="{StaticResource ChannelCountSource}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-
-                            <TextBlock Text="Point Count:"/>
-                            <ComboBox Margin="5"
-                                      SelectedItem="{Binding SelectedPointCount}"
-                                      ItemsSource="{StaticResource PointCountSource}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource PointCountToLabelConverter}}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
-                    </ext:FlyoutMenuButton.PopupContent>
-                </ext:FlyoutMenuButton>
-
-                <Button Content="LOAD"
-                        Padding="0"
-                        FontSize="9"
-                        ToolTipService.ToolTip="Load Channels"
-                        Style="{StaticResource DefaultButtonStyle}"
-                        Command="{Binding LoadChannelsCommand}"/>
-            </StackPanel>
-        </Border>
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Reload" Margin="2,0,0,0" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" Width="130" Orientation="Vertical">
+                        <TextBlock Text="Channel Count" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox SelectedItem="{Binding SelectedChannelCount}" ItemsSource="{StaticResource ChannelCountSource}"/>
+                        <TextBlock Text="Point Count" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox SelectedItem="{Binding SelectedPointCount}" ItemsSource="{StaticResource PointCountSource}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource PointCountToLabelConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Content="Load" Margin="0,10,0,0" Command="{Binding LoadChannelsCommand}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!-- Info -->
         <StackPanel Grid.Row="0" Grid.Column="1" Focusable="False" Height="30" Orientation="Horizontal">
@@ -231,8 +212,8 @@
                                 </Border>
 
                                 <s:SciChartSurface x:Name="channelSurface" Grid.Column="1"
-                                                     ShowLicensingWarnings="False"
-                                                     RenderableSeries="{Binding RenderableSeries}">
+                                                   ShowLicensingWarnings="False"
+                                                   RenderableSeries="{Binding RenderableSeries}">
 
                                     <!--  Create an X Axis with GrowBy  -->
                                     <s:SciChartSurface.XAxis>
@@ -269,18 +250,17 @@
             </ScrollViewer>
         </Border>
 
-        <TextBlock
-            Grid.Row="0"
-            Grid.RowSpan="3"
-            Grid.Column="1"
-            Text="There is no data to display" 
-            FontSize="28" 
-            FontWeight="Bold" 
-            Foreground="LightGray"
-            Opacity="0.6"
-            Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="0"
+                   Grid.RowSpan="3"
+                   Grid.Column="1"
+                   Text="There is no data to display" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   Foreground="LightGray"
+                   Opacity="0.6"
+                   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
 
         <!--Busy Indicator-->
         <Border Grid.Row="0"
@@ -293,6 +273,5 @@
                 <TextBlock x:Name="BusyMessage" Text="Generating data points..." FontSize="16" Foreground="#FFF" Margin="0,10" TextAlignment="Center" Opacity="0.7"/>
             </StackPanel>
         </Border>
-        
     </Grid>
 </UserControl>

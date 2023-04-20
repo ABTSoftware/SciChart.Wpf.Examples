@@ -82,7 +82,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <s:SciChartSurface DataContext="{StaticResource SeriesTooltipsViewModel}" s:ThemeManager.Theme="SciChartv7Navy">
+        <s:SciChartSurface DataContext="{StaticResource SeriesTooltipsViewModel}">
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries DataSeries="{Binding DataSeries1}"
                                             Stroke="{StaticResource MainThemeStrokeColor}"
