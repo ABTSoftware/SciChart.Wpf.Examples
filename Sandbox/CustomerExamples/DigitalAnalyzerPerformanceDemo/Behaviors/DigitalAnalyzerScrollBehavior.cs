@@ -1,7 +1,7 @@
-using Microsoft.Xaml.Behaviors;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Xaml.Behaviors;
 
 namespace SciChart_DigitalAnalyzerPerformanceDemo
 {
@@ -41,9 +41,11 @@ namespace SciChart_DigitalAnalyzerPerformanceDemo
             }
             else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
             {
-                if (!(sender is ScrollViewer scroll)) return;
-                scroll.ScrollToVerticalOffset(scroll.VerticalOffset - e.Delta);
-                e.Handled = true;
+                if (sender is ScrollViewer scroll)
+                {
+                    scroll.ScrollToVerticalOffset(scroll.VerticalOffset - e.Delta);
+                    e.Handled = true;
+                }
             }
         }
     }

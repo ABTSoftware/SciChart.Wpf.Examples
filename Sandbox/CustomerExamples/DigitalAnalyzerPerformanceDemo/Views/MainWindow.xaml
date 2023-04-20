@@ -1,0 +1,13 @@
+<Window x:Class="SciChart_DigitalAnalyzerPerformanceDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SciChart_DigitalAnalyzerPerformanceDemo"
+        Title="SciChart | Digital Analyzer Performance Demo">
+
+    <Window.Resources>
+        <local:DigitalAnalyzerExampleViewModel x:Key="ViewModel" />
+    </Window.Resources>
+    
+    <local:DigitalAnalyzerExampleView DataContext="{StaticResource ViewModel}" />
+    
+</Window>
