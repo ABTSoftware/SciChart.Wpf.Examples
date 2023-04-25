@@ -11,8 +11,6 @@ namespace SciChart.Examples.Demo.ViewModels
     public class ExportExampleViewModel : ViewModelWithTraitsBase, IDataErrorInfo
     {
         private readonly ExampleViewModel _parent;
-        private bool _onExported;
-        private bool _isLibFromFolder;
 
         public ExportExampleViewModel(IModule module, ExampleViewModel parent)
         {
@@ -59,10 +57,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool IsExportVisible
         {
-            get
-            {
-                return GetDynamicValue<bool>();
-            }
+            get => GetDynamicValue<bool>();
             set
             {
                 if (IsExportVisible != value)
@@ -83,25 +78,18 @@ namespace SciChart.Examples.Demo.ViewModels
 
         public bool IsLibFromFolder
         {
-            get { return _isLibFromFolder; }
-            set 
-            { 
-                _isLibFromFolder = value;
-                OnPropertyChanged(nameof(IsLibFromFolder));
+            get => GetDynamicValue<bool>();
+            set
+            {
+                SetDynamicValue(value);
+                ExportCommand.RaiseCanExecuteChanged();
             }
         }
 
         public bool OnExported
         {
-            get => _onExported;
-            set
-            {
-                if (_onExported != value)
-                {
-                    _onExported = value;
-                    OnPropertyChanged(nameof(OnExported));
-                }
-            }
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
         }
 
         public string ExportPath
@@ -162,7 +150,7 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
-        public string Error { get; private set; }
+        public string Error { get; }
 
         public string this[string propertyName]
         {
@@ -204,7 +192,9 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private string ValidateLibrariesPath()
         {
-            if (DirectoryHelper.IsValidPath(LibrariesPath, out string error))
+            string error = null;
+
+            if (IsLibFromFolder && DirectoryHelper.IsValidPath(LibrariesPath, out error))
             {
                 if (!ExportExampleHelper.SearchForCoreAssemblies(LibrariesPath))
                 {

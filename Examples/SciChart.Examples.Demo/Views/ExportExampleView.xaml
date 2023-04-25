@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="SciChart.Examples.Demo.Views.ExportExampleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks">
@@ -9,7 +10,6 @@
         <Style BasedOn="{StaticResource ToolbarPopupTextBoxStyle}" TargetType="TextBox">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Padding" Value="3"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <abt:BoolToValueConverter x:Key="b2vConverter" TrueValue="Visible" FalseValue="Collapsed"/>
@@ -30,6 +30,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -70,7 +71,7 @@
             <TextBlock Grid.Row="3"
                        Grid.Column="0"
                        Margin="0,5"
-                       Text="Please select folder to which export the example" 
+                       Text="Please select a folder to export the example" 
                        Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
 
             <TextBox Grid.Row="4"
@@ -83,7 +84,7 @@
                     Grid.Column="1"
                     Width="30"
                     Height="30"
-                    Margin="10,0,0,10"
+                    Margin="10,0,0,0"
                     Command="{Binding SelectExportPathCommand}"
                     Style="{StaticResource DefaultButtonStyle}">
 
@@ -92,52 +93,41 @@
                                         Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
             </Button>
 
-            <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="0">
-                <RadioButton Content="Latest NUget" IsChecked="True" GroupName="LibsOptions"/>
-                <RadioButton x:Name="FromLibRbtn" Content="FromLib" GroupName="LibsOptions" Margin="0, 5, 0, 0" IsChecked="{Binding IsLibFromFolder}"/>
+            <StackPanel Grid.Row="5" Grid.Column="0">
+                <TextBlock Margin="0,10,0,0" Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}">
+                    <Run Text="Please select how to reference SciChart"/>
+                    <Run Text="{Binding Source={x:Static s:SciChartSurface.VersionInfo}, Mode=OneWay, StringFormat='({0})'}"/>
+                </TextBlock>
+                
+                <RadioButton Content="NuGet Package" Margin="0,10,0,0" IsChecked="True"/>
+                <RadioButton Content="Installation Folder" Margin="0,10,0,0" IsChecked="{Binding IsLibFromFolder}"/>
             </StackPanel>
 
-            <Grid Grid.Row="6" 
-                  Grid.ColumnSpan="2"
-                  Visibility="{Binding IsLibFromFolder, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <TextBlock Grid.Row="0"
-                       Grid.Column="0"
-                       Margin="0,5"
-                       Text="Please select SciChart installation folder" 
-                       Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
-
-                <TextBox Grid.Row="1"
+            <TextBox Grid.Row="6" 
                      Grid.Column="0"
+                     Margin="0,10,0,0"
                      AutomationProperties.AutomationId="ExportExampleView.SciChartLibPath"            
                      Text="{Binding LibrariesPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                     ext:TextBoxHelper.Watermark="SciChart Lib Path"/>
+                     ext:TextBoxHelper.Watermark="Installation Path"
+                     Visibility="{Binding IsLibFromFolder, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-                <Button Grid.Row="1"
+            <Button Grid.Row="6" 
                     Grid.Column="1"
                     Width="30"
                     Height="30"
-                    Margin="10,0,0,10"
+                    Margin="10,10,0,0"
                     Command="{Binding SelectLibraryCommand}"
-                    Style="{StaticResource DefaultButtonStyle}">
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Visibility="{Binding IsLibFromFolder, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                    <icons:PackIconMaterial Kind="DotsHorizontal"
+                <icons:PackIconMaterial Kind="DotsHorizontal"
                                         Height="12" Width="12"
                                         Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}"/>
-                </Button>
-            </Grid>
+            </Button>
 
             <Button Grid.Row="7"
                     Grid.Column="0"   
-                    Margin="0,5,0,0"
+                    Margin="0,15,0,0"
                     Content="GO"
                     Command="{Binding ExportCommand}"
                     Style="{StaticResource ExportExampleButtonStyle}"
@@ -149,7 +139,7 @@
                        Foreground="{DynamicResource HyperlinkAlternativeForegroundBrush}"
                        FontSize="12"
                        FontWeight="SemiBold"
-                       Margin="0,5,0,0"
+                       Margin="0,15,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Visibility="{Binding OnExported, Converter={StaticResource b2vConverter}}"/>

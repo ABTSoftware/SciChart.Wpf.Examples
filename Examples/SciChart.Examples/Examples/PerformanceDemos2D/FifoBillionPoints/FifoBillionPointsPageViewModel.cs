@@ -20,7 +20,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         private bool _isStopped;
         private string _loadingMessage;
 
-        private NoLockTimer _timer;
+        private RenderSyncedTimer _timer;
         private PointCount _selectedPointCount;
 
         private const int AppendCount = 10_000; // The number of points to append per timer tick
@@ -29,14 +29,10 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         private readonly float[] _xBuffer = new float[AppendCount];
         private readonly float[] _yBuffer = new float[AppendCount];
 
-        private readonly object _syncLock = new object();
-
         public FifoBillionPointsPageViewModel()
         {
             _isRunning = false;
             _isStopped = true;
-
-            _timer = new NoLockTimer(TimeSpan.FromMilliseconds(TimerIntervalMs), OnTimerTick);
 
             RunCommand = new ActionCommand(OnRun);
             PauseCommand = new ActionCommand(OnPause);
@@ -78,7 +74,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         public ObservableCollection<PointCount> AllPointCounts { get; } = new ObservableCollection<PointCount>();
 
-        public SuspendableViewportManager ViewportManager { get; } = new SuspendableViewportManager();
+        public SurfaceViewportManager ViewportManager { get; } = new SurfaceViewportManager();
 
         public PointCount SelectedPointCount
         {
@@ -132,12 +128,16 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
         {
             if (!IsRunning)
             {
+                _timer ??= new RenderSyncedTimer(TimeSpan.FromMilliseconds(TimerIntervalMs),
+                    ViewportManager.RenderSurface,
+                    OnTimerTick);
+
                 IsRunning = true;
 
                 if (IsStopped)
                 {
-                    int seriesCount = SelectedPointCount.SeriesCount;
-                    int pointCount = SelectedPointCount.PointsCount;
+                    var seriesCount = SelectedPointCount.SeriesCount;
+                    var pointCount = SelectedPointCount.PointsCount;
 
                     LoadingMessage = $"Generating {SelectedPointCount.DisplayName} Points...";
 
@@ -223,15 +223,11 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                     };
                 });
 
-                // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
-                // Force a GC Collect before we begin
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
-
                 return series.ToList();
             });
         }
 
-        private Color GetRandomColor()
+        private static Color GetRandomColor()
         {
             return Color.FromRgb(Rand.NextByte(55), Rand.NextByte(55), Rand.NextByte(55));
         }
@@ -261,30 +257,24 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         private void OnPause()
         {
-            lock (_syncLock)
-            {
-                IsRunning = false;
-                IsStopped = false;
+            IsRunning = false;
+            IsStopped = false;
 
-                _timer.Stop();
-                ViewportManager.ZoomExtentsX();
-            }
+            _timer.Stop();
+            ViewportManager.ZoomExtentsX();
         }
 
         private void OnStop()
         {
-            lock (_syncLock)
+            if (!IsStopped)
             {
-                if (!IsStopped)
-                {
-                    _timer.Stop();
+                _timer.Stop();
 
-                    IsRunning = false;
-                    IsStopped = true;
+                IsRunning = false;
+                IsStopped = true;
 
-                    Series.ForEachDo(x => x.DataSeries.Clear(true));
-                    Series.Clear();
-                }
+                Series.ForEachDo(x => x.DataSeries.Clear(true));
+                Series.Clear();
             }
 
             // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
@@ -312,27 +302,24 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         private void OnTimerTick()
         {
-            lock (_syncLock)
+            using (ViewportManager.ParentSurface.SuspendUpdates())
             {
-                using (ViewportManager.ParentSurface.SuspendUpdates())
+                int seriesIndex = 0;
+                foreach (var series in Series)
                 {
-                    int seriesIndex = 0;
-                    foreach (var series in Series)
+                    var dataSeries = (XyDataSeries<float, float>)series.DataSeries;
+                    var randomWalkGenerator = (Rand)dataSeries.Tag;
+                    var startIndex = (int)dataSeries.XValues.Last() + 1;
+
+                    int yOffset = seriesIndex * 2;
+                    for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
                     {
-                        var dataSeries = (XyDataSeries<float, float>)series.DataSeries;
-                        var randomWalkGenerator = (Rand)dataSeries.Tag;
-                        var startIndex = (int)dataSeries.XValues.Last() + 1;
-
-                        int yOffset = seriesIndex * 2;
-                        for (int i = 0, j = startIndex; i < AppendCount; i++, j++)
-                        {
-                            _xBuffer[i] = j;
-                            _yBuffer[i] = randomWalkGenerator.NextWalk() + yOffset;
-                        }
-
-                        dataSeries.Append(_xBuffer, _yBuffer);
-                        seriesIndex++;
+                        _xBuffer[i] = j;
+                        _yBuffer[i] = randomWalkGenerator.NextWalk() + yOffset;
                     }
+
+                    dataSeries.Append(_xBuffer, _yBuffer);
+                    seriesIndex++;
                 }
             }
         }
