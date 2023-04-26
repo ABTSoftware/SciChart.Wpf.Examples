@@ -7,8 +7,6 @@ namespace SciChart.Mvvm.Tutorial
         public InfoAnnotation()
         {
             InitializeComponent();
-
-            DefaultStyleKey = typeof(InfoAnnotation);
         }
     }
 }
