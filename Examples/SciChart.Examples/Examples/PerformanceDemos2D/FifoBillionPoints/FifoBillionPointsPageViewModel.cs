@@ -264,7 +264,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             ViewportManager.ZoomExtentsX();
         }
 
-        private void OnStop()
+        private async void OnStop()
         {
             if (!IsStopped)
             {
@@ -273,12 +273,26 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
                 IsRunning = false;
                 IsStopped = true;
 
-                Series.ForEachDo(x => x.DataSeries.Clear(true));
+                LoadingMessage = "Releasing memory...";
+
+                var series = Series;
                 Series.Clear();
+
+                // Release memory
+                await Task.Run(() =>
+                {
+                    series.ForEachDo(x =>
+                    {
+                        x.DataSeries.Clear(true);
+                        x.DataSeries = null;
+                    });
+                });
             }
 
             // For example purposes, we're including GC.Collect. We don't recommend you do this in a production app
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            await Task.Run(()=>GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced));
+
+            LoadingMessage = null;
         }
 
         /// <summary>
