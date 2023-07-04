@@ -16,6 +16,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations;
 using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.MeasureX;
@@ -34,68 +35,92 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations
             AnnotationCreation.IsEnabled = false;
         }
 
+        private void UncheckAnnotationToggles(string exceptName = null)
+        {
+            foreach (var annotationToggle in new[] { FibRetr, FibExt, MeasureX, MeasureY, MeasureXy })
+            {
+                if (annotationToggle.Name != exceptName)
+                {
+                    annotationToggle.IsChecked = false;
+                }
+            }
+        }
+
         private void OnAnnotationCreated(object sender, EventArgs e)
         {
-            var newAnnotation = (AnnotationCreation.Annotation as AnnotationBase);
-            if (newAnnotation != null)
+            if (AnnotationCreation.Annotation is AnnotationBase newAnnotation)
             {
                 newAnnotation.IsEditable = true;
                 newAnnotation.CanEditText = true;
             }
+
             if (AnnotationCreation != null)
             {
                 AnnotationCreation.IsEnabled = false;
             }
+
             foreach (var annotation in SciChart.Annotations)
             {
                 annotation.IsEditable = true;
             }
 
-            FibRetr.IsChecked = false;
-            FibExt.IsChecked = false;
-            MeasureX.IsChecked = false;
-            MeasureY.IsChecked = false;
-            MeasureXy.IsChecked = false;
+            UncheckAnnotationToggles();
         }
 
         private void FibonacciRetracementChecked(object sender, RoutedEventArgs e)
         {
-            AnnotationCreation.IsEnabled = true;
-
-            AnnotationCreation.AnnotationType = typeof(FibonacciRetracementAnnotation);
+            if (sender is ToggleButton toggle)
+            {
+                UncheckAnnotationToggles(toggle.Name);
+                AnnotationCreation.IsEnabled = true;
+                AnnotationCreation.AnnotationType = typeof(FibonacciRetracementAnnotation);
+            }
         }
 
         private void FibonacciExtensionChecked(object sender, RoutedEventArgs e)
         {
-            AnnotationCreation.IsEnabled = true;
-
-            AnnotationCreation.AnnotationType = typeof(FibonacciExtensionAnnotation);
+            if (sender is ToggleButton toggle)
+            {
+                UncheckAnnotationToggles(toggle.Name);
+                AnnotationCreation.IsEnabled = true;
+                AnnotationCreation.AnnotationType = typeof(FibonacciExtensionAnnotation);
+            }
         }
 
         private void MeasureXChecked(object sender, RoutedEventArgs e)
         {
-            AnnotationCreation.IsEnabled = true;
+            if (sender is ToggleButton toggle)
+            {
+                UncheckAnnotationToggles(toggle.Name);
+                AnnotationCreation.IsEnabled = true;
+                AnnotationCreation.AnnotationType = typeof(MeasureXAnnotation);
+            }
+        }
 
-            AnnotationCreation.AnnotationType = typeof(MeasureXAnnotation);
-        }       
-        
         private void MeasureYChecked(object sender, RoutedEventArgs e)
         {
-            AnnotationCreation.IsEnabled = true;
+            if (sender is ToggleButton toggle)
+            {
+                UncheckAnnotationToggles(toggle.Name);
+                AnnotationCreation.IsEnabled = true;
+                AnnotationCreation.AnnotationType = typeof(MeasureY.MeasureYAnnotation);
+            }
+        }
 
-            AnnotationCreation.AnnotationType = typeof(MeasureY.MeasureYAnnotation);
-        }      
-  
         private void MeasureXyChecked(object sender, RoutedEventArgs e)
         {
-            AnnotationCreation.IsEnabled = true;
-
-            AnnotationCreation.AnnotationType = typeof(MeasureXyAnnotation);
+            if (sender is ToggleButton toggle)
+            {
+                UncheckAnnotationToggles(toggle.Name);
+                AnnotationCreation.IsEnabled = true;
+                AnnotationCreation.AnnotationType = typeof(MeasureXyAnnotation);
+            }
         }
 
         private void AnnotationTypeUnchecked(object sender, RoutedEventArgs e)
         {
             AnnotationCreation.IsEnabled = false;
+            AnnotationCreation.AnnotationType = null;           
         }
     }
 }
