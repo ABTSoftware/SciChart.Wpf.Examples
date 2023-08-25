@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using SciChart.Charting;
 using SciChart.Core.Extensions;
 using SciChart.Drawing.Common;
 using Path = System.IO.Path;
@@ -20,8 +21,12 @@ namespace UsingRenderContextApiExample
             Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
+            //Start VisualXcceleratorEngine, which is required for VisualXcceleratorRenderSurface
+            VisualXcceleratorEngine.UseAutoShutdown = true;
+            await VisualXcceleratorEngine.RestartEngineAsync();
+
             // Read image pixels
             var path = Path.Combine(Environment.CurrentDirectory, "Resources", "TestImage.jpg");
             BitmapSource bitmap = new BitmapImage(new Uri(path));
@@ -29,8 +34,10 @@ namespace UsingRenderContextApiExample
             bitmap.CopyPixels(_pixels, bitmap.PixelWidth * 4, 0);
 
             // Create a Texture
-            using (var rc = RenderSurface.GetRenderContext())
+            using (var rc = RenderSurface.GetRenderContext() as IVxRenderContext)
             {
+                rc.BeginFrame();
+
                 // Texture creation is very consuming, so recreate it as seldom as possible
                 if (_texture == null)
                 {
@@ -49,8 +56,10 @@ namespace UsingRenderContextApiExample
             var desiredHeight = (int)RenderSurface.ActualHeight;
 
             // Redraw occurs on dispose
-            using (var rc = RenderSurface.GetRenderContext())
+            using (var rc = RenderSurface.GetRenderContext() as IVxRenderContext)
             {
+                rc.BeginFrame();
+
                 // Copy pixel data
                 _texture.SetData(_pixels);
 
@@ -70,10 +79,12 @@ namespace UsingRenderContextApiExample
             var desiredHeight = (int)RenderSurface.ActualHeight;
             var ellipseSize = 50;
 
-            using (var rc = RenderSurface.GetRenderContext())
+            using (var rc = RenderSurface.GetRenderContext() as IVxRenderContext)
             using (var strokePen = rc.CreatePen(Colors.Yellow, true, 3))
             using (var fillBrush = rc.CreateBrush(Colors.Red))
             {
+                rc.BeginFrame();
+
                 rc.DrawEllipse(strokePen, fillBrush, new Point(desiredWidth / 2, desiredHeight / 2), ellipseSize, ellipseSize);
             }
         }
