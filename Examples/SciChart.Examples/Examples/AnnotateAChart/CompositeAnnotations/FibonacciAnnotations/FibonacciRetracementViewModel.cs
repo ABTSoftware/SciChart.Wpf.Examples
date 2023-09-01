@@ -13,10 +13,8 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting.Visuals.Annotations;
 
@@ -67,7 +65,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Fibonac
             set
             {
                 _isSelected = value;
-                OnPropertyChanged("IsSelected");
+                OnPropertyChanged(nameof(IsSelected));
             }
         }
 
@@ -100,10 +98,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Fibonac
         protected virtual void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));            
         }
     }
 }
