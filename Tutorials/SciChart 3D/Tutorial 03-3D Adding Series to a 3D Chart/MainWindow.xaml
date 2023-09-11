@@ -1,0 +1,39 @@
+﻿<Window x:Class="Tutorial_03_Adding_Series_to_a_3D_Chart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        Title="Tutorial 03 - Adding Series to a 3D Chart"
+        Height="550"
+        Width="800">
+
+    <Grid>
+        <s3D:SciChart3DSurface x:Name="sciChart3DSurface">
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <!--  Define the RenderableSeries  -->
+                <!--  where xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D" -->
+                <s3D:PointLineRenderableSeries3D x:Name="pointLineSeries3D"
+                                                 IsAntialiased="True"
+                                                 StrokeThickness="2">
+                    <s3D:PointLineRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Opacity="0.5" Size="16"/>
+                    </s3D:PointLineRenderableSeries3D.PointMarker>
+                </s3D:PointLineRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AxisTitle="X-Axis 3D"/>
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D AxisTitle="Y-Axis 3D"/>
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AxisTitle="Z-Axis 3D"/>
+            </s3D:SciChart3DSurface.ZAxis>
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D/>
+                    <s3D:ZoomExtentsModifier3D/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="Tutorial_02_Creating_a_SciChart3DSurface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        Title="Tutorial 02 - Creating a SciChart3DSurface"
+        Height="550"
+        Width="800">
+
+    <Grid>
+        <!--  Create the chart surface  -->
+        <!--  where xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D" -->
+        <s3D:SciChart3DSurface x:Name="sciChart3DSurface">
+            <!--  Create an X Axis  -->
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AxisTitle="X-Axis 3D"/>
+            </s3D:SciChart3DSurface.XAxis>
+            <!--  Create a Y Axis  -->
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D AxisTitle="Y-Axis 3D"/>
+            </s3D:SciChart3DSurface.YAxis>
+            <!--  Create a Z Axis  -->
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AxisTitle="Z-Axis 3D"/>
+            </s3D:SciChart3DSurface.ZAxis>
+            <!--  Specify interactivity modifiers  -->
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:OrbitModifier3D/>
+                    <s3D:ZoomExtentsModifier3D/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+    </Grid>
+</Window>

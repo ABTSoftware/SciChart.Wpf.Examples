@@ -1,0 +1,45 @@
+﻿<Window x:Class="Tutorial_04_Adding_Zooming_Panning_Behavior.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+        Title="Tutorial 04 - Adding Zooming, Panning Behavior"
+        Height="550"
+        Width="800">
+
+    <Grid>
+        <s3D:SciChart3DSurface x:Name="sciChart3DSurface">
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <s3D:PointLineRenderableSeries3D x:Name="pointLineSeries3D"
+                                                 IsAntialiased="True"
+                                                 StrokeThickness="2">
+                    <s3D:PointLineRenderableSeries3D.PointMarker>
+                        <s3D:SpherePointMarker3D Opacity="0.5" Size="16"/>
+                    </s3D:PointLineRenderableSeries3D.PointMarker>
+                </s3D:PointLineRenderableSeries3D>
+            </s3D:SciChart3DSurface.RenderableSeries>
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AxisTitle="X-Axis 3D"/>
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D AxisTitle="Y-Axis 3D"/>
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AxisTitle="Z-Axis 3D"/>
+            </s3D:SciChart3DSurface.ZAxis>
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <!-- Allows orbital motion of the Camera 3D on Left mouse drag -->
+                    <s3D:OrbitModifier3D/>
+                    <!-- Allows moving through the 3D World on Right mouse drag -->
+                    <s3D:FreeLookModifier3D ExecuteOn="MouseRightButton"/>
+                    <!-- Allows zooming the 3D World on mouse wheel -->
+                    <s3D:MouseWheelZoomModifier3D/>
+                    <!-- Allows zooming to fit on Left mouse double click -->
+                    <s3D:ZoomExtentsModifier3D ExecuteOn="MouseDoubleClick"
+                                               ResetPosition="-485,536,-485"
+                                               ResetTarget="0,100,0"/>
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+    </Grid>
+</Window>
