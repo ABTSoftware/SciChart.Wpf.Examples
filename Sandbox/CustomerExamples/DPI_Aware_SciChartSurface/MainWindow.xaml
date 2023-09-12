@@ -1,0 +1,6 @@
+<Window x:Class="SciChartExport.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dpiAwareSciChartSurface="clr-namespace:DpiAware_SciChartSurface"
+        Title="SciChart | Scatter Chart">
+  <!-- Note Visual Xccelerator Engine (DirectX is enabled in App.Xaml). You have to do this explicitly in your applications -->
+  <dpiAwareSciChartSurface:ScatterChartExampleView />
+</Window>
