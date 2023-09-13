@@ -28,13 +28,13 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations
         {
             RenderableSeriesViewModels = new List<IRenderableSeriesViewModel>
             {
-                new CandlestickRenderableSeriesViewModel {DataSeries = GetPriceDataSeries()}
+                new CandlestickRenderableSeriesViewModel {DataSeries = CompositeAnnotationsViewModel.GetPriceDataSeries()}
             };
         }
 
         public List<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; set; }
 
-        private IOhlcDataSeries GetPriceDataSeries()
+        private static IOhlcDataSeries GetPriceDataSeries()
         {
             var stockPrices = new OhlcDataSeries<DateTime, double>();
 

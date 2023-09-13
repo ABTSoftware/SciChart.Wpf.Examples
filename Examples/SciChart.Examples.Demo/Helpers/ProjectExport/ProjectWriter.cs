@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SciChart.Charting.Common.Extensions;
@@ -18,10 +17,19 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             "SciChart.Charting.dll",
             "SciChart.Charting3D.dll",
             "SciChart.Drawing.dll",
-            "SciChart.Charting.DrawingTools.dll"
+            "SciChart.Charting.DrawingTools.dll",
+            "SciChart.Examples.ExternalDependencies.dll"
         };
 
-        public static readonly string[] NuGetPackages =
+        public static readonly string[] AssembliesNuGetPackages =
+        {
+            "SciChart",
+            "SciChart3D",
+            "SciChart.DrawingTools",
+            "SciChart.ExternalDependencies"
+        };
+
+        public static readonly string[] ExamplesNuGetPackages =
         {
             //ExampleTitle;PackageName;PackageVersion
             "AudioAnalyzerDemo;NAudio;1.10.0",
@@ -29,7 +37,6 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         };
 
         public static readonly string ExampleTheme = "Navy";
-        public static readonly string ExternalDependencies = "SciChart.Examples.ExternalDependencies.dll";
 
         public static readonly string AssemblyInfoFileName = "AssemblyInfo.cs";
         public static readonly string SolutionFileName = "SolutionFile.sln";
@@ -45,7 +52,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-        public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool useLibsFromFolder, bool showMessageBox = true)
+        public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool useLibsFromFolder)
         {
             var files = new Dictionary<string, string>();
             var assembly = typeof(ProjectWriter).Assembly;
@@ -123,7 +130,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             return Regex.Replace(dictionary, pattern, string.Empty);
         }
 
-        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath, bool isLibFromFolder, Version version)
+        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath, bool useLibsFromFolder, Version version)
         {
             var projXml = XDocument.Parse(projFileSource);
             if (projXml.Root != null)
@@ -131,51 +138,32 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 var elements = projXml.Root.Elements().Where(x => x.Name.LocalName == "ItemGroup").ToList();
                 if (elements.Count == 3)
                 {
-                    if (isLibFromFolder)
+                    if (useLibsFromFolder)
                     {
-                        // Add appropriate references
-                        var el = new XElement("Reference", new XAttribute("Include", ExternalDependencies.Replace(".dll", string.Empty)));
-                        el.Add(new XElement("HintPath", Path.Combine(assembliesPath, ExternalDependencies)));
-                        elements[0].Add(el);
-
                         // Add assembly references
                         foreach (var asmName in AssembliesNames)
                         {
-                            el = new XElement("Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
-                            el.Add(new XElement("HintPath", Path.Combine(assembliesPath, asmName)));
+                            var el = new XElement("Reference", new XAttribute("Include", asmName.Replace(".dll", string.Empty)));
+                            el.Add(new XElement("HintPath", Path.Combine(assembliesPath, asmName)));                          
                             elements[0].Add(el);
                         }
                     }
                     else
                     {
-                        // Add Package of SciChart libs
-                        var el = new XElement("PackageReference",
-                                    new XAttribute("Include", "SciChart"),
-                                    new XAttribute("Version", version));
-                        elements[1].Add(el);
+                        // Add assembly NuGet packages
+                        foreach (var asmPackageName in AssembliesNuGetPackages)
+                        {
+                            var el = new XElement("PackageReference",
+                                new XAttribute("Include", asmPackageName),
+                                new XAttribute("Version", version));
 
-                        // Add Package of ExternalDependencies lib
-                        el = new XElement("PackageReference",
-                                    new XAttribute("Include", "SciChart.ExternalDependencies"),
-                                    new XAttribute("Version", version));
-                        elements[1].Add(el);
-
-                        // Add Package of DrawingTools lib
-                        el = new XElement("PackageReference",
-                                    new XAttribute("Include", "SciChart.DrawingTools"),
-                                    new XAttribute("Version", version));
-                        elements[1].Add(el);
-
-                        // Add Package of SciChart3D lib
-                        el = new XElement("PackageReference",
-                                    new XAttribute("Include", "SciChart3D"),
-                                    new XAttribute("Version", version));
-                        elements[1].Add(el);
+                            elements[1].Add(el);
+                        }  
                     }
 
                     // Add package references for specific example NuGet packages
                     var exampleTitle = Regex.Replace(example.Title, @"\s", string.Empty);
-                    var examplePackages = NuGetPackages.Where(p => p.StartsWith(exampleTitle));
+                    var examplePackages = ExamplesNuGetPackages.Where(p => p.StartsWith(exampleTitle));
                     if (examplePackages.Any())
                     {
                         foreach (var package in examplePackages)

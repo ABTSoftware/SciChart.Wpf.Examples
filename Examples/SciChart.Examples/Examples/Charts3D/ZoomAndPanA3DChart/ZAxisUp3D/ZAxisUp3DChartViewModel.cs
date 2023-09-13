@@ -47,7 +47,6 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
                 new ScatterRenderableSeries3DViewModel
                 {
                     DataSeries = dataSeries3D,
-                    Stroke = Colors.Transparent,
                     PointMarker = new SpherePointMarker3D { Size = 8, Opacity = 0.9 }
                 }
             };

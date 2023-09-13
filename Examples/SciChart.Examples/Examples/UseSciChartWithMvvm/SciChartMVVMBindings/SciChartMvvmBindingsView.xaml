@@ -20,6 +20,7 @@
                 <Setter Property="Foreground" Value="White"/>
             </Style>
 
+            <!-- This style is applied to a DateTimeAxis in the ViewModel, see IAxisViewModel.StyleKey property -->
             <Style x:Key="DateTimeAxisStyle" BasedOn="{StaticResource {x:Type s:DateTimeAxisForMvvm}}" TargetType="s:DateTimeAxisForMvvm">
                 <Setter Property="BorderThickness" Value="3"/>
                 <Setter Property="TickLabelStyle" Value="{StaticResource MvvmExampleCustomTickLabelStyle}"/>
@@ -47,6 +48,8 @@
                         <Ellipse  Fill="{TemplateBinding Background}" Stretch="Fill"/>
                     </Border>
                 </ControlTemplate>
+
+                <!-- This style is applied to a BoxAnnotation in the ViewModel, see IAnnotationViewModel.StyleKey property -->
                 <Style x:Key="CustomBoxAnnotationStyle" BasedOn="{StaticResource {x:Type s:BoxAnnotationForMvvm}}" TargetType="s:BoxAnnotationForMvvm">
                     <Setter Property="Background" Value="{StaticResource ExtraThemeStrokeBrush_5}" />
                     <Setter Property="Template" Value="{StaticResource CustomBoxTemplate}"/>

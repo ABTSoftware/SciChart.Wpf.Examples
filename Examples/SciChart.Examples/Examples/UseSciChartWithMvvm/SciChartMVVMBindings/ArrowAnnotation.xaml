@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             mc:Ignorable="d"  Margin="0,15,0,0"
+             mc:Ignorable="d"  
+             Margin="0,15,0,0">
 
-             >
     <Path Data="m 3.5 0.5 4 0 0 8 3 0 -5 5 -5 -5 3 0 z"
-                          Fill="{StaticResource SecondaryThemeTransparentSolidBrush}"
-                          Stroke="{StaticResource SecondaryThemeSolidBrush}"
-                          StrokeThickness="1" />
+          Fill="{StaticResource SecondaryThemeTransparentSolidBrush}"
+          Stroke="{StaticResource SecondaryThemeSolidBrush}"
+          StrokeThickness="1" />
 
 </s:CustomAnnotationForMvvm>

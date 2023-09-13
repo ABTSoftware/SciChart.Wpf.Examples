@@ -1,243 +1,278 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts.CreateRealTime3DSurfaceMeshChart"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="400"
              d:DesignWidth="600">
 
-    <UserControl.Resources>
-        <!-- Used for this example purposes, when switching color map, switch the ColorMapTextureSize -->
-        <Style x:Key="SurfaceMeshStyle" TargetType="{x:Type s3D:SurfaceMeshRenderableSeries3D}">
+	<UserControl.Resources>
+		<!-- Used for this example purposes, when switching color map, switch the ColorMapTextureSize -->
+		<Style x:Key="SurfaceMeshStyle" TargetType="{x:Type s3D:SurfaceMeshRenderableSeries3D}">
 
-            <!-- The ColorMapTextureSize property defines how large the texture is when a ColorMap is applied -->
-            <!-- For height color maps, 1024x1 is plenty of resolution to give a nice interpolated color map  -->
-            <!-- This is also the default value -->
-            <Setter Property="ColorMapTextureSize" Value="1024,1"/>
-            <Style.Triggers>
-                <!-- However when an image is applied, we want a nice square texture. -->
-                <!-- to set the ColorMapTextureSize to 512, 512 -->
-                <DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
-                    <Setter Property="ColorMapTextureSize" Value="512,512"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+			<!-- The ColorMapTextureSize property defines how large the texture is when a ColorMap is applied -->
+			<!-- For height color maps, 1024x1 is plenty of resolution to give a nice interpolated color map  -->
+			<!-- This is also the default value -->
+			<Setter Property="ColorMapTextureSize" Value="1024,1"/>
+			<Style.Triggers>
+				<!-- However when an image is applied, we want a nice square texture. -->
+				<!-- to set the ColorMapTextureSize to 512, 512 -->
+				<DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
+					<Setter Property="ColorMapTextureSize" Value="512,512"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
 
-        <!-- Simulates a Linear Interpolated color map -->
-        <s3D:GradientColorPalette x:Key="DefaultMeshColorPalette" IsStepped="False">
-            <s3D:GradientColorPalette.GradientStops>
-                <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
-                <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
-                <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
-                <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
-                <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
-                <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
-                <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
-            </s3D:GradientColorPalette.GradientStops>
-        </s3D:GradientColorPalette>
+		<!-- Simulates a Linear Interpolated color map -->
+		<s3D:GradientColorPalette x:Key="DefaultMeshColorPalette" IsStepped="False">
+			<s3D:GradientColorPalette.GradientStops>
+				<GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+				<GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+				<GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+				<GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+				<GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+				<GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+				<GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
+			</s3D:GradientColorPalette.GradientStops>
+		</s3D:GradientColorPalette>
 
-        <ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
+		<ext:LinearToLogarithmicValueConverter x:Key="LinearToLogarithmicValueConverter"/>
 
-        <local:ColorMapTemplateSelector x:Key="ColorMapTemplateSelector">
-            <local:ColorMapTemplateSelector.BrushDataTemplate>
-                <DataTemplate DataType="{x:Type s3D:BrushColorPalette}">
-                    <Rectangle Width="16" VerticalAlignment="Stretch" Fill="{Binding Brush}">
-                        <Rectangle.LayoutTransform>
-                            <RotateTransform Angle="90"/>
-                        </Rectangle.LayoutTransform>
-                    </Rectangle>
-                </DataTemplate>
-            </local:ColorMapTemplateSelector.BrushDataTemplate>
-            <local:ColorMapTemplateSelector.ImageBrushDataTemplate>
-                <DataTemplate DataType="{x:Type s3D:BrushColorPalette}">
-                    <Border Background="Yellow">
-                        <Rectangle Width="16" Height="16" Fill="{Binding Brush}">
-                            <Rectangle.LayoutTransform>
-                                <RotateTransform Angle="90"/>
-                            </Rectangle.LayoutTransform>
-                        </Rectangle>
-                    </Border>
-                </DataTemplate>
-            </local:ColorMapTemplateSelector.ImageBrushDataTemplate>
-        </local:ColorMapTemplateSelector>
-    </UserControl.Resources>
+		<local:ColorMapTemplateSelector x:Key="ColorMapTemplateSelector">
+			<local:ColorMapTemplateSelector.BrushDataTemplate>
+				<DataTemplate DataType="{x:Type s3D:BrushColorPalette}">
+					<Rectangle Width="16" VerticalAlignment="Stretch" Fill="{Binding Brush}">
+						<Rectangle.LayoutTransform>
+							<RotateTransform Angle="90"/>
+						</Rectangle.LayoutTransform>
+					</Rectangle>
+				</DataTemplate>
+			</local:ColorMapTemplateSelector.BrushDataTemplate>
+			<local:ColorMapTemplateSelector.ImageBrushDataTemplate>
+				<DataTemplate DataType="{x:Type s3D:BrushColorPalette}">
+					<Border Background="Yellow">
+						<Rectangle Width="16" Height="16" Fill="{Binding Brush}">
+							<Rectangle.LayoutTransform>
+								<RotateTransform Angle="90"/>
+							</Rectangle.LayoutTransform>
+						</Rectangle>
+					</Border>
+				</DataTemplate>
+			</local:ColorMapTemplateSelector.ImageBrushDataTemplate>
+		</local:ColorMapTemplateSelector>
+	</UserControl.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart3DSurface}}">
+		<ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart3DSurface}}">
 
-            <ext:FlyoutSeparator/>
+			<ext:FlyoutSeparator/>
 
-            <ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
-                <ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
-            </ToggleButton>
+			<ToggleButton x:Name="StartButton" Click="StartButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+				<ext:ToolbarIcon Kind="Play" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+			</ToggleButton>
 
-            <ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
-                <ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
-            </ToggleButton>
+			<ToggleButton x:Name="PauseButton" Click="PauseButton_Click" Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+				<ext:ToolbarIcon Kind="Pause" Height="14" Width="14" Style="{StaticResource ToolbarButtonIconStyle}"/>
+			</ToggleButton>
 
-            <ext:FlyoutSeparator/>
+			<ext:FlyoutSeparator/>
 
-            <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
-                        <TextBlock Text="Opacity" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <Slider Minimum="0.2" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+			<ext:FlyoutMenuButton>
+				<ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+				<ext:FlyoutMenuButton.PopupContent>
+					<StackPanel Margin="5" Width="150" Orientation="Vertical">
+						<TextBlock Text="Opacity" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<Slider Minimum="0.2" Maximum="1.0" x:Name="opacitySlider" Value="0.9" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Text="Normal hardness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+						<TextBlock Text="Normal hardness" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<Slider Minimum="0.0" Maximum="1.0" x:Name="normalHardnessSlider" Value="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Text="Shininess" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+						<TextBlock Text="Shininess" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<Slider Minimum="0" Maximum="11" x:Name="shininessSlider" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Text="Draw Mesh As" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox x:Name="DrawMeshAsCombo" SelectedIndex="0">
-                            <ComboBox.Items>
-                                <s3D:DrawMeshAs>SolidWireFrame</s3D:DrawMeshAs>
-                                <s3D:DrawMeshAs>SolidMesh</s3D:DrawMeshAs>
-                                <s3D:DrawMeshAs>Wireframe</s3D:DrawMeshAs>
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
+                        <CheckBox x:Name="pixelShaderNormals_cmbx" Margin="0,10,0,5" HorizontalAlignment="Stretch" Content="Use PixelShaderNormals"/>
 
-            <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="Palette" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" Width="180" Orientation="Vertical">
-                        <TextBlock Text="Color Map" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox x:Name="ColorMapCombo"
+						<TextBlock Text="Draw Mesh As" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<ComboBox x:Name="DrawMeshAsCombo" SelectedIndex="0">
+							<ComboBox.Items>
+								<s3D:DrawMeshAs>SolidWireFrame</s3D:DrawMeshAs>
+								<s3D:DrawMeshAs>SolidMesh</s3D:DrawMeshAs>
+								<s3D:DrawMeshAs>Wireframe</s3D:DrawMeshAs>
+							</ComboBox.Items>
+						</ComboBox>
+					</StackPanel>
+				</ext:FlyoutMenuButton.PopupContent>
+			</ext:FlyoutMenuButton>
+
+			<ext:FlyoutMenuButton>
+				<ext:ToolbarIcon Kind="Palette" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+				<ext:FlyoutMenuButton.PopupContent>
+					<StackPanel Margin="5" Width="180" Orientation="Vertical">
+						<TextBlock Text="Color Map" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<ComboBox x:Name="ColorMapCombo"
                                   SelectedIndex="0"
                                   SelectionChanged="ColorMapCombo_OnSelectionChanged"
                                   ItemTemplateSelector="{StaticResource ColorMapTemplateSelector}">
 
-                            <ComboBox.Items>
-                                <!-- Simulates a Linear Interpolated color map -->
-                                <s3D:GradientColorPalette IsStepped="False">
-                                    <s3D:GradientColorPalette.GradientStops>
-                                        <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
-                                        <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
-                                        <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
-                                        <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
-                                        <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
-                                        <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
-                                        <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
-                                    </s3D:GradientColorPalette.GradientStops>
-                                </s3D:GradientColorPalette>
+							<ComboBox.Items>
+								<!-- Simulates a Linear Interpolated color map -->
+								<s3D:GradientColorPalette IsStepped="False">
+									<s3D:GradientColorPalette.GradientStops>
+										<GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+										<GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+										<GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+										<GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+										<GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+										<GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+										<GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
+									</s3D:GradientColorPalette.GradientStops>
+								</s3D:GradientColorPalette>
 
-                                <!-- Simulates hard steps between colors -->
-                                <s3D:GradientColorPalette IsStepped="True">
-                                    <s3D:GradientColorPalette.GradientStops>
-                                        <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
-                                        <GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
-                                        <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
-                                        <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
-                                        <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
-                                        <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
-                                        <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
-                                    </s3D:GradientColorPalette.GradientStops>
-                                </s3D:GradientColorPalette>
+								<!-- Simulates hard steps between colors -->
+								<s3D:GradientColorPalette IsStepped="True">
+									<s3D:GradientColorPalette.GradientStops>
+										<GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
+										<GradientStop Offset="0.1" Color="{StaticResource ColorMapColor_2}" />
+										<GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_3}" />
+										<GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_4}" />
+										<GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_5}" />
+										<GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+										<GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
+									</s3D:GradientColorPalette.GradientStops>
+								</s3D:GradientColorPalette>
 
-                                <!-- Simulates any brush e.g. an image, which can be turned into a mesh color map -->
-                                <s3D:BrushColorPalette Tag="ImageBrush">
-                                    <s3D:BrushColorPalette.Brush>
-                                        <VisualBrush>
-                                            <VisualBrush.Visual>
-                                                <Canvas Width="512" Height="512" Background="Yellow" HorizontalAlignment="Left">
-                                                    <Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="125" Canvas.Top="150"/>
-                                                    <Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="325" Canvas.Top="150"/>
-                                                    <Path Stroke="Black" Data="M 125,300 S 225,400 325, 300" StrokeThickness="20" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Canvas.Left="35"/>
-                                                </Canvas>
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
-                                    </s3D:BrushColorPalette.Brush>
-                                </s3D:BrushColorPalette>
-                            </ComboBox.Items>
-                        </ComboBox>
+								<!-- Simulates any brush e.g. an image, which can be turned into a mesh color map -->
+								<s3D:BrushColorPalette Tag="ImageBrush">
+									<s3D:BrushColorPalette.Brush>
+										<VisualBrush>
+											<VisualBrush.Visual>
+												<Canvas Width="512" Height="512" Background="Yellow" HorizontalAlignment="Left">
+													<Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="125" Canvas.Top="150"/>
+													<Ellipse Fill="Black" Width="75" Height="75" Canvas.Left="325" Canvas.Top="150"/>
+													<Path Stroke="Black" Data="M 125,300 S 225,400 325, 300" StrokeThickness="20" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Canvas.Left="35"/>
+												</Canvas>
+											</VisualBrush.Visual>
+										</VisualBrush>
+									</s3D:BrushColorPalette.Brush>
+								</s3D:BrushColorPalette>
+							</ComboBox.Items>
+						</ComboBox>
 
-                        <TextBlock Text="Mesh Palette" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox x:Name="MeshPaletteModeCombo" SelectedIndex="0" SelectionChanged="MeshPaletteModeCombo_OnSelectionChanged">
-                            <ComboBox.Items>
-                                <s3D:MeshPaletteMode>HeightMapSolidCells</s3D:MeshPaletteMode>
-                                <s3D:MeshPaletteMode>HeightMapInterpolated</s3D:MeshPaletteMode>
-                                <s3D:MeshPaletteMode>Textured</s3D:MeshPaletteMode>
-                                <s3D:MeshPaletteMode>TexturedSolidCells</s3D:MeshPaletteMode>
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
+						<TextBlock Text="Mesh Palette" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<ComboBox x:Name="MeshPaletteModeCombo" SelectedIndex="0" SelectionChanged="MeshPaletteModeCombo_OnSelectionChanged">
+							<ComboBox.Items>
+								<s3D:MeshPaletteMode>HeightMapSolidCells</s3D:MeshPaletteMode>
+								<s3D:MeshPaletteMode>HeightMapInterpolated</s3D:MeshPaletteMode>
+								<s3D:MeshPaletteMode>Textured</s3D:MeshPaletteMode>
+								<s3D:MeshPaletteMode>TexturedSolidCells</s3D:MeshPaletteMode>
+							</ComboBox.Items>
+						</ComboBox>
+					</StackPanel>
+				</ext:FlyoutMenuButton.PopupContent>
+			</ext:FlyoutMenuButton>
 
-            <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="DatabaseArrowRight" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
-                        <TextBlock Text="Data to Render" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox x:Name="DataCombo" SelectedIndex="1" SelectionChanged="DataCombo_OnSelectionChanged">
-                            <ComboBox.Items>
-                                <system:String>3D Sinc 10 x 10</system:String>
-                                <system:String>3D Sinc 25 x 25</system:String>
-                                <system:String>3D Sinc 50 x 50</system:String>
-                                <system:String>3D Sinc 100 x 100</system:String>
-                                <system:String>3D Sinc 500 x 500</system:String>
-                                <system:String>3D Sinc 1k x 1k</system:String>
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-        </ext:SciChart3DInteractionToolbar>
+			<ext:FlyoutMenuButton>
+				<ext:ToolbarIcon Kind="DatabaseArrowRight" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+				<ext:FlyoutMenuButton.PopupContent>
+					<StackPanel Margin="5" Width="150" Orientation="Vertical">
+						<TextBlock Text="Data to Render" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<ComboBox x:Name="DataCombo" SelectedIndex="1" SelectionChanged="DataCombo_OnSelectionChanged">
+							<ComboBox.Items>
+								<system:String>3D Sinc 10 x 10</system:String>
+								<system:String>3D Sinc 25 x 25</system:String>
+								<system:String>3D Sinc 50 x 50</system:String>
+								<system:String>3D Sinc 100 x 100</system:String>
+								<system:String>3D Sinc 500 x 500</system:String>
+								<system:String>3D Sinc 1k x 1k</system:String>
+							</ComboBox.Items>
+						</ComboBox>
+					</StackPanel>
+				</ext:FlyoutMenuButton.PopupContent>
+			</ext:FlyoutMenuButton>
 
-        <s3D:SciChart3DSurface x:Name="SciChart3DSurface" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0" 
+			<ext:FlyoutMenuButton>
+				<ext:ToolbarIcon Kind="TrackLight" Style="{StaticResource ToolbarButtonIconStyle}"/>
+				<ext:FlyoutMenuButton.PopupContent>
+					<StackPanel Margin="5" Width="150" Orientation="Vertical">
+						<TextBlock Text="Main Light Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+						<ComboBox x:Name="lightModeComboBox" SelectionChanged="LightMode_OnSelectionChanged"/>
+						<StackPanel x:Name="lightSlidersPanel">
+							<StackPanel.Style>
+								<Style TargetType="{x:Type StackPanel}">
+									<Setter Property="Opacity" Value="1"/>
+									<Style.Triggers>
+										<Trigger Property="IsEnabled" Value="False">
+											<Setter Property="Opacity" Value="0.3"/>
+										</Trigger>
+									</Style.Triggers>
+								</Style>
+							</StackPanel.Style>
+
+							<TextBlock Text="Light Direction X" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+							<Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderX" Value="0.5" ValueChanged="LightSlider_OnValueChanged"/>
+
+							<TextBlock Text="Light Direction Y" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+							<Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderY" Value="-0.25" ValueChanged="LightSlider_OnValueChanged"/>
+
+							<TextBlock Text="Light Direction Z" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+							<Slider Minimum="-1.0" Maximum="1.0" x:Name="lightSliderZ" Value="-0.5" ValueChanged="LightSlider_OnValueChanged"/>
+						</StackPanel>
+					</StackPanel>
+				</ext:FlyoutMenuButton.PopupContent>
+			</ext:FlyoutMenuButton>
+
+		</ext:SciChart3DInteractionToolbar>
+
+		<s3D:SciChart3DSurface x:Name="SciChart3DSurface" Grid.Column="1" WorldDimensions="200,100,200" BorderThickness="0"
                                RenderPriority="Normal" MaxFrameRate="36">
 
-            <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D ZoomToFitOnAttach="True"/>
-            </s3D:SciChart3DSurface.Camera>
+			<s3D:SciChart3DSurface.Camera>
+				<s3D:Camera3D ZoomToFitOnAttach="True"/>
+			</s3D:SciChart3DSurface.Camera>
 
-            <s3D:SciChart3DSurface.RenderableSeries>
-                <s3D:SurfaceMeshRenderableSeries3D x:Name="SurfaceMesh" 
+			<s3D:SciChart3DSurface.RenderableSeries>
+				<s3D:SurfaceMeshRenderableSeries3D x:Name="SurfaceMesh"
                                                    Opacity="{Binding Source={x:Reference opacitySlider}, Path=Value, Mode=TwoWay}"
                                                    CellHardnessFactor="{Binding Source={x:Reference Name=normalHardnessSlider}, Path=Value, Mode=TwoWay}"
                                                    Shininess="{Binding Source={x:Reference Name=shininessSlider}, Path=Value, Mode=TwoWay, Converter={StaticResource LinearToLogarithmicValueConverter}}"
                                                    MeshColorPalette="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedItem, FallbackValue={StaticResource DefaultMeshColorPalette}}"
                                                    StrokeThickness="1"
-                                                   Stroke="#FFE4F5FC" 
+                                                   Stroke="#FFE4F5FC"
                                                    DrawSkirt="False"
                                                    Minimum="0.0"
-                                                   Maximum="0.5" 
+                                                   Maximum="0.5"
+												   UsePixelShaderNormals="{Binding IsChecked, Source={x:Reference pixelShaderNormals_cmbx}, Mode=TwoWay}"
                                                    MeshPaletteMode="{Binding Source={x:Reference Name=MeshPaletteModeCombo}, Path=SelectedItem}"
                                                    DrawMeshAs="{Binding Source={x:Reference Name=DrawMeshAsCombo}, Path=SelectedItem}"
                                                    Style="{StaticResource SurfaceMeshStyle}"/>
-            </s3D:SciChart3DSurface.RenderableSeries>
+			</s3D:SciChart3DSurface.RenderableSeries>
 
-            <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D AutoRange="Always"/>
-            </s3D:SciChart3DSurface.XAxis>
+			<s3D:SciChart3DSurface.XAxis>
+				<s3D:NumericAxis3D AutoRange="Always"/>
+			</s3D:SciChart3DSurface.XAxis>
 
-            <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D VisibleRange="0,1"/>
-            </s3D:SciChart3DSurface.YAxis>
+			<s3D:SciChart3DSurface.YAxis>
+				<s3D:NumericAxis3D VisibleRange="0,1"/>
+			</s3D:SciChart3DSurface.YAxis>
 
-            <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D AutoRange="Always"/>
-            </s3D:SciChart3DSurface.ZAxis>
+			<s3D:SciChart3DSurface.ZAxis>
+				<s3D:NumericAxis3D AutoRange="Always"/>
+			</s3D:SciChart3DSurface.ZAxis>
 
-        </s3D:SciChart3DSurface>
+		</s3D:SciChart3DSurface>
 
-        <s:HeatmapColorMap Margin="15" Grid.Column="1"
+		<s:HeatmapColorMap Margin="15" Grid.Column="1"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Stretch"
                            Background="{StaticResource ThemedSurfaceChartBackground}"
@@ -250,15 +285,15 @@
                            BorderBrush="#777"
                            BorderThickness="1"
                            Orientation="Vertical">
-            <s:HeatmapColorMap.Style>
-                <Style TargetType="s:HeatmapColorMap">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </s:HeatmapColorMap.Style>
-        </s:HeatmapColorMap>
-    </Grid>
+			<s:HeatmapColorMap.Style>
+				<Style TargetType="s:HeatmapColorMap">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Reference Name=ColorMapCombo}, Path=SelectedIndex}" Value="2">
+							<Setter Property="Visibility" Value="Collapsed"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</s:HeatmapColorMap.Style>
+		</s:HeatmapColorMap>
+	</Grid>
 </UserControl>

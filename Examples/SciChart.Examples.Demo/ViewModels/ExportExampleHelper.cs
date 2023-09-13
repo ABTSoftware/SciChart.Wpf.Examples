@@ -113,10 +113,9 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
-        private static void ExportExampleToSolution(ref string lastGroup, Example current)
+        private static void ExportExampleToSolution(ref string lastGroup, Example example)
         {
-            string projectName = ProjectWriter.WriteProject(
-                current, _exportPath + @"\", TryAutomaticallyFindAssemblies(), true, false);
+            string projectName = ProjectWriter.WriteProject(example, _exportPath + @"\", TryAutomaticallyFindAssemblies(), true);
 
             if (!File.Exists(ScriptPath))
             {
@@ -130,7 +129,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 }                
             }
 
-            if (lastGroup != null && current.Group != lastGroup)
+            if (lastGroup != null && example.Group != lastGroup)
             {
                 using (var fs = File.AppendText(ScriptPath))
                 {
@@ -139,7 +138,8 @@ namespace SciChart.Examples.Demo.ViewModels
                     fs.WriteLine("");
                 }
             }
-            lastGroup = current.Group;
+
+            lastGroup = example.Group;
 
             using (var fs = File.AppendText(ScriptPath))
             {
@@ -184,13 +184,12 @@ namespace SciChart.Examples.Demo.ViewModels
         public static bool SearchForCoreAssemblies(string folderPath)
         {
             bool result = true;
+
             foreach (var asmName in ProjectWriter.AssembliesNames)
             {
                 result &= IsAssemblyExist(folderPath, asmName) &&
                           IsAssemblyVersionMatch(folderPath, asmName);
             }
-            result &= IsAssemblyExist(folderPath, ProjectWriter.ExternalDependencies);
-
             return result;
         }
 

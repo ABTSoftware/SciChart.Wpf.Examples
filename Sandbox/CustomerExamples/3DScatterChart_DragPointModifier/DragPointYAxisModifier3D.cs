@@ -65,10 +65,16 @@ namespace Scatter3DChart_DragPointModifier
             var rayStart = new TSRVector3();
             var rayDirection = new TSRVector3();
 
-            camera.ComputeRay((int)startPoint.X, (int)startPoint.Y, rayStart, rayDirection);
+            var viewport = new TSRViewPort
+            {
+                Width = Convert.ToUInt32(Viewport3D.ViewportSize.Width),
+                Height = Convert.ToUInt32(Viewport3D.ViewportSize.Height)
+            };
+
+            camera.ComputeRay(viewport, (int)startPoint.X, (int)startPoint.Y, rayStart, rayDirection);
             var startVector = pointPlane.Intersect(rayStart, rayDirection);
 
-            camera.ComputeRay((int)endPoint.X, (int)endPoint.Y, rayStart, rayDirection);
+            camera.ComputeRay(viewport, (int)endPoint.X, (int)endPoint.Y, rayStart, rayDirection);
             var endVector = pointPlane.Intersect(rayStart, rayDirection);
 
             startVector.Subtract(startVector, endVector);

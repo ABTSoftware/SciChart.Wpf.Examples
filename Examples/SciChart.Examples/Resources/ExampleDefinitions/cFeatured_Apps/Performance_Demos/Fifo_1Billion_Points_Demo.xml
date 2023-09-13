@@ -1,40 +1,41 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml</View>
-  <ViewModel>Examples.PerformanceDemos2D.FifoBillionPoints.FifoBillionPointsPageViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOscilloscope.png</ImagePath>
-  <IconPath>IconRealtime</IconPath>
-  <ToolTipDescription>
-    Demonstrates the incredible performance when rendering streaming (scrolling) line charts.
-  </ToolTipDescription>
-  <Description>
-    This demo showcases the incredible performance when rendering streaming (scrolling) line charts.
+	<View>Examples/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml</View>
+	<ViewModel>Examples.PerformanceDemos2D.FifoBillionPoints.FifoBillionPointsPageViewModel</ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOscilloscope.png</ImagePath>
+	<IconPath>IconRealtime</IconPath>
+	<ToolTipDescription>
+		Demonstrates the incredible performance when rendering streaming (scrolling) line charts.
+	</ToolTipDescription>
+	<Description>
+		This demo showcases the incredible performance when rendering streaming (scrolling) line charts.
 
-    It showcases that SciChart is capable of rendering [b]1 billion (1,000,000,000) points in real-time at 60 fps[/b].
+		It showcases that SciChart is capable of rendering [b]1 billion (1,000,000,000) points in real-time at 60 fps[/b].
 
-    This kind of chart can be used in [b]real-time monitoring or visualizing output of telemetry sensors which produce huge data-sets[/b]. It uses FIFO series, the series that discards old data-points once a predefined number of points is met. This type of data-series is extremely efficient for scrolling charts, where you do not care about discarded (off-screen) data.
+		This kind of chart can be used in [b]real-time monitoring or visualizing output of telemetry sensors which produce huge data-sets[/b]. It uses FIFO series, the series that discards old data-points once a predefined number of points is met. This type of data-series is extremely efficient for scrolling charts, where you do not care about discarded (off-screen) data.
 
-    This demo is possible due to our newly introduced [b]Visual Xccelerator(TM)[/b] engine, a completely in-house, proprietary, cross-platform C++ game engine, fully GPU accelerated using pixel and vertex shaders, which we've built layers on top of to create 2D/3D charts.
-    
-    [b]Documentation Links[/b]
+		This demo is possible due to our newly introduced [b]Visual Xccelerator(TM)[/b] engine, a completely in-house, proprietary, cross-platform C++ game engine, fully GPU accelerated using pixel and vertex shaders, which we've built layers on top of to create 2D/3D charts.
 
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.DataSeries%602~FifoCapacity.html']DataSeries.FifoCapacity property[/url]
-    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
-    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']SciChart WPF v6 'Xccelerated Edition' Up to 100x Faster WPF Charts![/url]
-  </Description>
-  <CodeFiles>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/NoLockTimer.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/PointCount.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/Rand.cs.txt</string>
-	<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SuspendableViewportManager.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SystemMemoryInfo.cs.txt</string>
-  </CodeFiles>
-  <Features>
-    <Features>Realtime</Features>
-    <Features>Performance</Features>
-    <Features>Line</Features>
-    <Features>FIFO</Features>
-  </Features>
+		[b]Documentation Links[/b]
+
+		- [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.DataSeries%602~FifoCapacity.html']DataSeries.FifoCapacity property[/url]
+		- [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+		- [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']SciChart WPF v6 'Xccelerated Edition' Up to 100x Faster WPF Charts![/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/BoolToAxisAutoRangeConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/PointCount.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/Rand.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/RenderSyncedTimer.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SurfaceViewportManager.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/SystemMemoryInfo.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Realtime</Features>
+		<Features>Performance</Features>
+		<Features>Line</Features>
+		<Features>FIFO</Features>
+	</Features>
 </ExampleDefinition>

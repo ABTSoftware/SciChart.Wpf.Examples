@@ -40,24 +40,12 @@
                                                 Stroke="{StaticResource MainThemeStrokeColor}"
                                                 StrokeThickness="2"
                                                 Fill="{StaticResource MainThemeTransparentSolidBrush}">
-                    <!--<s:FastMountainRenderableSeries.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#A83376E5" />
-                            <GradientStop Offset="1" Color="#333376E5" />
-                        </LinearGradientBrush>
-                    </s:FastMountainRenderableSeries.Fill>-->
                 </s:FastMountainRenderableSeries>
 
                 <s:FastMountainRenderableSeries x:Name="mountainRenderableSeries2"
                                                 Stroke="{StaticResource SecondaryThemeStrokeColor}"
                                                 StrokeThickness="2"
                                                 Fill="{StaticResource SecondaryThemeTransparentSolidBrush}">
-                    <!--<s:FastMountainRenderableSeries.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#A839E345" />
-                            <GradientStop Offset="1" Color="#3339E345" />
-                        </LinearGradientBrush>
-                    </s:FastMountainRenderableSeries.Fill>-->
                 </s:FastMountainRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
@@ -82,9 +70,7 @@
             </s:SciChartSurface.Annotations>
 
             <s:SciChartSurface.ChartModifier>
-                <s:LegendModifier Name="legendModifier"
-                                  Margin="10"
-                                  ShowLegend="True" />
+                <s:LegendModifier Name="legendModifier" Margin="10" ShowLegend="True"/>
             </s:SciChartSurface.ChartModifier>
 
         </s:SciChartSurface>

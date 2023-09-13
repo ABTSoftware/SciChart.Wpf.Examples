@@ -46,43 +46,38 @@
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
             <ToggleButton x:Name="FibRetr"
                           Checked="FibonacciRetracementChecked"
+                          Unchecked="AnnotationTypeUnchecked"
                           Content="{StaticResource FibonacciRetracementContent}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Create Fibonacci Retracement Annotation"
-                          Unchecked="AnnotationTypeUnchecked"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>   
+                          ToolTipService.ToolTip="Create Fibonacci Retracement Annotation"/>   
                        
             <ToggleButton x:Name="FibExt"
                           Checked="FibonacciExtensionChecked"
+                          Unchecked="AnnotationTypeUnchecked"
                           Content="{StaticResource FibonacciExtensionContent}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Create Fibonacci Extension Annotation"
-                          Unchecked="AnnotationTypeUnchecked"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+                          ToolTipService.ToolTip="Create Fibonacci Extension Annotation"/>
                                
             <ToggleButton x:Name="MeasureX"
                           Checked="MeasureXChecked"
+                          Unchecked="AnnotationTypeUnchecked"
                           Content="{StaticResource MeasureXContent}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Create MeasureXAnnotation"
-                          Unchecked="AnnotationTypeUnchecked"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+                          ToolTipService.ToolTip="Create MeasureXAnnotation"/>
             
             <ToggleButton x:Name="MeasureY"
                           Checked="MeasureYChecked"
+                          Unchecked="AnnotationTypeUnchecked"
                           Content="{StaticResource MeasureYContent}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Create MeasureYAnnotation"
-                          Unchecked="AnnotationTypeUnchecked"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+                          ToolTipService.ToolTip="Create MeasureYAnnotation"/>
             
             <ToggleButton x:Name="MeasureXy"
                           Checked="MeasureXyChecked"
+                          Unchecked="AnnotationTypeUnchecked"
                           Content="{StaticResource MeasureXYContent}"
                           Style="{StaticResource DefaultToggleButtonStyle}"
-                          ToolTipService.ToolTip="Create MeasureXYAnnotation"
-                          Unchecked="AnnotationTypeUnchecked"
-                          s:ToggleButtonExtensions.GroupName="ZoomPanSelectionGroup"/>
+                          ToolTipService.ToolTip="Create MeasureXYAnnotation"/>
         </ext:SciChartInteractionToolbar>
 
         <s:SciChartSurface x:Name="SciChart"
