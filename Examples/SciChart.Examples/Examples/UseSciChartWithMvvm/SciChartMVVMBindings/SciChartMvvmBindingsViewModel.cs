@@ -42,8 +42,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
             AnnotationViewModels.Add(new TextAnnotationViewModel
             {
                 HorizontalAnchorPoint = HorizontalAnchorPoint.Center,
-                Text = "Anchor Center (X1, Y1)",
                 VerticalAnchorPoint = VerticalAnchorPoint.Bottom,
+                Text = "Anchor Center (X1, Y1)",
                 X1 = 5.0,
                 Y1 = 8
             });
@@ -51,8 +51,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
             AnnotationViewModels.Add(new TextAnnotationViewModel
             {
                 HorizontalAnchorPoint = HorizontalAnchorPoint.Right,
-                Text = "Anchor Right",
                 VerticalAnchorPoint = VerticalAnchorPoint.Top,
+                Text = "Anchor Right",
                 X1 = 5.0,
                 Y1 = 8.0
             });
@@ -72,8 +72,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 AnnotationCanvas = AnnotationCanvas.BelowChart,
                 CoordinateMode = AnnotationCoordinateMode.Relative,
                 HorizontalAnchorPoint = HorizontalAnchorPoint.Center,
-                Text = "Create a Watermark",
                 VerticalAnchorPoint = VerticalAnchorPoint.Center,
+                Text = "Create a Watermark",
                 X1 = 0.5,
                 Y1 = 0.5,
                 FontSize = 56,
@@ -170,6 +170,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 Y1 = -2,
                 Y2 = -4,
                 IsEditable = true,
+
+                // Apply a style declared in the View
                 StyleKey = "CustomBoxAnnotationStyle"
             });
         }
@@ -215,6 +217,8 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.SciChartMVVMBinding
                 AxisAlignment = AxisAlignment.Top,
                 Id = "DateTimeAxis",
                 VisibleRange = new DateRange(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)),
+
+                // Apply a style declared in the View
                 StyleKey = "DateTimeAxisStyle"
             };
 

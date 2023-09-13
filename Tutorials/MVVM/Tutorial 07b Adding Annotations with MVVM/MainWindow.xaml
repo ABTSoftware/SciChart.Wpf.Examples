@@ -12,10 +12,6 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/SciChart.Charting;component/Themes/Default.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
             <local:MainViewModel x:Key="MainViewModel"/>
 
             <!-- The TooltipControl template is defined below -->
@@ -58,8 +54,6 @@
                 <Setter Property="s:RolloverModifier.IncludeSeries" Value="True"/>
                 <Setter Property="StrokeThickness" Value="2"/>
             </Style>
-
-            <Style TargetType="local:InfoAnnotation" BasedOn="{StaticResource MvvmBaseAnnotationStyle}"/>
         </ResourceDictionary>        
     </Window.Resources>
 

@@ -8,34 +8,37 @@ using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Utility;
 using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.RenderableSeries;
+using SciChart.Core.Extensions;
 using SciChart.Core.Utility.Mouse;
 using SciChart.Drawing.Utility;
 
 namespace CustomModifierSandboxExample
 {
     public struct DataPoint
-    {        
+    {
         public double XValue;
         public double YValue;
         public int Index;
     }
 
     public class SimpleDataPointSelectionModifier : ChartModifierBase
-    {        
-        public static readonly DependencyProperty SelectionPolygonStyleProperty = DependencyProperty.Register(
-            "SelectionPolygonStyle", typeof (Style), typeof (SimpleDataPointSelectionModifier), new PropertyMetadata(default(Style)));
+    {
+        public static readonly DependencyProperty SelectionPolygonStyleProperty = DependencyProperty.Register
+            (nameof(SelectionPolygonStyle), typeof(Style), typeof(SimpleDataPointSelectionModifier), new PropertyMetadata(default(Style)));
 
-        public static readonly DependencyProperty SelectedPointsProperty = DependencyProperty.Register(
-            "SelectedPoints", typeof(IDictionary<IRenderableSeries, List<DataPoint>>), typeof(SimpleDataPointSelectionModifier), new PropertyMetadata(default(IDictionary<IRenderableSeries, List<DataPoint>>)));
+        public static readonly DependencyProperty SelectedPointsProperty = DependencyProperty.Register
+            (nameof(SelectedPoints), typeof(IDictionary<IRenderableSeries, List<DataPoint>>), typeof(SimpleDataPointSelectionModifier),
+            new PropertyMetadata(default(IDictionary<IRenderableSeries, List<DataPoint>>)));
 
-        public static readonly DependencyProperty SelectedPointColorProperty = DependencyProperty.Register(
-            "SelectedPointColor", typeof (Color), typeof (SimpleDataPointSelectionModifier), new PropertyMetadata(Colors.White));
+        public static readonly DependencyProperty SelectedPointColorProperty = DependencyProperty.Register
+            (nameof(SelectedPointColor), typeof(Color), typeof(SimpleDataPointSelectionModifier), new PropertyMetadata(Colors.White));
 
-        public static readonly DependencyProperty SelectedPointSizeProperty = DependencyProperty.Register(
-            "SelectedPointSize", typeof (double), typeof (SimpleDataPointSelectionModifier), new PropertyMetadata(5.0));
+        public static readonly DependencyProperty SelectedPointSizeProperty = DependencyProperty.Register
+            (nameof(SelectedPointSize), typeof(double), typeof(SimpleDataPointSelectionModifier), new PropertyMetadata(5.0));
 
         private Rectangle _rectangle;
         private bool _isDragging;
+
         private Point _startPoint;
         private Point _endPoint;
 
@@ -44,8 +47,8 @@ namespace CustomModifierSandboxExample
         /// </summary>
         public Color SelectedPointColor
         {
-            get { return (Color)GetValue(SelectedPointColorProperty); }
-            set { SetValue(SelectedPointColorProperty, value); }
+            get => (Color)GetValue(SelectedPointColorProperty);
+            set => SetValue(SelectedPointColorProperty, value);
         }
 
         /// <summary>
@@ -53,8 +56,8 @@ namespace CustomModifierSandboxExample
         /// </summary>
         public double SelectedPointSize
         {
-            get { return (double)GetValue(SelectedPointSizeProperty); }
-            set { SetValue(SelectedPointSizeProperty, value); }
+            get => (double)GetValue(SelectedPointSizeProperty);
+            set => SetValue(SelectedPointSizeProperty, value);
         }
 
         /// <summary>
@@ -62,8 +65,8 @@ namespace CustomModifierSandboxExample
         /// </summary>
         public IDictionary<IRenderableSeries, List<DataPoint>> SelectedPoints
         {
-            get { return (IDictionary<IRenderableSeries, List<DataPoint>>)GetValue(SelectedPointsProperty); }
-            set { SetValue(SelectedPointsProperty, value); }
+            get => (IDictionary<IRenderableSeries, List<DataPoint>>)GetValue(SelectedPointsProperty);
+            set => SetValue(SelectedPointsProperty, value);
         }
 
         /// <summary>
@@ -71,17 +74,14 @@ namespace CustomModifierSandboxExample
         /// </summary>
         public Style SelectionPolygonStyle
         {
-            get { return (Style)GetValue(SelectionPolygonStyleProperty); }
-            set { SetValue(SelectionPolygonStyleProperty, value); }
+            get => (Style)GetValue(SelectionPolygonStyleProperty);
+            set => SetValue(SelectionPolygonStyleProperty, value);
         }
 
         /// <summary>
         /// Gets whether the user is currently dragging the mouse
         /// </summary>
-        public bool IsDragging
-        {
-            get { return _isDragging; }
-        }
+        public bool IsDragging => _isDragging;
 
         /// <summary>
         /// Called when the Chart Modifier is attached to the Chart Surface
@@ -91,7 +91,7 @@ namespace CustomModifierSandboxExample
         {
             base.OnAttached();
 
-            ClearReticule();            
+            ClearReticule();
         }
 
         /// <summary>
@@ -128,8 +128,10 @@ namespace CustomModifierSandboxExample
             base.OnModifierMouseDown(e);
 
             // Check the ExecuteOn property and if we are already dragging. If so, exit
-            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, ExecuteOn))
+            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, e.Modifier))
+            {
                 return;
+            }
 
             // Check the mouse point was inside the ModifierSurface (the central chart area). If not, exit
             var modifierSurfaceBounds = ModifierSurface.GetBoundsRelativeTo(RootGrid);
@@ -140,12 +142,14 @@ namespace CustomModifierSandboxExample
 
             // Capture the mouse, so if mouse goes out of bounds, we retain mouse events
             if (e.IsMaster)
+            {
                 ModifierSurface.CaptureMouse();
+            }
 
             // Translate the mouse point (which is in RootGrid coordiantes) relative to the ModifierSurface
             // This accounts for any offset due to left Y-Axis
             var ptTrans = GetPointRelativeTo(e.MousePoint, ModifierSurface);
-                
+
             _startPoint = ptTrans;
             _rectangle = new Rectangle
             {
@@ -153,7 +157,7 @@ namespace CustomModifierSandboxExample
             };
 
             // Update the zoom recticule position
-            SetReticulePosition(_rectangle, _startPoint, _startPoint, e.IsMaster);
+            SetReticulePosition(_rectangle, _startPoint, _startPoint);
 
             // Add the zoom reticule to the ModifierSurface - a canvas over the chart
             ModifierSurface.Children.Add(_rectangle);
@@ -168,10 +172,10 @@ namespace CustomModifierSandboxExample
         /// <param name="e">Arguments detailing the mouse move operation</param>
         public override void OnModifierMouseMove(ModifierMouseArgs e)
         {
-            if (!_isDragging)
-                return;
+            if (!_isDragging) return;
 
             base.OnModifierMouseMove(e);
+
             e.Handled = true;
 
             // Translate the mouse point (which is in RootGrid coordiantes) relative to the ModifierSurface
@@ -179,7 +183,7 @@ namespace CustomModifierSandboxExample
             var ptTrans = GetPointRelativeTo(e.MousePoint, ModifierSurface);
 
             // Update the zoom recticule position
-            SetReticulePosition(_rectangle, _startPoint, ptTrans, e.IsMaster);
+            SetReticulePosition(_rectangle, _startPoint, ptTrans);
         }
 
         /// <summary>
@@ -188,8 +192,7 @@ namespace CustomModifierSandboxExample
         /// <param name="e">Arguments detailing the mouse button operation</param>
         public override void OnModifierMouseUp(ModifierMouseArgs e)
         {
-            if (!_isDragging)
-                return;
+            if (!_isDragging) return;
 
             base.OnModifierMouseUp(e);
 
@@ -197,7 +200,7 @@ namespace CustomModifierSandboxExample
             // This accounts for any offset due to left Y-Axis
             var ptTrans = GetPointRelativeTo(e.MousePoint, ModifierSurface);
 
-            _endPoint = SetReticulePosition(_rectangle, _startPoint, ptTrans, e.IsMaster);
+            _endPoint = SetReticulePosition(_rectangle, _startPoint, ptTrans);
 
             double distanceDragged = PointUtil.Distance(_startPoint, ptTrans);
             if (distanceDragged > 10.0)
@@ -215,7 +218,9 @@ namespace CustomModifierSandboxExample
             _isDragging = false;
 
             if (e.IsMaster)
+            {
                 ModifierSurface.ReleaseMouseCapture();
+            }
         }
 
         /// <summary>
@@ -226,7 +231,7 @@ namespace CustomModifierSandboxExample
         {
             base.OnParentSurfaceRendered(e);
 
-            var selectedPoints = this.SelectedPoints;
+            var selectedPoints = SelectedPoints;
             if (selectedPoints == null) return;
 
             double size = SelectedPointSize;
@@ -254,13 +259,13 @@ namespace CustomModifierSandboxExample
                         {
                             // Draw the selected point marker
                             e.RenderContext.DrawEllipse(
-                                stroke, 
-                                fill, 
+                                stroke,
+                                fill,
                                 new Point(xCalc.GetCoordinate(point.XValue), yCalc.GetCoordinate(point.YValue)),
-                                size, 
-                                size);                                                        
+                                size,
+                                size);
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -275,12 +280,12 @@ namespace CustomModifierSandboxExample
             }
         }
 
-        private Point SetReticulePosition(Rectangle rectangle, Point startPoint, Point endPoint, bool isMaster)
+        private Point SetReticulePosition(Rectangle rectangle, Point startPoint, Point endPoint)
         {
             var modifierRect = new Rect(0, 0, ModifierSurface.ActualWidth, ModifierSurface.ActualHeight);
-            endPoint = ClipToBounds(modifierRect, endPoint);
-
+            endPoint = modifierRect.ClipToBounds(endPoint);
             var rect = new Rect(startPoint, endPoint);
+
             Canvas.SetLeft(rectangle, rect.X);
             Canvas.SetTop(rectangle, rect.Y);
 
@@ -290,25 +295,10 @@ namespace CustomModifierSandboxExample
             return endPoint;
         }
 
-        private static Point ClipToBounds(Rect rect, Point point)
-        {
-            double rightEdge = rect.Right;
-            double leftEdge = rect.Left;
-            double topEdge = rect.Top;
-            double bottomEdge = rect.Bottom;
-
-            point.X = point.X > rightEdge ? rightEdge : point.X;
-            point.X = point.X < leftEdge ? leftEdge : point.X;
-            point.Y = point.Y > bottomEdge ? bottomEdge : point.Y;
-            point.Y = point.Y < topEdge ? topEdge : point.Y;
-
-            return point;
-        }
-
         private void PerformSelection(Point startPoint, Point endPoint)
         {
             // Find all the points that are inside this bounds and store them     
-            var dataPoints = new Dictionary<IRenderableSeries, List<DataPoint>>();    
+            var dataPoints = new Dictionary<IRenderableSeries, List<DataPoint>>();
             foreach (var renderSeries in base.ParentSurface.RenderableSeries)
             {
                 var dataSeries = renderSeries.DataSeries;
@@ -333,14 +323,14 @@ namespace CustomModifierSandboxExample
                     var currentPoint = new Point(((DateTime)dataSeries.XValues[i]).Ticks, (double)dataSeries.YValues[i]);
                     if (dataRect.Contains(currentPoint))
                     {
-                         dataPoints[renderSeries].Add(new DataPoint() { Index = i, XValue = currentPoint.X, YValue = currentPoint.Y});
+                        dataPoints[renderSeries].Add(new DataPoint() { Index = i, XValue = currentPoint.X, YValue = currentPoint.Y });
                     }
                 }
             }
 
-            this.SelectedPoints = dataPoints;
+            SelectedPoints = dataPoints;
 
-            this.ParentSurface.InvalidateElement();
+            ParentSurface.InvalidateElement();
         }
     }
 }

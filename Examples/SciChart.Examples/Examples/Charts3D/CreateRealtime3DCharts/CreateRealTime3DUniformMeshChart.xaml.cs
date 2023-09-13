@@ -19,9 +19,11 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using SciChart.Charting3D;
 using SciChart.Charting3D.Model;
 using SciChart.Charting3D.RenderableSeries;
 using SciChart.Data.Model;
+using Viewport3D = SciChart.Charting3D.Viewport3D;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 {
@@ -37,6 +39,8 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
         public CreateRealTime3DSurfaceMeshChart()
         {
             InitializeComponent();
+            lightModeComboBox.ItemsSource = Enum.GetValues(typeof(MainLightMode));
+            lightModeComboBox.SelectedItem = MainLightMode.CameraForward;
 
             Loaded += (s, e) => OnStart();
 
@@ -45,13 +49,13 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            OnStart(); 
+            OnStart();
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             OnStop();
-        }        
+        }
 
         private void DataCombo_OnSelectionChanged(object sender, EventArgs e)
         {
@@ -82,9 +86,9 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
 
             var dataSeries = new UniformGridDataSeries3D<double>(w, h)
             {
-                StartX = 0, 
-                StartZ = 0, 
-                StepX = 10 / (w - 1d), 
+                StartX = 0,
+                StartZ = 0,
+                StepX = 10 / (w - 1d),
                 StepZ = 10 / (h - 1d),
                 SeriesName = "Realtime Surface Mesh",
             };
@@ -92,15 +96,15 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
             var frontBuffer = dataSeries.InternalArray;
             var backBuffer = new GridData<double>(w, h).InternalArray;
 
-            int frames = 0;            
+            int frames = 0;
             _timer = new Timer();
             _timer.Interval = 20;
             _timer.Elapsed += (s, arg) =>
             {
                 lock (_syncRoot)
                 {
-                    double wc = w*0.5, hc = h*0.5;
-                    double freq = Math.Sin(frames++*0.1)*0.1 + 0.1;
+                    double wc = w * 0.5, hc = h * 0.5;
+                    double freq = Math.Sin(frames++ * 0.1) * 0.1 + 0.1;
 
                     // Each set of dataSeries[i,j] schedules a redraw when the next Render event fires. Therefore, we suspend updates so that we can update the chart once
                     // Data generation (Sin, Sqrt below) is expensive. We parallelize it by using Parallel.For for the outer loop
@@ -115,9 +119,9 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
                             // sin(pi*R*freq)/(pi*R*freq)
                             // R is distance from centre
 
-                            double radius = Math.Sqrt((wc - i)*(wc - i) + (hc - j)*(hc - j));
-                            var d = Math.PI*radius*freq;
-                            var value = Math.Sin(d)/d;
+                            double radius = Math.Sqrt((wc - i) * (wc - i) + (hc - j) * (hc - j));
+                            var d = Math.PI * radius * freq;
+                            var value = Math.Sin(d) / d;
                             buf[i][j] = double.IsNaN(value) ? 1.0 : value;
                         }
                     });
@@ -145,7 +149,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
             {
                 _isRunning = false;
                 _timer?.Stop();
-                
+
                 StartButton.IsChecked = false;
                 PauseButton.IsChecked = true;
             }
@@ -156,13 +160,13 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
             if (!IsLoaded) return;
 
             // Valid combinations check. If palette is a LinearGradientBrush and we are in texture mode, switch to heightmap mode
-            if (((BrushColorPalette)ColorMapCombo.SelectedItem).Brush is LinearGradientBrush && 
+            if (((BrushColorPalette)ColorMapCombo.SelectedItem).Brush is LinearGradientBrush &&
                 (MeshPaletteModeCombo.SelectedItem.Equals(MeshPaletteMode.Textured) || MeshPaletteModeCombo.SelectedItem.Equals(MeshPaletteMode.TexturedSolidCells)))
             {
                 MeshPaletteModeCombo.SelectedItem = MeshPaletteMode.HeightMapInterpolated;
             }
             // Valid combinations check. If palette is a TextureBrush and we are not in texture mode, switch to texture mode
-            else if (((BrushColorPalette)ColorMapCombo.SelectedItem).Brush is VisualBrush && 
+            else if (((BrushColorPalette)ColorMapCombo.SelectedItem).Brush is VisualBrush &&
                 (MeshPaletteModeCombo.SelectedItem.Equals(MeshPaletteMode.HeightMapInterpolated) || MeshPaletteModeCombo.SelectedItem.Equals(MeshPaletteMode.HeightMapSolidCells)))
             {
                 MeshPaletteModeCombo.SelectedItem = MeshPaletteMode.Textured;
@@ -184,6 +188,44 @@ namespace SciChart.Examples.Examples.Charts3D.CreateRealtime3DCharts
                 MeshPaletteModeCombo.SelectedItem.Equals(MeshPaletteMode.TexturedSolidCells))
             {
                 ColorMapCombo.SelectedIndex = ColorMapCombo.Items.Count - 1;
+            }
+        }
+
+        private void LightSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (SciChart3DSurface?.Viewport3D is Charting3D.Viewport3D viewport)
+            {
+                var vector = viewport.GetMainLightDirection();
+
+                vector.x = (float)lightSliderX.Value;
+                vector.y = (float)lightSliderY.Value;
+                vector.z = (float)lightSliderZ.Value;
+
+                viewport.SetMainLightDirection(vector);
+            }
+        }
+
+        private void LightMode_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lightModeComboBox.SelectedItem is MainLightMode lightMode)
+            {
+                lightSlidersPanel.IsEnabled = lightMode == MainLightMode.GlobalSpace;
+
+                if (SciChart3DSurface?.Viewport3D is Charting3D.Viewport3D viewport)
+                {
+                    viewport.SetMainLightMode(lightMode);
+
+                    if (lightMode == MainLightMode.GlobalSpace)
+                    {
+                        var vector = viewport.GetMainLightDirection();
+
+                        vector.x = (float)lightSliderX.Value;
+                        vector.y = (float)lightSliderY.Value;
+                        vector.z = (float)lightSliderZ.Value;
+
+                        viewport.SetMainLightDirection(vector);
+                    }
+                }
             }
         }
     }

@@ -11,40 +11,42 @@ namespace CustomModifierSandboxExample
     public class CustomModifierSandboxViewModel : BindableObject
     {
         private IDictionary<IRenderableSeries, List<DataPoint>> _selectedDataPoints;
-        private XyDataSeries<DateTime, double> _bidDataSeries = new XyDataSeries<DateTime, double>() { SeriesName = "Bid"};
-        private XyDataSeries<DateTime, double> _offerDataSeries = new XyDataSeries<DateTime, double>() { SeriesName = "Offer" };
+
+        public XyDataSeries<DateTime, double> BidDataSeries { get; }
+
+        public XyDataSeries<DateTime, double> OfferDataSeries { get; }
 
         public CustomModifierSandboxViewModel()
         {
             // Generate some data
             var r = new RandomWalkGenerator();
             var data = r.GetRandomWalkSeries(500);
-            _bidDataSeries.Append(data.XData.Select(x => DateTime.Today.AddDays(x)), data.YData);
+
+            BidDataSeries = new XyDataSeries<DateTime, double>() { SeriesName = "Bid" };
+            BidDataSeries.Append(data.XData.Select(DateTime.Today.AddDays), data.YData);
 
             r = new RandomWalkGenerator();
             data = r.GetRandomWalkSeries(500);
-            _offerDataSeries.Append(data.XData.Select(x => DateTime.Today.AddDays(x)), data.YData);
+
+            OfferDataSeries = new XyDataSeries<DateTime, double>() { SeriesName = "Offer" };
+            OfferDataSeries.Append(data.XData.Select(DateTime.Today.AddDays), data.YData);
         }
-
-        public XyDataSeries<DateTime, double> BidDataSeries { get { return _bidDataSeries; } }
-
-        public XyDataSeries<DateTime, double> OfferDataSeries { get { return _offerDataSeries; } } 
-
 
         /// <summary>
         /// Gets or sets the SelectedDataPoints. This is bound to SimpleDataPointSelectionModifier.SelectedPoints
         /// </summary>
         public IDictionary<IRenderableSeries, List<DataPoint>> SelectedDataPoints
         {
-            get { return _selectedDataPoints; }
+            get => _selectedDataPoints;
             set
             {
-                if (value != _selectedDataPoints)
+                if (_selectedDataPoints != value)
                 {
                     _selectedDataPoints = value;
-                    OnPropertyChanged("SelectedDataPoints");
 
-                    // TODO HERE: React to Selection Changed if you want 
+                    OnPropertyChanged(nameof(SelectedDataPoints));
+
+                    // HERE: React to Selection Changed if you want 
                 }
             }
         }
