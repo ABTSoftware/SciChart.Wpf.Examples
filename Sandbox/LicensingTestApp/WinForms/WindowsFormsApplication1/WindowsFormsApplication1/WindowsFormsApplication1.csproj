@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SciChart" Version="*" />
+		<PackageReference Include="SciChart" Version="*-*" />
 	</ItemGroup>
 
 </Project>

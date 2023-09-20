@@ -31,8 +31,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SciChart" Version="*" />
-		<PackageReference Include="SciChart3D" Version="*" />
+		<PackageReference Include="SciChart" Version="*-*" />
+		<PackageReference Include="SciChart3D" Version="*-*" />
 	</ItemGroup>
 
 </Project>

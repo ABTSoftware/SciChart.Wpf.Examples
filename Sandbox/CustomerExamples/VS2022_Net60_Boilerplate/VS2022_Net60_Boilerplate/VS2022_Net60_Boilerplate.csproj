@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
@@ -9,9 +8,7 @@
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>Latest</LangVersion>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="SciChart" Version="*" />
+		<PackageReference Include="SciChart" Version="*-*" />
 	</ItemGroup>
-
 </Project>

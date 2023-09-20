@@ -1,25 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="King_Low.obj" />
-    <None Remove="WhiteWoodTexture.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SciChart" Version="7.0.1.27097" />
-    <PackageReference Include="SciChart3D" Version="7.0.1.27097" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="King_Low.obj" />
-    <Resource Include="WhiteWoodTexture.jpg" />
-  </ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Company>SciChart Ltd</Company>
+		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>Enable</Nullable>
+		<UseWPF>True</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="King_Low.obj" />
+		<None Remove="WhiteWoodTexture.jpg" />
+	</ItemGroup>
+	<ItemGroup>
+		<Resource Include="King_Low.obj" />
+		<Resource Include="WhiteWoodTexture.jpg" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="SciChart" Version="*-*" />
+		<PackageReference Include="SciChart3D" Version="*-*" />
+	</ItemGroup>
 </Project>

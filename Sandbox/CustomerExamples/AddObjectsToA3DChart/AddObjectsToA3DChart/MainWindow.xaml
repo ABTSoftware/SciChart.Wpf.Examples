@@ -1,19 +1,16 @@
 ﻿<Window x:Class="AddObjectsToA3DChart.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AddObjectsToA3DChart"
         xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D" 
         xmlns:object="clr-namespace:SciChart.Charting3D.Visuals.Object;assembly=SciChart.Charting3D"
-        mc:Ignorable="d"
         Title="AddObjectsToA3DChart" 
         Height="768" 
         Width="1366">
+
     <Window.Resources>
 
-        <object:ObjectModelSource x:Key="test" Source="pack://application:,,,/King_Low.obj"/>
-        <object:TextureSource x:Key="MyTexture" Source="pack://application:,,,/WhiteWoodTexture.jpg"/>
+        <object:ObjectModelSource x:Key="KingLowObj" Source="pack://application:,,,/King_Low.obj"/>
+        <object:TextureSource x:Key="ObjTexture" Source="pack://application:,,,/WhiteWoodTexture.jpg"/>
 
         <s3D:GradientColorPalette x:Key="HeightColorMap">
             <s3D:GradientColorPalette.GradientStops>
@@ -25,14 +22,20 @@
         <object:Rotation3D x:Key="ObjRotationState" Axis="YAxis" Angle="180"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="#1C1C1E">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Content="Add 3D-Object using StreamSource" HorizontalAlignment="Center" Click="Button_Click"/>
+        <Button Grid.Row="0"
+                Margin="10"
+                Padding="5,0"
+                MinHeight="26"             
+                HorizontalAlignment="Left"
+                Content="Add 3D-Object (StreamSource)"
+                Click="Button_Click"/>
 
         <s3D:SciChart3DSurface Name="sciChart3DSurface"
                                Grid.Row="1"
@@ -53,47 +56,44 @@
                                                    MeshPaletteMode="HeightMapSolidCells"/>
             </s3D:SciChart3DSurface.RenderableSeries>
 
-
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:NumericAxis3D DrawLabels="False"
-                               DrawMajorTicks="False"
-                               DrawMinorGridLines="False"
-                               DrawMinorTicks="False"
-                               PlaneBorderThickness="0.0"/>
+                                   DrawMajorTicks="False"
+                                   DrawMinorGridLines="False"
+                                   DrawMinorTicks="False"
+                                   PlaneBorderThickness="0.0"/>
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
                 <s3D:NumericAxis3D DrawLabels="False"
-                               DrawMajorTicks="False"
-                               DrawMinorGridLines="False"
-                               DrawMinorTicks="False" 
-                               PlaneBorderThickness="0.0"/>
+                                   DrawMajorTicks="False"
+                                   DrawMinorGridLines="False"
+                                   DrawMinorTicks="False" 
+                                   PlaneBorderThickness="0.0"/>
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
                 <s3D:NumericAxis3D DrawLabels="False"
-                               DrawMajorTicks="False"
-                               DrawMinorGridLines="False"
-                               DrawMinorTicks="False" 
-                               PlaneBorderThickness="0.0"/>
+                                   DrawMajorTicks="False"
+                                   DrawMinorGridLines="False"
+                                   DrawMinorTicks="False" 
+                                   PlaneBorderThickness="0.0"/>
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
                     <s3D:ZoomExtentsModifier3D AnimateDurationMs="500"
-                                           ResetPosition="-400,200,400"
-                                           ResetTarget="0,50,0"/>
+                                               ResetPosition="-400,200,400"
+                                               ResetTarget="0,50,0"/>
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
 
             <s3D:SciChart3DSurface.SceneObjects>
-
-                <object:ObjectModel3D TextureSource="{StaticResource MyTexture}" 
-                                      Source="{StaticResource test}" 
+                <object:ObjectModel3D TextureSource="{StaticResource ObjTexture}" 
+                                      Source="{StaticResource KingLowObj}" 
                                       Position="109.375, 0.1, 15.625" 
                                       CoordinateMode="WorldCoordinates" 
                                       Scale="0.2, 0.2, 0.2"/>
-
             </s3D:SciChart3DSurface.SceneObjects>
         </s3D:SciChart3DSurface>
     </Grid>
