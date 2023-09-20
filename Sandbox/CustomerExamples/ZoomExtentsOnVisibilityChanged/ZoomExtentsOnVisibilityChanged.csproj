@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
@@ -9,7 +8,6 @@
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>Latest</LangVersion>
 	</PropertyGroup>
-
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
 		<Reference Include="System" />
 		<Reference Include="System.Data" />
@@ -29,11 +27,9 @@
 		<Reference Include="PresentationCore" />
 		<Reference Include="PresentationFramework" />
 	</ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="*" />
+    <PackageReference Include="SciChart" Version="7.0.2.27161" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
   </ItemGroup>
-
 </Project>

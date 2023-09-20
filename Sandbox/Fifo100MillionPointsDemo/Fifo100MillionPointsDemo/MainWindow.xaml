@@ -36,13 +36,19 @@
             
             <Button Margin="5,0,0,0" MinWidth="100" Command="{Binding RunCommand}">
                 <Button.Content>
-                    <TextBlock Text="RUN ►" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="RUN" FontWeight="Bold" Margin="0,0,5,0"/>
+                        <ContentPresenter Content="{StaticResource PlayIcon}"/>
+                    </StackPanel>
                 </Button.Content>
             </Button>
             
             <Button Margin="5,0,0,0" MinWidth="100" Command="{Binding StopCommand}">
                 <Button.Content>
-                    <TextBlock Text="Stop ■" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="STOP" FontWeight="Bold" Margin="0,0,5,0"/>
+                        <ContentPresenter Content="{StaticResource StopIcon}"/>
+                    </StackPanel>
                 </Button.Content>
             </Button>
         </StackPanel>
@@ -82,7 +88,7 @@
                 <TextBlock FontSize="24"
                            TextAlignment="Center">
                     <Run Text="Select a series size and click"/>
-                    <Run Text="RUN ►" FontWeight="Bold"/>
+                    <Run Text="RUN" FontWeight="Bold"/>
                     <Run Text="to start the test"/>
                 </TextBlock>
                 <TextBlock Text="{Binding PerformanceWarnings}" FontSize="16" Foreground="OrangeRed" Visibility="{Binding PerformanceWarnings, Converter={StaticResource visNotNull}}"/>
