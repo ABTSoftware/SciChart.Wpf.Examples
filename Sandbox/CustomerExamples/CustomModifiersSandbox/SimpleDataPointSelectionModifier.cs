@@ -128,7 +128,7 @@ namespace CustomModifierSandboxExample
             base.OnModifierMouseDown(e);
 
             // Check the ExecuteOn property and if we are already dragging. If so, exit
-            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, e.Modifier))
+            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, ExecuteOn))
             {
                 return;
             }

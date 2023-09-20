@@ -3,19 +3,23 @@
                     xmlns:abt="http://schemas.abtsoftware.co.uk/presentation">
 
     <BooleanToVisibilityConverter x:Key="b2vc"/>
+    <abt:BoolToValueConverter x:Key="InverseBooleanToVisibilityConverter"
+                              TrueValue="Collapsed"
+                              FalseValue="Visible" />
+
+    <Path x:Key="PlayIcon" Height="10" Width="10" Data="M8,5.14V19.14L19,12.14L8,5.14Z" Stretch="Uniform" Fill="#FFF"/>
+    <Path x:Key="StopIcon" Height="10" Width="10" Data="M18,18H6V6H18V18Z" Stretch="Uniform" Fill="#FFF"/>
 
     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#222"/>
     <SolidColorBrush x:Key="TextBrush" Color="#EEE"/>
-
-    <abt:BoolToValueConverter x:Key="InverseBooleanToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+ 
     <SolidColorBrush x:Key="TextBoxOutlineBrush" Color="#ff323539"/>
     <SolidColorBrush x:Key="TextBoxForeground" Color="#FFF"/>
 
-    <SolidColorBrush x:Key="IconFillDefault" Color="#FFDFE0E6"/>
-
-    <SolidColorBrush x:Key="IconForeground" Color="#FF5B5B5B"></SolidColorBrush>
     <Color x:Key="ForegroundDefault">#FFF</Color>
-    <SolidColorBrush x:Key="IconForegroundLight" Color="{StaticResource ForegroundDefault}"></SolidColorBrush>
+    <SolidColorBrush x:Key="IconFillDefault" Color="#FFDFE0E6"/>
+    <SolidColorBrush x:Key="IconForeground" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="IconForegroundLight" Color="{StaticResource ForegroundDefault}"/>
 
     <Color x:Key="SciChartGreen">#FF42b649</Color>
     <SolidColorBrush x:Key="SciChartGreenBrush" Color="{StaticResource SciChartGreen}"/>
@@ -23,20 +27,20 @@
     <Color x:Key="SciChartDarkGreen">#FF0FA32D</Color>
     <SolidColorBrush x:Key="SciChartDarkGreenBrush" Color="{StaticResource SciChartDarkGreen}"/>
 
-
     <Color x:Key="ApplicationBackgroundColor">#FF1C1C1C</Color>
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}"/>
 
     <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="#FF232426"/>
 
     <Color x:Key="TileBackgroundColor" >#FF323539</Color>
-    <SolidColorBrush x:Key="TildBackgroundBrush" Color="{StaticResource TileBackgroundColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="TildBackgroundBrush" Color="{StaticResource TileBackgroundColor}"/>
 
     <Style TargetType="abt:BusyPanel">
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
+    
     <Style TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
 
     <Style x:Key="BorderStyle" TargetType="Border">
@@ -61,6 +65,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 </ResourceDictionary>

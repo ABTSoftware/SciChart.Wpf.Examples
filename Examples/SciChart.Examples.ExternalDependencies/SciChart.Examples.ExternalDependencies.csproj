@@ -92,15 +92,15 @@
     <Resource Include="Resources\Objects\WhiteWoodTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="*-*" />
+    <PackageReference Include="SciChart" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="*-*" />
+    <PackageReference Include="SciChart3D" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="*-*" />
+    <PackageReference Include="SciChart.DirectX" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="*-*" />
+    <PackageReference Include="SciChart.DrawingTools" Version="7.0.2.27161" />
   </ItemGroup>
 </Project>
