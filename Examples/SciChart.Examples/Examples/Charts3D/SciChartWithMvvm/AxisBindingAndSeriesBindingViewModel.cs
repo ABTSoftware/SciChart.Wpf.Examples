@@ -13,26 +13,35 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using System;
 using System.Windows.Media;
 using SciChart.Charting3D.Model.ChartSeries;
+using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.Charts3D.SciChartWithMvvm
 {
-    public  class AxisBindingAndSeriesBindingViewModel : BaseViewModel
+    public class AxisBindingAndSeriesBindingViewModel : BaseViewModel
     {
+        public AxisBase3DViewModel XAxis { get; }
+
+        public AxisBase3DViewModel YAxis { get; }
+
+        public AxisBase3DViewModel ZAxis { get; }
+
         public AxisBindingAndSeriesBindingViewModel()
         {
             YAxis = new TimeSpanAxis3DViewModel
             {
                 StyleKey = "CustomTimeSpan3DStyle",
-                FontFamily = new FontFamily("Broadway")
+                FontFamily = new FontFamily("Broadway"),
+                VisibleRange = new DateRange(DateTime.MinValue, DateTime.MinValue.AddSeconds(10))
             };
 
             XAxis = new DateTimeAxis3DViewModel
             {
                 StyleKey = "CustomDateTime3DStyle",
-                FontFamily = new FontFamily("Comic sans ms")
+                FontFamily = new FontFamily("Comic Sans MS")
             };
 
             ZAxis = new NumericAxis3DViewModel
@@ -40,11 +49,5 @@ namespace SciChart.Examples.Examples.Charts3D.SciChartWithMvvm
                 StyleKey = "CustomNumeric3DStyle"
             };
         }
-
-        public AxisBase3DViewModel XAxis { get; set; }
-
-        public AxisBase3DViewModel YAxis { get; set; }
-
-        public AxisBase3DViewModel ZAxis { get; set; }
     }
 }

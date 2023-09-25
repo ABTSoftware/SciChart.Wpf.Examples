@@ -1,0 +1,10 @@
+﻿<s:LineAnnotation x:Class="SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations.FibonacciTrendLine"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                  CoordinateMode="Relative"
+                  Canvas.ZIndex="1"
+                  X1="0"
+                  X2="1"
+                  Y1="0"
+                  Y2="1"/>

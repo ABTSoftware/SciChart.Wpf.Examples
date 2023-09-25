@@ -15,12 +15,13 @@
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace SciChart.Examples
 {
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class ExampleDefinition
     {
         public string GithubUrl { get; set; }
@@ -29,12 +30,44 @@ namespace SciChart.Examples
         public string Title { get; set; }
         public string View { get; set; }
         public string ViewModel { get; set; }
-        public string ImagePath { get; set; }        
+        public string ImagePath { get; set; }
         public string IconPath { get; set; }
-
         public string Description { get; set; }
         public string ToolTipDescription { get; set; }
         public List<string> CodeFiles { get; set; }
         public List<Features> Features { get; set; }
+        public SafeXmlBool IsShowcaseExample { get; set; }
+        public string ShowcaseImagePath { get; set; }
+        public string ShowcaseDescription { get; set; }
+    }
+
+    public struct SafeXmlBool : IXmlSerializable
+    {
+        private bool _value;
+
+        public static implicit operator bool(SafeXmlBool safeBool)
+        {
+            return safeBool._value;
+        }
+
+        public static implicit operator SafeXmlBool(bool value)
+        {
+            return new SafeXmlBool { _value = value };
+        }
+
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            _value = reader.ReadElementContentAsString().ToLowerInvariant()  == "true";
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteString(_value ? "True" : "False");
+        }
     }
 }

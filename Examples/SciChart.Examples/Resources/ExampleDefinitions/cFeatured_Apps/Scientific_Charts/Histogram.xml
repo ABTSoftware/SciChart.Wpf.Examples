@@ -1,25 +1,28 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/SeeFeaturedApplication/Histogram/HistogramView.xaml</View>
-  <ViewModel>Examples.SeeFeaturedApplication.Histogram.HistogramViewModel</ViewModel>
-  <ImagePath></ImagePath>
-  <IconPath>IconColumn</IconPath>
-  <ToolTipDescription></ToolTipDescription>
-  <Description>
-    This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] with a custom modifier which creates [url='https://www.scichart.com/documentation/win/current/The%20TextAnnotation%20Type.html']TextAnnotation[/url] and positions them over the individual columns.
+	<View>Examples/SeeFeaturedApplication/Histogram/HistogramView.xaml</View>
+	<ViewModel>Examples.SeeFeaturedApplication.Histogram.HistogramViewModel</ViewModel>
+	<ImagePath></ImagePath>
+	<IconPath>IconColumn</IconPath>
+	<IsShowcaseExample>True</IsShowcaseExample>
+	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/histogram-chart.png</ShowcaseImagePath>
+	<ShowcaseDescription>This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the FastColumnRenderableSeries with a custom modifier which creates TextAnnotations and positions them over the individual columns.</ShowcaseDescription>
+	<ToolTipDescription></ToolTipDescription>
+	<Description>
+		This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] with a custom modifier which creates [url='https://www.scichart.com/documentation/win/current/The%20TextAnnotation%20Type.html']TextAnnotation[/url] and positions them over the individual columns.
 
-    Take a look at the source-code to see how we've achieved this.
-  </Description>
-  <CodeFiles>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/CustomAnnotationModifier.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramViewModel.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/Styles.xaml</string>
-  </CodeFiles>
-  <Features>
-    <Features>MVVM</Features>
-  </Features>
+		Take a look at the source-code to see how we've achieved this.
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/CustomAnnotationModifier.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/Styles.xaml</string>
+	</CodeFiles>
+	<Features>
+		<Features>MVVM</Features>
+	</Features>
 </ExampleDefinition>

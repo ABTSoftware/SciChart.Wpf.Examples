@@ -57,7 +57,6 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
             XAxis = new NumericAxis3DViewModel
             {
                 AxisTitle = "Life Expectancy",
-                AxisTitleOffset = 50,
                 VisibleRange = new DoubleRange(30, 85),
                 FontSize = 18,
                 TickTextBrush = Brushes.Red
@@ -66,7 +65,6 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
             YAxis = new NumericAxis3DViewModel
             {
                 AxisTitle = "GDP per capita",
-                AxisTitleOffset = 50,
                 VisibleRange = new DoubleRange(0, 100000),
                 FontSize = 18,
                 TickTextBrush = Brushes.Green,
@@ -77,7 +75,6 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
             ZAxis = new NumericAxis3DViewModel
             {
                 AxisTitle = "Year",
-                AxisTitleOffset = 50,
                 VisibleRange = new DoubleRange(1950, 2010),
                 FontSize = 18,
                 TickTextBrush = Brushes.Blue,

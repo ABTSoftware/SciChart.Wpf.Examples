@@ -10,167 +10,188 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
+  <UserControl.Resources>
 
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
+    <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
 
-        <ObjectDataProvider x:Key="PaletteModesProvider"
-                            MethodName="GetValues"
-                            ObjectType="{x:Type system:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="s:ColorPaletteMode" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+    <ObjectDataProvider x:Key="PaletteModesProvider"
+                        MethodName="GetValues"
+                        ObjectType="{x:Type system:Enum}">
+      <ObjectDataProvider.MethodParameters>
+        <x:Type TypeName="s:ColorPaletteMode" />
+      </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
 
-        <Style x:Key="MajorContourLineStyle" TargetType="s:ContourLine">
-            <Setter Property="StrokeDashArray" Value="2,4" />
-            <Setter Property="StrokeThickness" Value="3" />
-            <Setter Property="Stroke" Value="Red" />
-        </Style>
+    <Style x:Key="MajorContourLineStyle" TargetType="s:ContourLine">
+      <Setter Property="StrokeDashArray" Value="2,4" />
+      <Setter Property="StrokeThickness" Value="3" />
+      <Setter Property="Stroke" Value="Red" />
+    </Style>
 
-        <Style x:Key="MinorContourLineStyle" TargetType="s:ContourLine">
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Stroke" Value="GreenYellow" />
-        </Style>
+    <Style x:Key="MinorContourLineStyle" TargetType="s:ContourLine">
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="Stroke" Value="GreenYellow" />
+    </Style>
 
-        <s:HeatmapColorPalette x:Key="ColorPalette" Maximum="200">
-            <s:HeatmapColorPalette.GradientStops>
+    <s:HeatmapColorPalette x:Key="ColorPalette" Maximum="200">
+      <s:HeatmapColorPalette.GradientStops>
+        <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}" />
+        <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
+        <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}" />
+        <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_4}" />
+        <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
+        <GradientStop Offset="1.0" Color="{StaticResource ColorMapColor_6}" />
+      </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <Style TargetType="Label">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+    <!-- to the chart and is included for example purposes. -->
+    <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+    <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+      <ext:FlyoutMenuButton x:Name="ContourOptions" ToolTipService.ToolTip="Contour">
+        <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+        <ext:FlyoutMenuButton.PopupContent>
+          <StackPanel Margin="5" Width="150" Orientation="Vertical">
+            <CheckBox x:Name="ApplyPaletteCkb"
+                      Content="Apply Palette"
+                      IsChecked="True"
+                      Click="OnApplyPalette"/>
+
+            <ComboBox x:Name="ContourPaletteMode"
+                      Margin="0,10,0,0"
+                      ItemsSource="{Binding Source={StaticResource PaletteModesProvider}}"
+                      SelectedItem="{Binding Source={x:Reference contourSeries}, Path=ColorMapMode}"
+                      SelectedIndex="1"/>
+
+            <CheckBox x:Name="ApplyMajorStyleCkb"
+                      Content="Apply Major Style"
+                      Click="OnApplyMajorStyle"
+                      Margin="0,10,0,0"/>
+
+            <CheckBox x:Name="ApplyMinorStyleCkb"
+                      Content="Apply Minor Style"
+                      Click="OnApplyMinorStyle"
+                      Margin="0,10,0,0"/>
+
+            <CheckBox Margin="0,10,0,0"
+                      Content="Use AntiAliasing"
+                      IsChecked="{Binding Source={x:Reference contourSeries}, Path=AntiAliasing}"/>
+
+            <CheckBox Margin="0,10,0,5"
+                      Content="Show Heatmap"
+                      IsChecked="{Binding Source={x:Reference heatmapSeries}, Path=IsVisible}"/>
+
+            <TextBlock Margin="0,10"
+                       Text="{Binding Source={x:Reference contourSeries}, Path=ZMin, Mode=OneWay, StringFormat='{}ZMin: {0:0}'}"
+                       Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+            <Slider Minimum="5"
+                    Maximum="200"
+                    Interval="1"
+                    Value="{Binding Source={x:Reference contourSeries}, Path=ZMin, FallbackValue=10}"/>
+
+            <TextBlock Margin="0,10"
+                       Text="{Binding Source={x:Reference contourSeries}, Path=ZMax, Mode=OneWay, StringFormat='{}ZMax: {0:0}'}"
+                       Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+            <Slider Minimum="5"
+                    Maximum="200"
+                    Interval="1"
+                    Value="{Binding Source={x:Reference contourSeries}, Path=ZMax, FallbackValue=200}"/>
+
+            <TextBlock Margin="0,10"
+                       Text="{Binding Source={x:Reference contourSeries}, Path=ZStep, Mode=OneWay, StringFormat='{}ZStep: {0:0}'}"
+                       Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+            <Slider Minimum="5"
+                    Maximum="50"
+                    Interval="5"
+                    Value="{Binding Source={x:Reference contourSeries}, Path=ZStep, FallbackValue=20}" />
+
+            <TextBlock Margin="0,10"
+                       Text="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor, Mode=OneWay, StringFormat='{}Minors Per Major: {0:0}'}"
+                       Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+            <Slider Minimum="0"
+                    Maximum="10"
+                    Interval="1"
+                    Value="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor}"/>
+          </StackPanel>
+        </ext:FlyoutMenuButton.PopupContent>
+      </ext:FlyoutMenuButton>
+    </ext:SciChartInteractionToolbar>
+
+    <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
+      <s:SciChartSurface.RenderableSeries>
+        <s:FastUniformContourRenderableSeries x:Name="contourSeries"
+                                              AntiAliasing="True"
+                                              ZMax="200"
+                                              ZMin="20"
+                                              ZStep="20"/>
+
+        <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.4">
+          <s:FastUniformHeatmapRenderableSeries.ColorMap>
+            <s:HeatmapColorPalette Maximum="200">
+              <s:HeatmapColorPalette.GradientStops>
                 <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}" />
                 <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
                 <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}" />
                 <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_4}" />
                 <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
                 <GradientStop Offset="1.0" Color="{StaticResource ColorMapColor_6}" />
-            </s:HeatmapColorPalette.GradientStops>
-        </s:HeatmapColorPalette>
+              </s:HeatmapColorPalette.GradientStops>
+            </s:HeatmapColorPalette>
+          </s:FastUniformHeatmapRenderableSeries.ColorMap>
+        </s:FastUniformHeatmapRenderableSeries>
+      </s:SciChartSurface.RenderableSeries>
 
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
+      <s:SciChartSurface.XAxis>
+        <s:NumericAxis DrawMajorBands="True" />
+      </s:SciChartSurface.XAxis>
 
-    </UserControl.Resources>
+      <s:SciChartSurface.YAxis>
+        <s:NumericAxis DrawMajorBands="True" />
+      </s:SciChartSurface.YAxis>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+      <s:SciChartSurface.ChartModifier>
+        <s:ModifierGroup>
+          <s:TooltipModifier ShowTooltipOn="Always" UseInterpolation="True" ReceiveHandledEvents="True" />
+          <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton" />
+          <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+        </s:ModifierGroup>
+      </s:SciChartSurface.ChartModifier>
 
-        <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
-        <!-- to the chart and is included for example purposes. -->
-        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ext:FlyoutMenuButton x:Name="ContourOptions" ToolTipService.ToolTip="Contour">
-                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
-                        <CheckBox x:Name="ApplyPaletteCkb"
-                                  Content="Apply Palette"
-                                  Click="OnApplyPalette"/>
-                        
-                        <ComboBox x:Name="ContourPaletteMode"
-                                  Margin="0,10,0,0"
-                                  ItemsSource="{Binding Source={StaticResource PaletteModesProvider}}"
-                                  SelectedItem="{Binding Source={x:Reference contourSeries}, Path=ColorMapMode}"
-                                  SelectedIndex="1"/>
+      <s:SciChartSurface.Annotations>
+        <s:CustomAnnotation CoordinateMode="Relative" HorizontalAnchorPoint="Left" VerticalAnchorPoint="Top" Margin="5" X1="0" Y1="0">
 
-                        <CheckBox x:Name="ApplyMajorStyleCkb"
-                                  Content="Apply Major Style" 
-                                  Click="OnApplyMajorStyle"
-                                  Margin="0,10,0,0"/>
+          <Border CornerRadius="5" Background="{StaticResource MainThemeTransparentSolidBrush}">
+            <StackPanel Orientation="Horizontal" Margin="5">
+              <TextBlock FontSize="16"
+                         Opacity="0.7"
+                         Margin="5,2"
+                         VerticalAlignment="Center"
+                         Text="Find more Contours styling options under"
+                         Foreground="#FFF"/>
 
-                        <CheckBox x:Name="ApplyMinorStyleCkb"
-                                  Content="Apply Minor Style"
-                                  Click="OnApplyMinorStyle"
-                                  Margin="0,10,0,0"/>
-
-                        <CheckBox Margin="0,10,0,0"
-                                  Content="Use AntiAliasing"
-                                  IsChecked="{Binding Source={x:Reference contourSeries}, Path=AntiAliasing}"/>
-
-                        <CheckBox Margin="0,10,0,5"
-                                  Content="Show Heatmap"
-                                  IsChecked="{Binding Source={x:Reference heatmapSeries}, Path=IsVisible}"/>
-
-                        <TextBlock Margin="0,10"
-                                   Text="{Binding Source={x:Reference contourSeries}, Path=ZMin, Mode=OneWay, StringFormat='{}ZMin: {0:0}'}"
-                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        
-                        <Slider Minimum="5"
-                                Maximum="200"
-                                Interval="1"
-                                Value="{Binding Source={x:Reference contourSeries}, Path=ZMin, FallbackValue=10}"/>
-
-                        <TextBlock Margin="0,10"
-                                   Text="{Binding Source={x:Reference contourSeries}, Path=ZMax, Mode=OneWay, StringFormat='{}ZMax: {0:0}'}"
-                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        
-                        <Slider Minimum="5"
-                                Maximum="200"
-                                Interval="1"
-                                Value="{Binding Source={x:Reference contourSeries}, Path=ZMax, FallbackValue=200}"/>
-
-                        <TextBlock Margin="0,10"
-                                   Text="{Binding Source={x:Reference contourSeries}, Path=ZStep, Mode=OneWay, StringFormat='{}ZStep: {0:0}'}"
-                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        
-                        <Slider Minimum="5"
-                                Maximum="50"
-                                Interval="5"
-                                Value="{Binding Source={x:Reference contourSeries}, Path=ZStep, FallbackValue=20}" />
-
-                        <TextBlock Margin="0,10"
-                                   Text="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor, Mode=OneWay, StringFormat='{}Minors Per Major: {0:0}'}"
-                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        
-                        <Slider Minimum="0"
-                                Maximum="10"
-                                Interval="1"
-                                Value="{Binding Source={x:Reference contourSeries}, Path=MinorsPerMajor}"/>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-        </ext:SciChartInteractionToolbar>
-
-        <s:SciChartSurface x:Name="sciChart" Grid.Column="1">
-            <s:SciChartSurface.RenderableSeries>
-                <s:FastUniformContourRenderableSeries x:Name="contourSeries" 
-                                                      AntiAliasing="True"
-                                                      ZMax="200"
-                                                      ZMin="20"
-                                                      ZStep="20"/>
-
-                <s:FastUniformHeatmapRenderableSeries x:Name="heatmapSeries" Opacity="0.9">
-                    <s:FastUniformHeatmapRenderableSeries.ColorMap>
-                        <s:HeatmapColorPalette Maximum="200">
-                            <s:HeatmapColorPalette.GradientStops>
-                                <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}" />
-                                <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
-                                <GradientStop Offset="0.4" Color="{StaticResource ColorMapColor_3}" />
-                                <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_4}" />
-                                <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
-                                <GradientStop Offset="1.0" Color="{StaticResource ColorMapColor_6}" />
-                            </s:HeatmapColorPalette.GradientStops>
-                        </s:HeatmapColorPalette>
-                    </s:FastUniformHeatmapRenderableSeries.ColorMap>
-                </s:FastUniformHeatmapRenderableSeries>
-            </s:SciChartSurface.RenderableSeries>
-
-            <s:SciChartSurface.XAxis>
-                <s:NumericAxis DrawMajorBands="True" />
-            </s:SciChartSurface.XAxis>
-
-            <s:SciChartSurface.YAxis>
-                <s:NumericAxis DrawMajorBands="True" />
-            </s:SciChartSurface.YAxis>
-
-            <s:SciChartSurface.ChartModifier>
-                <s:ModifierGroup>
-                    <s:TooltipModifier ShowTooltipOn="Always" UseInterpolation="True" ReceiveHandledEvents="True" />
-                    <s:RubberBandXyZoomModifier ExecuteOn="MouseLeftButton" />
-                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
-                </s:ModifierGroup>
-            </s:SciChartSurface.ChartModifier>
-        </s:SciChartSurface>
-    </Grid>
+              <Border Width="26" Height="26" Margin="5,0" CornerRadius="5" Background="#FF2A354B">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="12" Width="12" Style="{StaticResource ToolbarButtonIconStyle}"/>
+              </Border>
+            </StackPanel>
+          </Border>
+        </s:CustomAnnotation>
+      </s:SciChartSurface.Annotations>
+    </s:SciChartSurface>
+  </Grid>
 </UserControl>

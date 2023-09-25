@@ -14,6 +14,8 @@ namespace SciChart.Examples.Demo.ViewModels
 {
     public interface IExampleViewModel
     {
+        bool InitReady { get; set; }
+
         Example SelectedExample { get; set; }
 
         ExportExampleViewModel ExportExampleViewModel { get; }
@@ -73,10 +75,11 @@ namespace SciChart.Examples.Demo.ViewModels
 
             ShowGithubCommand = new ActionCommand(() =>
             {
-                string githubUrl = SelectedExample == null  ? Urls.GithubRootUrl
+                string githubUrl = SelectedExample == null
+                    ? Urls.GithubRootUrl
                     : SelectedExample.GithubExampleUrl;
 
-                    Process.Start("explorer.exe", githubUrl);
+                Process.Start("explorer.exe", githubUrl);
             });
 
             GoToDocumentationCommand = new ActionCommand(() =>
@@ -89,10 +92,14 @@ namespace SciChart.Examples.Demo.ViewModels
             BreadCrumbViewModel = new BreadCrumbViewModel(module, this);
 
             ShowExample = true;
+            IsInfoVisible = true;
+#if !DEBUG
             IsShowingHelp = true;
             IsShowingSourceCodeHelp = true;
-            IsInfoVisible = true;
+#endif
         }
+
+        public bool InitReady { get; set; }
 
         public string Group { get; set; }
 
@@ -110,7 +117,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 _selectedExample = value;
                 ServiceLocator.Container.Resolve<IMainWindowViewModel>().SelectedExample = value;
 
-                SelectedFile = _selectedExample.SourceFiles.FirstOrDefault();
+                SelectedFile = _selectedExample?.SourceFiles.FirstOrDefault() ?? default;
                 OnPropertyChanged("SelectedExample");
 
                 FeedbackViewModel?.ExampleChanged();
@@ -177,7 +184,7 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
-        public ExampleUsage Usage => _selectedExample.Usage;
+        public ExampleUsage Usage => _selectedExample?.Usage;
 
         public bool ShowSourceCode
         {

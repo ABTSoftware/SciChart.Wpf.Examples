@@ -1,14 +1,9 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.CreateA3DChart.LogarithmicAxis3DView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
-             d:DesignHeight="400"
-             d:DesignWidth="600"
-             mc:Ignorable="d">
+             xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -75,24 +70,22 @@
 
             <s3D:SciChart3DSurface.YAxis>
                 <s3D:LogarithmicNumericAxis3D Name="logarithmicNumericYAxis3D"
-                                              AxisTitle="Logarithmic Axis"
+                                              AxisTitle="Y-Log Axis"
                                               CursorTextFormatting="0.0"
                                               TextFormatting="#.000"
                                               GrowBy="0.1, 0.1" 
                                               ScientificNotation="None"
-                                              DrawMajorBands="False"
-                                              AxisTitleOffset="65.0" />
+                                              DrawMajorBands="False" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:LogarithmicNumericAxis3D Name="logarithmicNumericXAxis3D"
-                                              AxisTitle="Logarithmic Axis"
+                                              AxisTitle="X-Log Axis"
                                               CursorTextFormatting="0.0"
                                               TextFormatting="#.#E+0"
                                               GrowBy="0.1, 0.1"
                                               ScientificNotation="LogarithmicBase"
-                                              DrawMajorBands="False"
-                                              AxisTitleOffset="65.0" />
+                                              DrawMajorBands="False" />
             </s3D:SciChart3DSurface.XAxis>
         </s3D:SciChart3DSurface>
     </Grid>

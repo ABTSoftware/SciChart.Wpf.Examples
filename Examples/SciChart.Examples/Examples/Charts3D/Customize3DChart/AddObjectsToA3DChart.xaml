@@ -48,7 +48,10 @@
         <s3D:SciChart3DSurface Name="sciChart3DSurface"
                                Grid.Column="1"
                                BorderThickness="0"
-                               WorldDimensions="250,2,250">
+                               WorldDimensions="250,2,250"
+                               s3D:ZxAxisPlane.IsPlaneVisible="False"
+                               s3D:XyAxisPlane.IsPlaneVisible="False"
+                               s3D:ZyAxisPlane.IsPlaneVisible="False">
 
             <s3D:SciChart3DSurface.Camera>
                 <s3D:Camera3D Position="-400,200,400" Target="0,50,0"/>
@@ -65,27 +68,15 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D DrawLabels="False"
-                                   DrawMajorTicks="False"
-                                   DrawMinorGridLines="False"
-                                   DrawMinorTicks="False"
-                                   PlaneBorderThickness="0.0"/>
+                <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D DrawLabels="False"
-                                   DrawMajorTicks="False"
-                                   DrawMinorGridLines="False"
-                                   DrawMinorTicks="False" 
-                                   PlaneBorderThickness="0.0"/>
+                <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D DrawLabels="False"
-                                   DrawMajorTicks="False"
-                                   DrawMinorGridLines="False"
-                                   DrawMinorTicks="False" 
-                                   PlaneBorderThickness="0.0"/>
+                <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>
@@ -101,7 +92,7 @@
                 <!--  The 3D chess objects models which are used in this example were created by Fabio Valle, objects are used for  -->
                 <!--  demonstrating purposes only to show possibility how to load and manipulate the 3D objects on 3D scene. Fabio's email: fabiovalle3d@gmail.com  -->
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.8125" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
-                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="2.5, 2, 107.5" CoordinateMode="DataCoordinates" Scale="0.2, 0.2, 0.2"/>
+                <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.4375, 0.6, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.6875" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.4375, 0.6, 0.5625" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>
                 <object:ObjectModel3D TextureSource="{StaticResource BlackTexture}" Source="{StaticResource PawnLowObj3DSource}" Position="0.1875, 0.6, 0.4375" CoordinateMode="Relative" Scale="0.2, 0.2, 0.2"/>

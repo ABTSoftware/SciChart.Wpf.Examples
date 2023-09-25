@@ -25,7 +25,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
             <DataTemplate x:Key="LidarLegendItemTemplate" DataType="chartData:SeriesInfo3D">
-                <Grid>
+                <Grid Margin="10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem1"/>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="LegendItem2"/>
@@ -34,10 +34,10 @@
                     </Grid.ColumnDefinitions>
 
                     <CheckBox Grid.Column="0"
-                              Margin="5,0,0,0"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Center"
-                              Content="Visible?"
+                              Content="Visible"
+                              FontWeight="Regular"
                               Foreground="White"
                               IsChecked="{Binding RenderableSeries.IsVisible, Mode=TwoWay}"
                               Visibility="{Binding LegendData.ShowVisibilityCheckboxes, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -45,7 +45,7 @@
                     <s:PointMarker Grid.Column="1"
                                    Width="10"
                                    Height="10"
-                                   Margin="10,0,0,0"
+                                   Margin="10,2,10,0"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    HorizontalContentAlignment="Stretch"
@@ -55,15 +55,14 @@
                                    Visibility="{Binding ShowSeriesMarkers, RelativeSource={RelativeSource AncestorType=s:SciChartLegend}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     <TextBlock Grid.Column="2"
-                               Margin="10,0,10,2"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
-                               Text="{Binding SeriesName}" />
+                               Text="{Binding SeriesName}"/>
 
                     <!-- Opacity. Bound to SeriesInfo.RenderableSeries.Opacity -->
                     <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="Opacity: " Foreground="White"/>
-                        <Slider Minimum="0.0" Maximum="1.0" MinWidth="100" DataContext="{Binding RenderableSeries}" Value="{Binding Path=Opacity, Mode=TwoWay}"/>
+                        <TextBlock Text="Opacity" Margin="10,0" VerticalAlignment="Center" FontWeight="Regular" Foreground="White"/>
+                        <Slider Minimum="0.0" Maximum="1.0" MinWidth="100" Margin="0,2,0,0" Value="{Binding Path=RenderableSeries.Opacity, Mode=TwoWay}"/>
                     </StackPanel>
                 </Grid>
             </DataTemplate>
@@ -78,12 +77,12 @@
             <s3D:SciChart3DSurface.RenderableSeries>
 
                 <!-- Renders the point cloud -->
-                <s3D:ScatterRenderableSeries3D x:Name="pointCloud" Opacity="1">
+                <s3D:ScatterRenderableSeries3D x:Name="pointCloud">
                     <s3D:ScatterRenderableSeries3D.PointMarker>
                         <!-- Apply a pixel pointmarker to render the point-cloud -->
                         <!-- other types include the Ellipse, Quad or Sphere pointmarker -->
                         <s3D:PixelPointMarker3D Fill="{StaticResource MainThemeStrokeColor}"
-                                                Opacity="{Binding ElementName=pointCloud, Path=Opacity}"/>
+                                                Opacity="{Binding Path=Opacity, Mode=TwoWay}"/>
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
 
@@ -129,8 +128,8 @@
         </s3D:SciChart3DSurface>
 
         <!-- Renders the series legend, bound to LegendModifier3D.LegendData -->
-        <s:SciChartLegend LegendData="{Binding ElementName=LegendModifier3D, Path=LegendData}"
-                          Background="{Binding Source={x:Reference Name=SciChart3DSurface}, Path=Background}"
+        <s:SciChartLegend LegendData="{Binding ElementName=LegendModifier3D, Path=LegendData, Mode=OneWay}"
+                          Background="{StaticResource ThemedChartBackground}"
                           Margin="25"
                           Orientation="Vertical"
                           HorizontalAlignment="Left"
