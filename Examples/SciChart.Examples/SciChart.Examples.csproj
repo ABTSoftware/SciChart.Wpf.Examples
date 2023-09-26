@@ -61,29 +61,64 @@
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\*.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
     <Page Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <Page Remove="Resources\ExampleSourceFiles\HeatmapChartTypes\NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\add_button.png" />
+    <None Remove="Resources\Images\annotation_icon.png" />
+    <None Remove="Resources\Images\chart_line_2.png" />
+    <None Remove="Resources\Images\cursor_arrow.png" />
+    <None Remove="Resources\Images\cursor_drag_arrow.png" />
+    <None Remove="Resources\Images\del_button.png" />
+    <None Remove="Resources\Images\hexgridgenerated.png" />
+    <None Remove="Resources\Images\load_button.png" />
+    <None Remove="Resources\Images\logarithmic_button.png" />
+    <None Remove="Resources\Images\pointbutton_icon.png" />
+    <None Remove="Resources\Images\point_count_icon.png" />
+    <None Remove="Resources\Images\point_marker_icon.png" />
+    <None Remove="Resources\Images\select_icon.png" />
+    <None Remove="Resources\Images\sq_br_next.png" />
+    <None Remove="Resources\Images\start_button.png" />
+    <None Remove="Resources\Images\step_line.png" />
+    <None Remove="Resources\Images\type_button.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resources\ExampleSourceFiles\HeatmapChartTypes\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Resources\Images\*.png" />
+    <Resource Include="Resources\Images\add_button.png" />
+    <Resource Include="Resources\Images\annotation_icon.png" />
+    <Resource Include="Resources\Images\chart_line_2.png" />
+    <Resource Include="Resources\Images\cursor_arrow.png" />
+    <Resource Include="Resources\Images\cursor_drag_arrow.png" />
+    <Resource Include="Resources\Images\del_button.png" />
+    <Resource Include="Resources\Images\hexgridgenerated.png" />
+    <Resource Include="Resources\Images\load_button.png" />
+    <Resource Include="Resources\Images\logarithmic_button.png" />
+    <Resource Include="Resources\Images\pointbutton_icon.png" />
+    <Resource Include="Resources\Images\point_count_icon.png" />
+    <Resource Include="Resources\Images\point_marker_icon.png" />
+    <Resource Include="Resources\Images\select_icon.png" />
+    <Resource Include="Resources\Images\sq_br_next.png" />
+    <Resource Include="Resources\Images\start_button.png" />
+    <Resource Include="Resources\Images\step_line.png" />
+    <Resource Include="Resources\Images\type_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\*.png" />
+    <PackageReference Include="SciChart" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="*-*" />
+    <PackageReference Include="SciChart3D" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="*-*" />
+    <PackageReference Include="SciChart.DirectX" Version="7.0.2.27161" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="*-*" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="*-*" />
+    <PackageReference Include="SciChart.DrawingTools" Version="7.0.2.27161" />
   </ItemGroup>
 </Project>

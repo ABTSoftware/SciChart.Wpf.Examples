@@ -1,50 +1,57 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.Charts3D.SciChartWithMvvm.AxisBindingAndSeriesBinding"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D">
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+             xmlns:extensions="clr-namespace:SciChart.Charting3D.Common.Extensions;assembly=SciChart.Charting3D"
+             xmlns:axis="clr-namespace:SciChart.Charting3D.Visuals.Axis;assembly=SciChart.Charting3D"
+             xmlns:sciChartWithMvvm="clr-namespace:SciChart.Examples.Examples.Charts3D.SciChartWithMvvm"
+             mc:Ignorable="d" 
+             d:DesignHeight="300"
+             d:DesignWidth="300">
 
     <UserControl.Resources>
 
-        <Style x:Key="CustomNumeric3DStyle" BasedOn="{StaticResource {x:Type s3D:NumericAxis3DForMvvm}}" TargetType="s3D:NumericAxis3DForMvvm">
+        <Style x:Key="CustomNumeric3DStyle" BasedOn="{StaticResource {x:Type axis:NumericAxis3DForMvvm}}" TargetType="axis:NumericAxis3DForMvvm">
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
                         <Setter Property="Stroke" Value="{StaticResource SecondaryThemeSolidBrush}"/>
-                        <Setter Property="StrokeThickness" Value="3"/>
+                        <Setter Property="StrokeThickness" Value="3" />
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="CustomTimeSpan3DStyle" BasedOn="{StaticResource {x:Type s3D:TimeSpanAxis3DForMvvm}}" TargetType="s3D:TimeSpanAxis3DForMvvm">
+        <Style x:Key="CustomTimeSpan3DStyle" BasedOn="{StaticResource {x:Type axis:TimeSpanAxis3DForMvvm}}" TargetType="axis:TimeSpanAxis3DForMvvm">
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
                         <Setter Property="Stroke" Value="{StaticResource MainThemeSolidBrush}"/>
-                        <Setter Property="StrokeThickness" Value="2"/>
+                        <Setter Property="StrokeThickness" Value="2" />
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="CustomDateTime3DStyle" BasedOn="{StaticResource {x:Type s3D:DateTimeAxis3DForMvvm}}" TargetType="s3D:DateTimeAxis3DForMvvm">
+        <Style x:Key="CustomDateTime3DStyle" BasedOn="{StaticResource {x:Type axis:DateTimeAxis3DForMvvm}}" TargetType="axis:DateTimeAxis3DForMvvm">
             <Setter Property="MajorGridLineStyle">
                 <Setter.Value>
                     <Style TargetType="Line">
                         <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_2}"/>
-                        <Setter Property="StrokeThickness" Value="1"/>
+                        <Setter Property="StrokeThickness" Value="1" />
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
@@ -56,14 +63,14 @@
                                Grid.Column="1"
                                BorderThickness="0"
                                WorldDimensions="200,100,200" 
-                               XAxis="{s3D:AxisBinding XAxis, Mode=OneWay}"
-                               YAxis="{s3D:AxisBinding YAxis, Mode=OneWay}"
-                               ZAxis="{s3D:AxisBinding ZAxis, Mode=OneWay}">
+                               XAxis="{extensions:AxisBinding XAxis}"
+                               YAxis="{extensions:AxisBinding YAxis}"
+                               ZAxis="{extensions:AxisBinding ZAxis}">
 
             <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D ZoomToFitOnAttach="True"/>
+                <s3D:Camera3D ZoomToFitOnAttach="True" />
             </s3D:SciChart3DSurface.Camera>
-
+         
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ZoomExtentsModifier3D AutoFitRadius="True" AnimateDurationMs = "500"/>
             </s3D:SciChart3DSurface.ChartModifier>

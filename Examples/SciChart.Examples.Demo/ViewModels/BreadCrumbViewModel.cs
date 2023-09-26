@@ -29,12 +29,11 @@ namespace SciChart.Examples.Demo.ViewModels
 
             _module = module;
             _parent = parent;
-
             _breadcrumbItems = new List<BreadcrumbItemViewModel>()
             {
-                new BreadcrumbItemViewModel(string.Empty, ShowNavigationCommand),
-                new BreadcrumbItemViewModel(string.Empty, ShowNavigationCommand),
-                new BreadcrumbItemViewModel(string.Empty, ShowNavigationCommand, true),
+                new BreadcrumbItemViewModel(parent.SelectedExample.TopLevelCategory, ShowNavigationCommand),
+                new BreadcrumbItemViewModel(parent.SelectedExample.Group, ShowNavigationCommand),
+                new BreadcrumbItemViewModel(parent.SelectedExample.Title, ShowNavigationCommand, true),
             };
 
             UpdateSelectedExample();
@@ -148,9 +147,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public IEnumerable<BreadcrumbItemViewModel> BreadCrumbItemViewModels { get { return _breadcrumbItems; } }
 
         public void UpdateSelectedExample()
-        {
-            if (_module.CurrentExample == null) return;
-
+        {            
             _selectedGroupExample = _module.CurrentExample;
             _selectedCategory = _module.CurrentExample.TopLevelCategory;
             _selectedCategoryGroup = _module.CurrentExample.Group;

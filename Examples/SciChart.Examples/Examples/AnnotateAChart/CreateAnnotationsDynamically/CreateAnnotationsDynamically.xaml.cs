@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using SciChart.Charting.ChartModifiers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -70,11 +69,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CreateAnnotationsDynamically
             }
         }
 
-        private void OnAnnotationCreated(object sender, AnnotationCreationArgs e)
+        private void OnAnnotationCreated(object sender, EventArgs e)
         {
-            if (e.NewAnnotation is { } newAnnotation)
+            if (annotationCreation.Annotation is AnnotationBase newAnnotation)
             {
-                newAnnotation.IsSelected = true;
                 newAnnotation.IsEditable = true;
                 newAnnotation.CanEditText = true;
             }

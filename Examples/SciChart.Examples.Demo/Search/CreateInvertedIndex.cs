@@ -13,26 +13,24 @@ namespace SciChart.Examples.Demo.Search
 {
     public static class CreateInvertedIndex
     {
-        //const string InvertedIndexRelativePath = @"\Resources\invertedIndex.dat";
+        const string InvertedIndexRelativePath = @"\Resources\invertedIndex.dat";
 
         private static readonly string[] _stopWords;
         private static readonly string[] _codeStopWords;
-
-        private static readonly Dictionary<string, Posting> _invertedIndex;
-        private static readonly Dictionary<string, Posting> _codeInvertedIndex;
+        private static Dictionary<string, Posting> _invertedIndex;
+        private static Dictionary<string, Posting> _codeInvertedIndex;
 
         static CreateInvertedIndex()
         {
             _stopWords = GetStopWords("stopwords", '\n');
             _codeStopWords = GetStopWords("codeStopwords", '\r');
-
             _invertedIndex = new Dictionary<string, Posting>();
             _codeInvertedIndex = new Dictionary<string, Posting>();
         }
 
         private static string[] GetStopWords(string fileName, char splitter)
         {
-            Assembly assembly = typeof(CreateInvertedIndex).Assembly;
+            Assembly assembly = typeof (CreateInvertedIndex).Assembly;
 
             var names = assembly.GetManifestResourceNames();
 
@@ -40,7 +38,7 @@ namespace SciChart.Examples.Demo.Search
 
             var file = allExampleSourceFiles.FirstOrDefault();
 
-            var result = new string[] { };
+            var result = new string[] {};
 
             if (file != null)
             {
@@ -49,7 +47,12 @@ namespace SciChart.Examples.Demo.Search
                 {
                     var readToEnd = sr.ReadToEnd();
                     result = readToEnd.Split(splitter);
-                    result = result.Select(x => x.Replace("\n", "")).ToArray();
+                    result = result.Select(x =>
+                    {
+                        if (x.Contains("\n"))
+                            return x.Replace("\n", "");
+                        return x;
+                    }).ToArray();
                 }
             }
 
@@ -109,21 +112,22 @@ namespace SciChart.Examples.Demo.Search
 
                     if (_invertedIndex.ContainsKey(term))
                     {
-                        var ti = new TermInfo(example.Key, termDict.Value.ToArray(), (float)(termDict.Value.Count / norm));
+                        var ti = new TermInfo(example.Key, termDict.Value.ToArray(), (float) (termDict.Value.Count / norm));
                         _invertedIndex[term].TermInfos.Add(ti);
                     }
                     else
                     {
                         _invertedIndex[term] = new Posting(new List<TermInfo>
                         {
-                            new TermInfo(example.Key, termDict.Value.ToArray(), (float)(termDict.Value.Count / norm))
+                            new TermInfo(example.Key, termDict.Value.ToArray(), (float) (termDict.Value.Count/norm))
                         });
                     }
                     _invertedIndex[term].InvertedDocumentFrequency += 1;
                 }
             }
 
-            _invertedIndex.ForEachDo(x => x.Value.InvertedDocumentFrequency = Math.Log(ex.Count / x.Value.InvertedDocumentFrequency));
+            _invertedIndex.ForEachDo(
+                x => x.Value.InvertedDocumentFrequency = Math.Log(ex.Count/x.Value.InvertedDocumentFrequency));
         }
 
         public static void CreateIndexForCode(IEnumerable<KeyValuePair<Guid, Example>> examples)
@@ -137,7 +141,7 @@ namespace SciChart.Examples.Demo.Search
                 string lines = GetSourceCodeFromExample(example.Value);
                 var terms = lines.ToLower().Split(' ').Where(x => x != "")
                     .Select(tokenizer.Tokenize)
-                    .SelectMany(strings => strings.SelectMany(inner => inner))
+                    .SelectMany(strings => strings.SelectMany(inner => inner))                                        
                     .Select(sb => sb.ToString())
                     .Where(s => !string.IsNullOrEmpty(s) && s.Length > 1)
                     .ToList();
@@ -169,7 +173,7 @@ namespace SciChart.Examples.Demo.Search
 
                     if (_codeInvertedIndex.ContainsKey(term))
                     {
-                        var ti = new TermInfo(example.Key, termDict.Value.ToArray(), (float)(termDict.Value.Count / norm));
+                        var ti = new TermInfo(example.Key, termDict.Value.ToArray(), (float) (termDict.Value.Count / norm));
                         _codeInvertedIndex[term].TermInfos.Add(ti);
                     }
                     else
@@ -182,19 +186,18 @@ namespace SciChart.Examples.Demo.Search
                     }
                     _codeInvertedIndex[term].InvertedDocumentFrequency += 1;
                 }
-
+                
             }
 
             _codeInvertedIndex.ForEachDo(x =>
             {
-                x.Value.InvertedDocumentFrequency = Math.Log(ex.Count / x.Value.InvertedDocumentFrequency);
+                x.Value.InvertedDocumentFrequency = Math.Log(ex.Count/x.Value.InvertedDocumentFrequency);
 
                 // Collapse memory of List<TermInfo>
                 x.Value.TermInfos = x.Value.TermInfos.ToList();
             });
         }
 
-        /*
         private static void WriteIndexToFile()
         {
             var location = Assembly.GetExecutingAssembly().Location;
@@ -225,6 +228,7 @@ namespace SciChart.Examples.Demo.Search
             }
         }
 
+#if !SILVERLIGHT
         public static void ReadIndexFromFile()
         {
             var location = Assembly.GetExecutingAssembly().Location;
@@ -254,14 +258,14 @@ namespace SciChart.Examples.Demo.Search
 
                     var post = posting.Split(':');
                     var termEntries = post[1].Split(',').Select(ushort.Parse).ToArray();
-
-                    termInfos.Add(new TermInfo(new Guid(post[0]), termEntries, (float)tf));
+                    
+                    termInfos.Add(new TermInfo(new Guid(post[0]), termEntries, (float) tf));
                 }
 
-                _invertedIndex[term] = new Posting(termInfos) { InvertedDocumentFrequency = invertedDocFrequency };
+                _invertedIndex[term] = new Posting(termInfos) {InvertedDocumentFrequency = invertedDocFrequency};
             }
         }
-        */
+#endif
 
         private static string GetTextFromExample(Example example)
         {
@@ -307,7 +311,7 @@ namespace SciChart.Examples.Demo.Search
                     }
                 }
             }
-
+            
             var lines = sb.ToString();
             return lines;
         }
@@ -324,7 +328,7 @@ namespace SciChart.Examples.Demo.Search
 
         private static int Sqr(int value)
         {
-            return value * value;
+            return value*value;
         }
     }
 }

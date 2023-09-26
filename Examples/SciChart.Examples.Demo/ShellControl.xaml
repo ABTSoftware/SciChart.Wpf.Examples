@@ -167,13 +167,13 @@
                     <TextBlock VerticalAlignment="Center"
                                Foreground="{DynamicResource HyperlinkForegroundBrush}"
                                Text="Enabled"
-                               Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                               Visibility="{Binding Source={x:Static ext:FeaturesHelper.Instance}, Path=SupportsHardwareAcceleration, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     <TextBlock VerticalAlignment="Center"
                                Foreground="{DynamicResource HyperlinkForegroundBrush}"
                                Text="Not Available"
                                ToolTip="DirectX Hardware acceleration for 2D Charts is only available on DirectX10 or later GPUs. 3D Charts support DirectX 9, 10 or 11"
-                               Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
+                               Visibility="{Binding Source={x:Static ext:FeaturesHelper.Instance}, Path=SupportsHardwareAcceleration, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
                 </StackPanel>
 
                 <StackPanel Margin="10,5"

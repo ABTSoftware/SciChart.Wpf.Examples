@@ -1,29 +1,32 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata.SeriesWithMetadata"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:local="clr-namespace:SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata"
+             xmlns:seriesWithMetadata="clr-namespace:SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600"
              Loaded="OnSeriesWithMetadataLoaded">
     <Grid>
         <Grid.Resources>
-            <local:GainLossPaletteProvider x:Key="GainLossPaletteProvider" 
-                                           GainColor="{StaticResource MainThemeStrokeColor}" 
-                                           LossColor="{StaticResource SecondaryThemeStrokeColor}"/>
+            <seriesWithMetadata:GainLossPaletteProvider x:Key="GainLossPaletteProvider" 
+                                                        GainColor="{StaticResource MainThemeStrokeColor}" 
+                                                        LossColor="{StaticResource SecondaryThemeStrokeColor}"/>
 
             <DataTemplate x:Key="LegendTemplate">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Line StrokeThickness="3" X2="1" Stretch="Fill" Stroke="{StaticResource MainThemeSolidBrush}"/>
+                    <Line StrokeThickness="3" X2="1" Stretch="Fill" Stroke="{StaticResource MainThemeSolidBrush}" />
                     <TextBlock Grid.Column="1" FontSize="20" Text="Net Gain" Margin="10,0,0,0"/>
 
                     <Line Grid.Row="1" Stretch="Fill" X2="1" StrokeThickness="3" Stroke="{StaticResource SecondaryThemeSolidBrush}"/>
@@ -32,8 +35,8 @@
             </DataTemplate>
 
             <Style x:Key="CursorTooltipContainerStyle" TargetType="s:CursorLabelControl">
-                <Setter Property="Background" Value="{s:ThemeBinding DefaultPath=CursorLabelBackgroundBrush}"/>
-                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="{s:ThemeBinding DefaultPath=CursorLabelBackgroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
             </Style>
 
             <DataTemplate x:Key="CursorTooltipTemplate" DataType="s:XySeriesInfo">
@@ -51,15 +54,14 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChartInteractionToolbar ext:CustomRotateChartModifier.IsRotationEnabled="False"
-                                        TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+        <ext:SciChartInteractionToolbar ext:CustomRotateChartModifier.IsRotationEnabled="False"  TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
         <!--  Create the chart surface  -->
         <s:SciChartSurface Name="sciChart"
@@ -75,13 +77,12 @@
                                             PaletteProvider="{StaticResource GainLossPaletteProvider}"
                                             s:CursorModifier.TooltipTemplate="{StaticResource CursorTooltipTemplate}">
                     <s:FastLineRenderableSeries.PointMarker>
-                        <local:AnnotatedPointMarker Width="5"
-                                                    Height="7" 
-                                                    Stroke="White"
-                                                    StrokeThickness="2"
-                                                    GainMarkerFill="{StaticResource MainThemeStrokeColor}" 
-                                                    LossMarkerFill="{StaticResource SecondaryThemeStrokeColor}"/>
+                        <seriesWithMetadata:AnnotatedPointMarker Width="5" Height="7" 
+                                                                 GainMarkerFill="{StaticResource MainThemeStrokeColor}" 
+                                                                 LossMarkerFill="{StaticResource SecondaryThemeStrokeColor}" 
+                                                                 Stroke="White" StrokeThickness="1"/>
                     </s:FastLineRenderableSeries.PointMarker>
+
                 </s:FastLineRenderableSeries>
             </s:SciChartSurface.RenderableSeries>
 
@@ -104,30 +105,22 @@
             </s:SciChartSurface.YAxis>
 
             <s:SciChartSurface.Annotations>
-                <s:HorizontalLineAnnotation Y1="0"
-                                            ShowLabel="False"                                           
-                                            Opacity="0.7"
-                                            HorizontalAlignment="Stretch"
-                                            Stroke="{StaticResource SecondaryThemeSolidBrush}">
-                    
-                    <s:AnnotationLabel Text="break-even balance point"
-                                       LabelPlacement="Top"
-                                       FontSize="14"/>
+                <s:HorizontalLineAnnotation Stroke="{StaticResource SecondaryThemeSolidBrush}" ShowLabel="False" Y1="0" Opacity="0.7" HorizontalAlignment="Stretch">
+                    <s:AnnotationLabel Text="break-even balance point" LabelPlacement="Top" FontSize="14"/>
                 </s:HorizontalLineAnnotation>
             </s:SciChartSurface.Annotations>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:LegendModifier ShowLegend="True"
-                                      Margin="10" 
-                                      LegendItemTemplate="{StaticResource LegendTemplate}"/>
-
+                    <s:LegendModifier ShowLegend="True" Margin="10" 
+                                      LegendItemTemplate="{StaticResource LegendTemplate}" />
                     <s:CursorModifier ShowTooltip="True" 
                                       ShowTooltipOn="MouseHover" 
                                       ReceiveHandledEvents="True" 
                                       TooltipContainerStyle="{StaticResource CursorTooltipContainerStyle}"/>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
+
         </s:SciChartSurface>
     </Grid>
 </UserControl>

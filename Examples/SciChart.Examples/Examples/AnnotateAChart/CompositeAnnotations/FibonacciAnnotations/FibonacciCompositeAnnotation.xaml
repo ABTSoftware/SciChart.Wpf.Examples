@@ -1,5 +1,0 @@
-﻿<s:CompositeAnnotation x:Class="SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations.FibonacciCompositeAnnotation"
-                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-                       Canvas.ZIndex="100"/>

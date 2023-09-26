@@ -135,8 +135,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter
 
         private void OnRunExample()
         {
-            if (!_isRunning &&
-                _renderSurface is VisualXcceleratorRenderSurface)
+            if (!_isRunning && _renderSurface is VisualXcceleratorRenderSurface)
             {
                 _simulation = new World(_pointCount);
                 _simulation.Populate();

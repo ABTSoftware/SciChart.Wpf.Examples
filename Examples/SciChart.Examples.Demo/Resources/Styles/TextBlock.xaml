@@ -2,33 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="DefaultTextStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="11" />
     </Style>
 
     <Style x:Key="GroupHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="18" />
     </Style>
 
     <Style x:Key="SearchItemRichTextBoxStyle" TargetType="RichTextBox">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="Foreground" Value="{DynamicResource SearchViewItemMatchForegroundBrush}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Foreground" Value="{DynamicResource SearchViewItemMatchForegroundBrush}" />
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <Style x:Key="ExampleHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="{DynamicResource HeadingTextBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="20" />
     </Style>
 
-    <Style x:Key="TipsHeaderTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="TipsHeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#FFE3E3E3"/>
@@ -36,31 +36,12 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
-    <Style x:Key="TipsBodyTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="TipsBodyTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="Foreground" Value="#FFC2C4CB"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-    </Style>
-
-    <Style x:Key="ShowcaseExampleHeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="{DynamicResource ShowcaseExampleHeaderTextBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-    </Style>
-
-    <Style x:Key="ShowcaseExampleDescriptionTextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="{DynamicResource ShowcaseExampleDescriptionTextBrush}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-        <Setter Property="LineHeight" Value="24"/>
     </Style>
 
 </ResourceDictionary>

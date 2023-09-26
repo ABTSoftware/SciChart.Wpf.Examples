@@ -35,8 +35,6 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.RealTimeHeatmap
             
             heatmapSeries.DataSeries = CreateSeries(3, 300, 200, heatmapSeries.ColorMap.Maximum);
             contourSeries.DataSeries = heatmapSeries.DataSeries;
-
-            OnApplyPalette(this, null);
         }
 
         private IDataSeries CreateSeries(int index, int width, int height, double cpMax)

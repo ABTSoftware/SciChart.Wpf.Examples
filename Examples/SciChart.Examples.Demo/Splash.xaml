@@ -2,8 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
-             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:exp="clr-namespace:SciChart.Examples;assembly=SciChart.Examples">
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals">
 
     <UserControl.Resources>
         <ext:BoolToValueConverter x:Key="ib2vConverter" TrueValue="Collapsed" FalseValue="Visible"/>
@@ -23,7 +22,7 @@
 
         <ContentPresenter Grid.Row="1"
                           Width="800"
-                          Margin="10,0,10,50"
+                          Margin="10,0,10,40"
                           Content="{StaticResource SciChartWhiteLogoImage}"
                           tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500}"
                           tz:Transitionz.Translate="{tz:TranslateParams From='0,50', To='0,0', Duration=500, Ease={StaticResource ExponentialEase}}"/>
@@ -31,17 +30,18 @@
         <StackPanel Grid.Row="2"
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Margin="0,10">
 
             <TextBlock FontSize="16" 
                        Foreground="#E3E3E3"
                        HorizontalAlignment="Center"
                        tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, BeginTime=0}">
-                <Run Text="SciChart SDK v8."/>
+                <Run Text="SciChart SDK v7."/>
                 <Run Text="The World's Fastest WPF Charts."/>
                 <Run Text="Find out more at"/>
                 <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Cursor="Hand" Click="Hyperlink_OnClick">
-                    <Run Text="{x:Static exp:Urls.ReleaseArticle}"/>                                           
+                    scichart.com/scichart-wpf-v7-0-released/
                 </Hyperlink>
             </TextBlock>
 

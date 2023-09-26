@@ -13,8 +13,6 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System;
-using System.Windows.Media;
 using SciChart.Charting.Visuals.Annotations;
 
 namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations

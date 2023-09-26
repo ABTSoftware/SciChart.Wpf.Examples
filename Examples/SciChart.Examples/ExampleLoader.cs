@@ -92,9 +92,9 @@ namespace SciChart.Examples
                 }
                 else
                 {
-                    var exampleFolder = codeFile.Replace("Resources/ExampleSourceFiles/", "");
+                    string exampleFolder = codeFile.Replace("Resources/ExampleSourceFiles/", "");
                     exampleFolder = exampleFolder.Substring(0, exampleFolder.LastIndexOf("/", StringComparison.InvariantCulture));
-                    res.GithubUrl = string.Format("{0}/{1}", Urls.GithubExampleRootUrl.Trim('/'), exampleFolder.Trim('/'));
+                    res.GithubUrl = Urls.GithubExampleRootUrl + exampleFolder;
                 }
 
                 return res;

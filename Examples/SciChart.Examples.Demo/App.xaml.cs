@@ -4,13 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using SciChart.Charting;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Controls.ExceptionView;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Bootstrap.Utility;
+using SciChart.UI.Reactive.Async;
 using SciChart.UI.Reactive.Traits;
 using Unity;
 
@@ -19,33 +19,26 @@ namespace SciChart.Examples.Demo
     public partial class App : Application
     {
         private static ILogFacade _log;
-        private Bootstrapper _bootstrapper;
+        private Bootstrapper _bootStrapper;
 
-        private const string DevMode = "/DEVMODE";
-        private const string QuickStart = "/UIAUTOMATIONTESTMODE";
-        private const int SplashDelay = 3000;
+        private const string _devMode = "/DEVMODE";
+        private const string _quickStart = "/UIAUTOMATIONTESTMODE";
 
         public App()
-        {
+        {  
             Startup += OnStartup;
             Exit += OnExit;
             DispatcherUnhandledException += OnDispatcherUnhandledException;
-
-            InitializeComponent();
+   
+            InitializeComponent();   
         }
-
-        public static ILogFacade Log
+        
+        public ILogFacade Log
         {
             get
             {
-                if (UIAutomationTestMode)
-                {
-                    _log ??= new ConsoleLogger();
-                }
-                else
-                {
-                    _log ??= LogManagerFacade.GetLogger(typeof(App));
-                }
+                if (UIAutomationTestMode) return new ConsoleLogger();
+                _log ??= LogManagerFacade.GetLogger(typeof(App));
                 return _log;
             }
         }
@@ -56,9 +49,9 @@ namespace SciChart.Examples.Demo
         public static bool UIAutomationTestMode { get; private set; }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
+        {        
             Log.Error("An unhandled exception occurred. Showing view to user...", e.Exception);
-
+                
             var exceptionView = new ExceptionView(e.Exception)
             {
                 Owner = Current?.MainWindow,
@@ -72,14 +65,14 @@ namespace SciChart.Examples.Demo
             e.Handled = true;
         }
 
-        private async void OnStartup(object sender, StartupEventArgs e)
+        private void OnStartup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Contains(DevMode, StringComparer.InvariantCultureIgnoreCase))
+            if (e.Args.Contains(_devMode, StringComparer.InvariantCultureIgnoreCase))
             {
                 DeveloperModManager.Manage.IsDeveloperMode = true;
             }
 
-            if (e.Args.Contains(QuickStart, StringComparer.InvariantCultureIgnoreCase))
+            if (e.Args.Contains(_quickStart, StringComparer.InvariantCultureIgnoreCase))
             {
                 // Used in automation testing, disable animations and delays in transitions 
                 UIAutomationTestMode = true;
@@ -91,7 +84,8 @@ namespace SciChart.Examples.Demo
                 Thread.CurrentThread.Name = "UI Thread";
 
                 Log.Debug("--------------------------------------------------------------");
-                Log.DebugFormat("SciChart.Examples.Demo: Session Started {0:dd MMM yyyy HH:mm:ss}", DateTime.Now);
+                Log.DebugFormat("SciChart.Examples.Demo: Session Started {0}",
+                    DateTime.Now.ToString("dd MMM yyyy HH:mm:ss"));
                 Log.Debug("--------------------------------------------------------------");
 
                 var assembliesToSearch = new[]
@@ -101,40 +95,37 @@ namespace SciChart.Examples.Demo
                     typeof(IViewModelTrait).Assembly, // SciChart.UI.Reactive 
                 };
 
-                var assemblyDiscovery = new ExplicitAssemblyDiscovery(assembliesToSearch);
-                var typeDiscoveryService = new AttributedTypeDiscoveryService(assemblyDiscovery);
-
-                _bootstrapper = new Bootstrapper(ServiceLocator.Container, typeDiscoveryService);
-
-                await Task.WhenAll(_bootstrapper.InitializeAsync(), Task.Delay(SplashDelay));
-
-                if (UIAutomationTestMode)
+                _bootStrapper = new Bootstrapper(ServiceLocator.Container, new AttributedTypeDiscoveryService(new ExplicitAssemblyDiscovery(assembliesToSearch)));
+                _bootStrapper.InitializeAsync().Then(() =>
                 {
-                    VisualXcceleratorEngine.EnableForceWaitForGPU = true;
-                }
-                else
-                {
-                    // Do this on background thread
-                    _ = Task.Run(() =>
+                    if (!UIAutomationTestMode)
                     {
-                        //Syncing usages 
-                        var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
-                        syncHelper.LoadFromIsolatedStorage();
+                        // Do this on background thread
+                        Task.Run(() =>
+                        {
+                            //Syncing usages 
+                            var syncHelper = ServiceLocator.Container.Resolve<ISyncUsageHelper>();
+                            syncHelper.LoadFromIsolatedStorage();
 
-                        //Try sync with service
-                        syncHelper.GetRatingsFromServer();
-                        syncHelper.SendUsagesToServer();
-                        syncHelper.SetUsageOnExamples();
-                    });
-                }
+                            //Try sync with service
+                            syncHelper.GetRatingsFromServer();
+                            syncHelper.SendUsagesToServer();
+                            syncHelper.SetUsageOnExamples();
+                        });
+                    }
 
-                _bootstrapper.OnInitComplete();
+                    _bootStrapper.OnInitComplete();
+
+                }).Catch(ex =>
+                {
+                    Log.Error("Exception:\n\n{0}", ex);
+                    MessageBox.Show("Exception occurred in SciChart.Examples.Demo.\r\n. Please send log files located at %CurrentUser%\\AppData\\Local\\SciChart\\SciChart.Examples.Demo.log to support");
+                });
             }
-            catch (Exception ex)
+            catch (Exception caught)
             {
-                Log.Error("Exception:\n\n{0}", ex);
-
-                MessageBox.Show("Please send log files located at %CurrentUser%\\AppData\\Local\\SciChart\\SciChart.Examples.Demo.log to support", "SciChart.Examples.Demo Exception");
+                Log.Error("Exception:\n\n{0}", caught);
+                MessageBox.Show("Exception occurred in SciChart.Examples.Demo.\r\n. Please send log files located at %CurrentUser%\\AppData\\Local\\SciChart\\SciChart.Examples.Demo.log to support");
             }
         }
 

@@ -14,7 +14,6 @@
         <Setter Property="DrawAxisScaleBands" Value="False"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="{StaticResource MainThemeTransparentSolidBrush}"/>
-        <Setter Property="Background" Value="{StaticResource ThemedChartBackground}"/>
         <Setter Property="MajorGridLineStyle">
             <Setter.Value>
                 <Style TargetType="Line">
@@ -85,7 +84,7 @@
                       Color="DimGray"/>
 
     <Style x:Key="ItemRenderableSeriesStyle" TargetType="s:FastStripeRenderableSeriesForMvvm">
-        <Setter Property="LabelColor" Value="#FF272727"/>
+        <Setter Property="LabelColor" Value="#272727"/>
         <Setter Property="LabelFontSize" Value="13"/>
         <Setter Property="s:VerticalSliceModifier.TooltipTemplate" Value="{StaticResource ItemTooltipTemplate}"/>
         <Setter Property="s:VerticalSliceModifier.TooltipContainerStyle">
@@ -94,7 +93,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="s:TooltipControl">
-                                <Border Background="#FF42B649" 
+                                <Border Background="#42B649" 
                                         CornerRadius="5"
                                         Opacity="0.9"
                                         Margin="0,0,5,5"
@@ -115,7 +114,7 @@
                 <ControlTemplate>
                     <Ellipse Width="10"
                              Height="10"
-                             Fill="#FF42B649"
+                             Fill="#42B649"
                              Effect="{StaticResource DropShadowEffect}"/>
                 </ControlTemplate>
             </Setter.Value>
@@ -161,10 +160,8 @@
                     <Border Height="Auto"
                             Width="Auto"
                             CornerRadius="4"
-                            HorizontalAlignment="Stretch"                            
-                            VerticalAlignment="Stretch"  
-                            BorderThickness="1"
-                            BorderBrush="#FF151A25"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"       
                             Background="#FF656D80"/>
                 </ControlTemplate>
             </Setter.Value>
@@ -173,9 +170,10 @@
 
     <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Background" Value="#FF2B364C"/>
-        <Setter Property="MinWidth" Value="9"/>
-        <Setter Property="Width" Value="9"/>
+        <Setter Property="Background" Value="#2B364C"/>
+        <Setter Property="MinWidth" Value="8"/>
+        <Setter Property="MinHeight" Value="8"/>
+        <Setter Property="Width" Value="8"/>
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -213,7 +211,7 @@
 
     <Style x:Key="SciChartScrollBarStyle" TargetType="s:SciChartScrollbar">
         <Setter Property="Height" Value="14"/>
-        <Setter Property="GripsThickness" Value="8"/>
+        <Setter Property="GripsThickness" Value="7"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="GripsStyle">
             <Setter.Value>
@@ -225,10 +223,9 @@
                             <ControlTemplate TargetType="s:ScrollbarResizeGrip">
                                 <Border x:Name="Thumb"
                                         Height="14"
-                                        Width="8"             
+                                        Width="7"             
                                         CornerRadius="3"
-                                        BorderThickness="1"
-                                        BorderBrush="#FF151A25"
+                                        BorderThickness="0"
                                         Background="#FF656D80"/>
                             </ControlTemplate>
                         </Setter.Value>

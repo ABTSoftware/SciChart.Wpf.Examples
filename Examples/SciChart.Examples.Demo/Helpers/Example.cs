@@ -39,14 +39,10 @@ namespace SciChart.Examples.Demo.Helpers
             ToolTipDescription = exDefinition.ToolTipDescription;            
             ExampleImagePath = exDefinition.ImagePath;
             Group = exDefinition.ChartGroup;
-            IsShowcaseExample = exDefinition.IsShowcaseExample;
-            ShowcaseDescription = exDefinition.ShowcaseDescription;
-            ShowcaseImagePath = exDefinition.ShowcaseImagePath;
             TopLevelCategory = exDefinition.ExampleCategory;
             IconPath = exDefinition.IconPath;
             Features = exDefinition.Features;
             GithubExampleUrl = exDefinition.GithubUrl;
-
             _sourceFilePaths = exDefinition.CodeFiles;
         }
 
@@ -116,7 +112,7 @@ namespace SciChart.Examples.Demo.Helpers
                 .Replace("[b]", string.Empty)
                 .Replace("[/b]", string.Empty)
                 .Replace("[i]", string.Empty)
-                .Replace("[/i]", string.Empty)
+                .Replace("[i]", string.Empty)
                 .Replace("[gt]", string.Empty)
                 .Replace("[lt]", string.Empty)
                 .Trim();
@@ -152,12 +148,6 @@ namespace SciChart.Examples.Demo.Helpers
 
         public ICommand SelectCommand { get; set; }
 
-        public bool IsShowcaseExample { get; set; }
-
-        public string ShowcaseImagePath { get; set; }
-
-        public string ShowcaseDescription { get; set; }
-
         public Guid PageId { get { return Page.PageId; } }
 
         public ExampleUsage Usage { get; set; }
@@ -166,7 +156,7 @@ namespace SciChart.Examples.Demo.Helpers
         {
             get
             {
-                if (!_isLoaded)
+                if(!_isLoaded)
                 {
                     LoadCode();
                     _isLoaded = true;
@@ -198,19 +188,6 @@ namespace SciChart.Examples.Demo.Helpers
         public override string ToString()
         {
             return Title;
-        }
-    }
-
-    public class ExampleEqualityComparer : IEqualityComparer<Example>
-    {
-        public bool Equals(Example x, Example y)
-        {
-            return x.Page.PageId == y.Page.PageId;
-        }
-
-        public int GetHashCode(Example obj)
-        {
-            return obj.Page.PageId.GetHashCode();
         }
     }
 }

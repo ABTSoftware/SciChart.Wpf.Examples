@@ -1,23 +1,20 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<View>Examples/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml</View>
-	<ViewModel/>
-	<ImagePath/>
-	<IconPath>IconSurface3D</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/simple-waterfall-3d-chart.png</ShowcaseImagePath>
-	<ShowcaseDescription>The example demonstrates the basics of the WaterfallDataSeries3D and WaterfallRenderableSeries3D. This series allows rendering of many 3D Slices / Mountain Charts which can be used for visualizing spectrographic, audio or ECG data.</ShowcaseDescription>
-	<ToolTipDescription>
-		Demonstrates the basics of the WaterfallDataSeries3D and WaterfallRenderableSeries3D types in SciChart
-	</ToolTipDescription>
-	<Description>
-		Demonstrates the basics of the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.DataSeries.Waterfall.WaterfallDataSeries3D%603.html']WaterfallDataSeries3D[/url] and [url='https://www.scichart.com/documentation/win/current/The%20Waterfall%203D%20Chart%20Type.html']WaterfallRenderableSeries3D[/url].
+  <View>Examples/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <IconPath>IconSurface3D</IconPath>
+  <ToolTipDescription>
+    Demonstrates the basics of the WaterfallDataSeries3D and WaterfallRenderableSeries3D types in SciChart
+  </ToolTipDescription>
+  <Description>
+    Demonstrates the basics of the [url='https://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.Model.DataSeries.Waterfall.WaterfallDataSeries3D%603.html']WaterfallDataSeries3D[/url] and [url='https://www.scichart.com/documentation/win/current/The%20Waterfall%203D%20Chart%20Type.html']WaterfallRenderableSeries3D[/url].
 
-		This series allows rendering of many 3D Slices / mountain charts which can be used for visualizing spectrographic, audio or ECG data.
+    This series allows rendering of many 3D Slices / mountain charts which can be used for visualizing spectrographic, audio or ECG data.
 
-		The Waterfall series colors and palette can be updated by supplying a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.MeshColorPalette.html']MeshColorPalette[/url] which wraps a SolidColorBrush or LinearGradientBrush. Multiple options are available and usage of this series type is described in the [url='https://www.scichart.com/documentation/win/current/The%20Waterfall%203D%20Chart%20Type.html']Waterfall Chart Documentation[/url]
-	</Description>
-	<CodeFiles>
-		<string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.txt</string>
-		<string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.cs.txt</string>
-	</CodeFiles>
+    The Waterfall series colors and palette can be updated by supplying a [url='http://www.scichart.com/documentation/win/current/SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.MeshColorPalette.html']MeshColorPalette[/url] which wraps a SolidColorBrush or LinearGradientBrush. Multiple options are available and usage of this series type is described in the [url='https://www.scichart.com/documentation/win/current/The%20Waterfall%203D%20Chart%20Type.html']Waterfall Chart Documentation[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/Charts3D/CreateA3DChart/Waterfall/CreateAWaterfall3DChart.xaml.cs.txt</string>
+  </CodeFiles>
 </ExampleDefinition>

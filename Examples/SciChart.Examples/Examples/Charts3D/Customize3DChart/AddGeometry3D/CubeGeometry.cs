@@ -26,19 +26,13 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
     /// </summary>
     public class CubeGeometry : BaseSceneEntity<SCRTSceneEntity>
     {
-        private readonly Vector3 _bottomRight;
-        private readonly Vector3 _topLeft;
-        private readonly Color _cubeColor;
+        private readonly Vector3 bottomRight;
+        private readonly Vector3 topLeft;
+        private readonly Color cubeColor;
 
-        /// <summary>
-        /// Creates a representation of a Cube in the 3D space, defined in world coordinates
-        /// </summary>
-        /// <param name="topLeft">Point in the 3D space that determines the top-left corner of a cube</param>
-        /// <param name="bottomRight">Point in the 3D space that determines the bottom-right corner of a cube</param>
-        /// <param name="cubeColor">Color of the cube surface</param>
         public CubeGeometry(Vector3 topLeft, Vector3 bottomRight, Color cubeColor) : base(new SCRTSceneEntity())
         {
-            // Setting the position of scene entities will be used back when sorting them from camera perspective back to front
+            // Shady : Setting the position of scene entities will be used back when sorting them from camera perspective back to front
             using (TSRVector3 centerPosition = new TSRVector3(
                     0.5f*(topLeft.x + bottomRight.x),
                     0.5f*(topLeft.y + bottomRight.y), 
@@ -47,9 +41,9 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
                 SetPosition(centerPosition);
             }                        
 
-            this._topLeft = topLeft;
-            this._bottomRight = bottomRight;
-            this._cubeColor = cubeColor;
+            this.topLeft = topLeft;
+            this.bottomRight = bottomRight;
+            this.cubeColor = cubeColor;
         }
 
         /// <summary>
@@ -57,21 +51,30 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
         /// </summary>
         public override eSCRTSceneEntityKind GetKind()
         {
-            return _cubeColor.A == 255 ? eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_OPAQUE : eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_TRANSPARENT;
+            return cubeColor.A == 255 ? eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_OPAQUE : eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_TRANSPARENT;
         }
 
         /// <summary>
-        /// Called when the 3D Engine wishes to render this element. This is where geometry must be drawn to the 3D scene
+        ///     Called when the 3D Engine wishes to render this element. This is where geometry must be drawn to the 3D scene
         /// </summary>
         /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void RenderScene(IRenderPassInfo3D rpi)
         {
-            float bottomRightCoordX = _bottomRight.X;
-            float bottomRightCoordY = _bottomRight.Y;
-            float bottomRightCoordZ = _bottomRight.Z;
-            float topLeftCoordX = _topLeft.X;
-            float topLeftCoordY = _topLeft.Y;
-            float topLeftCoordZ = _topLeft.Z;
+            float bottomRightCoordX = bottomRight.X;
+            float bottomRightCoordY = bottomRight.Y;
+            float bottomRightCoordZ = bottomRight.Z;
+            float topLeftCoordX = topLeft.X;
+            float topLeftCoordY = topLeft.Y;
+            float topLeftCoordZ = topLeft.Z;
+
+            // Commented code below is the example of treating the Location value
+            // as 3D point in Data Coordinates Space but not in World Coordinates Space
+            //bottomRightCoordX = (float)e.XCalc.GetCoordinate(bottomRight.X) - e.WorldDimensions.X / 2.0f;
+            //bottomRightCoordY = (float)e.YCalc.GetCoordinate(bottomRight.Y);
+            //bottomRightCoordZ = (float)e.ZCalc.GetCoordinate(bottomRight.Z) - e.WorldDimensions.Z / 2.0f;
+            //topLeftCoordX = (float)e.XCalc.GetCoordinate(topLeft.X) - e.WorldDimensions.X / 2.0f;
+            //topLeftCoordY = (float)e.YCalc.GetCoordinate(topLeft.Y);
+            //topLeftCoordZ = (float)e.ZCalc.GetCoordinate(topLeft.Z) - e.WorldDimensions.Z / 2.0f;
 
             // y          1--------0
             // |         /|       /|
@@ -106,6 +109,7 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
             eSCRTUpAxis upaxis = VXccelEngine3D.GetUpAxis();
             // We create a mesh context. There are various mesh render modes. The simplest is Triangles
             // For this mode we have to draw a single triangle (three vertices) for each corner of the cube
+            // You can see 
             using (var meshContext = BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
                 // Set the Rasterizer State for this entity 
@@ -118,8 +122,9 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
                     VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
                 }
                 
+
                 // Set the color before drawing vertices
-                meshContext.SetVertexColor(_cubeColor);
+                meshContext.SetVertexColor(cubeColor);
             
                 // Pass Entity ID value for a hit test purpose
                 ulong selectionColor = VXccelEngine3D.EncodeSelectionId(EntityId, 0);
@@ -184,11 +189,11 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
             // Revert raster state
             VXccelEngine3D.PopRasterizerState();
 
-            // Set the Rasterizer State for the cube mesh wireframe 
+            // Set the Rasterizer State for wireframe 
             VXccelEngine3D.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 
             // Create a Line Context for a continuous line and draw the outline of the cube 
-            var lineColor = Color.FromArgb(0xFF, _cubeColor.R, _cubeColor.G, _cubeColor.B);
+            var lineColor = Color.FromArgb(0xFF, cubeColor.R, cubeColor.G, cubeColor.B);
 
             CreateSquare(2.0f, true, lineColor, new[] { corners[0], corners[1], corners[2], corners[3] });
             CreateSquare(2.0f, true, lineColor, new[] { corners[4], corners[5], corners[6], corners[7] });

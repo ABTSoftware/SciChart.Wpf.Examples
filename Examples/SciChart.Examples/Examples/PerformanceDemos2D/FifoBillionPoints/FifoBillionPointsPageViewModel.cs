@@ -37,7 +37,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
             RunCommand = new ActionCommand(OnRun);
             PauseCommand = new ActionCommand(OnPause);
             StopCommand = new ActionCommand(OnStop);
-            ViewportManager = new SurfaceViewportManager(OnRendererChanged);
 
             // Add the point count options 
             AllPointCounts.Add(new PointCount("1 Million", 5, 200_000));
@@ -75,7 +74,7 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
         public ObservableCollection<PointCount> AllPointCounts { get; } = new ObservableCollection<PointCount>();
 
-        public SurfaceViewportManager ViewportManager { get; }
+        public SurfaceViewportManager ViewportManager { get; } = new SurfaceViewportManager();
 
         public PointCount SelectedPointCount
         {
@@ -122,23 +121,6 @@ namespace SciChart.Examples.Examples.PerformanceDemos2D.FifoBillionPoints
 
                 OnPropertyChanged(nameof(LoadingMessage));
                 OnPropertyChanged(nameof(IsLoading));
-            }
-        }
-
-        private void OnRendererChanged()
-        {
-            // If renderer changes, need to re-attach the timer
-            if (_timer != null)
-            {
-                _timer.Stop();
-                _timer.SafeDispose();
-
-                // Create and restart the timer
-                _timer = new RenderSyncedTimer(TimeSpan.FromMilliseconds(TimerIntervalMs),
-                    ViewportManager.RenderSurface,
-                    OnTimerTick);
-
-                if (IsRunning) _timer.Start();
             }
         }
 

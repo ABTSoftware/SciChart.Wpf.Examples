@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using SciChart.Examples.Demo.Common.Converters;
 using SciChart.Examples.Demo.ViewModels;
 
 namespace SciChart.Examples.Demo.Helpers.Grouping
@@ -22,28 +23,21 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
                 .GroupBy(example => example.Value.Group)
                 .OrderBy(group => group.Key);
 
-            var groupIndex = -1;
-            var groupExamples = new ObservableCollection<TileViewModel>();
-
+            var result = new ObservableCollection<TileViewModel>();
             foreach (IGrouping<string, KeyValuePair<Guid, Example>> pairs in groups)
             {
-                groupIndex++;
-                groupExamples.Add(new TileViewModel
+                result.Add(new TileViewModel
                 {
-                    TileDataContext = new EverythingGroupViewModel
-                    {
-                        GroupingIndex = groupIndex,
-                        GroupingName = pairs.Key
-                    }
+                    TileDataContext = new EverythingGroupViewModel { GroupingName = pairs.Key }
                 });
 
                 foreach (var example in pairs.Select(x => x.Value))
                 {
-                    groupExamples.Add(new TileViewModel { TileDataContext = example });
+                    result.Add(new TileViewModel{TileDataContext = example});
                 }
             }
 
-            return groupExamples;
+            return result;
         }
     }
 }

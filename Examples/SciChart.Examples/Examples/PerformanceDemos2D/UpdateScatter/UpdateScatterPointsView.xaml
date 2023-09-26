@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:local="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.UpdateScatter"
              Background="{StaticResource ThemedChartBackground}">
 
     <UserControl.Resources>
@@ -16,12 +15,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <local:BindingProxy x:Name="BindingProxy"
-                            BindingSource="{Binding RenderSurface, Source={x:Reference sciChart}, Mode=OneWay}"
-                            BindingTarget="{Binding RenderSurface, Mode=OneWayToSource}"/>
-
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Row="1"
+                           RenderSurface="{Binding RenderSurface, Mode=OneWayToSource}"
                            ext:ExampleHelpers.LoadedEventCommand="{Binding RunExampleCommand}"
                            ext:ExampleHelpers.UnloadedEventCommand="{Binding StopExampleCommand}">
 
@@ -53,7 +49,7 @@
             </s:SciChartSurface.YAxis>
         </s:SciChartSurface>
 
-        <!--<s:SciChartPerformanceOverlay Grid.Row="1"
+        <s:SciChartPerformanceOverlay Grid.Row="1"
                                       Margin="0,0,50,0"
                                       VerticalAlignment="Top"
                                       Background="#33FFFFFF"
@@ -61,7 +57,7 @@
                                       Foreground="#FFF"
                                       Padding="10"
                                       IsHitTestVisible="False"
-                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>-->
+                                      TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
         <TextBlock Grid.Row="1"
                    FontWeight="SemiBold"

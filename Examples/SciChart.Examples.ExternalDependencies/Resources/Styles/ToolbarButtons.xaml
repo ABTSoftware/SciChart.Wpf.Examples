@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-                    xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:common="clr-namespace:SciChart.Examples.ExternalDependencies.Common"
-                    xmlns:toolbar2D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D"
                     xmlns:converters="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Converters"
                     xmlns:extension="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Extension"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:toolbar2D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D"
+                    xmlns:tooltip3D="clr-namespace:SciChart.Charting3D.Modifiers.Tooltip3D;assembly=SciChart.Charting3D">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Button.xaml"/>
@@ -85,12 +85,10 @@
             <common:FlyoutMenuButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="Action Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ActionType}}}"
-                              SelectedItem="{Binding Modifier.ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ActionType}}}" SelectedItem="{Binding Modifier.ActionType, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:XyDirection}}}"
-                              SelectedItem="{Binding Modifier.XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Modifier.XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
                 </StackPanel>
             </common:FlyoutMenuButton.PopupContent>
         </common:FlyoutMenuButton>
@@ -127,8 +125,7 @@
                 <common:FlyoutMenuToggleButton.PopupContent>
                     <StackPanel Margin="5" Width="150" Orientation="Vertical">
                         <TextBlock Text="Annotation Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type converters:AnnotationType}}}"
-                                  SelectedItem="{Binding Modifier.SelectedType, Mode=TwoWay, Converter={StaticResource AnnotationTypeConverter}}"/>
+                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type converters:AnnotationType}}}" SelectedItem="{Binding Modifier.SelectedType, Mode=TwoWay, Converter={StaticResource AnnotationTypeConverter}}"/>
                     </StackPanel>
                 </common:FlyoutMenuToggleButton.PopupContent>
             </common:FlyoutMenuToggleButton>
@@ -145,12 +142,13 @@
             <common:FlyoutMenuButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="Export Options" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <CheckBox Content="Use Xaml RS" Margin="0,5" IsChecked="{Binding Modifier.UseXamlRs, Mode=OneWayToSource}"
-                              ToolTipService.ToolTip="When checked, use XamlRenderSurface on export"/>
+                    <CheckBox Content="Use Xaml RS" Margin="0,5" IsChecked="{Binding Modifier.UseXamlRs, Mode=OneWayToSource}" ToolTipService.ToolTip="When checked, use Xaml Render Surface on export"/>
+
                     <Button Content="Save PNG" Command="{Binding Modifier.SavePngCommand}"/>
-                    <Button Content="Save Large PNG" Command="{Binding Modifier.SaveSizePngCommand}"/>
+                    <Button Content="Save PNG (Big)" Command="{Binding Modifier.SavePngBigCommand}"/>
+
                     <Button Content="Save XPS" Command="{Binding Modifier.SaveXpsCommand}"/>
-                    <Button Content="Save Large XPS" Command="{Binding Modifier.SaveSizeXpsCommand}"/>
+                    <Button Content="Save XPS (Big)" Command="{Binding Modifier.SaveXpsBigCommand}"/>
                 </StackPanel>
             </common:FlyoutMenuButton.PopupContent>
         </common:FlyoutMenuButton>
@@ -162,8 +160,7 @@
             <common:FlyoutMenuButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="Update Theme" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}"
-                              SelectedItem="{Binding Modifier.SelectedTheme, Mode=TwoWay}" />
+                    <ComboBox ItemsSource="{Binding Source={x:Static s:ThemeManager.AllThemes}}" SelectedItem="{Binding Modifier.SelectedTheme, Mode=TwoWay}" />
                 </StackPanel>
             </common:FlyoutMenuButton.PopupContent>
         </common:FlyoutMenuButton>
@@ -175,16 +172,13 @@
             <common:FlyoutMenuButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="Legend source" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}"
-                              SelectedItem="{Binding Modifier.GetLegendDataFor, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Modifier.GetLegendDataFor, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Legend placement" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:LegendPlacement}}}"
-                              SelectedItem="{Binding Modifier.LegendPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:LegendPlacement}}}" SelectedItem="{Binding Modifier.LegendPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Legend orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type Orientation}}}"
-                              SelectedItem="{Binding Modifier.Orientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type Orientation}}}" SelectedItem="{Binding Modifier.Orientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <CheckBox Margin="0,10,0,0"
                               VerticalAlignment="Center"
@@ -227,20 +221,16 @@
             <common:FlyoutMenuToggleButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="Rollover mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}"
-                              SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}"
-                              SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='MouseHover'}" />
 
                     <TextBlock Text="Tooltip usage mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}"
-                              SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}" SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
 
                     <TextBlock Text="Tooltip placement" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}"
-                              SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}" SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
 
                     <CheckBox Margin="0,10,0,0"
                               VerticalAlignment="Center"
@@ -268,20 +258,16 @@
                     </StackPanel.Resources>
 
                     <TextBlock Text="Cursor mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}"
-                              SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}"
-                              SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Tooltip usage mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}"
-                              SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}" SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
 
                     <TextBlock Text="Tooltip placement" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}"
-                              SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}" SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
 
                     <TextBlock Text="Snapping mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:CursorSnappingMode}}}"
@@ -295,7 +281,8 @@
                             </MultiBinding>
                         </StackPanel.Visibility>
                         <TextBlock Text="Snap to" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <ComboBox ItemsSource="{Binding SeriesNames, Mode=OneWay}" SelectedIndex="0">
+                        <ComboBox ItemsSource="{Binding SeriesNames, Mode=OneWay}"
+                                  SelectedIndex="0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <toolbar2D:InvokeSnapToSeriesCommandAction SnapToSelectedSeriesCommand="{Binding SnapToSeriesCommand}" />
@@ -305,7 +292,7 @@
                     </StackPanel>
 
                     <CheckBox Margin="0,10,0,0"
-                              VerticalAlignment="Center"
+                               VerticalAlignment="Center"
                               Content="Show Axis Label"
                               IsChecked="{Binding Modifier.ShowAxisLabels, Mode=TwoWay}" />
 
@@ -327,20 +314,16 @@
             <common:FlyoutMenuToggleButton.PopupContent>
                 <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="ToolTip mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}"
-                              SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:SourceMode}}}" SelectedItem="{Binding Modifier.SourceMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock Text="Show tooltip mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}"
-                              SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}" SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
 
                     <TextBlock FontSize="12" Text="Tooltip usage mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox FontSize="12" ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}"
-                              SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
+                    <ComboBox FontSize="12" ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipUsageMode}}}" SelectedItem="{Binding Modifier.TooltipUsageMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='TooltipControl'}" />
 
                     <TextBlock FontSize="12" Text="Tooltip placement" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox FontSize="12" ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}"
-                              SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
+                    <ComboBox FontSize="12" ItemsSource="{Binding Source={extension:EnumValues {x:Type s:TooltipPlacement}}}" SelectedItem="{Binding Modifier.TooltipPlacement, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}, FallbackValue='Right'}" />
                 </StackPanel>
             </common:FlyoutMenuToggleButton.PopupContent>
         </common:FlyoutMenuToggleButton>
@@ -371,7 +354,7 @@
     <!-- Toolbar 3D Button Templates -->
 
     <DataTemplate x:Key="Orbit3DModifierTemplate">
-        <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
+        <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"     
                                        ToolTipService.ToolTip="Toggle OrbitModifier"
                                        common:FlyoutMenuToggleButtonExtensions.GroupName="ZoomPanSelection3DGroup">
             <common:ToolbarIcon Kind="RotateOrbit" Style="{StaticResource ToolbarButtonIconStyle}"/>
@@ -408,7 +391,7 @@
                               SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
                     <TextBlock Text="Crosshair mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:CrosshairMode}}}"
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type tooltip3D:CrosshairMode}}}"
                               SelectedItem="{Binding Modifier.CrosshairMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
                 </StackPanel>
             </common:FlyoutMenuToggleButton.PopupContent>
@@ -484,80 +467,6 @@
     </DataTemplate>
 
     <DataTemplate x:Key="EmptyDataTemplate"/>
-
-    <DataTemplate x:Key="CoordinateSystemModeTemplate">
-        <common:FlyoutMenuButton ToolTipService.ToolTip="Coordinate System">
-            <common:ToolbarIcon Kind="Axis" Style="{StaticResource ToolbarButtonIconStyle}"/>
-            <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
-                    <TextBlock Text="Coordinate System" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:CoordinateSystem3D}}}"
-                              SelectedItem="{Binding Modifier.SelectedCoordinateSystem, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                </StackPanel>
-            </common:FlyoutMenuButton.PopupContent>
-        </common:FlyoutMenuButton>
-    </DataTemplate>
-
-    <DataTemplate x:Key="CameraModeTemplate">
-        <common:FlyoutMenuButton ToolTipService.ToolTip="3D Camera Mode">
-            <common:ToolbarIcon Kind="Video" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-            <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
-                    <TextBlock Text="3D Camera Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:CameraProjectionMode}}}"
-                              SelectedItem="{Binding Modifier.SelectedCameraMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                </StackPanel>
-            </common:FlyoutMenuButton.PopupContent>
-        </common:FlyoutMenuButton>
-    </DataTemplate>
-
-    <DataTemplate x:Key="AxisLabelOrientationTemplate">
-        <common:FlyoutMenuButton ToolTipService.ToolTip="Axis Label Orientation">
-            <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <common:ToolbarIcon Path="M3,15.5 L6,12.5 4,12.5 4,0 2,0 2,12.5 0,12.5 3,15.5 M20,18 L17,15 17,17 4.5,17 4.5,19 17,19 17,21 20,18Z" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <TextBlock Text="LB" FontSize="9" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="7" Canvas.Top="0"/>
-            </Canvas>
-            <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
-                    <TextBlock Text="X-Axis Label Orientation" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.XAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-
-                    <TextBlock Text="Y-Axis Label Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.YAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-
-                    <TextBlock Text="Z-Axis Label Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.ZAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                </StackPanel>
-            </common:FlyoutMenuButton.PopupContent>
-        </common:FlyoutMenuButton>
-    </DataTemplate>
-
-    <DataTemplate x:Key="AxisTitleOrientationTemplate">
-        <common:FlyoutMenuButton ToolTipService.ToolTip="Axis Title Orientation">
-            <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <common:ToolbarIcon Path="M3,15.5 L6,12.5 4,12.5 4,0 2,0 2,12.5 0,12.5 3,15.5 M20,18 L17,15 17,17 4.5,17 4.5,19 17,19 17,21 20,18Z" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <TextBlock Text="T" FontSize="11" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="8" Canvas.Top="-1"/>
-            </Canvas>
-            <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
-                    <TextBlock Text="X-Axis Title Orientation" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisTitleOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.XAxisTitleOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-
-                    <TextBlock Text="Y-Axis Title Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisTitleOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.YAxisTitleOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-
-                    <TextBlock Text="Z-Axis Title Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisTitleOrientation3D}}}"
-                              SelectedItem="{Binding Modifier.ZAxisTitleOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
-                </StackPanel>
-            </common:FlyoutMenuButton.PopupContent>
-        </common:FlyoutMenuButton>
-    </DataTemplate>
 
     <Style x:Key="FlyoutSeparatorStyle" TargetType="common:FlyoutSeparator">
         <Setter Property="Margin" Value="5"/>

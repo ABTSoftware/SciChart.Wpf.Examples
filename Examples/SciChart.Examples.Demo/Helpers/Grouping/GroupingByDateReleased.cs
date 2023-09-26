@@ -6,7 +6,7 @@ using SciChart.Examples.Demo.ViewModels;
 
 namespace SciChart.Examples.Demo.Helpers.Grouping
 {
-    public class GroupingByDateReleased : IGrouping
+    public class GroupingByDateReleased: IGrouping
     {
         public GroupingMode GroupingMode { get; set; }
 
@@ -17,24 +17,17 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
 
         public ObservableCollection<TileViewModel> GroupingPredicate(IDictionary<Guid, Example> examples)
         {
-            var groupExamples = new ObservableCollection<TileViewModel>
+            var result = new ObservableCollection<TileViewModel>
             {
-                new TileViewModel
-                {
-                    TileDataContext = new EverythingGroupViewModel
-                    {
-                        GroupingIndex = 0,
-                        GroupingName = "Release Date"
-                    }
-                }
+                new TileViewModel {TileDataContext = new EverythingGroupViewModel {GroupingName = "Most Used"}}
             };
 
             foreach (var example in examples.Select(x => x.Value))
             {
-                groupExamples.Add(new TileViewModel { TileDataContext = example });
+                result.Add(new TileViewModel { TileDataContext = example });
             }
 
-            return groupExamples;
+            return result;
         }
     }
 }

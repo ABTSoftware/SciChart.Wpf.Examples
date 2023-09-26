@@ -16,19 +16,18 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Markup;
-using SciChart.Charting.ChartModifiers;
+using System.Windows.Controls;
+using System.Collections.Generic;
+using System.ComponentModel;
+using SciChart.Core.Extensions;
+using SciChart.Core.Utility.Mouse;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Modifiers;
 using SciChart.Charting3D.Modifiers.Tooltip3D;
-using SciChart.Core.Extensions;
-using SciChart.Core.Utility.Mouse;
-using SciChart.Examples.ExternalDependencies.Controls.Toolbar3D.CustomModifiers;
+using SciChart.Charting.ChartModifiers;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionToolbar
 {
@@ -42,11 +41,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
 
             public IChartModifier3D Modifier
             {
-                get => _modifier;
+                get { return _modifier; }
                 set
                 {
                     _modifier = value;
-                    OnPropertyChanged(nameof(Modifier));
+                    OnPropertyChanged("Modifier");
                 }
             }
 
@@ -55,29 +54,22 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             protected virtual void OnPropertyChanged(string propertyName)
             {
                 var handler = PropertyChanged;
-
-                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        
+        public static readonly DependencyProperty TargetSurfaceProperty = DependencyProperty.Register("TargetSurface", typeof(ISciChart3DSurface), typeof(SciChart3DInteractionToolbar), new PropertyMetadata(default(ISciChart3DSurface), OnTargetSurfaceDependencyPropertyChanged));
 
-        public static readonly DependencyProperty TargetSurfaceProperty = DependencyProperty.Register
-            (nameof(TargetSurface), typeof(ISciChart3DSurface), typeof(SciChart3DInteractionToolbar),
-            new PropertyMetadata(default(ISciChart3DSurface), OnTargetSurfaceDependencyPropertyChanged));
+        public static readonly DependencyProperty IsDeveloperModeProperty = DependencyProperty.Register("IsDeveloperMode", typeof(bool), typeof(SciChart3DInteractionToolbar), new PropertyMetadata(default(bool), OnIsDeveloperModeChanged));
 
-        public static readonly DependencyProperty IsDeveloperModeProperty = DependencyProperty.Register
-            (nameof(IsDeveloperMode), typeof(bool), typeof(SciChart3DInteractionToolbar),
-            new PropertyMetadata(false, OnIsDeveloperModeChanged));
+        public static readonly DependencyProperty ExtraContentProperty = DependencyProperty.Register("ExtraContent", typeof(List<ContentControl>), typeof(SciChart3DInteractionToolbar), new PropertyMetadata(OnExtraContentChanged));
 
-        public static readonly DependencyProperty ExtraContentProperty = DependencyProperty.Register
-            (nameof(ExtraContent), typeof(List<ContentControl>), typeof(SciChart3DInteractionToolbar),
-            new PropertyMetadata(OnExtraContentChanged));
-
-        public static readonly DependencyProperty ModifiersSourceProperty = DependencyProperty.Register
-            (nameof(ModifiersSource), typeof(ICollection<SciChart3DToolbarItem>), typeof(SciChart3DInteractionToolbar));
+        public static readonly DependencyProperty ModifiersSourceProperty = DependencyProperty.Register("ModifiersSource", typeof(ICollection<SciChart3DToolbarItem>), typeof(SciChart3DInteractionToolbar));
 
         private WrapPanel _toolBarWrapPanel;
         private ModifierGroup3D _modifiersInDevMode;
         private ModifierGroup3D _modifiersInUserMode;
+        private readonly ModifierGroup3D _modifiersInAllMode;
 
         public SciChart3DInteractionToolbar()
         {
@@ -85,31 +77,32 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             ExtraContent = new List<ContentControl>();
 
             _modifiersInUserMode = new ModifierGroup3D();
+            _modifiersInAllMode = new ModifierGroup3D();
             _modifiersInDevMode = new ModifierGroup3D();
         }
 
         public ISciChart3DSurface TargetSurface
         {
-            get => (ISciChart3DSurface)GetValue(TargetSurfaceProperty);
-            set => SetValue(TargetSurfaceProperty, value);
+            get { return (ISciChart3DSurface)GetValue(TargetSurfaceProperty); }
+            set { SetValue(TargetSurfaceProperty, value); }
         }
 
         public bool IsDeveloperMode
         {
-            get => (bool)GetValue(IsDeveloperModeProperty);
-            set => SetValue(IsDeveloperModeProperty, value);
+            get { return (bool)GetValue(IsDeveloperModeProperty); }
+            set { SetValue(IsDeveloperModeProperty, value); }
         }
 
         public List<ContentControl> ExtraContent
         {
-            get => (List<ContentControl>)GetValue(ExtraContentProperty);
-            set => SetValue(ExtraContentProperty, value);
+            get { return (List<ContentControl>)GetValue(ExtraContentProperty); }
+            set { SetValue(ExtraContentProperty, value); }
         }
 
         public ICollection<SciChart3DToolbarItem> ModifiersSource
         {
-            get => (ICollection<SciChart3DToolbarItem>)GetValue(ModifiersSourceProperty);
-            set => SetValue(ModifiersSourceProperty, value);
+            get { return (ICollection<SciChart3DToolbarItem>)GetValue(ModifiersSourceProperty); }
+            set { SetValue(ModifiersSourceProperty, value); }
         }
 
         public override void OnApplyTemplate()
@@ -123,7 +116,9 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
 
         private static void OnTargetSurfaceDependencyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue is ISciChart3DSurface scs)
+            var scs = e.NewValue as ISciChart3DSurface;
+
+            if (scs != null)
             {
                 var toolbar = (SciChart3DInteractionToolbar)d;
                 toolbar.OnCreateModifiers(toolbar, scs);
@@ -139,17 +134,20 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             {
                 var devModOn = (bool)e.NewValue;
 
-                scs.ChartModifier = devModOn
-                    ? toolbar._modifiersInDevMode
-                    : toolbar._modifiersInUserMode;
+                scs.ChartModifier = devModOn ? toolbar._modifiersInDevMode : toolbar._modifiersInUserMode;
+
+                var listMod = new List<SciChart3DToolbarItem>();
 
                 var wrappers = toolbar.IsDeveloperMode
                     ? toolbar._modifiersInDevMode.ChildModifiers
                     : toolbar._modifiersInUserMode.ChildModifiers;
 
-                toolbar.ModifiersSource = wrappers.Select(x => new SciChart3DToolbarItem { Modifier = x }).ToList();
+                listMod.AddRange(wrappers.Select(mod => new SciChart3DToolbarItem { Modifier = mod }));
+
+                toolbar.ModifiersSource = listMod;
             }
         }
+
 
         private static void OnExtraContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -170,141 +168,126 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
 
         protected virtual void OnCreateModifiers(SciChart3DInteractionToolbar toolbar, ISciChart3DSurface scs)
         {
-            var freeLookModifier = new FreeLookModifier3D
+            var freeLookModifier = new FreeLookModifier3D { IsEnabled = false };
+            var orbitModifier = new OrbitModifier3D { IsEnabled = true, ExecuteOn = ExecuteOn.MouseLeftButton };
+            var zoomExtentsModifier = new ZoomExtentsModifier3D { AnimateDurationMs = 500, AutoFitRadius = true, ResetPosition = new Vector3(-300, 100, -300) };
+            var mouseWheelZoomPanModifier = new MouseWheelZoomModifier3D();
+
+            var vertexSelectionMod = new VertexSelectionModifier3D { IsEnabled = false, ExecuteOn = ExecuteOn.MouseLeftButton, ExecuteWhen = MouseModifier.Ctrl };
+            var tooltipMod = new TooltipModifier3D { IsEnabled = false, ShowTooltipOn = ShowTooltipOptions.MouseOver };
+            var legendMod = new LegendModifier3D { LegendPlacement = LegendPlacement.Inside, ShowLegend = false };
+
+            _modifiersInAllMode.ChildModifiers.Add(orbitModifier);
+            _modifiersInDevMode.ChildModifiers.Add(orbitModifier);
+
+            _modifiersInAllMode.ChildModifiers.Add(freeLookModifier);
+            _modifiersInDevMode.ChildModifiers.Add(freeLookModifier);
+
+            _modifiersInAllMode.ChildModifiers.Add(zoomExtentsModifier);
+            _modifiersInDevMode.ChildModifiers.Add(zoomExtentsModifier);
+
+            _modifiersInAllMode.ChildModifiers.Add(mouseWheelZoomPanModifier);
+            _modifiersInDevMode.ChildModifiers.Add(mouseWheelZoomPanModifier);
+
+            _modifiersInDevMode.ChildModifiers.Add(vertexSelectionMod);
+            _modifiersInDevMode.ChildModifiers.Add(legendMod);
+            _modifiersInDevMode.ChildModifiers.Add(tooltipMod);
+
+            var exampleModifiers = (scs.ChartModifier as ModifierGroup3D);
+
+            if (exampleModifiers == null)
             {
-                IsEnabled = false
-            };
+                exampleModifiers = new ModifierGroup3D();
 
-            var orbitModifier = new OrbitModifier3D
-            {
-                IsEnabled = true,
-                ExecuteOn = ExecuteOn.MouseLeftButton
-            };
-
-            var zoomExtentsModifier = new ZoomExtentsModifier3D
-            {
-                AnimateDurationMs = 500,
-                AutoFitRadius = true,
-                ResetPosition = new Vector3(-300, 100, -300)
-            };
-
-            var mouseWheelModifier = new MouseWheelZoomModifier3D();
-
-            var vertexSelectionModifier = new VertexSelectionModifier3D
-            {
-                IsEnabled = false,
-                ExecuteOn = ExecuteOn.MouseLeftButton,
-                ExecuteWhen = MouseModifier.Ctrl
-            };
-
-            var tooltipModifier = new TooltipModifier3D
-            {
-                IsEnabled = false,
-                ShowTooltipOn = ShowTooltipOptions.MouseOver
-            };
-
-            var legendModifier = new LegendModifier3D
-            {
-                LegendPlacement = LegendPlacement.Inside,
-                ShowLegend = false
-            };
-
-            var devModifiers = new List<IChartModifier3D>();
-            var userModifiers = new List<IChartModifier3D>();
-            var exampleModifiers = new List<IChartModifier3D>();
-
-            userModifiers.Add(orbitModifier);
-            devModifiers.Add(orbitModifier);
-
-            userModifiers.Add(freeLookModifier);
-            devModifiers.Add(freeLookModifier);
-
-            userModifiers.Add(zoomExtentsModifier);
-            devModifiers.Add(zoomExtentsModifier);
-
-            userModifiers.Add(mouseWheelModifier);
-            devModifiers.Add(mouseWheelModifier);
-
-            devModifiers.Add(vertexSelectionModifier);
-            devModifiers.Add(legendModifier);
-            devModifiers.Add(tooltipModifier);
-
-            devModifiers.Add(new CoordinateSystemModifier());
-            devModifiers.Add(new CameraModeModifier());
-
-            devModifiers.Add(new AxisLabelOrientationModifier());
-            devModifiers.Add(new AxisTitleOrientationModifier());
-
-            if (scs.ChartModifier is ModifierGroup3D modifierGroup)
-            {
-                modifierGroup.ChildModifiers.ForEachDo(exampleModifiers.Add);
-            }
-            else if (scs.ChartModifier != null)
-            {
-                exampleModifiers.Add(scs.ChartModifier);
+                if (scs.ChartModifier != null)
+                {
+                    exampleModifiers.ChildModifiers.Add(scs.ChartModifier);
+                }
             }
 
-            _modifiersInUserMode = new ModifierGroup3D();
-            _modifiersInDevMode = new ModifierGroup3D();
+            var devMods = new ModifierGroup3D();
+            var userMods = new ModifierGroup3D();
 
-            foreach (var devMod in devModifiers)
+            foreach (var devMod in _modifiersInDevMode.ChildModifiers)
             {
                 var devModName = devMod.ModifierName;
 
-                if (exampleModifiers.All(x => x.ModifierName != devModName))
+                if (!(exampleModifiers.ChildModifiers.Any(x => x.ModifierName == devModName)))
                 {
-                    _modifiersInDevMode.ChildModifiers.Add(devMod);
+                    devMods.ChildModifiers.Add(devMod);
                 }
                 else
                 {
-                    foreach (var exampleMod in exampleModifiers.Where(x => x.ModifierName == devModName))
+                    if (exampleModifiers.ChildModifiers.Count(x => x.ModifierName == devModName) == 1)
                     {
-                        _modifiersInDevMode.ChildModifiers.Add(exampleMod);
+                        var exampleMod = exampleModifiers.ChildModifiers.Single(x => x.ModifierName == devModName);
+                        devMods.ChildModifiers.Add(exampleMod);
+                    }
+                    else 
+                    {
+                        foreach (var exampleMod in exampleModifiers.ChildModifiers.Where(x => x.ModifierName == devModName))
+                        {
+                            devMods.ChildModifiers.Add(exampleMod);
+                        }
                     }
                 }
             }
 
-            foreach (var userMod in userModifiers)
+            foreach (var inAllMod in _modifiersInAllMode.ChildModifiers)
             {
-                var userModName = userMod.ModifierName;
+                var modName = inAllMod.ModifierName;
 
-                if (exampleModifiers.All(x => x.ModifierName != userModName))
+                if (!(exampleModifiers.ChildModifiers.Any(x => x.ModifierName == modName)))
                 {
-                    _modifiersInUserMode.ChildModifiers.Add(userMod);
+                    userMods.ChildModifiers.Add(inAllMod);
                 }
                 else
                 {
-                    foreach (var exampleMod in exampleModifiers.Where(x => x.ModifierName == userModName))
+                    if (exampleModifiers.ChildModifiers.Count(x => x.ModifierName == modName) == 1)
                     {
-                        _modifiersInUserMode.ChildModifiers.Add(exampleMod);
+                        var exampleMod = exampleModifiers.ChildModifiers.Single(x => x.ModifierName == modName);
+                        userMods.ChildModifiers.Add(exampleMod);
+                    }
+                    else
+                    {
+                        foreach (var exampleMod in exampleModifiers.ChildModifiers.Where(x => x.ModifierName == modName))
+                        {
+                            userMods.ChildModifiers.Add(exampleMod);
+                        }
                     }
                 }
             }
 
-            foreach (var exampleMod in exampleModifiers)
+            foreach (var exampleMod in exampleModifiers.ChildModifiers)
             {
-                if (_modifiersInDevMode.ChildModifiers.All(x => x.ModifierName != exampleMod.ModifierName))
+                if (!devMods.ChildModifiers.Any(x => x.ModifierName == exampleMod.ModifierName))
                 {
-                    _modifiersInDevMode.ChildModifiers.Add(exampleMod);
+                    devMods.ChildModifiers.Add(exampleMod);
                 }
 
-                if (_modifiersInUserMode.ChildModifiers.All(x => x.ModifierName != exampleMod.ModifierName))
+                if (!userMods.ChildModifiers.Any(x => x.ModifierName == exampleMod.ModifierName))
                 {
-                    _modifiersInUserMode.ChildModifiers.Add(exampleMod);
+                    userMods.ChildModifiers.Add(exampleMod);
                 }
             }
+
+            _modifiersInDevMode = devMods;
+            _modifiersInUserMode = userMods;
 
             // Set modifiers to the chart
-            scs.ChartModifier = IsDeveloperMode
-                ? _modifiersInDevMode
-                : _modifiersInUserMode;
+            scs.ChartModifier = IsDeveloperMode ? _modifiersInDevMode : _modifiersInUserMode;
 
             var wrappers = toolbar.IsDeveloperMode
                 ? _modifiersInDevMode.ChildModifiers
                 : _modifiersInUserMode.ChildModifiers;
 
             // Set modifiers to the ItemSource for ItemsControl
-            ModifiersSource = wrappers.Select(x => new SciChart3DToolbarItem { Modifier = x }).ToList();
+            var listMod = new List<SciChart3DToolbarItem>();
+
+            listMod.AddRange(wrappers.Select(mod => new SciChart3DToolbarItem { Modifier = mod }));
+
+            ModifiersSource = listMod;
+
         }
     }
 }

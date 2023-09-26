@@ -2,7 +2,10 @@
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+                 Background="{Binding Background}"
                  CoordinateMode="Relative"
                  Opacity="0.2"
                  X1="0"
-                 X2="1"/>
+                 X2="1"
+                 Y1="{Binding Y1}"
+                 Y2="{Binding Y2}" />
