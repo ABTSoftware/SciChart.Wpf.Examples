@@ -3,8 +3,11 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using SciChart.Charting;
+using SciChart.Charting3D;
 using SciChart.Examples.Demo.Common;
 using SciChart.Examples.Demo.Helpers;
+using SciChart.Examples.Demo.Search;
+using SciChart.Examples.Demo.ViewModels;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Bootstrap.Utility;
 using SciChart.UI.Reactive.Async;
@@ -19,13 +22,13 @@ namespace SciChart.Examples.Demo
 
         private readonly ILogFacade _logger = LogManagerFacade.GetLogger(typeof(Bootstrapper));
 
-        public Bootstrapper(IUnityContainer container, IAttributedTypeDiscoveryService attributedTypeDiscovery) 
+        public Bootstrapper(IUnityContainer container, IAttributedTypeDiscoveryService attributedTypeDiscovery)
             : base(container, attributedTypeDiscovery)
         {
         }
 
         public Task InitializeAsync()
-        {            
+        {
             try
             {
                 _logger.InfoFormat("Initializing Async");
@@ -35,48 +38,65 @@ namespace SciChart.Examples.Demo
                     new SharedScheduler(TaskScheduler.FromCurrentSynchronizationContext(), DispatcherSchedulerEx.Current),
                     new SharedScheduler(TaskScheduler.Default, Scheduler.Default));
 
-                Container.RegisterInstance<ISchedulerContext>(sc);            
+                Container.RegisterInstance<ISchedulerContext>(sc);
                 ObservableObjectBase.DispatcherSynchronizationContext = SynchronizationContext.Current;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error("An error occurred in the initialization block: ", e);
+                _logger.Error("An error occurred in the initialization block: ", ex);
                 throw;
             }
 
-            return Task.Factory.StartNew(async () =>
+            return Task.Run(async () =>
             {
                 try
                 {
-                    _logger.InfoFormat("... 1of4 base.Initialize()");
+                    var loadLibsTask = SciChart2D3DInitializer.LoadLibrariesAndLicenseAsync();
+
+                    _logger.InfoFormat("... 1 of 5 base.Initialize()");
+
                     base.Initialize();
 
-                    // Do init async
-                    // Bootstrap example definitions
-                    _logger.InfoFormat("... 2of4 IModule.Initializer()");
-                    Container.Resolve<IModule>().Initialize();
+                    _logger.InfoFormat("... 2 of 5 IModule.Initialize()");
 
-                    _logger.InfoFormat("... 3of4 Resolve IMainWindowViewModel");
-                    var vm = ServiceLocator.Container.Resolve<IMainWindowViewModel>();
+                    var module = Container.Resolve<IModule>();
 
-                    // Bootstrap D3D to save time on startup     
-                    _logger.InfoFormat("... 4of4 D3D11.Initialize()");
+                    module.Initialize();
 
-                    if (App.UIAutomationTestMode)
+                    _logger.InfoFormat("... 3 of 5 Create Search Index");
+
+                    CreateInvertedIndex.CreateIndex(module.Examples);
+                    CreateInvertedIndex.CreateIndexForCode(module.Examples);
+
+                    await loadLibsTask;
+
+                    _logger.InfoFormat("... 4 of 5 Initialize Visual Xccelerator Engine");
+
+                    try
                     {
-                        VisualXcceleratorEngine.UseAlternativeFillSource = true;
-                        VisualXcceleratorEngine.EnableForceWaitForGPU = true;
+                        VisualXcceleratorEngine.UseAutoShutdown = false;
+                        VisualXcceleratorEngine.RestartEngine();
                     }
-                    else
+                    catch
                     {
-                        // Force delay to show splash
-                        await Task.Delay(3000);
+                        // Suppress Vx init errors. All rendering will occur with a fallback
                     }
-                    vm.InitReady = true;
+
+                    _logger.InfoFormat("... 5 of 5 Resolve View Models");
+
+                    var mainViewModel = ServiceLocator.Container.Resolve<IMainWindowViewModel>();
+                    var settingsViewModel = ServiceLocator.Container.Resolve<ISettingsViewModel>();
+                    var exampleViewModel = ServiceLocator.Container.Resolve<IExampleViewModel>();
+
+                    mainViewModel.SearchBoxEnabled = true;
+                    mainViewModel.InitReady = true;
+
+                    settingsViewModel.InitReady = true;
+                    exampleViewModel.InitReady = true;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    _logger.Error("One or more errors occurred during initialization of the MainViewModel or DirectX11 engine", e);
+                    _logger.Error("One or more errors occurred while initializing the MainViewModel or creating the search index: ", ex);
                     throw;
                 }
             });

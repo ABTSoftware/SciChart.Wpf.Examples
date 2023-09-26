@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
-using System.Windows.Data;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
-using SciChart.Examples.Demo.Behaviors;
 using SciChart.Examples.Demo.Helpers;
 
 namespace SciChart.Examples.Demo.ViewModels
 {
-    public class ExampleCategoryViewModel :ISelectable
-    {        
+    public class ExampleCategoryViewModel : ISelectable
+    {
         public string Category { get; set; }
+
+        public bool IsHomeCategory { get; set; }
 
         public IEnumerable<string> Groups { get; set; }
 

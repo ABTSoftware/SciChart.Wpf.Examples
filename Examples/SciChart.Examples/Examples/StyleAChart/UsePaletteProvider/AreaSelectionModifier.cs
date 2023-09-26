@@ -90,7 +90,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
         {
             base.OnModifierMouseDown(e);
 
-            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, ExecuteOn))
+            if (_isDragging || !MatchesExecuteOn(e.MouseButtons, e.Modifier))
                 return;
 
             // Exit if the mouse down was outside the bounds of the ModifierSurface

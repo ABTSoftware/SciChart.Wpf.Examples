@@ -15,6 +15,7 @@
 // *************************************************************************************
 using System;
 using System.ComponentModel;
+using System.Windows.Automation.Provider;
 using System.Windows.Media;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Interop;
@@ -37,7 +38,6 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
     public class TextSceneEntity : BaseSceneEntity<SCRTSceneEntity>
     {
         private readonly Color _textColor;
-        private readonly TextDisplayMode _textDisplayMode;
         private readonly int _fontSize;
         private readonly string _fontFamily;
         private Font3D _font;
@@ -54,19 +54,21 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
             SCRTDllLoader.InitNativeLibs();
         }
 
+        /// <summary>
+        /// Creates a representation of a Text Label in the 3D space, defined in world coordinates
+        /// </summary>
+        /// <param name="location">Point in the 3D space that determines the top-left corner of a label</param>
         public TextSceneEntity(string text, Color textColor, Vector3 location,
-            TextDisplayMode textDisplayMode = TextDisplayMode.FacingCameraAlways,
             int fontSize = 8, string fontFamily = "Arial")
             : base(new SCRTSceneEntity())
         {
             Text = text;
             _textColor = textColor;
             Location = location;
-            _textDisplayMode = textDisplayMode;
             _fontSize = fontSize;
             _fontFamily = fontFamily;
 
-            // Set requires SeletionId to false to exclude this item from selection, tooltips and also 
+            // Set requires SelectionId to False to exclude this item from selection, tooltips and also 
             // prevent issues with maximum number of selectable meshes 
             RequiresSelectionId = false;
         }
@@ -78,61 +80,24 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
         public override void RenderScene(IRenderPassInfo3D rpi)
         {
             var currentCamera = RootSceneEntity?.Viewport3D.CameraController;
+            if (currentCamera == null || Location == null) return;
 
-            var locX = Location.X;
-            var locY = Location.Y;
-            var locZ = Location.Z;
+            // Display billboarded text using camera vectors                
+            Vector3 cameraFwd = currentCamera.Forward;
+            Vector3 cameraUp = currentCamera.Up;
 
-            // Commented code belove is the example of treating the Location value
-            // as 3D point in Data Coordinates Space but not in World Coordinates Space
-            //locX = (float)e.XCalc.GetCoordinate(Location.X) - e.WorldDimensions.X / 2.0f;
-            //locY = (float)e.YCalc.GetCoordinate(Location.Y);
-            //locZ = (float)e.ZCalc.GetCoordinate(Location.Z) - e.WorldDimensions.Z / 2.0f;
+            // Compute a side vector
+            Vector3 cameraSide = cameraFwd ^ cameraUp;
+            cameraSide.Normalize();
 
-            switch (_textDisplayMode)
-            {
-                case TextDisplayMode.Default:
-                    {
-                        // Just display text
-                        _font.Begin();
-                        _font.AddText(Text, _textColor, locX, locY, locZ);
-                        _font.End();
-                        break;
-                    }
-                case TextDisplayMode.FacingCameraAlways:
-                    {
-                        if (currentCamera == null)
-                            goto case TextDisplayMode.Default;
+            // Compute orthogonal up vector
+            cameraUp = cameraSide ^ cameraFwd;
+            cameraUp.Normalize();
 
-                        // Display billboarded text using camera vectors                
-                        Vector3 cameraFwd = currentCamera.Forward;
-                        Vector3 cameraUp = currentCamera.Up;
-
-                        // Compute a side vector
-                        Vector3 cameraSide = cameraFwd ^ cameraUp;
-                        cameraSide.Normalize();
-
-                        // Compute orthogonal up vector
-                        cameraUp = cameraSide ^ cameraFwd;
-                        cameraUp.Normalize();
-
-                        // Display text billboarded using camera side, up vectors (text will always face camera) 
-                        _font.BeginBillboard(cameraSide, cameraUp);
-                        _font.AddText(Text, _textColor, locX, locY, locZ);
-                        _font.End();
-                        break;
-                    }
-                case TextDisplayMode.ScreenSpace:
-                    {
-                        // Screen space text 2D
-                        _font.BeginScreenSpace((float) RotationAngle, Location.X, Location.Y);
-                        _font.AddText(Text, _textColor, locX, locY, locZ);
-                        _font.EndScreenSpace();
-                        break;
-                    }
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            // Display text billboarded using camera side, up vectors (text will always face camera) 
+            _font.BeginBillboard(cameraSide, cameraUp);
+            _font.AddText(Text, _textColor, Location.X, Location.Y, Location.Z);
+            _font.End();
         }
 
         /// <summary>

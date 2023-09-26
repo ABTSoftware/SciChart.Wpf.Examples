@@ -1,14 +1,9 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.TenorCurves3DChart.TenorCurves3DChart"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
-             d:DesignHeight="400"
-             d:DesignWidth="600"
-             mc:Ignorable="d">
+             xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D">
 
     <UserControl.Resources>
         <s3D:GradientColorPalette x:Key="HeightColorMap" ContourStrokeThickness="1.0">
@@ -71,18 +66,15 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D x:Name="XAx3D" AxisTitle="Tenor" AxisTitleOffset="60"/>
+                <s3D:NumericAxis3D x:Name="XAx3D" AxisTitle="Tenor" />
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D x:Name="YAx3D"
-                                   AxisTitle="Rate (%)"
-                                   AxisTitleOffset="60"
-                                   TextFormatting="#" />
+                <s3D:NumericAxis3D x:Name="YAx3D" AxisTitle="Rate (%)" TextFormatting="#" />
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:DateTimeAxis3D x:Name="ZAx3D" DrawMajorBands="True" AxisTitle="Date" AxisTitleOffset="100"/>
+                <s3D:DateTimeAxis3D x:Name="ZAx3D" DrawMajorBands="True" AxisTitle="Date"/>
             </s3D:SciChart3DSurface.ZAxis>
 
             <s3D:SciChart3DSurface.ChartModifier>

@@ -13,6 +13,7 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using System.Windows.Media;
 using SciChart.Charting.Visuals.Annotations;
 
 namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations
@@ -20,7 +21,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Fibonac
     /// <summary>
     /// Interaction logic for CustomTextAnnotation.xaml
     /// </summary>
-    public partial class FibonacciRatioBox: BoxAnnotation
+    public partial class FibonacciRatioBox : BoxAnnotation
     {
         public FibonacciRatioBox()
         {

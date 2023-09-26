@@ -29,9 +29,9 @@ namespace SciChart.Examples.Examples.InspectDatapoints
         {
             InitializeComponent();
 
-            var dataSeries0 = new XyDataSeries<double, double>() { SeriesName = "Green Series" };
-            var dataSeries1 = new XyDataSeries<double, double>() { SeriesName = "Red Series" };
-            var dataSeries2 = new XyDataSeries<double, double>() { SeriesName = "Gray Series" };
+            var dataSeries0 = new XyDataSeries<double, double>() { SeriesName = "Blue Series" };
+            var dataSeries1 = new XyDataSeries<double, double>() { SeriesName = "Orange Series" };
+            var dataSeries2 = new XyDataSeries<double, double>() { SeriesName = "Green Series" };
             var dataSeries3 = new XyDataSeries<double, double>() { SeriesName = "Yellow Series" };
 
             var data1 = DataManager.Instance.GetNoisySinewave(300, 1.0, 300, 0.25);

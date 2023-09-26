@@ -4,14 +4,11 @@
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:c="clr-namespace:SciChart.Examples.Demo.Common.Converters"
-             xmlns:vm="clr-namespace:SciChart.Examples.Demo.ViewModels"
              xmlns:vxr="clr-namespace:SciChart.Drawing.VisualXcceleratorRasterizer;assembly=SciChart.Drawing"
              AutomationProperties.AutomationId="SettingsView">
 
     <UserControl.Resources>
-
-        <vm:SettingsViewModel x:Key="SettingsViewModel"/>
-
+        
         <ext:BoolToValueConverter x:Key="BoolToValueVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible"/>
         <c:InverseBooleanConverter x:Key="InverseBoolConverter"/>
         <c:RendererTypeToDisplayNameConverter x:Key="RendererConverter"/>
@@ -24,14 +21,18 @@
         </Style>
 
         <Style x:Key="SettingsCheckBoxStyle" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="DataContext" Value="{StaticResource SettingsViewModel}"/>
             <Setter Property="Foreground" Value="{DynamicResource SettingsViewForegroundBrush}"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
     </UserControl.Resources>
 
-    <Border Height="660" Width="480" CornerRadius="10" Background="{DynamicResource SettingsViewBackgroundBrush}">
+    <Border Height="660"
+            Width="480"
+            CornerRadius="10"
+            Background="{DynamicResource SettingsViewBackgroundBrush}"
+            IsEnabled="{Binding InitReady, Mode=OneWay, FallbackValue=False}">
+              
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -56,18 +57,18 @@
                        Text="SciChart Examples Suite Settings" />
 
             <Button Grid.Row="0"
-                    Grid.Column="1"
+                    Grid.Column="1"       
                     Margin="0,5,0,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     AutomationProperties.AutomationId="Settings.Close"
-                    Command="{Binding HideSettingsCommand}"
+                    Command="{Binding ParentViewModel.HideSettingsCommand}"
                     Style="{StaticResource CloseButtonStyle}" />
 
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" FontFamily="Segoe UI" Foreground="#FF8F94A1">
                 <Run Text="Hi there! Welcome to SciChart WPF"/>
                 <Run Text="{Binding Source={x:Static s:SciChartSurface.VersionInfo}, Mode=OneWay, StringFormat='({0},'}"/>
-                <Run Text="{Binding Path=TargetFramework, Source={StaticResource SettingsViewModel}, Mode=OneWay, StringFormat='{}{0})'}"/>
+                <Run Text="{Binding Path=TargetFramework, Mode=OneWay, StringFormat='{}{0})'}"/>
             </TextBlock>
 
             <Rectangle Grid.Row="2"
@@ -168,13 +169,6 @@
                               IsEnabled="{Binding IsDirectXAvailable}"
                               IsChecked="{Binding UseD3D11, Mode=TwoWay}"/>
 
-                    <CheckBox Margin="25,5"
-                              Content="Use DirectX 10 as fallback Graphics API"
-                              ToolTip="Uses the DirectX 10 Graphics API on those PCs which hardware doesn't support DirectX 11."
-                              Style="{StaticResource SettingsCheckBoxStyle}"
-                              IsEnabled="{Binding ElementName=useDirectX11Checkbox, Path=IsChecked}"
-                              IsChecked="{Binding Path=UseD3D10AsFallback, Mode=TwoWay}" />
-
                     <CheckBox Margin="0,5"
                               Content="Use DirectX 9c"
                               ToolTip="Render all 3D Charts (and 2D Charts when TSR Engine) using DirectX9 (where available)"
@@ -211,14 +205,12 @@
                     <CheckBox Margin="3"
                               Content="Y Axis Up"
                               FontSize="14"
-                              DataContext="{StaticResource SettingsViewModel}"
                               IsChecked="{Binding Is3DZAxisUp, Mode=TwoWay, Converter={StaticResource InverseBoolConverter}}"
                               s:ToggleButtonExtensions.GroupName="Viewport3DSettingsGroup" />
 
                     <CheckBox Margin="3"
                               Content="Z Axis Up"
                               FontSize="14"
-                              DataContext="{StaticResource SettingsViewModel}"
                               IsChecked="{Binding Is3DZAxisUp, Mode=TwoWay}"
                               s:ToggleButtonExtensions.GroupName="Viewport3DSettingsGroup" />
 
@@ -311,22 +303,22 @@
                                              Converter={StaticResource BoolToValueVisibilityConverter}}">
 
                         <Button ToolTip="Force a GC Collect"
-                                Command="{Binding GCCollectCommand}"
+                                Command="{Binding ParentViewModel.GCCollectCommand}"
                                 Content="Force GC.Collect"
                                 Style="{StaticResource DevModeButtonStyle}"/>
 
                         <Button ToolTip="Whoa there! This option is for our devs to export all examples to HTML pages for the website"
-                                Command="{Binding ExportAllHtmlCommand}"
+                                Command="{Binding ParentViewModel.ExportAllHtmlCommand}"
                                 Content="Export all to HTML"
                                 Style="{StaticResource DevModeButtonStyle}"/>
 
                         <Button ToolTip="Whoa there! This option is for our devs to export this example to HTML page for the website"
-                                Command="{Binding ExportToHtmlCommand}"
+                                Command="{Binding ParentViewModel.ExportToHtmlCommand}"
                                 Content="Export this to HTML"
                                 Style="{StaticResource DevModeButtonStyle}"/>
 
                         <Button ToolTip="Whoa there! This option exports all SciChart examples to stand alone projects and is for our devs to test export. If you want to export just one example, press the 'Export' button in the example toolbar"
-                                Command="{Binding ExportAllSolutionsCommand}"
+                                Command="{Binding ParentViewModel.ExportAllSolutionsCommand}"
                                 Content="Export all to .csproj"
                                 Style="{StaticResource DevModeButtonStyle}"/>
 

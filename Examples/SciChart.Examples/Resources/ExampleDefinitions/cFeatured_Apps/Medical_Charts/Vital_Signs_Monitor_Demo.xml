@@ -1,42 +1,43 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml</View>
-  <ViewModel></ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
-  <IconPath>IconRealtime</IconPath>
-  <ToolTipDescription>
-    The Vital Signs Monitor Demo showcases a real-time vital signs monitor.
-  </ToolTipDescription>
-  <Description>
-    Showcases how SciChart can be used in [b]Medical Context[/b].
-    
-    In this example we are simulating four channels of data showing that SciChart can be used to draw [b]real-time ECG/EKG[/b] charts and graphs to [b]monitor heart rate, body temperature, blood pressure, pulse, SPO2 blood oxygen, volumetric flow[/b] and more of [b]other vital signs[/b].
-    
-    SciChart will help you to short cut your development by providing rich, real-time, high performance and reliable charts for the [b]medical and healthcare applications[/b].
-    
-    In this example you can see how the [b]Line Series[/b] is used to draw real-time FIFO data. There is also the [b]Scatter Series[/b] used for a single point at the beginning of the lines. The fading effect is done with the help of [b]Palette Provider API[/b].
-    
-    [b]Note:[/b] All data is a simulation.
+	<View>Examples/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml</View>
+	<ViewModel/>
+	<ImagePath/>	
+	<IconPath>IconRealtime</IconPath>
+	<IsShowcaseExample>True</IsShowcaseExample>
+	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/vital-signs-monitor.png</ShowcaseImagePath>
+	<ShowcaseDescription>The example showcases how SciChart can be used in Medical Context. SciChart will help you to short cut your development by providing rich, real-time, high performance and reliable charts for the medical and healthcare applications.</ShowcaseDescription>
+	<ToolTipDescription>The Vital Signs Monitor Demo showcases a real-time vital signs monitor.</ToolTipDescription>
+	<Description>
+		Showcases how SciChart can be used in [b]Medical Context[/b].
 
-    [b]Documentation Links[/b]
+		In this example we are simulating four channels of data showing that SciChart can be used to draw [b]real-time ECG/EKG[/b] charts and graphs to [b]monitor heart rate, body temperature, blood pressure, pulse, SPO2 blood oxygen, volumetric flow[/b] and more of [b]other vital signs[/b].
 
-    - [url='https://www.scichart.com/documentation/win/current/The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url]
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Scatter%20Series%20Type.html']XyScatterRenderableSeries[/url]
-    - [url='https://www.scichart.com/example/wpf-chart-example-fifo-scrolling-charts']FIFO real-time scrolling charts example[/url]
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2006%20-%20Adding%20Realtime%20Updates.html']Adding real-time updates tutorial[/url]
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Paletted%20Series.html']PaletteProvider feature[/url]
-  </Description>
-  <CodeFiles>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsBatch.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsDataProvider.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsIndicatorsProvider.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsPaletteProvider.cs.txt</string>
-  </CodeFiles>
-  <Features>
-    <Features>FIFO</Features>
-    <Features>PaletteProvider</Features>
-    <Features>Performance</Features>
-    <Features>Realtime</Features>
-  </Features>
+		SciChart will help you to short cut your development by providing rich, real-time, high performance and reliable charts for the [b]medical and healthcare applications[/b].
+
+		In this example you can see how the [b]Line Series[/b] is used to draw real-time FIFO data. There is also the [b]Scatter Series[/b] used for a single point at the beginning of the lines. The fading effect is done with the help of [b]Palette Provider API[/b].
+
+		[b]Note:[/b] All data is a simulation.
+
+		[b]Documentation Links[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Scatter%20Series%20Type.html']XyScatterRenderableSeries[/url]
+		- [url='https://www.scichart.com/example/wpf-chart-example-fifo-scrolling-charts']FIFO real-time scrolling charts example[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2006%20-%20Adding%20Realtime%20Updates.html']Adding real-time updates tutorial[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Paletted%20Series.html']PaletteProvider feature[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsBatch.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsDataProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsIndicatorsProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsPaletteProvider.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>FIFO</Features>
+		<Features>PaletteProvider</Features>
+		<Features>Performance</Features>
+		<Features>Realtime</Features>
+	</Features>
 </ExampleDefinition>

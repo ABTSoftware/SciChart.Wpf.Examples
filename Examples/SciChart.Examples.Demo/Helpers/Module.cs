@@ -16,6 +16,7 @@ namespace SciChart.Examples.Demo.Helpers
         ReadOnlyCollection<string> AllCategories { get; }
         IDictionary<string, ReadOnlyCollection<string>> GroupsByCategory { get; }
         IDictionary<Guid, Example> Examples { get; }
+        IDictionary<Guid, Example> ShowcaseExamples { get; }
         Example CurrentExample { get; set; }
         void Initialize();
         IEnumerable<Example> ExamplesByCategoryAndGroup(string category, string group);
@@ -66,6 +67,8 @@ namespace SciChart.Examples.Demo.Helpers
 
         public IDictionary<Guid, Example> Examples { get; } = new Dictionary<Guid, Example>();
 
+        public IDictionary<Guid, Example> ShowcaseExamples { get; } = new Dictionary<Guid, Example>();
+
         public ReadOnlyCollection<string> AllCategories { get; private set; }
 
         public IDictionary<string, ReadOnlyCollection<string>> GroupsByCategory { get; private set; }
@@ -89,7 +92,7 @@ namespace SciChart.Examples.Demo.Helpers
             var loader = new ExampleLoader();
             var xmlExamples = loader.DiscoverAllXmlFiles();
            
-            IEnumerable<ExampleDefinition> exampleDefinitions = xmlExamples.Select(e => loader.Parse(e));
+            IEnumerable<ExampleDefinition> exampleDefinitions = xmlExamples.Select(loader.Parse);
 
             return exampleDefinitions;
         }
@@ -107,6 +110,9 @@ namespace SciChart.Examples.Demo.Helpers
 
                 Examples.Add(appPage.PageId, example);
                 categories.Add(example.TopLevelCategory);
+
+                if (example.IsShowcaseExample)
+                    ShowcaseExamples.Add(appPage.PageId, example);
             }
 
             AllCategories = new ReadOnlyCollection<string>(categories.ToList());

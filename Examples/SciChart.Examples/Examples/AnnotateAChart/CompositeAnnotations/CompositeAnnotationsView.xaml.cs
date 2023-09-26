@@ -19,14 +19,10 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using SciChart.Charting.Visuals.Annotations;
 using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.FibonacciAnnotations;
-using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.MeasureX;
-using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.MeasureXy;
+using SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.MeasureAnnotations;
 
 namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations
 {
-    /// <summary>
-    /// Interaction logic for CompositeAnnotationsView.xaml
-    /// </summary>
     public partial class CompositeAnnotationsView : UserControl
     {
         public CompositeAnnotationsView()
@@ -103,7 +99,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations
             {
                 UncheckAnnotationToggles(toggle.Name);
                 AnnotationCreation.IsEnabled = true;
-                AnnotationCreation.AnnotationType = typeof(MeasureY.MeasureYAnnotation);
+                AnnotationCreation.AnnotationType = typeof(MeasureYAnnotation);
             }
         }
 
