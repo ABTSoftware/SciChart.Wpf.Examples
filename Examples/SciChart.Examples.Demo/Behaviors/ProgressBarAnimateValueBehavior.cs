@@ -7,21 +7,39 @@ using Microsoft.Xaml.Behaviors;
 
 namespace SciChart.Examples.Demo.Behaviors
 {
-    public class ProgressValue
+    public class ProgressValues
     {
-        public double OldValue { get; set; }
-        public double NewValue { get; set; }
+        public bool HasValues { get; private set; }
+        public double OldValue { get; private set; }
+        public double NewValue { get; private set; }
+
+        public void Update(double oldValue, double newValue)
+        {
+            if (double.IsNaN(oldValue) || double.IsNaN(newValue))
+                throw new ArgumentException("Invalid progress bar values");
+
+            if (HasValues == false)
+                OldValue = oldValue;
+                             
+            NewValue = newValue;
+            HasValues = true;
+        }
+
+        public void Clear()
+        {
+            HasValues = false;
+            OldValue = double.NaN;
+            NewValue = double.NaN;
+        }
     }
 
     public class ProgressBarAnimateValueBehavior : Behavior<ProgressBar>
     {
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
-            (nameof(Value), typeof(double), typeof(ProgressBarAnimateValueBehavior),
-            new PropertyMetadata(0d, OnValuePropertyChanged));
+            (nameof(Value), typeof(double), typeof(ProgressBarAnimateValueBehavior), new PropertyMetadata(0d, OnValuePropertyChanged));
 
         public static readonly DependencyProperty DurationProperty = DependencyProperty.Register
-            (nameof(Duration), typeof(TimeSpan), typeof(ProgressBarAnimateValueBehavior),
-            new PropertyMetadata(TimeSpan.FromSeconds(0.5), OnDurationPropertyChanged));
+            (nameof(Duration), typeof(TimeSpan), typeof(ProgressBarAnimateValueBehavior), new PropertyMetadata(TimeSpan.FromSeconds(1d)));
 
         public double Value
         {
@@ -39,28 +57,19 @@ namespace SciChart.Examples.Demo.Behaviors
         {
             if (d is ProgressBarAnimateValueBehavior behavior)
             {
-                behavior.TryAnimateProgressBarValue((double)e.OldValue, (double)e.NewValue); 
-            }
-        }
-
-        private static void OnDurationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ProgressBarAnimateValueBehavior behavior)
-            {
-                behavior._duration = new Duration((TimeSpan)e.NewValue);
+                behavior.TryAnimateProgressBarValue((double)e.OldValue, (double)e.NewValue);
             }
         }
 
         private bool _isAnimating;
-        private Duration _duration;
-
-        private ProgressValue _progressValue;
         private readonly DoubleAnimation _valueAnimation;
+
+        private readonly object _progressLock = new();
+        private readonly ProgressValues _progressValues = new();
 
         public ProgressBarAnimateValueBehavior()
         {
             _valueAnimation = new DoubleAnimation();
-            _duration = new Duration(TimeSpan.FromSeconds(0.5));
         }
 
         protected override void OnAttached()
@@ -78,29 +87,6 @@ namespace SciChart.Examples.Demo.Behaviors
             _valueAnimation.Completed -= OnValueAnimationCompleted;
         }
 
-        private void TryAnimateProgressBarValue(double oldValue, double newValue)
-        {
-            if (_isAnimating)
-            {
-                if (_progressValue == null)
-                {
-                    _progressValue = new ProgressValue
-                    {
-                        OldValue = oldValue,
-                        NewValue = newValue
-                    };
-                }
-                else
-                {
-                    _progressValue.NewValue = newValue;
-                }
-
-                return;
-            }
-
-            AnimateProgressBarValue(oldValue, newValue);
-        }
-
         private void AnimateProgressBarValue(double oldValue, double newValue)
         {
             if (AssociatedObject != null)
@@ -109,23 +95,42 @@ namespace SciChart.Examples.Demo.Behaviors
 
                 _valueAnimation.From = oldValue;
                 _valueAnimation.To = newValue;
-                _valueAnimation.Duration = _duration;
+                _valueAnimation.Duration = Duration;
 
                 AssociatedObject.BeginAnimation(RangeBase.ValueProperty, _valueAnimation);
             }
         }
 
+        private void TryAnimateProgressBarValue(double oldValue, double newValue)
+        {
+            lock (_progressLock)
+            {
+                if (_isAnimating)
+                {
+                    _progressValues.Update(oldValue, newValue);
+                }
+                else
+                {
+                    AnimateProgressBarValue(oldValue, newValue);
+                }
+            }
+        }
+
         private void OnValueAnimationCompleted(object sender, EventArgs e)
         {
-            _isAnimating = false;
-
-            if (_progressValue != null)
+            lock (_progressLock)
             {
-                var oldValue = _progressValue.OldValue;
-                var newValue = _progressValue.NewValue;
+                _isAnimating = false;
 
-                _progressValue = null;
-                AnimateProgressBarValue(oldValue, newValue);
+                if (_progressValues.HasValues)
+                {
+                    var oldValue = _progressValues.OldValue;
+                    var newValue = _progressValues.NewValue;
+
+                    _progressValues.Clear();
+
+                    AnimateProgressBarValue(oldValue, newValue);
+                }
             }
         }
     }

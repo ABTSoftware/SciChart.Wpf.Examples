@@ -15,7 +15,6 @@
 // *************************************************************************************
 using System;
 using System.ComponentModel;
-using System.Windows.Automation.Provider;
 using System.Windows.Media;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Interop;
@@ -25,13 +24,6 @@ using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
 {
-    public enum TextDisplayMode
-    {
-        Default,
-        FacingCameraAlways,
-        ScreenSpace
-    }
-
     /// <summary>
     /// A class to demonstrate a 3D Text Elements added to the SciChart3D Scene. Created using our BaseSceneEntity and Font3D APIs
     /// </summary>
@@ -46,8 +38,6 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
 
         [TypeConverter(typeof(StringToVector3TypeConverter))]
         public Vector3 Location { get; set; }
-
-        public double RotationAngle { get; set; }
 
         static TextSceneEntity()
         {
@@ -101,34 +91,12 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
         }
 
         /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DisposeFont();
-            }
-
-            base.Dispose(disposing);
-        }
-
-        private void DisposeFont()
-        {
-            _font.SafeDispose();
-            _font = null;
-        }
-
-        /// <summary>
         /// Called when the 3D Engine wishes to update the geometry in this element. This is where we need to cache geometry before draw.
         /// </summary>
         /// <param name="rpi">The <see cref="IRenderPassInfo3D" /> containing parameters for the current render pass.</param>
         public override void UpdateScene(IRenderPassInfo3D rpi)
         {
-            if (_font == null)
-            {
-                _font = new Font3D(_fontFamily, (uint)_fontSize);
-            }
+            _font ??= new Font3D(_fontFamily, (uint)_fontSize);
         }
 
         /// <summary>
@@ -141,9 +109,28 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
             base.OnEngineRestart();
         }
 
+        private void DisposeFont()
+        {
+            _font.SafeDispose();
+            _font = null;
+        }
+
         public override eSCRTSceneEntityKind GetKind()
         {
             return eSCRTSceneEntityKind.SCRT_SCENE_ENTITY_KIND_HUD3D;
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                DisposeFont();
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

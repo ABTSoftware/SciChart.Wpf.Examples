@@ -93,7 +93,7 @@
                                                  Opacity="0">
 
                                         <i:Interaction.Behaviors>
-                                            <behaviors:ProgressBarAnimateValueBehavior Value="{Binding Path=ActualAutoSelectInterval, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ShowcaseControl}, Converter={StaticResource TimeSpanConverter}}"/>
+                                            <behaviors:ProgressBarAnimateValueBehavior Duration="00:00:01" Value="{Binding Path=AutoSelectСountdown, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ShowcaseControl}, Converter={StaticResource TimeSpanConverter}}"/>
                                         </i:Interaction.Behaviors>
 
                                     </ProgressBar>

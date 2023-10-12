@@ -23,12 +23,12 @@ namespace SciChart.Examples.Demo.Controls
             (nameof(IsAutoSelectEnabled), typeof(bool), typeof(ShowcaseControl), new PropertyMetadata(true, OnIsAutoSelectEnabledChanged));
 
         public static readonly DependencyProperty AutoSelectIntervalProperty = DependencyProperty.Register
-            (nameof(AutoSelectInterval), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5), OnAutoSelectIntervalChanged));
+            (nameof(AutoSelectInterval), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5d), OnAutoSelectIntervalChanged));
 
-        private static readonly DependencyPropertyKey ActualAutoSelectIntervalPropertyKey = DependencyProperty.RegisterReadOnly
-            (nameof(ActualAutoSelectInterval), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5)));
+        private static readonly DependencyPropertyKey AutoSelectСountdownPropertyKey = DependencyProperty.RegisterReadOnly
+            (nameof(AutoSelectСountdown), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5d)));
 
-        public static readonly DependencyProperty ActualAutoSelectIntervalProperty = ActualAutoSelectIntervalPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty AutoSelectСountdownProperty = AutoSelectСountdownPropertyKey.DependencyProperty;
 
         public static DependencyProperty HorizontalOffsetProperty = DependencyProperty.RegisterAttached
             ("HorizontalOffset", typeof(double), typeof(ShowcaseControl), new PropertyMetadata(0d, OnHorizontalOffsetChanged));
@@ -57,10 +57,10 @@ namespace SciChart.Examples.Demo.Controls
             set => SetValue(AutoSelectIntervalProperty, value);
         }
 
-        public TimeSpan ActualAutoSelectInterval
+        public TimeSpan AutoSelectСountdown
         {
-            get => (TimeSpan)GetValue(ActualAutoSelectIntervalProperty);
-            private set => SetValue(ActualAutoSelectIntervalPropertyKey, value);
+            get => (TimeSpan)GetValue(AutoSelectСountdownProperty);
+            private set => SetValue(AutoSelectСountdownPropertyKey, value);
         }
 
         public static void SetHorizontalOffset(FrameworkElement target, double value)
@@ -138,7 +138,7 @@ namespace SciChart.Examples.Demo.Controls
 
             UpdateScrollPosition();
 
-            ActualAutoSelectInterval = AutoSelectInterval;
+            AutoSelectСountdown = AutoSelectInterval;
         }
 
         public override void OnApplyTemplate()
@@ -176,15 +176,17 @@ namespace SciChart.Examples.Demo.Controls
         {
             if (_timer.IsPaused || !IsAutoSelectEnabled) return;
 
-            ActualAutoSelectInterval = ActualAutoSelectInterval.Subtract(TimerInterval);
+            AutoSelectСountdown = AutoSelectСountdown.Subtract(TimerInterval);
 
-            if (ActualAutoSelectInterval <= TimeSpan.Zero)
+            if (AutoSelectСountdown <= TimeSpan.Zero)
             {
                 var nextItemIndex = SelectedIndex + 1;
+
                 if (nextItemIndex < 0 || nextItemIndex >= Items.Count)
                 {
                     nextItemIndex = 0;
                 }
+
                 SelectedItem = Items[nextItemIndex];
             }
         }
@@ -195,7 +197,7 @@ namespace SciChart.Examples.Demo.Controls
 
             if (IsAutoSelectEnabled)
             {
-                ActualAutoSelectInterval = AutoSelectInterval;
+                AutoSelectСountdown = AutoSelectInterval;
 
                 _timer.Start();
 
@@ -336,7 +338,7 @@ namespace SciChart.Examples.Demo.Controls
         {
             if (d is ShowcaseControl showcaseControl && showcaseControl.IsLoaded)
             {
-                showcaseControl.ActualAutoSelectInterval = showcaseControl.AutoSelectInterval;
+                showcaseControl.AutoSelectСountdown = showcaseControl.AutoSelectInterval;
 
                 if ((bool)e.NewValue)
                 {
@@ -358,7 +360,7 @@ namespace SciChart.Examples.Demo.Controls
         {
             if (d is ShowcaseControl showcaseControl)
             {
-                showcaseControl.ActualAutoSelectInterval = (TimeSpan)e.NewValue;
+                showcaseControl.AutoSelectСountdown = (TimeSpan)e.NewValue;
             }
         }
 

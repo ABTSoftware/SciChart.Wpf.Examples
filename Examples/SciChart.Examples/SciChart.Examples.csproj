@@ -75,15 +75,15 @@
     <Resource Include="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="*-*" />
+    <PackageReference Include="SciChart" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="*-*" />
+    <PackageReference Include="SciChart3D" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="*-*" />
+    <PackageReference Include="SciChart.DirectX" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="*-*" />
+    <PackageReference Include="SciChart.DrawingTools" Version="8.*-*" />
   </ItemGroup>
 </Project>
