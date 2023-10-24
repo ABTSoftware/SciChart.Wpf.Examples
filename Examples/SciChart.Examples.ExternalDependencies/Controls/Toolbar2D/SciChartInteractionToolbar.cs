@@ -305,8 +305,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
         {
             var isPolar = (scs is SciChartSurface surface) &&
                 (surface.IsPolarChart ||
-                 surface.XAxes.Any(x => x.IsPolarAxis) ||
-                 surface.YAxes.Any(x => x.IsPolarAxis));
+                 surface.XAxes?.Any(x => x.IsPolarAxis) == true ||
+                 surface.YAxes?.Any(x => x.IsPolarAxis) == true);
 
             var devModifiers = new List<IChartModifier>();
             var userModifiers = new List<IChartModifier>();
@@ -348,8 +348,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             // AnnotationCreationModifier
             var annotationMod = new CustomAnnotationCreationModifier
             {
-                XAxisId = scs.XAxes.Any() ? scs.XAxes.First().Id : AxisCore.DefaultAxisId,
-                YAxisId = scs.YAxes.Any() ? scs.YAxes.First().Id : AxisCore.DefaultAxisId
+                XAxisId = scs.XAxes?.Any() == true ? scs.XAxes.First().Id : AxisCore.DefaultAxisId,
+                YAxisId = scs.YAxes?.Any() == true ? scs.YAxes.First().Id : AxisCore.DefaultAxisId
             };
 
             annotationMod.AnnotationCreated += (sender, args) =>

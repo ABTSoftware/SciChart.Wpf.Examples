@@ -3,36 +3,36 @@
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
 
     <Style x:Key="ExampleListBoxStyle" TargetType="ListBox">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0,5,0,0"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Padding" Value="3" />
-                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                    <Setter Property="VerticalContentAlignment" Value="Top" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Padding" Value="3"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Grid Background="{TemplateBinding Background}">
+                                <Border Background="{TemplateBinding Background}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
-                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="Normal"/>
                                             <VisualState x:Name="MouseOver">
                                                 <Storyboard>
                                                     <DoubleAnimation Duration="0"
                                                                      Storyboard.TargetName="fillColor"
                                                                      Storyboard.TargetProperty="Opacity"
-                                                                     To=".35" />
+                                                                     To=".35"/>
                                                 </Storyboard>
                                             </VisualState>
                                             <VisualState x:Name="Disabled">
@@ -40,18 +40,18 @@
                                                     <DoubleAnimation Duration="0"
                                                                      Storyboard.TargetName="contentPresenter"
                                                                      Storyboard.TargetProperty="Opacity"
-                                                                     To=".55" />
+                                                                     To=".55"/>
                                                 </Storyboard>
                                             </VisualState>
                                         </VisualStateGroup>
                                         <VisualStateGroup x:Name="SelectionStates">
-                                            <VisualState x:Name="Unselected" />
+                                            <VisualState x:Name="Unselected"/>
                                             <VisualState x:Name="Selected">
                                                 <Storyboard>
                                                     <DoubleAnimation Duration="0"
                                                                      Storyboard.TargetName="fillColor2"
                                                                      Storyboard.TargetProperty="Opacity"
-                                                                     To=".75" />
+                                                                     To=".75"/>
                                                 </Storyboard>
                                             </VisualState>
                                         </VisualStateGroup>
@@ -69,33 +69,32 @@
                                                     </ObjectAnimationUsingKeyFrames>
                                                 </Storyboard>
                                             </VisualState>
-                                            <VisualState x:Name="Unfocused" />
+                                            <VisualState x:Name="Unfocused"/>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <Rectangle x:Name="fillColor"
-                                               Fill="{StaticResource MainThemeSolidBrush}"
-                                               IsHitTestVisible="False"
-                                               Opacity="0"
-                                               RadiusX="1"
-                                               RadiusY="1" />
-                                    <Rectangle x:Name="fillColor2"
-                                               Fill="{StaticResource MainThemeSolidBrush}"
-                                               IsHitTestVisible="False"
-                                               Opacity="0"
-                                               RadiusX="1"
-                                               RadiusY="1" />
-                                    <ContentPresenter x:Name="contentPresenter"
-                                                      Margin="{TemplateBinding Padding}"
-                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                      Content="{TemplateBinding Content}"
-                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
-                                    <Rectangle x:Name="FocusVisualElement"
-                                               RadiusX="1"
-                                               RadiusY="1"
-                                               Stroke="{StaticResource MainThemeSolidBrush}"
-                                               StrokeThickness="1"
-                                               Visibility="Collapsed" />
-                                </Grid>
+                                    <Grid Margin="{TemplateBinding Padding}">
+                                        <Rectangle x:Name="fillColor"
+                                                   Fill="{StaticResource MainThemeSolidBrush}"
+                                                   IsHitTestVisible="False"
+                                                   Opacity="0"/>
+
+                                        <Rectangle x:Name="fillColor2"
+                                                   Fill="{StaticResource MainThemeSolidBrush}"
+                                                   IsHitTestVisible="False"
+                                                   Opacity="0"/>
+
+                                        <ContentPresenter x:Name="contentPresenter"
+                                                          Margin="{TemplateBinding Padding}"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                                        <Rectangle x:Name="FocusVisualElement"
+                                                   Stroke="{StaticResource MainThemeSolidBrush}"
+                                                   StrokeThickness="1"
+                                                   Visibility="Collapsed"/>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -105,42 +104,56 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Grid>
-                        <s:SciChartSurface Width="200"
-                                           Height="110"
-                                           FontSize="12"
-                                           FontWeight="SemiBold"
-                                           ChartTitle="{Binding TypeName}"
-                                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+                    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <s:SciChartSurface Grid.Row="1"
+                                           x:Name="surface"
+                                           Width="200"
+                                           Height="85"
+                                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}"
+                                           IsHitTestVisible="False">
 
                             <s:SciChartSurface.Resources>
-                                <ResourceDictionary Source="RenderebleSeriesStyles.xaml" />
+                                <ResourceDictionary Source="RenderebleSeriesStyles.xaml"/>
                             </s:SciChartSurface.Resources>
 
-                            <!--  Create an X Axis  -->
                             <s:SciChartSurface.XAxis>
                                 <s:NumericAxis DrawMajorGridLines="False"
                                                DrawMinorGridLines="False"
-                                               Visibility="Collapsed" />
+                                               Visibility="Collapsed"/>
                             </s:SciChartSurface.XAxis>
-
-                            <!--  Create a Y Axis with GrowBy  -->
+                            
                             <s:SciChartSurface.YAxis>
                                 <s:NumericAxis DrawMajorBands="True"
                                                DrawMajorGridLines="False"
                                                DrawMinorGridLines="False"
-                                               Visibility="Collapsed" />
+                                               Visibility="Collapsed"/>
                             </s:SciChartSurface.YAxis>
                         </s:SciChartSurface>
 
-                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,0">
-                                    <GradientStop Offset="0.0" Color="#00FEFEFE" />
-                                    <GradientStop Offset="1.0" Color="#00000000" />
-                                </LinearGradientBrush>
-                            </Border.Background>
+                        <Border Grid.Row="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"   
+                                Background="{StaticResource ThemedSurfaceChartBackground}">
+
+                            <TextBlock Text="{Binding TypeName}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="{Binding Foreground, Mode=OneWay, Source={x:Reference surface}}"
+                                       Margin="0,0,0,2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
                         </Border>
+
+                        <Border Grid.Row="0"
+                                Grid.RowSpan="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="Transparent"/>
                     </Grid>
                 </DataTemplate>
             </Setter.Value>

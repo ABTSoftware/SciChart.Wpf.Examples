@@ -3,7 +3,7 @@
 namespace SciChartExport
 {
     /// <summary>
-    /// Interaction logic for Shell.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
