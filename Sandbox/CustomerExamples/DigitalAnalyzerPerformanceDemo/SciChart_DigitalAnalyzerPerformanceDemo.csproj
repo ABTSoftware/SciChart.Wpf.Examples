@@ -30,9 +30,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39"/>
 		<PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0"/>
-		<PackageReference Include="SciChart" Version="7.0.2.27161" />
-		<PackageReference Include="SciChart3D" Version="7.0.2.27161" />
-		<PackageReference Include="SciChart.ExternalDependencies" Version="7.0.2.27161" />
-		<PackageReference Include="SciChart.DrawingTools" Version="7.0.2.27161" />
+		<PackageReference Include="SciChart" Version="*-*" />
+		<PackageReference Include="SciChart3D" Version="*-*" />
+		<PackageReference Include="SciChart.ExternalDependencies" Version="*-*" />
+		<PackageReference Include="SciChart.DrawingTools" Version="*-*" />
 	</ItemGroup>
 </Project>

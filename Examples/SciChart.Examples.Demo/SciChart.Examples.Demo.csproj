@@ -39,9 +39,6 @@
     <None Remove="Resources\codeStopwords.dat" />
     <None Remove="Resources\Fonts\Marlett.ttf" />
     <None Remove="Resources\Fonts\NEUROPOL.ttf" />
-    <None Remove="Resources\Images\HomeBackground.jpg" />
-    <None Remove="Resources\Images\scichartlogo.png" />
-    <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\stopwords.dat" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
@@ -98,9 +95,6 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\Marlett.ttf" />
     <Resource Include="Resources\Fonts\NEUROPOL.ttf" />
-    <Resource Include="Resources\Images\HomeBackground.jpg" />
-    <Resource Include="Resources\Images\scichartlogo.png" />
-    <Resource Include="Resources\Images\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
@@ -122,15 +116,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="7.0.2.27161" />
+    <PackageReference Include="SciChart" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="7.0.2.27161" />
+    <PackageReference Include="SciChart3D" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="7.0.2.27161" />
+    <PackageReference Include="SciChart.DirectX" Version="8.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="7.0.2.27161" />
+    <PackageReference Include="SciChart.DrawingTools" Version="8.*-*" />
   </ItemGroup>
 </Project>

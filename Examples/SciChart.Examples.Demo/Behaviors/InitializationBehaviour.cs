@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using SciChart.Examples.Demo.Helpers;
-using SciChart.Examples.Demo.Search;
 using SciChart.Examples.Demo.ViewModels;
-using SciChart.UI.Bootstrap;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Async;
 using SciChart.UI.Reactive.Observability;
@@ -18,38 +15,40 @@ namespace SciChart.Examples.Demo.Behaviors
     {
         private readonly IModule _module;
 
-        private readonly IBlurParams _defaultParams = new BlurParams() { Duration = 120, From = 8, To = 0 };
-        private readonly IBlurParams _blurredParams = new BlurParams() { Duration = 200, From = 0, To = 8 };
+        private readonly IBlurParams _defaultParams = new BlurParams { Duration = 120, From = 8, To = 0 };
+        private readonly IBlurParams _blurredParams = new BlurParams { Duration = 200, From = 0, To = 8 };
 
-        public InitializationBehaviour(MainWindowViewModel target, IModule module, ISchedulerContext schedulerContext)
-            : base(target)
+        public InitializationBehaviour(MainWindowViewModel target, IModule module, ISchedulerContext schedulerContext) : base(target)
         {
             _module = module;
 
-            Task.Factory.StartNew(() =>
-            {
-                CreateInvertedIndex.CreateIndex(_module.Examples);
-                CreateInvertedIndex.CreateIndexForCode(_module.Examples);
-            })
-            .Then(() => Target.SearchBoxEnabled = true)
-            .Catch(ex => target.Exception = new ExceptionViewModel("Initialization Error", ex.Flatten()));        
+            Target.ShowcaseExamples = _module.ShowcaseExamples
+                .Select(x => x.Value)
+                .Distinct(new ExampleEqualityComparer())
+                .ShuffleToList();
 
-            var groupsByCategory = _module.GroupsByCategory;            
+            Target.Categories = _module.GroupsByCategory
+                .Select(x => new ExampleCategoryViewModel { Category = x.Key, Groups = x.Value })
+                .ToList();
 
-            Target.Categories = groupsByCategory.Select(y => new ExampleCategoryViewModel() { Category = y.Key, Groups = y.Value}).ToList();            
+            Target.SelectedShowcaseExample = Target.ShowcaseExamples.FirstOrDefault();
+
             int midCount = (Target.Categories.Count() - 1) / 2;
             if (midCount >= 0 && midCount < Target.Categories.Count())
+            {
                 Target.SelectedCategory = Target.Categories.ElementAt(midCount);
+                Target.SelectedCategory.IsHomeCategory = true;
+            }
 
             Target.EverythingViewModel = new EverythingViewModel();
 
             Target.WhenPropertyChanged(x => x.SelectedCategory)
                 .Do(_ => Target.IsBusy = true)
                 .Throttle(TimeSpan.FromMilliseconds(500))
-                .Do(c => Target.EverythingViewModel.SelectedCategory = c != null ? c.Category : null)
+                .Do(c => Target.EverythingViewModel.SelectedCategory = c?.Category)
                 .Delay(TimeSpan.FromMilliseconds(200), schedulerContext.Default)
-                .ObserveOn(schedulerContext.Dispatcher)        
-                .Subscribe(_ => Target.IsBusy = false)                                        
+                .ObserveOn(schedulerContext.Dispatcher)
+                .Subscribe(_ => Target.IsBusy = false)
                 .DisposeWith(this);
 
             Target.WhenPropertyChanged(x => x.IsBusy)

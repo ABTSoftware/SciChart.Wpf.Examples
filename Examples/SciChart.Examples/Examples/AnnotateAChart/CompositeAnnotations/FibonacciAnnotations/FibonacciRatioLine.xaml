@@ -6,10 +6,7 @@
                             CoordinateMode="Relative"
                             Foreground="White"
                             LabelPlacement="Left"
-                            LabelValue="{Binding LabelValue}"
                             ShowLabel="True"
-                            Stroke="{Binding Stroke}"
                             StrokeThickness="1"
                             X1="0"
-                            X2="1"
-                            Y1="{Binding Y1}" />
+                            X2="1"/>

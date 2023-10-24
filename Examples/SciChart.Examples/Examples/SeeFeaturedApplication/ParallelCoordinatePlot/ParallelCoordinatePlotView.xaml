@@ -88,6 +88,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="ParallelAxisDropTargetStyle" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#70FFFFFF"/>
+            <Setter Property="Width" Value="7"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -148,7 +154,8 @@
                 <s:ModifierGroup>
                     <s:ZoomPanModifier XyDirection="XDirection" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsPanEnabled}}"/>
                     <s:RubberBandXyZoomModifier IsXAxisOnly="True" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsZoomEnabled}}"/>
-                    <s:ParallelAxisReorderModifier AxesReordered="OnAxisReordered" IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsReorderEnabled}}"/>
+                    <s:ParallelAxisReorderModifier AxesReordered="OnAxisReordered" DropTargetBorderStyle="{StaticResource ParallelAxisDropTargetStyle}" 
+                                                   IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsReorderEnabled}}"/>
                     <s:SeriesSelectionModifier IsEnabled="{Binding IsChecked, Mode=OneWay, Source={x:Reference IsSelectionEnabled}}"/>
                     <s:MouseWheelZoomModifier XyDirection="XDirection"/>
                     <s:ZoomExtentsModifier/>

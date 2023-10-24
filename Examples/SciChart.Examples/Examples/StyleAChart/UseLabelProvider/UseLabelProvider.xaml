@@ -9,7 +9,7 @@
                 <Setter Property="Foreground" Value="{Binding Foreground, Mode=OneWay}"/>
                 <Setter Property="FontSize" Value="{Binding FontSize, Mode=OneWay}"/>
                 <Setter Property="FontWeight" Value="{Binding FontWeight, Mode=OneWay}"/>
-                <Setter Property="RenderTransform">
+                <Setter Property="LayoutTransform">
                     <Setter.Value>
                         <RotateTransform Angle="{Binding Angle, Mode=OneWay}"/>
                     </Setter.Value>

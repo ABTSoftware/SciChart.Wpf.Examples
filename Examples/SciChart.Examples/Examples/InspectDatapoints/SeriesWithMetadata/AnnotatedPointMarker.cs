@@ -16,7 +16,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PointMarkers;
@@ -27,8 +26,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
 {
     public class AnnotatedPointMarker : BasePointMarker
     {
-        private const float TextSize = 12f;
-        private const double TextIndent = 3f;
+        private const int TextOffset = 12;
         private Color _checkedPointMarkerTextColor = Color.FromArgb(0xFF, 0x6B, 0xC4, 0xA9);
 
         private IList<IPointMetadata> _dataPointMetadata;
@@ -39,16 +37,12 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
         private IBrush2D _gainFillBrush;
         private IBrush2D _lossFillBrush;
 
-        private readonly TextBlock _textBlock;
-
         public Color GainMarkerFill { get; set; }
         public Color LossMarkerFill { get; set; }
 
         public AnnotatedPointMarker()
         {
             _dataPointIndexes = new List<int>();
-
-            _textBlock = new TextBlock { FontSize = TextSize, Margin = new Thickness(TextIndent) };
 
             SetCurrentValue(PointMarkerBatchStrategyProperty, new DefaultPointMarkerBatchStrategy());
         }
@@ -94,27 +88,18 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
 
                         DrawDiamond(context, center, Width, Height, _strokePen, isGain ? _gainFillBrush : _lossFillBrush);
 
-                        _textBlock.Text = gainLossValue;
-                        _textBlock.MeasureArrange();
+                        var textSize = context.MeasureText(gainLossValue, (float)FontSize, FontFamily, FontWeight, FontStyle);
 
-                        var xPos = center.X - _textBlock.DesiredSize.Width / 2;
-                        xPos = xPos < 0 ? TextIndent : xPos;
-
-                        var marginalRightPos = context.ViewportSize.Width - _textBlock.DesiredSize.Width - TextIndent;
-                        xPos = xPos > marginalRightPos ? marginalRightPos : xPos;
-
-                        var yPos = center.Y;
-                        var yOffset = isGain ? -_textBlock.DesiredSize.Height - TextIndent : TextIndent;
-                        yPos += yOffset;
-
-                        var textRect = new Rect(xPos, yPos, _textBlock.DesiredSize.Width, _textBlock.DesiredSize.Height);
-                        context.DrawText(textRect,
-                                        !metadata.IsCheckPoint ? isGain ? GainMarkerFill : LossMarkerFill : _checkedPointMarkerTextColor,
-                                        TextSize,
-                                        gainLossValue,
-                                        FontFamily,
-                                        FontWeight,
-                                        FontStyle);
+                        var xPos = center.X - textSize.Width / 2; 
+                        var yPos = isGain ? (center.Y - textSize.Height - TextOffset) : (center.Y + TextOffset);
+          
+                        context.DrawText(new Point(xPos, yPos),                                  
+                                         gainLossValue,
+                                         (float)FontSize,
+                                         FontFamily,
+                                         FontWeight,
+                                         FontStyle,
+                                         metadata.IsCheckPoint ? _checkedPointMarkerTextColor : (isGain ? GainMarkerFill : LossMarkerFill));
 
                         locationIndex++;
                     }
@@ -125,7 +110,9 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
         private void TryCacheResources(IRenderContext2D context)
         {
             if (!context.IsCompatibleType(_strokePen))
+            {
                 Dispose();
+            }
 
             _strokePen ??= context.CreatePen(Stroke, AntiAliasing, (float)StrokeThickness, Opacity);
             _gainFillBrush ??= context.CreateBrush(GainMarkerFill);
@@ -143,7 +130,7 @@ namespace SciChart.Examples.Examples.InspectDatapoints.SeriesWithMetadata
             {
                 // Points drawn like this:
                 // 
-                //      x0      (x4 in same location as x0)
+                //      x0  (x4 = x0)
                 // 
                 // x3        x1
                 //

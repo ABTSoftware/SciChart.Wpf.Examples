@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SciChart.Charting.Common.Extensions;
+using SciChart.Charting.Visuals;
 
 namespace SciChart.Examples.Demo.Helpers.ProjectExport
 {
@@ -52,11 +53,12 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
 
+        public static readonly Version SciChartVersion = typeof(SciChartSurface).Assembly.GetName().Version;
+
         public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool useLibsFromFolder)
         {
             var files = new Dictionary<string, string>();
             var assembly = typeof(ProjectWriter).Assembly;
-            var version = assembly.GetName().Version;
 
             var names = assembly.GetManifestResourceNames();
             var templateFiles = names.Where(x => x.Contains("Templates")).ToList();
@@ -78,7 +80,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
 
             string projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
 
-            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath, useLibsFromFolder, version);
+            files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath, useLibsFromFolder);
             files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
 
             files.RenameKey(ProjectFileName, projectName + ".csproj");
@@ -130,7 +132,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             return Regex.Replace(dictionary, pattern, string.Empty);
         }
 
-        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath, bool useLibsFromFolder, Version version)
+        private static string GenerateProjectFile(string projFileSource, Example example, string assembliesPath, bool useLibsFromFolder)
         {
             var projXml = XDocument.Parse(projFileSource);
             if (projXml.Root != null)
@@ -150,6 +152,9 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                     }
                     else
                     {
+                        // Get version in format [major].*-*
+                        var version = $"{SciChartVersion.Major}.*-*";
+
                         // Add assembly NuGet packages
                         foreach (var asmPackageName in AssembliesNuGetPackages)
                         {

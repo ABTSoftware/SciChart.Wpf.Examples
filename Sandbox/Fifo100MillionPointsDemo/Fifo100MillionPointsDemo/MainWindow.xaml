@@ -33,7 +33,7 @@
                       ItemsSource="{Binding AllPointCounts}"
                       VerticalAlignment="Center"
                       MinWidth="100"/>
-            
+
             <Button Margin="5,0,0,0" MinWidth="100" Command="{Binding RunCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -42,7 +42,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            
+
             <Button Margin="5,0,0,0" MinWidth="100" Command="{Binding StopCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

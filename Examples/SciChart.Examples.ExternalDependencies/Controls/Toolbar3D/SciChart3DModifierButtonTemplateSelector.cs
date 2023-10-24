@@ -16,14 +16,11 @@
 // SciChart Ltd., and should at no time be copied, transferred, sold,
 // distributed or made available without express written permission.
 // *************************************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting3D.Modifiers;
 using SciChart.Charting3D.Modifiers.Tooltip3D;
+using SciChart.Examples.ExternalDependencies.Controls.Toolbar3D.CustomModifiers;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionToolbar
 {
@@ -36,7 +33,10 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
         public DataTemplate VertexSelectionModifier3DTemplate { get; set; }
         public DataTemplate TooltipModifier3DTemplate { get; set; }
         public DataTemplate LegendModifier3DTemplate { get; set; }
-
+        public DataTemplate CoordinateSystemModeToolbarModifierTemplate { get; set; }
+        public DataTemplate CameraModeTemplate { get; set; }
+        public DataTemplate AxisLabelOrientationTemplate { get; set; }
+        public DataTemplate AxisTitleOrientationTemplate { get; set; }
         public DataTemplate EmptyTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -47,14 +47,40 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             {
                 var modifierType = mod.Modifier.GetType();
 
-                if (modifierType == typeof(FreeLookModifier3D)) return FreeLookModifierTemplate;
-                if (modifierType == typeof(OrbitModifier3D)) return OrbitModifierTemplate;
-                if (modifierType == typeof(MouseWheelZoomModifier3D)) return MouseWheel3DModifierTemplate;
-                if (modifierType == typeof(ZoomExtentsModifier3D)) return CustomZoomExtentsModifier3DTemplate;
-                if (modifierType == typeof(VertexSelectionModifier3D)) return VertexSelectionModifier3DTemplate;
-                if (modifierType == typeof(TooltipModifier3D)) return TooltipModifier3DTemplate;
-                if (modifierType == typeof(LegendModifier3D)) return LegendModifier3DTemplate;
+                if (modifierType == typeof(FreeLookModifier3D))
+                    return FreeLookModifierTemplate;
+
+                if (modifierType == typeof(OrbitModifier3D))
+                    return OrbitModifierTemplate;
+
+                if (modifierType == typeof(MouseWheelZoomModifier3D))
+                    return MouseWheel3DModifierTemplate;
+
+                if (modifierType == typeof(ZoomExtentsModifier3D))
+                    return CustomZoomExtentsModifier3DTemplate;
+
+                if (modifierType == typeof(VertexSelectionModifier3D))
+                    return VertexSelectionModifier3DTemplate;
+
+                if (modifierType == typeof(TooltipModifier3D))
+                    return TooltipModifier3DTemplate;
+
+                if (modifierType == typeof(LegendModifier3D))
+                    return LegendModifier3DTemplate;
+
+                if (modifierType == typeof(CoordinateSystemModifier))
+                    return CoordinateSystemModeToolbarModifierTemplate;
+
+                if (modifierType == typeof(CameraModeModifier))
+                    return CameraModeTemplate;
+
+                if (modifierType == typeof(AxisLabelOrientationModifier))
+                    return AxisLabelOrientationTemplate;
+
+                if (modifierType == typeof(AxisTitleOrientationModifier))
+                    return AxisTitleOrientationTemplate;
             }
+
             return EmptyTemplate;
         }
     }

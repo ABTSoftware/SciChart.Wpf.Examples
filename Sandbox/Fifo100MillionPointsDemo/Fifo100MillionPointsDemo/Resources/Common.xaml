@@ -12,7 +12,7 @@
 
     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#222"/>
     <SolidColorBrush x:Key="TextBrush" Color="#EEE"/>
- 
+
     <SolidColorBrush x:Key="TextBoxOutlineBrush" Color="#ff323539"/>
     <SolidColorBrush x:Key="TextBoxForeground" Color="#FFF"/>
 
@@ -38,7 +38,7 @@
     <Style TargetType="abt:BusyPanel">
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
-    
+
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>

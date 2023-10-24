@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
@@ -9,9 +9,7 @@
 		<RootNamespace>Tutorial_03_Adding_Series_to_a_3D_Chart</RootNamespace>
 		<LangVersion>Latest</LangVersion>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="SciChart3D" Version="*" />
+		<PackageReference Include="SciChart3D" Version="*-*" />
 	</ItemGroup>
-
 </Project>

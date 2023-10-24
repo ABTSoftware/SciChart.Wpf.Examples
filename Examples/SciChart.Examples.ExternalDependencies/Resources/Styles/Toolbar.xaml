@@ -123,6 +123,10 @@
                                                                                         OrbitModifierTemplate="{StaticResource Orbit3DModifierTemplate}"
                                                                                         TooltipModifier3DTemplate="{StaticResource TooltipModifier3DTemplate}"
                                                                                         VertexSelectionModifier3DTemplate="{StaticResource VertexSelectionModifier3DTemplate}"
+                                                                                        CoordinateSystemModeToolbarModifierTemplate="{StaticResource CoordinateSystemModeTemplate}"
+                                                                                        CameraModeTemplate="{StaticResource CameraModeTemplate}"
+                                                                                        AxisLabelOrientationTemplate="{StaticResource AxisLabelOrientationTemplate}"
+                                                                                        AxisTitleOrientationTemplate="{StaticResource AxisTitleOrientationTemplate}"
                                                                                         EmptyTemplate="{StaticResource EmptyDataTemplate}"/>
                                 </ItemsControl.ItemTemplateSelector>
                             </ItemsControl>

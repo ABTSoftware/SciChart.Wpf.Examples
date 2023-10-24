@@ -31,7 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SciChart" Version="7.0.2.27161" />
+		<PackageReference Include="SciChart" Version="*-*" />
 		<PackageReference Include="SciChart.Wpf.UI" Version="3.1.251" />
 		<PackageReference Include="SciChart.Wpf.UI.Transitionz" Version="3.1.251" />
 	</ItemGroup>

@@ -27,26 +27,30 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
         {
             var xValues = DashboardDataHelper.GetXValues();
             var yValues = DashboardDataHelper.GetYValues();
+
             var columnStyleKeys = DashboardDataHelper.GetColumnStyleKeys();
             var mountainStyleKeys = DashboardDataHelper.GetMountainStyleKeys();
 
             var rSeriesViewModel = new List<IRenderableSeriesViewModel>();
+
             for (int i = 0; i < 5; i++)
             {
-                var dataSeries = new XyDataSeries<double, double> {SeriesName = "Series " + (i + 1)};
+                var dataSeries = new XyDataSeries<double, double> { SeriesName = $"Series {i + 1}" };
                 dataSeries.Append(xValues, yValues[i]);
 
                 IRenderableSeriesViewModel seriesViewModel;
-                if (type == typeof (IStackedColumnRenderableSeries))
+
+                if (type == typeof(IStackedColumnRenderableSeries))
                 {
                     seriesViewModel = isSideBySide
-                        ? GetStackedColumn(dataSeries, isOneHundredPercent, columnStyleKeys[i], i.ToString())
-                        : GetStackedColumn(dataSeries, isOneHundredPercent, columnStyleKeys[i], "");
+                        ? GetStackedColumn(dataSeries, isOneHundredPercent, columnStyleKeys[i], $"G{i}")
+                        : GetStackedColumn(dataSeries, isOneHundredPercent, columnStyleKeys[i], "G1");
                 }
                 else
                 {
                     seriesViewModel = GetStackedMountain(dataSeries, isOneHundredPercent, mountainStyleKeys[i]);
                 }
+
                 rSeriesViewModel.Add(seriesViewModel);
             }
 
@@ -60,7 +64,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
                 DataSeries = dataSeries,
                 StyleKey = styleKey,
                 IsOneHundredPercent = isOneHundredPercent,
-                StackedGroupId = group,
+                StackedGroupId = group
             };
         }
 
@@ -70,7 +74,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
             {
                 DataSeries = dataSeries,
                 StyleKey = styleKey,
-                IsOneHundredPercent = isOneHundredPercent,
+                IsOneHundredPercent = isOneHundredPercent
             };
         }
     }

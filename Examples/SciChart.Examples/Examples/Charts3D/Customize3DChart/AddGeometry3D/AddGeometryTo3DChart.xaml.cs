@@ -26,37 +26,56 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
         {
             InitializeComponent();
 
-            // NOTE: Commented code below is the example of treating the Location value
-            // as 3D point in Data Coordinates Space but not in World Coordinates Space
-            //sciChart3DSurface.WorldDimensions.Y = 400;
+            Loaded += OnExampleLoaded;
+        }
 
+        private void OnExampleLoaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Create some SceneInstances and add to the 3D scene
+
+            // Requires Coordinate transformation from Data Coordinates to World Coordinates,
+            // which requires Axes3D to be created
             CreateCubes();
             CreateLabels();
+        }
+
+        private void CreateLabels()
+        {
+            // Add text labels to the scene 
+            var textA = new TextSceneEntity("Teeny Block", Color.FromArgb(255, 0xDC, 0x79, 0x69), TransformToWorldCoordinates(new Vector3(6.5f, 2.0f, 6.5f)), 9, "Segoe UI");
+            var textB = new TextSceneEntity("Big Block", Color.FromArgb(255, 0xF4, 0x84, 0x0B), TransformToWorldCoordinates(new Vector3(4.0f, 4.0f, 4.0f)), 10, "Tahoma");
+
+            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(textA);
+            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(textB);
+        }
+
+        private Vector3 TransformToWorldCoordinates(Vector3 chartPoint3D)
+        {
+            var worldPoint3D = new Vector3
+            {
+                X = (float)sciChart3DSurface.XAxis.GetCurrentCoordinateCalculator().GetCoordinate(chartPoint3D.X) - sciChart3DSurface.WorldDimensions.X / 2.0f,
+                Y = (float)sciChart3DSurface.YAxis.GetCurrentCoordinateCalculator().GetCoordinate(chartPoint3D.Y),
+                Z = (float)sciChart3DSurface.ZAxis.GetCurrentCoordinateCalculator().GetCoordinate(chartPoint3D.Z) - sciChart3DSurface.WorldDimensions.Z / 2.0f
+            };
+
+            return worldPoint3D;
         }
 
         private void CreateCubes()
         {
             // Create a cubes in 3D World space with TopLeft and BottomRight coordinates
             // We set some cubes to transparent colors to demonstrate Order Independent Transparency 
-            
-            var cubeA = new CubeGeometry(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(50.0f, 50.0f, 50.0f), Color.FromArgb(128, 0x64, 0xBA, 0xE4));            
-            var cubeB = new CubeGeometry(new Vector3(50.0f, 0.0f, 50.0f), new Vector3(100.0f, 100.0f, 100.0f), Color.FromArgb(128, 0xDC, 0x79, 0x69));            
-            var cubeC = new CubeGeometry(new Vector3(100.0f, 0.0f, 100.0f), new Vector3(150.0f, 150.0f, 150.0f), Color.FromArgb(255, 0x6B, 0xC4, 0xA9));            
-            var cubeD = new CubeGeometry(new Vector3(-100.0f, 0.0f, -100.0f), new Vector3(0.0f, 150.0f, 0.0f), Color.FromArgb(255, 0x5C, 0x43, 0x9B));            
-            var cubeE = new CubeGeometry(new Vector3(-150.0f, 0.0f, -150.0f), new Vector3(50.0f, 200.0f, 50.0f), Color.FromArgb(128, 0xF4, 0x84, 0x0B));
-            var cubeF = new CubeGeometry(new Vector3(-150.0f, 0.0f, -150.0f), new Vector3(-100.0f, 50.0f, -100.0f), Color.FromArgb(128, 0xF6, 0x08, 0x6C));
 
-            // NOTE: Commented code below is the example of treating the Location value
-            // as 3D point in Data Coordinates Space but not in World Coordinates Space
-            //cubeA = new CubeGeometry(new Vector3(5.0f, 0.0f, 5.0f), new Vector3(6.0f, 1.0f, 6.0f), Color.FromArgb(128, 255, 0, 0));
-            //cubeB = new CubeGeometry(new Vector3(6.0f, 0.0f, 6.0f), new Vector3(7.0f, 2.0f, 7.0f), Color.FromArgb(128, 0, 255, 0));
-            //cubeC = new CubeGeometry(new Vector3(7.0f, 0.0f, 7.0f), new Vector3(8.0f, 3.0f, 8.0f), Color.FromArgb(255, 0, 0, 255));
-            //cubeD = new CubeGeometry(new Vector3(3.0f, 0.0f, 3.0f), new Vector3(5.0f, 3.0f, 5.0f), Color.FromArgb(255, 0, 255, 255));
-            //cubeE = new CubeGeometry(new Vector3(2.0f, 0.0f, 2.0f), new Vector3(6.0f, 4.0f, 6.0f), Color.FromArgb(128, 255, 255, 255));
-            //cubeF = new CubeGeometry(new Vector3(2.0f, 0.0f, 2.0f), new Vector3(3.0f, 1.0f, 3.0f), Color.FromArgb(128, 255, 0, 0));
-            
-            // force a far position on this cube ( user can do this in cases where a box inside another )
-            TSRVector3 farPosition = new TSRVector3(20000.0f, 20000.0f, 2000.0f);
+            // Create CubeGeometries defined by chart coordinates
+            var cubeA = CreateCubeGeometry(new Vector3(4.5f, 0.0f, 4.5f), new Vector3(6.0f, 1.5f, 6.0f), Color.FromArgb(128, 0x64, 0xBA, 0xE4));
+            var cubeB = CreateCubeGeometry(new Vector3(6.0f, 0.0f, 6.0f), new Vector3(7.0f, 2.5f, 7.0f), Color.FromArgb(128, 0xDC, 0x79, 0x69));
+            var cubeC = CreateCubeGeometry(new Vector3(7.0f, 0.0f, 7.0f), new Vector3(8.0f, 3.5f, 8.0f), Color.FromArgb(255, 0x6B, 0xC4, 0xA9));
+            var cubeD = CreateCubeGeometry(new Vector3(2.5f, 0.0f, 2.5f), new Vector3(4.5f, 3.5f, 4.5f), Color.FromArgb(255, 0x5C, 0x43, 0x9B));
+            var cubeE = CreateCubeGeometry(new Vector3(1.0f, 0.0f, 1.0f), new Vector3(6.0f, 5.0f, 6.0f), Color.FromArgb(128, 0xF4, 0x84, 0x0B));
+            var cubeF = CreateCubeGeometry(new Vector3(1.0f, 0.0f, 1.0f), new Vector3(2.5f, 1.5f, 2.5f), Color.FromArgb(128, 0xF6, 0x08, 0x6C));
+
+            // force a far position on this cube, in world coordinates ( user can do this in cases where a box inside another )
+            var farPosition = new TSRVector3(20000.0f, 20000.0f, 2000.0f);
             cubeF.SetPosition(farPosition);
 
             // Add the cubes to the 3D Scene 
@@ -68,19 +87,16 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
             sciChart3DSurface.Viewport3D.RootEntity.Children.Add(cubeF);
         }
 
-        private void CreateLabels()
+        private CubeGeometry CreateCubeGeometry(Vector3 topLeft, Vector3 bottomRight, Color color)
         {
-            // Add some text labels to the scene 
-            var textA = new TextSceneEntity("Teeny Block", Color.FromArgb(255, 0xDC, 0x79, 0x69), new Vector3(75f, 100f, 75f), TextDisplayMode.FacingCameraAlways, 9, "Segoe UI");
-            var textB = new TextSceneEntity("Big Block", Color.FromArgb(255, 0xF4, 0x84, 0x0B), new Vector3(-50f,200f,-50f), TextDisplayMode.FacingCameraAlways, 10, "Tahoma");
+            // Transform the chart coordinates to world coordinates
+            var topLeftWorld = TransformToWorldCoordinates(topLeft);
+            var bottomRightWorld = TransformToWorldCoordinates(bottomRight);
 
-            // NOTE: Commented code below is the example of treating the Location value
-            // as 3D point in Data Coordinates Space but not in World Coordinates Space
-            //textA = new TextSceneEntity("Teeny Block", Color.FromArgb(255, 0, 225, 0), new Vector3(6.5f, 2.0f, 6.5f), TextDisplayMode.FacingCameraAlways, 9, "Segoe UI");
-            //textB = new TextSceneEntity("Big Block", Color.FromArgb(255, 255, 255, 255), new Vector3(4.0f, 4.0f, 4.0f), TextDisplayMode.FacingCameraAlways, 10, "Tahoma");
+            // Create a CubeGeometry from the world coordinates
+            var cubeGeometry = new CubeGeometry(topLeftWorld, bottomRightWorld, color);
 
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(textA);
-            sciChart3DSurface.Viewport3D.RootEntity.Children.Add(textB);
+            return cubeGeometry;
         }
     }
 }

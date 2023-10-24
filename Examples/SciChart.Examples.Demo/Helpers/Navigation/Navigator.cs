@@ -337,6 +337,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             ServiceLocator.Container.Resolve<IExampleViewModel>().BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
             ServiceLocator.Container.Resolve<IExampleViewModel>().ExportExampleViewModel.IsExportVisible = false;
             ServiceLocator.Container.Resolve<IMainWindowViewModel>().HideSearchCommand.Execute(null);
+            ServiceLocator.Container.Resolve<IMainWindowViewModel>().ResetSelectedCommand.Execute(null);
 
             // Clears memory on going to home
             ((TransitioningFrame)_examplesFrame.Frame).SetContentNull();

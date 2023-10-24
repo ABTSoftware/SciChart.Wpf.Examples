@@ -16,6 +16,8 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             _parent = parent;
 
+            ExportMajorVersion = ProjectWriter.SciChartVersion.Major;
+
             SelectExportPathCommand = new ActionCommand(() =>
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -34,7 +36,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 }
             });
 
-            ExportCommand = new ActionCommand(async() =>
+            ExportCommand = new ActionCommand(async () =>
             {
                 ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath, IsLibFromFolder);
 
@@ -42,7 +44,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
                 if (_parent.Usage != null)
                     _parent.Usage.Exported = true;
-                
+
                 await Task.Delay(TimeSpan.FromMilliseconds(2000));
 
                 OnExported = false;
@@ -51,9 +53,17 @@ namespace SciChart.Examples.Demo.ViewModels
             }, () => IsValid);
 
             CancelCommand = new ActionCommand(() => IsExportVisible = false);
-       
-            LibrariesPath = ExportExampleHelper.TryAutomaticallyFindAssemblies();   
+
+            LibrariesPath = ExportExampleHelper.TryAutomaticallyFindAssemblies();
         }
+
+        public ActionCommand SelectExportPathCommand { get; }
+        public ActionCommand SelectLibraryCommand { get; }
+
+        public ActionCommand ExportCommand { get; }
+        public ActionCommand CancelCommand { get; }
+
+        public int ExportMajorVersion { get; }
 
         public bool IsExportVisible
         {
@@ -117,15 +127,6 @@ namespace SciChart.Examples.Demo.ViewModels
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
-
-        public ActionCommand SelectExportPathCommand { get; }
-
-        public ActionCommand SelectLibraryCommand { get; }
-
-        public ActionCommand ExportCommand { get; }
-
-        public ActionCommand CancelCommand { get; }
-
 
         #region IDataErrorInfo
 

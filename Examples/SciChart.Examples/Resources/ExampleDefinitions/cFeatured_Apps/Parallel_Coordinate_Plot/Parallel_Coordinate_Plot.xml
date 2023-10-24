@@ -1,34 +1,37 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml</View>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
-  <IconPath>IconCandlestick</IconPath>
-  <ToolTipDescription>
-	  Demonstrates how to create and use Parallel Coordinates Plot with SciChart
-  </ToolTipDescription>
-  <Description>
-    The Parallel Coordinate Plot is a WPF chart type for visualizing and analyzing multi dimensional datasets. For example, it can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (each represented by an axis).
+	<View>Examples/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml</View>
+	<ImagePath/>
+	<IconPath>IconCandlestick</IconPath>
+	<IsShowcaseExample>True</IsShowcaseExample>
+	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/parallel-coordinate-plot.png</ShowcaseImagePath>
+	<ShowcaseDescription>The Parallel Coordinate Plot is a chart type for visualizing and analyzing multi dimensional datasets. It can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (represented by an axis)</ShowcaseDescription>
+	<ToolTipDescription>
+		Demonstrates how to create and use Parallel Coordinates Plot with SciChart
+	</ToolTipDescription>
+	<Description>
+		The Parallel Coordinate Plot is a WPF chart type for visualizing and analyzing multi dimensional datasets. For example, it can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (each represented by an axis).
 
-    This example demonstrates how to create, use and interact with SciChart Parallel Coordinates Plot.
+		This example demonstrates how to create, use and interact with SciChart Parallel Coordinates Plot.
 
-    [b][i] The following interactions are possible:[/i][/b]
+		[b][i] The following interactions are possible:[/i][/b]
 
-    - [b][MouseWheel][/b] to zoom in and out
-    - Click and drag [b][Left Mouse Button][/b] to zoom in
-    - Double-click [b][Left Mouse Button][/b] to zoom to data extents
+		- [b][MouseWheel][/b] to zoom in and out
+		- Click and drag [b][Left Mouse Button][/b] to zoom in
+		- Double-click [b][Left Mouse Button][/b] to zoom to data extents
 
-    [b][i] Toolbar actions: [/i][/b]
+		[b][i] Toolbar actions: [/i][/b]
 
-    - Toggle [b][Pan Button][/b] to enable panning with [b][Left Mouse Button][/b]
-    - Toggle [b][Reorder Button][/b] to enable reordering of Y-Axes. This allows swapping positions of two axes by drag-and-drop
-    - Toggle [b][Selection Button][/b] to enable series selection. It allows clicking on a series to select it, or multi-select by holding down [b]CTRL[/b]
-    - Toggle [b][Spline Button][/b] to draw series as spline lines
+		- Toggle [b][Pan Button][/b] to enable panning with [b][Left Mouse Button][/b]
+		- Toggle [b][Reorder Button][/b] to enable reordering of Y-Axes. This allows swapping positions of two axes by drag-and-drop
+		- Toggle [b][Selection Button][/b] to enable series selection. It allows clicking on a series to select it, or multi-select by holding down [b]CTRL[/b]
+		- Toggle [b][Spline Button][/b] to draw series as spline lines
 
-    [b]Documentation Links:[/b]
+		[b]Documentation Links:[/b]
 
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
-  </Description>
-  <CodeFiles>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml.cs.txt</string>
-  </CodeFiles>
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Radar%20Chart%20Type.html']The Radar Chart Type[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml.cs.txt</string>
+	</CodeFiles>
 </ExampleDefinition>

@@ -33,8 +33,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SciChart" Version="7.0.2.27161" />
-		<PackageReference Include="SciChart.DirectX" Version="7.0.2.27161" />
+		<PackageReference Include="SciChart" Version="*-*" />
+		<PackageReference Include="SciChart.DirectX" Version="*-*" />
 		<PackageReference Include="SharpDX" Version="4.2.0" />
 		<PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
 		<PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />

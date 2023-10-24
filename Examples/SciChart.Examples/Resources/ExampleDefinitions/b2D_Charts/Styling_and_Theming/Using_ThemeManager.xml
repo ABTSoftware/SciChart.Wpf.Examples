@@ -1,27 +1,30 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <View>Examples/StyleAChart/UsingThemeManager/ChangeTheme.xaml</View>
-  <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoThemeManager.png</ImagePath>
- <IconPath>IconThemes</IconPath>
-  <ToolTipDescription>Demonstrates easy Xaml Styling via the ThemeManager. SciChart includes six pre-defined Themes, which provide chart pane, grid-line brushes and default colors for Renderable Series</ToolTipDescription>
-  <Description>
-    SciChart Ships with 8 stunning themes, which you can apply to your charts with a single line of code. This example showcases the themes, and how they affect default cursor, zoom, axis, grid and series colors.
+	<View>Examples/StyleAChart/UsingThemeManager/ChangeTheme.xaml</View>
+	<ViewModel/>
+	<ImagePath/>
+	<IconPath>IconThemes</IconPath>
+	<IsShowcaseExample>True</IsShowcaseExample>
+	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/theme-manager-chart.png</ShowcaseImagePath>
+	<ShowcaseDescription>SciChart Ships with 8 stunning themes, which you can apply to your charts with a single line of code. This example showcases the themes, and how they affect default Cursor, Zoom, Axis, Grid and Series colors.</ShowcaseDescription>
+	<ToolTipDescription>Demonstrates easy Xaml Styling via the ThemeManager. SciChart includes six pre-defined Themes, which provide chart pane, grid-line brushes and default colors for Renderable Series</ToolTipDescription>
+	<Description>
+		SciChart Ships with 8 stunning themes, which you can apply to your charts with a single line of code. This example showcases the themes, and how they affect default cursor, zoom, axis, grid and series colors.
 
-    In addition, you can create [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']Custom Themes[/url]
+		In addition, you can create [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']Custom Themes[/url]
 
-    [b]Documentation Links[/b]
+		[b]Documentation Links[/b]
 
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart%20WPF%20ThemeManager.html']ThemeManager Class[/url]
-    - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Themes.IThemeProvider.html']IThemeProvider Interface[/url]
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']Creating a Custom Theme[/url]
-  </Description>
-  <CodeFiles>
-    <string>Resources/ExampleSourceFiles/StyleAChart/UsingThemeManager/ChangeTheme.xaml.txt</string>
-    <string>Resources/ExampleSourceFiles/StyleAChart/UsingThemeManager/ChangeTheme.xaml.cs.txt</string>
-  </CodeFiles>
-  <Features>
-    <Features>Theme</Features>
-    <Features>Style</Features>
-    <Features>XAML</Features>
-  </Features>
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart%20WPF%20ThemeManager.html']ThemeManager Class[/url]
+		- [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Themes.IThemeProvider.html']IThemeProvider Interface[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20a%20Custom%20Theme.html']Creating a Custom Theme[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/StyleAChart/UsingThemeManager/ChangeTheme.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/StyleAChart/UsingThemeManager/ChangeTheme.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Theme</Features>
+		<Features>Style</Features>
+		<Features>XAML</Features>
+	</Features>
 </ExampleDefinition>

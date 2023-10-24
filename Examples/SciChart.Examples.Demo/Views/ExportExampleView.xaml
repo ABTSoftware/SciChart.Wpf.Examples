@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="SciChart.Examples.Demo.Views.ExportExampleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks">
@@ -96,9 +95,8 @@
             <StackPanel Grid.Row="5" Grid.Column="0">
                 <TextBlock Margin="0,10,0,0" Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}">
                     <Run Text="Please select how to reference SciChart"/>
-                    <Run Text="{Binding Source={x:Static s:SciChartSurface.VersionInfo}, Mode=OneWay, StringFormat='({0})'}"/>
+                    <Run Text="{Binding ExportMajorVersion, Mode=OneWay, StringFormat='(requires v{0}.x)'}"/>
                 </TextBlock>
-                
                 <RadioButton Content="NuGet Package" Margin="0,10,0,0" IsChecked="True"/>
                 <RadioButton Content="Installation Folder" Margin="0,10,0,0" IsChecked="{Binding IsLibFromFolder}"/>
             </StackPanel>
