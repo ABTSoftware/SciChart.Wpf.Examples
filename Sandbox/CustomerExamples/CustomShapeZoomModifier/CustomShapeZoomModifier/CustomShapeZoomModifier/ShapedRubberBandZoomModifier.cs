@@ -156,7 +156,6 @@ namespace CustomShapeZoomModifier
             var ptTrans = GetPointRelativeTo(e.MousePoint, ModifierSurface);
 
             // Then UPDATE The SHAPE
-            //UpdateShape(false, _startPoint, ptTrans); // IsXAxisOnly will be used later
             UpdateShape(_startPoint, ptTrans);
         }
 
@@ -173,8 +172,6 @@ namespace CustomShapeZoomModifier
             // This accounts for any offset due to left Y-Axis
             var ptTrans = GetPointRelativeTo(e.MousePoint, ModifierSurface);
 
-            // then update shape and SET endPoint 
-            //_endPoint = UpdateShape(false, _startPoint, ptTrans);
             UpdateShape(_startPoint, ptTrans);
             _endPoint = ptTrans;
 
@@ -185,7 +182,6 @@ namespace CustomShapeZoomModifier
             // Check for dragged distance(if it's bigger than min dragged sensitivity
             if (PointUtil.Distance(startPoint, currentPoint) > MinDragSensitivity)
             {
-                // Zoom only if user drew a rectangle
                 PerformZoom(startPoint, endPoint);
 
                 e.Handled = true;
