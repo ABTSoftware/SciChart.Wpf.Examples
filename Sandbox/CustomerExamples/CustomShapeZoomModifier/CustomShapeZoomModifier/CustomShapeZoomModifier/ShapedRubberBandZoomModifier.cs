@@ -20,27 +20,27 @@ namespace CustomShapeZoomModifier
         /// <summary>
         /// Defines the ShapeFill dependency property
         /// </summary>
-        public static readonly DependencyProperty ShapeFillProperty = DependencyProperty.Register("ShapeFill", typeof(Brush), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(null));
+        public static readonly DependencyProperty ShapeFillProperty = DependencyProperty.Register(nameof(ShapeFill), typeof(Brush), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(null));
 
         /// <summary>
         /// Defines the ShapeStroke dependency property
         /// </summary>
-        public static readonly DependencyProperty ShapeStrokeProperty = DependencyProperty.Register("ShapeStroke", typeof(Brush), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(null));
+        public static readonly DependencyProperty ShapeStrokeProperty = DependencyProperty.Register(nameof(ShapeStroke), typeof(Brush), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(null));
 
         /// <summary>
         /// Defines the Modifier's Shape thickness
         /// </summary>
-        public static readonly DependencyProperty ModifierShapeStrokeThicknessProperty = DependencyProperty.Register("ModifierShapeStrokeThickness", typeof(int), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(4));
+        public static readonly DependencyProperty ModifierShapeStrokeThicknessProperty = DependencyProperty.Register(nameof(ModifierShapeStrokeThickness), typeof(int), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(4));
 
         /// <summary>
         /// Defines the Modifier's Shape thickness
         /// </summary>
-        public static readonly DependencyProperty ModifierEdgeShapeSizeProperty = DependencyProperty.Register("ModifierEdgeShapeSize", typeof(int), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(4));
+        public static readonly DependencyProperty ModifierEdgeShapeSizeProperty = DependencyProperty.Register(nameof(ModifierEdgeShapeSize), typeof(int), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(4));
 
         /// <summary>
         /// Defines the MinDragSensitivity DependencyProperty
         /// </summary>
-        public static readonly DependencyProperty MinDragSensitivityProperty = DependencyProperty.Register("MinDragSensitivity", typeof(double), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(10.0));
+        public static readonly DependencyProperty MinDragSensitivityProperty = DependencyProperty.Register(nameof(MinDragSensitivity), typeof(double), typeof(ShapedRubberBandZoomModifier), new PropertyMetadata(10.0));
 
         /// <summary>
         /// Defines in which direction we're zooming
