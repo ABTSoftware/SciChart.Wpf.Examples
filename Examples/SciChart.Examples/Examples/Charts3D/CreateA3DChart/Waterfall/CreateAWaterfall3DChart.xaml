@@ -8,183 +8,180 @@
              mc:Ignorable="d"
              d:DesignHeight="400"
              d:DesignWidth="600">
-    <Grid>
-        <Grid.Resources>
+  <Grid>
+    <Grid.Resources>
 
-            <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" Fill="Blue" />
+      <s3D:SpherePointMarker3D x:Key="PointMarker" Size="5" Fill="Blue" />
 
-            <s3D:GradientColorPalette x:Key="ExampleGradientColorPalette" IsStepped="False">
-                <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
-                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
-                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
-                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
-                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
-                </s3D:GradientColorPalette.GradientStops>
-            </s3D:GradientColorPalette>
+      <s3D:GradientColorPalette x:Key="ExampleGradientColorPalette" IsStepped="False">
+        <s3D:GradientColorPalette.GradientStops>
+          <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
+          <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
+          <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
+          <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
+          <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
+        </s3D:GradientColorPalette.GradientStops>
+      </s3D:GradientColorPalette>
 
-            <s3D:SolidColorBrushPalette x:Key="TransparentColorPalette" Fill="Transparent"/>
-            <s3D:SolidColorBrushPalette x:Key="SolidFillColorPalette" Fill="#AA00BFFF"/>
-            <s3D:SolidColorBrushPalette x:Key="SolidStrokeColorPalette" Fill="LimeGreen"/>
+      <s3D:SolidColorBrushPalette x:Key="TransparentColorPalette" Fill="Transparent"/>
+      <s3D:SolidColorBrushPalette x:Key="SolidFillColorPalette" Fill="#AA00BFFF"/>
+      <s3D:SolidColorBrushPalette x:Key="SolidStrokeColorPalette" Fill="LimeGreen"/>
 
-            <s3D:GradientColorPalette x:Key="ExampleStrokeColorPalette" IsStepped="False">
-                <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
-                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
-                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
-                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
-                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
-                </s3D:GradientColorPalette.GradientStops>
-            </s3D:GradientColorPalette>
-        </Grid.Resources>
+      <s3D:GradientColorPalette x:Key="ExampleStrokeColorPalette" IsStepped="False">
+        <s3D:GradientColorPalette.GradientStops>
+          <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
+          <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
+          <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
+          <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
+          <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
+        </s3D:GradientColorPalette.GradientStops>
+      </s3D:GradientColorPalette>
+    </Grid.Resources>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
 
-        <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
-        <!--  to the chart and is included for example purposes.  -->
-        <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
-        <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
-            
-            <ext:FlyoutSeparator/>
+    <!--  The SciChart3DInteractionToolbar adds rotate, orbit, zoom, pan, zoom extents functionality  -->
+    <!--  to the chart and is included for example purposes.  -->
+    <!--  If you wish to know how to zoom and pan a 3D chart then do a search for Zoom Pan in the Examples suite!  -->
+    <ext:SciChart3DInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChart}}">
 
-            <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" Width="150" Orientation="Vertical">
-                        <TextBlock Text="Stroke Color Palette" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <RadioButton Margin="0,5" Content="Gradient Stroke Y" x:Name="ckbStrokeY" IsChecked="True" GroupName="StrokePaletteFillDirection"/>
-                        <RadioButton Margin="0,5" Content="Gradient Stroke Z" x:Name="ckbStrokeZ" GroupName="StrokePaletteFillDirection"/>
-                        <RadioButton Margin="0,5" Content="Solid Color (Green)" x:Name="ckbStrokeSolidColor" GroupName="StrokePaletteFillDirection"/>
-                        <RadioButton Margin="0,5" Content="None (Transparent)" x:Name="ckbStrokeTransparent" GroupName="StrokePaletteFillDirection"/>
-      
-                        <TextBlock Text="Gradient Fill Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <RadioButton Margin="0,5" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" GroupName="GradientFillDirection"/>
-                        <RadioButton Margin="0,5" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" GroupName="GradientFillDirection"/>
-                        <RadioButton Margin="0,5" Content="Solid Color Fill (Blue)" x:Name="ckbFillSolid" GroupName="GradientFillDirection"/>
-                        <RadioButton Margin="0,5" Content="None (Transparent)" x:Name="ckbFillTransparent" GroupName="GradientFillDirection"/>
+      <ext:FlyoutSeparator/>
 
-                        <TextBlock Text="Appearance" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <CheckBox Margin="0,5" Content="Is Volumetric" x:Name="ckbIsVolumetric"/>
-                        <CheckBox Margin="0,5" Content="Show PointMarkers" x:Name="ckbShowPointMarkers">
-                            <CheckBox.Style>
-                                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource ToolbarPopupCheckBoxStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
-                                            <Setter Property="IsChecked" Value="False"/>
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </CheckBox.Style>
-                        </CheckBox>
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-        </ext:SciChart3DInteractionToolbar>
+      <ext:FlyoutMenuButton>
+        <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+        <ext:FlyoutMenuButton.PopupContent>
+          <StackPanel Margin="5" Width="150" Orientation="Vertical">
+            <TextBlock Text="Stroke Color Palette" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+            <RadioButton Margin="0,5" Content="Gradient Stroke Y" x:Name="ckbStrokeY" IsChecked="True" GroupName="StrokePaletteFillDirection"/>
+            <RadioButton Margin="0,5" Content="Gradient Stroke Z" x:Name="ckbStrokeZ" GroupName="StrokePaletteFillDirection"/>
+            <RadioButton Margin="0,5" Content="Solid Color (Green)" x:Name="ckbStrokeSolidColor" GroupName="StrokePaletteFillDirection"/>
+            <RadioButton Margin="0,5" Content="None (Transparent)" x:Name="ckbStrokeTransparent" GroupName="StrokePaletteFillDirection"/>
 
-        <s3D:SciChart3DSurface x:Name="SciChart"
-                               Grid.Column="1"
-                               WorldDimensions="200,100,200">
+            <TextBlock Text="Gradient Fill Direction" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+            <RadioButton Margin="0,5" Content="Gradient Fill Y Axis" x:Name="ckbFillY" IsChecked="True" GroupName="GradientFillDirection"/>
+            <RadioButton Margin="0,5" Content="Gradient Fill Z Axis" x:Name="ckbFillZ" GroupName="GradientFillDirection"/>
+            <RadioButton Margin="0,5" Content="Solid Color Fill (Blue)" x:Name="ckbFillSolid" GroupName="GradientFillDirection"/>
+            <RadioButton Margin="0,5" Content="None (Transparent)" x:Name="ckbFillTransparent" GroupName="GradientFillDirection"/>
 
-            <s3D:SciChart3DSurface.Camera>
-                <s3D:Camera3D ZoomToFitOnAttach="True" />
-            </s3D:SciChart3DSurface.Camera>
+            <TextBlock Text="Appearance" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+            <CheckBox Margin="0,5" Content="Is Volumetric" x:Name="ckbIsVolumetric"/>
+            <CheckBox Margin="0,5" Content="Show PointMarkers" x:Name="ckbShowPointMarkers">
+              <CheckBox.Style>
+                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource ToolbarPopupCheckBoxStyle}">
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
+                      <Setter Property="IsChecked" Value="False"/>
+                      <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </CheckBox.Style>
+            </CheckBox>
+          </StackPanel>
+        </ext:FlyoutMenuButton.PopupContent>
+      </ext:FlyoutMenuButton>
+    </ext:SciChart3DInteractionToolbar>
 
-            <s3D:SciChart3DSurface.RenderableSeries>
-                <s3D:WaterfallRenderableSeries3D x:Name="WaterfallSeries">
+    <s3D:SciChart3DSurface x:Name="SciChart"
+                           Grid.Column="1"
+                           WorldDimensions="200,100,200">
 
-                    <!-- This style is used to demonstrate different properties and their effects in the waterfall chart -->
-                    <!-- You don't need a style, you can just set the properties above as attributes -->
+      <s3D:SciChart3DSurface.Camera>
+        <s3D:Camera3D ZoomToFitOnAttach="True" />
+      </s3D:SciChart3DSurface.Camera>
 
-                    <!-- In our example, we set the default properties for PointMarker, Y/ZStrokeColorMapping, Y/ZColorMapping to null. -->
-                    <!-- These are changed by user controls declared above in the example -->
-                    <s3D:WaterfallRenderableSeries3D.Style>
-                        <Style TargetType="s3D:WaterfallRenderableSeries3D">
-                            <!-- The Stroke is not applied to the WaterfallRenderableSeries3D. This color is used for Tooltip (Background) binding -->
-                            <Setter Property="Stroke" Value="{StaticResource MainThemeTransparentStrokeColor}" />
-                            <Setter Property="Opacity" Value="0.8" />
-                            <Setter Property="StrokeThickness" Value="4" />
-                            <Setter Property="SliceThickness" Value="0" />
-                            <Setter Property="YStrokeColorMapping" Value="{x:Null}" />
-                            <Setter Property="ZStrokeColorMapping" Value="{x:Null}" />
-                            <Setter Property="ZColorMapping" Value="{x:Null}" />
-                            <Setter Property="YColorMapping" Value="{x:Null}" />
-                            <Style.Triggers>
-                                <!-- The YStrokeColorMapping applies a BrushColorPalette (Solid or Gradient brush)to the stroke in the Y direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeY}}" Value="True">
-                                    <Setter Property="YStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
-                                </DataTrigger>
-                                <!-- The ZStrokeColorMapping applies a BrushColorPalette to the stroke in the Z direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeZ}}" Value="True">
-                                    <Setter Property="ZStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
-                                </DataTrigger>
-                                <!-- When ckbStrkTransparent is checked, we set both strokes to transparent to give a clearer view of the fill -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeTransparent}}" Value="True">
-                                    <Setter Property="ZStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
-                                    <Setter Property="YStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
-                                </DataTrigger>
-                                <!-- When ckbStrkSolid is checked, we set both strokes to a solid color brush -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeSolidColor}}" Value="True">
-                                    <Setter Property="ZStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
-                                    <Setter Property="YStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
-                                </DataTrigger>
-                                <!-- The YColorMapping applies a BrushColorPalette to the fill in the Y direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillY}}" Value="True">
-                                    <Setter Property="YColorMapping" Value="{StaticResource ExampleGradientColorPalette}"/>
-                                </DataTrigger>
-                                <!-- The ZColorMapping applies a BrushColorPalette to the fill in the Z direction -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillZ}}" Value="True">
-                                    <Setter Property="ZColorMapping" Value="{StaticResource ExampleGradientColorPalette}"/>
-                                </DataTrigger>
-                                <!-- When ckbFillTransparent is checked, we set both fills to transparent to give a clearer view of the stroke -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillTransparent}}" Value="True">
-                                    <Setter Property="YColorMapping" Value="{StaticResource TransparentColorPalette}"/>
-                                    <Setter Property="ZColorMapping" Value="{StaticResource TransparentColorPalette}"/>
-                                </DataTrigger>
-                                <!-- When ckbFillSolid is checked, we set both fills to transparent to give a clearer view of the stroke -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillSolid}}" Value="True">
-                                    <Setter Property="YColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
-                                    <Setter Property="ZColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
-                                </DataTrigger>
-                                <!-- The PointMarker property applies a 3-dimensional point marker to points on each slice -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbShowPointMarkers}}" Value="True">
-                                    <Setter Property="PointMarker" Value="{StaticResource PointMarker}"/>
-                                </DataTrigger>
-                                <!-- When SliceThickness is set, the waterfall slices become volumetric -->
-                                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
-                                    <!-- SliceThickness is used to define the thickness of waterfall slices -->
-                                    <Setter Property="SliceThickness" Value="6"/>
-                                    <!-- PointMarker isn't allowed with volumetric waterfall -->
-                                    <Setter Property="PointMarker" Value="{x:Null}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </s3D:WaterfallRenderableSeries3D.Style>
-                </s3D:WaterfallRenderableSeries3D>
-            </s3D:SciChart3DSurface.RenderableSeries>
+      <s3D:SciChart3DSurface.RenderableSeries>
+        <s3D:WaterfallRenderableSeries3D x:Name="WaterfallSeries">
 
-            <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D/>
-            </s3D:SciChart3DSurface.XAxis>
+          <!-- This style is used to demonstrate different properties and their effects in the waterfall chart -->
+          <!-- You don't need a style, you can just set the properties above as attributes -->
 
-            <s3D:SciChart3DSurface.YAxis>
-                <s3D:NumericAxis3D/>
-            </s3D:SciChart3DSurface.YAxis>
+          <!-- In our example, we set the default properties for PointMarker, Y/ZStrokeColorMapping, Y/ZColorMapping to null. -->
+          <!-- These are changed by user controls declared above in the example -->
+          <s3D:WaterfallRenderableSeries3D.Style>
+            <Style TargetType="s3D:WaterfallRenderableSeries3D">
+              <!-- The Stroke is not applied to the WaterfallRenderableSeries3D. This color is used for Tooltip (Background) binding -->
+              <Setter Property="Stroke" Value="{StaticResource MainThemeTransparentStrokeColor}" />
+              <Setter Property="Opacity" Value="0.8" />
+              <Setter Property="StrokeThickness" Value="4" />
+              <Setter Property="SliceThickness" Value="0" />
+              <Setter Property="YStrokeColorMapping" Value="{x:Null}" />
+              <Setter Property="ZStrokeColorMapping" Value="{x:Null}" />
+              <Setter Property="ZColorMapping" Value="{x:Null}" />
+              <Setter Property="YColorMapping" Value="{x:Null}" />
+              <Style.Triggers>
+                <!-- The YStrokeColorMapping applies a BrushColorPalette (Solid or Gradient brush)to the stroke in the Y direction -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeY}}" Value="True">
+                  <Setter Property="YStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
+                </DataTrigger>
+                <!-- The ZStrokeColorMapping applies a BrushColorPalette to the stroke in the Z direction -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeZ}}" Value="True">
+                  <Setter Property="ZStrokeColorMapping" Value="{StaticResource ExampleStrokeColorPalette}"/>
+                </DataTrigger>
+                <!-- When ckbStrkTransparent is checked, we set both strokes to transparent to give a clearer view of the fill -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeTransparent}}" Value="True">
+                  <Setter Property="ZStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
+                  <Setter Property="YStrokeColorMapping" Value="{StaticResource TransparentColorPalette}"/>
+                </DataTrigger>
+                <!-- When ckbStrkSolid is checked, we set both strokes to a solid color brush -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbStrokeSolidColor}}" Value="True">
+                  <Setter Property="ZStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
+                  <Setter Property="YStrokeColorMapping" Value="{StaticResource SolidStrokeColorPalette}"/>
+                </DataTrigger>
+                <!-- The YColorMapping applies a BrushColorPalette to the fill in the Y direction -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillY}}" Value="True">
+                  <Setter Property="YColorMapping" Value="{StaticResource ExampleGradientColorPalette}"/>
+                </DataTrigger>
+                <!-- The ZColorMapping applies a BrushColorPalette to the fill in the Z direction -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillZ}}" Value="True">
+                  <Setter Property="ZColorMapping" Value="{StaticResource ExampleGradientColorPalette}"/>
+                </DataTrigger>
+                <!-- When ckbFillTransparent is checked, we set both fills to transparent to give a clearer view of the stroke -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillTransparent}}" Value="True">
+                  <Setter Property="YColorMapping" Value="{StaticResource TransparentColorPalette}"/>
+                  <Setter Property="ZColorMapping" Value="{StaticResource TransparentColorPalette}"/>
+                </DataTrigger>
+                <!-- When ckbFillSolid is checked, we set both fills to transparent to give a clearer view of the stroke -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbFillSolid}}" Value="True">
+                  <Setter Property="YColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
+                  <Setter Property="ZColorMapping" Value="{StaticResource SolidFillColorPalette}"/>
+                </DataTrigger>
+                <!-- The PointMarker property applies a 3-dimensional point marker to points on each slice -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbShowPointMarkers}}" Value="True">
+                  <Setter Property="PointMarker" Value="{StaticResource PointMarker}"/>
+                </DataTrigger>
+                <!-- When SliceThickness is set, the waterfall slices become volumetric -->
+                <DataTrigger Binding="{Binding IsChecked, Source={x:Reference ckbIsVolumetric}}" Value="True">
+                  <!-- SliceThickness is used to define the thickness of waterfall slices -->
+                  <Setter Property="SliceThickness" Value="6"/>
+                  <!-- PointMarker isn't allowed with volumetric waterfall -->
+                  <Setter Property="PointMarker" Value="{x:Null}"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </s3D:WaterfallRenderableSeries3D.Style>
+        </s3D:WaterfallRenderableSeries3D>
+      </s3D:SciChart3DSurface.RenderableSeries>
 
-            <s3D:SciChart3DSurface.ZAxis>
-                <s3D:LogarithmicNumericAxis3D TextFormatting="#.#E+0"
-                                              LogarithmicBase="10"
-                                              AutoRange="Always"
-                                              ScientificNotation="LogarithmicBase"/>
-            </s3D:SciChart3DSurface.ZAxis>
+      <s3D:SciChart3DSurface.XAxis>
+        <s3D:NumericAxis3D />
+      </s3D:SciChart3DSurface.XAxis>
 
-            <s3D:SciChart3DSurface.ChartModifier>
-                <s3D:VertexSelectionModifier3D />
-            </s3D:SciChart3DSurface.ChartModifier>
+      <s3D:SciChart3DSurface.YAxis>
+        <s3D:NumericAxis3D />
+      </s3D:SciChart3DSurface.YAxis>
 
-        </s3D:SciChart3DSurface>
-    </Grid>
+      <s3D:SciChart3DSurface.ZAxis>
+        <s3D:NumericAxis3D />
+      </s3D:SciChart3DSurface.ZAxis>
+
+      <s3D:SciChart3DSurface.ChartModifier>
+        <s3D:VertexSelectionModifier3D />
+      </s3D:SciChart3DSurface.ChartModifier>
+
+    </s3D:SciChart3DSurface>
+  </Grid>
 </UserControl>

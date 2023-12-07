@@ -15,21 +15,21 @@
         <Grid.Resources>
             <s3D:GradientColorPalette x:Key="GradientColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
-                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
-                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
-                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
-                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
+                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_1}"/>
+                    <GradientStop Offset="0.10" Color="{StaticResource ColorMapColor_2}"/>
+                    <GradientStop Offset="0.40" Color="{StaticResource ColorMapColor_3}"/>
+                    <GradientStop Offset="0.65" Color="{StaticResource ColorMapColor_6}"/>
+                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_7}"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
 
             <s3D:GradientColorPalette x:Key="StrokeColorPalette" IsStepped="False">
                 <s3D:GradientColorPalette.GradientStops>
-                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_7}"/>
-                    <GradientStop Offset="0.25" Color="{StaticResource ColorMapColor_6}"/>
-                    <GradientStop Offset="0.50" Color="{StaticResource ColorMapColor_3}"/>
-                    <GradientStop Offset="0.75" Color="{StaticResource ColorMapColor_2}"/>
-                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_1}"/>
+                    <GradientStop Offset="0.00" Color="{StaticResource ColorMapColor_1}"/>
+                    <GradientStop Offset="0.10" Color="{StaticResource ColorMapColor_2}"/>
+                    <GradientStop Offset="0.40" Color="{StaticResource ColorMapColor_3}"/>
+                    <GradientStop Offset="0.65" Color="{StaticResource ColorMapColor_6}"/>
+                    <GradientStop Offset="1.00" Color="{StaticResource ColorMapColor_7}"/>
                 </s3D:GradientColorPalette.GradientStops>
             </s3D:GradientColorPalette>
 
