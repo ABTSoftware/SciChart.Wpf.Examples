@@ -23,7 +23,9 @@ namespace SciChart.Examples.Demo.ViewModels
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    ExportPath = dialog.SelectedPath;
+                    var exportPath = dialog.SelectedPath;
+                    if(!exportPath.EndsWith("\\")) exportPath += "\\";
+                    ExportPath = exportPath;
                 }
             });
 
