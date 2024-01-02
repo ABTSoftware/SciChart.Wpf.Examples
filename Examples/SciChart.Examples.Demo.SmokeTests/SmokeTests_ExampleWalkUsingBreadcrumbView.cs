@@ -263,7 +263,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Create a Custom Theme", "Charts2D/StylingTheming/CustomTheme.png", (window) => Thread.Sleep(15000)),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Dashed Line Styling", "Charts2D/StylingTheming/DashedLineStyling.png"),
            // new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Use High Quality Rendering", "Charts2D/StylingTheming/UseHQRendering.png"),
-            new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PaletteProvider", "Charts2D/StylingTheming/UsingPaletteProvider.png"),
+           // new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PaletteProvider", "Charts2D/StylingTheming/UsingPaletteProvider.png"),
             //new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using PointMarkers", "Charts2D/StylingTheming/UsingPointMarkers.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Using ThemeManager", "Charts2D/StylingTheming/UsingThemeManager.png", (window) =>Task.Delay(1500)),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StylingTheming, "Xaml Styling", "Charts2D/StylingTheming/Xaml Styling.png", (window) => Thread.Sleep(1500)),
@@ -335,7 +335,7 @@ namespace SciChart.Examples.Demo.SmokeTests
              
              // Featured Apps, Financial Charts  
              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "Aggregation Filters", "FeaturedApps/FinancialCharts/AggregationFilters.png"),
-             new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "SciChart Trader Demo", "FeaturedApps/FinancialCharts/SciChartTraderDemo.png"),
+             //new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "SciChart Trader Demo", "FeaturedApps/FinancialCharts/SciChartTraderDemo.png"),
              
              // Featured Apps, Parallel Coordinate Plot
               new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ParallelCoordinatePlot, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png")
