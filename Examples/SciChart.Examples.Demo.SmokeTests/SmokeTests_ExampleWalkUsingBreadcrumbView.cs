@@ -207,6 +207,8 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Stacked Column Chart", "Charts2D/MultiseriesCharts/StackedColumnChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Stacked Column Side By Side", "Charts2D/MultiseriesCharts/StackedColumnSideBySide.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Stacked Mountain Chart", "Charts2D/MultiseriesCharts/StackedMountainChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Gantt Chart", "Charts2D/MultiseriesCharts/GanttChart.png"),
+            
             // 2D Charts, Create a Radar Chart
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Radar, "Radar Chart Customization Example", "Charts2D/RadarCharts/RadarChartCustomization.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Radar, "Using Radar Chart", "Charts2D/RadarCharts/RadarChart.png"),

@@ -12,7 +12,12 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
         private Color _color;
         private DateTime _start, _end;
 
-        public string Id { get; set; }
+        public GanttItemViewModel(int itemId)
+        {
+            Id = itemId;
+        }
+
+        public int Id { get; }
 
         public string Name { get; set; }
 
@@ -70,7 +75,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                 OnPropertyChanged(nameof(IsCurrent));
             }
         }
-        
+
         public void CheckCompletion(DateTime currentDate)
         {
             IsCurrent = currentDate >= Start && currentDate <= End;
