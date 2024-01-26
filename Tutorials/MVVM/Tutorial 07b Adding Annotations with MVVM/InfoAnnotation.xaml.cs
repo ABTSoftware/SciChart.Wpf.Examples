@@ -2,7 +2,7 @@
 
 namespace SciChart.Mvvm.Tutorial
 {
-    public partial class InfoAnnotation : CustomAnnotation
+    public partial class InfoAnnotation : CustomAnnotationForMvvm
     {
         public InfoAnnotation()
         {
