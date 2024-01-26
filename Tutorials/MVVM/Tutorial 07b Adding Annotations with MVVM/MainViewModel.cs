@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Media;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.Annotations;
 using SciChart.Data.Model;
 
 namespace SciChart.Mvvm.Tutorial
@@ -35,13 +36,17 @@ namespace SciChart.Mvvm.Tutorial
                 // Append when new values arrive
                 _lineData.Append(newValues.XValues, newValues.YValues);
 
-                // Every 100th datapoint, add an annotation
+                // Every 100th data point, add an annotation
                 if (i % 100 == 0)
                 {
                     Annotations.Add(new InfoAnnotationViewModel
                     {
                         X1 = _lineData.XValues.Last(),
                         Y1 = 0.0,
+
+                        // Specify that the point (X1, Y1) is located at the bottom-center of the annotation
+                        VerticalAnchorPoint=VerticalAnchorPoint.Bottom,
+                        HorizontalAnchorPoint=HorizontalAnchorPoint.Center,
                     });
                 }
                 i++;

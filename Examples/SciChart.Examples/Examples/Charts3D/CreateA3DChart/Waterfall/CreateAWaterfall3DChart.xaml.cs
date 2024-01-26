@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using SciChart.Charting;
+using SciChart.Charting.Model.DataSeries;
+using SciChart.Charting.Visuals.Axes;
+using SciChart.Charting3D.Axis;
 using SciChart.Charting3D.Model.DataSeries.Waterfall;
+using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Data;
 
 namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
@@ -25,19 +30,13 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
             var pointsPerSlice = 100;
             var sliceCount = 20;
 
-            var logBase = 10;
-            var slicePositions = new double[sliceCount];
-
-            for (int i = 0; i < sliceCount; ++i)
+            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, sliceCount)
             {
-                slicePositions[i] = Math.Pow(logBase, i);
-            }
-
-            var dataSeries = new WaterfallDataSeries3D<double>(pointsPerSlice, slicePositions)
-            {
-                SeriesName = "Waterfall",
+                SeriesName = "Waterfall 3D",
                 StartX = 10,
-                StepX = 1
+                StepX = 1,
+                StartZ = 1,
+                StepZ = 10
             };
 
             _transform.init((uint)Math.Log(pointsPerSlice, 2));
@@ -68,7 +67,7 @@ namespace SciChart.Examples.Examples.Charts3D.CreateA3DChart
                 for (var pointIndex = 0; pointIndex < pointsPerSlice; pointIndex++)
                 {
                     var mag = Math.Sqrt(re[pointIndex] * re[pointIndex] + im[pointIndex] * im[pointIndex]);
-                    var yVal = _random.Next(10,20) * Math.Log10(mag / pointsPerSlice);
+                    var yVal = _random.Next(10, 20) * Math.Log10(mag / pointsPerSlice);
                     yVal = (yVal < -25 || yVal > -5)
                         ? (yVal < -25) ? -25 : _random.Next(-6, -3)
                         : yVal;

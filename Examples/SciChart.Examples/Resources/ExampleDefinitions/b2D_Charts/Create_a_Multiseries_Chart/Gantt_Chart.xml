@@ -37,9 +37,8 @@
 		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttChartViewModel.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttItemViewModel.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttTextLabelProvider.cs.txt</string>
-		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GridItemsPanelBehavior.cs.txt</string>
-		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GridItemsScrollBehavior.cs.txt</string>
-		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/WeekDaysAxisCalendar.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/GanttScrollBehavior.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/GanttChart/WeekDaysAxisCalendar.cs.txt</string>
 	</CodeFiles>
 	<Features>
 		<Features>Custom</Features>

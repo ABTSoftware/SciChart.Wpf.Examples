@@ -35,7 +35,8 @@
     <Style x:Key="WaterfallStyle" TargetType="renderableSeries:WaterfallRenderableSeries3DForMvvm" BasedOn="{StaticResource {x:Type renderableSeries:WaterfallRenderableSeries3DForMvvm}}" >
         <Setter Property="YColorMapping" Value="{StaticResource GradientColorPalette}" />
         <Setter Property="ZColorMapping" Value="{StaticResource GradientColorPalette}" />
-        <!--<Setter Property="Stroke" Value="Purple" />-->
+        <Setter Property="YStrokeColorMapping" Value="{StaticResource GradientColorPalette}" />
+        <Setter Property="Stroke" Value="{StaticResource ColorMapColor_2}" />
     </Style>
 
     <Style x:Key="ColumnStyle3D" TargetType="renderableSeries:ColumnRenderableSeries3DForMvvm">
@@ -48,8 +49,8 @@
         <Setter Property="PointMarker">
             <Setter.Value>
                 <s3D:SpherePointMarker3D Fill="White" 
-                                                 Size="4" 
-                                                 Opacity="1"/>
+                                               Size="4" 
+                                               Opacity="1"/>
             </Setter.Value>
         </Setter>
     </Style>

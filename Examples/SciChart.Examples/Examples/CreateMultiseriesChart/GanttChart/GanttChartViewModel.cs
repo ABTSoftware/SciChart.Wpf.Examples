@@ -13,19 +13,13 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
 {
     public class GanttChartViewModel : BaseViewModel
     {
-        private List<IAxisViewModel> _yAxes;
-        private List<IRenderableSeriesViewModel> _renderableSeries;
-        
         private DateRange _xVisibleRange;
-
         private DateTime _xCurrentDate;
         private DateTime _xEndDate;
 
-        public IEnumerable<GanttItemViewModel> Items { get; }
-
-        public IEnumerable<IAxisViewModel> YAxes => ToAxes();
-
-        public IEnumerable<IRenderableSeriesViewModel> RenderableSeries => ToRenderableSeries();
+        public IList<GanttItemViewModel> Items { get; }
+        public IList<IAxisViewModel> YAxes { get; private set; }
+        public IList<IRenderableSeriesViewModel> RenderableSeries { get; private set; }
 
         public DateRange XVisibleRangeLimit { get; }
 
@@ -70,9 +64,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
         {
             Items = new[]
             {
-                new GanttItemViewModel
+                new GanttItemViewModel(1)
                 {
-                    Id = "1",
                     Name = "New Product Strategy",
                     Department = "Marketing/Business",
                     Start = new DateTime(2022, 05, 10),
@@ -80,9 +73,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(255, 95, 100)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(2)
                 {
-                    Id = "2",
                     Name = "Idea Generation",
                     Department = "Marketing/Engineering",
                     Start = new DateTime(2022, 05, 10),
@@ -90,9 +82,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(255, 150, 70)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(3)
                 {
-                    Id = "3",
                     Name = "Screening",
                     Department = "Marketing",
                     Start = new DateTime(2022, 06, 30),
@@ -100,9 +91,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(245, 185, 50)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(4)
                 {
-                    Id = "4",
                     Name = "Concept Testing",
                     Department = "Engineering",
                     Start = new DateTime(2022, 07, 25),
@@ -110,9 +100,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(35, 225, 130)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(5)
                 {
-                    Id = "5",
                     Name = "Business Analysis",
                     Department = "Business",
                     Start = new DateTime(2022, 07, 25),
@@ -120,9 +109,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(45, 205, 185)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(6)
                 {
-                    Id = "6",
                     Name = "Product Development",
                     Department = "Engineering",
                     Start = new DateTime(2022, 09, 12),
@@ -130,9 +118,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(70, 170, 240)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(7)
                 {
-                    Id = "7",
                     Name = "Market Testing",
                     Department = "Marketing",
                     Start = new DateTime(2022, 11, 01),
@@ -140,9 +127,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(75, 125, 235)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(8)
                 {
-                    Id = "8",
                     Name = "Focus Group Testing",
                     Department = "Marketing",
                     Start = new DateTime(2022, 12, 30),
@@ -150,9 +136,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(165, 95, 235)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(9)
                 {
-                    Id = "9",
                     Name = "Authorization",
                     Department = "Business/Engineering",
                     Start = new DateTime(2023, 01, 20),
@@ -160,9 +145,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(235, 65, 145)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(10)
                 {
-                    Id = "10",
                     Name = "Commercialization",
                     Department = "Business",
                     Start = new DateTime(2023, 01, 20),
@@ -170,9 +154,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(215, 50, 50)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(11)
                 {
-                    Id = "11",
                     Name = "Product Pricing",
                     Department = "Business/Marketing",
                     Start = new DateTime(2023, 02, 15),
@@ -180,9 +163,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(240, 90, 35)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(12)
                 {
-                    Id = "12",
                     Name = "Product Licensing",
                     Department = "Business",
                     Start = new DateTime(2023, 02, 15),
@@ -190,9 +172,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(255, 195, 20)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(13)
                 {
-                    Id = "13",
                     Name = "Promotion",
                     Department = "Marketing",
                     Start = new DateTime(2023, 03, 10),
@@ -200,9 +181,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     Color = Color.FromRgb(40, 205, 195)
                 },
 
-                new GanttItemViewModel
+                new GanttItemViewModel(14)
                 {
-                    Id = "14",
                     Name = "Launch",
                     Department = "Business",
                     Start = new DateTime(2023, 03, 28),
@@ -225,13 +205,16 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
 
             XCurrentDate = new DateTime(2022, 07, 04);
             XEndDate = new DateTime(2023, 04, 17);
+
+            CreateYAxes();
+            CreateRenderableSeries();
         }
 
-        private IEnumerable<IAxisViewModel> ToAxes()
+        private void CreateYAxes()
         {
-            if (_yAxes == null)
+            if (YAxes == null)
             {
-                _yAxes = new List<IAxisViewModel>
+                YAxes = new List<IAxisViewModel>
                 {
                     new NumericAxisViewModel
                     {
@@ -240,35 +223,37 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     }
                 };
 
-                _yAxes.AddRange(Items.Select(item => new NumericAxisViewModel
+                Items.OrderByDescending(x => x.Id).ForEachDo(item =>
                 {
-                    Id = item.Id,
-                    AxisAlignment = AxisAlignment.Left,
-                    StyleKey = "ItemYAxisStyle"
-                }));
+                    YAxes.Add(new NumericAxisViewModel
+                    {
+                        Id = $"YAxis-{item.Id}",
+                        AxisAlignment = AxisAlignment.Left,
+                        StyleKey = "ItemYAxisStyle"
+                    });
+                });
             }
-
-            return _yAxes;
         }
 
-        private IEnumerable<IRenderableSeriesViewModel> ToRenderableSeries()
+        private void CreateRenderableSeries()
         {
-            if (_renderableSeries == null)
+            if (RenderableSeries == null)
             {
-                _renderableSeries = new List<IRenderableSeriesViewModel>(
+                RenderableSeries = new List<IRenderableSeriesViewModel>();
 
-                    Items.Select(item => new StripeRenderableSeriesViewModel
+                Items.OrderByDescending(x => x.Id).ForEachDo(item =>
+                {
+                    RenderableSeries.Add(new StripeRenderableSeriesViewModel
                     {
-                        YAxisId = item.Id,
+                        YAxisId = $"YAxis-{item.Id}",
                         Stroke = item.Color,
                         Fill = item.Fill,
                         DataSeries = new StripeDataSeries<DateTime, double>(new[] { item.Start }, new[] { item.End }, 0d, 1d),
                         PointLabelProvider = new GanttTextLabelProvider(item),
                         StyleKey = "ItemRenderableSeriesStyle"
-                    }));
+                    });
+                });
             }
-
-            return _renderableSeries;
         }
     }
 }
