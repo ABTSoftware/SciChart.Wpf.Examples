@@ -10,7 +10,23 @@
 
     <Window.Resources>
         <scrollbarMvvmAxisExample:ScrollbarMvvmAxisViewModel x:Key="viewModel"/>
-        <Style x:Key="ScrollbarAxisStyle" TargetType="s:NumericAxis" x:Shared="False">
+        <Style x:Key="AxisBaseStyle" TargetType="s:NumericAxis">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasScrollbar}" Value="True">
+                    <DataTrigger.Setters>
+                        <Setter Property="AxisTitle" Value="This axis has a scrollbar"/>
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding HasScrollbar}" Value="False">
+                    <DataTrigger.Setters>
+                        <Setter Property="Scrollbar" Value="{x:Null}"/>
+                        <Setter Property="AxisTitle" Value="No scrollbar here!"/>
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="YAxisStyle" BasedOn="{StaticResource AxisBaseStyle}" TargetType="s:NumericAxis">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding HasScrollbar}" Value="True">
                     <DataTrigger.Setters>
@@ -19,13 +35,20 @@
                                 <s:SciChartScrollbar/>
                             </Setter.Value>
                         </Setter>
-                        <Setter Property="AxisTitle" Value="This axis has a scrollbar"/>
                     </DataTrigger.Setters>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding HasScrollbar}" Value="False">
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="XAxisStyle" BasedOn="{StaticResource AxisBaseStyle}" TargetType="s:NumericAxis" >
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasScrollbar}" Value="True">
                     <DataTrigger.Setters>
-                        <Setter Property="Scrollbar" Value="{x:Null}"/>
-                        <Setter Property="AxisTitle" Value="No scrollbar here!"/>
+                        <Setter Property="Scrollbar">
+                            <Setter.Value>
+                                <s:SciChartScrollbar/>
+                            </Setter.Value>
+                        </Setter>
                     </DataTrigger.Setters>
                 </DataTrigger>
             </Style.Triggers>

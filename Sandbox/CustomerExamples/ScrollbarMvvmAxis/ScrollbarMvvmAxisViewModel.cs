@@ -15,8 +15,8 @@ namespace ScrollbarMvvmAxisExample
             
             RenderableSeries = new ObservableCollection<IRenderableSeriesViewModel>();
 
-            YAxes.Add(new NumericAxisViewModelWithScrollbar() { HasScrollbar = false, StyleKey = "ScrollbarAxisStyle" });
-            XAxes.Add(new NumericAxisViewModelWithScrollbar() { HasScrollbar = true, StyleKey = "ScrollbarAxisStyle" });
+            YAxes.Add(new NumericAxisViewModelWithScrollbar() { HasScrollbar = false, StyleKey = "YAxisStyle" });
+            XAxes.Add(new NumericAxisViewModelWithScrollbar() { HasScrollbar = true, StyleKey = "XAxisStyle" });
 
             var xyData = new XyDataSeries<double>();
 
