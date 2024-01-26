@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomShapeZoomModifier", "CustomShapeZoomModifier\CustomShapeZoomModifier.csproj", "{F5A93038-F234-466C-9782-DE0FEE03D18E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5A93038-F234-466C-9782-DE0FEE03D18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5A93038-F234-466C-9782-DE0FEE03D18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5A93038-F234-466C-9782-DE0FEE03D18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5A93038-F234-466C-9782-DE0FEE03D18E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DB5A7B0A-F2A1-4D04-90D0-028DEE45594C}
+	EndGlobalSection
+EndGlobal

@@ -264,7 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\FeaturedApps\ScientificCharts\LIDARPointCloud3DDemo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GanttChart.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\AggregationFilters.png" />
     <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\SciChartTraderDemo.png" />

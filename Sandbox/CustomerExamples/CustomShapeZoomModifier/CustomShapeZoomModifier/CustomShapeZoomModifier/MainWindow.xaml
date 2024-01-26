@@ -1,0 +1,62 @@
+﻿<Window x:Class="CustomShapeZoomModifier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomShapeZoomModifier"
+        xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+        mc:Ignorable="d"
+        Title="Custom Shaped Zoom Modifier" 
+        Height="768" 
+        Width="1366" 
+        Loaded="Window_Loaded">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Perform Zoom on: " FontSize="16"/>
+            <ComboBox x:Name="cbx" ItemsSource="{Binding Source={local:EnumValues {x:Type local:ModifierAxis}}}" SelectedIndex="2"/>
+            <TextBlock Text=" axes" FontSize="16"/>
+        </StackPanel>
+        
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface x:Name="sciChart" Grid.Row="1">
+
+            <!--  Declare RenderableSeries  -->
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="lineRenderSeries"
+                                            Stroke="ForestGreen"
+                                            StrokeThickness="4">
+                </s:FastLineRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis with GrowBy  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis DrawMajorBands="True" FlipCoordinates="False" GrowBy="0.1, 0.1" />
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis with GrowBy. Optional bands give a cool look and feel for minimal performance impact  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMajorBands="True" GrowBy="0.5, 0.5" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <local:ShapedRubberBandZoomModifier ZoomOnAxis="{Binding ElementName=cbx, Path=SelectedItem}"
+                                                        ShapeFill="#55FF0000" 
+                                                        ShapeStroke="GreenYellow"
+                                                        ModifierShapeStrokeThickness="4"
+                                                        ModifierEdgeShapeSize="24"/>
+                    <s:ZoomExtentsModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</Window>

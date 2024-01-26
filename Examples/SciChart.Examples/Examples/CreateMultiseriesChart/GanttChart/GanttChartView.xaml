@@ -82,11 +82,12 @@
         </s:SciChartSurface>
 
         <ScrollViewer Grid.Row="1"
-                      Grid.ColumnSpan="2"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2" 
                       Style="{StaticResource ItemsScrollViewerStyle}">
 
             <b:Interaction.Behaviors>
-                <local:GridItemsScrollBehavior/>
+                <local:GanttScrollBehavior/>
             </b:Interaction.Behaviors>
 
             <Grid>
@@ -98,15 +99,13 @@
                 <ItemsControl Grid.Column="0"
                               Margin="0,-2,0,0"
                               ItemsSource="{Binding Items, Mode=OneWay}">
+                    
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <Grid>
-                                <b:Interaction.Behaviors>
-                                    <local:GridItemsPanelBehavior/>
-                                </b:Interaction.Behaviors>
-                            </Grid>
+                            <UniformGrid Columns="1"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border MinHeight="75"
@@ -202,7 +201,8 @@
         </ScrollViewer>
 
         <Border Grid.Row="2"
-                Grid.ColumnSpan="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2" 
                 Background="#2B364C">
 
             <s:SciChartScrollbar Margin="4,0"

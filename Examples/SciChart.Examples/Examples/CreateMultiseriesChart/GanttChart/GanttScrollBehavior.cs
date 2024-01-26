@@ -1,10 +1,10 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
 {
-    public class GridItemsScrollBehavior : Behavior<ScrollViewer>
+    public class GanttScrollBehavior : Behavior<ScrollViewer>
     {
         protected override void OnAttached()
         {
