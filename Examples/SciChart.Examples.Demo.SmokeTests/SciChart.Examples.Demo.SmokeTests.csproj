@@ -272,6 +272,12 @@
     <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\SciChartTraderDemo.png" />
     <EmbeddedResource Include="Resources\FeaturedApps\ParallelCoordinatePlot\ParallelCoordinatePlot.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SciChart.Examples.Demo\SciChart.Examples.Demo.csproj">
+      <Project>{b4f1752f-a1e0-4d2c-a900-9a1be6997828}</Project>
+      <Name>SciChart.Examples.Demo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

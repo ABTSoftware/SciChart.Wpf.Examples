@@ -26,6 +26,7 @@
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml.txt</string>
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageViewModel.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/BoolToAxisAutoRangeConverter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/NoLockTimer.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/PointCount.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/Rand.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/FifoBillionPoints/RenderSyncedTimer.cs.txt</string>

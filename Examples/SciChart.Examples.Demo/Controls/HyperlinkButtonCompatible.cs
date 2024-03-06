@@ -32,7 +32,8 @@ namespace SciChart.Examples.Demo.Controls
 #if !SILVERLIGHT
             if(!string.IsNullOrWhiteSpace(NavigateUri))
             {
-                Process.Start(NavigateUri);
+                var procStartInfo = new ProcessStartInfo(NavigateUri) { UseShellExecute = true };
+                Process.Start(procStartInfo);
             }
 #else
             if (!string.IsNullOrWhiteSpace(NavigateUri))
