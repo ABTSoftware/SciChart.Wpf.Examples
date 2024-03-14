@@ -1,0 +1,107 @@
+<UserControl x:Class="SciChart.Examples.Examples.StyleAChart.UseHighQualityRendering"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+  <UserControl.Resources>
+    <ItemsPanelTemplate x:Key="CentralAxisPanelTemplate">
+      <Canvas />
+    </ItemsPanelTemplate>
+
+    <!-- Styling settings for Y-Axis -->
+    <Style x:Key="YAxisStyle" TargetType="s:NumericAxis">
+        <Setter Property="MajorTickLineStyle">
+            <Setter.Value>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="Red" />
+        <Setter Property="TickTextBrush" Value="Red" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+    </Style>
+  </UserControl.Resources>
+
+  <Grid>
+      <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+      <!-- The charts have synchronized widths of the right Y-Axes areas -->
+      <!-- This is achieved by setting s:SciChartGroup.VerticalChartGroup on SciChartSurface  -->
+      <!-- Alternatively, Y-Axis can be turned inwards, which is demonstrated by the bottom chart -->
+      <s:SciChartSurface x:Name="ChartSurface1"
+                         Grid.Row="0"
+                         s:SciChartGroup.VerticalChartGroup="ChartsVerticalGroup"
+                         ViewportManager="{Binding ViewportManager, Mode=OneWay}">
+
+          <s:SciChartSurface.RenderableSeries>
+              <s:FastLineRenderableSeries DataSeries="{Binding DataSeries, Mode=OneWay}"/>
+          </s:SciChartSurface.RenderableSeries>
+
+          <s:SciChartSurface.ChartModifier>
+              <s:ModifierGroup s:MouseManager.MouseEventGroup="SharedModifierGroup">
+                  <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" />
+                  <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
+                  <s:MouseWheelZoomModifier />
+              </s:ModifierGroup>
+          </s:SciChartSurface.ChartModifier>
+
+          <s:SciChartSurface.XAxis>
+              <s:NumericAxis VisibleRange="{Binding SharedXVisibleRange, Mode=TwoWay}" DrawMinorGridLines="False" />
+          </s:SciChartSurface.XAxis>
+          <s:SciChartSurface.YAxis>
+              <s:NumericAxis Style="{StaticResource YAxisStyle}"
+                             BorderThickness="1,0,0,0"
+                             VisibleRange="{Binding SharedYVisibleRange, Mode=TwoWay}" />
+          </s:SciChartSurface.YAxis>
+
+      </s:SciChartSurface>
+
+    <!-- The chart has Y-Axis turned inwards -->
+    <!-- Bottom SciChartSurface  -->
+    <s:SciChartSurface x:Name="ChartSurface2"
+                       Grid.Row="1"
+                       CenterYAxesPanelTemplate="{StaticResource CentralAxisPanelTemplate}"
+                       ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                       s:SciChartGroup.VerticalChartGroup="ChartsVerticalGroup">
+
+      <s:SciChartSurface.RenderableSeries>
+        <s:FastLineRenderableSeries DataSeries="{Binding DataSeries, Mode=OneWay}"/>
+      </s:SciChartSurface.RenderableSeries>
+
+      <s:SciChartSurface.ChartModifier>
+        <s:ModifierGroup s:MouseManager.MouseEventGroup="SharedModifierGroup">
+          <s:RubberBandXyZoomModifier ReceiveHandledEvents="True" />
+          <s:ZoomExtentsModifier ReceiveHandledEvents="True" />
+          <s:MouseWheelZoomModifier />
+        </s:ModifierGroup>
+      </s:SciChartSurface.ChartModifier>
+
+      <s:SciChartSurface.XAxis>
+        <s:NumericAxis VisibleRange="{Binding SharedXVisibleRange, Mode=TwoWay}" DrawMinorGridLines="False" />
+      </s:SciChartSurface.XAxis>
+
+      <!-- Y-Axis is turned inwards by setting IsCenterAxis, Canvas.Left="0" and AxisAlignment="Right" -->
+      <!-- Besides, SciChartSurface.CenterYAxesPanelTemplate must be set to Canvas to make positioning possible -->
+      <s:SciChartSurface.YAxis>
+        <s:NumericAxis IsCenterAxis="True"
+                       Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=s:AxisArea}}"
+                       AxisAlignment="Right"
+                       Canvas.Left="0"
+                       BorderThickness="1,0,0,0"
+                       Style="{StaticResource YAxisStyle}"
+                       VisibleRange="{Binding SharedYVisibleRange, Mode=TwoWay}"/>
+      </s:SciChartSurface.YAxis>
+    </s:SciChartSurface>
+
+
+  </Grid>
+</UserControl>
