@@ -47,7 +47,8 @@ namespace SciChart.Examples.ExternalDependencies.Behaviors
         {
             if(!string.IsNullOrWhiteSpace(Uri))
             {
-                Process.Start(Uri);
+                var procStartInfo = new ProcessStartInfo(Uri) { UseShellExecute = true };
+                Process.Start(procStartInfo);
             }
         }
 

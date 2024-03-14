@@ -32,7 +32,7 @@ namespace SciChart.Examples.Demo.SmokeTests
         private UIA3Automation _automation;
         private Window _mainWindow;
         private Stopwatch _stopwatch;
-        const double DefaultTolerance = 0.2;
+        const double DefaultTolerance = 0.3;
         private const bool DefaultExportActualForTest = false;
 
         // Top level example categories

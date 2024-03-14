@@ -14,9 +14,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
             _item = item;
         }
 
-        public void OnBeginSeriesDraw(IRenderableSeries rSeries)
-        {
-        }
+        public void OnBeginSeriesDraw(IRenderableSeries rSeries) { }
 
         public string GetLabelText(IRenderableSeries rSeries, int index, IPointMetadata metadata)
         {

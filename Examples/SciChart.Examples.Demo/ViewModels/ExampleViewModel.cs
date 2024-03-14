@@ -79,12 +79,14 @@ namespace SciChart.Examples.Demo.ViewModels
                     ? Urls.GithubRootUrl
                     : SelectedExample.GithubExampleUrl;
 
-                Process.Start("explorer.exe", githubUrl);
+                var procStartInfo = new ProcessStartInfo(githubUrl) { UseShellExecute = true };
+                Process.Start(procStartInfo);
             });
 
             GoToDocumentationCommand = new ActionCommand(() =>
             {
-                Process.Start("explorer.exe", Urls.DocumentationRootUrl);
+                var procStartInfo = new ProcessStartInfo(Urls.DocumentationRootUrl) { UseShellExecute = true };
+                Process.Start(procStartInfo);
             });
 
             FeedbackViewModel = new FeedbackViewModel(this);
