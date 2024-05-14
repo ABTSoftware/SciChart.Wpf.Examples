@@ -51,9 +51,9 @@
                         <Ellipse Height="14"
                                  Width="14"
                                  Fill="{DynamicResource ToolbarPopupSliderThumbBrush}"/>
-                              
-                        <Ellipse Height="6"
-                                 Width="6"
+
+                        <Ellipse Height="7"
+                                 Width="7"
                                  Fill="{DynamicResource ToolbarPopupSliderRangeBrush}"
                                  RenderTransformOrigin="0.5,0.5">
                             <Ellipse.RenderTransform>
@@ -68,11 +68,11 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="ScaleTransform"
                                                          Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                                         To="2.3" Duration="0:0:0.10"/>
+                                                         To="1.8" Duration="0:0:0.10"/>
 
                                         <DoubleAnimation Storyboard.TargetName="ScaleTransform"
                                                          Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
-                                                         To="2.3" Duration="0:0:0.10"/>
+                                                         To="1.8" Duration="0:0:0.10"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -121,7 +121,7 @@
 
             <Track x:Name="PART_Track" Grid.Row="1">
                 <Track.DecreaseRepeatButton>
-                    <RepeatButton Margin="0,0,-2,0"
+                    <RepeatButton Margin="0,0,-4,0"
                                   Background="{DynamicResource ToolbarPopupSliderRangeBrush}"
                                   Command="Slider.DecreaseLarge"
                                   Style="{StaticResource HorizontalSliderButtonStyle}"/>
@@ -184,7 +184,7 @@
 
             <Track x:Name="PART_Track" Grid.Column="1">
                 <Track.DecreaseRepeatButton>
-                    <RepeatButton Margin="0,-2,0,0"
+                    <RepeatButton Margin="0,-4,0,0"
                                   Background="{DynamicResource ToolbarPopupSliderRangeBrush}"
                                   Command="Slider.DecreaseLarge"
                                   Style="{StaticResource VerticalSliderButtonStyle}"/>
@@ -227,13 +227,13 @@
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="MinWidth" Value="104"/>
-                <Setter Property="MinHeight" Value="21"/>
+                <Setter Property="MinWidth" Value="100"/>
+                <Setter Property="MinHeight" Value="20"/>
                 <Setter Property="Template" Value="{StaticResource HorizontalSlider}"/>
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="MinWidth" Value="21"/>
-                <Setter Property="MinHeight" Value="104"/>
+                <Setter Property="MinWidth" Value="20"/>
+                <Setter Property="MinHeight" Value="100"/>
                 <Setter Property="Template" Value="{StaticResource VerticalSlider}"/>
             </Trigger>
         </Style.Triggers>
