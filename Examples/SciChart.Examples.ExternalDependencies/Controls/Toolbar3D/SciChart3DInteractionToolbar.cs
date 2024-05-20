@@ -232,8 +232,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
             devModifiers.Add(new CoordinateSystemModifier());
             devModifiers.Add(new CameraModeModifier());
 
-            devModifiers.Add(new AxisLabelOrientationModifier());
+            devModifiers.Add(new AxisLabelsOrientationModifier());
             devModifiers.Add(new AxisTitleOrientationModifier());
+
+            devModifiers.Add(new AxisPlaneDrawLabelsModifier());
+            devModifiers.Add(new AxisPlaneDrawTitlesModifier());
 
             if (scs.ChartModifier is ModifierGroup3D modifierGroup)
             {

@@ -1,0 +1,9 @@
+<Window x:Class="SciChartExport.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Title="SciChart | Chart Width Synchronization" 
+        xmlns:example="clr-namespace:SciChart.Examples.Examples.StyleAChart"
+        xmlns:chartWidthSynchronization="clr-namespace:ChartWidthSynchronization">
+  <Window.Resources>
+    <chartWidthSynchronization:ChartWidthSynchronizationViewModel x:Key="ViewModel" />
+  </Window.Resources>
+  <example:UseHighQualityRendering DataContext="{StaticResource ViewModel}" />
+</Window>

@@ -13,7 +13,8 @@ namespace SciChart.Examples.Demo
 
         private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
         {
-            Process.Start("explorer.exe", Urls.ReleaseArticle);
+            var procStartInfo = new ProcessStartInfo(Urls.ReleaseArticle) { UseShellExecute = true };
+            Process.Start(procStartInfo);
         }
     }
 }

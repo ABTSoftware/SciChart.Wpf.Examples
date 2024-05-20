@@ -13,7 +13,8 @@ namespace SciChart.Examples.Demo.Views
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("explorer.exe", Urls.GithubRootUrl);
+            var procStartInfo = new ProcessStartInfo(Urls.GithubRootUrl) { UseShellExecute = true };
+            Process.Start(procStartInfo);
         }
     }
 }

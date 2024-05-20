@@ -39,7 +39,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.ExceptionView
             string email = "mailto:support@scichart.com?subject=Unhandled%20Exception&body=" + Uri.EscapeDataString(FormatEmail());
             try
             {
-                Process.Start(email);
+                var procStartInfo = new ProcessStartInfo(email) { UseShellExecute = true };
+                Process.Start(procStartInfo);
             }
             catch (Exception)
             {

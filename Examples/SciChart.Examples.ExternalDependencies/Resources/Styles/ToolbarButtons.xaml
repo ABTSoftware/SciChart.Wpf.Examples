@@ -3,8 +3,9 @@
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
                     xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-                    xmlns:common="clr-namespace:SciChart.Examples.ExternalDependencies.Common"
+                    xmlns:common="clr-namespace:SciChart.Examples.ExternalDependencies.Common"                  
                     xmlns:toolbar2D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D"
+                    xmlns:interop3D="clr-namespace:SciChart.Charting3D.Interop;assembly=SciChart.Charting3D"
                     xmlns:converters="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Converters"
                     xmlns:extension="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.Extension"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -370,7 +371,7 @@
 
     <!-- Toolbar 3D Button Templates -->
 
-    <DataTemplate x:Key="Orbit3DModifierTemplate">
+    <DataTemplate x:Key="OrbitModifier3DTemplate">
         <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
                                        ToolTipService.ToolTip="Toggle OrbitModifier"
                                        common:FlyoutMenuToggleButtonExtensions.GroupName="ZoomPanSelection3DGroup">
@@ -378,7 +379,7 @@
         </common:FlyoutMenuToggleButton>
     </DataTemplate>
 
-    <DataTemplate x:Key="FreeZoom3DModifierTemplate">
+    <DataTemplate x:Key="FreeLookModifier3DTemplate">
         <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
                                        ToolTipService.ToolTip="Free Zoom Modifier"
                                        common:FlyoutMenuToggleButtonExtensions.GroupName="ZoomPanSelection3DGroup">
@@ -415,7 +416,7 @@
         </common:FlyoutMenuToggleButton>
     </DataTemplate>
 
-    <DataTemplate x:Key="ZoomExtents3DModifierTemplate">
+    <DataTemplate x:Key="ZoomExtentsModifier3DTemplate">
         <common:FlyoutMenuButton Command="{Binding Modifier.ZoomExtentsCommand}"
                                  ToolTipService.ToolTip="Zoom to Extents">
             <common:ToolbarIcon Kind="FitToPageOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
@@ -485,9 +486,9 @@
 
     <DataTemplate x:Key="EmptyDataTemplate"/>
 
-    <DataTemplate x:Key="CoordinateSystemModeTemplate">
+    <DataTemplate x:Key="CoordinateSystemModifier3DTemplate">
         <common:FlyoutMenuButton ToolTipService.ToolTip="Coordinate System">
-            <common:ToolbarIcon Kind="Axis" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            <common:ToolbarIcon Kind="AxisArrow" Style="{StaticResource ToolbarButtonIconStyle}"/>
             <common:FlyoutMenuButton.PopupContent>
                 <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
                     <TextBlock Text="Coordinate System" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
@@ -498,7 +499,7 @@
         </common:FlyoutMenuButton>
     </DataTemplate>
 
-    <DataTemplate x:Key="CameraModeTemplate">
+    <DataTemplate x:Key="CameraModeModifier3DTemplate">
         <common:FlyoutMenuButton ToolTipService.ToolTip="3D Camera Mode">
             <common:ToolbarIcon Kind="Video" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
             <common:FlyoutMenuButton.PopupContent>
@@ -511,23 +512,26 @@
         </common:FlyoutMenuButton>
     </DataTemplate>
 
-    <DataTemplate x:Key="AxisLabelOrientationTemplate">
-        <common:FlyoutMenuButton ToolTipService.ToolTip="Axis Label Orientation">
+    <DataTemplate x:Key="LabelsOrientationModifier3DTemplate">
+        <common:FlyoutMenuButton ToolTipService.ToolTip="Axis Labels Orientation">
             <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <common:ToolbarIcon Path="M3,15.5 L6,12.5 4,12.5 4,0 2,0 2,12.5 0,12.5 3,15.5 M20,18 L17,15 17,17 4.5,17 4.5,19 17,19 17,21 20,18Z" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <TextBlock Text="LB" FontSize="9" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="7" Canvas.Top="0"/>
+                <common:ToolbarIcon Path="M18.11,2.89 L20,1 20,6 15,6 17.08,3.92 C16.55,3.23 15.64,2.66 14.36,2.19 13.08,1.72 11.63,1.5 10,1.5 8.38,1.5 6.92,1.72
+                                    5.64,2.19 4.36,2.66 3.45,3.23 2.92,3.92 L5,6 0,6 0,1 1.89,2.89 C2.64,2 3.74,1.31 5.2,0.78 6.65,0.25 8.25,0 10,0 11.75,0 13.35,0.25
+                                    14.8,0.78 16.26,1.31 17.36,2 18.11,2.89 M15.53,22 L8.73,22 C8.36,22 15.91,22 15.53,22 z"
+                                    Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <TextBlock Text="LB" FontSize="9" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="4" Canvas.Top="6" UseLayoutRounding="True"/>
             </Canvas>
             <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
-                    <TextBlock Text="X-Axis Label Orientation" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                    <TextBlock Text="X-Axis Labels Orientation" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
                               SelectedItem="{Binding Modifier.XAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                    <TextBlock Text="Y-Axis Label Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <TextBlock Text="Y-Axis Labels Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
                               SelectedItem="{Binding Modifier.YAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
-                    <TextBlock Text="Z-Axis Label Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <TextBlock Text="Z-Axis Labels Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:TickLabelOrientation3D}}}"
                               SelectedItem="{Binding Modifier.ZAxisLabelOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
                 </StackPanel>
@@ -535,14 +539,17 @@
         </common:FlyoutMenuButton>
     </DataTemplate>
 
-    <DataTemplate x:Key="AxisTitleOrientationTemplate">
+    <DataTemplate x:Key="TitleOrientationModifier3DTemplate">
         <common:FlyoutMenuButton ToolTipService.ToolTip="Axis Title Orientation">
             <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <common:ToolbarIcon Path="M3,15.5 L6,12.5 4,12.5 4,0 2,0 2,12.5 0,12.5 3,15.5 M20,18 L17,15 17,17 4.5,17 4.5,19 17,19 17,21 20,18Z" Style="{StaticResource ToolbarButtonIconStyle}"/>
-                <TextBlock Text="T" FontSize="11" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="8" Canvas.Top="-1"/>
+                <common:ToolbarIcon Path="M18.11,2.89 L20,1 20,6 15,6 17.08,3.92 C16.55,3.23 15.64,2.66 14.36,2.19 13.08,1.72 11.63,1.5 10,1.5 8.38,1.5 6.92,1.72
+                                    5.64,2.19 4.36,2.66 3.45,3.23 2.92,3.92 L5,6 0,6 0,1 1.89,2.89 C2.64,2 3.74,1.31 5.2,0.78 6.65,0.25 8.25,0 10,0 11.75,0 13.35,0.25
+                                    14.8,0.78 16.26,1.31 17.36,2 18.11,2.89 M15.53,22 L8.73,22 C8.36,22 15.91,22 15.53,22 z"
+                                    Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <TextBlock Text="TL" FontSize="9" FontWeight="Bold" FontFamily="Segoe" Canvas.Left="4" Canvas.Top="6" UseLayoutRounding="True"/>
             </Canvas>
             <common:FlyoutMenuButton.PopupContent>
-                <StackPanel Margin="5" MaxWidth="150" Orientation="Vertical">
+                <StackPanel Margin="5" Width="150" Orientation="Vertical">
                     <TextBlock Text="X-Axis Title Orientation" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisTitleOrientation3D}}}"
                               SelectedItem="{Binding Modifier.XAxisTitleOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
@@ -554,6 +561,64 @@
                     <TextBlock Text="Z-Axis Title Orientation" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisTitleOrientation3D}}}"
                               SelectedItem="{Binding Modifier.ZAxisTitleOrientation, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                </StackPanel>
+            </common:FlyoutMenuButton.PopupContent>
+        </common:FlyoutMenuButton>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DrawLabelsModifier3DTemplate">
+        <common:FlyoutMenuButton ToolTipService.ToolTip="Draw Labels Mode">
+            <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <common:ToolbarIcon Path="M15,12 C15.6,12 16,12.4 16,13 16,13.6 15.6,14 15,14 14.4,14 14,13.6 14,13 14,12.4 14.4,12 15,12
+                                    M15,9 C12.3,9 9.9,10.7 9,13 9.9,15.3 12.3,17 15,17 17.7,17 20.1,15.3 21,13 20.1,10.7 17.7,9 15,9
+                                    M15,15.5 C13.6,15.5 12.5,14.4 12.5,13 12.5,11.6 13.6,10.5 15,10.5 16.4,10.5 17.5,11.6 17.5,13 17.5,14.4 16.4,15.5 15,15.5
+                                    M7.1,13.33 L1.64,13.33 1.64,10 1.64,10 0,10 0,10 0,14 1,15 7.8,15 7.1,13.33 z
+                                    M18.39,1.64 L18.375,7.57 20,8.7 20,1 19,0 13.9,0 13.9,1.64 z"                                    
+                                    Height="20" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <TextBlock Text="LB" FontSize="9" FontWeight="Bold" FontFamily="Segoe" UseLayoutRounding="True"/>
+            </Canvas>
+            <common:FlyoutMenuButton.PopupContent>
+                <StackPanel Margin="5" Width="185" Orientation="Vertical">
+                    <TextBlock Text="XY-Plane: Draw Labels Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type interop3D:eAxisPlaneDrawLabelsMode}}}"
+                              SelectedItem="{Binding Modifier.XyPlaneDrawLabelsMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="ZX-Plane: Draw Labels Mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type interop3D:eAxisPlaneDrawLabelsMode}}}"
+                              SelectedItem="{Binding Modifier.ZxPlaneDrawLabelsMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="ZY-Plane: Draw Labels Mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type interop3D:eAxisPlaneDrawLabelsMode}}}"
+                              SelectedItem="{Binding Modifier.ZyPlaneDrawLabelsMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+                </StackPanel>
+            </common:FlyoutMenuButton.PopupContent>
+        </common:FlyoutMenuButton>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DrawTitlesModifier3DTemplate">
+        <common:FlyoutMenuButton ToolTipService.ToolTip="Draw Titles Mode">
+            <Canvas Height="18" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <common:ToolbarIcon Path="M15,12 C15.6,12 16,12.4 16,13 16,13.6 15.6,14 15,14 14.4,14 14,13.6 14,13 14,12.4 14.4,12 15,12
+                                    M15,9 C12.3,9 9.9,10.7 9,13 9.9,15.3 12.3,17 15,17 17.7,17 20.1,15.3 21,13 20.1,10.7 17.7,9 15,9
+                                    M15,15.5 C13.6,15.5 12.5,14.4 12.5,13 12.5,11.6 13.6,10.5 15,10.5 16.4,10.5 17.5,11.6 17.5,13 17.5,14.4 16.4,15.5 15,15.5
+                                    M7.1,13.33 L1.64,13.33 1.64,10 1.64,10 0,10 0,10 0,14 1,15 7.8,15 7.1,13.33 z
+                                    M18.39,1.64 L18.375,7.57 20,8.7 20,1 19,0 13.9,0 13.9,1.64 z"
+                                    Height="20" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <TextBlock Text="TL" FontSize="9" FontWeight="Bold" FontFamily="Segoe" UseLayoutRounding="True"/>
+            </Canvas>
+            <common:FlyoutMenuButton.PopupContent>
+                <StackPanel Margin="5" Width="185" Orientation="Vertical">
+                    <TextBlock Text="XY-Plane: Draw Titles Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisPlaneDrawTitlesMode}}}"
+                              SelectedItem="{Binding Modifier.XyPlaneDrawTitlesMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="ZX-Plane: Draw Titles Mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisPlaneDrawTitlesMode}}}"
+                              SelectedItem="{Binding Modifier.ZxPlaneDrawTitlesMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="ZY-Plane: Draw Titles Mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:AxisPlaneDrawTitlesMode}}}"
+                              SelectedItem="{Binding Modifier.ZyPlaneDrawTitlesMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
                 </StackPanel>
             </common:FlyoutMenuButton.PopupContent>
         </common:FlyoutMenuButton>

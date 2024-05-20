@@ -4,7 +4,7 @@ using SciChart.Charting3D.Modifiers;
 
 namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar3D.CustomModifiers
 {
-    internal class AxisLabelOrientationModifier : ChartModifierBase3D
+    internal class AxisLabelsOrientationModifier : ChartModifierBase3D
     {
         private TickLabelOrientation3D _xAxisLabelOrientation;
         private TickLabelOrientation3D _yAxisLabelOrientation;
