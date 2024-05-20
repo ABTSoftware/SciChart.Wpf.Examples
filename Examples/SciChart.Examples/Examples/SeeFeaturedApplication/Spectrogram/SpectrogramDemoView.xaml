@@ -18,25 +18,10 @@
         <Style x:Key="AxisStyle" TargetType="s:AxisBase">
             <Setter Property="DrawMajorBands" Value="False" />
             <Setter Property="IsPrimaryAxis" Value="False" />
-            <Setter Property="AxisBandsFill" Value="Transparent" />
-            <Setter Property="DrawMajorGridLines" Value="false" />
-            <Setter Property="DrawMinorGridLines" Value="false" />
-
-            <Setter Property="MajorTickLineStyle">
-                <Setter.Value>
-                    <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Transparent" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="MinorTickLineStyle">
-                <Setter.Value>
-                    <Style TargetType="Line">
-                        <Setter Property="Stroke" Value="Transparent" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="DrawMajorGridLines" Value="False" />
+            <Setter Property="DrawMinorGridLines" Value="False" />
+            <Setter Property="DrawMinorTicks" Value="False" />
+            <Setter Property="DrawMajorTicks" Value="False" />
         </Style>
     </UserControl.Resources>
 
@@ -59,7 +44,8 @@
 
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Column="1"
-                           Margin="5">
+                           Margin="5"
+                           s:SciChartGroup.VerticalChartGroup="SynchronizedChartWidthGroup">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastLineRenderableSeries x:Name="LineRenderableSeries" Stroke="{StaticResource MainThemeStrokeColor}" />
@@ -94,7 +80,8 @@
         <s:SciChartSurface x:Name="sciChart2"
                            Grid.Row="1"
                            Grid.Column="1"
-                           Margin="5 5 20 5">
+                           Margin="5"
+                           s:SciChartGroup.VerticalChartGroup="SynchronizedChartWidthGroup">
 
             <s:SciChartSurface.RenderableSeries>
                 <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries" AutoPeakDetection="True">
@@ -116,7 +103,7 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:NumericAxis Style="{StaticResource AxisStyle}" VisibleRange="{Binding Source={x:Reference Name=sciChart}, Path=XAxis.VisibleRange, Mode=TwoWay}" />
+                <s:NumericAxis Style="{StaticResource AxisStyle}" DrawMajorTicks="True" VisibleRange="{Binding Source={x:Reference Name=sciChart}, Path=XAxis.VisibleRange, Mode=TwoWay}" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>

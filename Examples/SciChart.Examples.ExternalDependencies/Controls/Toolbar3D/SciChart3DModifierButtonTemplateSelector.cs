@@ -26,18 +26,33 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
 {
     public class SciChart3DModifierButtonTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate FreeLookModifierTemplate { get; set; }
-        public DataTemplate OrbitModifierTemplate { get; set; }
-        public DataTemplate MouseWheel3DModifierTemplate { get; set; }
-        public DataTemplate CustomZoomExtentsModifier3DTemplate { get; set; }
-        public DataTemplate VertexSelectionModifier3DTemplate { get; set; }
-        public DataTemplate TooltipModifier3DTemplate { get; set; }
-        public DataTemplate LegendModifier3DTemplate { get; set; }
-        public DataTemplate CoordinateSystemModeToolbarModifierTemplate { get; set; }
-        public DataTemplate CameraModeTemplate { get; set; }
-        public DataTemplate AxisLabelOrientationTemplate { get; set; }
-        public DataTemplate AxisTitleOrientationTemplate { get; set; }
         public DataTemplate EmptyTemplate { get; set; }
+
+        public DataTemplate FreeLookTemplate { get; set; }
+
+        public DataTemplate OrbitTemplate { get; set; }
+
+        public DataTemplate MouseWheelTemplate { get; set; }
+
+        public DataTemplate CustomZoomExtentsTemplate { get; set; }
+
+        public DataTemplate VertexSelectionTemplate { get; set; }
+
+        public DataTemplate TooltipTemplate { get; set; }
+
+        public DataTemplate LegendTemplate { get; set; }
+
+        public DataTemplate CoordinateSystemTemplate { get; set; }
+
+        public DataTemplate CameraModeTemplate { get; set; }
+
+        public DataTemplate AxisLabelsOrientationTemplate { get; set; }
+
+        public DataTemplate AxisTitleOrientationTemplate { get; set; }
+
+        public DataTemplate AxisPlaneDrawLabelsTemplate { get; set; }
+
+        public DataTemplate AxisPlaneDrawTitlesTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -48,37 +63,43 @@ namespace SciChart.Examples.ExternalDependencies.Controls.SciChart3DInteractionT
                 var modifierType = mod.Modifier.GetType();
 
                 if (modifierType == typeof(FreeLookModifier3D))
-                    return FreeLookModifierTemplate;
+                    return FreeLookTemplate;
 
                 if (modifierType == typeof(OrbitModifier3D))
-                    return OrbitModifierTemplate;
+                    return OrbitTemplate;
 
                 if (modifierType == typeof(MouseWheelZoomModifier3D))
-                    return MouseWheel3DModifierTemplate;
+                    return MouseWheelTemplate;
 
                 if (modifierType == typeof(ZoomExtentsModifier3D))
-                    return CustomZoomExtentsModifier3DTemplate;
+                    return CustomZoomExtentsTemplate;
 
                 if (modifierType == typeof(VertexSelectionModifier3D))
-                    return VertexSelectionModifier3DTemplate;
+                    return VertexSelectionTemplate;
 
                 if (modifierType == typeof(TooltipModifier3D))
-                    return TooltipModifier3DTemplate;
+                    return TooltipTemplate;
 
                 if (modifierType == typeof(LegendModifier3D))
-                    return LegendModifier3DTemplate;
+                    return LegendTemplate;
 
                 if (modifierType == typeof(CoordinateSystemModifier))
-                    return CoordinateSystemModeToolbarModifierTemplate;
+                    return CoordinateSystemTemplate;
 
                 if (modifierType == typeof(CameraModeModifier))
                     return CameraModeTemplate;
 
-                if (modifierType == typeof(AxisLabelOrientationModifier))
-                    return AxisLabelOrientationTemplate;
+                if (modifierType == typeof(AxisLabelsOrientationModifier))
+                    return AxisLabelsOrientationTemplate;
 
                 if (modifierType == typeof(AxisTitleOrientationModifier))
                     return AxisTitleOrientationTemplate;
+
+                if (modifierType == typeof(AxisPlaneDrawLabelsModifier))
+                    return AxisPlaneDrawLabelsTemplate;
+
+                if (modifierType == typeof(AxisPlaneDrawTitlesModifier))
+                    return AxisPlaneDrawTitlesTemplate;
             }
 
             return EmptyTemplate;

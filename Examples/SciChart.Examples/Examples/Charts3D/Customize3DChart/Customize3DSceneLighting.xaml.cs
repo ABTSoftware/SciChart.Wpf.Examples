@@ -18,15 +18,19 @@ using System.Windows;
 using System.Windows.Controls;
 using SciChart.Charting3D;
 using SciChart.Charting3D.Model;
-using Viewport3D = SciChart.Charting3D.Viewport3D;
+using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
 {
     public partial class Customize3DSceneLighting : UserControl
     {
+        private readonly Vector3 _lightDirection = Vector3.Zero;
+
         public Customize3DSceneLighting()
         {
             InitializeComponent();
+
+            Unloaded += (s, e) => _lightDirection.SafeDispose();
 
             lightModeComboBox.ItemsSource = Enum.GetValues(typeof(MainLightMode));
             lightModeComboBox.SelectedItem = MainLightMode.CameraForward;
@@ -53,57 +57,62 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
             sphereMesh.DataSeries = meshDataSeries;
         }
 
+        private void SetLightDirection()
+        {
+            if (sciChart?.IsLoaded != true) return;
+
+            var lightVectorX = (float)lightSliderX.Value;
+            var lightVectorY = (float)lightSliderY.Value;
+            var lightVectorZ = (float)lightSliderZ.Value;
+
+            _lightDirection.Assign(lightVectorX, lightVectorY, lightVectorZ);
+
+            sciChart.Viewport3D.LightingController.SetLightDirection(_lightDirection);
+        }
+
         private void LightSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (sciChart?.Viewport3D is Viewport3D viewport)
-            {
-                var vector = viewport.GetMainLightDirection();
-
-                vector.x = (float) lightSliderX.Value;
-                vector.y = (float) lightSliderY.Value;
-                vector.z = (float) lightSliderZ.Value;
-
-                viewport.SetMainLightDirection(vector);
-            }
+            SetLightDirection();
         }
 
         private void LightMode_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (sciChart?.IsLoaded != true) return;
+
             if (lightModeComboBox.SelectedItem is MainLightMode lightMode)
             {
-                lightSlidersPanel.IsEnabled = lightMode == MainLightMode.GlobalSpace;
+                sciChart.Viewport3D.LightingController.LightMode = lightMode;
 
-                if (sciChart?.Viewport3D is Viewport3D viewport)
+                lightSlidersPanel.IsEnabled = false;
+
+                if (lightMode == MainLightMode.GlobalSpace)
                 {
-                    viewport.SetMainLightMode(lightMode);
+                    SetLightDirection();
 
-                    if (lightMode == MainLightMode.GlobalSpace)
-                    {
-                        var vector = viewport.GetMainLightDirection();
-
-                        vector.x = (float) lightSliderX.Value;
-                        vector.y = (float) lightSliderY.Value;
-                        vector.z = (float) lightSliderZ.Value;
-
-                        viewport.SetMainLightDirection(vector);
-                    }
+                    lightSlidersPanel.IsEnabled = true;
                 }
             }
         }
 
         private void SciChart_OnRendered(object sender, EventArgs e)
         {
-            if (sciChart.Viewport3D is Viewport3D viewport)
+            if (sciChart?.IsLoaded != true) return;
+
+            var cameraTarget = sciChart.Viewport3D.CameraController.Target;
+            var cameraPosition = sciChart.Viewport3D.CameraController.Position;
+            var cameraDirection = cameraTarget - cameraPosition;
+
+            cameraDirection.Normalize();
+
+            using (cameraDirection)
             {
-                var lightMode = viewport.GetMainLightMode();
-                labelLightMode.Text = lightMode.ToString();
-
-                var cameraDirection =  viewport.CameraController.Target - viewport.CameraController.Position;
-                cameraDirection.Normalize();
-
                 labelCameraX.Text = cameraDirection.X.ToString("F2");
                 labelCameraY.Text = cameraDirection.Y.ToString("F2");
                 labelCameraZ.Text = cameraDirection.Z.ToString("F2");
+
+                var lightMode = sciChart.Viewport3D.LightingController.LightMode;
+
+                labelLightMode.Text = lightMode.ToString();
 
                 if (lightMode == MainLightMode.CameraForward)
                 {
@@ -113,11 +122,15 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart
                 }
                 else if (lightMode == MainLightMode.GlobalSpace)
                 {
-                    var vector = viewport.GetMainLightDirection();
-
-                    labelLightX.Text = vector.x.ToString("F2");
-                    labelLightY.Text = vector.y.ToString("F2");
-                    labelLightZ.Text = vector.z.ToString("F2");
+                    labelLightX.Text = _lightDirection.X.ToString("F2");
+                    labelLightY.Text = _lightDirection.Y.ToString("F2");
+                    labelLightZ.Text = _lightDirection.Z.ToString("F2");
+                }
+                else if (lightMode == MainLightMode.None)
+                {
+                    labelLightX.Text = "N/A";
+                    labelLightY.Text = "N/A";
+                    labelLightZ.Text = "N/A";
                 }
             }
         }

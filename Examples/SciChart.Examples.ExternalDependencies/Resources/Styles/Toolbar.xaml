@@ -116,17 +116,19 @@
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplateSelector>
-                                    <toolbar3D:SciChart3DModifierButtonTemplateSelector CustomZoomExtentsModifier3DTemplate="{StaticResource ZoomExtents3DModifierTemplate}"
-                                                                                        FreeLookModifierTemplate="{StaticResource FreeZoom3DModifierTemplate}"
-                                                                                        LegendModifier3DTemplate="{StaticResource LegendModifier3DTemplate}"
-                                                                                        MouseWheel3DModifierTemplate="{StaticResource MouseWheelModifier3DTemplate}"
-                                                                                        OrbitModifierTemplate="{StaticResource Orbit3DModifierTemplate}"
-                                                                                        TooltipModifier3DTemplate="{StaticResource TooltipModifier3DTemplate}"
-                                                                                        VertexSelectionModifier3DTemplate="{StaticResource VertexSelectionModifier3DTemplate}"
-                                                                                        CoordinateSystemModeToolbarModifierTemplate="{StaticResource CoordinateSystemModeTemplate}"
-                                                                                        CameraModeTemplate="{StaticResource CameraModeTemplate}"
-                                                                                        AxisLabelOrientationTemplate="{StaticResource AxisLabelOrientationTemplate}"
-                                                                                        AxisTitleOrientationTemplate="{StaticResource AxisTitleOrientationTemplate}"
+                                    <toolbar3D:SciChart3DModifierButtonTemplateSelector CustomZoomExtentsTemplate="{StaticResource ZoomExtentsModifier3DTemplate}"
+                                                                                        FreeLookTemplate="{StaticResource FreeLookModifier3DTemplate}"
+                                                                                        LegendTemplate="{StaticResource LegendModifier3DTemplate}"
+                                                                                        MouseWheelTemplate="{StaticResource MouseWheelModifier3DTemplate}"
+                                                                                        OrbitTemplate="{StaticResource OrbitModifier3DTemplate}"
+                                                                                        TooltipTemplate="{StaticResource TooltipModifier3DTemplate}"
+                                                                                        VertexSelectionTemplate="{StaticResource VertexSelectionModifier3DTemplate}"
+                                                                                        CoordinateSystemTemplate="{StaticResource CoordinateSystemModifier3DTemplate}"
+                                                                                        CameraModeTemplate="{StaticResource CameraModeModifier3DTemplate}"
+                                                                                        AxisLabelsOrientationTemplate="{StaticResource LabelsOrientationModifier3DTemplate}"
+                                                                                        AxisTitleOrientationTemplate="{StaticResource TitleOrientationModifier3DTemplate}"
+                                                                                        AxisPlaneDrawLabelsTemplate="{StaticResource DrawLabelsModifier3DTemplate}"
+                                                                                        AxisPlaneDrawTitlesTemplate="{StaticResource DrawTitlesModifier3DTemplate}"
                                                                                         EmptyTemplate="{StaticResource EmptyDataTemplate}"/>
                                 </ItemsControl.ItemTemplateSelector>
                             </ItemsControl>

@@ -113,6 +113,7 @@
 
         <!--  Style for the Price Column chart  -->
         <Style x:Key="PriceColumnSeriesStyle" TargetType="s:FastColumnRenderableSeries">
+            <Setter Property="ZeroLineY" Value="1.051" />
             <Setter Property="ResamplingMode" Value="MinMax" />
             <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeColor_2}" />
             <Setter Property="Fill">
@@ -351,7 +352,8 @@
                         </s:CursorModifier.SnapToSeries>
                     </s:FastLineRenderableSeries>
 
-                    <s:FastColumnRenderableSeries DataSeries="{Binding PriceSeries}" Style="{StaticResource PriceColumnSeriesStyle}">
+                    <s:FastColumnRenderableSeries DataSeries="{Binding PriceSeries}" 
+                                                  Style="{StaticResource PriceColumnSeriesStyle}">
                         <s:CursorModifier.SnapToSeries>
                             <MultiBinding Converter="{StaticResource IsSameSeriesMultiConverter}" Mode="OneWay">
                                 <Binding Path="DataSeries.SeriesName" RelativeSource="{RelativeSource Self}"/>

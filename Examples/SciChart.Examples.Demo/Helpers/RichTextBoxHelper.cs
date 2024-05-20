@@ -74,7 +74,8 @@ namespace SciChart.Examples.Demo.Helpers
 
         private static void LinkOnClick(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start("explorer.exe", e.Uri.AbsoluteUri);
+            var procStartInfo = new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true };
+            Process.Start(procStartInfo);
             e.Handled = true;
         }
 
