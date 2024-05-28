@@ -11,7 +11,7 @@
 
     [b]#2 The HighQualityRenderSurface[/b]: A floating point coordinate software renderer (CPU Based). Produces the best quality image, but uses more CPU resources than HighSpeed.
 
-    [b]#3 The Direct3D11RenderSurface[/b]: A floating point, DirectX10 hardware renderer (GPU Based). Utilizes pixel shaders to offload as much computation to the GPU as possible. Produces Antialiased quality like the HQ renderer, but faster in many cases than the HS renderer. Requires a DirectX10 Video Card and Windows Vista, 7, 8, 8.1 or later to operate.
+    [b]#3 The VisualXcceleratorRenderSurface[/b]: A floating point, DirectX11 hardware renderer (GPU Based). Utilizes pixel shaders to offload as much computation to the GPU as possible. Produces Antialiased quality like the HQ renderer, but faster in many cases than the HS renderer. Requires a DirectX11 video Card and Windows Vista, 8, 8.1 or later to operate.
 
     [b]#4 The XamlRenderSurface[/b]: A vector renderer which uses WPF Canvas and allows high-quality, scalable export to XPS, Vector Format or Printing.
 
