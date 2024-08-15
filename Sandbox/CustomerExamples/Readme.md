@@ -152,12 +152,15 @@ A sandbox application with a SciChart WPF Chart allowing you to test out all the
 
 ### Two Charts, YAxis with same zero line
 
-WORK IN PROGRESS
 Demonstrates how to have two SciChart WPF charts, with YAxes with the same zero line, yet same scale
 
 ### VS2022_Net60_Boilerplate
 
 A very simple example which you can open in VS2022 to show SciChart WPF working with .NET 6.0
+
+### SimpleLineChart_VB
+
+A simple example showing a Line Chart that demonstrates how to set SciChart Runtime License Key and create a simple line chart in a WPF application with .NET 6.0 and Visual Basic 
 
 ### Zoom Extents after MVVM Series Changed
 

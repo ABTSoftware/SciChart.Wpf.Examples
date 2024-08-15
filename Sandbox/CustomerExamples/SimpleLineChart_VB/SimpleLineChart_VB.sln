@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SimpleLineChart_VB", "SimpleLineChart_VB\SimpleLineChart_VB.vbproj", "{10E06D8C-A8E4-49E2-BDF0-A65AF5723891}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10E06D8C-A8E4-49E2-BDF0-A65AF5723891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E06D8C-A8E4-49E2-BDF0-A65AF5723891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E06D8C-A8E4-49E2-BDF0-A65AF5723891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E06D8C-A8E4-49E2-BDF0-A65AF5723891}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61FAF40A-309D-48CA-ABB2-75586B93A746}
+	EndGlobalSection
+EndGlobal
