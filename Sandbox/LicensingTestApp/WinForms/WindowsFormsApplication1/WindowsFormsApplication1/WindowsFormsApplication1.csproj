@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
-		<TargetFrameworks>net462</TargetFrameworks>
+		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>True</UseWPF>
 		<UseWindowsForms>True</UseWindowsForms>
 		<OutputType>WinExe</OutputType>
