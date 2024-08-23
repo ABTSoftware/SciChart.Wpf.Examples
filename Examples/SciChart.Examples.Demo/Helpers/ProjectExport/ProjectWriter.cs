@@ -78,7 +78,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 }
             }
 
-            string projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
+            var projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
 
             files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath, useLibsFromFolder);
             files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
@@ -99,11 +99,10 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 files.Add(ExampleResourcesFileName, GenerateExampleResourcesFile(ExampleTheme));
             }
 
-            string exportPath = Path.Combine(selectedPath, projectName);
-
-            WriteProjectFiles(files, exportPath);
-
-            return projectName;
+            var exportPath = Path.Combine(selectedPath, projectName);
+            var isExported = WriteProjectFiles(files, exportPath);
+            
+            return isExported ? projectName : null;
         }
 
         private static string GetFileNameFromNs(string fullName)
@@ -267,17 +266,26 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             return string.Format("{{StaticResource {0}}}", resourceKey);
         }
 
-        private static void WriteProjectFiles(Dictionary<string, string> files, string selectedPath)
+        private static bool WriteProjectFiles(Dictionary<string, string> files, string selectedPath)
         {
-            Directory.CreateDirectory(selectedPath);
-
-            foreach (var file in files)
+            try
             {
-                using (var f = new StreamWriter(Path.Combine(selectedPath, file.Key)))
+                Directory.CreateDirectory(selectedPath);
+
+                foreach (var file in files)
                 {
-                    f.Write(file.Value);
+                    using (var sw = new StreamWriter(Path.Combine(selectedPath, file.Key)))
+                    {
+                        sw.Write(file.Value);
+                    }
                 }
+
+                return true;
             }
+            catch
+            {
+                return false;
+            } 
         }
     }
 }

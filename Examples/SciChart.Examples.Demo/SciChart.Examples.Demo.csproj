@@ -6,6 +6,7 @@
     <UseWindowsForms>True</UseWindowsForms>
     <ApplicationIcon>SciChartIconWin256x256.ico</ApplicationIcon>
     <LangVersion>Latest</LangVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
     <OutputPath>..\..\Build\Debug</OutputPath>
@@ -80,7 +81,7 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="RestSharp" Version="106.15.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
-    <PackageReference Include="SciChart.Wpf.UI" Version="3.1.251" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="3.2.268" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj">

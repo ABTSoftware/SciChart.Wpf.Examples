@@ -408,6 +408,10 @@
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:ShowTooltipOptions}}}"
                               SelectedItem="{Binding Modifier.ShowTooltipOn, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
 
+                    <CheckBox Margin="0,10,0,0" VerticalAlignment="Center" Content="Show Axis Label" IsChecked="{Binding Modifier.ShowAxisLabels, Mode=TwoWay}"/>
+                    
+                    <CheckBox Margin="0,10,0,0" VerticalAlignment="Center" Content="Show Tooltip Overlay" IsChecked="{Binding Modifier.ShowTooltipOverlay, Mode=TwoWay}"/>
+
                     <TextBlock Text="Crosshair mode" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
                     <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s3D:CrosshairMode}}}"
                               SelectedItem="{Binding Modifier.CrosshairMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>

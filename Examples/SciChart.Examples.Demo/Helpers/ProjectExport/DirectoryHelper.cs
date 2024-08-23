@@ -12,6 +12,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static string GetFileNameFromPath(string path)
         {
             var index = path.LastIndexOf("/", StringComparison.InvariantCulture);
+
             if (index > 0)
             {
                 return path.Substring(index + 1, path.Length - index - 1);
@@ -36,28 +37,35 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 return false;
             }
 
-            string drive = path.Substring(0, 3); // e.g. C:\
-
+            var drive = path.Substring(0, 3); // e.g. C:\
             var driveCheck = new Regex(@"^[a-zA-Z]:\\$");
+
             if (!driveCheck.IsMatch(drive))
             {
-                error = @"Drive should be set in the following format: ""_:\"", where ""_"" is drive letter";
+                error = @"Drive should be set in the following format: ""_:\"", where ""_"" is a drive letter";
                 return false;
             }
 
             if (!Directory.Exists(drive))
             {
-                error = @"Drive " + drive + " not found or inaccessible";
+                error = $"Drive {drive} is not found or inaccessible";
                 return false;
             }
 
             var strTheseAreInvalidFileNameChars = new string(Path.GetInvalidPathChars());
             strTheseAreInvalidFileNameChars += @":/?*" + "\"";
 
-            var containsABadCharacter = new Regex("[" + Regex.Escape(strTheseAreInvalidFileNameChars) + "]");
-            if (containsABadCharacter.IsMatch(path.Substring(3, path.Length - 3)))
+            var containsBadCharacter = new Regex("[" + Regex.Escape(strTheseAreInvalidFileNameChars) + "]");
+            if (containsBadCharacter.IsMatch(path.Substring(3, path.Length - 3)))
             {
                 error = "The given path's format is not supported";
+                return false;
+            }
+
+            var containsDotCharacter = new Regex(@"^.*\\(.*\.+|\.{2,}.*)($|\\)");
+            if (containsDotCharacter.IsMatch(path))
+            {
+                error = @"The given path with ""."" in folder name is not supported";
                 return false;
             }
 
@@ -69,10 +77,15 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             error = null;
             try
             {
-                string fullPath = folderPath + "file.temp";
+                if (!Directory.Exists(folderPath))
+                {
+                    // We cannot verify write access to a non-existent folder
+                    return true;
+                }
 
-                using (var fs = new FileStream(fullPath, FileMode.CreateNew,
-                                                         FileAccess.Write))
+                string fullPath = Path.Combine(folderPath, "file.temp");
+
+                using (var fs = new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write))
                 {
                     fs.WriteByte(0xff);
                 }
@@ -80,33 +93,39 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 if (File.Exists(fullPath))
                 {
                     File.Delete(fullPath);
-                    return true;
                 }
                 
                 return true;
             }
             catch (UnauthorizedAccessException)
             {
-                error = @"This location is not accessible for writing.";
+                error = "This location is not accessible for writing.";
+                return false;
+            }
+            catch
+            {
+                error = "This location is not found or inaccessible.";
                 return false;
             }
         }
 
         public static string GetPathForExport(string defaultPath)
         {
-            var isGoodPath = false;
-            string ret = null;
-            while (!isGoodPath)
+            var isValidPath = false;
+
+            string selectedPath = null;
+
+            while (!isValidPath)
             {
                 var dialog = new FolderBrowserDialog { SelectedPath = defaultPath };
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    string error;
-                    isGoodPath = HasWriteAccessToFolder(dialog.SelectedPath, out error);
-                    if (isGoodPath)
+                    isValidPath = HasWriteAccessToFolder(dialog.SelectedPath, out string error);
+
+                    if (isValidPath)
                     {
-                        ret = dialog.SelectedPath;
+                        selectedPath = dialog.SelectedPath;
                     }
                     else
                     {
@@ -115,11 +134,11 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                 }
                 else
                 {
-                    isGoodPath = true;
+                    isValidPath = true;
                 }
             }
 
-            return ret;
+            return selectedPath;
         }
     }
 }
