@@ -2,13 +2,14 @@
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
-		<TargetFrameworks>net462</TargetFrameworks>
-		<UseWPF>True</UseWPF>
+    <TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
 		<OutputType>WinExe</OutputType>
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>Latest</LangVersion>
 	</PropertyGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+	<ItemGroup>
 		<Reference Include="System" />
 		<Reference Include="System.Data" />
 		<Reference Include="System.Drawing" />

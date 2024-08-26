@@ -39,7 +39,11 @@ namespace ChartPrintingMultiPaneChartsExample
                     encoder5.Save(stream5);
                 }
 
-                Process.Start(dialog.FileName);
+                var processStartInfo = new ProcessStartInfo(dialog.FileName)
+                {
+                    UseShellExecute = true
+                };
+                Process.Start(processStartInfo);
             }
         }
     }

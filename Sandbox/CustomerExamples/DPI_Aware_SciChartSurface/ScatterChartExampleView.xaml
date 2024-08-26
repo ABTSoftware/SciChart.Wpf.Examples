@@ -21,50 +21,57 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
+                        <TextBlock Text="Scaling" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <CheckBox x:Name="checkBoxScaleLabels" Content="Scale Axis Labels" IsChecked="True" Margin="0,5" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
 
         <!-- Please notice that DpiAwareSciChartSurface requires a default style -->
         <!-- It is declared above in UserControl.Resources -->
         <sciChartScatterChart:DpiAwareSciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0" ShowLicensingWarnings="False">
             <sciChartScatterChart:DpiAwareSciChartSurface.RenderableSeries>
                 <!-- Scatter Series A -->
-                <s:XyScatterRenderableSeries x:Name="scatterRenderSeries0" Opacity="0.67">
+                <s:XyScatterRenderableSeries  x:Name="scatterRenderSeries0" Opacity="0.67">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="14"
                                               Height="14"
-                                              Fill="{StaticResource PointMarkerFillColor}" 
+                                              Fill="{StaticResource PointMarkerFillColor}"
                                               StrokeThickness="0" />
                     </s:XyScatterRenderableSeries.PointMarker>
 
                     <s:XyScatterRenderableSeries.SeriesAnimation>
                         <s:SweepAnimation AnimationDelay="0:0:0.2" Duration="0:0:0.6" />
                     </s:XyScatterRenderableSeries.SeriesAnimation>
-
                 </s:XyScatterRenderableSeries>
                 <!-- Scatter Series B -->
                 <s:XyScatterRenderableSeries x:Name="scatterRenderSeries1" Opacity="0.67">
                     <s:XyScatterRenderableSeries.PointMarker>
                         <s:EllipsePointMarker Width="14"
                                               Height="14"
-                                              Fill="{StaticResource ExtraThemeStrokeColor_5}" 
+                                              Fill="{StaticResource ExtraThemeStrokeColor_5}"
                                               StrokeThickness="0" />
                     </s:XyScatterRenderableSeries.PointMarker>
 
                     <s:XyScatterRenderableSeries.SeriesAnimation>
-                        <s:SweepAnimation AnimationDelay="0:0:1.2" Duration="0:0:0.6"/>
+                        <s:SweepAnimation AnimationDelay="0:0:1.2" Duration="0:0:0.6" />
                     </s:XyScatterRenderableSeries.SeriesAnimation>
-
                 </s:XyScatterRenderableSeries>
             </sciChartScatterChart:DpiAwareSciChartSurface.RenderableSeries>
 
             <sciChartScatterChart:DpiAwareSciChartSurface.XAxis>
-                <s:NumericAxis DrawMajorBands="True" GrowBy="0.1, 0.1" />
+                <s:NumericAxis Style="{StaticResource NumericAxisStyle}"  />
             </sciChartScatterChart:DpiAwareSciChartSurface.XAxis>
 
             <sciChartScatterChart:DpiAwareSciChartSurface.YAxis>
-                <s:NumericAxis DrawMajorBands="True" GrowBy="0.1, 0.1" />
+                <s:NumericAxis Style="{StaticResource NumericAxisStyle}" />
             </sciChartScatterChart:DpiAwareSciChartSurface.YAxis>
-
         </sciChartScatterChart:DpiAwareSciChartSurface>
     </Grid>
 </UserControl>

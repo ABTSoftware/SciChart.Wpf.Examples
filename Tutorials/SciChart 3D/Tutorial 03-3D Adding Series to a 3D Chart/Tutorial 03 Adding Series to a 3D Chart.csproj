@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
 		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>True</UseWPF>
 		<OutputType>WinExe</OutputType>
 		<OutputPath>bin\$(Configuration)</OutputPath>

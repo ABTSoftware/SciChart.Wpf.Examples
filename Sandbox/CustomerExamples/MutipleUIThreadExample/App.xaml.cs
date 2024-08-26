@@ -20,7 +20,7 @@ namespace MutipleUIThreadExample
 
                 secondWindow.Left = (SystemParameters.PrimaryScreenWidth / 2) - (secondWindow.Width / 2) + 100;
                 secondWindow.Top = (SystemParameters.PrimaryScreenHeight / 2) - (secondWindow.Height / 2) + 100;
-                
+
                 secondWindow.Closed += (s, t) => Dispatcher.CurrentDispatcher.InvokeShutdown();
 
                 secondWindow.Show();
@@ -38,7 +38,9 @@ namespace MutipleUIThreadExample
         {
             base.OnExit(e);
 
+#if NETFRAMEWORK
             SecondUIThread?.Abort();
+#endif
         }
 
         public static string CurrentThreadInfo => $"Thread #{Thread.CurrentThread.ManagedThreadId} [{Thread.CurrentThread.GetApartmentState()}]";
