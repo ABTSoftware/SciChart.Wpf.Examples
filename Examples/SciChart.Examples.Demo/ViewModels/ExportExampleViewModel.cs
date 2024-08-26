@@ -23,9 +23,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    var exportPath = dialog.SelectedPath;
-                    if(!exportPath.EndsWith("\\")) exportPath += "\\";
-                    ExportPath = exportPath;
+                    ExportPath = dialog.SelectedPath;
                 }
             });
 
@@ -40,17 +38,31 @@ namespace SciChart.Examples.Demo.ViewModels
 
             ExportCommand = new ActionCommand(async () =>
             {
-                ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath, IsLibFromFolder);
+                CanExport = false;
 
-                OnExported = true;
+                var projectName = ProjectWriter.WriteProject(module.CurrentExample, ExportPath, LibrariesPath, IsLibFromFolder);
 
-                if (_parent.Usage != null)
-                    _parent.Usage.Exported = true;
+                if (string.IsNullOrEmpty(projectName))
+                {
+                    OnExportError = true;
 
-                await Task.Delay(TimeSpan.FromMilliseconds(2000));
+                    await Task.Delay(4000);
 
-                OnExported = false;
-                CloseTrigger = true;
+                    OnExportError = false;
+                }
+                else
+                {
+                    OnExportSuccess = true;
+
+                    if (_parent.Usage != null)
+                        _parent.Usage.Exported = true;
+                    
+                    await Task.Delay(2000);
+
+                    OnExportSuccess = false;
+                }
+
+                CanExport = true;
 
             }, () => IsValid);
 
@@ -76,13 +88,16 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     SetDynamicValue(value);
 
-                    OnExported = false;
+                    CanExport = true;
+                    OnExportSuccess = false;
+                    OnExportError = false;
 
                     if (IsExportVisible)
                     {
                         _parent.FeedbackViewModel.IsFeedbackVisible = false;
                         _parent.BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
                     }
+
                     _parent.InvalidateDialogProperties();
                 }
             }
@@ -98,7 +113,19 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
-        public bool OnExported
+        public bool CanExport
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool OnExportSuccess
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool OnExportError
         {
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
@@ -122,12 +149,6 @@ namespace SciChart.Examples.Demo.ViewModels
                 SetDynamicValue(value);
                 ExportCommand.RaiseCanExecuteChanged();
             }
-        }
-
-        public bool CloseTrigger
-        {
-            get => GetDynamicValue<bool>();
-            set => SetDynamicValue(value);
         }
 
         #region IDataErrorInfo

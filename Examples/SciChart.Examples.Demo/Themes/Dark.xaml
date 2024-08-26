@@ -136,7 +136,9 @@
     <SolidColorBrush x:Key="FeedbackExportViewSeparatorBrush" Color="#FF606060"/>
     <SolidColorBrush x:Key="FeedbackExportHeaderForegroundBrush" Color="#FFE3E3E3"/>
     <SolidColorBrush x:Key="FeedbackExportMessageForegroundBrush" Color="#50FFFFFF"/>
-
+    <SolidColorBrush x:Key="FeedbackExportSuccessForegroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="FeedbackExportErrorForegroundBrush" Color="#FFDB000C"/>
+    
     <!-- Search View -->
 
     <SolidColorBrush x:Key="SearchViewSeparatorBrush" Color="#FF606060"/>

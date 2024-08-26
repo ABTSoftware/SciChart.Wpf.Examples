@@ -12,7 +12,6 @@
         </Style>
 
         <abt:BoolToValueConverter x:Key="b2vConverter" TrueValue="Visible" FalseValue="Collapsed"/>
-        <abt:BoolToValueConverter x:Key="ib2vConverter" TrueValue="Hidden" FalseValue="Visible"/>
 
     </UserControl.Resources>
 
@@ -124,23 +123,44 @@
             </Button>
 
             <Button Grid.Row="7"
-                    Grid.Column="0"   
+                    Grid.Column="0"
+                    MinHeight="30"
                     Margin="0,15,0,0"
                     Content="GO"
                     Command="{Binding ExportCommand}"
                     Style="{StaticResource ExportExampleButtonStyle}"
-                    Visibility="{Binding OnExported, Converter={StaticResource ib2vConverter}}"
+                    Visibility="{Binding CanExport, Converter={StaticResource b2vConverter}}"
                     AutomationProperties.AutomationId="ExportExampleView.ExportButton"/>
 
-            <TextBlock Grid.Row="7"
-                       Text="The example has been successfully exported!" 
-                       Foreground="{DynamicResource HyperlinkAlternativeForegroundBrush}"
-                       FontSize="12"
-                       FontWeight="SemiBold"
-                       Margin="0,15,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Visibility="{Binding OnExported, Converter={StaticResource b2vConverter}}"/>
+            <Border Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    MinHeight="30"
+                    Margin="0,15,0,0"
+                    Visibility="{Binding OnExportSuccess, Converter={StaticResource b2vConverter}}">
+
+                <TextBlock Text="The example has been successfully exported!" 
+                           Foreground="{DynamicResource FeedbackExportSuccessForegroundBrush}"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    MinHeight="30"
+                    Margin="0,15,0,0"
+                    Visibility="{Binding OnExportError, Converter={StaticResource b2vConverter}}">
+
+                <TextBlock Text="The example cannot be exported, please try to change the export path!" 
+                           Foreground="{DynamicResource FeedbackExportErrorForegroundBrush}"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+            </Border>
         </Grid>
     </Border>
 </UserControl>

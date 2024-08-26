@@ -1,12 +1,15 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-                    xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D">
+                    xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+                    xmlns:sciChartScatterChart="clr-namespace:DpiAware_SciChartSurface">
 
+
+    <!--Converters-->
+
+    <sciChartScatterChart:InverseScaleTransformConverter x:Key="InverseScaleTransformConverter"/>
     
-
     <!-- Examples Series Colors -->
-
     <Color x:Key="MainThemeStrokeColor">#50C7E0</Color>
     <Color x:Key="SecondaryThemeStrokeColor">#F48420</Color>
     <Color x:Key="MainThemeTransparentStrokeColor">#3350C7E0</Color>
@@ -219,4 +222,17 @@
         <Setter Property="s:ThemeManager.Theme" Value="SciChartv7Navy"/>
     </Style>
     
+    <Style x:Key="AxisLabelStyle" TargetType="s:NumericTickLabel">
+        <Setter Property="LayoutTransform" Value="{Binding Path=LayoutTransform, Converter={StaticResource InverseScaleTransformConverter}, RelativeSource={RelativeSource AncestorType=sciChartScatterChart:DpiAwareSciChartSurface}}"/>
+    </Style>
+
+    <Style x:Key="NumericAxisStyle" TargetType="s:NumericAxis">
+        <Setter Property="DrawMajorBands" Value="True"/>
+        <Setter Property="GrowBy" Value="0.1, 0.1"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkBoxScaleLabels, Path=IsChecked}" Value="True">
+                <Setter Property="TickLabelStyle" Value="{StaticResource AxisLabelStyle}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
