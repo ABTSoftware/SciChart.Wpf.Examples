@@ -11,8 +11,26 @@
              Loaded="ScatterChartExampleView_Loaded"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <!-- Value converter that allows scaling of UI Elements based on current Display Scaling -->
+        <sciChartScatterChart:InverseScaleTransformConverter x:Key="InverseScaleTransformConverter"/>
+
         <!-- Declare the default Style for the DpiAwareSciChartSurface -->
         <Style TargetType="sciChartScatterChart:DpiAwareSciChartSurface" BasedOn="{StaticResource {x:Type s:SciChartSurface}}" />
+
+        <!-- Styles that allows AxisLabels to scale down -->
+        <Style x:Key="AxisLabelStyle" TargetType="s:NumericTickLabel">
+            <Setter Property="RenderTransform" Value="{Binding Path=LayoutTransform, Converter={StaticResource InverseScaleTransformConverter}, RelativeSource={RelativeSource AncestorType=sciChartScatterChart:DpiAwareSciChartSurface}}"/>
+        </Style>
+
+        <Style x:Key="NumericAxisStyle" TargetType="s:NumericAxis">
+            <Setter Property="DrawMajorBands" Value="True"/>
+            <Setter Property="GrowBy" Value="0.1, 0.1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=checkBoxScaleLabels, Path=IsChecked}" Value="True">
+                    <Setter Property="TickLabelStyle" Value="{StaticResource AxisLabelStyle}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -35,7 +53,7 @@
 
         <!-- Please notice that DpiAwareSciChartSurface requires a default style -->
         <!-- It is declared above in UserControl.Resources -->
-        <sciChartScatterChart:DpiAwareSciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0" ShowLicensingWarnings="False">
+        <sciChartScatterChart:DpiAwareSciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
             <sciChartScatterChart:DpiAwareSciChartSurface.RenderableSeries>
                 <!-- Scatter Series A -->
                 <s:XyScatterRenderableSeries  x:Name="scatterRenderSeries0" Opacity="0.67">
