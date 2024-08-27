@@ -10,6 +10,11 @@ namespace DpiAware_SciChartSurface
 
         protected override void OnDpiChanged(DpiScale oldDpi, DpiScale newDpi)
         {
+            UpdateScale(newDpi);
+        }
+
+        private void UpdateScale(DpiScale newDpi)
+        {
             var xDpiScale = 1d / newDpi.DpiScaleX;
             var yDpiScale = 1d / newDpi.DpiScaleY;
 
@@ -25,6 +30,8 @@ namespace DpiAware_SciChartSurface
             // Scales down Chart when display scaling is > 100%
             _scaleTransform = new ScaleTransform();
             LayoutTransform = _scaleTransform;
+
+            UpdateScale(VisualTreeHelper.GetDpi(this));
         }
     }
 }
