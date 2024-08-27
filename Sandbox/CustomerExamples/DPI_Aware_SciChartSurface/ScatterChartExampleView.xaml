@@ -11,25 +11,12 @@
              Loaded="ScatterChartExampleView_Loaded"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <!-- Value converter that allows scaling of UI Elements based on current Display Scaling -->
-        <sciChartScatterChart:InverseScaleTransformConverter x:Key="InverseScaleTransformConverter"/>
-
         <!-- Declare the default Style for the DpiAwareSciChartSurface -->
         <Style TargetType="sciChartScatterChart:DpiAwareSciChartSurface" BasedOn="{StaticResource {x:Type s:SciChartSurface}}" />
-
-        <!-- Styles that allows AxisLabels to scale down -->
-        <Style x:Key="AxisLabelStyle" TargetType="s:NumericTickLabel">
-            <Setter Property="RenderTransform" Value="{Binding Path=LayoutTransform, Converter={StaticResource InverseScaleTransformConverter}, RelativeSource={RelativeSource AncestorType=sciChartScatterChart:DpiAwareSciChartSurface}}"/>
-        </Style>
 
         <Style x:Key="NumericAxisStyle" TargetType="s:NumericAxis">
             <Setter Property="DrawMajorBands" Value="True"/>
             <Setter Property="GrowBy" Value="0.1, 0.1"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=checkBoxScaleLabels, Path=IsChecked}" Value="True">
-                    <Setter Property="TickLabelStyle" Value="{StaticResource AxisLabelStyle}"/>
-                </DataTrigger>
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
@@ -39,19 +26,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
-            <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
-                <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" MinWidth="120" Orientation="Vertical">
-                        <TextBlock Text="Scaling" Style="{StaticResource FlyoutMenuHeaderStyle}" />
-                        <CheckBox x:Name="checkBoxScaleLabels" Content="Scale Axis Labels" IsChecked="True" Margin="0,5" />
-                    </StackPanel>
-                </ext:FlyoutMenuButton.PopupContent>
-            </ext:FlyoutMenuButton>
-        </ext:SciChartInteractionToolbar>
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" />
 
-        <!-- Please notice that DpiAwareSciChartSurface requires a default style -->
+            <!-- Please notice that DpiAwareSciChartSurface requires a default style -->
         <!-- It is declared above in UserControl.Resources -->
         <sciChartScatterChart:DpiAwareSciChartSurface x:Name="sciChart" Grid.Column="1" Padding="0" BorderThickness="0">
             <sciChartScatterChart:DpiAwareSciChartSurface.RenderableSeries>
