@@ -51,11 +51,8 @@
         <ItemsControl Grid.Row="2" Margin="-4" ItemsSource="{Binding GridCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid>
-                        <b:Interaction.Behaviors>
-                            <br:GridItemsPanelBehavior ItemPlacement="RowAndColumn"/>
-                        </b:Interaction.Behaviors>
-                    </Grid>
+                    <UniformGrid Rows="{Binding RowsCount, Mode=OneWay}"
+                                 Columns="{Binding ColumnsCount, Mode=OneWay}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>

@@ -7,6 +7,10 @@ namespace OilAndGasExample.GridCharts
 {
     public class GridPanelViewModel : BindableObject
     {
+        public int RowsCount => GridCharts.Count / 3;
+
+        public int ColumnsCount => GridCharts.Count / 3;
+
         public ObservableCollection<ChartViewModel> GridCharts { get; }
 
         public GridPanelViewModel()

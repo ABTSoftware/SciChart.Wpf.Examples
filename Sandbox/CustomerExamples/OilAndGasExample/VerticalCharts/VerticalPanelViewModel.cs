@@ -22,6 +22,10 @@ namespace OilAndGasExample.VerticalCharts
             }
         }
 
+        public int RowsCount => 0;
+
+        public int ColumnsCount => VerticalCharts.Count;
+
         public ObservableCollection<ChartViewModel> VerticalCharts { get; }
 
         public VerticalPanelViewModel()
