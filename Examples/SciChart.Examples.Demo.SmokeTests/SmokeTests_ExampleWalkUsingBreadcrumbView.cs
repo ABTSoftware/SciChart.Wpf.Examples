@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -471,7 +472,25 @@ namespace SciChart.Examples.Demo.SmokeTests
             // Capture a screenshot & compare
             using (var capture = Capture.Element(userControlNotFrame))
             {
-                var actualBitmap = new WriteableBitmap(capture.BitmapImage);
+                BitmapSource bitmapSource = null;
+
+#if NETFRAMEWORK
+                bitmapSource = capture.BitmapImage;
+#else
+                using(MemoryStream memory = new MemoryStream())
+                {
+                    capture.Bitmap.Save(memory, ImageFormat.Png);
+                    memory.Position = 0;
+                    var bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memory;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+
+                    bitmapSource = bitmapImage;
+                }
+#endif
+                var actualBitmap = new WriteableBitmap(bitmapSource);
 
                 //#if DEBUG
                 // When true, we export the image and open in Paint for test purposes. 
