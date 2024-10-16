@@ -56,6 +56,7 @@ namespace PerformanceBenchmark
             var textBlock = new FrameworkElementFactory(typeof(TextBlock));
             var textBinding = new Binding("TestName")
             {
+                Mode = BindingMode.OneWay,
                 StringFormat = "N2"
             };
 
@@ -65,6 +66,7 @@ namespace PerformanceBenchmark
             var testNameColumn = new DataGridTemplateColumn
             {
                 CellTemplate = new DataTemplate { VisualTree = textBlock },
+                ClipboardContentBinding = textBinding,
                 Header = "Test Name"
             };
 
@@ -79,11 +81,13 @@ namespace PerformanceBenchmark
                 // On result, bind the cell background to output of _heatProvider;
                 var resultBinding = new Binding($"[{chartProvider.Name}]")
                 {
+                    Mode = BindingMode.OneWay,
                     StringFormat = "N2"
                 };
 
                 var backgroundBinding = new Binding($"[{chartProvider.Name}]")
                 {
+                    Mode = BindingMode.OneWay,
                     Converter = new HeatConverter(_heatProvider)
                 };
 
@@ -96,6 +100,7 @@ namespace PerformanceBenchmark
                 Columns.Add(new DataGridTemplateColumn
                 {
                     CellTemplate = new DataTemplate { VisualTree = textBlock },
+                    ClipboardContentBinding = resultBinding,
                     Header = chartProvider.Name
                 });
             }
