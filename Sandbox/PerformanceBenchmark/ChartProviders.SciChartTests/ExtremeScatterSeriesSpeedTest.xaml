@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="ChartProviders.SciChartTests.ExtremeScatterSeriesSpeedTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <Grid>
+
+        <!--  In this code file we made the following modifications  -->
+        <!--  1. Changed the point template to 5px to match Visiblox's size of point (before was 9)  -->
+        <!--  2. Added AutoAlignVisibleRange=False on numeric axis to prevent a crash  -->
+        <!--  3. Added DrawMinorGridLines=False and DrawMinorTicks=False to match Visiblox  -->
+
+        <!--  Create the chart surface  -->
+        <s:SciChartSurface Name="sciChart"
+                           s:ThemeManager.Theme="SciChartv7Navy"
+                           s:RenderSurfaceExtensions.RenderSurfaceType="{Binding RenderSurface}"
+                           s:PerformanceHelper.EnableExtremeResamplers="{Binding EnableExtremeResamplers}"
+                           s:PerformanceHelper.EnableExtremeDrawingManager="{Binding EnableExtremeDrawingManager}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <s:ExtremeScatterRenderableSeries x:Name="scatterSeries">
+                    <s:ExtremeScatterRenderableSeries.PointMarker>
+                        <s:EllipsePointMarker Width="5"
+                                              Height="5"
+                                              Fill="#50C7E0"/>
+                    </s:ExtremeScatterRenderableSeries.PointMarker>
+                </s:ExtremeScatterRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!--  Create an X Axis  -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis DrawMinorGridLines="False" DrawMinorTicks="False">
+                    <s:NumericAxis.VisibleRange>
+                        <s:DoubleRange Max="100" Min="0"/>
+                    </s:NumericAxis.VisibleRange>
+                </s:NumericAxis>
+            </s:SciChartSurface.XAxis>
+
+            <!--  Create a Y Axis  -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis DrawMinorGridLines="False" DrawMinorTicks="False">
+                    <s:NumericAxis.VisibleRange>
+                        <s:DoubleRange Max="100" Min="0"/>
+                    </s:NumericAxis.VisibleRange>
+                </s:NumericAxis>
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.Annotations>
+                <s:TextAnnotation x:Name="infoTextAnnotation"
+                                  Background="#DF11192C"
+                                  Foreground="#90FFFFFF"
+                                  Padding="5,2,5,5"
+                                  HorizontalAnchorPoint="Center"
+                                  VerticalAnchorPoint="Center"
+                                  FontSize="12"
+                                  FontWeight="SemiBold"
+                                  CoordinateMode="Relative"
+                                  X1="0.5"
+                                  Y1="0.1"/>
+            </s:SciChartSurface.Annotations>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

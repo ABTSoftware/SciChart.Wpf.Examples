@@ -1,0 +1,32 @@
+﻿<Project Sdk="Xpf.Sdk/1.0.1-cibuild001094">
+
+	<PropertyGroup>
+		<Company>SciChart Ltd</Company>
+		<Copyright>Copyright © SciChart Ltd 2011-2024</Copyright>
+		<TargetFrameworks>net6.0-windows</TargetFrameworks>
+		<UseWPF>True</UseWPF>
+		<OutputType>WinExe</OutputType>
+		<OutputPath>..\Build.AvaloniaXPF\$(Configuration)</OutputPath>
+		<LangVersion>Latest</LangVersion>
+		<DefineConstants>XPF</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<RuntimeHostConfigurationOption Include="AvaloniaUI.Xpf.LicenseKey" Value="[AVALONIA_LICENSE_KEY]" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ChartProviders.Common\ChartProviders.Common.Xpf.csproj" />
+		<ProjectReference Include="..\ChartProviders.SciChartTests\ChartProviders.SciChartTests.Xpf.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="SciChartWin256x256.ico" />
+		<None Remove="SciChartXpf256x256.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="SciChartXpf256x256.ico" />
+	</ItemGroup>
+
+</Project>

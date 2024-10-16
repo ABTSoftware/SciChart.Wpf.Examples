@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="Benchmark.Colors.Highlight">#FF003BB0</Color>
+    <Color x:Key="Benchmark.Colors.Accent">#FF0050EF</Color>
+    <Color x:Key="Benchmark.Colors.Accent1">#CC0050EF</Color>
+    <Color x:Key="Benchmark.Colors.Accent2">#990050EF</Color>
+    <Color x:Key="Benchmark.Colors.ThemeForeground">#FF222222</Color>
+    <Color x:Key="Benchmark.Colors.ThemeBackground">#FFFFFFFF</Color>
+
+    <Color x:Key="Benchmark.Colors.Gray">#FF222222</Color>
+    <Color x:Key="Benchmark.Colors.Gray1">#FF333333</Color>
+    <Color x:Key="Benchmark.Colors.Gray2">#FF474747</Color>
+    <Color x:Key="Benchmark.Colors.Gray3">#FF606060</Color>
+    <Color x:Key="Benchmark.Colors.Gray4">#FF7F7F7F</Color>
+    <Color x:Key="Benchmark.Colors.Gray5">#FFACACAC</Color>
+    <Color x:Key="Benchmark.Colors.Gray6">#FFC5C5C5</Color>
+    <Color x:Key="Benchmark.Colors.Gray7">#FFE5E5E5</Color>
+    <Color x:Key="Benchmark.Colors.Gray8">#FFF1F1F1</Color>
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Highlight" Color="{StaticResource Benchmark.Colors.Highlight}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Accent" Color="{StaticResource Benchmark.Colors.Accent}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Accent1" Color="{StaticResource Benchmark.Colors.Accent1}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Accent2" Color="{StaticResource Benchmark.Colors.Accent2}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.ThemeForeground" Color="{StaticResource Benchmark.Colors.ThemeForeground}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.ThemeBackground" Color="{StaticResource Benchmark.Colors.ThemeBackground}" />
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray" Color="{StaticResource Benchmark.Colors.Gray}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray1" Color="{StaticResource Benchmark.Colors.Gray1}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray2" Color="{StaticResource Benchmark.Colors.Gray2}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray3" Color="{StaticResource Benchmark.Colors.Gray3}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray4" Color="{StaticResource Benchmark.Colors.Gray4}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray5" Color="{StaticResource Benchmark.Colors.Gray5}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray6" Color="{StaticResource Benchmark.Colors.Gray6}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray7" Color="{StaticResource Benchmark.Colors.Gray7}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Gray8" Color="{StaticResource Benchmark.Colors.Gray8}" />
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Border" Color="{StaticResource Benchmark.Colors.Gray5}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Background" Color="{StaticResource Benchmark.Colors.Gray7}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Foreground" Color="{StaticResource Benchmark.Colors.Gray}" />
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Border.MouseOver" Color="{StaticResource Benchmark.Colors.Gray}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Background.MouseOver" Color="{StaticResource Benchmark.Colors.Gray6}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Foreground.MouseOver" Color="{StaticResource Benchmark.Colors.Gray}" />
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Border.Pressed" Color="{StaticResource Benchmark.Colors.Gray}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Background.Pressed" Color="{StaticResource Benchmark.Colors.Gray5}" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Foreground.Pressed" Color="{StaticResource Benchmark.Colors.Gray}" />
+
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Disabled" Color="#90FFFFFF" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Validation" Color="#FFDB000C" />
+    <SolidColorBrush x:Key="Benchmark.Brushes.Control.Transparent" Color="#00FFFFFF" />
+
+</ResourceDictionary>

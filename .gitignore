@@ -7,5 +7,6 @@ packages
 *.vs
 *.opendb
 *.db
-Build/
+[Bb]uild/
+[Bb]uild.*/
 Examples/lastbuild.txt

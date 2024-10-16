@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Path x:Key="TestCasePlaceholder"
+          Data="M67.829 132.776h299.1v-55.19h-311.94c-52.696 0-68.273 26.388-43.458 68.619l264.289 438.289v251.555h-52.15c-39.008 0-39.008 55.19 0.001 55.19h379.86c39.009 0 39.009-55.19 0-55.19h-52.151v-265.656h-55.926v265.656h-163.708v-265.656l-263.916-437.617zM339.029 471.151l-169.647-284.299 141.202-0.001 208.749 225.816-31.164 58.484h-149.14zM631.021 451.585l-212.019-226.596 212.019-220.573 67.076 67.076-161.302 153.497 161.302 159.521-67.076 67.076zM744.905 384.509l161.302-159.521-161.302-153.497 67.076-67.076 212.019 220.573-212.019 226.596-67.076-67.076z"
+          Stretch="Uniform"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          Fill="{StaticResource Benchmark.Brushes.Gray8}">
+
+        <Path.LayoutTransform>
+            <ScaleTransform ScaleY="-1.0"/>
+        </Path.LayoutTransform>
+    </Path>
+
+    <Path x:Key="TestListPlaceholder"
+          Data="M46.875 144H38L25 157.125L33.875 165.875L42.5 157.375L60.125 175L69 166.125L46.875 144zM87.375 162.5H187.375V150H87.375V162.5zM87.375 125H187.375V112.5H87.375V125zM187.375 87.5H87.375V75H187.375V87.5zM87.375 50H187.375V37.5H87.375V50zM38 106.5H46.875L69 128.625L60.125 137.375L42.5 119.75L33.875 128.375L25 119.5L38 106.5zM46.875 68.875H38L25 81.875L33.875 90.75L42.5 82.125L60.125 99.875L69 91L46.875 68.875zM38 31.25H46.875L69 53.375L60.125 62.25L42.5 44.5L33.875 53.125L25 44.375L38 31.25z"
+          Stretch="Uniform"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          Fill="{StaticResource Benchmark.Brushes.Gray8}">
+
+        <Path.LayoutTransform>
+            <ScaleTransform ScaleY="-1.0"/>
+        </Path.LayoutTransform>
+    </Path>
+
+</ResourceDictionary>

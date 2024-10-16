@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<Company>SciChart Ltd</Company>
+		<Copyright>Copyright © SciChart Ltd 2011-2024</Copyright>
+		<TargetFrameworks>net6.0-windows</TargetFrameworks>
+		<UseWPF>True</UseWPF>
+		<OutputType>Library</OutputType>
+		<OutputPath>..\Build.AvaloniaXPF\$(Configuration)</OutputPath>
+		<LangVersion>Latest</LangVersion>
+		<DefineConstants>XPF</DefineConstants>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>PublicPrivateKeyFile.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SciChart.Avalonia.Xpf" Version="*-*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ChartProviders.Common\ChartProviders.Common.Xpf.csproj" />
+	</ItemGroup>
+
+</Project>
