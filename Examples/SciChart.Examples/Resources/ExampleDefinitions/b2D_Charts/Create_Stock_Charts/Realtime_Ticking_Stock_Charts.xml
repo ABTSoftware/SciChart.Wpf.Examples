@@ -32,7 +32,7 @@
     - [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17223/37/how-to-have-a-fixed-scrolling-time-range-on-the-xaxis-that-works-with-modifiers']How to have a Fixed Scrolling Time-Range on the XAxis that works with Modifiers[/url]
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
     - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
-    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']CategoryDateTimeAxis vs. NumericAxis[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']Category Axis vs. Value Axis[/url]
   </Description>
   <CodeFiles>
     <string>Resources/ExampleSourceFiles/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml.txt</string>

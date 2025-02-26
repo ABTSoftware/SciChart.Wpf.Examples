@@ -22,6 +22,7 @@ using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Model.Filters;
 using SciChart.Charting.Numerics.Calendars;
+using SciChart.Charting.Visuals.Axes.IndexDataProviders;
 using SciChart.Data.Model;
 using SciChart.Examples.Examples.SeeFeaturedApplication.Common;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -58,6 +59,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
         
         private IDiscontinuousDateTimeCalendar _calendar;
         private OhlcDataSeries<DateTime, double> _ohlcDataSeries;
+
+        private IIndexDataProvider _priceChartIndexDataProvider;
 
         public SciTraderViewModel()
         {
@@ -102,6 +105,16 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
             ChartType.FastCandlestick,
             ChartType.FastOhlc
         };
+
+        public IIndexDataProvider PriceChartIndexDataProvider
+        {
+            get => _priceChartIndexDataProvider;
+            set
+            {
+                _priceChartIndexDataProvider = value;
+                OnPropertyChanged(nameof(PriceChartIndexDataProvider));
+            }
+        }
 
         public IOhlcDataSeries<DateTime, double> PriceSeries
         {
@@ -352,12 +365,24 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SciTrader
         private void UpdatePriceChart(PriceSeries priceData)
         {
             // Create a new series and append Open, High, Low, Close data                
-            _ohlcDataSeries = new OhlcDataSeries<DateTime, double>();
+            _ohlcDataSeries = new OhlcDataSeries<DateTime, double> { SeriesName = priceData.Symbol };
             _ohlcDataSeries.Append(priceData.TimeData, priceData.OpenData, priceData.HighData, priceData.LowData, priceData.CloseData);
-            
-            PriceSeries = (IOhlcDataSeries<DateTime, double>) (UseDiscontinuousDateTimeAxis ? _ohlcDataSeries.ToDiscontinuousSeries(Calendar) : _ohlcDataSeries);
-            PriceSeries.SeriesName = priceData.Symbol;
-            
+
+            if (UseDiscontinuousDateTimeAxis)
+            {
+                // IndexDataProvider isn't used with DiscontinuousDateTimeAxis
+                // Set to Null to free the occupied memory
+                PriceChartIndexDataProvider = null;
+                PriceSeries = (IOhlcDataSeries<DateTime, double>) _ohlcDataSeries.ToDiscontinuousSeries(Calendar);
+            }
+            else
+            {
+                // IndexDataProvider is required for IndexDateTimeAxis
+                // Specify that IndexDateTimeAxis should calculate axis ticks and gridlines based on the price DataSeries
+                PriceChartIndexDataProvider = new DataSeriesIndexDataProvider(_ohlcDataSeries);
+                PriceSeries = _ohlcDataSeries;
+            }
+
             // Create a series for the 200 period SMA which will be plotted as a line chart
             Sma200Series = (IXyDataSeries<DateTime, double>)PriceSeries.ToMovingAverage(200);
 

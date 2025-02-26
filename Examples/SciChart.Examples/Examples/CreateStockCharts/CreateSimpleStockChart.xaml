@@ -69,17 +69,22 @@
         <!--  Create the SciStockChart. In the code-behind we append data and add series  -->
         <s:SciStockChart x:Name="StockChart" Grid.Column="1">
 
-            <!--  Override any property of the built-in CategoryDateTimeAxis here  -->
-            <s:SciStockChart.XAxisStyle>
-                <Style TargetType="s:CategoryDateTimeAxis">
-                    <Setter Property="DrawMinorGridLines" Value="True" />
-                    <Setter Property="DrawMajorGridLines" Value="True" />
-                    <Setter Property="DrawMajorBands" Value="True" />
-                    <Setter Property="MinorsPerMajor" Value="5" />
-                    <Setter Property="TextFormatting" Value="dd MMM yyyy" />
-                    <Setter Property="GrowBy" Value="0, 0.1" />
-                </Style>
-            </s:SciStockChart.XAxisStyle>
+            <!-- Replace the default CategoryDateTimeAxis with a new IndexDateTimeAxis, introduced in SciChart v8.7 -->
+            <!-- Override the any properties of the built-in CategoryDateTimeAxis  -->
+            <s:SciStockChart.XAxis>
+                <s:IndexDateTimeAxis>
+                    <s:IndexDateTimeAxis.Style>
+                        <Style TargetType="s:IndexDateTimeAxis">
+                            <Setter Property="DrawMinorGridLines" Value="True" />
+                            <Setter Property="DrawMajorGridLines" Value="True" />
+                            <Setter Property="DrawMajorBands" Value="True" />
+                            <Setter Property="MinorsPerMajor" Value="5" />
+                            <Setter Property="TextFormatting" Value="dd MMM yyyy" />
+                            <Setter Property="GrowBy" Value="0, 0.1" />
+                        </Style>
+                    </s:IndexDateTimeAxis.Style>
+                </s:IndexDateTimeAxis>
+            </s:SciStockChart.XAxis>
 
             <!--  Override any property of the built-in NumericAxis here  -->
             <s:SciStockChart.YAxisStyle>

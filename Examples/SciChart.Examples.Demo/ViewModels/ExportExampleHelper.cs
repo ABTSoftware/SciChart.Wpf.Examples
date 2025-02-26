@@ -26,13 +26,9 @@ namespace SciChart.Examples.Demo.ViewModels
         static ExportExampleHelper()
         {
             DefaultExportPath = AppDomain.CurrentDomain.BaseDirectory + FolderName + "\\";
-
-            AssemblyVersion = GetSciChartVersion();
         }
 
         public static string DefaultExportPath { get; }
-
-        public static string AssemblyVersion { get; }
 
         public static string ScriptPath
         {
@@ -193,7 +189,7 @@ namespace SciChart.Examples.Demo.ViewModels
             return result;
         }
 
-        public static bool IsAssemblyExist(string folderPath, string assemblyName)
+        private static bool IsAssemblyExist(string folderPath, string assemblyName)
         {
             string fullPath = Path.Combine(folderPath, assemblyName);
 
@@ -202,17 +198,22 @@ namespace SciChart.Examples.Demo.ViewModels
             return isExists;
         }
 
-        public static bool IsAssemblyVersionMatch(string folderPath, string assemblyName)
+        private static bool IsAssemblyVersionMatch(string folderPath, string assemblyName)
         {
             string fullPath = Path.Combine(folderPath, assemblyName);
+            string fileVersion = FileVersionInfo.GetVersionInfo(fullPath).FileVersion;
+            string libVersion = SciChartSurface.VersionInfo;
 
-            var pattern = new Regex(@"^\d+\.\d+");
-            bool isMatch = pattern.Match(FileVersionInfo.GetVersionInfo(fullPath).FileVersion).Value == pattern.Match(AssemblyVersion).Value;
+            if (!string.IsNullOrEmpty(fileVersion) && !string.IsNullOrEmpty(libVersion))
+            {
+                var pattern = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+");
+                return pattern.Match(fileVersion).Value == pattern.Match(libVersion).Value;
+            }
 
-            return isMatch;
+            return false;
         }
 
-        public static string GetAssemblyPathFromRegistry()
+        private static string GetAssemblyPathFromRegistry()
         {
             using (var registryKey = Registry.CurrentUser.OpenSubKey(RegistryKeyString))
             {
@@ -225,13 +226,6 @@ namespace SciChart.Examples.Demo.ViewModels
             }
 
             return null;
-        }
-
-        public static string GetSciChartVersion()
-        {
-            var assemblyName = new AssemblyName(typeof(SciChartSurface).Assembly.FullName);
-
-            return assemblyName.Version.ToString();
-        }    
+        }  
     }
 }

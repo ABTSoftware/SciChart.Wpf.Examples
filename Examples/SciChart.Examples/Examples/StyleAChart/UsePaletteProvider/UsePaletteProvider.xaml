@@ -92,7 +92,7 @@
             </s:SciChartSurface.Resources>
 
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis AxisTitle="Time" />
+                <s:IndexDateTimeAxis AxisTitle="Time" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxes>

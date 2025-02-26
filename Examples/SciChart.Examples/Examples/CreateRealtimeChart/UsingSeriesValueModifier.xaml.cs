@@ -49,8 +49,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart
             _timerNewDataUpdate.Elapsed += OnNewData;
 
             // Create new dataseries of type X=double, Y=double
-            _series0 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Orange Series" };
-            _series1 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Blue Series" };
+            _series0 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Blue Series" };
+            _series1 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Orange Series" };
             _series2 = new UniformXyDataSeries<double>(t, dt) { FifoCapacity = FifoSize, SeriesName = "Green Series" };
 
             // Set the dataseries on the chart's RenderableSeries

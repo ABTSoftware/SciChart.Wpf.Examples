@@ -36,7 +36,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart
         {
             var series = new OhlcDataSeries<DateTime, double>();
 
-            var marketDataService = new MarketDataService(DateTime.Now, 5, 5);
+            var marketDataService = new MarketDataService(new DateTime(2010, 12, 6), 5, 5);
             var data = marketDataService.GetHistoricalData(200);
             series.Append(data.Select(x => x.DateTime), data.Select(x => x.Open), data.Select(x => x.High), data.Select(x => x.Low), data.Select(x => x.Close));
 

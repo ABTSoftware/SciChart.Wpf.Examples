@@ -47,20 +47,17 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Measure
             var rangeY = Y1.CompareTo(Y2) > 0 ? RangeFactory.NewRange(Y2, Y1) : RangeFactory.NewRange(Y1, Y2);
 
             string xText;
-
-            if (xCoordCalc is ICategoryCoordinateCalculator<DateTime> categoryCalc)
+            if (rangeX is DateRange dateRange)
             {
-                var indexRange = (IntegerRange)rangeX;
-                var difference = categoryCalc.TransformIndexToData(indexRange.Max) - categoryCalc.TransformIndexToData(indexRange.Min);
-
-                xText = string.Format("{0:dd} days", difference);
+                var rangeDiff = dateRange.Max - dateRange.Min;
+                xText = $"{rangeDiff.Days:N0} days";
             }
             else
             {
                 xText = rangeX.Diff.ToString();
             }
 
-            MeasureText.Text = string.Format("{0:#.##}\n{1}", rangeY.Diff, xText);
+            MeasureText.Text = $"{rangeY.Diff:#.##}\n{xText}";
         }
     }
 }

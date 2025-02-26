@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SciChart.Examples.Examples.ModifyAxisBehaviour"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DataContext="{d:DesignInstance local:CategoryVsValueAxisViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -27,11 +28,18 @@
 
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
             <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:ToolbarIcon Width="16"
+                                 Height="16"
+                                 Kind="TuneVariant"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
                 <ext:FlyoutMenuButton.PopupContent>
-                    <StackPanel Margin="5" MinWidth="130" Orientation="Vertical">
-                        <TextBlock Text="X-Axis Category" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
-                        <CheckBox Content="Use Category Axis" Margin="0,5" IsChecked="{Binding UseCategoryNumericAxis, Mode=TwoWay}"/>
+                    <StackPanel MinWidth="130"
+                                Margin="5"
+                                Orientation="Vertical">
+                        <TextBlock Style="{StaticResource FlyoutMenuHeaderStyle}" Text="Axis Type" />
+                        <CheckBox Margin="0,5"
+                                  Content="Use Index X-Axis?"
+                                  IsChecked="{Binding UseIndexNumericAxis, Mode=TwoWay}" />
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
@@ -39,22 +47,23 @@
 
         <s:SciChartSurface Name="sciChart"
                            Grid.Column="1"
-                           BorderThickness="0"
                            Padding="0"
-                           local:SwitchAxisTypeBehavior.UseAlternateXAxis="{Binding UseCategoryNumericAxis}">
+                           local:SwitchAxisTypeBehavior.UseAlternateXAxis="{Binding UseIndexNumericAxis}"
+                           ViewportManager="{Binding ViewportManager, Mode=OneWay}"
+                           BorderThickness="0">
 
             <s:SciChartSurface.RenderableSeries>
-                <s:FastLineRenderableSeries DataSeries="{Binding DataSeries}"
-                                            Stroke="{StaticResource MainThemeStrokeColor}"
-                                            s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate}" />
+                <s:FastLineRenderableSeries s:TooltipModifier.TooltipTemplate="{StaticResource TooltipTemplate}"
+                                            DataSeries="{Binding DataSeries}"
+                                            Stroke="{StaticResource MainThemeStrokeColor}" />
             </s:SciChartSurface.RenderableSeries>
 
             <local:SwitchAxisTypeBehavior.DefaultXAxis>
-                <s:NumericAxis Id="XNumAxis" DrawMajorBands="True" />
+                <s:NumericAxis DrawMajorBands="True" />
             </local:SwitchAxisTypeBehavior.DefaultXAxis>
 
             <local:SwitchAxisTypeBehavior.AlternativeXAxis>
-                <s:CategoryNumericAxis Id="XCatAxis" DrawMajorBands="True" />
+                <s:IndexNumericAxis DrawMajorBands="True" IndexDataProvider="{Binding IndexDataProvider, Mode=OneWay}" />
             </local:SwitchAxisTypeBehavior.AlternativeXAxis>
 
             <s:SciChartSurface.YAxis>
@@ -67,9 +76,13 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:TooltipModifier ReceiveHandledEvents="True"
-                                       ShowTooltipOn="Always"
-                                       UseInterpolation="True" />
+                    <!-- Rollover allows inspecting data with mouse -->
+                    <s:RolloverModifier ShowTooltipOn="MouseHover"
+                                        UseInterpolation="True" />
+                    <!-- VerticalSlice shows a vertical line with a tooltip at the intersection point with a RenderableSeries -->
+                    <s:VerticalSliceModifier>
+                        <s:VerticalLineAnnotation ShowLabel="True" LabelPlacement="Axis" X1="8.0" IsEditable="True" />
+                    </s:VerticalSliceModifier>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>

@@ -94,7 +94,7 @@
             <StackPanel Grid.Row="5" Grid.Column="0">
                 <TextBlock Margin="0,10,0,0" Foreground="{DynamicResource FeedbackExportHeaderForegroundBrush}">
                     <Run Text="Please select how to reference SciChart"/>
-                    <Run Text="{Binding ExportMajorVersion, Mode=OneWay, StringFormat='(requires v{0}.x)'}"/>
+                    <Run Text="{Binding ExportVersionMajor, Mode=OneWay, StringFormat='(requires v{0}.x)'}"/>
                 </TextBlock>
                 <RadioButton Content="NuGet Package" Margin="0,10,0,0" IsChecked="True"/>
                 <RadioButton Content="Installation Folder" Margin="0,10,0,0" IsChecked="{Binding IsLibFromFolder}"/>

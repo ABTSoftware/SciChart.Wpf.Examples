@@ -95,11 +95,13 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     var renderSettings = new VxRenderSettings
                     {
-                        DirectXMode = UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
-                        FullScreenAntiAliasingMode =
-                            Use3DAA4x ?
-                                FullScreenAntiAliasingMode.MSAA4x :
-                                FullScreenAntiAliasingMode.None,
+                        DirectXMode = UseD3D9
+                            ? DirectXMode.DirectX9c
+                            : DirectXMode.DirectX11,
+                        
+                        FullScreenAntiAliasingMode = Use3DAA4x
+                            ? FullScreenAntiAliasingMode.MSAA4x
+                            : FullScreenAntiAliasingMode.None
                     };
 
                     if (!renderSettings.Equals(_renderSettings))

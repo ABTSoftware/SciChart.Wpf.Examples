@@ -86,18 +86,28 @@
         <s:SciChartSurface x:Name="SciChart"
                            Grid.Column="1"
                            RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
-            <!--  Styles.xaml resource keys must match StyleKey in RenderableSeriesViewModel  -->
-            <s:SciChartSurface.Resources>
-                <!--  <ResourceDictionary Source="Styles.xaml" />  -->
-            </s:SciChartSurface.Resources>
 
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis />
+                <s:IndexDateTimeAxis />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
-                <s:NumericAxis />
+                <s:NumericAxis GrowBy="0.1, 0.1" />
             </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.Annotations>
+                <!-- Hint with helpful text that appears at the top-left corner of the chart -->
+                <s:CustomAnnotation CoordinateMode="Relative" HorizontalAnchorPoint="Left" VerticalAnchorPoint="Top" Margin="5" X1="0" Y1="0">
+                    <Border CornerRadius="5" Background="{StaticResource MainThemeTransparentSolidBrush}">
+                        <TextBlock Text="Choose an Annotation type, then Click &amp; Drag to place it" 
+                                   Margin="10" 
+                                   Foreground="#FFF"
+                                   HorizontalAlignment="Left" 
+                                   FontSize="18"
+                                   Opacity="0.7" />
+                    </Border>
+                </s:CustomAnnotation>
+            </s:SciChartSurface.Annotations>
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>

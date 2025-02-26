@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Unity;
 using SciChart.Examples.Demo.Behaviors;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.Demo.Helpers.Grouping;
 using SciChart.UI.Reactive.Observability;
-using Unity.Attributes;
+using Unity;
 
 namespace SciChart.Examples.Demo.ViewModels
 {

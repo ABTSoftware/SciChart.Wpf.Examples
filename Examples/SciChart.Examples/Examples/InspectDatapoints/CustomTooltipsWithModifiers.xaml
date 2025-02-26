@@ -234,12 +234,10 @@
                                       ReceiveHandledEvents="True" />
                     <s:TooltipModifier x:Name="TooltipModifier" IsEnabled="False" ReceiveHandledEvents="True" />
                     <s:VerticalSliceModifier IsEnabled="True">
-                        <s:VerticalSliceModifier.VerticalLines>
-                            <s:VerticalLineAnnotation IsEditable="True"
-                                                      LabelPlacement="Axis"
-                                                      ShowLabel="True"
-                                                      X1="1250" />
-                        </s:VerticalSliceModifier.VerticalLines>
+                        <s:VerticalLineAnnotation IsEditable="True"
+                                                  LabelPlacement="Axis"
+                                                  ShowLabel="True"
+                                                  X1="1250" />
                     </s:VerticalSliceModifier>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>

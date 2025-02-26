@@ -21,6 +21,7 @@ using System.Windows.Input;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
+using SciChart.Core.Extensions;
 using SciChart.Data.Model;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -35,7 +36,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
         private readonly MovingAverage _sma50 = new MovingAverage(50);
 
         private PriceBar _lastPrice;
-        private IndexRange _xVisibleRange;
+        private DateRange _xVisibleRange;
 
         private int _selectedStrokeThickness;
         private string _selectedSeriesStyle;
@@ -84,8 +85,6 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
                 OnPropertyChanged("SeriesViewModels");
             }
         }
-
-        public double BarTimeFrame { get; } = TimeSpan.FromMinutes(5).TotalSeconds;
 
         public ICommand TickCommand => new ActionCommand(() => OnNewPrice(_marketDataService.GetNextBar()));
         
@@ -152,7 +151,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
             }
         }      
 
-        public IndexRange XVisibleRange
+        public DateRange XVisibleRange
         {
             get => _xVisibleRange;
             set
@@ -186,10 +185,10 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
 
                     // If the latest appending point is inside the viewport (i.e. not off the edge of the screen)
                     // then scroll the viewport 1 bar, to keep the latest bar at the same place
-                    if (XVisibleRange.Max > ds0.Count)
+                    if (XVisibleRange.Max > ds0.XMax.ToDateTime())
                     {
                         var existingRange = _xVisibleRange;
-                        var newRange = new IndexRange(existingRange.Min + 1, existingRange.Max + 1);
+                        var newRange = new DateRange(existingRange.Min.AddMinutes(5), existingRange.Max.AddMinutes(5));
                         XVisibleRange = newRange;
                     }
                 }

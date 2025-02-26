@@ -95,7 +95,7 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis DrawMajorBands="True" />
+                <s:IndexDateTimeAxis DrawMajorBands="True" />
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>

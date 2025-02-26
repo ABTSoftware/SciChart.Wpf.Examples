@@ -422,9 +422,10 @@
 
                 <!--  Create X Axis. Optional bands give a cool look and feel for minimal performance impact  -->
                 <xb:SwitchAxisTypeBehavior.DefaultXAxis>
-                    <s:CategoryDateTimeAxis Id="XCatAxis"
+                    <s:IndexDateTimeAxis Id="XCatAxis"
                                             DrawMajorBands="True"
                                             GrowBy="0.0, 0.1"
+                                            IndexDataProvider="{Binding PriceChartIndexDataProvider}"
                                             VisibleRange="{Binding CDTAVisibleRange, Mode=TwoWay}"/>
                 </xb:SwitchAxisTypeBehavior.DefaultXAxis>
 
@@ -501,14 +502,15 @@
 
                 <!--  Create default X and Y axes. Optional bands give a cool look and feel for minimal performance impact  -->
                 <xb:SwitchAxisTypeBehavior.DefaultXAxis>
-                    <s:CategoryDateTimeAxis Id="XCatAxis"
-                                            DrawLabels="False"
-                                            DrawMajorBands="True"
-                                            VisibleRange="{Binding CDTAVisibleRange, Mode=TwoWay}">
-                        <s:CategoryDateTimeAxis.GrowBy>
-                            <s:DoubleRange Max="0.1" Min="0.0" />
-                        </s:CategoryDateTimeAxis.GrowBy>
-                    </s:CategoryDateTimeAxis>
+                    <s:IndexDateTimeAxis Id="XCatAxis"
+                                                   DrawLabels="False"
+                                                   DrawMajorBands="True"
+                                                   IndexDataProvider="{Binding PriceChartIndexDataProvider}"
+                                                   VisibleRange="{Binding CDTAVisibleRange, Mode=TwoWay}">
+                        <s:IndexDateTimeAxis.GrowBy>
+                            <s:DoubleRange Min="0.0" Max="0.1" />
+                        </s:IndexDateTimeAxis.GrowBy>
+                    </s:IndexDateTimeAxis>
                 </xb:SwitchAxisTypeBehavior.DefaultXAxis>
 
                 <xb:SwitchAxisTypeBehavior.AlternativeXAxis>

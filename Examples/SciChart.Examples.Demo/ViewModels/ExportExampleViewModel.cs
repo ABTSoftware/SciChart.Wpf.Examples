@@ -16,7 +16,7 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             _parent = parent;
 
-            ExportMajorVersion = ProjectWriter.SciChartVersion.Major;
+            ExportVersionMajor = ProjectWriter.VersionMajor;
 
             SelectExportPathCommand = new ActionCommand(() =>
             {
@@ -77,7 +77,7 @@ namespace SciChart.Examples.Demo.ViewModels
         public ActionCommand ExportCommand { get; }
         public ActionCommand CancelCommand { get; }
 
-        public int ExportMajorVersion { get; }
+        public int ExportVersionMajor { get; }
 
         public bool IsExportVisible
         {

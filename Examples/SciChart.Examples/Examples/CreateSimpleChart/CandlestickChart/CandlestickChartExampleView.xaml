@@ -63,7 +63,7 @@
 
             <!--  Create an X Axis  -->
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis DrawMajorBands="True"/>
+                <s:IndexDateTimeAxis DrawMajorBands="True"/>
             </s:SciChartSurface.XAxis>
 
             <!--  Create a Y Axis with GrowBy  -->

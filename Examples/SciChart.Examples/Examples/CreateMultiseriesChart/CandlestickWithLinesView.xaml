@@ -31,7 +31,7 @@
             </s:SciChartSurface.RenderableSeries>
 
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis GrowBy="0.0, 0.1" DrawMajorBands="True"/>
+                <s:IndexDateTimeAxis GrowBy="0.0, 0.1" DrawMajorBands="True"/>
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
