@@ -4,30 +4,8 @@
     <UseWPF>True</UseWPF>
     <LangVersion>Latest</LangVersion>
     <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-    <DocumentationFile>..\..\Build\Debug\net462\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
-    <OutputPath>..\..\Build\Release\</OutputPath>
-    <DocumentationFile>..\..\Build\Release\net462\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-    <DocumentationFile>..\..\Build\Debug\netcoreapp3.1\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
-    <OutputPath>..\..\Build\Release</OutputPath>
-    <DocumentationFile>..\..\Build\Release\netcoreapp3.1\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-    <DocumentationFile>..\..\Build\Debug\net6.0-windows\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
-    <OutputPath>..\..\Build\Release</OutputPath>
-    <DocumentationFile>..\..\Build\Release\net6.0-windows\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
+    <OutputPath>..\..\Build\$(Configuration)</OutputPath>
+    <DocumentationFile>..\..\Build\$(Configuration)\$(TargetFramework)\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Controls\SciChartInteractionToolbar\MyCustomAnnotation.cs" />

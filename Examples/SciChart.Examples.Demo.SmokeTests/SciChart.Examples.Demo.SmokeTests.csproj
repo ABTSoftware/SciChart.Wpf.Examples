@@ -1,304 +1,243 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  
-  <PropertyGroup>
-	<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
-	<UseWPF>True</UseWPF>
-	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-	<LangVersion>Latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0-windows' and '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\Build\Debug\net6.0-windows\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0-windows' and '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Build\Release\net6.0-windows\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' and '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\Build\Debug\netcoreapp3.1\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' and '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Build\Release\netcoreapp3.1\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' ">
-    <RootNamespace>SciChart.Examples.Demo.SmokeTests</RootNamespace>
-    <AssemblyName>SciChart.Examples.Demo.SmokeTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+		<UseWPF>True</UseWPF>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<LangVersion>Latest</LangVersion>
+		<OutputPath>..\..\Build\$(Configuration)</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' and '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\Build\Debug\net462\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' and '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Build\Release\net462\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="UIAutomationProvider" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FlaUI.UIA3">
-      <Version>3.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>3.13.2</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter">
-      <Version>3.17.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BoxPlot.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BubbleChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\CandlestickChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalBandSeriesChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalLineChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ImpulseStemChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\LineChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\MountainChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\PolarChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ScatterChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BandSeriesChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\AnnotationsAreEasy.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\ClosedSurfaceMesh3D.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleBubble3DChart.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleCylindroid3DChart.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleEllipsoid3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\NonUniformSurfaceMesh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CompositeAnnotations.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CreateAnnotationsDynamically.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DatapointMarkers.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DragHorizontalThreshold.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\InteractionWithAnnotations.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\PolarChartAnnotations.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeAnnotations.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeMarkers.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\Fifo1BillionPoints.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\FastPalettedScatterCharts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\ScatterChartPerformanceDemo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ColumnChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalMountainChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingDonutChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingPieChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\CandlestickAndLines.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ContoursWithHeatmap.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardPolarCharts.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardStyleCharts.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ErrorBars.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\FanChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GapsInSeries.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\LineAndScatterChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedBarChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnSideBySide.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedMountainChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChartCustomization.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ErrorBarTernaryChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\PolygonTernaryChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ScatterTernaryChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\CustomCharts\SplineScatterChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\StockCharts\MultiPaneStockChart.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StockCharts\RealtimeTickingCharts.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StockCharts\UsingSciStockChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ExportCharts\ExportChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\Filters\FiltersApiExample.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapAndPaletteProvider.png" />
-    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapMetaData.png" />
-    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapRealTime.png" />
-    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapWithText.png" />
-    <EmbeddedResource Include="Resources\Charts2D\Heatmaps\NonUniformHeatmap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\Legends\LegendsAPI.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\SyncCharts\SyncCharts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\AddRemoveSeries.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeRenderableSeriesType.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeSeriesType.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CategoryVsValueAxis.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CentralXYAxes.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\LogarithmicAxis.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\ModifyAxisProperties.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleXAxis.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleYAxis.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\PolarChartManyAxes.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SecondaryYAxis.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SwitchAxisTypeRuntime.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticalCharts.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticallyStackedYAxis.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\AxisAnnotationBinding.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindMultipleCharts.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindSciChartToData.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\ManipulateSeriesMvvm.png" />
-    <EmbeddedResource Include="Resources\Charts2D\MVVMExamples\SeriesBinding.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\CustomTheme.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\DashedLineStyling.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UseHQRendering.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPaletteProvider.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPointMarkers.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingThemeManager.png" />
-    <EmbeddedResource Include="Resources\Charts2D\StylingTheming\Xaml Styling.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\CustomPointMarker.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\HitTestAPI.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\PointMarkersSelection.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesSelection.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesWithMetadata.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\TooltipsAndModifiers.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\Using TooltipModifier.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingCursorModifier.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingRolloverModifier.png" />
-    <EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingVerticalSlice.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\CustomOverviewControl.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAreaToZoom.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAxisToScale.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\MousewheelZoomScroll.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\OverviewControl.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanOnMouseDrag.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanYXDirection.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomPan\PerAxisScrollbars.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\UndoRedo.png" />
-    <EmbeddedResource Include="Resources\Charts2D\ZoomHistory\ZoomHistoryMVVM.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePointCloud3DChart.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePolar3DChart.png" />
-    <EmbeddedResource Include="Resources\Charts3D\StyleChart\SimpleThemManager3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleUniformMeshCloud3DChart.png" />
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleWaterfall3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformColumn3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformOrthogonalHeatmap3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\FloorCeilingSurfaceMesh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\ModifyAxis\AxisBinding.png" />
-    <EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\WithContoursSurfaceMesh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\ModifyAxis\LogarihtmicAxis3D.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\Customize\AddGeometryto3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\Customize\AddObjectto3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleScatter3DChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\ECGMonitorDemo.png" />
-    <EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\VitalSignsMonitorDemo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\ScientificCharts\LIDARPointCloud3DDemo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GanttChart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\AggregationFilters.png" />
-    <EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\SciChartTraderDemo.png" />
-    <EmbeddedResource Include="Resources\FeaturedApps\ParallelCoordinatePlot\ParallelCoordinatePlot.png" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="UIAutomationProvider" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FlaUI.UIA3" Version="3.2.0" />
+		<PackageReference Include="NUnit" Version="3.14.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+		<!-- Explicit package to address FlaUI.UIA3 vulnerabilities -->
+		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BoxPlot.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BubbleChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\CandlestickChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalBandSeriesChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalLineChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ImpulseStemChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\LineChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\MountainChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\PolarChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ScatterChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\BandSeriesChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\AnnotationsAreEasy.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\ClosedSurfaceMesh3D.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleBubble3DChart.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleCylindroid3DChart.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleEllipsoid3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\NonUniformSurfaceMesh.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CompositeAnnotations.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\CreateAnnotationsDynamically.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DatapointMarkers.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\DragHorizontalThreshold.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\InteractionWithAnnotations.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\PolarChartAnnotations.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeAnnotations.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\TradeMarkers.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\Fifo1BillionPoints.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\FastPalettedScatterCharts.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\ScatterChartPerformanceDemo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\ColumnChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\DigitalMountainChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingDonutChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateGaugeChart\UsingPieChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\CandlestickAndLines.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ContoursWithHeatmap.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardPolarCharts.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\DashboardStyleCharts.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\ErrorBars.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\FanChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GapsInSeries.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\LineAndScatterChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedBarChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedColumnSideBySide.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\StackedMountainChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\RadarCharts\RadarChartCustomization.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ErrorBarTernaryChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TernaryCharts\PolygonTernaryChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TernaryCharts\ScatterTernaryChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\CustomCharts\SplineScatterChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\StockCharts\MultiPaneStockChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StockCharts\RealtimeTickingCharts.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StockCharts\UsingSciStockChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ExportCharts\ExportChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\Filters\FiltersApiExample.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapAndPaletteProvider.png" />
+		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapMetaData.png" />
+		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapRealTime.png" />
+		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\HeatmapWithText.png" />
+		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\NonUniformHeatmap.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\Legends\LegendsAPI.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\SyncCharts\SyncCharts.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\AddRemoveSeries.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeRenderableSeriesType.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ManipulateSeries\ChangeSeriesType.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CategoryVsValueAxis.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\CentralXYAxes.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\LogarithmicAxis.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\ModifyAxisProperties.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleXAxis.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\MultipleYAxis.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\PolarChartManyAxes.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SecondaryYAxis.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\SwitchAxisTypeRuntime.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticalCharts.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ModifyAxisBehavior\VerticallyStackedYAxis.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\MVVMExamples\AxisAnnotationBinding.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindMultipleCharts.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MVVMExamples\BindSciChartToData.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MVVMExamples\ManipulateSeriesMvvm.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MVVMExamples\SeriesBinding.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\CustomTheme.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\DashedLineStyling.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\UseHQRendering.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPaletteProvider.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingPointMarkers.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\UsingThemeManager.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StylingTheming\Xaml Styling.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\CustomPointMarker.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\HitTestAPI.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\PointMarkersSelection.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesSelection.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\SeriesWithMetadata.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\TooltipsAndModifiers.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\Using TooltipModifier.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingCursorModifier.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingRolloverModifier.png" />
+		<EmbeddedResource Include="Resources\Charts2D\TooltipsAndHitTests\UsingVerticalSlice.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\CustomOverviewControl.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAreaToZoom.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\DragAxisToScale.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\MousewheelZoomScroll.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\OverviewControl.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanOnMouseDrag.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\PanYXDirection.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomPan\PerAxisScrollbars.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\ZoomHistory\UndoRedo.png" />
+		<EmbeddedResource Include="Resources\Charts2D\ZoomHistory\ZoomHistoryMVVM.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePointCloud3DChart.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimplePolar3DChart.png" />
+		<EmbeddedResource Include="Resources\Charts3D\StyleChart\SimpleThemManager3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleUniformMeshCloud3DChart.png" />
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleWaterfall3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformColumn3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\UniformOrthogonalHeatmap3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\FloorCeilingSurfaceMesh.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\ModifyAxis\AxisBinding.png" />
+		<EmbeddedResource Include="Resources\Charts3D\SurfaceMesh\WithContoursSurfaceMesh.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\ModifyAxis\LogarihtmicAxis3D.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\Customize\AddGeometryto3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\Customize\AddObjectto3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleScatter3DChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\ECGMonitorDemo.png" />
+		<EmbeddedResource Include="Resources\FeaturedApps\MedicalCharts\VitalSignsMonitorDemo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\ScientificCharts\LIDARPointCloud3DDemo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\GanttChart.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\AggregationFilters.png" />
+		<EmbeddedResource Include="Resources\FeaturedApps\FinancialCharts\SciChartTraderDemo.png" />
+		<EmbeddedResource Include="Resources\FeaturedApps\ParallelCoordinatePlot\ParallelCoordinatePlot.png" />
+	</ItemGroup>
 </Project>

@@ -58,10 +58,9 @@
 
             <!--  Create an X Axis  -->
             <s:SciChartSurface.XAxis>
-                <s:CategoryDateTimeAxis GrowBy="0,0.5"
-                                        DrawMinorGridLines="False"
-                                        BarTimeFrame="{Binding BarTimeFrame, Mode=OneWay}"
-                                        VisibleRange="{Binding XVisibleRange, Mode=TwoWay}" />
+                <s:IndexDateTimeAxis GrowBy="0,0.5"
+                                               DrawMinorGridLines="False"
+                                               VisibleRange="{Binding XVisibleRange, Mode=TwoWay}" />
             </s:SciChartSurface.XAxis>
 
             <!--  Create a Y Axis with GrowBy  -->

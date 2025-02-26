@@ -104,16 +104,20 @@
                 </Style>
             </s:SciStockChart.Resources>
 
-            <!--  Override any properties of the built-in CategoryDateTimeAxis  -->
-            <s:SciStockChart.XAxisStyle>
-                <Style TargetType="s:CategoryDateTimeAxis">
-                    <Setter Property="GrowBy" Value="0, 0.1" />
-                    <Setter Property="DrawMinorGridLines" Value="False" />
-                    <Setter Property="DrawMajorBands" Value="True" />
-                    <Setter Property="BarTimeFrame" Value="{Binding BarTimeFrame, Mode=OneWay}" />
-                    <Setter Property="VisibleRange" Value="{Binding XVisibleRange, Mode=TwoWay}" />
-                </Style>
-            </s:SciStockChart.XAxisStyle>
+            <!-- Replace the default CategoryDateTimeAxis with a new IndexDateTimeAxis, introduced in SciChart v8.7 -->
+            <!-- Override the any properties of the built-in CategoryDateTimeAxis  -->
+            <s:SciStockChart.XAxis>
+                <s:IndexDateTimeAxis>
+                    <s:IndexDateTimeAxis.Style>
+                        <Style TargetType="s:IndexDateTimeAxis">
+                            <Setter Property="GrowBy" Value="0, 0.1" />
+                            <Setter Property="DrawMinorGridLines" Value="False" />
+                            <Setter Property="DrawMajorBands" Value="True" />
+                            <Setter Property="VisibleRange" Value="{Binding XVisibleRange, Mode=TwoWay}" />
+                        </Style>
+                    </s:IndexDateTimeAxis.Style>
+                </s:IndexDateTimeAxis>
+            </s:SciStockChart.XAxis>
 
             <!--  Override any properties of the built-in NumericAxis  -->
             <s:SciStockChart.YAxisStyle>

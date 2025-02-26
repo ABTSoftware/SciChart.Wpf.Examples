@@ -68,15 +68,13 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:VerticalSliceModifier ShowAxisLabels="False">
-                    <s:VerticalSliceModifier.VerticalLines>
-                        <s:VerticalLineAnnotation X1="{Binding XCurrentDate, Mode=TwoWay}">
-                            <s:VerticalLineAnnotation.AnnotationLabels>
-                                <s:AnnotationLabel Background="#42B649"    
+                    <s:VerticalLineAnnotation X1="{Binding XCurrentDate, Mode=TwoWay}">
+                        <s:VerticalLineAnnotation.AnnotationLabels>
+                            <s:AnnotationLabel Background="#42B649"    
                                                    Foreground="White"
                                                    AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
-                            </s:VerticalLineAnnotation.AnnotationLabels>
-                        </s:VerticalLineAnnotation>
-                    </s:VerticalSliceModifier.VerticalLines>
+                        </s:VerticalLineAnnotation.AnnotationLabels>
+                    </s:VerticalLineAnnotation>
                 </s:VerticalSliceModifier>
             </s:SciChartSurface.ChartModifier>
         </s:SciChartSurface>
@@ -99,13 +97,13 @@
                 <ItemsControl Grid.Column="0"
                               Margin="0,-2,0,0"
                               ItemsSource="{Binding Items, Mode=OneWay}">
-                    
+
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="1"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border MinHeight="75"
@@ -187,12 +185,10 @@
                             <s:ZoomExtentsModifier XyDirection="XDirection"/>
                             <s:MouseWheelZoomModifier XyDirection="XDirection"/>
                             <s:VerticalSliceModifier ShowAxisLabels="False">
-                                <s:VerticalSliceModifier.VerticalLines>
-                                    <s:VerticalLineAnnotation IsEditable="True"
-                                                              Stroke="#42B649"
-                                                              StrokeThickness="1"
-                                                              X1="{Binding XCurrentDate, Mode=TwoWay}"/>
-                                </s:VerticalSliceModifier.VerticalLines>
+                                <s:VerticalLineAnnotation IsEditable="True"
+                                                          Stroke="#42B649"
+                                                          StrokeThickness="1"
+                                                          X1="{Binding XCurrentDate, Mode=TwoWay}"/>
                             </s:VerticalSliceModifier>
                         </s:ModifierGroup>
                     </s:SciChartSurface.ChartModifier>

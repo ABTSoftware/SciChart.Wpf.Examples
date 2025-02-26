@@ -7,26 +7,7 @@
     <ApplicationIcon>SciChartIconWin256x256.ico</ApplicationIcon>
     <LangVersion>Latest</LangVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
-    <OutputPath>..\..\Build\Release\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
-    <OutputPath>..\..\Build\Release</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
-    <OutputPath>..\..\Build\Debug</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
-    <OutputPath>..\..\Build\Release</OutputPath>
+    <OutputPath>..\..\Build\$(Configuration)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Helpers\HtmlExport\ExportedExampleIndex.html" />
@@ -77,11 +58,14 @@
     <EmbeddedResource Include="Resources\stopwords.dat" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Microsoft.NETCore.Targets package fixes the NU1605 issue for netcoreapp3.1 -->
+    <!-- https://learn.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu1605 -->
+    <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.90" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="RestSharp" Version="106.15.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
-    <PackageReference Include="SciChart.Wpf.UI" Version="3.2.268" />
+    <PackageReference Include="SciChart.Wpf.UI" Version="4.0.271" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj">

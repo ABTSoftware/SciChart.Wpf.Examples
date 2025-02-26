@@ -62,26 +62,6 @@
             <Setter Property="IsCursorEnabled" Value="False" />
             <Setter Property="IsXAxisVisible" Value="False" />
             <Setter Property="IsRubberBandZoomEnabled" Value="False" />
-            <Setter Property="XAxisStyle">
-                <Setter.Value>
-                    <Style TargetType="s:CategoryDateTimeAxis">
-                        <Setter Property="AutoRange" Value="Always" />
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Setter Property="DrawMajorGridLines" Value="False" />
-                        <Setter Property="DrawMinorGridLines" Value="False" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="YAxisStyle">
-                <Setter.Value>
-                    <Style TargetType="s:NumericAxis">
-                        <Setter Property="AutoRange" Value="Always" />
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Setter Property="DrawMajorGridLines" Value="False" />
-                        <Setter Property="DrawMinorGridLines" Value="False" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
         </Style>
 
         <!--  A number of converters which change parameters of charts based on the IsFirstChartPane property  -->
@@ -195,15 +175,24 @@
                                 </Style>
                             </s:SciStockChart.Resources>
 
-                            <!--  Override any properties of the built-in CategoryDateTimeAxis  -->
-                            <s:SciStockChart.XAxisStyle>
-                                <Style TargetType="s:CategoryDateTimeAxis">
-                                    <Setter Property="DrawMajorBands" Value="True" />
-                                    <Setter Property="DrawMinorGridLines" Value="False" />
-                                    <Setter Property="VisibleRange" Value="{Binding ParentViewModel.XVisibleRange, Mode=TwoWay}" />
-                                    <Setter Property="GrowBy" Value="0, 0.05" />
-                                </Style>
-                            </s:SciStockChart.XAxisStyle>
+                            <!-- Replace the default CategoryDateTimeAxis with a new IndexDateTimeAxis, introduced in SciChart v8.7 -->
+                            <!-- Override the any properties of the built-in CategoryDateTimeAxis  -->
+                            <s:SciStockChart.XAxis>
+                                <s:IndexDateTimeAxis>
+                                    <s:IndexDateTimeAxis.Style>
+                                        <Style TargetType="s:IndexDateTimeAxis">
+                                            <Setter Property="DrawMajorBands" Value="True" />
+                                            <Setter Property="DrawMinorGridLines" Value="False" />
+                                            <Setter Property="VisibleRange" Value="{Binding ParentViewModel.XVisibleRange, Mode=TwoWay}" />
+                                            <Setter Property="GrowBy" Value="0, 0.05" />
+                                            <Setter Property="Visibility" Value="{Binding IsXAxisVisible, 
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=s:SciStockChart}, 
+                                                Converter={StaticResource BoolToVisibilityConverter},
+                                                Mode=OneWay}" />
+                                        </Style>
+                                    </s:IndexDateTimeAxis.Style>
+                                </s:IndexDateTimeAxis>
+                            </s:SciStockChart.XAxis>
 
                             <!--  Override any properties of the built-in NumericAxis  -->
                             <s:SciStockChart.YAxisStyle>
@@ -223,12 +212,38 @@
 
                             <!--  This is the Chart behind the scrollbar, bound to the First ChartPaneViewModel, first DataSeries  -->
                             <!--  It displays the data as a FastMountainRenderableSeries  -->
-                            <s:SciStockChart x:Name="PART_ScrollbarChartBackground" ShowLegend="False" Style="{StaticResource OverviewChartStyle}"
+                            <s:SciStockChart x:Name="PART_ScrollbarChartBackground" 
+                                             ShowLegend="False" 
+                                             Style="{StaticResource OverviewChartStyle}"
                                              s:ThemeManager.Theme="{Binding Source={x:Reference ThemeCombo}, Path=SelectedItem, TargetNullValue='SciChartv7Navy'}">
 
                                 <s:SciStockChart.RenderableSeries>
                                     <s:FastMountainRenderableSeries DataSeries="{Binding ParentViewModel.ChartPaneViewModels[0].ChartSeriesViewModels[0].DataSeries}" />
                                 </s:SciStockChart.RenderableSeries>
+
+                                <!-- Replace the default CategoryDateTimeAxis with a new IndexDateTimeAxis, introduced in SciChart v8.7 -->
+                                <!-- Override the any properties of the built-in CategoryDateTimeAxis  -->
+                                <s:SciStockChart.XAxis>
+                                    <s:IndexDateTimeAxis>
+                                        <s:IndexDateTimeAxis.Style>
+                                            <Style TargetType="s:IndexDateTimeAxis">
+                                                <Setter Property="AutoRange" Value="Always" />
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Setter Property="DrawMajorGridLines" Value="False" />
+                                                <Setter Property="DrawMinorGridLines" Value="False" />
+                                            </Style>
+                                        </s:IndexDateTimeAxis.Style>
+                                    </s:IndexDateTimeAxis>
+                                </s:SciStockChart.XAxis>
+
+                                <s:SciStockChart.YAxisStyle>
+                                    <Style TargetType="s:NumericAxis">
+                                        <Setter Property="AutoRange" Value="Always" />
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter Property="DrawMajorGridLines" Value="False" />
+                                        <Setter Property="DrawMinorGridLines" Value="False" />
+                                    </Style>
+                                </s:SciStockChart.YAxisStyle>
 
                             </s:SciStockChart>
 
