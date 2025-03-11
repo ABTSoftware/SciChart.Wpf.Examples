@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Threading;
 using SciChart.Charting;
 using SciChart.Charting.Common.AttachedProperties;
 using SciChart.Charting.Common.Extensions;
@@ -12,10 +11,11 @@ using SciChart.Charting.Visuals;
 using SciChart.Charting.Visuals.TradeChart;
 using SciChart.Charting3D;
 using SciChart.Data.Numerics.PointResamplers;
-using SciChart.Drawing.Common;
 using SciChart.Drawing.HighSpeedRasterizer;
 using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common.Converters;
+using SciChart.Examples.Demo.Helpers;
+using SciChart.Examples.Demo.Helpers.Navigation;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Observability;
@@ -27,6 +27,7 @@ namespace SciChart.Examples.Demo.ViewModels
     {
         bool InitReady { get; set; }
         IMainWindowViewModel ParentViewModel { get; set; }
+        void OnIsVisibleChanged(bool isVisible);
     }
 
     [ExportType(typeof(ISettingsViewModel), CreateAs.Singleton)]
@@ -94,11 +95,13 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     var renderSettings = new VxRenderSettings
                     {
-                        DirectXMode = UseD3D9 ? DirectXMode.DirectX9c : DirectXMode.AutoDetect,
-                        FullScreenAntiAliasingMode =
-                            Use3DAA4x ?
-                                FullScreenAntiAliasingMode.MSAA4x :
-                                FullScreenAntiAliasingMode.None,
+                        DirectXMode = UseD3D9
+                            ? DirectXMode.DirectX9c
+                            : DirectXMode.DirectX11,
+                        
+                        FullScreenAntiAliasingMode = Use3DAA4x
+                            ? FullScreenAntiAliasingMode.MSAA4x
+                            : FullScreenAntiAliasingMode.None
                     };
 
                     if (!renderSettings.Equals(_renderSettings))
@@ -173,6 +176,12 @@ namespace SciChart.Examples.Demo.ViewModels
         }
 
         public bool Is3DZAxisUp
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool Is3DZAxisUpEnabled
         {
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
@@ -273,6 +282,22 @@ namespace SciChart.Examples.Demo.ViewModels
         {
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
+        }
+
+        public void OnIsVisibleChanged(bool isVisible)
+        {
+            if (!isVisible) return;
+
+            Is3DZAxisUp = Viewport3D.ViewportOrientation == Viewport3DOrientation.ZAxisUp;
+
+            if (Navigator.Instance.CurrentPage is ExamplesHostAppPage)
+            {               
+                Is3DZAxisUpEnabled = !Navigator.Instance.CurrentExample.Uri.Contains("ZAxisUp3D");
+            }
+            else
+            {
+                Is3DZAxisUpEnabled = true;
+            }
         }
 
         private void CreateGlobalStyle<T>() where T : SciChartSurface

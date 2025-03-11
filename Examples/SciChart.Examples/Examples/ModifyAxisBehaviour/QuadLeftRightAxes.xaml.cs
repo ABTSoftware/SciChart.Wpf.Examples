@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2024. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -48,14 +48,14 @@ namespace SciChart.Examples.Examples.ModifyAxisBehaviour
 
 
                 // Fill each data-series with 2,000 pts of X,Y values (Date,Double) and assign to RenderableSeries
-                sciChart.RenderableSeries[0].DataSeries = FillData(dataSeries0, "Red Line");
-                sciChart.RenderableSeries[1].DataSeries = FillData(dataSeries1, "Grey Line");
-                sciChart.RenderableSeries[2].DataSeries = FillData(dataSeries2, "Orange Line");
-                sciChart.RenderableSeries[3].DataSeries = FillData(dataSeries3, "Blue Line");
-                sciChart.RenderableSeries[4].DataSeries = FillData(dataSeries4, "Another Blue");
-                sciChart.RenderableSeries[5].DataSeries = FillData(dataSeries5, "Green Line");
-                sciChart.RenderableSeries[6].DataSeries = FillData(dataSeries6, "Another Red");
-                sciChart.RenderableSeries[7].DataSeries = FillData(dataSeries7, "Another Grey");
+                sciChart.RenderableSeries[0].DataSeries = FillData(dataSeries0, "Blue Line");
+                sciChart.RenderableSeries[1].DataSeries = FillData(dataSeries1, "Light Orange Line");
+                sciChart.RenderableSeries[2].DataSeries = FillData(dataSeries2, "Purple Line");
+                sciChart.RenderableSeries[3].DataSeries = FillData(dataSeries3, "Green Line");
+                sciChart.RenderableSeries[4].DataSeries = FillData(dataSeries4, "Scarlet Line");
+                sciChart.RenderableSeries[5].DataSeries = FillData(dataSeries5, "Dark Blue Line");
+                sciChart.RenderableSeries[6].DataSeries = FillData(dataSeries6, "Orange Line");
+                sciChart.RenderableSeries[7].DataSeries = FillData(dataSeries7, "Coral Red Line");
             }
 
             sciChart.ZoomExtents();

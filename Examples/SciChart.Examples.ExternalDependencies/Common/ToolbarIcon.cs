@@ -20,15 +20,9 @@ namespace SciChart.Examples.ExternalDependencies.Common
             {
                 Data = Path;
             }
-            else if (Kind != 0)
-            {
-                string value = null;
-                PackIconMaterialDataFactory.DataIndex.Value?.TryGetValue(Kind, out value);
-                Data = value;
-            }
             else
             {
-                Data = null;
+                base.UpdateData();
             }
         }
 

@@ -61,10 +61,7 @@ namespace SciChart.Examples.Demo
 
             var exceptionView = new ExceptionView(e.Exception)
             {
-                Owner = Current?.MainWindow,
-                WindowStartupLocation = Current != null
-                    ? WindowStartupLocation.CenterOwner
-                    : WindowStartupLocation.CenterScreen
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
 
             exceptionView.ShowDialog();

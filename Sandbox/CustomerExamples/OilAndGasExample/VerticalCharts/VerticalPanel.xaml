@@ -17,11 +17,8 @@
         <ItemsControl Margin="4,0,-4,0" ItemsSource="{Binding VerticalCharts}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid>
-                        <b:Interaction.Behaviors>
-                            <br:GridItemsPanelBehavior ItemPlacement="Column"/>
-                        </b:Interaction.Behaviors>
-                    </Grid>
+                    <UniformGrid Rows="{Binding RowsCount, Mode=OneWay}"
+                                 Columns="{Binding ColumnsCount, Mode=OneWay}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>

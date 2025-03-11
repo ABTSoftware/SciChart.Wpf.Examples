@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using SciChart.Charting.Visuals;
 
@@ -44,17 +45,29 @@ namespace SciChart.Examples.ExternalDependencies.Controls.ExceptionView
             }
             catch (Exception)
             {
-                MessageBox.Show(
-                    "We have not detected an email client on your PC!\r\nPlease email support@scichart.com with the exception message.");
+                MessageBox.Show("We have not detected an email client on your PC!\r\nPlease email support@scichart.com with the exception message.");
             }
         }
 
         private string FormatEmail()
         {
-            return
-                string.Format(
-                    "Dear Support, \r\n\r\nI was running the SciChart {0} examples and saw this Unhandled Exception. \r\n\r\nCan you help? \r\n\r\nThank you!\r\n\r\n\r\n{1}",
-                    SciChartSurface.VersionInfo, exceptionViewer.Text);
+            var emailBuilder = new StringBuilder();
+
+            emailBuilder.AppendLine("Dear Support,");
+            emailBuilder.AppendLine();
+
+            emailBuilder.AppendLine($"I was running the SciChart {SciChartSurface.VersionInfo} examples and saw this Unhandled Exception.");
+            emailBuilder.AppendLine();
+
+            emailBuilder.AppendLine("Can you help?");
+            emailBuilder.AppendLine();
+
+            emailBuilder.AppendLine("Thank you!");
+            emailBuilder.AppendLine();
+
+            emailBuilder.AppendLine(exceptionViewer.Text);
+
+            return emailBuilder.ToString();
         }
     }
 }

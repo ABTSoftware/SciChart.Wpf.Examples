@@ -15,7 +15,7 @@ using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Reactive.Observability;
 using SciChart.Wpf.UI.Transitionz;
-using Unity.Attributes;
+using Unity;
 using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
 
 namespace SciChart.Examples.Demo

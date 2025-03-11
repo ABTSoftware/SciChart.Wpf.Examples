@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2024. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -47,12 +47,10 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations.Measure
                 ? RangeFactory.NewRange(X2, X1)
                 : RangeFactory.NewRange(X1, X2);
 
-            if (xCoordCalc is ICategoryCoordinateCalculator<DateTime> categoryCalc)
+            if (range is DateRange dateRange)
             {
-                var indexRange = (IntegerRange)range;
-                var difference = categoryCalc.TransformIndexToData(indexRange.Max) - categoryCalc.TransformIndexToData(indexRange.Min);
-
-                MeasureText.Text = string.Format("{0:dd} days", difference);
+                var rangeDiff = dateRange.Max - dateRange.Min;
+                MeasureText.Text = $"{rangeDiff.Days:N0} days";
             }
             else
             {

@@ -67,14 +67,12 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-                    <s:VerticalSliceModifier Name="sliceModifier">
-                        <s:VerticalSliceModifier.VerticalLines>
-                            <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="1" />
-                            <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="3" />
-                            <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="5" />
-                            <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="7" />
-                            <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="9" />
-                        </s:VerticalSliceModifier.VerticalLines>
+                    <s:VerticalSliceModifier x:Name="verticalSliceModifier">
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="1" />
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="3" />
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="5" />
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="7" />
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="9" />
                     </s:VerticalSliceModifier>
                     <s:LegendModifier Margin="0,0,0,5"
                                       LegendPlacement="Top"

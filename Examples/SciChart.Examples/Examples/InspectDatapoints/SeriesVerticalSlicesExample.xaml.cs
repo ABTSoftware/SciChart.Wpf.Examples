@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2024. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -86,17 +86,17 @@ namespace SciChart.Examples.Examples.InspectDatapoints
                 Style = (Style)Resources["sliceStyle"]
             };
 
-            sliceModifier.VerticalLines.Add(slice);
+            verticalSliceModifier.VerticalLines.Add(slice);
             addVerticalSliceBtn.IsChecked = false;
         }
 
         private void OnDeleteSelectedSliceClick(object sender, RoutedEventArgs e)
         {
-            var selectedSlices = sliceModifier.VerticalLines.Where(annotation => annotation.IsSelected).ToList();
+            var selectedSlices = verticalSliceModifier.VerticalLines.Where(annotation => annotation.IsSelected).ToList();
 
             foreach (var slice in selectedSlices)
             {
-                sliceModifier.VerticalLines.Remove(slice);
+                verticalSliceModifier.VerticalLines.Remove(slice);
             }
         }
     }

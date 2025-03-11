@@ -1,5 +1,5 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2024. All rights reserved.
+// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
 //  
 // Web: http://www.scichart.com
 //   Support: support@scichart.com
@@ -29,7 +29,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.MultiPane
 {
     public class CreateMultiPaneStockChartsViewModel : BaseViewModel
     {
-        private IndexRange _xAxisVisibleRange;
+        private DateRange _xAxisVisibleRange;
         private ObservableCollection<BaseChartPaneViewModel> _chartPaneViewModels = new ObservableCollection<BaseChartPaneViewModel>();
         private readonly ICommand _closePaneCommand;
         private bool _isPanEnabled;
@@ -87,7 +87,7 @@ namespace SciChart.Examples.Examples.CreateStockCharts.MultiPane
         /// <summary>
         /// Shared XAxis VisibleRange for all charts
         /// </summary>
-        public IndexRange XVisibleRange
+        public DateRange XVisibleRange
         {
             get { return _xAxisVisibleRange; }
             set

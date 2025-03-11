@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -34,7 +33,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         {
             //ExampleTitle;PackageName;PackageVersion
             "AudioAnalyzerDemo;NAudio;1.10.0",
-            "VitalSignsMonitorDemo;System.Reactive;3.1.1"
+            "VitalSignsMonitorDemo;System.Reactive;4.4.1"
         };
 
         public static readonly string ExampleTheme = "Navy";
@@ -53,7 +52,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
         public static readonly XNamespace PresentationXmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         public static readonly XNamespace XXmlns = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-        public static readonly Version SciChartVersion = typeof(SciChartSurface).Assembly.GetName().Version;
+        public static int VersionMajor => int.Parse(SciChartSurface.VersionInfo?.Split('.')[0].Trim('v') ?? "0");
 
         public static string WriteProject(Example example, string selectedPath, string assembliesPath, bool useLibsFromFolder)
         {
@@ -151,15 +150,12 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
                     }
                     else
                     {
-                        // Get version in format [major].*-*
-                        var version = $"{SciChartVersion.Major}.*-*";
-
                         // Add assembly NuGet packages
                         foreach (var asmPackageName in AssembliesNuGetPackages)
                         {
                             var el = new XElement("PackageReference",
                                 new XAttribute("Include", asmPackageName),
-                                new XAttribute("Version", version));
+                                new XAttribute("Version", $"{VersionMajor}.*-*"));
 
                             elements[1].Add(el);
                         }  

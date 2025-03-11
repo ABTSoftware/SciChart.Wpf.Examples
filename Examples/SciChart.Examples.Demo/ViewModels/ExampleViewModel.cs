@@ -7,7 +7,6 @@ using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.UI.Bootstrap;
 using SciChart.Wpf.UI.Transitionz;
 using Unity;
-using Unity.Attributes;
 using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
 
 namespace SciChart.Examples.Demo.ViewModels
