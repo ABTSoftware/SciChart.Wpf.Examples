@@ -1,0 +1,39 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateStockCharts/RenkoChart/RenkoChartView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+  <IconPath>IconCandlestick</IconPath>
+  <ToolTipDescription>Demonstrates how to create a Renko Chart with Bollinger Bands, Moving Average and Trend indicators</ToolTipDescription>
+  <Description>
+    This example demonstrates a Renko Chart with Bollinger Bands, a Simple Moving Average (SMA-20), and an aggregated Volume Chart, based on EUR/USD daily data spanning over a decade. It showcases the capabilities of SciChart for financial charting.
+
+    [b]Key Features Demonstrated[/b]
+
+    -[b]Renko Chart[/b] is rendered using [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries[/url] and utilizes the AggregateByRenko filter from the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']Filters API[/url]
+    -[b]Bollinger Bands[/b] are rendered using [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Band%20Series%20Type.html']FastBandRenderableSeries[/url] with a transparent fill and dashed stroke, leveraging the custom BollingerBandsFilter created with the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']Filters API[/url]
+    -[b]SMA-20 Overlay[/b] is rendered with [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url], utilizing the [url='https://www.scichart.com/documentation/win/current/webframe.html#Moving%20Average%20Filter.html']MovingAverage filter[/url] from the [url='https://www.scichart.com/documentation/win/current/webframe.html#What%20is%20the%20Filters%20API.html']Filters API[/url]
+    -[b]Volume Chart[/b] is rendered with [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url], and positioned using the [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Styling%20-%20Templating%20the%20Axis%20Panel.html']AxisPanelTemplate API[/url]
+    -[b]Two-Color Background Bands[/b] are implemented using the [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Styling%20%E2%80%93%20Chart%20Shading%20with%20Axis%20Bands%20API.html']Custom AxisBands API[/url]
+    -[b]IndexDateTimeAxis[/b] for X-Axis. [url='https://www.scichart.com/documentation/win/current/webframe.html#IndexDateTimeAxis.html']IndexDateTimeAxis[/url] automatically collapses overnight and weekend gaps in data
+
+    [b]Interactive Features[/b]
+
+    -[b]Rollover with Tooltips[/b] on both Renko Chart and Volume Chart, powered by [url='https://www.scichart.com/documentation/win/current/webframe.html#RolloverModifier.html']RolloverModifier[/url]
+    -[b]Zooming[/b] with mouse wheel and click-and-drag in the X-direction only, provided by [url='https://www.scichart.com/documentation/win/current/webframe.html#MouseWheelZoomModifier.html']MouseWheelZoomModifier[/url] and [url='https://www.scichart.com/documentation/win/current/webframe.html#RubberBandXyZoomModifier.html']RubberBandXyZoomModifier[/url]
+    -[b]Panning[/b] via click-and-drag in the X-direction, enabled by [url='https://www.scichart.com/documentation/win/current/webframe.html#ZoomPanModifier.html']ZoomPanModifier[/url]
+  </Description>
+  <CodeFiles>
+	<string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/BollingerBandsFilter.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/RenkoChartView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/RenkoChartView.xaml.cs.txt</string>
+	<string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/TrendBandsChartModifier.cs.txt</string>
+	<string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/VolumeMetadata.cs.txt</string>
+	<string>Resources/ExampleSourceFiles/CreateStockCharts/RenkoChart/VolumePaletteProvider.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Candlestick</Features>
+	<Features>Column</Features>
+    <Features>Line</Features>
+    <Features>Ohlc</Features>
+  </Features>
+</ExampleDefinition>

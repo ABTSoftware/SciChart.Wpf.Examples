@@ -226,6 +226,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Multi-Pane Stock Charts", "Charts2D/StockCharts/MultiPaneStockChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Realtime Ticking Stock Charts", "Charts2D/StockCharts/RealtimeTickingCharts.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Using SciStockChart", "Charts2D/StockCharts/UsingSciStockChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Renko Chart", "Charts2D/StockCharts/RenkoChart.png"),
             // 2D Charts, Export a Chart
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ExportAChart, "Export and Screenshot Options in Chart", "Charts2D/ExportCharts/ExportChart.png"),
             // 2D Charts, Filters API

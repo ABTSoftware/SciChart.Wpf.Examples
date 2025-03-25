@@ -9,7 +9,7 @@
              AutomationProperties.AutomationId="SettingsView">
 
     <UserControl.Resources>
-        
+
         <ext:BoolToValueConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible"/>
         <ext:BoolToValueConverter x:Key="InverseBoolToVisibilityConverter" FalseValue="Visible" TrueValue="Collapsed"/>
 
@@ -35,7 +35,7 @@
             CornerRadius="10"
             Background="{DynamicResource SettingsViewBackgroundBrush}"
             IsEnabled="{Binding InitReady, Mode=OneWay, FallbackValue=False}">
-              
+
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -160,38 +160,55 @@
                                SnapsToDevicePixels="True"
                                UseLayoutRounding="True"/>
 
-                    <TextBlock Text="DirectX Settings"
-                               Style="{StaticResource SettingsGroupHeaderStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="DirectX Settings"
+                                   Style="{StaticResource SettingsGroupHeaderStyle}"/>
+                        <icons:PackIconMaterial Kind="Autorenew"
+                                                Height="18"
+                                                Width="18"
+                                                Margin="5,5,0,0"                                  
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="{DynamicResource SettingsViewForegroundBrush}"
+                                                Visibility="{Binding IsD3DBusy, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" IsEnabled="{Binding IsD3DBusy, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}">
+                        
+                        <CheckBox x:Name="useDirectX11Checkbox"
+                                  Margin="0,5"
+                                  Content="Use DirectX 11"
+                                  ToolTip="Render all 3D Charts (and 2D Charts when VX Engine) using DirectX11 (where available)"
+                                  s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" 
+                                  Style="{StaticResource SettingsCheckBoxStyle}"
+                                  IsEnabled="{Binding IsDirectX11Supported, Mode=OneWay}"
+                                  IsChecked="{Binding UseD3D11, Mode=TwoWay}"/>
+                        
+                        <CheckBox Margin="0,5"
+                                  Content="Use DirectX 9c"
+                                  ToolTip="Render all 3D Charts (and 2D Charts when VX Engine) using DirectX9 (where available)"
+                                  s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup"
+                                  Style="{StaticResource SettingsCheckBoxStyle}"
+                                  IsEnabled="{Binding IsDirectXAvailable, Mode=OneWay}"
+                                  IsChecked="{Binding UseD3D9, Mode=TwoWay}"/>
 
-                    <CheckBox x:Name="useDirectX11Checkbox"
-                              Margin="0,5"
-                              Content="Use DirectX 11"
-                              ToolTip="Render all 2D &amp; 3D Charts using DirectX11 (where available)"
-                              s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup" 
-                              Style="{StaticResource SettingsCheckBoxStyle}"
-                              IsEnabled="{Binding IsDirectXAvailable}"
-                              IsChecked="{Binding UseD3D11, Mode=TwoWay}"/>
+                        <CheckBox Margin="0,5"
+                                  Content="AntiAliasing (None)"
+                                  ToolTip="Render all 3D Charts without AntiAliasing"
+                                  s:ToggleButtonExtensions.GroupName="3DAASettingsGroup"
+                                  Style="{StaticResource SettingsCheckBoxStyle}"
+                                  IsEnabled="{Binding IsDirectXAvailable, Mode=OneWay}"
+                                  IsChecked="{Binding Use3DAANone, Mode=TwoWay}"/>
 
-                    <CheckBox Margin="0,5"
-                              Content="Use DirectX 9c"
-                              ToolTip="Render all 3D Charts (and 2D Charts when TSR Engine) using DirectX9 (where available)"
-                              s:ToggleButtonExtensions.GroupName="3DDirectXSettingsGroup"
-                              Style="{StaticResource SettingsCheckBoxStyle}"
-                              IsChecked="{Binding UseD3D9, Mode=TwoWay}"/>
+                        <CheckBox Margin="0,5"
+                                  Content="AntiAliasing (4x MSAA)"
+                                  ToolTip="Render all 3D Charts with 4x Multi Sample AntiAliasing"
+                                  s:ToggleButtonExtensions.GroupName="3DAASettingsGroup"
+                                  Style="{StaticResource SettingsCheckBoxStyle}"
+                                  IsEnabled="{Binding IsDirectXAvailable, Mode=OneWay}"
+                                  IsChecked="{Binding Use3DAA4x, Mode=TwoWay}"/>
 
-                    <CheckBox Margin="0,5"
-                              Content="AntiAliasing (None)"
-                              ToolTip="Render all 3D Charts without AntiAliasing"
-                              s:ToggleButtonExtensions.GroupName="3DAASettingsGroup"
-                              Style="{StaticResource SettingsCheckBoxStyle}"
-                              IsChecked="{Binding Use3DAANone, Mode=TwoWay}"/>
-
-                    <CheckBox Margin="0,5"
-                              Content="AntiAliasing (4x MSAA)"
-                              ToolTip="Render all 3D Charts with 4x Multi Sample AntiAliasing"
-                              s:ToggleButtonExtensions.GroupName="3DAASettingsGroup"
-                              Style="{StaticResource SettingsCheckBoxStyle}"
-                              IsChecked="{Binding Use3DAA4x, Mode=TwoWay}"/>
+                    </StackPanel>
 
                     <!-- Viewport 3D Orientation -->
 
@@ -300,7 +317,7 @@
                               IsEnabled="True"/>
 
                     <!-- Developer Mode -->
-                    
+
                     <Rectangle Height="1"
                                Margin="0,10,0,0"
                                Fill="{DynamicResource SettingsViewSeparatorBrush}"

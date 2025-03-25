@@ -14,14 +14,10 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.RenderableSeries;
-using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 {
@@ -33,7 +29,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 
         public Brush OverrideFillBrush(IRenderableSeries series, int index, IPointMetadata metadata)
         {
-            var isOverridden = IsColorOverridden(index);
+            var isOverridden = IsColorOverridden((IComparable)series.DataSeries.XValues[index]);
 
             if (isOverridden)
             {
@@ -45,7 +41,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 
         public Color? OverrideStrokeColor(IRenderableSeries series, int index, IPointMetadata metadata)
         {
-            var isOverridden = IsColorOverridden(index);
+            var isOverridden = IsColorOverridden((IComparable)series.DataSeries.XValues[index]);
 
             if (isOverridden)
             {
@@ -57,7 +53,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 
         public PointPaletteInfo? OverridePointMarker(IRenderableSeries series, int index, IPointMetadata metadata)
         {
-            var isOverridden = IsColorOverridden(index);
+            var isOverridden = IsColorOverridden((IComparable)series.DataSeries.XValues[index]);
 
             if (isOverridden)
             {
