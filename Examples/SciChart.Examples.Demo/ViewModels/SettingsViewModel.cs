@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using SciChart.Charting;
@@ -39,8 +41,12 @@ namespace SciChart.Examples.Demo.ViewModels
         public SettingsViewModel()
         {
             WithTrait<AllowFeedbackSettingBehaviour>();
-            IsDirectXAvailable = VisualXcceleratorEngine.SupportsHardwareAcceleration;
 
+            IsDirectXAvailable = VisualXcceleratorEngine.SupportsHardwareAcceleration &&
+                                 !VisualXcceleratorEngine.IsGpuBlacklisted;
+
+            IsDirectX11Supported = IsDirectXAvailable && VisualXcceleratorEngine.HasDirectX10OrBetterCapableGpu;
+            
             UseD3D9 = VisualXcceleratorEngine.IsUsingD3D9;
             UseD3D11 = !VisualXcceleratorEngine.IsUsingD3D9;
 
@@ -59,8 +65,7 @@ namespace SciChart.Examples.Demo.ViewModels
             // Always force wait for draw in UIAutomationTestMode 
             EnableForceWaitForGPU = App.UIAutomationTestMode;
             UseAlternativeFillSourceD3D = true;
-            SelectedRenderer = VisualXcceleratorEngine.SupportsHardwareAcceleration &&
-                               !VisualXcceleratorEngine.IsGpuBlacklisted
+            SelectedRenderer = IsDirectXAvailable
                 ? typeof(VisualXcceleratorRenderSurface)
                 : typeof(HighSpeedRenderSurface);
 
@@ -72,12 +77,12 @@ namespace SciChart.Examples.Demo.ViewModels
                     this.WhenPropertyChanged(x => x.EnableExtremeDrawingManager),
                     this.WhenPropertyChanged(x => x.SelectedRenderer),
                     Tuple.Create)
-                .Throttle(TimeSpan.FromMilliseconds(1))
-                .Subscribe(t =>
+                .Throttle(TimeSpan.FromMilliseconds(100))
+                .Subscribe(tuple =>
                 {
-                    Viewport3D.UseAlternativeFillSource = t.Item1;
-                    Viewport3D.ForceStallUntilGPUIsIdle = t.Item2;
-                    VisualXcceleratorEngine.EnableForceWaitForGPU = t.Item2;
+                    Viewport3D.UseAlternativeFillSource = tuple.Item1;
+                    Viewport3D.ForceStallUntilGPUIsIdle = tuple.Item2;
+                    VisualXcceleratorEngine.EnableForceWaitForGPU = tuple.Item2;
 
                     RecreateStyles();
                 })
@@ -90,25 +95,35 @@ namespace SciChart.Examples.Demo.ViewModels
                     this.WhenPropertyChanged(x => x.Use3DAA4x),
                     Tuple.Create)
                 .Skip(1)
-                .Throttle(TimeSpan.FromMilliseconds(1))
-                .Subscribe(t =>
+                .Throttle(TimeSpan.FromMilliseconds(100))
+                .ObserveOn(Scheduler.CurrentThread)
+                .Subscribe(async tuple =>
                 {
-                    var renderSettings = new VxRenderSettings
+                    try
                     {
-                        DirectXMode = UseD3D9
-                            ? DirectXMode.DirectX9c
-                            : DirectXMode.DirectX11,
-                        
-                        FullScreenAntiAliasingMode = Use3DAA4x
-                            ? FullScreenAntiAliasingMode.MSAA4x
-                            : FullScreenAntiAliasingMode.None
-                    };
+                        IsD3DBusy = true;
 
-                    if (!renderSettings.Equals(_renderSettings))
+                        var renderSettings = new VxRenderSettings
+                        {
+                            DirectXMode = UseD3D9
+                                ? DirectXMode.DirectX9c
+                                : DirectXMode.DirectX11,
+
+                            FullScreenAntiAliasingMode = Use3DAA4x
+                                ? FullScreenAntiAliasingMode.MSAA4x
+                                : FullScreenAntiAliasingMode.None
+                        };
+
+                        if (!renderSettings.Equals(_renderSettings))
+                        {
+                            _renderSettings = renderSettings;
+                            var task = VisualXcceleratorEngine.RestartEngineAsync(renderSettings);     
+                            await Task.WhenAll(task, Task.Delay(1000));
+                        }
+                    }
+                    finally
                     {
-                        // Restart 2D engine
-                        VisualXcceleratorEngine.RestartEngine(renderSettings);
-                        _renderSettings = renderSettings;
+                        IsD3DBusy = false;
                     }
                 });
 
@@ -144,10 +159,16 @@ namespace SciChart.Examples.Demo.ViewModels
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
-
+        
         public IMainWindowViewModel ParentViewModel
         {
             get => GetDynamicValue<IMainWindowViewModel>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool IsD3DBusy
+        {
+            get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
         }
 
@@ -279,6 +300,12 @@ namespace SciChart.Examples.Demo.ViewModels
         }
 
         public bool IsDirectXAvailable
+        {
+            get => GetDynamicValue<bool>();
+            set => SetDynamicValue(value);
+        }
+
+        public bool IsDirectX11Supported
         {
             get => GetDynamicValue<bool>();
             set => SetDynamicValue(value);
