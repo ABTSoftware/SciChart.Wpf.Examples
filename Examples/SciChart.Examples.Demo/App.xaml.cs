@@ -59,7 +59,11 @@ namespace SciChart.Examples.Demo
         {
             Log.Error("An unhandled exception occurred. Showing view to user...", e.Exception);
 
-            var exceptionView = new ExceptionView(e.Exception)
+            var mainWindowViewModel = ServiceLocator.Container.Resolve<IMainWindowViewModel>();
+
+            var exampleName = mainWindowViewModel?.SelectedExample?.Title ?? "No Example";
+            var message = $"Selected Example: {exampleName}";
+            var exceptionView = new ExceptionView(e.Exception, message)
             {
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
