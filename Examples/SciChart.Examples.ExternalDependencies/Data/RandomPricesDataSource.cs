@@ -18,6 +18,7 @@
 // *************************************************************************************
 using System;
 using System.Timers;
+using System.Windows.Media;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
@@ -164,11 +165,15 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
         private PriceBar GetUpdatedData()
         {
-            double num = _lastPriceBar.Close + ((_random.NextDouble() - 0.48) * (_lastPriceBar.Close / 100.0));
-            double high = (num > _lastPriceBar.High) ? num : _lastPriceBar.High;
-            double low = (num < _lastPriceBar.Low) ? num : _lastPriceBar.Low;
-            long volumeInc = (long)((_random.NextDouble() * 30000 + 20000) * 0.05);
-            _lastPriceBar = new PriceBar(_lastPriceBar.DateTime, _lastPriceBar.Open, high, low, num, _lastPriceBar.Volume + volumeInc);
+            double close = _lastPriceBar.Close + ((_random.NextDouble() - 0.48) * (_lastPriceBar.Close / 100.0));
+            double high = (close > _lastPriceBar.High) ? close : _lastPriceBar.High;
+            double low = (close < _lastPriceBar.Low) ? close : _lastPriceBar.Low;
+
+            bool bullish = close > _lastPriceBar.Open;
+            var volume = (long)(_random.NextDouble() * 30000 + 20000); // base range
+            volume = bullish ? (long)(volume * 1.1) : (long)(volume*0.8); // trend influence
+
+            _lastPriceBar = new PriceBar(_lastPriceBar.DateTime, _lastPriceBar.Open, high, low, close, volume);
 
             return _lastPriceBar;
         }

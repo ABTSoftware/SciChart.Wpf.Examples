@@ -94,7 +94,7 @@
                                   SelectedItem="{Binding NewSegmentBrush, Mode=TwoWay}">
 
                             <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="gauge:DonutBrushesModel">
+                                <DataTemplate DataType="{x:Type gauge:BrushViewModel}">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
                                         <Rectangle Width="12" Height="12" Fill="{Binding Brush}"/>
                                         <TextBlock Margin="5,0" Text="{Binding BrushName}" FontWeight="Regular" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
@@ -124,6 +124,7 @@
             </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
+        <!-- Pie Chart declaration -->
         <s:SciChartPieSurface x:Name="pieSurface"
                               Grid.Column="1"
                               Background="{StaticResource ThemedChartBackground}"
@@ -134,7 +135,7 @@
                               InsideLabelTemplate="{StaticResource InsideLabelDataTemplate}"
                               LegendListStyle="{StaticResource PieChartListBoxForegroundStyle}"
                               OutsideLabelTemplate="{StaticResource OutsideLabelDataTemplate}"
-                              ItemsSource="{Binding SegmentsDataCollection}">
+                              ItemsSource="{Binding PieSegmentViewModels}">
 
             <i:Interaction.Behaviors>
                 <!-- Note: To use this in your own application, grab from github at https://github.com/ABTSoftware/SciChart.WPF.Examples/tree/master/v5.x/Examples/SciChart.Examples.ExternalDependencies/Behaviors -->
@@ -148,7 +149,7 @@
             </s:SciChartPieSurface.ItemTemplate>
 
             <!-- Brushes are per segment. If you do not specify brushes, SciChart will choose random brushes -->
-            <!-- you can specify SolidColorBrush, or GradientBrushes to give your pie chart a slightly less flat appearance -->
+            <!-- you can specify SolidColorBrush, or GradientBrushes to give your Pie Chart a slightly less flat appearance -->
             <s:SciChartPieSurface.BrushesCollection>
 
                 <LinearGradientBrush>

@@ -1,0 +1,291 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateStockCharts.MarketProfileTrading.MarketProfileTradingChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mpt="clr-namespace:SciChart.Examples.Examples.CreateStockCharts.MarketProfileTrading"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             d:DataContext="{d:DesignInstance mpt:MarketProfileTradingChartViewModel}"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             Background="#FF232426"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AskBarStyle" TargetType="s:HistogramBar">
+                <Setter Property="Stroke" Value="{Binding AskStroke}" />
+                <Setter Property="Fill" Value="{Binding AskFill}" />
+            </Style>
+
+            <Style x:Key="BidBarStyle" TargetType="s:HistogramBar">
+                <Setter Property="Stroke" Value="{Binding BidStroke}" />
+                <Setter Property="Fill" Value="{Binding BidFill}" />
+            </Style>
+
+            <Style x:Key="OverThresholdAskBarStyle" BasedOn="{StaticResource AskBarStyle}" TargetType="s:HistogramBar">
+                <Setter Property="Stroke" Value="LimeGreen" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Foreground" Value="#002800" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <Style x:Key="OverThresholdBidBarStyle" BasedOn="{StaticResource BidBarStyle}" TargetType="s:HistogramBar">
+                <Setter Property="Stroke" Value="Crimson" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Foreground" Value="#2A0000" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <!-- PaletteProvider allows to highlight individual bars in histograms -->
+            <mpt:HistoBarPaletteProvider x:Key="VolumeLadderThresholdPaletteProvider"
+                                         OverriddenAskBarStyle="{StaticResource OverThresholdAskBarStyle}"
+                                         OverriddenBidBarStyle="{StaticResource OverThresholdBidBarStyle}"
+                                         VolumeThreshold="700000" />
+
+            <Style x:Key="PriceNumericAxisStyle" TargetType="s:NumericAxis">
+                <Setter Property="DrawMajorBands" Value="False" />
+                <Setter Property="DrawMajorGridLines" Value="True" />
+                <Setter Property="DrawMinorGridLines" Value="False" />
+                <Setter Property="DrawMinorTicks" Value="False" />
+                <Setter Property="GrowBy" Value="0, 0.1" />
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ext:SciChartInteractionToolbar Grid.RowSpan="3">
+            <!-- Interactivity Settings -->
+            <ToggleButton IsChecked="{Binding Source={x:Reference RubberBandXyZoomModifier}, Path=IsEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleButtonStyle}" s:ToggleButtonExtensions.GroupName="CreateSciStockChart_ZoomGroup">
+                <ext:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ToggleButton IsChecked="{Binding Source={x:Reference ZoomPanModifier}, Path=IsEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleButtonStyle}" s:ToggleButtonExtensions.GroupName="CreateSciStockChart_ZoomGroup">
+                <ext:ToolbarIcon Kind="ArrowAll" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            </ToggleButton>
+
+            <ext:FlyoutSeparator />
+
+            <!-- Update Service -->
+            <ToggleButton s:ToggleButtonExtensions.GroupName="StartStop"
+                          Command="{Binding StartUpdatesCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Width="14"
+                                 Height="14"
+                                 Kind="Play"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+            </ToggleButton>
+            <ToggleButton s:ToggleButtonExtensions.GroupName="StartStop"
+                          Command="{Binding StopUpdatesCommand}"
+                          Style="{StaticResource DefaultUncheckableToggleButtonStyle}">
+                <ext:ToolbarIcon Width="12"
+                                 Height="12"
+                                 Kind="Stop"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+            </ToggleButton>
+
+            <ext:FlyoutSeparator />
+
+            <!-- Series Settings -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Market Profile Settings">
+                <ext:ToolbarIcon Width="16"
+                                 Height="16"
+                                 Kind="Tire"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Width="200"
+                                MinWidth="150"
+                                Margin="5"
+                                Orientation="Vertical">
+                        <!-- Show or Hide Candlesticks -->
+                        <CheckBox x:Name="ShowCheckBox" Content="Show Candlesticks?" IsChecked="False" />
+
+                        <!-- Per-bar Volume Profile -->
+                        <TextBlock Margin="0,10,0,5"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"
+                                   Text="Bar Volume Profile:" />
+                        <ComboBox Height="25"
+                                  ItemsSource="{Binding Source={ext:EnumValues {x:Type s:HistogramMode}}}"
+                                  SelectedItem="{Binding HistogramBarMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+
+                        <!-- Price levels -->
+                        <TextBlock Margin="0,10,0,5"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"
+                                   Text="Slide to change price levels"
+                                   TextWrapping="Wrap" />
+                        <Slider HorizontalAlignment="Stretch"
+                                Maximum="1"
+                                AutoToolTipPrecision="3"
+                                Minimum="0.1"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="0.1"
+                                Orientation="Horizontal"
+                                Value="{Binding PriceLevel, Mode=TwoWay}" 
+                                ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChartInteractionToolbar>
+
+        <!--  Create the chart surface with candlestick and histogram bars around each candlestick  BottomAxesPanelTemplate="{StaticResource XAxesPanelTemplate}"-->
+        <s:SciChartSurface x:Name="sciChart"
+                           Grid.Column="1"
+                           Padding="0"
+                           BorderThickness="0"
+                           ViewportManager="{Binding ViewportManager}">
+
+            <s:SciChartSurface.RenderableSeries>
+
+                <!-- Total Market Volume Profile Series at the right -->
+                <s:FastMarketProfileRenderableSeries x:Name="MarketProfileRenderableSeries"
+                                                     DataSeries="{Binding PriceDataSeries}"
+                                                     MarketProfileWidth="110"
+                                                     Opacity="0.1"
+                                                     StrokeAsk="#7052CC54"
+                                                     StrokeBid="#D0E26565"
+                                                     TickSize="{Binding PriceLevel, Mode=TwoWay}"
+                                                     XAxisId="TimeXAxis"
+                                                     YAxisId="PriceYAxis"
+                                                     s:RolloverModifier.IncludeSeries="False"
+                                                     s:SeriesValueModifier.IncludeSeries="False">
+                    <s:FastMarketProfileRenderableSeries.FillAsk>
+                        <SolidColorBrush Color="#7052CC54" />
+                    </s:FastMarketProfileRenderableSeries.FillAsk>
+
+                    <s:FastMarketProfileRenderableSeries.FillBid>
+                        <SolidColorBrush Color="#D0E26565" />
+                    </s:FastMarketProfileRenderableSeries.FillBid>
+                </s:FastMarketProfileRenderableSeries>
+
+                <!-- Volume Candlestick Series -->
+                <s:FastVolumeCandlestickRenderableSeries DataSeries="{Binding VolumeDataSeries, Mode=TwoWay}"
+                                                         FontSize="9"
+                                                         Opacity="0.2"
+                                                         XAxisId="TimeXAxis"
+                                                         YAxisId="VolumeYAxis"
+                                                         StrokeThickness="2"
+                                                         StrokeUp="#7052CC54"
+                                                         StrokeDown="#D0E26565">
+                    <s:FastVolumeCandlestickRenderableSeries.FillUp>
+                        <SolidColorBrush Color="#7052CC54" />
+                    </s:FastVolumeCandlestickRenderableSeries.FillUp>
+                    <s:FastVolumeCandlestickRenderableSeries.FillDown>
+                        <SolidColorBrush Color="#D0E26565" />
+                    </s:FastVolumeCandlestickRenderableSeries.FillDown>
+                    <s:FastVolumeCandlestickRenderableSeries.ZeroLineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="#FF8C00" />
+                            <Setter Property="StrokeThickness" Value="3" />
+                        </Style>
+                    </s:FastVolumeCandlestickRenderableSeries.ZeroLineStyle>
+                </s:FastVolumeCandlestickRenderableSeries>
+
+                <!-- Volume 20-SMA Line Series -->
+                <s:FastLineRenderableSeries DataSeries="{Binding MovingAverageVolumeDataSeries}"
+                                            Stroke="#DCDCDC"
+                                            StrokeThickness="1"
+                                            Opacity="0.7"
+                                            XAxisId="TimeXAxis"
+                                            YAxisId="VolumeYAxis"
+                                            s:RolloverModifier.IncludeSeries="False" />
+
+                <!-- Hybrid Price and Volume Candlestick Series -->
+                <s:FastHistoBarRenderableSeries MarketProfileSeriesHelper="{Binding MarketProfileSeriesHelper, Source={x:Reference MarketProfileRenderableSeries}, Mode=OneWay}"
+                                                DataSeries="{Binding PriceDataSeries, Mode=TwoWay}"
+                                                HistogramMode="{Binding HistogramBarMode, Mode=TwoWay}"
+                                                HorizontalBarSpacing="{Binding HorizontalBarSpacing, Mode=TwoWay}"
+                                                VerticalBarSpacing="{Binding VerticalBarSpacing, Mode=TwoWay}"
+                                                ShowCandlesticks="{Binding IsChecked, Source={x:Reference Name=ShowCheckBox}, Mode=OneWay}"
+                                                TickSize="{Binding PriceLevel, Mode=TwoWay}"
+                                                PaletteProvider="{StaticResource VolumeLadderThresholdPaletteProvider}"
+                                                AskBarStyle="{StaticResource AskBarStyle}"
+                                                BidBarStyle="{StaticResource BidBarStyle}"
+                                                MaxHistoBarCandles="30"
+                                                DataPointWidth="0.9"
+                                                StrokeDown="#D0E26565"
+                                                StrokeUp="#7052CC54"
+                                                XAxisId="TimeXAxis"
+                                                YAxisId="PriceYAxis">
+
+                    <s:FastHistoBarRenderableSeries.FillUp>
+                        <SolidColorBrush Color="#7052CC54" />
+                    </s:FastHistoBarRenderableSeries.FillUp>
+
+                    <s:FastHistoBarRenderableSeries.FillDown>
+                        <SolidColorBrush Color="#D0E26565" />
+                    </s:FastHistoBarRenderableSeries.FillDown>
+                </s:FastHistoBarRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxes>
+                <!-- Primary X-Axis -->
+                <s:IndexDateTimeAxis Grid.Column="0"
+                                     Id="TimeXAxis"
+                                     Visibility="Visible"
+                                     VisibleRange="{Binding XVisibleRange, Mode=TwoWay}" />
+            </s:SciChartSurface.XAxes>
+
+            <s:SciChartSurface.YAxes>
+                <!-- Price Y-Axis -->
+                <s:NumericAxis Id="PriceYAxis"
+                               Visibility="Visible"
+                               DrawMajorBands="True"
+                               AutoTicks="False"
+                               MinorDelta="0.1"
+                               MajorDelta="{Binding PriceLevel, Mode=OneWay}"
+                               Style="{StaticResource PriceNumericAxisStyle}"
+                               VisibleRange="{Binding YVisibleRange, Mode=TwoWay}" />
+
+                <!-- Hidden Volume Y-Axis -->
+                <s:NumericAxis Id="VolumeYAxis"
+                               Visibility="Hidden"
+                               AutoRange="Always"
+                               Height="150"
+                               VerticalAlignment="Bottom"
+                               DrawMajorGridLines="False"
+                               Style="{StaticResource PriceNumericAxisStyle}"
+                               s:ZoomPanModifier.IncludeAxis="False" />
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup s:MouseManager.MouseEventGroup="SciChartGroup">
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomPanModifier x:Name="ZoomPanModifier"
+                                       IsEnabled="True"
+                                       ClipModeX="None" />
+                    <s:ZoomExtentsModifier />
+                    <s:RubberBandXyZoomModifier x:Name="RubberBandXyZoomModifier"
+                                                IsEnabled="False"
+                                                IsXAxisOnly="True"
+                                                ZoomExtentsY="True" />
+                    <s:RolloverModifier UseInterpolation="False" />
+                    <s:YAxisDragModifier AxisId="PriceYAxis" />
+                    <s:SeriesValueModifier YAxisId="PriceYAxis" />
+                    <s:XAxisDragModifier AxisId="TimeXAxis" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Height="32">
+
+            <!--  Define the Overview control, binding to XVisibleRange, which is shared between this and the SciStockChart control  -->
+            <s:SciChartOverview Grid.Column="0"
+                                ParentSurface="{Binding ElementName=sciChart, Mode=OneWay}"
+                                SelectedRange="{Binding XVisibleRange, Mode=TwoWay}"
+                                XAxisId="TimeXAxis" />
+        </Grid>
+    </Grid>
+</UserControl>
