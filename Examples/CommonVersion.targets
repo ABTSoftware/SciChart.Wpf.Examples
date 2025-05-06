@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Product>SciChart</Product>
+		<Company>SciChart Ltd</Company>
+		<Trademark>SCICHART™</Trademark>
+		<Copyright>Copyright © SciChart Ltd 2011-2025, www.scichart.com</Copyright>
+		<Description>SciChart - high performance real-time WPF charts for Scientific and Trading applications. For more info see www.scichart.com</Description>
+		<Version>8.8.0</Version>
+		<FileVersion>8.8.0</FileVersion>
+		<InformationalVersion>8.8.0</InformationalVersion>
+	</PropertyGroup>
+
+	<!-- Set assembly version -->
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Reflection.AssemblyVersionAttribute">
+			<_Parameter1>$(Version)</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<!-- Build system integration -->
+	<PropertyGroup>
+		<GenerateAssemblyVersionAttribute>False</GenerateAssemblyVersionAttribute>
+		<IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
+	</PropertyGroup>
+</Project>

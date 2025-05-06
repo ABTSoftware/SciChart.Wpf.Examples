@@ -39,12 +39,12 @@ namespace SciChart.Examples.ExternalDependencies.Data
         private readonly int _tickTimerIntervalms;
         private readonly RandomPricesDataSource _generator;
 
-        public MarketDataService(DateTime startDate, int timeFrameMinutes, int tickTimerIntervalms)
+        public MarketDataService(DateTime startDate, int timeFrameMinutes, int tickTimerIntervalms, int ticksPerBar = 25, double startingPrice = 30)
         {
             _startDate = startDate;
             _timeFrameMinutes = timeFrameMinutes;
             _tickTimerIntervalms = tickTimerIntervalms;
-            _generator = new RandomPricesDataSource(_timeFrameMinutes, true, _tickTimerIntervalms, 25, 367367, 30, _startDate);
+            _generator = new RandomPricesDataSource(_timeFrameMinutes, true, _tickTimerIntervalms, ticksPerBar, 367367, startingPrice, _startDate);
         }
 
         public void SubscribePriceUpdate(Action<PriceBar> callback)

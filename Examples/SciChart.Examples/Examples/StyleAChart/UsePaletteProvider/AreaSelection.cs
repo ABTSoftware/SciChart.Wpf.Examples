@@ -15,12 +15,13 @@
 // *************************************************************************************
 using System;
 using SciChart.Charting.Visuals;
+using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 {
     public class AreaSelection
     {
-        private IComparable _x1, _x2;
+        private double _x1, _x2;
 
         public ISciChartSurface Surface { get; set; }
 
@@ -38,8 +39,10 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
         /// <summary>
         /// Checks whether current <see cref="AreaSelection"/> contains a point with x coordinate
         /// </summary>
-        public bool Contains(double x)
+        public bool Contains(IComparable xValue)
         {
+            var x = xValue.ToDouble();
+
             return x.CompareTo(_x1) >= 0 && x.CompareTo(_x2) <= 0;
         }
     }

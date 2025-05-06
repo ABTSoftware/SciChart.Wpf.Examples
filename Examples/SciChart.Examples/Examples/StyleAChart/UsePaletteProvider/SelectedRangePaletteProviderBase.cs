@@ -14,20 +14,17 @@
 // expressed or implied. 
 // *************************************************************************************
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using SciChart.Charting.Model.DataSeries;
 using SciChart.Charting.Visuals.PaletteProviders;
 using SciChart.Charting.Visuals.RenderableSeries;
 
 namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
 {
-    public class SelectedRangePaletteProviderBase: DependencyObject, IPaletteProvider
+    public class SelectedRangePaletteProviderBase : DependencyObject, IPaletteProvider
     {
-        public static readonly DependencyProperty AreaSelectionProperty =
-            DependencyProperty.Register("AreaSelection", typeof (AreaSelection),
-                typeof (SelectedRangePaletteProviderBase), new PropertyMetadata(null));
+        public static readonly DependencyProperty AreaSelectionProperty = DependencyProperty.Register
+            (nameof(AreaSelection), typeof(AreaSelection), typeof(SelectedRangePaletteProviderBase), new PropertyMetadata(null));
 
         public Color? PointMarkerStrokeOverride { get; set; }
 
@@ -41,7 +38,7 @@ namespace SciChart.Examples.Examples.StyleAChart.UsePaletteProvider
             set { SetValue(AreaSelectionProperty, value); }
         }
 
-        protected bool IsColorOverridden(double xValue)
+        protected bool IsColorOverridden(IComparable xValue)
         {
             return AreaSelection != null && AreaSelection.Contains(xValue);
         }

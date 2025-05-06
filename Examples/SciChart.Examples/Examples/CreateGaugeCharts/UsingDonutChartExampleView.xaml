@@ -89,7 +89,7 @@
                                   SelectedItem="{Binding NewSegmentBrush, Mode=TwoWay}">
 
                             <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="gauge:DonutBrushesModel">
+                                <DataTemplate DataType="gauge:BrushViewModel">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
                                         <Rectangle Width="12" Height="12" Fill="{Binding Brush}"/>
                                         <TextBlock Margin="5,0" Text="{Binding BrushName}" FontWeight="Regular" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
@@ -126,7 +126,7 @@
                                 FontSize="20"
                                 SegmentSpacing="4"
                                 Foreground="#FFDFE0E6"
-                                ItemsSource="{Binding DonutModels}"                                
+                                ItemsSource="{Binding DonutSegmentViewModels}"                                
                                 InsideLabelTemplate="{StaticResource InsideLabelDataTemplate}"
                                 LegendListStyle="{StaticResource PieChartListBoxForegroundStyle}">
 
@@ -136,7 +136,7 @@
             </i:Interaction.Behaviors>
 
             <s:SciChartDonutSurface.ItemTemplate>
-                <DataTemplate DataType="gauge:DonutSegmentViewModel">
+                <DataTemplate DataType="gauge:PieSegmentViewModel">
                     <s:DonutSegment Fill="{Binding Fill, Mode=TwoWay}" IsSelected="{Binding IsSelected, Mode=TwoWay}" SegmentValue="{Binding Value, Mode=TwoWay}" Text="{Binding Name, Mode=TwoWay}" Stroke="{Binding Stroke, Mode=TwoWay}" StrokeThickness="{Binding StrokeThickness, Mode=TwoWay}" />
                 </DataTemplate>
             </s:SciChartDonutSurface.ItemTemplate>

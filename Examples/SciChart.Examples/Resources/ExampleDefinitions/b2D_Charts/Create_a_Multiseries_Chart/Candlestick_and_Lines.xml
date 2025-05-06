@@ -3,11 +3,11 @@
   <ViewModel />
   <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
-  <ToolTipDescription>Demonstrates how to simple multi-series financial charts, with a Candlestick chart rendering OHLC data and three line series rendering Moving Average indicators</ToolTipDescription>
+  <ToolTipDescription>Demonstrates how to create simple multi-series financial charts, with a Candlestick chart rendering OHLC data and three line series rendering Moving Average indicators</ToolTipDescription>
   <Description>
     Demonstrates a multi-series chart using the [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries[/url] with three [url='https://www.scichart.com/documentation/win/current/The%20Line%20Series%20Type.html']FastLineRenderableSeries[/url] showing the moving average of the closing price.
 
-    The example uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']IndexDateTimeAxis[/url] which collapses overnight and weekend gaps in data, but, uses the Index to the data to calculate X-position. 
+    The example uses the [url='https://www.scichart.com/documentation/win/current/webframe.html#IndexDateTimeAxis.html']IndexDateTimeAxis[/url] which collapses overnight and weekend gaps in data, but, uses the Index to the data to calculate X-position.
 
     [b]Example Usage[/b]
 
@@ -19,6 +19,7 @@
 
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Candlestick%20charts%20type.html']FastCandlestickRenderableSeries Type[/url]
     - [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Model.DataSeries.OhlcDataSeries%602.html']OhlcDataSeries Type[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#IndexDateTimeAxis.html']IndexDateTimeAxis[/url]
     - [url='https://www.scichart.com/documentation/win/current/webframe.html#Value%20Axis%20vs.%20Category%20Axis.html']Category Axis vs. Value Axis[/url]
     - [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
   </Description>
