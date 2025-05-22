@@ -73,12 +73,6 @@
         </StackPanel>
     </DataTemplate>
 
-    <DropShadowEffect x:Key="DropShadowEffect"
-                      BlurRadius="5"
-                      Direction="-45"
-                      ShadowDepth="5"
-                      Color="DimGray"/>
-
     <Style x:Key="ItemRenderableSeriesStyle" TargetType="s:FastStripeRenderableSeriesForMvvm">
         <Setter Property="LabelColor" Value="#FF272727"/>
         <Setter Property="LabelFontSize" Value="13"/>
@@ -93,8 +87,7 @@
                                         CornerRadius="5"
                                         Opacity="0.9"
                                         Margin="0,0,5,5"
-                                        Padding="5"
-                                        Effect="{StaticResource DropShadowEffect}">
+                                        Padding="5">
 
                                     <ContentPresenter Content="{TemplateBinding DataContext}"
                                                       ContentTemplate="{TemplateBinding ContentTemplate}"/>
@@ -110,8 +103,7 @@
                 <ControlTemplate>
                     <Ellipse Width="10"
                              Height="10"
-                             Fill="#FF42B649"
-                             Effect="{StaticResource DropShadowEffect}"/>
+                             Fill="#FF42B649" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
