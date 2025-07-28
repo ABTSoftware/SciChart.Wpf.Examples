@@ -1,0 +1,103 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <Color x:Key="RedColor">#FFAE408E</Color>
+    <Color x:Key="GreenColor">#FF67BDAF</Color>
+    <Color x:Key="BlueColor">#FF417195</Color>
+
+    <SolidColorBrush x:Key="RedBrush" Color="{StaticResource RedColor}" />
+    <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource GreenColor}" />
+    <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource BlueColor}" />
+
+    <Style x:Key="SharedXAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Always" />
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMajorGridLines" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+        <Setter Property="CursorTextFormatting" Value="N2" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <Style x:Key="SharedYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Always" />
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMajorGridLines" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+        <Setter Property="CursorTextFormatting" Value="N2" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <Style x:Key="SharedGrowByXAxisStyle"
+           BasedOn="{StaticResource SharedXAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="GrowBy" Value="0.1,0.1" />
+    </Style>
+
+    <Style x:Key="SharedGrowByYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="GrowBy" Value="0.1,0.1" />
+    </Style>
+    
+    <Style x:Key="SharedGrowByTopYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="GrowBy" Value="0.0,0.1" />
+    </Style>
+
+    <Style x:Key="RedStackedMountainSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="ResamplingMode" Value="None" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke" Value="{StaticResource RedColor}" />
+        <Setter Property="Fill" Value="{StaticResource RedBrush}" />
+    </Style>
+
+    <Style x:Key="GreenStackedMountainSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="ResamplingMode" Value="None" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke" Value="{StaticResource GreenColor}" />
+        <Setter Property="Fill" Value="{StaticResource GreenBrush}" />
+    </Style>
+
+    <Style x:Key="BlueStackedMountainSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="ResamplingMode" Value="None" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke" Value="{StaticResource BlueColor}" />
+        <Setter Property="Fill" Value="{StaticResource BlueBrush}" />
+    </Style>
+
+    <Style x:Key="RedScatterSeriesStyle" TargetType="s:XyScatterRenderableSeries">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s:EllipsePointMarker Width="4"
+                                      Height="4"
+                                      Fill="{StaticResource RedColor}"
+                                      StrokeThickness="0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GreenScatterSeriesStyle" TargetType="s:XyScatterRenderableSeries">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s:EllipsePointMarker Width="4"
+                                      Height="4"
+                                      Fill="{StaticResource GreenColor}"
+                                      StrokeThickness="0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BlueScatterSeriesStyle" TargetType="s:XyScatterRenderableSeries">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s:EllipsePointMarker Width="4"
+                                      Height="4"
+                                      Fill="{StaticResource BlueColor}"
+                                      StrokeThickness="0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

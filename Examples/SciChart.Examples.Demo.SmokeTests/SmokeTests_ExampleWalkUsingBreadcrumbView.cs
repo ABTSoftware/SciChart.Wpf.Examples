@@ -227,6 +227,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Realtime Ticking Stock Charts", "Charts2D/StockCharts/RealtimeTickingCharts.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Using SciStockChart", "Charts2D/StockCharts/UsingSciStockChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Renko Chart", "Charts2D/StockCharts/RenkoChart.png"),
+             //new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Market Profile Trading Chart", "Charts2D/StockCharts/MarketProfileTradingChart.png"),
             // 2D Charts, Export a Chart
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ExportAChart, "Export and Screenshot Options in Chart", "Charts2D/ExportCharts/ExportChart.png"),
             // 2D Charts, Filters API
@@ -327,7 +328,10 @@ namespace SciChart.Examples.Demo.SmokeTests
             // Featured Apps, Performance Demos
            // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fifo 1Billion Points Demo", "FeaturedApps/PerformanceDemos/Fifo1BillionPoints.png"),
             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fast Paletted Scatter Charts", "FeaturedApps/PerformanceDemos/FastPalettedScatterCharts.png"),
-           // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Scatter Chart Performance Demo", "FeaturedApps/PerformanceDemos/ScatterChartPerformanceDemo.png",
+           new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Oil & Gas Wells Chart Demo", "FeaturedApps/PerformanceDemos/OilAndGas.png"),
+           
+            
+            // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Scatter Chart Performance Demo", "FeaturedApps/PerformanceDemos/ScatterChartPerformanceDemo.png",
              //   (mw) => Thread.Sleep(1500)), // bit of a delay to allow example to show 
              
             // Featured Apps, Medical Charts 

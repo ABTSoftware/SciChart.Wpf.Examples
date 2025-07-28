@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateMultiseriesChart/ErrorSeriesExampleView.xaml</View>
   <ViewModel>Examples.CreateMultiseriesChart.ErrorSeriesExampleViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoErrorBars.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ErrorBars.png</ImagePath>
   <IconPath>IconErrorBars</IconPath>
   <ToolTipDescription>Demonstrates how to add Error Bars to a Line or Scatter Chart</ToolTipDescription>
   <Description>

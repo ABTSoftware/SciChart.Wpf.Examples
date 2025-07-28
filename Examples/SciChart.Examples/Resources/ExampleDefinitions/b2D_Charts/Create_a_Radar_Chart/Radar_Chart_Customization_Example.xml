@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRadarChart/RadarChartCustomizationExampleView.xaml</View>
   <ViewModel>Examples.CreateRadarChart.RadarChartCustomizationExampleViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RadarChartCustomization.png</ImagePath>
   <IconPath>IconPolar</IconPath>
   <ToolTipDescription>Radar Chart.</ToolTipDescription>
   <Description>

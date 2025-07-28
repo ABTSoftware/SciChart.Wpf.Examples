@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/PerformanceDemos2D/DigitalAnalyzer/DigitalAnalyzerExampleView.xaml</View>
   <ViewModel>Examples.PerformanceDemos2D.DigitalAnalyzer.DigitalAnalyzerExampleViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DigitalAnalyzerPerformanceDemo.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>
     The Digital Analyzer demo shows a multi-surface pane, interactive MVVM demo rendering FastLineRenderableSeries that uses UniformXyDataSeries as data source. 

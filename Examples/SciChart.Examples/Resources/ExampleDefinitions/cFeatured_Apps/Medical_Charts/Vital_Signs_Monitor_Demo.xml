@@ -1,10 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/SeeFeaturedApplication/VitalSignsMonitor/VitalSignsMonitorView.xaml</View>
 	<ViewModel/>
-	<ImagePath/>	
+	<ImagePath>/SciChart.Examples;component/Resources/Images/vital-signs-monitor.png</ImagePath>	
 	<IconPath>IconRealtime</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/vital-signs-monitor.png</ShowcaseImagePath>
 	<ShowcaseDescription>The example showcases how SciChart can be used in Medical Context. SciChart will help you to short cut your development by providing rich, real-time, high performance and reliable charts for the medical and healthcare applications.</ShowcaseDescription>
 	<ToolTipDescription>The Vital Signs Monitor Demo showcases a real-time vital signs monitor.</ToolTipDescription>
 	<Description>

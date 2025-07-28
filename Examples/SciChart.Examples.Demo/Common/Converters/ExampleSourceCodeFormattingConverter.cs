@@ -23,21 +23,21 @@ namespace SciChart.Examples.Demo.Common.Converters
             }
 
             var terms = _mainWindowViewModel.SearchText.Split(' ').Where(word => word != "").Select(x => x.ToLower()).ToArray();
-            var codeFiles = (Dictionary<string, string>) value;
+            var codeFiles = (Dictionary<string, string>)value;
 
             var uiCodeFiles = codeFiles.Where(x => x.Key.EndsWith(".xaml"));
             var lines = new List<string>();
 
             foreach (var file in uiCodeFiles)
             {
-                lines.AddRange(file.Value.Split(new[] {"\r\n"}, StringSplitOptions.None));
+                lines.AddRange(file.Value.Split(new[] { "\r\n" }, StringSplitOptions.None));
             }
 
             var toHighlight = new HashSet<string>();
             foreach (var term in terms)
             {
                 var containsTerm = lines.Where(x => x != "" && x.ToLower().Contains(term));
-                containsTerm.Take(2).Select(x => x.Trim()).ForEachDo(x => toHighlight.Add(x));
+                containsTerm.Take(2).Select(FormatTextBase).ForEachDo(x => toHighlight.Add(x));
             }
 
             string result;
@@ -68,7 +68,7 @@ namespace SciChart.Examples.Demo.Common.Converters
                 lines[i] = HighlightTermsBase(lines[i], terms);
             }
 
-            var result = string.Format(". . . {0} . . .", string.Join(" . . . ", lines));
+            var result = string.Format("... {0} ...", string.Join(" ... ", lines));
             return result;
         }
     }

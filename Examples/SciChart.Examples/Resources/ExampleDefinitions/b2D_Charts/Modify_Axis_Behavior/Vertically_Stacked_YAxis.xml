@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/VerticallyStackedAxes.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoVerticallyStackedAxes.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/VerticallyStackedYAxis.png</ImagePath>
 <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates overriding the LeftAxesPanel Template to create a true EEG style chart, where many traces are included on the same chart.</ToolTipDescription>
   <Description>

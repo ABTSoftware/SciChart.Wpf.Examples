@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRealtimeChart/UsingSeriesValueModifier.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoUsingSeriesValueModifier.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimeSeriesValues.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>This shows the SeriesValueModifier applied to a real-time chart, to display the latest value of a series on the YAxis with an AxisMarkerAnnotation.
   </ToolTipDescription>

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/SeriesVerticalSlicesExample.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoVerticalSliceModifier.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingVerticalSlice.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates usage of VerticalSliceModifier for getting slices of series like when using RolloverModifier. You can add, remove and interact with slices</ToolTipDescription>
   <Description>

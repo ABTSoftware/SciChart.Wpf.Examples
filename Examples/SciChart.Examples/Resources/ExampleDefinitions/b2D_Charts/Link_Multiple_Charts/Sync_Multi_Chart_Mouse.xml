@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/SynchronizeMouseAcrossCharts.xaml</View>
   <ViewModel>Examples.ZoomAndPanAChart.SynchronizeMouseAcrossChartsViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSyncMouseEvents.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SyncCharts.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates synchronizing of mouse events across multiple charts by using the MouseManager.MouseEventGroup attached property    
     Two SciChartSurface panes are created and arranged vertically, this example shows how to synchronize Zoom, Pan, Rollover and Cursor operations using MVVM to enable and disable modifiers

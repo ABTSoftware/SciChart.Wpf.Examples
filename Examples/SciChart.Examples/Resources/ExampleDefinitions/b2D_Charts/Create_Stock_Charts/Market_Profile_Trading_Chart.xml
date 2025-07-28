@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateStockCharts/MarketProfileTrading/MarketProfileTradingChartView.xaml</View>
   <ViewModel>Examples.CreateStockCharts.MarketProfileTrading.MarketProfileTradingChartViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCandlestickAndLines.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/marketprofiletadingchart.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Demonstrates Market/Volume Profile Series types for financial charting</ToolTipDescription>
   <Description>

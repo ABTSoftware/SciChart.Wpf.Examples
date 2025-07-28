@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/SeeFeaturedApplication/Lidar3DPointCloudDemo/Lidar3DPointCloudDemoView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/LIDARPointCloud3DDemo.png</ImagePath>
   <IconPath>IconScatter3D</IconPath>
     <ToolTipDescription>The LiDAR PointCloud 3D Demo showcases rendering of LiDAR composite data of a region (Central London) with SciChart.
   </ToolTipDescription>

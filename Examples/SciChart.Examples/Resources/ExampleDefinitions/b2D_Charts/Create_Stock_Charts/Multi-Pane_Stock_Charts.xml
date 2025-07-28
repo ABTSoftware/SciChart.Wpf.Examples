@@ -3,7 +3,7 @@
   <View>Examples/CreateStockCharts/MultiPane/CreateMultiPaneStockCharts.xaml</View>
   <ViewModel>Examples.CreateStockCharts.MultiPane.CreateMultiPaneStockChartsViewModel</ViewModel>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCreateMultiPaneStockCharts.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/MultiPaneStockChart.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Using the SciChartGroup and SciStockChart control, create's a static multi-pane stock chart with Indicator and Volume panes</ToolTipDescription>
   <Description>

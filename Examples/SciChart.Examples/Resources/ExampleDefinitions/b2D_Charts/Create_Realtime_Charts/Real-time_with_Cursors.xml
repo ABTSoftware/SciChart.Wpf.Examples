@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRealtimeChart/RealTimeCursors.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealtimeCursors.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimewithCursors.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>Demonstrates how the RolloverModifier can be applied to a real-time chart, giving cursor-style feedback as the chart is rendered.</ToolTipDescription>
   <Description>

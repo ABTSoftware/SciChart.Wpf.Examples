@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/SeriesSelectionExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SeriesSelection.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates series-selection. Click a series to select it. It's color changes and it is brought to the top of the Z-order</ToolTipDescription>
   <Description>

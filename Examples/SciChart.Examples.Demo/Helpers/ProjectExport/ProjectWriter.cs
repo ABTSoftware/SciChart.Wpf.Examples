@@ -78,6 +78,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             }
 
             var projectName = "SciChart_" + Regex.Replace(example.Title, @"[^A-Za-z0-9]+", string.Empty);
+            var exampleTitle = Regex.Replace(example.Title.Replace("&", "and"), @"[^A-Za-z0-9\s]+", string.Empty);
 
             files[ProjectFileName] = GenerateProjectFile(files[ProjectFileName], example, assembliesPath, useLibsFromFolder);
             files[SolutionFileName] = GenerateSolutionFile(files[SolutionFileName], projectName);
@@ -86,7 +87,7 @@ namespace SciChart.Examples.Demo.Helpers.ProjectExport
             files.RenameKey(SolutionFileName, projectName + ".sln");
 
             files[ApplicationFileName] = GenerateApplicationFile(files[ApplicationFileName], ExampleTheme);
-            files[MainWindowFileName] = GenerateShellFile(files[MainWindowFileName], example).Replace("[EXAMPLE_TITLE]", example.Title);
+            files[MainWindowFileName] = GenerateShellFile(files[MainWindowFileName], example).Replace("[EXAMPLE_TITLE]", exampleTitle);
 
             foreach (var codeFile in example.SourceFiles)
             {

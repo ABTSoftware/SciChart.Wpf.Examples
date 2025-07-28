@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/DragAreaToZoom.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDragToZoom.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DragAreaToZoom.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>Demonstrates zooming of SciChart by dragging an area: Overlays two series on a SciChartSurface and applies the RubberBandXyZoomModifier. This is a built-in ChartModifierBase derived class which adds the behavior of zooming when you mouse-drag an area.
 Uses secondary Y-Axis to demontrate zooming with multiple axes

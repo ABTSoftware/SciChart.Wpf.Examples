@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/PerformanceDemos2D/LoadMillions/LoadMillionsPageView.xaml</View>
   <ViewModel>Examples.PerformanceDemos2D.LoadMillions.LoadMillionsPageViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOscilloscope.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Load1MillionPointsInstantly.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>
     Demonstrates the startup performance of SciChart by loading 1,000,000 points from cold in under 100ms

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateGaugeCharts/UsingDonutChartExampleView.xaml</View>
   <ViewModel>Examples.CreateGaugeCharts.UsingDonutChartExampleViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPolarChartExample.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingDonutChart.png</ImagePath>
   <IconPath>IconPolar</IconPath>
   <ToolTipDescription>Donut Chart.</ToolTipDescription>
   <Description>

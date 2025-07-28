@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/ScrollChartUsingOverviewControl.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOverviewControl.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/OverviewControl.png</ImagePath>
   <IconPath>IconPan</IconPath>
   <ChartTypes>Line</ChartTypes>
     <ToolTipDescription>Demonstrates the use of the SciChart Overview control to zoom and scroll a chart. 

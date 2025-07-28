@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/PerformanceDemos2D/FifoBillionPoints/FifoBillionPointsPageView.xaml</View>
 	<ViewModel>Examples.PerformanceDemos2D.FifoBillionPoints.FifoBillionPointsPageViewModel</ViewModel>
-	<ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoOscilloscope.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Fifo1BillionPoints.png</ImagePath>
 	<IconPath>IconRealtime</IconPath>
 	<ToolTipDescription>
 		Demonstrates the incredible performance when rendering streaming (scrolling) line charts.

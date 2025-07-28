@@ -20,34 +20,28 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Expander}">
-                        <DockPanel>
-
-                            <ScrollViewer x:Name="ExpanderContentScrollView"
-                                          DockPanel.Dock="Bottom"
-                                          HorizontalScrollBarVisibility="Hidden"
-                                          VerticalScrollBarVisibility="Hidden">
-                                <ScrollViewer.Tag>
-                                    <system:Double>0.0</system:Double>
-                                </ScrollViewer.Tag>
-                                <ScrollViewer.Width>
-                                    <MultiBinding Converter="{StaticResource multiplyConverter}">
-                                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                                    </MultiBinding>
-                                </ScrollViewer.Width>
-                                <ContentPresenter x:Name="ExpandSite"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Focusable="false" />
-                            </ScrollViewer>
-                        </DockPanel>
+                        <Grid x:Name="ExpanderContentRoot">
+                            <Grid.Tag>
+                                <system:Double>0.0</system:Double>
+                            </Grid.Tag>
+                            <Grid.Width>
+                                <MultiBinding Converter="{StaticResource multiplyConverter}">
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Grid.Width>
+                            <ContentPresenter x:Name="ExpandSite"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False" />
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsExpanded" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Duration="0:0:0.4"
-                                                             Storyboard.TargetName="ExpanderContentScrollView"
+                                                             Storyboard.TargetName="ExpanderContentRoot"
                                                              Storyboard.TargetProperty="Tag"
                                                              To="270" />
                                         </Storyboard>
@@ -57,7 +51,7 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Duration="0:0:0.4"
-                                                             Storyboard.TargetName="ExpanderContentScrollView"
+                                                             Storyboard.TargetName="ExpanderContentRoot"
                                                              Storyboard.TargetProperty="Tag"
                                                              To="0" />
                                         </Storyboard>
@@ -73,7 +67,7 @@
         <Style x:Key="ToolbarSeparatorStyle" TargetType="{x:Type Rectangle}">
             <Setter Property="Width" Value="1"/>
             <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Margin" Value="6,0"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Fill" Value="{DynamicResource MainToolbarSeparatorBrush}"/>
@@ -101,7 +95,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--  BreadCrumb / Toolbar  -->
+        <!-- BreadCrumb / Toolbar -->
         <Border Grid.Row="0" Panel.ZIndex="0">
             <Grid SnapsToDevicePixels="True">
                 <Grid.RowDefinitions>
@@ -114,76 +108,89 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Grid.Row="0"
-                           Grid.ColumnSpan="2"
-                           Height="1"
-                           Fill="{DynamicResource BreadcrumbSeparatorBrush}"
-                           HorizontalAlignment="Stretch"
-                           UseLayoutRounding="True"/>
+                <!-- Breadcrumb -->
+                <Border x:Name="BreadcrumbWrapper"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="20,0">
+                    <bc:Breadcrumb x:Name="BreadcrumbChain"
+                                   HorizontalAlignment="Left"
+                                   BreadcrumbItems="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels}"
+                                   HomeCommand="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels[0].Command}">
+                        <bc:Breadcrumb.BreadcrumbItemStyle>
+                            <Style TargetType="Button" BasedOn="{StaticResource BreadcrumbButtonStyle}">
+                                <Setter Property="bc:Breadcrumb.IsItemSelected" Value="{Binding IsSelected}"/>
+                                <Setter Property="Command" Value="{Binding Command}"/>
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       Text="{Binding Path=DataContext.Content, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </bc:Breadcrumb.BreadcrumbItemStyle>
+                    </bc:Breadcrumb>
+                </Border>
 
-                <!--  Breadcrumb  -->
-                <bc:Breadcrumb Grid.Row="1"
-                               Grid.Column="0"
-                               Margin="20,0"
-                               BreadcrumbItems="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels}"
-                               HomeCommand="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels[0].Command}">
-                    <bc:Breadcrumb.BreadcrumbItemStyle>
-                        <Style TargetType="Button" BasedOn="{StaticResource BreadcrumbButtonStyle}">
-                            <Setter Property="bc:Breadcrumb.IsItemSelected" Value="{Binding IsSelected}"/>
-                            <Setter Property="Command" Value="{Binding Command}"/>
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock FontSize="11"
-                                                   FontWeight="SemiBold"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   Text="{Binding Path=DataContext.Content, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}"/>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </bc:Breadcrumb.BreadcrumbItemStyle>
-                </bc:Breadcrumb>
+                <Button x:Name="BreadcrumbButton"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        Visibility="Collapsed"
+                        Command="{Binding Path=BreadCrumbViewModel.BreadCrumbItemViewModels[0].Command}"
+                        Style="{StaticResource MainToolbarButtonStyle}">
 
-                <!--  Toolbar for all examples  -->
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="ArrowRightCircle" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Switch Example"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Toolbar for all examples -->
                 <StackPanel Grid.Row="1"
                             Grid.Column="1"
+                            Margin="0,0,20,0"
                             Orientation="Horizontal">
 
-                    <!-- Send Feedback  -->
+                    <!-- Send Feedback -->
                     <Button Command="{Binding SendFeedbackCommand}"
                             Style="{StaticResource MainToolbarButtonStyle}"
                             ToolTipService.ToolTip="Send us some feedback! Your encouragement goes a long way!">
                         
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="CommentQuoteOutline" Height="16" Width="16" Margin="0,2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Send Feedback"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Feedback"/>
                         </StackPanel>
                     </Button>
 
                     <Rectangle Style="{StaticResource ToolbarSeparatorStyle}"/>
 
-                    <!--  Show Example  -->
+                    <!-- Show Example -->
                     <ToggleButton IsChecked="{Binding ShowExample, Mode=TwoWay}"
                                   Style="{StaticResource MainToolbarToggleButtonStyle}"
                                   ToolTipService.ToolTip="Switch back to example view">
 
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="ChartMultiline" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Example"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Example"/>
                         </StackPanel>
                     </ToggleButton>
 
                     <Rectangle Style="{StaticResource ToolbarSeparatorStyle}"/>
 
-                    <!--  Show Source Code  -->
+                    <!-- Show Source Code -->
                     <ToggleButton IsChecked="{Binding ShowSourceCode, Mode=TwoWay}"
                                   Style="{StaticResource MainToolbarToggleButtonStyle}"
                                   ToolTipService.ToolTip="View the Source Code for this example right here in the app">
 
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="CodeTags" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Source Code"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Source Code"/>
                         </StackPanel>
                     </ToggleButton>
 
@@ -197,7 +204,7 @@
 
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="ExportVariant" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Export Solution"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Export Solution"/>
                         </StackPanel>
                     </Button>
 
@@ -209,7 +216,7 @@
 
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="Github" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="GitHub"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="GitHub"/>
                         </StackPanel>
                     </Button>
                     
@@ -221,20 +228,20 @@
                         
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="FileDocumentOutline" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Documentation"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Documentation"/>
                         </StackPanel>
                     </Button>
 
                     <Rectangle Style="{StaticResource ToolbarSeparatorStyle}"/>
 
-                    <!--  Info Panel  -->
+                    <!-- Info Panel -->
                     <ToggleButton x:Name="InfoPanelButton"
                                   IsChecked="{Binding IsInfoVisible, Mode=TwoWay}"
                                   Style="{StaticResource MainToolbarToggleButtonStyle}">
 
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="Information" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Info"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Info"/>
                         </StackPanel>
                     </ToggleButton>
                 </StackPanel>
@@ -259,13 +266,13 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!--  Source Code View  -->
+            <!-- Source Code View -->
             <views:SourceCodeView Grid.Column="0"
                                   HorizontalAlignment="Stretch"
                                   tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=100, TransitionOn=Visibility}"
                                   tz:Transitionz.Visibility="{Binding Path=ShowSourceCode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-            <!--  Description / Info Box  -->
+            <!-- Description -->
             <Expander x:Name="DescriptionBoxExpander"
                       Grid.Column="1"
                       Margin="-1,0"
@@ -279,9 +286,8 @@
                         Background="{DynamicResource InfoPanelBackgroundBrush}"
                         SizeChanged="OnExamplesPopupSizeChanged">
 
-                    <Grid Margin="20,15">
+                    <Grid Margin="0,15,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
@@ -292,49 +298,45 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Viewbox Grid.Column="0" Width="30" Height="30">
+                        <Viewbox Grid.Column="0" Margin="20,0,10,0" Width="30" Height="30">
                             <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding SelectedExample.IconPath}"/>
                         </Viewbox>
 
                         <TextBlock Grid.Column="1"
-                                   Margin="10,0,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    TextWrapping="Wrap"
                                    Text="{Binding SelectedExample.Title}"
                                    Style="{StaticResource TipsHeaderTextBlockStyle}"/>
-                
+
                         <Button Grid.Column="2"
-                                Width="10"
-                                Height="10"
-                                Margin="20,0,0,0"
+                                Margin="15,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Command="{Binding HideDescriptionCommand}"
                                 Style="{StaticResource CloseButtonStyle}"/>
 
-                        <Rectangle Grid.Row="1"
-                                   Grid.ColumnSpan="3"
-                                   Height="1"
-                                   Margin="0,10"
-                                   Fill="#FF40434E"
-                                   HorizontalAlignment="Stretch"
-                                   UseLayoutRounding="True"
-                                   SnapsToDevicePixels="True"/>
+                        <ScrollViewer Grid.Row="1"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="3"
+                                      Margin="20,15,2,2"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto">
 
-                        <RichTextBox Grid.Row="2"
-                                     Grid.ColumnSpan="3"
-                                     Margin="-5,0"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Foreground="#FFC2C4CB"                                    
-                                     IsReadOnly="True" 
-                                     helpers:RichTextBoxHelper.Text="{Binding SelectedExample.FormattedDescription}" />
+                            <RichTextBox Margin="-5,0,15,15"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Foreground="#FFC2C4CB"                                    
+                                         IsReadOnly="True" 
+                                         HorizontalScrollBarVisibility="Disabled"
+                                         VerticalScrollBarVisibility="Disabled"
+                                         helpers:RichTextBoxHelper.Text="{Binding SelectedExample.FormattedDescription}"/>
+                        </ScrollViewer>
                     </Grid>
                 </Border>
             </Expander>
 
-            <!--  Example Frame itself  -->
+            <!-- Example Frame -->
             <helpers:TransitioningFrame x:Name="ExamplesFrame"
                                         Grid.Column="0"
                                         HorizontalAlignment="Stretch"
@@ -354,7 +356,9 @@
                 tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, From=0, To=1, TransitionOn=Visibility}"
                 tz:Transitionz.Visibility="{Binding Path=FeedbackViewModel.IsFeedbackVisible, Converter={StaticResource BoolToValueVisibilityConverter}}">
 
-            <views:FeedbackView HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding FeedbackViewModel}"/>
+            <views:FeedbackView HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                DataContext="{Binding FeedbackViewModel}"/>
         </Border>
 
         <Border Grid.Row="1"
@@ -364,8 +368,8 @@
                 tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, From=0, To=1, TransitionOn=Visibility}"
                 tz:Transitionz.Visibility="{Binding Path=ExportExampleViewModel.IsExportVisible, Converter={StaticResource BoolToValueVisibilityConverter}}">
 
-            <views:ExportExampleView HorizontalAlignment="Center"
-                                     VerticalAlignment="Center"
+            <views:ExportExampleView HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
                                      AutomationProperties.AutomationId="ExportExampleView"
                                      DataContext="{Binding ExportExampleViewModel}"/>
         </Border>
@@ -377,7 +381,9 @@
                 tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
                 tz:Transitionz.Visibility="{Binding Path=BreadCrumbViewModel.IsShowingBreadcrumbNavigation, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-            <views:ExampleNavigationView HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding BreadCrumbViewModel}"/>
+            <views:ExampleNavigationView HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         DataContext="{Binding BreadCrumbViewModel}"/>
         </Border>
 
         <Border Grid.Row="1"

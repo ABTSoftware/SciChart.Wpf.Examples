@@ -32,6 +32,7 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
                 {
                     TileDataContext = new EverythingGroupViewModel
                     {
+                        ParentGroupName = pairs.First().Value.TopLevelCategory,
                         GroupingIndex = groupIndex,
                         GroupingName = pairs.Key
                     }

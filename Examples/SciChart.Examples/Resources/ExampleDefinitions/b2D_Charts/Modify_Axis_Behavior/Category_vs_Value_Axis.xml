@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/CategoryVsValueAxis.xaml</View>
   <ViewModel>Examples.ModifyAxisBehaviour.CategoryVsValueAxisViewModel</ViewModel>
-  <ImagePath></ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/CategoryVsValueAxis.png</ImagePath>
   <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates switching from Value to Category axis dynamically</ToolTipDescription>
   <Description>

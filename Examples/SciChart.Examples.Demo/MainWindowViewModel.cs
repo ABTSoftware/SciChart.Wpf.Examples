@@ -62,11 +62,7 @@ namespace SciChart.Examples.Demo
                 SearchText = null;
             });
 
-            _resetSelectedCommand = new ActionCommand(() =>
-            {
-                SelectedCategory = Categories.FirstOrDefault(c => c.IsHomeCategory);
-                SelectedShowcaseExample = ShowcaseExamples.FirstOrDefault();
-            });
+            _resetSelectedCommand = new ActionCommand(EverythingViewModel.CleanSelectedNode);
 
             _showSettingsCommand = new ActionCommand(() =>
             {
@@ -177,25 +173,9 @@ namespace SciChart.Examples.Demo
             set => this.SetDynamicValue(value);
         }
 
-        public IEnumerable<ExampleCategoryViewModel> Categories { get; set; }
-
-        public IEnumerable<Example> ShowcaseExamples { get; set; }
-
         public bool IsBusy
         {
             get => this.GetDynamicValue<bool>();
-            set => this.SetDynamicValue(value);
-        }
-
-        public ExampleCategoryViewModel SelectedCategory
-        {
-            get => this.GetDynamicValue<ExampleCategoryViewModel>();
-            set => this.SetDynamicValue(value);
-        }
-
-        public Example SelectedShowcaseExample
-        {
-            get => this.GetDynamicValue<Example>();
             set => this.SetDynamicValue(value);
         }
 

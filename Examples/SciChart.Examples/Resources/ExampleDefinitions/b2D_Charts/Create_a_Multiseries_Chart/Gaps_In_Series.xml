@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateMultiseriesChart/GapsInSeries.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoGapsInSeries.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/GapsInSeries.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates discontinuous lines series and column series, where gaps can be inserted into the chart by using double.NaN</ToolTipDescription>
   <Description>

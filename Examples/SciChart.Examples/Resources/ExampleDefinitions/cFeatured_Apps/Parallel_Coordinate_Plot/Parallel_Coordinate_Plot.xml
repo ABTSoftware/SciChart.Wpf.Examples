@@ -1,9 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/SeeFeaturedApplication/ParallelCoordinatePlot/ParallelCoordinatePlotView.xaml</View>
-	<ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ParallelCoordinatePlot.png</ImagePath>
 	<IconPath>IconCandlestick</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/parallel-coordinate-plot.png</ShowcaseImagePath>
 	<ShowcaseDescription>The Parallel Coordinate Plot is a chart type for visualizing and analyzing multi dimensional datasets. It can be used to compare several sets of statistical records (represented by lines) with a combination of different statistical features (represented by an axis)</ShowcaseDescription>
 	<ToolTipDescription>
 		Demonstrates how to create and use Parallel Coordinates Plot with SciChart

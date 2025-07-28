@@ -2,10 +2,8 @@
 	<Title>Spectrogram Chart</Title>
 	<View>Examples/SeeFeaturedApplication/Spectrogram/SpectrogramDemoView.xaml</View>
 	<ViewModel/>
-	<ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/spectrogram-chart.png</ImagePath>
 	<IconPath>IconScatter</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/spectrogram-chart.png</ShowcaseImagePath>
 	<ShowcaseDescription>The Spectrogram Demo showcases how to mix a 2D Line Chart showing a Fast Fourier Transform of a waveform, and also show a Spectrogram of the same data. The result is a smooth scrolling heatmap allowing you to visually inspect your spectrum data.</ShowcaseDescription>
 	<ToolTipDescription/>
 	<Description>

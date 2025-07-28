@@ -34,7 +34,7 @@
                            VerticalAlignment="Center"
                            Text="{Binding ChannelName}" />
 
-                <!-- Declare the SciChartSurface. SciChartSurfaceEx enables hardware acceleration by default -->
+                <!-- Declare the SciChartSurface, hardware acceleration is enabled by default -->
                 <s:SciChartSurface Grid.Column="1"
                                    Height="20"
                                    Padding="0"
@@ -43,15 +43,9 @@
                     <!--  Declare RenderableSeries, which are mapped to DataSet Series 1:1 and in order  -->
                     <s:SciChartSurface.RenderableSeries>
                         <s:FastLineRenderableSeries AntiAliasing="False"
+                                                    StrokeThickness="1"
                                                     DataSeries="{Binding ChannelDataSeries}"
-                                                    ResamplingMode="None"
-                                                    Stroke="{Binding Stroke, Mode=OneWay}">
-                            <s:FastLineRenderableSeries.RolloverMarkerTemplate>
-                                <ControlTemplate>
-                                    <Ellipse Width="7" Height="7" Fill="White"/>
-                                </ControlTemplate>
-                            </s:FastLineRenderableSeries.RolloverMarkerTemplate>
-                        </s:FastLineRenderableSeries>
+                                                    Stroke="{Binding Stroke, Mode=OneWay}" />
                     </s:SciChartSurface.RenderableSeries>
 
                     <!--  Axes are created implicitly when a dataset is created, but we override them here so we can style them  -->
@@ -60,20 +54,27 @@
                                        DrawMajorGridLines="False"
                                        DrawMinorGridLines="False"
                                        DrawMajorBands="False"
-                                       Visibility="Collapsed">
-                        </s:NumericAxis>
+                                       DrawLabels="False"
+                                       DrawMajorTicks="False"
+                                       DrawMinorTicks="False"
+                                       Visibility="Collapsed" />
                     </s:SciChartSurface.XAxis>
 
                     <s:SciChartSurface.YAxis>
-                        <s:NumericAxis AutoRange="Always"
+                        <s:NumericAxis AutoRange="Never"
+                                       VisibleRange="0.0, 1.0"
                                        DrawMajorGridLines="False"
                                        DrawMinorGridLines="False"
                                        DrawMajorBands="False"
-                                       Visibility="Collapsed"/>
+                                       DrawLabels="False"
+                                       DrawMajorTicks="False"
+                                       DrawMinorTicks="False"
+                                       Visibility="Collapsed" />
                     </s:SciChartSurface.YAxis>
                 </s:SciChartSurface>
             </Grid>
         </DataTemplate>
+
         <!--  Style per ListBoxItem to ensure the chart stretches to fit  -->
         <Style x:Key="ChannelListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -94,12 +95,12 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!--  Define the Toolbar to the left  -->
         <ext:SciChartInteractionToolbar Grid.Column="0">
             <ToggleButton x:Name="StartButton"
                           Command="{Binding StartCommand}"
@@ -157,7 +158,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -185,6 +186,7 @@
                        Grid.Column="3"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
+                       Text="{Binding PointCount, Mode=OneTime}"
                        Style="{StaticResource StatsStyle}" />
         </Grid>
     </Grid>

@@ -1,8 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/ModifyAxisProperties.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoModifyAxisProperties.png</ImagePath>
-<IconPath>IconAxis3D</IconPath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ModifyAxisProperties.png</ImagePath>
+  <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates the properties on NumericAxis and DateTimeAxis including TextFormatting, VisibleRange, AxisAlignment and the effect of changing them. Includes how to collapse gaps in a Candlestick or OHLC Chart</ToolTipDescription>
   <Description>
     Demonstrates the properties on NumericAxis and DateTimeAxis including TextFormatting, VisibleRange, AxisAlignment and the effect of changing them.

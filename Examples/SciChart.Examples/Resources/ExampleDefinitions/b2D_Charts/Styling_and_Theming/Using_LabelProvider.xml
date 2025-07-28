@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/UseLabelProvider/UseLabelProvider.xaml</View>
   <ViewModel/>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingLabelProvider.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates how to use the ILabelProvider interface to customize axis labels individually</ToolTipDescription>
   <Description>

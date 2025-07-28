@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/FiltersAPI/FiltersAPIExample.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/FiltersApiExample.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>
     Demonstrates how to the the Filters API in SciChart WPF v5

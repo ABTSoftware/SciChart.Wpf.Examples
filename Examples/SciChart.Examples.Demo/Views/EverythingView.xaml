@@ -1,91 +1,38 @@
 ﻿<UserControl x:Class="SciChart.Examples.Demo.Views.EverythingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"            
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"           
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:common="clr-namespace:SciChart.Examples.Demo.Common"
              xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls"
-             xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"                         
-             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"        
+             xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
              AutomationProperties.AutomationId="EverythingView">
 
     <UserControl.Resources>
-
-        <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
-        <converters:BusyToBlurEffectConverter x:Key="BusyToBlurEffectConverter" BlurRadius="15"/>
-
-        <views:ComboBoxItemTemplateSelector x:Key="ComboBoxItemTemplateSelector">
-            <views:ComboBoxItemTemplateSelector.DropDownItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=GroupingMode, Converter={StaticResource EnumDescriptionConverter}}"/>
-                </DataTemplate>
-            </views:ComboBoxItemTemplateSelector.DropDownItemTemplate>
-            <views:ComboBoxItemTemplateSelector.SelectedItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="10,0">
-                        <icons:PackIconMaterial Kind="SortVariant" Height="14" Width="14" Margin="0,2,0,0" Foreground="{DynamicResource ToolbarPopupComboBoxDropDownIconBrush}"/>
-                        <TextBlock Margin="10,0,0,0" Text="Sort:" Foreground="{DynamicResource ExampleListSortComboBoxSortLabelBrush}"/>
-                        <TextBlock Margin="5,0,10,0" Text="{Binding Path=GroupingMode, Converter={StaticResource EnumDescriptionConverter}}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </views:ComboBoxItemTemplateSelector.SelectedItemTemplate>
-        </views:ComboBoxItemTemplateSelector>
-
+        <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
+        <converters:BusyToBlurEffectConverter x:Key="BusyToBlurEffectConverter" BlurRadius="15" />
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <controls:NavigationTabControl Grid.Row="0"
-                                       Margin="20,0"                                 
-                                       VerticalAlignment="Top"
-                                       HorizontalAlignment="Left"
-                                       ItemsSource="{Binding Categories, Mode=OneWay}"
-                                       SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
-            <controls:NavigationTabControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="13"
-                               FontWeight="SemiBold"
-                               FontFamily="Segoe UI"
-                               Text="{Binding Category, Mode=OneWay}"/>
-                </DataTemplate>
-            </controls:NavigationTabControl.ItemTemplate>
-        </controls:NavigationTabControl>
-
-        <ComboBox Grid.Row="0"
-                  Width="240"
-                  Height="34"
-                  Margin="20,0"
-                  BorderThickness="1"
-                  HorizontalAlignment="Right"
-                  Background="{StaticResource ExampleListSortComboBoxBackgroundBrush}"
-                  UseLayoutRounding="True"
-                  ItemsSource="{Binding Path=EverythingViewModel.SortingGroups, Mode=OneWay}"
-                  SelectedItem="{Binding Path=EverythingViewModel.SelectedGroupingMode, Mode=TwoWay}"
-                  ItemTemplateSelector="{StaticResource ComboBoxItemTemplateSelector}"/>
-
-        <Border Grid.Row="1" Margin="0,20,0,0" Effect="{Binding Path=IsBusy, Mode=OneWay, Converter={StaticResource BusyToBlurEffectConverter}}">
+        <Border Effect="{Binding Path=IsBusy, Mode=OneWay, Converter={StaticResource BusyToBlurEffectConverter}}">
             <controls:ItemsControlWithUIAutomation AutomationProperties.AutomationId="ExamplesWrapPanel"
                                                    ItemTemplate="{StaticResource EverythingDataTemplate}"
-                                                   ItemsSource="{Binding Path=EverythingViewModel.EverythingSource, Mode=OneWay}">
+                                                   ItemsSource="{Binding Path=EverythingViewModel.EverythingSource, Mode=OneWay}"
+                                                   NavigatedItem="{Binding EverythingViewModel.NavigatedTileItem, Mode=TwoWay}">
                 <controls:ItemsControlWithUIAutomation.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <common:WrapPanelCompatible Orientation="Horizontal"/>
+                        <common:WrapPanelCompatible Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </controls:ItemsControlWithUIAutomation.ItemsPanel>
             </controls:ItemsControlWithUIAutomation>
         </Border>
 
-        <mahapps:MetroProgressBar Grid.Row="1"
-                                  Margin="0,10,0,0"
-                                  EllipseDiameter="4"
-                                  IsIndeterminate="True"
+        <mahapps:MetroProgressBar HorizontalAlignment="Stretch"
                                   VerticalAlignment="Top"
-                                  HorizontalAlignment="Stretch"
+                                  EllipseDiameter="4"
                                   Foreground="{DynamicResource ExampleListBusyIndeterminateBrush}"
-                                  Visibility="{Binding Path=IsBusy, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                  IsIndeterminate="True"
+                                  Visibility="{Binding Path=IsBusy, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>

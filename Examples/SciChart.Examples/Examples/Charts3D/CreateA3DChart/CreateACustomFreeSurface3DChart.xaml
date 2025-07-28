@@ -104,7 +104,7 @@
             </s3D:SciChart3DSurface.RenderableSeries>
 
             <s3D:SciChart3DSurface.XAxis>
-                <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
+                <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.XAxis>
 
             <s3D:SciChart3DSurface.YAxis>
@@ -112,7 +112,7 @@
             </s3D:SciChart3DSurface.YAxis>
 
             <s3D:SciChart3DSurface.ZAxis>
-                <s3D:NumericAxis3D NegativeSideClipping="None" PositiveSideClipping="None" />
+                <s3D:NumericAxis3D />
             </s3D:SciChart3DSurface.ZAxis>
 
         </s3D:SciChart3DSurface>

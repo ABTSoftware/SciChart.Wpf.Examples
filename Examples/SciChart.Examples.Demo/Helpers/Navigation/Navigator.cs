@@ -145,6 +145,12 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             else
             {
                 Navigate((Guid)_history.Current);
+
+                if (_history.Current is Guid pageId && pageId == AppPage.HomePageId)
+                {
+                    ServiceLocator.Container.Resolve<IMainWindowViewModel>().HideSearchCommand.Execute(null);
+                    ServiceLocator.Container.Resolve<IMainWindowViewModel>().ResetSelectedCommand.Execute(null);
+                }
             }
 
             ServiceLocator.Container.Resolve<IExampleViewModel>().BreadCrumbViewModel.IsShowingBreadcrumbNavigation = false;
@@ -153,6 +159,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             GoBackCommand.RaiseCanExecuteChanged();
             GoForwardCommand.RaiseCanExecuteChanged();
             NavigateToHomeCommand.RaiseCanExecuteChanged();
+            
             if (CurrentExample is ExampleAppPage lastExamplePage)
             {
                 // Required to release memory from last example 
@@ -182,6 +189,12 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             else
             {
                 Navigate((Guid)_history.Current);
+
+                if (_history.Current is Guid pageId && pageId == AppPage.HomePageId)
+                {
+                    ServiceLocator.Container.Resolve<IMainWindowViewModel>().HideSearchCommand.Execute(null);
+                    ServiceLocator.Container.Resolve<IMainWindowViewModel>().ResetSelectedCommand.Execute(null);
+                }
             }
 
             ServiceLocator.Container.Resolve<IExampleViewModel>().ExportExampleViewModel.IsExportVisible = false;

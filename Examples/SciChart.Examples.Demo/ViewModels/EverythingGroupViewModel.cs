@@ -16,5 +16,9 @@ namespace SciChart.Examples.Demo.ViewModels
         public string GroupingName { get; set; }
 
         public ICommand SelectCommand { get; set; }
+
+        public string ParentGroupName { get; set; }
+
+        public int ExamplesCount { get; set; }
     }
 }

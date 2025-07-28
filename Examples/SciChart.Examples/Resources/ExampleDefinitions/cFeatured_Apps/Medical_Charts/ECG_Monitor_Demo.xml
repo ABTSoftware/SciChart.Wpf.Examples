@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/SeeFeaturedApplication/ECGMonitor/ECGMonitorView.xaml</View>
   <ViewModel>Examples.SeeFeaturedApplication.ECGMonitor.ECGMonitorViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ECGMonitorDemo.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>The ECG Monitor Demo showcases a real-time heart-rate monitor. This example uses MVVM and shows how to set the Axis VisibleRange and scroll the chart manually when the trace reaches the right edge. 
   A refresh rate of 50Hz is used and a shader effect is applied to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.

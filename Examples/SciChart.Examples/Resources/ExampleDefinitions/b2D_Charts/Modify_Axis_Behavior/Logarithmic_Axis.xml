@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/LogarithmicAxisView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoLogarithmicAxis.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/LogarithmicAxis.png</ImagePath>
   <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates a chart with three line-series and a Logarithmic Y-Axis</ToolTipDescription>
   <Description>

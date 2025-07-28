@@ -5,27 +5,27 @@
                      xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
                      Title="SciChart"
                      TitleBarHeight="40"
-                     TitleForeground="Transparent"         
-                     Background="{DynamicResource MetroWindowHeaderBrush}"   
-                     WindowTitleBrush="{DynamicResource MetroWindowHeaderBrush}"                    
-                     NonActiveWindowTitleBrush="{DynamicResource MetroNonActiveWindowHeaderBrush}"                     
-                     GlowBrush="{DynamicResource MetroWindowGlowBrush}"   
-                     NonActiveGlowBrush="{DynamicResource MetroNonActiveWindowGlowBrush}"
-                     WindowStartupLocation="CenterScreen"
+                     TitleForeground="Transparent"
+                     Background="{DynamicResource MetroWindowHeaderBrush}"
+                     WindowTitleBrush="{DynamicResource MetroWindowHeaderBrush}"
+                     NonActiveWindowTitleBrush="{DynamicResource MetroNonActiveWindowHeaderBrush}"
+                     BorderBrush="{DynamicResource MetroWindowHeaderBrush}"
+                     NonActiveBorderBrush="{DynamicResource MetroNonActiveWindowHeaderBrush}"
                      BorderThickness="1"
-                     Width="1200"
-                     Height="900"
-                     MinWidth="1024"
-                     MinHeight="768">
+                     MinWidth="750"
+                     MinHeight="500">
 
     <mahapps:MetroWindow.IconTemplate>
         <DataTemplate>
-            <ContentPresenter Width="20" Height="20" Content="{StaticResource SciChartWhiteNoTextLogoImage}"/>
+            <ContentPresenter Width="20"
+                              Height="20"
+                              Content="{StaticResource SciChartWhiteNoTextLogoImage}"/>
         </DataTemplate>
     </mahapps:MetroWindow.IconTemplate>
 
     <mahapps:MetroWindow.WindowButtonCommands>
-        <mahapps:WindowButtonCommands LightMinButtonStyle="{StaticResource MetroWindowButtonStyle}"
+        <mahapps:WindowButtonCommands Template="{StaticResource MetroWindowButtonCommandsTemplate}"
+                                      LightMinButtonStyle="{StaticResource MetroWindowButtonStyle}"
                                       LightMaxButtonStyle="{StaticResource MetroWindowButtonStyle}" 
                                       LightCloseButtonStyle="{StaticResource MetroWindowButtonStyle}"/>
     </mahapps:MetroWindow.WindowButtonCommands>

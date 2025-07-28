@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/CustomTheme/CustomThemeView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCustomTheme.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/CustomTheme.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates easy Xaml Styling via the ThemeManager. SciChart includes six pre-defined Themes, which provide chart pane, grid-line brushes and default colors for Renderable Series</ToolTipDescription>
   <Description>

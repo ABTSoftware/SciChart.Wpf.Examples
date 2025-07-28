@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/SeriesTooltipsExample.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesTooltips.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingTooltipModifier.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates using of Tooltip Modifier for getting information about Renderable Series and its displaying on tooltips.</ToolTipDescription>
   <Description>

@@ -30,7 +30,7 @@ using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.ExternalDependencies.Data
 {
-    public class DataManager : IDataManager
+    public partial class DataManager : IDataManager
     {
         private readonly IDictionary<string, PriceSeries> _dataSets = new Dictionary<string, PriceSeries>();
         private readonly List<DoubleSeries> _acousticPlotData = new List<DoubleSeries>();

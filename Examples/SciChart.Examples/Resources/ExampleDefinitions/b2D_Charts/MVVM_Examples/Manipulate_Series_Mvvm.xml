@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/UseSciChartWithMvvm/ManipulateSeriesMVVM/ManipulateSeriesMvvmView.xaml</View>
   <ViewModel>Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM.ManipulateSeriesMvvmViewModel</ViewModel>
-  <ImagePath></ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ManipulateSeriesMvvm.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription></ToolTipDescription>
   <Description>

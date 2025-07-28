@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateACustomChart/SplineLineSeries/SplineChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoLine.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SplineScatterChart.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Generates a spline scatter-line chart in code</ToolTipDescription>
   <Description>

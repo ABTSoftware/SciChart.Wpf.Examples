@@ -1,10 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/SeeFeaturedApplication/Histogram/HistogramView.xaml</View>
 	<ViewModel>Examples.SeeFeaturedApplication.Histogram.HistogramViewModel</ViewModel>
-	<ImagePath></ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/histogram-chart.png</ImagePath>
 	<IconPath>IconColumn</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/histogram-chart.png</ShowcaseImagePath>
 	<ShowcaseDescription>This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the FastColumnRenderableSeries with a custom modifier which creates TextAnnotations and positions them over the individual columns.</ShowcaseDescription>
 	<ToolTipDescription></ToolTipDescription>
 	<Description>

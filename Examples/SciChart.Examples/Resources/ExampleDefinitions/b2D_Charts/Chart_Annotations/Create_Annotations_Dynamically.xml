@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/AnnotateAChart/CreateAnnotationsDynamically/CreateAnnotationsDynamically.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoCreateAnnotationsDynamically.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/CreateAnnotationsDynamically.png</ImagePath>
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates the Modifiers API to create Text, Line, Box, LineArrow and Custom Annotations dynamically.</ToolTipDescription>
   <Description>
