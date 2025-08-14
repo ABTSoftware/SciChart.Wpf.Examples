@@ -88,8 +88,8 @@
                        VerticalAlignment="Center"
                        TextTrimming="CharacterEllipsis"
                        Style="{StaticResource GroupHeaderTextStyle}">               
-                <Run Text="{Binding TileDataContext.ParentGroupName, StringFormat='{}{0}:'}"/>
-                <Run Text="{Binding TileDataContext.GroupingName}"/>
+                <Run Text="{Binding TileDataContext.CategoryName, StringFormat='{}{0}:'}"/>
+                <Run Text="{Binding TileDataContext.SubcategoryName}"/>
                 <Run Text="{Binding TileDataContext.ExamplesCount, StringFormat='{}({0} Demos)'}"/>
             </TextBlock>
 

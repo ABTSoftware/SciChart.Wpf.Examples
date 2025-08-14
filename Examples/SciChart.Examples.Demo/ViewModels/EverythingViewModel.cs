@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SciChart.Examples.Demo.Helpers;
+using SciChart.UI.Reactive.Observability;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-using SciChart.Examples.Demo.Helpers;
-using SciChart.UI.Reactive.Observability;
+using SciChart.Examples.Demo.Helpers.Grouping;
 using Unity;
 
 namespace SciChart.Examples.Demo.ViewModels
@@ -38,10 +39,10 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     if (value.Example == null)
                     {
-                        var navigatedItem = EverythingSource.FirstOrDefault(t => 
+                        var navigatedItem = EverythingSource.FirstOrDefault(t =>
                             t.TileDataContext is EverythingGroupViewModel g &&
-                            g.GroupingName == value.Name &&
-                            g.ParentGroupName == value.GroupName);
+                            g.SubcategoryName == value.Name &&
+                            g.CategoryName == value.GroupName);
 
                         SetDynamicValue(navigatedItem, nameof(NavigatedTileItem));
                     }
@@ -77,7 +78,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     if (value.TileDataContext is EverythingGroupViewModel groupToNavigate)
                     {
-                        var node = FindNodeByName(ExampleNodes, groupToNavigate.GroupingName, groupToNavigate.ParentGroupName);
+                        var node = FindNodeByName(ExampleNodes, groupToNavigate.SubcategoryName, groupToNavigate.CategoryName);
 
                         SetDynamicValue(node, nameof(SelectedExampleNode));
                     }
@@ -88,7 +89,7 @@ namespace SciChart.Examples.Demo.ViewModels
                         SetDynamicValue(node, nameof(SelectedExampleNode));
                     }
                 }
-                
+
                 SetDynamicValue(value);
             }
         }
@@ -101,52 +102,52 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private void SetItemSources(IModule module)
         {
-            var groupExamples = new ObservableCollection<TileViewModel>();
-
             Examples = module.Examples;
+            var tileViewModels = new ObservableCollection<TileViewModel>();
+            var treeViewNodeViewModels = new List<ExampleTreeNodeViewModel>();
 
-            var exampleNodes = new List<ExampleTreeNodeViewModel>();
-            var topLevelCategories = module.Examples
+            var comparer = new CategoryComparer();
+            var categories = module.Examples
                 .GroupBy(e => e.Value.TopLevelCategory)
-                .OrderBy(g => g.Key)
-                .OrderBy(g => g.Key == "Featured Apps" ? 1 : 2);
-
-            foreach (var topLevelCategory in topLevelCategories)
+                .OrderBy(g => g.Key, comparer);
+            foreach (var category in categories)
             {
-                var topLevelNode = new ExampleTreeNodeViewModel(topLevelCategory.Key, null);
+                var subcategories = category
+                    .GroupBy(e => e.Value.Group)
+                    .OrderBy(g=>g.Key, comparer);
 
-                var groups = topLevelCategory.GroupBy(e => e.Value.Group).OrderBy(g => g.Key);
-                foreach (var group in groups)
+                var categoryNodeViewModel = new ExampleTreeNodeViewModel(category.Key, null);
+                foreach (var subcategory in subcategories)
                 {
-                    var sortedExamples = group.Select(x => x.Value).OrderBy(e => e.Title);
+                    var examples = subcategory.Select(x => x.Value).ToList();
 
                     // Add groups to the all list and tree view
-                    groupExamples.Add(new TileViewModel
+                    tileViewModels.Add(new TileViewModel
                     {
                         TileDataContext = new EverythingGroupViewModel
                         {
-                            ParentGroupName = topLevelNode.Name,
-                            GroupingName = group.Key,
-                            ExamplesCount = sortedExamples.Count()
+                            CategoryName = category.Key,
+                            SubcategoryName = subcategory.Key,
+                            ExamplesCount = examples.Count
                         }
                     });
 
-                    var groupNode = new ExampleTreeNodeViewModel(group.Key, topLevelNode.Name);
-                    groupNode.ShowExpander = true;
+                    var subcategoryNodeViewModel = new ExampleTreeNodeViewModel(subcategory.Key, category.Key);
+                    subcategoryNodeViewModel.ShowExpander = true;
 
-                    // Add examples into groups
-                    foreach (var example in sortedExamples)
+                    // Add examples for every subcategory
+                    foreach (var example in examples)
                     {
-                        groupExamples.Add(new TileViewModel { TileDataContext = example });
-                        groupNode.Children.Add(new ExampleTreeNodeViewModel(example.Title, groupNode.Name, example));
+                        tileViewModels.Add(new TileViewModel { TileDataContext = example });
+                        subcategoryNodeViewModel.Children.Add(new ExampleTreeNodeViewModel(example.Title, subcategoryNodeViewModel.Name, example));
                     }
 
-                    topLevelNode.Children.Add(groupNode);
+                    categoryNodeViewModel.Children.Add(subcategoryNodeViewModel);
                 }
-                exampleNodes.Add(topLevelNode);
+                treeViewNodeViewModels.Add(categoryNodeViewModel);
             }
-            ExampleNodes = exampleNodes;
-            EverythingSource = groupExamples;
+            ExampleNodes = treeViewNodeViewModels;
+            EverythingSource = tileViewModels;
         }
 
         private static ExampleTreeNodeViewModel FindNodeByName(IEnumerable<ExampleTreeNodeViewModel> nodes, string name, string groupName)

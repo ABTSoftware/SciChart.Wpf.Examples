@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Media;
 using MahApps.Metro.Controls;
 using SciChart.UI.Bootstrap;
 using Unity;
@@ -29,56 +32,103 @@ namespace SciChart.Examples.Demo
             }
             else
             {
-                // The screen size, in pixels adjusted for DPI, of the primary display monitor.
-                var monitorWidth = SystemParameters.PrimaryScreenWidth;
-                var monitorHeight = SystemParameters.PrimaryScreenHeight;
-
-                var windowWidth = 0d;
-                var windowHeight = 0d;
-
-                // Landscape
-                if (monitorWidth > monitorHeight)
+                if (TryGetPrimaryScreenSize(out double screenWidth, out double screenHeight))
                 {
-                    const double DefaultAspectRatioX = 16;
-                    const double DefaultAspectRatioY = 9;
+                    double windowWidth, windowHeight;
 
-                    var aspectRatioUnit = monitorHeight * DefaultSizeFactor / DefaultAspectRatioY;
+                    // Landscape
+                    if (screenWidth > screenHeight)
+                    {
+                        const double DefaultAspectRatioX = 16;
+                        const double DefaultAspectRatioY = 9;
 
-                    windowWidth = aspectRatioUnit * DefaultAspectRatioX;
-                    windowHeight = monitorHeight * DefaultSizeFactor;
+                        var aspectRatioUnit = screenHeight * DefaultSizeFactor / DefaultAspectRatioY;
+
+                        windowWidth = aspectRatioUnit * DefaultAspectRatioX;
+                        windowHeight = screenHeight * DefaultSizeFactor;
+                    }
+                    // Portrait
+                    else
+                    {
+                        const double DefaultAspectRatioX = 4;
+                        const double DefaultAspectRatioY = 3;
+
+                        var aspectRatioUnit = screenWidth * DefaultSizeFactor / DefaultAspectRatioX;
+
+                        windowWidth = screenWidth * DefaultSizeFactor;
+                        windowHeight = aspectRatioUnit * DefaultAspectRatioY;
+                    }
+
+                    Width = windowWidth;
+                    Height = windowHeight;
+
+                    WindowStartupLocation = WindowStartupLocation.Manual;
+
+                    if (windowWidth > screenWidth || windowHeight > screenHeight)
+                    {
+                        // We cannot calculate the position because the window is larger than the display.
+                        // We set the default position to 10% of the display size and maximize the window.
+                        Left = screenWidth * 0.1;
+                        Top = screenHeight * 0.1;
+
+                        WindowState = WindowState.Maximized;
+                    }
+                    else
+                    {
+                        Left = (screenWidth - windowWidth) / 2;
+                        Top = (screenHeight - windowHeight) / 2;
+                    }
                 }
-                // Portrait
                 else
                 {
-                    const double DefaultAspectRatioX = 4;
-                    const double DefaultAspectRatioY = 3;
+                    // We cannot calculate the size and position because we are unable to get the display bounds.
+                    // We set the default size to show 3 columns of example tiles with an aspect ratio of 16x9.
+                    Width = 1300;
+                    Height = 730;
 
-                    var aspectRatioUnit = monitorWidth * DefaultSizeFactor / DefaultAspectRatioX;
-
-                    windowWidth = monitorWidth * DefaultSizeFactor;
-                    windowHeight = aspectRatioUnit * DefaultAspectRatioY;
-                }
-
-                Width = windowWidth;
-                Height = windowHeight;
-
-                WindowStartupLocation = WindowStartupLocation.Manual;
-
-                if (windowWidth > monitorWidth || windowHeight > monitorHeight)
-                {
-                    // We cannot calculate the position because the window is larger than the display monitor size.
-                    // We set the default position to 10% of the display width and height respectively and maximize the window.
-                    Left = monitorWidth * 0.1;
-                    Top = monitorHeight * 0.1;
-
-                    WindowState = WindowState.Maximized;
-                }
-                else
-                {
-                    Left = (monitorWidth - windowWidth) / 2;
-                    Top = (monitorHeight - windowHeight) / 2;
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 }
             }
+        }
+
+        private bool TryGetPrimaryScreenSize(out double width, out double height)
+        {
+            try
+            {
+                // The screen size (device-independent units) of the primary display.
+                width = SystemParameters.PrimaryScreenWidth;
+                height = SystemParameters.PrimaryScreenHeight;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.Log.Error("SystemParameters: An error occurred while getting the screen size", ex);
+            }
+
+            try
+            {
+                // The screen size (physical pixels) of the primary display.
+                var screenWidth = Screen.PrimaryScreen.Bounds.Width;
+                var screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+                // The DPI scaling factor of the primary display.
+                var screenScale = VisualTreeHelper.GetDpi(this);
+
+                width = screenWidth / screenScale.DpiScaleX;
+                height = screenHeight / screenScale.DpiScaleY;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.Log.Error("Screen: An error occurred while getting the screen size", ex);
+            }
+
+            width = double.NaN;
+            height = double.NaN;
+
+            return false;
         }
     }
 }
