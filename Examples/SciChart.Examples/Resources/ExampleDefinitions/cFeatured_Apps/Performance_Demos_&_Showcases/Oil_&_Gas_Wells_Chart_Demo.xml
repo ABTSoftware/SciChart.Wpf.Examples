@@ -1,0 +1,62 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/PerformanceDemos2D/OilAndGas/OilAndGasWellsExampleView.xaml</View>
+	<ViewModel>Examples.PerformanceDemos2D.OilAndGas.OilAndGasWellsExampleViewModel</ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/OilGasChart.png</ImagePath>
+	<IconPath>IconRealtime</IconPath>
+	<Description>
+		A common use case in [b]Oil and Gas exploration[/b] is to visualize dashboards of charts arranged vertically. These are used to visualize parameters such as missing drill speed, rock type or hardness, temperature and pressure with increasing well depth.
+
+		The [b]Oil and Gas Explorer[/b] dashboard combines a few techniques in SciChart WPF chart library to create a beautiful 2D/3D chart demonstration.
+
+		[b]Documentation Links[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Column%20Series%20Type.html']The Column Series Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Scatter%203D%20Chart%20Type.html']The Scatter 3D Chart Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#RenderableSeries%20APIs%20-%20Paletted%20Serie.html']PaletteProvider API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Styling%20-%20Templating%20the%20Axis%20Panel.html']Templating the Axis Panel[/url]
+		- [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/Common/Chart3DViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/Common/ChartTitleToSurfaceBackgroundConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/Common/ChartViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/Common/IChart3DFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/Common/IChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/ChartFactory/MountainChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/ChartFactory/ScatterChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridLegend.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridLegend.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridPanel.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridPanel.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridPanelResources.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/GridCharts/GridPanelViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/ThreeDCharts/ChartFactory/ScatterChart3DFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/ThreeDCharts/Chart3DPanel.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/ThreeDCharts/Chart3DPanel.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/ThreeDCharts/Chart3DPanelResources.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/ThreeDCharts/Chart3DPanelViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/DensityChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/PoreSpaceChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/ResistivityChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/ShaleChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/SonicChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/ChartFactory/TextureChartFactory.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/AxisLegendResources.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/RangeFillPaletteProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/VerticalPanel.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/VerticalPanel.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/VerticalPanelResources.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/VerticalPanelViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/VerticalCharts/VerticalRolloverModifier.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/OilAndGasWellsExampleView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/OilAndGasWellsExampleView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/OilAndGas/OilAndGasWellsExampleViewModel.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Performance</Features>
+		<Features>Scatter3D</Features>
+		<Features>PointCloud3D</Features>
+		<Features>PaletteProvider</Features>
+		<Features>Scientific</Features>
+	</Features>
+</ExampleDefinition>

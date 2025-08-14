@@ -16,7 +16,7 @@ namespace SciChart.Examples.Demo.Controls
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register
             (nameof(Content), typeof(object), typeof(ShowcaseControl), new PropertyMetadata(null));
 
-        public static DependencyProperty ScrollButtonStyleProperty = DependencyProperty.RegisterAttached
+        public static readonly DependencyProperty ScrollButtonStyleProperty = DependencyProperty.Register
             (nameof(ScrollButtonStyle), typeof(Style), typeof(ShowcaseControl), new PropertyMetadata(null));
 
         public static readonly DependencyProperty IsAutoSelectEnabledProperty = DependencyProperty.Register
@@ -26,11 +26,11 @@ namespace SciChart.Examples.Demo.Controls
             (nameof(AutoSelectInterval), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5d), OnAutoSelectIntervalChanged));
 
         private static readonly DependencyPropertyKey AutoSelectСountdownPropertyKey = DependencyProperty.RegisterReadOnly
-            (nameof(AutoSelectСountdown), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.FromSeconds(5d)));
+            (nameof(AutoSelectСountdown), typeof(TimeSpan), typeof(ShowcaseControl), new PropertyMetadata(TimeSpan.Zero));
 
         public static readonly DependencyProperty AutoSelectСountdownProperty = AutoSelectСountdownPropertyKey.DependencyProperty;
 
-        public static DependencyProperty HorizontalOffsetProperty = DependencyProperty.RegisterAttached
+        private static readonly DependencyProperty HorizontalOffsetProperty = DependencyProperty.RegisterAttached
             ("HorizontalOffset", typeof(double), typeof(ShowcaseControl), new PropertyMetadata(0d, OnHorizontalOffsetChanged));
 
         public object Content
@@ -61,16 +61,6 @@ namespace SciChart.Examples.Demo.Controls
         {
             get => (TimeSpan)GetValue(AutoSelectСountdownProperty);
             private set => SetValue(AutoSelectСountdownPropertyKey, value);
-        }
-
-        public static void SetHorizontalOffset(FrameworkElement target, double value)
-        {
-            target.SetValue(HorizontalOffsetProperty, value);
-        }
-
-        public static double GetHorizontalOffset(FrameworkElement target)
-        {
-            return (double)target.GetValue(HorizontalOffsetProperty);
         }
 
         private ScrollViewer _scrollViewer;
@@ -146,19 +136,23 @@ namespace SciChart.Examples.Demo.Controls
             base.OnApplyTemplate();
 
             _leftScrollButton = GetAndAssertTemplateChild<Button>("PART_LeftScrollButton");
-
+            
             _leftScrollButton.Click -= OnLeftScrollButtonClick;
             _leftScrollButton.Click += OnLeftScrollButtonClick;
 
             _rightScrollButton = GetAndAssertTemplateChild<Button>("PART_RightScrollButton");
-
+            
             _rightScrollButton.Click -= OnRightScrollButtonClick;
             _rightScrollButton.Click += OnRightScrollButtonClick;
 
             _itemsPresenter = GetAndAssertTemplateChild<ItemsPresenter>("PART_ItemsPresenter");
 
             _scrollViewer = GetAndAssertTemplateChild<ScrollViewer>("PART_ScrollViewer");
+
+            _scrollViewer.ScrollChanged -= OnScrollViewerScrollChanged;
             _scrollViewer.ScrollChanged += OnScrollViewerScrollChanged;
+            
+            _scrollViewer.SetValue(HorizontalOffsetProperty, 0d);
 
             ScrollViewer.SetCanContentScroll(this, false);
         }
@@ -176,9 +170,11 @@ namespace SciChart.Examples.Demo.Controls
         {
             if (_timer.IsPaused || !IsAutoSelectEnabled) return;
 
-            AutoSelectСountdown = AutoSelectСountdown.Subtract(TimerInterval);
-
-            if (AutoSelectСountdown <= TimeSpan.Zero)
+            if (AutoSelectСountdown > TimeSpan.Zero)
+            {
+                AutoSelectСountdown = AutoSelectСountdown.Subtract(TimerInterval);
+            }
+            else
             {
                 var nextItemIndex = SelectedIndex + 1;
 
@@ -284,7 +280,7 @@ namespace SciChart.Examples.Demo.Controls
             }
         }
 
-        private void AnimateScroll(ScrollViewer scrollViewer, double horizontalOffset)
+        private static void AnimateScroll(ScrollViewer scrollViewer, double horizontalOffset)
         {
             var scrollAnimation = new DoubleAnimation
             {
@@ -358,17 +354,22 @@ namespace SciChart.Examples.Demo.Controls
 
         private static void OnAutoSelectIntervalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ShowcaseControl showcaseControl)
+            if (d is ShowcaseControl showcaseControl && e.NewValue is TimeSpan newInterval)
             {
-                showcaseControl.AutoSelectСountdown = (TimeSpan)e.NewValue;
+                if (newInterval < TimeSpan.FromSeconds(1))
+                {
+                    throw new ArgumentException("AutoSelectInterval cannot be less than 1 second");
+                }
+
+                showcaseControl.AutoSelectСountdown = newInterval;
             }
         }
 
         private static void OnHorizontalOffsetChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
-            if (target is ScrollViewer scrollViewer)
+            if (target is ScrollViewer scrollViewer && e.NewValue is double newOffset)
             {
-                scrollViewer.ScrollToHorizontalOffset((double)e.NewValue);
+                scrollViewer.ScrollToHorizontalOffset(newOffset);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/DragAxisToScale.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDragAxisToScale.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DragAxisToScale.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>Demonstrates mouse-dragging of X and Y Axis to scale using the YAxisDragModifier and XAxisDragModifier. These are a built-in ChartModifierBase derived classes which add the behavior of scaling on mouse-drag of each axis.
   </ToolTipDescription>

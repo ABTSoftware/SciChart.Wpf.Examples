@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.VerticalCharts.VerticalPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:c="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.Common"             
+             xmlns:l="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.VerticalCharts">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="VerticalPanelResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <c:ChartTitleToSurfaceBackgroundConverter x:Key="ChartTitleToSurfaceBackgroundConverter"
+                                                      ShaleBrush="{StaticResource CrossPatternedBrush}"
+                                                      DensityBrush="{StaticResource DefaultChartBackground}"
+                                                      ResistivityBrush="{StaticResource DefaultChartBackground}"
+                                                      SonicBrush="{StaticResource DefaultChartBackground}"
+                                                      SpaceBrush="{StaticResource DefaultChartBackground}"
+                                                      TextureBrush="{StaticResource DefaultChartBackground}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <ItemsControl Margin="4,0" ItemsSource="{Binding VerticalCharts}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding ColumnsCount, Mode=OneWay}"
+                                 Rows="{Binding RowsCount, Mode=OneWay}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <s:SciChartSurface Margin="1"
+                                           Background="{Binding ChartTitle, Converter={StaticResource ChartTitleToSurfaceBackgroundConverter}}"
+                                           RenderableSeries="{s:SeriesBinding RenderableSeries}"
+                                           XAxes="{s:AxesBinding XAxes}"
+                                           YAxes="{s:AxesBinding YAxes}">
+                            <s:SciChartSurface.ChartModifier>
+                                <s:ModifierGroup s:MouseManager.MouseEventGroup="MouseGroup">
+                                    <s:MouseWheelZoomModifier XyDirection="XDirection" />
+                                    <s:ZoomExtentsModifier XyDirection="XDirection" />
+                                    <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False" />
+                                    <l:VerticalRolloverModifier LineOverlayStyle="{StaticResource RolloverLineStyle}"
+                                                                ReceiveHandledEvents="True"
+                                                                ShowAxisLabels="False"
+                                                                ShowTooltipOn="MouseHover"
+                                                                UseInterpolation="True" />
+                                </s:ModifierGroup>
+                            </s:SciChartSurface.ChartModifier>
+                        </s:SciChartSurface>
+
+                        <Border BorderBrush="{StaticResource ThemedChartBackground}"
+                                BorderThickness="3,0,3,3" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

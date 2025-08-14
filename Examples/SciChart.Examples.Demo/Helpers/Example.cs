@@ -24,11 +24,13 @@ namespace SciChart.Examples.Demo.Helpers
 {
     public sealed class Example : ISelectable
     {
+        private static readonly string DefaultImagePath = @"/SciChart.Examples;component/Resources/Images/BandSeriesChart.png";
+        private static readonly Regex _urlRegex = new Regex(@"\[url='(.*?)'?\](.*?)\[\/url\]");
+
         private readonly List<string> _sourceFilePaths;
         private readonly Dictionary<string, string> _sourceFiles = new Dictionary<string, string>();
         private bool _isLoaded;
-        private static readonly Regex _urlRegex = new Regex(@"\[url='(.*?)'?\](.*?)\[\/url\]");        
-
+        
         public Example(AppPage page, ExampleDefinition exDefinition)
         {
             Page = page;
@@ -37,11 +39,9 @@ namespace SciChart.Examples.Demo.Helpers
             HtmlDescription = ParseHtmlDescription(exDefinition.Description);
             Description = SimplifyDescription(exDefinition.Description);
             ToolTipDescription = exDefinition.ToolTipDescription;            
-            ExampleImagePath = exDefinition.ImagePath;
+            ExampleImagePath = string.IsNullOrEmpty(exDefinition.ImagePath) ? DefaultImagePath : exDefinition.ImagePath;
             Group = exDefinition.ChartGroup;
-            IsShowcaseExample = exDefinition.IsShowcaseExample;
             ShowcaseDescription = exDefinition.ShowcaseDescription;
-            ShowcaseImagePath = exDefinition.ShowcaseImagePath;
             TopLevelCategory = exDefinition.ExampleCategory;
             IconPath = exDefinition.IconPath;
             Features = exDefinition.Features;
@@ -151,10 +151,6 @@ namespace SciChart.Examples.Demo.Helpers
         public string IconPath { get; set; }
 
         public ICommand SelectCommand { get; set; }
-
-        public bool IsShowcaseExample { get; set; }
-
-        public string ShowcaseImagePath { get; set; }
 
         public string ShowcaseDescription { get; set; }
 

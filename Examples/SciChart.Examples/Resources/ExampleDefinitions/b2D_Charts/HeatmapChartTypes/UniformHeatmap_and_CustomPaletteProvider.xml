@@ -2,7 +2,7 @@
 <ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/HeatmapChartTypes/UniformHeatmapAndPaletteProvider/UniformHeatmapAndPaletteProvider.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHeatmapWithText.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/HeatmapAndPaletteProvider.png</ImagePath>
   <IconPath>IconHeat</IconPath>
   <ToolTipDescription>Shows how to use UniformHeatmap with a custom PaletteProvider</ToolTipDescription>
   <Description>

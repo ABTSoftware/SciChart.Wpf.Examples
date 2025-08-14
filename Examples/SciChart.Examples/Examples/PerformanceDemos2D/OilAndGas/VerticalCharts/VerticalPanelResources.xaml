@@ -1,0 +1,457 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:l="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.VerticalCharts"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SciChart.Charting;component/Themes/TemplateParts/Default.Axes.xaml" />
+        <ResourceDictionary Source="AxisLegendResources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Vertical Panel -->
+
+    <RadialGradientBrush x:Key="DefaultChartBackground" Center="0.5, 0.5">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Offset="0" Color="#22365B" />
+            <GradientStop Offset="1" Color="#17243d" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <Style x:Key="SharedXAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Once" />
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+        <Setter Property="VisibleRangeLimit" Value="0,999" />
+        <Setter Property="CursorTextFormatting" Value="N2" />
+        <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type l:VerticalPanel}}}" />
+        <Setter Property="AxisAlignment" Value="Left" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <Style x:Key="SharedYAxisStyle" TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="CursorTextFormatting" Value="N2" />
+        <Setter Property="DrawMajorTicks" Value="False" />
+        <Setter Property="DrawMinorTicks" Value="False" />
+        <Setter Property="DrawLabels" Value="False" />
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+        <Setter Property="FlipCoordinates" Value="True" />
+        <Setter Property="AxisAlignment" Value="Top" />
+    </Style>
+    
+    <Style x:Key="RolloverLineStyle" TargetType="Line">
+        <Setter Property="Panel.ZIndex" Value="-1000" />
+        <Setter Property="Stroke" Value="#E4F5FC" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+    </Style>
+
+    <Style x:Key="RolloverTooltipBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Margin" Value="0,0,5,5" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="-45"
+                                  ShadowDepth="5"
+                                  Color="DimGray" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="RolloverEllipseMarkerTemplate">
+        <Ellipse Width="8"
+                 Height="8"
+                 Effect="{StaticResource EllipseShadowEffect}"
+                 Fill="#E4F5FC" />
+    </ControlTemplate>
+
+    <!-- Shale Chart -->
+
+    <Style x:Key="ShaleChartXAxisStyle"
+           BasedOn="{StaticResource SharedXAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMajorGridLines" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+    </Style>
+
+    <Style x:Key="ShaleChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Always" />
+        <Setter Property="DrawMajorGridLines" Value="False" />
+        <Setter Property="DrawMinorGridLines" Value="False" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource ShaleChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GreenShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="#E4F5FC" />
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#84BAAF" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BlueShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="#E4F5FC" />
+        <Setter Property="Fill" Value="#325A82" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#AE408E" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RedShaleSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="IsOneHundredPercent" Value="True" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Stroke" Value="#E4F5FC" />
+        <Setter Property="Fill" Value="#AE408E" />
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False" />
+    </Style>
+
+    <!-- Density Chart -->
+
+    <Style x:Key="DensityChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Never" />
+        <Setter Property="VisibleRange" Value="-0.2,0.2" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource DensityChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DensitySeriesStyle" TargetType="s:FastBandRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeY1" Value="#AE408E" />
+        <Setter Property="Fill" Value="#90417195" />
+        <Setter Property="FillY1" Value="#9067BDAF" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border>
+                                    <Border.Style>
+                                        <Style BasedOn="{StaticResource RolloverTooltipBorderStyle}" TargetType="Border">
+                                            <Setter Property="Background" Value="#417195" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsFirstSeries}" Value="True">
+                                                    <Setter Property="Background" Value="#67BDAF" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Resistivity Chart -->
+
+    <Style x:Key="ResistivityChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Never" />
+        <Setter Property="VisibleRange" Value="0,1" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource ResistivityChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ResistivitySeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="#00BFFF" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#0992C6" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ResistivityAverageSeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke" Value="#FF4500" />
+        <Setter Property="StrokeDashArray" Value="5,5" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#BA3D15" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Pore Space Chart -->
+
+    <Style x:Key="PoreSpaceChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Never" />
+        <Setter Property="VisibleRange" Value="-0.2,1.6" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource PoreSpaceChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BluePoreSpaceSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="#4682B4" />
+        <Setter Property="Fill" Value="#904682B4" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#4682B4" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OlivePoreSpaceSeriesStyle" TargetType="s:StackedMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="#757000" />
+        <Setter Property="Fill" Value="#90757000" />
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#757000" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScatterPoreSpaceSeriesStyle" TargetType="s:XyScatterRenderableSeries">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s:EllipsePointMarker Width="6"
+                                      Height="6"
+                                      Fill="DodgerBlue"
+                                      Stroke="White" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False" />
+    </Style>
+
+    <!-- Sonic Chart -->
+
+    <Style x:Key="SonicChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Never" />
+        <Setter Property="VisibleRange" Value="5,85" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource SonicChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SonicSeriesStyle" TargetType="{x:Type s:FastUniformHeatmapRenderableSeries}">
+        <Setter Property="Opacity" Value="0.8" />
+        <Setter Property="UseLinearTextureFiltering" Value="True" />
+        <Setter Property="ColorMap">
+            <Setter.Value>
+                <s:HeatmapColorPalette Maximum="100" Minimum="0">
+                    <s:HeatmapColorPalette.GradientStops>
+                        <GradientStop Offset="0.0" Color="Transparent" />
+                        <GradientStop Offset="0.4" Color="Transparent" />
+                        <GradientStop Offset="0.6" Color="#45BEE8" />
+                        <GradientStop Offset="0.8" Color="#E4F5FC" />
+                        <GradientStop Offset="1.0" Color="#DF69A8" />
+                    </s:HeatmapColorPalette.GradientStops>
+                </s:HeatmapColorPalette>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RolloverMarkerTemplate" Value="{StaticResource RolloverEllipseMarkerTemplate}" />
+        <Setter Property="s:RolloverModifier.TooltipContainerStyle">
+            <Setter.Value>
+                <Style TargetType="s:TooltipControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="s:TooltipControl">
+                                <Border Background="#417195" Style="{StaticResource RolloverTooltipBorderStyle}">
+                                    <ContentPresenter Content="{TemplateBinding DataContext}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="s:RolloverModifier.TooltipTemplate">
+            <Setter.Value>
+                <DataTemplate DataType="s:HeatmapSeriesInfo">
+                    <StackPanel>
+                        <TextBlock Margin="0,2"
+                                   Foreground="White"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding FormattedXValue, StringFormat='X: {0}'}" />
+                        <TextBlock Margin="0,2"
+                                   Foreground="White"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding FormattedYValue, StringFormat='Y: {0}'}" />
+                        <TextBlock Margin="0,2"
+                                   Foreground="White"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding FormattedZValue, StringFormat='Z: {0}'}" />
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Texture Chart -->
+
+    <Style x:Key="TextureChartYAxisStyle"
+           BasedOn="{StaticResource SharedYAxisStyle}"
+           TargetType="{x:Type s:NumericAxisForMvvm}">
+        <Setter Property="AutoRange" Value="Never" />
+        <Setter Property="VisibleRange" Value="-5,30" />
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="s:AxisTitle">
+                    <Setter Property="Content" Value="{StaticResource TextureChartAxisLegend}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,-5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextureMountainSeriesStyle" TargetType="s:FastMountainRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="IsDigitalLine" Value="True" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Fill" Value="#50808080" />
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False" />
+    </Style>
+
+    <Style x:Key="TextureLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
+        <Setter Property="AntiAliasing" Value="True" />
+        <Setter Property="StrokeThickness" Value="3" />
+        <Setter Property="Stroke" Value="#434D63" />
+        <Setter Property="s:RolloverModifier.IncludeSeries" Value="False" />
+    </Style>
+
+</ResourceDictionary>

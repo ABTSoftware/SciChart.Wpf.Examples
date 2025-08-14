@@ -6,8 +6,6 @@
     <SolidColorBrush x:Key="MetroWindowTitleBrush" Color="#FFE3E3E3"/>
     <SolidColorBrush x:Key="MetroWindowHeaderBrush" Color="#FF1E2639"/>
     <SolidColorBrush x:Key="MetroNonActiveWindowHeaderBrush" Color="#FF42464E"/>
-    <SolidColorBrush x:Key="MetroWindowGlowBrush" Color="#FF151A25"/>
-    <SolidColorBrush x:Key="MetroNonActiveWindowGlowBrush" Color="#FF42464E"/>
 
     <SolidColorBrush x:Key="MetroWindowButtonForegroundBrush" Color="#FFE3E3E3"/>
     <SolidColorBrush x:Key="MetroWindowButtonBackgroundBrush" Color="Transparent"/>
@@ -61,6 +59,13 @@
     <SolidColorBrush x:Key="NavigationTabControlItemSelectedForegroundBrush" Color="#FF64BAE4"/>
     <SolidColorBrush x:Key="NavigationTabControlItemMouseOverBackgroundBrush" Color="#FF1E273E"/>
 
+    <!-- Navigation TreeView (2D Charts, 3D Charts, Featured Apps) -->
+
+    <SolidColorBrush x:Key="NavigationTreeViewBackgroundBrush" Color="#FF192336"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemSelectedBackgroundBrush" Color="#FF364C6F"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemHighlightedBackgroundBrush" Color="#FF364C6F"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemMouseOverBackgroundBrush" Color="#FF263147"/>
+
     <!-- Chart Icons -->
 
     <SolidColorBrush x:Key="ChartIconStrokeBrush" Color="#FFE3E3E3"/>
@@ -83,7 +88,7 @@
 
     <!-- Example List -->
 
-    <SolidColorBrush x:Key="ExampleListGroupSeparatorBrush" Color="#FF40434E"/>
+    <SolidColorBrush x:Key="ExampleListGroupSeparatorBrush" Color="#8040434E"/>
     <SolidColorBrush x:Key="ExampleListBusyIndeterminateBrush" Color="#FF64BAE4"/>
     
     <SolidColorBrush x:Key="ExampleListSortComboBoxBackgroundBrush" Color="#FF181825"/>
@@ -113,7 +118,7 @@
     <!-- Example Navigation View -->
 
     <SolidColorBrush x:Key="ExampleNavigationViewBackgroundBrush" Color="#FF2F3A51"/>
-    <SolidColorBrush x:Key="ExampleNavigationViewSeparatorBrush" Color="#FF454D60"/>
+    <SolidColorBrush x:Key="ExampleNavigationViewSeparatorBrush" Color="#FF384357"/>
     <SolidColorBrush x:Key="ExampleNavigationViewForegroundBrush" Color="#FFE3E3E3"/>
 
     <SolidColorBrush x:Key="ExampleNavigationViewItemBackgroundBrush" Color="#FF2A354B"/>
@@ -123,7 +128,7 @@
     <!-- Settings View -->
 
     <SolidColorBrush x:Key="SettingsViewBackgroundBrush" Color="#FF2F3A51"/>
-    <SolidColorBrush x:Key="SettingsViewSeparatorBrush" Color="#FF454D60"/>
+    <SolidColorBrush x:Key="SettingsViewSeparatorBrush" Color="#FF384357"/>
     <SolidColorBrush x:Key="SettingsViewForegroundBrush" Color="#FFE3E3E3"/>
 
     <SolidColorBrush x:Key="DevModeButtonForegroundBrush" Color="#FF8F94A1"/>
@@ -137,7 +142,7 @@
     <!-- Feedback / Export View -->
 
     <SolidColorBrush x:Key="FeedbackExportViewBackgroundBrush" Color="#FF2F3A51"/>
-    <SolidColorBrush x:Key="FeedbackExportViewSeparatorBrush" Color="#FF454D60"/>
+    <SolidColorBrush x:Key="FeedbackExportViewSeparatorBrush" Color="#FF384357"/>
     <SolidColorBrush x:Key="FeedbackExportHeaderForegroundBrush" Color="#FFE3E3E3"/>
     <SolidColorBrush x:Key="FeedbackExportMessageForegroundBrush" Color="#FF8F94A1"/>
     <SolidColorBrush x:Key="FeedbackExportSuccessForegroundBrush" Color="#FF64BAE4"/>
@@ -145,7 +150,7 @@
 
     <!-- Search View -->
 
-    <SolidColorBrush x:Key="SearchViewSeparatorBrush" Color="#FF40434E"/>
+    <SolidColorBrush x:Key="SearchViewSeparatorBrush" Color="#8040434E"/>
     <SolidColorBrush x:Key="SearchViewBusyIndeterminateBrush" Color="#FF64BAE4"/>
     <SolidColorBrush x:Key="SearchViewNoResultsForegroundBrush" Color="#30E3E3E3"/>
 

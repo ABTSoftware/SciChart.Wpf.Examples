@@ -1,0 +1,32 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/PerformanceDemos2D/LoadMillions/LoadMillionsPageView.xaml</View>
+  <ViewModel>Examples.PerformanceDemos2D.LoadMillions.LoadMillionsPageViewModel</ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Load1MillionPointsInstantly.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    Demonstrates the startup performance of SciChart by loading 1,000,000 points from cold in under 100ms
+  </ToolTipDescription>
+  <Description>
+    This demo showcases the loading or startup time of SciChart by appending one million points to the chart and rendering in under 100ms!
+
+    [b][i]Example Usage[/i][/b]
+    Click 'Create Data' to create 1 million points instantly!
+
+    Then Zoom and Pan the chart to see the smoothness.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/LoadMillions/LoadMillionsPageView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/LoadMillions/LoadMillionsPageView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/LoadMillions/LoadMillionsPageViewModel.cs.txt</string>    
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+    <Features>Line</Features>
+  </Features>
+</ExampleDefinition>

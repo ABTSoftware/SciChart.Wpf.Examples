@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/PerformanceDemos2D/ScatterPerf/ScatterChartPerformanceTest.xaml</View>
+  <ViewModel></ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ScatterChartPerformanceDemo.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>
+    Demonstrates the performance of SciChart's XyScatterRenderableSeries by loading 1,000,000 scatter chart points.
+  </ToolTipDescription>
+  <Description>
+    This demo showcases the loading or startup time of SciChart by appending one million points to a Scatter Chart and rendering at interactive framerates!
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+    - [url='https://www.scichart.com/scichart-wpf-v6-the-worlds-fastest-wpf-charts/']How Fast is SciChart's WPF Chart? DirectX vs. Software Comparison[/url]
+    - [url='https://www.scichart.com/documentation/win/current/The%20Scatter%20Series%20Type.html']XyScatterRenderableSeries[/url]
+    - [url='https://www.scichart.com/documentation/win/current/Point%20Marker%20API%20-%20BaseRenderableSeries.Pointmarker.html']PointMarker API[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/ScatterChartPerformanceTest.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/PerformanceDemos2D/ScatterPerf/ScatterChartPerformanceTest.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+    <Features>Scatter</Features>
+  </Features>
+</ExampleDefinition>

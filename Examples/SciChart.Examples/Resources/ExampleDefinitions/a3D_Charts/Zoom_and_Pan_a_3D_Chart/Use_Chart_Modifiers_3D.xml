@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/ZoomAndPanA3DChart/UseChartModifiers3D.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/UseChartModifiers3D.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>
     Demonstrates how [url='https://www.scichart.com/documentation/win/current/ZoomExtentsModifier3.html']ZoomExtentsModifier3D[/url], [url='https://www.scichart.com/documentation/win/current/The%20Orbit%20Modifier.html']OrbitModifier[/url], [url='https://www.scichart.com/documentation/win/current/MouseWheelZoomModifier3D.html']MouseWheelModifier[/url] works and how to rotate camera.

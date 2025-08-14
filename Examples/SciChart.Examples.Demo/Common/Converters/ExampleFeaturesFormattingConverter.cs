@@ -22,7 +22,7 @@ namespace SciChart.Examples.Demo.Common.Converters
                 return string.Empty;
             }
 
-            var lines = ((IEnumerable<Features>)value).Select(x => x.ToString()).ToArray();
+            var lines = ((IEnumerable<Features>)value).Select(x => FormatTextBase(x.ToString())).ToArray();
             var terms = _mainWindowViewModel.SearchText.Split(' ').Where(word => word != "").Select(x => x.ToLower()).ToArray();
             var result = new List<string>();
 

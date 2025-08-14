@@ -20,36 +20,36 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="FilesListBox"
-                 Grid.Column="0"
-                 Margin="0"
-                 Padding="0,5"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"
-                 Background="{DynamicResource InfoPanelBackgroundBrush}"
-                 BorderThickness="0"
-                 SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
-                 ItemContainerStyle="{StaticResource SourceCodeFileItemStyle}"
-                 ItemTemplate="{StaticResource SourceCodeFileItemTemplate}"
-                 ItemsSource="{Binding SelectedExample.SourceFiles}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+              Grid.Column="0"
+              Padding="0,5"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Background="{DynamicResource InfoPanelBackgroundBrush}"
+              BorderThickness="0"
+              SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
+              ItemContainerStyle="{StaticResource SourceCodeFileItemStyle}"
+              ItemTemplate="{StaticResource SourceCodeFileItemTemplate}"
+              ItemsSource="{Binding SelectedExample.SourceFiles}"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 
         <RichTextBox Grid.Column="1"
-                     IsReadOnly="True"
-                     Margin="5"
-                     BorderThickness="0"                     
-                     Background="Transparent"
-                     Foreground="WhiteSmoke"
-                     HorizontalScrollBarVisibility="Disabled"
-                     VerticalScrollBarVisibility="Auto"                    
-                     helpers:CodeHighlighter.SourceLanguage="{Binding SelectedFile.Key, Converter={StaticResource StringToLanguageTypeConverter}}"
-                     helpers:CodeHighlighter.SourceCode="{Binding SelectedFile.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                     tz:Transitionz.Opacity="{Binding SourceOpacityParams}"/>
+                  IsReadOnly="True"
+                  Margin="5,5,2,5"
+                  BorderThickness="0"                     
+                  Background="Transparent"
+                  Foreground="WhiteSmoke"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto"                    
+                  helpers:CodeHighlighter.SourceLanguage="{Binding SelectedFile.Key, Converter={StaticResource StringToLanguageTypeConverter}}"
+                  helpers:CodeHighlighter.SourceCode="{Binding SelectedFile.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  tz:Transitionz.Opacity="{Binding SourceOpacityParams}"/>
 
         <Border Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Opacity="1"
-                tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, From=0, To=1, TransitionOn=Visibility}"
-                tz:Transitionz.Visibility="{Binding Path=IsShowingSourceCodeHelp, Converter={StaticResource BooleanToVisibilityConverter}}">
+             Grid.ColumnSpan="2"
+             Opacity="1"
+             tz:Transitionz.Opacity="{tz:OpacityParams Duration=200, From=0, To=1, TransitionOn=Visibility}"
+             tz:Transitionz.Visibility="{Binding Path=IsShowingSourceCodeHelp, Converter={StaticResource BooleanToVisibilityConverter}}">
+
             <views:SourceTipsView tz:Transitionz.Translate="{tz:TranslateParams Duration=400, From='50,0', To='0,0', Ease={StaticResource BounceEase}, TransitionOn=Loaded}" />
         </Border>
     </Grid>

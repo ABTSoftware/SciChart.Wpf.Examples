@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/ZoomAndPanA3DChart/ModifyCameraProperties.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/ModifyCamera3DProperties.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>
     Demonstrates the properties of the [url='https://www.scichart.com/documentation/win/current/The%20SciChart3DSurface%20Camera.html']Camera3D[/url] class which allows data-binding to camera position, target, orientation, field of view etc...

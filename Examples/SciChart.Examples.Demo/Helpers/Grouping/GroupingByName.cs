@@ -33,7 +33,7 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
                     TileDataContext = new EverythingGroupViewModel
                     {
                         GroupingIndex = groupIndex,
-                        GroupingName = pairs.Key.ToString()
+                        SubcategoryName = pairs.Key.ToString()
                     }
                 });
 

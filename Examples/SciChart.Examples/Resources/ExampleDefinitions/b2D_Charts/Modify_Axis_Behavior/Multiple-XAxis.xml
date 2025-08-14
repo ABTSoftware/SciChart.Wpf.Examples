@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/MultipleXAxes.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultiXAxis.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/MultipleXAxis.png</ImagePath>
   <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates a line chart with four series and multiple top / bottom X-Axis and left / right Y-Axis. SciChart supports multiple top or bottom X-Axes and multiple left and right Y-Axes. This example shows in a simple way how to register a line series on each axis</ToolTipDescription>
   <Description>

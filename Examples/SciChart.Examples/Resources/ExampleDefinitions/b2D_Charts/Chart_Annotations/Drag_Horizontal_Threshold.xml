@@ -2,7 +2,7 @@
 <ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/AnnotateAChart/DragHorizontalThreshold/DragThresholdMvvm.xaml</View>
   <ViewModel>Examples.AnnotateAChart.DragHorizontalThreshold.DragThresholdMvvmViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoThreshold.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DragHorizontalThreshold.png</ImagePath>
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates how to add a Horizontal line Annotation and drag via the mouse, recoloring the series when series-values pass a certain threshold</ToolTipDescription>
   <Description>

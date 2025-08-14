@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SciChart.Examples.Demo.Helpers;
+using SciChart.Examples.Demo.Helpers.Grouping;
 using SciChart.Examples.ExternalDependencies.Common;
 using ActionCommand = SciChart.Charting.Common.Helpers.ActionCommand;
 
@@ -145,7 +146,7 @@ namespace SciChart.Examples.Demo.ViewModels
             }
         }
 
-        public IEnumerable<BreadcrumbItemViewModel> BreadCrumbItemViewModels { get { return _breadcrumbItems; } }
+        public IEnumerable<BreadcrumbItemViewModel> BreadCrumbItemViewModels => _breadcrumbItems;
 
         public void UpdateSelectedExample()
         {
@@ -159,8 +160,9 @@ namespace SciChart.Examples.Demo.ViewModels
             _breadcrumbItems[1].Content = _selectedCategoryGroup;
             _breadcrumbItems[2].Content = _selectedGroupExample.Title;
 
-            AllCategories = _module.AllCategories;
-            AllCategoryGroups = _module.GroupsByCategory[_selectedCategory];
+            var comparer = new CategoryComparer();
+            AllCategories = _module.AllCategories.OrderBy(c=>c, comparer);
+            AllCategoryGroups = _module.GroupsByCategory[_selectedCategory].OrderBy(c => c, comparer);
             AllGroupExamples = _module.ExamplesByCategoryAndGroup(_selectedCategory, _selectedCategoryGroup);
 
             OnPropertyChanged(nameof(SelectedCategory));

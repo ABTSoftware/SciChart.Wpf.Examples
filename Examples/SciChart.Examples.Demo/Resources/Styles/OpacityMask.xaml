@@ -8,11 +8,10 @@
         <GradientStop Color="Transparent" Offset="1.0"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="HorizontalFadeOpacityBrush" StartPoint="0,0" EndPoint="1,0">
+    <LinearGradientBrush x:Key="TopFadeOpacityBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="Transparent" Offset="0.0"/>
         <GradientStop Color="White" Offset="0.2"/>
-        <GradientStop Color="White" Offset="0.8"/>
-        <GradientStop Color="Transparent" Offset="1.0"/>
+        <GradientStop Color="White" Offset="1.0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BottomFadeOpacityBrush" StartPoint="0,0" EndPoint="0,1">
@@ -21,4 +20,23 @@
         <GradientStop Color="Transparent" Offset="1.0"/>
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="HorizontalFadeOpacityBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="Transparent" Offset="0.0"/>
+        <GradientStop Color="White" Offset="0.2"/>
+        <GradientStop Color="White" Offset="0.8"/>
+        <GradientStop Color="Transparent" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LeftFadeOpacityBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="Transparent" Offset="0.0"/>
+        <GradientStop Color="White" Offset="0.2"/>
+        <GradientStop Color="White" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="RightFadeOpacityBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="White" Offset="0.0"/>
+        <GradientStop Color="White" Offset="0.8"/>
+        <GradientStop Color="Transparent" Offset="1.0"/>
+    </LinearGradientBrush>
+    
 </ResourceDictionary>

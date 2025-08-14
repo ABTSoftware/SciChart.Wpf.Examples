@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D">
+
+    <Style x:Key="Scatter3DAxisStyle" TargetType="s3D:NumericAxis3D">
+        <Setter Property="VisibleRange" Value="0,300" />
+        <Setter Property="DrawMajorBands" Value="False" />
+        <Setter Property="DrawMinorTicks" Value="False" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TickTextBrush" Value="{StaticResource MainThemeSolidBrush}" />
+    </Style>
+
+    <Style x:Key="ScatterMetadataColorSeriesStyle" TargetType="s3D:ScatterRenderableSeries3D">
+        <Setter Property="PointMarker">
+            <Setter.Value>
+                <s3D:SpherePointMarker3D Fill="#FFFFFF" Size="10" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.OilAndGasWellsExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gc="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.GridCharts"
+             xmlns:tc="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.ThreeDCharts"
+             xmlns:vc="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.OilAndGas.VerticalCharts">
+
+    <Grid Background="{StaticResource ThemedChartBackground}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*" />
+            <ColumnDefinition Width="55*" />
+        </Grid.ColumnDefinitions>
+
+        <gc:GridPanel Grid.Row="0"
+                      Grid.Column="0"
+                      DataContext="{Binding GridPanelViewModel, Mode=OneWay}" />
+
+        <vc:VerticalPanel Grid.Row="0"
+                          Grid.RowSpan="2"
+                          Grid.Column="1"
+                          DataContext="{Binding VerticalPanelViewModel, Mode=OneWay}" />
+
+        <tc:Chart3DPanel Grid.Row="1"
+                         Grid.Column="0"
+                         DataContext="{Binding Chart3DPanelViewModel, Mode=OneWay}" />
+    </Grid>
+</UserControl>

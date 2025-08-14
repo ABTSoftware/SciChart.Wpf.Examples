@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/LineSeriesStyling.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDashedLine.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DashedLineStyling.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates StrokeThickness, StrokeDashArray and PointMarker properties of a LineSeries which can be used to style a dashed or solid line with triangle markers</ToolTipDescription>
   <Description>

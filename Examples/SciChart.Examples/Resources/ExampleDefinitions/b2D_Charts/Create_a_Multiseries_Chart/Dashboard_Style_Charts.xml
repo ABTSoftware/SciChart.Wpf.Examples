@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsView.xaml</View>
   <ViewModel>Examples.CreateMultiseriesChart.DashboardStyleCharts.DashboardStyleChartsViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDashboardStyleCharts.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DashboardStyleCharts.png</ImagePath>
   <IconPath>IconStackedColumn</IconPath>
   <ToolTipDescription>Shows how to dynamically change type of chart</ToolTipDescription>
   <Description>

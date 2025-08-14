@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/RolloverFeedback.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRolloverModifier.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingRolloverModifier.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates using the BaseRenderableSeries.RolloverMarkerTemplate property and the RolloverModifier to add mouse-over feedback of data-points on multiple line series to the user</ToolTipDescription>
   <Description>

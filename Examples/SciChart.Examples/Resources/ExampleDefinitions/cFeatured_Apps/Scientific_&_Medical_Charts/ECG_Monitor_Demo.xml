@@ -1,0 +1,28 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/ECGMonitor/ECGMonitorView.xaml</View>
+  <ViewModel>Examples.SeeFeaturedApplication.ECGMonitor.ECGMonitorViewModel</ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ECGMonitorDemo.png</ImagePath>
+  <IconPath>IconRealtime</IconPath>
+  <ToolTipDescription>The ECG Monitor Demo showcases a real-time heart-rate monitor. This example uses MVVM and shows how to set the Axis VisibleRange and scroll the chart manually when the trace reaches the right edge. 
+  A refresh rate of 50Hz is used and a shader effect is applied to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.
+  </ToolTipDescription>
+  <Description>
+    The ECG Monitor Demo showcases a real-time heart-rate monitor. This example uses MVVM and shows how fill a FIFO Series with data, shifting the XAxis.VisibleRange by 50% when the trace reaches the right edge.
+
+    The example can run indefinitely as the FIFO chart series automatically discards points that are outside the viewport.
+
+    A refresh rate of 50Hz is used and a shader effect is applied to provide a slight glow to the series to simulate the trace glow on an oscilloscope VDU.
+    
+    [b]Note:[/b] ECG data is a simulation.
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ECGMonitor/ECGMonitorView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ECGMonitor/ECGMonitorView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ECGMonitor/ECGMonitorViewModel.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/ECGMonitor/BeatToScaleConverter.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Realtime</Features>
+    <Features>Performance</Features>
+  </Features>
+</ExampleDefinition>

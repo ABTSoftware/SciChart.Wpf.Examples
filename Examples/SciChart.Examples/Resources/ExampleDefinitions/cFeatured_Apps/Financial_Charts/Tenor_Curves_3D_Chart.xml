@@ -1,10 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/SeeFeaturedApplication/TenorCurves3DChart/TenorCurves3DChart.xaml</View>
 	<ViewModel/>
-	<ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/TenorCurves3DChart.png</ImagePath>
 	<IconPath>IconColumn</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/tenor-curves-3d-chart.png</ShowcaseImagePath>
 	<ShowcaseDescription>The Tenor Curves example demonstrates how to combine 3D Charts and 2D Charts in the same example, in this case to display sample tenor curve data. 3D Charts are provided by the SciChart3DSurface, 2D Line Charts are provided by the SciChartSurface.</ShowcaseDescription>
 	<ToolTipDescription/>
 	<Description>

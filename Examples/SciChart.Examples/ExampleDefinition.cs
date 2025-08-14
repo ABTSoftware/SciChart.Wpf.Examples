@@ -36,8 +36,6 @@ namespace SciChart.Examples
         public string ToolTipDescription { get; set; }
         public List<string> CodeFiles { get; set; }
         public List<Features> Features { get; set; }
-        public SafeXmlBool IsShowcaseExample { get; set; }
-        public string ShowcaseImagePath { get; set; }
         public string ShowcaseDescription { get; set; }
     }
 

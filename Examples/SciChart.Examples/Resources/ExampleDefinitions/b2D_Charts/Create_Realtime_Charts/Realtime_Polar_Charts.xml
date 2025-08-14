@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRealtimeChart/RealTimePolarChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealtimePolarChatt.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimePolarCharts.png</ImagePath>
   <IconPath>IconPolar</IconPath>
   <ToolTipDescription>
     This example shows how to create realtime polar chart with noisy sinewave

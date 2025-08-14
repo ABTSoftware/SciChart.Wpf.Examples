@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/UsePointMarkers.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPointMarkers2.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingPointMarkers.png</ImagePath>
   <IconPath>IconScatter</IconPath>
   <ToolTipDescription>Demonstrates the new PointMarker API in SciChart 2.0. Now built-in types handle Ellipse, Square, Cross, Triangle markers and a special type allows for UIElements to be rendered to bitmap at data-point values (SpriteMarker).</ToolTipDescription>
   <Description>

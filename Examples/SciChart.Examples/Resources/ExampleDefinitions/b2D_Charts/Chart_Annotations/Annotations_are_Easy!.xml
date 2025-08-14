@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
   <View>Examples/AnnotateAChart/AnnotationsAreEasy.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAnnotationsAreEasy.png</ImagePath>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/AnnotationsAreEasy.png</ImagePath>
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates the Annotations API to create Text, Line, Box, LineArrow and Custom Annotations in Xaml.</ToolTipDescription>
   <Description>

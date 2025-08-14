@@ -13,14 +13,13 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using SciChart.Charting.Common.Helpers;
+using SciChart.Examples.ExternalDependencies.Common;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Media;
-using SciChart.Charting.Common.Helpers;
-using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 {
@@ -42,12 +41,12 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         };
 
         private readonly Random _random = new Random();
-        private volatile int _currentSize;
 
         private const int ChannelCount = 50; // Number of channels to render
-        private const int Size = 1000;       // Size of each channel in points (FIFO Buffer)
+        private const int Size = 1_000;       // Size of each channel in points (FIFO Buffer)
 
-        private uint _timerInterval = 20; // Interval of the timer to generate data in ms        
+        private uint _timerInterval = 20; // Interval of the timer to generate data in ms
+        private double[] _buffer;
         private int _bufferSize = 15;     // Number of points to append to each channel each timer tick
 
         private Timer _timer;
@@ -62,6 +61,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         public EEGExampleViewModel()
         {
+            _buffer = new double[_bufferSize];
+
             _startCommand = new ActionCommand(Start);
             _pauseCommand = new ActionCommand(Pause);
             _stopCommand = new ActionCommand(Stop);
@@ -73,7 +74,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _channelViewModels = value;
-                OnPropertyChanged("ChannelViewModels");
+                OnPropertyChanged(nameof(ChannelViewModels));
             }
         }
 
@@ -81,7 +82,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         public ICommand PauseCommand => _pauseCommand;
         public ICommand StopCommand => _stopCommand;
 
-        public int PointCount => _currentSize * ChannelCount;
+        public int PointCount => Size * ChannelCount;
 
         public double TimerInterval
         {
@@ -89,7 +90,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _timerInterval = (uint)value;
-                OnPropertyChanged("TimerInterval");
+                OnPropertyChanged(nameof(TimerInterval));
                 Stop();
             }
         }
@@ -99,9 +100,14 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             get => _bufferSize;
             set
             {
-                _bufferSize = (int)value;
-                OnPropertyChanged("BufferSize");
-                Stop();
+                var newSize = (int)value;
+                if (Math.Abs(_bufferSize - newSize) > double.Epsilon)
+                {
+                    _bufferSize = newSize;
+
+                    OnPropertyChanged(nameof(BufferSize));
+                    Stop();
+                }
             }
         }
 
@@ -111,7 +117,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _isReset = value;
-                OnPropertyChanged("IsReset");
+                OnPropertyChanged(nameof(IsReset));
             }
         }
 
@@ -121,7 +127,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _running = value;
-                OnPropertyChanged("IsRunning");
+                OnPropertyChanged(nameof(IsRunning));
             }
         }
 
@@ -136,6 +142,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             {
                 IsRunning = true;
                 IsReset = false;
+
+                if(_buffer.Length != _bufferSize) _buffer = new double[_bufferSize];
 
                 _timer = new Timer(_timerInterval);
                 _timer.Elapsed += OnTick;
@@ -165,7 +173,10 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
                 for (int i = 0; i < ChannelCount; i++)
                 {
-                    var channelViewModel = new EEGChannelViewModel(Size, _seriesStrokeProvider.GetStroke(i, ChannelCount)) { ChannelName = "Channel " + i };
+                    var channelViewModel = new EEGChannelViewModel(Size, _seriesStrokeProvider.GetStroke(i, ChannelCount))
+                    {
+                        ChannelName = "Channel " + i
+                    };
                     ChannelViewModels.Add(channelViewModel);
                 }
 
@@ -175,25 +186,19 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 
         private void OnTick(object sender, EventArgs e)
         {
-            // Ensure only one timer Tick processed at a time
             lock (_syncRoot)
             {
                 foreach (var channel in _channelViewModels)
                 {
                     var dataSeries = channel.ChannelDataSeries;
-
-                    using (dataSeries.SuspendUpdates())
+                    // Generate new Y values in the random walk
+                    for (int j = 0; j < _bufferSize; j++)
                     {
-                        // Add points 10 at a time for efficiency
-                        for (int j = 0; j < BufferSize; j++)
-                        {
-                            // Append a new Y value in the random walk
-                            dataSeries.Append(_random.NextDouble());
-                        }
+                        _buffer[j] = _random.NextDouble();
                     }
 
-                    // For reporting current size to GUI
-                    _currentSize = dataSeries.Count;
+                    // Add points in a batch for efficiency
+                    dataSeries.Append(_buffer);
                 }
             }
         }

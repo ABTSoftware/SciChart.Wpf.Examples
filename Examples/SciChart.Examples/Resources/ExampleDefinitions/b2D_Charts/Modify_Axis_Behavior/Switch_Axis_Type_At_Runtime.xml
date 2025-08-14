@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/SwitchAxisTypeAtRuntime.xaml</View>
   <ViewModel>Examples.ModifyAxisBehaviour.SwitchAxisTypeAtRuntimeViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoLogarithmicAxis.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SwitchAxisTypeRuntime.png</ImagePath>
   <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates switching from Linear to Logarithmic axis dynamically</ToolTipDescription>
   <Description>

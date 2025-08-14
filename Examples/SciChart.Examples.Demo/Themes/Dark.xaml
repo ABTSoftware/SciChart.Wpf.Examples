@@ -6,8 +6,6 @@
     <SolidColorBrush x:Key="MetroWindowTitleBrush" Color="#FFE5E5E5"/>
     <SolidColorBrush x:Key="MetroWindowHeaderBrush" Color="#FF232426"/>
     <SolidColorBrush x:Key="MetroNonActiveWindowHeaderBrush" Color="#FF2C3135"/>
-    <SolidColorBrush x:Key="MetroWindowGlowBrush" Color="#FF1C1C1C"/>
-    <SolidColorBrush x:Key="MetroNonActiveWindowGlowBrush" Color="#FF2C3135"/>
 
     <SolidColorBrush x:Key="MetroWindowButtonForegroundBrush" Color="#FFE5E5E5"/>
     <SolidColorBrush x:Key="MetroWindowButtonBackgroundBrush" Color="Transparent"/>
@@ -56,6 +54,13 @@
     <SolidColorBrush x:Key="NavigationTabControlItemForegroundBrush" Color="#FFE3E3E3"/>
     <SolidColorBrush x:Key="NavigationTabControlItemSelectedForegroundBrush" Color="#FF42B649"/>
     <SolidColorBrush x:Key="NavigationTabControlItemMouseOverBackgroundBrush" Color="#FF232426"/>
+
+    <!-- Navigation TreeView (2D Charts, 3D Charts, Featured Apps) -->
+
+    <SolidColorBrush x:Key="NavigationTreeViewBackgroundBrush" Color="#FF2C3135"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemSelectedBackgroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemHighlightedBackgroundBrush" Color="#FF42B649"/>
+    <SolidColorBrush x:Key="NavigationTreeViewItemMouseOverBackgroundBrush" Color="#FF232426"/>
 
     <!-- Chart Icons -->
 

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/CreateRealtime3DCharts/RealtimeWaterfall/RealtimeWaterfall3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealTime3DWaterfallChart.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>
     The 3D Realtime Waterfall Chart example shows how to update a Waterfall Chart in real-time.

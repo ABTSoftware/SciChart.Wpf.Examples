@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/MouseDragToPanXOrY.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPanXorYDirection.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PanYXDirection.png</ImagePath>
   <IconPath>IconPan</IconPath>
     <ToolTipDescription>Demonstrates mouse-dragging of SciChart constrained to the X or Y axis. 
     

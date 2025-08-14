@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/CreateA3DChart/CreateAPolarMesh3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SimplePolar3DChart.png</ImagePath>
   <IconPath>IconSurface3D</IconPath>
   <ToolTipDescription>
     The Polar 3D chart demo shows how to create high-performance 3D Polar Mesh with two-dimensional offset array applied to its surface using the SciChart 3D Component.

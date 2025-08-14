@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ModifyAxisBehaviour/VerticalCharts.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoVerticalCharts.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/VerticalCharts.png</ImagePath>
 <IconPath>IconAxis3D</IconPath>
   <ToolTipDescription>Demonstrates a vertical chart with XAxis on the Left, Right, and YAxes at the Top. SciChart supports unlimited X and Y axis and allows placement of any axis on the Left, Right, Top, Bottom of the chart. Placing an XAxis on the left rotates the chart, giving a vertical chart effect.</ToolTipDescription>
   <Description>

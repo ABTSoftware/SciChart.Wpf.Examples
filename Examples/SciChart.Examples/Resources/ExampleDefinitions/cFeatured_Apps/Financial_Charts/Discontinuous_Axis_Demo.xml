@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/SeeFeaturedApplication/DiscontinuousAxisDemo/DiscontinuousAxisView.xaml</View>
   <ViewModel>Examples.SeeFeaturedApplication.DiscontinuousAxisDemo.DiscontinuousAxisViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/DiscontinuousAxisDemo.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>
     The Discontinuous Axis Demo shows how to use a new Axis type - the DiscontinuousDateTimeAxis - which is a DateTime Value Axis (measures X-position by X-value) that allows collapsing of gaps in the data.

@@ -3,7 +3,7 @@
   <View>Examples/CreateStockCharts/RealtimeMvvm/CreateRealTimeTickingStockChart.xaml</View>
   <ViewModel>Examples.CreateStockCharts.RealtimeMvvm.CreateRealTimeTickingStockChartViewModel</ViewModel>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealTimeStockChart.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimeTickingCharts.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>Using the SciStockChart control, creates a real-time example with two series and a SciChartOverview</ToolTipDescription>
   <Description>

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/CreateRealtime3DCharts/RealtimeOrthogonalHeatmap3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealTime3DHeatmapSpectrogramChart.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>
     The 3D Realtime Surface Mesh example shows how to update a Uniform Mesh in real-time

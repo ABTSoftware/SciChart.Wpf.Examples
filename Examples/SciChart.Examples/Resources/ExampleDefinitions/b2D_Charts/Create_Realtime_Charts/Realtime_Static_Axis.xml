@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRealtimeChart/RealTimeStaticAxis/RealTimeStaticAxis.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoRealTimeStaticAxis.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimeStaticAxis.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>
     This example shows how to use static axis in charts. This example uses a background-thread Timer with variable interval of 20 ms to demonstrate the effect.

@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/HeatmapChartTypes/NonUniformHeatmap/NonUniformHeatmap.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoHeatmapWithText.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/NonUniformHeatmap.png</ImagePath>
   <IconPath>IconHeat</IconPath>
   <ToolTipDescription>Demonstrates how to create a NonUnoformHeatmap with Text in the cells SciChart. Accepts a 2D Array of data and has a user-defined colour map which can be displayed as a legend over the chart.</ToolTipDescription>
   <Description>

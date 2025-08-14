@@ -3,7 +3,7 @@
   <Title>Stacked Bar Chart</Title>
   <View>Examples/CreateMultiseriesChart/StackedBarChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoStackedBarChart.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/StackedBarChart.png</ImagePath>
   <IconPath>IconStackedColumn</IconPath>
   <ChartTypes>Column</ChartTypes>
   <ToolTipDescription>Shows how to create stacked  bar chart</ToolTipDescription>

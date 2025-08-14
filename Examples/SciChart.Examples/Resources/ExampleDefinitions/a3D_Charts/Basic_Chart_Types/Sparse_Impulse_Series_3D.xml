@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/CreateA3DChart/SparseImpulseSeries3D.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SparseImpulseSeries3D.png</ImagePath>
   <IconPath>IconImpulse</IconPath>
   <ToolTipDescription></ToolTipDescription>
   <Description>

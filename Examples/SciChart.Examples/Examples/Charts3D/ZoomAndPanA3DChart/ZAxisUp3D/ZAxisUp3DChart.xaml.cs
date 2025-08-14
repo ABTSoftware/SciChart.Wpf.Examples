@@ -11,10 +11,10 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
 
         public ZAxisUp3DChart()
         {
-            InitializeComponent();
-
-            // Save default Viewport orientation
+            // Save the used Viewport orientation before the Example is initialized
             _defaultOrientation = Viewport3D.ViewportOrientation;
+
+            InitializeComponent();
 
             Unloaded += OnUnLoaded;
         }
@@ -33,6 +33,7 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
 
         private void OnUnLoaded(object sender, RoutedEventArgs e)
         {
+            // Restore the original Viewport orientation
             Viewport3D.SetViewportOrientation(_defaultOrientation);            
         }
     }

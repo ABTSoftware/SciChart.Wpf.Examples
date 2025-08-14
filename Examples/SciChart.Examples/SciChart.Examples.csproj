@@ -7,14 +7,8 @@
     <OutputPath>..\..\Build\$(Configuration)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
-    <Compile Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <Compile Remove="Resources\ExampleSourceFiles\**" />
-    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
-    <EmbeddedResource Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <EmbeddedResource Remove="Resources\ExampleSourceFiles\**" />
-    <None Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
-    <None Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <None Remove="Resources\ExampleDefinitions\**\*.xml" />
     <None Remove="Images\*.png" />
   </ItemGroup>
@@ -42,8 +36,6 @@
     <ProjectReference Include="..\SciChart.Examples.ExternalDependencies\SciChart.Examples.ExternalDependencies.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Remove="Examples\HeatmapChartTypes\NewFolder1\**" />
-    <Page Remove="Examples\HeatmapChartTypes\NewFolder\**" />
     <Page Remove="Resources\ExampleSourceFiles\**" />
   </ItemGroup>
   <ItemGroup>
