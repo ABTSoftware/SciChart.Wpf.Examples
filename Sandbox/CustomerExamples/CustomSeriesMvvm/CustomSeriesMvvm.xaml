@@ -12,17 +12,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SciChart.Charting;component/Themes/Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
             <customSeriesMvvmExample:CustomSeriesMvvmViewModel x:Key="CustomSeriesMvvmViewModel"/>
-
-            <Style TargetType="{x:Type customSeriesMvvmExample:FastLineRenderableSeriesEx}" BasedOn="{StaticResource {x:Type s:FastLineRenderableSeriesForMvvm}}">
-
-            </Style>
+            <Style TargetType="{x:Type customSeriesMvvmExample:FastLineRenderableSeriesEx}" BasedOn="{StaticResource {x:Type s:FastLineRenderableSeriesForMvvm}}"/>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid DataContext="{StaticResource CustomSeriesMvvmViewModel}">
-        <s:SciChartSurface RenderableSeries="{s:SeriesBinding Series}">
+        <s:SciChartSurface s:ThemeManager.Theme="SciChartv4Dark" 
+                           RenderableSeries="{s:SeriesBinding Series}">
             <s:SciChartSurface.XAxis>
                 <s:NumericAxis/>
             </s:SciChartSurface.XAxis>
