@@ -28,7 +28,8 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
-    </UserControl.Resources> 
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
