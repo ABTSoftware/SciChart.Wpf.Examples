@@ -190,6 +190,33 @@
         </Canvas>
     </DataTemplate>
 
+    <DataTemplate x:Key="IconColumnPyramide">
+        <Canvas Width="106" Height="106.1">
+            <Polygon Points="698.2,26.5 698.2,132.6 804.2,132.6 804.2,127.6 703.2,127.6 703.2,26.5 " Name="XMLID_1914_" FillRule="NonZero" Fill="{DynamicResource ChartIconStrokeBrush}">
+                <Polygon.RenderTransform>
+                    <TranslateTransform X="-698.2" Y="-26.5"/>
+                </Polygon.RenderTransform>
+            </Polygon>
+            <Canvas Canvas.Left="75" Canvas.Top="60" Width="20" Height="60" s:ClipToBoundsHelper.ClipToBounds="True" s:Device.SnapsToDevicePixels="True">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <RotateTransform Angle="90" CenterX=".5" CenterY=".5"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="71.300011" Y1="6.099988" X2="0.2000061" Y2="77.199997" Name="line196" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="76.300011" Y1="11.000012" X2="5.0999999" Y2="82.099991" Name="line198" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="81.200005" Y1="15.900006" X2="9.9999943" Y2="87.000015" Name="line200" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="86.099998" Y1="20.799999" X2="14.899988" Y2="91.900009" Name="line202" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="91.000023" Y1="25.699993" X2="19.899988" Y2="96.900009" Name="line204" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+                <Line Canvas.Left="-57" Canvas.Top="-7" X1="95.899986" Y1="30.599987" X2="24.800013" Y2="101.8" Name="line206" StrokeThickness="2" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="10"/>
+            </Canvas>
+            <Rectangle Canvas.Left="15" Canvas.Top="5" Width="40" Height="24" StrokeThickness="5" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="4"/>
+            <Rectangle Canvas.Left="15" Canvas.Top="37" Width="65" Height="24" Name="rect41917" StrokeThickness="5" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="4"/>
+            <Rectangle Canvas.Left="15" Canvas.Top="70" Width="80" Height="24" Name="rect419179" StrokeThickness="5" Stroke="{DynamicResource ChartIconStrokeBrush}" StrokeMiterLimit="4"/>
+        </Canvas>
+    </DataTemplate>
+
     <DataTemplate x:Key="IconTernary" >
         <Canvas  Width="112" Height="111" s:Device.SnapsToDevicePixels="True">
             <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="715.3,298.7 715.3,302.5 711.6,302.5 711.6,307.5 715.3,307.5 715.3,311.2 720.3,311.2 720.3,307.5 724.1,307.5 724.1,302.5 720.3,302.5 720.3,298.7 " Name="XMLID_1523_7" FillRule="NonZero" Fill="{DynamicResource ChartIconStrokeBrush}">

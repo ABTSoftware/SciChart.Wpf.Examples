@@ -35,7 +35,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
             ("GroupName", typeof(string), typeof(FlyoutMenuToggleButtonExtensions), new PropertyMetadata(OnGroupNameChanged));
 
         /// <summary>
-        /// Sets the GroupName Attached Property
+        /// Sets the GroupName attached property
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
@@ -45,7 +45,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
         }
 
         /// <summary>
-        /// Gets the GroupName Attached Property
+        /// Gets the GroupName attached property
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
