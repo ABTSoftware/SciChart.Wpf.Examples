@@ -48,7 +48,7 @@ namespace Scatter3DChart_DragPointModifier
             return _pointsEntity?.GetVertexCoords(pointVector) ?? Vector3.Zero;
         }
 
-        private double GetYDragDelta(Point startPoint, Point endPoint, Vector3 coordVector)
+        private double GetYDrag(Point endPoint, Vector3 coordVector)
         {
             // 1.Create a plane at the highlighted point using its position and camera forward vector
             // 2.Calculate a ray using the camera and mouse x,y position
@@ -60,10 +60,11 @@ namespace Scatter3DChart_DragPointModifier
             if (Viewport3D == null || coordVector == null) return double.NaN;
 
             var camera = Viewport3D.GetWorld().GetMainCamera();
-            var pointPlane = new TSRPlane(camera.GetFwd(), coordVector);
+            var pointPlane = new TSRPlane(camera.m_Fwd, coordVector);
 
             var rayStart = new TSRVector3();
             var rayDirection = new TSRVector3();
+            var rayEnd = new TSRVector3();
 
             var viewport = new TSRViewPort
             {
@@ -71,16 +72,17 @@ namespace Scatter3DChart_DragPointModifier
                 Height = Convert.ToUInt32(Viewport3D.ViewportSize.Height)
             };
 
-            camera.ComputeRay(viewport, (int)startPoint.X, (int)startPoint.Y, rayStart, rayDirection);
-            var startVector = pointPlane.Intersect(rayStart, rayDirection);
+            int iScreenX = 0;
+            int iScreenY = 0;
+            float fDepth = 0.0f;
+            camera.TransformIntoScreenCoords(viewport, coordVector, out iScreenX, out iScreenY, out fDepth);
+            camera.ComputeRay(viewport, (int)iScreenX, (int)endPoint.Y, rayStart, rayDirection);
+            rayEnd.x = rayStart.x + rayDirection.x;
+            rayEnd.y = rayStart.y + rayDirection.y;
+            rayEnd.z = rayStart.z + rayDirection.z;
 
-            camera.ComputeRay(viewport, (int)endPoint.X, (int)endPoint.Y, rayStart, rayDirection);
-            var endVector = pointPlane.Intersect(rayStart, rayDirection);
-
-            startVector.Subtract(startVector, endVector);
-            var delta = Math.Abs(startVector.y);
-
-            return endPoint.Y > startPoint.Y ? -delta : delta;
+            var endVector = pointPlane.Split(rayStart, rayEnd);
+            return endVector.y;
         }
 
         /// <summary>
@@ -151,17 +153,23 @@ namespace Scatter3DChart_DragPointModifier
             {
                 var pointVector = GetPointVector(_entityVertexId);
                 var coordVector = GetCoordVector(pointVector);
-                var dragDelta = GetYDragDelta(StartPoint, e.MousePoint, coordVector);
+                var yDrag = GetYDrag(e.MousePoint, coordVector);
 
-                if (!dragDelta.IsNaN())
+                float maxY = 500.0f;
+                float minY = -500.0f;
+
+                if ((yDrag > minY) && (yDrag < maxY))
                 {
-                    PointDragDelta?.Invoke(this, new DragPointEventArgs
+                    if (!yDrag.IsNaN())
                     {
-                        PointIndex = (int)_entityVertexId.VertexId - 1,
-                        YValue = ParentSurface.YAxis.GetDataValue(coordVector.y + dragDelta)
-                    });
+                        PointDragDelta?.Invoke(this, new DragPointEventArgs
+                        {
+                            PointIndex = (int)_entityVertexId.VertexId - 1,
+                            YValue = ParentSurface.YAxis.GetDataValue(yDrag)
+                        });
 
-                    StartPoint = e.MousePoint;
+                        StartPoint = e.MousePoint;
+                    }
                 }
             }
         }

@@ -1,0 +1,31 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/CreateMultiSeriesChart/PopulationPyramidChart/PopulationPyramidExampleView.xaml</View>
+	<ViewModel />
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PopulationPyramidChart.png</ImagePath>
+	<IconPath>IconColumnPyramide</IconPath>
+	<ToolTipDescription>Population Pyramid Chart</ToolTipDescription>
+	<Description>
+		This example demonstrates a highly interactive Population Pyramid chart built with SciChart WPF. It visualizes real-world demographic data using separate stacked column series for male and female populations.
+
+		The chart is rendered on a single SciChartSurface, with a custom axis layout achieved by supplying non-default WPF panels for the axes. A custom LabelProvider is used to generate age range labels, ensuring the demographic data remains clear and easy to interpret.
+
+		[b]Documentation Links[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Axis%20Styling%20-%20Templating%20the%20Axis%20Panel.html']Stacked Axes[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Axis%20Labels%20-%20LabelProvider%20API.html']Custom LabelProvider[/url]
+		- [url='https://www.scichart.com/documentation/win/current/DataSeries%20Types%20in%20SciChart.html']DataSeries Types in SciChart[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']Common RenderableSeries Properties[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/PopulationPyramidChart/AgeRangeLabelProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/PopulationPyramidChart/PopulationPyramidExampleView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/PopulationPyramidChart/PopulationPyramidExampleView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateMultiseriesChart/PopulationPyramidChart/CustomMouseWheelZoomModifier.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Column</Features>
+		<Features>Bar</Features>
+	</Features>
+</ExampleDefinition>
+
