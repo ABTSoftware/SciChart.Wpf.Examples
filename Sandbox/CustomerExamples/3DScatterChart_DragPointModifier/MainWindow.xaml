@@ -57,8 +57,8 @@
                 <s3D:ModifierGroup3D>
                     <s3D:MouseWheelZoomModifier3D />
                     <s3D:OrbitModifier3D ExecuteOn="MouseRightButton" />
-                    <local:TestWorldScreenCoordModifier3D/>
-                    <local:DragPointYAxisModifier3D PointDragStart="OnPointDragStart"
+                    <local:DragPointYAxisModifier3D ExecuteWhen="Ctrl"
+                                                    PointDragStart="OnPointDragStart"
                                                     PointDragDelta="OnPointDragDelta"
                                                     PointDragEnd="OnPointDragEnd"/>
 
@@ -75,7 +75,7 @@
 
             <TextBlock Foreground="Gray"
                        Margin="0,5"
-                       Text="SHIFT+LMB to test world-screen coords transformation (see Output in Debug mode)"/>
+                       Text="RMB+Drag to rotate the chart around"/>
         </StackPanel>
 
         <TextBlock x:Name="pointInfo"
