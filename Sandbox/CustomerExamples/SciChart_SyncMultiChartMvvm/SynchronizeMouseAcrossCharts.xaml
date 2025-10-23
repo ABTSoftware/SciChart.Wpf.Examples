@@ -1,0 +1,129 @@
+<UserControl x:Class="SciChart_SyncMultiChartMvvm.SynchronizeMouseAcrossCharts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <!-- This style is applied to an XAxis via the StyleKey property (see SynchronizeMouseAcrossChartsViewModel ctor) -->
+        <!-- The Tag property is used to demonstrate binding to AxisViewModel -->
+        <!-- Notice how VisibleRange is bound to the SharedXVisibleRange property of SynchronizeMouseAcrossChartsViewModel -->
+        <Style x:Key="XAxisStyle" TargetType="{x:Type s:NumericAxis}">
+            <Setter Property="BorderThickness" Value="0, 2, 0, 0"/>
+            <Setter Property="BorderBrush" Value="{Binding Tag}"/>
+            <Setter Property="TickTextBrush" Value="{Binding Tag}"/>
+            <Setter Property="MajorTickLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="{Binding Tag}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ZoomExtentsRange" Value="0, 1" />
+            <Setter Property="VisibleRange" Value="{Binding DataContext.SharedXVisibleRange, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- HOW TO SYNCHRONIZE TWO OR MORE CHARTS TOGETHER                                                     -->
+        <!--                                                                                                    -->
+        <!-- Step 1: You must declare a MouseManager.MouseEventGroup at the root chartmodifier on both charts   -->
+        <!--         This will share the mouse events between the charts                                        -->
+        <!--                                                                                                    -->
+        <!-- Step 2: you must bind XAxis.VisibleRange together on the two charts                                -->
+        <!--         you can bind three or more charts by binding to a common ViewModel property                -->
+        <!--                                                                                                    -->
+        <!-- Step 3: You must set attached property SciChartGroup.VerticalChartGroup to synchronize axis sizes  -->
+        <!--                                                                                                    -->
+        <!-- Remark #1: Be sure to set the ReceiveHandledEvents=True on modifiers which cease to work after sharing mouse events! -->
+        <!-- Remark #2: To synchronize widths of charting areas, set s:SciChartGroup.VerticalChartGroup="[Sync Group Name]" on both charts -->
+
+        <!--  Define a top Chart -->
+        <s:SciChartSurface Grid.Row="0"
+                           XAxes="{s:AxesBinding TopXAxesCollection}"
+                           s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
+
+            <!--  Define Y Axis -->
+            <!-- X Axis is created in SynchronizeMouseAcrossChartsViewModel and bound via AxesBinding -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1,0.1"
+                               MinorsPerMajor="2"
+                               VisibleRange="0,1" />
+            </s:SciChartSurface.YAxis>
+
+            <!--  Whats going on here?  -->
+            <!--  We share the mouse events by using MouseManager.MouseEventGroup="..."  -->
+            <!--  We ensure modifiers receive events even when another has handled by setting ReceiveHandledEvents=true  -->
+            <!--  We bind both charts XAxis to shared property on the viewmodel to ensure they stay in sync  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup s:MouseManager.MouseEventGroup="InteractivityGroup">
+                    <s:ModifierGroup s:MouseManager.MouseEventGroup="InteractivityGroup">
+                        <s:RubberBandXyZoomModifier ExecuteOn="MouseRightButton"
+                                                    IsXAxisOnly="True"
+                                                    ReceiveHandledEvents="True" />
+                        <s:ZoomPanModifier ExecuteOn="MouseLeftButton" ReceiveHandledEvents="True" />
+                        <s:MouseWheelZoomModifier />
+                        <s:CursorModifier ReceiveHandledEvents="True" />
+                        <s:ZoomExtentsModifier />
+                    </s:ModifierGroup>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <!--  Define a bottom Chart -->
+        <s:SciChartSurface Grid.Row="1"
+                           XAxes="{s:AxesBinding BottomXAxesCollection}"
+                           s:SciChartGroup.VerticalChartGroup="SyncedChartsSameAxisSizes">
+
+            <!--  Define Y axis -->
+            <!-- X Axis is created in SynchronizeMouseAcrossChartsViewModel and bound via AxesBinding -->
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis GrowBy="0.1,0.1"
+                               MinorsPerMajor="2"
+                               VisibleRange="0,1" />
+            </s:SciChartSurface.YAxis>
+
+            <!--  Whats going on here?  -->
+            <!--  We share the mouse events by using MouseManager.MouseEventGroup="..."  -->
+            <!--  We ensure modifiers receive events even when another has handled by setting ReceiveHandledEvents=true  -->
+            <!--  We bind both charts XAxis to shared property on the viewmodel to ensure they stay in sync  -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup s:MouseManager.MouseEventGroup="InteractivityGroup">
+                    <s:RubberBandXyZoomModifier ExecuteOn="MouseRightButton"
+                                                IsXAxisOnly="True"
+                                                ReceiveHandledEvents="True" />
+                    <s:ZoomPanModifier ExecuteOn="MouseLeftButton" ReceiveHandledEvents="True" />
+                    <s:MouseWheelZoomModifier />
+                    <s:CursorModifier ReceiveHandledEvents="True" />
+                    <s:ZoomExtentsModifier />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <!-- Hint panel -->
+        <StackPanel Grid.Row="0"
+                    Margin="10"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+
+            <TextBlock Foreground="Gray"
+                       Text="LMB + Drag to pan the charts"/>
+
+            <TextBlock Foreground="Gray"
+                       Margin="0,5,0,0"
+                       Text="RMB+Drag to zoom in the charts"/>
+
+            <TextBlock Foreground="Gray"
+                       Margin="0,5,0,0"
+                       Text="Double-click to zoom out to the initial range"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
