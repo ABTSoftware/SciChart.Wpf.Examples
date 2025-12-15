@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/CreateA3DChart/CreateACustomFreeSurface3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ClosedSurfaceMesh3D.png</ImagePath>
   <IconPath>IconSurface3D</IconPath>
   <ToolTipDescription>
     The Closed Mesh 3D chart demo shows how to create closed mesh using the SciChart 3D Component.

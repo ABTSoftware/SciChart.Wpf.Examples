@@ -11,17 +11,18 @@ namespace SciChart.Examples.ExternalDependencies.Controls.ExceptionView
     /// </summary>
     public partial class ExceptionView : Window
     {
-        public ExceptionView(Exception exception)
+        public ExceptionView(Exception exception, string errorMessage = null)
         {
             InitializeComponent();
 
-            LogException(exception);
+            LogException(exception, errorMessage);
         }
 
-        private void LogException(Exception exception)
+        private void LogException(Exception exception, string errorMessage = null)
         {
             if (exception == null) return;
 
+            if (errorMessage != null) exceptionViewer.Text += $"{errorMessage}{Environment.NewLine}";
             exceptionViewer.Text += exception.GetType().Name + ": " + exception.Message + Environment.NewLine;
             exceptionViewer.Text += "-------------------------------------------" + Environment.NewLine + Environment.NewLine;
             exceptionViewer.Text += "Stack Trace: " + Environment.NewLine;

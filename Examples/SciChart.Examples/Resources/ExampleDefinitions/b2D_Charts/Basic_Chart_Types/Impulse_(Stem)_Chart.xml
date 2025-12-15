@@ -2,7 +2,7 @@
   <Title>Impulse (Stem) chart</Title>
   <View>Examples/CreateSimpleChart/ImpulseChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoImpulse.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ImpulseStemChart.png</ImagePath>
   <IconPath>IconImpulse</IconPath>
   <ToolTipDescription>Generates an Impulse-reseponse style chart with optional point-marker in code</ToolTipDescription>
   <Description>

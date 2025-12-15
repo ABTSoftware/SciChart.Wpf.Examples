@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/CustomTooltipsWithModifiers.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSeriesSelect.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/TooltipsAndModifiers.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>Demonstrates how to use custom tooltips with RolloverModifier, TooltipModifier, VerticalSliceModifier and CursorModifier.</ToolTipDescription>
   <Description>

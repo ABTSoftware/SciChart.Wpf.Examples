@@ -40,7 +40,7 @@
                     </s3D:ScatterRenderableSeries3D.PointMarker>
                 </s3D:ScatterRenderableSeries3D>
             </s3D:SciChart3DSurface.RenderableSeries>
-            
+
             <s3D:SciChart3DSurface.XAxis>
                 <s3D:NumericAxis3D/>
             </s3D:SciChart3DSurface.XAxis>
@@ -55,21 +55,28 @@
 
             <s3D:SciChart3DSurface.ChartModifier>
                 <s3D:ModifierGroup3D>
-                    <s3D:OrbitModifier3D/>
-                    <s3D:MouseWheelZoomModifier3D/>
+                    <s3D:MouseWheelZoomModifier3D />
+                    <s3D:OrbitModifier3D ExecuteOn="MouseRightButton" />
                     <local:DragPointYAxisModifier3D ExecuteWhen="Ctrl"
                                                     PointDragStart="OnPointDragStart"
                                                     PointDragDelta="OnPointDragDelta"
                                                     PointDragEnd="OnPointDragEnd"/>
+
                 </s3D:ModifierGroup3D>
             </s3D:SciChart3DSurface.ChartModifier>
         </s3D:SciChart3DSurface>
 
-        <TextBlock Margin="10"
-                   Foreground="Gray"                 
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Left"
-                   Text="CTRL + Click LMB, then Hold LMB + Drag to change the point Y-value"/>
+        <StackPanel Margin="10"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+
+            <TextBlock Foreground="Gray"
+                       Text="CTRL+LMB+Drag to change the point Y-value"/>
+
+            <TextBlock Foreground="Gray"
+                       Margin="0,5"
+                       Text="RMB+Drag to rotate the chart around"/>
+        </StackPanel>
 
         <TextBlock x:Name="pointInfo"
                    Margin="10"

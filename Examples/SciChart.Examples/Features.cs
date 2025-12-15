@@ -87,6 +87,8 @@ namespace SciChart.Examples
         VerticalChartGroup,
         Viewport3D,
         XAML,
-        Zoom
+        Zoom,
+        MarketProfile,
+        VolumeProfile,
     }
 }

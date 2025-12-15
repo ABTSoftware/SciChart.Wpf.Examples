@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/Customize3DChart/AddGeometry3D/AddGeometryTo3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/AddGeometryto3DChart.png</ImagePath>
   <IconPath>Icon3D</IconPath>
   <ToolTipDescription>
     This 3D Chart demo shows how to add a custom Cube Geometry to the SciChart3DSurface using our BaseSceneEntity type

@@ -29,18 +29,19 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 {
     public class UsingPieChartExampleViewModel : BaseViewModel
     {
-        private readonly List<IPieSegmentViewModel> _selectedModels;
+        private BrushViewModel _newSegmentBrush;
+        private string _newSegmentText = "New";
+        private string _newSegmentValue = "10";
+
+        private IPieSegmentViewModel _selectedSegment;
+        private readonly List<IPieSegmentViewModel> _selectedModels = new List<IPieSegmentViewModel>();
 
         public UsingPieChartExampleViewModel()
         {
-            NewSegmentText = "New";
-            NewSegmentValue = "10";
-
-            AllBrushes = typeof(Brushes).GetProperties().Select(x => new PieBrushesModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();
+            AllBrushes = typeof(Brushes).GetProperties().Select(x => new BrushViewModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();
             NewSegmentBrush = AllBrushes.First(x => x.BrushName == "Aquamarine");
 
-            _selectedModels = new List<IPieSegmentViewModel>();
-            SegmentsDataCollection = new ObservableCollection<IPieSegmentViewModel>
+            PieSegmentViewModels = new ObservableCollection<IPieSegmentViewModel>
             {
                 new PieSegmentViewModel {Value = 60, Name = "Fruit"},
                 new PieSegmentViewModel {Value = 46, Name = "Protein"},
@@ -52,7 +53,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
             AddNewItemCommand = new ActionCommand(() =>
             {
-                SegmentsDataCollection.Add(new PieSegmentViewModel
+                PieSegmentViewModels.Add(new PieSegmentViewModel
                 {
                     Value = NewSegmentValue.ToDouble(),
                     Name = NewSegmentText,
@@ -63,9 +64,65 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
             }, () => !NewSegmentText.IsNullOrEmpty() && !NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0 && NewSegmentBrush != null);
 
-            DeleteSegment = new ActionCommand(() => SegmentsDataCollection.RemoveAt(0));
+            DeleteSegment = new ActionCommand(() => PieSegmentViewModels.RemoveAt(0));
             SegmentSelectionCommand = new ActionCommand<NotifyCollectionChangedEventArgs>(OnSegmentSelectionExecute);
         }
+
+        public ObservableCollection<IPieSegmentViewModel> PieSegmentViewModels { get; set; }
+
+        // Populates combo box for choosing color of new item to add
+        public List<BrushViewModel> AllBrushes { get; }
+
+        public BrushViewModel NewSegmentBrush
+        {
+            get => _newSegmentBrush;
+            set
+            {
+                _newSegmentBrush = value;
+                OnPropertyChanged(nameof(NewSegmentBrush));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
+            }
+        }
+
+        public IPieSegmentViewModel SelectedSegment
+        {
+            get => _selectedSegment;
+            set
+            {
+                _selectedSegment = value;
+                OnPropertyChanged(nameof(SelectedSegment));
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+        public bool IsSelected => SelectedSegment != null;
+
+        public string NewSegmentText
+        {
+            get => _newSegmentText;
+            set
+            {
+                _newSegmentText = value;
+                OnPropertyChanged(nameof(NewSegmentText));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string NewSegmentValue
+        {
+            get => _newSegmentValue;
+            set
+            {
+                _newSegmentValue = value;
+                OnPropertyChanged(nameof(NewSegmentValue));
+                AddNewItemCommand?.RaiseCanExecuteChanged();
+            }
+        }
+        public ActionCommand AddNewItemCommand { get; set; }
+
+        public ActionCommand DeleteSegment { get; set; }
+
+        public ActionCommand<NotifyCollectionChangedEventArgs> SegmentSelectionCommand { get; set; }
 
         private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
         {
@@ -82,68 +139,6 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             SelectedSegment = _selectedModels?.LastOrDefault();
         }
 
-        public ObservableCollection<IPieSegmentViewModel> SegmentsDataCollection { get; set; }
-
-        // Populates combo box for choosing color of new item to add
-        public List<PieBrushesModel> AllBrushes { get; }
-
-        // For managing 'Add New Segment'
-        private PieBrushesModel _newSegmentBrush;
-        private string _newSegmentText;
-        private IPieSegmentViewModel _selectedSegment;
-        private string _newSegmentValue;
-
-        public PieBrushesModel NewSegmentBrush
-        {
-            get { return _newSegmentBrush; }
-            set
-            {
-                _newSegmentBrush = value;
-                OnPropertyChanged(nameof(NewSegmentBrush));
-                AddNewItemCommand?.RaiseCanExecuteChanged();
-            }
-        }
-
-        public IPieSegmentViewModel SelectedSegment
-        {
-            get { return _selectedSegment; }
-            set
-            {
-                _selectedSegment = value;
-                OnPropertyChanged(nameof(SelectedSegment));
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-
-        public bool IsSelected => SelectedSegment != null;
-
-        public string NewSegmentText
-        {
-            get { return _newSegmentText; }
-            set
-            {
-                _newSegmentText = value;
-                OnPropertyChanged(nameof(NewSegmentText));
-                AddNewItemCommand?.RaiseCanExecuteChanged();
-            }
-        }
-
-        public string NewSegmentValue
-        {
-            get { return _newSegmentValue; }
-            set
-            {
-                _newSegmentValue = value;
-                OnPropertyChanged(nameof(NewSegmentValue));
-                AddNewItemCommand?.RaiseCanExecuteChanged();
-            }
-        }
-        public ActionCommand AddNewItemCommand { get; set; }
-
-        public ActionCommand DeleteSegment { get; set; }
-
-        public ActionCommand<NotifyCollectionChangedEventArgs> SegmentSelectionCommand { get; set; }
-
         // Helper functions to create nice brushes out of colors
         private Brush ToGradient(Color baseColor)
         {
@@ -157,97 +152,6 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         private SolidColorBrush ToShade(Color baseColor, double shade)
         {
             return new SolidColorBrush(Color.FromArgb(baseColor.A, (byte)(baseColor.R * shade), (byte)(baseColor.G * shade), (byte)(baseColor.B * shade)));
-        }
-    }
-
-    public class PieBrushesModel
-    {
-        public Brush Brush { get; set; }
-        public string BrushName { get; set; }
-    }
-
-    public class PieSegmentViewModel : BaseViewModel, IPieSegmentViewModel
-    {
-
-        public double _Value;
-        public double _Percentage;
-        public bool _IsSelected;
-        public string _Name;
-        public Brush _Fill;
-        public Brush _Stroke;
-
-        public double Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                _Value = value;
-                OnPropertyChanged("Value");
-            }
-        }
-
-        public double Percentage
-        {
-            get
-            {
-                return _Percentage;
-            }
-            set
-            {
-                _Percentage = value;
-                OnPropertyChanged("Percentage");
-            }
-        }
-        public bool IsSelected
-        {
-            get
-            {
-                return _IsSelected;
-            }
-            set
-            {
-                _IsSelected = value;
-                OnPropertyChanged("IsSelected");
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public Brush Fill
-        {
-            get
-            {
-                return _Fill;
-            }
-            set
-            {
-                _Fill = value;
-                OnPropertyChanged("Fill");
-            }
-        }
-        public Brush Stroke
-        {
-            get
-            {
-                return _Stroke;
-            }
-            set
-            {
-                _Stroke = value;
-                OnPropertyChanged("Stroke");
-            }
         }
     }
 }

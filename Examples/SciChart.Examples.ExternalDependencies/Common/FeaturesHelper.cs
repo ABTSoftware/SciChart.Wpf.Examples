@@ -18,15 +18,18 @@
 // *************************************************************************************
 
 using System;
-using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Threading;
 using SciChart.Charting;
 using SciChart.Charting.Common.Helpers;
+using SciChart.Data.Model;
 
 namespace SciChart.Examples.ExternalDependencies.Common
 {
-    public class FeaturesHelper : INotifyPropertyChanged
+    /// <summary>
+    /// Provides power plan and hardware acceleration status tracking.
+    /// </summary>
+    public class FeaturesHelper : BindableObject
     {
         private readonly PowerManager _powerManager = new PowerManager();
 
@@ -34,6 +37,8 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
         private FeaturesHelper()
         {
+            OpenControlPanelCommand = new ActionCommand(_powerManager.OpenControlPanel);
+
             var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
 
             timer.Tick += (s, e) =>
@@ -42,6 +47,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
 
                 if (_lastPlan == null || !_lastPlan.Equals(currentPlan))
                 {
+                    OnPropertyChanged(nameof(CurrentPowerPlanName));
                     OnPropertyChanged(nameof(PowerSavingHighPerformance));
                     OnPropertyChanged(nameof(PowerSavingBalanced));
                     OnPropertyChanged(nameof(PowerSavingUnknown));
@@ -54,29 +60,44 @@ namespace SciChart.Examples.ExternalDependencies.Common
             timer.Start();
         }
 
+        /// <summary>
+        /// Gets the singleton instance of the FeaturesHelper class.
+        /// </summary>
         public static FeaturesHelper Instance { get; } = new FeaturesHelper();
 
+        /// <summary>
+        /// Gets the name of the currently active power plan.
+        /// </summary>
         public string CurrentPowerPlanName => _powerManager.GetCurrentPlan().Name;
 
+        /// <summary>
+        /// Indicates whether the GPU supports hardware acceleration.
+        /// </summary>
         public bool SupportsHardwareAcceleration => VisualXcceleratorEngine.SupportsHardwareAcceleration;
 
+        /// <summary>
+        /// Indicates whether the system is using the 'High Performance' power plan.
+        /// </summary>
         public bool PowerSavingHighPerformance => _powerManager.GetCurrentPlan().Guid == _powerManager.MaximumPerformance.Guid;
 
+        /// <summary>
+        /// Indicates whether the system is using the 'Balanced' power plan.
+        /// </summary>
         public bool PowerSavingBalanced => _powerManager.GetCurrentPlan().Guid == _powerManager.Balanced.Guid;
 
-        public bool PowerSavingUnknown => !PowerSavingHighPerformance && !PowerSavingBalanced && !PowerSavingPowerSaver;
-
+        /// <summary>
+        /// Indicates whether the system is using the 'Power Saver' power plan.
+        /// </summary>
         public bool PowerSavingPowerSaver => _powerManager.GetCurrentPlan().Guid == _powerManager.PowerSourceOptimized.Guid;
 
-        public ICommand OpenControlPanelCommand { get { return new ActionCommand(() => _powerManager.OpenControlPanel()); }}
+        /// <summary>
+        /// Indicates whether the current power plan does not match any known predefined plans.
+        /// </summary>
+        public bool PowerSavingUnknown => !PowerSavingHighPerformance && !PowerSavingBalanced && !PowerSavingPowerSaver;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        /// <summary>
+        /// Gets the command to open the power options in control panel.
+        /// </summary>
+        public ICommand OpenControlPanelCommand { get; }
     }
 }

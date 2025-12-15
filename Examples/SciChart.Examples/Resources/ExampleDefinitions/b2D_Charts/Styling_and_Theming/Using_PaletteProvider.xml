@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/UsePaletteProvider/UsePaletteProvider.xaml</View>
   <ViewModel>Examples.StyleAChart.UsePaletteProvider.UsePaletteProviderViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPaletteProvider.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UsingPaletteProvider.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Demonstrates how to use the IPaletteProvider interface to colour lines and points individually. Using this interface you can colour a line, Column, Ohlc or Candlestick chart depending on a point value - useful for showing thresholds or areas of interest!</ToolTipDescription>
   <Description>

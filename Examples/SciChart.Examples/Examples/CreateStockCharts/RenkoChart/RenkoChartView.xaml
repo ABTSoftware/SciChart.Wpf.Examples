@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.CreateStockCharts.RenkoChart.RenkoChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:renkoChart="clr-namespace:SciChart.Examples.Examples.CreateStockCharts.RenkoChart"
+             Loaded="CandlesticksWithLines_Loaded">
+
+    <UserControl.Resources>
+
+        <SolidColorBrush x:Key="UpVolumeBrush" Color="#C078D2AF"/>
+        <SolidColorBrush x:Key="DownVolumeBrush" Color="#C0F0645F"/>
+        <renkoChart:VolumePaletteProvider x:Key="VolumePaletteProvider" 
+                                          DownVolumeBrush="{StaticResource DownVolumeBrush}" 
+                                          UpVolumeBrush="{StaticResource UpVolumeBrush}"/>
+
+        <!-- YAxisPanelTemplate allows custom layouts of Y-Axes -->
+        <!-- In this example it is used to overlay Volume Chart on top of the Renko Chart partially -->
+        <ItemsPanelTemplate x:Key="YAxesPanelTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ItemsPanelTemplate>
+
+        <!-- Rollover Tooltip for Volume Series -->
+        <DataTemplate x:Key="VolumeTooltipDataTemplate" DataType="s:XySeriesInfo">
+            <Border CornerRadius="5" Background="Transparent">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Foreground="White" Text="Volume" Margin="0,0,0,5"/>
+                    <TextBlock Foreground="White" Text="{Binding Value, Mode=OneWay, StringFormat=N2}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <!-- Rollover Tooltip for Renko Series -->
+        <DataTemplate x:Key="RenkoTooltipDataTemplate" DataType="s:OhlcSeriesInfo">
+            <Border CornerRadius="5" Background="Transparent">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Foreground="White" Text="Open"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Foreground="White" Text="{Binding OpenValue, Mode=OneWay, StringFormat=N2}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Foreground="White" Text="Close"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Foreground="White" Text="{Binding CloseValue, Mode=OneWay, StringFormat=N2}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Tooltip Background -->
+        <Style x:Key="TooltipControlStyle" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border BorderThickness="0"
+                                CornerRadius="5">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource DownVolumeBrush}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PointMetadata.IsUpBar, Mode=OneWay}" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource UpVolumeBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5"
+                                                  Direction="-45"
+                                                  ShadowDepth="5"
+                                                  Color="DimGray"/>
+                            </Border.Effect>
+                            <ContentPresenter Content="{TemplateBinding DataContext}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- The style for the Rollover line -->
+        <Style x:Key="RolloverLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#DCDCDC"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality -->
+        <!-- to the chart and is included for example purposes. -->
+        <!-- If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite! -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
+
+        <s:SciChartSurface x:Name="sciChart" Grid.Column="1" RightAxesPanelTemplate="{StaticResource YAxesPanelTemplate}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <!-- Price Chart Series -->
+                <!-- All Price Series are associated with Main Y Axis -->
+                <s:FastCandlestickRenderableSeries x:Name="RenkoSeries"
+                                                   YAxisId="MainYAxis"
+
+                                                   DataPointWidth="1"
+                                                   FillUp="Green"
+                                                   FillDown="Red"
+                                                   s:RolloverModifier.IncludeSeries="True"
+                                                   s:RolloverModifier.TooltipTemplate="{StaticResource RenkoTooltipDataTemplate}"
+                                                   s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipControlStyle}"/>
+                <!-- Price SMA Series -->
+                <s:FastLineRenderableSeries x:Name="SmaPriceSeries"
+                                            YAxisId="MainYAxis"
+
+                                            Stroke="#F5FFD700"
+                                            s:RolloverModifier.IncludeSeries="False"/>
+
+                <!-- SMA Bollinger Bands Series -->
+                <s:FastBandRenderableSeries x:Name="BollingerBandsSeries" 
+                                            YAxisId="MainYAxis"
+
+                                            Fill="Transparent" 
+                                            FillY1="Transparent"
+                                            StrokeDashArray="5,5" 
+                                            StrokeDashArrayY1="5,5"
+                                            Stroke="#A5FFD700" 
+                                            StrokeY1="#A5FFD700" 
+                                            s:RolloverModifier.IncludeSeries="False"/>
+
+                <!-- Volume Chart Series -->
+                <!-- All Volume Series are associated with the Auxiliary Y-Axis -->
+                <s:FastLineRenderableSeries x:Name="SmaVolumeSeries"
+                                            YAxisId="AuxiliaryYAxis"
+
+                                            Stroke="#DCDCDC"
+                                            s:RolloverModifier.IncludeSeries="False"/>
+
+                <s:FastColumnRenderableSeries x:Name="VolumeSeries"
+                                              YAxisId="AuxiliaryYAxis"
+
+                                              DataPointWidth="0.5"
+                                              StrokeThickness="2"
+                                              PaletteProvider="{StaticResource VolumePaletteProvider}"
+                                              s:RolloverModifier.IncludeSeries="True"
+                                              s:RolloverModifier.TooltipTemplate="{StaticResource VolumeTooltipDataTemplate}"
+                                              s:RolloverModifier.TooltipContainerStyle="{StaticResource TooltipControlStyle}"/>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:IndexDateTimeAxis x:Name="IndexXAxis" DrawMajorBands="False"/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis Id="MainYAxis"
+                               Grid.RowSpan="2" Grid.Column="0"   GrowBy="0.1, 0.1" DrawMajorBands="False"/>
+                <s:NumericAxis Id="AuxiliaryYAxis"
+                               Grid.Row="1" Grid.Column="1"  Visibility="Hidden"/>
+            </s:SciChartSurface.YAxes>
+
+            <!-- Chart interactivity -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RolloverModifier UseInterpolation="False" 
+                                        ShowTooltipOn="MouseHover" 
+                                        ShowAxisLabels="False" 
+                                        LineOverlayStyle="{StaticResource RolloverLineStyle}" />
+                    <s:MouseWheelZoomModifier XyDirection="XDirection"/>
+                    <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
+                    <s:RubberBandXyZoomModifier IsXAxisOnly="True" ZoomExtentsY="False"/>
+                    <renkoChart:TrendBandsChartModifier x:Name="TrendBandsChartModifier" UpTrendColor="#1A66CC66" DownTrendColor="#1AFF704D"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

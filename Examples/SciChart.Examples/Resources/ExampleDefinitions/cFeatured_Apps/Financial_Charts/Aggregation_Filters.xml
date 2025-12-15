@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/SeeFeaturedApplication/AggregationFilters/AggregationFiltersView.xaml</View>
   <ViewModel>Examples.SeeFeaturedApplication.AggregationFilters.AggregationFiltersViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoSciTrader.png</ImagePath>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/AggregationFilters.png</ImagePath>
   <IconPath>IconCandlestick</IconPath>
   <ToolTipDescription>
     Demonstrates how to the AggregationFilter, part of the Filters API in SciChart WPF

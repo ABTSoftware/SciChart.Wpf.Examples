@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/MouseWheelToZoomPan.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMousewheel.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/MousewheelZoomScroll.png</ImagePath>
   <IconPath>IconZoom</IconPath>
   <ToolTipDescription>Demonstrates mouse-wheel zooming and scrolling of SciChart.
 

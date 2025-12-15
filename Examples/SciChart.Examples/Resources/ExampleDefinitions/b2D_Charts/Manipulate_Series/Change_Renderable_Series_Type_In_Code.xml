@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ManipulateSeries/ChangeRenderableSeriesTypeExampleView.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoChangeRenderableSeriesType.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ChangeRenderableSeriesType.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates how to change the type of a RenderableSeries (e.g. change Line to Column, to Mountain) using the SciChart API</ToolTipDescription>
   <Description>

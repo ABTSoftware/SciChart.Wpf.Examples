@@ -164,7 +164,8 @@ namespace SciChart.Examples
 
         private string Trim(string str, bool skipFirstChar = false)
         {
-            var trimmed = str.Replace("_", " ").Trim();
+            var trimmed = str.Replace("___", " & ").Trim();
+            trimmed = trimmed.Replace("_", " ").Trim();
             if (skipFirstChar)
             {
                 trimmed = trimmed.Substring(1, trimmed.Length - 1);

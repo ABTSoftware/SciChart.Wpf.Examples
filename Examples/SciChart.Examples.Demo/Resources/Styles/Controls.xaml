@@ -16,6 +16,7 @@
         <ResourceDictionary Source="/SciChart.Examples.Demo;component/Resources/Styles/Tile.xaml"/>
         <ResourceDictionary Source="/SciChart.Examples.Demo;component/Resources/Styles/TransitioningFrame.xaml"/>
         <ResourceDictionary Source="/SciChart.Examples.Demo;component/Resources/Styles/WatermarkedAutocomplete.xaml"/>
+        <ResourceDictionary Source="/SciChart.Examples.Demo;component/Resources/Styles/TreeView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="CheckBox" BasedOn="{StaticResource ToolbarPopupCheckBoxStyle}"/>

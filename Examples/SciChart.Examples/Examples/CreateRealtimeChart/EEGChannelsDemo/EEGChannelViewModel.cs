@@ -13,9 +13,9 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
-using System.Windows.Media;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Examples.ExternalDependencies.Common;
+using System.Windows.Media;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 {
@@ -31,7 +31,8 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             // Add an empty First In First Out series. When the data reaches capacity (int size) then old samples
             // will be pushed out of the series and new appended to the end. This gives the appearance of 
             // a scrolling chart window
-            ChannelDataSeries = new UniformXyDataSeries<double> { FifoCapacity = size };
+            ChannelDataSeries = new UniformXyDataSeries<double>(size, new UniformDataDistributionArgs<double>(false));
+            ChannelDataSeries.FifoCapacity = size;
 
             // Pre-fill with NaN up to size. This stops the stretching effect when Fifo series are filled with AutoRange
             for (int i = 0; i < size; i++)
@@ -48,7 +49,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _color = value;
-                OnPropertyChanged("Stroke");
+                OnPropertyChanged(nameof(Stroke));
             }
         }
 
@@ -58,7 +59,7 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
             set
             {
                 _channelDataSeries = value;
-                OnPropertyChanged("ChannelDataSeries");
+                OnPropertyChanged(nameof(ChannelDataSeries));
             }
         }
 

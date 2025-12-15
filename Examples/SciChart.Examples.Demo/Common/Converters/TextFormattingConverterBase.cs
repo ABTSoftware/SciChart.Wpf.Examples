@@ -7,15 +7,30 @@ using SciChart.Core.Extensions;
 
 namespace SciChart.Examples.Demo.Common.Converters
 {
-    public class TextFormattingConverterBase : DependencyObject
+    public abstract class TextFormattingConverterBase : DependencyObject
     {
-         public static readonly DependencyProperty HighlightBrushProperty = DependencyProperty.Register
+        public static readonly DependencyProperty HighlightBrushProperty = DependencyProperty.Register
             (nameof(HighlightBrush), typeof(Brush), typeof(TextFormattingConverterBase), new PropertyMetadata(null));
 
         public Brush HighlightBrush
         {
             get => (Brush)GetValue(HighlightBrushProperty);
             set => SetValue(HighlightBrushProperty, value);
+        }
+
+        public virtual string FormatTextBase(string text)
+        {
+            if (!string.IsNullOrEmpty(text))
+            {
+                return text
+                    .Replace("&amp;", "and")
+                    .Replace("&quot;", string.Empty)
+                    .Replace("&lt;", string.Empty)
+                    .Replace("&gt;", string.Empty)
+                    .Replace("&#x", string.Empty)
+                    .Trim();
+            }
+            return string.Empty;
         }
 
         public string HighlightTermsBase(string text, string[] terms)
@@ -25,6 +40,7 @@ namespace SciChart.Examples.Demo.Common.Converters
             foreach (var term in terms)
             {
                 var indexes = text.ToLower().AllIndexesOf(term).Reverse().ToList();
+
                 foreach (var index in indexes)
                 {
                     for (int j = 0; j < term.Length; j++)

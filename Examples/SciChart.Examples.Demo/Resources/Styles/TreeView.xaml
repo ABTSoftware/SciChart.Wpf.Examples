@@ -1,0 +1,137 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls"
+                    xmlns:converters="clr-namespace:SciChart.Examples.Demo.Common.Converters"
+                    xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
+                    xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:p="http://schemas.abtsoftware.co.uk/presentation"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <s:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:ExampleTreeNodeDepthToMarginConverter x:Key="ExampleTreeNodeDepthToMarginConverter" DepthOffset="20" />
+
+    <Style x:Key="NavigationTreeViewItemStyle" TargetType="{x:Type controls:NavigationTreeViewItem}">
+        <Setter Property="IsExpanded" Value="{Binding IsTopLevel, Mode=OneTime}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NavigationTreeViewItem}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="PART_ItemHeader"
+                                MinHeight="36"
+                                Margin="0,0,0,2"
+                                CornerRadius="5"
+                                Background="Transparent"
+                                IsHitTestVisible="{Binding IsSelectable, Mode=OneWay}">
+
+                            <Grid Margin="{Binding Mode=OneWay, Converter={StaticResource ExampleTreeNodeDepthToMarginConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter x:Name="Header"  
+                                                  Grid.Column="0"
+                                                  Margin="0,5"
+                                                  VerticalAlignment="Center"
+                                                  ContentSource="Header" />
+
+                                <Border x:Name="Expander"
+                                        Grid.Column="1"
+                                        Visibility="{Binding ShowExpander, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Path x:Name="ExpandPath"
+                                          Margin="10,0"
+                                          Width="10"
+                                          Height="10"
+                                          Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
+                                          Fill="#FFE3E3E3"
+                                          Stretch="Uniform"
+                                          RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <RotateTransform Angle="0" />
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <ItemsPresenter x:Name="PART_ItemsHost"
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        Opacity="0">
+                            <ItemsPresenter.LayoutTransform>
+                                <ScaleTransform ScaleY="0" />
+                            </ItemsPresenter.LayoutTransform>
+                        </ItemsPresenter>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasItems" Value="True" />
+                                <Condition Property="IsExpanded" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandPath" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="90" />
+                                </Setter.Value>
+                            </Setter>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_ItemsHost"
+                                                         Storyboard.TargetProperty="LayoutTransform.ScaleY"
+                                                         To="1"
+                                                         Duration="0:0:0.3" />
+
+                                        <DoubleAnimation Storyboard.TargetName="PART_ItemsHost"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_ItemsHost"
+                                                         Storyboard.TargetProperty="LayoutTransform.ScaleY"
+                                                         To="0"
+                                                         Duration="0:0:0.3" />
+
+                                        <DoubleAnimation Storyboard.TargetName="PART_ItemsHost"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_ItemHeader" Property="Background" Value="{DynamicResource NavigationTreeViewItemHighlightedBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_ItemHeader" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ItemHeader" Property="Background" Value="{DynamicResource NavigationTreeViewItemMouseOverBackgroundBrush}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Children.Count}" Value="0" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_ItemHeader" Property="Background" Value="{DynamicResource NavigationTreeViewItemSelectedBackgroundBrush}" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -27,8 +27,13 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 {
     public class UsingDonutChartExampleViewModel : BaseViewModel
     {
-        private readonly ObservableCollection<IPieSegmentViewModel> _donutModels;
-        private readonly List<IPieSegmentViewModel> _selectedModels;
+        // For managing 'Add New Segment'
+        private BrushViewModel _newSegmentBrush;
+        private string _newSegmentText = "New";
+        private string _newSegmentValue = "10";
+
+        private readonly ObservableCollection<IPieSegmentViewModel> _donutSegmentViewModels;
+        private readonly List<IPieSegmentViewModel> _selectedViewModels = new List<IPieSegmentViewModel>();
 
         private readonly Color _colorForSegment1 = Color.FromArgb(0xFF, 0x83, 0x98, 0xBA);
         private readonly Color _colorForSegment2 = Color.FromArgb(0xFF, 0x27, 0x4B, 0x92);
@@ -38,27 +43,23 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         private readonly Color _colorForSegment6 = Color.FromArgb(0xFF, 0xE8, 0xC6, 0x67);
 
         public UsingDonutChartExampleViewModel()
-        {           
-            NewSegmentText = "New";
-            NewSegmentValue = "10";
-
-            AllBrushes = typeof(Brushes).GetProperties().Select(x => new DonutBrushesModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();                  
+        {
+            AllBrushes = typeof(Brushes).GetProperties().Select(x => new BrushViewModel { BrushName = x.Name, Brush = (Brush)x.GetValue(null, null) }).ToList();                  
             NewSegmentBrush = AllBrushes.First(x => x.BrushName == "Aquamarine");
 
-            _selectedModels = new List<IPieSegmentViewModel>();
-            _donutModels = new ObservableCollection<IPieSegmentViewModel>
+            _donutSegmentViewModels = new ObservableCollection<IPieSegmentViewModel>
             {
-                new DonutSegmentViewModel {Value = 75, Name = "Rent", Stroke = ToShade(_colorForSegment1, 0.8), Fill = ToGradient(_colorForSegment1), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 19, Name = "Food", Stroke = ToShade(_colorForSegment2, 0.8), Fill = ToGradient(_colorForSegment2), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 9, Name = "Utilities", Stroke = ToShade(_colorForSegment3, 0.8), Fill = ToGradient(_colorForSegment3), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 9, Name = "Fun", Stroke = ToShade(_colorForSegment4, 0.8), Fill = ToGradient(_colorForSegment4), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 10, Name = "Clothes", Stroke = ToShade(_colorForSegment5, 0.8), Fill = ToGradient(_colorForSegment5), StrokeThickness = 2},
-                new DonutSegmentViewModel {Value = 5, Name = "Phone", Stroke = ToShade(_colorForSegment6, 0.8), Fill = ToGradient(_colorForSegment6), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 75, Name = "Rent", Stroke = ToShade(_colorForSegment1, 0.8), Fill = ToGradient(_colorForSegment1), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 19, Name = "Food", Stroke = ToShade(_colorForSegment2, 0.8), Fill = ToGradient(_colorForSegment2), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 9, Name = "Utilities", Stroke = ToShade(_colorForSegment3, 0.8), Fill = ToGradient(_colorForSegment3), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 9, Name = "Fun", Stroke = ToShade(_colorForSegment4, 0.8), Fill = ToGradient(_colorForSegment4), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 10, Name = "Clothes", Stroke = ToShade(_colorForSegment5, 0.8), Fill = ToGradient(_colorForSegment5), StrokeThickness = 2},
+                new PieSegmentViewModel {Value = 5, Name = "Phone", Stroke = ToShade(_colorForSegment6, 0.8), Fill = ToGradient(_colorForSegment6), StrokeThickness = 2},
             };
 
             AddNewItemCommand = new ActionCommand(() =>
             {
-                _donutModels.Add(new DonutSegmentViewModel
+                _donutSegmentViewModels.Add(new PieSegmentViewModel
                 {
                     Value = NewSegmentValue.ToDouble(),
                     Name = NewSegmentText,
@@ -69,21 +70,6 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
             }, () =>!NewSegmentText.IsNullOrEmpty() && !NewSegmentValue.IsNullOrEmpty() && NewSegmentValue.ToDouble() > 0 && NewSegmentBrush != null);
 
             SegmentSelectionCommand = new ActionCommand<NotifyCollectionChangedEventArgs>(OnSegmentSelectionExecute);
-        }
-
-        private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
-        {
-            if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
-            {
-                _selectedModels.Add((IPieSegmentViewModel) e.NewItems[0]);
-            }
-
-            if (!e.OldItems.IsNullOrEmptyList() && e.OldItems[0] != null)
-            {
-                _selectedModels.Remove((IPieSegmentViewModel) e.OldItems[0]);
-            }
-            
-            SelectedSegment = _selectedModels?.LastOrDefault();     
         }
 
         private IPieSegmentViewModel _selectedSegment;
@@ -102,7 +88,7 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         public bool IsSelected => SelectedSegment != null;
 
         // Binds to ItemsSource of Donut Chart
-        public ObservableCollection<IPieSegmentViewModel> DonutModels { get { return _donutModels; } }
+        public ObservableCollection<IPieSegmentViewModel> DonutSegmentViewModels => _donutSegmentViewModels;
 
         // For managing Addition of new segments
         public ActionCommand AddNewItemCommand { get; set; }
@@ -110,16 +96,11 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         public ActionCommand<NotifyCollectionChangedEventArgs> SegmentSelectionCommand { get; set; }
         
         // Populates combo box for choosing color of new item to add
-        public List<DonutBrushesModel> AllBrushes { get; }
+        public List<BrushViewModel> AllBrushes { get; }
 
-        // For managing 'Add New Segment'
-        private DonutBrushesModel _newSegmentBrush;
-        private string _newSegmentText;
-        private string _newSegmentValue;
-
-        public DonutBrushesModel NewSegmentBrush
+        public BrushViewModel NewSegmentBrush
         {
-            get { return _newSegmentBrush; }
+            get => _newSegmentBrush;
             set
             {
                 _newSegmentBrush = value;
@@ -141,13 +122,28 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
 
         public string NewSegmentValue
         {
-            get { return _newSegmentValue; }
+            get => _newSegmentValue;
             set
             {
                 _newSegmentValue = value;
                 OnPropertyChanged(nameof(NewSegmentValue));
                 AddNewItemCommand?.RaiseCanExecuteChanged();
             }
+        }
+
+        private void OnSegmentSelectionExecute(NotifyCollectionChangedEventArgs e)
+        {
+            if (!e.NewItems.IsNullOrEmptyList() && e.NewItems[0] != null)
+            {
+                _selectedViewModels.Add((IPieSegmentViewModel)e.NewItems[0]);
+            }
+
+            if (!e.OldItems.IsNullOrEmptyList() && e.OldItems[0] != null)
+            {
+                _selectedViewModels.Remove((IPieSegmentViewModel)e.OldItems[0]);
+            }
+
+            SelectedSegment = _selectedViewModels?.LastOrDefault();
         }
 
         // Helper functions to create nice brushes out of colors
@@ -164,109 +160,5 @@ namespace SciChart.Examples.Examples.CreateGaugeCharts
         {
             return new SolidColorBrush(Color.FromArgb(baseColor.A, (byte)(baseColor.R * shade), (byte)(baseColor.G * shade), (byte)(baseColor.B * shade)));
         }             
-    }
-
-    public class DonutBrushesModel
-    {
-        public Brush Brush { get; set; }
-        public string BrushName { get; set; }
-    }
-
-    public class DonutSegmentViewModel : BaseViewModel, IPieSegmentViewModel
-    {
-        public double _Value;
-        public double _Percentage;
-        public bool _IsSelected;
-        public string _Name;
-        public Brush _Fill;
-        public Brush _Stroke;
-        public double _strokeThickness;
-
-        public double StrokeThickness
-        {
-            get
-            {
-                return _strokeThickness;
-            }
-            set
-            {
-                _strokeThickness = value;
-                OnPropertyChanged("StrokeThickness");
-            }
-        }
-
-        public double Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                _Value = value;
-                OnPropertyChanged("Value");
-            }
-        }
-
-        public double Percentage
-        {
-            get
-            {
-                return _Percentage;
-            }
-            set
-            {
-                _Percentage = value;
-                OnPropertyChanged("Percentage");
-            }
-        }
-        public bool IsSelected
-        {
-            get
-            {
-                return _IsSelected;
-            }
-            set
-            {
-                _IsSelected = value;
-                OnPropertyChanged("IsSelected");
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public Brush Fill
-        {
-            get
-            {
-                return _Fill;
-            }
-            set
-            {
-                _Fill = value;
-                OnPropertyChanged("Fill");
-            }
-        }
-        public Brush Stroke
-        {
-            get
-            {
-                return _Stroke;
-            }
-            set
-            {
-                _Stroke = value;
-                OnPropertyChanged("Stroke");
-            }
-        }
     }
 }

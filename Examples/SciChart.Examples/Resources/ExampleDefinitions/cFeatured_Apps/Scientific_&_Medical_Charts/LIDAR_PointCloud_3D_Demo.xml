@@ -1,0 +1,25 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/Lidar3DPointCloudDemo/Lidar3DPointCloudDemoView.xaml</View>
+  <ViewModel />
+	<ImagePath>/SciChart.Examples;component/Resources/Images/LIDARPointCloud3DDemo.png</ImagePath>
+  <IconPath>IconScatter3D</IconPath>
+    <ToolTipDescription>The LiDAR PointCloud 3D Demo showcases rendering of LiDAR composite data of a region (Central London) with SciChart.
+  </ToolTipDescription>
+  <Description>
+    LiDAR data can be collected from a variety of sources: UAV drones (Unmanned Aerial Vehicles), self-driving cars, geological survey tools and more.
+
+    It can be used in a variety of scenarios: anything from defence/tactical operations to geological survey such as energy/mining, geospatial analysis, civil engineering, construction and more.
+
+    The LiDAR PointCloud 3D Demo showcases rendering of LiDAR composite data of Central London as a 3D Point Cloud chart using SciChart. The 3D Point Cloud chart is defined by the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.Model.XyzDataSeries3D%603.html']XyzDataSeries3D[/url] and the [url='http://www.scichart.com/documentation/v5.x/webframe.html#SciChart.Charting3D~SciChart.Charting3D.RenderableSeries.ScatterRenderableSeries3D.html']ScatterRenderableSeries3D[/url]. A texture is drawn at each individual point to allow a high-performance solution allowing many points.
+
+    More info about creation of this demo, the data source and availability on other platforms can be found in the blog article [url='https://blog.scichart.com/lidar-uav-point-cloud-and-contour-mapping-with-scichart/']at this link.[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Lidar3DPointCloudDemo/Lidar3DPointCloudDemoView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Lidar3DPointCloudDemo/Lidar3DPointCloudDemoView.xaml.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>PointCloud3D</Features>
+    <Features>Scatter3D</Features>
+  </Features>
+</ExampleDefinition>

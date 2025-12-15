@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/TooltipsAndHitTest3DCharts/SelectScatterPoint3DChart.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAddRemoveDataSeries.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SimpleSelectScatterPoint3DChart.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>TODO</ToolTipDescription>
   <Description>

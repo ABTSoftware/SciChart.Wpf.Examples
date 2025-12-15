@@ -7,7 +7,7 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
              xmlns:helpers="clr-namespace:SciChart.Examples.Demo.Helpers"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"            
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:navigation="clr-namespace:SciChart.Examples.Demo.Helpers.Navigation"
              xmlns:views="clr-namespace:SciChart.Examples.Demo.Views"
              xmlns:w="clr-namespace:SciChart.Examples.Demo.Controls.WatermarkedAutocomplete"
@@ -22,12 +22,12 @@
         <converters:StringToOpacityConverter x:Key="StringToOpacityConverter" InverseOpacityValue="True"/>
 
         <DataTemplate x:Key="WatermarkContentTemplate">
-            <StackPanel Margin="5,0"
-                        HorizontalAlignment="Left"
-                        IsHitTestVisible="False"
-                        Orientation="Horizontal">
+            <DockPanel Margin="5,0"
+                       HorizontalAlignment="Left"
+                       IsHitTestVisible="False">
 
                 <Path x:Name="PART_SearchIcon"
+                      DockPanel.Dock="Left"
                       Stretch="Uniform"
                       Width="16"
                       Height="16"
@@ -42,8 +42,9 @@
                            FontFamily="Segoe UI"
                            FontSize="14"
                            Foreground="{DynamicResource SearchBoxWatermarkForegroundBrush}"
+                           TextTrimming="CharacterEllipsis"
                            Text="Search Examples, Source Code and more..." />
-            </StackPanel>
+            </DockPanel>
         </DataTemplate>
 
     </UserControl.Resources>
@@ -55,62 +56,71 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="86" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="10,0">
+        <Grid Grid.Row="0" Margin="20,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
+            <Button Grid.Column="0"
+                    Command="{Binding GoBackCommand}"
+                    Style="{StaticResource BackButtonStyle}" />
 
-                <Button Margin="10,0,0,0"
-                        Command="{Binding GoBackCommand}"
-                        Style="{StaticResource BackButtonStyle}" />
-
-                <Button Margin="10,0,0,0"
-                        AutomationProperties.AutomationId="ShellControl.Home"
-                        Command="{Binding NavigateToHomeCommand}"
-                        Style="{StaticResource HomeButtonStyle}" />
-
-                <Button Margin="10,0,0,0"
-                        Command="{Binding GoForwardCommand}"
-                        Style="{StaticResource NextButtonStyle}" />
-
-                <ContentPresenter Height="64"
-                                  Margin="10,5,10,0"
-                                  Content="{StaticResource SciChartColoredLogoImage}"
-                                  MouseDown="UIElement_OnMouseDown"
-                                  ToolTip="SciChart | Making Impossible Projects Possible since 2012"
-                                  Cursor="Hand"/>
-            </StackPanel>
-
-            <w:WatermarkedAutocomplete x:Name="SearchBox"
-                                       Grid.Column="1"
-                                       Height="46"
-                                       Width="400"
-                                       Margin="10,0"
-                                       HorizontalAlignment="Stretch"
-                                       VerticalAlignment="Center"
-                                       FontSize="18"
-                                       IsEnabled="{Binding SearchBoxEnabled, Mode=TwoWay}"
-                                       ItemsSource="{Binding AutoCompleteDataSource}"
-                                       Text="{Binding SearchText, Mode=TwoWay}"
-                                       behaviors:AutocompleteHelper.LoseFocusOnEscape="False"
-                                       behaviors:AutocompleteHelper.WatermarkContentTemplate="{StaticResource WatermarkContentTemplate}">
-                <i:Interaction.Behaviors>
-                    <behaviors:ExampleAutocompleteBehavior/>
-                </i:Interaction.Behaviors>
-            </w:WatermarkedAutocomplete>
+            <Button Grid.Column="1"
+                    Margin="10,0"
+                    AutomationProperties.AutomationId="ShellControl.Home"
+                    Command="{Binding NavigateToHomeCommand}"
+                    Style="{StaticResource HomeButtonStyle}" />
 
             <Button Grid.Column="2"
+                    Command="{Binding GoForwardCommand}"
+                    Style="{StaticResource NextButtonStyle}" />
+
+            <Canvas Grid.Column="3"
+                    Height="46"
+                    Width="180"
+                    Margin="10,0,0,0"
+                    ClipToBounds="True"
+                    Background="Transparent"
+                    MouseDown="OnSciChartLogoMouseDown"
+                    ToolTip="SciChart | Making Impossible Projects Possible since 2012"
+                    Cursor="Hand">
+
+                <ContentPresenter Height="60"
+                                  Canvas.Left="0"
+                                  Canvas.Top="-6"
+                                  IsHitTestVisible="False"
+                                  Content="{StaticResource SciChartColoredLogoImage}"/>
+            </Canvas>
+
+            <Border x:Name="SearchBoxWrapper" Grid.Column="4" Margin="10,0">
+                <w:WatermarkedAutocomplete x:Name="SearchBox"
+                                           Height="48"
+                                           Width="400"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           IsEnabled="{Binding SearchBoxEnabled, Mode=TwoWay}"
+                                           ItemsSource="{Binding AutoCompleteDataSource}"
+                                           Text="{Binding SearchText, Mode=TwoWay}"
+                                           behaviors:AutocompleteHelper.LoseFocusOnEscape="False"
+                                           behaviors:AutocompleteHelper.WatermarkContentTemplate="{StaticResource WatermarkContentTemplate}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:ExampleAutocompleteBehavior/>
+                    </i:Interaction.Behaviors>
+                </w:WatermarkedAutocomplete>
+            </Border>
+
+            <Button Grid.Column="5"
                     Name="SettingsButton"
-                    Margin="10,0"
+                    Margin="10,0,0,0"
                     AutomationProperties.AutomationId="ShellControl.ShowSettings"
                     Command="{Binding ShowSettingsCommand}"
                     Style="{StaticResource SettingsButtonStyle}" />
@@ -131,107 +141,61 @@
                                     navigation:Navigator.StartPage="{Binding HomePage, Mode=OneTime}" />
 
         <Border Grid.Row="1"
-                Opacity="0"              
+                Opacity="0"
+                Background="Transparent"
                 tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
                 tz:Transitionz.Visibility="{Binding SearchText, Converter={StaticResource IsEmptyStringConverter}, FallbackValue='Collapsed'}">
 
-            <views:SearchView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20"/>
+            <views:SearchView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </Border>
 
         <Border Grid.Row="0"
                 Grid.RowSpan="2"
                 Opacity="0"
-                Background="{DynamicResource MetroWindowDialogViewBackgroundBrush}"      
+                Background="{DynamicResource MetroWindowDialogViewBackgroundBrush}"
                 tz:Transitionz.Blur="{Binding Path=BlurBackgroundParams}"
                 tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
                 tz:Transitionz.Visibility="{Binding IsSettingsShow, Converter={StaticResource BoolToValueConverter}, FallbackValue=Collapsed}">
 
-            <views:SettingsView HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <views:SettingsView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </Border>
 
-        <Border Grid.Row="2" Height="30" Background="{DynamicResource MetroWindowHeaderBrush}">
-            <Grid>
-                <StackPanel Margin="10,5"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal"
-                            Background="Transparent"
-                            ToolTipService.ToolTip="When available, SciChart will use DirectX 10/11 Hardware Acceleration. If not available, certain demos will run more slowly">
+        <Border Grid.Row="2" Background="{DynamicResource MetroWindowHeaderBrush}">
+            <Grid Margin="10,0" DataContext="{Binding Source={x:Static ext:FeaturesHelper.Instance}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource MetroWindowTitleBrush}">
-                        <Run Text="DirectX Hardware Acceleration is " />
-                    </TextBlock>
+                <TextBlock Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           ToolTipService.ToolTip="SciChart will use DirectX 10/11 Hardware Acceleration."
+                           Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Run Text="DirectX Hardware Acceleration is" Foreground="{DynamicResource MetroWindowTitleBrush}" />
+                    <Run Text="Enabled" Foreground="{DynamicResource HyperlinkForegroundBrush}" />
+                </TextBlock>
 
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="{DynamicResource HyperlinkForegroundBrush}"
-                               Text="Enabled"
-                               Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           ToolTipService.ToolTip="DirectX Hardware acceleration for 2D Charts is only available on DirectX10 or later GPUs."
+                           Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <Run Text="DirectX Hardware Acceleration is" Foreground="{DynamicResource MetroWindowTitleBrush}" />
+                    <Run Text="Not Available" Foreground="{DynamicResource HyperlinkForegroundBrush}" />
+                </TextBlock>
 
-                    <TextBlock VerticalAlignment="Center"
-                               Foreground="{DynamicResource HyperlinkForegroundBrush}"
-                               Text="Not Available"
-                               ToolTip="DirectX Hardware acceleration for 2D Charts is only available on DirectX10 or later GPUs. 3D Charts support DirectX 9, 10 or 11"
-                               Visibility="{Binding Path=SupportsHardwareAcceleration, Mode=OneWay, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
-                </StackPanel>
-
-                <StackPanel Margin="10,5"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal"
-                            Background="Transparent"
-                            ToolTipService.ToolTip="We recommend viewing our demos with Windows Power-Saving = High Performance. You can change this setting in the control panel."
-                            DataContext="{Binding Source={x:Static ext:FeaturesHelper.Instance}}">
-
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type Hyperlink}" BasedOn="{StaticResource {x:Type Hyperlink}}">
-                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Resources>
-
-                    <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource MetroWindowTitleBrush}">
-                        <Run Text="Power Saving Settings: " />
-                    </TextBlock>
-
-                    <TextBlock VerticalAlignment="Center"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingHighPerformance,Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Command="{Binding Path=OpenControlPanelCommand}">
-                            <Run Text="High Performance"/>
-                        </Hyperlink>
-                    </TextBlock>
-
-                    <TextBlock VerticalAlignment="Center"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingBalanced, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Command="{Binding Path=OpenControlPanelCommand}">
-                            <Run Text="Balanced"/>
-                        </Hyperlink>
-                    </TextBlock>
-
-                    <TextBlock VerticalAlignment="Center"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingUnknown, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Command="{Binding Path=OpenControlPanelCommand}">
-                            <Run Text="{Binding CurrentPowerPlanName, Mode=OneWay}"/>
-                        </Hyperlink>
-                    </TextBlock>
-
-                    <TextBlock VerticalAlignment="Center"
-                               ToolTip="For the best performance, we recommend High Performance power saving options"
-                               Visibility="{Binding Path=PowerSavingPowerSaver, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Command="{Binding Path=OpenControlPanelCommand}">
-                            <Run Text="Power Saver"/>
-                        </Hyperlink>
-                    </TextBlock>
-                </StackPanel>
+                <TextBlock Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           ToolTipService.ToolTip="We recommend viewing our demos with Windows High Performance power plan. You can change the plan in the control panel.">
+                    <Run Text="Power Saving Settings:" Foreground="{DynamicResource MetroWindowTitleBrush}" />
+                    <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Command="{Binding Path=OpenControlPanelCommand}">
+                        <Run Text="{Binding CurrentPowerPlanName, Mode=OneWay}" />
+                    </Hyperlink>
+                </TextBlock>
             </Grid>
         </Border>
     </Grid>

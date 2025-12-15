@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/AnnotateAChart/PolarChartAnnotations.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoPolarChartAnnotations.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PolarChartAnnotations.png</ImagePath>
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates the Annotations API with Polar Chart</ToolTipDescription>
   <Description>

@@ -158,13 +158,13 @@ namespace SciChart.Examples.ExternalDependencies.Data
                 _circIndex = 0;
             }
 
-            double lostValue = _circularBuffer[_circIndex];
+            var lastValue = _circularBuffer[_circIndex];
             _circularBuffer[_circIndex] = value;
 
             // Compute the average
             // Skip NaN 
-            _total += double.IsNaN(value) ? 0d : value;
-            _total -= lostValue;
+            _total += double.IsNaN(value) || double.IsInfinity(value) ? 0d : value;
+            _total -= double.IsNaN(lastValue) || double.IsInfinity(lastValue) ? 0d : lastValue;
       
             // If not yet filled, just return. Current value should be double.NaN
             if (!_filled && _circIndex != _length -1)

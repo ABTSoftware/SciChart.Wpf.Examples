@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/StyleAChart/XamlStyling.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoXamlStyling.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Xaml Styling.png</ImagePath>
   <IconPath>IconThemes</IconPath>
   <ToolTipDescription>Using garish colors to demonstrate Xaml styling of the chart, Axis, grid lines, tick lines and common series types</ToolTipDescription>
   <Description>

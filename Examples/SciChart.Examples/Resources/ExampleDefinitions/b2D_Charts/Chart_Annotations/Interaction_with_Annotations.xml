@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/AnnotateAChart/InteractionWithAnnotations.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoInteractionWithAnnotations.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/InteractionWithAnnotations.png</ImagePath>
   <IconPath>IconAnnotations</IconPath>
   <ToolTipDescription>Demonstrates annotations selection/interactivity capabilities.</ToolTipDescription>
   <Description>

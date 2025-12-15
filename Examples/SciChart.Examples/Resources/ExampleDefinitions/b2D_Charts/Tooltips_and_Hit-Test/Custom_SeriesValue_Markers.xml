@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/InspectDatapoints/CustomSeriesValueMarkers/CustomSeriesValueMarkersView.xaml</View>
   <ViewModel>Examples.InspectDatapoints.CustomSeriesValueMarkers.CustomSeriesValueMarkersViewModel</ViewModel>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/CustomSeriesValueMarkers.png</ImagePath>
   <IconPath>IconCursor</IconPath>
   <ToolTipDescription>
     Demonstrates how to add multiple axis markers on composite renderable series

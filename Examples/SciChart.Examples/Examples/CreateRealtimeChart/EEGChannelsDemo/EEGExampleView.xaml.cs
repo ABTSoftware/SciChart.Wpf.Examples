@@ -13,13 +13,14 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied. 
 // *************************************************************************************
+using SciChart.Drawing.Common;
+using SciChart.Examples.ExternalDependencies.Data;
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using SciChart.Drawing.Common;
-using SciChart.Examples.ExternalDependencies.Data;
+using System.Windows.Threading;
 
 namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
 {
@@ -29,16 +30,15 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
     public partial class EEGExampleView : UserControl
     {
         private Stopwatch _stopWatch;
-        private double _lastFrameTime;
         private MovingAverage _fpsAverage;
+        private int _frameCount;
 
         public EEGExampleView()
         {
             InitializeComponent();
 
-            _stopWatch = Stopwatch.StartNew();
-            _fpsAverage = new MovingAverage(5);         
-   
+            _fpsAverage = new MovingAverage(5);
+
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
         }
@@ -47,15 +47,17 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         {
             RenderSurfaceBase.UseThreadedRenderTimer = false;
 
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;            
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
+            // Synchronizes rendering across all SciChartSurfaces
             RenderSurfaceBase.UseThreadedRenderTimer = true;
 
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;         
-            CompositionTarget.Rendering += CompositionTarget_Rendering;            
+            _stopWatch = Stopwatch.StartNew();
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
         /// <summary>
@@ -63,25 +65,26 @@ namespace SciChart.Examples.Examples.CreateRealtimeChart.EEGChannelsDemo
         /// </summary>
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            if (StartButton.IsChecked == true)
+            if (StartButton.IsChecked != true)
             {
-                // Compute the render time
-                double frameTime = _stopWatch.ElapsedMilliseconds;
-                double delta = frameTime - _lastFrameTime;
-                double fps = 1000.0 / delta;
+                fpsCounter.Text = "-";
+                return;
+            }
 
-                // Push the fps to the movingaverage, we want to average the FPS to get a more reliable reading
-                _fpsAverage.Push(fps);
+            if (_stopWatch.ElapsedMilliseconds >= 1000)
+            {
+                // Push the fps to the moving average, we want to average the FPS to get a more reliable reading
+                _fpsAverage.Push(_frameCount);
 
                 // Render the fps to the screen
-                fpsCounter.Text = double.IsNaN(_fpsAverage.Current) ? "-" : string.Format("{0:0}", _fpsAverage.Current);
+                var text = double.IsNaN(_fpsAverage.Current) ? "-" : $"{_fpsAverage.Current:0}";
+                Dispatcher.BeginInvoke(() => fpsCounter.Text = text, DispatcherPriority.Render);
 
-                // Render the total point count (all series) to the screen
-                var eegExampleViewModel = (DataContext as EEGExampleViewModel);
-                pointCount.Text = eegExampleViewModel != null ? eegExampleViewModel.PointCount.ToString() : "Na";
-
-                _lastFrameTime = frameTime;
+                _frameCount = 0;
+                _stopWatch.Restart();
             }
+
+            _frameCount++;
         }
     }
 }

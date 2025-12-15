@@ -10,6 +10,7 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
+        <!-- Defines the style applied to vertical slice lines in the VerticalSliceModifier -->
         <Style x:Key="sliceStyle" TargetType="s:VerticalLineAnnotation">
             <Setter Property="ShowLabel" Value="True" />
             <Setter Property="Stroke" Value="{StaticResource ExtraThemeStrokeBrush_4}" />
@@ -22,6 +23,14 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Defines the template for slice-specific rollover markers -->
+        <!-- Applies to vertical slice lines in the VerticalSliceModifier -->
+        <ControlTemplate x:Key="VerticalSliceMarkerTemplate">
+            <Rectangle Width="10" Height="10" Fill="{Binding Stroke}"
+                       StrokeThickness="1"
+                       Stroke="#CCCCCC" />
+        </ControlTemplate>
     </UserControl.Resources>
 
     <Grid>
@@ -71,8 +80,13 @@
                         <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="1" />
                         <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="3" />
                         <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="5" />
-                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="7" />
-                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" X1="9" />
+                        <!-- The two VerticalLines below use slice-specific rollover markers -->
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" 
+                                                  s:VerticalSliceModifier.RolloverMarkerTemplate="{StaticResource VerticalSliceMarkerTemplate}" 
+                                                  X1="7" />
+                        <s:VerticalLineAnnotation Style="{StaticResource sliceStyle}" 
+                                                  s:VerticalSliceModifier.RolloverMarkerTemplate="{StaticResource VerticalSliceMarkerTemplate}" 
+                                                  X1="9" />
                     </s:VerticalSliceModifier>
                     <s:LegendModifier Margin="0,0,0,5"
                                       LegendPlacement="Top"

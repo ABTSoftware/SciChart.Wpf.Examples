@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateMultiSeriesChart/FanChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoFanChart.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/FanChart.png</ImagePath>
   <IconPath>IconFanChart</IconPath>
   <ToolTipDescription>Demonstrates how to use multiple Band-Series to simulate a Fan Chart</ToolTipDescription>
   <Description>

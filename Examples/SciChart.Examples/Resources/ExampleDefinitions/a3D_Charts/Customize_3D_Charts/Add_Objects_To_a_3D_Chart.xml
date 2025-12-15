@@ -1,10 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/Charts3D/Customize3DChart/AddObjectsToA3DChart.xaml</View>
 	<ViewModel/>
-	<ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/add-objects-3d-chart.png</ImagePath>
 	<IconPath>Icon3D</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/add-objects-3d-chart.png</ShowcaseImagePath>
 	<ShowcaseDescription>This 3D Chart demo shows how to add Wavefront *.obj files to the SciChart3DSurface using our BaseSceneEntity type. Entities may be added to the RootEntity, which is a type of BaseSceneEntity. Several objects are created and added to the scene.</ShowcaseDescription>
 	<ToolTipDescription>
 		This 3D Chart demo shows how to add Wavefront *.obj to the SciChart3DSurface using our BaseSceneEntity type

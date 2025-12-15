@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/UseSciChartWithMvvm/SciChartMVVMBindings/SciChartMvvmBindingsView.xaml</View>
   <ViewModel>Examples.UseSciChartWithMvvm.SciChartMVVMBinding.SciChartMvvmBindingsViewModel</ViewModel>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoMultipleChartsMvvm.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/AxisAnnotationBinding.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates how to use MVVM to databind IRednerableSeriesViewModel to RenderableSeries on SciChartSurface.</ToolTipDescription>
   <Description>

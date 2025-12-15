@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateSimpleChart/DigitalBandSeriesChartExampleView.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoBandSeries.png</ImagePath>
+    <ImagePath>/SciChart.Examples;component/Resources/Images/DigitalBandSeriesChart.png</ImagePath>
   <IconPath>IconBand</IconPath>
   <ChartTypes>Candlestick</ChartTypes>
   <ToolTipDescription>Generates a Digital (Step) Band Series chart in code</ToolTipDescription>

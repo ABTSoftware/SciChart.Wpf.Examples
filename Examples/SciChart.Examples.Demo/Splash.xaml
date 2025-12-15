@@ -10,7 +10,7 @@
     </UserControl.Resources>
 
     <Grid Visibility="{Binding InitReady, Converter={StaticResource ib2vConverter}, FallbackValue=Visible}">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -21,27 +21,33 @@
             <ExponentialEase x:Key="ExponentialEase" Exponent="5"/>
         </Grid.Resources>
 
-        <ContentPresenter Grid.Row="1"
-                          Width="800"
-                          Margin="10,0,10,50"
-                          Content="{StaticResource SciChartWhiteLogoImage}"
-                          tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500}"
-                          tz:Transitionz.Translate="{tz:TranslateParams From='0,50', To='0,0', Duration=500, Ease={StaticResource ExponentialEase}}"/>
+        <Viewbox Grid.Row="1"
+                 MaxWidth="800"
+                 Margin="50,0,50,50"
+                 HorizontalAlignment="Center">
+
+            <ContentPresenter Content="{StaticResource SciChartWhiteLogoImage}"
+                              tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500}"
+                              tz:Transitionz.Translate="{tz:TranslateParams From='0,50', To='0,0', Duration=500, Ease={StaticResource ExponentialEase}}"/>
+        </Viewbox>
 
         <StackPanel Grid.Row="2"
+                    Margin="50,0"
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top">
 
-            <TextBlock FontSize="16" 
-                       Foreground="#E3E3E3"
+            <TextBlock FontSize="16"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Foreground="#E3E3E3"                       
                        HorizontalAlignment="Center"
                        tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, BeginTime=0}">
                 <Run Text="SciChart SDK v8."/>
                 <Run Text="The World's Fastest WPF Charts."/>
                 <Run Text="Find out more at"/>
                 <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Cursor="Hand" Click="Hyperlink_OnClick">
-                    <Run Text="{x:Static exp:Urls.ReleaseArticle}"/>                                           
+                    <Run Text="{x:Static exp:Urls.ReleaseArticle}"/>
                 </Hyperlink>
             </TextBlock>
 
@@ -54,4 +60,3 @@
         </StackPanel>
     </Grid>
 </UserControl>
-    

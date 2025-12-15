@@ -75,11 +75,9 @@ namespace SciChart.Examples.Demo.SmokeTests
 
 
         // Featured Apps example groups
-        private const string Group_Featured_PerformanceDemos = "Performance Demos";
-        private const string Group_Featured_ScientificCharts = "Scientific Charts";
-        private const string Group_Featured_MedicalCharts = "Medical Charts";
+        private const string Group_Featured_PerformanceDemos = "Performance Demos & Showcases";
+        private const string Group_Featured_ScientificCharts = "Scientific & Medical Charts";
         private const string Group_Featured_FinancialCharts = "Financial Charts";
-        private const string Group_Featured_ParallelCoordinatePlot = "Parallel Coordinate Plot";
 
 
 
@@ -226,6 +224,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Multi-Pane Stock Charts", "Charts2D/StockCharts/MultiPaneStockChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Realtime Ticking Stock Charts", "Charts2D/StockCharts/RealtimeTickingCharts.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Using SciStockChart", "Charts2D/StockCharts/UsingSciStockChart.png"),
+            //new ExampleStartTestCase(Category_2DCharts, Group_2D_StockCharts, "Market Profile Trading Chart", "Charts2D/StockCharts/MarketProfileTradingChart.png"),
             // 2D Charts, Export a Chart
             new ExampleStartTestCase(Category_2DCharts, Group_2D_ExportAChart, "Export and Screenshot Options in Chart", "Charts2D/ExportCharts/ExportChart.png"),
             // 2D Charts, Filters API
@@ -326,22 +325,26 @@ namespace SciChart.Examples.Demo.SmokeTests
             // Featured Apps, Performance Demos
            // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fifo 1Billion Points Demo", "FeaturedApps/PerformanceDemos/Fifo1BillionPoints.png"),
             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Fast Paletted Scatter Charts", "FeaturedApps/PerformanceDemos/FastPalettedScatterCharts.png"),
-           // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Scatter Chart Performance Demo", "FeaturedApps/PerformanceDemos/ScatterChartPerformanceDemo.png",
+           new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Oil & Gas Wells Chart Demo", "FeaturedApps/PerformanceDemos/OilAndGas.png"),
+           
+            
+            // new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_PerformanceDemos, "Scatter Chart Performance Demo", "FeaturedApps/PerformanceDemos/ScatterChartPerformanceDemo.png",
              //   (mw) => Thread.Sleep(1500)), // bit of a delay to allow example to show 
              
             // Featured Apps, Medical Charts 
-             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_MedicalCharts, "ECG Monitor Demo", "FeaturedApps/MedicalCharts/ECGMonitorDemo.png"),
-             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_MedicalCharts, "Vital Signs Monitor Demo", "FeaturedApps/MedicalCharts/VitalSignsMonitorDemo.png"),
+             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_ScientificCharts, "ECG Monitor Demo", "FeaturedApps/MedicalCharts/ECGMonitorDemo.png"),
+             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_ScientificCharts, "Vital Signs Monitor Demo", "FeaturedApps/MedicalCharts/VitalSignsMonitorDemo.png"),
 
              // Featured Apps, ScientificCharts
              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ScientificCharts, "LIDAR PointCloud 3D Demo", "FeaturedApps/ScientificCharts/LIDARPointCloud3DDemo.png"),
              
              // Featured Apps, Financial Charts  
              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "Aggregation Filters", "FeaturedApps/FinancialCharts/AggregationFilters.png"),
+             new ExampleStartTestCase(Category_FeaturedApps, Group_Featured_FinancialCharts, "Renko Chart", "Charts2D/StockCharts/RenkoChart.png"),
              //new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_FinancialCharts, "SciChart Trader Demo", "FeaturedApps/FinancialCharts/SciChartTraderDemo.png"),
              
              // Featured Apps, Parallel Coordinate Plot
-              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ParallelCoordinatePlot, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png")
+              new ExampleStartTestCase(Category_FeaturedApps,  Group_Featured_ScientificCharts, "Parallel Coordinate Plot", "FeaturedApps/ParallelCoordinatePlot/ParallelCoordinatePlot.png")
 
         };
 

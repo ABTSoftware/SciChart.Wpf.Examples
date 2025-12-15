@@ -24,7 +24,7 @@ namespace SciChart.Examples.Demo.Helpers.Grouping
                     TileDataContext = new EverythingGroupViewModel
                     {
                         GroupingIndex = 0,
-                        GroupingName = "Most Used"
+                        SubcategoryName = "Most Used"
                     }
                 }
             };

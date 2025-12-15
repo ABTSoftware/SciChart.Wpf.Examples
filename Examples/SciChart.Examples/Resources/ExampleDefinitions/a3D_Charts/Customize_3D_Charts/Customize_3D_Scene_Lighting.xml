@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/Customize3DChart/Customize3DSceneLighting.xaml</View>
   <ViewModel/>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Customize3DSceneLighting.png</ImagePath>
   <IconPath>Icon3D</IconPath>
   <ToolTipDescription>
     This 3D Chart demo shows how to control the light direction on the SciChart3DSurface using Viewport3D methods

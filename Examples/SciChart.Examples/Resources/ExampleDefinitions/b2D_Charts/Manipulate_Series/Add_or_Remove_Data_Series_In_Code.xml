@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ManipulateSeries/AddRemoveDataSeriesExampleView.xaml</View>
   <ViewModel/>
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoAddRemoveDataSeries.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/AddRemoveSeries.png</ImagePath>
   <IconPath>IconLine</IconPath>
   <ToolTipDescription>Demonstrates how to add and remove data-series and their associated RenderableSeries using SciChart.</ToolTipDescription>
   <Description>

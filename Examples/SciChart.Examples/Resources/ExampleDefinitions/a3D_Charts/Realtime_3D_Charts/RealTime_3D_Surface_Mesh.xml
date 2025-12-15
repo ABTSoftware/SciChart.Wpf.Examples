@@ -1,10 +1,8 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/Charts3D/CreateRealtime3DCharts/CreateRealTime3DUniformMeshChart.xaml</View>
 	<ViewModel/>
-	<ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoECGMonitor.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealTime3DSurfaceMesh.png</ImagePath>
 	<IconPath>IconRealtime</IconPath>
-	<IsShowcaseExample>True</IsShowcaseExample>
-	<ShowcaseImagePath>/SciChart.Examples;component/Resources/Images/realtime-3d-surface-mesh.png</ShowcaseImagePath>
 	<ShowcaseDescription>The 3D Realtime Surface Mesh example shows how to update a UniformGridDataSeries3D in real-time. Many mesh options are available such as Wireframe, SolidMesh, Solid with Wireframe, and many paletting options such as Solid, Interpolated and Textured.</ShowcaseDescription>
 	<ToolTipDescription>
 		The 3D Realtime Surface Mesh example shows how to update a Uniform Mesh in real-time

@@ -22,6 +22,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Charts2D\StockCharts\MarketProfileTradingChart.png" />
+	  <None Remove="Resources\Charts2D\StockCharts\RenkoChart.png" />
+	  <None Remove="Resources\FeaturedApps\PerformanceDemos\OilAndGas.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="FlaUI.UIA3" Version="3.2.0" />
 		<PackageReference Include="NUnit" Version="3.14.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
@@ -46,6 +52,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\AnnotationsAreEasy.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StockCharts\MarketProfileTradingChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\StockCharts\RenkoChart.png" />
 		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\ClosedSurfaceMesh3D.png" />
 		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleBubble3DChart.png" />
 		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\SimpleCylindroid3DChart.png" />
@@ -69,6 +77,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\FastPalettedScatterCharts.png" />
+		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\OilAndGas.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\FeaturedApps\PerformanceDemos\ScatterChartPerformanceDemo.png" />

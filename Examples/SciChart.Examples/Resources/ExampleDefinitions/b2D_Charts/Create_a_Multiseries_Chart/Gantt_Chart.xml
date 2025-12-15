@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<View>Examples/CreateMultiseriesChart/GanttChart/GanttChartView.xaml</View>
 	<ViewModel>Examples.CreateMultiseriesChart.GanttChart.GanttChartViewModel</ViewModel>
-	<ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/GanttChart.png</ImagePath>
 	<IconPath>IconGantt</IconPath>
 	<ToolTipDescription>Shows how to create a Gantt chart</ToolTipDescription>
 	<Description>

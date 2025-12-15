@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/CreateRealtimeChart/RealTimeGhostedTraces.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoGhostedTraces.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RealtimeGhostedTraces.png</ImagePath>
   <IconPath>IconRealtime</IconPath>
   <ToolTipDescription>This example shows persistence of old traces giving a 'ghosted' effect. As new series are drawn older series are made increasingly transparent until they become invisible. 
     This example uses a background-thread Timer with variable interval of 20ms - 500ms to demonstrate the effect. 

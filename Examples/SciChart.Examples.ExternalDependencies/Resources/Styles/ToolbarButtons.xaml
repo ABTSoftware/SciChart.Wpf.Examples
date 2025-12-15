@@ -46,12 +46,18 @@
     </system:String>
 
     <!-- Toolbar 2D Button Templates -->
-
     <DataTemplate x:Key="RubberBandXyZoomModifierTemplate">
         <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
+                                       Style="{StaticResource DefaultFlyoutMenuToggleButtonStyle}"
                                        ToolTipService.ToolTip="Toggle Rubber-Band Zoom"
                                        common:FlyoutMenuToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
             <common:ToolbarIcon Kind="MagnifyPlusOutline" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            <common:FlyoutMenuToggleButton.PopupContent>
+                <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                    <TextBlock Text="Direction" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Modifier.XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                </StackPanel>
+            </common:FlyoutMenuToggleButton.PopupContent>
         </common:FlyoutMenuToggleButton>
     </DataTemplate>
 
@@ -102,6 +108,12 @@
                                        ToolTipService.ToolTip="Select PointMarkers"
                                        common:FlyoutMenuToggleButtonExtensions.GroupName="ZoomPanSelectionGroup">
             <common:ToolbarIcon Kind="SelectionEllipseArrowInside" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            <common:FlyoutMenuToggleButton.PopupContent>
+                <StackPanel Margin="5" Width="150" Orientation="Vertical">
+                    <TextBlock Text="Direction" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:XyDirection}}}" SelectedItem="{Binding Modifier.XyDirection, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}" />
+                </StackPanel>
+            </common:FlyoutMenuToggleButton.PopupContent>
         </common:FlyoutMenuToggleButton>
     </DataTemplate>
 

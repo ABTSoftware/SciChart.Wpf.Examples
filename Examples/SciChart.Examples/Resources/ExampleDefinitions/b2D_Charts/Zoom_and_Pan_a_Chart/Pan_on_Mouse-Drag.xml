@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/ZoomAndPanAChart/MouseDragToPan.xaml</View>
   <ViewModel />
-  <ImagePath>/SciChart.Examples;component/Resources/Images/ExampleImages/demoDragToPan.png</ImagePath>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PanOnMouseDrag.png</ImagePath>
 <IconPath>IconPan</IconPath>
   <ToolTipDescription>Demonstrates mouse-dragging of SciChart: Overlays three series on a SciChartSurface and applies the ZoomPanModifier. This is a built-in ChartModifierBase derived class which adds the behavior of panning on mouse-drag. 
   </ToolTipDescription>

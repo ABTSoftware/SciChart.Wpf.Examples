@@ -34,7 +34,7 @@ namespace SciChart.Examples.Demo.Common.Converters
             foreach (var term in terms)
             {
                 var containsTerm = lines.Where(x => x != "" && x.ToLower().Contains(term));
-                containsTerm.Take(2).ForEachDo(x => sentences.Add(x));
+                containsTerm.Take(2).Select(FormatTextBase).ForEachDo(x => sentences.Add(x));
             }
 
             if (sentences.Any())

@@ -3,6 +3,10 @@
                     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:controls="clr-namespace:SciChart.Examples.Demo.Controls.EndlessItemsControl">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Scrollbars.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="controls:EndlessItemsControl">
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -12,7 +16,8 @@
                     <ScrollViewer x:Name="PART_ScrollViewer"
                                   BorderThickness="0"
                                   HorizontalScrollBarVisibility="{Binding Path=(ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}"
-                                  VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}">
+                                  VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}"
+                                  Style="{StaticResource OverlayScrollViewerStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -30,7 +35,7 @@
 
                             <mahapps:MetroProgressBar x:Name="progressBar"
                                                       Grid.Row="1"
-                                                      Margin="5"
+                                                      Margin="20,10"
                                                       IsIndeterminate="True"
                                                       VerticalAlignment="Center" 
                                                       HorizontalAlignment="Stretch"

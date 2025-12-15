@@ -1,7 +1,7 @@
 ﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <View>Examples/Charts3D/ZoomAndPanA3DChart/ZAxisUp3D/ZAxisUp3DChart.xaml</View>
   <ViewModel>Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D.ZAxisUp3DChartViewModel</ViewModel>
-  <ImagePath/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/ChangeViewport3DOrientation.png</ImagePath>
   <IconPath>Icon3D</IconPath>
   <ToolTipDescription>
     This 3D Chart demo shows how to change 3D Viewport orientation to have either Z-Axis or Y-Axis pointing upwards
