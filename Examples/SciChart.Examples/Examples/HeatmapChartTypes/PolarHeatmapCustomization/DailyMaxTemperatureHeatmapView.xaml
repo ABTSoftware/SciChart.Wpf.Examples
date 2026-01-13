@@ -1,0 +1,176 @@
+<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization.DailyMaxTemperatureHeatmapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization">
+
+    <UserControl.Resources>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter" />
+        <local:DayOfYearToDateConverter x:Key="DayOfYearToDateConverter" />
+        <local:MaxTemperatureConverter x:Key="MaxTempConverter" NoDataText="No Data" />
+
+        <!-- Custom label providers for the angular and radial axis -->
+        <local:MonthNameAngularAxisLabelProvider x:Key="MonthNameAzimuthalAxisLabelProvider" />
+        <local:YearRadialAxisLabelProvider x:Key="YearRadialAxisLabelProvider" />
+
+        <!-- Custom template for a heatmap tooltip -->
+        <DataTemplate x:Key="PolarTooltipItemTemplate" DataType="s:HeatmapSeriesInfo">
+            <StackPanel Margin="4">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource DayOfYearToDateConverter}">
+                            <Binding Path="XValue" />
+                            <Binding Path="YValue" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="0,5,0,0" Text="{Binding ZValue, Converter={StaticResource MaxTempConverter}}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Custom template for the chart legend that includes a Color Map for the Heatmap -->
+        <ControlTemplate x:Key="ColorMapLegendTemplate" TargetType="s:LegendPlaceholder">
+            <s:HeatmapColorMap HorizontalAlignment="Left"
+                               VerticalAlignment="Stretch"
+                               Background="{StaticResource ThemedTransparentChartBackground}"
+                               BorderThickness="0"
+                               ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                               EnableAxisDrag="True"
+                               Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderSeries}}"
+                               Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderSeries}}"
+                               Orientation="Vertical"
+                               TextFormatting="0">
+                <s:HeatmapColorMap.AxisStyle>
+                    <Style TargetType="s:AxisBase">
+                        <Setter Property="Margin" Value="-12,0,0,0" />
+                        <Setter Property="DrawMajorBands" Value="False" />
+                        <Setter Property="DrawMinorTicks" Value="False" />
+                        <Setter Property="DrawMajorGridLines" Value="False" />
+                        <Setter Property="DrawMinorGridLines" Value="False" />
+                    </Style>
+                </s:HeatmapColorMap.AxisStyle>
+            </s:HeatmapColorMap>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  The SciChartInteractionToolbar adds configuration options for zoom, pan, zoom extents functionality. -->
+        <!--  Included for example purposes.  -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=SciChartSurface}}" />
+
+        <!-- Custom SciChartSurface is used to support printing and export with custom size -->
+        <local:DailyMaxTemperatureHeatmapSurface x:Name="SciChartSurface"
+                                                 Grid.Column="1"
+                                                 ChartTitle="Daily Max Temperature (&#176;C) at Heathrow, London (2011-2024)"
+                                                 s:ThemeManager.Theme="SciChartv7Navy">
+            <local:DailyMaxTemperatureHeatmapSurface.RenderableSeries>
+                <!-- PolarUniformHeatmapRenderableSeries is used to render the heatmap data -->
+                <s:PolarUniformHeatmapRenderableSeries x:Name="HeatmapRenderSeries"
+                                                       s:TooltipModifier.TooltipTemplate="{StaticResource PolarTooltipItemTemplate}"
+                                                       UseLinearTextureFiltering="False">
+                    <s:PolarUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Maximum="40.2" Minimum="-1.2">
+                            <GradientStop Offset="0.0" Color="{StaticResource ColorMapColor_1}" />
+                            <GradientStop Offset="0.3" Color="{StaticResource ColorMapColor_2}" />
+                            <GradientStop Offset="0.5" Color="{StaticResource ColorMapColor_3}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource ColorMapColor_6}" />
+                        </s:HeatmapColorPalette>
+                    </s:PolarUniformHeatmapRenderableSeries.ColorMap>
+                </s:PolarUniformHeatmapRenderableSeries>
+
+                <!-- Used to render circular grid lines on top of the heatmap -->
+                <s:FastLineRenderableSeries x:Name="AzimuthalGridLinesRenderSeries"
+                                            s:TooltipModifier.IncludeSeries="False"
+                                            Stroke="LightGray"
+                                            StrokeThickness="1"
+                                            DrawNaNAs="Gaps" />
+                <!-- Used to renders radial grid lines on top of the heatmap -->
+                <s:FastLineRenderableSeries x:Name="RadialGridLinesRenderSeries"
+                                            s:TooltipModifier.IncludeSeries="False"
+                                            Stroke="LightGray"
+                                            StrokeThickness="1"
+                                            DrawNaNAs="Gaps" />
+            </local:DailyMaxTemperatureHeatmapSurface.RenderableSeries>
+
+            <local:DailyMaxTemperatureHeatmapSurface.XAxis>
+                <!-- Defines the Angular Axis -->
+                <!-- Default grid lines are turned off -->
+                <!-- MajorDelta specifies axis labels positions every 15 days -->
+                <!-- A custom LabelProvider is used to define the axis label text -->
+                <!-- Specifying VisibleRange allows control over how the heatmap is stretched across the Polar Surface -->
+                <s:PolarXAxis Name="AngularAxis"
+                              DrawMajorGridLines="False"
+                              DrawMajorTicks="False"
+                              DrawMinorTicks="False"
+                              BorderThickness="0"
+                              FontSize="15"
+                              IsLabelCullingEnabled="False"
+                              AutoTicks="False"
+                              MajorDelta="15"
+                              LabelProvider="{StaticResource MonthNameAzimuthalAxisLabelProvider}" 
+                              RotationAngle="90"
+                              VisibleRange="-13, 380"
+                              VisibleRangeLimit="-43, 410"
+                              ZoomExtentsRange="-13, 380" />
+            </local:DailyMaxTemperatureHeatmapSurface.XAxis>
+
+            <!-- Defines the Radial Axis -->
+            <!-- Default grid lines are turned off -->
+            <!-- MajorDelta specifies axis labels positions every 2 years -->
+            <!-- A negative VisibleRange.Min value allows creating a visual gap at the chart center -->
+            <!-- A custom LabelProvider is used to define the axis label text -->
+            <local:DailyMaxTemperatureHeatmapSurface.YAxis>
+                <s:PolarYAxis Name="RadialAxis"
+                              DrawMajorGridLines="False"
+                              DrawMajorTicks="False"
+                              DrawMinorTicks="False"
+                              Foreground="White"
+                              Angle="180"
+                              IsLabelCullingEnabled="False"
+                              AutoTicks="False"
+                              MajorDelta="2"
+                              VisibleRange="-4,14"
+                              ZoomExtentsRange="-4,14"
+                              VisibleRangeLimit="-4,14"
+                              VisibleRangeLimitMode="MinMax"
+                              LabelProvider="{StaticResource YearRadialAxisLabelProvider}">
+                    <s:PolarYAxis.TickLabelStyle>
+                        <Style TargetType="s:NumericTickLabel">
+                            <Setter Property="HorizontalAnchorPoint" Value="Center" />
+                            <Setter Property="VerticalAnchorPoint" Value="Center" />
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </s:PolarYAxis.TickLabelStyle>
+                </s:PolarYAxis>
+            </local:DailyMaxTemperatureHeatmapSurface.YAxis>
+
+            <!-- Chart modifiers define the available interactivity options -->
+            <local:DailyMaxTemperatureHeatmapSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:TooltipModifier />
+                    <s:RubberBandXyZoomModifier XyDirection="XDirection" ZoomExtentsY="False" />
+                    <s:ZoomExtentsModifier XyDirection="XYDirection" />
+                    <s:MouseWheelZoomModifier XyDirection="XDirection" />
+                    <ext:CustomExportModifier EnableXamlRendererExport="False" />
+                    <!-- Chart Legend is disabled in the Toolbar due to a custom Legend Template -->
+                    <s:LegendModifier Margin="20,0,0,10"
+                                      VerticalAlignment="Stretch"
+                                      LegendPlacement="Left"
+                                      LegendTemplate="{StaticResource ColorMapLegendTemplate}"
+                                      ext:SciChartInteractionToolbar.AppearsInToolbar="False" />
+                </s:ModifierGroup>
+            </local:DailyMaxTemperatureHeatmapSurface.ChartModifier>
+        </local:DailyMaxTemperatureHeatmapSurface>
+    </Grid>
+</UserControl>

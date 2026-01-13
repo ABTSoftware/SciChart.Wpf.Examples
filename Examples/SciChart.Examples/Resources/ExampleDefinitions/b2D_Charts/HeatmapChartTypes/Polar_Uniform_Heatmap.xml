@@ -1,0 +1,35 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/HeatmapChartTypes/PolarUniformHeatmap/PolarUniformHeatmap.xaml</View>
+	<ViewModel/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PolarUniformHeatmap.png</ImagePath>
+	<IconPath>IconHeat</IconPath>
+	<ToolTipDescription>Demonstrates how to create a Polar Uniform Heatmap using SciChart. Accepts a 2D Array of data and has a user-defined color map which can be displayed as a legend over the chart.</ToolTipDescription>
+	<Description>
+		This example showcases how to construct a Polar Uniform Heatmap using SciChart. The chart is built to visualize scalar values distributed across polar coordinates, making it ideal for scenarios such as directional data analysis, antenna radiation patterns, or circular heat distribution studies.
+
+		[b]Data Input[/b]
+		The heatmap accepts a 2D array of numerical values, where each element represents a data value at a given polar coordinate (radius and angle).
+
+		[b]Customizable Color Mapping[/b]
+		A user-defined color map is applied to translate data values into visually distinct colors. This enables intuitive interpretation of gradients, peaks, and troughs within the dataset.
+
+		[b]Polar Coordinate Rendering[/b]
+		Unlike Cartesian heatmaps, this visualization arranges data in a circular layout, aligning values radially and angularly to reflect polar distributions.
+
+		[b]Interactive Features[/b]
+		SciChart's rendering engine supports zooming, panning, and tooltips, allowing users to explore the dataset interactively and gain deeper insights.
+
+		[b]Documentation Links[/b]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarUniformHeatmap/PolarUniformHeatmap.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarUniformHeatmap/PolarUniformHeatmap.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Polar</Features>
+		<Features>Heatmap</Features>
+	</Features>
+</ExampleDefinition>

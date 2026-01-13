@@ -48,9 +48,6 @@
 
             <s:SciChartSurface.ChartModifier>
                 <s:ModifierGroup>
-
-                    <s:RubberBandXyZoomModifier ext:SciChartInteractionToolbar.AppearceInToolbar="False" />
-                    <s:AnnotationCreationModifier ext:SciChartInteractionToolbar.AppearceInToolbar="False" />
                     <s:YAxisDragModifier IsEnabled="False" />
                     <s:XAxisDragModifier IsEnabled="False" />
                     <s:ZoomExtentsModifier IsAnimated="True"/>

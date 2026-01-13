@@ -18,6 +18,7 @@ using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SciChart.Examples.Demo.Common.Converters;
 using SciChart.Examples.Demo.Helpers;
 using SciChart.Examples.Demo.Helpers.Navigation;
+using SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization;
 using SciChart.UI.Bootstrap;
 using SciChart.UI.Reactive;
 using SciChart.UI.Reactive.Observability;
@@ -251,8 +252,12 @@ namespace SciChart.Examples.Demo.ViewModels
 
         private void RecreateStyles()
         {
+            // Default SciChart surfaces
             CreateGlobalStyle<SciChartSurface>();
             CreateGlobalStyle<SciStockChart>();
+
+            // Custom Example surfaces
+            CreateGlobalStyle<DailyMaxTemperatureHeatmapSurface>();
         }
 
         public Type SelectedRenderer
@@ -330,14 +335,13 @@ namespace SciChart.Examples.Demo.ViewModels
         private void CreateGlobalStyle<T>() where T : SciChartSurface
         {
             var overrideStyle = new Style(typeof(T));
-
-            //overrideStyle.Setters.Add(new Setter(RenderSurfaceExtensions.RenderSurfaceTypeProperty, SelectedRenderer.AssemblyQualifiedName));
             var binding = new Binding
             {
                 Source = this,
                 Converter = new RendererSettingConverter(),
                 Mode = BindingMode.OneWay
             };
+
             overrideStyle.Setters.Add(new Setter(SciChartSurfaceBase.RenderSurfaceProperty, binding));
             overrideStyle.Setters.Add(new Setter(VisualXcceleratorEngine.EnableImpossibleModeProperty, EnableImpossibleMode));
 
@@ -356,7 +360,7 @@ namespace SciChart.Examples.Demo.ViewModels
 
             if (Application.Current.Resources.Contains(typeof(T)))
                 Application.Current.Resources.Remove(typeof(T));
-
+            
             Application.Current.Resources.Add(typeof(T), overrideStyle);
         }
     }

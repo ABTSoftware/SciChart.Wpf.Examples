@@ -969,5 +969,63 @@ namespace SciChart.Examples.ExternalDependencies.Data
         {
             return Enumerable.Range(start, count).Select(i => (double)i).ToArray();
         }
+
+        /// <summary>
+        /// Loads and unzips the archive with ultrasound data, then converts HEX values to double format.
+        /// </summary>
+        /// <returns>The 2D array of ultrasound data.</returns>
+        public double[,] GetUltrasoundPolarHeatmapData()
+        {
+            int w = 256, h = 206;
+            var data = new double[h, w];
+            var asm = Assembly.GetExecutingAssembly();
+            var csvResource = asm.GetManifestResourceNames().Single(x => x.ToUpper(CultureInfo.InvariantCulture).Contains("ULTRASOUNDPOLARHEATMAPDATA.CSV.GZ"));
+
+            using (var stream = asm.GetManifestResourceStream(csvResource))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
+            {
+                string line;
+                int y = 0;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    var zStrings = line.Split(',');
+                    var zValues = Array.ConvertAll(zStrings, a => (double)Convert.ToInt32(a, 16));
+                    for (int i = 0; i < zValues.Length; i++)
+                    {
+                        data[y, i] = zValues[i];
+                    }
+                    y++;
+                }
+            }
+            return data;
+        }
+
+        public double[,] GetDailyMaxTemperatureHeatmap()
+        {
+            int w = 366, h = 14;
+            var data = new double[h, w];
+            var asm = Assembly.GetExecutingAssembly();
+            var csvResource = asm.GetManifestResourceNames().Single(x => x.ToUpper(CultureInfo.InvariantCulture).Contains("LONDONHEATHROWMAXTEMPERATURE.CSV.GZ"));
+
+            using (var stream = asm.GetManifestResourceStream(csvResource))
+            using (var gz = new GZipStream(stream, CompressionMode.Decompress))
+            using (var streamReader = new StreamReader(gz))
+            {
+                string line;
+                int y = 0;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    var zStrings = line.Split(',');
+                    
+                    for (int i = 0; i < w; i++)
+                    {
+                        data[y, i] = double.Parse(zStrings[i], CultureInfo.InvariantCulture);
+                    }
+                    y++;
+                }
+            }
+            return data;
+        }
     }
 }
