@@ -25,6 +25,7 @@
 	  <None Remove="Resources\Charts2D\Heatmaps\DailyMaxTemperatureHeatmapPolarChart.png" />
 	  <None Remove="Resources\Charts2D\Heatmaps\PolarUniformHeatmap.png" />
 	  <None Remove="Resources\Charts2D\Heatmaps\UltrasoundHeatmapPolarChart.png" />
+	  <None Remove="Resources\Charts2D\MultiseriesCharts\PopulationPyramidChart.png" />
 	  <None Remove="Resources\Charts2D\StockCharts\MarketProfileTradingChart.png" />
 	  <None Remove="Resources\Charts2D\StockCharts\RenkoChart.png" />
 	  <None Remove="Resources\FeaturedApps\PerformanceDemos\OilAndGas.png" />
@@ -58,6 +59,7 @@
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\DailyMaxTemperatureHeatmapPolarChart.png" />
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\PolarUniformHeatmap.png" />
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\UltrasoundHeatmapPolarChart.png" />
+		<EmbeddedResource Include="Resources\Charts2D\MultiseriesCharts\PopulationPyramidChart.png" />
 		<EmbeddedResource Include="Resources\Charts2D\StockCharts\MarketProfileTradingChart.png" />
 		<EmbeddedResource Include="Resources\Charts2D\StockCharts\RenkoChart.png" />
 		<EmbeddedResource Include="Resources\Charts3D\BasicChartTypes\ClosedSurfaceMesh3D.png" />

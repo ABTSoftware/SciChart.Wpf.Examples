@@ -53,7 +53,7 @@ namespace SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization
             var yearValue = valuesAsDoubles[1];
             var dayOfYear = (int)(dayValue + 1);
             var year = (int)yearValue + startYear;
-            if (dayOfYear is < 1 or > 366) return string.Empty;
+            if (dayOfYear < 1 || dayOfYear > 366) return string.Empty;
 
             // Use a leap year for date conversion
             // because the example data assumes every year has 366 days
