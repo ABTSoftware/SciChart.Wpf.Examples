@@ -41,6 +41,10 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
         private int _selectedStrokeThickness;
         private string _selectedSeriesStyle;
 
+        private bool _autoSimplify;
+        private double _simplifyOpenThreshold;
+        private double _simplifyCloseThreshold;
+
         private ObservableCollection<IRenderableSeriesViewModel> _seriesViewModels;
 
         public CreateRealTimeTickingStockChartViewModel()
@@ -116,11 +120,16 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
 
                 if (_selectedSeriesStyle == "OHLC")
                 {
-                    SeriesViewModels[0] = new OhlcRenderableSeriesViewModel
+                    var viewModel = new OhlcRenderableSeriesViewModel
                     {
                         DataSeries = SeriesViewModels[0].DataSeries,
                         StyleKey = "BaseRenderableSeriesStyle"
                     };
+                    AutoSimplify = viewModel.AutoSimplify;
+                    SimplifyCloseThreshold = viewModel.SimplifyCloseThresholdPx;
+                    SimplifyOpenThreshold = viewModel.SimplifyOpenThresholdPx;
+                    
+                    SeriesViewModels[0] = viewModel;
                 }                   
                 else if (_selectedSeriesStyle == "Candlestick")
                 {
@@ -149,7 +158,55 @@ namespace SciChart.Examples.Examples.CreateStockCharts.RealtimeMvvm
 
                 OnPropertyChanged("SeriesViewModels");
             }
-        }      
+        }
+
+        public bool AutoSimplify
+        {
+            get => _autoSimplify;
+            set
+            {
+                if (_autoSimplify != value)
+                {
+                    _autoSimplify = value;
+                    OnPropertyChanged(nameof(AutoSimplify));
+
+                    if (SeriesViewModels[0] is OhlcRenderableSeriesViewModel ohlc)
+                        ohlc.AutoSimplify = value;
+                }
+            }
+        }
+
+        public double SimplifyOpenThreshold
+        {
+            get => _simplifyOpenThreshold;
+            set
+            {
+                if (_simplifyOpenThreshold != value)
+                {
+                    _simplifyOpenThreshold = value;
+                    OnPropertyChanged(nameof(SimplifyOpenThreshold));
+
+                    if (SeriesViewModels[0] is OhlcRenderableSeriesViewModel ohlc)
+                        ohlc.SimplifyOpenThresholdPx = value;
+                }
+            }
+        }
+
+        public double SimplifyCloseThreshold
+        {
+            get => _simplifyCloseThreshold;
+            set
+            {
+                if (_simplifyCloseThreshold != value)
+                {
+                    _simplifyCloseThreshold = value;
+                    OnPropertyChanged(nameof(SimplifyCloseThreshold));
+
+                    if (SeriesViewModels[0] is OhlcRenderableSeriesViewModel ohlc)
+                        ohlc.SimplifyCloseThresholdPx = value;
+                }
+            }
+        }
 
         public DateRange XVisibleRange
         {

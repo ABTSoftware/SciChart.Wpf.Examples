@@ -11,10 +11,10 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ext:GetTypeNameConverter x:Key="GetTypeNameConverter" />
+        <ext:TypeToTypeNameConverter x:Key="TypeToTypeNameConverter" />
 
         <DataTemplate x:Key="ComboboxItemTemplate">
-            <TextBlock Text="{Binding ., Converter={StaticResource GetTypeNameConverter}}" />
+            <TextBlock Text="{Binding ., Converter={StaticResource TypeToTypeNameConverter}}" />
         </DataTemplate>
     </UserControl.Resources>
 

@@ -207,6 +207,7 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Stacked Column Side By Side", "Charts2D/MultiseriesCharts/StackedColumnSideBySide.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Stacked Mountain Chart", "Charts2D/MultiseriesCharts/StackedMountainChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Gantt Chart", "Charts2D/MultiseriesCharts/GanttChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_MultiSeries, "Population Pyramid Chart", "Charts2D/MultiseriesCharts/PopulationPyramidChart.png"),
             
             // 2D Charts, Create a Radar Chart
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Radar, "Radar Chart Customization Example", "Charts2D/RadarCharts/RadarChartCustomization.png"),
@@ -235,6 +236,11 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "HeatmapMetaData", "Charts2D/Heatmaps/HeatmapMetaData.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "NonUniformHeatmap", "Charts2D/Heatmaps/NonUniformHeatmap.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "UniformHeatmap and CustomPaletteProvider", "Charts2D/Heatmaps/HeatmapAndPaletteProvider.png"),
+           
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "Daily Max Temperature Heatmap Polar Chart", "Charts2D/Heatmaps/DailyMaxTemperatureHeatmapPolarChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "Ultrasound Heatmap Polar Chart", "Charts2D/Heatmaps/UltrasoundHeatmapPolarChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_Heatmap, "Polar Uniform Heatmap", "Charts2D/Heatmaps/PolarUniformHeatmap.png"),
+            
             // 2D Charts, Legends
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Legends, "Chart Legends API", "Charts2D/Legends/LegendsAPI.png"),
             // 2D Charts, Link Multiple Charts

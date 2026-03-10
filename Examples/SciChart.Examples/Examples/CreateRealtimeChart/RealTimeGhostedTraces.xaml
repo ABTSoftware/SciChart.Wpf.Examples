@@ -10,12 +10,7 @@
              d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <!--  Used by the hint annotation, hides if if the user selects high quality renderer  -->
-        <ext:TrueIfValueConverter x:Key="TrueIfValueConverter" Value="SciChart.Rendering.HighQualityRasterizer.HighQualityRenderSurface" />
-    </UserControl.Resources>
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

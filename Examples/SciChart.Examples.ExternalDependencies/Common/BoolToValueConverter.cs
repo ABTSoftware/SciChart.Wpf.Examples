@@ -35,10 +35,6 @@ namespace SciChart.Examples.ExternalDependencies.Common
         /// The value to convert to if the input boolean is false
         /// </summary>
         public object FalseValue { get; set; }
-        /// <summary>
-        /// The value to convert to if the input boolean is true and in Silverlight
-        /// </summary>
-        public object TrueSLValue { get; set; }
 
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -53,23 +49,18 @@ namespace SciChart.Examples.ExternalDependencies.Common
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool v = false;
-            if (value is bool)
+
+            if (value is bool boolValue)
             {
-                v = (bool) value;
-            }
-            if (value is int)
-            {
-                v = ((int) value) >= 1;
+                v = boolValue;
             }
 
-            return v ? 
-#if !SILVERLIGHT
-                TrueValue 
-#else
-                TrueSLValue ?? TrueValue
-#endif
-                : 
-                FalseValue;
+            if (value is int intValue)
+            {
+                v = intValue >= 1;
+            }
+
+            return v ? TrueValue : FalseValue;
         }
 
         /// <summary>
@@ -82,7 +73,7 @@ namespace SciChart.Examples.ExternalDependencies.Common
         /// <returns>
         /// The value to be passed to the source object.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

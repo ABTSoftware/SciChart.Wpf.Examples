@@ -81,6 +81,43 @@
                     </StackPanel>
                 </ext:FlyoutMenuButton.PopupContent>
             </ext:FlyoutMenuButton>
+
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Tire" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5,5,5,10" Width="150" Orientation="Vertical">
+                        <TextBlock Text="Ohlc Series Settings" Margin="0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <CheckBox Content="Auto Simplify"
+                                  IsChecked="{Binding AutoSimplify, Mode=TwoWay}"/>
+
+                        <TextBlock Text="Simplify Open Threshold" Margin="0,10,0,0" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0"
+                                Maximum="10"
+                                SmallChange="0.5"
+                                LargeChange="0.5"
+                                TickFrequency="0.5"
+                                IsSnapToTickEnabled="True"
+                                Margin="0,5"
+                                Orientation="Horizontal"
+                                IsEnabled="{Binding AutoSimplify}"
+                                Value="{Binding SimplifyOpenThreshold, Mode=TwoWay}"
+                                ToolTipService.ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+
+                        <TextBlock Text="Simplify Close Threshold" Margin="0,5,0,0" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <Slider Minimum="0"
+                                Maximum="10"
+                                SmallChange="0.5"
+                                LargeChange="0.5"
+                                TickFrequency="0.5"
+                                IsSnapToTickEnabled="True"
+                                Margin="0,5"
+                                Orientation="Horizontal"
+                                IsEnabled="{Binding AutoSimplify}"
+                                Value="{Binding SimplifyCloseThreshold, Mode=TwoWay}"
+                                ToolTipService.ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
         </ext:SciChartInteractionToolbar>
 
         <!--  Define the StockChart control, binding to PriceData  -->

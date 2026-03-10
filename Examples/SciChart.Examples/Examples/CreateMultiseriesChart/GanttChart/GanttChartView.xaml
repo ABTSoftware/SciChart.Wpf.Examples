@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart.GanttChartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart">
 
@@ -37,7 +37,7 @@
                        FontWeight="SemiBold"
                        Foreground="White"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center"             
+                       VerticalAlignment="Center"
                        Margin="15,0"/>
         </Border>
 
@@ -48,7 +48,7 @@
                                                         VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
                                                         VisibleRangeLimit="{Binding XVisibleRangeLimit}"
                                                         Calendar="{StaticResource XAxisCalendar}"
-                                                        Style="{StaticResource DoubleScaleXAxisStyle}"/>
+                                                        Style="{StaticResource DoubleScaleXAxisWithGridLineStyle}"/>
             </s:SciChartSurface.XAxis>
 
             <s:SciChartSurface.YAxis>
@@ -58,7 +58,7 @@
             <s:SciChartSurface.Annotations>
                 <s:VerticalLineAnnotation X1="{Binding XEndDate, Mode=OneWay}">
                     <s:VerticalLineAnnotation.AnnotationLabels>
-                        <s:AnnotationLabel Text="Project End"                                                           
+                        <s:AnnotationLabel Text="Project End"
                                            Background="OrangeRed" 
                                            Foreground="White"
                                            AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
@@ -70,9 +70,9 @@
                 <s:VerticalSliceModifier ShowAxisLabels="False">
                     <s:VerticalLineAnnotation X1="{Binding XCurrentDate, Mode=TwoWay}">
                         <s:VerticalLineAnnotation.AnnotationLabels>
-                            <s:AnnotationLabel Background="#42B649"    
-                                                   Foreground="White"
-                                                   AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
+                            <s:AnnotationLabel Background="#42B649"
+                                               Foreground="White"
+                                               AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
                         </s:VerticalLineAnnotation.AnnotationLabels>
                     </s:VerticalLineAnnotation>
                 </s:VerticalSliceModifier>
@@ -166,7 +166,7 @@
                         <s:DoubleScaleDiscontinuousDateTimeAxis Height="0"
                                                                 x:Name="DoubleScaleDateTimeAxis"
                                                                 AxisBandsFrequency="Daily"
-                                                                VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"           
+                                                                VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
                                                                 VisibleRangeLimit="{Binding XVisibleRangeLimit}"
                                                                 Calendar="{StaticResource XAxisCalendar}"
                                                                 Style="{StaticResource DoubleScaleXAxisStyle}"/>
@@ -188,7 +188,13 @@
                                 <s:VerticalLineAnnotation IsEditable="True"
                                                           Stroke="#42B649"
                                                           StrokeThickness="1"
-                                                          X1="{Binding XCurrentDate, Mode=TwoWay}"/>
+                                                          X1="{Binding XCurrentDate, Mode=TwoWay}">
+                                    <s:VerticalLineAnnotation.ResizingGripsStyle>
+                                        <Style TargetType="Thumb">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Style>
+                                    </s:VerticalLineAnnotation.ResizingGripsStyle>
+                                </s:VerticalLineAnnotation>
                             </s:VerticalSliceModifier>
                         </s:ModifierGroup>
                     </s:SciChartSurface.ChartModifier>

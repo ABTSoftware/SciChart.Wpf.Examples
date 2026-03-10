@@ -26,14 +26,12 @@ namespace SciChart.Examples.ExternalDependencies.Common
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var type = value as Type;
-            var typeName = "";
+            var typeName = string.Empty;
 
-            if (type != null)
+            if (value != null)
             {
-                typeName = type.Name;
+                typeName = ((value as Type) ?? value.GetType()).Name;
             }
-
             return typeName.Replace("Fast", "").Replace("RenderableSeries", " Series");
         }
 

@@ -13,36 +13,28 @@
              AutomationProperties.AutomationId="ExampleView">
 
     <UserControl.Resources>
-
-        <ext:ScrollViewerWidthMultiConverter x:Key="multiplyConverter" />
-
         <Style x:Key="DescriptionBoxAnimatedExpanderStyle" TargetType="{x:Type Expander}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Expander}">
-                        <Grid x:Name="ExpanderContentRoot">
-                            <Grid.Tag>
-                                <system:Double>0.0</system:Double>
-                            </Grid.Tag>
-                            <Grid.Width>
-                                <MultiBinding Converter="{StaticResource multiplyConverter}">
-                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                                </MultiBinding>
-                            </Grid.Width>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            
                             <ContentPresenter x:Name="ExpandSite"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Focusable="False" />
-                        </Grid>
+                        </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsExpanded" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.4"
-                                                             Storyboard.TargetName="ExpanderContentRoot"
-                                                             Storyboard.TargetProperty="Tag"
+                                            <DoubleAnimation Duration="0:0:0.4"                                                 
+                                                             Storyboard.TargetProperty="Width" 
+                                                             From="0"
                                                              To="270" />
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -50,9 +42,9 @@
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.4"
-                                                             Storyboard.TargetName="ExpanderContentRoot"
-                                                             Storyboard.TargetProperty="Tag"
+                                            <DoubleAnimation Duration="0:0:0.4"                                                        
+                                                             Storyboard.TargetProperty="Width"
+                                                             From="270"
                                                              To="0" />
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -161,7 +153,7 @@
                     <Button Command="{Binding SendFeedbackCommand}"
                             Style="{StaticResource MainToolbarButtonStyle}"
                             ToolTipService.ToolTip="Send us some feedback! Your encouragement goes a long way!">
-                        
+
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="CommentQuoteOutline" Height="16" Width="16" Margin="0,2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Feedback"/>
@@ -219,13 +211,13 @@
                             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="GitHub"/>
                         </StackPanel>
                     </Button>
-                    
+
                     <Rectangle Style="{StaticResource ToolbarSeparatorStyle}"/>
 
                     <Button Command="{Binding GoToDocumentationCommand}"
                             Style="{StaticResource MainToolbarButtonStyle}"
                             ToolTipService.ToolTip="Go to Documentation for SciChart.WPF">
-                        
+
                         <StackPanel Orientation="Horizontal">
                             <icons:PackIconMaterial Kind="FileDocumentOutline" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Text="Documentation"/>
@@ -278,62 +270,57 @@
                       Margin="-1,0"
                       ExpandDirection="Left"
                       IsExpanded="{Binding ElementName=InfoPanelButton, Path=IsChecked}"
+                      Background="{DynamicResource InfoPanelBackgroundBrush}"
                       Style="{StaticResource DescriptionBoxAnimatedExpanderStyle}">
 
-                <Border x:Name="DescriptionBox"
-                        Width="270"
-                        BorderThickness="0"      
-                        Background="{DynamicResource InfoPanelBackgroundBrush}"
-                        SizeChanged="OnExamplesPopupSizeChanged">
+                <Grid MinWidth="270" Margin="0,15,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                    <Grid Margin="0,15,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                    <Viewbox Grid.Column="0" Margin="20,0,10,0" Width="30" Height="30">
+                        <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding SelectedExample.IconPath}"/>
+                    </Viewbox>
 
-                        <Viewbox Grid.Column="0" Margin="20,0,10,0" Width="30" Height="30">
-                            <ContentPresenter Content="{Binding}" ext:ContentPresenterHelper.ContentTemplate="{Binding SelectedExample.IconPath}"/>
-                        </Viewbox>
+                    <TextBlock Grid.Column="1"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Text="{Binding SelectedExample.Title}"
+                               Style="{StaticResource TipsHeaderTextBlockStyle}"/>
 
-                        <TextBlock Grid.Column="1"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   TextWrapping="Wrap"
-                                   Text="{Binding SelectedExample.Title}"
-                                   Style="{StaticResource TipsHeaderTextBlockStyle}"/>
+                    <Button Grid.Column="2"
+                            Margin="15,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Command="{Binding HideDescriptionCommand}"
+                            Style="{StaticResource CloseButtonStyle}"/>
 
-                        <Button Grid.Column="2"
-                                Margin="15,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Command="{Binding HideDescriptionCommand}"
-                                Style="{StaticResource CloseButtonStyle}"/>
+                    <ScrollViewer Grid.Row="1"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="3"
+                                  Margin="20,15,2,2"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto">
 
-                        <ScrollViewer Grid.Row="1"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="3"
-                                      Margin="20,15,2,2"
-                                      HorizontalScrollBarVisibility="Disabled"
-                                      VerticalScrollBarVisibility="Auto">
-
-                            <RichTextBox Margin="-5,0,15,15"
-                                         Background="Transparent"
-                                         BorderThickness="0"
-                                         Foreground="#FFC2C4CB"                                    
-                                         IsReadOnly="True" 
-                                         HorizontalScrollBarVisibility="Disabled"
-                                         VerticalScrollBarVisibility="Disabled"
-                                         helpers:RichTextBoxHelper.Text="{Binding SelectedExample.FormattedDescription}"/>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
+                        <RichTextBox Margin="-5,0,15,15"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Foreground="#FFC2C4CB"                                    
+                                     IsReadOnly="True" 
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     VerticalScrollBarVisibility="Disabled"
+                                     RequestBringIntoView="DescriptionBox_OnRequestBringIntoView"
+                                     helpers:RichTextBoxHelper.Text="{Binding SelectedExample.FormattedDescription}"/>
+                    </ScrollViewer>
+                </Grid>
             </Expander>
 
             <!-- Example Frame -->

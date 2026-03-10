@@ -1,0 +1,48 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/HeatmapChartTypes/PolarHeatmapCustomization/DailyMaxTemperatureHeatmapView.xaml</View>
+	<ViewModel/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/PolarUniformHeatmapMaxDailyTemperature.png</ImagePath>
+	<IconPath>IconHeat</IconPath>
+	<ToolTipDescription>Demonstrates how to use SciChart, specifically a Polar Uniform Heatmap to visualize real-world heatmap data.</ToolTipDescription>
+	<Description>
+		This example demonstrates how to create a Polar Uniform Heatmap using SciChart to visualize real-world maximum daily temperature data over multiple years.
+
+		The PolarXAxis (Angular Axis) represents the days of the year and is divided into sector-like grid lines that mark month boundaries, with month labels positioned at the center of each sector.
+		The PolarYAxis (Radial Axis) represents individual years and is segmented using circular grid lines.
+
+		[b]Data Input[/b]
+		The heatmap accepts a 2D array of maximum daily temperature values, where each row corresponds to a year and each column represents a day of the year.
+		Each year is assumed to contain 366 days; for non-leap years, the value corresponding to February 29 is represented as NaN.
+		Missing measurements are represented as NaN values in the dataset and are rendered as transparent cells.
+
+		[b]Chart Legend[/b]
+		A color map is applied to translate temperature values into visually distinct colors. This enables intuitive interpretation of seasonal gradients, extreme temperature peaks, and long-term trends within the data.
+		It is visually represented by a ColorMap control displayed as a chart legend.
+
+		[b]Interactivity[/b]
+		Interactions allow users to explore year-round temperature patterns in detail:
+		- Tooltips displaying calendar dates and temperature values
+		- Rubber-band zooming along angular and radial axes
+		- Mouse-wheel zooming
+		- Chart export functionality
+		- A legend for interpreting the color scale
+
+		[b]Documentation Links[/b]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/DailyMaxTemperatureHeatmapSurface.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/DailyMaxTemperatureHeatmapView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/DailyMaxTemperatureHeatmapView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/DayOfYearToDateConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/MaxTemperatureConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/MonthNameAngularAxisLabelProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization/YearRadialAxisLabelProvider.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Polar</Features>
+		<Features>Heatmap</Features>
+	</Features>
+</ExampleDefinition>
