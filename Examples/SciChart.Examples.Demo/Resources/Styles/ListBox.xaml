@@ -16,8 +16,6 @@
     <p:BoolToValueConverter x:Key="InverseBooleanToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible"/>
 
     <converters:IsGroupConverter x:Key="IsGroupConverter"/>
-    <converters:ExampleConverter x:Key="ExampleConverter"/>
-
     <converters:ExampleDescriptionFormattingConverter x:Key="ExampleDescriptionFormattingConverter" HighlightBrush="{DynamicResource SearchViewItemMatchHighlightBrush}"/>
     <converters:ExampleSourceCodeFormattingConverter x:Key="ExampleSourceCodeFormattingConverter" HighlightBrush="{DynamicResource SearchViewItemMatchHighlightBrush}"/>
     <converters:ExampleFeaturesFormattingConverter x:Key="ExampleFeaturesFormattingConverter" HighlightBrush="{DynamicResource SearchViewItemMatchHighlightBrush}"/>

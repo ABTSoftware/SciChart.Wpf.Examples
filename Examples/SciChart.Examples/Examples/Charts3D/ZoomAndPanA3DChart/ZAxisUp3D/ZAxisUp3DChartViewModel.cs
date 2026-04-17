@@ -56,20 +56,26 @@ namespace SciChart.Examples.Examples.Charts3D.ZoomAndPanA3DChart.ZAxisUp3D
         {
             XAxis = new NumericAxis3DViewModel
             {
-                AxisTitle = "Life Expectancy",
+                AxisTitle = "Life Expectancy, years",
                 VisibleRange = new DoubleRange(30, 85),
                 FontSize = 18,
+                TextFormatting="F0",
                 TickTextBrush = Brushes.Red
             };
 
-            YAxis = new NumericAxis3DViewModel
+            YAxis = new LogarithmicNumericAxis3DViewModel
             {
-                AxisTitle = "GDP per capita",
-                VisibleRange = new DoubleRange(0, 100000),
+                AxisTitle = "GDP per capita, USD",
+                VisibleRange = new DoubleRange(90, 100000),
+                MajorDelta = 1,
+                AutoTicks = false,
+                LogarithmicBase = 10,
                 FontSize = 18,
                 TickTextBrush = Brushes.Green,
                 PositiveSideClipping = AxisSideClipping.VisibleRange,
-                NegativeSideClipping = AxisSideClipping.VisibleRange
+                NegativeSideClipping = AxisSideClipping.VisibleRange,
+                TextFormatting = "#,##0 $",
+                CursorTextFormatting = "#,##0 $"
             };
 
             ZAxis = new NumericAxis3DViewModel

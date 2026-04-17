@@ -1,0 +1,39 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/HeatmapChartTypes/PolarHeatmapCustomization_Ultrasound/PolarUniformHeatmapUltrasound.xaml</View>
+	<ViewModel/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/UltrasoundPolarUniformHeatmap.png</ImagePath>
+	<IconPath>IconHeat</IconPath>
+	<ToolTipDescription>Demonstrates how to create a Polar Uniform Heatmap for visualizing ultrasound data using SciChart.</ToolTipDescription>
+	<Description>
+		This example demonstrates how to construct a sector-shaped polar uniform heatmap using SciChart to visualize ultrasound diagnostic data.
+		The sector view is achieved by applying a large VisibleRange to the Angular Axis, which compresses the heatmap into a sector. A rotation angle is applied to position the heatmap on the lower side of the chart.
+		Finally, a custom WPF behavior is used to scale and reposition the polar plot within the viewport whenever the chart is resized.
+
+		[b]Data Input[/b]
+		The UniformHeatmapDataSeries class accepts a 2D array of numerical ultrasound data.
+
+		[b]Customizable Color Mapping[/b]
+		A user-defined color map is applied to translate data values into visually distinct colors. This enables intuitive interpretation of gradients, peaks, and troughs within the dataset.
+
+		[b]Interactive Features[/b]
+		This example does not support standard zooming or panning features due to constraints imposed by customizations of the polar chart layout.
+		However, custom interactions can still be implemented via the ChartModifier API.
+
+		[b]Documentation Links[/b]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Heatmap%20Type.html']Heatmap API Documentation[/url]
+		- [url='https://www.scichart.com/documentation/win/current/Common%20RenderableSeries%20Properties.html']RenderableSeries API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Model.DataSeries.Heatmap2DArrayDataSeries.UniformHeatmapDataSeries%603.html']UniformHeatmapDataSeries[/url]
+		- [url='https://www.scichart.com/documentation/win/current/The%20CompositeAnnotation%20Type.html']CompositeAnnotation API Overview[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization_Ultrasound/PolarUniformHeatmapUltrasound.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization_Ultrasound/PolarUniformHeatmapUltrasound.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization_Ultrasound/UltrasoundPolarLabelProvider.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/HeatmapChartTypes/PolarHeatmapCustomization_Ultrasound/SciChartSurfaceTransformBehavior.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Polar</Features>
+		<Features>Heatmap</Features>
+		<Features>Annotations</Features>
+	</Features>
+</ExampleDefinition>

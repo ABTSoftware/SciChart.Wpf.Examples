@@ -16,12 +16,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!--  The SciChartPolarInteractionToolbar adds zoom, zoom extents and rotate functionality  -->
+        <!--  The SciChartInteractionToolbar adds zoom, zoom extents and rotate functionality  -->
         <!--  to the chart and is included for example purposes.  -->
         <!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
         <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}" >
             <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="CircleExpand" RotationAngle="45" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:ToolbarIcon Kind="CircleExpand" Width="16" Height="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Margin="5" Width="150" Orientation="Vertical">
                         <TextBlock Text="X-Axis Alignment" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
@@ -44,7 +44,7 @@
             </ext:FlyoutMenuButton>
 
             <ext:FlyoutMenuButton>
-                <ext:ToolbarIcon Kind="RotateLeft" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:ToolbarIcon Kind="AngleAcute" Width="16" Height="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
                 <ext:FlyoutMenuButton.PopupContent>
                     <StackPanel Margin="5" Width="150" Orientation="Vertical">
                         <TextBlock Text="X-Axis Angle" Style="{StaticResource FlyoutMenuHeaderStyle}"/>

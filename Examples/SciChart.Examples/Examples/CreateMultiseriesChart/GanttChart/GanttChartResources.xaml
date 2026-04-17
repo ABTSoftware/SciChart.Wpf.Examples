@@ -11,6 +11,11 @@
         <Setter Property="DrawMinorGridLines" Value="False"/>
         <Setter Property="DrawMajorBands" Value="False"/>
         <Setter Property="DrawAxisScaleBands" Value="False"/>
+    </Style>
+
+    <Style x:Key="DoubleScaleXAxisWithGridLineStyle"
+           BasedOn="{StaticResource DoubleScaleXAxisStyle}"
+           TargetType="s:DoubleScaleDiscontinuousDateTimeAxis">
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="{StaticResource MainThemeTransparentSolidBrush}"/>
         <Setter Property="Background" Value="{StaticResource ThemedChartBackground}"/>
@@ -244,5 +249,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

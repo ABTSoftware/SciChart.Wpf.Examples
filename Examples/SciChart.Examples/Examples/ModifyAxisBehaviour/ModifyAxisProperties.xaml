@@ -92,8 +92,8 @@
             <!--  Add some sample RenderableSeries. Each theme has a default style for these  -->
             <s:SciChartSurface.RenderableSeries>
                 <s:FastColumnRenderableSeries x:Name="columnSeries" YAxisId="{Binding Source={x:Reference Name=yAxis}, Path=Id, Mode=TwoWay}" />
-                <s:FastOhlcRenderableSeries x:Name="ohlcSeries" YAxisId="{Binding Source={x:Reference Name=yAxis}, Path=Id, Mode=TwoWay}" />
-                <s:FastLineRenderableSeries x:Name="lineSeries" YAxisId="{Binding Source={x:Reference Name=yAxis}, Path=Id, Mode=TwoWay}" />
+                <s:FastOhlcRenderableSeries x:Name="ohlcSeries" YAxisId="{Binding Source={x:Reference Name=yAxis}, Path=Id, Mode=TwoWay}"/>
+                <s:FastLineRenderableSeries x:Name="lineSeries" YAxisId="{Binding Source={x:Reference Name=yAxis}, Path=Id, Mode=TwoWay}"/>
             </s:SciChartSurface.RenderableSeries>
 
             <!--  Add some modifiers to zoom, zoom extents  -->

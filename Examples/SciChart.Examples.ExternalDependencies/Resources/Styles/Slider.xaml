@@ -236,6 +236,9 @@
                 <Setter Property="MinHeight" Value="100"/>
                 <Setter Property="Template" Value="{StaticResource VerticalSlider}"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 

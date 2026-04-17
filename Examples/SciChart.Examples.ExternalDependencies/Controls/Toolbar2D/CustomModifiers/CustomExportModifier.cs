@@ -38,6 +38,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D.CustomModifi
         public ICommand SaveSizeXpsCommand { get; }
 
         public bool UseXamlRs { get; set; }
+        
+        public bool EnableXamlRendererExport { get; set; } = true;
 
         public CustomExportModifier()
         {

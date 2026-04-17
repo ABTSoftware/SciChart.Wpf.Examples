@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization_Ultrasound.PolarUniformHeatmapUltrasound"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization_Ultrasound">
+
+    <UserControl.Resources>
+        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
+
+        <!-- Style for labels on the Angular Axis -->
+        <!-- Applies a 180 deg rotation to every label -->
+        <Style x:Key="XAxisTickLabelStyle" TargetType="s:DefaultTickLabel">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid ClipToBounds="True" Background="{StaticResource ThemedSurfaceChartBackground}">
+        <s:SciChartSurface x:Name="SciChartSurface" Background="Transparent">
+            <i:Interaction.Behaviors>
+                <!-- This behavior centers the chart in the viewport when the Polar Surface is resized -->
+                <local:SciChartSurfaceTransformBehavior ScaleFactor="1.3"/>
+            </i:Interaction.Behaviors>
+
+            <s:SciChartSurface.RenderableSeries>
+                <!-- PolarUniformHeatmapRenderableSeries is used to render the heatmap data -->
+                <s:PolarUniformHeatmapRenderableSeries x:Name="HeatmapRenderSeries"
+                                                       UseLinearTextureFiltering="False"
+                                                       Opacity="0.8">
+                    <s:PolarUniformHeatmapRenderableSeries.ColorMap>
+                        <s:HeatmapColorPalette Minimum="0" Maximum="255">
+                            <GradientStop Offset="0.0" Color="Transparent"/>
+                            <GradientStop Offset="1.0" Color="WhiteSmoke"/>
+                        </s:HeatmapColorPalette>
+                    </s:PolarUniformHeatmapRenderableSeries.ColorMap>
+                </s:PolarUniformHeatmapRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <!-- Defines the Angular Axis -->
+                <!-- VisibleRange controls how the heatmap is stretched across the polar surface -->
+                <!-- Extended VisibleRange is used to compress the data into a sector view -->
+                <!-- RotationAngle is applied to position the chart on the lower side of the Polar Surface -->
+                <s:PolarXAxis Name="AngularAxis"
+                              AutoRange="Never"
+                              AutoTicks="False"
+                              BorderThickness="0"
+                              DrawMajorGridLines="False"
+                              FlipCoordinates="True"
+                              IsLabelCullingEnabled="False"
+                              MajorDelta="25"
+                              RotationAngle="225"
+                              VisibleRange="0,1000"
+                              TickLabelStyle="{StaticResource XAxisTickLabelStyle}"/>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <!-- Defines the Angular Axis -->
+                <!-- VisibleRange controls how the heatmap is stretched across the polar surface -->
+                <!-- A negative VisibleRange.Min value allows creating a visual gap at the chart center -->
+                <s:PolarYAxis Name="RadialAxis"
+                              Angle="-48"
+                              AutoRange="Never"
+                              DrawMajorGridLines="False"
+                              DrawMajorTicks="False"
+                              DrawMinorGridLines="False"
+                              DrawMinorTicks="False"
+                              FlipCoordinates="False"
+                              VisibleRange="-50,206"/>
+            </s:SciChartSurface.YAxis>
+
+            <!-- Defines a couple of double-headed Arrow Annotations -->
+            <!-- Two overlapping single-headed ArrowAnnotations are used to create a single double-headed arrow -->
+            <s:SciChartSurface.Annotations>
+                <!--  First arrow  -->
+                <s:CompositeAnnotation IsEditable="False"
+                                       X1="183.46"
+                                       X2="207"
+                                       Y1="65.32"
+                                       Y2="148.55">
+                    <s:CompositeAnnotation.Annotations>
+                        <s:LineArrowAnnotation HeadLength="4"
+                                               HeadWidth="9"
+                                               Stroke="{StaticResource MainThemeSolidBrush}"
+                                               X1="{Binding ParentAnnotation.X2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               X2="{Binding ParentAnnotation.X1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y1="{Binding ParentAnnotation.Y2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y2="{Binding ParentAnnotation.Y1, Mode=OneWay, RelativeSource={RelativeSource Self}}"/>
+                        <s:LineArrowAnnotation HeadLength="4"
+                                               HeadWidth="9"
+                                               Stroke="{StaticResource MainThemeSolidBrush}"
+                                               X1="{Binding ParentAnnotation.X1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               X2="{Binding ParentAnnotation.X2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y1="{Binding ParentAnnotation.Y1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y2="{Binding ParentAnnotation.Y2, Mode=OneWay, RelativeSource={RelativeSource Self}}"/>
+                    </s:CompositeAnnotation.Annotations>
+                </s:CompositeAnnotation>
+                <!--  Second arrow  -->
+                <s:CompositeAnnotation IsEditable="False"
+                                       X1="87.3"
+                                       X2="56.42"
+                                       Y1="124.28"
+                                       Y2="166.8">
+                    <s:CompositeAnnotation.Annotations>
+                        <s:LineArrowAnnotation HeadLength="4"
+                                               HeadWidth="9"
+                                               Stroke="{StaticResource ExtraThemeStrokeBrush_2}"
+                                               X1="{Binding ParentAnnotation.X2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               X2="{Binding ParentAnnotation.X1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y1="{Binding ParentAnnotation.Y2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y2="{Binding ParentAnnotation.Y1, Mode=OneWay, RelativeSource={RelativeSource Self}}"/>
+                        <s:LineArrowAnnotation HeadLength="4"
+                                               HeadWidth="9"
+                                               Stroke="{StaticResource ExtraThemeStrokeBrush_2}"
+                                               X1="{Binding ParentAnnotation.X1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               X2="{Binding ParentAnnotation.X2, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y1="{Binding ParentAnnotation.Y1, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                                               Y2="{Binding ParentAnnotation.Y2, Mode=OneWay, RelativeSource={RelativeSource Self}}"/>
+                    </s:CompositeAnnotation.Annotations>
+                </s:CompositeAnnotation>
+            </s:SciChartSurface.Annotations>
+        </s:SciChartSurface>
+
+        <!-- Color Map for the heatmap -->
+        <Grid HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <s:HeatmapColorMap Grid.Row="1"
+                               Margin="20"
+                               VerticalAlignment="Stretch"
+                               Background="Transparent"
+                               BorderThickness="0"
+                               ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"        
+                               Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderSeries}}"
+                               Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderSeries}}"
+                               Orientation="Vertical"
+                               EnableAxisDrag="False">
+                <s:HeatmapColorMap.AxisStyle>
+                    <Style TargetType="s:AxisBase">
+                        <Setter Property="DrawMajorBands" Value="False"/>
+                        <Setter Property="DrawMajorGridLines" Value="False"/>
+                        <Setter Property="DrawMinorGridLines" Value="False"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Style>
+                </s:HeatmapColorMap.AxisStyle>
+            </s:HeatmapColorMap>
+        </Grid>
+
+        <!-- The TextBlock at the top displays the chart title -->
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="10"
+                   FontSize="22"
+                   Foreground="WhiteSmoke"
+                   Text="Fetal ultrasound at 31 weeks"/>
+    </Grid>
+</UserControl>

@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Media;
 using SciChart.Examples.Demo.ViewModels;
 using SciChart.UI.Bootstrap;
 using Unity;
@@ -32,14 +31,9 @@ namespace SciChart.Examples.Demo.Views
             };
         }
 
-        private void OnExamplesPopupSizeChanged(object sender, SizeChangedEventArgs e)
+        private void DescriptionBox_OnRequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
         {
-            var rectangleGeometry = new RectangleGeometry
-            {
-                Rect = new Rect(0, 0, e.NewSize.Width, e.NewSize.Height)
-            };
-
-            ((UIElement)sender).Clip = rectangleGeometry;
+            e.Handled = true;
         }
     }
 }
