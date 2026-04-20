@@ -6,7 +6,7 @@
     <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <Copyright>Copyright © 2011-2023</Copyright>
+    <Copyright>Copyright © SciChart Ltd 2011-2026</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
