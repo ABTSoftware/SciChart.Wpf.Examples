@@ -339,20 +339,25 @@ namespace AnnotationDragModifier3DExample
 			};
 
 			// Pass Entity ID
-            VXccelEngine3D.SelectionColor(EntityId);
+            ulong selectionColor = VXccelEngine3D.EncodeSelectionId(EntityId, 0);
+            VXccelEngine3D.SelectionColor(selectionColor);
 
 			// We create a mesh context. There are various mesh render modes. The simplest is Triangles
 			// For this mode we have to draw a single triangle (three vertices) for each corner of the cube
 			// You can see 
-			eSCRTCullMode cullMode = doubleSided ? eSCRTCullMode.SCRTCullModeNone : eSCRTCullMode.SCRTCullModeBack;
-
-            using (var meshContext = base.BeginLitMesh(cullMode, TSRRenderMode.TRIANGLES))
+			using (var meshContext = base.BeginLitMesh(TSRRenderMode.TRIANGLES))
 			{
+				// Set the Rasterizer State for this entity 
+				if (doubleSided)
+                    VXccelEngine3D.PushRasterizerState(RasterizerStates.Default.TSRRasterizerState);
+				else
+                    VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
+				
 				meshContext.SetVertexColor((_dragFaceId == 0 && DragZ) ? dragColor : color);
 				
 				// Front face
 				SetNormal(meshContext, _normals[0]);
-				meshContext.SetSelectionId(EntityId);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 0));
 				SetVertex(meshContext, _corners[0]);
 				SetVertex(meshContext, _corners[2]);
 				SetVertex(meshContext, _corners[1]);
@@ -364,7 +369,7 @@ namespace AnnotationDragModifier3DExample
 
 				// Right side face
 				SetNormal(meshContext, _normals[1]);
-				meshContext.SetSelectionId(EntityId + 1);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 1));
 				SetVertex(meshContext, _corners[1]);
 				SetVertex(meshContext, _corners[2]);
 				SetVertex(meshContext, _corners[6]);
@@ -376,7 +381,7 @@ namespace AnnotationDragModifier3DExample
 
 				// Top face
 				SetNormal(meshContext, _normals[2]);
-				meshContext.SetSelectionId(EntityId + 2);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 2));
 				SetVertex(meshContext, _corners[2]);
 				SetVertex(meshContext, _corners[7]);
 				SetVertex(meshContext, _corners[6]);
@@ -388,7 +393,7 @@ namespace AnnotationDragModifier3DExample
 
 				// Left side face
 				SetNormal(meshContext, _normals[3]);
-				meshContext.SetSelectionId(EntityId+ 3);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 3));
 				SetVertex(meshContext, _corners[3]);
 				SetVertex(meshContext, _corners[0]);
 				SetVertex(meshContext, _corners[4]);
@@ -400,7 +405,7 @@ namespace AnnotationDragModifier3DExample
 
 				// Back face
 				SetNormal(meshContext, _normals[4]);
-				meshContext.SetSelectionId(EntityId+ 4);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 4));
 				SetVertex(meshContext, _corners[7]);
 				SetVertex(meshContext, _corners[5]);
 				SetVertex(meshContext, _corners[6]);
@@ -412,7 +417,7 @@ namespace AnnotationDragModifier3DExample
 
 				// Bottom face 
 				SetNormal(meshContext, _normals[5]);
-				meshContext.SetSelectionId(EntityId+ 5);
+				meshContext.SetSelectionId(VXccelEngine3D.EncodeSelectionId(EntityId, 5));
 				SetVertex(meshContext, _corners[0]);
 				SetVertex(meshContext, _corners[1]);
 				SetVertex(meshContext, _corners[5]);
@@ -421,6 +426,11 @@ namespace AnnotationDragModifier3DExample
 				SetVertex(meshContext, _corners[4]);
 			}
 
+			// Revert raster state
+            VXccelEngine3D.PopRasterizerState();
+
+			// Set the Rasterizer State for wireframe 
+            VXccelEngine3D.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 			var strokeWidth = (float)this.strokeWidth;
 
 			// Create a Line Context for a continuous line and draw the outline of the cube 
@@ -429,6 +439,8 @@ namespace AnnotationDragModifier3DExample
 			CreateSquare(strokeWidth, true, stroke, new[] { _corners[0], _corners[4], _corners[7], _corners[3] });
 			CreateSquare(strokeWidth, true, stroke, new[] { _corners[5], _corners[1], _corners[2], _corners[6] });
 
+			// Revert raster state
+            VXccelEngine3D.PopRasterizerState();
 		}
 
 		/// <summary>
@@ -445,7 +457,8 @@ namespace AnnotationDragModifier3DExample
 				lineContext.SetVertexColor(lineColor);
 
 				// Set selection id in order for the hit-test to be supported
-				lineContext.SetSelectionId(EntityId);
+				ulong selectionId = VXccelEngine3D.EncodeSelectionId(EntityId, 0);
+				lineContext.SetSelectionId(selectionId);
 
 				for (var i = 0; i < vertices.Length; i++)
 				{
