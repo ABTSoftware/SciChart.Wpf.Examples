@@ -9,3 +9,5 @@ packages
 *.db
 Build/
 Examples/lastbuild.txt
+# Claude Code
+.claude/

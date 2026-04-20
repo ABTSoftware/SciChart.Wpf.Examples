@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 	<PropertyGroup>
 		<Company>SciChart Ltd</Company>
-		<Copyright>Copyright © SciChart Ltd 2011-2023</Copyright>
+		<Copyright>Copyright � SciChart Ltd 2011-2026</Copyright>
 		<TargetFrameworks>net6.0-windows</TargetFrameworks>
 		<UseWPF>True</UseWPF>
 		<OutputType>WinExe</OutputType>
