@@ -103,8 +103,10 @@ namespace Plane3DAnnotationExample
             // We create a mesh context. There are various mesh render modes. The simplest is Triangles
             // For this mode we have to draw a couple of triangles (three vertices) for each side of the plane
             // You can see 
-            using (var meshContext = BeginLitMesh( eSCRTCullMode.SCRTCullModeBack, TSRRenderMode.TRIANGLES))
+            using (var meshContext = BeginLitMesh(TSRRenderMode.TRIANGLES))
             {
+                // Set the Rasterizer State for this entity 
+                VXccelEngine3D.PushRasterizerState(RasterizerStates.CullBackFacesState.TSRRasterizerState);
 
                 // Set the color before drawing vertices
                 meshContext.SetVertexColor(m_color);
@@ -129,14 +131,23 @@ namespace Plane3DAnnotationExample
                 SetVertex(meshContext, corners[2]);
             }
 
+            // Revert raster state
+            VXccelEngine3D.PopRasterizerState();
 
             if (m_drawWireframe)
             {
+
+
+                // Set the Rasterizer State for wireframe 
+                VXccelEngine3D.PushRasterizerState(RasterizerStates.WireframeState.TSRRasterizerState);
 
                 // Create a Line Context for a continuous line and draw the outline of the cube 
                 var lineColor = Color.FromArgb(0xFF, m_color.R, m_color.G, m_color.B);
 
                 CreateSquare(2.0f, true, lineColor, new[] { corners[0], corners[1], corners[3], corners[2] });
+
+                // Revert raster state
+                VXccelEngine3D.PopRasterizerState();
             }
         }
 
