@@ -20,7 +20,7 @@ namespace SciChart.Mvvm.Tutorial
             set
             {
                 _chartTitle = value;
-                OnPropertyChanged("ChartTitle");
+                OnPropertyChanged(nameof(ChartTitle));
             }
         }
 
