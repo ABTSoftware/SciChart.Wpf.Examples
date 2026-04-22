@@ -10,6 +10,6 @@
 		<LangVersion>Latest</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="SciChart3D" Version="*-*" />
+		<PackageReference Include="SciChart3D" Version="8.*-*" />
 	</ItemGroup>
 </Project>

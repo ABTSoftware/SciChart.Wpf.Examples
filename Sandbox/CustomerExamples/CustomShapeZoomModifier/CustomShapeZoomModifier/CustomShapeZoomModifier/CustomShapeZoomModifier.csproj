@@ -29,6 +29,6 @@
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="2.9.0" />
-    <PackageReference Include="SciChart" Version="*-*" />
+    <PackageReference Include="SciChart" Version="8.*-*" />
   </ItemGroup>
 </Project>
