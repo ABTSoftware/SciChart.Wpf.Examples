@@ -1,0 +1,192 @@
+<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPattern.Antenna3DRadiationPatternView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals" xmlns:s="http://schemas.abtsoftware.co.uk/scichart" xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D" xmlns:local="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPattern" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Shared gain color palette and axis styles used across all sub-views -->
+                <ResourceDictionary Source="AntennaSharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Antenna metrics model: scalar figures-of-merit bound into the legend panel -->
+            <local:AntennaMetrics x:Key="AntennaMetrics" />
+
+            <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter" />
+
+            <!-- Style for the vertical color bar axis alongside the 3D chart -->
+            <Style x:Key="ColorBarAxisStyle" TargetType="s:AxisBase">
+                <Setter Property="BorderThickness" Value="1,0,0,0" />
+                <Setter Property="BorderBrush" Value="#93A3C5" />
+                <Setter Property="DrawMinorTicks" Value="False" />
+                <Setter Property="AutoTicks" Value="False" />
+                <Setter Property="AxisAlignment" Value="Right" />
+                <Setter Property="MajorDelta">
+                    <Setter.Value>
+                        <sys:Double>10</sys:Double>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="MajorTickLineStyle" Value="{StaticResource AxisTickStyle}" />
+            </Style>
+
+            <!-- Custom legend template: displays antenna metrics (peak gain, HPBW, SLL, F/B ratio) -->
+            <ControlTemplate x:Key="LegendTemplate">
+                <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Background="#CC11192C" BorderBrush="#4493A3C5" BorderThickness="0" Padding="10,7">
+                    <StackPanel>
+                        <TextBlock Text="Antenna Metrics" Foreground="#93A3C5" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,5" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="8" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Peak Gain" Foreground="#7088AA" FontSize="13" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="HPBW (E-plane)" Foreground="#7088AA" FontSize="13" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="HPBW (H-plane)" Foreground="#7088AA" FontSize="13" />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="First SLL" Foreground="#7088AA" FontSize="13" />
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Front / Back" Foreground="#7088AA" FontSize="13" />
+                            <TextBlock Grid.Row="0" Grid.Column="2" FontSize="11" Foreground="#E0FFFFFF" Text="{Binding PeakGain,    Mode=OneWay, Source={StaticResource AntennaMetrics}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" Foreground="#E0FFFFFF" Text="{Binding HpbwEPlane, Mode=OneWay, Source={StaticResource AntennaMetrics}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" FontSize="11" Foreground="#E0FFFFFF" Text="{Binding HpbwHPlane, Mode=OneWay, Source={StaticResource AntennaMetrics}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" FontSize="11" Foreground="#E0FFFFFF" Text="{Binding FirstSll,   Mode=OneWay, Source={StaticResource AntennaMetrics}}" />
+                            <TextBlock Grid.Row="4" Grid.Column="2" FontSize="11" Foreground="#E0FFFFFF" Text="{Binding FrontToBack, Mode=OneWay, Source={StaticResource AntennaMetrics}}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!-- Layout: toolbar | gain coverage (left) | 3D chart (centre) | polar charts (right) -->
+    <Grid Background="{StaticResource ThemedSurfaceChartBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar with cross-section angle sliders and visual settings -->
+        <ext:SciChart3DInteractionToolbar Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+            <ext:FlyoutSeparator />
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Cross-section settings">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+                        <!-- E-plane cut: selects φ angle for the elevation cross-section -->
+                        <TextBlock Text="E-plane  φ cut" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="PhiCutSlider" Width="130" VerticalAlignment="Center" Minimum="0" Maximum="360" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="OnPhiCutChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference PhiCutSlider}, Path=Value, StringFormat={}{0:F0}°}" VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+                        <!-- H-plane cut: selects θ angle for the azimuth cross-section -->
+                        <TextBlock Text="H-plane  θ cut" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="ThetaCutSlider" Width="130" VerticalAlignment="Center" Minimum="0" Maximum="180" Value="22" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="OnThetaCutChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference ThetaCutSlider}, Path=Value, StringFormat={}{0:F0}°}" VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+                        <!-- Ring opacity: controls visibility of θ/φ rings on the 3D mesh -->
+                        <TextBlock Text="Ring opacity" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="OverlayOpacitySlider" Width="130" HorizontalAlignment="Left" Minimum="0" Maximum="1" Value="0.4" />
+                            <TextBlock Text="{Binding Source={x:Reference OverlayOpacitySlider}, Path=Value, StringFormat={}{0:0.0}}" VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+                        <!-- Indicator opacity: controls visibility of θ/φ arc indicators -->
+                        <TextBlock Text="Indicator opacity" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="IndicatorOpacitySlider" Width="130" HorizontalAlignment="Left" Minimum="0" Maximum="1" Value="1.0" ValueChanged="OnIndicatorOpacityChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference IndicatorOpacitySlider}, Path=Value, StringFormat={}{0:0.0}}" VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+                        <!-- Indicator radius: scales the size of the θ/φ arc indicators -->
+                        <TextBlock Text="Indicator radius" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="IndicatorRadiusSlider" Width="130" HorizontalAlignment="Left" Minimum="0.5" Maximum="3.5" Value="0.8" ValueChanged="OnIndicatorRadiusChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference IndicatorRadiusSlider}, Path=Value, StringFormat={}{0:0.0}}" VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+        </ext:SciChart3DInteractionToolbar>
+
+        <!-- Left panel: gain cut lines (fan chart) and gain coverage heatmap -->
+        <local:GainCoverageChartsView x:Name="gainCoverageView" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+
+        <!-- Centre: 3D radiation pattern with gain mesh, coordinate rings and angle indicators -->
+        <s3D:SciChart3DSurface x:Name="sciChart"
+                               Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                               Margin="0,8,0,0"
+                               WorldDimensions="200,200,200"
+                               BorderThickness="0"
+                               IsFpsCounterVisible="False"
+                               IsXyzGizmoVisible="False"
+                               s3D:XyAxisPlane.IsPlaneVisible="False"
+                               s3D:ZyAxisPlane.IsPlaneVisible="False"
+                               s3D:ZxAxisPlane.IsPlaneVisible="False">
+
+            <s3D:SciChart3DSurface.Camera>
+                <s3D:Camera3D Position="-142,215,-120" Target="0,100,0" />
+            </s3D:SciChart3DSurface.Camera>
+
+            <s3D:SciChart3DSurface.RenderableSeries>
+                <!-- Coordinate rings on the 3D mesh, showing the current θ and φ cut planes -->
+                <s3D:PointLineRenderableSeries3D x:Name="phiRing" Stroke="#FF4080FF" StrokeThickness="1" IsAntialiased="True" Opacity="{Binding Source={x:Reference OverlayOpacitySlider}, Path=Value}" />
+                <s3D:PointLineRenderableSeries3D x:Name="thetaRing" Stroke="#FFFF8040" StrokeThickness="1" IsAntialiased="True" Opacity="{Binding Source={x:Reference OverlayOpacitySlider}, Path=Value}" />
+                <!-- Angle indicators: arcs with arrowheads showing θ and φ directions -->
+                <s3D:PointLineRenderableSeries3D x:Name="thetaArc" Stroke="#FFFF8040" StrokeThickness="3" IsAntialiased="True" Opacity="{Binding Source={x:Reference IndicatorOpacitySlider}, Path=Value}" />
+                <s3D:PointLineRenderableSeries3D x:Name="thetaArrow" Stroke="#FFFF8040" StrokeThickness="3" IsAntialiased="True" Opacity="{Binding Source={x:Reference IndicatorOpacitySlider}, Path=Value}" />
+                <s3D:PointLineRenderableSeries3D x:Name="phiArc" Stroke="#FF4080FF" StrokeThickness="3" IsAntialiased="True" Opacity="{Binding Source={x:Reference IndicatorOpacitySlider}, Path=Value}" />
+                <s3D:PointLineRenderableSeries3D x:Name="phiArrow" Stroke="#FF4080FF" StrokeThickness="3" IsAntialiased="True" Opacity="{Binding Source={x:Reference IndicatorOpacitySlider}, Path=Value}" />
+            </s3D:SciChart3DSurface.RenderableSeries>
+
+            <!-- Axes use manual ranges set in code-behind to fit the mesh extents -->
+            <s3D:SciChart3DSurface.XAxis>
+                <s3D:NumericAxis3D AutoRange="Never" VisibleRange="-5.5,5.5" />
+            </s3D:SciChart3DSurface.XAxis>
+            <s3D:SciChart3DSurface.YAxis>
+                <s3D:NumericAxis3D AutoRange="Never" />
+            </s3D:SciChart3DSurface.YAxis>
+            <s3D:SciChart3DSurface.ZAxis>
+                <s3D:NumericAxis3D AutoRange="Never" VisibleRange="-5.5,5.5" />
+            </s3D:SciChart3DSurface.ZAxis>
+
+            <!-- Chart modifiers: orbit, zoom, zoom-extents reset, and the metrics legend -->
+            <s3D:SciChart3DSurface.ChartModifier>
+                <s3D:ModifierGroup3D>
+                    <s3D:MouseWheelZoomModifier3D />
+                    <s3D:OrbitModifier3D />
+                    <s3D:ZoomExtentsModifier3D AnimateDurationMs="500" ResetPosition="-142,215,-120" ResetTarget="0,100,0" />
+                    <s3D:LegendModifier3D ShowLegend="True" LegendPlacement="Inside" HorizontalAlignment="Right" LegendTemplate="{StaticResource LegendTemplate}" />
+                </s3D:ModifierGroup3D>
+            </s3D:SciChart3DSurface.ChartModifier>
+        </s3D:SciChart3DSurface>
+
+        <!-- Right panel: E-plane and H-plane polar gain cuts -->
+        <local:PolarChartsView x:Name="polarView" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" />
+
+        <!-- Vertical color bar: maps the shared gain palette to dBi values -->
+        <s:HeatmapColorMap Grid.Column="2"
+                           Grid.Row="0" 
+                           Margin="3,58.2,0,51.2"
+                           Padding="5"
+                           EnableAxisDrag="False"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Stretch"
+                           BorderThickness="0"
+                           Background="{StaticResource ThemedTransparentChartBackground}"
+                           ColorMap="{Binding Source={StaticResource GainColorPalette}, Path=GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           Minimum="{Binding Source={StaticResource GainColorPalette}, Path=Minimum}"
+                           Maximum="{Binding Source={StaticResource GainColorPalette}, Path=Maximum}"
+                           Orientation="Vertical"
+                           TextFormatting="0"
+                           AxisStyle="{StaticResource ColorBarAxisStyle}" />
+    </Grid>
+</UserControl>

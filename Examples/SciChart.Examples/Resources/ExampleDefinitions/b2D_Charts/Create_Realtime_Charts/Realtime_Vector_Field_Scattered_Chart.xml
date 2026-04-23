@@ -1,0 +1,43 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/CreateRealtimeChart/RealtimeScatteredVectorFieldChartView.xaml</View>
+	<ViewModel />
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Realtime_Scattered_Vectors.png</ImagePath>
+	<IconPath>IconRealtime</IconPath>
+	<ToolTipDescription>Demonstrates a real-time animated Scattered Vector Field chart with particles advected through three Rankine vortices, using NonUniformVectorFieldDataSeries.</ToolTipDescription>
+	<Description>
+		This example demonstrates a real-time [b]Scattered (Non-Uniform) Vector Field Chart[/b] - a set of particles at arbitrary positions, each showing its local flow velocity as an arrow, animated at up to ~50 fps.
+
+		The chart uses [b]VectorFieldRenderableSeries[/b] and [b]NonUniformVectorFieldDataSeries[/b], which stores flat (X, Y, DX, DY) tuples for scatter-positioned vectors. Three [b]Rankine vortices[/b] (regularised point vortices) define the steady flow field. Each frame, every particle is advected to a new position using an [b]explicit Euler integration[/b] step, its velocity is re-sampled at the new position, and the particle wraps around the domain boundary if it leaves.
+
+		Thread safety is maintained with a [b]double-buffer[/b]: the background timer writes updated positions and velocities into scratch arrays, and the UI rendering handler copies them into the live arrays that the DataSeries wraps before calling InvalidateParentSurface.
+
+		Two update modes are available via the toolbar:
+		- [b]Normal[/b] - a background thread-pool timer fires every 20 ms (~50 fps); the rendering handler invalidates the chart only when new data is ready.
+		- [b]Performance[/b] - the data update runs directly inside CompositionTarget.Rendering every frame for maximum throughput, with a FPS overlay shown.
+
+		[b]Features demonstrated[/b]
+
+		- NonUniformVectorFieldDataSeries with scattered, time-varying particle positions
+		- Real-time update of both X/Y positions and DX/DY vectors via double-buffered arrays
+		- Scalable particle count via toolbar slider (re-initialises on next Start)
+		- Color mapping by magnitude or by direction via HeatmapColorPalette
+		- Two built-in colour map presets: Plasma and Cool-Warm
+		- Three arrow length modes: DataUnits, MagnitudePixels, FixedPixels
+		- Normal and Performance update modes with optional FPS overlay
+
+		[b]Documentation Links[/b]
+
+		- Vector Field RenderableSeries
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries.html']BaseRenderableSeries[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#HeatmapColorPalette.html']HeatmapColorPalette[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealtimeScatteredVectorFieldChartView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealtimeScatteredVectorFieldChartView.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Realtime</Features>
+		<Features>Performance</Features>
+		<Features>VectorField</Features>
+	</Features>
+</ExampleDefinition>

@@ -10,7 +10,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -90,7 +89,7 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
                            DataContext="{Binding Source={x:Reference Name=heatmapSeries}, Mode=OneWay}"
-                           ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           ColorPalette="{Binding ColorMap}"
                            Minimum="{Binding ColorMap.Minimum}"
                            Maximum="{Binding ColorMap.Maximum}"
                            TextFormatting="n0"

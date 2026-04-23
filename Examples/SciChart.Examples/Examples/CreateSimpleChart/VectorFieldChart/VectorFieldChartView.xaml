@@ -1,0 +1,305 @@
+<UserControl x:Class="SciChart.Examples.Examples.CreateSimpleChart.VectorFieldChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateSimpleChart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             Loaded="OnLoaded"
+             Unloaded="OnUnloaded"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!-- Highlights selected vectors in a bright accent color via IStrokePaletteProvider -->
+        <local:VectorSelectionPaletteProvider x:Key="SelectionPaletteProvider"/>
+
+        <!-- Linear palette: cool-blue → teal → yellow → warm-red.
+             Used for Solid / ByMagnitude colour modes. -->
+        <s:HeatmapColorPalette x:Key="CoolWarmLinearPalette" Minimum="0" Maximum="1.415">
+            <GradientStop Color="#FF2255CC" Offset="0.00"/>
+            <GradientStop Color="#FF00CC88" Offset="0.33"/>
+            <GradientStop Color="#FFEECC00" Offset="0.67"/>
+            <GradientStop Color="#FFDD2211" Offset="1.00"/>
+        </s:HeatmapColorPalette>
+
+        <!-- Circular palette: same hues with stops redistributed evenly and the first colour
+             repeated at offset 1.0 so the palette wraps smoothly for ByDirection mode. -->
+        <s:HeatmapColorPalette x:Key="CoolWarmCircularPalette" Minimum="0" Maximum="1">
+            <GradientStop Color="#FF2255CC" Offset="0.00"/>
+            <GradientStop Color="#FF00CC88" Offset="0.25"/>
+            <GradientStop Color="#FFEECC00" Offset="0.50"/>
+            <GradientStop Color="#FFDD2211" Offset="0.75"/>
+            <GradientStop Color="#FF2255CC" Offset="1.00"/>
+        </s:HeatmapColorPalette>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Toolbar: standard zoom/pan modifiers plus two flyout menus for data and vector settings.
+             The toolbar also adds zoom-extents and mouse-wheel zoom automatically. -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding ElementName=SciChartSurface}">
+
+            <ext:FlyoutSeparator/>
+
+            <!-- Data settings: choose between the uniform and non-uniform field, and set its resolution -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Data settings">
+                <ext:ToolbarIcon Kind="Cog" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+
+                        <!-- Field type: switches between UniformVectorFieldDataSeries and NonUniformVectorFieldDataSeries -->
+                        <TextBlock Text="Field Type" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="FieldSourceCombo"
+                                  Margin="0,4,0,0"
+                                  SelectionChanged="OnFieldTypeChanged"/>
+
+                        <!-- Grid size: visible only for the Uniform field; controls the n×n grid resolution -->
+                        <TextBlock x:Name="GridSizeHeader"
+                                   Text="Grid Size"
+                                   Margin="0,10,0,4"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel x:Name="GridSizePanel" Orientation="Horizontal">
+                            <Slider x:Name="GridSizeSlider"
+                                    Minimum="10" Maximum="100" Value="40"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="5"
+                                    ValueChanged="OnGridSizeChanged"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=GridSizeSlider}, Path=Value, StringFormat={}{0:0} × {0:0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Vectors count: visible only for the Non-Uniform field; controls how many
+                             scattered sample points are generated (rejection-sampled away from vortex cores) -->
+                        <TextBlock x:Name="VectorsCountHeader"
+                                   Text="Vectors Count"
+                                   Margin="0,10,0,4"
+                                   Visibility="Collapsed"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel x:Name="VectorsCountPanel" Orientation="Horizontal" Visibility="Collapsed">
+                            <Slider x:Name="VectorsCountSlider"
+                                    Minimum="600" Maximum="10000" Value="4000"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="200"
+                                    ValueChanged="OnVectorsCountChanged"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=VectorsCountSlider}, Path=Value, StringFormat={}{0:N0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <!-- Culling options: LOD cell size and density control -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Culling options">
+                <ext:ToolbarIcon Kind="Layers" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+
+                        <!-- Cell size: 0 = disabled; higher values reduce draw calls more aggressively -->
+                        <TextBlock Text="Culling Cell Size" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="LodCellSizeSlider"
+                                    Minimum="0" Maximum="20"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=CullingCellSizePx, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="0.5"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=LodCellSizeSlider}, Path=Value, StringFormat={}{0:0.#} px}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Max vectors per cell: 1 = single winner; higher values show more in dense regions -->
+                        <TextBlock Text="Max Vectors Per Cell" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="MaxVectorsPerCellSlider"
+                                    Minimum="1" Maximum="20"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=CullingMaxVectorsPerCell, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="1"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=MaxVectorsPerCellSlider}, Path=Value, StringFormat={}{0:0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutSeparator/>
+
+            <!-- Vector options: color mapping, arrow length/width, normalization -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Vector options">
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+
+                        <!-- Color mode: Solid (single colour), ByMagnitude, or ByDirection -->
+                        <TextBlock Text="Color Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="ColorModeCombo"
+                                  Margin="0,4,0,0"
+                                  SelectionChanged="OnColorModeChanged"/>
+
+                        <!-- Length mode: Pixels (fixed px), ScaledPixels (mag×scale px), or DataUnits -->
+                        <TextBlock Text="Length Mode" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <ComboBox x:Name="LengthModeCombo"
+                                  SelectionChanged="OnLengthModeChanged"/>
+
+                        <!-- MagnitudeScale: visible only in MagnitudePixels mode -->
+                        <TextBlock x:Name="MagnitudeScaleHeader" Text="Magnitude Scale" Margin="0,10,0,4" Visibility="Collapsed" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel x:Name="MagnitudeScalePanel" Orientation="Horizontal" Visibility="Collapsed">
+                            <Slider x:Name="MagnitudeScaleSlider"
+                                    Minimum="1" Maximum="100"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=MagnitudeScale, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=MagnitudeScaleSlider}, Path=Value, StringFormat={}{0:F0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- PixelLength: visible only in FixedPixels mode -->
+                        <TextBlock x:Name="PixelLengthHeader" Text="Pixel Length" Margin="0,10,0,4" Visibility="Collapsed" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel x:Name="PixelLengthPanel" Orientation="Horizontal" Visibility="Collapsed">
+                            <Slider x:Name="PixelLengthSlider"
+                                    Minimum="5" Maximum="80"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=PixelLength, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=PixelLengthSlider}, Path=Value, StringFormat={}{0:F0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Arrow head geometry controls -->
+                        <TextBlock Text="Arrow Head Length" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="ArrowLengthSlider"
+                                    Minimum="3" Maximum="20"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=ArrowHeadLength, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="1"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=ArrowLengthSlider}, Path=Value, StringFormat={}{0:F0} px}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Arrow Head Width" Margin="0,10,0,4" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="ArrowWidthSlider"
+                                    Minimum="2" Maximum="15"
+                                    Value="{Binding Source={x:Reference Name=VectorSeries}, Path=ArrowHeadWidth, Mode=TwoWay}"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="1"/>
+                            <TextBlock Text="{Binding Source={x:Reference Name=ArrowWidthSlider}, Path=Value, StringFormat={}{0:F0} px}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                        </StackPanel>
+
+                        <CheckBox x:Name="IsFilledCheckBox"
+                                  Content="Filled Arrow Head"
+                                  Margin="0,10,0,0"
+                                  IsChecked="{Binding Source={x:Reference Name=VectorSeries}, Path=IsArrowHeadFilled, Mode=TwoWay}"/>
+
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!-- Main chart surface. DataSeries is assigned from code-behind on field type change. -->
+        <s:SciChartSurface x:Name="SciChartSurface"
+                           Grid.Column="1">
+
+            <s:SciChartSurface.RenderableSeries>
+                <!-- VectorFieldRenderableSeries renders each (X, Y, DX, DY) vector as an arrow.
+                     ColorMap maps magnitude or direction to colour depending on the selected ColorMode.
+                     PaletteProvider overrides the stroke color for selected vectors. -->
+                <s:VectorFieldRenderableSeries x:Name="VectorSeries"
+                                               Stroke="#4FC3F7"
+                                               StrokeThickness="2"
+                                               ArrowHeadLength="6"
+                                               ArrowHeadWidth="6"
+                                               IsArrowHeadFilled="False"
+                                               LengthMode="MagnitudePixels"
+                                               MagnitudeScale="30"
+                                               ColorMode="ByMagnitude"
+                                               AntiAliasing="True"
+                                               PaletteProvider="{StaticResource SelectionPaletteProvider}">
+                    <s:VectorFieldRenderableSeries.ColorMap>
+                        <!-- Initial palette (linear); swapped to CoolWarmCircularPalette by code-behind
+                             when ColorMode = ByDirection and restored on any other mode. -->
+                        <s:HeatmapColorPalette Minimum="0" Maximum="1.415">
+                            <GradientStop Color="#FF2255CC" Offset="0.00"/>
+                            <GradientStop Color="#FF00CC88" Offset="0.33"/>
+                            <GradientStop Color="#FFEECC00" Offset="0.67"/>
+                            <GradientStop Color="#FFDD2211" Offset="1.00"/>
+                        </s:HeatmapColorPalette>
+                    </s:VectorFieldRenderableSeries.ColorMap>
+                </s:VectorFieldRenderableSeries>
+            </s:SciChartSurface.RenderableSeries>
+
+            <!-- AutoRange="Never" so axis range is controlled from code-behind via RegenerateData() -->
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis x:Name="XAxis"
+                               DrawMajorBands="False"
+                               DrawMinorGridLines="False"
+                               AutoRange="Never" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis x:Name="YAxis"
+                               DrawMajorBands="False"
+                               DrawMinorGridLines="False"
+                               AutoRange="Never" />
+            </s:SciChartSurface.YAxis>
+
+            <s:SciChartSurface.Annotations>
+                <!-- Displays the total rendered vector count, updated after each data regeneration -->
+                <s:TextAnnotation x:Name="VectorCountAnnotation"
+                                  CoordinateMode="Relative"
+                                  X1="0" Y1="0"
+                                  HorizontalAnchorPoint="Left"
+                                  VerticalAnchorPoint="Top"
+                                  Margin="5,5,0,0"
+                                  FontSize="20"
+                                  Opacity="0.5"
+                                  Foreground="#FFF"/>
+            </s:SciChartSurface.Annotations>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:ZoomPanModifier/>
+                    <s:ZoomExtentsModifier/>
+                    <s:MouseWheelZoomModifier/>
+                    <s:TooltipModifier ShowTooltipOn="MouseOver" />
+                    <s:DataPointSelectionModifier AllowsMultiSelection="True"/>
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+        <!-- Horizontal colour legend bound to the VectorSeries colour map -->
+        <s:HeatmapColorMap Grid.Column="1"
+                           Width="200"
+                           Margin="0,20,30,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Background="{StaticResource ThemedSurfaceChartBackground}"
+                           Foreground="{Binding ElementName=SciChartSurface, Path=Foreground}"
+                           ColorPalette="{Binding ElementName=VectorSeries, Path=ColorMap}"
+                           Minimum="{Binding ElementName=VectorSeries, Path=ColorMap.Minimum, Mode=TwoWay}"
+                           Maximum="{Binding ElementName=VectorSeries, Path=ColorMap.Maximum, Mode=TwoWay}"
+                           TextFormatting="0.00"
+                           BorderBrush="#777"
+                           BorderThickness="1"
+                           Orientation="Horizontal"/>
+
+    </Grid>
+</UserControl>

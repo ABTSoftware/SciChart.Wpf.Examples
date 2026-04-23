@@ -1,4 +1,19 @@
-﻿using System;
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// SettingsViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
+// *************************************************************************************
+using System;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -146,10 +161,6 @@ namespace SciChart.Examples.Demo.ViewModels
 #if NETFRAMEWORK
 
         public string TargetFramework => ".NET Framework 4.6.2";
-
-#elif NETCOREAPP3_1
-
-        public string TargetFramework => ".NET Core 3.1";
 
 #elif NET
 
@@ -316,6 +327,10 @@ namespace SciChart.Examples.Demo.ViewModels
             set => SetDynamicValue(value);
         }
 
+        /// <summary>
+        /// This callback is called every time when the SettingsView is opened. It can be used to disable some settings for certain examples.
+        /// At the moment, the Z-Axis Up feature is disabled in some examples.
+        /// </summary>
         public void OnIsVisibleChanged(bool isVisible)
         {
             if (!isVisible) return;
@@ -324,7 +339,8 @@ namespace SciChart.Examples.Demo.ViewModels
 
             if (Navigator.Instance.CurrentPage is ExamplesHostAppPage)
             {               
-                Is3DZAxisUpEnabled = !Navigator.Instance.CurrentExample.Uri.Contains("ZAxisUp3D");
+                Is3DZAxisUpEnabled = !Navigator.Instance.CurrentExample.Uri.Contains("ZAxisUp3D") &&
+                                     !Navigator.Instance.CurrentExample.Uri.Contains("Antenna3DRadiationPattern");
             }
             else
             {

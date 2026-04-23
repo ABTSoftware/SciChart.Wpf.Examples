@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.RacingTelemetryDashboard.RacingTelemetryDashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.RacingTelemetryDashboard.Views">
+    <UserControl.Resources>
+
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#A0C0E0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="4,1" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="BaseRacingSeriesStyle" TargetType="s:FastLineRenderableSeries">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="StrokeThickness" Value="4"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- GPS Speed -->
+        <Style x:Key="GpsSpeedStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="GpsSpdB_Style" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}">
+            <Setter Property="StrokeDashArray" Value="4 2" />
+        </Style>
+
+        <!-- Wheel speeds -->
+        <Style x:Key="WheelFL_Style" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="WheelFR_Style" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="WheelRL_Style" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="WheelRR_Style" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+
+        <!-- RPM -->
+        <Style x:Key="EngineRpmStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="DriveRpmStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="GearStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="DrsStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+
+        <!-- Throttle / Brake -->
+        <Style x:Key="ThrottleStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="BrakeStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+
+        <!-- Temperature -->
+        <Style x:Key="ExhaustTempStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="CoolantTempStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+        <Style x:Key="OilTempStyle" TargetType="s:FastLineRenderableSeries" BasedOn="{StaticResource BaseRacingSeriesStyle}" />
+
+        <!-- Cross domain scatter -->
+        <Style x:Key="ScatterC9_Style" TargetType="s:XyScatterRenderableSeries">
+            <Setter Property="PointMarker">
+                <Setter.Value>
+                    <s:EllipsePointMarker Width="4" Height="4" Stroke="#50C7E0" Fill="#3050C7E0" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScatterExhaust_Style" TargetType="s:XyScatterRenderableSeries">
+            <Setter Property="PointMarker">
+                <Setter.Value>
+                    <s:EllipsePointMarker Width="4" Height="4" Stroke="#FF2020" Fill="#30FF2020" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScatterCoolant_Style" TargetType="s:XyScatterRenderableSeries">
+            <Setter Property="PointMarker">
+                <Setter.Value>
+                    <s:EllipsePointMarker Width="4" Height="4" Stroke="#4080FF" Fill="#304080FF" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScatterOil_Style" TargetType="s:XyScatterRenderableSeries">
+            <Setter Property="PointMarker">
+                <Setter.Value>
+                    <s:EllipsePointMarker Width="4" Height="4" Stroke="#FF9040" Fill="#30FF9040" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid Background="#0D1117">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <local:DomainChartsView Grid.Row="0"/>
+            <TextBlock Grid.Row="1" Text="CROSS DOMAIN" Style="{StaticResource SectionHeader}" />
+            <local:CrossDomainView Grid.Row="2"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,26 +1,25 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
-//  
-// Web: http://www.scichart.com
-//   Support: support@scichart.com
-//   Sales:   sales@scichart.com
-// 
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
 // ManipulateSeriesMvvmViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
 // to modify, create derivative works, distribute and publish any part of this source
-// code whether for commercial, private or personal use. 
-// 
+// code whether for commercial, private or personal use.
+//
 // The SCICHART® examples are distributed in the hope that they will be useful, but
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
-// expressed or implied. 
+// expressed or implied.
 // *************************************************************************************
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
-using SciChart.Charting.ViewportManagers;
 using SciChart.Core.Extensions;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Data;
@@ -33,26 +32,30 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
 
         public ManipulateSeriesMvvmViewModel()
         {
-            ViewportManager = new DefaultViewportManager();
             RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel>();
 
             AddCommand = new ActionCommand(() =>
             {
-                RenderableSeriesViewModels.Add(ViewModelsFactory.New(SelectedSeriesType.Type, 0));
-                ZoomExtents();
-                ClearCommand.RaiseCanExecuteChanged();
+                var seriesViewModel = ViewModelsFactory.New(SelectedSeriesType.Type, 0);
+                RenderableSeriesViewModels.Add(seriesViewModel);
+                seriesViewModel.ZoomExtentsWhenReady();
+
+                ClearCommand?.RaiseCanExecuteChanged();
+
             }, () => SelectedSeriesType != null);
 
             RemoveCommand = new ActionCommand(() =>
             {
                 RenderableSeriesViewModels.RemoveWhere(s => s.IsSelected);
                 ClearCommand.RaiseCanExecuteChanged();
+
             }, () => RenderableSeriesViewModels.Any(s => s.IsSelected));
 
             ClearCommand = new ActionCommand(() =>
             {
                 RenderableSeriesViewModels.Clear();
                 ClearCommand.RaiseCanExecuteChanged();
+
             }, () => RenderableSeriesViewModels.Count > 0);
 
             SelectionChangedCommand = new ActionCommand(() =>
@@ -85,7 +88,6 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
             RemoveCommand.RaiseCanExecuteChanged();
         }
 
-        public IViewportManager ViewportManager { get; }
         public List<SeriesType> SeriesTypes { get; }
         public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; }
 
@@ -116,18 +118,9 @@ namespace SciChart.Examples.Examples.UseSciChartWithMvvm.ManipulateSeriesMVVM
                 var index = RenderableSeriesViewModels.IndexOf(rSeriesVm);
 
                 RenderableSeriesViewModels[index] = ViewModelsFactory.New(SelectedSeriesType.Type, 0, RenderableSeriesViewModels[index].DataSeries);
-                RenderableSeriesViewModels[index].IsSelected = true;
-
-                ZoomExtents();
+                RenderableSeriesViewModels[index].IsSelected = true;              
+                RenderableSeriesViewModels[index].ZoomExtentsWhenReady();
             }
-        }
-
-        private void ZoomExtents()
-        {
-            ViewportManager.BeginInvoke(() =>
-            {
-                ViewportManager.AnimateZoomExtents(TimeSpan.FromMilliseconds(500));
-            });
         }
     }
 }

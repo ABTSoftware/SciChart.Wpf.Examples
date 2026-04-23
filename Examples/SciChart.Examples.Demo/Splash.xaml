@@ -43,7 +43,7 @@
                        Foreground="#E3E3E3"                       
                        HorizontalAlignment="Center"
                        tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=500, BeginTime=0}">
-                <Run Text="SciChart SDK v8."/>
+                <Run Text="SciChart SDK v9."/>
                 <Run Text="The World's Fastest WPF Charts."/>
                 <Run Text="Find out more at"/>
                 <Hyperlink Foreground="{DynamicResource HyperlinkForegroundBrush}" Cursor="Hand" Click="Hyperlink_OnClick">

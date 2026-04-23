@@ -1,0 +1,143 @@
+<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPattern.GainCoverageChartsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+            >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Shared gain color palette used by the heatmap -->
+                <ResourceDictionary Source="AntennaSharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Tooltip template for the gain heatmap: shows φ, θ and gain in dBi -->
+            <DataTemplate x:Key="GainCoverageTooltipTemplate" DataType="s:HeatmapSeriesInfo">
+            <StackPanel Margin="5,3">
+                <TextBlock Foreground="#E0FFFFFF" FontSize="13">
+                    <Run Text="φ " /><Run Text="{Binding FormattedXValue, Mode=OneWay}" />
+                    <Run Text="°   θ " /><Run Text="{Binding FormattedYValue, Mode=OneWay}" /><Run Text="°" />
+                </TextBlock>
+                <TextBlock Foreground="#E0FFFFFF" FontSize="13">
+                    <Run Text="Gain " /><Run Text="{Binding FormattedZValue, Mode=OneWay}" /><Run Text=" dBi" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+            <!-- Applied to fan chart series when IsSelected=true (annotation is grabbed) -->
+            <Style x:Key="SelectedLineSeriesStyle" TargetType="s:FastLineRenderableSeries">
+                <Setter Property="StrokeThickness" Value="3" />
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="0,8,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Top: gain cut line chart with E-plane (φ cut) and H-plane (θ cut) traces -->
+        <s:SciChartSurface x:Name="fanChart"
+                           Grid.Row="0"
+                           BorderThickness="0"
+                           s:SciChartGroup.VerticalChartGroup="GainCoverageChartsGroup">
+            <s:SciChartSurface.RenderableSeries>
+                <!-- H-plane cut line: gain vs φ at a fixed θ (orange) -->
+                <s:FastLineRenderableSeries x:Name="thetaCutSeries" XAxisId="PhiXAxis" YAxisId="GainAxis"
+                                            Stroke="#FFFF8040" StrokeThickness="1"
+                                            SelectedSeriesStyle="{StaticResource SelectedLineSeriesStyle}" />
+                <!-- E-plane cut line: gain vs θ at a fixed φ (blue) -->
+                <s:FastLineRenderableSeries x:Name="phiCutSeries" XAxisId="ThetaXAxis" YAxisId="GainAxis"
+                                            Stroke="#FF4080FF" StrokeThickness="1"
+                                            SelectedSeriesStyle="{StaticResource SelectedLineSeriesStyle}" />
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxes>
+                <!-- Bottom axis: θ range 0°–180° for the E-plane cut -->
+                <s:NumericAxis Id="ThetaXAxis" AxisTitle="θ (°)" AxisAlignment="Bottom"
+                               IsPrimaryAxis="True"
+                               AutoRange="Never" VisibleRange="0,180"
+                               AutoTicks="False" MajorDelta="30"
+                               DrawMajorBands="False" DrawMinorTicks="False" DrawMinorGridLines="False" />
+                <!-- Top axis: φ range 0°–360° for the H-plane cut -->
+                <s:NumericAxis Id="PhiXAxis" AxisTitle="φ (°)" AxisAlignment="Top"
+                               IsPrimaryAxis="False"
+                               AutoRange="Never" VisibleRange="0,360"
+                               AutoTicks="False" MajorDelta="30"
+                               DrawMajorBands="False" DrawMinorTicks="False" DrawMinorGridLines="False"
+                               DrawMajorGridLines="False" />
+            </s:SciChartSurface.XAxes>
+            <s:SciChartSurface.YAxes>
+                <!-- Title-only axis on the left (no data, just label) -->
+                <s:NumericAxis Id="TitleAxis" AxisAlignment="Left" AxisTitle="Gain Cuts"
+                               IsPrimaryAxis="False" DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"
+                               DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"
+                               AutoRange="Never" VisibleRange="0,1" BorderThickness="0" />
+                <!-- Gain axis in dBi: range matches the color palette (-40 to +3 dBi) -->
+                <s:NumericAxis Id="GainAxis" AxisAlignment="Right" AxisTitle="Gain (dBi)"
+                               IsPrimaryAxis="True" AutoRange="Never" VisibleRange="-40,3"
+                               AutoTicks="False" MajorDelta="10"
+                               DrawMajorBands="False" DrawMinorTicks="False" DrawMinorGridLines="False" />
+            </s:SciChartSurface.YAxes>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup MouseEventGroup="GainCoverageModifierGroup">
+                    <s:LegendModifier ShowLegend="True" LegendPlacement="Inside" GetLegendDataFor="AllSeries" Orientation="Vertical" />
+                    <s:RolloverModifier ShowTooltipOn="MouseHover" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <!-- Bottom: gain coverage heatmap (φ × θ) with draggable cross-section lines -->
+        <s:SciChartSurface x:Name="gainHeatmap"
+                           Grid.Row="1"
+                           BorderThickness="0"
+                           s:SciChartGroup.VerticalChartGroup="GainCoverageChartsGroup">
+            <s:SciChartSurface.RenderableSeries>
+                <!-- Heatmap of gain in dBi across the full (φ, θ) grid -->
+                <s:FastUniformHeatmapRenderableSeries x:Name="gainHeatmapSeries"
+                                                      YAxisId="ThetaAxis"
+                                                      ColorMap="{StaticResource GainColorPalette}"
+                                                      UseLinearTextureFiltering="True"
+                                                      Opacity="0.95"
+                                                      s:TooltipModifier.TooltipTemplate="{StaticResource GainCoverageTooltipTemplate}" />
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis AxisTitle="φ (°)" AxisAlignment="Right"
+                               DrawMinorTicks="False" DrawMajorTicks="False" DrawMajorBands="False"
+                               AutoRange="Never" VisibleRange="0,360" AutoTicks="False" MajorDelta="30" />
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxes>
+                <s:NumericAxis Id="TitleAxis" AxisAlignment="Left" AxisTitle="Gain Coverage Map"
+                               IsPrimaryAxis="False" DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"
+                               DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"
+                               AutoRange="Never" VisibleRange="0,1" BorderThickness="0" />
+                <s:NumericAxis Id="ThetaAxis" AxisAlignment="Top"
+                               IsPrimaryAxis="True" AutoRange="Never" VisibleRange="0,180"
+                               DrawMinorTicks="False" DrawMajorTicks="False" DrawMajorBands="False"
+                               AutoTicks="False" MajorDelta="30" />
+            </s:SciChartSurface.YAxes>
+            <s:SciChartSurface.Annotations>
+                <!-- Draggable cross-section lines bound to the toolbar sliders -->
+                <s:VerticalLineAnnotation x:Name="thetaLine"
+                                          YAxisId="ThetaAxis"
+                                            Stroke="#CCFF8040"
+                                            StrokeThickness="1.5"
+                                            StrokeDashArray="4 2"
+                                            IsEditable="True" />
+                <s:HorizontalLineAnnotation x:Name="phiLine"
+                                            YAxisId="ThetaAxis"
+                                            Stroke="#CC4080FF"
+                                          StrokeThickness="1.5"
+                                          StrokeDashArray="4 2"
+                                          IsEditable="True" />
+            </s:SciChartSurface.Annotations>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup MouseEventGroup="GainCoverageModifierGroup">
+                    <s:TooltipModifier UseInterpolation="True" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+    </Grid>
+</UserControl>

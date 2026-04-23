@@ -54,8 +54,8 @@
         <!--  This is what we use to control zoom history as well as Undo Redo  -->
         <s:SciChartSurface x:Name="SciChart"
                            Grid.Column="1"
-                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}"
-                           ViewportManager="{Binding ViewportManager}">
+                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
+            
             <s:SciChartSurface.Resources>
                 <ResourceDictionary Source="Styles.xaml" />
             </s:SciChartSurface.Resources>
@@ -77,11 +77,9 @@
                                 <Setter Property="Stroke" Value="White" />
                             </Style>
                         </s:SeriesSelectionModifier.SelectedSeriesStyle>
-
                     </s:SeriesSelectionModifier>
                 </s:ModifierGroup>
             </s:SciChartSurface.ChartModifier>
-
         </s:SciChartSurface>
     </Grid>
 </UserControl>

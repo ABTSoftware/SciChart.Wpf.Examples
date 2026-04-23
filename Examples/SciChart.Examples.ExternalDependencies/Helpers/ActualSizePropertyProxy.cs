@@ -1,20 +1,17 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
-//  
-// Web: http://www.scichart.com
-//   Support: support@scichart.com
-//   Sales:   sales@scichart.com
-// 
-// ActualSizePropertyProxy.cs is part of SCICHART®, High Performance Scientific Charts
-// For full terms and conditions of the license, see http://www.scichart.com/scichart-eula/
-// 
-// This source code is protected by international copyright law. Unauthorized
-// reproduction, reverse-engineering, or distribution of all or any portion of
-// this source code is strictly prohibited.
-// 
-// This source code contains confidential and proprietary trade secrets of
-// SciChart Ltd., and should at no time be copied, transferred, sold,
-// distributed or made available without express written permission.
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// ActualSizePropertyProxy.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
 // *************************************************************************************
 using System.ComponentModel;
 using System.Windows;

@@ -6,8 +6,6 @@
              xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization_Ultrasound">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
         <!-- Style for labels on the Angular Axis -->
         <!-- Applies a 180 deg rotation to every label -->
         <Style x:Key="XAxisTickLabelStyle" TargetType="s:DefaultTickLabel">
@@ -138,16 +136,13 @@
                                VerticalAlignment="Stretch"
                                Background="Transparent"
                                BorderThickness="0"
-                               ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"        
+                               ColorPalette="{Binding ColorMap, Source={x:Reference HeatmapRenderSeries}}"
                                Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderSeries}}"
                                Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderSeries}}"
                                Orientation="Vertical"
                                EnableAxisDrag="False">
                 <s:HeatmapColorMap.AxisStyle>
                     <Style TargetType="s:AxisBase">
-                        <Setter Property="DrawMajorBands" Value="False"/>
-                        <Setter Property="DrawMajorGridLines" Value="False"/>
-                        <Setter Property="DrawMinorGridLines" Value="False"/>
                         <Setter Property="Visibility" Value="Collapsed"/>
                     </Style>
                 </s:HeatmapColorMap.AxisStyle>

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.PerformanceDemos2D.RacingTelemetryDashboard.Views.CrossDomainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SciChart.Examples.Examples.PerformanceDemos2D.RacingTelemetryDashboard.ViewModels"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             mc:Ignorable="d">
+    <ItemsControl ItemsSource="{Binding CrossCharts}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Rows="1" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type vm:ChartPanelViewModel}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <s:SciChartSurface Grid.Row="0"
+                                       RenderableSeries="{s:SeriesBinding RenderableSeries}"
+                                       XAxes="{s:AxesBinding XAxes}"
+                                       YAxes="{s:AxesBinding YAxes}">
+                        <s:SciChartSurface.ChartModifier>
+                            <s:ModifierGroup>
+                                <s:RubberBandXyZoomModifier IsXAxisOnly="True" />
+                                <s:ZoomPanModifier ExecuteOn="MouseRightButton" />
+                                <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                                <s:CursorModifier ShowTooltip="False" ShowAxisLabels="True" />
+                                <s:LegendModifier x:Name="crossLegendMod" ShowLegend="False" GetLegendDataFor="AllSeries" />
+                            </s:ModifierGroup>
+                        </s:SciChartSurface.ChartModifier>
+                    </s:SciChartSurface>
+
+                    <s:SciChartLegend Grid.Row="1"
+                                      LegendData="{Binding ElementName=crossLegendMod, Path=LegendData}"
+                                      Orientation="Horizontal"
+                                      HorizontalAlignment="Stretch"
+                                      HorizontalContentAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

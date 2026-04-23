@@ -4,11 +4,11 @@
 		<Product>SciChart</Product>
 		<Company>SciChart Ltd</Company>
 		<Trademark>SCICHART™</Trademark>
-		<Copyright>Copyright © SciChart Ltd 2011-2025, www.scichart.com</Copyright>
+		<Copyright>Copyright © SciChart Ltd 2011-2026, www.scichart.com</Copyright>
 		<Description>SciChart - high performance real-time WPF charts for Scientific and Trading applications. For more info see www.scichart.com</Description>
-		<Version>8.11.1.28988</Version>
-		<FileVersion>8.11.1.28988</FileVersion>
-		<InformationalVersion>8.11.1.28988</InformationalVersion>
+		<Version>9.0.0.29196</Version>
+		<FileVersion>9.0.0.29196</FileVersion>
+		<InformationalVersion>9.0.0.29196</InformationalVersion>
 	</PropertyGroup>
 
 	<!-- Set assembly version -->

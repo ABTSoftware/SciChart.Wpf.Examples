@@ -1,0 +1,44 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/CreateSimpleChart/VectorFieldChart/VectorFieldChartView.xaml</View>
+  <ViewModel />
+  <ImagePath>/SciChart.Examples;component/Resources/Images/Static_SinusoidalVortexes.png</ImagePath>
+  <IconPath>IconHeat</IconPath>
+  <ToolTipDescription>Demonstrates vector field charts using both uniform and scattered (non-uniform) data, with VectorFieldRenderableSeries, configurable color mode, length mode, arrowhead style and more.</ToolTipDescription>
+  <Description>
+	  Demonstrates a [b]Vector Field Chart[/b] using [b]VectorFieldRenderableSeries[/b] with two dataset types, each backed by a different data series class.
+
+	  [b]Sinusoidal Vortices (Uniform)[/b] uses [b]UniformVectorFieldDataSeries[/b] - vectors are placed on a regular grid. The field is derived from a sinusoidal stream function, producing an alternating vortex pattern with smoothly varying magnitudes.
+
+	  [b]Dual Vortex Flow (Non-Uniform)[/b] uses [b]NonUniformVectorFieldDataSeries[/b] - vectors are placed at randomly scattered positions across the domain, skipping excluded regions around two point vortices of different sizes located in opposite corners. The superimposed co-rotating vortices produce a swirling flow pattern.
+
+	  [b]Features demonstrated[/b]
+
+	  - [b]UniformVectorFieldDataSeries[/b] for regular-grid vector data
+	  - [b]NonUniformVectorFieldDataSeries[/b] for arbitrarily positioned (scattered) vector data
+	  - ColorMode: Solid, ByMagnitude, ByDirection - color sampled from HeatmapColorPalette
+	  - LengthMode: DataUnits, MagnitudePixels, FixedPixels - with MagnitudeScale and PixelLength slider
+	  - ArrowHeadLength, ArrowHeadWidth and IsArrowHeadFilled controls
+	  - Grid density slider (uniform mode) and vector count slider (non-uniform mode)
+	  - Interactive control of vector field visual density using the CullingCellSize slider
+	  - Per-vector inspection using TooltipModifier, displaying the vector origin and magnitude on hover
+	  - Vector selection with DataPointSelectionModifier, with visual highlighting implemented via a PaletteProvider
+
+	  [b]Documentation Links[/b]
+
+	  - Vector Field RenderableSeries
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#TooltipModifier.html']Tooltip Modifier[/url]
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#DataPoint%20Selection.html']DataPoint Selection Modifier[/url]
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#RenderableSeries%20APIs%20-%20Paletted%20Serie.html']PaletteProvider[/url]
+	  - [url='https://www.scichart.com/documentation/win/current/webframe.html#Heatmap%20Legend%20-%20HeatmapColorMap%20Control.html']Color Legend[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/VectorFieldChart/VectorFieldChartView.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/VectorFieldChart/VectorFieldChartView.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateSimpleChart/VectorFieldChart/VectorFieldPaletteProvider.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>VectorField</Features>
+    <Features>Tooltips</Features>
+    <Features>Selection</Features>
+  </Features>
+</ExampleDefinition>
