@@ -46,8 +46,7 @@ SciChart WPF Includes the following 2D & 3D chart types, as well as an wide set 
 
 * [WPF Line Chart](https://www.scichart.com/wpf-chart-example-line-chart)
 * [WPF Band Chart](https://www.scichart.com/wpf-chart-example-band-series-chart)
-* [WPF Candlestick Chart](https://www.scichart.com/wpf-chart-example-candlestick-chart)
-* WPF OHLC Chart 
+* [WPF Candlestick/OHLC Chart](https://www.scichart.com/wpf-chart-example-candlestick-chart)
 * [WPF Column Chart](https://www.scichart.com/wpf-chart-example-column-chart)
 * [WPF Pie Chart](https://www.scichart.com/wpf-pie-chart-example/)
 * [WPF Donut Chart](https://www.scichart.com/wpf-donut-chart-example/)
@@ -131,7 +130,7 @@ A place to put ideas, examples for users to answer support requests and more.
 > - [Changelog for SciChart WPF](https://www.scichart.com/changelog/scichart-wpf/)
 > - [MVVM Tutorials](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2002b%20-%20Creating%20a%20SciChartSurface%20with%20MVVM.html)
 > - [Code-Behind Tutorials](https://www.scichart.com/documentation/win/current/webframe.html#Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
-> - [SciChart WPF Documentation](https://www.scichart.com/documentation/js/current/webframe.html)
+> - [SciChart WPF Documentation](https://www.scichart.com/documentation/win/current/webframe.html)
 > - [SciChart Community forums](https://scichart.com/questions)
 > - [SciChart Stackoverflow tag](https://stackoverflow.com/tags/scichart)
 > - [Contact Us (Technical support or sales)](https://scichart.com/contact-us)
