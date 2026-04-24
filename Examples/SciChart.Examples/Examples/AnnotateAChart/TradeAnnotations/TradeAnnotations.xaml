@@ -91,7 +91,7 @@
         <s:SciChartSurface x:Name="sciChart"
                            Grid.Column="1"
                            Annotations="{s:AnnotationsBinding Annotations}"
-                           RenderableSeries="{s:SeriesBinding Series}">
+                           RenderableSeries="{s:SeriesBinding RenderableSeriesViewModels}">
 
             <s:SciChartSurface.XAxis>
                 <s:DateTimeAxis />

@@ -1,4 +1,19 @@
-﻿using System;
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// TradeAnnotationsViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
+// *************************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,6 +21,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using SciChart.Charting.ChartModifiers;
+using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Common.Helpers;
 using SciChart.Charting.DrawingTools.TradingAnnotations.ViewModels;
 using SciChart.Charting.Model.ChartSeries;
@@ -19,7 +35,7 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
 {
     public class TradeAnnotationsViewModel : BaseViewModel
     {
-        private ObservableCollection<IRenderableSeriesViewModel> _series;
+        private ObservableCollection<IRenderableSeriesViewModel> _renderableSeries;
         private ObservableCollection<IAnnotationViewModel> _annotations;
         
         private Type _annotationType;
@@ -37,10 +53,9 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             Annotations = new ObservableCollection<IAnnotationViewModel>();
             Annotations.CollectionChanged += OnAnnotationsCollectionChanged;
 
-            Series = new ObservableCollection<IRenderableSeriesViewModel>
-            {
-                new CandlestickRenderableSeriesViewModel {DataSeries = GetPriceDataSeries()}
-            };
+            var viewModel = new CandlestickRenderableSeriesViewModel { DataSeries = GetPriceDataSeries() };
+            RenderableSeriesViewModels = new ObservableCollection<IRenderableSeriesViewModel> { viewModel };
+            RenderableSeriesViewModels.ZoomExtentsWhenReady();
         }
 
         public bool IsEditPanelVisible
@@ -73,13 +88,13 @@ namespace SciChart.Examples.Examples.AnnotateAChart.TradeAnnotations
             }
         }
 
-        public ObservableCollection<IRenderableSeriesViewModel> Series
+        public ObservableCollection<IRenderableSeriesViewModel> RenderableSeriesViewModels
         {
-            get => _series;
+            get => _renderableSeries;
             set
             {
-                _series = value;
-                OnPropertyChanged("Series");
+                _renderableSeries = value;
+                OnPropertyChanged("RenderableSeriesViewModels");
             }
         }
 

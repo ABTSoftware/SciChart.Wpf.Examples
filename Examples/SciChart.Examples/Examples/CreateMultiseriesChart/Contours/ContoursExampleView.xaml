@@ -12,8 +12,6 @@
 
   <UserControl.Resources>
 
-    <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
     <ObjectDataProvider x:Key="PaletteModesProvider"
                         MethodName="GetValues"
                         ObjectType="{x:Type system:Enum}">

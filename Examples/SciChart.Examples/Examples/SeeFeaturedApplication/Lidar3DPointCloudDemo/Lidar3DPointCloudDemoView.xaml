@@ -157,11 +157,7 @@
 
             <s:HeatmapColorMap.AxisStyle>
                 <Style TargetType="s:AxisBase">
-                    <Setter Property="Margin" Value="-10,0,0,0"/>
-                    <Setter Property="DrawMajorBands" Value="False"/>
                     <Setter Property="DrawMinorTicks" Value="False"/>
-                    <Setter Property="DrawMajorGridLines" Value="False"/>
-                    <Setter Property="DrawMinorGridLines" Value="False"/>
                 </Style>
             </s:HeatmapColorMap.AxisStyle>
         </s:HeatmapColorMap>

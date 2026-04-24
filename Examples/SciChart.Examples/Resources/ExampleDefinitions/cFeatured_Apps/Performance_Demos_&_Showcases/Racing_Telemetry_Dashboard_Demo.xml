@@ -1,0 +1,49 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/PerformanceDemos2D/RacingTelemetryDashboard/RacingTelemetryDashboardView.xaml</View>
+	<ViewModel>Examples.PerformanceDemos2D.RacingTelemetryDashboard.RacingDashboardViewModel</ViewModel>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/RacingTelemetryDashboard.png</ImagePath>
+	<IconPath>IconRealtime</IconPath>
+	<Description>
+		A common use case demonstrates a [b]Racing Telemetry Dashboard[/b] built on top of synthetically generated single-lap data. These are used to visualize parameters such as RPM, Speed for each wheel, oil and exhaust temperature, throttle and braking usage, etc.
+		It showcases how multiple telemetry signals can be visualized and correlated across different domains.
+
+		The [b]Racing Telemetry Dashboard[/b] combines a few techniques in SciChart WPF chart library to create a beautiful and easy to read(analyze) chart demonstration.
+
+		[b]User Interaction[/b]
+
+		- Y-axes in Distance and Time charts are synchronized using the [b]RangeSyncGroupId[/b] property.
+		- X-axes are also synchronized across charts, enabling unified navigation in both distance and time domains.
+		- Zooming in Distance and Time charts can be performed using the right mouse button.
+		- Double-click (left mouse button) performs Zoom Extents.
+		- A white vertical slice line is displayed on both Distance and Time charts. It is synchronized and can be moved by dragging.
+		- The vertical slice performs hit-testing across all series at the selected position.
+		- Hit-test results are displayed in the legend panel on the left, showing telemetry values at the selected point.
+		- Bottom (Cross Domain) charts support interaction via left mouse button using RubberBandXyZoomModifier.
+		- The legend panel on the left is scrollable via an integrated scrollbar.
+
+		[b]Documentation Links[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Line%20Series%20Type.html']The Line Series Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Scatter%20Series%20Type.html']Scatter Series Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#VerticalSliceModifier.html']Vertical Slice Modifier API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#LegendModifier.html']Legend Modifier API[/url]
+		- [url='https://www.scichart.com/performance-tips']Performance Tips and Tricks[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/RacingTelemetryDashboardView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/RacingTelemetryDashboardView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/DomainChartsView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/DomainChartsView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/CrossDomainView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/CrossDomainView.xaml.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/SelectionTrackingListBox.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/Views/SeriesInfoValueConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/RacingDashboardViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/ViewModels/ChartPanelViewModel.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/PerformanceDemos2D/RacingTelemetryDashboard/ViewModels/InterpolatingRangeSyncTransform.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Performance</Features>
+		<Features>Scientific</Features>
+	</Features>
+</ExampleDefinition>

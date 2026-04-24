@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 	<PropertyGroup>
-		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
 		<UseWPF>True</UseWPF>
 		<LangVersion>Latest</LangVersion>
 		<OutputType>Library</OutputType>
@@ -15,16 +15,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
 		<OutputPath>..\..\Build\Release\</OutputPath>
 		<DocumentationFile>..\..\Build\Release\net462\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-		<OutputPath>..\..\Build\Debug</OutputPath>
-		<DocumentationFile>..\..\Build\Debug\netcoreapp3.1\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
-		<OutputPath>..\..\Build\Release</OutputPath>
-		<DocumentationFile>..\..\Build\Release\netcoreapp3.1\SciChart.Examples.ExternalDependencies.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">

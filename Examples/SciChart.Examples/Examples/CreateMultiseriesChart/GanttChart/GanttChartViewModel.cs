@@ -1,4 +1,19 @@
-﻿using System;
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// GanttChartViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
+// *************************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
@@ -11,18 +26,46 @@ using SciChart.Examples.ExternalDependencies.Common;
 
 namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
 {
+    /// <summary>
+    /// Main view-model for the Gantt Chart example.
+    ///
+    /// Architecture overview:
+    ///   The chart is built from a single <c>SciChartSurface</c> that uses one hidden X-axis shared
+    ///   with a separate header surface, and a collection of stacked Y-axes — one per task row.
+    ///   Each task row also gets one <c>StripeRenderableSeries</c> whose horizontal extent represents
+    ///   the task's start-to-end date range.
+    ///
+    ///   A draggable green vertical line (<c>VerticalSliceModifier</c>) represents the current date
+    ///   and drives completion recalculation for all items via <see cref="XCurrentDate"/>.
+    /// </summary>
     public class GanttChartViewModel : BaseViewModel
     {
         private DateRange _xVisibleRange;
         private DateTime _xCurrentDate;
         private DateTime _xEndDate;
 
+        /// <summary>Task data bound to the left-panel list and used to generate axes/series.</summary>
         public IList<GanttItemViewModel> Items { get; }
+
+        /// <summary>
+        /// One <c>NumericAxis</c> per task row, plus a hidden default right-aligned axis.
+        /// Bound to <c>SciChartSurface.YAxes</c>.
+        /// </summary>
         public IList<IAxisViewModel> YAxes { get; private set; }
+
+        /// <summary>
+        /// One <c>StripeRenderableSeriesViewModel</c> per task row.
+        /// Bound to <c>SciChartSurface.RenderableSeries</c>.
+        /// </summary>
         public IList<IRenderableSeriesViewModel> RenderableSeries { get; private set; }
 
+        /// <summary>Hard limits on how far the user can pan or zoom the timeline.</summary>
         public DateRange XVisibleRangeLimit { get; }
 
+        /// <summary>
+        /// The currently visible date range, two-way bound to both the header and chart X-axes
+        /// so they scroll in lockstep.
+        /// </summary>
         public DateRange XVisibleRange
         {
             get => _xVisibleRange;
@@ -33,6 +76,10 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
             }
         }
 
+        /// <summary>
+        /// The date represented by the draggable green marker. Changing this recalculates the
+        /// completion percentage for every task.
+        /// </summary>
         public DateTime XCurrentDate
         {
             get => _xCurrentDate;
@@ -47,6 +94,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
             }
         }
 
+        /// <summary>The project end date, shown as a fixed orange vertical line annotation.</summary>
         public DateTime XEndDate
         {
             get => _xEndDate;
@@ -210,6 +258,12 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
             CreateRenderableSeries();
         }
 
+        /// <summary>
+        /// Builds the Y-axis collection: one per-task axis on the left in reverse order.
+        /// Reversing the item order means the first task ends up at the top of the stacked panel.
+        /// Each axis is styled to zero width and a fixed visible range so it acts purely as a
+        /// layout row with no tick marks or labels of its own.
+        /// </summary>
         private void CreateYAxes()
         {
             if (YAxes == null)
@@ -223,6 +277,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                     }
                 };
 
+                // Add one Y-axis per item in descending order so item 1 renders at the top.
                 Items.OrderByDescending(x => x.Id).ForEachDo(item =>
                 {
                     YAxes.Add(new NumericAxisViewModel
@@ -235,12 +290,22 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
             }
         }
 
+        /// <summary>
+        /// Builds one <c>StripeRenderableSeriesViewModel</c> per task, in the same descending order
+        /// as <see cref="CreateYAxes"/>. Each series is assigned to its matching Y-axis by ID.
+        ///
+        /// The <c>StripeDataSeries</c> encodes the task bar as a single stripe:
+        ///   X = Start date, X1 = End date, Y = 0 (bottom of the bar), Y1 = 1 (top of the bar).
+        ///
+        /// A <see cref="GanttTextLabelProvider"/> draws the working-day count inside each bar.
+        /// </summary>
         private void CreateRenderableSeries()
         {
             if (RenderableSeries == null)
             {
                 RenderableSeries = new List<IRenderableSeriesViewModel>();
 
+                // Match the axis ordering so each series is paired with the correct row.
                 Items.OrderByDescending(x => x.Id).ForEachDo(item =>
                 {
                     RenderableSeries.Add(new StripeRenderableSeriesViewModel
@@ -248,6 +313,7 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart
                         YAxisId = $"YAxis-{item.Id}",
                         Stroke = item.Color,
                         Fill = item.Fill,
+                        // Single stripe: X=start, X1=end, Y=0..1 spans the full row height.
                         DataSeries = new StripeDataSeries<DateTime, double>(new[] { item.Start }, new[] { item.End }, 0d, 1d),
                         PointLabelProvider = new GanttTextLabelProvider(item),
                         StyleKey = "ItemRenderableSeriesStyle"

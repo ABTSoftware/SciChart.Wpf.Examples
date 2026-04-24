@@ -12,8 +12,6 @@
 
     <UserControl.Resources>
 
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
         <!--Tooltip template-->
         <DataTemplate x:Key="TooltipItemTemplate">
             <TextBlock Text="{Binding PointMetadata.Tooltip}"/>
@@ -112,7 +110,7 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
                            DataContext="{Binding Source={x:Reference Name=heatmapSeries}, Mode=OneWay}"
-                           ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           ColorPalette="{Binding ColorMap}"
                            Minimum="{Binding ColorMap.Minimum}"
                            Maximum="{Binding ColorMap.Maximum}"
                            TextFormatting="n0"

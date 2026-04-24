@@ -1,17 +1,17 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
-//  
-// Web: http://www.scichart.com
-//   Support: support@scichart.com
-//   Sales:   sales@scichart.com
-// 
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
 // TextSceneEntity.cs is part of the SCICHART® Examples. Permission is hereby granted
 // to modify, create derivative works, distribute and publish any part of this source
-// code whether for commercial, private or personal use. 
-// 
+// code whether for commercial, private or personal use.
+//
 // The SCICHART® examples are distributed in the hope that they will be useful, but
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
-// expressed or implied. 
+// expressed or implied.
 // *************************************************************************************
 using System;
 using System.ComponentModel;
@@ -29,12 +29,18 @@ namespace SciChart.Examples.Examples.Charts3D.Customize3DChart.AddGeometry3D
     /// </summary>
     public class TextSceneEntity : BaseSceneEntity<SCRTSceneEntity>
     {
-        private readonly Color _textColor;
+        private Color _textColor;
         private readonly int _fontSize;
         private readonly string _fontFamily;
         private Font3D _font;
 
         public string Text { get; set; }
+
+        public Color TextColor
+        {
+            get => _textColor;
+            set => _textColor = value;
+        }
 
         [TypeConverter(typeof(StringToVector3TypeConverter))]
         public Vector3 Location { get; set; }

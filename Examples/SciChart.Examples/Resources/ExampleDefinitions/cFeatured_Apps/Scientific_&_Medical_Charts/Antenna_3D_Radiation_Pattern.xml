@@ -1,0 +1,59 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/SeeFeaturedApplication/Antenna3DRadiationPattern/Antenna3DRadiationPatternView.xaml</View>
+  <ViewModel/>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/Antenna3DRadiationPatternDemo.png</ImagePath>
+  <IconPath>IconScatter3D</IconPath>
+  <ShowcaseDescription>Visualise a directional antenna radiation pattern in full 3D alongside E-plane and H-plane polar cross-sections and a 2D gain coverage map, all driven from a single physics-based gain model.</ShowcaseDescription>
+  <ToolTipDescription>Renders an antenna radiation pattern as a color-mapped 3D mesh, with E-plane and H-plane polar charts and a 2D gain coverage heatmap.</ToolTipDescription>
+  <Description>
+    Combines SciChart 3D and 2D chart surfaces in a single view to visualise antenna directivity.
+
+    [b]What is shown[/b]
+
+    - [b]3D Radiation Pattern[/b] - The gain of a simulated 8x8 microstrip patch array is sampled on a 180x360 spherical grid and rendered as a color-mapped 3D mesh. The mesh uses a custom [url='https://www.scichart.com/documentation/win/current/webframe.html#Extending%20SciChart%203D%20with%20Custom%20Geometry.html']BaseSceneEntity[/url] with precomputed triangles, per-vertex colors and surface normals for maximum performance.
+
+    - [b]Jet Colormap Legend[/b] - A vertical [url='https://www.scichart.com/documentation/win/current/webframe.html#HeatmapColorMap.html']HeatmapColorMap[/url] overlays the 3D chart and maps the gain range from -40 dBi (blue) to 0 dBi (red).
+
+    - [b]Gain Coverage Map[/b] - A [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Uniform%20Heatmap%20Chart%20Type.html']FastUniformHeatmapRenderableSeries[/url] shows the full gain field as a 2D heatmap. Draggable cross-section lines and a TooltipModifier let you explore exact values.
+
+    - [b]E-plane and H-plane Polar Charts[/b] - Elevation and azimuth cross-sections rendered on [url='https://www.scichart.com/documentation/win/current/webframe.html#PolarChart.html']PolarXAxis / PolarYAxis[/url] pairs. The E-plane shows gain vs theta at a fixed phi; the H-plane shows gain vs phi at a fixed theta. Both update interactively via toolbar sliders.
+
+    [b]Antenna Physics Model[/b]
+
+    The gain function combines a cos^2(theta) element factor with an 8x8 rectangular array factor (half-wavelength spacing, broadside steering). A power compression exponent of 0.75 inflates the side lobes so that all pattern features are clearly visible.
+
+    [b]Key SciChart Features[/b]
+
+    - Custom 3D geometry via BaseSceneEntity with per-vertex color and lighting
+    - PolarXAxis / PolarYAxis for antenna pattern cross-sections
+    - FastUniformHeatmapRenderableSeries with shared HeatmapColorPalette
+    - HeatmapColorMap bound to a shared ColorMap for a live color scale legend
+    - Combining SciChart3DSurface and multiple SciChartSurface instances in one view
+    - ZAxisUp viewport orientation on SciChart3DSurface
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Creating%20your%20first%20SciChart3DSurface.html']SciChart3DSurface[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#Extending%20SciChart%203D%20with%20Custom%20Geometry.html']Custom 3D Geometry (BaseSceneEntity)[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#PolarChart.html']Polar Charts[/url]
+    - [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Uniform%20Heatmap%20Chart%20Type.html']Uniform Heatmap Chart[/url]
+  </Description>
+  <CodeFiles>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/AntennaSharedResources.xaml</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/Antenna3DRadiationPatternView.xaml</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/Antenna3DRadiationPatternView.xaml.cs</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/AntennaGainMeshEntity.cs</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/GainCoverageChartsView.xaml</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/GainCoverageChartsView.xaml.cs</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/PolarChartsView.xaml</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/PolarChartsView.xaml.cs</string>
+    <string>SeeFeaturedApplication/Antenna3DRadiationPattern/AntennaMetrics.cs</string>
+    <string>Charts3D/Customize3DChart/AddGeometry3D/TextSceneEntity.cs</string>
+  </CodeFiles>
+  <Features>
+	  <Features>Viewport3D</Features>
+	  <Features>CustomMesh3D</Features>
+    <Features>Polar</Features>
+    <Features>Heatmap</Features>
+  </Features>
+</ExampleDefinition>

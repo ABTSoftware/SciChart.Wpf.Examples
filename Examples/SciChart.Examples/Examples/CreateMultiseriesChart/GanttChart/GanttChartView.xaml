@@ -1,216 +1,296 @@
-﻿<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart.GanttChartView"
+<UserControl x:Class="SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart.GanttChartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
              xmlns:local="clr-namespace:SciChart.Examples.Examples.CreateMultiseriesChart.GanttChart">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="GanttChartResources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+   <UserControl.Resources>
+       <ResourceDictionary>
+           <ResourceDictionary.MergedDictionaries>
+               <ResourceDictionary Source="GanttChartResources.xaml"/>
+           </ResourceDictionary.MergedDictionaries>
+       </ResourceDictionary>
+   </UserControl.Resources>
 
-    <Grid Margin="-2,0,0,0" Background="{StaticResource ThemedChartBackground}">
+   <!--
+       Overall layout: 3 rows × 2 columns.
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+         Col 0 (230px): project title / task list labels
+         Col 1 (*):     X-axis header / Gantt chart surface
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+         Row 0 (50px):  project title (col 0) + scrollable X-axis header (col 1)
+         Row 1 (*):     task list (col 0) + Gantt chart surface (col 1), both inside a ScrollViewer
+         Row 2 (Auto):  SciChartScrollbar spanning both columns, bound to the chart X-axis
+   -->
+   <Grid Margin="-2,0,0,0" Background="{StaticResource ThemedChartBackground}">
 
-        <Border Grid.Row="0"
-                Grid.Column="0"
-                BorderThickness="0,0,1,1"
-                BorderBrush="{StaticResource MainThemeTransparentSolidBrush}">
+       <Grid.RowDefinitions>
+           <RowDefinition Height="50"/>
+           <RowDefinition Height="*"/>
+           <RowDefinition Height="Auto"/>
+       </Grid.RowDefinitions>
 
-            <TextBlock Text="2022-2023 PROJECT OVERVIEW"
-                       TextTrimming="CharacterEllipsis"
-                       FontSize="12"
-                       FontWeight="SemiBold"
-                       Foreground="White"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="15,0"/>
-        </Border>
+       <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="230"/>
+           <ColumnDefinition Width="*"/>
+       </Grid.ColumnDefinitions>
 
-        <s:SciChartSurface Grid.Row="0" Grid.Column="1">
-            <s:SciChartSurface.XAxis>
-                <s:DoubleScaleDiscontinuousDateTimeAxis Height="50" 
-                                                        AxisBandsFrequency="Daily"
-                                                        VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
-                                                        VisibleRangeLimit="{Binding XVisibleRangeLimit}"
-                                                        Calendar="{StaticResource XAxisCalendar}"
-                                                        Style="{StaticResource DoubleScaleXAxisWithGridLineStyle}"/>
-            </s:SciChartSurface.XAxis>
+       <!-- Project title label in the top-left corner. -->
+       <Border Grid.Row="0"
+               Grid.Column="0"
+               BorderThickness="0,0,1,1"
+               BorderBrush="{StaticResource MainThemeTransparentSolidBrush}">
 
-            <s:SciChartSurface.YAxis>
-                <s:NumericAxis Visibility="Collapsed"/>
-            </s:SciChartSurface.YAxis>
+           <TextBlock Text="2022-2023 PROJECT OVERVIEW"
+                      TextTrimming="CharacterEllipsis"
+                      FontSize="12"
+                      FontWeight="SemiBold"
+                      Foreground="White"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="15,0"/>
+       </Border>
 
-            <s:SciChartSurface.Annotations>
-                <s:VerticalLineAnnotation X1="{Binding XEndDate, Mode=OneWay}">
-                    <s:VerticalLineAnnotation.AnnotationLabels>
-                        <s:AnnotationLabel Text="Project End"
-                                           Background="OrangeRed" 
-                                           Foreground="White"
-                                           AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
-                    </s:VerticalLineAnnotation.AnnotationLabels>
-                </s:VerticalLineAnnotation>
-            </s:SciChartSurface.Annotations>
+       <!--
+           Header X-axis surface (top-right).
 
-            <s:SciChartSurface.ChartModifier>
-                <s:VerticalSliceModifier ShowAxisLabels="False">
-                    <s:VerticalLineAnnotation X1="{Binding XCurrentDate, Mode=TwoWay}">
-                        <s:VerticalLineAnnotation.AnnotationLabels>
-                            <s:AnnotationLabel Background="#42B649"
-                                               Foreground="White"
-                                               AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
-                        </s:VerticalLineAnnotation.AnnotationLabels>
-                    </s:VerticalLineAnnotation>
-                </s:VerticalSliceModifier>
-            </s:SciChartSurface.ChartModifier>
-        </s:SciChartSurface>
+           A dedicated SciChartSurface is used here so the X-axis stays fixed at the top while
+           the task rows below scroll vertically. Its XVisibleRange is two-way bound to the same
+           property as the main chart surface, keeping both axes in perfect sync during pan/zoom.
 
-        <ScrollViewer Grid.Row="1"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2" 
-                      Style="{StaticResource ItemsScrollViewerStyle}">
+           Annotations on this surface:
+             - Orange VerticalLineAnnotation: fixed "Project End" marker with an axis label.
+             - Green VerticalLineAnnotation (inside VerticalSliceModifier): current-date marker
+               that shares XCurrentDate with the main chart so both lines move together.
+       -->
+       <s:SciChartSurface Grid.Row="0" Grid.Column="1">
+           <s:SciChartSurface.XAxis>
+               <s:DoubleScaleDiscontinuousDateTimeAxis Height="50"
+                                                       AxisBandsFrequency="Daily"
+                                                       VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
+                                                       VisibleRangeLimit="{Binding XVisibleRangeLimit}"
+                                                       Calendar="{StaticResource XAxisCalendar}"
+                                                       Style="{StaticResource DoubleScaleXAxisWithGridLineStyle}"/>
+           </s:SciChartSurface.XAxis>
 
-            <b:Interaction.Behaviors>
-                <local:GanttScrollBehavior/>
-            </b:Interaction.Behaviors>
+           <!-- Y-axis hidden; this surface is axis-only and draws no series. -->
+           <s:SciChartSurface.YAxis>
+               <s:NumericAxis Visibility="Collapsed"/>
+           </s:SciChartSurface.YAxis>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="230"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+           <s:SciChartSurface.Annotations>
+               <!-- Fixed orange line marking the project end date. -->
+               <s:VerticalLineAnnotation X1="{Binding XEndDate, Mode=OneWay}">
+                   <s:VerticalLineAnnotation.AnnotationLabels>
+                       <s:AnnotationLabel Text="Project End"
+                                          Background="OrangeRed"
+                                          Foreground="White"
+                                          AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
+                   </s:VerticalLineAnnotation.AnnotationLabels>
+               </s:VerticalLineAnnotation>
+           </s:SciChartSurface.Annotations>
 
-                <ItemsControl Grid.Column="0"
-                              Margin="0,-2,0,0"
-                              ItemsSource="{Binding Items, Mode=OneWay}">
+           <s:SciChartSurface.ChartModifier>
+               <!-- VerticalSliceModifier hosts the draggable green current-date marker.
+                    ShowAxisLabels=False suppresses the default numeric label; the annotation
+                    label below shows the formatted date instead. -->
+               <s:VerticalSliceModifier ShowAxisLabels="False">
+                   <s:VerticalLineAnnotation X1="{Binding XCurrentDate, Mode=TwoWay}">
+                       <s:VerticalLineAnnotation.AnnotationLabels>
+                           <s:AnnotationLabel Background="#42B649"
+                                              Foreground="White"
+                                              AxisLabelStyle="{StaticResource XAxisLabelStyle}"/>
+                       </s:VerticalLineAnnotation.AnnotationLabels>
+                   </s:VerticalLineAnnotation>
+               </s:VerticalSliceModifier>
+           </s:SciChartSurface.ChartModifier>
+       </s:SciChartSurface>
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="1"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+       <!--
+           Scrollable Gantt area (rows 1, spanning both columns).
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border MinHeight="75"
-                                    BorderThickness="0,1,1,0"
-                                    BorderBrush="{StaticResource MainThemeTransparentSolidBrush}">
+           A ScrollViewer wraps both the task list panel (col 0) and the chart surface (col 1)
+           so they scroll vertically together. Horizontal scrolling is disabled here — timeline
+           pan is handled by ZoomPanModifier on the chart surface.
 
-                                <Grid Margin="0,10,10,10" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="6"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
+           GanttScrollBehavior enables Ctrl+MouseWheel for vertical scrolling; unmodified wheel
+           events pass through to the chart's ZoomPanModifier and MouseWheelZoomModifier.
+       -->
+       <ScrollViewer Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Style="{StaticResource ItemsScrollViewerStyle}">
 
-                                    <Border Grid.Column="0">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="#FF80838E"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsCurrent}" Value="True">
-                                                        <Setter Property="Background" Value="{Binding Fill}"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                    </Border>
+           <b:Interaction.Behaviors>
+               <local:GanttScrollBehavior/>
+           </b:Interaction.Behaviors>
 
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
-                                        <TextBlock Text="{Binding Name}"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   FontSize="14"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="#FFE2F4ED"/>
+           <Grid>
+               <Grid.ColumnDefinitions>
+                   <ColumnDefinition Width="230"/>
+                   <ColumnDefinition Width="*"/>
+               </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="{Binding Department}"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   FontSize="12"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="#FF80838E"/>
-                                    </StackPanel>
+               <!--
+                   Left panel: task list.
 
-                                    <TextBlock Grid.Column="2"
-                                               Text="{Binding Completion, StringFormat='{}{0}%'}"
-                                               FontSize="12"
-                                               FontWeight="SemiBold"
-                                               Foreground="#FFE2F4ED"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                   An ItemsControl with a single-column UniformGrid mirrors the per-row Y-axis
+                   layout on the chart surface (right), so each task label aligns with its bar.
+                   Each item shows:
+                     - A colored accent strip on the left (grey when not current, task color when current).
+                     - Task name and department.
+                     - Completion percentage on the right.
+               -->
+               <ItemsControl Grid.Column="0"
+                             Margin="0,-2,0,0"
+                             ItemsSource="{Binding Items, Mode=OneWay}">
 
-                <s:SciChartSurface Grid.Column="1"
-                                   LeftAxesPanelTemplate="{StaticResource YAxesPanel}"
-                                   YAxes="{s:AxesBinding YAxes, Mode=OneWay}"
-                                   RenderableSeries="{s:SeriesBinding RenderableSeries}">
+                   <ItemsControl.ItemsPanel>
+                       <ItemsPanelTemplate>
+                           <UniformGrid Columns="1"/>
+                       </ItemsPanelTemplate>
+                   </ItemsControl.ItemsPanel>
 
-                    <s:SciChartSurface.XAxis>
-                        <s:DoubleScaleDiscontinuousDateTimeAxis Height="0"
-                                                                x:Name="DoubleScaleDateTimeAxis"
-                                                                AxisBandsFrequency="Daily"
-                                                                VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
-                                                                VisibleRangeLimit="{Binding XVisibleRangeLimit}"
-                                                                Calendar="{StaticResource XAxisCalendar}"
-                                                                Style="{StaticResource DoubleScaleXAxisStyle}"/>
-                    </s:SciChartSurface.XAxis>
+                   <ItemsControl.ItemTemplate>
+                       <DataTemplate>
+                           <Border MinHeight="75"
+                                   BorderThickness="0,1,1,0"
+                                   BorderBrush="{StaticResource MainThemeTransparentSolidBrush}">
 
-                    <s:SciChartSurface.Annotations>
-                        <s:VerticalLineAnnotation ShowLabel="False"
-                                                  Stroke="OrangeRed"
-                                                  StrokeThickness="1"
-                                                  X1="{Binding XEndDate, Mode=OneWay}"/>
-                    </s:SciChartSurface.Annotations>
+                               <Grid Margin="0,10,10,10">
+                                   <Grid.ColumnDefinitions>
+                                       <ColumnDefinition Width="6"/>
+                                       <ColumnDefinition Width="*"/>
+                                       <ColumnDefinition Width="30"/>
+                                   </Grid.ColumnDefinitions>
 
-                    <s:SciChartSurface.ChartModifier>
-                        <s:ModifierGroup>
-                            <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
-                            <s:ZoomExtentsModifier XyDirection="XDirection"/>
-                            <s:MouseWheelZoomModifier XyDirection="XDirection"/>
-                            <s:VerticalSliceModifier ShowAxisLabels="False">
-                                <s:VerticalLineAnnotation IsEditable="True"
-                                                          Stroke="#42B649"
-                                                          StrokeThickness="1"
-                                                          X1="{Binding XCurrentDate, Mode=TwoWay}">
-                                    <s:VerticalLineAnnotation.ResizingGripsStyle>
-                                        <Style TargetType="Thumb">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                        </Style>
-                                    </s:VerticalLineAnnotation.ResizingGripsStyle>
-                                </s:VerticalLineAnnotation>
-                            </s:VerticalSliceModifier>
-                        </s:ModifierGroup>
-                    </s:SciChartSurface.ChartModifier>
-                </s:SciChartSurface>
-            </Grid>
-        </ScrollViewer>
+                                   <!-- Accent strip: grey by default, task color when IsCurrent=True. -->
+                                   <Border Grid.Column="0">
+                                       <Border.Style>
+                                           <Style TargetType="Border">
+                                               <Setter Property="Background" Value="#FF80838E"/>
+                                               <Style.Triggers>
+                                                   <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                                       <Setter Property="Background" Value="{Binding Fill}"/>
+                                                   </DataTrigger>
+                                               </Style.Triggers>
+                                           </Style>
+                                       </Border.Style>
+                                   </Border>
 
-        <Border Grid.Row="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="2" 
-                Background="#2B364C">
+                                   <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+                                       <TextBlock Text="{Binding Name}"
+                                                  TextTrimming="CharacterEllipsis"
+                                                  FontSize="14"
+                                                  FontWeight="SemiBold"
+                                                  Foreground="#FFE2F4ED"/>
 
-            <s:SciChartScrollbar Margin="4,0"
-                                 IsAnimated="False"
-                                 Axis="{Binding Source={x:Reference DoubleScaleDateTimeAxis}}"
-                                 Style="{StaticResource SciChartScrollBarStyle}"/>
-        </Border>
-    </Grid>
+                                       <TextBlock Text="{Binding Department}"
+                                                  TextTrimming="CharacterEllipsis"
+                                                  FontSize="12"
+                                                  FontWeight="SemiBold"
+                                                  Foreground="#FF80838E"/>
+                                   </StackPanel>
+
+                                   <TextBlock Grid.Column="2"
+                                              Text="{Binding Completion, StringFormat='{}{0}%'}"
+                                              FontSize="12"
+                                              FontWeight="SemiBold"
+                                              Foreground="#FFE2F4ED"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Center"/>
+                               </Grid>
+                           </Border>
+                       </DataTemplate>
+                   </ItemsControl.ItemTemplate>
+               </ItemsControl>
+
+               <!--
+                   Main Gantt chart surface (right column).
+
+                   One stripe series per task row is bound via RenderableSeries. Each series is
+                   assigned to its own Y-axis (from YAxes), stacked vertically using the custom
+                   LeftAxesPanelTemplate (a single-column UniformGrid).
+
+                   X-axis: Height=0 hides it visually; the visible axis lives in the header surface
+                   above. XVisibleRange is two-way bound to the same property so pan/zoom is shared.
+
+                   Annotations:
+                     - Orange line: project end date (non-interactive, no label — label is on header).
+                     - Green VerticalSliceModifier: draggable current-date marker (IsEditable=True),
+                       resize grips hidden so only drag-to-reposition is possible.
+
+                   Modifiers:
+                     - ZoomPanModifier: left-click drag to pan the timeline (X only).
+                     - ZoomExtentsModifier: double-click to reset the X range.
+                     - MouseWheelZoomModifier: scroll to zoom the timeline (X only).
+               -->
+               <s:SciChartSurface Grid.Column="1"
+                                  LeftAxesPanelTemplate="{StaticResource YAxesPanel}"
+                                  YAxes="{s:AxesBinding YAxes, Mode=OneWay}"
+                                  RenderableSeries="{s:SeriesBinding RenderableSeries}">
+
+                   <s:SciChartSurface.XAxis>
+                       <!-- Height=0: axis is hidden here; the header surface shows the visible axis. -->
+                       <s:DoubleScaleDiscontinuousDateTimeAxis Height="0"
+                                                               x:Name="DoubleScaleDateTimeAxis"
+                                                               AxisBandsFrequency="Daily"
+                                                               VisibleRange="{Binding XVisibleRange, Mode=TwoWay}"
+                                                               VisibleRangeLimit="{Binding XVisibleRangeLimit}"
+                                                               Calendar="{StaticResource XAxisCalendar}"
+                                                               Style="{StaticResource DoubleScaleXAxisStyle}"/>
+                   </s:SciChartSurface.XAxis>
+
+                   <s:SciChartSurface.Annotations>
+                       <!-- Orange line marking the project end date, no label (label is on the header). -->
+                       <s:VerticalLineAnnotation ShowLabel="False"
+                                                 Stroke="OrangeRed"
+                                                 StrokeThickness="1"
+                                                 X1="{Binding XEndDate, Mode=OneWay}"/>
+                   </s:SciChartSurface.Annotations>
+
+                   <s:SciChartSurface.ChartModifier>
+                       <s:ModifierGroup>
+                           <s:ZoomPanModifier XyDirection="XDirection" ZoomExtentsY="False"/>
+                           <s:ZoomExtentsModifier XyDirection="XDirection"/>
+                           <s:MouseWheelZoomModifier XyDirection="XDirection"/>
+                           <!-- Draggable green current-date marker. ResizingGrips are hidden so the
+                                line can only be repositioned by dragging, not resized. -->
+                           <s:VerticalSliceModifier ShowAxisLabels="False">
+                               <s:VerticalLineAnnotation IsEditable="True"
+                                                         Stroke="#42B649"
+                                                         StrokeThickness="1"
+                                                         X1="{Binding XCurrentDate, Mode=TwoWay}">
+                                   <s:VerticalLineAnnotation.ResizingGripsStyle>
+                                       <Style TargetType="Thumb">
+                                           <Setter Property="Visibility" Value="Collapsed"/>
+                                       </Style>
+                                   </s:VerticalLineAnnotation.ResizingGripsStyle>
+                               </s:VerticalLineAnnotation>
+                           </s:VerticalSliceModifier>
+                       </s:ModifierGroup>
+                   </s:SciChartSurface.ChartModifier>
+               </s:SciChartSurface>
+           </Grid>
+       </ScrollViewer>
+
+       <!--
+           SciChartScrollbar (bottom row, spanning both columns).
+
+           Bound to the hidden main-chart X-axis by x:Reference so it controls the same
+           VisibleRange that is shared with the header surface. Provides drag-to-pan and
+           drag-to-zoom on the timeline without needing the chart area itself.
+       -->
+       <Border Grid.Row="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               Background="#2B364C">
+
+           <s:SciChartScrollbar Margin="4,0"
+                                IsAnimated="False"
+                                Axis="{Binding Source={x:Reference DoubleScaleDateTimeAxis}}"
+                                Style="{StaticResource SciChartScrollBarStyle}"/>
+       </Border>
+   </Grid>
 </UserControl>

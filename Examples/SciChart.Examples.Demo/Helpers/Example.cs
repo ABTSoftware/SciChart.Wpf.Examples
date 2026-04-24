@@ -1,18 +1,17 @@
 ﻿// *************************************************************************************
-// SCICHART © Copyright SciChart Ltd. 2011-2021. All rights reserved.
-//  
-// Web: http://www.scichart.com
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
 // Support: support@scichart.com
-//  
-// Example.cs is part of SciChart Examples, a High Performance WPF & Silverlight Chart. 
-// For full terms and conditions of the SciChart license, see http://www.scichart.com/scichart-eula/
-//  
-// SciChart Examples source code is provided free of charge on an "As-Is" basis to support
-// and provide examples of how to use the SciChart component. You bear the risk of using it. 
-// The authors give no express warranties, guarantees or conditions. You may have additional 
-// consumer rights under your local laws which this license cannot change. To the extent 
-// permitted under your local laws, the contributors exclude the implied warranties of 
-// merchantability, fitness for a particular purpose and non-infringement. 
+// Sales:   sales@scichart.com
+//
+// Example.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
 // *************************************************************************************
 using System;
 using System.Collections.Generic;

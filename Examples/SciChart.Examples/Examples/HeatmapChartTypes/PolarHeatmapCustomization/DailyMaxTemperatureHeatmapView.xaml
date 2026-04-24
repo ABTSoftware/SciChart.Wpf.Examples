@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:SciChart.Examples.Examples.HeatmapChartTypes.PolarHeatmapCustomization">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter" />
         <local:DayOfYearToDateConverter x:Key="DayOfYearToDateConverter" />
         <local:MaxTemperatureConverter x:Key="MaxTempConverter" NoDataText="No Data" />
 
@@ -35,7 +34,7 @@
                                VerticalAlignment="Stretch"
                                Background="{StaticResource ThemedTransparentChartBackground}"
                                BorderThickness="0"
-                               ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                               ColorPalette="{Binding ColorMap, Source={x:Reference HeatmapRenderSeries}}"
                                EnableAxisDrag="True"
                                Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderSeries}}"
                                Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderSeries}}"
@@ -43,11 +42,7 @@
                                TextFormatting="0">
                 <s:HeatmapColorMap.AxisStyle>
                     <Style TargetType="s:AxisBase">
-                        <Setter Property="Margin" Value="-12,0,0,0" />
-                        <Setter Property="DrawMajorBands" Value="False" />
                         <Setter Property="DrawMinorTicks" Value="False" />
-                        <Setter Property="DrawMajorGridLines" Value="False" />
-                        <Setter Property="DrawMinorGridLines" Value="False" />
                     </Style>
                 </s:HeatmapColorMap.AxisStyle>
             </s:HeatmapColorMap>

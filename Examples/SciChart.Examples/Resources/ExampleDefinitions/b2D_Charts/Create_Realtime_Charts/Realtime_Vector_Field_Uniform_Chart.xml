@@ -1,0 +1,42 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/CreateRealtimeChart/RealtimeVectorFieldChartView.xaml</View>
+	<ViewModel />
+	<ImagePath>/SciChart.Examples;component/Resources/Images/Realtime_Uniform_Vectors.png</ImagePath>
+	<IconPath>IconRealtime</IconPath>
+	<ToolTipDescription>Demonstrates a real-time animated Uniform Vector Field chart driven by four interfering radial wave sources, using UniformVectorFieldDataSeries on a resizable grid.</ToolTipDescription>
+	<Description>
+		This example demonstrates a real-time [b]Uniform Vector Field Chart[/b] - a grid of arrows, each drawn as a stem line with an arrowhead indicating direction and magnitude, animated at up to ~50 fps.
+
+		The chart uses [b]VectorFieldRenderableSeries[/b] and [b]UniformVectorFieldDataSeries[/b]. The field is computed from four superimposed radial wave sources that produce smooth interference patterns across a 70x46 grid spanning [-15, 15] x [-10, 10].
+
+		Each frame the displacement values are rewritten directly into the backing 2D arrays and [b]InvalidateParentSurface[/b] is called - no DataSeries reallocation occurs. [b]FieldDataDistributionArgs[/b] supplies pre-known data extents so SciChart can skip the O(N) range scan on every update.
+
+		Two update modes are available via the toolbar:
+		- [b]Normal[/b] - a background thread-pool timer fires every 20 ms (~50 fps); the rendering handler invalidates the chart only when new data is ready, keeping the UI thread free between updates.
+		- [b]Performance[/b] - the data update runs directly inside CompositionTarget.Rendering every frame for maximum throughput, with a FPS overlay shown.
+
+		[b]Features demonstrated[/b]
+
+		- UniformVectorFieldDataSeries on a resizable grid (adjustable via slider while stopped)
+		- Real-time in-place DX/DY update without reallocating the DataSeries
+		- FieldDataDistributionArgs to bypass per-frame O(N) range scans
+		- Color mapping by magnitude or by direction via HeatmapColorPalette
+		- Three arrow length modes: DataUnits, MagnitudePixels, FixedPixels
+		- Normal and Performance update modes with optional FPS overlay
+
+		[b]Documentation Links[/b]
+
+		- Vector Field RenderableSeries
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#SciChart.Charting~SciChart.Charting.Visuals.RenderableSeries.BaseRenderableSeries.html']BaseRenderableSeries[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#HeatmapColorPalette.html']HeatmapColorPalette[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealtimeVectorFieldChartView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/CreateRealtimeChart/RealtimeVectorFieldChartView.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>Realtime</Features>
+		<Features>Performance</Features>
+		<Features>VectorField</Features>
+	</Features>
+</ExampleDefinition>

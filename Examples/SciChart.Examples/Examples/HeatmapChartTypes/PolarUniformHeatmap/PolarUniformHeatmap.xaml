@@ -5,8 +5,6 @@
              xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
         <!-- Style for axis ticks -->
         <Style x:Key="AxisTickStyle" TargetType="Line">
             <Setter Property="Stroke" Value="#93A3C5" />
@@ -114,7 +112,7 @@
                            VerticalAlignment="Stretch"
                            BorderThickness="0"
                            Background="{StaticResource ThemedTransparentChartBackground}"
-                           ColorMap="{Binding ColorMap.GradientStops, Source={x:Reference HeatmapRenderSeries}, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           ColorPalette="{Binding ColorMap, Source={x:Reference HeatmapRenderSeries}}"
                            Maximum="{Binding ColorMap.Maximum, Source={x:Reference HeatmapRenderSeries}}"
                            Minimum="{Binding ColorMap.Minimum, Source={x:Reference HeatmapRenderSeries}}"
                            Orientation="Vertical"
@@ -123,13 +121,8 @@
                            Margin="20">
             <s:HeatmapColorMap.AxisStyle>
                 <Style TargetType="s:AxisBase">
-                    <Setter Property="Margin" Value="-12,0,0,0"/>
                     <Setter Property="BorderThickness" Value="1,0,0,0" />
                     <Setter Property="BorderBrush" Value="#93A3C5"/>
-                    <Setter Property="DrawMajorBands" Value="False"/>
-                    <Setter Property="DrawMinorTicks" Value="False"/>
-                    <Setter Property="DrawMajorGridLines" Value="False"/>
-                    <Setter Property="DrawMinorGridLines" Value="False"/>
                     <Setter Property="MajorTickLineStyle" Value="{StaticResource AxisTickStyle}"/>
                 </Style>
             </s:HeatmapColorMap.AxisStyle>

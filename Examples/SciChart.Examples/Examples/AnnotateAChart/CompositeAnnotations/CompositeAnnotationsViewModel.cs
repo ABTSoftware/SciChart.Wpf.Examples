@@ -1,20 +1,21 @@
 ﻿// *************************************************************************************
-// SCICHART® Copyright SciChart Ltd. 2011-2025. All rights reserved.
-//  
-// Web: http://www.scichart.com
-//   Support: support@scichart.com
-//   Sales:   sales@scichart.com
-// 
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
 // CompositeAnnotationsViewModel.cs is part of the SCICHART® Examples. Permission is hereby granted
 // to modify, create derivative works, distribute and publish any part of this source
-// code whether for commercial, private or personal use. 
-// 
+// code whether for commercial, private or personal use.
+//
 // The SCICHART® examples are distributed in the hope that they will be useful, but
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
-// expressed or implied. 
+// expressed or implied.
 // *************************************************************************************
 using System;
 using System.Collections.Generic;
+using SciChart.Charting.Common.Extensions;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -24,15 +25,24 @@ namespace SciChart.Examples.Examples.AnnotateAChart.CompositeAnnotations
 {
     public class CompositeAnnotationsViewModel : BaseViewModel
     {
+        public List<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; } = new List<IRenderableSeriesViewModel>();
+
         public CompositeAnnotationsViewModel()
         {
-            RenderableSeriesViewModels = new List<IRenderableSeriesViewModel>
-            {
-                new CandlestickRenderableSeriesViewModel {DataSeries = CompositeAnnotationsViewModel.GetPriceDataSeries()}
-            };
+            CreateRenderableSeries();
         }
 
-        public List<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; set; }
+        private async void CreateRenderableSeries()
+        {
+            var viewModel = new CandlestickRenderableSeriesViewModel
+            {
+                DataSeries = GetPriceDataSeries()
+            };
+
+            RenderableSeriesViewModels.Add(viewModel);
+
+            await viewModel.ZoomExtentsWhenReadyAsync();
+        }
 
         private static IOhlcDataSeries GetPriceDataSeries()
         {

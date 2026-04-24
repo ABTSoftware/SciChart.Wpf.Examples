@@ -1,0 +1,39 @@
+﻿// *************************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
+//
+// Web:     http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// SelectionTrackingListBox.cs is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
+// *************************************************************************************
+using System.Windows.Controls;
+
+namespace SciChart.Examples.Examples.PerformanceDemos2D.RacingTelemetryDashboard.Views
+{
+    /// <summary>
+    /// ListBox that scrolls newly-selected items into view. Useful when selection is driven
+    /// externally (e.g. via a TwoWay binding from a ViewModel) and the affected item may be
+    /// off-screen. Uses <see cref="SelectionChangedEventArgs.AddedItems"/> so deselection
+    /// doesn't scroll.
+    /// </summary>
+    public class SelectionTrackingListBox : ListBox
+    {
+        public SelectionTrackingListBox()
+        {
+            SelectionChanged += OnSelectionChanged;
+        }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+                ScrollIntoView(e.AddedItems[0]);
+        }
+    }
+}

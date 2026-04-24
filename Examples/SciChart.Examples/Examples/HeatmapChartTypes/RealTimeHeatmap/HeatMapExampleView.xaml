@@ -12,8 +12,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
-
         <s:HeatmapColorPalette x:Key="ColorPalette" Maximum="200">
             <s:HeatmapColorPalette.GradientStops>
                 <GradientStop Offset="0" Color="{StaticResource ColorMapColor_1}" />
@@ -97,7 +95,7 @@
                            VerticalAlignment="Stretch"
                            Background="{StaticResource ThemedSurfaceChartBackground}"
                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
-                           ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           ColorPalette="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap}"
                            Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
                            Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
                            TextFormatting="0.00"

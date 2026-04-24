@@ -10,7 +10,6 @@
              d:DesignWidth="800">
 
     <UserControl.Resources>
-        <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLinearGradientBrushConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -79,7 +78,7 @@
                            VerticalAlignment="Stretch"
                            Background="{StaticResource ThemedSurfaceChartBackground}"
                            Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}"
-                           ColorMap="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.GradientStops, Converter={StaticResource ColorsToLinearGradientBrushConverter}}"
+                           ColorPalette="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap}"
                            Minimum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Minimum, Mode=TwoWay}"
                            Maximum="{Binding Source={x:Reference Name=heatmapSeries}, Path=ColorMap.Maximum, Mode=TwoWay}"
                            TextFormatting="0.00"
@@ -88,12 +87,9 @@
                            BorderThickness="1"
                            Orientation="Vertical">
             <s:HeatmapColorMap.AxisStyle>
-                <Style TargetType="{x:Type s:NumericAxis}">
-                    <Setter Property="Margin" Value="-15,0,-10,0"/>
+                <Style TargetType="s:AxisBase">
                     <Setter Property="DrawMajorTicks" Value="False"/>
                     <Setter Property="DrawMinorTicks" Value="False"/>
-                    <Setter Property="DrawMajorGridLines" Value="False"/>
-                    <Setter Property="DrawMinorGridLines" Value="False"/>
                 </Style>
             </s:HeatmapColorMap.AxisStyle>
         </s:HeatmapColorMap>

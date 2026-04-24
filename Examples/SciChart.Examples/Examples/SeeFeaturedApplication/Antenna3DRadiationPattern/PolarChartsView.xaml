@@ -1,0 +1,102 @@
+<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPattern.PolarChartsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <UserControl.Resources>
+        <!-- Radial grid line style for the polar chart concentric rings -->
+        <Style x:Key="PolarRadialGridLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#55FFFFFF" />
+            <Setter Property="StrokeThickness" Value="2" />
+        </Style>
+        <Style x:Key="AxisTickStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#93A3C5" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="0,8,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Top: E-plane (elevation) polar chart — gain vs θ at a fixed φ -->
+        <s:SciChartSurface x:Name="elevationChart" Grid.Row="0" BorderThickness="0">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="elevationSeries" Stroke="#FF00AAFF" StrokeThickness="1" />
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <!-- Angular axis: 0°–359° with 30° ticks, rotated so 0° is at top -->
+                <s:PolarXAxis AutoRange="Never" VisibleRange="0,359"
+                              AutoTicks="False" MajorDelta="30"
+                              BorderThickness="1,0,0,0" BorderBrush="#93A3C5"
+                              DrawMinorGridLines="False" DrawMinorTicks="False"
+                              CursorTextFormatting="###"
+                              MajorTickLineStyle="{StaticResource AxisTickStyle}"
+                              RotationAngle="90" />
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxes>
+                <!-- Radial axis: gain in dBi, range matches the color palette -->
+                <s:PolarYAxis IsPrimaryAxis="True"
+                              AutoRange="Never" VisibleRange="-40,3"
+                              AutoTicks="False" MajorDelta="3"
+                              DrawLabels="True" DrawMajorGridLines="True" DrawMinorGridLines="False" DrawMinorTicks="False"
+                              BorderBrush="#93A3C5" BorderThickness="1,0,0,0"
+                              TextFormatting="0" AxisTitle="dBi"
+                              MajorTickLineStyle="{StaticResource AxisTickStyle}"
+                              MajorGridLineStyle="{StaticResource PolarRadialGridLineStyle}" />
+                <!-- Title-only axis on the right: displays current cut angle -->
+                <s:NumericAxis x:Name="elevationTitleAxis" Id="TitleAxis" AxisAlignment="Right"
+                               AxisTitle="E-plane (φ = 0°)"
+                               IsPrimaryAxis="False" DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"
+                               DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"
+                               AutoRange="Never" VisibleRange="0,1" BorderThickness="0" />
+            </s:SciChartSurface.YAxes>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RolloverModifier ShowTooltipOn="Always" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+
+        <!-- Bottom: H-plane (azimuth) polar chart — gain vs φ at a fixed θ -->
+        <s:SciChartSurface x:Name="azimuthChart" Grid.Row="1" BorderThickness="0">
+            <s:SciChartSurface.RenderableSeries>
+                <s:FastLineRenderableSeries x:Name="azimuthSeries" Stroke="#FFFF6600" StrokeThickness="1" />
+            </s:SciChartSurface.RenderableSeries>
+            <s:SciChartSurface.XAxis>
+                <!-- Angular axis: 0°–359° with 30° ticks, rotated so 0° is at top -->
+                <s:PolarXAxis AutoRange="Never" VisibleRange="0,359"
+                              AutoTicks="False" MajorDelta="30"
+                              BorderThickness="1,0,0,0" BorderBrush="#93A3C5"
+                              DrawMinorGridLines="False" DrawMinorTicks="False"
+                              CursorTextFormatting="###"
+                              MajorTickLineStyle="{StaticResource AxisTickStyle}"
+                              RotationAngle="90" />
+            </s:SciChartSurface.XAxis>
+            <s:SciChartSurface.YAxes>
+                <!-- Radial axis: gain in dBi, range matches the color palette -->
+                <s:PolarYAxis IsPrimaryAxis="True"
+                              AutoRange="Never" BorderBrush="#93A3C5" BorderThickness="1,0,0,0"
+                              VisibleRange="-40,3"
+                              AutoTicks="False" MajorDelta="3"
+                              DrawLabels="True" DrawMajorGridLines="True" DrawMinorGridLines="False" DrawMinorTicks="False"
+                              TextFormatting="0" AxisTitle="dBi"
+                              MajorTickLineStyle="{StaticResource AxisTickStyle}"
+                              MajorGridLineStyle="{StaticResource PolarRadialGridLineStyle}" />
+                <!-- Title-only axis on the right: displays current cut angle -->
+                <s:NumericAxis x:Name="azimuthTitleAxis" Id="TitleAxis" AxisAlignment="Right"
+                               AxisTitle="H-plane (θ = 22°)"
+                               IsPrimaryAxis="False" DrawLabels="False" DrawMajorTicks="False" DrawMinorTicks="False"
+                               DrawMajorGridLines="False" DrawMinorGridLines="False" DrawMajorBands="False"
+                               AutoRange="Never" VisibleRange="0,1" BorderThickness="0" />
+            </s:SciChartSurface.YAxes>
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RolloverModifier ShowTooltipOn="Always" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

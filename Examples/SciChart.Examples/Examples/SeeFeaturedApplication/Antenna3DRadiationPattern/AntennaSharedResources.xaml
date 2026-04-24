@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <!-- Jet colormap: maps gain range -40 dBi (navy) to +3 dBi (dark red) -->
+    <s:HeatmapColorPalette x:Key="GainColorPalette" Minimum="-40" Maximum="3">
+        <GradientStop Offset="0.000" Color="#000080" />
+        <GradientStop Offset="0.125" Color="#0000FF" />
+        <GradientStop Offset="0.375" Color="#00FFFF" />
+        <GradientStop Offset="0.625" Color="#FFFF00" />
+        <GradientStop Offset="0.875" Color="#FF0000" />
+        <GradientStop Offset="1.000" Color="#800000" />
+    </s:HeatmapColorPalette>
+
+    <!-- Shared axis tick style -->
+    <Style x:Key="AxisTickStyle" TargetType="Line">
+        <Setter Property="Stroke" Value="#93A3C5" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+</ResourceDictionary>

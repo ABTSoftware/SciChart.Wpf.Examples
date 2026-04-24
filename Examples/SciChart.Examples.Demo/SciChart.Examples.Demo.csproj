@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
     <UseWPF>True</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <ApplicationIcon>SciChartIconWin256x256.ico</ApplicationIcon>
@@ -58,9 +58,6 @@
     <EmbeddedResource Include="Resources\stopwords.dat" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Microsoft.NETCore.Targets package fixes the NU1605 issue for netcoreapp3.1 -->
-    <!-- https://learn.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu1605 -->
-    <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.0.90" />
     <PackageReference Include="RestSharp" Version="106.15.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
@@ -101,15 +98,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="8.11.*-*" />
+    <PackageReference Include="SciChart" Version="9.0.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="8.11.*-*" />
+    <PackageReference Include="SciChart3D" Version="9.0.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DirectX" Version="8.11.*-*" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="8.11.*-*" />
+    <PackageReference Include="SciChart.DrawingTools" Version="9.0.*-*" />
   </ItemGroup>
 </Project>

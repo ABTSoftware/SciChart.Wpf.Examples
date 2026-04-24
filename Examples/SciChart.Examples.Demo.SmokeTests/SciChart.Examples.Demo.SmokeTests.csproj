@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 	<PropertyGroup>
-		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
 		<UseWPF>True</UseWPF>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<LangVersion>Latest</LangVersion>
