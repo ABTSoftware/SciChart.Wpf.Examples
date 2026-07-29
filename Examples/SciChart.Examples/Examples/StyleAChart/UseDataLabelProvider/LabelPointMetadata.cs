@@ -1,11 +1,11 @@
-﻿// *************************************************************************************
+// *************************************************************************************
 // SCICHART® Copyright SciChart Ltd. 2011-2026. All rights reserved.
 //
 // Web:     http://www.scichart.com
 // Support: support@scichart.com
 // Sales:   sales@scichart.com
 //
-// HistogramLabelAnnotation.xaml.cs is part of the SCICHART® Examples. Permission is hereby granted
+// LabelPointMetadata.cs is part of the SCICHART® Examples. Permission is hereby granted
 // to modify, create derivative works, distribute and publish any part of this source
 // code whether for commercial, private or personal use.
 //
@@ -13,18 +13,22 @@
 // without any warranty. It is provided "AS IS" without warranty of any kind, either
 // expressed or implied.
 // *************************************************************************************
-using SciChart.Charting.Visuals.Annotations;
+using System.ComponentModel;
+using SciChart.Charting.Model.DataSeries;
 
-namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
+namespace SciChart.Examples.Examples.StyleAChart.UseDataLabelProvider
 {
-    /// <summary>
-    /// Interaction logic for CustomTextAnnotation.xaml
-    /// </summary>
-    public partial class HistogramLabelAnnotation : TextAnnotation
+    public class LabelPointMetadata : IPointMetadata
     {
-        public HistogramLabelAnnotation()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public LabelPointMetadata(string label)
         {
-            InitializeComponent();
+            Label = label;
         }
+
+        public bool IsSelected { get; set; }
+
+        public string Label { get; }
     }
 }

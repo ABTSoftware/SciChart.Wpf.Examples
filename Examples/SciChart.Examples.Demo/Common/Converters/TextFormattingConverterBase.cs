@@ -43,6 +43,8 @@ namespace SciChart.Examples.Demo.Common.Converters
                     .Replace("&lt;", string.Empty)
                     .Replace("&gt;", string.Empty)
                     .Replace("&#x", string.Empty)
+                    // Escape any remaining bare '&' last, after the named entities above are consumed, so the result is valid XAML for XamlReader.Load.
+                    .Replace("&", "&amp;")
                     .Trim();
             }
             return string.Empty;

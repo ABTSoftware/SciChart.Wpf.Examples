@@ -18,6 +18,7 @@ namespace SciChart.Examples
     public enum Features
     {
         Annotations,
+        AspectRatio,
         Area,
         Axis,
         Band,
@@ -31,6 +32,7 @@ namespace SciChart.Examples
         Custom,
         Dashed,
         DataSeries,
+        DataLabelProvider,
         ErrorBars,
         Events,
         Fan,
@@ -50,6 +52,7 @@ namespace SciChart.Examples
         Log10,
         Logarithmic,
         LogE,
+        Map,
         Mountain,
         Mousewheel,
         MultipleAxis,

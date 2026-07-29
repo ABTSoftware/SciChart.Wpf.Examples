@@ -180,6 +180,8 @@ namespace SciChart.Examples.Demo.SmokeTests
             new ExampleStartTestCase(Category_2DCharts, Group_2D_CreateSimpleCharts, "Mountain Chart", "Charts2D/CreateSimpleChart/MountainChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_CreateSimpleCharts, "Polar Chart", "Charts2D/CreateSimpleChart/PolarChart.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_CreateSimpleCharts, "Scatter Chart", "Charts2D/CreateSimpleChart/ScatterChart.png"),
+            new ExampleStartTestCase(Category_2DCharts, Group_2D_CreateSimpleCharts, "Vector Field Chart", "Charts2D/CreateSimpleChart/VectorFieldChart.png"),
+
             // 2D Charts, Annotations
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Annotations, "Annotations are Easy!", "Charts2D/ChartAnnotations/AnnotationsAreEasy.png"),
             new ExampleStartTestCase(Category_2DCharts, Group_2D_Annotations, "Composite Annotations", "Charts2D/ChartAnnotations/CompositeAnnotations.png"),

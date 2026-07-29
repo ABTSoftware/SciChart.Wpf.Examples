@@ -33,7 +33,7 @@
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/DashboardStyleChartsViewModel.cs.txt</string>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/ExampleListBoxStyle.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/LabelForegroundConverter.cs.txt</string>
-    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/RenderebleSeriesStyles.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/RenderableSeriesStyles.xaml.txt</string>
     <string>Resources/ExampleSourceFiles/CreateMultiseriesChart/DashboardStyleCharts/SpacingModeToMaximumSpacingConverter.cs.txt</string>
   </CodeFiles>
   <Features>

@@ -276,8 +276,7 @@
         <s:SciChartSurface x:Name="oscilloscopeChart"
                            Grid.Column="1"
                            CenterXAxesPanelTemplate="{StaticResource template}"
-                           CenterYAxesPanelTemplate="{StaticResource template}"
-                           RenderPriority="Low">
+                           CenterYAxesPanelTemplate="{StaticResource template}">
             <i:Interaction.Behaviors>
                 <local:ShiftedAxesBehavior XAxisPosition="0"
                                            XMode="Absolute"

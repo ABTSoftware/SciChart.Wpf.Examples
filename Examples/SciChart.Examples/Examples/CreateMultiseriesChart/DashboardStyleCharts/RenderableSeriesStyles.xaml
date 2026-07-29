@@ -3,6 +3,11 @@
                     xmlns:dashboardStyleCharts="clr-namespace:SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts"
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
 
+    <!-- Merged so the StyleKey styles below can BasedOn the SciChart MVVM styles -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SciChart.Charting;component/Themes/TemplateParts/Default.RenderableSeries.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <dashboardStyleCharts:LabelForegroundConverter x:Key="LabelForegroundConverter" />
 
     <!--TooltipTemplate for RolloverModifier-->
@@ -14,11 +19,12 @@
     </DataTemplate>
 
     <!--Columns colors-->
-
-    <Style x:Key="BaseStackedStyle" TargetType="s:StackedColumnRenderableSeries">
-        <Setter Property="LabelColor" Value="{Binding Stroke, RelativeSource={RelativeSource Self}, Converter={StaticResource LabelForegroundConverter}}" />
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="ShowLabel" Value="{Binding IsChecked, ElementName=ShowLabels, Mode=TwoWay}" />
+    <Style x:Key="BaseStackedStyle"
+           BasedOn="{StaticResource MvvmBaseColumnRenderableSeriesStyle}"
+           TargetType="s:StackedColumnRenderableSeries">
+        <Setter Property="ShowDataLabels"
+                Value="{Binding IsChecked, ElementName=ShowLabelsCbx, Mode=TwoWay}" />
+        <Setter Property="Foreground" Value="{Binding Stroke, RelativeSource={RelativeSource Self}, Converter={StaticResource LabelForegroundConverter}}" />
         <Setter Property="DataPointWidth" Value="{Binding Value, ElementName=DataPointWidth, Mode=TwoWay}" />
         <Setter Property="Spacing" Value="{Binding Value, ElementName=Spacing, Mode=TwoWay}" />
         <Setter Property="SpacingMode" Value="{Binding SelectedItem, ElementName=SpacingModeCbx, Mode=TwoWay, TargetNullValue=Absolute}" />
@@ -65,7 +71,6 @@
     </Style>
 
     <!--Mountains colors-->
-
     <DataTemplate x:Key="DigitalToolTipTemplate" DataType="s:XySeriesInfo">
         <Border Style="{StaticResource BorderStyle}" BorderBrush="{Binding Stroke}">
             <TextBlock Text="{Binding SeriesName, StringFormat='{}{0}'}" />

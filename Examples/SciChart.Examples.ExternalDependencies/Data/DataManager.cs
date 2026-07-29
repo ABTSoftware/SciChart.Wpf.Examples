@@ -320,10 +320,12 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
                             foreach (var resourceString in assembly.GetManifestResourceNames())
                             {
-                                if (resourceString.Contains("_"))
+                                // Only the instrument data files directly under ResourceDirectory follow the
+                                // "{SYMBOL}_{TimeFrame}" naming; skip any other embedded resource that happens to
+                                // contain an underscore (e.g. data in sub-folders such as EuropeCitiesPopulation).
+                                if (resourceString.StartsWith(ResourceDirectory + ".") && resourceString.Contains("_") &&
+                                    Instrument.TryParse(GetSubstring(resourceString, ResourceDirectory + ".", "_"), out var instr))
                                 {
-                                    string instrumentString = GetSubstring(resourceString, ResourceDirectory + ".", "_");
-                                    var instr = Instrument.Parse(instrumentString);
                                     if (!_availableInstruments.Contains(instr))
                                     {
                                         _availableInstruments.Add(instr);
@@ -364,9 +366,11 @@ namespace SciChart.Examples.ExternalDependencies.Data
 
                         foreach (var resourceString in assembly.GetManifestResourceNames())
                         {
-                            if (resourceString.Contains("_"))
+                            // Same guard as AvailableInstruments: only parse instrument data files directly under
+                            // ResourceDirectory, ignoring other underscore-containing resources (e.g. sub-folder data).
+                            if (resourceString.StartsWith(ResourceDirectory + ".") && resourceString.Contains("_") &&
+                                Instrument.TryParse(GetSubstring(resourceString, ResourceDirectory + ".", "_"), out var instrument))
                             {
-                                var instrument = Instrument.Parse(GetSubstring(resourceString, ResourceDirectory + ".", "_"));
                                 var timeframe = TimeFrame.Parse(GetSubstring(resourceString, "_", ".csv.gz"));
 
                                 _availableTimeFrames[instrument].Add(timeframe);

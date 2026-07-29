@@ -50,7 +50,9 @@
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplateSelector>
-                                    <toolbar2D:ModifierButtonTemplateSelector AnimationsModifierTemplate="{StaticResource AnimationsModifierTemplate}"
+                                    <toolbar2D:ModifierButtonTemplateSelector AspectRatioModifierTemplate="{StaticResource AspectRatioModifierTemplate}"
+                                                                              DataLabelsModifierTemplate="{StaticResource DataLabelsModifierTemplate}"
+                                                                              AnimationsModifierTemplate="{StaticResource AnimationsModifierTemplate}"
                                                                               AnnotationCreationModifierTemplate="{StaticResource AnnotationCreationModifierTemplate}"
                                                                               CursorModifierTemplate="{StaticResource CursorModifierTemplate}"
                                                                               EmptyTemplate="{StaticResource EmptyTemplate}"

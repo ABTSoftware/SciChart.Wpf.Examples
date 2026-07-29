@@ -1,0 +1,60 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/SeeFeaturedApplication/SeismicActivityExplorer/SeismicActivityExplorerView.xaml</View>
+	<ViewModel/>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SeismicActivityExplorer.png</ImagePath>
+	<IconPath>IconBubbleChart</IconPath>
+	<ShowcaseDescription>Explore thousands of simulated earthquakes on a real bathymetry map of the Banda Sea, the meeting point of the Sunda, Australian and Pacific plates: bubble size encodes magnitude, color encodes focal depth via a metadata value provider, and the terrain comes from the NOAA ETOPO 2022 elevation model.</ShowcaseDescription>
+	<ToolTipDescription>Renders simulated earthquakes over real Banda Sea bathymetry. Magnitude drives bubble size; focal depth, carried in point metadata, drives the ColorMap through IPointColorMapValueProvider.</ToolTipDescription>
+	<Description>
+		Visualises simulated seismicity of the Banda Sea region - the meeting point of the Sunda, Australian and Pacific plates, host to some of the deepest earthquakes on Earth - in map view: each bubble is one earthquake positioned by longitude (X) and latitude (Y), sized by magnitude and colored by focal depth. Events are shallow crustal on the islands and coasts, then deepen with both the distance from the shoreline and the water depth, so each deep basin reads as a bullseye deepening toward its center, reaching 500-650 km in the Banda Sea cores. The terrain background is a real elevation model.
+
+		[b]Note:[/b] All seismic events are randomly generated, synthetic data: 25,000 events spanning 2000-2010, shaped by the real terrain so they look plausible - shallow crustal on the islands, deepening toward the deep basin centers where the subducted slab lies. They are not real earthquake records. Terrain: ETOPO 2022 (NOAA), public domain.
+
+		[b]What is shown[/b]
+
+		- [b]Color by a 4th dimension[/b] - X, Y and Z hold longitude, latitude and magnitude, leaving no slot for depth. Each event's focal depth travels in point metadata, and an IPointColorMapValueProvider feeds it to the [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Bubble%20Charts%20Type.html']FastBubbleRenderableSeries[/url] ColorMap, so color encodes depth while size stays on magnitude.
+
+		- [b]Color range modes with a draggable legend[/b] - ColorMapRange controls how depths map to colors: the default Manual pins the absolute 0-700 km scale (the textbook seismic depth scale), Auto fits the scale to the data, AutoMin and AutoMax pin one end only. Outside Auto mode the legend axis is draggable, and in AutoMin/AutoMax the data-driven end is locked with a VisibleRangeLimit.
+
+		- [b]Magnitude-scaled bubbles[/b] - A small FastBubbleRenderableSeries subclass overrides GetBubbleDiameter so the rendered diameter doubles with each whole magnitude step, while Z keeps the raw magnitude for tooltips and hit-testing.
+
+		- [b]Real terrain heatmap[/b] - A FastUniformHeatmapRenderableSeries renders the embedded ETOPO 2022 elevation extract (30 arc-second cells) with muted hypsometric tints anchored at sea level, so the deep troughs, the coastlines and the island arcs are all visible without competing with the data.
+
+		- [b]Performance[/b] - The synthetic catalog holds 25,000 events spanning 2000-2010 (roughly 2,500 per year, matching the real seismicity rate of the region); per-vertex ColorMap tinting on the Vx renderer keeps the full catalog fluid.
+
+		- [b]Configurable bubble fill and threshold highlighting[/b] - The FillBrush property defines the bubble look (impact zone, solid disc, soft ball or shockwave rings). Events at or above a magnitude threshold split into a separate series drawn on top of everything, with a shared SizeReferenceMagnitude keeping one consistent magnitude-to-size scale across both series.
+
+		[b]Key SciChart Features[/b]
+
+		- FastBubbleRenderableSeries with ColorMap, ColorMapRange, ColorMapValueProvider and FillBrush
+		- IPointColorMapValueProvider coloring by a 4th data dimension from point metadata
+		- FastUniformHeatmapRenderableSeries as a map background layer
+		- HeatmapColorMap legend styled as an axis, with axis drag and range limits
+		- Custom styled TooltipModifier tooltips fed from point metadata
+
+		[b]Documentation Links[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Bubble%20Charts%20Type.html']The Bubble Chart Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#The%20Uniform%20Heatmap%20Type.html']The Uniform Heatmap Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#PaletteProvider%20API.html']PaletteProvider API[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#DataSeries%20PointMetadata%20API.html']PointMetadata API[/url]
+	</Description>
+	<CodeFiles>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/SeismicActivityExplorerView.xaml.txt</string>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/SeismicActivityExplorerView.xaml.cs.txt</string>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/SeismicEventMetadata.cs.txt</string>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/MagnitudeBubbleSeries.cs.txt</string>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/DepthTintConverter.cs.txt</string>
+		<string>SeeFeaturedApplication/SeismicActivityExplorer/SeismicPalettes.xaml.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>AspectRatio</Features>
+		<Features>Zoom</Features>
+		<Features>Pan</Features>
+		<Features>Map</Features>
+		<Features>Bubble</Features>
+		<Features>Heatmap</Features>
+		<Features>Scientific</Features>
+		<Features>Tooltips</Features>
+	</Features>
+</ExampleDefinition>

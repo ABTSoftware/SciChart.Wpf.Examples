@@ -118,7 +118,7 @@
                                            IsHitTestVisible="False">
 
                             <s:SciChartSurface.Resources>
-                                <ResourceDictionary Source="RenderebleSeriesStyles.xaml"/>
+                                <ResourceDictionary Source="RenderableSeriesStyles.xaml"/>
                             </s:SciChartSurface.Resources>
 
                             <s:SciChartSurface.XAxis>

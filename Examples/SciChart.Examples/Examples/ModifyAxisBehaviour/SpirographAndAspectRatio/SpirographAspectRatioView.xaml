@@ -1,0 +1,117 @@
+<UserControl x:Class="SciChart.Examples.Examples.ModifyAxisBehaviour.SpirographAndAspectRatio.SpirographAspectRatioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="OnLoaded">
+    <UserControl.Resources>
+
+        <!-- Axis look: muted foreground, gridlines off, ranges fixed (the spirograph supplies its own coordinates) -->
+        <Style x:Key="NumericAxisStyle" TargetType="s:NumericAxis">
+            <Setter Property="Foreground" Value="#8398BA"/>
+            <Setter Property="AutoRange" Value="Never"/>
+            <Setter Property="DrawMajorGridLines" Value="False"/>
+            <Setter Property="DrawMinorGridLines" Value="False"/>
+        </Style>
+
+        <!-- The ViewportManager that keeps the chart undistorted. AspectRatio=1 draws one X unit and one Y unit at the same pixel length (the spirograph stays round); 
+        Fit grows whichever axis is too zoomed-in so nothing is ever cropped. -->
+        <!-- Declared as a resource so the toolbar flyout below can bind to it. -->
+        <s:AspectRatioViewportManager x:Key="AspectRatioVm" AspectRatio="1" AspectRatioMode="Fit" Anchor="Center"/>
+
+    </UserControl.Resources>
+
+    <!-- Two columns: the interaction toolbar (sized to content) on the left, the chart filling the rest -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ext:SciChartInteractionToolbar Grid.Column="0" TargetSurface="{Binding Source={x:Reference Name=sciChartSurface}}">
+            <!-- Enables/disables the aspect-ratio lock by swapping the surface ViewportManager in OnAspectRatioEnabledChanged -->
+            <!-- Controls are disabled while the aspect-ratio lock is toggled off -->
+            <ext:FlyoutMenuToggleButton x:Name="aspectRatioToggle"
+                                        IsChecked="True"
+                                        Checked="OnAspectRatioEnabledChanged"
+                                        Unchecked="OnAspectRatioEnabledChanged"
+                                        Style="{StaticResource DefaultFlyoutMenuToggleButtonStyle}"
+                                        ToolTipService.ToolTip="Toggle aspect ratio">
+                <ext:ToolbarIcon Kind="AspectRatio" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuToggleButton.PopupContent>
+                    <StackPanel x:Name="aspectRatioMenu" Margin="5" MinWidth="180" Orientation="Vertical">
+
+                        <!-- Mode: which axis is held; the selected item's Tag (an AspectRatioMode) is written to the manager -->
+                        <TextBlock Text="Aspect Ratio Mode" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox Margin="0,5"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding AspectRatioMode, Source={StaticResource AspectRatioVm}, Mode=TwoWay}">
+                            <ComboBoxItem Content="Latest changed" Tag="{x:Static s:AspectRatioMode.LatestChanged}" />
+                            <ComboBoxItem Content="Lock X (resize Y)" Tag="{x:Static s:AspectRatioMode.X}" />
+                            <ComboBoxItem Content="Lock Y (resize X)" Tag="{x:Static s:AspectRatioMode.Y}" />
+                            <ComboBoxItem Content="Fit (never crop)" Tag="{x:Static s:AspectRatioMode.Fit}" />
+                        </ComboBox>
+
+                        <!-- Anchor: which edge of the resized axis stays fixed while the other moves to satisfy the ratio -->
+                        <TextBlock Text="Anchor" Margin="0,10,0,0" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox Margin="0,5"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding Anchor, Source={StaticResource AspectRatioVm}, Mode=TwoWay}">
+                            <ComboBoxItem Content="Center" Tag="{x:Static s:AspectRatioAnchor.Center}" />
+                            <ComboBoxItem Content="Min (fix left / bottom)" Tag="{x:Static s:AspectRatioAnchor.Min}" />
+                            <ComboBoxItem Content="Max (fix right / top)" Tag="{x:Static s:AspectRatioAnchor.Max}" />
+                        </ComboBox>
+
+                        <!-- Ratio: X-unit pixel length divided by Y-unit pixel length; the slider writes straight to the manager -->
+                        <TextBlock Text="Aspect Ratio (X : Y)" Margin="0,10,0,0" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Slider x:Name="aspectRatioSlider" Minimum="0.25" Maximum="4"
+                                    Width="130" VerticalAlignment="Center"
+                                    Value="{Binding AspectRatio, Source={StaticResource AspectRatioVm}, Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Source={x:Reference aspectRatioSlider}, Path=Value, StringFormat={}{0:0.00}}"
+                                       VerticalAlignment="Center" Margin="6,0,0,0" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </ext:FlyoutMenuToggleButton.PopupContent>
+            </ext:FlyoutMenuToggleButton>
+        </ext:SciChartInteractionToolbar>
+
+        <!-- The chart uses the AspectRatioViewportManager that keeps the chart undistorted; the spirograph line series are added in code-behind. -->
+        <s:SciChartSurface x:Name="sciChartSurface" Grid.Column="1"
+                           ViewportManager="{StaticResource AspectRatioVm}">
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis Style="{StaticResource NumericAxisStyle}">
+                    <!-- Wide enough to contain both spinning spirographs: the fan disc centred near
+                         x = -12 and the flower near x = 0. The ViewportManager keeps it undistorted. -->
+                    <s:NumericAxis.VisibleRange>
+                        <s:DoubleRange Min="-16.5" Max="5"/>
+                    </s:NumericAxis.VisibleRange>
+                </s:NumericAxis>
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxis>
+                <s:NumericAxis Style="{StaticResource NumericAxisStyle}">
+                    <s:NumericAxis.VisibleRange>
+                        <s:DoubleRange Min="-5.4" Max="5.4"/>
+                    </s:NumericAxis.VisibleRange>
+                </s:NumericAxis>
+            </s:SciChartSurface.YAxis>
+
+            <!-- Drag to pan, double-click to zoom to extents; the AspectRatioViewportManager re-applies the aspect after each -->
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsEnabled="True" />
+                    <s:ZoomPanModifier IsEnabled="False" />
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+    </Grid>
+</UserControl>

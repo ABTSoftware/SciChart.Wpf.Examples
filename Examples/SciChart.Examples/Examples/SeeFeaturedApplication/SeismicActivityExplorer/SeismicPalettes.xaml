@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="http://schemas.abtsoftware.co.uk/scichart">
+
+    <!-- ETOPO bathymetry/topography color map for the terrain layer. Anchored at sea level:
+         desaturated blues below 0 m, gray-browns above, so the terrain whispers and the events
+         shout. Offsets are relative to the fixed -8000..4000 m range; deeper/higher cells clamp
+         to the end colors. -->
+    <s:HeatmapColorPalette x:Key="TerrainColorMap" Minimum="-8000" Maximum="4000">
+        <s:HeatmapColorPalette.GradientStops>
+            <GradientStop Offset="0.0"    Color="#1A2638" />
+            <GradientStop Offset="0.25"   Color="#243950" />
+            <GradientStop Offset="0.4583" Color="#2F4D63" />
+            <GradientStop Offset="0.6"    Color="#3C6173" />
+            <GradientStop Offset="0.6583" Color="#4A7480" />
+            <GradientStop Offset="0.6666" Color="#53808A" />
+            <GradientStop Offset="0.6668" Color="#4F4D40" />
+            <GradientStop Offset="0.6875" Color="#5D5A4A" />
+            <GradientStop Offset="0.7333" Color="#6F6957" />
+            <GradientStop Offset="1.0"    Color="#8C8470" />
+        </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <!-- Depth color scales (km). All run cool/dark at the surface to warm/bright at depth
+         (red = deepest); the default 0-700 km range is the absolute scale and is overwritten
+         live as the user drags the legend or switches range mode. -->
+
+    <!-- Rainbow: blue at the surface through cyan/green/yellow to red at depth.
+         Extra stops in the first 0-150 km give the shallow majority visible variation. -->
+    <s:HeatmapColorPalette x:Key="RainbowDepthColorMap" Minimum="0" Maximum="700">
+        <s:HeatmapColorPalette.GradientStops>
+            <GradientStop Offset="0.0"   Color="#3349C9" />
+            <GradientStop Offset="0.043" Color="#2F7FD6" />
+            <GradientStop Offset="0.1"   Color="#28A8A2" />
+            <GradientStop Offset="0.215" Color="#4DBE5B" />
+            <GradientStop Offset="0.43"  Color="#EFD24B" />
+            <GradientStop Offset="0.715" Color="#F0822F" />
+            <GradientStop Offset="1.0"   Color="#E0322B" />
+        </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <s:HeatmapColorPalette x:Key="ViridisDepthColorMap" Minimum="0" Maximum="700">
+        <s:HeatmapColorPalette.GradientStops>
+            <GradientStop Offset="0.0"  Color="#440154" />
+            <GradientStop Offset="0.1"  Color="#3B528B" />
+            <GradientStop Offset="0.25" Color="#21918C" />
+            <GradientStop Offset="0.55" Color="#5EC962" />
+            <GradientStop Offset="1.0"  Color="#FDE725" />
+        </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <s:HeatmapColorPalette x:Key="OceanDepthColorMap" Minimum="0" Maximum="700">
+        <s:HeatmapColorPalette.GradientStops>
+            <GradientStop Offset="0.0"  Color="#0A2A5E" />
+            <GradientStop Offset="0.25" Color="#2E86C1" />
+            <GradientStop Offset="1.0"  Color="#7DD3FC" />
+        </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <!-- Greyed-out stand-in shown on the legend when depth coloring is switched off
+         (the luminance of the rainbow scale above). -->
+    <s:HeatmapColorPalette x:Key="InactiveDepthColorMap" Minimum="0" Maximum="700">
+        <s:HeatmapColorPalette.GradientStops>
+            <GradientStop Offset="0.0"   Color="#5A5A5A" />
+            <GradientStop Offset="0.043" Color="#7B7B7B" />
+            <GradientStop Offset="0.1"   Color="#909090" />
+            <GradientStop Offset="0.215" Color="#9F9F9F" />
+            <GradientStop Offset="0.43"  Color="#C9C9C9" />
+            <GradientStop Offset="0.715" Color="#969696" />
+            <GradientStop Offset="1.0"   Color="#5E5E5E" />
+        </s:HeatmapColorPalette.GradientStops>
+    </s:HeatmapColorPalette>
+
+    <!-- Bubble fill sprites. White is multiplied by each bubble's resolved color, so these
+         define only the radial shape of the fill, not its hue. -->
+    <RadialGradientBrush x:Key="SolidBubbleFill">
+        <GradientStop Offset="0.0" Color="#FFFFFFFF" />
+        <GradientStop Offset="1.0" Color="#FFFFFFFF" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="SoftBallBubbleFill">
+        <GradientStop Offset="0.0" Color="#FFFFFFFF" />
+        <GradientStop Offset="0.7" Color="#FFFFFFFF" />
+        <GradientStop Offset="1.0" Color="#00FFFFFF" />
+    </RadialGradientBrush>
+
+    <!-- Concentric shockwave rings; also the fixed fill for the highlighted mainshocks. -->
+    <RadialGradientBrush x:Key="ShockwaveRingsFill">
+        <GradientStop Offset="0.0"  Color="#FFFFFFFF" />
+        <GradientStop Offset="0.3"  Color="#00FFFFFF" />
+        <GradientStop Offset="0.55" Color="#FFFFFFFF" />
+        <GradientStop Offset="0.8"  Color="#00FFFFFF" />
+        <GradientStop Offset="1.0"  Color="#FFFFFFFF" />
+    </RadialGradientBrush>
+
+</ResourceDictionary>

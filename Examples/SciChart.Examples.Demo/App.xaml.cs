@@ -21,6 +21,7 @@ using System.Windows;
 using System.Windows.Threading;
 using SciChart.Charting;
 using SciChart.Charting.Visuals.RenderableSeries.Animations;
+using SciChart.Examples.Demo.Controls.BusyIndicator;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
 using SciChart.Examples.ExternalDependencies.Common;
 using SciChart.Examples.ExternalDependencies.Controls.ExceptionView;
@@ -72,6 +73,9 @@ namespace SciChart.Examples.Demo
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            // The indicator is topmost, so it has to go before the modal exception dialog is shown
+            BusyIndicatorService.Instance.HideImmediately();
+
             Log.Error("An unhandled exception occurred. Showing view to user...", e.Exception);
 
             var mainWindowViewModel = ServiceLocator.Container.Resolve<IMainWindowViewModel>();
@@ -105,6 +109,11 @@ namespace SciChart.Examples.Demo
             try
             {
                 Thread.CurrentThread.Name = "UI Thread";
+
+                // Started up front so the indicator is warm before the user can select an example. Disabled under UI
+                // automation, where an extra topmost window would interfere with the tests
+                BusyIndicatorService.Instance.IsEnabled = !UIAutomationTestMode;
+                BusyIndicatorService.Instance.Initialize();
 
                 Log.Debug("--------------------------------------------------------------");
                 Log.DebugFormat("SciChart.Examples.Demo: Session Started {0:dd MMM yyyy HH:mm:ss}", DateTime.Now);
@@ -156,6 +165,15 @@ namespace SciChart.Examples.Demo
 
         private void OnExit(object sender, ExitEventArgs exitEventArgs)
         {
+            try
+            {
+                BusyIndicatorService.Instance.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to shut down the busy indicator", ex);
+            }
+
             if (!UIAutomationTestMode)
             {
                 var usageCalc = ServiceLocator.Container.Resolve<IUsageCalculator>();

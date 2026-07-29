@@ -1,0 +1,84 @@
+<Window x:Class="SciChart.Examples.Demo.Controls.BusyIndicator.BusyIndicatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SciChart Busy"
+        Width="64"
+        Height="64"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        Topmost="True"
+        Focusable="False"
+        IsHitTestVisible="False"
+        IsTabStop="False"
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True">
+
+    <!--  This window lives on its own thread, so it must not resolve any resource that was created on the UI thread.  -->
+    <!--  Everything below uses literal values, and the empty local Style suppresses implicit-style lookup entirely.   -->
+    <Window.Style>
+        <Style TargetType="{x:Type Window}" />
+    </Window.Style>
+
+    <Window.Resources>
+        <Storyboard x:Key="SpinStoryboard" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="SpinTransform"
+                             Storyboard.TargetProperty="Angle"
+                             From="0"
+                             To="360"
+                             Duration="0:0:1.15"
+                             Timeline.DesiredFrameRate="30" />
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid Width="64" Height="64" Background="Transparent">
+
+        <!--  Backing chip, so the ring stays legible over both light and dark example content  -->
+        <Ellipse Width="64" Height="64" Fill="#CC1B222B" />
+
+        <!--  Static track. Width 44 with StrokeThickness 4 gives a circle of radius 20 centred on (22,22)  -->
+        <Ellipse Width="44"
+                 Height="44"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Stroke="#33FFFFFF"
+                 StrokeThickness="4" />
+
+        <!--  The rotating 120 degree arc, on that same radius-20 circle. The transform is applied to the containing  -->
+        <!--  Grid rather than to the Path, so that the centre of rotation is the circle centre and not the bounds    -->
+        <!--  of the arc geometry (which would wobble).                                                              -->
+        <Grid Width="44"
+              Height="44"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <RotateTransform x:Name="SpinTransform" Angle="0" />
+            </Grid.RenderTransform>
+            <Path Width="44"
+                  Height="44"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Stretch="None"
+                  Stroke="#FF64BAE4"
+                  StrokeThickness="4"
+                  StrokeStartLineCap="Round"
+                  StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure StartPoint="22,2">
+                            <ArcSegment Point="39.3205,32"
+                                        Size="20,20"
+                                        SweepDirection="Clockwise"
+                                        IsLargeArc="False" />
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Grid>
+    </Grid>
+</Window>

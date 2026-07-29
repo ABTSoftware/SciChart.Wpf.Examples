@@ -1,0 +1,355 @@
+<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.SeismicActivityExplorer.SeismicActivityExplorerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.SeismicActivityExplorer"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             mc:Ignorable="d"
+             Loaded="OnLoaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SeismicPalettes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        <local:DepthTintConverter x:Key="DepthTint" />
+
+        <!-- Style for the vertical color bar axis -->
+        <Style x:Key="ColorBarAxisStyle" TargetType="s:AxisBase">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="DrawMinorTicks" Value="False" />
+            <Setter Property="DrawMajorTicks" Value="False" />
+            <Setter Property="AutoTicks" Value="False" />
+            <Setter Property="AxisAlignment" Value="Left" />
+            <Setter Property="AxisTitle" Value="Depth" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="MajorDelta">
+                <Setter.Value>
+                    <system:Double>50</system:Double>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for the Latitude, Longitude axes -->
+        <Style x:Key="GeoAxisStyle" TargetType="s:AxisBase">
+            <Setter Property="DrawMinorTicks" Value="False" />
+            <Setter Property="DrawMajorTicks" Value="False" />
+            <Setter Property="DrawMajorGridLines" Value="False" />
+            <Setter Property="DrawMinorGridLines" Value="False" />
+            <Setter Property="DrawMajorBands" Value="False" />
+            <Setter Property="GrowBy" Value="0,0" />
+            <Setter Property="TextFormatting" Value="0.0°" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <DropShadowEffect x:Key="TooltipShadowEffect"
+                          BlurRadius="6"
+                          Direction="-45"
+                          ShadowDepth="3"
+                          Opacity="0.5"
+                          Color="Black" />
+
+        <!-- Tooltip container tinted with the same color the depth palette gives the event -->
+        <Style x:Key="SeismicTooltipStyle" TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <Border Background="{Binding PointMetadata.DepthKm, Converter={StaticResource DepthTint}}"
+                                BorderBrush="{Binding PointMetadata.DepthKm, Converter={StaticResource DepthTint}, ConverterParameter=Border}"
+                                BorderThickness="1.5"
+                                CornerRadius="4"
+                                Padding="9,7"
+                                Margin="0,0,12,12"
+                                Effect="{StaticResource TooltipShadowEffect}">
+                            <ContentPresenter Content="{TemplateBinding DataContext}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="SeismicTooltipTemplate" DataType="s:XyzSeriesInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontWeight="Bold" FontSize="13" Foreground="White" Margin="0,0,0,3"
+                           Text="{Binding PointMetadata.EventName}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointMetadata.EventName}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Foreground="White" Text="{Binding ZValue, StringFormat='{}Magnitude: M{0:F1}'}" />
+                <TextBlock Foreground="White" Text="{Binding PointMetadata.DepthKm, StringFormat='{}Depth: {0:F0} km'}" />
+                <TextBlock Foreground="White" Text="{Binding PointMetadata.Time, StringFormat='{}Date: {0:dd MMM yyyy HH:mm}'}" />
+                <TextBlock Foreground="White" Opacity="0.8" FontSize="11" Margin="0,3,0,0">
+                    <Run Text="{Binding YValue, Mode=OneWay, StringFormat='{}Lat {0:F2}°'}" /><Run Text=", " /><Run Text="{Binding XValue, Mode=OneWay, StringFormat='{}Lon {0:F2}°'}" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Keeps the geographic map undistorted. The axes are raw lon/lat, so one degree of longitude
+             spans cos(latitude) of one degree of latitude on the ground; AspectRatio = 0.9945 = cos(6°S)
+             (the Banda Sea region's centre latitude) renders lon and lat at the correct relative pixel
+             scale. Declared as a resource so the aspect flyout can bind to it across its Popup namescope. -->
+        <s:AspectRatioViewportManager x:Key="AspectRatioVm" AspectRatio="0.9945" AspectRatioMode="Fit" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Toolbar: three setting flyouts (Data & Layers, Bubble Style, Depth Color) -->
+        <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}">
+
+            <!-- Aspect Ratio: how the geographic axes are kept undistorted -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Aspect ratio">
+                <ext:ToolbarIcon Kind="AspectRatio"
+                                 Height="16"
+                                 Width="16"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5"
+                                MinWidth="170"
+                                Orientation="Vertical">
+                        <!-- Mode and ratio bind straight to the AspectRatioViewportManager resource (no code-behind) -->
+                        <TextBlock Text="Aspect Ratio Mode"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox Margin="0,5"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding AspectRatioMode, Source={StaticResource AspectRatioVm}, Mode=TwoWay}">
+                            <ComboBoxItem Content="Latest changed"
+                                          Tag="{x:Static s:AspectRatioMode.LatestChanged}" />
+                            <ComboBoxItem Content="Lock X (resize Y)"
+                                          Tag="{x:Static s:AspectRatioMode.X}" />
+                            <ComboBoxItem Content="Lock Y (resize X)"
+                                          Tag="{x:Static s:AspectRatioMode.Y}" />
+                            <ComboBoxItem Content="Fit (never crop)"
+                                          Tag="{x:Static s:AspectRatioMode.Fit}" />
+                        </ComboBox>
+                        <TextBlock Text="Aspect Ratio (Lon : Lat)"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5">
+                            <Slider x:Name="aspectRatioSlider"
+                                    Minimum="0.25"
+                                    Maximum="4"
+                                    Width="130"
+                                    VerticalAlignment="Center"
+                                    Value="{Binding AspectRatio, Source={StaticResource AspectRatioVm}, Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Source={x:Reference Name=aspectRatioSlider}, Path=Value, StringFormat={}{0:0.00}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutSeparator />
+
+            <!-- Data & Layers: terrain backdrop, depth filter, mainshock emphasis -->
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="Layers" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="170" Orientation="Vertical">
+                        <TextBlock Text="Data &amp; Layers" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+
+                        <CheckBox x:Name="terrainCheck" Content="Show bathymetry layer" IsChecked="True" Margin="0,5" />
+
+                        <TextBlock Text="Max Depth Shown" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Slider x:Name="depthFilterSlider" Minimum="0" Maximum="700" Value="700"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="10"
+                                    ValueChanged="OnFilterChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference Name=depthFilterSlider}, Path=Value, StringFormat={}{0:0} km}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+
+                        <TextBlock Text="Mainshock Threshold" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Slider x:Name="thresholdSlider" Minimum="5.5" Maximum="8.5" Value="7"
+                                    Width="130" VerticalAlignment="Center"
+                                    IsSnapToTickEnabled="True" TickFrequency="0.1"
+                                    ValueChanged="OnFilterChanged" />
+                            <TextBlock Text="{Binding Source={x:Reference Name=thresholdSlider}, Path=Value, StringFormat={}M {0:0.0}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <!-- Bubble Style: glyph size and fill -->
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="TuneVariant" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="170" Orientation="Vertical">
+                        <TextBlock Text="Bubble Style" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+
+                        <TextBlock Text="Max Bubble Size" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Slider x:Name="maxSizeSlider" Minimum="10" Maximum="120" Value="60"
+                                    Width="130" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Source={x:Reference Name=maxSizeSlider}, Path=Value, StringFormat={}{0:0} px}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+
+                        <TextBlock Text="Bubble Fill" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox x:Name="fillBrushCombo" Margin="0,5" SelectionChanged="OnFillBrushChanged">
+                            <!-- Tag holds the fill brush itself; the default item has none (series sprite) -->
+                            <ComboBoxItem Content="Impact Zone (default)" IsSelected="True" />
+                            <ComboBoxItem Content="Solid" Tag="{StaticResource SolidBubbleFill}" />
+                            <ComboBoxItem Content="Soft Ball" Tag="{StaticResource SoftBallBubbleFill}" />
+                            <ComboBoxItem Content="Shockwave Rings" Tag="{StaticResource ShockwaveRingsFill}" />
+                        </ComboBox>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <!-- Depth Color: focal-depth color map and range -->
+            <ext:FlyoutMenuButton>
+                <ext:ToolbarIcon Kind="FormatColorFill" Height="16" Width="16" Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="170" Orientation="Vertical">
+                        <TextBlock Text="Depth Color" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+
+                        <CheckBox x:Name="colorMapCheck" Content="Color by focal depth" IsChecked="True" Margin="0,5"
+                                  Checked="OnColorMapToggled" Unchecked="OnColorMapToggled" />
+
+                        <TextBlock Text="Depth Color Palette" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox x:Name="paletteCombo" 
+                                  Margin="0,5" 
+                                  SelectionChanged="OnPaletteChanged"
+                                  IsEnabled="{Binding IsChecked, Source={x:Reference colorMapCheck}}">
+                            <!-- Tag holds the depth color map itself -->
+                            <ComboBoxItem Content="Rainbow (red = deep)" Tag="{StaticResource RainbowDepthColorMap}" IsSelected="True" />
+                            <ComboBoxItem Content="Viridis" Tag="{StaticResource ViridisDepthColorMap}" />
+                            <ComboBoxItem Content="Ocean" Tag="{StaticResource OceanDepthColorMap}" />
+                        </ComboBox>
+
+                        <TextBlock Text="Color Range" Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox x:Name="rangeModeCombo" Margin="0,5" SelectionChanged="OnRangeModeChanged">
+                            <!-- Tag holds the ColorMapRangeMode applied to the bubble series -->
+                            <ComboBoxItem Content="Manual (absolute km scale)" Tag="{x:Static s:ColorMapRangeMode.Manual}" IsSelected="True" />
+                            <ComboBoxItem Content="Auto (fit to data)" Tag="{x:Static s:ColorMapRangeMode.Auto}" />
+                            <ComboBoxItem Content="AutoMax (Max locked to data)" Tag="{x:Static s:ColorMapRangeMode.AutoMax}" />
+                            <ComboBoxItem Content="AutoMin (Min locked to data)" Tag="{x:Static s:ColorMapRangeMode.AutoMin}" />
+                        </ComboBox>
+
+                        <TextBlock Text="Drag the legend scale to adjust the depth range. Disabled in Auto mode; pinned ends are range-limited."
+                                   TextWrapping="Wrap" MaxWidth="170" Opacity="0.7" Margin="0,5" />
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!-- Chart: bathymetry heatmap + bubble series over geographic axes, with the depth legend overlaid -->
+        <s:SciChartSurface Name="sciChart" Grid.Column="1"
+                           Padding="0"
+                           BorderThickness="0"
+                           ChartTitle="Banda Sea Seismicity (Synthetic Catalog)"
+                           SizeChanged="OnLayoutSizeChanged"
+                           ViewportManager="{StaticResource AspectRatioVm}">
+
+            <s:SciChartSurface.RenderableSeries>
+                <!-- ETOPO 2022 bathymetry/topography background; muted so the events stand out -->
+                <s:FastUniformHeatmapRenderableSeries x:Name="terrainSeries"
+                                                      ColorMap="{StaticResource TerrainColorMap}"
+                                                      IsVisible="{Binding IsChecked, Source={x:Reference terrainCheck}}"
+                                                      UseLinearTextureFiltering="True"
+                                                      s:TooltipModifier.IncludeSeries="False" />
+
+                <!-- BubbleColor is the opaque fallback shown when depth coloring is off -->
+                <local:MagnitudeBubbleSeries x:Name="bubbleSeries"
+                                             ResamplingMode="None"
+                                             BubbleColor="{StaticResource SecondaryThemeStrokeColor}"
+                                             Opacity="0.85"
+                                             MaxBubbleSizeInPixels="{Binding Source={x:Reference Name=maxSizeSlider}, Path=Value, Mode=TwoWay}"
+                                             s:TooltipModifier.TooltipContainerStyle="{StaticResource SeismicTooltipStyle}"
+                                             s:TooltipModifier.TooltipTemplate="{StaticResource SeismicTooltipTemplate}" />
+
+                <!-- Events at or above the magnitude threshold: separate series, drawn on top.
+                     Always dark yellow with the shockwave-rings fill, independent of the
+                     fill selected for the background events -->
+                <local:MagnitudeBubbleSeries x:Name="mainshockSeries"
+                                             ResamplingMode="None"
+                                             BubbleColor="#D4A017"
+                                             FillBrush="{StaticResource ShockwaveRingsFill}"
+                                             Opacity="1"
+                                             MaxBubbleSizeInPixels="{Binding Source={x:Reference Name=maxSizeSlider}, Path=Value, Mode=TwoWay}"
+                                             s:TooltipModifier.TooltipContainerStyle="{StaticResource SeismicTooltipStyle}"
+                                             s:TooltipModifier.TooltipTemplate="{StaticResource SeismicTooltipTemplate}" />
+            </s:SciChartSurface.RenderableSeries>
+
+            <s:SciChartSurface.XAxis>
+                <s:NumericAxis x:Name="longitudeAxis"
+                               VisibleRange="120, 134"
+                               VisibleRangeLimit="120, 134"
+                               Style="{StaticResource GeoAxisStyle}" />
+            </s:SciChartSurface.XAxis>
+
+            <s:SciChartSurface.YAxes>
+                <!-- Invisible left axis: extends the surface background under the depth-legend
+                     overlay so the chart does not visually end at the legend -->
+                <s:NumericAxis x:Name="legendHostAxis" 
+                               Id="LegendHostAxis"
+                               AxisAlignment="Left"
+                               AutoRange="Never"
+                               Width="84"
+                               DrawLabels="False"
+                               Style="{StaticResource GeoAxisStyle}" />
+
+                <s:NumericAxis x:Name="latitudeAxis" 
+                               VisibleRange="-10, -2"
+                               VisibleRangeLimit="-10, -2"
+                               Style="{StaticResource GeoAxisStyle}" />
+            </s:SciChartSurface.YAxes>
+
+            <s:SciChartSurface.ChartModifier>
+                <s:ModifierGroup>
+                    <s:RubberBandXyZoomModifier IsEnabled="True" ExecuteOn="MouseLeftButton" />
+                    <s:ZoomPanModifier ExecuteOn="MouseLeftButton" />
+                    <s:MouseWheelZoomModifier />
+                    <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                    <s:TooltipModifier ShowTooltipOn="MouseHover" HoverDelay="350" />
+                </s:ModifierGroup>
+            </s:SciChartSurface.ChartModifier>
+
+        </s:SciChartSurface>
+
+        <!-- Depth color scale overlaid on the invisible left axis area, so it reads as part of
+             the surface: scale on the left, color bar adjacent to the chart. Vertical alignment
+             with the chart area and the host axis width are synced in code. -->
+        <s:HeatmapColorMap x:Name="depthLegend" Grid.Column="1"
+                           Margin="0,0,5,0"
+                           SizeChanged="OnLayoutSizeChanged"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Stretch"
+                           Minimum="0"
+                           Maximum="700"
+                           TextFormatting="0' km'"
+                           Orientation="Vertical"
+                           Background="Transparent"
+                           BorderThickness="0"
+                           Padding="0"
+                           AxisStyle="{StaticResource ColorBarAxisStyle}"
+                           Foreground="{Binding Source={x:Reference Name=sciChart}, Path=Foreground}" />
+    </Grid>
+</UserControl>

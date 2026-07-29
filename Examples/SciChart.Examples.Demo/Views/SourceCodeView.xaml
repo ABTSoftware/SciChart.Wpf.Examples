@@ -41,7 +41,7 @@
                   HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Auto"                    
                   helpers:CodeHighlighter.SourceLanguage="{Binding SelectedFile.Key, Converter={StaticResource StringToLanguageTypeConverter}}"
-                  helpers:CodeHighlighter.SourceCode="{Binding SelectedFile.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  helpers:CodeHighlighter.SourceCode="{Binding VisibleSourceCode, Mode=OneWay}"
                   tz:Transitionz.Opacity="{Binding SourceOpacityParams}"/>
 
         <Border Grid.Row="0"

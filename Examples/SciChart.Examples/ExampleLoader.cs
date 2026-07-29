@@ -105,16 +105,25 @@ namespace SciChart.Examples
             }
         }
 
+        private static string[] _exampleSourceResourceNames;
+
+        // Enumerating the manifest allocates a fresh array of every resource in the assembly, so cache the filtered
+        // result: LoadSourceFile is called once per source file of every example while the search index is built
+        private static string[] ExampleSourceResourceNames =>
+            _exampleSourceResourceNames ??= typeof(ExampleLoader).Assembly
+                .GetManifestResourceNames()
+                .Where(x => x.Contains("SciChart.Examples.Examples"))
+                .ToArray();
+
         public static string LoadSourceFile(string name)
         {
             Assembly assembly = typeof(ExampleLoader).Assembly;
 
-            var names = assembly.GetManifestResourceNames();
-
-            var allExampleSourceFiles = names.Where(x => x.Contains("SciChart.Examples.Examples"));
-
             var find = name.Replace('/', '.').Replace(".txt", string.Empty).Replace("Resources.ExampleSourceFiles.", string.Empty);
-            var file = allExampleSourceFiles.FirstOrDefault(x => x.EndsWith(find));
+
+            // Ordinal comparison: resource names are ASCII dotted identifiers, so the default culture-sensitive
+            // EndsWith is both unnecessary and an order of magnitude slower
+            var file = Array.Find(ExampleSourceResourceNames, x => x.EndsWith(find, StringComparison.Ordinal));
 
             if (file == null)
                 throw new Exception(string.Format("Unable to find the source code resource {0}", find));

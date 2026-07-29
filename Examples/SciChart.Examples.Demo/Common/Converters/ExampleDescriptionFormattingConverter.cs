@@ -58,10 +58,7 @@ namespace SciChart.Examples.Demo.Common.Converters
             }
             else
             {
-                foreach (string sentence in lines.Take(2).Select(x => x.Trim()))
-                {
-                    result += (sentence + ". ");
-                }
+                result = string.Join(". ", lines.Take(2).Select(FormatTextBase)) + ". ";
             }
 
             return string.IsNullOrEmpty(result) ? "[No Results]" : result;
