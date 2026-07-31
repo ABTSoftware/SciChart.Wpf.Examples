@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -33,12 +34,18 @@
     <Resource Include="Resources\Objects\*.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="9.0.*-*" />
+    <None Remove="Resources\Data\EuropeCitiesPopulation\*.gz" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="9.0.*-*" />
+    <EmbeddedResource Include="Resources\Data\EuropeCitiesPopulation\*.gz" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="9.0.*-*" />
+    <PackageReference Include="SciChart" Version="9.1.*-*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart3D" Version="9.1.*-*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SciChart.DrawingTools" Version="9.1.*-*" />
   </ItemGroup>
 </Project>

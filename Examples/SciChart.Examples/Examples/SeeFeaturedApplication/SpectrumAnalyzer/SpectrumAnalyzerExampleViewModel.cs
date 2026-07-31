@@ -52,6 +52,11 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
         {
             _dataSeries = new XyDataSeries<double, double>();
 
+            for (int i = 0; i < Count; i++)
+                _im[i] = i;
+
+            _dataSeries.Append(_im, _re);
+
             _transform = new FFT2();
             _transform.init(10);
 
@@ -64,47 +69,44 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
             _stopCommand = new ActionCommand(OnExampleExit);
         }
 
-        public ICommand StartCommand { get { return _startCommand; } }
-        public ICommand StopCommand { get { return _stopCommand; } }
+        public ICommand StartCommand => _startCommand;
+        public ICommand StopCommand => _stopCommand;
 
-        public string YAxisTitle
-        {
-            get { return IsTimeDomain ? "Voltage (V)" : "FFT(Voltage) (dB)"; }
-        }
+        public string YAxisTitle => IsTimeDomain ? "Voltage (V)" : "FFT(Voltage) (dB)";
 
         public DoubleRange YVisibleRange
         {
-            get { return _yVisibleRange; }
+            get => _yVisibleRange;
             set
             {
                 _yVisibleRange = value;
-                OnPropertyChanged("YVisibleRange");
+                OnPropertyChanged(nameof(YVisibleRange));
             }
         }
 
         public DoubleRange XVisibleRange
         {
-            get { return _xVisibleRange; }
+            get => _xVisibleRange;
             set
             {
                 _xVisibleRange = value;
-                OnPropertyChanged("XVisibleRange");
+                OnPropertyChanged(nameof(XVisibleRange));
             }
         }
 
         public IXyDataSeries<double, double> DataSeries
         {
-            get { return _dataSeries; }
+            get => _dataSeries;
             set
             {
                 _dataSeries = value;
-                OnPropertyChanged("DataSeries");
+                OnPropertyChanged(nameof(DataSeries));
             }
         }
 
         public bool IsFrequencyDomain
         {
-            get { return _isFrequencyDomain; }
+            get => _isFrequencyDomain;
             set
             {
                 if (_isFrequencyDomain == value)
@@ -115,19 +117,20 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 
                 if (IsFrequencyDomain)
                 {
+                    // UpdateData() suspends updates internally
                     UpdateData();
-                    ZoomExtents();
+                    ZoomExtentsY();
                     XVisibleRange = new DoubleRange(0, (Count / 2) - 1);
                 }
 
-                OnPropertyChanged("IsFrequencyDomain");
-                OnPropertyChanged("YAxisTitle");
+                OnPropertyChanged(nameof(IsFrequencyDomain));
+                OnPropertyChanged(nameof(YAxisTitle));
             }
         }
 
         public bool IsTimeDomain
         {
-            get { return _isTimeDomain; }
+            get => _isTimeDomain;
             set
             {
                 if (_isTimeDomain == value)
@@ -137,17 +140,18 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
 
                 if (IsTimeDomain)
                 {
+                    // UpdateData() suspends updates internally
                     UpdateData();
-                    ZoomExtents();
+                    ZoomExtentsY();
                     XVisibleRange = new DoubleRange(0, Count - 1);
                 }
 
-                OnPropertyChanged("IsTimeDomain");
-                OnPropertyChanged("YAxisTitle");
+                OnPropertyChanged(nameof(IsTimeDomain));
+                OnPropertyChanged(nameof(YAxisTitle));
             }
         }
 
-        private void ZoomExtents()
+        private void ZoomExtentsY()
         {
             _dataSeries.InvalidateParentSurface(RangeMode.ZoomToFitY);
         }
@@ -178,11 +182,15 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
                         _re[i] = 20 * Math.Log10(mag / Count);
                         _im[i] = i;
                     }
-                }                
+                }
 
-                _dataSeries.SeriesName = YAxisTitle;
-                _dataSeries.Clear();
-                _dataSeries.Append(_im, _re);
+                using (_dataSeries.SuspendUpdates())
+                {
+                    _dataSeries.SeriesName = YAxisTitle;
+                    var yValues = _dataSeries.YValues;
+                    for (int i = 0; i < Count; i++)
+                        yValues[i] = _re[i];
+                }
             }
         }
 
@@ -190,18 +198,12 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.SpectrumAnalyzer
         // These methods are just used to do tidy up when switching between examples
         public void OnExampleExit()
         {
-            if (_updateTimer != null)
-            {
-                _updateTimer.Stop();
-            }
+            _updateTimer?.Stop();
         }
 
         public void OnExampleEnter()
         {
-            if (_updateTimer != null)
-            {
-                _updateTimer.Start();
-            }
+            _updateTimer?.Start();
         }
 
     }

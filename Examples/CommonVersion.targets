@@ -6,9 +6,9 @@
 		<Trademark>SCICHART™</Trademark>
 		<Copyright>Copyright © SciChart Ltd 2011-2026, www.scichart.com</Copyright>
 		<Description>SciChart - high performance real-time WPF charts for Scientific and Trading applications. For more info see www.scichart.com</Description>
-		<Version>9.0.0.29196</Version>
-		<FileVersion>9.0.0.29196</FileVersion>
-		<InformationalVersion>9.0.0.29196</InformationalVersion>
+		<Version>9.1.0.29201</Version>
+		<FileVersion>9.1.0.29201</FileVersion>
+		<InformationalVersion>9.1.0.29201</InformationalVersion>
 	</PropertyGroup>
 
 	<!-- Set assembly version -->

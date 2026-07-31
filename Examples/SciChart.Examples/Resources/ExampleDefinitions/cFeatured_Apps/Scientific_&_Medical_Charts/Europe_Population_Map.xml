@@ -1,0 +1,56 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/SeeFeaturedApplication/PopulationMap/PopulationMapView.xaml</View>
+	<ImagePath>/SciChart.Examples;component/Resources/Images/EuropePopulationMap.png</ImagePath>
+	<IconPath>IconCandlestick</IconPath>
+	<ShowcaseDescription>An interactive thematic map of Europe. Countries are shaded by total population (darker means more people), and each city is a bubble sized by its population and coloured by its urban primacy (the city's share of its country's population) via a ColorMap. Demonstrates filled polygon rendering, a bubble series with a ColorMap and a custom value provider, geographic projection, dual legends, tooltips and interactive filtering. The map uses the Lambert Azimuthal Equal-Area projection (EPSG:3035) used by Eurostat for Europe.</ShowcaseDescription>
+	<ToolTipDescription>
+		A population map of Europe: countries shaded by population, with cities sized by population and coloured by urban primacy.
+	</ToolTipDescription>
+	<Description>
+		This example is an interactive thematic map of Europe built entirely from geographic data.
+
+		Countries are drawn with a custom [b]FilledPolygonRenderableSeries[/b] that renders filled polygons, shaded by total population so that darker regions hold more people.
+
+		Each city is a bubble drawn by a [b]FastBubbleRenderableSeries[/b], encoding two independent values at once. The bubble [b]size[/b] is the city's population (sized by area), and the bubble [b]colour[/b] is its [b]urban primacy[/b] (the city's share of its country's total population), applied through a ColorMap and a custom value provider. A large, bright bubble is a metropolis that dominates its country; a large, deep-blue bubble is a big city in a populous, polycentric one.
+
+		Every coordinate (country polygons and city points) is projected from longitude and latitude to the Lambert Azimuthal Equal-Area projection (EPSG:3035, the standard Eurostat projection for Europe), giving Europe its familiar shape with Scandinavia at the top and Spain and Turkey at the lower corners. The [b]AspectRatioViewportManager[/b] keeps the projected map undistorted.
+
+		Two legends explain the encodings: a country population colour key on the left, and a city key on the right with graduated circles for population and a colour bar for urban primacy. Hovering over a bubble shows the city name, country, population and primacy.
+
+		[b][i] The following interactions are possible:[/i][/b]
+
+		- [b][MouseWheel][/b] to zoom in and out
+		- Click and drag the [b][Left Mouse Button][/b] to pan
+		- Double-click the [b][Left Mouse Button][/b] to zoom to the full extent
+		- Hover the mouse over a city to show its tooltip
+
+		[b][i] Toolbar actions: [/i][/b]
+
+		- Open the [b]Min City Population[/b] flyout and drag the slider to filter out smaller cities
+		- Open the [b]Aspect Ratio[/b] flyout to change how the map is kept undistorted (mode and ratio)
+
+		[b]Documentation Links:[/b]
+
+		- [url='https://www.scichart.com/documentation/win/current/The%20Bubble%20Series%20Type.html']FastBubbleRenderableSeries Type[/url]
+		- [url='https://www.scichart.com/documentation/win/current/What%20is%20a%20RenderableSeries.html']What is a RenderableSeries?[/url]
+		- [url='https://www.scichart.com/documentation/win/current/DataSeries%20Types%20in%20SciChart.html']DataSeries Types in SciChart[/url]
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/CountryCentroid.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/CountryPointMetadata.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/FilledPolygonRenderableSeries.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/CityBubbleSeries.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/CityLegendItem.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/PopulationLegendItem.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/MinPopulationLabelConverter.cs.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/PopulationMapView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/PopulationMap/PopulationMapView.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>AspectRatio</Features>
+		<Features>Zoom</Features>
+		<Features>Pan</Features>
+		<Features>Map</Features>
+		<Features>Bubble</Features>
+	</Features>
+</ExampleDefinition>

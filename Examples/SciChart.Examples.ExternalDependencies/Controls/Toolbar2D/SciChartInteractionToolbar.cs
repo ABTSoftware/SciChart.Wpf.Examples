@@ -409,6 +409,10 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             var theme = new CustomThemeChangeModifier();
             devModifiers.Add(theme);
 
+            // CustomAspectRatioModifier (installs/drives an AspectRatioViewportManager when toggled on)
+            var aspectRatio = new CustomAspectRatioModifier { IsEnabled = false };
+            devModifiers.Add(aspectRatio);
+
             // LegendModifier
             var legend = new LegendModifier
             {
@@ -470,6 +474,11 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
             var animationsModifier = new SeriesAnimationCustomModifier();
 
             devModifiers.Add(animationsModifier);
+
+            // DataLabelsModifier
+            var dataLabelsModifier = new DataLabelsCustomModifier();
+
+            devModifiers.Add(dataLabelsModifier);
 
             if (!isPolar)
             {

@@ -6,6 +6,10 @@
         <Setter Property="Opacity" Value="0.3" />
         <Setter Property="StrokeThickness" Value="2" />
         <Setter Property="DataPointWidth" Value="0.9" />
+        <Setter Property="ShowDataLabels" Value="True" />
+        <Setter Property="Foreground" Value="#ffdddddd" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <Style x:Key="BlueColumnStyle"

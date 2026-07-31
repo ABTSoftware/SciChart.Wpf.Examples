@@ -27,9 +27,8 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
             var color = (Color) value;
 
             var greyScale = color.R * 0.299 + color.G * 0.587 + color.B * 0.114;
-            var newColor = greyScale > 128 ? Colors.Black : Colors.White;
 
-            return newColor;
+            return greyScale > 128 ? Brushes.Black : Brushes.White;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

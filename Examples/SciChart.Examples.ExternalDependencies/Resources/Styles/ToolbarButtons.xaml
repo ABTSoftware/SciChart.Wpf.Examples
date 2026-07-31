@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
                     xmlns:s3D="http://schemas.abtsoftware.co.uk/scichart3D"
+                    xmlns:dlp="clr-namespace:SciChart.Charting.Visuals.RenderableSeries.DataLabelProviders;assembly=SciChart.Charting"
+                    xmlns:vm="clr-namespace:SciChart.Charting.ViewportManagers;assembly=SciChart.Charting"
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:common="clr-namespace:SciChart.Examples.ExternalDependencies.Common"                  
                     xmlns:toolbar2D="clr-namespace:SciChart.Examples.ExternalDependencies.Controls.Toolbar2D"
@@ -46,6 +48,36 @@
     </system:String>
 
     <!-- Toolbar 2D Button Templates -->
+    <DataTemplate x:Key="AspectRatioModifierTemplate">
+        <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
+                                       Style="{StaticResource DefaultFlyoutMenuToggleButtonStyle}"
+                                       ToolTipService.ToolTip="Toggle Aspect Ratio Lock">
+            <common:ToolbarIcon Kind="AspectRatio" Style="{StaticResource ToolbarButtonIconStyle}"/>
+            <common:FlyoutMenuToggleButton.PopupContent>
+                <StackPanel Margin="5"
+                            Width="170"
+                            Orientation="Vertical"
+                            IsEnabled="{Binding Modifier.IsEnabled}">
+                    <TextBlock Text="Mode" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type vm:AspectRatioMode}}}"
+                              SelectedItem="{Binding Modifier.AspectRatioMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="Anchor" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type vm:AspectRatioAnchor}}}"
+                              SelectedItem="{Binding Modifier.Anchor, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                    <TextBlock Text="Aspect Ratio (X : Y)" Margin="0,10,0,5" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="DevAspectRatioSlider" Minimum="0.25" Maximum="4" Width="115" VerticalAlignment="Center"
+                                Value="{Binding Modifier.AspectRatio, Mode=TwoWay}"/>
+                        <TextBlock Text="{Binding Value, Source={x:Reference DevAspectRatioSlider}, StringFormat={}{0:0.00}}"
+                                   VerticalAlignment="Center" Margin="6,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </common:FlyoutMenuToggleButton.PopupContent>
+        </common:FlyoutMenuToggleButton>
+    </DataTemplate>
+
     <DataTemplate x:Key="RubberBandXyZoomModifierTemplate">
         <common:FlyoutMenuToggleButton IsChecked="{Binding Modifier.IsEnabled, Mode=TwoWay}"
                                        Style="{StaticResource DefaultFlyoutMenuToggleButtonStyle}"
@@ -373,6 +405,131 @@
                 </StackPanel>
             </common:FlyoutMenuButton.PopupContent>
         </common:FlyoutMenuButton>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DataLabelsModifierTemplate">
+        <StackPanel Orientation="Vertical">
+
+            <common:FlyoutSeparator/>
+
+            <!-- Positioning -->
+            <common:FlyoutMenuButton ToolTipService.ToolTip="Data Label Positioning"
+                                     IsEnabled="{Binding Modifier.HasSelection}">
+                <common:ToolbarIcon Kind="FormatVerticalAlignCenter" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <common:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+                        <TextBlock Text="Positioning" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+                        <TextBlock Text="Horizontal Anchor Point" Margin="0,6,0,2"/>
+                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:HorizontalAnchorPoint}}}"
+                                  SelectedItem="{Binding Modifier.LabelHorizontalAnchorPoint, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Vertical Anchor Point" Margin="0,6,0,2"/>
+                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type s:VerticalAnchorPoint}}}"
+                                  SelectedItem="{Binding Modifier.LabelVerticalAnchorPoint, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <TextBlock Text="Bar Anchor Point" Margin="0,6,0,2"
+                                   Visibility="{Binding Modifier.IsBarSeries, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type dlp:BarAnchorPoint}}}"
+                                  SelectedItem="{Binding Modifier.BarAnchorPoint, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"
+                                  Visibility="{Binding Modifier.IsBarSeries, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,2">
+                            <TextBlock Text="Padding Left: "/>
+                            <TextBlock Text="{Binding Modifier.PaddingLeft, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="-10" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.PaddingLeft, Mode=TwoWay}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Padding Top: "/>
+                            <TextBlock Text="{Binding Modifier.PaddingTop, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="-10" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.PaddingTop, Mode=TwoWay}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Padding Right: "/>
+                            <TextBlock Text="{Binding Modifier.PaddingRight, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="-10" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.PaddingRight, Mode=TwoWay}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Padding Bottom: "/>
+                            <TextBlock Text="{Binding Modifier.PaddingBottom, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="-10" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.PaddingBottom, Mode=TwoWay}"/>
+                    </StackPanel>
+                </common:FlyoutMenuButton.PopupContent>
+            </common:FlyoutMenuButton>
+
+            <!-- Culling -->
+            <common:FlyoutMenuButton ToolTipService.ToolTip="Data Label Culling"
+                                     IsEnabled="{Binding Modifier.HasSelection}">
+                <common:ToolbarIcon Kind="FilterVariant" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <common:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+                        <TextBlock Text="Culling" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+                        <CheckBox Content="Show Labels" Margin="0,8,0,2"
+                                  IsChecked="{Binding Modifier.ShowDataLabels, Mode=TwoWay}"/>
+
+                        <TextBlock Text="Skip Mode" Margin="0,6,0,2"/>
+                        <ComboBox ItemsSource="{Binding Source={extension:EnumValues {x:Type dlp:DataLabelSkipMode}}}"
+                                  SelectedItem="{Binding Modifier.SkipMode, Mode=TwoWay, Converter={StaticResource SelectedEnumValueConverter}}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Skip Number: "/>
+                            <TextBlock Text="{Binding Modifier.SkipNumber, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="0" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.SkipNumber, Mode=TwoWay}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Point Count Threshold: "/>
+                            <TextBlock Text="{Binding Modifier.PointCountThreshold, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="10" Maximum="1000" TickFrequency="10" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.PointCountThreshold, Mode=TwoWay}"/>
+                    </StackPanel>
+                </common:FlyoutMenuButton.PopupContent>
+            </common:FlyoutMenuButton>
+
+            <!-- Text -->
+            <common:FlyoutMenuButton ToolTipService.ToolTip="Data Label Text Options"
+                                     IsEnabled="{Binding Modifier.HasSelection}">
+                <common:ToolbarIcon Kind="FormatFont" Style="{StaticResource ToolbarButtonIconStyle}"/>
+                <common:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5" MinWidth="200" Orientation="Vertical">
+                        <TextBlock Text="Text Options" Style="{StaticResource FlyoutMenuHeaderStyle}"/>
+
+                        <TextBlock Text="Text Format (e.g. 0.##, N0, N2, E2, P1)" Margin="0,6,0,2"/>
+                        <TextBox Text="{Binding Modifier.LabelTextFormatting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,2">
+                            <TextBlock Text="Font Size: "/>
+                            <TextBlock Text="{Binding Modifier.LabelFontSize, StringFormat={}{0:0}}"/>
+                        </StackPanel>
+                        <Slider Minimum="6" Maximum="28" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding Modifier.LabelFontSize, Mode=TwoWay}"/>
+
+                        <TextBlock Text="Label Color" Margin="0,6,0,2"/>
+                        <ComboBox SelectedItem="{Binding Modifier.LabelColor, Mode=TwoWay}">
+                            <system:String>White</system:String>
+                            <system:String>Yellow</system:String>
+                            <system:String>LimeGreen</system:String>
+                            <system:String>Cyan</system:String>
+                            <system:String>Black</system:String>
+                        </ComboBox>
+                    </StackPanel>
+                </common:FlyoutMenuButton.PopupContent>
+            </common:FlyoutMenuButton>
+
+            <common:FlyoutSeparator/>
+
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="FlyoutSeparatorTemplate">

@@ -49,6 +49,8 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
 
         private Timer _timer;
         private const double TimerIntervalMs = 20;
+        private const int FourierPointCount = 1000;
+        private const int LissajousPointCount = 2500;
 
         private readonly object _tickLocker = new object();
 
@@ -161,18 +163,26 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
                     // Setup the Zoom Limit (affects double click to zoom extents)
                     ResetZoom();
 
-                    // Add the new dataseries and reset counters. See OnTick where data is appended
+                    ResetPhases();
+
                     _series0.SeriesName = _selectedDataSource;
-                    _series0.Clear();
+
+                    DoubleSeries initialData = _selectedDataSource == "Lissajous"
+                        ? DataManager.Instance.GetLissajousCurve(0.12, _phase1, _phase0, LissajousPointCount)
+                        : DataManager.Instance.GetFourierSeries(2.0, _phase0, FourierPointCount);
+                    _series0.Append(initialData.XData, initialData.YData);
 
                     ChartData = _series0;
-
-                    _phase0 = 0;
-                    _phase1 = 0.15;
                 }
 
                 OnPropertyChanged(nameof(SelectedDataSource));
             }
+        }
+
+        private void ResetPhases()
+        {
+            _phase0 = 0;
+            _phase1 = 0.15;
         }
 
         private void ResetZoom()
@@ -306,19 +316,27 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Oscilloscope
         {
             lock (_tickLocker)
             {
-                // Generate data at this phase depending on data source type
+                // Get new data
                 DoubleSeries dataSource = SelectedDataSource == "Lissajous"
-                    ? DataManager.Instance.GetLissajousCurve(0.12, _phase1, _phase0, 2500)
-                    : DataManager.Instance.GetFourierSeries(2.0, _phase0, 1000);
+                    ? DataManager.Instance.GetLissajousCurve(0.12, _phase1, _phase0, LissajousPointCount)
+                    : DataManager.Instance.GetFourierSeries(2.0, _phase0, FourierPointCount);
 
+                // Update data parameters
                 _phase0 += _phaseIncrement;
                 _phase1 += _phaseIncrement * 0.005;
 
-                // Lock the data-series and clear / re-add new data
-                using (ChartData.SuspendUpdates())
+                var srcX = dataSource.XData;
+                var srcY = dataSource.YData;
+
+                using (_series0.SuspendUpdates())
                 {
-                    _series0.Clear();
-                    _series0.Append(dataSource.XData, dataSource.YData);
+                    var xValues = _series0.XValues;
+                    var yValues = _series0.YValues;
+                    for (int i = 0; i < srcX.Count; i++)
+                    {
+                        xValues[i] = srcX[i];
+                        yValues[i] = srcY[i];
+                    }
                 }
             }
         }

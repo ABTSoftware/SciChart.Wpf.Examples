@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Charts2D\CreateSimpleChart\VectorFieldChart.png" />
 	  <None Remove="Resources\Charts2D\Heatmaps\DailyMaxTemperatureHeatmapPolarChart.png" />
 	  <None Remove="Resources\Charts2D\Heatmaps\PolarUniformHeatmap.png" />
 	  <None Remove="Resources\Charts2D\Heatmaps\UltrasoundHeatmapPolarChart.png" />
@@ -56,6 +57,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\Charts2D\ChartAnnotations\AnnotationsAreEasy.png" />
+		<EmbeddedResource Include="Resources\Charts2D\CreateSimpleChart\VectorFieldChart.png" />
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\DailyMaxTemperatureHeatmapPolarChart.png" />
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\PolarUniformHeatmap.png" />
 		<EmbeddedResource Include="Resources\Charts2D\Heatmaps\UltrasoundHeatmapPolarChart.png" />

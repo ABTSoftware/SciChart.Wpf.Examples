@@ -46,12 +46,12 @@
     <Resource Include="Resources\Images\*.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart" Version="9.0.*-*" />
+    <PackageReference Include="SciChart" Version="9.1.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart3D" Version="9.0.*-*" />
+    <PackageReference Include="SciChart3D" Version="9.1.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SciChart.DrawingTools" Version="9.0.*-*" />
+    <PackageReference Include="SciChart.DrawingTools" Version="9.1.*-*" />
   </ItemGroup>
 </Project>

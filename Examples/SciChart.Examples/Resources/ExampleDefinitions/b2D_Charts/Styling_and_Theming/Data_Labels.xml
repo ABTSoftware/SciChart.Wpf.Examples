@@ -1,0 +1,33 @@
+<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <View>Examples/StyleAChart/UseDataLabelProvider/UseDataLabelProvider.xaml</View>
+  <ImagePath>/SciChart.Examples;component/Resources/Images/DataLabels.png</ImagePath>
+  <IconPath>IconThemes</IconPath>
+  <ToolTipDescription>Demonstrates how to use the DataLabelProvider API to display text labels at data points on various series types, with customizable formatting, positioning, and skip logic.</ToolTipDescription>
+  <Description>
+    Demonstrates how to use the DataLabelProvider API to display text labels at data points. This example shows:
+
+    - Column series with color-coded labels (green for positive, orange for negative values)
+    - Line series with labels sourced from point metadata
+    - Bubble series with standard numeric labels
+    - Spline series with labels shown only at peaks and troughs
+
+    Click on a series to select it, then use the toolbar to adjust DataLabelProvider settings for the selected series.
+
+    The DataLabelProvider supports customizable label text formatting, horizontal and vertical anchor points, skip modes for overlapping labels, and point count thresholds.
+
+    [b]Documentation Links[/b]
+
+    - [url='https://www.scichart.com/documentation/win/current/DataLabelProvider.html']DataLabelProvider API[/url]
+    - [url='https://www.scichart.com/documentation/win/current/SeriesSelectionModifier.html']SeriesSelectionModifier[/url]
+  </Description>
+  <CodeFiles>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseDataLabelProvider/UseDataLabelProvider.xaml.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseDataLabelProvider/UseDataLabelProvider.xaml.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseDataLabelProvider/LabelPointMetadata.cs.txt</string>
+    <string>Resources/ExampleSourceFiles/StyleAChart/UseDataLabelProvider/ColoredColumnDataLabelProvider.cs.txt</string>
+  </CodeFiles>
+  <Features>
+    <Features>Style</Features>
+    <Features>DataLabelProvider</Features>
+  </Features>
+</ExampleDefinition>

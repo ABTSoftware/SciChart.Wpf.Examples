@@ -42,6 +42,8 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
         public DataTemplate EmptyTemplate { get; set; }
         public DataTemplate PointMarkersModifierTemplate { get; set; }
         public DataTemplate AnimationsModifierTemplate { get; set; }
+        public DataTemplate DataLabelsModifierTemplate { get; set; }
+        public DataTemplate AspectRatioModifierTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -104,6 +106,12 @@ namespace SciChart.Examples.ExternalDependencies.Controls.Toolbar2D
 
                     case nameof(SeriesAnimationCustomModifier):
                         return AnimationsModifierTemplate;
+
+                    case nameof(DataLabelsCustomModifier):
+                        return DataLabelsModifierTemplate;
+
+                    case nameof(CustomAspectRatioModifier):
+                        return AspectRatioModifierTemplate;
 
                     default:
                         return EmptyTemplate;

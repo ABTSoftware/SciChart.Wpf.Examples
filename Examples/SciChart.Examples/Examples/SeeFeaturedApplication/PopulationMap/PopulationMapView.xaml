@@ -1,0 +1,402 @@
+﻿<UserControl x:Class="SciChart.Examples.Examples.SeeFeaturedApplication.PopulationMap.PopulationMapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SciChart.Examples.Examples.SeeFeaturedApplication.PopulationMap"
+             xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+             xmlns:ext="http://schemas.abtsoftware.co.uk/scichart/exampleExternals"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Loaded="OnLoaded">
+    <UserControl.Resources>
+        <local:MinPopulationLabelConverter x:Key="MinPopulationLabelConverter" />
+
+        <Style x:Key="BubbleTooltipContainerStyle"
+               TargetType="s:TooltipControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="s:TooltipControl">
+                        <ContentControl Content="{TemplateBinding DataContext}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="BubbleTooltipTemplate"
+                      DataType="s:SeriesInfo">
+            <Border Background="#CC1C1C1E"
+                    CornerRadius="4"
+                    Padding="8,5"
+                    BorderBrush="#40FFFFFF"
+                    BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="{Binding PointMetadata.Name}"
+                               Foreground="White"
+                               FontSize="11"
+                               FontWeight="SemiBold" />
+                    <TextBlock Foreground="#CCFFFFFF"
+                               FontSize="11"
+                               Text="{Binding PointMetadata.Country, StringFormat='Country: {0}'}" />
+                    <TextBlock Foreground="#CCFFFFFF"
+                               FontSize="11"
+                               Text="{Binding PointMetadata.PopulationLabel, StringFormat='Population: {0}'}" />
+                    <TextBlock Foreground="#CCFFFFFF"
+                               FontSize="11"
+                               Text="{Binding PointMetadata.NationalShare, StringFormat='Urban primacy: {0:P1}'}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="AxisStyle"
+               TargetType="s:NumericAxis">
+            <Setter Property="DrawMajorGridLines"
+                    Value="False" />
+            <Setter Property="DrawMinorGridLines"
+                    Value="False" />
+            <Setter Property="DrawMajorBands"
+                    Value="False" />
+            <Setter Property="DrawLabels"
+                    Value="False" />
+            <Setter Property="DrawMajorTicks"
+                    Value="False" />
+            <Setter Property="DrawMinorTicks"
+                    Value="False" />
+            <Setter Property="GrowBy"
+                    Value="0.05, 0.05" />
+        </Style>
+
+        <!--  Country-population choropleth: low = light, high = dark (darker regions = more people)  -->
+        <s:HeatmapColorPalette x:Key="CountryPopulationPalette"
+                               Minimum="1000000"
+                               Maximum="100000000">
+            <s:HeatmapColorPalette.GradientStops>
+                <GradientStop Offset="0"
+                              Color="#F7F4E8" />
+                <GradientStop Offset="0.33"
+                              Color="#DDD7C5" />
+                <GradientStop Offset="0.66"
+                              Color="#B8B29F" />
+                <GradientStop Offset="1"
+                              Color="#7E796A" />
+            </s:HeatmapColorPalette.GradientStops>
+        </s:HeatmapColorPalette>
+
+        <!--  City urban-primacy palette. Minimum/Maximum are the log10 of the primacy range (~0.003% to 100%) -->
+        <s:HeatmapColorPalette x:Key="CityPrimacyPalette"
+                               Minimum="-4.5"
+                               Maximum="0">
+            <s:HeatmapColorPalette.GradientStops>
+                <GradientStop Offset="0"
+                              Color="#1B3A6B" />
+                <GradientStop Offset="0.45"
+                              Color="#2E8BC0" />
+                <GradientStop Offset="0.75"
+                              Color="#48C9B0" />
+                <GradientStop Offset="1"
+                              Color="#7FF0D0" />
+            </s:HeatmapColorPalette.GradientStops>
+        </s:HeatmapColorPalette>
+
+        <!--  Flat white sprite: each bubble renders as a solid disc of its resolved ColorMap color  -->
+        <RadialGradientBrush x:Key="CityBubbleFill">
+            <GradientStop Offset="0"
+                          Color="White" />
+            <GradientStop Offset="1"
+                          Color="White" />
+        </RadialGradientBrush>
+
+        <!--  Keeps the LAEA-projected map undistorted (AspectRatio=1, since the projection is already in
+              equal-area metres). Declared as a resource so the toolbar aspect flyout can bind to it
+              across the flyout's Popup namescope.  -->
+        <s:AspectRatioViewportManager x:Key="AspectRatioVm"
+                                      AspectRatio="1"
+                                      AspectRatioMode="Fit" />
+    </UserControl.Resources>
+    <!-- Two columns: the interaction toolbar (sized to content) on the left, the map filling the right -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Toolbar: a min-city-population filter flyout and an aspect-ratio flyout -->
+        <ext:SciChartInteractionToolbar Grid.Column="0"
+                                        TargetSurface="{Binding Source={x:Reference Name=ChartSurface}}">
+
+            <!-- Aspect Ratio: how the geographic axes are kept undistorted -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Aspect ratio">
+                <ext:ToolbarIcon Kind="AspectRatio"
+                                 Height="16"
+                                 Width="16"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5"
+                                MinWidth="180"
+                                Orientation="Vertical">
+                        <!-- Mode and ratio bind straight to the AspectRatioViewportManager resource (no code-behind) -->
+                        <TextBlock Text="Aspect Ratio Mode"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <ComboBox Margin="0,5"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding AspectRatioMode, Source={StaticResource AspectRatioVm}, Mode=TwoWay}">
+                            <ComboBoxItem Content="Latest changed"
+                                          Tag="{x:Static s:AspectRatioMode.LatestChanged}" />
+                            <ComboBoxItem Content="Lock X (resize Y)"
+                                          Tag="{x:Static s:AspectRatioMode.X}" />
+                            <ComboBoxItem Content="Lock Y (resize X)"
+                                          Tag="{x:Static s:AspectRatioMode.Y}" />
+                            <ComboBoxItem Content="Fit (never crop)"
+                                          Tag="{x:Static s:AspectRatioMode.Fit}" />
+                        </ComboBox>
+                        <TextBlock Text="Aspect Ratio (X : Y)"
+                                   Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5">
+                            <Slider x:Name="aspectRatioSlider"
+                                    Minimum="0.25"
+                                    Maximum="4"
+                                    Width="130"
+                                    VerticalAlignment="Center"
+                                    Value="{Binding AspectRatio, Source={StaticResource AspectRatioVm}, Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Source={x:Reference aspectRatioSlider}, Path=Value, StringFormat={}{0:0.00}}"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+            <ext:FlyoutSeparator />
+
+            <!-- City filter by population -->
+            <ext:FlyoutMenuButton ToolTipService.ToolTip="Filter cities by minimum population">
+                <ext:ToolbarIcon Kind="TuneVariant"
+                                 Height="16"
+                                 Width="16"
+                                 Style="{StaticResource ToolbarButtonIconStyle}" />
+                <ext:FlyoutMenuButton.PopupContent>
+                    <StackPanel Margin="5"
+                                MinWidth="180"
+                                Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,2">
+                            <TextBlock Text="City Population:"
+                                       Style="{StaticResource FlyoutMenuHeaderStyle}" />
+                            <TextBlock Text="{Binding Source={x:Reference minPopSlider}, Path=Value, Converter={StaticResource MinPopulationLabelConverter}}"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,8,0,2">
+                            <Slider x:Name="minPopSlider"
+                                    Width="130"
+                                    Minimum="0"
+                                    Maximum="2000000"
+                                    Value="500000"
+                                    VerticalAlignment="Center"
+                                    TickFrequency="50000"
+                                    IsSnapToTickEnabled="True"
+                                    ValueChanged="OnMinPopulationChanged" />
+                            <TextBlock x:Name="cityCountTxt"
+                                       VerticalAlignment="Center"
+                                       Margin="6,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ext:FlyoutMenuButton.PopupContent>
+            </ext:FlyoutMenuButton>
+
+        </ext:SciChartInteractionToolbar>
+
+        <!-- Map column: the chart surface, and two overlay legend panels (Panel.ZIndex puts them above the chart) -->
+        <Grid Grid.Column="1">
+            <!-- The chart surface. Uses the AspectRatioViewportManager to keep the LAEA-projected map undistorted -->
+            <s:SciChartSurface x:Name="ChartSurface"
+                               ChartTitle="European Population &amp; City Dominance"
+                               ViewportManager="{StaticResource AspectRatioVm}">
+
+                <!-- Axes are unlabelled (the map reads as a picture); VisibleRange / ZoomExtentsRange are the
+                 projected LAEA bounds, set in code-behind. -->
+                <s:SciChartSurface.XAxis>
+                    <s:NumericAxis Style="{StaticResource AxisStyle}" />
+                </s:SciChartSurface.XAxis>
+
+                <s:SciChartSurface.YAxis>
+                    <s:NumericAxis Style="{StaticResource AxisStyle}" />
+                </s:SciChartSurface.YAxis>
+
+                <s:SciChartSurface.RenderableSeries>
+                    <!--  Country choropleth: polygons added in code (projected + colored by population)  -->
+                    <local:FilledPolygonRenderableSeries x:Name="countrySeries"
+                                                         Stroke="#FF8398BA"
+                                                         StrokeThickness="1" />
+
+                    <!--  City bubbles: sized by population (area), coloured by urban primacy -->
+                    <local:CityBubbleSeries x:Name="citySeries"
+                                            BubbleColor="#FF40D877"
+                                            Opacity="0.65"
+                                            AutoZRange="True"
+                                            ResamplingMode="None"
+                                            MaxBubbleSizeInPixels="60"
+                                            MinBubbleSizeInPixels="4"
+                                            FillBrush="{StaticResource CityBubbleFill}"
+                                            ColorMap="{StaticResource CityPrimacyPalette}"
+                                            ColorMapRangeMode="Manual"
+                                            ShowDataLabels="True"
+                                            Foreground="White"
+                                            FontSize="10"
+                                            FontWeight="SemiBold"
+                                            s:TooltipModifier.TooltipTemplate="{StaticResource BubbleTooltipTemplate}"
+                                            s:TooltipModifier.TooltipContainerStyle="{StaticResource BubbleTooltipContainerStyle}">
+                        <local:CityBubbleSeries.ColorMapValueProvider>
+                            <local:CityPrimacyColorMapValueProvider />
+                        </local:CityBubbleSeries.ColorMapValueProvider>
+                    </local:CityBubbleSeries>
+                </s:SciChartSurface.RenderableSeries>
+
+                <s:SciChartSurface.ChartModifier>
+                    <s:ModifierGroup>
+                        <s:ZoomPanModifier ExecuteOn="MouseLeftButton" />
+                        <s:MouseWheelZoomModifier />
+                        <s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick" />
+                        <s:XAxisDragModifier />
+                        <s:YAxisDragModifier />
+                        <s:TooltipModifier ShowTooltipOn="Always" />
+                    </s:ModifierGroup>
+                </s:SciChartSurface.ChartModifier>
+            </s:SciChartSurface>
+
+            <!-- Population legend — top-left overlay -->
+            <Border HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="10"
+                    Padding="12,10"
+                    CornerRadius="6"
+                    BorderBrush="#40FFFFFF"
+                    BorderThickness="1"
+                    Background="#BB17243D"
+                    Panel.ZIndex="1">
+                <StackPanel>
+                    <TextBlock Text="Country Population"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="13"
+                               Margin="0,0,0,6" />
+                    <s:SciChartLegend x:Name="PopulationLegend"
+                                      Orientation="Vertical"
+                                      ShowSeriesMarkers="False"
+                                      ShowVisibilityCheckboxes="False"
+                                      Background="Transparent"
+                                      BorderThickness="0">
+                        <s:SciChartLegend.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:PopulationLegendItem}">
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,4">
+                                    <Rectangle Width="14"
+                                               Height="14"
+                                               VerticalAlignment="Center">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="{Binding Color}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock Text="{Binding Label}"
+                                               Foreground="#CCFFFFFF"
+                                               FontSize="11"
+                                               VerticalAlignment="Center"
+                                               Margin="8,0,0,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </s:SciChartLegend.ItemTemplate>
+                    </s:SciChartLegend>
+                </StackPanel>
+            </Border>
+
+            <!-- City population legend — top-right overlay -->
+            <Border HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="10"
+                    Padding="12,10"
+                    CornerRadius="6"
+                    BorderBrush="#40FFFFFF"
+                    BorderThickness="1"
+                    Background="#BB17243D"
+                    Panel.ZIndex="1">
+                <StackPanel>
+                    <TextBlock Text="City Population"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="13"
+                               Margin="0,0,0,6" />
+                    <s:SciChartLegend x:Name="CitySizeLegend"
+                                      Orientation="Vertical"
+                                      ShowSeriesMarkers="False"
+                                      ShowVisibilityCheckboxes="False"
+                                      Background="Transparent"
+                                      BorderThickness="0">
+                        <s:SciChartLegend.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:CityLegendItem}">
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,1"
+                                            VerticalAlignment="Center">
+                                    <Grid Width="64"
+                                          Height="{Binding Diameter}">
+                                        <Ellipse Width="{Binding Diameter}"
+                                                 Height="{Binding Diameter}"
+                                                 Fill="#48C9B0"
+                                                 Opacity="0.7"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center" />
+                                    </Grid>
+                                    <TextBlock Text="{Binding Label}"
+                                               Foreground="#CCFFFFFF"
+                                               FontSize="11"
+                                               VerticalAlignment="Center"
+                                               Margin="8,0,0,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </s:SciChartLegend.ItemTemplate>
+                    </s:SciChartLegend>
+
+                    <!--  City colour key: urban primacy (cool = balanced, bright = dominant)  -->
+                    <TextBlock Text="Urban Primacy"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="13"
+                               Margin="0,12,0,4" />
+                    <Rectangle Height="12"
+                               Width="130"
+                               RadiusX="2"
+                               RadiusY="2"
+                               HorizontalAlignment="Left">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="1,0">
+                                <GradientStop Offset="0"
+                                              Color="#1B3A6B" />
+                                <GradientStop Offset="0.45"
+                                              Color="#2E8BC0" />
+                                <GradientStop Offset="0.75"
+                                              Color="#48C9B0" />
+                                <GradientStop Offset="1"
+                                              Color="#7FF0D0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Grid Width="130"
+                          HorizontalAlignment="Left"
+                          Margin="0,2,0,0">
+                        <TextBlock Text="Balanced"
+                                   Foreground="#AAFFFFFF"
+                                   FontSize="10"
+                                   HorizontalAlignment="Left" />
+                        <TextBlock Text="Dominant"
+                                   Foreground="#AAFFFFFF"
+                                   FontSize="10"
+                                   HorizontalAlignment="Right" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

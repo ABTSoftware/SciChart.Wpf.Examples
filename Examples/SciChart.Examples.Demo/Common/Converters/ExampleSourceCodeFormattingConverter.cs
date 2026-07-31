@@ -64,7 +64,7 @@ namespace SciChart.Examples.Demo.Common.Converters
             }
             else
             {
-                var sentences = lines.Take(2).Select(x => string.Format("... {0} ...", x.Trim().Replace('<', ' ').Replace('>', ' ').ToList()));
+                var sentences = lines.Take(2).Select(x => string.Format("... {0} ...", FormatTextBase(x).Replace('<', ' ').Replace('>', ' ')));
                 result = string.Join("\n", sentences);
             }
 

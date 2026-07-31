@@ -133,13 +133,16 @@ namespace SciChart.Examples.Demo.ViewModels
                 _selectedExample = value;
                 ServiceLocator.Container.Resolve<IMainWindowViewModel>().SelectedExample = value;
 
+                // Close the Source Code pane before the new file is selected, so that switching examples
+                // never triggers a syntax highlight of code the user is not looking at
+                ShowExample = true;
+
                 SelectedFile = _selectedExample?.SourceFiles.FirstOrDefault() ?? default;
                 OnPropertyChanged("SelectedExample");
 
                 FeedbackViewModel?.ExampleChanged();
                 BreadCrumbViewModel?.UpdateSelectedExample();
 
-                ShowExample = true;
                 IsInfoVisible = true;
             }
         }
@@ -212,6 +215,7 @@ namespace SciChart.Examples.Demo.ViewModels
                 {
                     _showSourceCode = value;
                     OnPropertyChanged("ShowSourceCode");
+                    OnPropertyChanged("VisibleSourceCode");
 
                     ShowExample = !ShowSourceCode;
                     if (_showSourceCode && Usage != null)
@@ -239,9 +243,16 @@ namespace SciChart.Examples.Demo.ViewModels
             {
                 _selectedFile = value;
                 OnPropertyChanged("SelectedFile");
+                OnPropertyChanged("VisibleSourceCode");
                 OnPropertyChanged("SourceOpacityParams");
             }
         }
+
+        /// <summary>
+        /// Gets the source code that the Source Code pane should syntax-highlight. Returns <see cref="string.Empty"/>
+        /// while the pane is hidden, so that the expensive colorization only runs when the user can actually see it.
+        /// </summary>
+        public string VisibleSourceCode => _showSourceCode ? _selectedFile.Value ?? string.Empty : string.Empty;
 
         public IOpacityParams SourceOpacityParams => new OpacityParams { From = 0, To = 1, Duration = 100, TransitionOn = TransitionOn.Once };
 

@@ -26,11 +26,13 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
         private string _typeName;
         private bool _isOneHundredPercent;
         private readonly bool _isSideBySide;
+        private readonly Type _chartType;
 
         public ChartTypeViewModel(IEnumerable<IRenderableSeriesViewModel> rSeriesViewModels, Type type, bool isOneHundredPercent, bool isSideBySide)
         {
             RenderableSeriesViewModels = rSeriesViewModels;
 
+            _chartType = type;
             _isOneHundredPercent = isOneHundredPercent;
             _isSideBySide = isSideBySide;
             _typeName = GenerateChartName(type);
@@ -40,35 +42,34 @@ namespace SciChart.Examples.Examples.CreateMultiseriesChart.DashboardStyleCharts
 
         public IEnumerable<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; set; }
 
+        public Type ChartType => _chartType;
+
         public string TypeName
         {
-            get { return _typeName; }
+            get => _typeName;
             set
             {
                 _typeName = value;
-                OnPropertyChanged("TypeName");
+                OnPropertyChanged(nameof(TypeName));
             }
         }
 
         public bool IsOneHundredPercent
         {
-            get { return _isOneHundredPercent; }
+            get => _isOneHundredPercent;
             set
             {
                 _isOneHundredPercent = value;
-                OnPropertyChanged("TypeName");
+                OnPropertyChanged(nameof(TypeName));
             }
         }
 
         public bool IsSideBySide
         {
-            get { return _isSideBySide; }
+            get => _isSideBySide;
         }
 
-        public string AxisFormatting
-        {
-            get { return _isOneHundredPercent ? "#0'%'" : ""; }
-        }
+        public string AxisFormatting => _isOneHundredPercent ? "#0'%'" : "";
 
         #endregion
 

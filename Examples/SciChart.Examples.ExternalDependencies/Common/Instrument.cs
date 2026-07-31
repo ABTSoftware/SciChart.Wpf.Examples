@@ -35,6 +35,13 @@ namespace SciChart.Examples.ExternalDependencies.Common
             return new[] { EurUsd, Indu, Spx500, CrudeOil, Test }.Single(x => x.Symbol.ToUpper(CultureInfo.InvariantCulture) == instrumentString.ToUpper(CultureInfo.InvariantCulture));
         }
 
+        public static bool TryParse(string instrumentString, out Instrument instrument)
+        {
+            instrument = new[] { EurUsd, Indu, Spx500, CrudeOil, Test }
+                .FirstOrDefault(x => x.Symbol.ToUpper(CultureInfo.InvariantCulture) == instrumentString.ToUpper(CultureInfo.InvariantCulture));
+            return instrument != null;
+        }
+
         public static readonly Instrument EurUsd = new Instrument("EURUSD", "FX Euro US Dollar", 4);
         public static readonly Instrument Indu = new Instrument("INDU", "Dow Jones Industrial Average", 0);
         public static readonly Instrument Spx500 = new Instrument("SPX500", "S&P500 Index", 0);

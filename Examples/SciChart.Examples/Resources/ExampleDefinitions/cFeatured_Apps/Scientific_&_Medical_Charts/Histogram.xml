@@ -3,18 +3,14 @@
 	<ViewModel>Examples.SeeFeaturedApplication.Histogram.HistogramViewModel</ViewModel>
 	<ImagePath>/SciChart.Examples;component/Resources/Images/histogram-chart.png</ImagePath>
 	<IconPath>IconColumn</IconPath>
-	<ShowcaseDescription>This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the FastColumnRenderableSeries with a custom modifier which creates TextAnnotations and positions them over the individual columns.</ShowcaseDescription>
+	<ShowcaseDescription>This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the FastColumnRenderableSeries with the Data Labels API, enabling ShowDataLabels so the series draws a value label above each column.</ShowcaseDescription>
 	<ToolTipDescription></ToolTipDescription>
 	<Description>
-		This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] with a custom modifier which creates [url='https://www.scichart.com/documentation/win/current/The%20TextAnnotation%20Type.html']TextAnnotation[/url] and positions them over the individual columns.
+		This example demonstrates how to create a Histogram with Labels on columns in SciChart. This is achieved by combining the [url='https://www.scichart.com/documentation/win/current/The%20Column%20Series%20Type.html']FastColumnRenderableSeries[/url] with the built in Data Labels API.
 
-		Take a look at the source-code to see how we've achieved this.
+		Setting ShowDataLabels on the column series tells its DataLabelProvider to draw a value label above each column. The label font, size, weight and color are configured directly on the series, so no annotations are required.
 	</Description>
 	<CodeFiles>
-		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/CustomAnnotationModifier.cs.txt</string>
-		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.txt</string>
-		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelAnnotation.xaml.cs.txt</string>
-		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramLabelViewModel.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.txt</string>
 		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramView.xaml.cs.txt</string>
 		<string>Resources/ExampleSourceFiles/SeeFeaturedApplication/Histogram/HistogramViewModel.cs.txt</string>

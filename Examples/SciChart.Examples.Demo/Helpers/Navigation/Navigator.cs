@@ -17,8 +17,10 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Unity;
 using SciChart.Charting.HistoryManagers;
+using SciChart.Examples.Demo.Controls.BusyIndicator;
 using SciChart.Examples.Demo.Helpers.UsageTracking;
 using SciChart.Examples.Demo.ViewModels;
 using SciChart.UI.Bootstrap;
@@ -112,6 +114,10 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
 
         public void Navigate(Example example)
         {
+            // Also covers GoBack, GoForward and opening the first example from the home page, none of which go through
+            // Module.NavigateToExampleCommand. Show() is idempotent, so the overlap with it is harmless
+            BusyIndicatorService.Instance.Show();
+
             if (CurrentPage.PageId == AppPage.ExamplesPageId)
             {
                 if (CanNavigateTo(example))
@@ -186,9 +192,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
+            ScheduleMemoryCleanup();
         }
 
         public void GoForward()
@@ -229,9 +233,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
+            ScheduleMemoryCleanup();
         }
 
         private void OnExamplesFrameBeforeNavigation()
@@ -240,9 +242,7 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             {
                 _currentExample.View = null;
 
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
+                ScheduleMemoryCleanup();
             }
         }
 
@@ -268,6 +268,9 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
             }
 
             _usageCalculator.UpdateUsage(CurrentExample);
+
+            // Outside the view != null check, so that a failed navigation also clears the indicator
+            BusyIndicatorService.Instance.HideWhenRendered();
         }
 
         private void OnMainFrameAfterNavigation()
@@ -380,12 +383,36 @@ namespace SciChart.Examples.Demo.Helpers.Navigation
                 lastExampleView.View = null;
             }
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
+            ScheduleMemoryCleanup();
         }
 
         #endregion
+
+        private static bool _memoryCleanupPending;
+
+        /// <summary>
+        /// Requests a background (non-blocking) Gen2 collection to release the memory held by the previous example.
+        /// Posted at idle priority so that switching examples is not stalled by a blocking collect on the UI thread.
+        /// We deliberately do not call <see cref="GC.WaitForPendingFinalizers"/> here: the finalizer thread drains the
+        /// queue on its own (which is what releases the SciChart native/GPU resources), whereas waiting for it on the
+        /// UI thread freezes the application and can deadlock against locks held by those finalizers.
+        /// </summary>
+        private static void ScheduleMemoryCleanup()
+        {
+            if (_memoryCleanupPending) return;
+
+            var dispatcher = Application.Current?.Dispatcher;
+            if (dispatcher == null) return;
+
+            // Coalesces rapid example switching into a single collection
+            _memoryCleanupPending = true;
+
+            dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() =>
+            {
+                _memoryCleanupPending = false;
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, false); //NOSONAR
+            }));
+        }
 
         public void Push(Example example)
         {

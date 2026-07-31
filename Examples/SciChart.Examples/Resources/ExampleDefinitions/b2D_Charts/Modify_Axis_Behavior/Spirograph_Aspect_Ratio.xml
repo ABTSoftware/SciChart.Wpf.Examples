@@ -1,0 +1,37 @@
+﻿<ExampleDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<View>Examples/ModifyAxisBehaviour/SpirographAndAspectRatio/SpirographAspectRatioView.xaml</View>
+	<ViewModel />
+	<ImagePath>/SciChart.Examples;component/Resources/Images/SpirographAspectRatio.png</ImagePath>
+	<IconPath>IconAxis3D</IconPath>
+	<ToolTipDescription>Two continuously rotating spirographs demonstrating the AspectRatioViewportManager, which keeps the curves undistorted as the chart is resized or zoomed.</ToolTipDescription>
+	<Description>
+		This example shows two continuously rotating spirographs and demonstrates the AspectRatioViewportManager. The viewport manager preserves the correct aspect ratio of the rendered curves as the window is resized, zoomed or panned, so the spinning figures keep their geometric proportions instead of stretching. Because the figures are always rotating, any aspect distortion is easy to spot: at a 1:1 ratio they spin as rigid shapes, while changing the ratio makes them visibly shear as they turn.
+
+		[b][i]Example Usage[/i][/b]
+
+		- Resize the window or zoom: the AspectRatioViewportManager keeps the rotating spirographs undistorted.
+		- Open the Aspect Ratio toolbar flyout and drag the ratio away from 1:1 (or change the mode): the spinning figures visibly shear, then return to rigid rotation at 1:1 or in Fit mode.
+		- Drag with the left mouse button to pan; double-click to zoom to extents.
+
+		[b]Documentation Links[/b]
+
+		- [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17195/30/turning-gridlines-axis-labels-on-or-off']Turning Gridlines, Axis Labels On or Off[/url]
+		- [url='http://support.scichart.com/index.php?/Knowledgebase/Article/View/17196/30/drawing-axis-bands']Drawing Axis Bands[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Ranging%20-%20AutoRange%20and%20VisibleRange.html']Setting Axis VisibleRange in Code or MVVM[/url]
+		- [url='https://www.scichart.com/documentation/win/current/webframe.html#Axis%20Types%20in%20SciChart.html']Axis Types in SciChart[/url]
+		- [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.NumericAxis.html']NumericAxis Type[/url]
+		- [url='http://www.scichart.com/documentation/win/current/SciChart.Charting~SciChart.Charting.Visuals.Axes.DateTimeAxis.html']DateTimeAxis Type[/url]
+
+	</Description>
+	<CodeFiles>
+		<string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/SpirographAndAspectRatio/SpirographAspectRatioView.xaml.txt</string>
+		<string>Resources/ExampleSourceFiles/ModifyAxisBehaviour/SpirographAndAspectRatio/SpirographAspectRatioView.xaml.cs.txt</string>
+	</CodeFiles>
+	<Features>
+		<Features>AspectRatio</Features>
+		<Features>Zoom</Features>
+		<Features>Pan</Features>
+		<Features>Line</Features>
+		<Features>Realtime</Features>
+	</Features>
+</ExampleDefinition>

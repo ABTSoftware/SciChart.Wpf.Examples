@@ -14,7 +14,6 @@
 // expressed or implied.
 // *************************************************************************************
 using System.Collections.Generic;
-using System.Globalization;
 using SciChart.Charting.Model.ChartSeries;
 using SciChart.Charting.Model.DataSeries;
 using SciChart.Examples.ExternalDependencies.Common;
@@ -30,35 +29,25 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Histogram
 
         public HistogramViewModel()
         {
-            ChartLabels = new List<HistogramLabelViewModel>();
-
-            // StyleKey in RenderableSeriesViewModel must match style resource keys in XAML 
+            // StyleKey in RenderableSeriesViewModel must match style resource keys in XAML
             RenderableSeriesViewModels = new List<IRenderableSeriesViewModel>
             {
-                GenerateColumn(-2.5, BlueSeriesData, "BlueColumnStyle"),
                 GenerateAverage(-2.5, BlueSeriesData, "BlueLineStyle"),
-                GenerateColumn(0, RedSeriesData, "RedColumnStyle"),
                 GenerateAverage(0, BlueSeriesData, "RedLineStyle"),
-                GenerateColumn(2.5, GreenSeriesData, "GreenColumnStyle"),
                 GenerateAverage(2.5, BlueSeriesData, "GreenLineStyle"),
+                GenerateColumn(-2.5, BlueSeriesData, "BlueColumnStyle"),
+                GenerateColumn(0, RedSeriesData, "RedColumnStyle"),
+                GenerateColumn(2.5, GreenSeriesData, "GreenColumnStyle"),
             };
         }
 
         public List<IRenderableSeriesViewModel> RenderableSeriesViewModels { get; set; }
-
-        public List<HistogramLabelViewModel> ChartLabels { get; set; }
 
         private IRenderableSeriesViewModel GenerateColumn(double startsAt, double[] data, string styleKey)
         {
             var dataSeries = new UniformXyDataSeries<double>(startsAt, 0.25);
 
             dataSeries.Append(data);
-
-            // Annotations for text labels
-            for (int i = 0; i < data.Length; i++)
-            {
-                ChartLabels.Add(new HistogramLabelViewModel(startsAt + (0.25 * i), data[i], data[i].ToString(CultureInfo.InvariantCulture)));
-            }
 
             return new ColumnRenderableSeriesViewModel
             {
