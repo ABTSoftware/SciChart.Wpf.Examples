@@ -50,6 +50,7 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPa
         private const double InitialThetaDeg = 22.0;
 
         private Viewport3DOrientation _defaultOrientation;
+        private bool _defaultEnableDropShadows;
 
         private double[,] _gain;
         private double _ringRadius;
@@ -71,11 +72,15 @@ namespace SciChart.Examples.Examples.SeeFeaturedApplication.Antenna3DRadiationPa
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             Viewport3D.SetViewportOrientation(_defaultOrientation);
+
+            // EnableDropShadows is application-wide; restore it so other examples keep their shadows
+            EffectManager.EnableDropShadows = _defaultEnableDropShadows;
         }
 
         private void OnLoaded(object _, RoutedEventArgs __)
         {
-            // Disable shadow effects for tooltips
+            // Disable shadow effects for tooltips, saving the current value to restore on Unloaded
+            _defaultEnableDropShadows = EffectManager.EnableDropShadows;
             EffectManager.EnableDropShadows = false;
 
             // Save the used Viewport orientation before the Example is initialized

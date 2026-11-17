@@ -17,101 +17,102 @@ using System.Windows.Media;
 using SciChart.Charting.Visuals;
 using SciChart.Examples.ExternalDependencies.Common;
 
-namespace SciChart.Examples.Examples.CreateGaugeCharts;
-
-public class BrushViewModel
+namespace SciChart.Examples.Examples.CreateGaugeCharts
 {
-    public Brush Brush { get; set; }
-    public string BrushName { get; set; }
-}
-
-public class PieSegmentViewModel : BaseViewModel, IPieSegmentViewModel
-{
-    private double _value;
-    private double _percentage;
-    private bool _isSelected;
-    private string _name;
-    private Brush _fill;
-    private Brush _stroke;
-    private double _strokeThickness;
-
-    public double Value
+    public class BrushViewModel
     {
-        get => _value;
-        set
-        {
-            if (_value.Equals(value)) return;
-
-            _value = value;
-            OnPropertyChanged(nameof(Value));
-        }
+        public Brush Brush { get; set; }
+        public string BrushName { get; set; }
     }
 
-    public double Percentage
+    public class PieSegmentViewModel : BaseViewModel, IPieSegmentViewModel
     {
-        get => _percentage;
-        set
-        {
-            if (_percentage.Equals(value)) return;
+        private double _value;
+        private double _percentage;
+        private bool _isSelected;
+        private string _name;
+        private Brush _fill;
+        private Brush _stroke;
+        private double _strokeThickness;
 
-            _percentage = value;
-            OnPropertyChanged(nameof(Percentage));
+        public double Value
+        {
+            get => _value;
+            set
+            {
+                if (_value.Equals(value)) return;
+
+                _value = value;
+                OnPropertyChanged(nameof(Value));
+            }
         }
-    }
-    public bool IsSelected
-    {
-        get => _isSelected;
-        set
-        {
-            if (value.Equals(_isSelected)) return;
 
-            _isSelected = value;
-            OnPropertyChanged(nameof(IsSelected));
+        public double Percentage
+        {
+            get => _percentage;
+            set
+            {
+                if (_percentage.Equals(value)) return;
+
+                _percentage = value;
+                OnPropertyChanged(nameof(Percentage));
+            }
         }
-    }
-    public string Name
-    {
-        get => _name;
-        set
+        public bool IsSelected
         {
-            if (ReferenceEquals(_name, value)) return;
+            get => _isSelected;
+            set
+            {
+                if (value.Equals(_isSelected)) return;
 
-            _name = value;
-            OnPropertyChanged(nameof(Name));
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
         }
-    }
-    public Brush Fill
-    {
-        get => _fill;
-        set
+        public string Name
         {
-            if (ReferenceEquals(_fill, value)) return;
+            get => _name;
+            set
+            {
+                if (ReferenceEquals(_name, value)) return;
 
-            _fill = value;
-            OnPropertyChanged(nameof(Fill));
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
         }
-    }
-    public Brush Stroke
-    {
-        get => _stroke;
-        set
+        public Brush Fill
         {
-            if (ReferenceEquals(_stroke, value)) return;
+            get => _fill;
+            set
+            {
+                if (ReferenceEquals(_fill, value)) return;
 
-            _stroke = value;
-            OnPropertyChanged(nameof(Stroke));
+                _fill = value;
+                OnPropertyChanged(nameof(Fill));
+            }
         }
-    }
-
-    public double StrokeThickness
-    {
-        get => _strokeThickness;
-        set
+        public Brush Stroke
         {
-            if (value.Equals(_strokeThickness)) return;
+            get => _stroke;
+            set
+            {
+                if (ReferenceEquals(_stroke, value)) return;
 
-            _strokeThickness = value;
-            OnPropertyChanged(nameof(StrokeThickness));
+                _stroke = value;
+                OnPropertyChanged(nameof(Stroke));
+            }
+        }
+
+        public double StrokeThickness
+        {
+            get => _strokeThickness;
+            set
+            {
+                if (value.Equals(_strokeThickness)) return;
+
+                _strokeThickness = value;
+                OnPropertyChanged(nameof(StrokeThickness));
+            }
         }
     }
 }
